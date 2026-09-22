@@ -46,3 +46,23 @@ If you also install the `website` app, add `website_debranding` from
 
 Brand values (colors, names) are defined once in `addons/afenda_brand/brand.py`
 and mirrored in `static/src/scss/primary_variables.scss`.
+
+## Branches and upstream updates
+
+- `upstream-19.0`: pristine odoo/odoo. Never edit.
+- `19.0`: `upstream-19.0` + the `[REBRAND]` commit + the `afenda/` layer. This deploys.
+
+To take an Odoo update:
+
+````bash
+git fetch upstream 19.0
+git checkout upstream-19.0 && git merge --ff-only upstream/19.0 && git push
+git checkout 19.0 && git merge upstream-19.0        # resolve conflicts if any
+.venv/Scripts/python -m afenda.tools.rebrand --apply # re-brands only what is new
+.venv/Scripts/python -m afenda.tools.scan_identity   # must print 0 remaining
+git commit -am "[REBRAND] re-apply after upstream merge"
+````
+
+Note: `upstream/19.0` history is unrelated to our rewritten root, so the
+first merge needs `--allow-unrelated-histories`; see the spec for why the
+root was rewritten.

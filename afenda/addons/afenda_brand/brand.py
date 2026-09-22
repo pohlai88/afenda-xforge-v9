@@ -7,6 +7,9 @@ BRAND = {
     "product": "AFENDA xForge",
     "short": "AFENDA",
     "bot": "AFENDA Bot",
+    "domain": "afenda.app",  # placeholder until the real domain is known
+    "docs_path": "/docs/",  # generated documentation, served same-origin (phase 3)
+    "url_prefix": "app",  # browser address prefix, replaces "odoo"
     "tagline": "The truth of your business, kept.",
     # Colors
     "primary": "#1E3A8A",  # Ledger Blue: one action per screen
