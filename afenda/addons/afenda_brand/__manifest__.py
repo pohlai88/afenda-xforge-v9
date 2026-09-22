@@ -2,7 +2,9 @@
 {
     "name": "AFENDA xForge Branding",
     "summary": "Brand the web client, login, emails and portal as AFENDA xForge",
-    "version": "19.0.1.0.0",
+    # 19.0.1.0.1 carries migrations/19.0.1.0.1/post-migrate.py, which re-applies
+    # the company branding on update: post_init_hook runs at install only.
+    "version": "19.0.1.0.1",
     "category": "Hidden/Tools",
     "author": "AFENDA",
     "website": "https://afenda.app",

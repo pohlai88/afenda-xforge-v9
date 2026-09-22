@@ -11,6 +11,7 @@ from odoo.tests import HttpCase, tagged
 from odoo.tools import file_open, is_html_empty
 
 from ..brand import BRAND
+from ..hooks import _UPSTREAM_REPORT_FONT, _apply_company_branding
 
 ODOO_TELLS = ("odoo.com", "Powered by Odoo", "odoo_logo", "Odoo S.A.")
 
@@ -152,6 +153,66 @@ class TestBranding(HttpCase):
         )
         self.assertEqual(new_company.primary_color.upper(), BRAND["ink"])
         self.assertEqual(new_company.secondary_color.upper(), BRAND["graphite"])
+
+    def test_migration_reapplies_company_branding(self):
+        """The 19.0.1.0.1 migration calls `_apply_company_branding` so that an
+        existing database picks up a branding fix on `-u afenda_brand`;
+        `post_init_hook` runs at install only and never would.
+
+        Two companies, because the function has two jobs that pull against each
+        other: repair what AFENDA got wrong, keep what the administrator chose.
+        """
+        # A company as an install from before both fixes left it.
+        stale = self.env["res.company"].create({"name": "Stale"})
+        stale.write({
+            # The pre-inversion values: fill colour in the text field, ink in
+            # the fill field.
+            "email_primary_color": BRAND["primary"],
+            "email_secondary_color": BRAND["ink"],
+            # The pre-Task-4 document state: upstream font, no layout, no colours.
+            "font": _UPSTREAM_REPORT_FONT,
+            "external_report_layout_id": False,
+            "primary_color": False,
+            "secondary_color": False,
+        })
+        # A company an administrator has since configured.
+        chosen = self.env["res.company"].create({"name": "Chosen"})
+        boxed = self.env.ref("web.external_layout_boxed")
+        chosen.write({
+            "font": "Roboto",
+            "primary_color": "#123456",
+            "secondary_color": "#654321",
+            "email_secondary_color": "#ABCDEF",
+            "external_report_layout_id": boxed.id,
+        })
+
+        _apply_company_branding(self.env)
+
+        # Regression: guard the two email colours on the upstream default alone
+        # and #0F172A is not it, so the company is skipped forever -- every
+        # upgrade re-ships the unreadable Ledger-Blue-on-ink CTA button that
+        # the inversion fix was supposed to end.
+        self.assertEqual(stale.email_secondary_color.upper(), BRAND["primary"])
+        self.assertEqual(stale.email_primary_color.upper(), BRAND["on_primary"])
+        # Regression: leave the branding body inside post_init_hook (or omit
+        # the migration, or omit the version bump that makes it run) and the
+        # document defaults never reach a company that already exists.
+        self.assertEqual(stale.font, "Source_Sans_3")
+        self.assertEqual(
+            stale.external_report_layout_id,
+            self.env.ref("web.external_layout_standard"),
+        )
+        self.assertEqual(stale.primary_color.upper(), BRAND["ink"])
+        self.assertEqual(stale.secondary_color.upper(), BRAND["graphite"])
+
+        # Regression: drop any of the guards -- or widen the replaceable set
+        # past the exact superseded values -- and an upgrade silently reverts
+        # an administrator's branding, which is worse than never applying ours.
+        self.assertEqual(chosen.font, "Roboto")
+        self.assertEqual(chosen.primary_color, "#123456")
+        self.assertEqual(chosen.secondary_color, "#654321")
+        self.assertEqual(chosen.email_secondary_color, "#ABCDEF")
+        self.assertEqual(chosen.external_report_layout_id, boxed)
 
     def test_system_bot_is_branded(self):
         bot = self.env.ref("base.partner_root")

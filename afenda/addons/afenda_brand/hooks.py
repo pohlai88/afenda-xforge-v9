@@ -10,6 +10,35 @@ _DEFAULT_COMPANY_NAMES = {"My Company", "YourCompany"}
 # (odoo/addons/base/models/res_company.py:88-91).
 _UPSTREAM_REPORT_FONT = "Lato"
 
+# The email colour values AFENDA is entitled to overwrite: upstream's own
+# default, and any value an earlier AFENDA release wrote and has since
+# superseded. The superseded entries exist because the ordinary "only while it
+# is still upstream's" guard cannot see them -- a company holding one is not at
+# upstream's default, so the guard would skip it forever and the fix would
+# never reach a database that predates it.
+#
+# Delete a superseded entry once no database installed before its fix remains.
+_REPLACEABLE_EMAIL_COLORS = {
+    # Upstream defaults: addons/mail/models/res_company.py:28-33.
+    "email_primary_color": (
+        "#FFFFFF",  # upstream: the button TEXT, which is also our value
+        # Superseded (fixed 2026-09-23): the hook had mail's two names
+        # inverted and wrote the button FILL colour into the TEXT field.
+        BRAND["primary"],
+    ),
+    "email_secondary_color": (
+        "#875A7B",  # upstream: the Odoo purple button FILL
+        # Superseded (same inversion): ink landed in the FILL field, so the
+        # notification button rendered Ledger Blue on ink -- unreadable.
+        BRAND["ink"],
+    ),
+}
+
+
+def _is_replaceable(current, replaceable):
+    """True while `current` is a value AFENDA may still overwrite."""
+    return not current or current.upper() in {value.upper() for value in replaceable}
+
 
 def _read_static(path):
     with file_open(f"afenda_brand/static/{path}", "rb") as f:
@@ -51,6 +80,23 @@ def post_init_hook(env):
         ]
     ).unlink()
 
+    _apply_company_branding(env)
+    refresh_app_icons(env)
+
+
+def _apply_company_branding(env):
+    """Write the AFENDA logo, name, colours, font and report layout on every company.
+
+    Module-level so the 19.0.1.0.1 migration can re-apply it on update: a
+    `post_init_hook` runs at install only, so without that call a database
+    installed before a branding fix keeps the broken value for good.
+
+    Every field is guarded. A field is written only while it still holds a
+    value AFENDA is entitled to replace -- nothing, upstream's default, or (for
+    the two email colours) a value an earlier AFENDA release wrote and has
+    since superseded. An administrator's own choice is never overwritten,
+    neither by a re-install nor by the migration.
+    """
     companies = env["res.company"].sudo().search([])
     logo = _read_static("img/logo.png")
     favicon = _read_static("img/favicon.ico")
@@ -68,15 +114,18 @@ def post_init_hook(env):
             ("email_primary_color", "on_primary"),
             ("email_secondary_color", "primary"),
         ):
-            if field in company._fields:
-                vals[field] = BRAND[key]
+            if field not in company._fields:
+                continue
+            current, intended = company[field], BRAND[key]
+            if not _is_replaceable(current, _REPLACEABLE_EMAIL_COLORS[field]):
+                continue
+            if not current or current.upper() != intended.upper():
+                vals[field] = intended
         # Printed documents. A document carries no action, so its accents are
         # ink and graphite, not Ledger Blue. Each field is written only while it
-        # still holds the upstream default, so re-installing the module never
-        # stomps a font, layout or colour an administrator has since picked.
-        # (This hook runs at install only -- `-u afenda_brand` does not call it
-        # at all -- so it is a re-install, not an update, that the guards
-        # protect against.) Writing any of them regenerates the
+        # still holds the upstream default, so neither a re-install nor the
+        # migration stomps a font, layout or colour an administrator has since
+        # picked. Writing any of them regenerates the
         # web.asset_styles_company_report attachment
         # (addons/web/models/models.py:2241-2266).
         # A company created before `font` had a default holds NULL, which is
@@ -92,8 +141,7 @@ def post_init_hook(env):
         if "favicon" in company._fields:
             vals["favicon"] = favicon
         company.write(vals)
-
-    refresh_app_icons(env)
+    return companies
 
 
 def refresh_app_icons(env):
