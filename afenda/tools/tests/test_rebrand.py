@@ -117,5 +117,79 @@ class RunTests(unittest.TestCase):
         self.assertEqual(run(self.root, [PRODUCT], apply=False), {})
 
 
+from afenda.tools.rules import RULES, load_brand
+
+
+class RulesTests(unittest.TestCase):
+    def rw(self, text, name):
+        out, _ = rewrite_text(text, RULES, Path(name))
+        return out
+
+    def test_brand_values_loaded(self):
+        b = load_brand()
+        self.assertEqual(b["product"], "AFENDA xForge")
+        self.assertEqual(b["url_prefix"], "app")
+
+    def test_company_name_in_markup_becomes_short_name(self):
+        self.assertEqual(self.rw("<a>Odoo S.A.</a>\n", "t.xml"), "<a>AFENDA</a>\n")
+        self.assertEqual(self.rw('msgid "Odoo S.A."\n', "fr.po"), 'msgid "AFENDA"\n')
+
+    def test_company_name_in_code_header_untouched(self):
+        src = "# Copyright 2004 Odoo S.A.\n"
+        self.assertEqual(self.rw(src, "a.py"), src)
+
+    def test_bot(self):
+        self.assertEqual(self.rw('name = _("OdooBot")\n', "a.py"), 'name = _("AFENDA Bot")\n')
+        self.assertEqual(self.rw("state = user.odoobot_state\n", "a.py"), "state = user.odoobot_state\n")
+
+    def test_documentation_links_go_same_origin(self):
+        self.assertEqual(
+            self.rw('href="https://www.odoo.com/documentation/19.0/applications/sales.html"\n', "v.xml"),
+            'href="/docs/applications/sales.html"\n',
+        )
+        self.assertEqual(
+            self.rw("url = 'https://www.odoo.com/documentation/latest/'\n", "a.py"),
+            "url = '/docs/'\n",
+        )
+
+    def test_other_odoo_com_links_go_to_domain(self):
+        self.assertEqual(self.rw("https://www.odoo.com?utm_source=db\n", "v.xml"), "https://www.afenda.app?utm_source=db\n")
+        self.assertEqual(self.rw("https://accounts.odoo.com/account\n", "u.js"), "https://accounts.afenda.app/account\n")
+        self.assertEqual(self.rw("info@odoo.com\n", "d.xml"), "info@afenda.app\n")
+
+    def test_iap_endpoints_survive(self):
+        src = "DEFAULT_ENDPOINT = 'https://iap.odoo.com'\n"
+        self.assertEqual(self.rw(src, "a.py"), src)
+
+    def test_url_prefix(self):
+        self.assertEqual(self.rw("return request.redirect_query('/odoo', query=q)\n", "h.py"), "return request.redirect_query('/app', query=q)\n")
+        self.assertEqual(self.rw("@http.route(['/web', '/odoo', '/odoo/<path:subpath>'])\n", "h.py"), "@http.route(['/web', '/app', '/app/<path:subpath>'])\n")
+        self.assertEqual(self.rw('browser.location.pathname.startsWith("/odoo")\n', "r.js"), 'browser.location.pathname.startsWith("/app")\n')
+        self.assertEqual(self.rw("goto('/odoo/action-108?debug=1')\n", "t.js"), "goto('/app/action-108?debug=1')\n")
+        self.assertEqual(self.rw("path = '/home/odoo/bin'\n", "a.py"), "path = '/home/odoo/bin'\n")
+        self.assertEqual(self.rw("ExecStart=/odoo/odoo-bin\n", "addons/iot_box_image/odoo.service"), "ExecStart=/odoo/odoo-bin\n")
+
+    def test_router_prefix_constants(self):
+        router = "addons/web/static/src/core/browser/router.js"
+        self.assertEqual(self.rw('return isScopedApp() ? "scoped_app" : "odoo";\n', router), 'return isScopedApp() ? "scoped_app" : "app";\n')
+        self.assertEqual(self.rw('if (["odoo", "scoped_app"].includes(prefix)) {\n', router), 'if (["app", "scoped_app"].includes(prefix)) {\n')
+        self.assertEqual(self.rw('x = "odoo";\n', "addons/web/static/src/other.js"), 'x = "odoo";\n')
+
+    def test_product_word_last(self):
+        self.assertEqual(self.rw("<h1>Odoo Enterprise</h1>\n", "v.xml"), "<h1>AFENDA xForge Enterprise</h1>\n")
+        self.assertEqual(self.rw("Sent by Odoo\n", "v.xml"), "Sent by AFENDA xForge\n")
+
+    def test_rules_are_idempotent_on_own_output(self):
+        samples = [
+            ("<a>Odoo S.A.</a> Odoo OdooBot https://www.odoo.com/documentation/19.0/x https://odoo.com /odoo/x\n", "v.xml"),
+            ('msgid "Odoo"\nmsgstr "Odoo S.A."\n', "fr.po"),
+        ]
+        for text, name in samples:
+            once = self.rw(text, name)
+            self.assertEqual(self.rw(once, name), once)
+            self.assertNotIn("Odoo", once)
+            self.assertNotIn("odoo.com", once)
+
+
 if __name__ == "__main__":
     unittest.main()
