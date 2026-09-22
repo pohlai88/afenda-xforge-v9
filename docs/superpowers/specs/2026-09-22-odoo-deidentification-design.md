@@ -66,7 +66,7 @@ idempotent: it only changes what still says Odoo.
 |---|---|---|
 | Product name in text | xml, js, py, html, md, po, pot | `Odoo` → `AFENDA xForge` |
 | Bot | same | `OdooBot` → `AFENDA Bot` |
-| Links | all text files | `https://www.odoo.com/documentation/...` → `https://afenda.app/docs/...`; other `odoo.com` links → `https://afenda.app` |
+| Links | all text files | `https://www.odoo.com/documentation/<version>/<path>` → `/docs/<path>` (same origin, served by phase 3; a placeholder page until then); other `odoo.com` links → `https://afenda.app` |
 | URL prefix | py routes, js router, xml/js hardcoded paths | `/odoo` → `/app`; `/odoo/<path>` → `/app/<path>`; the `odoo` router prefix constant |
 | Database manager | `addons/web/static/src/public/database_manager.qweb.html` | wording |
 | Error pages | `odoo/http.py` and `odoo/addons/base/...` templates | wording |
@@ -88,13 +88,26 @@ every `.po` keeps every language translated.
 - Applied only after phase 1 is green, in its own commit, because these
   can break JavaScript at scale and need the full web test run.
 
-### Phase 3 (post-launch, content)
+### Phase 3 (post-launch): generated documentation
 
-- `afenda/upstream/documentation`: shallow submodule of
-  `odoo/documentation` at the 19.0 branch. Text rebranded by the same
-  script, screenshots retaken on AFENDA, hosted at `afenda.app/docs`.
-  Until then `afenda.app/docs` serves one "documentation coming soon"
-  page.
+Odoo's manual is not reused. Documentation is generated from the code
+so it is always current and carries no Odoo identity:
+
+- **OpenAPI 3.1 for the JSON API.** Odoo 19 serves
+  `/json/2/<model>/<method>` with bearer-token auth (`odoo/http.py`,
+  `routing_type = 'json2'`). A generator addon `afenda_api_docs`
+  introspects the registry at request time: every model the calling
+  user can read, its fields from `fields_get` (type, required, help,
+  selection values, relations), and the public ORM methods (`search`,
+  `search_read`, `read`, `create`, `write`, `unlink`, plus methods
+  decorated as public). It serves `/docs/openapi.json` and a `/docs`
+  page rendering it with an embedded, self-hosted API reference UI.
+- **Model reference.** The same addon renders a browsable reference
+  from `ir.model` and `ir.model.fields` help texts, grouped by app,
+  at `/docs/models`.
+- **In-app links.** The rebrand rule for documentation links points at
+  `/docs` (same origin) instead of an external domain, so the settings
+  documentation icons and the user menu resolve to generated pages.
 - `paper-muncher` for PDF rendering, evaluated as a replacement for
   wkhtmltopdf.
 
@@ -135,5 +148,6 @@ every `.po` keeps every language translated.
   Python package.
 - Domain placeholder: `afenda.app`, to be replaced once the real domain
   is known.
-- Documentation: cloned now, rebranded in phase 3.
+- Documentation: Odoo's manual is not cloned or reused. Phase 3
+  generates API and model documentation from the code instead.
 - Local development database keeps the default admin login.
