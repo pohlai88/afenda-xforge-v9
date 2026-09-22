@@ -79,10 +79,67 @@ APP_GLYPHS: dict[str, str] = {
     "gamification": "f091",
     "data_recycle": "f1b8",
     "payment": "f09d",
+    "payment_custom": "f19c",  # wire transfer: the one provider icon Odoo drew itself
+    "payment_demo": "f0c3",  # the test provider
     "spreadsheet_dashboard": "f0ce",
     "utm": "f0e8",
     "base": "f013",
     "web": "f009",
+}
+
+# Modules whose icon is a third party's mark, not Odoo's. Do not brand these.
+#
+# `addons/payment/data/payment_provider_data.xml` loads each one into
+# `payment.provider.image_128`, and those blobs are what the provider form
+# (`payment_provider_views.xml:34`) and kanban (`:153`) show: a screen whose whole
+# job is telling Adyen from Stripe from PayPal. Branding them removes no Odoo
+# identity and destroys the only thing distinguishing twenty-odd rows. The
+# pos_* entries are the same story for cash-handling and terminal vendors.
+# Customer-facing checkout is unaffected either way - it draws from
+# `payment/static/img/`, which this generator never touches.
+#
+# If you are here to "finish the job", don't: these are deliberate.
+THIRD_PARTY: frozenset[str] = frozenset({
+    "payment_adyen",
+    "payment_aps",
+    "payment_asiapay",
+    "payment_authorize",
+    "payment_buckaroo",
+    "payment_dpo",
+    "payment_ecpay",
+    "payment_flutterwave",
+    "payment_iyzico",
+    "payment_mercado_pago",
+    "payment_mollie",
+    "payment_nuvei",
+    "payment_paymob",
+    "payment_paypal",
+    "payment_payu",
+    "payment_razorpay",
+    "payment_redsys",
+    "payment_stripe",
+    "payment_toss_payments",
+    "payment_worldline",
+    "payment_xendit",
+    "pos_cashdro",
+    "pos_cashmatic",
+    "pos_glory_cash",
+    "pos_mollie",
+})
+
+# odoo/addons/base ships artwork no `addons/*` glob reaches:
+# `get_module_icon` (odoo/modules/module.py:380-396) falls back to
+# base/static/description/icon.png for every module without one of its own, and
+# base/views/base_menus.xml points the Settings, Apps and Tests root menus at
+# settings.png, modules.png and exception.png. Leaving these Odoo's teal hexagon
+# would brand every app in the menu except the ones an admin opens first.
+BASE_DESCRIPTION = "odoo/addons/base/static/description"
+BASE_ICONS: dict[str, str] = {
+    "icon": APP_GLYPHS["base"],  # the fallback icon of ~530 module records
+    "settings": APP_GLYPHS["base"],  # Settings root menu
+    "modules": APP_GLYPHS["web"],  # Apps root menu
+    "board": APP_GLYPHS["board"],  # the dashboard
+    "exception": "f071",  # warning triangle: the Tests menu and modules in error
 }
 
 
@@ -210,18 +267,29 @@ def icon_svg(code: str | None) -> str:
     )
 
 
+def _render(png: Path, code: str | None) -> list[Path]:
+    """Redraw ``png`` and, only if upstream ships one, the SVG beside it."""
+    written = [png]
+    with Image.open(png) as src:
+        width, height = src.size
+    icon_png(width, height, code).save(png)
+    svg = png.with_suffix(".svg")
+    if svg.exists():
+        svg.write_text(icon_svg(code), encoding="utf-8")
+        written.append(svg)
+    return written
+
+
 def render_all(root: Path) -> list[Path]:
     """Redraw every module icon under ``root``; never create one upstream lacks."""
     written: list[Path] = []
     for png in sorted(root.glob("addons/*/static/description/icon.png")):
         module = png.parents[2].name
-        code = APP_GLYPHS.get(module)
-        with Image.open(png) as src:
-            size = src.size
-        icon_png(size[0], size[1], code).save(png)
-        written.append(png)
-        svg = png.with_suffix(".svg")
-        if svg.exists():
-            svg.write_text(icon_svg(code), encoding="utf-8")
-            written.append(svg)
+        if module in THIRD_PARTY:
+            continue
+        written.extend(_render(png, APP_GLYPHS.get(module)))
+    for stem, code in sorted(BASE_ICONS.items()):
+        png = root.joinpath(BASE_DESCRIPTION, f"{stem}.png")
+        if png.exists():
+            written.extend(_render(png, code))
     return written

@@ -1,2 +1,5 @@
-pillow
-fonttools
+# Pinned: the rendered PNGs are committed, and Pillow's encoder and LANCZOS
+# filter are version-sensitive - an unpinned upgrade rewrites every icon in the
+# tree for no visible reason. Bump deliberately, then re-render and review.
+pillow==9.4.0
+fonttools==4.65.0

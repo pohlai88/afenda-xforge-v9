@@ -5,10 +5,13 @@ fixture tree once through ``brand_images.render_all`` - which also proves the
 generator is wired into it - and every test reads that one render.
 """
 import hashlib
+import re
 import tempfile
 import unittest
 from pathlib import Path
 
+from fontTools.pens.boundsPen import BoundsPen
+from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.ttLib import TTFont
 from PIL import Image
 
@@ -16,6 +19,10 @@ from afenda.tools import app_icons, brand_images
 
 BLUE = (30, 58, 138)
 GRAPHITE = (75, 85, 99)
+
+# Fixture content the generator must leave exactly as it found it.
+UNTOUCHED = b"not an icon, and not the generator's business"
+PROVIDER_SVG = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50"><rect width="50" height="50" fill="#00B0F0"/></svg>'
 
 # module -> (size, ships an icon.svg upstream)
 FIXTURES = {
@@ -26,6 +33,20 @@ FIXTURES = {
     "x_technical": ((100, 100), True),  # unmapped -> AFENDA mark on graphite
     "l10n_zz": ((250, 167), True),      # unmapped and not square
 }
+# Rendered from odoo/addons/base, which no addons/* glob reaches.
+BASE_FIXTURES = ("icon", "settings", "modules")
+
+
+def _transform(svg: str):
+    """The affine the generated SVG puts on its glyph, as a function."""
+    numbers = r"(-?[\d.]+(?:e-?\d+)?)"
+    m = re.search(
+        rf"transform=\"translate\({numbers} {numbers}\) scale\({numbers} {numbers}\) "
+        rf"translate\({numbers} {numbers}\)\"",
+        svg,
+    )
+    tx, ty, sx, sy, dx, dy = (float(v) for v in m.groups())
+    return lambda x, y: ((x + dx) * sx + tx, (y + dy) * sy + ty)
 
 
 def _white_bbox(im: Image.Image):
@@ -59,6 +80,23 @@ class AppIconTests(unittest.TestCase):
                     '<rect width="50" height="50" fill="#985184"/></svg>',
                     encoding="utf-8",
                 )
+        cls.third_party = sorted(app_icons.THIRD_PARTY)[:2]
+        cls.provider_bytes = {}
+        for module in cls.third_party:
+            d = cls.root / "addons" / module / "static" / "description"
+            d.mkdir(parents=True)
+            # A real, perfectly renderable icon: the generator must still pass it by.
+            Image.new("RGBA", (100, 100), (0, 128, 0, 255)).save(d / "icon.png")
+            (d / "icon.svg").write_text(PROVIDER_SVG, encoding="utf-8")
+            cls.provider_bytes[module] = {
+                n: hashlib.sha256((d / n).read_bytes()).hexdigest() for n in ("icon.png", "icon.svg")
+            }
+        cls.base = cls.root / app_icons.BASE_DESCRIPTION
+        cls.base.mkdir(parents=True)
+        for stem in BASE_FIXTURES:
+            Image.new("RGBA", (100, 100), (255, 0, 0, 255)).save(cls.base / f"{stem}.png")
+        # board.svg exists without a board.png: neither may be created or touched.
+        (cls.base / "board.svg").write_bytes(UNTOUCHED)
         cls.written = brand_images.render_all(cls.root)
         cls.pngs = {m: Image.open(cls.root / "addons" / m / "static" / "description" / "icon.png").convert("RGBA")
                     for m in FIXTURES}
@@ -165,6 +203,85 @@ class AppIconTests(unittest.TestCase):
         """Fails if the SVG path is a constant rather than the mapped glyph."""
         self.assertNotEqual(self.svgs["account"], self.svgs["crm"])
         self.assertNotEqual(self.svgs["account"], self.svgs["x_technical"])
+
+    def test_svg_carries_the_glyph_its_mapping_names(self):
+        """Different-per-module is not the same as right-per-module: this ties
+        APP_GLYPHS to what is drawn, so shuffling the map fails."""
+        font = TTFont(app_icons.FA_TTF)
+        glyphs = font.getGlyphSet()
+        for module in ("account", "crm", "sms"):
+            pen = SVGPathPen(glyphs)
+            glyphs[font.getBestCmap()[int(app_icons.APP_GLYPHS[module], 16)]].draw(pen)
+            self.assertIn(pen.getCommands(), self.svgs[module],
+                          f"{module} does not carry the outline of U+{app_icons.APP_GLYPHS[module].upper()}")
+
+    def test_svg_transform_places_the_glyph_upright_and_centred(self):
+        """The transform is the one piece of this file no pixel can check: a
+        two-stage translate around a NEGATIVE y scale, because the font's y axis
+        points up and SVG's points down. Applied to the glyph's own bounds it
+        must land at GLYPH_SCALE of the tile, centred - and not upside down."""
+        font = TTFont(app_icons.FA_TTF)
+        glyphs = font.getGlyphSet()
+        side = app_icons.SVG_SIDE
+        for module in ("account", "crm", "sms"):
+            bounds = BoundsPen(glyphs)
+            glyphs[font.getBestCmap()[int(app_icons.APP_GLYPHS[module], 16)]].draw(bounds)
+            x0, y0, x1, y1 = bounds.bounds
+            place = _transform(self.svgs[module])
+            left, bottom = place(x0, y0)  # the font's low y is the glyph's bottom
+            right, top = place(x1, y1)
+            self.assertLess(top, bottom, f"{module} is drawn upside down")
+            self.assertAlmostEqual(max(right - left, bottom - top), side * app_icons.GLYPH_SCALE, places=2,
+                                   msg=f"{module} is not {app_icons.GLYPH_SCALE:.0%} of the tile")
+            self.assertAlmostEqual((left + right) / 2, side / 2, places=2, msg=f"{module} x centre")
+            self.assertAlmostEqual((top + bottom) / 2, side / 2, places=2, msg=f"{module} y centre")
+            for value in (left, right, top, bottom):
+                self.assertTrue(0 < value < side, f"{module} spills out of the tile at {value}")
+
+    # --- what the generator must NOT touch --------------------------------
+
+    def test_third_party_provider_icons_are_left_alone(self):
+        """A provider's mark is not Odoo's identity, and the provider kanban is
+        unusable without it. Fails if THIRD_PARTY stops being honoured."""
+        self.assertTrue(self.third_party)
+        written = {p.relative_to(self.root).as_posix() for p in self.written}
+        for module in self.third_party:
+            for name, before in self.provider_bytes[module].items():
+                path = self.root / "addons" / module / "static" / "description" / name
+                self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(), before,
+                                 f"{module}/{name} was rewritten")
+                self.assertNotIn(self._rel(module, name), written)
+
+    # --- odoo/addons/base -------------------------------------------------
+
+    def test_base_fallback_and_root_menu_icons_are_branded(self):
+        """base/static/description/icon.png is what get_module_icon falls back to
+        for every module without its own, and settings.png / modules.png are the
+        Settings and Apps root menus. No addons/* glob reaches them."""
+        written = {p.relative_to(self.root).as_posix() for p in self.written}
+        for stem in BASE_FIXTURES:
+            rel = f"{app_icons.BASE_DESCRIPTION}/{stem}.png"
+            self.assertIn(rel, written, rel)
+            with Image.open(self.base / f"{stem}.png") as im:
+                im = im.convert("RGBA")
+                self.assertEqual(im.size, (100, 100), stem)
+                self.assertEqual(im.getpixel((50, 0))[:3], BLUE, f"{stem} is not a brand tile")
+                self.assertEqual(im.getpixel((0, 0))[3], 0, f"{stem} has a square corner")
+                box = _white_bbox(im)
+                self.assertIsNotNone(box, f"{stem} has no glyph")
+        self.assertNotEqual(
+            hashlib.sha256((self.base / "icon.png").read_bytes()).hexdigest(),
+            hashlib.sha256((self.base / "modules.png").read_bytes()).hexdigest(),
+            "the base fallback and the Apps menu draw the same glyph",
+        )
+
+    def test_base_icons_are_never_invented(self):
+        """board.svg has no board.png beside it in the fixture: the generator
+        renders from the PNGs it finds and creates nothing."""
+        self.assertFalse((self.base / "board.png").exists())
+        self.assertEqual((self.base / "board.svg").read_bytes(), UNTOUCHED)
+        for stem in BASE_FIXTURES:
+            self.assertFalse((self.base / f"{stem}.svg").exists(), f"{stem}.svg was invented")
 
 
 if __name__ == "__main__":
