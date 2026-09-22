@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- Browser tab title and favicon for every server-rendered page -->
+    <template id="layout" inherit_id="web.layout" name="AFENDA layout">
+        <xpath expr="//title" position="replace">
+            <title t-esc="title or 'AFENDA xForge'"/>
+        </xpath>
+        <xpath expr="//link[@rel='shortcut icon']" position="attributes">
+            <attribute name="t-att-href">x_icon or '/afenda_brand/static/img/favicon.ico'</attribute>
+        </xpath>
+    </template>
+
+    <!-- Login card footer: no odoo.com link -->
+    <template id="login_layout" inherit_id="web.login_layout" name="AFENDA login layout">
+        <xpath expr="//a[contains(@href, 'odoo.com')]" position="replace">
+            <span class="text-muted">AFENDA xForge</span>
+        </xpath>
+    </template>
+
+    <!-- "Powered by" message used by portal and website footers -->
+    <template id="brand_promotion_message" inherit_id="web.brand_promotion_message" name="AFENDA brand promotion">
+        <xpath expr="//t[@t-out]" position="replace">
+            <span class="text-muted">AFENDA xForge</span>
+        </xpath>
+    </template>
+
+</odoo>

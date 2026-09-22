@@ -1,0 +1,8 @@
+[submodule "afenda/oca/server-brand"]
+	path = afenda/oca/server-brand
+	url = https://github.com/OCA/server-brand.git
+	branch = 19.0
+[submodule "afenda/oca/web"]
+	path = afenda/oca/web
+	url = https://github.com/OCA/web.git
+	branch = 19.0

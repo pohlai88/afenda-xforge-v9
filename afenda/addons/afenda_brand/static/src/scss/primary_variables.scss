@@ -1,0 +1,17 @@
+// AFENDA xForge identity v2.1 — prepended to web._assets_primary_variables so
+// every `!default` in Odoo's own primary_variables.scss picks these up.
+// Keep in sync with brand.py.
+
+$o-community-color: #1E3A8A;
+$o-enterprise-color: #1E3A8A;
+$o-brand-odoo: #1E3A8A;
+$o-brand-primary: #1E3A8A;
+$o-brand-secondary: #4B5563;
+$o-action: #1E3A8A;
+$o-main-link-color: #1E3A8A;
+
+// Paper behind the views; views themselves stay white.
+$o-webclient-background-color: #F7F7F5;
+
+$o-font-family-sans-serif: ("Source Sans 3", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
+$o-font-family-monospace: ("Source Code Pro", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace);
