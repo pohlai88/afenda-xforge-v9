@@ -226,6 +226,11 @@ def render_all(root: Path) -> list[Path]:
         else:
             raise ValueError(kind)
         written.append(path)
+    # Imported here rather than at module level: app_icons builds on this
+    # module's mark and tile, so a top-level import would be circular.
+    from . import app_icons
+
+    written.extend(app_icons.render_all(root))
     return written
 
 
