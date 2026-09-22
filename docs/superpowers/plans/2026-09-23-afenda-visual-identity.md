@@ -430,3 +430,57 @@ Files: `afenda/tools/rules.py`, `afenda/tools/tests/test_rebrand.py`,
    test with an authenticated session (`self.authenticate("admin", "admin")`).
 5. Run tools tests and the `/afenda_brand` tests. Commit tooling and the applied file(s)
    together, explicit paths: `[REBRAND] portal title attribute`.
+
+---
+
+### Task 9: Upgrade path for branding defaults
+
+(Replaces the cancelled portal-title task. Added 2026-09-23 after the gap was
+demonstrated by three test failures on an updated database.)
+
+Files: `ADDON/hooks.py`, `ADDON/__manifest__.py`,
+`ADDON/migrations/19.0.1.0.1/post-migrate.py` (new), `ADDON/tests/test_branding.py`.
+
+Problem, verified: `post_init_hook` runs on install only. On `-u afenda_brand`
+against an existing database it does not run, so company branding written by the
+hook is never refreshed. Two concrete consequences observed on a real database:
+- companies keep `email_secondary_color = #0F172A`, the value written before the
+  Task 2 inversion fix, so notification buttons stay ink-on-blue and unreadable;
+- companies keep `font = 'Lato'` and no report layout, so Task 4's document
+  defaults never apply.
+The Task 4 guards ("write only while the value is still upstream's") are correct
+and must stay; they are not the cause.
+
+1. Extract the whole company-branding body of `post_init_hook` into a module-level
+   `_apply_company_branding(env)` in `hooks.py`, and have `post_init_hook` call it.
+   No behaviour change: same guards, same fields, same values.
+2. Add a migration that re-applies it on update: create
+   `ADDON/migrations/19.0.1.0.1/post-migrate.py` with the standard Odoo signature
+   (`def migrate(cr, version):`), build an environment from `cr`, and call
+   `_apply_company_branding(env)`. Bump `"version"` in `__manifest__.py` to
+   `19.0.1.0.1` so the migration runs. Read an existing Odoo migration script for
+   the exact 19.0 signature and environment-construction idiom before writing it.
+3. The stale-value problem is wider than the guards allow: a company whose
+   `email_secondary_color` is `#0F172A` is not "still upstream's default"
+   (`#875A7B`), so the guard would skip it forever. In `_apply_company_branding`,
+   treat the specific superseded AFENDA values as replaceable alongside the
+   upstream defaults: for the two email colour fields, write when the current
+   value is empty, the upstream default, or a value from `BRAND` that is no longer
+   the intended one for that field. Keep this narrow and comment why each
+   superseded value is listed, so it can be deleted once no such database remains.
+4. Correct the misleading comment at `hooks.py:75-76`: it claims administrator
+   choices survive "a later `-u afenda_brand`", which was never true of a hook that
+   does not run on update. State the real reason instead: the value is written only
+   while it is still upstream's, so a re-install never stomps an existing choice.
+   Also widen the font guard to treat a NULL font as unset
+   (`if company.font in (False, _UPSTREAM_REPORT_FONT)`).
+5. Test: add `test_migration_reapplies_company_branding` to
+   `ADDON/tests/test_branding.py`. Simulate the stale state on a copy of the main
+   company (write `email_secondary_color = BRAND["ink"]`, `font = 'Lato'`,
+   `external_report_layout_id = False`, `primary_color = False`), call
+   `_apply_company_branding(self.env)` directly, and assert every field lands on
+   its intended value. Also assert the negative: a company with an administrator's
+   own choice (e.g. `font = 'Roboto'`, `primary_color = '#123456'`) keeps it.
+   Name the regression each assertion catches in a comment.
+6. Run the full `/afenda_brand` suite and quote the summary line. Commit as
+   `[FIX] afenda_brand: apply branding defaults on update, not only on install`.
