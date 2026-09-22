@@ -257,22 +257,43 @@ class AppIconTests(unittest.TestCase):
     def test_base_fallback_and_root_menu_icons_are_branded(self):
         """base/static/description/icon.png is what get_module_icon falls back to
         for every module without its own, and settings.png / modules.png are the
-        Settings and Apps root menus. No addons/* glob reaches them."""
+        Settings and Apps root menus. No addons/* glob reaches them.
+
+        `icon` is the generic case, so it gets the generic tile: the AFENDA mark
+        on graphite, like any unmapped module. The two root menus are real apps
+        and get the Ledger Blue tile with their own glyph.
+        """
         written = {p.relative_to(self.root).as_posix() for p in self.written}
         for stem in BASE_FIXTURES:
             rel = f"{app_icons.BASE_DESCRIPTION}/{stem}.png"
             self.assertIn(rel, written, rel)
+            expected = GRAPHITE if stem == "icon" else BLUE
             with Image.open(self.base / f"{stem}.png") as im:
                 im = im.convert("RGBA")
                 self.assertEqual(im.size, (100, 100), stem)
-                self.assertEqual(im.getpixel((50, 0))[:3], BLUE, f"{stem} is not a brand tile")
+                self.assertEqual(im.getpixel((50, 0))[:3], expected, f"{stem} is not a brand tile")
                 self.assertEqual(im.getpixel((0, 0))[3], 0, f"{stem} has a square corner")
                 box = _white_bbox(im)
                 self.assertIsNotNone(box, f"{stem} has no glyph")
-        self.assertNotEqual(
-            hashlib.sha256((self.base / "icon.png").read_bytes()).hexdigest(),
-            hashlib.sha256((self.base / "modules.png").read_bytes()).hexdigest(),
-            "the base fallback and the Apps menu draw the same glyph",
+        # Every pair must be distinguishable. `icon` and `settings` were once
+        # both f013, which made the Settings root menu identical to the tile
+        # ~530 unmapped modules show; `icon` and `modules` are the same trap one
+        # mapping away.
+        digests = {
+            stem: hashlib.sha256((self.base / f"{stem}.png").read_bytes()).hexdigest()
+            for stem in BASE_FIXTURES
+        }
+        self.assertEqual(
+            len(set(digests.values())), len(BASE_FIXTURES),
+            f"two base icons draw the same tile: {digests}",
+        )
+        # And the fallback must be exactly what an unmapped module gets: same
+        # graphite tile, same mark. x_technical is unmapped in FIXTURES.
+        fallback = Image.open(self.base / "icon.png").convert("RGBA").resize((100, 100))
+        unmapped = self.pngs["x_technical"]
+        self.assertEqual(
+            list(fallback.getdata()), list(unmapped.getdata()),
+            "the fallback icon is not the same tile an unmapped module gets",
         )
 
     def test_base_icons_are_never_invented(self):

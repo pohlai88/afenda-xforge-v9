@@ -134,8 +134,12 @@ THIRD_PARTY: frozenset[str] = frozenset({
 # settings.png, modules.png and exception.png. Leaving these Odoo's teal hexagon
 # would brand every app in the menu except the ones an admin opens first.
 BASE_DESCRIPTION = "odoo/addons/base/static/description"
-BASE_ICONS: dict[str, str] = {
-    "icon": APP_GLYPHS["base"],  # the fallback icon of ~530 module records
+BASE_ICONS: dict[str, str | None] = {
+    # The fallback IS the generic case, so it gets the generic treatment: the
+    # AFENDA mark on graphite, exactly like an unmapped module. Giving it the
+    # f013 cog instead made it byte-identical to settings.png below, so the
+    # Settings root menu looked like the tile ~530 modules show.
+    "icon": None,  # the fallback icon of ~530 module records
     "settings": APP_GLYPHS["base"],  # Settings root menu
     "modules": APP_GLYPHS["web"],  # Apps root menu
     "board": APP_GLYPHS["board"],  # the dashboard
