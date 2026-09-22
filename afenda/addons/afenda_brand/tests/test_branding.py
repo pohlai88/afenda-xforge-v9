@@ -2,10 +2,12 @@ import base64
 import io
 import re
 
+from lxml import html as lxml_html
+from markupsafe import Markup
 from PIL import Image
 
 from odoo.tests import HttpCase, tagged
-from odoo.tools import file_open
+from odoo.tools import file_open, is_html_empty
 
 from ..brand import BRAND
 
@@ -192,3 +194,91 @@ class TestBranding(HttpCase):
         # so they are what proves primary_variables.dark.scss was loaded at all.
         for name, color in BRAND["dark"].items():
             self.assertIn(color.lower(), css, f"dark {name} {color} is missing from the dark theme")
+
+    # --- Email layouts -------------------------------------------------
+    # Email clients drop <style>, so these templates are all inline values.
+    # Nothing but mail's own markup can emit them, which is what makes the
+    # "absent" assertions below able to fail.
+
+    def _email_context(self, **overrides):
+        """The context mail.mail_notification_layout reads, spelled out.
+
+        Mirrors what `mail.render.mixin._render_encapsulate` assembles
+        (addons/mail/models/mail_render_mixin.py:177-224); spelled out here so
+        the render is not at the mercy of a helper's defaults.
+        """
+        values = {
+            "message": self.env["mail.message"].sudo().new({"body": Markup("<p>body</p>")}),
+            "company": self.env.ref("base.main_company"),
+            "button_access": {"url": "/x", "title": "View"},
+            "has_button_access": True,
+            "email_notification_force_header": True,
+            "email_notification_force_footer": True,
+            "email_notification_allow_header": True,
+            "email_notification_allow_footer": True,
+            "subtype": self.env["mail.message.subtype"].sudo(),
+            "subtitles": ["Record"],
+            "is_discussion": False,
+            "record_name": "Record",
+            "tracking_values": [],
+            "author_user": False,
+            "email_add_signature": False,
+            "signature": "",
+            "show_unfollow": False,
+            "lang": "en_US",
+            "is_html_empty": is_html_empty,
+        }
+        values.update(overrides)
+        return values
+
+    def _render_email_layout(self, xmlid, **overrides):
+        return self.env["ir.qweb"]._render(
+            xmlid, self._email_context(**overrides), minimal_qcontext=True
+        )
+
+    def test_email_cta_contrast(self):
+        """Regression for the upstream naming trap: mail's "primary" colour is
+        the button TEXT and "secondary" is the button FILL. Swap the two
+        company fields back and this button is Ledger Blue on Ledger Blue."""
+        html = self._render_email_layout("mail.mail_notification_layout")
+        tree = lxml_html.fromstring(html)
+        cells = tree.xpath("//td[contains(@style, 'background:')]")
+        self.assertEqual(len(cells), 1, "the CTA cell was not rendered")
+        fill = re.search(r"background:\s*(#[0-9A-Fa-f]{6})", cells[0].get("style"))
+        self.assertTrue(fill, "the CTA cell has no background colour")
+        anchors = cells[0].xpath(".//a")
+        self.assertEqual(len(anchors), 1, "the CTA cell has no link")
+        text = re.search(r"color:\s*(#[0-9A-Fa-f]{6})", anchors[0].get("style"))
+        self.assertTrue(text, "the CTA link has no colour")
+        self.assertEqual(fill.group(1).upper(), BRAND["primary"])
+        self.assertEqual(text.group(1).upper(), BRAND["on_primary"])
+
+    def test_email_default_layout_is_branded(self):
+        """Regression: without the //body xpath the notification email is
+        Verdana on Odoo's #454748, and the footer links out instead of showing
+        the AFENDA mark."""
+        html = self._render_email_layout("mail.mail_notification_layout")
+        body = lxml_html.fromstring(html).xpath("//body")[0].get("style")
+        self.assertIn("Source Sans 3", body)
+        self.assertNotIn("Verdana", body)
+        self.assertIn(BRAND["ink"], body)
+        self.assertIn("/afenda_brand/static/img/logo_email.png", html)
+        self.assertNotIn("utm_source=db", html, "the outbound 'Powered by' link survived")
+        for tell in ("Verdana", "#454748", "#875A7B"):
+            self.assertNotIn(tell, html, f"default mail layout still carries {tell!r}")
+
+    def test_email_light_layout_is_branded(self):
+        """Regression: without the three light-layout xpaths the card sits on
+        Odoo grey #F1F1F1, has no edge, and the footer cell has no rule."""
+        html = self._render_email_layout("mail.mail_notification_light")
+        tree = lxml_html.fromstring(html)
+        frame = tree.xpath("//table[contains(@style, 'background-color')]")[0].get("style")
+        self.assertIn(BRAND["paper"], frame, "the email frame is not AFENDA paper")
+        card = tree.xpath("//table[@width='590']")[0].get("style")
+        self.assertIn(f"border:1px solid {BRAND['hairline']}", card, "the email card has no edge")
+        footer = tree.xpath("//td[contains(@style, 'font-size:11px')]")[0].get("style")
+        self.assertIn(f"border-top:1px solid {BRAND['hairline']}", footer)
+        self.assertIn(BRAND["graphite"], footer)
+        self.assertIn("/afenda_brand/static/img/logo_email.png", html)
+        for tell in ("Verdana", "#F1F1F1", "#454748", "#875A7B", "utm_source=db"):
+            self.assertNotIn(tell, html, f"light mail layout still carries {tell!r}")

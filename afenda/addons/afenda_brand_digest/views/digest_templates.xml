@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        The digest layout is the one Odoo email that ships a real <style> block
+        (addons/digest/data/digest_data.xml:5-265), so branding it is a matter
+        of cascade, not of inline attributes. Append a second block rather than
+        replacing upstream's: the upstream rules stay, ours win on order.
+
+        Values from afenda_brand/brand.py: primary #1E3A8A, ink #0F172A.
+
+        The upstream root is `<html xmlns="http://www.w3.org/1999/xhtml">`, so
+        every node in it is namespaced and a bare `//style` finds nothing;
+        local-name() is what reaches it, and the inserted element repeats the
+        namespace so it serialises as a plain <style> next to its sibling.
+    -->
+    <template id="digest_mail_layout" inherit_id="digest.digest_mail_layout"
+              name="AFENDA digest mail layout">
+        <xpath expr="//*[local-name()='style']" position="after">
+            <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
+                a { color: #1E3A8A !important; }
+                body { color: #0F172A !important; }
+            </style>
+        </xpath>
+    </template>
+
+</odoo>

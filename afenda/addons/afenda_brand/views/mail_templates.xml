@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!--
+        Notification emails. Email clients strip <style> blocks and cannot load
+        @font-face, so every value here is inline and the font is a fallback
+        chain ending in a websafe face. These are the only places outside
+        primary_variables.scss where a brand hex is written by hand; the values
+        are the ones in brand.py (primary #1E3A8A, ink #0F172A, paper #F7F7F5,
+        graphite #4B5563, hairline #E5E7EB).
+
+        The CTA cell is deliberately untouched: it already reads
+        company.email_secondary_color (fill) and company.email_primary_color
+        (text), which afenda_brand sets to Ledger Blue on white.
+
+        Upstream: addons/mail/data/mail_templates_email_layouts.xml.
+    -->
+
+    <!-- Default notification layout (addons/mail/data/mail_templates_email_layouts.xml:4) -->
+    <template id="mail_notification_layout" inherit_id="mail.mail_notification_layout"
+              name="AFENDA mail notification layout">
+        <!-- :9 - upstream ships Verdana on #454748. -->
+        <xpath expr="//body" position="attributes">
+            <attribute name="style">font-family:'Source Sans 3','Segoe UI',Helvetica,Arial,sans-serif; color:#0F172A;</attribute>
+        </xpath>
+        <!-- :86-87 - the "Powered by" anchor. OCA mail_debranding only strips
+             anchors whose href matches odoo.com (mail_debranding/models/
+             mail_render_mixin.py:28-35); the rebrand rewrote this href to
+             afenda.app, so the anchor survives rendering and is ours to
+             replace. The image is absolute because an email has no origin. -->
+        <xpath expr="//a[contains(@href, 'utm_source=db')]" position="replace">
+            <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email.png'"
+                 height="16" alt="AFENDA xForge"
+                 style="height:16px; border:0; vertical-align:middle;"/>
+            <span style="color:#4B5563; vertical-align:middle;"> The truth of your business, kept.</span>
+        </xpath>
+    </template>
+
+    <!-- Light notification layout (addons/mail/data/mail_templates_email_layouts.xml:96) -->
+    <template id="mail_notification_light" inherit_id="mail.mail_notification_light"
+              name="AFENDA light mail notification layout">
+        <!-- :101 - upstream leaves <body> unstyled and puts the face on the
+             outer table; set it on both so a client that drops table styles
+             still gets the stack. -->
+        <xpath expr="//body" position="attributes">
+            <attribute name="style">font-family:'Source Sans 3','Segoe UI',Helvetica,Arial,sans-serif; color:#0F172A;</attribute>
+        </xpath>
+        <!-- :104 - the frame around the card: Odoo grey #F1F1F1 -> AFENDA paper. -->
+        <xpath expr="//table[contains(@style, '#F1F1F1')]" position="attributes">
+            <attribute name="style">padding-top: 16px; background-color: #F7F7F5; font-family:'Source Sans 3','Segoe UI',Helvetica,Arial,sans-serif; color:#0F172A; width: 100%; border-collapse:separate;</attribute>
+        </xpath>
+        <!-- :105 - the card itself: white on paper needs a hairline to read. -->
+        <xpath expr="//table[@width='590']" position="attributes">
+            <attribute name="style">padding: 24px; background-color: #FFFFFF; color:#0F172A; border:1px solid #E5E7EB; border-collapse:separate;</attribute>
+        </xpath>
+        <!-- :143 - the footer cell. -->
+        <xpath expr="//td[contains(@style, 'font-size:11px')]" position="attributes">
+            <attribute name="style">min-width: 590px; padding: 0 8px 0 8px; font-size:11px; border-top:1px solid #E5E7EB; padding-top:12px; color:#4B5563;</attribute>
+        </xpath>
+        <!-- :144 - that cell opens with its own grey rule, which would now draw
+             a second line directly under the hairline border above. Collapse it
+             rather than delete it, so the cell keeps upstream's structure. -->
+        <xpath expr="//td[contains(@style, 'font-size:11px')]/hr" position="attributes">
+            <attribute name="style">border:medium none;clear:both;display:block;font-size:0px;height:0;line-height:0;margin:0;</attribute>
+        </xpath>
+        <!-- :160-161 - the "Powered by" anchor, as above. -->
+        <xpath expr="//a[contains(@href, 'utm_source=db')]" position="replace">
+            <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email.png'"
+                 height="16" alt="AFENDA xForge"
+                 style="height:16px; border:0; vertical-align:middle;"/>
+            <span style="color:#4B5563; font-size:11px; vertical-align:middle;"> The truth of your business, kept.</span>
+        </xpath>
+    </template>
+
+</odoo>

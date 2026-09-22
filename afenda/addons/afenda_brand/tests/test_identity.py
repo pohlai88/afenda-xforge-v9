@@ -26,9 +26,18 @@ class TestIdentity(HttpCase):
         self.assertEqual(self.url_open("/odoo", allow_redirects=False).status_code, 404)
 
     def test_notification_email_body(self):
-        partner = self.env["res.partner"].create({"name": "Crawl Recipient", "email": "crawl@example.com"})
+        # An internal recipient gets the "View" call to action, and the two
+        # force_* flags switch the header and footer on, so one render covers
+        # the CTA, the body face and the "Powered by" line.
+        recipient = self.env["res.users"].create(
+            {"name": "Crawl Recipient", "login": "crawl@example.com", "email": "crawl@example.com"}
+        )
+        partner = recipient.partner_id
         record = self.env["res.partner"].create({"name": "Crawl Record"})
-        record.message_post(
+        record.with_context(
+            email_notification_force_header=True,
+            email_notification_force_footer=True,
+        ).message_post(
             body="identity check",
             partner_ids=partner.ids,
             message_type="comment",
@@ -36,7 +45,15 @@ class TestIdentity(HttpCase):
         )
         mail = self.env["mail.mail"].search([("recipient_ids", "in", partner.ids)], order="id desc", limit=1)
         self.assertTrue(mail, "no outgoing mail was queued")
-        self.assertClean(mail.body_html, "notification email")
+        body = mail.body_html
+        self.assertClean(body, "notification email")
+        # The AFENDA layout, not Odoo's: Ledger Blue on the CTA, the AFENDA
+        # mark where "Powered by Odoo" used to link out, and none of the three
+        # values only mail's own templates can emit.
+        self.assertIn("#1E3A8A", body, "the CTA is not Ledger Blue")
+        self.assertIn("logo_email.png", body, "the footer has no AFENDA mark")
+        for tell in ("#875A7B", "#F1F1F1", "Verdana"):
+            self.assertNotIn(tell, body, f"notification email still carries {tell!r}")
 
     def test_report_html(self):
         report = self.env.ref("web.action_report_externalpreview")
