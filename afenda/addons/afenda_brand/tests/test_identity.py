@@ -49,3 +49,10 @@ class TestIdentity(HttpCase):
         # Odoo 16+ stores translations on the fields themselves; check a known string.
         menu = self.env.ref("base.menu_administration").with_context(lang="fr_FR")
         self.assertClean(menu.name, "fr_FR menu name")
+
+    def test_docs_placeholder_route_works(self):
+        page = self.url_open("/docs")
+        self.assertEqual(page.status_code, 200)
+        self.assertIn("coming soon", page.text.lower())
+        page2 = self.url_open("/docs/applications/sales.html")
+        self.assertEqual(page2.status_code, 200)

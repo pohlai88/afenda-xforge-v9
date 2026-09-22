@@ -27,6 +27,7 @@
     "data": [
         "data/config_data.xml",
         "views/webclient_templates.xml",
+        "views/docs_placeholder.xml",
     ],
     "assets": {
         "web._assets_primary_variables": [
