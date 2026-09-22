@@ -33,7 +33,7 @@ KINDS = {
     "cli": "odoo/cli/x",
     "other": "addons/m/x",
 }
-PO_MSGSTR_CAP = 400  # translations are near-duplicates across languages; sample them
+PO_MSGSTR_CAP = 2000  # translations are near-duplicates across languages; sample them
 
 
 def kind_of(rel: str) -> str:

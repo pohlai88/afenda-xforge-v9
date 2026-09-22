@@ -236,6 +236,30 @@ class RulesTests(unittest.TestCase):
         src = '"Last-Translator: Ron M <ronm@odoo.com>, 2025\\n"\n'
         self.assertEqual(self.rw(src, "fr.po"), src)
 
+    def test_odoo_com_case_insensitive(self):
+        self.assertEqual(self.rw("https://accounts.ODOO.COM/account\n", "u.js"), "https://accounts.afenda.app/account\n")
+
+    def test_allcaps_odoo_word(self):
+        self.assertEqual(self.rw('<separator string="FOR WEBSITES BUILT WITH ODOO"/>\n', "v.xml"), '<separator string="FOR WEBSITES BUILT WITH AFENDA XFORGE"/>\n')
+
+    def test_lowercase_quoted_attribute_value(self):
+        self.assertEqual(self.rw('title="odoo"\n', "v.xml"), 'title="afenda"\n')
+        self.assertEqual(self.rw('placeholder="odoo"\n', "v.xml"), 'placeholder="afenda"\n')
+        self.assertEqual(self.rw('x = "https://odoo.com"\n', "a.py"), 'x = "https://afenda.app"\n')
+
+    def test_iap_endpoint_protected_in_python_only(self):
+        self.assertEqual(self.rw("DEFAULT_ENDPOINT = 'https://iap.odoo.com'\n", "a.py"), "DEFAULT_ENDPOINT = 'https://iap.odoo.com'\n")
+
+    def test_iap_endpoint_rewritten_in_template(self):
+        self.assertIn("afenda.app", self.rw('<a href="https://iap-services.odoo.com/iap/sms/pricing">Pricing</a>\n', "v.xml"))
+
+    def test_odoo_package_internal_paths_excluded(self):
+        self.assertEqual(self.rw("frame.filename.endswith('/odoo/http.py')\n", "odoo/netsvc.py"), "frame.filename.endswith('/odoo/http.py')\n")
+        self.assertEqual(self.rw('if "/odoo/addons/" in filename:\n', "odoo/tests/common.py"), 'if "/odoo/addons/" in filename:\n')
+
+    def test_company_name_in_python_manifest(self):
+        self.assertEqual(self.rw("    'author': 'Odoo S.A.',\n", "addons/web/__manifest__.py"), "    'author': 'AFENDA',\n")
+
 
 if __name__ == "__main__":
     unittest.main()

@@ -27,8 +27,11 @@ PO_SUFFIXES = frozenset({".po", ".pot"})
 
 # Lines never rewritten, in any file.
 PROTECTED_ALWAYS = re.compile(
-    r"noqa: rebrand|Part of Odoo|X-Odoo-|Odoo-Link-Preview|iap\.odoo\.com|iap-services\.odoo\.com|services\.odoo\.com|Last-Translator:|Language-Team:|Report-Msgid-Bugs-To:"
+    r"noqa: rebrand|X-Odoo-|Odoo-Link-Preview|Part of Odoo|Last-Translator:|Language-Team:|Report-Msgid-Bugs-To:"
 )
+# Machine service endpoints: protected only in Python source (API calls), not in
+# templates/JS where the same text may appear as human-facing link text or hrefs.
+PROTECTED_ENDPOINTS_PY = re.compile(r"iap\.odoo\.com|iap-services\.odoo\.com|services\.odoo\.com")
 # Lines never rewritten in code files: license headers, imports, module loader.
 PROTECTED_IN_CODE = re.compile(
     r"Part of Odoo|Copyright|^\s*(from|import)\s+[\w.]+(\s+import\s|$)|odoo\.define\(|require\("
@@ -58,6 +61,10 @@ class Rule:
 
 
 def _is_protected(line: str, path: Path) -> bool:
+    if "noqa: rebrand" in line:
+        return True
+    if path.suffix == ".py" and PROTECTED_ENDPOINTS_PY.search(line):
+        return True
     if PROTECTED_ALWAYS.search(line):
         return True
     if path.suffix in CODE_SUFFIXES and PROTECTED_IN_CODE.search(line):
