@@ -19,7 +19,6 @@
         "disable_odoo_online",
         "remove_odoo_enterprise",
         "mail_debranding",
-        "portal_debranding",
         # OCA/web 19.0
         "web_favicon",
         "web_pwa_customize",

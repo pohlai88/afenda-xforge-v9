@@ -22,12 +22,12 @@ TEXT_SUFFIXES = frozenset({
     ".scss", ".css", ".json", ".csv", ".template", ".cfg", ".conf", ".ini",
     ".yml", ".yaml", ".sh", ".sql",
 })
-CODE_SUFFIXES = frozenset({".py", ".js", ".ts", ".scss", ".css"})
+CODE_SUFFIXES = frozenset({".py", ".js", ".ts", ".scss", ".css", ".template"})
 PO_SUFFIXES = frozenset({".po", ".pot"})
 
 # Lines never rewritten, in any file.
 PROTECTED_ALWAYS = re.compile(
-    r"noqa: rebrand|X-Odoo-|Odoo-Link-Preview|iap\.odoo\.com|iap-services\.odoo\.com|services\.odoo\.com"
+    r"noqa: rebrand|Part of Odoo|X-Odoo-|Odoo-Link-Preview|iap\.odoo\.com|iap-services\.odoo\.com|services\.odoo\.com"
 )
 # Lines never rewritten in code files: license headers, imports, module loader.
 PROTECTED_IN_CODE = re.compile(

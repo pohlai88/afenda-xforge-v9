@@ -83,6 +83,14 @@ class RewriteTextTests(unittest.TestCase):
         self.assertEqual(once, twice)
         self.assertEqual(counts, {})
 
+    def test_license_header_protected_in_any_file_type(self):
+        src = "# Part of Odoo. See LICENSE file for full copyright and licensing details.\nname = 'Odoo'\n"
+        out, _ = rewrite_text(src, [PRODUCT], Path("model.py.template"))
+        self.assertTrue(out.startswith("# Part of Odoo. See LICENSE"))
+        self.assertIn("name = 'AFENDA xForge'", out)
+        out2, _ = rewrite_text("<!-- Part of Odoo. -->\n<t>Odoo</t>\n", [PRODUCT], Path("v.xml"))
+        self.assertEqual(out2, "<!-- Part of Odoo. -->\n<t>AFENDA xForge</t>\n")
+
 
 class RunTests(unittest.TestCase):
     def setUp(self):

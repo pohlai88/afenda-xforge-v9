@@ -26,7 +26,7 @@ class TestBranding(HttpCase):
 
     def test_webclient_page_is_branded(self):
         self.authenticate("admin", "admin")
-        html = self.url_open("/odoo").text
+        html = self.url_open("/app").text
         self.assertIn("<title>AFENDA xForge</title>", html.replace("\n", ""))
         self.assertNotIn("Powered by Odoo", html)
         # disable_odoo_online drops the odoo.com entries from the user menu;
