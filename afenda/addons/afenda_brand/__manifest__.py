@@ -50,6 +50,12 @@
             "afenda_brand/static/src/scss/fonts.scss",
             "afenda_brand/static/src/scss/login.scss",
         ],
+        # Printed documents: static font instances (wkhtmltopdf cannot use the
+        # variable fonts) plus the document rules.
+        "web.report_assets_common": [
+            "afenda_brand/static/src/scss/fonts_report.scss",
+            "afenda_brand/static/src/scss/report.scss",
+        ],
     },
     "post_init_hook": "post_init_hook",
 }

@@ -115,6 +115,14 @@ class TestBranding(HttpCase):
         for record in (company, new_company):
             self.assertEqual(record.email_secondary_color.upper(), BRAND["primary"])
             self.assertEqual(record.email_primary_color.upper(), "#FFFFFF")
+        # Printed documents: the defaults reach companies created after install.
+        self.assertEqual(new_company.font, "Source_Sans_3")
+        self.assertEqual(
+            new_company.external_report_layout_id,
+            self.env.ref("web.external_layout_standard"),
+        )
+        self.assertEqual(new_company.primary_color.upper(), BRAND["ink"])
+        self.assertEqual(new_company.secondary_color.upper(), BRAND["graphite"])
 
     def test_system_bot_is_branded(self):
         bot = self.env.ref("base.partner_root")

@@ -6,6 +6,10 @@ from .brand import BRAND
 
 _DEFAULT_COMPANY_NAMES = {"My Company", "YourCompany"}
 
+# base ships font="Lato" and leaves the layout and the two report colors empty
+# (odoo/addons/base/models/res_company.py:88-91).
+_UPSTREAM_REPORT_FONT = "Lato"
+
 
 def _read_static(path):
     with file_open(f"afenda_brand/static/{path}", "rb") as f:
@@ -50,6 +54,8 @@ def post_init_hook(env):
     companies = env["res.company"].sudo().search([])
     logo = _read_static("img/logo.png")
     favicon = _read_static("img/favicon.ico")
+    # The standard layout: one column of figures, no boxes, no filled headers.
+    report_layout = env.ref("web.external_layout_standard", raise_if_not_found=False)
     for company in companies:
         vals = {}
         if company.uses_default_logo or not company.logo:
@@ -57,8 +63,6 @@ def post_init_hook(env):
         if company.name in _DEFAULT_COMPANY_NAMES:
             vals["name"] = BRAND["short"]
         for field, key in (
-            ("primary_color", "primary"),
-            ("secondary_color", "ink"),
             # mail names these from the reader's point of view: "primary" is the
             # button TEXT, "secondary" is the button FILL.
             ("email_primary_color", "on_primary"),
@@ -66,6 +70,20 @@ def post_init_hook(env):
         ):
             if field in company._fields:
                 vals[field] = BRAND[key]
+        # Printed documents. A document carries no action, so its accents are
+        # ink and graphite, not Ledger Blue. Each field is written only while it
+        # still holds the upstream default, so an administrator who has picked a
+        # font, a layout or a color keeps it across a later `-u afenda_brand`.
+        # Writing any of them regenerates the web.asset_styles_company_report
+        # attachment (addons/web/models/models.py:2241-2266).
+        if company.font == _UPSTREAM_REPORT_FONT:
+            vals["font"] = "Source_Sans_3"
+        if report_layout and not company.external_report_layout_id:
+            vals["external_report_layout_id"] = report_layout.id
+        if not company.primary_color:
+            vals["primary_color"] = BRAND["ink"]
+        if not company.secondary_color:
+            vals["secondary_color"] = BRAND["graphite"]
         if "favicon" in company._fields:
             vals["favicon"] = favicon
         company.write(vals)

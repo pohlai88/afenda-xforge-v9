@@ -1,0 +1,39 @@
+// AFENDA document polish for printed reports.
+//
+// Scope: upstream stamps `o_company_<id>_layout` on the header, article and
+// footer of every document and `o_report_layout_standard` on the article of the
+// standard layout (addons/web/views/report_templates.xml:503-552). The company
+// id is not knowable from static SCSS, so the layout wrapper is matched by
+// prefix. Nothing here applies outside a rendered document.
+
+.o_report_layout_standard,
+[class^="o_company_"],
+[class*=" o_company_"] {
+    // Figures in a document are read column-wise: every digit gets the same
+    // advance so totals line up under the amounts they add.
+    .o_main_table td.text-end,
+    #total td,
+    .o_total,
+    .o_price_total,
+    td.o_list_number {
+        font-variant-numeric: tabular-nums;
+    }
+
+    // Source Serif 4 Semibold is the display face: the document title, and
+    // nothing else. Headings elsewhere stay on the sans.
+    h2 {
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 600;
+    }
+
+    // Hairline rules: the table is read by its columns, not by its borders.
+    // $border-color is the AFENDA hairline (#E5E7EB), set in
+    // primary_variables.scss, which report_assets_common includes.
+    table,
+    .o_main_table,
+    .o_main_table th,
+    .o_main_table td,
+    #total td {
+        border-color: $border-color;
+    }
+}

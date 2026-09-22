@@ -1,0 +1,57 @@
+// Self-hosted Source superfamily for printed documents (SIL Open Font License,
+// see static/fonts/OFL.txt).
+//
+// The backend bundle uses the variable fonts, but wkhtmltopdf ignores
+// variable-font axes: asking a VF for weight 600 silently prints weight 200.
+// So the report bundle points at the static instances generated from those same
+// VFs (fontTools instancer), one file per weight.
+//
+// Two family names carry the same faces. "Source_Sans_3" is the key of the
+// res.company `font` Selection, which web.styles_company_report emits raw as
+// `font-family: Source_Sans_3` (addons/web/views/report_templates.xml:925-926);
+// "Source Sans 3" is the human family this addon's own rules ask for.
+// URLs are absolute because the compiled bundle is served from /web/assets/...,
+// not from the addon directory.
+
+@each $o-afenda-sans in ("Source_Sans_3", "Source Sans 3") {
+    @font-face {
+        font-family: $o-afenda-sans;
+        src: url("/afenda_brand/static/fonts/SourceSans3-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: $o-afenda-sans;
+        src: url("/afenda_brand/static/fonts/SourceSans3-Semibold.ttf") format("truetype");
+        font-weight: 600;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: $o-afenda-sans;
+        src: url("/afenda_brand/static/fonts/SourceSans3-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+    }
+    @font-face {
+        font-family: $o-afenda-sans;
+        src: url("/afenda_brand/static/fonts/SourceSans3-It.ttf") format("truetype");
+        font-weight: 400;
+        font-style: italic;
+    }
+}
+
+// Display face: document titles only, never body text.
+@font-face {
+    font-family: "Source Serif 4";
+    src: url("/afenda_brand/static/fonts/SourceSerif4-Semibold.ttf") format("truetype");
+    font-weight: 600;
+    font-style: normal;
+}
+
+// References and money.
+@font-face {
+    font-family: "Source Code Pro";
+    src: url("/afenda_brand/static/fonts/SourceCodePro-Regular.ttf") format("truetype");
+    font-weight: 400;
+    font-style: normal;
+}
