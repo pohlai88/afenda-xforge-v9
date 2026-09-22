@@ -92,7 +92,7 @@ class RewriteTextTests(unittest.TestCase):
         self.assertEqual(out2, "<!-- Part of Odoo. -->\n<t>AFENDA xForge</t>\n")
 
     def test_prose_starting_with_from_is_not_protected_as_import(self):
-        src = "This feature comes from Odoo itself, and that too with great possibilities.\n"
+        src = "from Odoo itself, and that too with great possibilities.\n"
         out, _ = rewrite_text(src, [PRODUCT], Path("a.py"))
         self.assertIn("from AFENDA xForge itself", out)
 
