@@ -15,8 +15,9 @@ repository root, while respecting the AFENDA layering rules.
 - `source/`: byte-exact official RST at odoo/documentation commit
   `8174b8bfbd3247e59208bf853bd7f6c47bec946c` (authority level 1).
 - `docs/`: normalized Markdown with provenance front matter (level 2).
-- `indexes/` and `chunks/`: symbols (362), code examples (1,234), cross-references,
-  anchors, concepts, autodoc directive list (124), RAG chunks (547) (level 3).
+- `indexes/`: symbols (362), code examples (1,234), cross-references,
+  anchors, concepts, autodoc directive list (124) (level 3). The kit's `chunks/` and
+  `llms-full.txt` were removed on 2026-09-23 as verbatim duplicates of `docs/`.
 - `knowledge/`: three derived maps (architecture, frontend extension order, security)
   (level 4, not normative).
 - `scripts/query.py`: regex search over `docs/`.
@@ -50,7 +51,7 @@ Optional later, same template: `odoo-website-theme-dev`, `odoo-upgrade-dev`,
    `name_get` gone, use `display_name`; `check_access`/`has_access` combine rights and
    rules. View XML: no `attrs`/`states`, use Python-expression attributes; `list`
    view, not `tree`.
-2. Authority order: `source/` > `docs/` > `indexes/`,`chunks/` > `knowledge/`.
+2. Authority order: `source/` > `docs/` > `indexes/` > `knowledge/`.
    Reference pages for API facts, tutorials and how-tos for workflow.
 3. Autodoc gaps: check `indexes/autodoc-directives.json`; resolve by reading the
    repo's own `odoo/` or `addons/` source; never invent docstrings.

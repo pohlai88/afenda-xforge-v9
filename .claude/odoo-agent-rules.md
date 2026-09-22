@@ -26,7 +26,7 @@ Facts from the kit changelog (`docs/developer/reference/backend/orm/changelog.md
 ## Authority and citation
 
 - Kit at `.agents/Odoo_19_Developer_LLM_Kit/`. Authority: `source/` > `docs/` >
-  `indexes/`, `chunks/` > `knowledge/`.
+  `indexes/` > `knowledge/`.
 - Reference pages for API facts; tutorials and how-tos for workflow.
 - Autodoc gaps (`indexes/autodoc-directives.json`): resolve by reading the repo's
   own `odoo/` and `addons/` source. Never invent docstrings.
