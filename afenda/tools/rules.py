@@ -45,8 +45,10 @@ def build_rules(brand: dict) -> list[Rule]:
             path_excludes=("iot_box_image",),
         ),
         Rule("router_prefix", re.compile(r'"odoo"'), f'"{prefix}"', path_contains=(ROUTER,)),
-        # 6. The product name, standalone word only, last so earlier rules win.
-        Rule("product", re.compile(r"(?<![\w\-@/.])Odoo(?![\w\-])"), product),
+        # 6. Social/profile handles at domain root (twitter.com/Odoo).
+        Rule("social_handle", re.compile(r"(?<=\.com/)Odoo(?=[/\"'\s)]|$)"), short.lower()),
+        # 7. The product name, standalone word only, last so earlier rules win.
+        Rule("product", re.compile(r"(?<![\w@/.])Odoo(?!\w)"), product),
     ]
 
 

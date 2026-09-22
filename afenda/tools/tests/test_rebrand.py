@@ -5,7 +5,7 @@ from pathlib import Path
 
 from afenda.tools.rebrand import Rule, iter_files, rewrite_text, run
 
-PRODUCT = Rule("product", re.compile(r"(?<![\w\-@/.])Odoo(?![\w\-])"), "AFENDA xForge")
+PRODUCT = Rule("product", re.compile(r"(?<![\w@/.])Odoo(?!\w)"), "AFENDA xForge")
 
 
 class RewriteTextTests(unittest.TestCase):
@@ -179,9 +179,21 @@ class RulesTests(unittest.TestCase):
         self.assertEqual(self.rw("<h1>Odoo Enterprise</h1>\n", "v.xml"), "<h1>AFENDA xForge Enterprise</h1>\n")
         self.assertEqual(self.rw("Sent by Odoo\n", "v.xml"), "Sent by AFENDA xForge\n")
 
+    def test_hyphenated_words_are_rebranded(self):
+        self.assertEqual(self.rw('msgstr "Verbindung zum Odoo-Server"\n', "de.po"), 'msgstr "Verbindung zum AFENDA xForge-Server"\n')
+        self.assertEqual(self.rw("Non-Odoo systems\n", "v.xml"), "Non-AFENDA xForge systems\n")
+
+    def test_http_header_prefix_survives(self):
+        src = "header_dbname = self.httprequest.headers.get('X-Odoo-Database')\n"
+        self.assertEqual(self.rw(src, "http.py"), src)
+
+    def test_social_handles(self):
+        self.assertEqual(self.rw('href="https://twitter.com/Odoo"\n', "v.xml"), 'href="https://twitter.com/afenda"\n')
+        self.assertEqual(self.rw('"https://www.facebook.com/Odoo"\n', "fr.po"), '"https://www.facebook.com/afenda"\n')
+
     def test_rules_are_idempotent_on_own_output(self):
         samples = [
-            ("<a>Odoo S.A.</a> Odoo OdooBot https://www.odoo.com/documentation/19.0/x https://odoo.com /odoo/x\n", "v.xml"),
+            ("<a>Odoo S.A.</a> Odoo OdooBot https://www.odoo.com/documentation/19.0/x https://odoo.com /odoo/x Odoo-Server https://twitter.com/Odoo\n", "v.xml"),
             ('msgid "Odoo"\nmsgstr "Odoo S.A."\n', "fr.po"),
         ]
         for text, name in samples:

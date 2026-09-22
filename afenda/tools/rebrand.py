@@ -27,7 +27,7 @@ PO_SUFFIXES = frozenset({".po", ".pot"})
 
 # Lines never rewritten, in any file.
 PROTECTED_ALWAYS = re.compile(
-    r"noqa: rebrand|iap\.odoo\.com|iap-services\.odoo\.com|services\.odoo\.com"
+    r"noqa: rebrand|X-Odoo-|iap\.odoo\.com|iap-services\.odoo\.com|services\.odoo\.com"
 )
 # Lines never rewritten in code files: license headers, imports, module loader.
 PROTECTED_IN_CODE = re.compile(
