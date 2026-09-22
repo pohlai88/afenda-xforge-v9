@@ -7,7 +7,18 @@
         of cascade, not of inline attributes. Append a second block rather than
         replacing upstream's: the upstream rules stay, ours win on order.
 
-        Values from afenda_brand/brand.py: primary #1E3A8A, ink #0F172A.
+        Every anchor in the digest wraps a <span> that carries its own colour
+        (:284, :345, :401-405, :412, :438), so a rule on `a` never reaches the
+        text: an !important on the ancestor does not beat a normal
+        declaration matching the descendant. These selectors are upstream's own
+        colour-carrying ones, overridden one for one.
+
+        Left alone on purpose: `.odoo_link_text` and `.td_button_connect`, which
+        already read company.email_secondary_color (Ledger Blue since Task 2),
+        and `#button_connect` / `.tip_button_text`, which are white on it.
+
+        Values from afenda_brand/brand.py: primary #1E3A8A, ink #0F172A,
+        graphite #4B5563.
 
         The upstream root is `<html xmlns="http://www.w3.org/1999/xhtml">`, so
         every node in it is namespaced and a bare `//style` finds nothing;
@@ -18,8 +29,24 @@
               name="AFENDA digest mail layout">
         <xpath expr="//*[local-name()='style']" position="after">
             <style xmlns="http://www.w3.org/1999/xhtml" type="text/css">
-                a { color: #1E3A8A !important; }
-                body { color: #0F172A !important; }
+                /* Upstream #374151 -> ink */
+                body,
+                .header_title,
+                .tip_title,
+                .tip_content,
+                .kpi_header,
+                .kpi_value,
+                .kpi_border_col,
+                .preference,
+                .run_business { color: #0F172A !important; }
+                /* Upstream #878d97 -> graphite */
+                .company_name,
+                .header_date,
+                .kpi_value_label,
+                .by_odoo,
+                #footer { color: #4B5563 !important; }
+                /* Upstream #007e84, a teal that belongs to no AFENDA token */
+                #button_open_report { color: #1E3A8A !important; }
             </style>
         </xpath>
     </template>

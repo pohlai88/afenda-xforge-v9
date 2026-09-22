@@ -9,6 +9,11 @@
         are the ones in brand.py (primary #1E3A8A, ink #0F172A, paper #F7F7F5,
         graphite #4B5563, hairline #E5E7EB).
 
+        Where a change only adds properties, it is written with
+        `<attribute name="style" add="..." separator=" "/>` so an upstream edit
+        to a property we do not set survives; only the two places that must
+        *remove* an upstream value (Verdana, #F1F1F1) restate the whole string.
+
         The CTA cell is deliberately untouched: it already reads
         company.email_secondary_color (fill) and company.email_primary_color
         (text), which afenda_brand sets to Ledger Blue on white.
@@ -19,7 +24,8 @@
     <!-- Default notification layout (addons/mail/data/mail_templates_email_layouts.xml:4) -->
     <template id="mail_notification_layout" inherit_id="mail.mail_notification_layout"
               name="AFENDA mail notification layout">
-        <!-- :9 - upstream ships Verdana on #454748. -->
+        <!-- :9 - upstream ships Verdana on #454748; both have to go, so this
+             one replaces rather than adds. -->
         <xpath expr="//body" position="attributes">
             <attribute name="style">font-family:'Source Sans 3','Segoe UI',Helvetica,Arial,sans-serif; color:#0F172A;</attribute>
         </xpath>
@@ -27,11 +33,15 @@
              anchors whose href matches odoo.com (mail_debranding/models/
              mail_render_mixin.py:28-35); the rebrand rewrote this href to
              afenda.app, so the anchor survives rendering and is ours to
-             replace. The image is absolute because an email has no origin. -->
+             replace. The image is absolute because an email has no origin.
+             width= as well as height= and a px max-width: Outlook's Word
+             engine ignores CSS sizing and would otherwise lay the asset out at
+             its native width. logo_email_2x.png is a 128x32 transparent mark
+             drawn for this 64x16 box, not the 1200px lockup. -->
         <xpath expr="//a[contains(@href, 'utm_source=db')]" position="replace">
-            <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email.png'"
-                 height="16" alt="AFENDA xForge"
-                 style="height:16px; border:0; vertical-align:middle;"/>
+            <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email_2x.png'"
+                 width="64" height="16" alt="AFENDA xForge"
+                 style="width:64px;height:16px;max-width:64px;border:0;vertical-align:middle;"/>
             <span style="color:#4B5563; vertical-align:middle;"> The truth of your business, kept.</span>
         </xpath>
     </template>
@@ -45,17 +55,20 @@
         <xpath expr="//body" position="attributes">
             <attribute name="style">font-family:'Source Sans 3','Segoe UI',Helvetica,Arial,sans-serif; color:#0F172A;</attribute>
         </xpath>
-        <!-- :104 - the frame around the card: Odoo grey #F1F1F1 -> AFENDA paper. -->
+        <!-- :104 - the frame around the card. Odoo grey #F1F1F1 and Verdana
+             both have to go, so this one is a full rewrite. -->
         <xpath expr="//table[contains(@style, '#F1F1F1')]" position="attributes">
             <attribute name="style">padding-top: 16px; background-color: #F7F7F5; font-family:'Source Sans 3','Segoe UI',Helvetica,Arial,sans-serif; color:#0F172A; width: 100%; border-collapse:separate;</attribute>
         </xpath>
-        <!-- :105 - the card itself: white on paper needs a hairline to read. -->
+        <!-- :105 - the card itself: white on paper needs a hairline to read.
+             Appended, so the later `color` wins over upstream's #454748 and
+             any property upstream adds later is kept. -->
         <xpath expr="//table[@width='590']" position="attributes">
-            <attribute name="style">padding: 24px; background-color: #FFFFFF; color:#0F172A; border:1px solid #E5E7EB; border-collapse:separate;</attribute>
+            <attribute name="style" add="color:#0F172A; border:1px solid #E5E7EB;" separator=" "/>
         </xpath>
-        <!-- :143 - the footer cell. -->
+        <!-- :143 - the footer cell; padding-top after upstream's shorthand. -->
         <xpath expr="//td[contains(@style, 'font-size:11px')]" position="attributes">
-            <attribute name="style">min-width: 590px; padding: 0 8px 0 8px; font-size:11px; border-top:1px solid #E5E7EB; padding-top:12px; color:#4B5563;</attribute>
+            <attribute name="style" add="border-top:1px solid #E5E7EB; padding-top:12px; color:#4B5563;" separator=" "/>
         </xpath>
         <!-- :144 - that cell opens with its own grey rule, which would now draw
              a second line directly under the hairline border above. Collapse it
@@ -63,11 +76,13 @@
         <xpath expr="//td[contains(@style, 'font-size:11px')]/hr" position="attributes">
             <attribute name="style">border:medium none;clear:both;display:block;font-size:0px;height:0;line-height:0;margin:0;</attribute>
         </xpath>
-        <!-- :160-161 - the "Powered by" anchor, as above. -->
+        <!-- :160-161 - the "Powered by" anchor, as above. This row sits on the
+             paper frame, outside the white card, which is why the asset has a
+             transparent background rather than a matted white one. -->
         <xpath expr="//a[contains(@href, 'utm_source=db')]" position="replace">
-            <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email.png'"
-                 height="16" alt="AFENDA xForge"
-                 style="height:16px; border:0; vertical-align:middle;"/>
+            <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email_2x.png'"
+                 width="64" height="16" alt="AFENDA xForge"
+                 style="width:64px;height:16px;max-width:64px;border:0;vertical-align:middle;"/>
             <span style="color:#4B5563; font-size:11px; vertical-align:middle;"> The truth of your business, kept.</span>
         </xpath>
     </template>

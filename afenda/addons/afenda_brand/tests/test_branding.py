@@ -242,13 +242,15 @@ class TestBranding(HttpCase):
         company fields back and this button is Ledger Blue on Ledger Blue."""
         html = self._render_email_layout("mail.mail_notification_layout")
         tree = lxml_html.fromstring(html)
-        cells = tree.xpath("//td[contains(@style, 'background:')]")
+        # Anchored on structure, not on a style substring: the CTA cell is the
+        # td whose direct child is the button_access link.
+        cells = tree.xpath("//td[a[@href='/x']]")
         self.assertEqual(len(cells), 1, "the CTA cell was not rendered")
-        fill = re.search(r"background:\s*(#[0-9A-Fa-f]{6})", cells[0].get("style"))
+        fill = re.search(r"background:\s*(#[0-9A-Fa-f]{6})", cells[0].get("style") or "")
         self.assertTrue(fill, "the CTA cell has no background colour")
-        anchors = cells[0].xpath(".//a")
+        anchors = cells[0].xpath("./a")
         self.assertEqual(len(anchors), 1, "the CTA cell has no link")
-        text = re.search(r"color:\s*(#[0-9A-Fa-f]{6})", anchors[0].get("style"))
+        text = re.search(r"color:\s*(#[0-9A-Fa-f]{6})", anchors[0].get("style") or "")
         self.assertTrue(text, "the CTA link has no colour")
         self.assertEqual(fill.group(1).upper(), BRAND["primary"])
         self.assertEqual(text.group(1).upper(), BRAND["on_primary"])
@@ -262,7 +264,7 @@ class TestBranding(HttpCase):
         self.assertIn("Source Sans 3", body)
         self.assertNotIn("Verdana", body)
         self.assertIn(BRAND["ink"], body)
-        self.assertIn("/afenda_brand/static/img/logo_email.png", html)
+        self.assertIn("/afenda_brand/static/img/logo_email_2x.png", html)
         self.assertNotIn("utm_source=db", html, "the outbound 'Powered by' link survived")
         for tell in ("Verdana", "#454748", "#875A7B"):
             self.assertNotIn(tell, html, f"default mail layout still carries {tell!r}")
@@ -276,9 +278,41 @@ class TestBranding(HttpCase):
         self.assertIn(BRAND["paper"], frame, "the email frame is not AFENDA paper")
         card = tree.xpath("//table[@width='590']")[0].get("style")
         self.assertIn(f"border:1px solid {BRAND['hairline']}", card, "the email card has no edge")
+        # The card and footer styles are appended to upstream's, so upstream's
+        # own `color` is still in the string; what matters is which one an
+        # email client reads last.
+        self.assertEqual(self._last_color(card), BRAND["ink"], "the card text is not ink")
         footer = tree.xpath("//td[contains(@style, 'font-size:11px')]")[0].get("style")
         self.assertIn(f"border-top:1px solid {BRAND['hairline']}", footer)
-        self.assertIn(BRAND["graphite"], footer)
-        self.assertIn("/afenda_brand/static/img/logo_email.png", html)
-        for tell in ("Verdana", "#F1F1F1", "#454748", "#875A7B", "utm_source=db"):
+        self.assertEqual(self._last_color(footer), BRAND["graphite"])
+        self.assertIn("/afenda_brand/static/img/logo_email_2x.png", html)
+        for tell in ("Verdana", "#F1F1F1", "utm_source=db"):
             self.assertNotIn(tell, html, f"light mail layout still carries {tell!r}")
+
+    def test_email_mark_is_sized_for_outlook(self):
+        """Regression: Outlook's Word engine ignores CSS sizing and lays an
+        image out at its native width, so a 1200px asset with only height="16"
+        blows the 590px card apart. Both layouts must ship the attribute pair
+        and point at the pre-scaled mark."""
+        with file_open("afenda_brand/static/img/logo_email_2x.png", "rb") as f:
+            raw = f.read()
+        self.assertEqual(Image.open(io.BytesIO(raw)).size, (128, 32), "the mark is not the 2x asset")
+        self.assertLess(len(raw), 12_000, "the mark is too heavy to ship on every notification")
+        # Transparent corner: this row sits on the paper frame in the light
+        # layout, so a white-matted asset would draw a box on off-white.
+        self.assertEqual(Image.open(io.BytesIO(raw)).convert("RGBA").getpixel((0, 0))[3], 0)
+        for xmlid in ("mail.mail_notification_layout", "mail.mail_notification_light"):
+            tree = lxml_html.fromstring(self._render_email_layout(xmlid))
+            marks = tree.xpath("//img[contains(@src, 'logo_email')]")
+            self.assertEqual(len(marks), 1, f"{xmlid} does not carry the AFENDA mark")
+            mark = marks[0]
+            self.assertEqual(mark.get("width"), "64", f"{xmlid}: no width attribute for Outlook")
+            self.assertEqual(mark.get("height"), "16", f"{xmlid}: no height attribute")
+            self.assertIn("max-width:64px", (mark.get("style") or "").replace(" ", ""))
+            self.assertIn("logo_email_2x.png", mark.get("src"))
+
+    @staticmethod
+    def _last_color(style):
+        """The `color` an email client ends up reading out of one inline style."""
+        values = re.findall(r"(?:^|;)\s*color\s*:\s*([^;]+)", style)
+        return values[-1].strip().upper() if values else None
