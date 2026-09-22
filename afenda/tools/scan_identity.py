@@ -23,6 +23,10 @@ ALLOW = re.compile(
     r"^\s*(from|import)\s+odoo\b|^\s*#.*Part of Odoo|X-Odoo-|Odoo-Link-Preview"
     r"|github\.com/odoo/|Last-Translator:|Language-Team:|Report-Msgid-Bugs-To:",
 )
+# Structural shapes that contain "odoo" but carry no identity: the XML data-file
+# root element, ES module specifiers for the bundled framework, and the .po
+# extractor origin comments. These are code structure, not words a user reads.
+STRUCTURAL = re.compile(r"</?odoo[\s>]|@odoo/|^#[.:]\s")
 
 
 def scan(root: Path) -> list[tuple[str, int, str]]:
@@ -38,15 +42,24 @@ def scan(root: Path) -> list[tuple[str, int, str]]:
         for lineno, line in enumerate(text.splitlines(), 1):
             if not SUSPECT.search(line):
                 continue
-            if ALLOW.search(line):
+            if ALLOW.search(line) or STRUCTURAL.search(line):
                 continue
-            if path.suffix in (".py",) and re.match(r"^\s*(from|import)\s", line):
+            # The engine's own protections mark lines that are deliberately not
+            # identity (license headers, imports, translator attribution, machine
+            # endpoints). The SUSPECT pattern above stays broader than the rules,
+            # so this reuse narrows noise without inheriting the rules' blind spots.
+            if _is_protected(line, path.relative_to(root)):
                 continue
             hits.append((rel, lineno, line.strip()[:160]))
     return hits
 
 
 def main() -> int:
+    # Hits can contain any script; never let the console encoding abort the scan.
+    try:
+        sys.stdout.reconfigure(errors="replace")
+    except AttributeError:
+        pass
     root = Path(__file__).resolve().parents[2]
     hits = scan(root)
     for rel, lineno, line in hits[:200]:
