@@ -5,7 +5,9 @@
 .o_afenda_login {
     background: $o-webclient-background-color;  // paper
 
-    // Upstream puts `bg-100` on this card; two classes beat one, so ours wins.
+    // Upstream dresses this card in `bg-100 border-0`. Both are !important
+    // utilities, so no selector here could win; login_layout strips the two
+    // classes instead and these plain declarations then apply.
     .o_database_list {
         background: $white;
         border: 1px solid $border-color;  // hairline

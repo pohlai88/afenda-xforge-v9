@@ -23,6 +23,12 @@ class TestBranding(HttpCase):
         self.assertIn("AFENDA xForge", html)
         self.assertIn("o_afenda_login", html, "the login body class is missing")
         self.assertIn(BRAND["tagline"], html, "the login card is missing the tagline")
+        # bg-100 and border-0 are !important utilities: while either is on the
+        # card, login.scss cannot paint it whatever the selector or load order.
+        card = re.search(r'<div[^>]*\bclass="([^"]*\bo_database_list\b[^"]*)"', html)
+        self.assertTrue(card, "the login card was not rendered")
+        for utility in ("bg-100", "border-0"):
+            self.assertNotIn(utility, card.group(1).split(), f"{utility} still overrides the card")
         for tell in ODOO_TELLS:
             self.assertNotIn(tell, html, f"login page still shows {tell!r}")
 
@@ -31,8 +37,13 @@ class TestBranding(HttpCase):
         hrefs = re.findall(r'href="(/web/assets/[^"]+web\.assets_frontend[^"]*\.css)"', html)
         self.assertTrue(hrefs, "web.assets_frontend stylesheet not linked from /web/login")
         css = self.url_open(hrefs[0]).text.lower()
-        self.assertIn(".o_afenda_login", css, "login.scss is not in the frontend bundle")
-        self.assertIn(BRAND["paper"].lower(), css, "the login ground is not AFENDA paper")
+        ground = re.search(r"\.o_afenda_login\s*\{([^}]*)\}", css)
+        self.assertTrue(ground, "login.scss is not in the frontend bundle")
+        self.assertIn(BRAND["paper"].lower(), ground.group(1), "the login ground is not AFENDA paper")
+        card = re.search(r"\.o_afenda_login\s+\.o_database_list\s*\{([^}]*)\}", css)
+        self.assertTrue(card, "the login card rule is not in the frontend bundle")
+        self.assertIn("#fff", card.group(1), "the login card is not white")
+        self.assertIn(BRAND["hairline"].lower(), card.group(1), "the login card has no hairline border")
 
     def test_webclient_page_is_branded(self):
         self.authenticate("admin", "admin")

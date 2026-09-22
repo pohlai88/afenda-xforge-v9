@@ -11,7 +11,9 @@ class Home(home.Home):
     @http.route()
     def web_login(self, *args, **kw):
         response = super().web_login(*args, **kw)
-        # A successful POST returns a redirect, which has no template context.
+        # Every odoo.http.Response carries a qcontext (set_default, http.py:1573),
+        # redirects included; the guard is only for a third-party override of
+        # web_login returning a plain werkzeug response.
         if hasattr(response, "qcontext"):
             response.qcontext["afenda_tagline"] = BRAND["tagline"]
         return response

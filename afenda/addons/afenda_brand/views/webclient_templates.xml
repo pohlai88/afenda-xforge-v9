@@ -17,9 +17,13 @@
         <xpath expr="//t[@t-set='body_classname']" position="attributes">
             <attribute name="t-value">'o_afenda_login'</attribute>
         </xpath>
-        <!-- The card is built with t-attf-class, so hasclass() cannot see it. -->
+        <!-- The card is built with t-attf-class, so hasclass() cannot see it.
+             `bg-100` and `border-0` are Bootstrap-style utilities and so carry
+             !important, which no rule in login.scss could outrank; strip them
+             here and let the AFENDA card surface apply. -->
         <xpath expr="//div[contains(@t-attf-class, 'o_database_list')]" position="attributes">
             <attribute name="style">max-width: 360px;</attribute>
+            <attribute name="t-attf-class" remove="bg-100 border-0" add="border" separator=" "/>
         </xpath>
         <!-- Not @alt: it is a translated attribute, which ir.ui.view
              _valid_inheritance refuses as an inheritance selector. -->
