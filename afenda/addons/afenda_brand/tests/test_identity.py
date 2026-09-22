@@ -2,7 +2,11 @@ import re
 
 from odoo.tests import HttpCase, tagged
 
-TELLS = re.compile(r"\bOdoo\b|odoo\.com|OdooBot|/odoo/|Odoo S\.A\.")
+# `title="odoo"` is its own shape: lowercase, so `\bOdoo\b` misses it, and it
+# is what a tooltip shows on hover. The peer's product_lowercase_attr rule
+# rewrote the one occurrence (addons/portal/views/portal_templates.xml); this
+# is the guard that an upstream merge does not bring it back.
+TELLS = re.compile(r"\bOdoo\b|odoo\.com|OdooBot|/odoo/|Odoo S\.A\.|title=[\"']odoo[\"']")
 
 
 @tagged("post_install", "-at_install")
@@ -16,6 +20,16 @@ class TestIdentity(HttpCase):
     def test_public_pages(self):
         for url in ("/web/login", "/web/database/manager", "/web/manifest.webmanifest"):
             self.assertClean(self.url_open(url).text, url)
+
+    def test_portal_home(self):
+        """The portal is the one logged-in surface a customer sees, and its
+        footer is where "Powered by Odoo" and the lowercase `title="odoo"`
+        tooltip lived. It needs a session: /my redirects to the login page
+        otherwise, and a login page that is clean proves nothing about /my."""
+        self.authenticate("admin", "admin")
+        page = self.url_open("/my")
+        self.assertEqual(page.status_code, 200)
+        self.assertClean(page.text, "/my")
 
     def test_app_prefix_serves_webclient_and_old_prefix_is_gone(self):
         self.authenticate("admin", "admin")

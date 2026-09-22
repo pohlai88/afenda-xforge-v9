@@ -72,11 +72,16 @@ def post_init_hook(env):
                 vals[field] = BRAND[key]
         # Printed documents. A document carries no action, so its accents are
         # ink and graphite, not Ledger Blue. Each field is written only while it
-        # still holds the upstream default, so an administrator who has picked a
-        # font, a layout or a color keeps it across a later `-u afenda_brand`.
-        # Writing any of them regenerates the web.asset_styles_company_report
-        # attachment (addons/web/models/models.py:2241-2266).
-        if company.font == _UPSTREAM_REPORT_FONT:
+        # still holds the upstream default, so re-installing the module never
+        # stomps a font, layout or colour an administrator has since picked.
+        # (This hook runs at install only -- `-u afenda_brand` does not call it
+        # at all -- so it is a re-install, not an update, that the guards
+        # protect against.) Writing any of them regenerates the
+        # web.asset_styles_company_report attachment
+        # (addons/web/models/models.py:2241-2266).
+        # A company created before `font` had a default holds NULL, which is
+        # just as unset as Lato.
+        if company.font in (False, _UPSTREAM_REPORT_FONT):
             vals["font"] = "Source_Sans_3"
         if report_layout and not company.external_report_layout_id:
             vals["external_report_layout_id"] = report_layout.id
@@ -87,3 +92,29 @@ def post_init_hook(env):
         if "favicon" in company._fields:
             vals["favicon"] = favicon
         company.write(vals)
+
+    refresh_app_icons(env)
+
+
+def refresh_app_icons(env):
+    """Recompute every root menu's cached icon from the files on disk.
+
+    `web_icon_data` is only recomputed when `web_icon` is written
+    (odoo/addons/base/models/ir_ui_menu.py:158-162), and it is what the apps
+    menu actually renders (`load_menus`, same file, :262-292). Re-rendering the
+    tiles on disk does not touch it, so a database keeps whatever artwork was
+    current when its menus were created. Writing each menu's own value back
+    re-reads the file.
+
+    Module-level so that an upgrade path can call it without re-running the
+    whole install hook.
+    """
+    roots = (
+        env["ir.ui.menu"]
+        .sudo()
+        .with_context(active_test=False)
+        .search([("parent_id", "=", False), ("web_icon", "!=", False)])
+    )
+    for menu in roots:
+        menu.web_icon = menu.web_icon
+    return roots

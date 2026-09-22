@@ -16,16 +16,21 @@
         "mail_bot",
         "portal",
         # OCA/server-brand 19.0
+        # `mail_debranding` is deliberately absent: it only acts on a body that
+        # still contains an `<a href>` to odoo.com (mail_render_mixin.py:28-32),
+        # and the rebrand rewrote every such href, so it is a no-op on this
+        # tree. `portal_debranding` is absent for a harder reason: its login
+        # xpath anchors on that same rewritten href
+        # (views/web_login_debrand.xml:5-9) and would raise on install.
+        # See afenda/README.md for the audit.
         "disable_odoo_online",
         "remove_odoo_enterprise",
-        "mail_debranding",
         # OCA/web 19.0
         "web_favicon",
         "web_pwa_customize",
         "web_no_bubble",
     ],
     "data": [
-        "data/config_data.xml",
         "views/webclient_templates.xml",
         "views/mail_templates.xml",
         "views/docs_placeholder.xml",
@@ -45,7 +50,10 @@
             "afenda_brand/static/src/scss/fonts.scss",
             "afenda_brand/static/src/scss/backend.scss",
             "afenda_brand/static/src/js/title_service.js",
+            "afenda_brand/static/src/js/effects.js",
+            "afenda_brand/static/src/js/user_menu.js",
             "afenda_brand/static/src/xml/res_config_edition.xml",
+            "afenda_brand/static/src/xml/error_dialogs.xml",
         ],
         "web.assets_frontend": [
             "afenda_brand/static/src/scss/fonts.scss",

@@ -24,3 +24,22 @@
 .o_list_view td.o_list_char[name="name"] {
     font-variant-numeric: tabular-nums;
 }
+
+// Empty states: one quiet ledger page instead of the three Odoo faces.
+//
+// Upstream draws all three through `:before` background images
+// (addons/web/static/src/views/view.scss:25-41); the two "face" helpers are
+// 120x140 boxes and the folder is 120x80. Same selector shape, same
+// specificity, later in the bundle, so these declarations win. The upstream
+// `background-size: cover` comes from the %o-nocontent-init-image placeholder
+// and would crop a 120x80 drawing inside the taller boxes, hence `contain`.
+.o_view_nocontent .o_nocontent_help {
+    .o_view_nocontent_smiling_face:before,
+    .o_view_nocontent_neutral_face:before,
+    .o_view_nocontent_empty_folder:before {
+        width: 120px;
+        height: 80px;
+        background: transparent url(/afenda_brand/static/img/empty_state.svg) no-repeat center;
+        background-size: contain;
+    }
+}

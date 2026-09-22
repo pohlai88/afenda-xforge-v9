@@ -32,17 +32,44 @@ Installing `afenda_brand` pulls in the OCA modules and applies the identity:
 
 | Where a user sees it | What changes |
 |---|---|
-| Browser tab | "AFENDA xForge" instead of "Odoo", favicon replaced |
-| Login page | AFENDA logo, no "Powered by Odoo" link |
-| Web client | Ledger Blue primary color, Source Sans 3 and Source Code Pro, paper background, tabular figures on money |
-| Settings | "AFENDA xForge 19.0" edition block, Enterprise upsells removed (`remove_odoo_enterprise`), odoo.com links removed (`disable_odoo_online`) |
-| Emails | "Powered by Odoo" footer removed (`mail_debranding`), AFENDA email colors |
-| Portal | Odoo branding removed (`portal_debranding`) |
-| PWA / mobile | App name "AFENDA", theme color Ledger Blue (`web_pwa_customize`) |
+| Browser tab | "AFENDA xForge" instead of "Odoo"; AFENDA favicon, or the company's own if one is set (`web_favicon`) |
+| Login page | AFENDA logo on a paper ground, one white card with a hairline edge, the tagline "The truth of your business, kept.", no "Powered by Odoo" link |
+| Web client | Ledger Blue primary, Ink `#0F172A` navbar, paper background, Source Sans 3 / Source Serif 4 / Source Code Pro, tabular figures on every number |
+| Semantic colors | Ember `#C2410C` attention, Verified `#15803D` posted, Flag `#B91C1C` error, replacing Odoo's green/orange/pink palette (light and dark schemes) |
+| Apps menu | All 108 module icons redrawn as AFENDA tiles; unmapped modules and the base fallback get the AFENDA mark on graphite. Third-party payment-provider marks are deliberately left alone |
+| Empty states | One ledger-page drawing instead of Odoo's smiling face, neutral face and folder |
+| Effects and errors | The rainbow man is replaced by a one-line success notification; the error dialog says "Something went wrong", not "Oops!" |
+| User menu | "Help" opens AFENDA's documentation; odoo.com entries removed (`disable_odoo_online`) |
+| Settings | "AFENDA xForge 19.0" edition block, Enterprise upsells removed (`remove_odoo_enterprise`) |
+| Emails | AFENDA notification and digest layouts: Ledger Blue call-to-action on white text, paper frame, hairline card edge, the AFENDA mark where "Powered by Odoo" linked out |
+| Printed documents | Standard layout, Source Sans 3 (static instances the PDF engine can use), ink and graphite accents, hairline table rules, tabular figures |
+| Portal | The footer "Powered by" line is replaced through `web.brand_promotion_message`, in this module. The record sidebar keeps its own "Powered by" line (`addons/portal/views/portal_templates.xml:282`), rebranded to the AFENDA lockup — see the OCA note below |
+| PWA / mobile | App name "AFENDA", theme color Ledger Blue, maskable icons, branded offline page (`web_pwa_customize`) |
 | Companies | Default logo is the AFENDA lockup; a company still named "My Company" is renamed "AFENDA" at install |
 
+One external request remains in a stock install: `addons/web/static/fonts/fonts.scss`
+loads the non-Latin Noto fallback faces from `fonts.odoocdn.com`. Latin text is
+served entirely from `afenda_brand/static/fonts/`; the CDN is only reached when a
+page renders CJK, Arabic or similar. Removing it is phase-2 work.
+
+### OCA dependencies
+
+The rebrand rewrites Odoo's own strings, which turns out to defeat OCA debranding
+modules that detect those strings. Audited at 2026-09-23:
+
+| Module | What it is for | Still effective | Evidence |
+|---|---|---|---|
+| `disable_odoo_online` | Removes the odoo.com user-menu entries and stops the publisher-warranty ping | yes | `user_menuitems` still registers `support`/`odoo_account` (`addons/web/static/src/webclient/user_menu/user_menu_items.js:139-143`); `publisher_warranty.contract` still exists (`addons/mail/models/update.py:20`) and its cron still runs |
+| `remove_odoo_enterprise` | Hides Enterprise-only modules and upsell settings | yes | `ir.module.module.to_buy` and `payment.provider.module_to_buy` still exist; `widget="upgrade_boolean"` is still used by `account`, `base_setup` and others |
+| `web_favicon` | Per-company favicon | yes | `res.company.favicon` comes from it, the install hook writes it, and `web.layout` resolves it through `_get_favicon()` |
+| `web_pwa_customize` | PWA name, colors and icons | yes | The install hook and `controllers/webmanifest.py` both build on it |
+| `web_no_bubble` | Hides the tour pointer bubbles | yes | `.o_tour_pointer` is still the class `web_tour` renders (`addons/web_tour/static/src/js/tour_pointer/tour_pointer.xml:8`) |
+| `mail_debranding` | Strips `<a href="…odoo.com…">` from outgoing mail | **no — dropped from `depends`** | It only acts when the body still contains an odoo.com anchor (`mail_render_mixin.py:28-32`). No `odoo.com` href survives anywhere in `addons/` or `odoo/`, so it never fires. Its own suite now fails on a rebranded database for the same reason |
+| `portal_debranding` | Hides the login and portal "Powered by" | **no — not installed** | Its login xpath anchors on that same rewritten href (`views/web_login_debrand.xml:5-9`) and would raise on an unmatched xpath at install. The login line and `web.brand_promotion` are handled by `views/webclient_templates.xml` instead; the record-sidebar line it would also have hidden now reads "Powered by AFENDA", which is on-brand rather than an Odoo tell |
+
 If you also install the `website` app, add `website_debranding` from
-`oca/server-brand` to remove the website footer branding.
+`oca/server-brand` to remove the website footer branding — and check first that
+its own detection has not been defeated the same way.
 
 Brand values (colors, names) are defined once in `addons/afenda_brand/brand.py`
 and mirrored in `static/src/scss/primary_variables.scss`.

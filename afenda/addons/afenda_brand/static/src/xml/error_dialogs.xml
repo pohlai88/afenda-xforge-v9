@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+
+    <!-- "Oops!" is a voice AFENDA does not use; an error is stated plainly.
+         The title lives on the <Dialog> as `title.translate`
+         (addons/web/static/src/core/errors/error_dialogs.xml:54), so the
+         replacement must keep that attribute name to stay translatable. -->
+    <t t-name="afenda_brand.ErrorDialog" t-inherit="web.ErrorDialog" t-inherit-mode="extension">
+        <xpath expr="//Dialog" position="attributes">
+            <attribute name="title.translate">Something went wrong</attribute>
+        </xpath>
+    </t>
+
+</templates>

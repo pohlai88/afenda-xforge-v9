@@ -4,11 +4,18 @@
 // footer of every document and `o_report_layout_standard` on the article of the
 // standard layout (addons/web/views/report_templates.xml:503-552). The company
 // id is not knowable from static SCSS, so the layout wrapper is matched by
-// prefix. Nothing here applies outside a rendered document.
+// prefix AND the `_layout` suffix on the class itself: a bare `o_company_`
+// prefix also catches `o_company_logo_small`, `o_company_logo_big`,
+// `o_company_tagline`, `o_company_details` and `o_company_address`, which are
+// inline fragments, not document wrappers. `*="_layout"` rather than
+// `$="_layout"` because the wrapper class is not always last -- the striped
+// header is `o_company_#{id}_layout header`
+// (addons/web/views/report_templates.xml:312). Nothing here applies outside a
+// rendered document.
 
 .o_report_layout_standard,
-[class^="o_company_"],
-[class*=" o_company_"] {
+[class^="o_company_"][class*="_layout"],
+[class*=" o_company_"][class*="_layout"] {
     // Figures in a document are read column-wise: every digit gets the same
     // advance so totals line up under the amounts they add.
     .o_main_table td.text-end,

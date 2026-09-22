@@ -6,8 +6,14 @@
         <xpath expr="//title" position="replace">
             <title t-esc="title or 'AFENDA xForge'"/>
         </xpath>
+        <!-- Both this template and web_favicon's inherit web.layout and set the
+             same attribute; ours is applied last (higher view id at the same
+             priority), so it has to carry web_favicon's lookup as well or the
+             per-company favicon field (which the install hook writes and the
+             company form offers) would never reach a browser. Order:
+             the scoped-app icon, then the company's own, then AFENDA's. -->
         <xpath expr="//link[@rel='shortcut icon']" position="attributes">
-            <attribute name="t-att-href">x_icon or '/afenda_brand/static/img/favicon.ico'</attribute>
+            <attribute name="t-att-href">x_icon or env['res.company'].sudo()._get_favicon() or '/afenda_brand/static/img/favicon.ico'</attribute>
         </xpath>
     </template>
 
@@ -20,10 +26,14 @@
         <!-- The card is built with t-attf-class, so hasclass() cannot see it.
              `bg-100` and `border-0` are Bootstrap-style utilities and so carry
              !important, which no rule in login.scss could outrank; strip them
-             here and let the AFENDA card surface apply. -->
+             here and let the AFENDA card surface apply. Nothing is added back:
+             `.card` (0-1-0, no !important) loses to
+             `.o_afenda_login .o_database_list` (0-2-0, later in the bundle), so
+             login.scss owns the border. Adding `border` would make that SCSS
+             line dead and its test assertion vacuous. -->
         <xpath expr="//div[contains(@t-attf-class, 'o_database_list')]" position="attributes">
             <attribute name="style">max-width: 360px;</attribute>
-            <attribute name="t-attf-class" remove="bg-100 border-0" add="border" separator=" "/>
+            <attribute name="t-attf-class" remove="bg-100 border-0" separator=" "/>
         </xpath>
         <!-- Not @alt: it is a translated attribute, which ir.ui.view
              _valid_inheritance refuses as an inheritance selector. -->

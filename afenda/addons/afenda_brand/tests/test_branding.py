@@ -2,6 +2,7 @@ import base64
 import io
 import re
 
+from lxml import etree as lxml_etree
 from lxml import html as lxml_html
 from markupsafe import Markup
 from PIL import Image
@@ -29,7 +30,13 @@ class TestBranding(HttpCase):
         # card, login.scss cannot paint it whatever the selector or load order.
         card = re.search(r'<div[^>]*\bclass="([^"]*\bo_database_list\b[^"]*)"', html)
         self.assertTrue(card, "the login card was not rendered")
-        for utility in ("bg-100", "border-0"):
+        # `border` is in the list for the opposite reason: re-adding it makes
+        # Bootstrap's utility paint the edge, which turns the hairline rule in
+        # login.scss into dead code and the assertion in
+        # test_frontend_css_has_login_surface vacuous. login.scss owns the
+        # border: `.o_afenda_login .o_database_list` (0-2-0, later in the
+        # bundle) already outranks `.card` (0-1-0, no !important).
+        for utility in ("bg-100", "border-0", "border"):
             self.assertNotIn(utility, card.group(1).split(), f"{utility} still overrides the card")
         for tell in ODOO_TELLS:
             self.assertNotIn(tell, html, f"login page still shows {tell!r}")
@@ -59,6 +66,26 @@ class TestBranding(HttpCase):
         js = self.url_open(hrefs[0]).text
         for item in ("documentation", "support", "odoo_account"):
             self.assertIn(f'.remove("{item}")', js, f"user menu item {item!r} is not removed")
+
+    def test_favicon_is_served_on_every_page(self):
+        """web.layout resolves the shortcut icon through web_favicon's
+        `_get_favicon()` before falling back to the AFENDA file. Regression: if
+        that lookup is dropped the per-company favicon the install hook writes
+        is never served; if it is wrong, the browser tab on /app gets a 404
+        instead of an icon."""
+        for url, authenticated in (("/web/login", False), ("/app", True)):
+            if authenticated:
+                self.authenticate("admin", "admin")
+            html = self.url_open(url).text
+            href = re.search(r'<link[^>]*rel="shortcut icon"[^>]*href="([^"]+)"', html)
+            self.assertTrue(href, f"{url} links no shortcut icon")
+            icon = self.url_open(href.group(1))
+            self.assertEqual(icon.status_code, 200, f"{url}: {href.group(1)} is not served")
+            self.assertTrue(icon.content, f"{url}: the favicon is empty")
+            # Whatever the route, the bytes are the AFENDA favicon: the hook
+            # wrote the same file onto every company.
+            with file_open("afenda_brand/static/img/favicon.ico", "rb") as f:
+                self.assertEqual(icon.content, f.read(), f"{url} serves a different favicon")
 
     def test_pwa_manifest_is_branded(self):
         manifest = self.url_open("/web/manifest.webmanifest").json()
@@ -143,6 +170,139 @@ class TestBranding(HttpCase):
         icp = self.env["ir.config_parameter"].sudo()
         self.assertEqual(icp.get_param("web.web_app_name"), BRAND["product"])
         self.assertEqual(icp.get_param("pwa.manifest.short_name"), BRAND["short"])
+
+    def test_app_icons_are_branded(self):
+        """The apps menu draws `web_icon_data`, a cached copy of the icon file
+        taken when `web_icon` was last written
+        (odoo/addons/base/models/ir_ui_menu.py:158-162). Rendering new tiles on
+        disk does not touch it, so without the refresh step in post_init_hook an
+        existing database keeps Odoo's teal hexagons for every root menu."""
+        roots = self.env["ir.ui.menu"].sudo().with_context(active_test=False).search(
+            [("parent_id", "=", False), ("web_icon", "!=", False)]
+        )
+        self.assertTrue(roots, "no root menu carries a web_icon")
+        brand = {
+            tuple(int(BRAND[k][i:i + 2], 16) for i in (1, 3, 5)): k
+            for k in ("primary", "graphite")
+        }
+        checked = 0
+        for menu in roots:
+            # A three-part web_icon is a "built" icon (class,colour,background)
+            # and stores no image at all; only the two-part `module,path` form
+            # has web_icon_data.
+            if len(menu.web_icon.split(",")) != 2 or not menu.web_icon_data:
+                continue
+            image = Image.open(io.BytesIO(base64.b64decode(menu.web_icon_data))).convert("RGBA")
+            # Mid-top edge: inside the tile whatever the corner radius.
+            pixel = image.getpixel((image.width // 2, 0))[:3]
+            self.assertIn(
+                pixel, brand,
+                f"{menu.name}: {menu.web_icon} is not an AFENDA tile (top edge {pixel})",
+            )
+            checked += 1
+        # This database installs few apps; Discuss plus the three base root
+        # menus (Apps, Settings, Tests) are the floor.
+        self.assertGreaterEqual(checked, 4, "too few image icons probed to prove anything")
+        self.assertEqual(
+            checked, len([m for m in roots if len(m.web_icon.split(",")) == 2]),
+            "a root menu names an image icon but stores no web_icon_data",
+        )
+        # The apps menu also serves the SVG beside each PNG; #985184 is the
+        # Odoo purple the upstream icon.svg files were drawn in.
+        svg = self.url_open("/mail/static/description/icon.svg").text
+        self.assertNotIn("#985184", svg, "the mail app icon is still Odoo artwork")
+        self.assertIn(BRAND["primary"], svg, "the mail app icon is not a Ledger Blue tile")
+
+    def test_empty_state_is_a_ledger_page(self):
+        """Regression: without the backend.scss override the three empty-state
+        helpers keep Odoo's smiling/neutral faces and folder drawings."""
+        self.authenticate("admin", "admin")
+        html = self.url_open("/app").text
+        hrefs = re.findall(r'href="(/web/assets/[^"]+web\.assets_web[^"]*\.css)"', html)
+        self.assertTrue(hrefs, "web.assets_web stylesheet not linked from /app")
+        css = self.url_open(hrefs[0]).text
+        self.assertEqual(self.url_open("/afenda_brand/static/img/empty_state.svg").status_code, 200)
+        ours = css.rfind("/afenda_brand/static/img/empty_state.svg")
+        self.assertGreater(ours, -1, "empty_state.svg never reaches the backend bundle")
+        # Same specificity as upstream's rule, so only load order decides.
+        for upstream in ("smiling_face.svg", "neutral_face.svg", "empty_folder.svg"):
+            self.assertGreater(
+                ours, css.rfind(upstream),
+                f"the AFENDA empty state must follow the last {upstream} rule to win",
+            )
+
+    def test_effects_and_help_are_quiet(self):
+        """Regression: drop effects.js and a saved record fires the rainbow man
+        again; drop user_menu.js and the user menu has no Help at all, because
+        disable_odoo_online removes upstream's (its `support` item) and nothing
+        replaces it."""
+        self.authenticate("admin", "admin")
+        html = self.url_open("/app").text
+        self.assertIn('"afenda_docs_url"', html, "session_info does not publish the docs url")
+        self.assertIn(BRAND["docs_path"], html, "session_info carries the wrong docs url")
+        js = self._webclient_js(html)
+        self.assertIn("afenda_help", js, "the Help user-menu item is not in the bundle")
+        self.assertIn("session.afenda_docs_url", js, "Help does not read the url from the session")
+        # `force: true` is what lets a second registration replace web's own
+        # "rainbow_man" (effect_service.js:58) instead of throwing on a
+        # duplicate key; without it the AFENDA effect never takes.
+        effect = js.rfind('"rainbow_man"')
+        self.assertGreater(effect, -1, "no rainbow_man registration in the bundle")
+        self.assertIn("force", js[effect:effect + 200], "the rainbow_man override is not forced")
+        self.assertGreater(
+            effect, js.find('effectRegistry.add("rainbow_man"'),
+            "the AFENDA effect must be registered after web's own",
+        )
+
+    def test_error_dialog_says_it_plainly(self):
+        """"Oops!" is not a voice AFENDA uses.
+
+        Two halves, because neither alone can fail for the right reason. The
+        bundle half proves the extension ships and names the right parent --
+        upstream's own template, carrying "Oops!", is registered too and stays
+        in the bundle either way, so asserting its absence would only ever be
+        red. The lxml half proves the xpath still selects something in the
+        current upstream template, which is what the browser does with the
+        registered extension at runtime.
+        """
+        self.authenticate("admin", "admin")
+        js = self._webclient_js(self.url_open("/app").text)
+        registration = js.find('registerTemplateExtension("web.ErrorDialog"')
+        self.assertGreater(registration, -1, "the AFENDA error-dialog extension is not in the bundle")
+        block = js[registration:registration + 1200]
+        self.assertIn("Something went wrong", block, "the extension does not carry the AFENDA title")
+        self.assertNotIn(
+            "Missing (extension) parent templates", js,
+            "an OWL extension in this bundle names a template that does not exist",
+        )
+        # The xpath, against the template it inherits from.
+        with file_open("web/static/src/core/errors/error_dialogs.xml", "rb") as f:
+            upstream = lxml_etree.fromstring(f.read())
+        with file_open("afenda_brand/static/src/xml/error_dialogs.xml", "rb") as f:
+            ours = lxml_etree.fromstring(f.read())
+        target = upstream.xpath("//t[@t-name='web.ErrorDialog']")
+        self.assertEqual(len(target), 1, "web.ErrorDialog is no longer declared where we inherit from")
+        patch = ours.xpath("//t[@t-inherit='web.ErrorDialog']/xpath")
+        self.assertEqual(len(patch), 1, "the AFENDA extension no longer carries exactly one xpath")
+        # The browser registers each template as its own document, so a leading
+        # `//` in the expr is scoped to that template (template_inheritance.js:145
+        # evaluates against the template element's ownerDocument). Re-parse to
+        # reproduce that scope instead of searching the whole upstream file.
+        scoped = lxml_etree.fromstring(lxml_etree.tostring(target[0]))
+        nodes = scoped.xpath(patch[0].get("expr"))
+        self.assertEqual(
+            len(nodes), 1,
+            f"{patch[0].get('expr')!r} selects {len(nodes)} nodes in web.ErrorDialog, not 1",
+        )
+        attribute = patch[0].find("attribute")
+        self.assertIsNotNone(nodes[0].get(attribute.get("name")),
+                             f"web.ErrorDialog has no {attribute.get('name')!r} attribute to replace")
+        self.assertEqual(attribute.text, "Something went wrong")
+
+    def _webclient_js(self, html):
+        srcs = re.findall(r'src="(/web/assets/[^"]+web\.assets_web[^"]*\.js)"', html)
+        self.assertTrue(srcs, "web.assets_web script not linked from /app")
+        return self.url_open(srcs[0]).text
 
     def test_backend_theme_uses_brand_colors_and_fonts(self):
         self.authenticate("admin", "admin")
