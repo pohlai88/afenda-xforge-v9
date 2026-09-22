@@ -8,6 +8,9 @@ from pathlib import Path
 from afenda.tools.rebrand import Rule
 
 MARKUP = frozenset({".xml", ".html", ".js", ".ts", ".po", ".pot", ".md", ".rst", ".json", ".csv"})
+# Formats whose text is only ever displayed. Excludes .js/.ts/.json/.csv,
+# where a quoted ODOO can be an API payload identifier rather than a label.
+DISPLAY = frozenset({".xml", ".html", ".po", ".pot", ".md", ".rst"})
 URLISH = frozenset({".py", ".js", ".ts", ".xml", ".html", ".md", ".rst", ".po", ".pot", ".json", ".csv"})
 ROUTER = "addons/web/static/src/core/browser/router.js"
 
@@ -49,8 +52,16 @@ def build_rules(brand: dict) -> list[Rule]:
         Rule("router_prefix", re.compile(r'"odoo"'), f'"{prefix}"', path_contains=(ROUTER,)),
         # 6. Social/profile handles at domain root (twitter.com/Odoo).
         Rule("social_handle", re.compile(r"(?<![\w.-])((?:www\.)?(?:twitter|x|facebook|linkedin|instagram|youtube|github|tiktok)\.com/)Odoo(?=[/\"'\s)]|$)"), rf"\g<1>{short.lower()}"),
-        # 7. All-caps standalone survivors the (normal-case) product rule below misses.
-        Rule("product_allcaps", re.compile(r"(?<![\w@/.])ODOO(?!\w)"), product.upper()),
+        # 7. ALL-CAPS product name, markup and translations only. Python and JS
+        #    string literals carry API payload identifiers (payment provider
+        #    paymentSource, merchant customer ids, EDI request prefixes) that
+        #    third parties have registered; rewriting those breaks integrations.
+        Rule(
+            "product_allcaps",
+            re.compile(r"(?<![\w@/.])ODOO(?!\w)"),
+            product.upper(),
+            suffixes=DISPLAY,
+        ),
         # 8. Lowercase standalone word when it is the ENTIRE quoted attribute value
         #    (e.g. title="odoo", placeholder="odoo") — never touches odoo.com-style
         #    text or the "odoo" package name in code, which aren't bare quoted values.
@@ -59,7 +70,9 @@ def build_rules(brand: dict) -> list[Rule]:
         Rule(
             "product_lowercase_attr",
             re.compile(r'(?<=["\'])odoo(?=["\'])'),
-            short.lower(),
+            # Tooltips and placeholders a user reads, so match the wordmark's
+            # casing rather than the lowercase identifier form.
+            short,
             suffixes=frozenset({".xml", ".html"}),
         ),
         # 9. The product name, standalone word only, last so earlier rules win.

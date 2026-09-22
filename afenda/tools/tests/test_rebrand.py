@@ -239,12 +239,23 @@ class RulesTests(unittest.TestCase):
     def test_odoo_com_case_insensitive(self):
         self.assertEqual(self.rw("https://accounts.ODOO.COM/account\n", "u.js"), "https://accounts.afenda.app/account\n")
 
+    def test_allcaps_leaves_api_identifiers_alone(self):
+        """ODOO in Python and JS payloads is a registered third-party identifier."""
+        cases = [
+            ("            'paymentSource': 'ODOO',\n", "payment_transaction.py"),
+            ("        request_id = 'ODOO' + secrets.token_hex(13)\n", "connection.py"),
+            ("'merchantCustomerId': ('ODOO-%s-%s' % (a, b))\n", "authorize_request.py"),
+            ("     * ODOO FIX START\n", "cropper.js"),
+        ]
+        for src, name in cases:
+            self.assertEqual(self.rw(src, name), src, name)
+
     def test_allcaps_odoo_word(self):
         self.assertEqual(self.rw('<separator string="FOR WEBSITES BUILT WITH ODOO"/>\n', "v.xml"), '<separator string="FOR WEBSITES BUILT WITH AFENDA XFORGE"/>\n')
 
     def test_lowercase_quoted_attribute_value(self):
-        self.assertEqual(self.rw('title="odoo"\n', "v.xml"), 'title="afenda"\n')
-        self.assertEqual(self.rw('placeholder="odoo"\n', "v.xml"), 'placeholder="afenda"\n')
+        self.assertEqual(self.rw('title="odoo"\n', "v.xml"), 'title="AFENDA"\n')
+        self.assertEqual(self.rw('placeholder="odoo"\n', "v.xml"), 'placeholder="AFENDA"\n')
         self.assertEqual(self.rw('x = "https://odoo.com"\n', "a.py"), 'x = "https://afenda.app"\n')
 
     def test_iap_endpoint_protected_in_python_only(self):

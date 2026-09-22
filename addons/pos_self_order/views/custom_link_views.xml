@@ -6,7 +6,7 @@
     <field name="arch" type="xml">
         <list string="Custom Links" editable="bottom">
             <field name="sequence" widget="handle" />
-            <field name="name" placeholder="afenda"/>
+            <field name="name" placeholder="AFENDA"/>
             <field name="url" placeholder="https://afenda.app"/>
             <field name="pos_config_ids" widget="many2many_tags" placeholder="empty = all points of sale" options="{'no_create': True}"/>
             <field name="style"/>
