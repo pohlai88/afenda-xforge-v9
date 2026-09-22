@@ -36,6 +36,12 @@ TARGETS: dict[str, str] = {
     "addons/mail/static/src/img/odoo_o.png": "mark_png",
     "addons/account/static/src/img/Odoo_logo_O.svg": "tile_svg",
     "odoo/addons/base/static/img/res_company_logo.png": "lockup_png",
+    "addons/web/static/img/nologo.png": "lockup_png",
+    "addons/web/static/img/logo_inverse_white_206px.png": "lockup_white_png",
+    "addons/web/static/img/default_icon_app.png": "tile_png",
+    "addons/web/static/img/enterprise_upgrade.jpg": "blank_jpg",
+    "odoo/addons/base/static/img/logo_white.png": "lockup_white_png",
+    "odoo/addons/base/static/img/demo_logo_report.png": "lockup_faint_png",
 }
 
 SIZES: dict[str, tuple[int, int]] = {
@@ -49,7 +55,17 @@ SIZES: dict[str, tuple[int, int]] = {
     "addons/mail/static/src/img/odoobot_transparent.png": (512, 512),
     "addons/mail/static/src/img/odoo_o.png": (100, 100),
     "odoo/addons/base/static/img/res_company_logo.png": (450, 120),
+    "addons/web/static/img/nologo.png": (180, 79),
+    "addons/web/static/img/logo_inverse_white_206px.png": (627, 206),
+    "addons/web/static/img/default_icon_app.png": (180, 180),
+    # Unreferenced upstream screenshot; a 1x1 white pixel keeps the path valid.
+    "addons/web/static/img/enterprise_upgrade.jpg": (1, 1),
+    "odoo/addons/base/static/img/logo_white.png": (600, 194),
+    "odoo/addons/base/static/img/demo_logo_report.png": (621, 196),
 }
+
+# Alpha kept by the report background watermark (Odoo ships its own at 25/255).
+WATERMARK_OPACITY = 0.12
 
 MARK_SVG_INNER = (
     '<path d="M32 12 L50 42 H41 L32 27 L23 42 H14 Z" fill="{fg}" stroke="{fg}" stroke-width="2.5" stroke-linejoin="round"/>'
@@ -101,11 +117,27 @@ def tile_png(size: int) -> Image.Image:
     return im.resize((size, size), Image.LANCZOS)
 
 
-def mark_png(size: int) -> Image.Image:
+def mark_png(size: int, fg=BLUE) -> Image.Image:
     big = size * SS
     im = Image.new("RGBA", (big, big), (0, 0, 0, 0))
-    _mark(ImageDraw.Draw(im), big / 64, BLUE, box_mark=False)
+    _mark(ImageDraw.Draw(im), big / 64, fg, box_mark=False)
     return im.resize((size, size), Image.LANCZOS)
+
+
+def _solid(im: Image.Image, rgb) -> Image.Image:
+    """Force every pixel to one colour, keeping the alpha channel.
+
+    Resampling an RGBA image blends colour into fully transparent pixels, which
+    leaves a grey fringe on a white-on-dark lockup. Flattening the colour first
+    keeps the edge white and the shape in the alpha channel.
+    """
+    out = Image.new("RGBA", im.size, tuple(rgb) + (0,))
+    out.putalpha(im.getchannel("A"))
+    return out
+
+
+def blank_jpg(width: int, height: int) -> Image.Image:
+    return Image.new("RGB", (width, height), WHITE)
 
 
 def _font(name: str, size: int, **axes) -> ImageFont.FreeTypeFont:
@@ -116,11 +148,17 @@ def _font(name: str, size: int, **axes) -> ImageFont.FreeTypeFont:
     return f
 
 
-def lockup_png(width: int, height: int, ink=INK, sub=BLUE) -> Image.Image:
+def lockup_png(width: int, height: int, ink=INK, sub=BLUE, mark_fill=None) -> Image.Image:
+    """Fit the AFENDA lockup into width x height on a transparent canvas.
+
+    ``mark_fill=None`` draws the blue tile with a white mark; a colour draws the
+    bare mark in that colour with no tile behind it.
+    """
     W, H, S = 1200, 300, 4
     im = Image.new("RGBA", (W * S, H * S), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
-    im.alpha_composite(tile_png(220 * S), (40 * S, 40 * S))
+    glyph = tile_png(220 * S) if mark_fill is None else mark_png(220 * S, mark_fill)
+    im.alpha_composite(glyph, (40 * S, 40 * S))
     serif = _font("SourceSerif4-VF.ttf", 150 * S, **{"Optical Size": 60, "Weight": 600})
     sans = _font("SourceSans3-VF.ttf", 78 * S, **{"Weight": 500})
     x = cx = 300 * S
@@ -135,6 +173,18 @@ def lockup_png(width: int, height: int, ink=INK, sub=BLUE) -> Image.Image:
     canvas = Image.new("RGBA", (width, height), (0, 0, 0, 0))
     canvas.alpha_composite(inner, ((width - inner.width) // 2, (height - inner.height) // 2))
     return canvas
+
+
+def lockup_white_png(width: int, height: int) -> Image.Image:
+    """Lockup for dark backgrounds: white wordmark, white mark, no tile."""
+    return _solid(lockup_png(width, height, ink=WHITE, sub=WHITE, mark_fill=WHITE), WHITE)
+
+
+def lockup_faint_png(width: int, height: int, opacity: float = WATERMARK_OPACITY) -> Image.Image:
+    """The standard lockup dimmed to a page-background watermark."""
+    im = lockup_png(width, height)
+    im.putalpha(im.getchannel("A").point(lambda v: int(v * opacity)))
+    return im
 
 
 def render_all(root: Path) -> list[Path]:
@@ -159,6 +209,15 @@ def render_all(root: Path) -> list[Path]:
         elif kind == "lockup_png":
             w, h = SIZES[rel]
             lockup_png(w, h).save(path)
+        elif kind == "lockup_white_png":
+            w, h = SIZES[rel]
+            lockup_white_png(w, h).save(path)
+        elif kind == "lockup_faint_png":
+            w, h = SIZES[rel]
+            lockup_faint_png(w, h).save(path)
+        elif kind == "blank_jpg":
+            w, h = SIZES[rel]
+            blank_jpg(w, h).save(path, quality=95)
         else:
             raise ValueError(kind)
         written.append(path)
