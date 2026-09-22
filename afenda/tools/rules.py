@@ -46,7 +46,7 @@ def build_rules(brand: dict) -> list[Rule]:
         ),
         Rule("router_prefix", re.compile(r'"odoo"'), f'"{prefix}"', path_contains=(ROUTER,)),
         # 6. Social/profile handles at domain root (twitter.com/Odoo).
-        Rule("social_handle", re.compile(r"(?<=\.com/)Odoo(?=[/\"'\s)]|$)"), short.lower()),
+        Rule("social_handle", re.compile(r"((?:twitter|x|facebook|linkedin|instagram|youtube|github|tiktok)\.com/)Odoo(?=[/\"'\s)]|$)"), rf"\g<1>{short.lower()}"),
         # 7. The product name, standalone word only, last so earlier rules win.
         Rule("product", re.compile(r"(?<![\w@/.])Odoo(?!\w)"), product),
     ]

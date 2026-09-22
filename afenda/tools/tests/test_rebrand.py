@@ -186,10 +186,13 @@ class RulesTests(unittest.TestCase):
     def test_http_header_prefix_survives(self):
         src = "header_dbname = self.httprequest.headers.get('X-Odoo-Database')\n"
         self.assertEqual(self.rw(src, "http.py"), src)
+        src2 = "headers = {'Odoo-Link-Preview': '1'}\n"
+        self.assertEqual(self.rw(src2, "link_preview.py"), src2)
 
     def test_social_handles(self):
         self.assertEqual(self.rw('href="https://twitter.com/Odoo"\n', "v.xml"), 'href="https://twitter.com/afenda"\n')
         self.assertEqual(self.rw('"https://www.facebook.com/Odoo"\n', "fr.po"), '"https://www.facebook.com/afenda"\n')
+        self.assertEqual(self.rw('href="https://example.com/Odoo"\n', "v.xml"), 'href="https://example.com/Odoo"\n')
 
     def test_rules_are_idempotent_on_own_output(self):
         samples = [
