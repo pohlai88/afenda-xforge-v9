@@ -57,6 +57,19 @@ class TestBranding(HttpCase):
         new_company = self.env["res.company"].create({"name": "Second"})
         self.assertEqual(self._logo_size(new_company.logo), expected_size, "new companies get the AFENDA logo")
 
+    def test_system_bot_is_branded(self):
+        bot = self.env.ref("base.partner_root")
+        self.assertEqual(bot.name, BRAND["bot"])
+        users = self.env["res.users"].with_context(active_test=False).search([])
+        self.assertTrue(all(u.odoobot_state == "disabled" for u in users))
+        new_user = self.env["res.users"].create({"name": "Lee", "login": "lee@example.com"})
+        self.assertEqual(new_user.odoobot_state, "disabled", "new users never get the Odoo onboarding chat")
+        bot_messages = self.env["mail.message"].search(
+            [("author_id", "=", bot.id), ("model", "=", "discuss.channel")]
+        )
+        for message in bot_messages:
+            self.assertNotIn("odoo", (message.body or "").lower(), "bot message still mentions Odoo")
+
     def test_config_parameters(self):
         icp = self.env["ir.config_parameter"].sudo()
         self.assertEqual(icp.get_param("web.web_app_name"), BRAND["product"])

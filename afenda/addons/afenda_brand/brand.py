@@ -6,6 +6,7 @@ Keep in sync with static/src/scss/primary_variables.scss.
 BRAND = {
     "product": "AFENDA xForge",
     "short": "AFENDA",
+    "bot": "AFENDA Bot",
     "tagline": "The truth of your business, kept.",
     # Colors
     "primary": "#1E3A8A",  # Ledger Blue: one action per screen

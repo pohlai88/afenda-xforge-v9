@@ -13,6 +13,7 @@
         "web",
         "base_setup",
         "mail",
+        "mail_bot",
         "portal",
         # OCA/server-brand 19.0
         "disable_odoo_online",

@@ -31,6 +31,22 @@ def post_init_hook(env):
         }
     ).execute()
 
+    # The system bot: AFENDA's name and mark, and no Odoo onboarding chat.
+    bot = env.ref("base.partner_root").sudo()
+    bot.write({"name": BRAND["bot"], "image_1920": _read_static("img/icon-512.png")})
+    users = env["res.users"].sudo().with_context(active_test=False).search([])
+    users.write({"odoobot_state": "disabled"})
+    bot_channels = env["discuss.channel"].sudo().search(
+        [("channel_type", "=", "chat"), ("channel_member_ids.partner_id", "=", bot.id)]
+    )
+    env["mail.message"].sudo().search(
+        [
+            ("model", "=", "discuss.channel"),
+            ("res_id", "in", bot_channels.ids),
+            ("author_id", "=", bot.id),
+        ]
+    ).unlink()
+
     companies = env["res.company"].sudo().search([])
     logo = _read_static("img/logo.png")
     favicon = _read_static("img/favicon.ico")
