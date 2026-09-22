@@ -66,3 +66,9 @@ git commit -am "[REBRAND] re-apply after upstream merge"
 Note: `upstream/19.0` history is unrelated to our rewritten root, so the
 first merge needs `--allow-unrelated-histories`; see the spec for why the
 root was rewritten.
+
+## De-identification tools
+
+Rule changes are reviewed on the corpus, never on the tree:
+`python -m afenda.tools.corpus diff` shows exactly what a rule change alters;
+after review, `python -m afenda.tools.corpus golden` and commit both files.
