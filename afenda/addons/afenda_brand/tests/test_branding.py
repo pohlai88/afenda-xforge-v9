@@ -84,9 +84,9 @@ class TestBranding(HttpCase):
 
     def test_backend_theme_uses_brand_colors_and_fonts(self):
         self.authenticate("admin", "admin")
-        html = self.url_open("/odoo").text
+        html = self.url_open("/app").text
         hrefs = re.findall(r'href="(/web/assets/[^"]+web\.assets_web[^"]*\.css)"', html)
-        self.assertTrue(hrefs, "web.assets_web stylesheet not linked from /odoo")
+        self.assertTrue(hrefs, "web.assets_web stylesheet not linked from /app")
         css = self.url_open(hrefs[0]).text.lower()
         self.assertIn(BRAND["primary"].lower(), css)
         self.assertIn("source sans 3", css)
