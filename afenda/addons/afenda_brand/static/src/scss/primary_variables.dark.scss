@@ -1,6 +1,6 @@
 // AFENDA xForge dark color scheme. Loaded before primary_variables.scss in
 // web.assets_web_dark, so these `!default` values win there and only there.
-// Keep in sync with brand.py.
+// Keep in sync with BRAND["dark"] in brand.py.
 
 $o-webclient-background-color: #0B1120 !default;
 $o-view-background-color: #111827 !default;

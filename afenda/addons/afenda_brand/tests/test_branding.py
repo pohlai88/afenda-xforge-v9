@@ -103,12 +103,19 @@ class TestBranding(HttpCase):
             ("hairline", BRAND["hairline"]),
         ):
             self.assertIn(color.lower(), css, f"AFENDA {name} {color} is missing from the theme")
+        for color in [BRAND["favorite"], *BRAND["tags"]]:
+            self.assertIn(color.lower(), css, f"AFENDA palette color {color} is missing from the theme")
         # ...and Odoo's own semantic palette does not. Bootstrap's generic named
-        # colors keep their own hexes whatever the theme (bootstrap_overridden.scss
-        # "Restore BS4 Colors"); only those two declarations may still hold one.
+        # colors keep their own hexes whatever the theme -- $green comes from
+        # web/static/src/scss/bootstrap_overridden.scss "Restore BS4 Colors" and
+        # $red from web/static/src/scss/pre_variables.scss:39 -- so exactly one
+        # declaration each may still hold the old hex, and nothing else may.
         bootstrap_named = {"#28a745": "--green: #28a745", "#dc3545": "--red: #dc3545"}
         for odoo_color in ("#28a745", "#ffac00", "#dc3545", "#f3cc00", "#d2317b", "#f0cda8"):
-            rest = css.replace(bootstrap_named[odoo_color], "") if odoo_color in bootstrap_named else css
+            declaration = bootstrap_named.get(odoo_color)
+            if declaration:
+                self.assertEqual(css.count(declaration), 1, f"{declaration!r} is not the lone survivor")
+            rest = css.replace(declaration, "", 1) if declaration else css
             self.assertNotIn(odoo_color, rest, f"Odoo theme color {odoo_color} must not survive")
         # html_editor hardcodes the community purple in its table picker; our
         # override must come later in the bundle so it wins.
@@ -121,5 +128,7 @@ class TestBranding(HttpCase):
     def test_dark_scheme_overrides_the_tokens(self):
         bundle = self.env["ir.qweb"]._get_asset_bundle("web.assets_web_dark", css=True, js=False)
         css = bundle.css().raw.decode().lower()
-        self.assertIn("#0b1120", css, "dark webclient background is missing")
-        self.assertIn("#111827", css, "dark view background is missing")
+        # "primary" and "link" are the two values the light sheet never contains,
+        # so they are what proves primary_variables.dark.scss was loaded at all.
+        for name, color in BRAND["dark"].items():
+            self.assertIn(color.lower(), css, f"dark {name} {color} is missing from the dark theme")

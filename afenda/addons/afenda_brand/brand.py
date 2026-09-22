@@ -2,7 +2,7 @@
 
 Keys: product, short, bot, domain, docs_path, url_prefix, tagline, and the
 colors primary, on_primary, ink, paper, graphite, hairline, ember, verified,
-flag, favorite, plus the tags palette.
+flag, favorite, the tags palette, and the dark sub-dict.
 
 Keep in sync with static/src/scss/primary_variables.scss.
 """
@@ -31,4 +31,14 @@ BRAND = {
         "#9CA3AF", "#A33A3A", "#B5651D", "#A16207", "#3B6EA8", "#7C4F7F",
         "#9A6B4F", "#2F8F8A", "#3448A8", "#A8447A", "#4C8A56", "#6B5FA8",
     ],
+    # Dark color scheme, mirrors static/src/scss/primary_variables.dark.scss.
+    "dark": {
+        "background": "#0B1120",  # behind the views
+        "view": "#111827",  # the views themselves
+        "text": "#E5E7EB",
+        "primary": "#3B5BDB",  # Ledger Blue lifted to carry on ink
+        "link": "#A5B4FC",
+        "border": "#1F2937",
+        "navbar": "#0B1120",
+    },
 }
