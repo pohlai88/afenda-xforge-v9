@@ -1,0 +1,26 @@
+// AFENDA xForge: quiet surface, exact data.
+
+// html_editor hardcodes the Odoo community purple in its table picker
+// instead of using $o-brand-primary; bring it back to Ledger Blue.
+.o-we-tablepicker .o-we-cell.active {
+    background-color: #1E3A8A;
+}
+
+// Money and quantities always line up: tabular figures wherever a number is read.
+.o_field_monetary,
+.o_field_float,
+.o_field_integer,
+.o_field_percentage,
+.o_list_number,
+.o_list_view td.o_list_number,
+.o_list_view .o_list_footer,
+.o_field_widget.o_field_monetary input,
+.o_field_widget.o_field_float input {
+    font-variant-numeric: tabular-nums;
+}
+
+// References and document numbers read as data, not prose.
+.o_form_view .oe_title .o_field_char.o_field_widget[name="name"] input,
+.o_list_view td.o_list_char[name="name"] {
+    font-variant-numeric: tabular-nums;
+}

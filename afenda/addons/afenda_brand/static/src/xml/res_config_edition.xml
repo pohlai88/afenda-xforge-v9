@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="afenda_brand.res_config_edition" t-inherit="res_config_edition" t-inherit-mode="extension">
+        <xpath expr="//h3" position="replace">
+            <h3 class="px-0">AFENDA xForge <t t-esc="serverVersion"/></h3>
+        </xpath>
+        <xpath expr="//small" position="replace">
+            <small>© 2026 AFENDA. Built on open-source components released under the <a id="license" target="_blank" href="http://www.gnu.org/licenses/lgpl.html" style="text-decoration: underline;">GNU LGPL</a>.</small>
+        </xpath>
+    </t>
+</templates>
