@@ -22,7 +22,7 @@ them, all real-time.
 Mail gateway
 ------------
 Sending information and documents made simplified. You can send emails
-from Odoo itself, and that too with great possibilities. For example,
+from AFENDA xForge itself, and that too with great possibilities. For example,
 design a beautiful email template for the invoices, and use the same
 for all your customers, no need to do the same exercise every time.
 
