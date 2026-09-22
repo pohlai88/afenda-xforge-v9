@@ -193,6 +193,8 @@ class RulesTests(unittest.TestCase):
         self.assertEqual(self.rw('href="https://twitter.com/Odoo"\n', "v.xml"), 'href="https://twitter.com/afenda"\n')
         self.assertEqual(self.rw('"https://www.facebook.com/Odoo"\n', "fr.po"), '"https://www.facebook.com/afenda"\n')
         self.assertEqual(self.rw('href="https://example.com/Odoo"\n', "v.xml"), 'href="https://example.com/Odoo"\n')
+        self.assertEqual(self.rw('href="https://fedex.com/Odoo"\n', "v.xml"), 'href="https://fedex.com/Odoo"\n')
+        self.assertEqual(self.rw('href="https://www.twitter.com/Odoo"\n', "v.xml"), 'href="https://www.twitter.com/afenda"\n')
 
     def test_rules_are_idempotent_on_own_output(self):
         samples = [
