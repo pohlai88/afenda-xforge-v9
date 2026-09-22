@@ -69,6 +69,18 @@ root was rewritten.
 
 ## De-identification tools
 
+```bash
+.venv/Scripts/python -m afenda.tools.rebrand           # dry run, per-rule counts
+.venv/Scripts/python -m afenda.tools.rebrand --apply   # rewrite addons/ and odoo/
+.venv/Scripts/python -m afenda.tools.brand_images      # AFENDA images over Odoo's logo paths
+.venv/Scripts/python -m afenda.tools.scan_identity     # exit 1 if any Odoo identity remains
+.venv/Scripts/python -m unittest discover -s afenda/tools/tests -t . -v
+```
+
+Rules live in `afenda/tools/rules.py`; names and domain in
+`afenda/addons/afenda_brand/brand.py`. A line ending in `# noqa: rebrand`
+is never rewritten.
+
 Rule changes are reviewed on the corpus, never on the tree:
 `python -m afenda.tools.corpus diff` shows exactly what a rule change alters;
 after review, `python -m afenda.tools.corpus golden` and commit both files.
