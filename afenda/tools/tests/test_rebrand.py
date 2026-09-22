@@ -1,0 +1,121 @@
+import re
+import tempfile
+import unittest
+from pathlib import Path
+
+from afenda.tools.rebrand import Rule, iter_files, rewrite_text, run
+
+PRODUCT = Rule("product", re.compile(r"(?<![\w\-@/.])Odoo(?![\w\-])"), "AFENDA xForge")
+
+
+class RewriteTextTests(unittest.TestCase):
+    def test_replaces_standalone_word(self):
+        out, counts = rewrite_text('title = _("Welcome to Odoo")\n', [PRODUCT], Path("a.py"))
+        self.assertEqual(out, 'title = _("Welcome to AFENDA xForge")\n')
+        self.assertEqual(counts, {"product": 1})
+
+    def test_leaves_identifiers_alone(self):
+        src = "class OdooEditor:\n    pass\nX_ODOO = 'X-Odoo-Database'\n"
+        out, counts = rewrite_text(src, [PRODUCT], Path("a.py"))
+        self.assertEqual(out, src)
+        self.assertEqual(counts, {})
+
+    def test_skips_license_header_in_code(self):
+        src = "# Part of Odoo. See LICENSE file.\n# Copyright Odoo S.A.\nname = 'Odoo'\n"
+        out, _ = rewrite_text(src, [PRODUCT], Path("a.py"))
+        self.assertTrue(out.startswith("# Part of Odoo. See LICENSE file.\n# Copyright Odoo S.A.\n"))
+        self.assertIn("name = 'AFENDA xForge'", out)
+
+    def test_skips_import_lines(self):
+        src = "from odoo import Odoo\nimport Odoo.things\nlabel = 'Odoo'\n"
+        out, _ = rewrite_text(src, [PRODUCT], Path("a.py"))
+        self.assertIn("from odoo import Odoo\n", out)
+        self.assertIn("import Odoo.things\n", out)
+        self.assertIn("label = 'AFENDA xForge'", out)
+
+    def test_copyright_is_not_protected_in_markup(self):
+        src = "<small>Copyright 2004 Odoo</small>\n"
+        out, _ = rewrite_text(src, [PRODUCT], Path("t.xml"))
+        self.assertEqual(out, "<small>Copyright 2004 AFENDA xForge</small>\n")
+
+    def test_noqa_marker_protects_line(self):
+        src = "x = 'Odoo'  # noqa: rebrand\n"
+        out, _ = rewrite_text(src, [PRODUCT], Path("a.py"))
+        self.assertEqual(out, src)
+
+    def test_machine_endpoints_protected(self):
+        src = "URL = 'https://iap.odoo.com/Odoo'\nURL2 = 'https://iap-services.odoo.com'\n"
+        out, _ = rewrite_text(src, [PRODUCT], Path("a.py"))
+        self.assertEqual(out, src)
+
+    def test_po_only_touches_msgid_and_msgstr(self):
+        src = (
+            '#. module: base\n'
+            '#: model:ir.module.module,shortdesc:base.module_Odoo\n'
+            'msgid "Odoo"\n'
+            'msgstr "Odoo"\n'
+            'msgid ""\n'
+            '"Welcome to Odoo, "\n'
+            '"the suite"\n'
+            'msgstr ""\n'
+        )
+        out, counts = rewrite_text(src, [PRODUCT], Path("fr.po"))
+        self.assertIn('#: model:ir.module.module,shortdesc:base.module_Odoo\n', out)
+        self.assertIn('msgid "AFENDA xForge"\n', out)
+        self.assertIn('msgstr "AFENDA xForge"\n', out)
+        self.assertIn('"Welcome to AFENDA xForge, "\n', out)
+        self.assertEqual(counts, {"product": 3})
+
+    def test_rule_suffix_and_path_filters(self):
+        only_xml = Rule("x", re.compile("Odoo"), "A", suffixes=frozenset({".xml"}))
+        self.assertTrue(only_xml.applies_to(Path("v.xml")))
+        self.assertFalse(only_xml.applies_to(Path("v.py")))
+        router = Rule("r", re.compile("Odoo"), "A", path_contains=("core/browser/router.js",))
+        self.assertTrue(router.applies_to(Path("addons/web/static/src/core/browser/router.js")))
+        self.assertFalse(router.applies_to(Path("addons/web/static/src/other.js")))
+        no_iot = Rule("n", re.compile("Odoo"), "A", path_excludes=("iot_box_image",))
+        self.assertFalse(no_iot.applies_to(Path("addons/iot_box_image/x.py")))
+
+    def test_idempotent(self):
+        src = "a = 'Odoo Odoo'\n"
+        once, _ = rewrite_text(src, [PRODUCT], Path("a.py"))
+        twice, counts = rewrite_text(once, [PRODUCT], Path("a.py"))
+        self.assertEqual(once, twice)
+        self.assertEqual(counts, {})
+
+
+class RunTests(unittest.TestCase):
+    def setUp(self):
+        self.tmp = tempfile.TemporaryDirectory()
+        self.root = Path(self.tmp.name)
+        (self.root / "addons" / "m").mkdir(parents=True)
+        (self.root / "odoo").mkdir()
+        (self.root / "afenda").mkdir()
+        (self.root / ".git").mkdir()
+        (self.root / "addons" / "m" / "v.xml").write_text("<t>Odoo</t>\n", encoding="utf-8")
+        (self.root / "addons" / "m" / "logo.png").write_bytes(b"\x89PNG Odoo")
+        (self.root / "odoo" / "x.py").write_text("s = 'Odoo'\n", encoding="utf-8")
+        (self.root / "afenda" / "y.py").write_text("s = 'Odoo'\n", encoding="utf-8")
+
+    def tearDown(self):
+        self.tmp.cleanup()
+
+    def test_iter_files_scans_only_text_in_addons_and_odoo(self):
+        rel = sorted(p.relative_to(self.root).as_posix() for p in iter_files(self.root))
+        self.assertEqual(rel, ["addons/m/v.xml", "odoo/x.py"])
+
+    def test_dry_run_changes_nothing_and_counts(self):
+        counts = run(self.root, [PRODUCT], apply=False)
+        self.assertEqual(counts, {"product": 2})
+        self.assertEqual((self.root / "odoo" / "x.py").read_text(encoding="utf-8"), "s = 'Odoo'\n")
+
+    def test_apply_writes_files(self):
+        run(self.root, [PRODUCT], apply=True)
+        self.assertEqual((self.root / "odoo" / "x.py").read_text(encoding="utf-8"), "s = 'AFENDA xForge'\n")
+        self.assertEqual((self.root / "addons" / "m" / "v.xml").read_text(encoding="utf-8"), "<t>AFENDA xForge</t>\n")
+        self.assertEqual((self.root / "afenda" / "y.py").read_text(encoding="utf-8"), "s = 'Odoo'\n")
+        self.assertEqual(run(self.root, [PRODUCT], apply=False), {})
+
+
+if __name__ == "__main__":
+    unittest.main()
