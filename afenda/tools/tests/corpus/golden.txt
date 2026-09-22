@@ -28072,7 +28072,7 @@
 .py	other	from .result import OdooTestResult
 .py	other	from .suite import OdooSuite
 .py	other	from :class:`~odoo.models.AbstractModel`.
-.py	other	from Odoo itself, and that too with great possibilities. For example,
+.py	other	from AFENDA xForge itself, and that too with great possibilities. For example,
 .py	other	from odoo import  _, api, fields, models
 .py	other	from odoo import Command
 .py	other	from odoo import Command, SUPERUSER_ID

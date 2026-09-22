@@ -91,6 +91,16 @@ class RewriteTextTests(unittest.TestCase):
         out2, _ = rewrite_text("<!-- Part of Odoo. -->\n<t>Odoo</t>\n", [PRODUCT], Path("v.xml"))
         self.assertEqual(out2, "<!-- Part of Odoo. -->\n<t>AFENDA xForge</t>\n")
 
+    def test_prose_starting_with_from_is_not_protected_as_import(self):
+        src = "This feature comes from Odoo itself, and that too with great possibilities.\n"
+        out, _ = rewrite_text(src, [PRODUCT], Path("a.py"))
+        self.assertIn("from AFENDA xForge itself", out)
+
+    def test_real_import_still_protected(self):
+        src = "from odoo import models\nfrom Odoo.legacy import Thing\n"
+        out, _ = rewrite_text(src, [PRODUCT], Path("a.py"))
+        self.assertEqual(out, src)
+
 
 class RunTests(unittest.TestCase):
     def setUp(self):

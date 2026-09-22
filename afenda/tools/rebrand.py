@@ -31,7 +31,7 @@ PROTECTED_ALWAYS = re.compile(
 )
 # Lines never rewritten in code files: license headers, imports, module loader.
 PROTECTED_IN_CODE = re.compile(
-    r"Part of Odoo|Copyright|^\s*(from|import)\s|odoo\.define\(|require\("
+    r"Part of Odoo|Copyright|^\s*(from|import)\s+[\w.]+(\s+import\s|$)|odoo\.define\(|require\("
 )
 # In .po files only these lines carry user-visible text.
 PO_TEXT_LINE = re.compile(r'^(msgid |msgstr|msgid_plural |")')
