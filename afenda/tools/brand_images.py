@@ -58,8 +58,10 @@ SIZES: dict[str, tuple[int, int]] = {
     "addons/web/static/img/nologo.png": (180, 79),
     "addons/web/static/img/logo_inverse_white_206px.png": (627, 206),
     "addons/web/static/img/default_icon_app.png": (180, 180),
-    # Unreferenced upstream screenshot; a 1x1 white pixel keeps the path valid.
-    "addons/web/static/img/enterprise_upgrade.jpg": (1, 1),
+    # Nothing references this upstream screenshot, but keep its real dimensions:
+    # a blank JPEG this size is a few KB, and any consumer an upstream merge adds
+    # later gets the box it expects instead of a silently stretched pixel.
+    "addons/web/static/img/enterprise_upgrade.jpg": (2378, 1306),
     "odoo/addons/base/static/img/logo_white.png": (600, 194),
     "odoo/addons/base/static/img/demo_logo_report.png": (621, 196),
 }
@@ -177,6 +179,9 @@ def lockup_png(width: int, height: int, ink=INK, sub=BLUE, mark_fill=None) -> Im
 
 def lockup_white_png(width: int, height: int) -> Image.Image:
     """Lockup for dark backgrounds: white wordmark, white mark, no tile."""
+    # mark_fill is the load-bearing argument: it is what suppresses the blue tile,
+    # and _solid cannot undo a tile once drawn. ink and sub only keep the
+    # pre-flatten render honest, since _solid overwrites every RGB value.
     return _solid(lockup_png(width, height, ink=WHITE, sub=WHITE, mark_fill=WHITE), WHITE)
 
 
