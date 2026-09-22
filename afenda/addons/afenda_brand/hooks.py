@@ -10,28 +10,32 @@ _DEFAULT_COMPANY_NAMES = {"My Company", "YourCompany"}
 # (odoo/addons/base/models/res_company.py:88-91).
 _UPSTREAM_REPORT_FONT = "Lato"
 
-# The email colour values AFENDA is entitled to overwrite: upstream's own
-# default, and any value an earlier AFENDA release wrote and has since
-# superseded. The superseded entries exist because the ordinary "only while it
-# is still upstream's" guard cannot see them -- a company holding one is not at
-# upstream's default, so the guard would skip it forever and the fix would
-# never reach a database that predates it.
+# Upstream's own defaults for the two email colours
+# (addons/mail/models/res_company.py:28-33). A company still holding one of
+# these has never been branded, so writing over it takes nothing away.
+_UPSTREAM_EMAIL_COLORS = {
+    "email_primary_color": ("#FFFFFF",),  # the button TEXT
+    "email_secondary_color": ("#875A7B",),  # the Odoo purple button FILL
+}
+
+# Values an earlier AFENDA release wrote and has since superseded. A company
+# holding one is not at upstream's default, so the guard above cannot see it
+# and the fix would never reach a database that predates it.
 #
-# Delete a superseded entry once no database installed before its fix remains.
-_REPLACEABLE_EMAIL_COLORS = {
-    # Upstream defaults: addons/mail/models/res_company.py:28-33.
-    "email_primary_color": (
-        "#FFFFFF",  # upstream: the button TEXT, which is also our value
-        # Superseded (fixed 2026-09-23): the hook had mail's two names
-        # inverted and wrote the button FILL colour into the TEXT field.
-        BRAND["primary"],
-    ),
-    "email_secondary_color": (
-        "#875A7B",  # upstream: the Odoo purple button FILL
-        # Superseded (same inversion): ink landed in the FILL field, so the
-        # notification button rendered Ledger Blue on ink -- unreadable.
-        BRAND["ink"],
-    ),
+# Only migrations/19.0.1.0.1/post-migrate.py opts in, through
+# `replace_superseded=True`. That is deliberate: the repair has to reach each
+# stale database exactly once, and keeping it off every other code path keeps
+# the one risk it carries -- an administrator who genuinely picked the
+# superseded colour -- out of the install hook and out of any future caller.
+# This table is therefore migration-local in practice, and goes with that
+# migration once no database installed before 2026-09-23 remains.
+_SUPERSEDED_EMAIL_COLORS = {
+    # The inversion fixed on 2026-09-23: the hook had mail's two names the
+    # wrong way round, so the button FILL colour landed in the TEXT field...
+    "email_primary_color": (BRAND["primary"],),
+    # ...and ink landed in the FILL field, which rendered the notification
+    # button Ledger Blue on ink -- unreadable.
+    "email_secondary_color": (BRAND["ink"],),
 }
 
 
@@ -80,26 +84,41 @@ def post_init_hook(env):
         ]
     ).unlink()
 
-    _apply_company_branding(env)
+    companies = _apply_company_branding(env)
+    # The favicon stays here, outside `_apply_company_branding`, because it is
+    # the one branding field with no guard available: web_favicon's default is
+    # Odoo's own icon with a randomly coloured bottom row
+    # (afenda/oca/web/web_favicon/models/res_company.py:21-50), so a stored
+    # value cannot be told apart from one an administrator uploaded. Writing it
+    # at install only keeps that blast radius exactly where it has always been;
+    # the migration must not re-run it on a configured database.
+    if "favicon" in companies._fields:
+        companies.write({"favicon": _read_static("img/favicon.ico")})
+
     refresh_app_icons(env)
 
 
-def _apply_company_branding(env):
+def _apply_company_branding(env, replace_superseded=False):
     """Write the AFENDA logo, name, colours, font and report layout on every company.
 
     Module-level so the 19.0.1.0.1 migration can re-apply it on update: a
     `post_init_hook` runs at install only, so without that call a database
     installed before a branding fix keeps the broken value for good.
 
-    Every field is guarded. A field is written only while it still holds a
-    value AFENDA is entitled to replace -- nothing, upstream's default, or (for
-    the two email colours) a value an earlier AFENDA release wrote and has
-    since superseded. An administrator's own choice is never overwritten,
-    neither by a re-install nor by the migration.
+    Every field written here is guarded on its value still being upstream's own
+    default (or nothing at all), so an administrator's name, logo, font, layout
+    or colour is never overwritten, neither by a re-install nor by the
+    migration. `replace_superseded` widens that test for the two email colours
+    alone, to also accept a value an earlier AFENDA release wrote and has since
+    superseded; see `_SUPERSEDED_EMAIL_COLORS` for why only the migration
+    passes it.
+
+    The favicon is deliberately not written here; see `post_init_hook`.
     """
+    # sudo(): branding has to reach every company, not only the ones the
+    # installing user is allowed into (res.company is filtered by `company_ids`).
     companies = env["res.company"].sudo().search([])
     logo = _read_static("img/logo.png")
-    favicon = _read_static("img/favicon.ico")
     # The standard layout: one column of figures, no boxes, no filled headers.
     report_layout = env.ref("web.external_layout_standard", raise_if_not_found=False)
     for company in companies:
@@ -116,10 +135,11 @@ def _apply_company_branding(env):
         ):
             if field not in company._fields:
                 continue
-            current, intended = company[field], BRAND[key]
-            if not _is_replaceable(current, _REPLACEABLE_EMAIL_COLORS[field]):
-                continue
-            if not current or current.upper() != intended.upper():
+            replaceable = _UPSTREAM_EMAIL_COLORS.get(field, ())
+            if replace_superseded:
+                replaceable += _SUPERSEDED_EMAIL_COLORS.get(field, ())
+            current, intended = (company[field] or "").upper(), BRAND[key]
+            if current != intended.upper() and _is_replaceable(current, replaceable):
                 vals[field] = intended
         # Printed documents. A document carries no action, so its accents are
         # ink and graphite, not Ledger Blue. Each field is written only while it
@@ -138,8 +158,6 @@ def _apply_company_branding(env):
             vals["primary_color"] = BRAND["ink"]
         if not company.secondary_color:
             vals["secondary_color"] = BRAND["graphite"]
-        if "favicon" in company._fields:
-            vals["favicon"] = favicon
         company.write(vals)
     return companies
 

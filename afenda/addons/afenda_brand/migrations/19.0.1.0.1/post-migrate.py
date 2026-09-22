@@ -12,6 +12,10 @@ The app icons need the same treatment: `web_icon_data` is a cached copy of the
 icon file, refreshed only when `web_icon` is written, so an updated database
 keeps whatever artwork was current when its root menus were created.
 
+What this deliberately does NOT re-apply is the company favicon: it is the one
+branding field with no "still upstream's" test available, so it is written at
+install only and an administrator's upload survives every upgrade.
+
 `post-` stage: this runs after the module's own data is loaded, so
 `web.external_layout_standard` and the re-declared `res.company` fields exist.
 
@@ -26,5 +30,8 @@ from odoo.addons.afenda_brand.hooks import _apply_company_branding, refresh_app_
 
 def migrate(cr, version):
     env = api.Environment(cr, SUPERUSER_ID, {})
-    _apply_company_branding(env)
+    # `replace_superseded` is passed here and nowhere else: repairing a value
+    # AFENDA itself wrote and has since superseded is a one-shot job for the
+    # databases that predate the fix, not standing behaviour of the hook.
+    _apply_company_branding(env, replace_superseded=True)
     refresh_app_icons(env)

@@ -1,5 +1,8 @@
+import ast
 import base64
+import inspect
 import io
+import pathlib
 import re
 
 from lxml import etree as lxml_etree
@@ -7,6 +10,7 @@ from lxml import html as lxml_html
 from markupsafe import Markup
 from PIL import Image
 
+from odoo.modules.module import load_script
 from odoo.tests import HttpCase, tagged
 from odoo.tools import file_open, is_html_empty
 
@@ -14,6 +18,13 @@ from ..brand import BRAND
 from ..hooks import _UPSTREAM_REPORT_FONT, _apply_company_branding
 
 ODOO_TELLS = ("odoo.com", "Powered by Odoo", "odoo_logo", "Odoo S.A.")
+
+# A 1x1 PNG, base64 as a Binary field stores it: stands in for a favicon an
+# administrator uploaded, and is nothing the addon would ever write itself.
+_CUSTOM_FAVICON = (
+    b"iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8z8BQDwAE"
+    b"hQGAhKmMIQAAAABJRU5ErkJggg=="
+)
 
 
 @tagged("post_install", "-at_install")
@@ -184,9 +195,23 @@ class TestBranding(HttpCase):
             "secondary_color": "#654321",
             "email_secondary_color": "#ABCDEF",
             "external_report_layout_id": boxed.id,
+            "favicon": _CUSTOM_FAVICON,
         })
 
+        # The default call, which is what `post_init_hook` makes: the
+        # superseded repair is opt-in, so the stale email colours survive it.
+        # Regression: make the repair unconditional and every path that brands
+        # companies -- the install hook, any future caller -- starts carrying
+        # the risk of overwriting an administrator who genuinely picked ink for
+        # the notification button.
         _apply_company_branding(self.env)
+        self.assertEqual(stale.email_secondary_color.upper(), BRAND["ink"])
+        self.assertEqual(stale.email_primary_color.upper(), BRAND["primary"])
+        # The fields guarded on upstream's own default are repaired either way.
+        self.assertEqual(stale.font, "Source_Sans_3")
+
+        # What the migration calls.
+        _apply_company_branding(self.env, replace_superseded=True)
 
         # Regression: guard the two email colours on the upstream default alone
         # and #0F172A is not it, so the company is skipped forever -- every
@@ -194,10 +219,11 @@ class TestBranding(HttpCase):
         # the inversion fix was supposed to end.
         self.assertEqual(stale.email_secondary_color.upper(), BRAND["primary"])
         self.assertEqual(stale.email_primary_color.upper(), BRAND["on_primary"])
-        # Regression: leave the branding body inside post_init_hook (or omit
-        # the migration, or omit the version bump that makes it run) and the
-        # document defaults never reach a company that already exists.
-        self.assertEqual(stale.font, "Source_Sans_3")
+        # Regression: leave the branding body inside post_init_hook and the
+        # document defaults never reach a company that already exists. (That
+        # the migration script itself is present and loadable is
+        # `test_migration_script_is_wired_to_the_manifest_version`; this test
+        # calls the function directly and cannot see the script at all.)
         self.assertEqual(
             stale.external_report_layout_id,
             self.env.ref("web.external_layout_standard"),
@@ -213,6 +239,38 @@ class TestBranding(HttpCase):
         self.assertEqual(chosen.secondary_color, "#654321")
         self.assertEqual(chosen.email_secondary_color, "#ABCDEF")
         self.assertEqual(chosen.external_report_layout_id, boxed)
+        # The favicon has no "still upstream's" test available (web_favicon's
+        # default carries a random colour bar), so it is written by
+        # `post_init_hook` alone. Regression: move those two lines back into
+        # `_apply_company_branding` and every upgrade overwrites an uploaded
+        # company favicon with the AFENDA one.
+        self.assertEqual(chosen.favicon, _CUSTOM_FAVICON)
+
+    def test_migration_script_is_wired_to_the_manifest_version(self):
+        """The migration script is the subject of this change and the test
+        above cannot see it: that one calls `_apply_company_branding` directly
+        and stays green with the script deleted.
+
+        Regressions: delete `migrations/<version>/post-migrate.py`; bump the
+        manifest version without adding the matching directory (Odoo looks the
+        directory up by version, odoo/modules/migration.py:186-215, and simply
+        finds nothing); or give `migrate` a signature Odoo rejects --
+        `exec_script` requires exactly `(cr, version)` and raises TypeError
+        otherwise (odoo/modules/migration.py:245-252), which aborts the whole
+        upgrade.
+        """
+        addon = pathlib.Path(__file__).resolve().parent.parent
+        version = ast.literal_eval((addon / "__manifest__.py").read_text(encoding="utf-8"))["version"]
+        script = addon / "migrations" / version / "post-migrate.py"
+        self.assertTrue(
+            script.is_file(),
+            f"manifest version {version} has no migrations/{version}/post-migrate.py",
+        )
+        module = load_script(str(script), "afenda_brand_post_migrate_under_test")
+        self.assertEqual(
+            tuple(inspect.signature(module.migrate).parameters), ("cr", "version"),
+            "Odoo only accepts a migrate(cr, version) signature",
+        )
 
     def test_system_bot_is_branded(self):
         bot = self.env.ref("base.partner_root")
