@@ -1028,7 +1028,7 @@ msgstr "MUILLE VERKKOSIVUILLE"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
 msgstr "VERKKOSIVUILLE, JOTKA ON RAKENNETTU ODOOLLA"
 
 #. module: im_livechat

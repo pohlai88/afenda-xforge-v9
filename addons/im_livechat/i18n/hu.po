@@ -1015,8 +1015,8 @@ msgstr "MÁS WEBOLDALAKNAK"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
-msgstr "ODOO-VAL KÉSZÜLT WEBOLDALAKNAK"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
+msgstr "AFENDA XFORGE-VAL KÉSZÜLT WEBOLDALAKNAK"
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_troubleshooting_answer_firefox_demo

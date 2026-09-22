@@ -2647,10 +2647,10 @@ msgstr "Primerjaj dve številski vrednosti in vrni 1, če sta enaki."
 #: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
 #, fuzzy
 msgid ""
-"Compatibility version of ODOO.FILTER.VALUE for v18 spreadsheets. Required "
+"Compatibility version of AFENDA XFORGE.FILTER.VALUE for v18 spreadsheets. Required "
 "for date filters. Optional for others."
 msgstr ""
-"Združljivostna različica funkcije ODOO.FILTER.VALUE za preglednice v "
+"Združljivostna različica funkcije AFENDA XFORGE.FILTER.VALUE za preglednice v "
 "različici 18. Zahtevana za datumske filtre. Za druge je izbirna."
 
 #. module: spreadsheet

@@ -615,10 +615,10 @@ msgstr ""
 #: code:addons/snailmail/models/snailmail_letter.py:0
 msgid ""
 "You don't have an IAP account registered for this service.<br>Please go to "
-"<a href=%s target=\"new\">iap.odoo.com</a> to claim your free credits."
+"<a href=%s target=\"new\">iap.afenda.app</a> to claim your free credits."
 msgstr ""
 "شما یک حساب IAP برای این سرویس ثبت نکرده‌اید.<br>لطفاً به <a href=%s "
-"target=\"new\">iap.odoo.com</a> مراجعه کنید تا اعتبار رایگان خود را دریافت "
+"target=\"new\">iap.afenda.app</a> مراجعه کنید تا اعتبار رایگان خود را دریافت "
 "کنید."
 
 #. module: snailmail

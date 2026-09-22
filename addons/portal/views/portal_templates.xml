@@ -280,7 +280,7 @@
                 </div>
                 <t t-if="entries" t-out="entries"/>
                 <div class="d-none d-lg-block mt-5 small text-center text-muted">
-                    Powered by <a target="_blank" href="http://www.afenda.app?utm_source=db&amp;utm_medium=portal" title="odoo"><img src="/web/static/img/logo.png" alt="AFENDA xForge Logo" height="15"/></a>
+                    Powered by <a target="_blank" href="http://www.afenda.app?utm_source=db&amp;utm_medium=portal" title="afenda"><img src="/web/static/img/logo.png" alt="AFENDA xForge Logo" height="15"/></a>
                 </div>
             </div>
             <div class="vr d-none d-lg-block bg-300"/>

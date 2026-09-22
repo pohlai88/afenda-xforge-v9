@@ -1012,8 +1012,8 @@ msgstr "ĐỐI VỚI CÁC TRANG WEB KHÁC"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
-msgstr "ĐỐI VỚI CÁC TRANG WEB ĐƯỢC TẠO BẰNG ODOO"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
+msgstr "ĐỐI VỚI CÁC TRANG WEB ĐƯỢC TẠO BẰNG AFENDA XFORGE"
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_troubleshooting_answer_firefox_demo

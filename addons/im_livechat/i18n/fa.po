@@ -1015,7 +1015,7 @@ msgstr "برای سایر وبسایتها"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
 msgstr "برای وب سایت‌های ساخته شده با اودو"
 
 #. module: im_livechat

@@ -1013,8 +1013,8 @@ msgstr "UNTUK WEBSITE LAINNYA"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
-msgstr "UNTUK WEBSITES YANG DIBANGUN DENGAN ODOO"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
+msgstr "UNTUK WEBSITES YANG DIBANGUN DENGAN AFENDA XFORGE"
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_troubleshooting_answer_firefox_demo

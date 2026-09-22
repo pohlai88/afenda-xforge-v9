@@ -1163,8 +1163,8 @@ msgstr "BOSHQA VEB-SAYTLAR UCHUN"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 #, fuzzy
-msgid "FOR WEBSITES BUILT WITH ODOO"
-msgstr "ODOO BILAN YARATILGAN VEB-SAYTLAR UCHUN"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
+msgstr "AFENDA XFORGE BILAN YARATILGAN VEB-SAYTLAR UCHUN"
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_troubleshooting_answer_firefox_demo

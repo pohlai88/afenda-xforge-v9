@@ -5040,8 +5040,8 @@ msgstr "Vad tycker du om våra priser (ej betygsatt)?"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does \"ODOO\" stand for?"
-msgstr "Vad står \"ODOO\" för?"
+msgid "What does \"AFENDA XFORGE\" stand for?"
+msgstr "Vad står \"AFENDA XFORGE\" för?"
 
 #. module: survey
 #. odoo-python

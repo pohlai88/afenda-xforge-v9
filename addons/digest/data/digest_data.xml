@@ -421,9 +421,6 @@
                                 </table>
                             </td>
                         </tr>
-                        <tr t-if="display_mobile_banner">
-                            <t t-call="digest.digest_section_mobile"/>
-                        </tr>
                     </tfoot>
                 </table>
             </td>
@@ -452,49 +449,6 @@
     </template>
 
     <!--                     DIGEST PARTS                    -->
-
-    <!-- MOBILE BANNER -->
-    <template id="digest_section_mobile">
-<td colspan="3" style="padding: 20px;width:100%; border-bottom: 1px solid #d8dadd;">
-    <table>
-        <tbody>
-            <tr>
-                <td align="right" style="width: 33%;">
-                    <img src="https://www.afenda.app/web/image/38874595-16ef5349/odoo-mobile.png" alt="AFENDA xForge Mobile" />
-                </td>
-                <td align="left" style="width: 66%;">
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td>
-                                    <p class="run_business">Run your business from anywhere with <b>AFENDA xForge Mobile</b>.</p>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="https://play.google.com/store/apps/details?id=com.odoo.mobile"
-                                        target="_blank">
-                                            <img class="download_app" height="40" width="135"
-                                                    src="https://download.odoocdn.com/digests/digest/static/src/img/google_play.png" />
-                                    </a>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>
-                                    <a href="https://itunes.apple.com/us/app/odoo/id1272543640" target="_blank">
-                                        <img class="download_app" height="40" width="135"
-                                                src="https://download.odoocdn.com/digests/digest/static/src/img/app_store.png" />
-                                    </a>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</td>
-    </template>
 
 
     <!--                     DIGEST TOOLS                    -->

@@ -5004,8 +5004,8 @@ msgstr "คุณคิดอย่างไรเกี่ยวกับรา
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does \"ODOO\" stand for?"
-msgstr "\"ODOO\" ย่อมาจากอะไร?"
+msgid "What does \"AFENDA XFORGE\" stand for?"
+msgstr "\"AFENDA XFORGE\" ย่อมาจากอะไร?"
 
 #. module: survey
 #. odoo-python

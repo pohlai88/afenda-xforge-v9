@@ -4947,8 +4947,8 @@ msgstr "O que você achados nossos preços? (Não avaliada)"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does \"ODOO\" stand for?"
-msgstr "O que \"ODOO\" quer dizer?"
+msgid "What does \"AFENDA XFORGE\" stand for?"
+msgstr "O que \"AFENDA XFORGE\" quer dizer?"
 
 #. module: survey
 #. odoo-python

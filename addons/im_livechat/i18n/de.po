@@ -1019,8 +1019,8 @@ msgstr "FÜR ANDERE WEBSITES"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
-msgstr "FÜR MIT ODOO ERSTELLTE WEBSITES"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
+msgstr "FÜR MIT AFENDA XFORGE ERSTELLTE WEBSITES"
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_troubleshooting_answer_firefox_demo

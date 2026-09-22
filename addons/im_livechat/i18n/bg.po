@@ -1020,8 +1020,8 @@ msgstr "ЗА ДРУГИ УЕБСАЙТОВЕ"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
-msgstr "ЗА УЕБСАЙТОВЕ, ИЗГРАДЕНИ С ODOO"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
+msgstr "ЗА УЕБСАЙТОВЕ, ИЗГРАДЕНИ С AFENDA XFORGE"
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_troubleshooting_answer_firefox_demo

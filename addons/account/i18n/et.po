@@ -4306,7 +4306,7 @@ msgstr "Kuulub samale ettevõttele kui %s."
 msgid ""
 "Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
-msgstr "Allolev tekst toimib soovitusena ja ei laiene ODOO S.Avastutusalale."
+msgstr "Allolev tekst toimib soovitusena ja ei laiene AFENDA XFORGE S.Avastutusalale."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__bank_bic

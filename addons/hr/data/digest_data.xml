@@ -9,7 +9,6 @@
 <div>
     <p class="tip_title">Tip: Where's Bryan?</p>
     <p class="tip_content">Activate Remote Work to let Employees specify where they are working from.</p>
-    <img src="https://download.odoocdn.com/digests/hr/static/src/img/18-hr-work-location.gif" width="540" class="illustration_border"/>
 </div>
             </field>
         </record>

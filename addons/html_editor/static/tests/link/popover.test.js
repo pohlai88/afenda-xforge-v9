@@ -475,10 +475,10 @@ describe("Link creation", () => {
         });
         test("typing uppercase URL + space should convert to link", async () => {
             const { editor, el } = await setupEditor("<p>[]</p>");
-            await insertText(editor, "http://ODOO.COM");
+            await insertText(editor, "http://afenda.app");
             await insertSpace(editor);
             expect(cleanLinkArtifacts(getContent(el))).toBe(
-                '<p><a href="http://ODOO.COM">http://ODOO.COM</a>&nbsp;[]</p>'
+                '<p><a href="http://afenda.app">http://afenda.app</a>&nbsp;[]</p>'
             );
         });
     });

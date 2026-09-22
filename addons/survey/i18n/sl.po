@@ -5657,8 +5657,8 @@ msgstr "Kaj menite o naših cenah (ni ocenjeno)?"
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
 #, fuzzy
-msgid "What does \"ODOO\" stand for?"
-msgstr "Kaj pomeni \"ODOO\"?"
+msgid "What does \"AFENDA XFORGE\" stand for?"
+msgstr "Kaj pomeni \"AFENDA XFORGE\"?"
 
 #. module: survey
 #. odoo-python

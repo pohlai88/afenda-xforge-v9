@@ -1003,7 +1003,7 @@ msgstr "للمواقع الإلكترونية الأخرى"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
 msgstr "للمواقع الإلكترونية التي تم إنشاؤها بواسطة أودو"
 
 #. module: im_livechat

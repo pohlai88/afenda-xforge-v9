@@ -2297,10 +2297,10 @@ msgstr "مقارنة قيمتين عدديتين ببعضهما، تكون ال�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
 msgid ""
-"Compatibility version of ODOO.FILTER.VALUE for v18 spreadsheets. Required "
+"Compatibility version of AFENDA XFORGE.FILTER.VALUE for v18 spreadsheets. Required "
 "for date filters. Optional for others."
 msgstr ""
-"الإصدار المتوافق من ODOO.FILTER.VALUE مع جداول البيانات في إصدار أودو 18. وهو "
+"الإصدار المتوافق من AFENDA XFORGE.FILTER.VALUE مع جداول البيانات في إصدار أودو 18. وهو "
 "مطلوب لتصفية التواريخ، واختياري في الحالات الأخرى."
 
 #. module: spreadsheet

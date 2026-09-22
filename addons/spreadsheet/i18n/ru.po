@@ -2360,10 +2360,10 @@ msgstr "Сравнивает два числовых значения, возв�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
 msgid ""
-"Compatibility version of ODOO.FILTER.VALUE for v18 spreadsheets. Required "
+"Compatibility version of AFENDA XFORGE.FILTER.VALUE for v18 spreadsheets. Required "
 "for date filters. Optional for others."
 msgstr ""
-"Совместимая версия ODOO.FILTER.VALUE для таблиц v18. Обязательна для "
+"Совместимая версия AFENDA XFORGE.FILTER.VALUE для таблиц v18. Обязательна для "
 "фильтров по дате, необязательна для остальных."
 
 #. module: spreadsheet

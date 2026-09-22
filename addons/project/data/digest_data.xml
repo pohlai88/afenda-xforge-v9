@@ -17,7 +17,6 @@
                 <p class="tip_content">
                 Quickly check the status of tasks for approvals or change requests and identify those on hold until dependencies are resolved with the hourglass icon.
                 </p>
-                <img src="https://download.odoocdn.com/digests/project/static/src/img/task-state-img.png" width="720" class="illustration_border" />
             </div>
             </field>
         </record>
@@ -48,7 +47,6 @@
 <div>
     <p class="tip_title">Tip: Your Own Personal Kanban</p>
     <p class="tip_content">Use personal stages to organize your tasks and create your own workflow.</p>
-    <img src="https://download.odoocdn.com/digests/project/static/src/img/18-project-personal-stages.gif" width="540" class="illustration_border"/>
 </div>
             </field>
         </record>
@@ -61,7 +59,6 @@
 <div>
     <p class="tip_title">Tip: Project-Specific Fields</p>
     <p class="tip_content">Add project-specific property fields on tasks to customize your project management process.</p>
-    <img src="https://download.odoocdn.com/digests/project/static/src/img/18-project-property-fields.gif" width="540" class="illustration_border"/>
 </div>
             </field>
         </record>

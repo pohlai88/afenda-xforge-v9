@@ -5045,8 +5045,8 @@ msgstr "私達の価格についてどう思いますか(未評価)？"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does \"ODOO\" stand for?"
-msgstr "\"ODOO\" の意味は何ですか？"
+msgid "What does \"AFENDA XFORGE\" stand for?"
+msgstr "\"AFENDA XFORGE\" の意味は何ですか？"
 
 #. module: survey
 #. odoo-python

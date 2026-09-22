@@ -18220,7 +18220,7 @@ msgstr "Belize"
 msgid ""
 "Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
-msgstr "Allolev tekst toimib soovitusena ja ei laiene ODOO S.Avastutusalale."
+msgstr "Allolev tekst toimib soovitusena ja ei laiene AFENDA XFORGE S.Avastutusalale."
 
 #. module: base
 #: model:res.country,name:base.bj

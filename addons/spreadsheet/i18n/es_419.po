@@ -2351,10 +2351,10 @@ msgstr "Compara dos valores numéricos, devuelve 1 si son iguales."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
 msgid ""
-"Compatibility version of ODOO.FILTER.VALUE for v18 spreadsheets. Required "
+"Compatibility version of AFENDA XFORGE.FILTER.VALUE for v18 spreadsheets. Required "
 "for date filters. Optional for others."
 msgstr ""
-"Versión de compatibilidad de ODOO.FILTER.VALUE para las hojas de cálculo de "
+"Versión de compatibilidad de AFENDA XFORGE.FILTER.VALUE para las hojas de cálculo de "
 "la versión 18. Obligatoria para los filtros de fecha, opcional para otros."
 
 #. module: spreadsheet

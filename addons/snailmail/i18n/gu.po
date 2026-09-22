@@ -626,7 +626,7 @@ msgstr ""
 #. module: snailmail
 #. odoo-python
 #: code:addons/snailmail/models/snailmail_letter.py:0
-msgid "You don't have an IAP account registered for this service.<br>Please go to <a href=%s target=\"new\">iap.odoo.com</a> to claim your free credits."
+msgid "You don't have an IAP account registered for this service.<br>Please go to <a href=%s target=\"new\">iap.afenda.app</a> to claim your free credits."
 msgstr ""
 
 #. module: snailmail

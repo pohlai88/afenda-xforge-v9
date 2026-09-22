@@ -84,7 +84,7 @@ class TestCRMLead(TestCrmCommon):
         cls.lead_generic_email_dupes = cls.env['crm.lead'].create([
             # email based: normalized version used for email domain criterion
             {
-                'email_from': '"Fabulous Fab" <fp@ODOO.COM>',
+                'email_from': '"Fabulous Fab" <fp@afenda.app>',
                 'name': 'Dupe1 of fp@afenda.app (same email)',
                 'type': 'lead',
             },

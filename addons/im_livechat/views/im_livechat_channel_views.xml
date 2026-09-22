@@ -200,7 +200,7 @@
                                     <p>
                                         Learn how to display a live chat bubble on your website and start chatting with visitors in a few easy steps.
                                     </p>
-                                    <separator string="FOR WEBSITES BUILT WITH ODOO" />
+                                    <separator string="FOR WEBSITES BUILT WITH AFENDA XFORGE" />
                                     <ol>
                                         <li>Go to <strong>Website</strong> > <strong>Configuration</strong> > <strong>Settings</strong> > <strong>Email</strong> &amp; <strong>Marketing.</strong></li>
                                         <li>Turn on the <strong>Live Chat</strong> feature.</li>

@@ -5083,8 +5083,8 @@ msgstr "Fiyatlarımız (derecelendirilmemiş) hakkında ne düşünüyorsunuz?"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does \"ODOO\" stand for?"
-msgstr "\"ODOO\" ne anlama geliyor?"
+msgid "What does \"AFENDA XFORGE\" stand for?"
+msgstr "\"AFENDA XFORGE\" ne anlama geliyor?"
 
 #. module: survey
 #. odoo-python

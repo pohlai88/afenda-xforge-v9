@@ -5070,8 +5070,8 @@ msgstr "Co si myslíte o našich cenách (bez hodnocení)?"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does \"ODOO\" stand for?"
-msgstr "Co znamená „ODOO“?"
+msgid "What does \"AFENDA XFORGE\" stand for?"
+msgstr "Co znamená „AFENDA XFORGE“?"
 
 #. module: survey
 #. odoo-python

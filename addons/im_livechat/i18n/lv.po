@@ -979,7 +979,7 @@ msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
 msgstr ""
 
 #. module: im_livechat

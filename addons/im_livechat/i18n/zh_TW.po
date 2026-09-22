@@ -994,8 +994,8 @@ msgstr "其他網站"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "FOR WEBSITES BUILT WITH ODOO"
-msgstr "使用 ODOO 製作的網站"
+msgid "FOR WEBSITES BUILT WITH AFENDA XFORGE"
+msgstr "使用 AFENDA XFORGE 製作的網站"
 
 #. module: im_livechat
 #: model:chatbot.script.answer,name:im_livechat.chatbot_script_troubleshooting_answer_firefox_demo

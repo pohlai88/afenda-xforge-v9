@@ -2323,10 +2323,10 @@ msgstr "Usporedi dvije numeričke vrijednosti, vraćajući 1 ako su jednake."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
 msgid ""
-"Compatibility version of ODOO.FILTER.VALUE for v18 spreadsheets. Required "
+"Compatibility version of AFENDA XFORGE.FILTER.VALUE for v18 spreadsheets. Required "
 "for date filters. Optional for others."
 msgstr ""
-"Verzija kompatibilnosti ODOO.FILTER.VALUE za v18 proračunske tablice. "
+"Verzija kompatibilnosti AFENDA XFORGE.FILTER.VALUE za v18 proračunske tablice. "
 "Obavezno za filtre datuma. Opcionalno za ostale."
 
 #. module: spreadsheet

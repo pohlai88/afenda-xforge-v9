@@ -120,7 +120,6 @@
             <t t-snippet="mass_mailing.s_mail_block_header_view" string="View Online" group="website"/>
             <t t-snippet="mass_mailing.s_centered_cta_badge" string="Centered CTA" group="website"/>
             <t t-snippet="mass_mailing.s_special_offer_cta" string="Special Offer CTA" group="website"/>
-            <t t-snippet="mass_mailing.s_section_mobile" string="Section Mobile" group="website"/>
             <t t-snippet="mass_mailing.s_coupon_code" string="Promo Code" group="website"/>
         </snippets>
         <snippets id="snippet_content" string="Inner Content">

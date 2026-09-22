@@ -2320,10 +2320,10 @@ msgstr "مقایسه دو مقدار عددی، بازگشت ۱ اگر مساو�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
 msgid ""
-"Compatibility version of ODOO.FILTER.VALUE for v18 spreadsheets. Required "
+"Compatibility version of AFENDA XFORGE.FILTER.VALUE for v18 spreadsheets. Required "
 "for date filters. Optional for others."
 msgstr ""
-"نسخه سازگاری ODOO.FILTER.VALUE برای صفحات گسترده نسخه 18. برای فیلترهای "
+"نسخه سازگاری AFENDA XFORGE.FILTER.VALUE برای صفحات گسترده نسخه 18. برای فیلترهای "
 "تاریخ الزامی است. برای سایرین اختیاری است."
 
 #. module: spreadsheet

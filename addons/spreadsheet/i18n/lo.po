@@ -2277,10 +2277,10 @@ msgstr "ປຽບທຽບສອງຄ່າຕົວເລກ, ສົ່ງຄ�
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/pivot/pivot_functions.js:0
 msgid ""
-"Compatibility version of ODOO.FILTER.VALUE for v18 spreadsheets. Required "
+"Compatibility version of AFENDA XFORGE.FILTER.VALUE for v18 spreadsheets. Required "
 "for date filters. Optional for others."
 msgstr ""
-"ເວີຊັນທີ່ເຂົ້າກັນໄດ້ຂອງ ODOO.FILTER.VALUE ສຳລັບສະເປຣດຊີດ v18. ຈຳເປັນສຳລັບຕົວຕອງວັນທີ. ສ່ວນອື່ນໆ"
+"ເວີຊັນທີ່ເຂົ້າກັນໄດ້ຂອງ AFENDA XFORGE.FILTER.VALUE ສຳລັບສະເປຣດຊີດ v18. ຈຳເປັນສຳລັບຕົວຕອງວັນທີ. ສ່ວນອື່ນໆ"
 "ແມ່ນເລືອກໄດ້."
 
 #. module: spreadsheet

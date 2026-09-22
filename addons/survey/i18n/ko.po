@@ -5017,8 +5017,8 @@ msgstr "가격에 대해 어떻게 생각하십니까?"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does \"ODOO\" stand for?"
-msgstr "\"ODOO\"는 무엇의 약자입니까?"
+msgid "What does \"AFENDA XFORGE\" stand for?"
+msgstr "\"AFENDA XFORGE\"는 무엇의 약자입니까?"
 
 #. module: survey
 #. odoo-python
