@@ -19,12 +19,12 @@
 # Ivaylo Malinov <iv.malinov@gmail.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:35+0000\n"
 "PO-Revision-Date: 2026-08-02 18:13+0000\n"
 "Last-Translator: Ivaylo Malinov <iv.malinov@gmail.com>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/"
 "maintenance/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -1511,11 +1511,11 @@ msgstr "Текст"
 #. module: maintenance
 #: model:ir.model.fields,help:maintenance.field_maintenance_team__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Моделът (Odoo Document Kind), към който съответства този псевдоним. Всеки "
+"Моделът (AFENDA xForge Document Kind), към който съответства този псевдоним. Всеки "
 "входящ имейл, който не отговаря на съществуващ запис, ще доведе до "
 "създаването на нов запис на този модел (например задача за проекта)"
 
@@ -1523,10 +1523,10 @@ msgstr ""
 #: model:ir.model.fields,help:maintenance.field_maintenance_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Името на имейла, напр. \"работни места\", ако искате да уловите имейли за "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 
 #. module: maintenance
 #. odoo-python

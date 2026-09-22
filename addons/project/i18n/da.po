@@ -16,12 +16,12 @@
 # "Kira Petersen François (peti)" <peti@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-07 00:39+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Danish <https://translate.odoo.com/projects/odoo-19/project/"
+"Language-Team: Danish <https://translate.afenda.app/projects/odoo-19/project/"
 "da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -1651,11 +1651,11 @@ msgstr "Status for kundebedømmelser"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid ""
-"Customers propose feedbacks by email; Odoo creates tasks automatically, and "
+"Customers propose feedbacks by email; AFENDA xForge creates tasks automatically, and "
 "you can\n"
 "      communicate on the task directly."
 msgstr ""
-"Kunderne sender feedback via e-mail. Odoo opretter automatisk opgaver, og du "
+"Kunderne sender feedback via e-mail. AFENDA xForge opretter automatisk opgaver, og du "
 "kan\n"
 "      kommunikere direkte via opgaven."
 
@@ -4962,11 +4962,11 @@ msgstr "Intervallet skal være større end 0"
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Modellen (Odoo-dokumenttype), som dette alias svarer til. Enhver indgående e-"
+"Modellen (AFENDA xForge-dokumenttype), som dette alias svarer til. Enhver indgående e-"
 "mail, der ikke svarer til en eksisterende post, vil medføre oprettelse af en "
 "ny post af denne model (f.eks. en projektopgave)"
 
@@ -4974,10 +4974,10 @@ msgstr ""
 #: model:ir.model.fields,help:project.field_project_project__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Navnet på e-mailaliasset, f.eks. 'jobs', hvis du vil modtage e-mails sendt "
-"til <jobs@eksempel.odoo.com>"
+"til <jobs@eksempel.afenda.app>"
 
 #. module: project
 #. odoo-python
@@ -5860,11 +5860,11 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid ""
-"You have unsaved changes - no worries! Odoo will automatically save it as "
+"You have unsaved changes - no worries! AFENDA xForge will automatically save it as "
 "you navigate.<br/> You can discard these changes from here or manually save "
 "your task.<br/>Let's save it manually."
 msgstr ""
-"Du har ikke-gemte ændringer – bare rolig! Odoo gemmer dem automatisk, mens "
+"Du har ikke-gemte ændringer – bare rolig! AFENDA xForge gemmer dem automatisk, mens "
 "du navigerer.<br/> Du kan vælge at annullere ændringerne eller gemme opgaven "
 "manuelt herfra.<br/> Lad os gemme manuelt."
 

@@ -534,7 +534,7 @@ test("scroll to anchor from load", async () => {
         static path = "my_component";
     }
     registry.category("actions").add("my_component", MyComponent);
-    redirect("/odoo/my_component#scrollToHere");
+    redirect("/app/my_component#scrollToHere");
     await mountWithCleanup(WebClient);
     await animationFrame();
 

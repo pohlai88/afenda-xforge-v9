@@ -8,12 +8,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-08 01:34+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/auth_oauth/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -209,8 +209,8 @@ msgstr "使用 Google 登入"
 
 #. module: auth_oauth
 #: model:auth.oauth.provider,body:auth_oauth.provider_openerp
-msgid "Sign in with Odoo.com"
-msgstr "使用 Odoo.com 登入"
+msgid "Sign in with AFENDA xForge.com"
+msgstr "使用 AFENDA xForge.com 登入"
 
 #. module: auth_oauth
 #. odoo-python

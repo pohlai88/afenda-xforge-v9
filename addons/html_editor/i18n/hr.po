@@ -7,12 +7,12 @@
 # Odoo Translation Bot <c3p@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:29+0000\n"
 "PO-Revision-Date: 2026-08-05 01:45+0000\n"
-"Last-Translator: Odoo Translation Bot <c3p@odoo.com>\n"
-"Language-Team: Croatian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: AFENDA xForge Translation Bot <c3p@afenda.app>\n"
+"Language-Team: Croatian <https://translate.afenda.app/projects/odoo-19/"
 "html_editor/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -2021,10 +2021,10 @@ msgstr "Ovo je trenutna verzija, nema ničega za usporediti."
 #: code:addons/html_editor/static/src/main/media/image_crop.js:0
 msgid ""
 "This type of image is not supported for cropping.<br/>If you want to crop "
-"it, please first download it from the original source and upload it in Odoo."
+"it, please first download it from the original source and upload it in AFENDA xForge."
 msgstr ""
 "Ova vrsta slike ne podržava izrezivanje.<br/>Ako je želite izrezati, "
-"najprije je preuzmite iz izvornog izvora i učitajte je u Odoo."
+"najprije je preuzmite iz izvornog izvora i učitajte je u AFENDA xForge."
 
 #. module: html_editor
 #. odoo-javascript
@@ -2391,8 +2391,8 @@ msgstr "dokument"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/link/link_popover.xml:0
-msgid "e.g. https://www.odoo.com"
-msgstr "npr. https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "npr. https://www.afenda.app"
 
 #. module: html_editor
 #. odoo-javascript

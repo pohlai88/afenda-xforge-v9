@@ -135,7 +135,7 @@ class TestPortalFormatPerformance(FullBaseMailPerformance):
         comment_subtype_id = cls.env['ir.model.data']._xmlid_to_res_id('mail.mt_comment')
         cls.link_previews = cls.env["mail.link.preview"].create(
             [
-                {"source_url": "https://www.odoo.com"},
+                {"source_url": "https://www.afenda.app"},
                 {"source_url": "https://www.example.com"},
             ]
         )
@@ -179,7 +179,7 @@ class TestPortalFormatPerformance(FullBaseMailPerformance):
                 ],
                 'reaction_ids': [
                     (0, 0, {
-                        'content': 'https://www.odoo.com',
+                        'content': 'https://www.afenda.app',
                         'partner_id': cls.customers[(msg_idx * 2) + 1].id
                     }), (0, 0, {
                         'content': 'https://www.example.com',

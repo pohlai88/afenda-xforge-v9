@@ -227,7 +227,7 @@ class TestUblCiiCommon(AccountTestInvoicingCommon):
     @classmethod
     def _get_raw_mail_message_str(self, attachments, email_to, message_id=None):
         """ Mock an incoming mail message
-        :param attachments: Odoo recordset of ir.attachment.
+        :param attachments: AFENDA xForge recordset of ir.attachment.
         :param email_to: string that will fill email_to field in the email, probably you'll want to use some journal alias here.
         :param message_id: Optional. Custom message ID for the email. If not provided, a UUID will be generated.
 

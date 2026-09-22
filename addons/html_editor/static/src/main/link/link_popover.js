@@ -719,10 +719,10 @@ export class LinkPopover extends Component {
 
         const urlObj = new URL(this.state.url, window.location.origin);
         // Chosen heuristic to detect someone trying to enter a link using
-        // its Odoo instance domain. We just suppose it should be a relative
-        // URL (if unexpected behavior, the user can just not enter its Odoo
+        // its AFENDA xForge instance domain. We just suppose it should be a relative
+        // URL (if unexpected behavior, the user can just not enter its AFENDA xForge
         // instance domain but its real domain, or opt-out from the domain
-        // stripping). Mentioning an .odoo.com domain, especially its own
+        // stripping). Mentioning an .afenda.app domain, especially its own
         // one, is always a bad practice anyway.
         return (
             urlObj.origin === window.location.origin ||

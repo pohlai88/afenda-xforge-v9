@@ -31,6 +31,6 @@ trigger an automatic reminder email.
             'base_automation/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

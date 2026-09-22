@@ -1251,7 +1251,7 @@
 
   var LISTENERS = Object.create(null);
   var SUPPORTED_EVENTS = ["runStart", "suiteStart", "testStart", "assertion", "testEnd", "suiteEnd", "runEnd"];
-  SUPPORTED_EVENTS.push("OdooBeforeTestHook", "OdooAfterTestHook"); // Odoo customization
+  SUPPORTED_EVENTS.push("OdooBeforeTestHook", "OdooAfterTestHook"); // AFENDA xForge customization
 
   /**
    * Emits an event with the specified data to all currently registered listeners.
@@ -3007,7 +3007,7 @@
 
   			_this.started = now();
 			emit("testStart", _this.testReport.start(true));
-			emit("OdooBeforeTestHook"); // Odoo customization
+			emit("OdooBeforeTestHook"); // AFENDA xForge customization
   			return runLoggingCallbacks("testStart", {
   				name: _this.testName,
   				module: module.name,
@@ -3148,7 +3148,7 @@
   			this.pushFailure("Expected at least one assertion, but none were run - call " + "expect(0) to accept zero assertions.", this.stack);
   		}
 
-  		// Odoo customization
+  		// AFENDA xForge customization
   		// wait for the task queue to be fully consummed, s.t. if there has been rejected promises
   		// during the test, the unhandledrejection handlers have been called before the cleanups
   		// have been executed, for the errors to be properly preventDefaulted if necessary (see
@@ -5347,7 +5347,7 @@
   		assertLi.innerHTML = message;
   		assertList.appendChild(assertLi);
 
-      // Odoo Customisation!!!
+      // AFENDA xForge Customisation!!!
       // Crappy hack to display full tracebacks (with sourcemaps if debug=assets)
       if (lastError && QUnit.annotateTraceback) {
           const pre = assertLi.querySelector("pre");

@@ -278,7 +278,7 @@ class PaymentTransaction(models.Model):
         if self.provider_code != 'razorpay':
             return super()._send_void_request()
 
-        raise UserError(_("Transactions processed by Razorpay can't be manually voided from Odoo."))
+        raise UserError(_("Transactions processed by Razorpay can't be manually voided from AFENDA xForge."))
 
     @api.model
     def _search_by_reference(self, provider_code, payment_data):
@@ -304,7 +304,7 @@ class PaymentTransaction(models.Model):
         else:  # 'refund'
             notes = payment_data.get('notes')
             reference = isinstance(notes, dict) and notes.get('reference')
-            if reference:  # The refund was initiated from Odoo.
+            if reference:  # The refund was initiated from AFENDA xForge.
                 tx = self.search([('reference', '=', reference), ('provider_code', '=', 'razorpay')])
             else:  # The refund was initiated from Razorpay.
                 # Find the source transaction based on its provider reference.

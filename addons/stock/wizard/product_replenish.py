@@ -144,7 +144,7 @@ class ProductReplenish(models.TransientModel):
             action = self.env.ref('stock.stock_picking_action_picking_type')
             return [{
                 'label': move.picking_id.name,
-                'url': f'/odoo/action-stock.stock_picking_action_picking_type/{move.picking_id.id}'
+                'url': f'/app/action-stock.stock_picking_action_picking_type/{move.picking_id.id}'
             }]
         return False
 

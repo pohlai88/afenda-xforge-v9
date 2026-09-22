@@ -20,12 +20,12 @@
 # Odoo Turkish Import <dyki+tr@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-05 20:25+0000\n"
-"Last-Translator: Odoo Turkish Import <dyki+tr@odoo.com>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: AFENDA xForge Turkish Import <dyki+tr@afenda.app>\n"
+"Language-Team: Turkish <https://translate.afenda.app/projects/odoo-19/"
 "base_import/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -460,11 +460,11 @@ msgstr "ID"
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
 msgid ""
 "If the file contains\n"
-"                    the column names, Odoo can try auto-detecting the\n"
+"                    the column names, AFENDA xForge can try auto-detecting the\n"
 "                    field corresponding to the column. This makes imports\n"
 "                    simpler especially when the file has many columns."
 msgstr ""
-"Dosya sütun adlarını içeriyorsa, Odoo sütuna karşılık gelen alanı otomatik "
+"Dosya sütun adlarını içeriyorsa, AFENDA xForge sütuna karşılık gelen alanı otomatik "
 "olarak algılamayı deneyebilir. Bu, özellikle dosyada çok sayıda sütun "
 "olduğunda içe aktarmayı kolaylaştırır."
 
@@ -633,8 +633,8 @@ msgstr "Aşağıdaki ad için eşleşen kayıt bulunamadı"
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
-msgid "Odoo Field"
-msgstr "Odoo Alanı"
+msgid "AFENDA xForge Field"
+msgstr "AFENDA xForge Alanı"
 
 #. module: base_import
 #. odoo-javascript
@@ -911,11 +911,11 @@ msgstr "Dosyalarınızı yükleyin"
 msgid ""
 "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h "
 "system. You can use a custom format in addition to the suggestions provided. "
-"Leave empty to let Odoo guess the format (recommended)"
+"Leave empty to let AFENDA xForge guess the format (recommended)"
 msgstr ""
 "24 saatlik sistemde saat için HH, 12 saatlik sistemde 'p' ile birlikte II "
 "kullanın. Sağlanan önerilere ek olarak özel bir biçim kullanabilirsiniz. "
-"Biçimi Odoo'nun tahmin etmesine izin vermek için boş bırakın (önerilir)."
+"Biçimi AFENDA xForge'nun tahmin etmesine izin vermek için boş bırakın (önerilir)."
 
 #. module: base_import
 #. odoo-javascript
@@ -923,12 +923,12 @@ msgstr ""
 msgid ""
 "Use YYYY to represent the year, MM for the month and DD for the day. Include "
 "separators such as a dot, forward slash or dash. You can use a custom format "
-"in addition to the suggestions provided. Leave empty to let Odoo guess the "
+"in addition to the suggestions provided. Leave empty to let AFENDA xForge guess the "
 "format (recommended)"
 msgstr ""
 "Yıl için YYYY, ay için MM ve gün için DD kullanın. Nokta, eğik çizgi veya "
 "tire gibi ayırıcılar ekleyin. Önerilen formatlara ek olarak özel bir format "
-"da kullanabilirsiniz. Odoo'nun formatı tahmin etmesi için boş bırakın "
+"da kullanabilirsiniz. AFENDA xForge'nun formatı tahmin etmesi için boş bırakın "
 "(önerilir)."
 
 #. module: base_import

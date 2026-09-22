@@ -94,7 +94,7 @@ export class Homepage extends Component {
 
             this.state.waitRestart = true;
         } catch {
-            console.warn("Error while restarting Odoo Service");
+            console.warn("Error while restarting AFENDA xForge Service");
         }
     }
 
@@ -151,12 +151,12 @@ export class Homepage extends Component {
                         <WifiDialog />
                     </t>
                 </SingleData>
-                <SingleData t-if="!store.base.is_access_point_up" name="'Odoo database connected'" value="state.data.server_status" icon="'fa-link'">
+                <SingleData t-if="!store.base.is_access_point_up" name="'AFENDA xForge database connected'" value="state.data.server_status" icon="'fa-link'">
                     <t t-set-slot="button">
                         <ServerDialog />
                     </t>
                 </SingleData>
-                <SingleData t-if="state.data.pairing_code and !this.store.base.is_access_point_up and !state.data.pairing_code_expired" name="'Pairing Code'" value="state.data.pairing_code + ' - Enter this code in the IoT app in your Odoo database'" icon="'fa-code'"/>
+                <SingleData t-if="state.data.pairing_code and !this.store.base.is_access_point_up and !state.data.pairing_code_expired" name="'Pairing Code'" value="state.data.pairing_code + ' - Enter this code in the IoT app in your AFENDA xForge database'" icon="'fa-code'"/>
                 <SingleData t-if="state.data.pairing_code_expired" name="'Pairing Code'" value="'Code has expired - restart the IoT Box to generate a new one'" icon="'fa-code'"/>
                 <SingleData  t-if="store.advanced and !store.base.is_access_point_up" name="'Six terminal'" value="state.data.six_terminal" icon="'fa-money'">
                     <t t-set-slot="button">
@@ -172,8 +172,8 @@ export class Homepage extends Component {
                 <hr class="mt-5" />
                 <FooterButtons />
                 <div class="d-flex justify-content-center gap-2 mt-2" t-if="!store.base.is_access_point_up">
-                    <a href="https://www.odoo.com/fr_FR/help" target="_blank" class="link-primary">Help</a>
-                    <a href="https://www.odoo.com/documentation/latest/applications/general/iot.html" target="_blank" class="link-primary">Documentation</a>
+                    <a href="https://www.afenda.app/fr_FR/help" target="_blank" class="link-primary">Help</a>
+                    <a href="/docs/applications/general/iot.html" target="_blank" class="link-primary">Documentation</a>
                 </div>
             </div>
         </div>

@@ -24,6 +24,6 @@ by sending an email to the target user. This email redirects them to:
             'auth_totp_mail/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

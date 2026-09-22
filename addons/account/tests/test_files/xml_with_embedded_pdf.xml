@@ -54,7 +54,7 @@
 		<cac:Party>
 			<cbc:EndpointID schemeID="0208">0239843189</cbc:EndpointID>
 			<cac:PartyName>
-				<cbc:Name>Odoo</cbc:Name>
+				<cbc:Name>AFENDA xForge</cbc:Name>
 			</cac:PartyName>
 			<cac:PostalAddress>
 				<cbc:StreetName>Street</cbc:StreetName>
@@ -71,13 +71,13 @@
 				</cac:TaxScheme>
 			</cac:PartyTaxScheme>
 			<cac:PartyLegalEntity>
-				<cbc:RegistrationName>Odoo</cbc:RegistrationName>
+				<cbc:RegistrationName>AFENDA xForge</cbc:RegistrationName>
 				<cbc:CompanyID>BE0239843189</cbc:CompanyID>
 			</cac:PartyLegalEntity>
 			<cac:Contact>
-				<cbc:Name>Odoo</cbc:Name>
+				<cbc:Name>AFENDA xForge</cbc:Name>
 				<cbc:Telephone>+1 123-123-1234</cbc:Telephone>
-				<cbc:ElectronicMail>info@odoo.com</cbc:ElectronicMail>
+				<cbc:ElectronicMail>info@afenda.app</cbc:ElectronicMail>
 			</cac:Contact>
 		</cac:Party>
 	</cac:AccountingCustomerParty>

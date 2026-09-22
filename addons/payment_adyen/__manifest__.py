@@ -24,6 +24,6 @@
             'payment_adyen/static/src/interactions/payment_form.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

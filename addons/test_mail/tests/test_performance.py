@@ -1430,7 +1430,7 @@ class TestMessageToStorePerformance(BaseMailPerformance):
 
         cls.link_previews = cls.env["mail.link.preview"].create(
             [
-                {"source_url": "https://www.odoo.com"},
+                {"source_url": "https://www.afenda.app"},
                 {"source_url": "https://www.example.com"},
             ]
         )
@@ -1634,7 +1634,7 @@ class TestMessageToStorePerformance(BaseMailPerformance):
                                         ),
                                         "date": fields.Datetime.to_string(message.date),
                                         "default_subject": "Test",
-                                        "email_from": '"OdooBot" <odoobot@example.com>',
+                                        "email_from": '"AFENDA Bot" <odoobot@example.com>',
                                         "id": message.id,
                                         "incoming_email_cc": False,
                                         "incoming_email_to": False,
@@ -1700,7 +1700,7 @@ class TestMessageToStorePerformance(BaseMailPerformance):
                                         "id": self.env.user.partner_id.id,
                                         "is_company": False,
                                         "main_user_id": self.env.user.id,
-                                        "name": "OdooBot",
+                                        "name": "AFENDA Bot",
                                         "write_date": fields.Datetime.to_string(
                                             self.env.user.partner_id.write_date
                                         ),
@@ -1752,7 +1752,7 @@ class TestMessageToStorePerformance(BaseMailPerformance):
                                         ),
                                         "date": fields.Datetime.to_string(message.date),
                                         "default_subject": "Test",
-                                        "email_from": '"OdooBot" <odoobot@example.com>',
+                                        "email_from": '"AFENDA Bot" <odoobot@example.com>',
                                         "id": message.id,
                                         "incoming_email_cc": False,
                                         "incoming_email_to": False,
@@ -1818,7 +1818,7 @@ class TestMessageToStorePerformance(BaseMailPerformance):
                                         "id": self.env.user.partner_id.id,
                                         "is_company": False,
                                         "main_user_id": self.env.user.id,
-                                        "name": "OdooBot",
+                                        "name": "AFENDA Bot",
                                         "write_date": fields.Datetime.to_string(
                                             self.env.user.partner_id.write_date
                                         ),

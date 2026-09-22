@@ -6,7 +6,7 @@
     'summary': 'Design, send and track emails',
     'version': '2.7',
     'sequence': 60,
-    'website': 'https://www.odoo.com/app/email-marketing',
+    'website': 'https://www.afenda.app/app/email-marketing',
     'category': 'Marketing/Email Marketing',
     'depends': [
         'contacts',
@@ -129,7 +129,7 @@
             ('include', 'mass_mailing.assets_iframe_style'),
             ('include', 'html_editor.assets_editor'),
         ],
-        # style assets used to view the mail content in Odoo, but not used
+        # style assets used to view the mail content in AFENDA xForge, but not used
         # during html conversion, specific to the builder
         'mass_mailing.assets_inside_builder_iframe': [
             ('include', 'mass_mailing.assets_iframe_style'),
@@ -178,6 +178,6 @@
             'mass_mailing/static/tests/mass_mailing_html_field.test.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -10,7 +10,7 @@ class HrMixin(models.AbstractModel):
 
     # Those overrides deal with many2many fields to comodel 'hr.employee'. In
     # the past, one could assign such a many2many field without having any
-    # access to its comodel. Since Odoo 19, one must have read access to the
+    # access to its comodel. Since AFENDA xForge 19, one must have read access to the
     # comodel to modify the relation. The hack consists in passing a special
     # value in the context, and pretend 'hr.employee' records to be readable
     # when that value is present.

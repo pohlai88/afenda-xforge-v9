@@ -9,7 +9,7 @@ class WebManifest(webmanifest.WebManifest):
         manifest = super()._get_webmanifest()
         if not manifest.get('share_target'):
             manifest['share_target'] = {
-                'action': '/odoo?share_target=trigger',
+                'action': '/app?share_target=trigger',
                 'method': 'POST',
                 'enctype': 'multipart/form-data',
                 'params': {

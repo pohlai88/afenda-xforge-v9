@@ -5,7 +5,7 @@
     'category': 'Website/Website',
     'sequence': 50,
     'summary': 'Sell your products online',
-    'website': 'https://www.odoo.com/app/ecommerce',
+    'website': 'https://www.afenda.app/app/ecommerce',
     'version': '1.1',
     'depends': [
         'website', 'sale', 'website_payment', 'website_mail', 'portal_rating', 'digest', 'delivery', 'html_builder',
@@ -190,6 +190,6 @@
             #('remove', 'website_sale/static/src/snippets/**/*.edit.js'),
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

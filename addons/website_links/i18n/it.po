@@ -10,12 +10,12 @@
 # "Marianna Ciofani (cima)" <cima@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:30+0000\n"
 "PO-Revision-Date: 2026-08-02 17:46+0000\n"
-"Last-Translator: \"Marianna Ciofani (cima)\" <cima@odoo.com>\n"
-"Language-Team: Italian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Marianna Ciofani (cima)\" <cima@afenda.app>\n"
+"Language-Team: Italian <https://translate.afenda.app/projects/odoo-19/"
 "website_links/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -299,10 +299,10 @@ msgstr "Questo codice è già in uso"
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid ""
 "Those trackers can be used in Google Analytics to track clicks and visitors, "
-"or in Odoo reports to track opportunities and related revenues."
+"or in AFENDA xForge reports to track opportunities and related revenues."
 msgstr ""
 "Questi monitoraggi possono esser utilizzati in Google Analytics per tenere "
-"traccia di clic e visitatori, o nei resoconti Odoo per monitorare "
+"traccia di clic e visitatori, o nei resoconti AFENDA xForge per monitorare "
 "opportunità e relativi ricavi."
 
 #. module: website_links
@@ -371,8 +371,8 @@ msgstr "ad es. LinkedIn, Facebook, Leads..."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
-msgid "e.g. https://www.odoo.com/contactus"
-msgstr "es. https://www.odoo.com/contactus"
+msgid "e.g. https://www.afenda.app/contactus"
+msgstr "es. https://www.afenda.app/contactus"
 
 #~ msgid ""
 #~ "<span class=\"o_website_links_short_url d-flex align-items-center text-"

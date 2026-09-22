@@ -30,7 +30,7 @@ _MAIL_PROVIDERS = {
     'o2.pl', 'live.cn', 'gmial.com', 'seznam.cz', 'live.be', 'videotron.ca', 'gmil.com', 'live.ca', 'hotmail.de', 'sbcglobal.net', 'connect.hku.hk',
     'yahoo.com.au', 'att.net', 'live.in', 'btinternet.com', 'gmx.fr', 'voila.fr', 'shaw.ca', 'prodigy.net.mx', 'vip.qq.com', 'yahoo.com.ph',
     'bigpond.com', '7thcomputing.com', 'freenet.de', 'alice.it', 'esi.dz',
-    'bk.ru', 'mail.odoo.com', 'gmail.con', 'fiu.edu', 'gmal.com', 'useemlikefun.com', 'google.com', 'trbvn.com', 'yopmail.com', 'ya.ru',
+    'bk.ru', 'mail.afenda.app', 'gmail.con', 'fiu.edu', 'gmal.com', 'useemlikefun.com', 'google.com', 'trbvn.com', 'yopmail.com', 'ya.ru',
     'hotmail.co.th', 'arcor.de', 'hotmail.ca', '21cn.com', 'live.de', 'outlook.de', 'gmailcom', 'unal.edu.co', 'tom.com', 'yahoo.gr',
     'gmx.at', 'inbox.lv', 'ziggo.nl', 'xs4all.nl', 'sapo.pt', 'live.com.au', 'nate.com', 'online.de', 'sina.cn', 'gmail.co', 'rogers.com',
     'mailinator.com', 'cox.net', 'hotmail.be', 'verizon.net', 'yahoo.co.jp', 'usa.com', 'consultant.com', 'hotmai.com', '189.cn',
@@ -45,7 +45,7 @@ _MAIL_PROVIDERS = {
     # Dummy entries
     'example.com',
 }
-_MAIL_DOMAIN_BLACKLIST = _MAIL_PROVIDERS | {'odoo.com'}
+_MAIL_DOMAIN_BLACKLIST = _MAIL_PROVIDERS | {'afenda.app'}
 
 # List of country codes for which we should offer state filtering when mining new leads.
 # See crm.iap.lead.mining.request#_compute_available_state_ids() or task-2471703 for more details.
@@ -137,5 +137,5 @@ def iap_jsonrpc(url, method='call', params=None, timeout=15):
     except (requests.exceptions.RequestException, IAPServerError) as e:
         _logger.warning("iap jsonrpc %s failed, %s: %s", url, e.__class__.__name__, exception_to_unicode(e))
         raise exceptions.AccessError(
-            _("An error occurred while reaching %s. Please contact Odoo support if this error persists.", url)
+            _("An error occurred while reaching %s. Please contact AFENDA xForge support if this error persists.", url)
         )

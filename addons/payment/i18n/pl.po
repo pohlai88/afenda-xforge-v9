@@ -34,12 +34,12 @@
 # "Marta (wacm)" <wacm@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-04 15:20+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Polish <https://translate.odoo.com/projects/odoo-19/payment/"
+"Language-Team: Polish <https://translate.afenda.app/projects/odoo-19/payment/"
 "pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -66,7 +66,7 @@ msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/> These properties are set to\n"
 "                                match the behavior of providers and that of "
 "their integration with\n"
-"                                Odoo regarding this payment method. Any "
+"                                AFENDA xForge regarding this payment method. Any "
 "change may result in errors\n"
 "                                and should be tested on a test database "
 "first."
@@ -74,7 +74,7 @@ msgstr ""
 "<i class=\"fa fa-exclamation-triangle\"/> Te właściwości są ustawione, aby\n"
 "                                pasowały do zachowania dostawców i ich "
 "integracji z \n"
-"                                Odoo dotyczących tej metody płatności. "
+"                                AFENDA xForge dotyczących tej metody płatności. "
 "Jakiekolwiek zmiany mogą skutkować błędem\n"
 "                                i powinny być najpierw przetestowane w "
 "testowej bazie danych."
@@ -693,11 +693,11 @@ msgstr "Przechwyć transakcję"
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_provider__capture_manually
 msgid ""
-"Capture the amount from Odoo, when the delivery is completed.\n"
+"Capture the amount from AFENDA xForge, when the delivery is completed.\n"
 "Use this if you want to charge your customers cards only when\n"
 "you are sure you can ship the goods to them."
 msgstr ""
-"Przechwytuje kwotę z Odoo po zakończeniu dostawy.\n"
+"Przechwytuje kwotę z AFENDA xForge po zakończeniu dostawy.\n"
 "Użyj tej opcji, jeśli chcesz obciążać karty klientów tylko wtedy, gdy\n"
 "jesteś pewien, że możesz wysłać do nich towary."
 
@@ -1711,8 +1711,8 @@ msgstr "Octopus"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__module_to_buy
-msgid "Odoo Enterprise Module"
-msgstr "Moduł Odoo Enterprise"
+msgid "AFENDA xForge Enterprise Module"
+msgstr "Moduł AFENDA xForge Enterprise"
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_transaction__operation__offline
@@ -2269,10 +2269,10 @@ msgstr "Zwrot"
 #: model:ir.model.fields,help:payment.field_payment_provider__support_refund
 msgid ""
 "Refund is a feature allowing to refund customers directly from the payment "
-"in Odoo."
+"in AFENDA xForge."
 msgstr ""
 "Zwrot to funkcja umożliwiająca zwrot pieniędzy klientom bezpośrednio z "
-"płatności w Odoo."
+"płatności w AFENDA xForge."
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form

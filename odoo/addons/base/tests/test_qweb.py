@@ -650,7 +650,7 @@ class TestQWebNS(TransactionCase):
             'type': 'qweb',
             'arch': """
                 <t t-name="base.dummy">
-                    <Invoice xmlns:od="http://odoo.com/od">
+                    <Invoice xmlns:od="http://afenda.app/od">
                         <od:name t-att-test="'a' + 1"/>
                     </Invoice>
                 </t>
@@ -672,13 +672,13 @@ class TestQWebNS(TransactionCase):
         """
         tempate = """
             <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
-                <g:brand>Odoo</g:brand>
+                <g:brand>AFENDA xForge</g:brand>
                 <g:link>My Link</g:link>
             </rss>
         """
         expected_result = """
             <rss xmlns:g="http://base.google.com/ns/1.0" version="2.0">
-                <g:brand>Odoo</g:brand>
+                <g:brand>AFENDA xForge</g:brand>
                 <g:link>My Link</g:link>
             </rss>
 

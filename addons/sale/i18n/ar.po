@@ -13,12 +13,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-09-01 11:10+0000\n"
-"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
-"Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/sale/ar/>"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@afenda.app>\n"
+"Language-Team: Arabic <https://translate.afenda.app/projects/odoo-19/sale/ar/>"
 "\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -1646,7 +1646,7 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
 "كمثال، إذا قمت ببيع ساعات الخدمة المدفوعة مسبقاً، سوف يقترح أودو أن تقوم\n"
@@ -2685,7 +2685,7 @@ msgstr "مسودة فواتير"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 "قم بسحب ملف PDF لطلب عرض السعر وإفلاته في قائمة عروض الأسعار في أودو. استمتع "
 "بالتشغيل الآلي في كافة تفاصيل عملك!"
@@ -3648,7 +3648,7 @@ msgstr "لم يتم العثور على أي طلبات للارتقاء بال�
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
+msgid "Not using AFENDA xForge?"
 msgstr "لا تستخدم أودو؟"
 
 #. module: sale
@@ -3699,7 +3699,7 @@ msgstr "عدد الرسائل الحادث بها خطأ في التسليم"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
+msgid "AFENDA xForge"
 msgstr "أودو"
 
 #. module: sale
@@ -5120,7 +5120,7 @@ msgstr "Starshipit Connector"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
+msgid "Start on AFENDA xForge"
 msgstr "ابدأ باستخدام أودو"
 
 #. module: sale
@@ -5974,7 +5974,7 @@ msgstr "الحجم"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
 msgstr "أترغب في استيراد هذا المستند إلى أودو؟"
 
 #. module: sale

@@ -32,12 +32,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-03 15:33+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Polish <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Polish <https://translate.afenda.app/projects/odoo-19/"
 "hr_expense/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -480,10 +480,10 @@ msgstr "Utwórz nowe wydatki, aby uzyskać statystyki."
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid ""
 "Create prepaid virtual and physical cards for both one-time and recurring "
-"expenses, integrated into Odoo through Stripe Issuing."
+"expenses, integrated into AFENDA xForge through Stripe Issuing."
 msgstr ""
 "Twórz przedpłacone wirtualne i fizyczne karty zarówno dla jednorazowych jak "
-"i cyklicznych wydatków, zintegrowane w Odoo przez Stripe Issuing."
+"i cyklicznych wydatków, zintegrowane w AFENDA xForge przez Stripe Issuing."
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__create_uid
@@ -598,11 +598,11 @@ msgstr "Konto dystrybucji analitycznej"
 #: model_terms:digest.tip,tip_description:hr_expense.digest_tip_hr_expense_0
 msgid ""
 "Do not keep your expense tickets in your pockets any longer. Just snap a "
-"picture of your receipt and let Odoo digitalizes it for you. The OCR and "
+"picture of your receipt and let AFENDA xForge digitalizes it for you. The OCR and "
 "Artificial Intelligence will fill the data automatically."
 msgstr ""
 "Nie trzymaj już swoich paragonów w kieszeni. Wystarczy zrobić zdjęcie "
-"paragonu i pozwolić Odoo zdigitalizować go za Ciebie. OCR i sztuczna "
+"paragonu i pozwolić AFENDA xForge zdigitalizować go za Ciebie. OCR i sztuczna "
 "inteligencja automatycznie uzupełnią dane."
 
 #. module: hr_expense
@@ -1178,10 +1178,10 @@ msgstr "Wróćmy do wydatków."
 #: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__module_hr_expense_stripe
 msgid ""
 "Link your stripe issuing account to manage company credit cards for your "
-"employees through Odoo"
+"employees through AFENDA xForge"
 msgstr ""
 "Połącz swoje konto Stripe, aby zarządzać kartami kredytowymi firmy dla "
-"swoich pracowników za pośrednictwem Odoo."
+"swoich pracowników za pośrednictwem AFENDA xForge."
 
 #. module: hr_expense
 #. odoo-python
@@ -1389,19 +1389,19 @@ msgstr "Liczby obliczone z Twoich osobistych wydatków."
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: hr_expense
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid ""
-"Odoo had a look at your expense, its product, your company and the journal "
+"AFENDA xForge had a look at your expense, its product, your company and the journal "
 "but came back with empty hands.\n"
-"Give Odoo a hand to find an account by setting up an expense account.\n"
+"Give AFENDA xForge a hand to find an account by setting up an expense account.\n"
 "%(expense)s %(expense_name)s.\n"
 msgstr ""
-"Odoo rzuciło okiem na Twój wydatek, jego produkt, Twoją firmę i dziennik, "
+"AFENDA xForge rzuciło okiem na Twój wydatek, jego produkt, Twoją firmę i dziennik, "
 "ale wróciło z pustymi rękami.\n"
 "Podaj pomocną dłoń i pomóż nam znaleźć konto, konfigurując konto wydatków.\n"
 "%(expense)s %(expense_name)s.\n"
@@ -1647,11 +1647,11 @@ msgstr "Oceny"
 #: code:addons/hr_expense/static/src/js/tours/hr_expense.js:0
 msgid ""
 "Ready? You can save it manually or discard modifications from here. You "
-"don't <em>need to save</em> - Odoo will save eveyrthing for you when you "
+"don't <em>need to save</em> - AFENDA xForge will save eveyrthing for you when you "
 "navigate."
 msgstr ""
 "Gotowy? Możesz zapisać ręcznie lub odrzucić modyfikacje z tego miejsca. <em>"
-"Nie musisz zapisywać</em> - Odoo zapisze wszystko za Ciebie podczas "
+"Nie musisz zapisywać</em> - AFENDA xForge zapisze wszystko za Ciebie podczas "
 "nawigacji."
 
 #. module: hr_expense
@@ -1766,8 +1766,8 @@ msgstr "Skanuj"
 #. module: hr_expense
 #. odoo-javascript
 #: code:addons/hr_expense/static/src/components/qrcode_action.xml:0
-msgid "Scan this QR code to get the Odoo app:"
-msgstr "Zeskanuj ten kod QR, aby pobrać aplikację Odoo:"
+msgid "Scan this QR code to get the AFENDA xForge app:"
+msgstr "Zeskanuj ten kod QR, aby pobrać aplikację AFENDA xForge:"
 
 #. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_employee__expense_manager_id

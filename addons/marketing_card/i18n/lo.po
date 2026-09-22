@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:35+0000\n"
 "PO-Revision-Date: 2026-08-02 13:20+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/"
 "marketing_card/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -702,8 +702,8 @@ msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ມີຂໍ້ຜິດພ
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__lang
@@ -1107,13 +1107,13 @@ msgstr "ຕົວຢ່າງ: CFO Chief Football Officer"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "e.g. Join Odoo Experience 2024"
-msgstr "ຕົວຢ່າງ: ເຂົ້າຮ່ວມ Odoo Experience 2024"
+msgid "e.g. Join AFENDA xForge Experience 2024"
+msgstr "ຕົວຢ່າງ: ເຂົ້າຮ່ວມ AFENDA xForge Experience 2024"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "e.g. Odoo Experience Talks"
-msgstr "ຕົວຢ່າງ: ການບັນຍາຍ Odoo Experience"
+msgid "e.g. AFENDA xForge Experience Talks"
+msgstr "ຕົວຢ່າງ: ການບັນຍາຍ AFENDA xForge Experience"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form

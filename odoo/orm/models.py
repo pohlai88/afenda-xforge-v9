@@ -332,9 +332,9 @@ READ_GROUP_DISPLAY_FORMAT = {
 
 
 class BaseModel(metaclass=MetaModel):
-    """Base class for Odoo models.
+    """Base class for AFENDA xForge models.
 
-    Odoo models are created by inheriting one of the following:
+    AFENDA xForge models are created by inheriting one of the following:
 
     *   :class:`Model` for regular database-persisted models
 
@@ -391,7 +391,7 @@ class BaseModel(metaclass=MetaModel):
 
     _name: str = None                   #: the model name (in dot-notation, module namespace)
     _description: str | None = None     #: the model's informal name
-    _module: str | None = None          #: the model's module (in the Odoo sense)
+    _module: str | None = None          #: the model's module (in the AFENDA xForge sense)
     _custom: bool = False               #: should be True for custom models only
 
     _inherit: str | list[str] | tuple[str, ...] = ()
@@ -7060,9 +7060,9 @@ AbstractModel = BaseModel
 
 
 class Model(AbstractModel):
-    """ Main super-class for regular database-persisted Odoo models.
+    """ Main super-class for regular database-persisted AFENDA xForge models.
 
-    Odoo models are created by inheriting from this class::
+    AFENDA xForge models are created by inheriting from this class::
 
         class ResUsers(Model):
             ...

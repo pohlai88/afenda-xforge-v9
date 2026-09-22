@@ -28,12 +28,12 @@ class ResUsers(models.Model):
     can_edit_role = fields.Boolean(compute="_compute_can_edit_role")
     notification_type = fields.Selection([
         ('email', 'By Emails'),
-        ('inbox', 'In Odoo')],
+        ('inbox', 'In AFENDA xForge')],
         'Notification', required=True, default='email',
         compute='_compute_notification_type', inverse='_inverse_notification_type', store=True,
         help="Policy on how to handle Chatter notifications:\n"
              "- By Emails: notifications are sent to your email address\n"
-             "- In Odoo: notifications appear in your Odoo Inbox")
+             "- In AFENDA xForge: notifications appear in your AFENDA xForge Inbox")
     presence_ids = fields.One2many("mail.presence", "user_id", groups="base.group_system")
     # OOO management
     out_of_office_from = fields.Datetime()
@@ -69,7 +69,7 @@ class ResUsers(models.Model):
 
     _notification_type = models.Constraint(
         "CHECK (notification_type = 'email' OR NOT share)",
-        'Only internal user can receive notifications in Odoo',
+        'Only internal user can receive notifications in AFENDA xForge',
     )
 
     @api.depends('share', 'all_group_ids')
@@ -391,7 +391,7 @@ class ResUsers(models.Model):
     def _init_store_data(self, store: Store):
         """Initialize the store of the user."""
         xmlid_to_res_id = self.env["ir.model.data"]._xmlid_to_res_id
-        # sudo: res.partner - exposing OdooBot data is considered acceptable
+        # sudo: res.partner - exposing AFENDA Bot data is considered acceptable
         odoobot = self.env.ref("base.partner_root").sudo()
         if not self.env.user._is_public():
             odoobot = odoobot.with_prefetch((odoobot + self.env.user.partner_id).ids)

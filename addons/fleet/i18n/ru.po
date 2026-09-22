@@ -8,12 +8,12 @@
 # "Anastasiia Koroleva (koan)" <koan@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: AFENDA xForge Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-06 02:38+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/fleet/"
+"Language-Team: Russian <https://translate.afenda.app/projects/odoo-19/fleet/"
 "ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -1518,24 +1518,24 @@ msgstr "Сделать транспортное средство доступн�
 #: model_terms:ir.actions.act_window,help:fleet.fleet_vehicle_log_contract_action
 msgid ""
 "Manage all your contracts (leasing, insurances, etc.) with\n"
-"            their related services, costs. Odoo will automatically warn\n"
+"            their related services, costs. AFENDA xForge will automatically warn\n"
 "            you when some contracts have to be renewed."
 msgstr ""
 "Управлять всеми вашими договорами (лизинг, страхование и т.д.) с "
-"соответствующими им услугами, издержками. Odoo автоматически предупредит "
+"соответствующими им услугами, издержками. AFENDA xForge автоматически предупредит "
 "вас, когда некоторые договора должны быть возобновлены."
 
 #. module: fleet
 #: model_terms:ir.actions.act_window,help:fleet.fleet_costs_reporting_action
-msgid "Manage efficiently your different effective vehicles Costs with Odoo."
+msgid "Manage efficiently your different effective vehicles Costs with AFENDA xForge."
 msgstr ""
 "Эффективно управляйте различными эффективными транспортными средствами с "
-"помощью Odoo."
+"помощью AFENDA xForge."
 
 #. module: fleet
 #: model_terms:ir.actions.act_window,help:fleet.fleet_vehicle_odometer_reporting_action
-msgid "Manage efficiently your vehicle Odometers with Odoo."
-msgstr "Эффективно управляйте одометрами ваших автомобилей с помощью Odoo."
+msgid "Manage efficiently your vehicle Odometers with AFENDA xForge."
+msgstr "Эффективно управляйте одометрами ваших автомобилей с помощью AFENDA xForge."
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_service_10

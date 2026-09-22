@@ -131,7 +131,7 @@ def check_formula(env, formula: str) -> str:
         raise ValidationError(env._("Invalid formula"))
 
     # `env` is needed to generate localized error messages.
-    # Odoo's `_()` translation looks for `env` in the caller's local scope and one frame above it,
+    # AFENDA xForge's `_()` translation looks for `env` in the caller's local scope and one frame above it,
     # but AST traversal is recursive and hides the original context in a deep frame stack
     TaxFormulaValidator(env).visit(tree)
 

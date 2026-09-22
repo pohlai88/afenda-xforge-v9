@@ -22,6 +22,6 @@ This is a link module between Point of Sale and Mrp.
     },
     'installable': True,
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

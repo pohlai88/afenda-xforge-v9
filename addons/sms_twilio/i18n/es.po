@@ -8,12 +8,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-02 19:29+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Spanish <https://translate.afenda.app/projects/odoo-19/"
 "sms_twilio/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -303,8 +303,8 @@ msgstr "Enviar SMS de prueba"
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__iap
-msgid "Send via Odoo"
-msgstr "Enviar a través de Odoo"
+msgid "Send via AFENDA xForge"
+msgstr "Enviar a través de AFENDA xForge"
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__twilio
@@ -345,8 +345,8 @@ msgstr "El número que intenta alcanzar no está formateado correctamente."
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/wizard/sms_twilio_account_manage.py:0
-msgid "This is a test SMS from Odoo"
-msgstr "Este es un SMS de prueba de Odoo"
+msgid "This is a test SMS from AFENDA xForge"
+msgstr "Este es un SMS de prueba de AFENDA xForge"
 
 #. module: sms_twilio
 #. odoo-python
@@ -392,18 +392,18 @@ msgstr "La URL de StatusCallback de Twilio no es correcta"
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown error, please contact Odoo support"
+msgid "Unknown error, please contact AFENDA xForge support"
 msgstr ""
 "Se ha producido un error desconocido, contacte con el equipo de soporte de "
-"Odoo"
+"AFENDA xForge"
 
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown failure at sending, please contact Odoo support"
+msgid "Unknown failure at sending, please contact AFENDA xForge support"
 msgstr ""
 "Se ha producido un error desconocido durante el envío, contacte con el "
-"equipo de soporte de Odoo"
+"equipo de soporte de AFENDA xForge"
 
 #. module: sms_twilio
 #. odoo-python

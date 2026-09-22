@@ -5,7 +5,7 @@
     'category': 'Hidden',
     'summary': 'Find free high-resolution images from Unsplash',
     'version': '1.1',
-    'description': """Explore the free high-resolution image library of Unsplash.com and find images to use in Odoo. An Unsplash search bar is added to the image library modal.""",
+    'description': """Explore the free high-resolution image library of Unsplash.com and find images to use in AFENDA xForge. An Unsplash search bar is added to the image library modal.""",
     'depends': ['base_setup', 'html_editor'],
     'data': [
         'views/res_config_settings_view.xml',
@@ -25,6 +25,6 @@
             'web_unsplash/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

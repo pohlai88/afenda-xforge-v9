@@ -68,7 +68,7 @@ class PaymentProvider(models.Model):
 
         :param dict values: The values used to generate the signature
         :param bool incoming: Whether the signature must be generated for an incoming (Buckaroo to
-                              Odoo) or outgoing (Odoo to Buckaroo) communication.
+                              AFENDA xForge) or outgoing (AFENDA xForge to Buckaroo) communication.
         :return: The shasign
         :rtype: str
         """

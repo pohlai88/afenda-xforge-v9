@@ -5,12 +5,12 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 14:51+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Catalan <https://translate.afenda.app/projects/odoo-19/"
 "website_crm_iap_reveal/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -254,9 +254,9 @@ msgstr "Generació d'iniciatives: Generació d'iniciatives/oportunitats"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__industry_tag_ids
-msgid "Leave empty to always match. Odoo will not create lead if no match"
+msgid "Leave empty to always match. AFENDA xForge will not create lead if no match"
 msgstr ""
-"Deixeu-ho buit per a coincidir sempre. L'Odoo no crearà el liderat si no "
+"Deixeu-ho buit per a coincidir sempre. L'AFENDA xForge no crearà el liderat si no "
 "coincideix"
 
 #. module: website_crm_iap_reveal
@@ -338,8 +338,8 @@ msgstr "Condicions de generació d'oportunitat"
 #. module: website_crm_iap_reveal
 #. odoo-python
 #: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py:0
-msgid "Opportunity created by Odoo Lead Generation"
-msgstr "Oportunitat creada per Odoo Lead Generation"
+msgid "Opportunity created by AFENDA xForge Lead Generation"
+msgstr "Oportunitat creada per AFENDA xForge Lead Generation"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__other_role_ids

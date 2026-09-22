@@ -283,7 +283,7 @@ class PeriodicCollector(_BasePeriodicCollector):
 class SyncCollector(Collector):
     """
     Record complete execution synchronously.
-    Note that --limit-memory-hard may need to be increased when launching Odoo.
+    Note that --limit-memory-hard may need to be increased when launching AFENDA xForge.
     """
     name = 'traces_sync'
 

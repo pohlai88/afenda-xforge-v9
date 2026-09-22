@@ -1,8 +1,8 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'United Arab Emirates - Accounting',
-    'author': 'Odoo S.A.',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/united_arab_emirates.html',
+    'author': 'AFENDA xForge S.A.',
+    'website': '/docs/applications/finance/fiscal_localizations/united_arab_emirates.html',
     'icon': '/account/static/description/l10n.png',
     'countries': ['ae'],
     'category': 'Accounting/Localizations/Account Charts',

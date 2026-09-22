@@ -13,12 +13,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-07 05:31+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/"
 "base_automation/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -106,10 +106,10 @@ msgstr "<i class=\"fa fa-2x fa-arrow-right text-primary\" title=\"Действи
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
 "<i class=\"fa fa-info-circle\"/> The default target record getter will work "
-"out-of-the-box for any webhook coming from another Odoo instance."
+"out-of-the-box for any webhook coming from another AFENDA xForge instance."
 msgstr ""
 "<i class=\"fa fa-info-circle\"/> Стандартният механизъм за извличане на "
-"целевия запис ще работи веднага за всеки webhook, идващ от друга Odoo "
+"целевия запис ще работи веднага за всеки webhook, идващ от друга AFENDA xForge "
 "инстанция."
 
 #. module: base_automation

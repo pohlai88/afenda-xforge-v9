@@ -107,7 +107,7 @@ describe.current.tags("headless");
 defineSpreadsheetModels();
 defineSpreadsheetActions();
 
-test("Can add an Odoo Bar chart", async () => {
+test("Can add an AFENDA xForge Bar chart", async () => {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_bar" });
     const sheetId = model.getters.getActiveSheetId();
     expect(model.getters.getChartIds(sheetId).length).toBe(1);
@@ -118,7 +118,7 @@ test("Can add an Odoo Bar chart", async () => {
     expect(model.getters.getChartRuntime(chartId).chartJsConfig.type).toBe("bar");
 });
 
-test("Can add an Odoo Line chart", async () => {
+test("Can add an AFENDA xForge Line chart", async () => {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_line" });
     const sheetId = model.getters.getActiveSheetId();
     expect(model.getters.getChartIds(sheetId).length).toBe(1);
@@ -129,7 +129,7 @@ test("Can add an Odoo Line chart", async () => {
     expect(model.getters.getChartRuntime(chartId).chartJsConfig.type).toBe("line");
 });
 
-test("Can add an Odoo Pie chart", async () => {
+test("Can add an AFENDA xForge Pie chart", async () => {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_pie" });
     const sheetId = model.getters.getActiveSheetId();
     expect(model.getters.getChartIds(sheetId).length).toBe(1);
@@ -147,7 +147,7 @@ test("A data source is added after a chart creation", async () => {
     expect(model.getters.getChartDataSource(chartId)).not.toBe(undefined);
 });
 
-test("Odoo bar chart runtime loads the data", async () => {
+test("AFENDA xForge bar chart runtime loads the data", async () => {
     const { model } = await createSpreadsheetWithChart({
         type: "odoo_bar",
         mockRPC: async function (route, args) {
@@ -184,7 +184,7 @@ test("Odoo bar chart runtime loads the data", async () => {
     expect.verifySteps(["formatted_read_group"]);
 });
 
-test("Odoo pie chart runtime loads the data", async () => {
+test("AFENDA xForge pie chart runtime loads the data", async () => {
     const { model } = await createSpreadsheetWithChart({
         type: "odoo_pie",
         mockRPC: async function (route, args) {
@@ -218,7 +218,7 @@ test("Odoo pie chart runtime loads the data", async () => {
     expect.verifySteps(["formatted_read_group"]);
 });
 
-test("Odoo line chart runtime loads the data", async () => {
+test("AFENDA xForge line chart runtime loads the data", async () => {
     const { model } = await createSpreadsheetWithChart({
         type: "odoo_line",
         mockRPC: async function (route, args) {
@@ -410,7 +410,7 @@ test("Updating the domain keeps the global filters domain", async () => {
     expect(lastReadGroupDomain).toEqual(["&", ["1", "=", "1"], ["product", "in", [41]]]);
 });
 
-test("Can import/export an Odoo chart", async () => {
+test("Can import/export an AFENDA xForge chart", async () => {
     const { model } = await createModelWithDataSource();
     insertChartInSpreadsheet(model, "odoo_line");
     const data = model.exportData();
@@ -480,7 +480,7 @@ test("can import (export) contextual domain", async function () {
     expect.verifySteps(["formatted_read_group"]);
 });
 
-test("Can undo/redo an Odoo chart creation", async () => {
+test("Can undo/redo an AFENDA xForge chart creation", async () => {
     const { model } = await createModelWithDataSource();
     insertChartInSpreadsheet(model, "odoo_line");
     const sheetId = model.getters.getActiveSheetId();
@@ -586,7 +586,7 @@ test("Bar chart with stacked attribute is supported", async () => {
     );
 });
 
-test("Can copy/paste Odoo chart", async () => {
+test("Can copy/paste AFENDA xForge chart", async () => {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_pie" });
     const sheetId = model.getters.getActiveSheetId();
     const chartId = model.getters.getChartIds(sheetId)[0];
@@ -606,7 +606,7 @@ test("Can copy/paste Odoo chart", async () => {
     );
 });
 
-test("Can cut/paste Odoo chart", async () => {
+test("Can cut/paste AFENDA xForge chart", async () => {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_pie" });
     const sheetId = model.getters.getActiveSheetId();
     const chartId = model.getters.getChartIds(sheetId)[0];
@@ -623,7 +623,7 @@ test("Can cut/paste Odoo chart", async () => {
     );
 });
 
-test("Duplicating a sheet correctly duplicates Odoo chart", async () => {
+test("Duplicating a sheet correctly duplicates AFENDA xForge chart", async () => {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_bar" });
     const sheetId = model.getters.getActiveSheetId();
     const secondSheetId = "secondSheetId";
@@ -831,7 +831,7 @@ test("Can insert odoo chart from a different model", async () => {
     expect(model.getters.getChartIds(sheetId).length).toBe(1);
 });
 
-test("Odoo chart legend color changes with background color update", async () => {
+test("AFENDA xForge chart legend color changes with background color update", async () => {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_bar" });
     const sheetId = model.getters.getActiveSheetId();
     const chartId = model.getters.getChartIds(sheetId)[0];
@@ -865,7 +865,7 @@ test("Remove odoo chart when sheet is deleted", async () => {
     expect(model.getters.getOdooChartIds().length).toBe(0);
 });
 
-test("Odoo chart datasource display name has a default when the chart title is empty", async () => {
+test("AFENDA xForge chart datasource display name has a default when the chart title is empty", async () => {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_line" });
     const sheetId = model.getters.getActiveSheetId();
     const chartId = model.getters.getChartIds(sheetId)[0];
@@ -880,10 +880,10 @@ test("Odoo chart datasource display name has a default when the chart title is e
         figureId: model.getters.getFigureIdFromChartId(chartId),
         sheetId,
     });
-    expect(model.getters.getOdooChartDisplayName(chartId)).toBe("(#1) Odoo Line Chart");
+    expect(model.getters.getOdooChartDisplayName(chartId)).toBe("(#1) AFENDA xForge Line Chart");
 });
 
-test("Every Odoo chart type has a default title", async () => {
+test("Every AFENDA xForge chart type has a default title", async () => {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_line" });
     const sheetId = model.getters.getActiveSheetId();
     const chartId = model.getters.getChartIds(sheetId)[0];
@@ -909,7 +909,7 @@ test("Every Odoo chart type has a default title", async () => {
         });
         await waitForDataLoaded(model);
         const chartName = chartRegistry.get(chartType).name;
-        expect(model.getters.getOdooChartDisplayName(chartId)).toBe(`(#1) Odoo ${chartName} Chart`);
+        expect(model.getters.getOdooChartDisplayName(chartId)).toBe(`(#1) AFENDA xForge ${chartName} Chart`);
     }
 });
 
@@ -1346,7 +1346,7 @@ test("Show values is taken into account in the runtime", async () => {
     expect(runtime.chartJsConfig.options.plugins.chartShowValuesPlugin.showValues).toBe(true);
 });
 
-test("Odoo line and bar charts display only horizontal grid lines", async () => {
+test("AFENDA xForge line and bar charts display only horizontal grid lines", async () => {
     const { model } = await createSpreadsheetWithChart({
         type: "odoo_line",
     });

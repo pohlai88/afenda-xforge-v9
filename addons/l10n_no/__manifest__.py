@@ -1,15 +1,15 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Norway - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'icon': '/account/static/description/l10n.png',
     'countries': ['no'],
     'version': '2.1',
     'author': 'Rolv Råen',
     'category': 'Accounting/Localizations/Account Charts',
-    'description': """This is the module to manage the accounting chart for Norway in Odoo.
+    'description': """This is the module to manage the accounting chart for Norway in AFENDA xForge.
 
-Updated for Odoo 9 by Bringsvor Consulting AS <www.bringsvor.com>
+Updated for AFENDA xForge 9 by Bringsvor Consulting AS <www.bringsvor.com>
 """,
     'depends': [
         'base_iban',

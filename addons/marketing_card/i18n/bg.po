@@ -6,12 +6,12 @@
 # Rosen Vladimirov <vladimirov.rosen@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:35+0000\n"
 "PO-Revision-Date: 2026-08-05 14:59+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/"
 "marketing_card/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -709,8 +709,8 @@ msgstr "Брой съобщения с грешка при доставка"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__lang
@@ -1122,13 +1122,13 @@ msgstr "напр. CFO Chief Football Officer"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "e.g. Join Odoo Experience 2024"
-msgstr "напр. Включете се в Odoo Experience 2024"
+msgid "e.g. Join AFENDA xForge Experience 2024"
+msgstr "напр. Включете се в AFENDA xForge Experience 2024"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "e.g. Odoo Experience Talks"
-msgstr "напр. Odoo Experience Talks"
+msgid "e.g. AFENDA xForge Experience Talks"
+msgstr "напр. AFENDA xForge Experience Talks"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form

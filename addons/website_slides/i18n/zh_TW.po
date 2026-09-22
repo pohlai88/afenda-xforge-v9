@@ -10,12 +10,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-06 01:12+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/website_slides/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -4658,15 +4658,15 @@ msgstr "問題數量"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.mail_notification_channel_invite
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: website_slides
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_1_4
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_2_1
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_4_0
-msgid "Odoo • Image and Text"
-msgstr "Odoo • 圖片及文字"
+msgid "AFENDA xForge • Image and Text"
+msgstr "AFENDA xForge • 圖片及文字"
 
 #. module: website_slides
 #: model:res.groups,name:website_slides.group_website_slides_officer
@@ -7103,7 +7103,7 @@ msgstr "例：兒童計算機科學"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
 msgid ""
-"e.g. In this video, we'll give you the keys on how Odoo can help you to grow "
+"e.g. In this video, we'll give you the keys on how AFENDA xForge can help you to grow "
 "your business. At the end, we'll propose you a quiz to test your knowledge."
 msgstr ""
 "例如: 在本影片中，我們將向您介紹Odoo如何幫助您拓展業務。 最後，我們將為測試您"

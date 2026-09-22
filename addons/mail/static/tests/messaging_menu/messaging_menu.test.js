@@ -133,7 +133,7 @@ test("respond to notification prompt (denied)", async () => {
     await click(".o_menu_systray i[aria-label='Messages']");
     await click(".o-mail-NotificationItem");
     await contains(".o_notification:has(.o_notification_bar.bg-warning)", {
-        text: "Notifications blocked. Odoo will not send notifications on this device.",
+        text: "Notifications blocked. AFENDA xForge will not send notifications on this device.",
     });
     await contains(".o-mail-MessagingMenu-counter", { count: 0 });
     await click(".o_menu_systray i[aria-label='Messages']");
@@ -146,14 +146,14 @@ test("respond to notification prompt (granted)", async () => {
     await click(".o_menu_systray i[aria-label='Messages']");
     await click(".o-mail-NotificationItem");
     await contains(".o_notification:has(.o_notification_bar.bg-success)", {
-        text: "Notifications allowed. Odoo will send notifications on this device!",
+        text: "Notifications allowed. AFENDA xForge will send notifications on this device!",
     });
 });
 
 test("no suggestion to enable chat push notifications in mobile app", async () => {
     mockPermission("notifications", "default");
-    // simulate Android Odoo App
-    mockUserAgent("Chrome/0.0.0 Android (OdooMobile; Linux; Android 13; Odoo TestSuite)");
+    // simulate Android AFENDA xForge App
+    mockUserAgent("Chrome/0.0.0 Android (OdooMobile; Linux; Android 13; AFENDA xForge TestSuite)");
     await start();
     await click(".o_menu_systray i[aria-label='Messages']");
     await contains(".o-mail-MessagingMenu-counter", { count: 0 });
@@ -195,7 +195,7 @@ test("rendering with PWA installation request", async () => {
             serverState.odoobotId
         }/avatar_128?unique=${deserializeDateTime(odoobot.write_date).ts}']`
     );
-    await contains(".o-mail-NotificationItem-name", { text: "Install Odoo" });
+    await contains(".o-mail-NotificationItem-name", { text: "Install AFENDA xForge" });
     await contains(".o-mail-NotificationItem-text", {
         text: "Come here often? Install the app for quick and easy access!",
     });
@@ -237,7 +237,7 @@ test("installation of the PWA request can be dismissed", async () => {
     await click(".o-mail-NotificationItem .oi-close");
     await waitForSteps([
         "getItem pwaService.installationState",
-        'installationState value:  {"/odoo":"dismissed"}',
+        'installationState value:  {"/app":"dismissed"}',
     ]);
     await click(".o_menu_systray i[aria-label='Messages']");
     await contains(".o-mail-NotificationItem", { count: 0 });
@@ -252,7 +252,7 @@ test("rendering with PWA installation request (dismissed)", async () => {
             if (key === "pwaService.installationState") {
                 asyncStep("getItem " + key);
                 // in this test, installation has been previously dismissed by the user
-                return `{"/odoo":"dismissed"}`;
+                return `{"/app":"dismissed"}`;
             }
             return super.getItem(key);
         },
@@ -698,7 +698,7 @@ test("chat preview should not display correspondent name in body", async () => {
     // DM chat with demo, the conversation is named "Demo" and body is simply message content
     // not prefix like "Demo:"
     const pyEnv = await startServer();
-    const partnerId = pyEnv["res.partner"].create({ name: "Demo", email: "demo@odoo.com" });
+    const partnerId = pyEnv["res.partner"].create({ name: "Demo", email: "demo@afenda.app" });
     const userId = pyEnv["res.users"].create({ partner_id: partnerId });
     const channelId = pyEnv["discuss.channel"].create({
         channel_type: "chat",

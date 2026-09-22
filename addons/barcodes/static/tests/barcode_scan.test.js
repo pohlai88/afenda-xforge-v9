@@ -30,6 +30,6 @@ test("Display notification for media device permission on barcode scanning", asy
     // => second rendering: displays "Unable to access camera" in the dialog
     await animationFrame();
     expect(".modal-body").toHaveText(
-        "Unable to access camera\nCould not start scanning. Odoo needs your authorization first."
+        "Unable to access camera\nCould not start scanning. AFENDA xForge needs your authorization first."
     );
 });

@@ -1,7 +1,7 @@
 {
     'name': 'Polish E-Invoicing FA(3)',
     'category': 'Accounting/Localizations',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'summary': 'Support for FA(3) electronic invoices in Poland via KSeF',
     'description': """Export FA(3) compliant XML invoices and prepare for integration with KSeF.""",
     'data': [

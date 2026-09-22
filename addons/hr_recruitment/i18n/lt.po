@@ -26,12 +26,12 @@
 # Greta Šeštokė <greta@vialaurea.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-07 23:55+0000\n"
 "Last-Translator: Greta Šeštokė <greta@vialaurea.com>\n"
-"Language-Team: Lithuanian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Lithuanian <https://translate.afenda.app/projects/odoo-19/"
 "hr_recruitment/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -2456,11 +2456,11 @@ msgstr "Žinučių su pristatymo klaida skaičius"
 #: model_terms:ir.actions.act_window,help:hr_recruitment.action_hr_job_applications
 #: model_terms:ir.actions.act_window,help:hr_recruitment.crm_case_categ0_act_job
 msgid ""
-"Odoo helps you track applicants in the recruitment\n"
+"AFENDA xForge helps you track applicants in the recruitment\n"
 "                process and follow up all operations: meetings, interviews, "
 "etc."
 msgstr ""
-"\"Odoo\" padeda sekti įdarbinimo proceso kandidatus\n"
+"\"AFENDA xForge\" padeda sekti įdarbinimo proceso kandidatus\n"
 "                ir sekti visus veiksmus: susitikimus, interviu, t.t."
 
 #. module: hr_recruitment
@@ -3300,11 +3300,11 @@ msgstr ""
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Modelis (\"Odoo\" dokumento rūšis), su kuriuo susijęs šis pseudonimas. Visi "
+"Modelis (\"AFENDA xForge\" dokumento rūšis), su kuriuo susijęs šis pseudonimas. Visi "
 "gaunami laiškai, kurie neatsako į egzistuojantį įrašą, sukurs naują šio "
 "modelio įrašą (pvz. projekto užduotį)"
 
@@ -3317,10 +3317,10 @@ msgstr "Įdarbinimo laipsnio pavadinimas turi būti unikalus!"
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "El. pašto pseudonimo pavadinimas, pvz. \"darbai\", jei norite gauti "
-"<darbai@pavyzdys.odoo.com>"
+"<darbai@pavyzdys.afenda.app>"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_talent_pool__no_of_talents

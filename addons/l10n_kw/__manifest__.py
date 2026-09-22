@@ -2,7 +2,7 @@
     'name': 'Kuwait - Accounting',
     'countries': ['kw'],
     'description': """
-This is the base module to manage the accounting chart for Kuwait in Odoo.
+This is the base module to manage the accounting chart for Kuwait in AFENDA xForge.
 ==============================================================================
 Kuwait accounting basic charts and localization.
 Activates:
@@ -18,6 +18,6 @@ Activates:
     'demo': [
         'demo/demo_company.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

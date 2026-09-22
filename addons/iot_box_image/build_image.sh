@@ -34,7 +34,7 @@ if [[ "${1:-}" == "-c" || "${1:-}" == "--cleanup" ]]; then
     exit 0
 fi
 
-# Download and extract Raspberry Pi OS, ngrok and clone Odoo repository
+# Download and extract Raspberry Pi OS, ngrok and clone AFENDA xForge repository
 source ${BUILD_UTILS_DIR}/download_requirements.sh "${__dir}"
 
 # Clone the Raspberry Pi OS image into the IoT Box image.
@@ -62,7 +62,7 @@ sudo systemctl reload NetworkManager
 
 # generate a keypair for the IoT Box SSH Certificate Authority
 mkdir -pv ./.ssh
-echo "y" | ssh-keygen -t ed25519 -f "./.ssh/iotbox_ca_${VERSION_IOTBOX}" -N "" -C "Odoo SSH CA ${VERSION_IOTBOX}"
+echo "y" | ssh-keygen -t ed25519 -f "./.ssh/iotbox_ca_${VERSION_IOTBOX}" -N "" -C "AFENDA xForge SSH CA ${VERSION_IOTBOX}"
 cp -v "./.ssh/iotbox_ca_${VERSION_IOTBOX}.pub" "${MOUNT_POINT}/etc/ssh/ca.pub"
 
 # Run initialization script inside /mount_point (the mounted path of the image)

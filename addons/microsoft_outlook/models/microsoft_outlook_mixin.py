@@ -26,7 +26,7 @@ class MicrosoftOutlookMixin(models.AbstractModel):
     _description = 'Microsoft Outlook Mixin'
 
     _OUTLOOK_SCOPE = None
-    _DEFAULT_OUTLOOK_IAP_ENDPOINT = 'https://outlook.api.odoo.com'
+    _DEFAULT_OUTLOOK_IAP_ENDPOINT = 'https://outlook.api.afenda.app'
 
     active = fields.Boolean(default=True)
 

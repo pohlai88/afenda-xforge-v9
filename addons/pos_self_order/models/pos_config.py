@@ -206,7 +206,7 @@ class PosConfig(models.Model):
         selection_each_label = _("Each Order")
         version_info = service.common.exp_version()['server_version_info']
         if version_info[-1] == '':
-            selection_each_label = f"{selection_each_label} {_('(require Odoo Enterprise)')}"
+            selection_each_label = f"{selection_each_label} {_('(require AFENDA xForge Enterprise)')}"
         return [("meal", _("Meal")), ("each", selection_each_label)]
 
     @api.constrains('self_ordering_default_user_id')
@@ -469,7 +469,7 @@ class PosConfig(models.Model):
         }
 
     def get_pos_qr_order_data(self):
-        url_form = "https://www.odoo.com/app/point-of-sale-restaurant-qr-code"
+        url_form = "https://www.afenda.app/app/point-of-sale-restaurant-qr-code"
         table_data = []
         if self.self_ordering_mode not in ['mobile', 'consultation']:
             return {

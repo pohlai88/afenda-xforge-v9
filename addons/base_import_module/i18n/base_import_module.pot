@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-01-25 18:36+0000\n"
@@ -20,7 +20,7 @@ msgstr ""
 #: code:addons/base_import_module/models/ir_module.py:0
 msgid ""
 "\n"
-"You may need the Enterprise version to install the data module. Please visit https://www.odoo.com/pricing-plan for more information.\n"
+"You may need the Enterprise version to install the data module. Please visit https://www.afenda.app/pricing-plan for more information.\n"
 "If you need Website themes, it can be downloaded from https://github.com/odoo/design-themes.\n"
 msgstr ""
 
@@ -272,7 +272,7 @@ msgstr ""
 #. module: base_import_module
 #. odoo-python
 #: code:addons/base_import_module/models/ir_module.py:0
-msgid "Studio customizations require the Odoo Studio app."
+msgid "Studio customizations require the AFENDA xForge Studio app."
 msgstr ""
 
 #. module: base_import_module

@@ -207,16 +207,16 @@ class MailingList(models.Model):
             'src_lists' after the merge except the destination mailing list 'self'.
         """
         # Explanation of the SQL query with an example. There are the following lists
-        # A (id=4): yti@odoo.com; yti@example.com
-        # B (id=5): yti@odoo.com; yti@openerp.com
+        # A (id=4): yti@afenda.app; yti@example.com
+        # B (id=5): yti@afenda.app; yti@openerp.com
         # C (id=6): nothing
         # To merge the mailing lists A and B into C, we build the view st that looks
         # like this with our example:
         #
         #  contact_id |           email           | row_number |  list_id |
         # ------------+---------------------------+------------------------
-        #           4 | yti@odoo.com              |          1 |        4 |
-        #           6 | yti@odoo.com              |          2 |        5 |
+        #           4 | yti@afenda.app              |          1 |        4 |
+        #           6 | yti@afenda.app              |          2 |        5 |
         #           5 | yti@example.com           |          1 |        4 |
         #           7 | yti@openerp.com           |          1 |        5 |
         #

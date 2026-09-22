@@ -45,6 +45,6 @@ You need to configure your certificate and the tax agency.
         'demo/demo_res_partner.xml',
         'demo/demo_company.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

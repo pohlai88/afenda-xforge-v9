@@ -1,4 +1,4 @@
-Odoo UI Icons - v1.2
+AFENDA xForge UI Icons - v1.2
 
 Credits
 - https://www.carbondesignsystem.com/guidelines/icons/library/

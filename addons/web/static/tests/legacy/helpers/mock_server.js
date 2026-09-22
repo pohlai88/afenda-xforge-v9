@@ -130,7 +130,7 @@ export function makeServerError({
 } = {}) {
     return makeErrorFromResponse({
         code: code || 0,
-        message: message || "Odoo Server Error",
+        message: message || "AFENDA xForge Server Error",
         data: {
             name: errorName || `odoo.exceptions.${type || "UserError"}`,
             debug: "traceback",

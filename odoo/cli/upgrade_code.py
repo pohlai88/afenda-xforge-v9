@@ -64,7 +64,7 @@ except ImportError:
         def __init__(self):
             self.parser = argparse.ArgumentParser(
                 prog=Path(sys.argv[0]).name,
-                description=__doc__.replace('/odoo/upgrade_code', str(UPGRADE)),
+                description=__doc__.replace('/odoo/upgrade_code', str(UPGRADE)),  # noqa: rebrand
                 formatter_class=argparse.RawDescriptionHelpFormatter,
             )
     config = None

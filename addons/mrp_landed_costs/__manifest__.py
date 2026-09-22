@@ -16,6 +16,6 @@ take them into account in your stock valuation.
         'views/stock_landed_cost_views.xml',
     ],
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

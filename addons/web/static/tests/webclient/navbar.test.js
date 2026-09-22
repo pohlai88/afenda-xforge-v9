@@ -56,7 +56,7 @@ test("href attribute on apps menu items", async () => {
     defineMenus([{ id: 1, actionID: 339 }]);
     await mountWithCleanup(NavBar);
     await contains(".o_navbar_apps_menu button.dropdown-toggle").click();
-    expect(".o-dropdown--menu .dropdown-item").toHaveAttribute("href", "/odoo/action-339");
+    expect(".o-dropdown--menu .dropdown-item").toHaveAttribute("href", "/app/action-339");
 });
 
 test.tags("desktop");
@@ -64,7 +64,7 @@ test("href attribute with path on apps menu items", async () => {
     defineMenus([{ id: 1, actionID: 339, actionPath: "my-path" }]);
     await mountWithCleanup(NavBar);
     await contains(".o_navbar_apps_menu button.dropdown-toggle").click();
-    expect(".o-dropdown--menu .dropdown-item").toHaveAttribute("href", "/odoo/my-path");
+    expect(".o-dropdown--menu .dropdown-item").toHaveAttribute("href", "/app/my-path");
 });
 
 test.tags("desktop");

@@ -4,7 +4,7 @@
     'version': '2.7',
     'sequence': 125,
     'summary': 'Manage and publish an eLearning platform',
-    'website': 'https://www.odoo.com/app/elearning',
+    'website': 'https://www.afenda.app/app/elearning',
     'category': 'Website/eLearning',
     'description': """
 Create Online Courses
@@ -201,6 +201,6 @@ Featuring
             "website_slides/static/src/core/common/**/*",
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

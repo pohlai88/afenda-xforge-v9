@@ -105,8 +105,8 @@ class PaymentProvider(models.Model):
         See: https://docs.payu.in/docs/hashing-request-and-response
 
         :param dict payment_data: The payment data to sign
-        :param bool incoming: Whether the signature must be generated for an incoming (PayU to Odoo)
-                              or for outgoing (Odoo to PayU) communication
+        :param bool incoming: Whether the signature must be generated for an incoming (PayU to AFENDA xForge)
+                              or for outgoing (AFENDA xForge to PayU) communication
         :return: The generated signature
         :rtype: str
         """

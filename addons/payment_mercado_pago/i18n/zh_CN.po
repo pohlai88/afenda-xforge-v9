@@ -7,12 +7,12 @@
 # "Chloe Wang (chwa)" <chwa@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-08-07 23:28+0000\n"
-"Last-Translator: \"Chloe Wang (chwa)\" <chwa@odoo.com>\n"
-"Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Chloe Wang (chwa)\" <chwa@afenda.app>\n"
+"Language-Team: Chinese (Simplified Han script) <https://translate.afenda.app/"
 "projects/odoo-19/payment_mercado_pago/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -38,8 +38,8 @@ msgstr "发生错误"
 
 #. module: payment_mercado_pago
 #: model_terms:ir.ui.view,arch_db:payment_mercado_pago.authorization_error
-msgid "An error occurred while linking your Mercado Pago account with Odoo."
-msgstr "在将您的 Mercado Pago 账户与 Odoo 连接时发生错误。"
+msgid "An error occurred while linking your Mercado Pago account with AFENDA xForge."
+msgstr "在将您的 Mercado Pago 账户与 AFENDA xForge 连接时发生错误。"
 
 #. module: payment_mercado_pago
 #: model_terms:ir.ui.view,arch_db:payment_mercado_pago.payment_provider_form

@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-"""The Odoo API module defines method decorators.
+"""The AFENDA xForge API module defines method decorators.
 """
 from __future__ import annotations
 

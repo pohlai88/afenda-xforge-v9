@@ -27,12 +27,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-04 19:35+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/product/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Catalan <https://translate.afenda.app/projects/odoo-19/product/"
 "ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -2767,12 +2767,12 @@ msgstr "Si us plau, introdueix un nombre positiu sencer."
 #: code:addons/product/models/product_document.py:0
 msgid ""
 "Please enter a valid URL.\n"
-"Example: https://www.odoo.com\n"
+"Example: https://www.afenda.app\n"
 "\n"
 "Invalid URL: %s"
 msgstr ""
 "Si us plau, introdueix un URL vàlid.\n"
-"Exemple: https://www.odoo.com\n"
+"Exemple: https://www.afenda.app\n"
 "\n"
 "URL no vàlid: %s"
 
@@ -4773,8 +4773,8 @@ msgstr "p. ex. Llums"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_variant_easy_edit_view
-msgid "e.g. Odoo Enterprise Subscription"
-msgstr "e.x. Subscripció a Odoo Enterprise"
+msgid "e.g. AFENDA xForge Enterprise Subscription"
+msgstr "e.x. Subscripció a AFENDA xForge Enterprise"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_template_form_view

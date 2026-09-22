@@ -11,12 +11,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-05 21:08+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tony Ng (ngto)\" <ngto@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/account_peppol/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -137,7 +137,7 @@ msgid ""
 "                                    </span>\n"
 "                                    <div style=\"margin-bottom: 5px; margin-"
 "top: 18px;\">\n"
-"                                        <a t-attf-href=\"/odoo/accounting/\" "
+"                                        <a t-attf-href=\"/app/accounting/\" "
 "target=\"_blank\" t-attf-style=\"padding: 8px 12px; font-size: 12px; color: "
 "{{ object.email_primary_color or '#FFFFFF' }}; text-decoration: none !"
 "important; font-weight: 400; background-color: "
@@ -181,12 +181,12 @@ msgid ""
 "\n"
 "                                    <p>You can now <strong>send<t t-"
 "if=\"object.account_peppol_proxy_state == 'receiver'\"> and receive</t></"
-"strong> electronic invoices via Odoo — completely free of charge.</p>\n"
+"strong> electronic invoices via AFENDA xForge — completely free of charge.</p>\n"
 "\n"
 "                                    <p>Best regards,</p>\n"
 "\n"
 "                                    <p style=\"margin-bottom: 24px;\">The "
-"Odoo Team</p>\n"
+"AFENDA xForge Team</p>\n"
 "                                </td>\n"
 "                            </tr>\n"
 "                        </table>\n"
@@ -223,7 +223,7 @@ msgstr ""
 "                                    </span>\n"
 "                                    <div style=\"margin-bottom: 5px; margin-"
 "top: 18px;\">\n"
-"                                        <a t-attf-href=\"/odoo/accounting/\" "
+"                                        <a t-attf-href=\"/app/accounting/\" "
 "target=\"_blank\" t-attf-style=\"padding: 8px 12px; font-size: 12px; color: {"
 "{ object.email_primary_color or '#FFFFFF' }}; text-decoration: none "
 "!important; font-weight: 400; background-color: {{ "
@@ -265,13 +265,13 @@ msgstr ""
 "                                    <p>我們已成功將你的公司加入 <strong>"
 "Peppol 網絡</strong>。</p>\n"
 "\n"
-"                                    <p>你現可透過 Odoo <strong>傳送<t t-"
+"                                    <p>你現可透過 AFENDA xForge <strong>傳送<t t-"
 "if=\"object.account_peppol_proxy_state == 'receiver'\">及接收</t></strong>電"
 "子發票，費用全免！</p>\n"
 "\n"
 "                                    <p>順祝  安康</p>\n"
 "\n"
-"                                    <p style=\"margin-bottom: 24px;\">Odoo 團"
+"                                    <p style=\"margin-bottom: 24px;\">AFENDA xForge 團"
 "隊</p>\n"
 "                                </td>\n"
 "                            </tr>\n"
@@ -993,7 +993,7 @@ msgstr "建立 EDI 文件時發生錯誤(格式: %s)："
 #. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/tools/peppol_iap_connector.py:0
-msgid "Failed to connect to Odoo Peppol Proxy."
+msgid "Failed to connect to AFENDA xForge Peppol Proxy."
 msgstr ""
 
 #. module: account_peppol
@@ -1016,8 +1016,8 @@ msgstr ""
 #. module: account_peppol
 #. odoo-javascript
 #: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "Free on Odoo"
-msgstr "在 Odoo 免費使用"
+msgid "Free on AFENDA xForge"
+msgstr "在 AFENDA xForge 免費使用"
 
 #. module: account_peppol
 #. odoo-javascript
@@ -1033,7 +1033,7 @@ msgstr "知道！"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
-msgid "I accept that Odoo may process my e-invoices,"
+msgid "I accept that AFENDA xForge may process my e-invoices,"
 msgstr ""
 
 #. module: account_peppol
@@ -1211,19 +1211,19 @@ msgstr "peppol 註冊狀態更新的通知電郵"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__res_partner__peppol_eas__odemo
-msgid "Odoo Demo ID"
+msgid "AFENDA xForge Demo ID"
 msgstr ""
 
 #. module: account_peppol
 #. odoo-javascript
 #: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "Odoo keeps you up to date with the new regulation."
-msgstr "Odoo 協助你時刻遵守最新法規。"
+msgid "AFENDA xForge keeps you up to date with the new regulation."
+msgstr "AFENDA xForge 協助你時刻遵守最新法規。"
 
 #. module: account_peppol
 #. odoo-python
@@ -1559,7 +1559,7 @@ msgstr "主要聯絡電郵"
 msgid ""
 "Primary contact email for Peppol connection related communications and "
 "notifications.\n"
-"In particular, this email is used by Odoo to reconnect your Peppol account "
+"In particular, this email is used by AFENDA xForge to reconnect your Peppol account "
 "in case of database change."
 msgstr ""
 
@@ -1572,9 +1572,9 @@ msgstr "代理類型"
 #. odoo-python
 #: code:addons/account_peppol/exceptions.py:0
 msgid ""
-"Proxy error, please contact Odoo (missing \"%s\" - please make sure that it "
+"Proxy error, please contact AFENDA xForge (missing \"%s\" - please make sure that it "
 "was loaded from the configuration panel)"
-msgstr "代理錯誤，請聯絡 Odoo。（\"%s\" 缺漏：請確保已在配置面板載入它）"
+msgstr "代理錯誤，請聯絡 AFENDA xForge。（\"%s\" 缺漏：請確保已在配置面板載入它）"
 
 #. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__account_move__peppol_move_state__to_send
@@ -1588,8 +1588,8 @@ msgstr "準備發送"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_config_wizard_form
-msgid "Receive your electronic invoices in Odoo"
-msgstr "在 Odoo 接收電子發票"
+msgid "Receive your electronic invoices in AFENDA xForge"
+msgstr "在 AFENDA xForge 接收電子發票"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
@@ -1608,8 +1608,8 @@ msgstr ""
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
-msgid "Register with Odoo"
-msgstr "註冊使用 Odoo"
+msgid "Register with AFENDA xForge"
+msgstr "註冊使用 AFENDA xForge"
 
 #. module: account_peppol
 #. odoo-python
@@ -1735,7 +1735,7 @@ msgid ""
 "Some service support migration keys. If this is your case you can enter your "
 "migration key below.\n"
 "                            If not, you should de-register from your current "
-"service provider and register with Odoo afterward."
+"service provider and register with AFENDA xForge afterward."
 msgstr ""
 
 #. module: account_peppol
@@ -1753,7 +1753,7 @@ msgstr "測試"
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
 msgid ""
 "Test mode allows sending e-invoices through the test Peppol network.<br/>\n"
-"                            By clicking the button below I accept that Odoo "
+"                            By clicking the button below I accept that AFENDA xForge "
 "may process my e-invoices."
 msgstr ""
 
@@ -2304,8 +2304,8 @@ msgstr ""
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_config_wizard_form
 msgid ""
-"You are sending and receiving your e-invoices via Odoo with this Peppol ID"
-msgstr "你正在使用此 Peppol 識別碼，透過 Odoo 發送及接收電子發票"
+"You are sending and receiving your e-invoices via AFENDA xForge with this Peppol ID"
+msgstr "你正在使用此 Peppol 識別碼，透過 AFENDA xForge 發送及接收電子發票"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
@@ -2314,8 +2314,8 @@ msgstr ""
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_config_wizard_form
-msgid "You are sending your e-invoices via Odoo with this Peppol ID"
-msgstr "你正在使用此 Peppol 識別碼，透過 Odoo 發送電子發票"
+msgid "You are sending your e-invoices via AFENDA xForge with this Peppol ID"
+msgstr "你正在使用此 Peppol 識別碼，透過 AFENDA xForge 發送電子發票"
 
 #. module: account_peppol
 #. odoo-python
@@ -2408,8 +2408,8 @@ msgstr "你的 Peppol 註冊會很快啟動。你現已可以傳送發票。"
 #: code:addons/account_peppol/wizard/peppol_registration.py:0
 msgid ""
 "Your company is already registered on an Access Point (%s) for receiving "
-"invoices. We will register you on Odoo as a sender only."
-msgstr "你的公司已註冊使用接入點（%s）接收發票。Odoo 系統只會將你註冊為發送人。"
+"invoices. We will register you on AFENDA xForge as a sender only."
+msgstr "你的公司已註冊使用接入點（%s）接收發票。AFENDA xForge 系統只會將你註冊為發送人。"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form

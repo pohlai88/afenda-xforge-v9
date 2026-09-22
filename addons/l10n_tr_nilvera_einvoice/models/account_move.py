@@ -472,7 +472,7 @@ class AccountMove(models.Model):
         invoices_to_update._l10n_tr_nilvera_get_submitted_document_status()
 
     def _cron_nilvera_get_sale_pdf(self, batch_size=100):
-        """ Fetches the Nilvera generated PDFs for the sales generated on Odoo. """
+        """ Fetches the Nilvera generated PDFs for the sales generated on AFENDA xForge. """
         # We fetch all invoices whose message_main_attachment_id is the same
         # as their invoice_pdf_report_id attachment. After we add the Nilvera
         # PDF, `_l10n_tr_nilvera_add_pdf_to_invoice` will set

@@ -2,11 +2,11 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
 {
-    'name': 'OdooBot',
+    'name': 'AFENDA Bot',
     'version': '1.2',
     'category': 'Productivity/Discuss',
-    'summary': 'Add OdooBot in discussions',
-    'website': 'https://www.odoo.com/app/discuss',
+    'summary': 'Add AFENDA Bot in discussions',
+    'website': 'https://www.afenda.app/app/discuss',
     'depends': ['mail'],
     'auto_install': True,
     'installable': True,
@@ -19,6 +19,6 @@
             'mail_bot/static/src/scss/odoobot_style.scss',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

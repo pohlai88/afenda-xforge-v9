@@ -330,7 +330,7 @@ class ProductFeed(models.Model):
                 )
 
         # Note: Google only supports a restricted set of unit and computes the comparison prices
-        # differently than Odoo.
+        # differently than AFENDA xForge.
         # Ex: product="Pack of wine (6 bottles)", price=$65.00, uom_name="Pack".
         #   - in odoo: base_unit_count=6.0, base_unit_name="750ml"
         #       => displayed: "$10.83 / 750ml"
@@ -390,7 +390,7 @@ class ProductFeed(models.Model):
         return additional_info
 
     def _notify_website_manager(self, **kwargs):
-        """Send a notification to the website manager using OdooBot.
+        """Send a notification to the website manager using AFENDA Bot.
 
         This method wraps around `message_notify` to notify the manager of the feed's website.
 

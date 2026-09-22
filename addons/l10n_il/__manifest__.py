@@ -6,7 +6,7 @@
     'version': '1.1',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the latest basic Israelian localisation necessary to run Odoo in Israel:
+This is the latest basic Israelian localisation necessary to run AFENDA xForge in Israel:
 ================================================================================
 
 This module consists of:
@@ -14,7 +14,7 @@ This module consists of:
  - Taxes and tax report
  - Multiple Fiscal positions
  """,
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'depends': [
         'account',
     ],
@@ -26,6 +26,6 @@ This module consists of:
     'demo': [
         'demo/demo_company.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

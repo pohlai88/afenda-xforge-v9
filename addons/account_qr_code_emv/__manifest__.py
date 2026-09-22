@@ -7,7 +7,7 @@
     'description': """
 Bridge module addings support for EMV Merchant-Presented QR-code generation for Payment System.
     """,
-    'author': 'Odoo SA',
+    'author': 'AFENDA xForge SA',
     'depends': ['account'],
     'data': [
         'views/res_bank_views.xml',

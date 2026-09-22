@@ -1056,7 +1056,7 @@ class HrExpense(models.Model):
                 mail_lang = (manager_langs and manager_langs[0]) or self.env.lang or 'en_US'
                 body = self.env['ir.qweb']._render(
                     template='hr_expense.hr_expense_template_submitted_expenses',
-                    values={'manager_name': manager.name, 'url': '/odoo/expenses-to-process', 'company': company},
+                    values={'manager_name': manager.name, 'url': '/app/expenses-to-process', 'company': company},
                     lang=mail_lang,
                 )
                 new_mails.append({
@@ -1780,8 +1780,8 @@ class HrExpense(models.Model):
 
         if not account:
             raise UserError(self.env._(
-                "Odoo had a look at your expense, its product, your company and the journal but came back with empty hands.\n"
-                "Give Odoo a hand to find an account by setting up an expense account.\n"
+                "AFENDA xForge had a look at your expense, its product, your company and the journal but came back with empty hands.\n"
+                "Give AFENDA xForge a hand to find an account by setting up an expense account.\n"
                 "%(expense)s %(expense_name)s.\n",
                 expense=self,
                 expense_name=self.name,

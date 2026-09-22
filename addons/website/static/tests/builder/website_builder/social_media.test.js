@@ -169,12 +169,12 @@ test("save social medias", async () => {
 
     await click(":iframe h4");
 
-    await contains("div[data-action-param='facebook'] input").edit("https://facebook.com/Odoo");
+    await contains("div[data-action-param='facebook'] input").edit("https://facebook.com/afenda");
 
     let writeCalled = false;
     onRpc("website", "write", ({ args }) => {
         expect(args[0]).toEqual([1]);
-        expect(args[1]).toInclude(["social_facebook", "https://facebook.com/Odoo"]);
+        expect(args[1]).toInclude(["social_facebook", "https://facebook.com/afenda"]);
         expect(args[1]).toInclude(["social_twitter", "https://x.com/odoo"]);
         writeCalled = true;
         return true;

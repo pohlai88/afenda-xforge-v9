@@ -9,12 +9,12 @@
 # "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-13 18:39+0000\n"
 "PO-Revision-Date: 2026-08-02 13:11+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Spanish <https://translate.afenda.app/projects/odoo-19/"
 "payment_authorize/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -234,10 +234,10 @@ msgstr "El ID utilizado únicamente para identificar la cuenta con Authorize.Net
 #. module: payment_authorize
 #: model:ir.model.fields,help:payment_authorize.field_payment_provider__authorize_client_key
 msgid ""
-"The public client key. To generate directly from Odoo or from Authorize.Net "
+"The public client key. To generate directly from AFENDA xForge or from Authorize.Net "
 "backend."
 msgstr ""
-"La clave del cliente público. Para generar directamente desde Odoo o desde "
+"La clave del cliente público. Para generar directamente desde AFENDA xForge o desde "
 "Authorize.Net backend."
 
 #. module: payment_authorize

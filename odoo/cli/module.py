@@ -63,13 +63,13 @@ class Module(Command):
                 '-d', '--database', dest='db_name', default=None,
                 help="database name, connection details will be taken from the config file")
             parser.add_argument("-D", "--data-dir", dest="data_dir",
-                 help="directory where to store Odoo data")
+                 help="directory where to store AFENDA xForge data")
 
         install_parser.add_argument(
             'modules', nargs='+', metavar='MODULE',
             help="names of the modules to be installed. For data modules (.zip), use the path instead")
         install_parser.epilog = textwrap.dedent("""\
-            Before installing modules, an Odoo database needs to be created and initialized
+            Before installing modules, an AFENDA xForge database needs to be created and initialized
             on your PostgreSQL instance, using the `db init` command:
 
             $ odoo-bin db init <db_name>

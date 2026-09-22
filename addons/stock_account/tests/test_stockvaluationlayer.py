@@ -153,7 +153,7 @@ class TestStockValuationStandard(TestStockValuationCommon):
 
     def test_currency_precision_and_standard_value(self):
         currency = self.env['res.currency'].create({
-            'name': 'Odoo',
+            'name': 'AFENDA xForge',
             'symbol': 'O',
             'rounding': 1,
         })
@@ -669,7 +669,7 @@ class TestStockValuationFIFO(TestStockValuationCommon):
 
     def test_currency_precision_and_fifo_value(self):
         currency = self.env['res.currency'].create({
-            'name': 'Odoo',
+            'name': 'AFENDA xForge',
             'symbol': 'O',
             'rounding': 1,
         })

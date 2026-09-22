@@ -39,10 +39,10 @@ class MailGatewayAllowed(models.Model):
             <p class="o_view_nocontent_smiling_face">
                 Add addresses to the Allowed List
             </p><p>
-                To protect you from spam and reply loops, Odoo automatically blocks emails
+                To protect you from spam and reply loops, AFENDA xForge automatically blocks emails
                 coming to your gateway past a threshold of <b>%(threshold)i</b> emails every <b>%(minutes)i</b>
                 minutes. If there are some addresses from which you need to receive very frequent
-                updates, you can however add them below and Odoo will let them go through.
+                updates, you can however add them below and AFENDA xForge will let them go through.
             </p>''')) % {
             'threshold': LOOP_THRESHOLD,
             'minutes': LOOP_MINUTES,

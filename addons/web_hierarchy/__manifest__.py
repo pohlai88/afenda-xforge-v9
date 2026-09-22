@@ -6,7 +6,7 @@
     'version': '1.0',
     'description':
         """
-Odoo Web Hierarchy view
+AFENDA xForge Web Hierarchy view
 =======================
 
 This module adds a new view called to be able to define a view to display
@@ -25,6 +25,6 @@ an organization such as an Organization Chart for employees for instance.
             'web_hierarchy/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

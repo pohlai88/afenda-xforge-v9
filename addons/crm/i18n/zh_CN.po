@@ -13,12 +13,12 @@
 # "Chloe Wang (chwa)" <chwa@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:35+0000\n"
 "PO-Revision-Date: 2026-08-07 19:48+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Simplified Han script) <https://translate.afenda.app/"
 "projects/odoo-19/crm/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -331,7 +331,7 @@ msgid ""
 "board, you'll discover what <t t-out=\"object.company_id.name or ''\">My "
 "Company (San Francisco)</t> has to offer. My name is <t t-"
 "out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the "
-"most out of Odoo. Could we plan a quick demo soon?<br/>\n"
+"most out of AFENDA xForge. Could we plan a quick demo soon?<br/>\n"
 "                            Feel free to reach out at any time!<br/><br/>\n"
 "                            Best,<br/>\n"
 "                            <t t-if=\"object.user_id\">\n"
@@ -382,9 +382,9 @@ msgid ""
 "</td></tr>\n"
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    Powered by <a target=\"_blank\" href=\"https://www.odoo.com?"
+"    Powered by <a target=\"_blank\" href=\"https://www.afenda.app?"
 "utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: "
-"{{object.company_id.email_secondary_color or '#875A7B'}};;\">Odoo</a>\n"
+"{{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
 "</table>\n"
 "        "
@@ -437,7 +437,7 @@ msgstr ""
 "                            很高兴与您相识！加入之后，您将逐步了解 <t t-"
 "out=\"object.company_id.name or ''\">My Company (San Francisco)</t> 所能提供"
 "的各项服务。我是 <t t-out=\"object.user_id.name or ''\">Marc Demo</t> ，将协"
-"助您充分使用 Odoo 的各项功能。我们是否可以尽快安排一次简短演示？<br/>\n"
+"助您充分使用 AFENDA xForge 的各项功能。我们是否可以尽快安排一次简短演示？<br/>\n"
 "                            随时欢迎与我联系！<br/><br/>\n"
 "                            此致，<br/>\n"
 "                            <t t-if=\"object.user_id\">\n"
@@ -489,8 +489,8 @@ msgstr ""
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
 "    由 <a target=\"_blank\" href=\"https://"
-"www.odoo.com?utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: {"
-"{object.company_id.email_secondary_color or '#875A7B'}};;\">Odoo</a>提供技术"
+"www.afenda.app?utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: {"
+"{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>提供技术"
 "支持\n"
 "</td></tr>\n"
 "</table>\n"
@@ -1035,9 +1035,9 @@ msgstr "归类并分析线索/商机的类别，例如：培训，服务"
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid ""
-"Click on the breadcrumb to go back to your Pipeline. Odoo will save all "
+"Click on the breadcrumb to go back to your Pipeline. AFENDA xForge will save all "
 "modifications as you navigate."
-msgstr "点击面包屑导航，返回您的商机。Odoo 会在您切换浏览画面时保存所有修改。"
+msgstr "点击面包屑导航，返回您的商机。AFENDA xForge 会在您切换浏览画面时保存所有修改。"
 
 #. module: crm
 #. odoo-javascript
@@ -1122,8 +1122,8 @@ msgstr "完成日期"
 #. module: crm
 #. odoo-javascript
 #: code:addons/crm/static/src/views/crm_form/crm_pls_tooltip_button.xml:0
-msgid "Computed by Odoo AI using your data."
-msgstr "由 Odoo AI 使用您的数据计算。"
+msgid "Computed by AFENDA xForge AI using your data."
+msgstr "由 AFENDA xForge AI 使用您的数据计算。"
 
 #. module: crm
 #: model:ir.model,name:crm.model_res_config_settings
@@ -1509,20 +1509,20 @@ msgstr "您是否知道发送给销售团队别名的电子邮件会在商机中
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_4
 msgid ""
 "Did you know you can search a company by name or VAT number to instantly "
-"fill in all its data? Odoo autocompletes everything for you: logo, address, "
+"fill in all its data? AFENDA xForge autocompletes everything for you: logo, address, "
 "company size, business information, social media accounts, etc."
 msgstr ""
-"您知道吗，您可以通过名称或增值税号搜索公司，即可立即填写所有信息？Odoo 会为您"
+"您知道吗，您可以通过名称或增值税号搜索公司，即可立即填写所有信息？AFENDA xForge 会为您"
 "自动填写所有内容：标志、地址、公司规模、业务信息、社交媒体帐户等。"
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_5
 msgid ""
 "Did you know you can turn a list of opportunities into a map view, using the "
-"top-right map icon? A lot of screens in Odoo can be turned into a map: "
+"top-right map icon? A lot of screens in AFENDA xForge can be turned into a map: "
 "tasks, contacts, delivery orders, etc."
 msgstr ""
-"您知道吗，您可以使用右上角的地图图标将商机列表转换为地图视图？Odoo 系统中的许"
+"您知道吗，您可以使用右上角的地图图标将商机列表转换为地图视图？AFENDA xForge 系统中的许"
 "多屏幕都可以转换为地图：任务、联系人、交付订单等。"
 
 #. module: crm
@@ -2514,10 +2514,10 @@ msgstr "MRR"
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
 msgid ""
-"Make and receive calls from Odoo with Ringover's dialer. Track calls, SMS "
+"Make and receive calls from AFENDA xForge with Ringover's dialer. Track calls, SMS "
 "messages, and get AI-powered transcripts of your conversations."
 msgstr ""
-"使用 Ringover 的拨号器从 Odoo 拨打和接听电话。追踪通话和短信，并获得人工智能"
+"使用 Ringover 的拨号器从 AFENDA xForge 拨打和接听电话。追踪通话和短信，并获得人工智能"
 "支持的对话副本。"
 
 #. module: crm
@@ -2951,23 +2951,23 @@ msgstr "出现发送错误的消息数量"
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_case_form_view_salesteams_opportunity
 msgid ""
-"Odoo helps you keep track of your sales pipeline to follow\n"
+"AFENDA xForge helps you keep track of your sales pipeline to follow\n"
 "                    up potential sales and better forecast your future "
 "revenues."
 msgstr ""
-"Odoo 帮助您追踪商机，\n"
+"AFENDA xForge 帮助您追踪商机，\n"
 "                    关注潜在销售机会，更好地预测未来收入。"
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_2
 msgid ""
-"Odoo's artificial intelligence engine predicts the success rate of each "
+"AFENDA xForge's artificial intelligence engine predicts the success rate of each "
 "opportunity based on your history. You can always update the success rate "
-"manually, but if you let Odoo do the job the score is updated while the "
+"manually, but if you let AFENDA xForge do the job the score is updated while the "
 "opportunity moves forward in your sales cycle."
 msgstr ""
-"Odoo 人工智能引擎根据您的历史数据预测每个商机的成功率。您始终可以手动更新成功"
-"率，但如果让 Odoo 来完成这项工作，商机在销售周期中推进时，得分将会自动更新。"
+"AFENDA xForge 人工智能引擎根据您的历史数据预测每个商机的成功率。您始终可以手动更新成功"
+"率，但如果让 AFENDA xForge 来完成这项工作，商机在销售周期中推进时，得分将会自动更新。"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.view_crm_case_opportunities_filter
@@ -3850,20 +3850,20 @@ msgstr "潜在客户 “%s” 不可同时设为已贏得及已损失。"
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"该别名对应的模型（Odoo 文档种类）。任何不属于回复已有记录的邮件，将导致创建该"
+"该别名对应的模型（AFENDA xForge 文档种类）。任何不属于回复已有记录的邮件，将导致创建该"
 "模型的新记录（例如：项目任务）"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
-"电子邮箱别名，例如：如果要收取<jobs@example.odoo.com>的电子邮件，别名应为“"
+"电子邮箱别名，例如：如果要收取<jobs@example.afenda.app>的电子邮件，别名应为“"
 "jobs”"
 
 #. module: crm
@@ -3991,8 +3991,8 @@ msgstr "提示：将收到的电子邮件转化为商机"
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_1
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_1
-msgid "Tip: Did you know Odoo has built-in lead mining?"
-msgstr "提示：您知道 Odoo 有内置线索挖掘功能吗？"
+msgid "Tip: Did you know AFENDA xForge has built-in lead mining?"
+msgstr "提示：您知道 AFENDA xForge 有内置线索挖掘功能吗？"
 
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_4
@@ -4457,8 +4457,8 @@ msgstr "例如：太昂贵"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
-msgid "e.g. https://www.odoo.com"
-msgstr "例如：https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "例如：https://www.afenda.app"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.sales_team_form_view_in_crm

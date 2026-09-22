@@ -25,6 +25,6 @@ This module implements reCaptchaV3 so that you can prevent bot spam on your publ
             'google_recaptcha/static/src/xml/recaptcha.xml',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

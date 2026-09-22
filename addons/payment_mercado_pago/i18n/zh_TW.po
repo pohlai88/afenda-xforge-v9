@@ -9,12 +9,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-08-04 19:40+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/payment_mercado_pago/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -40,7 +40,7 @@ msgstr "發生了錯誤"
 
 #. module: payment_mercado_pago
 #: model_terms:ir.ui.view,arch_db:payment_mercado_pago.authorization_error
-msgid "An error occurred while linking your Mercado Pago account with Odoo."
+msgid "An error occurred while linking your Mercado Pago account with AFENDA xForge."
 msgstr ""
 
 #. module: payment_mercado_pago

@@ -11,7 +11,7 @@ from odoo.tools import mute_logger
 
 class TestReports(odoo.tests.HttpCase):
     def test_report_session_cookie(self):
-        """ Asserts wkhtmltopdf forwards the user session when requesting resources to Odoo, such as images,
+        """ Asserts wkhtmltopdf forwards the user session when requesting resources to AFENDA xForge, such as images,
         and that the resource is correctly returned as expected.
         """
         partner_id = self.env.user.partner_id.id

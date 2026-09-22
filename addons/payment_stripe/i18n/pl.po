@@ -11,12 +11,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 18:18+0000\n"
-"Last-Translator: \"Marta (wacm)\" <wacm@odoo.com>\n"
-"Language-Team: Polish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Marta (wacm)\" <wacm@afenda.app>\n"
+"Language-Team: Polish <https://translate.afenda.app/projects/odoo-19/"
 "payment_stripe/pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -88,10 +88,10 @@ msgstr "ID"
 #: model:ir.model.fields,help:payment_stripe.field_payment_provider__stripe_webhook_secret
 msgid ""
 "If a webhook is enabled on your Stripe account, this signing secret must be "
-"set to authenticate the messages sent from Stripe to Odoo."
+"set to authenticate the messages sent from Stripe to AFENDA xForge."
 msgstr ""
 "Jeśli w Twoim koncie Stripe włączono funkcję webhook, należy ustawić ten "
-"klucz podpisywania, aby uwierzytelnić wiadomości wysyłane ze Stripe do Odoo."
+"klucz podpisywania, aby uwierzytelnić wiadomości wysyłane ze Stripe do AFENDA xForge."
 
 #. module: payment_stripe
 #. odoo-javascript

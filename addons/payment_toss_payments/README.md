@@ -21,14 +21,14 @@ For the front-end, the `PaymentForm` component is patched to:
   customer information, and success/failure return URLs).
 
 On the backend, after the customer completes the payment on Toss Payments and is redirected back to
-Odoo on the success URL, a server-to-server API call is made to the
+AFENDA xForge on the success URL, a server-to-server API call is made to the
 `/v1/payments/confirm` endpoint to confirm the payment. The response is then processed to update the
 transaction state and store the `paymentKey` and `secret` fields returned by Toss Payments.
 
 Webhook notifications are used to keep the transaction state in sync with Toss Payments:
 
 - The webhook endpoint receives `PAYMENT_STATUS_CHANGED` events.
-- The payload is matched to an Odoo transaction by reference (`orderId`).
+- The payload is matched to an AFENDA xForge transaction by reference (`orderId`).
 - A signature-like check is performed by comparing the `secret` in the event with the one
   stored on the transaction when the payment was confirmed.
 - If the verification passes, the transaction is processed and its state updated according to the
@@ -48,7 +48,7 @@ Webhook notifications are used to keep the transaction state in sync with Toss P
 ## Not implemented features
 
 - Tokenization or saving payment methods
-- Refunds initiated from Odoo
+- Refunds initiated from AFENDA xForge
 - Express checkout
 - Less common payment methods: virtual account, gift certificates, and overseas payment
 

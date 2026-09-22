@@ -6,10 +6,10 @@
     'category': 'Hidden',
     'version': '1.0',
     'description': """
-Odoo Web core module.
+AFENDA xForge Web core module.
 ========================
 
-This module provides the core of the Odoo Web Client.
+This module provides the core of the AFENDA xForge Web Client.
 """,
     'depends': ['base'],
     'auto_install': True,
@@ -553,6 +553,6 @@ This module provides the core of the Odoo Web Client.
         ],
     },
     'bootstrap': True,  # load translations for login screen,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -2,9 +2,9 @@
 {
     'name': 'Saudi Arabia - Withholding Tax',
     'icon': '/account/static/description/l10n.png',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'category': 'Accounting/Localizations/Account Charts',
-    'website': 'https://www.odoo.com/documentation/master/applications/finance/fiscal_localizations/saudi_arabia.html',
+    'website': '/docs/applications/finance/fiscal_localizations/saudi_arabia.html',
     'description': """
 Saudi Arabia Withholding Tax Module
 

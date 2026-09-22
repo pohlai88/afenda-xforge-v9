@@ -98,10 +98,10 @@ class ResUsers(models.Model):
                 full_sync = True
         self.res_users_settings_id.sudo().microsoft_calendar_sync_token = next_sync_token
 
-        # Microsoft -> Odoo
+        # Microsoft -> AFENDA xForge
         synced_events, synced_recurrences = self.env['calendar.event']._sync_microsoft2odoo(events) if events else (self.env['calendar.event'], self.env['calendar.recurrence'])
 
-        # Odoo -> Microsoft
+        # AFENDA xForge -> Microsoft
         recurrences = self.env['calendar.recurrence']._get_microsoft_records_to_sync(full_sync=full_sync)
         recurrences -= synced_recurrences
         recurrences._sync_odoo2microsoft()
@@ -187,7 +187,7 @@ class ResUsers(models.Model):
         """
         Set the first synchronization date as an ICP parameter when applicable (param not defined yet
         and calendar never synchronized before). This parameter is used for not synchronizing previously
-        created Odoo events and thus avoid spamming invitations for those events.
+        created AFENDA xForge events and thus avoid spamming invitations for those events.
         """
         ICP = self.env['ir.config_parameter'].sudo()
         first_synchronization_date = ICP.get_param('microsoft_calendar.sync.first_synchronization_date')

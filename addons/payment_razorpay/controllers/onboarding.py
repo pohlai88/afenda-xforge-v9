@@ -30,7 +30,7 @@ class RazorpayController(Controller):
         """
         _logger.info("Returning from authorization with data:\n%s", pprint.pformat(data))
 
-        # Retrieve the Razorpay data and Odoo metadata from the redirect data.
+        # Retrieve the Razorpay data and AFENDA xForge metadata from the redirect data.
         provider_id = int(data['provider_id'])
         authorization_code = data.get('authorization_code')
         csrf_token = data['csrf_token']
@@ -45,7 +45,7 @@ class RazorpayController(Controller):
 
         # Request and set the OAuth tokens on the provider.
         action = request.env.ref('payment.action_payment_provider')
-        redirect_url = f'/odoo/action-{action.id}/{int(provider.id)}'
+        redirect_url = f'/app/action-{action.id}/{int(provider.id)}'
         if not authorization_code:  # The user cancelled the authorization.
             return request.redirect(redirect_url)
 

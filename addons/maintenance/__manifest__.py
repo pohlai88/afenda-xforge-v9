@@ -9,7 +9,7 @@
 Track equipment and maintenance requests""",
     'depends': ['mail'],
     'summary': 'Track equipment and manage maintenance requests',
-    'website': 'https://www.odoo.com/app/maintenance',
+    'website': 'https://www.afenda.app/app/maintenance',
     'data': [
         'security/maintenance.xml',
         'security/ir.model.access.csv',
@@ -31,6 +31,6 @@ Track equipment and maintenance requests""",
             'maintenance/static/tests/tours/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

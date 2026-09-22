@@ -11,8 +11,8 @@ Taiwan - E-invoicing
 ====================
 This module allows the user to send their invoices to the Ecpay system.
 """,
-    "website": "https://www.odoo.com",
-    'author': 'Odoo S.A.',
+    "website": "https://www.afenda.app",
+    'author': 'AFENDA xForge S.A.',
     "license": "LGPL-3",
     "depends": ["l10n_tw", "base_vat"],
     "data": [

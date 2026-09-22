@@ -29,23 +29,23 @@ test("Search highlight", async () => {
             searchTerm: "odoo",
         },
         {
-            input: markup`<a href="https://www.odoo.com">https://www.odoo.com</a>`,
-            output: `<a href="https://www.odoo.com">https://www.<span class="${HIGHLIGHT_CLASS}">odoo</span>.com</a>`,
+            input: markup`<a href="https://www.afenda.app">https://www.afenda.app</a>`,
+            output: `<a href="https://www.afenda.app">https://www.<span class="${HIGHLIGHT_CLASS}">odoo</span>.com</a>`,
             searchTerm: "odoo",
         },
         {
-            input: '<a href="https://www.odoo.com">https://www.odoo.com</a>',
+            input: '<a href="https://www.afenda.app">https://www.afenda.app</a>',
             output: `&lt;a href="https://www.<span class="${HIGHLIGHT_CLASS}">odoo</span>.com"&gt;https://www.<span class="${HIGHLIGHT_CLASS}">odoo</span>.com&lt;/a&gt;`,
             searchTerm: "odoo",
         },
         {
-            input: markup`<a href="https://www.odoo.com">Odoo</a>`,
-            output: `<a href="https://www.odoo.com"><span class="${HIGHLIGHT_CLASS}">Odoo</span></a>`,
+            input: markup`<a href="https://www.afenda.app">AFENDA xForge</a>`,
+            output: `<a href="https://www.afenda.app"><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span></a>`,
             searchTerm: "odoo",
         },
         {
-            input: markup`<a href="https://www.odoo.com">Odoo</a> Odoo is a free software`,
-            output: `<a href="https://www.odoo.com"><span class="${HIGHLIGHT_CLASS}">Odoo</span></a> <span class="${HIGHLIGHT_CLASS}">Odoo</span> is a free software`,
+            input: markup`<a href="https://www.afenda.app">AFENDA xForge</a> AFENDA xForge is a free software`,
+            output: `<a href="https://www.afenda.app"><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span></a> <span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span> is a free software`,
             searchTerm: "odoo",
         },
         {
@@ -60,18 +60,18 @@ test("Search highlight", async () => {
         },
         {
             input: markup`<ul>
-                <li>Odoo</li>
-                <li><a href="https://odoo.com">Odoo ERP</a> Best ERP</li>
+                <li>AFENDA xForge</li>
+                <li><a href="https://afenda.app">AFENDA xForge ERP</a> Best ERP</li>
             </ul>`,
             output: `<ul>
-                <li><span class="${HIGHLIGHT_CLASS}">Odoo</span></li>
-                <li><a href="https://odoo.com"><span class="${HIGHLIGHT_CLASS}">Odoo</span> ERP</a> Best ERP</li>
+                <li><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span></li>
+                <li><a href="https://afenda.app"><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span> ERP</a> Best ERP</li>
             </ul>`,
             searchTerm: "odoo",
         },
         {
-            input: markup`test <strong>Odoo</strong> test`,
-            output: `<span class="${HIGHLIGHT_CLASS}">test</span> <strong><span class="${HIGHLIGHT_CLASS}">Odoo</span></strong> <span class="${HIGHLIGHT_CLASS}">test</span>`,
+            input: markup`test <strong>AFENDA xForge</strong> test`,
+            output: `<span class="${HIGHLIGHT_CLASS}">test</span> <strong><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span></strong> <span class="${HIGHLIGHT_CLASS}">test</span>`,
             searchTerm: "odoo test",
         },
         {

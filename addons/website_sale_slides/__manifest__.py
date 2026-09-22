@@ -35,6 +35,6 @@
             'website_sale_slides/static/src/website_builder/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

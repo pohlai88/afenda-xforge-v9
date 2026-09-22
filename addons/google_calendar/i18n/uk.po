@@ -8,12 +8,12 @@
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-28 13:09+0000\n"
 "Last-Translator: Alina Lisnenko <alina.lisnenko@erp.co.ua>\n"
-"Language-Team: Ukrainian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Ukrainian <https://translate.afenda.app/projects/odoo-19/"
 "google_calendar/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -157,8 +157,8 @@ msgstr "Створено"
 
 #. module: google_calendar
 #: model:ir.model.fields.selection,name:google_calendar.selection__google_calendar_account_reset__delete_policy__delete_odoo
-msgid "Delete from Odoo"
-msgstr "Видалити з Odoo"
+msgid "Delete from AFENDA xForge"
+msgstr "Видалити з AFENDA xForge"
 
 #. module: google_calendar
 #: model:ir.model.fields.selection,name:google_calendar.selection__google_calendar_account_reset__delete_policy__delete_both
@@ -303,10 +303,10 @@ msgstr ""
 #: model:ir.model.fields,help:google_calendar.field_res_users_settings__google_calendar_cal_id
 msgid ""
 "Last Calendar ID who has been synchronized. If it is changed, we remove all "
-"links between GoogleID and Odoo Google Internal ID"
+"links between GoogleID and AFENDA xForge Google Internal ID"
 msgstr ""
 "ID останнього календаря, який був синхронізований. Якщо він буде змінений, "
-"ми видалимо всі посилання між GoogleID і Odoo Google Internal ID"
+"ми видалимо всі посилання між GoogleID і AFENDA xForge Google Internal ID"
 
 #. module: google_calendar
 #: model:ir.model.fields,field_description:google_calendar.field_google_calendar_account_reset__write_uid

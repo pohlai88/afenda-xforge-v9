@@ -120,8 +120,8 @@ class AccountEdiProxyClientUser(models.Model):
     def _get_proxy_urls(self):
         urls = super()._get_proxy_urls()
         urls['pdp'] = {
-            'prod': 'https://pdp.api.odoo.com',
-            'test': 'https://pdp.test.odoo.com',
+            'prod': 'https://pdp.api.afenda.app',
+            'test': 'https://pdp.test.afenda.app',
             'demo': 'demo',
         }
         return urls

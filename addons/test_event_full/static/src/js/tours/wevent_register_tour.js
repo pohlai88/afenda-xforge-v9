@@ -27,7 +27,7 @@ const reminderToggleSteps = function (talkName, reminderOn, toggleReminder) {
                 steps = steps.concat([{
                     content: "The form of the email reminder modal is filled",
                     trigger: "#o_wetrack_email_reminder_form input[name='email']",
-                    run: "fill visitor@odoo.com",
+                    run: "fill visitor@afenda.app",
                 },
                 {
                     content: "The form is submit",

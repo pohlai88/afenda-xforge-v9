@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-04 02:46+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/sms_twilio/"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/sms_twilio/"
 "uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
@@ -349,8 +349,8 @@ msgstr "Sinov SMS yuborish"
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__iap
 #, fuzzy
-msgid "Send via Odoo"
-msgstr "Odoo orqali yuborish"
+msgid "Send via AFENDA xForge"
+msgstr "AFENDA xForge orqali yuborish"
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__twilio
@@ -398,8 +398,8 @@ msgstr "Siz termoqchi bo‘lgan raqam noto‘g‘ri formatda"
 #. odoo-python
 #: code:addons/sms_twilio/wizard/sms_twilio_account_manage.py:0
 #, fuzzy
-msgid "This is a test SMS from Odoo"
-msgstr "Bu Odoo‘dan sinov SMS xabari"
+msgid "This is a test SMS from AFENDA xForge"
+msgstr "Bu AFENDA xForge‘dan sinov SMS xabari"
 
 #. module: sms_twilio
 #. odoo-python
@@ -453,16 +453,16 @@ msgstr "Twilio StatusCallback URL noto‘g‘ri"
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
 #, fuzzy
-msgid "Unknown error, please contact Odoo support"
-msgstr "Noma'lum xato yuz berdi, iltimos Odoo yordam xizmatiga murojaat qiling"
+msgid "Unknown error, please contact AFENDA xForge support"
+msgstr "Noma'lum xato yuz berdi, iltimos AFENDA xForge yordam xizmatiga murojaat qiling"
 
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
 #, fuzzy
-msgid "Unknown failure at sending, please contact Odoo support"
+msgid "Unknown failure at sending, please contact AFENDA xForge support"
 msgstr ""
-"Yuborishda noma'lum xatolik yuz berdi, iltimos Odoo yordam xizmatiga "
+"Yuborishda noma'lum xatolik yuz berdi, iltimos AFENDA xForge yordam xizmatiga "
 "murojaat qiling"
 
 #. module: sms_twilio

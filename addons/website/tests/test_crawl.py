@@ -16,7 +16,7 @@ _logger = logging.getLogger(__name__)
 
 @odoo.tests.common.tagged('post_install', '-at_install', 'crawl')
 class Crawler(HttpCaseWithUserDemo):
-    """ Test suite crawling an Odoo CMS instance and checking that all
+    """ Test suite crawling an AFENDA xForge CMS instance and checking that all
     internal links lead to a 200 response.
 
     If a username and a password are provided, authenticates the user before
@@ -26,8 +26,8 @@ class Crawler(HttpCaseWithUserDemo):
     def setUp(self):
         super(Crawler, self).setUp()
         self.env.ref('website.default_website').write({
-            'social_facebook': "https://www.facebook.com/Odoo",
-            'social_twitter': 'https://twitter.com/Odoo',
+            'social_facebook': "https://www.facebook.com/afenda",
+            'social_twitter': 'https://twitter.com/afenda',
             'social_linkedin': 'https://www.linkedin.com/company/odoo',
             'social_youtube': 'https://www.youtube.com/user/OpenERPonline',
             'social_github': 'https://github.com/odoo',
@@ -99,7 +99,7 @@ class Crawler(HttpCaseWithUserDemo):
                 # FIXME: handle relative link (not parts.path.startswith /)
                 if parts.netloc or \
                     not parts.path.startswith('/') or \
-                    parts.path == '/odoo' or\
+                    parts.path == '/app' or\
                     parts.path.startswith('/web/') or \
                     parts.path.startswith('/en/') or \
                    (parts.scheme and parts.scheme not in ('http', 'https')):

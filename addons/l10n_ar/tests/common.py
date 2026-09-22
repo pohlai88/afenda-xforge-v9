@@ -285,7 +285,7 @@ class TestArCommon(AccountTestInvoicingCommon):
         })
         cls.product_iva_exento = cls.env['product.product'].create({
             # demo product_product_exento
-            'name': 'Book: Development in Odoo (VAT Exempt)',
+            'name': 'Book: Development in AFENDA xForge (VAT Exempt)',
             'uom_id': uom_unit.id,
             'standard_price': 100.0,
             "list_price": 80.0,

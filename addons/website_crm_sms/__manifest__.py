@@ -10,6 +10,6 @@
     'depends': ['website_sms', 'crm'],
     'installable': True,
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

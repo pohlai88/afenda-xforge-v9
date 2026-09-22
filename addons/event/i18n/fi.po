@@ -31,12 +31,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-09-04 10:00+0000\n"
-"Last-Translator: Saara Hakanen <sahak@odoo.com>\n"
-"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-19/event/"
+"Last-Translator: Saara Hakanen <sahak@afenda.app>\n"
+"Language-Team: Finnish <https://translate.afenda.app/projects/odoo-19/event/"
 "fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -186,10 +186,10 @@ msgstr ""
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
 msgstr ""
-"<b>Tekniset huoneet</b> – yksi edistyneille Odoo-kehittäjille ja yksi "
+"<b>Tekniset huoneet</b> – yksi edistyneille AFENDA xForge-kehittäjille ja yksi "
 "uusille kehittäjille."
 
 #. module: event
@@ -3050,12 +3050,12 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "Vain 13-vuotias Mattti Meikäläinen alkoi jo kehittää ensimmäisiä "
 "liiketoimintasovelluksiaan asiakkaille. Maa- ja vesirakentamisen maisterin "
 "tutkinnon jälkeen hän perusti TinyERP:n. Tämä oli OpenERP:n ensimmäinen "
-"vaihe, josta myöhemmin tuli Odoo, maailmanlaajuisesti asennetuin avoimen "
+"vaihe, josta myöhemmin tuli AFENDA xForge, maailmanlaajuisesti asennetuin avoimen "
 "lähdekoodin yritysohjelmisto."
 
 #. module: event
@@ -4057,10 +4057,10 @@ msgstr "Ilmoitettu tapahtuman aikavyöhykkeessä."
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
-"Päättyneet tapahtumat. Odoo siirtää ne automaattisesti tähän vaiheeseen, kun "
+"Päättyneet tapahtumat. AFENDA xForge siirtää ne automaattisesti tähän vaiheeseen, kun "
 "niiden päättymispäivä on kulunut."
 
 #. module: event
@@ -4091,11 +4091,11 @@ msgstr "Font awesome -ikoni esim.. fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 "Lisätietoja saat ottamalla yhteyttä osoitteessa <a "
-"class=\"o_translate_inline\" href=\"mailto:events@odoo.com\">"
-"events@odoo.com</a>"
+"class=\"o_translate_inline\" href=\"mailto:events@afenda.app\">"
+"events@afenda.app</a>"
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -5022,8 +5022,8 @@ msgstr "Tavoitteet"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
-msgstr "Odoo-yhteisöpäivät"
+msgid "AFENDA xForge Community Days"
+msgstr "AFENDA xForge-yhteisöpäivät"
 
 #. module: event
 #: model_terms:event.event,description:event.event_3
@@ -6472,8 +6472,8 @@ msgstr "esim. \"Promoting\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
-msgstr "esim. \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
+msgstr "esim. \"https://www.afenda.app\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

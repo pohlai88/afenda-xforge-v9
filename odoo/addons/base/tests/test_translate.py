@@ -266,7 +266,7 @@ class TranslationToolsTestCase(BaseCase):
         source = """<t t-name="stuff">
                         <ul class="nav navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link oe_menu_leaf" href="/odoo/action-54?menu_id=42">
+                                <a class="nav-link oe_menu_leaf" href="/app/action-54?menu_id=42">
                                     <span class="oe_menu_text">Blah</span>
                                 </a>
                             </li>
@@ -700,17 +700,17 @@ class TestTranslation(TransactionCase):
     # TODO Currently, the unique constraint doesn't work for translatable field
     # def test_111_unique_en(self):
     #     Country = self.env['res.country']
-    #     country_1 = Country.create({'name': 'Odoo'})
+    #     country_1 = Country.create({'name': 'AFENDA xForge'})
     #     country_1.with_context(lang='fr_FR').name = 'Odoo_Fr'
     #     country_1.flush_recordset()
     #
     #     country_2 = Country.create({'name': 'Odoo2'})
     #     with self.assertRaises(IntegrityError), mute_logger('odoo.sql_db'):
-    #         country_2.name = 'Odoo'
+    #         country_2.name = 'AFENDA xForge'
     #         country_2.flush_recordset()
     #
     #     with self.assertRaises(IntegrityError), mute_logger('odoo.sql_db'):
-    #         country_3 = Country.create({'name': 'Odoo'})
+    #         country_3 = Country.create({'name': 'AFENDA xForge'})
 
 class TestTranslationWrite(TransactionCase):
     @classmethod

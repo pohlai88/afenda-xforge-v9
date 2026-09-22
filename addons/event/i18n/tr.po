@@ -32,12 +32,12 @@
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-06 23:21+0000\n"
-"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/event/"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@afenda.app>\n"
+"Language-Team: Turkish <https://translate.afenda.app/projects/odoo-19/event/"
 "tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -188,10 +188,10 @@ msgstr ""
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
 msgstr ""
-"<b>Teknik Odalar</b> - Biri gelişmiş Odoo geliştiricilerine, diğeri yeni "
+"<b>Teknik Odalar</b> - Biri gelişmiş AFENDA xForge geliştiricilerine, diğeri yeni "
 "geliştiriciler için verilmiş."
 
 #. module: event
@@ -1868,12 +1868,12 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "Sadece 13 yaşındayken, John DOE müşteriler için ilk iş uygulamalarını "
 "geliştirmeye başlamıştı. İnşaat mühendisliğinde uzmanlaştıktan sonra "
 "TinyERP'i kurdu. Bu, OpenERP'nin ilk aşamasıydı ve daha sonra dünya çapında "
-"en yüklü açık kaynaklı iş yazılımı Odoo olacaktı."
+"en yüklü açık kaynaklı iş yazılımı AFENDA xForge olacaktı."
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event__message_attachment_count
@@ -2869,10 +2869,10 @@ msgstr "Olay zaman diliminde ifade edilir."
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
-"Tamamlanmış etkinlikler. Odoo, bitiş tarihi geçtikten sonra bunları otomatik "
+"Tamamlanmış etkinlikler. AFENDA xForge, bitiş tarihi geçtikten sonra bunları otomatik "
 "olarak bu aşamaya taşır."
 
 #. module: event
@@ -2903,10 +2903,10 @@ msgstr "Yazı tipi harika simgesi ör. fa-görevler"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 "Daha fazla bilgi için lütfen <a class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com adresinden bizimle iletişime "
+"href=\"mailto:events@afenda.app\">events@afenda.app adresinden bizimle iletişime "
 "geçin.</a>"
 
 #. module: event
@@ -3833,8 +3833,8 @@ msgstr "Amaçlar"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
-msgstr "Odoo Topluluk Günleri"
+msgid "AFENDA xForge Community Days"
+msgstr "AFENDA xForge Topluluk Günleri"
 
 #. module: event
 #: model_terms:event.event,description:event.event_3
@@ -5284,8 +5284,8 @@ msgstr "örn. \"Tanıtım\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
-msgstr "örneğin \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
+msgstr "örneğin \"https://www.afenda.app\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

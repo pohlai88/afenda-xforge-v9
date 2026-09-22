@@ -43,12 +43,12 @@
 # Jarmo Kortetjärvi <jarmo.kortetjarvi@futural.fi>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-10 06:48+0000\n"
-"Last-Translator: Saara Hakanen <sahak@odoo.com>\n"
-"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-19/mrp/fi/>"
+"Last-Translator: Saara Hakanen <sahak@afenda.app>\n"
+"Language-Team: Finnish <https://translate.afenda.app/projects/odoo-19/mrp/fi/>"
 "\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -1964,12 +1964,12 @@ msgstr "Luo muokattavia työarkkeja laatutarkastuksia varten"
 msgid ""
 "Create operation level dependencies that will influence both planning and "
 "the status of work orders upon MO confirmation. If this feature is ticked, "
-"and nothing is specified, Odoo will assume that all operations can be "
+"and nothing is specified, AFENDA xForge will assume that all operations can be "
 "started simultaneously."
 msgstr ""
 "Luo toimintatason riippuvuuksia, jotka vaikuttavat sekä suunnitteluun että "
 "työtilausten tilaan MO-vahvistuksen yhteydessä. Jos tämä ominaisuus on "
-"rastitettu eikä mitään ole määritetty, Odoo olettaa, että kaikki toiminnot "
+"rastitettu eikä mitään ole määritetty, AFENDA xForge olettaa, että kaikki toiminnot "
 "voidaan aloittaa samanaikaisesti."
 
 #. module: mrp
@@ -2258,13 +2258,13 @@ msgstr "Tiedot"
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_routing_workcenter__cost_mode
 msgid ""
-"Determines the way Odoo calculates the cost of the operation:\n"
+"Determines the way AFENDA xForge calculates the cost of the operation:\n"
 "- Based on Actual time: the cost will be calculated based on tracked time "
 "and real employee costs.\n"
 "- Based on Estimated time: the cost will be calculated based on estimated "
 "time and costs."
 msgstr ""
-"Määrittää tavan, jolla Odoo laskee toimenpiteen kustannukset:\n"
+"Määrittää tavan, jolla AFENDA xForge laskee toimenpiteen kustannukset:\n"
 "- Todellisen ajan perusteella: kustannukset lasketaan kirjatun ajan sekä "
 "todellisten työntekijäkustannusten perusteella.\n"
 "- Arvioidun ajan perusteella: kustannukset lasketaan arvioidun ajan ja "
@@ -2967,46 +2967,46 @@ msgstr ""
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_mrp_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the allocation "
+"If this checkbox is ticked, AFENDA xForge will automatically print the allocation "
 "report labels of a MO when it is done."
 msgstr ""
-"Jos valittu, Odoo tulostaa automaattisesti MO:n jakoraportin etiketit, kun "
+"Jos valittu, AFENDA xForge tulostaa automaattisesti MO:n jakoraportin etiketit, kun "
 "se on valmis."
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_mrp_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the allocation "
+"If this checkbox is ticked, AFENDA xForge will automatically print the allocation "
 "report of a MO when it is done and has assigned moves."
 msgstr ""
-"Jos valittu, Odoo tulostaa automaattisesti MO:n jakautumisraportin, kun se "
+"Jos valittu, AFENDA xForge tulostaa automaattisesti MO:n jakautumisraportin, kun se "
 "on valmis ja kun siirtoja on osoitettu."
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_mrp_lot
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN label "
+"If this checkbox is ticked, AFENDA xForge will automatically print the lot/SN label "
 "of a MO when it is done."
 msgstr ""
-"Jos valittu, Odoo tulostaa automaattisesti MO:n erä- tai sarjanumeron "
+"Jos valittu, AFENDA xForge tulostaa automaattisesti MO:n erä- tai sarjanumeron "
 "etiketin, kun se on valmis."
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_mrp_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the product labels "
 "of a MO when it is done."
 msgstr ""
-"Jos ruksittu, Odoo tulostaa automaattisesti tuotantotilauksen tuote-"
+"Jos ruksittu, AFENDA xForge tulostaa automaattisesti tuotantotilauksen tuote-"
 "etiketit, kun se on valmis."
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_production_order
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the production "
+"If this checkbox is ticked, AFENDA xForge will automatically print the production "
 "order of a MO when it is done."
 msgstr ""
-"Jos valittu, Odoo tulostaa automaattisesti MO:n tuotantotilauksen, kun se on "
+"Jos valittu, AFENDA xForge tulostaa automaattisesti MO:n tuotantotilauksen, kun se on "
 "valmis."
 
 #. module: mrp
@@ -4147,13 +4147,13 @@ msgstr "KNL tavoite"
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.view_picking_type_form_inherit_mrp
 msgid ""
-"Odoo opens a PDF preview by default. If you want to print instantly,\n"
+"AFENDA xForge opens a PDF preview by default. If you want to print instantly,\n"
 "                                install the IoT App on a computer that is on "
 "the same local network as the\n"
 "                                barcode operator and configure the routing "
 "of the reports."
 msgstr ""
-"Odoo avaa oletusarvoisesti PDF-esikatselun. Jos haluat tulostaa heti,\n"
+"AFENDA xForge avaa oletusarvoisesti PDF-esikatselun. Jos haluat tulostaa heti,\n"
 "                                asenna IoT-sovellus tietokoneelle, joka on "
 "samassa paikallisverkossa kuin\n"
 "                                viivakoodioperaattori ja määritä raporttien "
@@ -6691,12 +6691,12 @@ msgid ""
 "When activated, then the registration of consumption for that component is "
 "recorded manually exclusively.\n"
 "If not activated, and any of the components consumption is edited manually "
-"on the manufacturing order, Odoo assumes manual consumption also."
+"on the manufacturing order, AFENDA xForge assumes manual consumption also."
 msgstr ""
 "Kun aktivoitu, kyseisen komponentin kulus kirjataan yksinomaan "
 "manuaalisesti.\n"
 "Jos sitä ei ole aktivoitu ja jonkin komponentin kulutusta muokataan "
-"manuaalisesti tuotantotilauksessa, Odoo olettaa myös manuaalisen kulutuksen."
+"manuaalisesti tuotantotilauksessa, AFENDA xForge olettaa myös manuaalisen kulutuksen."
 
 #. module: mrp
 #: model:ir.model.fields.selection,name:mrp.selection__mrp_bom__ready_to_produce__asap
@@ -6722,7 +6722,7 @@ msgstr ""
 #. module: mrp
 #: model_terms:digest.tip,tip_description:mrp.digest_tip_mrp_0
 msgid ""
-"With the Odoo work center control panel, your worker can start work orders "
+"With the AFENDA xForge work center control panel, your worker can start work orders "
 "in the shop and follow instructions of the worksheet. Quality tests are "
 "perfectly integrated into the process. Workers can trigger feedback loops, "
 "maintenance alerts, scrap products, etc."

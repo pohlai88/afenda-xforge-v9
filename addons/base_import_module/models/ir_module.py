@@ -29,7 +29,7 @@ from odoo.addons.base.models.ir_asset import is_wildcard_glob
 
 _logger = logging.getLogger(__name__)
 
-APPS_URL = "https://apps.odoo.com"
+APPS_URL = "https://apps.afenda.app"
 MAX_FILE_SIZE = 100 * 1024 * 1024  # in megabytes
 
 
@@ -140,7 +140,7 @@ class IrModuleModule(models.Model):
             to_install = known_mods.filtered(lambda mod: mod.name in unmet_dependencies)
             to_install.button_immediate_install()
         elif 'web_studio' not in installed_mods and _is_studio_custom(path):
-            raise UserError(_("Studio customizations require the Odoo Studio app."))
+            raise UserError(_("Studio customizations require the AFENDA xForge Studio app."))
 
         mod = known_mods_names.get(module)
         if mod:
@@ -575,7 +575,7 @@ class IrModuleModule(models.Model):
                 description += "- " + module + "\n"
             description += _(
                 "\nYou may need the Enterprise version to install the data module. Please visit "
-                "https://www.odoo.com/pricing-plan for more information.\n"
+                "https://www.afenda.app/pricing-plan for more information.\n"
                 "If you need Website themes, it can be downloaded from https://github.com/odoo/design-themes.\n"
             )
         else:

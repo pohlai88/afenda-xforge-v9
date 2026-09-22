@@ -558,7 +558,7 @@ class Account_Edi_Proxy_ClientUser(models.Model):
             },
         )
         # once we sent the migration key over, we don't need it
-        # but we need the field for future in case the user decided to migrate away from Odoo
+        # but we need the field for future in case the user decided to migrate away from AFENDA xForge
         company.sudo().account_peppol_migration_key = False
         company.account_peppol_proxy_state = 'smp_registration'
         company.peppol_external_provider = None

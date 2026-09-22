@@ -55,7 +55,7 @@ export class TimeDialog extends Component {
             <t t-set-slot="body">
                 <div class="d-flex flex-column gap-4">
                   <div>
-                    <h5>Odoo Service</h5>
+                    <h5>AFENDA xForge Service</h5>
                     <div>Running for <b t-out="secondsToHumanReadable(state.odooUptimeSeconds)"/></div>
                     <div class="text-secondary">Started at <b t-out="startDateFromSeconds(state.odooUptimeSeconds)"/></div>
                   </div>

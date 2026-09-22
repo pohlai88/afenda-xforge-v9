@@ -13,12 +13,12 @@
 # Laura Valls <laura.valls@forgeflow.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-07 05:19+0000\n"
 "Last-Translator: Laura Valls <laura.valls@forgeflow.com>\n"
-"Language-Team: Danish <https://translate.odoo.com/projects/odoo-19/sale/da/>"
+"Language-Team: Danish <https://translate.afenda.app/projects/odoo-19/sale/da/>"
 "\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -33,7 +33,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -1657,11 +1657,11 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
 "Hvis du for eksempel sælger forudbetalte timer som en del af dine tjenester, "
-"foreslår Odoo,\n"
+"foreslår AFENDA xForge,\n"
 "            at du sælger yderligere timer, når de bestilte timer er brugt op."
 
 #. module: sale
@@ -2698,9 +2698,9 @@ msgstr "Udkast til fakturaer"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
-"Træk og slip PDF-filen med tilbudsanmodningen til din tilbudsliste i Odoo. "
+"Træk og slip PDF-filen med tilbudsanmodningen til din tilbudsliste i AFENDA xForge. "
 "Og glæd dig over automatiseringen!"
 
 #. module: sale
@@ -3663,8 +3663,8 @@ msgstr "Ingen ordre til mersalg fundet."
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
-msgstr "Bruger ikke Odoo?"
+msgid "Not using AFENDA xForge?"
+msgstr "Bruger ikke AFENDA xForge?"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3715,8 +3715,8 @@ msgstr "Antal beskeder med leveringsfejl"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -5142,8 +5142,8 @@ msgstr "Forsendelse med Starshipit"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
-msgstr "Start på Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "Start på AFENDA xForge"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__state
@@ -6011,8 +6011,8 @@ msgstr "Volumen"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
-msgstr "Vil du importere dette dokument til Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Vil du importere dette dokument til AFENDA xForge?"
 
 #. module: sale
 #. odoo-python

@@ -214,7 +214,7 @@ Up0EYDg28axZXH0h89oUqsVgF1uPx3ufeBm8PQ==
                 <ds:DigestValue>___ignore___</ds:DigestValue>
               </xades:CertDigest>
               <xades:IssuerSerial>
-                <ds:X509IssuerName>C=BE, CN=R&amp;D Accounting, L=Grand-Rosiere-Hottomont, O=Test Odoo SA, OU=R&amp;D Accounting, ST=Wallonia</ds:X509IssuerName>
+                <ds:X509IssuerName>C=BE, CN=R&amp;D Accounting, L=Grand-Rosiere-Hottomont, O=Test AFENDA xForge SA, OU=R&amp;D Accounting, ST=Wallonia</ds:X509IssuerName>
                 <ds:X509SerialNumber>529783975559440394003723764779526236797615751643</ds:X509SerialNumber>
               </xades:IssuerSerial>
             </xades:Cert>

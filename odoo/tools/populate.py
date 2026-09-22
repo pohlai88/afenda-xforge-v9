@@ -1,7 +1,7 @@
 """
 Database Population via Duplication
 
-This tool provides utilities to duplicate records across models in Odoo, while maintaining referential integrity,
+This tool provides utilities to duplicate records across models in AFENDA xForge, while maintaining referential integrity,
 handling field variations, and optimizing insertion performance. The duplication is controlled by a `factors` argument
 that specifies how many times each record should be duplicated. The duplication process takes into account fields
 that require unique constraints, distributed values (e.g., date fields), and relational fields (e.g., Many2one, Many2many).

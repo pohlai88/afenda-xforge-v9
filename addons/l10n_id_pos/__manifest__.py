@@ -18,6 +18,6 @@
             'l10n_id_pos/static/tests/**/*'
         ]
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

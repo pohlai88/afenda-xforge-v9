@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-30 19:06+0000\n"
 "PO-Revision-Date: 2025-12-30 19:06+0000\n"
@@ -89,5 +89,5 @@ msgstr ""
 #: model:ir.model.fields,help:l10n_fi.field_account_journal__invoice_reference_model
 msgid ""
 "You can choose different models for each type of reference. The default one "
-"is the Odoo reference."
+"is the AFENDA xForge reference."
 msgstr ""

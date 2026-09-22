@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 
-"""The Odoo API module defines Odoo Environments.
+"""The AFENDA xForge API module defines AFENDA xForge Environments.
 """
 from __future__ import annotations
 

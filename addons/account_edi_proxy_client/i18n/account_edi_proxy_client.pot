@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-01-25 18:36+0000\n"
@@ -104,7 +104,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/account_edi_proxy_client/models/account_edi_proxy_user.py:0
 msgid ""
-"Failed to connect to Odoo Access Point server. This might be due to another connection to Odoo Access Point server. It can occur if you have duplicated your database. \n"
+"Failed to connect to AFENDA xForge Access Point server. This might be due to another connection to AFENDA xForge Access Point server. It can occur if you have duplicated your database. \n"
 "\n"
 "If you are not sure how to fix this, please contact our support."
 msgstr ""

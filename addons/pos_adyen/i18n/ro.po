@@ -10,12 +10,12 @@
 # Busoi Cristina <elena.busoi@capps.ai>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 13:31+0000\n"
 "Last-Translator: Dorin Hongu <dhongu@gmail.com>\n"
-"Language-Team: Romanian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Romanian <https://translate.afenda.app/projects/odoo-19/"
 "pos_adyen/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -97,10 +97,10 @@ msgstr "Setări de configurare"
 #. odoo-javascript
 #: code:addons/pos_adyen/static/src/app/utils/payment/payment_adyen.js:0
 msgid ""
-"Could not connect to the Odoo server, please check your internet connection "
+"Could not connect to the AFENDA xForge server, please check your internet connection "
 "and try again."
 msgstr ""
-"Nu s-a putut conecta la serverul Odoo, vă rugăm să verificați conexiunea la "
+"Nu s-a putut conecta la serverul AFENDA xForge, vă rugăm să verificați conexiunea la "
 "internet și să încercați din nou."
 
 #. module: pos_adyen

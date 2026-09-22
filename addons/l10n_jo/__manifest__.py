@@ -3,7 +3,7 @@
     'name': 'Jordan - Accounting',
     'countries': ['jo'],
     'description': """
-This is the base module to manage the accounting chart for Jordan in Odoo.
+This is the base module to manage the accounting chart for Jordan in AFENDA xForge.
 ==============================================================================
 
 Jordan accounting basic charts and localization.
@@ -31,6 +31,6 @@ Activates:
         'demo/demo_company.xml',
         'demo/demo_partner.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

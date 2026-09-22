@@ -7,12 +7,12 @@
 # "Anastasiia Koroleva (koan)" <koan@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: AFENDA xForge Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-10 11:05+0000\n"
-"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
-"Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/mail_bot/"
+"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@afenda.app>\n"
+"Language-Team: Russian <https://translate.afenda.app/projects/odoo-19/mail_bot/"
 "ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -159,16 +159,16 @@ msgstr ""
 #. odoo-python
 #: code:addons/mail_bot/models/res_users.py:0
 msgid ""
-"Odoo's chat helps employees collaborate efficiently. I'm here to help you "
+"AFENDA xForge's chat helps employees collaborate efficiently. I'm here to help you "
 "discover its features."
 msgstr ""
-"Чат Odoo помогает сотрудникам эффективно сотрудничать. Я помогу вам открыть "
+"Чат AFENDA xForge помогает сотрудникам эффективно сотрудничать. Я помогу вам открыть "
 "его возможности."
 
 #. module: mail_bot
 #: model:ir.model.fields,field_description:mail_bot.field_res_users__odoobot_state
-msgid "OdooBot Status"
-msgstr "Статус OdooBot"
+msgid "AFENDA Bot Status"
+msgstr "Статус AFENDA Bot"
 
 #. module: mail_bot
 #: model:ir.model.fields,field_description:mail_bot.field_res_users__odoobot_failed
@@ -217,11 +217,11 @@ msgstr ""
 #: code:addons/mail_bot/models/mail_bot.py:0
 msgid ""
 "Sorry, I am not listening. To get someone's attention, %(bold_start)sping "
-"him%(bold_end)s. Write %(command_start)s@OdooBot%(command_end)s and select "
+"him%(bold_end)s. Write %(command_start)s@AFENDA Bot%(command_end)s and select "
 "me."
 msgstr ""
 "Извините, я не слушаю. Чтобы привлечь чьё-то внимание, %(bold_start)"
-"sупомяните его%(bold_end)s. Напишите %(command_start)s@OdooBot%(command_end)"
+"sупомяните его%(bold_end)s. Напишите %(command_start)s@AFENDA Bot%(command_end)"
 "s и выберите меня."
 
 #. module: mail_bot
@@ -248,11 +248,11 @@ msgstr "Это некрасиво! Я бот, но у меня есть чувс
 msgid ""
 "That’s the end of this overview. You can %(bold_start)sclose this "
 "conversation%(bold_end)s or type %(command_start)sstart the tour%"
-"(command_end)s to see it again. Enjoy exploring Odoo!"
+"(command_end)s to see it again. Enjoy exploring AFENDA xForge!"
 msgstr ""
 "На этом наш обзор закончен. Вы можете %(bold_start)sзакрыть этот диалог%"
 "(bold_end)s или ввести «%(command_start)sНачать тур%(command_end)s», чтобы "
-"пройти его снова. Приятной работы в Odoo!"
+"пройти его снова. Приятной работы в AFENDA xForge!"
 
 #. module: mail_bot
 #. odoo-python
@@ -318,11 +318,11 @@ msgstr ""
 msgid ""
 "Wow you are a natural!%(new_line)sPing someone with @username to grab their "
 "attention. %(bold_start)sTry to ping me using%(bold_end)s %"
-"(command_start)s@OdooBot%(command_end)s in a sentence."
+"(command_start)s@AFENDA Bot%(command_end)s in a sentence."
 msgstr ""
 "Ух ты, у вас здорово получается!%(new_line)sПинганите кого-то с помощью "
 "@имя_пользователя, чтобы привлечь его внимание. %(bold_start)sПопробуйте "
-"упомянуть меня, используя%(bold_end)s %(command_start)s@OdooBot%(command_end)"
+"упомянуть меня, используя%(bold_end)s %(command_start)s@AFENDA Bot%(command_end)"
 "s в сообщении."
 
 #. module: mail_bot

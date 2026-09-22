@@ -18,7 +18,7 @@ from . import websocket_client
 from . import webrtc_client
 
 _logger = logging.getLogger(__name__)
-_logger.warning("==== Starting Odoo ====")
+_logger.warning("==== Starting AFENDA xForge ====")
 
 _get = requests.get
 _post = requests.post

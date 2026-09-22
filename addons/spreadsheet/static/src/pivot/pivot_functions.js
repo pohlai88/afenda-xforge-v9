@@ -21,7 +21,7 @@ const { functionRegistry } = spreadsheet.registries;
 const ODOO_FILTER_VALUE = /** @satisfies {CustomFunctionDescription} */ ({
     description: _t("Return the current value of a spreadsheet filter."),
     args: [arg("filter_name (string)", _t("The label of the filter whose value to return."))],
-    category: "Odoo",
+    category: "AFENDA xForge",
     /**
      * @param {FPayload} filterName
      */
@@ -36,7 +36,7 @@ const ODOO_FILTER_VALUE = /** @satisfies {CustomFunctionDescription} */ ({
 const ODOO_FILTER_LABEL = /** @satisfies {CustomFunctionDescription} */ ({
     description: _t("Return the label of the current value of a spreadsheet filter."),
     args: [arg("filter_name (string)", _t("The label of the filter whose value to return."))],
-    category: "Odoo",
+    category: "AFENDA xForge",
     compute: function (filterName) {
         const filter = this.getters.getGlobalFilterByName(toString(filterName, this.locale));
         const value = this["ODOO.FILTER.VALUE"](filterName);

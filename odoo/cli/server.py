@@ -50,7 +50,7 @@ def report_configuration():
     """
     import odoo.addons  # noqa: PLC0415
     import odoo.release  # noqa: PLC0415
-    _logger.info("Odoo version %s", odoo.release.version)
+    _logger.info("AFENDA xForge version %s", odoo.release.version)
     if os.path.isfile(config['config']):
         _logger.info("Using configuration file at %s", config['config'])
     _logger.info('addons paths: %s', odoo.addons.__path__)

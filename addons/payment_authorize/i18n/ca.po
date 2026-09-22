@@ -12,12 +12,12 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~11.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~11.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-13 18:39+0000\n"
 "PO-Revision-Date: 2026-08-02 13:40+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Catalan <https://translate.afenda.app/projects/odoo-19/"
 "payment_authorize/ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -233,10 +233,10 @@ msgstr "L'ID només s'utilitza per identificar el compte amb Authorize.Net"
 #. module: payment_authorize
 #: model:ir.model.fields,help:payment_authorize.field_payment_provider__authorize_client_key
 msgid ""
-"The public client key. To generate directly from Odoo or from Authorize.Net "
+"The public client key. To generate directly from AFENDA xForge or from Authorize.Net "
 "backend."
 msgstr ""
-"La clau pública del client. Per a generar directament des de Odoo o des del "
+"La clau pública del client. Per a generar directament des de AFENDA xForge o des del "
 "backend d'Authorize.net."
 
 #. module: payment_authorize

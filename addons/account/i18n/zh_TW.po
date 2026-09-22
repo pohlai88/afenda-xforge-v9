@@ -12,12 +12,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-26 12:00+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tony Ng (ngto)\" <ngto@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/account/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -387,9 +387,9 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid ""
-". The journal entries need to be computed by Odoo before being posted in "
+". The journal entries need to be computed by AFENDA xForge before being posted in "
 "your company's currency."
-msgstr "。記項在以你公司慣用的貨幣誌入流水賬之前，需先經由 Odoo 核算。"
+msgstr "。記項在以你公司慣用的貨幣誌入流水賬之前，需先經由 AFENDA xForge 核算。"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
@@ -1722,7 +1722,7 @@ msgid ""
 "                                    </td>\n"
 "                                    <td align=\"right\" style=\"padding-"
 "right: 16px;\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height: 2em; object-fit: contain;"
 "\" class=\"align-baseline w-auto\"/>\n"
 "                                    </td>\n"
@@ -1792,7 +1792,7 @@ msgid ""
 "                                        <div style=\"text-align: center; "
 "padding-top: 24px;\">\n"
 "                                            <a t-if=\"invoice_count != 1\" t-"
-"attf-href=\"/odoo/accounting/action-"
+"attf-href=\"/app/accounting/action-"
 "account.action_account_moves_email_preview?"
 "active_ids={{ invoice_preview_ids }}\" target=\"_blank\" t-attf-"
 "style=\"padding: 12px 24px; font-size: 14px; font-weight: bold; color: "
@@ -1858,7 +1858,7 @@ msgstr ""
 "                                    </td>\n"
 "                                    <td align=\"right\" style=\"padding-"
 "right: 16px;\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height: 2em; object-fit: "
 "contain;\" class=\"align-baseline w-auto\"/>\n"
 "                                    </td>\n"
@@ -1927,7 +1927,7 @@ msgstr ""
 "                                        <div style=\"text-align: center; "
 "padding-top: 24px;\">\n"
 "                                            <a t-if=\"invoice_count != 1\" t-"
-"attf-href=\"/odoo/accounting/action-"
+"attf-href=\"/app/accounting/action-"
 "account.action_account_moves_email_preview?active_ids={{ "
 "invoice_preview_ids }}\" target=\"_blank\" t-attf-style=\"padding: 12px "
 "24px; font-size: 14px; font-weight: bold; color: #FFFFFF; text-decoration: "
@@ -1993,7 +1993,7 @@ msgid ""
 "                                        <t t-else=\"\">Incoming Bill</t>\n"
 "                                    </td>\n"
 "                                    <td align=\"right\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height:30px; width:92px; object-"
 "fit:contain;\"/>\n"
 "                                    </td>\n"
@@ -2223,7 +2223,7 @@ msgstr ""
 "                                        <t t-else=\"\">傳入賬單</t>\n"
 "                                    </td>\n"
 "                                    <td align=\"right\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height:30px; width:92px; object-"
 "fit:contain;\"/>\n"
 "                                    </td>\n"
@@ -4845,9 +4845,9 @@ msgstr "與 %s 同屬一間公司。"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_default_terms_and_conditions
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
-msgstr "以下文字僅作為建議，不涉及 Odoo S.A. 的責任."
+msgstr "以下文字僅作為建議，不涉及 AFENDA 的責任."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__bank_bic
@@ -6958,7 +6958,7 @@ msgstr "日期範例"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_financial_year_op__opening_date
 msgid ""
-"Date from which the accounting is managed in Odoo. It is the date of the "
+"Date from which the accounting is managed in AFENDA xForge. It is the date of the "
 "opening entry."
 msgstr "會計在系統中管理的日期. 這是期初分錄的日期."
 
@@ -11899,7 +11899,7 @@ msgstr "手動分錄"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__inbound_payment_method_line_ids
 msgid ""
-"Manual: Get paid by any method outside of Odoo.\n"
+"Manual: Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
@@ -11909,7 +11909,7 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"手動: 通過 Odoo 以外的任何方式獲得報酬.\n"
+"手動: 通過 AFENDA xForge 以外的任何方式獲得報酬.\n"
 "支付提供商: 每個支付提供商都有自己的支付方式. 借助合作夥伴線上購買或訂閱時保"
 "存的支付密鑰，請求在卡上/向卡進行交易.\n"
 "批量存款: 一次收集多張客戶支票，產生批量存款並將其提交給您的銀行. 模組 "
@@ -11920,24 +11920,24 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__outbound_payment_method_line_ids
 msgid ""
-"Manual: Pay by any method outside of Odoo.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Manual: Pay by any method outside of AFENDA xForge.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit "
 "Transfer file to your bank. Module account_sepa is necessary.\n"
 msgstr ""
-"手動: 通過 Odoo 之外的任何方式支付.\n"
-"支票: 通過支票支付帳單並從 Odoo 列印.\n"
+"手動: 通過 AFENDA xForge 之外的任何方式支付.\n"
+"支票: 通過支票支付帳單並從 AFENDA xForge 列印.\n"
 "SEPA Credit Transfer:通過向您的銀行提交 SEPA Credit Transfer 文件在 SEPA 區域"
 "付款. 模組 account_sepa 是必要的.\n"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -11952,11 +11952,11 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment_register__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -11965,10 +11965,10 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"手動: 通過 Odoo 之外的任何方式支付或收款.\n"
+"手動: 通過 AFENDA xForge 之外的任何方式支付或收款.\n"
 "支付提供商: 每個支付提供商都有自己的支付方式. 借助合作夥伴在線購買或訂閱時保"
 "存的支付密鑰，請求在卡上/向卡進行交易.\n"
-"支票: 通過支票支付賬單並從 Odoo 列印.\n"
+"支票: 通過支票支付賬單並從 AFENDA xForge 列印.\n"
 "批量存款: 一次收集多張客戶支票，產生批量存款並將其提交給您的銀行. 模組 "
 "account_batch_payment 是必需的.\n"
 "SEPA Credit Transfer: 通過向您的銀行提交 SEPA Credit Transfer 文件在 SEPA 區"
@@ -12949,27 +12949,27 @@ msgstr "十月"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report_expression__engine__domain
-msgid "Odoo Domain"
-msgstr "Odoo Domain"
+msgid "AFENDA xForge Domain"
+msgstr "AFENDA xForge Domain"
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.action_bank_statement_tree
 #: model_terms:ir.actions.act_window,help:account.action_credit_statement_tree
 msgid ""
-"Odoo allows you to reconcile a statement line directly with\n"
+"AFENDA xForge allows you to reconcile a statement line directly with\n"
 "                the related sale or purchase invoices."
 msgstr ""
-"Odoo 允許您直接將對帳單明細與\n"
+"AFENDA xForge 允許您直接將對帳單明細與\n"
 "                 相關的銷售或採購應收付憑單對帳核銷."
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_customer
-msgid "Odoo helps you easily track all activities related to a customer."
-msgstr "Odoo 協助你輕鬆追蹤與客戶相關的所有活動。"
+msgid "AFENDA xForge helps you easily track all activities related to a customer."
+msgstr "AFENDA xForge 協助你輕鬆追蹤與客戶相關的所有活動。"
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_supplier
-msgid "Odoo helps you easily track all activities related to a supplier."
+msgid "AFENDA xForge helps you easily track all activities related to a supplier."
 msgstr "Odoo幫助您輕鬆追蹤與供應商相關的所有活動."
 
 #. module: account
@@ -15869,11 +15869,11 @@ msgstr "<b>使用會計模組</b>立即將應收憑單發送給您的客戶."
 msgid ""
 "Send one separate email for each invoice.\n"
 "Any file extension will be accepted.\n"
-"Only PDF and XML files will be interpreted by Odoo"
+"Only PDF and XML files will be interpreted by AFENDA xForge"
 msgstr ""
 "請為每張發票，傳送一封單獨的電郵。\n"
 "任何檔案副檔名都會接受。\n"
-"Odoo 只會理解 PDF 及 XML 檔案。"
+"AFENDA xForge 只會理解 PDF 及 XML 檔案。"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.account_send_payment_receipt_by_email_action
@@ -19557,11 +19557,11 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_account_move__quick_edit_total_amount
 msgid ""
 "Use this field to encode the total amount of the invoice.\n"
-"Odoo will automatically create one invoice line with default values to match "
+"AFENDA xForge will automatically create one invoice line with default values to match "
 "it."
 msgstr ""
 "使用此欄位對發票總額進行編碼.\n"
-"Odoo 將自動建立一個具有預設值的應收憑單明細來匹配它."
+"AFENDA xForge 將自動建立一個具有預設值的應收憑單明細來匹配它."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__used
@@ -19871,11 +19871,11 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                orders or receipts. This allows you to control bills\n"
 "                you receive from your vendor according to the draft\n"
-"                document in Odoo."
+"                document in AFENDA xForge."
 msgstr ""
 "供應商賬單可根據採購訂單或收據，\n"
 "                由系統預先產生。\n"
-"                此功能讓你可根據 Odoo 內的草稿文件，\n"
+"                此功能讓你可根據 AFENDA xForge 內的草稿文件，\n"
 "                控制從供應商收到的賬單。"
 
 #. module: account
@@ -20119,8 +20119,8 @@ msgstr "您正在核銷一些已經被核銷的分錄."
 #: model:ir.model.fields,help:account.field_account_journal__invoice_reference_model
 msgid ""
 "You can choose different models for each type of reference. The default one "
-"is the Odoo reference."
-msgstr "您可以為每種模型選擇不同的編碼. 預設值是 Odoo 編碼."
+"is the AFENDA xForge reference."
+msgstr "您可以為每種模型選擇不同的編碼. 預設值是 AFENDA xForge 編碼."
 
 #. module: account
 #. odoo-python
@@ -21099,8 +21099,8 @@ msgstr ""
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
-msgid "e.g. https://www.odoo.com"
-msgstr "例：https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "例：https://www.afenda.app"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form

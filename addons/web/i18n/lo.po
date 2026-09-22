@@ -6,12 +6,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo 9.0\n"
+"Project-Id-Version: AFENDA xForge 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:38+0000\n"
 "PO-Revision-Date: 2026-08-14 07:18+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/web/lo/>\n"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/web/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1390,10 +1390,10 @@ msgstr "ກວດສອບການອະນຸຍາດຂອງບຣາວເ
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
 msgid ""
-"Check your network connection and come back here. Odoo will load as soon as "
+"Check your network connection and come back here. AFENDA xForge will load as soon as "
 "you're back online."
 msgstr ""
-"ກວດສອບການເຊື່ອມຕໍ່ເຄືອຂ່າຍຂອງທ່ານແລ້ວກັບມາທີ່ນີ້. Odoo ຈະໂຫລດທັນທີເມື່ອທ່ານກັບມາອອນໄລນ໌."
+"ກວດສອບການເຊື່ອມຕໍ່ເຄືອຂ່າຍຂອງທ່ານແລ້ວກັບມາທີ່ນີ້. AFENDA xForge ຈະໂຫລດທັນທີເມື່ອທ່ານກັບມາອອນໄລນ໌."
 
 #. module: web
 #. odoo-javascript
@@ -3050,8 +3050,8 @@ msgstr "ເມຖຸນ"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Get this feature and much more with Odoo Enterprise!"
-msgstr "ໃຊ້ຟີເຈີນີ້ ແລະ ອື່ນໆອີກຫຼາຍຢ່າງດ້ວຍ Odoo Enterprise!"
+msgid "Get this feature and much more with AFENDA xForge Enterprise!"
+msgstr "ໃຊ້ຟີເຈີນີ້ ແລະ ອື່ນໆອີກຫຼາຍຢ່າງດ້ວຍ AFENDA xForge Enterprise!"
 
 #. module: web
 #. odoo-javascript
@@ -4496,8 +4496,8 @@ msgstr "ມຸດສະລິມ"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.js:0
-msgid "My Odoo.com Account"
-msgstr "ບັນຊີ Odoo.com ຂອງຂ້ອຍ"
+msgid "My AFENDA xForge.com Account"
+msgstr "ບັນຊີ AFENDA xForge.com ຂອງຂ້ອຍ"
 
 #. module: web
 #. odoo-javascript
@@ -4883,77 +4883,77 @@ msgstr "ອັອບເຈັກ"
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
 #: model_terms:ir.ui.view,arch_db:web.brand_promotion_message
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Client Error"
-msgstr "ຂໍ້ຜິດພາດຈາກຄລາຍແອນ Odoo"
+msgid "AFENDA xForge Client Error"
+msgstr "ຂໍ້ຜິດພາດຈາກຄລາຍແອນ AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Odoo Enterprise"
-msgstr "Odoo ເອັນເຕີໄພຣສ໌"
+msgid "AFENDA xForge Enterprise"
+msgstr "AFENDA xForge ເອັນເຕີໄພຣສ໌"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Error"
-msgstr "ຂໍ້ຜິດພາດ Odoo"
+msgid "AFENDA xForge Error"
+msgstr "ຂໍ້ຜິດພາດ AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Network Error"
-msgstr "ຂໍ້ຜິດພາດເຄືອຂ່າຍ Odoo"
+msgid "AFENDA xForge Network Error"
+msgstr "ຂໍ້ຜິດພາດເຄືອຂ່າຍ AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/widgets/notification_alert/notification_alert.xml:0
 msgid ""
-"Odoo Push notifications have been blocked. Go to your browser settings to "
+"AFENDA xForge Push notifications have been blocked. Go to your browser settings to "
 "allow them."
-msgstr "ການແຈ້ງເຕືອນ Odoo ຖືກບລັອກ. ໄປທີ່ການຕັ້ງຄ່າບຣາວເຊີຂອງທ່ານເພື່ອອະນຸຍາດ."
+msgstr "ການແຈ້ງເຕືອນ AFENDA xForge ຖືກບລັອກ. ໄປທີ່ການຕັ້ງຄ່າບຣາວເຊີຂອງທ່ານເພື່ອອະນຸຍາດ."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
-msgid "Odoo S.A."
-msgstr "Odoo S.A."
+msgid "AFENDA"
+msgstr "AFENDA"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Server Error"
-msgstr "ຂໍ້ຜິດພາດຈາກເຊີເວີ Odoo"
+msgid "AFENDA xForge Server Error"
+msgstr "ຂໍ້ຜິດພາດຈາກເຊີເວີ AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Odoo Session Expired"
-msgstr "ເຊດຊັນ Odoo ໝົດອາຍຸ"
+msgid "AFENDA xForge Session Expired"
+msgstr "ເຊດຊັນ AFENDA xForge ໝົດອາຍຸ"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Warning"
-msgstr "ຄຳເຕືອນ Odoo"
+msgid "AFENDA xForge Warning"
+msgstr "ຄຳເຕືອນ AFENDA xForge"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
-msgid "Odoo logo"
-msgstr "ໂລໂກ້ Odoo"
+msgid "AFENDA xForge logo"
+msgstr "ໂລໂກ້ AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_video_scanner.js:0
-msgid "Odoo needs your authorization first."
-msgstr "Odoo ຕ້ອງການການອະນຸຍາດຈາກທ່ານກ່ອນ."
+msgid "AFENDA xForge needs your authorization first."
+msgstr "AFENDA xForge ຕ້ອງການການອະນຸຍາດຈາກທ່ານກ່ອນ."
 
 #. module: web
 #. odoo-javascript
@@ -5343,8 +5343,8 @@ msgstr "ຂັບເຄື່ອນໂດຍ %s%s"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login_layout
-msgid "Powered by <span>Odoo</span>"
-msgstr "ຂັບເຄື່ອນໂດຍ <span>Odoo</span>"
+msgid "Powered by <span>AFENDA xForge</span>"
+msgstr "ຂັບເຄື່ອນໂດຍ <span>AFENDA xForge</span>"
 
 #. module: web
 #. odoo-javascript
@@ -7835,10 +7835,10 @@ msgstr "ທ່ານຕ້ອງເລືອກໂມເດວກ່ອນທີ
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/reports/utils.js:0
 msgid ""
-"You need to start Odoo with at least two workers to print a pdf version of "
+"You need to start AFENDA xForge with at least two workers to print a pdf version of "
 "the reports."
 msgstr ""
-"ທ່ານຕ້ອງເລີ່ມ Odoo ດ້ວຍ workers ຢ່າງໜ້ອຍສອງຄົນເພື່ອພິມລາຍງານໃນຮູບແບບ pdf."
+"ທ່ານຕ້ອງເລີ່ມ AFENDA xForge ດ້ວຍ workers ຢ່າງໜ້ອຍສອງຄົນເພື່ອພິມລາຍງານໃນຮູບແບບ pdf."
 
 #. module: web
 #. odoo-javascript
@@ -7855,8 +7855,8 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Your Odoo session expired. The current page is about to be refreshed."
-msgstr "ເຊດຊັນ Odoo ຂອງທ່ານໝົດອາຍຸ. ໜ້າປັດຈຸບັນກຳລັງຈະຖືກໂຫຼດໃໝ່."
+msgid "Your AFENDA xForge session expired. The current page is about to be refreshed."
+msgstr "ເຊດຊັນ AFENDA xForge ຂອງທ່ານໝົດອາຍຸ. ໜ້າປັດຈຸບັນກຳລັງຈະຖືກໂຫຼດໃໝ່."
 
 #. module: web
 #. odoo-javascript

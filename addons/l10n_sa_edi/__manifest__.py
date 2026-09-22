@@ -3,7 +3,7 @@
 
 {
     'name': 'Saudi Arabia - E-invoicing',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'countries': ['sa'],
     'version': '0.3',
     'depends': [

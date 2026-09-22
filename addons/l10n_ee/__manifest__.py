@@ -1,15 +1,15 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Estonia - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'version': '1.3',
     'icon': '/account/static/description/l10n.png',
     'countries': ['ee'],
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the base module to manage the accounting chart for Estonia in Odoo.
+This is the base module to manage the accounting chart for Estonia in AFENDA xForge.
     """,
-    'author': 'Odoo SA',
+    'author': 'AFENDA xForge SA',
     'depends': [
         'account',
         'account_edi_ubl_cii',

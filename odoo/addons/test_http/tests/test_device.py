@@ -44,7 +44,7 @@ class TestDevice(TestHttpBase):
                 **headers,
                 'Host': '',
                 'X-Forwarded-For': ip,
-                'X-Forwarded-Host': 'odoo.com',
+                'X-Forwarded-Host': 'afenda.app',
                 'X-Forwarded-Proto': 'https'
             }
         with freeze_time(time), \

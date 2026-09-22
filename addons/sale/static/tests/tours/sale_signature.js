@@ -64,7 +64,7 @@ registry.category("web_tour.tours").add('sale_signature', {
     }, {
         trigger: '#quote_content',
         run: function () {
-            redirect("/odoo");
+            redirect("/app");
         },  // Avoid race condition at the end of the tour by returning to the home page.
         expectUnloadPage: true,
     },

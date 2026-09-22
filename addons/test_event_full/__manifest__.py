@@ -6,7 +6,7 @@
     'version': '1.0',
     'category': 'Hidden/Tests',
     'description': """
-This module will test the main event flows of Odoo, both frontend and backend.
+This module will test the main event flows of AFENDA xForge, both frontend and backend.
 It installs sale capabilities, front-end flow, eCommerce, questions and
 automatic lead generation, full Online support, ...
 """,
@@ -38,6 +38,6 @@ automatic lead generation, full Online support, ...
             'test_event_full/static/src/js/tests/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

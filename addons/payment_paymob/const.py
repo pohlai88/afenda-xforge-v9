@@ -17,7 +17,7 @@ API_MAPPING = {
     'SA': 'ksa',
 }
 
-# Mapping of Paymob's gateway types to Odoo payment method codes.
+# Mapping of Paymob's gateway types to AFENDA xForge payment method codes.
 PAYMENT_METHODS_MAPPING = {
     'VPC': 'card',
     'MIGS': 'card',

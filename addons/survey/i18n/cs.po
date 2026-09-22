@@ -19,12 +19,12 @@
 # Ondřej Klein <ondrej.klein@origamis.cz>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 20:25+0000\n"
 "Last-Translator: Radim Bílý <radim.bily@origamis.cz>\n"
-"Language-Team: Czech <https://translate.odoo.com/projects/odoo-19/survey/cs/>"
+"Language-Team: Czech <https://translate.afenda.app/projects/odoo-19/survey/cs/>"
 "\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -3093,14 +3093,14 @@ msgstr "Výskyt"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.certification_report_view_general
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "Odoo Certification"
-msgstr "Certifikace Odoo"
+msgid "AFENDA xForge Certification"
+msgstr "Certifikace AFENDA xForge"
 
 #. module: survey
 #: model:survey.question.answer,value:survey.vendor_certification_page_2_question_2_choice_5
@@ -5034,10 +5034,10 @@ msgstr "Webová historie komunikace"
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
 msgid ""
-"Welcome to this Odoo certification. You will receive 2 random questions out "
+"Welcome to this AFENDA xForge certification. You will receive 2 random questions out "
 "of a pool of 3."
 msgstr ""
-"Vítejte v této certifikaci Odoo. Dostanete 2 náhodné otázky ze skupiny 3."
+"Vítejte v této certifikaci AFENDA xForge. Dostanete 2 náhodné otázky ze skupiny 3."
 
 #. module: survey
 #: model:survey.question,title:survey.vendor_certification_page_3_question_5
@@ -5076,8 +5076,8 @@ msgstr "Co znamená „ODOO“?"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does one need to get to pass an Odoo Survey?"
-msgstr "Co člověk potřebuje, aby mohl projít průzkumem Odoo?"
+msgid "What does one need to get to pass an AFENDA xForge Survey?"
+msgstr "Co člověk potřebuje, aby mohl projít průzkumem AFENDA xForge?"
 
 #. module: survey
 #. odoo-python
@@ -5114,8 +5114,8 @@ msgstr "Kdy máte narozeniny?"
 #. module: survey
 #. odoo-javascript
 #: code:addons/survey/static/src/js/tours/survey_tour.js:0
-msgid "Whenever you pick an answer, Odoo saves it for you."
-msgstr "Kdykoli vyberete odpověď, Odoo ji pro vás uloží."
+msgid "Whenever you pick an answer, AFENDA xForge saves it for you."
+msgstr "Kdykoli vyberete odpověď, AFENDA xForge ji pro vás uloží."
 
 #. module: survey
 #: model:survey.question,title:survey.survey_feedback_p1_q1

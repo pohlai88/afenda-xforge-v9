@@ -40,7 +40,7 @@ class PaymentProvider(models.Model):
     )
     authorize_client_key = fields.Char(
         string="API Client Key",
-        help="The public client key. To generate directly from Odoo or from Authorize.Net backend.",
+        help="The public client key. To generate directly from AFENDA xForge or from Authorize.Net backend.",
         copy=False,
     )
 

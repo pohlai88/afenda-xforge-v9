@@ -31,7 +31,7 @@ function forceLocaleAndTimezoneWithCleanup() {
 
 function makeMockLocation() {
     return Object.assign(document.createElement("a"), {
-        href: window.location.origin + "/odoo",
+        href: window.location.origin + "/app",
         assign(url) {
             this.href = url;
         },
@@ -245,7 +245,7 @@ function patchSessionInfo() {
         registry_hash: "05500d71e084497829aa807e3caa2e7e9782ff702c15b2f57f87f2d64d049bd0",
         is_admin: true,
         is_system: true,
-        username: "thewise@odoo.com",
+        username: "thewise@afenda.app",
         name: "Mitchell",
         partner_id: 7,
         uid: 7,

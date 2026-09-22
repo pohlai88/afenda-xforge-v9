@@ -24,7 +24,7 @@ class TestPurchaseInvoice(AccountTestInvoicingCommon):
         ).create({
             'name': 'Purchase user',
             'login': 'purchaseUser',
-            'email': 'pu@odoo.com',
+            'email': 'pu@afenda.app',
             'group_ids': [(6, 0, [group_purchase_user.id, group_employee.id, group_partner_manager.id])],
         })
 
@@ -75,7 +75,7 @@ class TestPurchaseInvoice(AccountTestInvoicingCommon):
         purchase_user_2 = self.purchase_user.sudo().copy({
             'name': 'Purchase user 2',
             'login': 'purchaseUser2',
-            'email': 'pu2@odoo.com',
+            'email': 'pu2@afenda.app',
         })
 
         purchase_order_form = Form(self.env['purchase.order'].with_user(purchase_user_2))

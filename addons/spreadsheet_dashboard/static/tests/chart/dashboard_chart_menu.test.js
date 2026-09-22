@@ -68,7 +68,7 @@ test("Click on chart in dashboard mode redirect to the odoo menu", async functio
         odooMenuId: 2,
     });
     const chartMenu = model.getters.getChartOdooMenu(chartId);
-    expect(chartMenu.id).toBe(2, { message: "Odoo menu is linked to chart" });
+    expect(chartMenu.id).toBe(2, { message: "AFENDA xForge menu is linked to chart" });
     await animationFrame();
 
     await click(fixture.querySelector(".o-chart-container canvas"));

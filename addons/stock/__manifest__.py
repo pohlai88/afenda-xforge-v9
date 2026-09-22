@@ -5,7 +5,7 @@
     'name': 'Inventory',
     'version': '1.1',
     'summary': 'Manage your stock and logistics activities',
-    'website': 'https://www.odoo.com/app/inventory',
+    'website': 'https://www.afenda.app/app/inventory',
     'depends': ['product', 'barcodes_gs1_nomenclature', 'digest'],
     'category': 'Supply Chain/Inventory',
     'sequence': 25,
@@ -119,6 +119,6 @@
             'stock/static/tests/*.test.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

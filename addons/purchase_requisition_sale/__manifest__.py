@@ -9,6 +9,6 @@
     'sequence': 70,
     'depends': ['purchase_requisition', 'sale_purchase'],
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

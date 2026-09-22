@@ -8,12 +8,12 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-07 02:15+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/microsoft_calendar/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -139,8 +139,8 @@ msgstr "建立於"
 
 #. module: microsoft_calendar
 #: model:ir.model.fields.selection,name:microsoft_calendar.selection__microsoft_calendar_account_reset__delete_policy__delete_odoo
-msgid "Delete from Odoo"
-msgstr "從 Odoo 紀錄刪除"
+msgid "Delete from AFENDA xForge"
+msgstr "從 AFENDA xForge 紀錄刪除"
 
 #. module: microsoft_calendar
 #: model:ir.model.fields.selection,name:microsoft_calendar.selection__microsoft_calendar_account_reset__delete_policy__delete_both
@@ -186,10 +186,10 @@ msgid ""
 "Due to an Outlook Calendar limitation, recurrence updates must be done "
 "directly in Outlook Calendar.\n"
 "If this recurrence is not shown in Outlook Calendar, you must delete it in "
-"Odoo Calendar and recreate it in Outlook Calendar."
+"AFENDA xForge Calendar and recreate it in Outlook Calendar."
 msgstr ""
 "由於 Outlook 日曆的限制，重複事項更新必須直接在 Outlook 日曆中完成。\n"
-"如果在 Outlook 日曆中未顯示該重複事項，則必須在 Odoo 日曆中刪除，然後在 "
+"如果在 Outlook 日曆中未顯示該重複事項，則必須在 AFENDA xForge 日曆中刪除，然後在 "
 "Outlook 日曆中重新建立。"
 
 #. module: microsoft_calendar
@@ -214,14 +214,14 @@ msgstr "活動循環規則"
 #. odoo-python
 #: code:addons/microsoft_calendar/models/calendar.py:0
 msgid ""
-"For a correct synchronization between Odoo and Outlook Calendar, all "
+"For a correct synchronization between AFENDA xForge and Outlook Calendar, all "
 "attendees must have an email address. However, some events do not respect "
 "this condition. As long as the events are incorrect, the calendars will not "
 "be synchronized.\n"
 "Either update the events/attendees or archive these events %(details)s:\n"
 "%(invalid_events)s"
 msgstr ""
-"要在 Odoo 及 Outlook 日曆之間正確同步，所有參加者都必須有電郵地址。但是，某些"
+"要在 AFENDA xForge 及 Outlook 日曆之間正確同步，所有參加者都必須有電郵地址。但是，某些"
 "事件不遵守此條件。只要事件不正確，日曆就不會同步。\n"
 "你可更新事件/參加者，或封存這些事件 %(details)s：\n"
 "%(invalid_events)s"
@@ -231,8 +231,8 @@ msgstr ""
 #: code:addons/microsoft_calendar/models/calendar.py:0
 msgid ""
 "For having a different organizer in your event, it is necessary that the "
-"organizer have its Odoo Calendar synced with Outlook Calendar."
-msgstr "若要為活動設定不同的舉辦者，舉辦者必須將 Odoo 日曆與 Outlook 日曆同步。"
+"organizer have its AFENDA xForge Calendar synced with Outlook Calendar."
+msgstr "若要為活動設定不同的舉辦者，舉辦者必須將 AFENDA xForge 日曆與 Outlook 日曆同步。"
 
 #. module: microsoft_calendar
 #: model:ir.model.fields,field_description:microsoft_calendar.field_calendar_alarm_manager__id

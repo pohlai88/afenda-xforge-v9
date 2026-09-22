@@ -30,6 +30,6 @@ This module add completed courses to resume for employees.
             'hr_skills_slides/static/src/fields/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

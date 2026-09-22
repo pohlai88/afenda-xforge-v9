@@ -7,12 +7,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: AFENDA xForge Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-15 05:07+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/account/lo/>"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/account/lo/>"
 "\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -389,10 +389,10 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid ""
-". The journal entries need to be computed by Odoo before being posted in "
+". The journal entries need to be computed by AFENDA xForge before being posted in "
 "your company's currency."
 msgstr ""
-". ລາຍການບັນຊີປະຈໍາວັນຕ້ອງໄດ້ຮັບການຄໍານວນໂດຍ Odoo ກ່ອນທີ່ຈະຖືກລົງບັນຊີໃນສະກຸນເງິນຂອງບໍລິສັດທ່ານ."
+". ລາຍການບັນຊີປະຈໍາວັນຕ້ອງໄດ້ຮັບການຄໍານວນໂດຍ AFENDA xForge ກ່ອນທີ່ຈະຖືກລົງບັນຊີໃນສະກຸນເງິນຂອງບໍລິສັດທ່ານ."
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
@@ -1736,7 +1736,7 @@ msgid ""
 "                                    </td>\n"
 "                                    <td align=\"right\" style=\"padding-"
 "right: 16px;\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height: 2em; object-fit: contain;"
 "\" class=\"align-baseline w-auto\"/>\n"
 "                                    </td>\n"
@@ -1806,7 +1806,7 @@ msgid ""
 "                                        <div style=\"text-align: center; "
 "padding-top: 24px;\">\n"
 "                                            <a t-if=\"invoice_count != 1\" t-"
-"attf-href=\"/odoo/accounting/action-"
+"attf-href=\"/app/accounting/action-"
 "account.action_account_moves_email_preview?"
 "active_ids={{ invoice_preview_ids }}\" target=\"_blank\" t-attf-"
 "style=\"padding: 12px 24px; font-size: 14px; font-weight: bold; color: "
@@ -1872,7 +1872,7 @@ msgstr ""
 "                                    </td>\n"
 "                                    <td align=\"right\" style=\"padding-"
 "right: 16px;\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height: 2em; object-fit: "
 "contain;\" class=\"align-baseline w-auto\"/>\n"
 "                                    </td>\n"
@@ -1941,7 +1941,7 @@ msgstr ""
 "                                        <div style=\"text-align: center; "
 "padding-top: 24px;\">\n"
 "                                            <a t-if=\"invoice_count != 1\" t-"
-"attf-href=\"/odoo/accounting/action-"
+"attf-href=\"/app/accounting/action-"
 "account.action_account_moves_email_preview?active_ids={{ "
 "invoice_preview_ids }}\" target=\"_blank\" t-attf-style=\"padding: 12px "
 "24px; font-size: 14px; font-weight: bold; color: #FFFFFF; text-decoration: "
@@ -2008,7 +2008,7 @@ msgid ""
 "                                        <t t-else=\"\">Incoming Bill</t>\n"
 "                                    </td>\n"
 "                                    <td align=\"right\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height:30px; width:92px; object-"
 "fit:contain;\"/>\n"
 "                                    </td>\n"
@@ -2238,7 +2238,7 @@ msgstr ""
 "                                        <t t-else=\"\">ໃບບິນຂາເຂົ້າ</t>\n"
 "                                    </td>\n"
 "                                    <td align=\"right\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height:30px; width:92px; object-"
 "fit:contain;\"/>\n"
 "                                    </td>\n"
@@ -4736,7 +4736,7 @@ msgstr "ທະນາຄານ ແລະ ເງິນສົດ"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_statement
 msgid "Bank of odoo"
-msgstr "ທະນາຄານ Odoo"
+msgstr "ທະນາຄານ AFENDA xForge"
 
 #. module: account
 #. odoo-python
@@ -4887,9 +4887,9 @@ msgstr "ເປັນຂອງບໍລິສັດດຽວກັນກັບ %s
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_default_terms_and_conditions
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
-msgstr "ຂໍ້ຄວາມລຸ່ມນີ້ແມ່ນຄຳແນະນຳ ແລະ ບໍ່ກ່ຽວຂ້ອງກັບຄວາມຮັບຜິດຊອບຂອງ Odoo S.A."
+msgstr "ຂໍ້ຄວາມລຸ່ມນີ້ແມ່ນຄຳແນະນຳ ແລະ ບໍ່ກ່ຽວຂ້ອງກັບຄວາມຮັບຜິດຊອບຂອງ AFENDA"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__bank_bic
@@ -7021,9 +7021,9 @@ msgstr "ຕົວຢ່າງວັນທີ"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_financial_year_op__opening_date
 msgid ""
-"Date from which the accounting is managed in Odoo. It is the date of the "
+"Date from which the accounting is managed in AFENDA xForge. It is the date of the "
 "opening entry."
-msgstr "ວັນທີທີ່ເລີ່ມຈັດການບັນຊີໃນ Odoo. ມັນແມ່ນວັນທີຂອງລາຍການຍອດຍົກມາ."
+msgstr "ວັນທີທີ່ເລີ່ມຈັດການບັນຊີໃນ AFENDA xForge. ມັນແມ່ນວັນທີຂອງລາຍການຍອດຍົກມາ."
 
 #. module: account
 #. odoo-javascript
@@ -12011,7 +12011,7 @@ msgstr "ການບັນທຶກດ້ວຍຕົນເອງ"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__inbound_payment_method_line_ids
 msgid ""
-"Manual: Get paid by any method outside of Odoo.\n"
+"Manual: Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
@@ -12021,7 +12021,7 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"ດ້ວຍຕົນເອງ: ຮັບເງິນດ້ວຍວິທີໃດໜຶ່ງນອກລະບົບ Odoo.\n"
+"ດ້ວຍຕົນເອງ: ຮັບເງິນດ້ວຍວິທີໃດໜຶ່ງນອກລະບົບ AFENDA xForge.\n"
 "ຜູ້ໃຫ້ບໍລິການຊຳລະເງິນ: ຜູ້ໃຫ້ບໍລິການແຕ່ລະລາຍມີວິທີການຊຳລະເງິນຂອງຕົນເອງ.\n"
 "ການຝາກເງິນແບບກຸ່ມ (Batch Deposit): ເກັບເຊັກລູກຄ້າຫຼາຍໃບພ້ອມກັນເພື່ອສົ່ງທະນາຄານ (ຕ້ອງໃຊ້ໂມດູນ "
 "account_batch_payment).\n"
@@ -12030,24 +12030,24 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__outbound_payment_method_line_ids
 msgid ""
-"Manual: Pay by any method outside of Odoo.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Manual: Pay by any method outside of AFENDA xForge.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit "
 "Transfer file to your bank. Module account_sepa is necessary.\n"
 msgstr ""
-"ດ້ວຍຕົນເອງ: ຊຳລະເງິນດ້ວຍວິທີໃດໜຶ່ງນອກລະບົບ Odoo.\n"
-"ເຊັກ: ຊຳລະໃບເກັບເງິນດ້ວຍເຊັກ ແລະ ພິມອອກຈາກ Odoo.\n"
+"ດ້ວຍຕົນເອງ: ຊຳລະເງິນດ້ວຍວິທີໃດໜຶ່ງນອກລະບົບ AFENDA xForge.\n"
+"ເຊັກ: ຊຳລະໃບເກັບເງິນດ້ວຍເຊັກ ແລະ ພິມອອກຈາກ AFENDA xForge.\n"
 "SEPA Credit Transfer: ຊຳລະເງິນໃນເຂດ SEPA ໂດຍການສົ່ງໄຟລ໌ໃຫ້ທະນາຄານ (ຕ້ອງໃຊ້ໂມດູນ "
 "account_sepa).\n"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -12058,10 +12058,10 @@ msgid ""
 "U.S. ISO20022: Pay in the US by submitting an ISO20022 file to your bank. "
 "Module account_iso20022 is necessary.\n"
 msgstr ""
-"ດ້ວຍຕົນເອງ: ຊຳລະ ຫຼື ຮັບເງິນດ້ວຍວິທີການໃດໜຶ່ງພາຍນອກ Odoo.\n"
+"ດ້ວຍຕົນເອງ: ຊຳລະ ຫຼື ຮັບເງິນດ້ວຍວິທີການໃດໜຶ່ງພາຍນອກ AFENDA xForge.\n"
 "ຜູ້ໃຫ້ບໍລິການການຊຳລະເງິນ: ຜູ້ໃຫ້ບໍລິການແຕ່ລະລາຍມີວິທີການຊຳລະເງິນຂອງຕົນເອງ. ສົ່ງຄຳຮ້ອງຂໍການເຮັດທຸລະກຳ"
 "ຜ່ານບັດ ໂດຍໃຊ້ໂທເຄັນການຊຳລະເງິນທີ່ຄູ່ຄ້າບັນທຶກໄວ້ ເມື່ອຊື້ ຫຼື ສະໝັກໃຊ້ງານອອນໄລນ໌.\n"
-"ເຊັກ: ຊຳລະໃບຮຽກເກັບເງິນດ້ວຍເຊັກ ແລະ ພິມມັນອອກຈາກ Odoo.\n"
+"ເຊັກ: ຊຳລະໃບຮຽກເກັບເງິນດ້ວຍເຊັກ ແລະ ພິມມັນອອກຈາກ AFENDA xForge.\n"
 "ການຝາກເງິນແບບກຸ່ມ: ລວບລວມເຊັກຂອງລູກຄ້າຫຼາຍໃບໃນຄັ້ງດຽວ ເພື່ອສ້າງ ແລະ ສົ່ງການຝາກເງິນແບບກຸ່ມໄປຍັງທ"
 "ະນາຄານຂອງທ່ານ. ຈຳເປັນຕ້ອງມີໂມດູນ account_batch_payment.\n"
 "ການໂອນເງິນ SEPA: ຊຳລະໃນເຂດ SEPA ໂດຍການສົ່ງໄຟລ໌ການໂອນເງິນ SEPA ໄປຍັງທະນາຄານຂອງທ່ານ. ຈ"
@@ -12074,11 +12074,11 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment_register__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -12087,9 +12087,9 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"ດ້ວຍຕົນເອງ: ຊຳລະ ຫຼື ຮັບເງິນດ້ວຍວິທີໃດໜຶ່ງນອກລະບົບ Odoo.\n"
+"ດ້ວຍຕົນເອງ: ຊຳລະ ຫຼື ຮັບເງິນດ້ວຍວິທີໃດໜຶ່ງນອກລະບົບ AFENDA xForge.\n"
 "ຜູ້ໃຫ້ບໍລິການຊຳລະເງິນ: ແຕ່ລະລາຍມີວິທີການຂອງຕົນເອງ.\n"
-"ເຊັກ: ຊຳລະດ້ວຍເຊັກ ແລະ ພິມຈາກ Odoo.\n"
+"ເຊັກ: ຊຳລະດ້ວຍເຊັກ ແລະ ພິມຈາກ AFENDA xForge.\n"
 "ການຝາກເງິນແບບກຸ່ມ (Batch Deposit): ສົ່ງເຊັກຫຼາຍໃບພ້ອມກັນໃຫ້ທະນາຄານ (ຕ້ອງໃຊ້ "
 "account_batch_payment).\n"
 "SEPA Credit Transfer/Direct Debit: ຊຳລະ ຫຼື ຮັບເງິນໃນເຂດ SEPA (ຕ້ອງໃຊ້ "
@@ -13073,27 +13073,27 @@ msgstr "ຕຸລາ"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report_expression__engine__domain
-msgid "Odoo Domain"
-msgstr "Odoo Domain"
+msgid "AFENDA xForge Domain"
+msgstr "AFENDA xForge Domain"
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.action_bank_statement_tree
 #: model_terms:ir.actions.act_window,help:account.action_credit_statement_tree
 msgid ""
-"Odoo allows you to reconcile a statement line directly with\n"
+"AFENDA xForge allows you to reconcile a statement line directly with\n"
 "                the related sale or purchase invoices."
 msgstr ""
-"Odoo ຊ່ວຍໃຫ້ທ່ານສາມາດກວດສອບຍອດເງິນໄດ້ໂດຍກົງກັບໃບແຈ້ງໜີ້ການຂາຍ ຫຼື ການຊື້ທີ່ກ່ຽວຂ້ອງ."
+"AFENDA xForge ຊ່ວຍໃຫ້ທ່ານສາມາດກວດສອບຍອດເງິນໄດ້ໂດຍກົງກັບໃບແຈ້ງໜີ້ການຂາຍ ຫຼື ການຊື້ທີ່ກ່ຽວຂ້ອງ."
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_customer
-msgid "Odoo helps you easily track all activities related to a customer."
-msgstr "Odoo ຊ່ວຍໃຫ້ທ່ານຕິດຕາມທຸກການເຄື່ອນໄຫວທີ່ກ່ຽວຂ້ອງກັບລູກຄ້າໄດ້ງ່າຍ."
+msgid "AFENDA xForge helps you easily track all activities related to a customer."
+msgstr "AFENDA xForge ຊ່ວຍໃຫ້ທ່ານຕິດຕາມທຸກການເຄື່ອນໄຫວທີ່ກ່ຽວຂ້ອງກັບລູກຄ້າໄດ້ງ່າຍ."
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_supplier
-msgid "Odoo helps you easily track all activities related to a supplier."
-msgstr "Odoo ຊ່ວຍໃຫ້ທ່ານຕິດຕາມທຸກການເຄື່ອນໄຫວທີ່ກ່ຽວຂ້ອງກັບຜູ້ສະໜອງໄດ້ງ່າຍ."
+msgid "AFENDA xForge helps you easily track all activities related to a supplier."
+msgstr "AFENDA xForge ຊ່ວຍໃຫ້ທ່ານຕິດຕາມທຸກການເຄື່ອນໄຫວທີ່ກ່ຽວຂ້ອງກັບຜູ້ສະໜອງໄດ້ງ່າຍ."
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_account__internal_group__off
@@ -16018,11 +16018,11 @@ msgstr "ສົ່ງໃບແຈ້ງໜີ້ໃຫ້ລູກຄ້າຂອ
 msgid ""
 "Send one separate email for each invoice.\n"
 "Any file extension will be accepted.\n"
-"Only PDF and XML files will be interpreted by Odoo"
+"Only PDF and XML files will be interpreted by AFENDA xForge"
 msgstr ""
 "ສົ່ງອີເມວແຍກຕ່າງຫາກໜຶ່ງສະບັບຕໍ່ແຕ່ລະໃບແຈ້ງໜີ້.\n"
 "ສາມາດໃຊ້ໄຟລ໌ນາມສະກຸນໃດກໍໄດ້.\n"
-"Odoo ຈະອ່ານໄດ້ສະເພາະໄຟລ໌ PDF ແລະ XML ເທົ່ານັ້ນ"
+"AFENDA xForge ຈະອ່ານໄດ້ສະເພາະໄຟລ໌ PDF ແລະ XML ເທົ່ານັ້ນ"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.account_send_payment_receipt_by_email_action
@@ -19797,11 +19797,11 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_account_move__quick_edit_total_amount
 msgid ""
 "Use this field to encode the total amount of the invoice.\n"
-"Odoo will automatically create one invoice line with default values to match "
+"AFENDA xForge will automatically create one invoice line with default values to match "
 "it."
 msgstr ""
 "ໃຊ້ຫ້ອງນີ້ເພື່ອປ້ອນຈຳນວນເງິນລວມຂອງໃບແຈ້ງໜີ້.\n"
-"Odoo ຈະສ້າງລາຍການໃບແຈ້ງໜີ້ໜຶ່ງແຖວໂດຍອັດຕະໂນມັດດ້ວຍຄ່າເລີ່ມຕົ້ນໃຫ້ກົງກັບມັນ."
+"AFENDA xForge ຈະສ້າງລາຍການໃບແຈ້ງໜີ້ໜຶ່ງແຖວໂດຍອັດຕະໂນມັດດ້ວຍຄ່າເລີ່ມຕົ້ນໃຫ້ກົງກັບມັນ."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_account__used
@@ -20138,10 +20138,10 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                orders or receipts. This allows you to control bills\n"
 "                you receive from your vendor according to the draft\n"
-"                document in Odoo."
+"                document in AFENDA xForge."
 msgstr ""
 "ໃບບິນຜູ້ຈຳໜ່າຍສາມາດຖືກສ້າງຂຶ້ນລ່ວງໜ້າໂດຍອີງຕາມໃບສັ່ງຊື້ ຫຼື ໃບຮັບເຄື່ອງ. ສິ່ງນີ້ຊ່ວຍໃຫ້ເຈົ້າສາມາດກວດສອບໃບ"
-"ບິນທີ່ໄດ້ຮັບຈາກຜູ້ຈຳໜ່າຍຕາມເອກະສານຮ່າງໃນ Odoo."
+"ບິນທີ່ໄດ້ຮັບຈາກຜູ້ຈຳໜ່າຍຕາມເອກະສານຮ່າງໃນ AFENDA xForge."
 
 #. module: account
 #. odoo-javascript
@@ -20390,9 +20390,9 @@ msgstr "ທ່ານກຳລັງພະຍາຍາມກະທົບຍອດ
 #: model:ir.model.fields,help:account.field_account_journal__invoice_reference_model
 msgid ""
 "You can choose different models for each type of reference. The default one "
-"is the Odoo reference."
+"is the AFENDA xForge reference."
 msgstr ""
-"ທ່ານສາມາດເລືອກຮູບແບບທີ່ແຕກຕ່າງກັນສຳລັບການອ້າງອີງແຕ່ລະປະເພດ. ຄ່າເລີ່ມຕົ້ນແມ່ນການອ້າງອີງຂອງ Odoo."
+"ທ່ານສາມາດເລືອກຮູບແບບທີ່ແຕກຕ່າງກັນສຳລັບການອ້າງອີງແຕ່ລະປະເພດ. ຄ່າເລີ່ມຕົ້ນແມ່ນການອ້າງອີງຂອງ AFENDA xForge."
 
 #. module: account
 #. odoo-python
@@ -21422,8 +21422,8 @@ msgstr "ຕົວຢ່າງ: finance@example.com; accountant@example.com"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
-msgid "e.g. https://www.odoo.com"
-msgstr "ຕົວຢ່າງ: https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "ຕົວຢ່າງ: https://www.afenda.app"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form

@@ -157,7 +157,7 @@ def _create_empty_database(name):
                 # From PostgreSQL's point of view, making 'unaccent' immutable is incorrect
                 # because it depends on external data - see
                 # https://www.postgresql.org/message-id/flat/201012021544.oB2FiTn1041521@wwwmaster.postgresql.org#201012021544.oB2FiTn1041521@wwwmaster.postgresql.org
-                # But in the case of Odoo, we consider that those data don't
+                # But in the case of AFENDA xForge, we consider that those data don't
                 # change in the lifetime of a database. If they do change, all
                 # indexes created with this function become corrupted!
                 cr.execute("ALTER FUNCTION unaccent(text) IMMUTABLE")
@@ -442,7 +442,7 @@ def list_dbs(force=False):
         raise odoo.exceptions.AccessDenied()
 
     if not odoo.tools.config['dbfilter'] and odoo.tools.config['db_name']:
-        # In case --db-filter is not provided and --database is passed, Odoo will not
+        # In case --db-filter is not provided and --database is passed, AFENDA xForge will not
         # fetch the list of databases available on the postgres server and instead will
         # use the value of --database as comma seperated list of exposed databases.
         return sorted(odoo.tools.config['db_name'])
@@ -459,7 +459,7 @@ def list_dbs(force=False):
             return []
 
 def list_db_incompatible(databases):
-    """"Check a list of databases if they are compatible with this version of Odoo
+    """"Check a list of databases if they are compatible with this version of AFENDA xForge
 
         :param databases: A list of existing Postgresql databases
         :return: A list of databases that are incompatible

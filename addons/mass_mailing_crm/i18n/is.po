@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~15.1\n"
+"Project-Id-Version: AFENDA xForge Server saas~15.1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2021-12-07 10:47+0000\n"
 "PO-Revision-Date: 2022-09-22 05:53+0000\n"
@@ -60,7 +60,7 @@ msgstr ""
 
 #. module: mass_mailing_crm
 #: code:addons/mass_mailing_crm/models/mailing_mailing.py:0
-msgid "Note that Odoo cannot track replies if they are sent towards email addresses to this database."
+msgid "Note that AFENDA xForge cannot track replies if they are sent towards email addresses to this database."
 msgstr ""
 
 #. module: mass_mailing_crm

@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:36+0000\n"
 "PO-Revision-Date: 2026-08-02 12:51+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/spreadsheet/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/spreadsheet/"
 "lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -1119,8 +1119,8 @@ msgstr "ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຄາດຄິ
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at odoo.com/help."
-msgstr "ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຄາດຄິດ. ກະລຸນາແຈ້ງຂໍ້ຜິດພາດທີ່ odoo.com/help."
+msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
+msgstr "ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຄາດຄິດ. ກະລຸນາແຈ້ງຂໍ້ຜິດພາດທີ່ afenda.app/help."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6350,80 +6350,80 @@ msgstr "ຕຸລາ"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Bar Chart"
-msgstr "ແຜນພູມແທ່ງ Odoo"
+msgid "AFENDA xForge Bar Chart"
+msgstr "ແຜນພູມແທ່ງ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Combo Chart"
-msgstr "ແຜນພູມປະສົມ Odoo"
+msgid "AFENDA xForge Combo Chart"
+msgstr "ແຜນພູມປະສົມ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Funnel Chart"
-msgstr "ແຜນພູມຮູບຈວຍ Odoo"
+msgid "AFENDA xForge Funnel Chart"
+msgstr "ແຜນພູມຮູບຈວຍ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Geo Chart"
-msgstr "ແຜນພູມພູມສາດ Odoo"
+msgid "AFENDA xForge Geo Chart"
+msgstr "ແຜນພູມພູມສາດ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Line Chart"
-msgstr "ແຜນພູມເສັ້ນ Odoo"
+msgid "AFENDA xForge Line Chart"
+msgstr "ແຜນພູມເສັ້ນ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pie Chart"
-msgstr "ແຜນພູມວົງມົນ Odoo"
+msgid "AFENDA xForge Pie Chart"
+msgstr "ແຜນພູມວົງມົນ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pyramid Chart"
-msgstr "ແຜນພູມພີລະມິດ Odoo"
+msgid "AFENDA xForge Pyramid Chart"
+msgstr "ແຜນພູມພີລະມິດ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Radar Chart"
-msgstr "ແຜນພູມເຣດາ Odoo"
+msgid "AFENDA xForge Radar Chart"
+msgstr "ແຜນພູມເຣດາ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Scatter Chart"
-msgstr "ແຜນພູມກະຈາຍ Odoo"
+msgid "AFENDA xForge Scatter Chart"
+msgstr "ແຜນພູມກະຈາຍ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/hooks.js:0
-msgid "Odoo Spreadsheet"
-msgstr "Odoo ສະເປຣດຊີດ"
+msgid "AFENDA xForge Spreadsheet"
+msgstr "AFENDA xForge ສະເປຣດຊີດ"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Sunburst Chart"
-msgstr "ແຜນພູມ Sunburst Odoo"
+msgid "AFENDA xForge Sunburst Chart"
+msgstr "ແຜນພູມ Sunburst AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Treemap Chart"
-msgstr "ແຜນພູມ Treemap Odoo"
+msgid "AFENDA xForge Treemap Chart"
+msgstr "ແຜນພູມ Treemap AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Waterfall Chart"
-msgstr "ແຜນພູມນໍ້າຕົກ Odoo"
+msgid "AFENDA xForge Waterfall Chart"
+msgstr "ແຜນພູມນໍ້າຕົກ AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13471,8 +13471,8 @@ msgstr "ຕ.ຍ. 'ປ້າຍຊື່ລິ້ງ'"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.odoo.com'"
-msgstr "ຕ.ຍ. 'http://www.odoo.com'"
+msgid "e.g. 'http://www.afenda.app'"
+msgstr "ຕ.ຍ. 'http://www.afenda.app'"
 
 #. module: spreadsheet
 #. odoo-javascript

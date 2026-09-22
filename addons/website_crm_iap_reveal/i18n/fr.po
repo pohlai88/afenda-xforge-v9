@@ -10,12 +10,12 @@
 # "Manon Rondou (ronm)" <ronm@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 14:24+0000\n"
-"Last-Translator: \"Manon Rondou (ronm)\" <ronm@odoo.com>\n"
-"Language-Team: French <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Manon Rondou (ronm)\" <ronm@afenda.app>\n"
+"Language-Team: French <https://translate.afenda.app/projects/odoo-19/"
 "website_crm_iap_reveal/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -260,9 +260,9 @@ msgstr "Génération de pistes: Génération de pistes/opportunités"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__industry_tag_ids
-msgid "Leave empty to always match. Odoo will not create lead if no match"
+msgid "Leave empty to always match. AFENDA xForge will not create lead if no match"
 msgstr ""
-"Laissez vide pour toujours correspondre. Odoo ne créera pas de piste s'il "
+"Laissez vide pour toujours correspondre. AFENDA xForge ne créera pas de piste s'il "
 "n'y a pas de correspondance"
 
 #. module: website_crm_iap_reveal
@@ -344,8 +344,8 @@ msgstr "Conditions de génération d'opportunités"
 #. module: website_crm_iap_reveal
 #. odoo-python
 #: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py:0
-msgid "Opportunity created by Odoo Lead Generation"
-msgstr "Opportunité créée par le générateur de pistes d'Odoo"
+msgid "Opportunity created by AFENDA xForge Lead Generation"
+msgstr "Opportunité créée par le générateur de pistes d'AFENDA xForge"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__other_role_ids

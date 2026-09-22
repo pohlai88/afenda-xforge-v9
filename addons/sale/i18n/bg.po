@@ -27,12 +27,12 @@
 # Toma Tomov <toma.tomov@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-07 22:59+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/sale/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/sale/"
 "bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -47,7 +47,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -55,7 +55,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            Ако вашият клиент работи с Odoo 18 или по-нова версия, "
+"            Ако вашият клиент работи с AFENDA xForge 18 или по-нова версия, "
 "клиентските данни и редовете на поръчката за продажба\n"
 "            ще бъдат създадени автоматично. Всеки друг pdf, съдържащ "
 "прикачен\n"
@@ -1680,10 +1680,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Като пример, ако продавате предплатени часове за услуги, Odoo Ви препоръчва\n"
+"Като пример, ако продавате предплатени часове за услуги, AFENDA xForge Ви препоръчва\n"
 "                да продавате допълнителни часове, когато всички поръчани "
 "часове бъдат изразходвани."
 
@@ -2723,10 +2723,10 @@ msgstr "Чернови фактури"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 "Плъзнете и пуснете PDF файла на заявката за оферта в списъка с оферти в "
-"Odoo. Насладете се на автоматизацията!"
+"AFENDA xForge. Насладете се на автоматизацията!"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
@@ -3698,8 +3698,8 @@ msgstr "Няма намерени поръчки за допълнителна �
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
-msgstr "Не използвате Odoo?"
+msgid "Not using AFENDA xForge?"
+msgstr "Не използвате AFENDA xForge?"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3751,8 +3751,8 @@ msgstr "Брой съобщения с грешка при доставка"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -5184,8 +5184,8 @@ msgstr "Конектор за Starshipit"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
-msgstr "Започване в Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "Започване в AFENDA xForge"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__state
@@ -6066,8 +6066,8 @@ msgstr "Обем"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
-msgstr "Искате ли да импортирате този документ в Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Искате ли да импортирате този документ в AFENDA xForge?"
 
 #. module: sale
 #. odoo-python

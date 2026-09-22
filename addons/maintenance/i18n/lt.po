@@ -23,12 +23,12 @@
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:35+0000\n"
 "PO-Revision-Date: 2026-08-02 17:37+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Lithuanian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Lithuanian <https://translate.afenda.app/projects/odoo-19/"
 "maintenance/lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -1511,11 +1511,11 @@ msgstr "Tekstas"
 #. module: maintenance
 #: model:ir.model.fields,help:maintenance.field_maintenance_team__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Modelis (\"Odoo\" dokumento rūšis), su kuriuo susijęs šis pseudonimas. Visi "
+"Modelis (\"AFENDA xForge\" dokumento rūšis), su kuriuo susijęs šis pseudonimas. Visi "
 "gaunami laiškai, kurie neatsako į egzistuojantį įrašą, sukurs naują šio "
 "modelio įrašą (pvz. projekto užduotį)"
 
@@ -1523,10 +1523,10 @@ msgstr ""
 #: model:ir.model.fields,help:maintenance.field_maintenance_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "El. pašto pseudonimo pavadinimas, pvz. \"darbai\", jei norite gauti "
-"<darbai@pavyzdys.odoo.com>"
+"<darbai@pavyzdys.afenda.app>"
 
 #. module: maintenance
 #. odoo-python

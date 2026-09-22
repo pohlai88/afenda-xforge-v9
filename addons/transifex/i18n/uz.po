@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 13:28+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/transifex/"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/transifex/"
 "uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
@@ -94,8 +94,8 @@ msgstr "Tarjima qilinmagan"
 #. module: transifex
 #: model:ir.model.fields,help:transifex.field_transifex_code_translation__transifex_url
 #, fuzzy
-msgid "Propose a modification in the official version of Odoo"
-msgstr "Odoo rasmiy versiyasiga o‘zgartirish taklif etish"
+msgid "Propose a modification in the official version of AFENDA xForge"
+msgstr "AFENDA xForge rasmiy versiyasiga o‘zgartirish taklif etish"
 
 #. module: transifex
 #. odoo-javascript

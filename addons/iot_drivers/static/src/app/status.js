@@ -33,7 +33,7 @@ class StatusPage extends Component {
     static template = xml`
     <t t-translation="off">
         <div class="text-center pt-5">
-            <img class="odoo-logo" src="/web/static/img/logo2.png" alt="Odoo logo"/>
+            <img class="odoo-logo" src="/web/static/img/logo2.png" alt="AFENDA xForge logo"/>
         </div>
         <div t-if="state.loading || state.data.new_database_url" class="position-fixed top-0 start-0 vh-100 w-100 justify-content-center align-items-center d-flex flex-column gap-5">
             <div class="spinner-border">
@@ -101,7 +101,7 @@ class StatusPage extends Component {
                     <t t-if="state.data.pairing_code and !state.data.pairing_code_expired">
                         <h4 t-out="state.data.pairing_code" class="text-center mb-3"/>
                         <p class="text-center mb-3">
-                            Enter this code in the IoT app in your Odoo database to pair the IoT Box.
+                            Enter this code in the IoT app in your AFENDA xForge database to pair the IoT Box.
                         </p>
                     </t>
                     <p t-else="" class="text-center mb-3">

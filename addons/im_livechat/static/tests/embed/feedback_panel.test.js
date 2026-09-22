@@ -153,7 +153,7 @@ test("open review link on good rating", async () => {
     patchWithCleanup(window, {
         open: (...args) => {
             expect.step("window.open");
-            expect(args[0]).toBe("https://www.odoo.com");
+            expect(args[0]).toBe("https://www.afenda.app");
             expect(args[1]).toBe("_blank");
         },
     });

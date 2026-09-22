@@ -16,12 +16,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: AFENDA xForge Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-04 16:52+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Greek <https://translate.odoo.com/projects/odoo-19/stock/el/>"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Greek <https://translate.afenda.app/projects/odoo-19/stock/el/>"
 "\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -1728,11 +1728,11 @@ msgstr "Πριν την προγραμματισμένη ημερομηνία"
 #. module: stock
 #: model_terms:res.company,invoice_terms_html:stock.res_company_1
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
 msgstr ""
 "Το παρακάτω κείμενο χρησιμεύει ως πρόταση και δεν εμπλέκει την ευθύνη της "
-"Odoo S.A."
+"AFENDA"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_package__quant_ids
@@ -2908,10 +2908,10 @@ msgstr "Προεπιλεγμένες διαδρομές μέσω της αποθ
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_orderpoint
 msgid ""
-"Define a minimum stock rule so that Odoo automatically creates requests for "
+"Define a minimum stock rule so that AFENDA xForge automatically creates requests for "
 "quotations or confirmed manufacturing orders to resupply your stock."
 msgstr ""
-"Ορίστε έναν κανόνα ελάχιστου αποθέματος ώστε το Odoo να δημιουργεί αυτόματα "
+"Ορίστε έναν κανόνα ελάχιστου αποθέματος ώστε το AFENDA xForge να δημιουργεί αυτόματα "
 "αιτήματα για προσφορές ή επιβεβαιωμένες εντολές παραγωγής για την αναπλήρωση "
 "του αποθέματός σας."
 
@@ -2924,14 +2924,14 @@ msgstr "Ορίστε νέα αποθήκη"
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
 "Define your locations to reflect your warehouse structure and\n"
-"            organization. Odoo is able to manage physical locations\n"
+"            organization. AFENDA xForge is able to manage physical locations\n"
 "            (warehouses, shelves, bin, etc), partner locations (customers,\n"
 "            vendors) and virtual locations which are the counterpart of\n"
 "            the stock operations like the manufacturing orders\n"
 "            consumptions, inventories, etc."
 msgstr ""
 "Ορίστε τις τοποθεσίες σας ώστε να αντικατοπτρίζουν τη δομή και\n"
-"            την οργάνωση. Το Odoo μπορεί να διαχειρίζεται φυσικές "
+"            την οργάνωση. Το AFENDA xForge μπορεί να διαχειρίζεται φυσικές "
 "τοποθεσίες\n"
 "            (αποθήκες, ράφια, κάδοι κ.λπ.), τοποθεσίες συνεργατών (πελατών,\n"
 "            προμηθευτών) και εικονικές τοποθεσίες, οι οποίες αποτελούν το "
@@ -3603,12 +3603,12 @@ msgstr "Άδειες Τοποθεσίες"
 #. module: stock
 #: model_terms:digest.tip,tip_description:stock.digest_tip_stock_0
 msgid ""
-"Enjoy a quick-paced experience with the Odoo barcode app. It is blazing fast "
+"Enjoy a quick-paced experience with the AFENDA xForge barcode app. It is blazing fast "
 "and works even without a stable internet connection. It supports all flows: "
 "inventory adjustments, batch picking, moving lots or pallets, low inventory "
 "checks, etc. Go to the \"Apps\" menu to activate the barcode interface."
 msgstr ""
-"Απολαύστε μια ταχύτατη εμπειρία με την εφαρμογή barcode του Odoo. Είναι "
+"Απολαύστε μια ταχύτατη εμπειρία με την εφαρμογή barcode του AFENDA xForge. Είναι "
 "εξαιρετικά γρήγορη και λειτουργεί ακόμη και χωρίς σταθερή σύνδεση στο "
 "διαδίκτυο. Υποστηρίζει όλες τις ροές: απογραφές, συλλογή παρτίδων, "
 "μετακινήσεις παρτίδων ή παλετών, ελέγχους χαμηλού αποθέματος κ.λπ. Μεταβείτε "
@@ -3646,16 +3646,16 @@ msgstr ""
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
-"Every stock operation in Odoo moves the products from one\n"
+"Every stock operation in AFENDA xForge moves the products from one\n"
 "            location to another one.  For instance, if you receive products\n"
-"            from a vendor, Odoo will move products from the Vendor\n"
+"            from a vendor, AFENDA xForge will move products from the Vendor\n"
 "            location to the Stock location. Each report can be performed on\n"
 "            physical, partner or virtual locations."
 msgstr ""
-"Κάθε ενέργεια αποθέματος στο Odoo μετακινεί προϊόντα από μία\n"
+"Κάθε ενέργεια αποθέματος στο AFENDA xForge μετακινεί προϊόντα από μία\n"
 "            τοποθεσία σε μία άλλη. Για παράδειγμα, όταν παραλαμβάνετε "
 "προϊόντα\n"
-"            από προμηθευτή, το Odoo μετακινεί τα προϊόντα από την τοποθεσία\n"
+"            από προμηθευτή, το AFENDA xForge μετακινεί τα προϊόντα από την τοποθεσία\n"
 "            του Προμηθευτή προς την τοποθεσία Αποθέματος.\n"
 "Κάθε αναφορά μπορεί να πραγματοποιηθεί σε\n"
 "            φυσικές, συνεργατών ή εικονικές τοποθεσίες."
@@ -4323,84 +4323,84 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_delivery_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the delivery slip "
+"If this checkbox is ticked, AFENDA xForge will automatically print the delivery slip "
 "of a picking when it is validated."
 msgstr ""
-"Αν αυτό το πλαίσιο είναι επιλεγμένο, το Odoo θα εκτυπώνει αυτόματα το δελτίο "
+"Αν αυτό το πλαίσιο είναι επιλεγμένο, το AFENDA xForge θα εκτυπώνει αυτόματα το δελτίο "
 "παράδοσης μιας μεταφοράς μόλις επικυρωθεί."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_lot_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the lot/SN labels "
 "of a picking when it is validated."
 msgstr ""
-"Αν αυτό το πλαίσιο είναι επιλεγμένο, το Odoo θα εκτυπώνει αυτόματα τις "
+"Αν αυτό το πλαίσιο είναι επιλεγμένο, το AFENDA xForge θα εκτυπώνει αυτόματα τις "
 "ετικέτες παρτίδων/σειριακών αριθμών μιας μεταφοράς μόλις επικυρωθεί."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_package_label
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the package label "
+"If this checkbox is ticked, AFENDA xForge will automatically print the package label "
 "when \"Put in Pack\" button is used."
 msgstr ""
-"Αν αυτό το πλαίσιο είναι επιλεγμένο, το Odoo θα εκτυπώνει αυτόματα την "
+"Αν αυτό το πλαίσιο είναι επιλεγμένο, το AFENDA xForge θα εκτυπώνει αυτόματα την "
 "ετικέτα συσκευασίας όταν χρησιμοποιείται το κουμπί 'Τοποθέτηση σε "
 "συσκευασία'."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_packages
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the packages and "
+"If this checkbox is ticked, AFENDA xForge will automatically print the packages and "
 "their contents of a picking when it is validated."
 msgstr ""
-"Αν αυτό το πλαίσιο είναι επιλεγμένο, το Odoo θα εκτυπώνει αυτόματα τις "
+"Αν αυτό το πλαίσιο είναι επιλεγμένο, το AFENDA xForge θα εκτυπώνει αυτόματα τις "
 "συσκευασίες και το περιεχόμενό τους από μια μεταφορά μόλις επικυρωθεί."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the product labels "
 "of a picking when it is validated."
 msgstr ""
-"Αν αυτό το πλαίσιο είναι επιλεγμένο, το Odoo θα εκτυπώνει αυτόματα τις "
+"Αν αυτό το πλαίσιο είναι επιλεγμένο, το AFENDA xForge θα εκτυπώνει αυτόματα τις "
 "ετικέτες προϊόντων μιας μεταφοράς μόλις επικυρωθεί."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report labels of a picking when it is validated."
 msgstr ""
-"Αν αυτό το πλαίσιο είναι επιλεγμένο, το Odoo θα εκτυπώνει αυτόματα τις "
+"Αν αυτό το πλαίσιο είναι επιλεγμένο, το AFENDA xForge θα εκτυπώνει αυτόματα τις "
 "ετικέτες αναφοράς παραλαβής μιας μεταφοράς μόλις επικυρωθεί."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report of a picking when it is validated and has assigned moves."
 msgstr ""
-"Αν αυτό το πλαίσιο είναι επιλεγμένο, το Odoo θα εκτυπώνει αυτόματα την "
+"Αν αυτό το πλαίσιο είναι επιλεγμένο, το AFENDA xForge θα εκτυπώνει αυτόματα την "
 "αναφορά παραλαβής μιας μεταφοράς όταν αυτή επικυρωθεί και έχει καταχωρημένες "
 "κινήσεις."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_return_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the return slip of "
+"If this checkbox is ticked, AFENDA xForge will automatically print the return slip of "
 "a picking when it is validated."
 msgstr ""
-"Αν αυτό το πλαίσιο είναι επιλεγμένο, το Odoo θα εκτυπώνει αυτόματα το δελτίο "
+"Αν αυτό το πλαίσιο είναι επιλεγμένο, το AFENDA xForge θα εκτυπώνει αυτόματα το δελτίο "
 "επιστροφής μιας μεταφοράς μόλις επικυρωθεί."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_show_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically show the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically show the reception "
 "report (if there are moves to allocate to) when validating."
 msgstr ""
-"Αν αυτό το πλαίσιο είναι επιλεγμένο, το Odoo θα εμφανίζει αυτόματα την "
+"Αν αυτό το πλαίσιο είναι επιλεγμένο, το AFENDA xForge θα εμφανίζει αυτόματα την "
 "αναφορά παραλαβής (εφόσον υπάρχουν κινήσεις προς κατανομή) κατά την "
 "επικύρωση."
 
@@ -6256,7 +6256,7 @@ msgstr "Οκτώβριος"
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.view_picking_type_form
 msgid ""
-"Odoo opens a PDF preview by default. If you (Enterprise users only) want to "
+"AFENDA xForge opens a PDF preview by default. If you (Enterprise users only) want to "
 "print instantly,\n"
 "                                        install the IoT App on a computer "
 "that is on the same local network as the\n"
@@ -6264,7 +6264,7 @@ msgid ""
 "routing of the reports.\n"
 "                                        <br/>"
 msgstr ""
-"Το Odoo ανοίγει προεπισκόπηση PDF από προεπιλογή . Αν θέλετε (διαθέσιμο μόνο "
+"Το AFENDA xForge ανοίγει προεπισκόπηση PDF από προεπιλογή . Αν θέλετε (διαθέσιμο μόνο "
 "για χρήστες Enterprise) να εκτυπώνετε άμεσα,\n"
 "                                       εγκαταστήστε την εφαρμογή IoT σε έναν "
 "υπολογιστή που βρίσκεται στο ίδιο τοπικό δίκτυο\n"

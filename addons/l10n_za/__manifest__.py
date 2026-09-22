@@ -6,12 +6,12 @@
     'version': '1.0',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the latest basic South African localisation necessary to run Odoo in ZA:
+This is the latest basic South African localisation necessary to run AFENDA xForge in ZA:
 ================================================================================
     - a generic chart of accounts
     - SARS VAT Ready Structure""",
     'author': 'Paradigm Digital (https://www.paradigmdigital.co.za)',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'depends': [
         'account',
         'base_vat',

@@ -43,11 +43,11 @@ PAYMENT_METHODS_MAPPING = MappingProxyType({
     ),  # Unused but required to compute the ignored methods to send to ECPay
 })
 
-# Mapping of Odoo payment method codes to the values returned by ECPay notifications.
+# Mapping of AFENDA xForge payment method codes to the values returned by ECPay notifications.
 # This map intentionally contains only methods where the returned value lets us pick a brand PM
-# in Odoo (e.g., convenience stores and specific wallets). Other methods are still supported via
+# in AFENDA xForge (e.g., convenience stores and specific wallets). Other methods are still supported via
 # PAYMENT_METHODS_MAPPING, but their response values are either generic (e.g., Credit_CreditCard)
-# or not mapped to brand PMs in Odoo (e.g., ATM/WebATM bank variants).
+# or not mapped to brand PMs in AFENDA xForge (e.g., ATM/WebATM bank variants).
 PAYMENT_METHODS_RESPONSE_MAPPING = MappingProxyType({
     "ok_mart": "CVS_OK",
     "hi_life": "CVS_HILIFE",

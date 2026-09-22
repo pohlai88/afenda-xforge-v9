@@ -24,7 +24,7 @@ class Session(http.Controller):
 
     @http.route('/web/session/get_session_info', type='jsonrpc', auth='user', readonly=True)
     def get_session_info(self):
-        # Crapy workaround for unupdatable Odoo Mobile App iOS (Thanks Apple :@)
+        # Crapy workaround for unupdatable AFENDA xForge Mobile App iOS (Thanks Apple :@)
         request.session.touch()
         return request.env['ir.http'].session_info()
 
@@ -45,7 +45,7 @@ class Session(http.Controller):
             credential = {'login': login, 'password': password, 'type': 'password'}
             auth_info = request.session.authenticate(env, credential)
             if auth_info['uid'] != request.session.uid:
-                # Crapy workaround for unupdatable Odoo Mobile App iOS (Thanks Apple :@) and Android
+                # Crapy workaround for unupdatable AFENDA xForge Mobile App iOS (Thanks Apple :@) and Android
                 # Correct behavior should be to raise AccessError("Renewing an expired session for user that has multi-factor-authentication is not supported. Please use /web/login instead.")
                 return {'uid': None}
 
@@ -79,13 +79,13 @@ class Session(http.Controller):
             'state': json.dumps({'d': request.db, 'u': ICP.get_param('web.base.url')}),
             'scope': 'userinfo',
         }
-        return 'https://accounts.odoo.com/oauth2/auth?' + url_encode(params)
+        return 'https://accounts.afenda.app/oauth2/auth?' + url_encode(params)
 
     @http.route('/web/session/destroy', type='jsonrpc', auth='user', readonly=True)
     def destroy(self):
         request.session.logout()
 
     @http.route('/web/session/logout', type='http', auth='none', readonly=True)
-    def logout(self, redirect='/odoo'):
+    def logout(self, redirect='/app'):
         request.session.logout(keep_db=True)
         return request.redirect(redirect, 303)

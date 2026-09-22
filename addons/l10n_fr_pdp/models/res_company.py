@@ -13,8 +13,8 @@ PDP_identifier_re = re.compile(r'^([0-9]{9})(_[0-9]{14})?(_.+)?$')
 
 _logger = logging.getLogger(__name__)
 
-ENDPOINT = 'https://pdp.odoo.com'
-TEST_ENDPOINT = 'https://pdp.test.odoo.com'
+ENDPOINT = 'https://pdp.afenda.app'
+TEST_ENDPOINT = 'https://pdp.test.afenda.app'
 
 
 class ResCompany(models.Model):

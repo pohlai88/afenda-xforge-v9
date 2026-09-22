@@ -702,14 +702,14 @@ class TestSyncOdoo2Google(TestSyncGoogle):
         # Assert that synchronization is paused, patch wasn't called and record is waiting to be synced.
         self.assertFalse(self.env.user.google_synchronization_stopped)
         self.assertEqual(self.env.user._get_google_sync_status(), "sync_paused")
-        self.assertEqual(record.name, "Updated Event", "Assert that event name was updated in Odoo Calendar")
+        self.assertEqual(record.name, "Updated Event", "Assert that event name was updated in AFENDA xForge Calendar")
         self.assertTrue(record.need_sync, "Sync variable must be true for updating event when sync re-activates")
         self.assertGoogleEventNotPatched()
 
     @patch_api
     def test_delete_synced_event_with_sync_config_paused(self):
         """
-        Deletes a synced event with synchronization paused, event must be archived in Odoo and
+        Deletes a synced event with synchronization paused, event must be archived in AFENDA xForge and
         have its field 'need_sync' as True for later synchronizing it with Google Calendar.
         """
         # Set synchronization as active and then pause synchronization.
@@ -729,10 +729,10 @@ class TestSyncOdoo2Google(TestSyncGoogle):
         self.env.user.sudo().pause_google_synchronization()
         record.unlink()
 
-        # Assert that synchronization is paused, delete wasn't called and record was archived in Odoo.
+        # Assert that synchronization is paused, delete wasn't called and record was archived in AFENDA xForge.
         self.assertFalse(self.env.user.google_synchronization_stopped)
         self.assertEqual(self.env.user._get_google_sync_status(), "sync_paused")
-        self.assertFalse(record.active, "Event must be archived in Odoo after unlinking it")
+        self.assertFalse(record.active, "Event must be archived in AFENDA xForge after unlinking it")
         self.assertTrue(record.need_sync, "Sync variable must be true for updating event in Google when sync re-activates")
         self.assertGoogleEventNotDeleted()
 
@@ -897,7 +897,7 @@ class TestSyncOdoo2Google(TestSyncGoogle):
         """
         Skip the synchro of new events by attendees when the organizer is not synchronized with Google.
         Otherwise, the event ownership will be lost to the attendee and it could generate duplicates in
-        Odoo, as well cause problems in the future the synchronization of that event for the original owner.
+        AFENDA xForge, as well cause problems in the future the synchronization of that event for the original owner.
         """
         with self.mock_datetime_and_now("2023-01-10"):
             # Stop the synchronization for the organizer and leave the attendee synchronized.

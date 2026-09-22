@@ -23,14 +23,14 @@ describe.current.tags("headless");
 
 test("escape", () => {
     expect(escape("<a>this is a link</a>")).toBe("&lt;a&gt;this is a link&lt;/a&gt;");
-    expect(escape(`<a href="https://www.odoo.com">odoo<a>`)).toBe(
-        `&lt;a href=&quot;https://www.odoo.com&quot;&gt;odoo&lt;a&gt;`
+    expect(escape(`<a href="https://www.afenda.app">odoo<a>`)).toBe(
+        `&lt;a href=&quot;https://www.afenda.app&quot;&gt;odoo&lt;a&gt;`
     );
-    expect(escape(`<a href='https://www.odoo.com'>odoo<a>`)).toBe(
-        `&lt;a href=&#x27;https://www.odoo.com&#x27;&gt;odoo&lt;a&gt;`
+    expect(escape(`<a href='https://www.afenda.app'>odoo<a>`)).toBe(
+        `&lt;a href=&#x27;https://www.afenda.app&#x27;&gt;odoo&lt;a&gt;`
     );
-    expect(escape("<a href='https://www.odoo.com'>Odoo`s website<a>")).toBe(
-        `&lt;a href=&#x27;https://www.odoo.com&#x27;&gt;Odoo&#x60;s website&lt;a&gt;`
+    expect(escape("<a href='https://www.afenda.app'>AFENDA xForge`s website<a>")).toBe(
+        `&lt;a href=&#x27;https://www.afenda.app&#x27;&gt;AFENDA xForge&#x60;s website&lt;a&gt;`
     );
 });
 
@@ -130,10 +130,10 @@ test("isEmail", () => {
     expect(isEmail("")).toBe(false);
     expect(isEmail("test")).toBe(false);
     expect(isEmail("test@odoo")).toBe(false);
-    expect(isEmail("test@odoo@odoo.com")).toBe(false);
-    expect(isEmail("te st@odoo.com")).toBe(false);
+    expect(isEmail("test@odoo@afenda.app")).toBe(false);
+    expect(isEmail("te st@afenda.app")).toBe(false);
 
-    expect(isEmail("test@odoo.com")).toBe(true);
+    expect(isEmail("test@afenda.app")).toBe(true);
 });
 
 test("isNumeric", () => {

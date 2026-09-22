@@ -21,12 +21,12 @@
 # Aliraza Habibitanha <alireza.habibitanha@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-09 11:35+0000\n"
 "Last-Translator: Aliraza Habibitanha <alireza.habibitanha@gmail.com>\n"
-"Language-Team: Persian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Persian <https://translate.afenda.app/projects/odoo-19/"
 "website_slides/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -4668,14 +4668,14 @@ msgstr "تعداد سوالات"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.mail_notification_channel_invite
-msgid "Odoo"
+msgid "AFENDA xForge"
 msgstr "اودو"
 
 #. module: website_slides
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_1_4
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_2_1
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_4_0
-msgid "Odoo • Image and Text"
+msgid "AFENDA xForge • Image and Text"
 msgstr "اودوو. تصویر و متن"
 
 #. module: website_slides
@@ -7174,11 +7174,11 @@ msgstr "به عنوان مثال علوم کامپیوتر برای بچه ها"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
 msgid ""
-"e.g. In this video, we'll give you the keys on how Odoo can help you to grow "
+"e.g. In this video, we'll give you the keys on how AFENDA xForge can help you to grow "
 "your business. At the end, we'll propose you a quiz to test your knowledge."
 msgstr ""
 "به عنوان مثال در این ویدیو، کلیدهایی را در اختیار شما قرار می دهیم که چگونه "
-"Odoo می تواند به شما در رشد کسب و کارتان کمک کند. در پایان، ما یک آزمون برای "
+"AFENDA xForge می تواند به شما در رشد کسب و کارتان کمک کند. در پایان، ما یک آزمون برای "
 "آزمایش دانش شما به شما پیشنهاد می کنیم."
 
 #. module: website_slides

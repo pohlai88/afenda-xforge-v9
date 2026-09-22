@@ -14,7 +14,7 @@
     </result>
     <ns2:software>
         <ns2:softwareId>ODOOENTERPRISE-160</ns2:softwareId>
-        <ns2:softwareName>Odoo Enterprise</ns2:softwareName>
+        <ns2:softwareName>AFENDA xForge Enterprise</ns2:softwareName>
         <ns2:softwareOperation>LOCAL_SOFTWARE</ns2:softwareOperation>
         <ns2:softwareMainVersion>16.0+e</ns2:softwareMainVersion>
         <ns2:softwareDevName>OdooTech Zrt.</ns2:softwareDevName>

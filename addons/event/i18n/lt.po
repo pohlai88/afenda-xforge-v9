@@ -24,12 +24,12 @@
 # Ulevičienė <vilma.uleviciene@mededu.lt>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-05 03:03+0000\n"
 "Last-Translator: Ulevičienė <vilma.uleviciene@mededu.lt>\n"
-"Language-Team: Lithuanian <https://translate.odoo.com/projects/odoo-19/event/"
+"Language-Team: Lithuanian <https://translate.afenda.app/projects/odoo-19/event/"
 "lt/>\n"
 "Language: lt\n"
 "MIME-Version: 1.0\n"
@@ -176,7 +176,7 @@ msgstr ""
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
 msgstr ""
 
@@ -1805,11 +1805,11 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "Būdamas vos 13 metų, Johnas DOE jau pradėjo kurti savo pirmąsias verslo "
 "programas klientams. Įgijęs civilinės inžinerijos specialybę, jis įkūrė „"
-"TinyERP“. Tai buvo pirmasis „OpenERP“ etapas, kuris vėliau tapo „Odoo“ – "
+"TinyERP“. Tai buvo pirmasis „OpenERP“ etapas, kuris vėliau tapo „AFENDA xForge“ – "
 "dažniausiai pasaulyje diegiama atvirojo kodo verslo programine įranga."
 
 #. module: event
@@ -2775,7 +2775,7 @@ msgstr ""
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
 
@@ -2807,7 +2807,7 @@ msgstr "Font awesome piktograma, pvz., fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 
 #. module: event
@@ -3714,7 +3714,7 @@ msgstr "Tikslai"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
+msgid "AFENDA xForge Community Days"
 msgstr ""
 
 #. module: event
@@ -5096,7 +5096,7 @@ msgstr ""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
 msgstr ""
 
 #. module: event

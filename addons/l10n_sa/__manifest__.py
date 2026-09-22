@@ -4,9 +4,9 @@
     'icon': '/account/static/description/l10n.png',
     'countries': ['sa'],
     'version': '2.3',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'category': 'Accounting/Localizations/Account Charts',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/saudi_arabia.html',
+    'website': '/docs/applications/finance/fiscal_localizations/saudi_arabia.html',
     'description': """
 Saudi Arabia Accounting Module
 ===========================================================

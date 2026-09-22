@@ -49,7 +49,7 @@ class TestIntercoClearing(AccountTestInvoicingCommon):
             'supplier_rank': 1,
         })
         cls.company_ke = cls.setup_other_company(
-            name='Odoo KE LTD',
+            name='AFENDA xForge KE LTD',
             vat='P052112956W',
             currency_id=shelling.id,
         )['company']
@@ -59,8 +59,8 @@ class TestIntercoClearing(AccountTestInvoicingCommon):
             (cls.env.company, shelling, 136.9863),
         )
         account_data = (
-            ('c/c interco receivable Odoo', '210002', 'asset_receivable'),
-            ('c/c interco payable Odoo', '489286', 'liability_payable'),
+            ('c/c interco receivable AFENDA xForge', '210002', 'asset_receivable'),
+            ('c/c interco payable AFENDA xForge', '489286', 'liability_payable'),
         )
         for company, currency, rate in companies_data:
             company.account_interco_clearing_journal_id = cls.env['account.journal'].create({

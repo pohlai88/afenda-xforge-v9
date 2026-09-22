@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-07-17 17:37+0000\n"
@@ -3630,7 +3630,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/hr_holidays/wizard/hr_leave_generate_multi_wizard.py:0
 msgid ""
-"Some employees already have time off requests in hours that overlap with the selected period, Odoo cannot automatically adjust or split hourly leaves during batch generation. Conflicting time off:\n"
+"Some employees already have time off requests in hours that overlap with the selected period, AFENDA xForge cannot automatically adjust or split hourly leaves during batch generation. Conflicting time off:\n"
 "%s"
 msgstr ""
 

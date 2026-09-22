@@ -264,7 +264,7 @@ test("default currency format", async () => {
         data: {},
         revisions: [],
         default_currency: {
-            code: "Odoo",
+            code: "AFENDA xForge",
             symbol: "θ",
             position: "after",
             decimalPlaces: 2,

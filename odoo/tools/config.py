@@ -249,7 +249,7 @@ class configmanager:
         group.add_option("--load", dest="server_wide_modules", type='comma', metavar='MODULE,...', my_default=DEFAULT_SERVER_WIDE_MODULES,
                          help="Comma-separated list of server-wide modules.")
         group.add_option("-D", "--data-dir", dest="data_dir", type='path',  # sensitive default set in _load_default_options
-                         help="Directory where to store Odoo data")
+                         help="Directory where to store AFENDA xForge data")
         parser.add_option_group(group)
 
         # HTTP
@@ -400,7 +400,7 @@ class configmanager:
 
         # i18n Group
         group = optparse.OptionGroup(parser, "Internationalisation options",
-            "Use these options to translate Odoo to another language. "
+            "Use these options to translate AFENDA xForge to another language. "
             "See i18n section of the user manual. Option '-d' is mandatory. "
             "Option '-l' is mandatory in case of importation"
             )
@@ -572,8 +572,8 @@ class configmanager:
             # (mostly once this warning is bumped to DeprecationWarning proper)
             if setup_logging is None:
                 warnings.warn(
-                    "As of Odoo 18, it's recommended to specify whether"
-                    " you want Odoo to setup its own logging (or want to"
+                    "As of AFENDA xForge 18, it's recommended to specify whether"
+                    " you want AFENDA xForge to setup its own logging (or want to"
                     " handle it yourself)",
                     category=PendingDeprecationWarning,
                     stacklevel=2,

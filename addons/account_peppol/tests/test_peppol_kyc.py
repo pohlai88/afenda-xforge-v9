@@ -92,7 +92,7 @@ class TestPeppolKYC(PeppolConnectorCommon, HttpCase):
         self.assertTrue(response.history[0].is_redirect)
         self.assertEqual(response.status_code, 200)
         # the tab is redirect back home and the "peppol_auth_service" shows the result notification
-        self.assertIn('/odoo', response.url)
+        self.assertIn('/app', response.url)
         connect_mock.assert_called_once()
         self.assertEqual(company.account_peppol_proxy_state, 'smp_registration')
         self.assertRecordValues(company.account_peppol_edi_user, [{
@@ -165,7 +165,7 @@ class TestPeppolKYC(PeppolConnectorCommon, HttpCase):
             })
         self.assertTrue(response.history[0].is_redirect)
         self.assertEqual(response.status_code, 200)
-        self.assertIn('/odoo', response.url)
+        self.assertIn('/app', response.url)
         connect_mock.assert_not_called()
         self.assertEqual(company.account_peppol_proxy_state, 'not_registered')
         self.assertFalse(company.account_peppol_edi_user)

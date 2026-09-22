@@ -16,7 +16,7 @@ class Client:
     """A wrapper for Zeep.Client
 
     * providing a simpler API to pass timeouts and session,
-    * restricting its attributes to a few, most-commonly used accross Odoo's modules,
+    * restricting its attributes to a few, most-commonly used accross AFENDA xForge's modules,
     * serializing the returned values of its methods.
     """
     def __init__(self, *args, **kwargs):

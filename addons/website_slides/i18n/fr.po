@@ -14,12 +14,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-02 20:08+0000\n"
-"Last-Translator: \"Manon Rondou (ronm)\" <ronm@odoo.com>\n"
-"Language-Team: French <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Manon Rondou (ronm)\" <ronm@afenda.app>\n"
+"Language-Team: French <https://translate.afenda.app/projects/odoo-19/"
 "website_slides/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -4772,15 +4772,15 @@ msgstr "Nombre de questions"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.mail_notification_channel_invite
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: website_slides
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_1_4
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_2_1
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_4_0
-msgid "Odoo • Image and Text"
-msgstr "Odoo • Image et Texte"
+msgid "AFENDA xForge • Image and Text"
+msgstr "AFENDA xForge • Image et Texte"
 
 #. module: website_slides
 #: model:res.groups,name:website_slides.group_website_slides_officer
@@ -7295,10 +7295,10 @@ msgstr "par ex. L'informatique pour les enfants"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
 msgid ""
-"e.g. In this video, we'll give you the keys on how Odoo can help you to grow "
+"e.g. In this video, we'll give you the keys on how AFENDA xForge can help you to grow "
 "your business. At the end, we'll propose you a quiz to test your knowledge."
 msgstr ""
-"par ex:. Dans cette vidéo, nous vous expliquerons comment Odoo peut vous "
+"par ex:. Dans cette vidéo, nous vous expliquerons comment AFENDA xForge peut vous "
 "aider à développer votre entreprise. À la fin, nous vous proposerons un quiz "
 "pour tester vos connaissances."
 

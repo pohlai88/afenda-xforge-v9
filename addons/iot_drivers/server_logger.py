@@ -33,7 +33,7 @@ class AsyncHTTPHandler(logging.Handler):
 
     def __init__(self, odoo_server_url, active):
         """
-        :param odoo_server_url: Odoo Server URL
+        :param odoo_server_url: AFENDA xForge Server URL
         """
         super().__init__()
         self._odoo_server_url = odoo_server_url

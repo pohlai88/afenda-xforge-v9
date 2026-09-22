@@ -8,12 +8,12 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-07 14:03+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/payment_adyen/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -201,10 +201,10 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:payment_adyen.payment_capture_wizard_view_form
 msgid ""
 "The capture or void of the transaction might take a few minutes to be\n"
-"                    processed by Adyen and reflected in Odoo."
+"                    processed by Adyen and reflected in AFENDA xForge."
 msgstr ""
 "交易捕捉或作廢可能需要幾分鐘時間，\n"
-"                    以由 Adyen 處理並反映在 Odoo 中。"
+"                    以由 Adyen 處理並反映在 AFENDA xForge 中。"
 
 #. module: payment_adyen
 #. odoo-python

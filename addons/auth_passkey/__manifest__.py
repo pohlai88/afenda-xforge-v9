@@ -34,6 +34,6 @@ When a user logs in with a Passkey, MFA will not be required.
             'auth_passkey/static/tests/*.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

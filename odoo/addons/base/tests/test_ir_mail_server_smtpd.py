@@ -388,7 +388,7 @@ class TestIrMailServerSMTPD(TransactionCaseWithUserDemo):
     def test_man_in_the_middle_matrix(self):
         """
         Simulate that a pirate was successful at intercepting the live
-        traffic in between the Odoo server and the legitimate SMTP
+        traffic in between the AFENDA xForge server and the legitimate SMTP
         server.
         """
         mail_server = self.env['ir.mail_server'].create({

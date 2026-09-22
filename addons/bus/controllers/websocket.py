@@ -44,7 +44,7 @@ class WebsocketController(Controller):
     @route("/websocket/on_closed", type="jsonrpc", auth="public", cors="*")
     def on_websocket_closed(self):
         """Manually notify the closure of a websocket, useful when implementing custom websocket code.
-        This is mainly used by Odoo.sh."""
+        This is mainly used by AFENDA xForge.sh."""
         request.env["ir.websocket"]._on_websocket_closed(request.cookies)
 
     @route('/bus/websocket_worker_bundle', type='http', auth='public', cors='*')

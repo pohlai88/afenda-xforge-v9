@@ -13,6 +13,6 @@
         'views/res_config_settings_view.xml',
     ],
     'depends': ['base_setup'],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

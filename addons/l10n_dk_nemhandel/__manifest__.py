@@ -34,7 +34,7 @@
             'l10n_dk_nemhandel/static/src/tours/nemhandel_onboarding.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'pre_init_hook': '_pre_init_nemhandel',
     'post_init_hook': '_post_init_nemhandel',

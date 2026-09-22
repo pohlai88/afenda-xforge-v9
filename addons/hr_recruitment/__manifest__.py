@@ -7,7 +7,7 @@
     'category': 'Human Resources/Recruitment',
     'sequence': 90,
     'summary': 'Track your recruitment pipeline',
-    'website': 'https://www.odoo.com/app/recruitment',
+    'website': 'https://www.afenda.app/app/recruitment',
     'depends': [
         'hr',
         'calendar',
@@ -61,6 +61,6 @@
             'hr_recruitment/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

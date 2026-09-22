@@ -23,6 +23,6 @@ for customization purpose.
             'base_import_module/static/src/**/*',
         ]
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

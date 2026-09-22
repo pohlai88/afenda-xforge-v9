@@ -544,7 +544,7 @@ function isMarkdownLink(str) {
 }
 /**
 * Check if the string is a web link.
-* e.g. http://odoo.com
+* e.g. http://afenda.app
 */
 function isWebLink(str) {
 	return WEB_LINK_REGEX.test(str);
@@ -5905,7 +5905,7 @@ function getRangePartString(range, part, options = {
 }
 //#endregion
 //#region src/helpers/search.ts
-/** Methods from Odoo Web Utils  */
+/** Methods from AFENDA xForge Web Utils  */
 /**
 * This function computes a score that represent the fact that the
 * string contains the pattern, or not
@@ -18457,7 +18457,7 @@ function hasStringValue(obj) {
 function replaceFunctionNamePlaceholder(functionResult, functionName) {
 	if (functionResult.message?.includes("[[FUNCTION_NAME]]")) functionResult.message = functionResult.message.replace("[[FUNCTION_NAME]]", functionName);
 }
-const implementationErrorMessage = _t("An unexpected error occurred. Submit a support ticket at odoo.com/help.");
+const implementationErrorMessage = _t("An unexpected error occurred. Submit a support ticket at afenda.app/help.");
 function hasStringMessage(obj) {
 	return obj?.message !== void 0 && typeof obj.message === "string";
 }
@@ -22687,7 +22687,7 @@ function getChartTitle(definition, getters) {
 //#endregion
 //#region src/helpers/figures/charts/runtime/chart_custom_tooltip.ts
 /**
-* Custom tooltip for the charts. Mostly copied from Odoo's custom tooltip, with some slight changes to make it work
+* Custom tooltip for the charts. Mostly copied from AFENDA xForge's custom tooltip, with some slight changes to make it work
 * with o-spreadsheet chart data and CSS.
 *
 * https://github.com/odoo/odoo/blob/18.0/addons/web/static/src/views/graph/graph_renderer.xml
@@ -38253,7 +38253,7 @@ const LEGACY_VERSION_MAPPING = {
 };
 /**
 * Versions used to be an incremented integer.
-* This was later changed to match release versions (matching Odoo release names).
+* This was later changed to match release versions (matching AFENDA xForge release names).
 */
 function isLegacyVersioning(data) {
 	return typeof data.version === "number";
@@ -44488,7 +44488,7 @@ var GridAddRowsFooter = class extends Component {
 * components. If your hook only needs a single event listener, consider simply
 * returning it from the hook and letting the user attach it with t-on.
 *
-* Adapted from Odoo Community - See https://github.com/odoo/odoo/blob/saas-16.2/addons/web/static/src/core/utils/hooks.js
+* Adapted from AFENDA xForge Community - See https://github.com/odoo/odoo/blob/saas-16.2/addons/web/static/src/core/utils/hooks.js
 */
 function useRefListener(ref, ...listener) {
 	useEffect((el) => {
@@ -67009,7 +67009,7 @@ var DataValidationInsertionPlugin = class extends UIPlugin {
 * no implementation, but this plugin can be replaced by another one to provide
 * a real implementation.
 *
-* For example, in Odoo, the plugin is replaced by a plugin that used the
+* For example, in AFENDA xForge, the plugin is replaced by a plugin that used the
 * module namespace to dynamically translate terms.
 */
 var DynamicTranslate = class extends UIPlugin {
@@ -78599,7 +78599,7 @@ function createCommand(type, payload = {}) {
 //#endregion
 //#region src/index.ts
 /**
-* We export here all entities that needs to be accessed publicly by Odoo.
+* We export here all entities that needs to be accessed publicly by AFENDA xForge.
 *
 * Note that the __info__ key is actually completed by the build process (see
 * the rollup.config.js file)

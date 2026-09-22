@@ -9,12 +9,12 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-04 07:31+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/payment/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/> These properties are set to\n"
 "                                match the behavior of providers and that of "
 "their integration with\n"
-"                                Odoo regarding this payment method. Any "
+"                                AFENDA xForge regarding this payment method. Any "
 "change may result in errors\n"
 "                                and should be tested on a test database "
 "first."
@@ -47,7 +47,7 @@ msgstr ""
 "<i class=\"fa fa-exclamation-triangle\"/> 設定這些屬性是為了\n"
 "                                配對服務提供者的行為，以及他們就此付款方式"
 "與\n"
-"                                Odoo 的整合功能的行為。任何變更都可能引致錯誤"
+"                                AFENDA xForge 的整合功能的行為。任何變更都可能引致錯誤"
 "，\n"
 "                                應首先在測試資料庫上進行測試。"
 
@@ -657,11 +657,11 @@ msgstr "獲取交易"
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_provider__capture_manually
 msgid ""
-"Capture the amount from Odoo, when the delivery is completed.\n"
+"Capture the amount from AFENDA xForge, when the delivery is completed.\n"
 "Use this if you want to charge your customers cards only when\n"
 "you are sure you can ship the goods to them."
 msgstr ""
-"交付完成後，可從 Odoo 捕捉金額。\n"
+"交付完成後，可從 AFENDA xForge 捕捉金額。\n"
 "如果只想在確定能夠將貨物運送給客戶時\n"
 "才以客戶的付款卡收費，請使用此選項。"
 
@@ -1670,8 +1670,8 @@ msgstr "八達通"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__module_to_buy
-msgid "Odoo Enterprise Module"
-msgstr "Odoo 企業版專屬模組"
+msgid "AFENDA xForge Enterprise Module"
+msgstr "AFENDA xForge 企業版專屬模組"
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_transaction__operation__offline
@@ -2227,8 +2227,8 @@ msgstr "退款"
 #: model:ir.model.fields,help:payment.field_payment_provider__support_refund
 msgid ""
 "Refund is a feature allowing to refund customers directly from the payment "
-"in Odoo."
-msgstr "「退款」功能讓你可直接從 Odoo 內的付款資料，向客戶執行退款。"
+"in AFENDA xForge."
+msgstr "「退款」功能讓你可直接從 AFENDA xForge 內的付款資料，向客戶執行退款。"
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form

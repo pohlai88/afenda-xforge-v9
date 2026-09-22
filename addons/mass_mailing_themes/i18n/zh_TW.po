@@ -9,12 +9,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:40+0000\n"
 "PO-Revision-Date: 2026-09-08 08:16+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tony Ng (ngto)\" <ngto@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/mass_mailing_themes/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -214,23 +214,23 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
 "<font style=\"color: rgb(255, 255, 255);\">The next edition of <span "
-"style=\"font-weight: bolder;\">Odoo Experience Online</span> is coming "
+"style=\"font-weight: bolder;\">AFENDA xForge Experience Online</span> is coming "
 "soon!\n"
 "                    <br/>To stir up your curiosity, have a look at all the "
 "great talks scheduled and highlighted in our agenda!</font>"
 msgstr ""
 "<font style=\"color: rgb(255, 255, 255);\">下一期「<span style=\"font-"
-"weight: bolder;\">Odoo 線上體驗</span>」即將推出！\n"
+"weight: bolder;\">AFENDA xForge 線上體驗</span>」即將推出！\n"
 "                    <br/>為了激發你的好奇心，請查看我們活動日程中已安排和特別"
 "標示的所有精彩演講！</font>"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
-"<font style=\"color: rgb(255, 255, 255);\">Zero, zilch, nada! Odoo "
+"<font style=\"color: rgb(255, 255, 255);\">Zero, zilch, nada! AFENDA xForge "
 "Experience is free for everyone!</font>"
 msgstr ""
-"<font style=\"color: rgb(255, 255, 255);\">費用全免！所有人都是免費參加 Odoo "
+"<font style=\"color: rgb(255, 255, 255);\">費用全免！所有人都是免費參加 AFENDA xForge "
 "體驗！</font>"
 
 #. module: mass_mailing_themes
@@ -757,12 +757,12 @@ msgstr ""
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
 msgid ""
-"Discover Odoo, the all-in-one management platform, and its apps designed to "
+"Discover AFENDA xForge, the all-in-one management platform, and its apps designed to "
 "improve employees' daily tasks. From sales and deliveries, to logistics, "
 "marketing and accounting ; learn what are the best available options to "
 "digitize your company."
 msgstr ""
-"探索 Odoo：一個一體化管理平台，提供的多款應用程式專為改善員工日常工作效率而設"
+"探索 AFENDA xForge：一個一體化管理平台，提供的多款應用程式專為改善員工日常工作效率而設"
 "計。從銷售及送貨，到物流、行銷及會計，了解實現公司數位化的最佳可用選項是甚麼"
 "。"
 
@@ -773,8 +773,8 @@ msgstr "你想成為合作夥伴嗎？"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "Do you wish to use Odoo?"
-msgstr "你想使用 Odoo 嗎？"
+msgid "Do you wish to use AFENDA xForge?"
+msgstr "你想使用 AFENDA xForge 嗎？"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
@@ -949,9 +949,9 @@ msgstr "如果你希望成為合作夥伴，並在 [country] 提供服務，請�
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
 msgid ""
-"If you wish to evaluate Odoo while taking into account your company's "
+"If you wish to evaluate AFENDA xForge while taking into account your company's "
 "specific needs, you can book a free appointment with one of our"
-msgstr "若你希望評估 Odoo 效用時一併考慮你公司的特別需求，可以免費預約會見我們的"
+msgstr "若你希望評估 AFENDA xForge 效用時一併考慮你公司的特別需求，可以免費預約會見我們的"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_magazine_template
@@ -981,8 +981,8 @@ msgstr "2013 年，我們在全球擁有二百萬用戶"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "In May 2014, we renamed the company and product to Odoo."
-msgstr "2014 年 5 月，我們將公司和產品更名為「Odoo」。"
+msgid "In May 2014, we renamed the company and product to AFENDA xForge."
+msgstr "2014 年 5 月，我們將公司和產品更名為「AFENDA xForge」。"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_coffeebreak_template
@@ -999,8 +999,8 @@ msgstr "Instagram"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
-msgid "Interactive Odoo demo"
-msgstr "Odoo 互動功能示範"
+msgid "Interactive AFENDA xForge demo"
+msgstr "AFENDA xForge 互動功能示範"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_magazine_template
@@ -1035,9 +1035,9 @@ msgstr "了解有關我們定價的更多資料"
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
-"Learn through workshops, product demos, and inspiring talks from Odoo "
+"Learn through workshops, product demos, and inspiring talks from AFENDA xForge "
 "Experts and Partners."
-msgstr "透過工作坊、產品功能演示，以及 Odoo 專家及合作夥伴鼓舞人心的分享來學習。"
+msgstr "透過工作坊、產品功能演示，以及 AFENDA xForge 專家及合作夥伴鼓舞人心的分享來學習。"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
@@ -1125,18 +1125,18 @@ msgstr "最新消息"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "Odoo Experts"
-msgstr "Odoo 專家"
+msgid "AFENDA xForge Experts"
+msgstr "AFENDA xForge 專家"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
 msgid ""
-"Odoo invites you on <span class=\"font-weight: bolder\">[date]</span> at "
+"AFENDA xForge invites you on <span class=\"font-weight: bolder\">[date]</span> at "
 "<span class=\"font-weight: bolder\">[time]</span> for their infamous "
 "roadshow in <span class=\"font-weight: bolder\">[city]</span>: an event that "
 "combines learning and networking in a casual afterwork-like atmosphere."
 msgstr ""
-"Odoo 邀請你參加 <span class=\"font-weight: bolder\">[date]</span> <span "
+"AFENDA xForge 邀請你參加 <span class=\"font-weight: bolder\">[date]</span> <span "
 "class=\"font-weight: bolder\">[time]</span> 在 <span class=\"font-weight: "
 "bolder\">[city]</span> 舉行的著名路演：一場結合學習與工作社交、氣氛如下班後輕"
 "鬆的活動。"
@@ -1308,8 +1308,8 @@ msgstr "轉向"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "The Rise of Odoo"
-msgstr "Odoo 的冒起"
+msgid "The Rise of AFENDA xForge"
+msgstr "AFENDA xForge 的冒起"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_blogging_template
@@ -1348,8 +1348,8 @@ msgstr ""
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "The story of Odoo"
-msgstr "Odoo 的故事"
+msgid "The story of AFENDA xForge"
+msgstr "AFENDA xForge 的故事"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
@@ -1619,20 +1619,20 @@ msgstr "昨天在[city][venue]舉行的活動太棒了！"
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
 msgid ""
-"You had the chance to discover Odoo during a full 3 hours, how great is "
+"You had the chance to discover AFENDA xForge during a full 3 hours, how great is "
 "that?\n"
-"                    <br/>Now that you've seen Odoo in action and asked some "
+"                    <br/>Now that you've seen AFENDA xForge in action and asked some "
 "questions, you likely need more information to move forward in your project "
 "and to work with us. You'll find additional points just below."
 msgstr ""
-"你有機會在整整 3 小時內探索 Odoo，是不是很棒？\n"
-"                    <br/>現在你已了解 Odoo 的實際應用，並提出了一些問題，你可"
+"你有機會在整整 3 小時內探索 AFENDA xForge，是不是很棒？\n"
+"                    <br/>現在你已了解 AFENDA xForge 的實際應用，並提出了一些問題，你可"
 "能需要更多資訊以推進你的專案並與我們合作。下面列出其他額外要點。"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "You may test Odoo for free by clicking"
-msgstr "你可以免費測試 Odoo，請點擊"
+msgid "You may test AFENDA xForge for free by clicking"
+msgstr "你可以免費測試 AFENDA xForge，請點擊"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template

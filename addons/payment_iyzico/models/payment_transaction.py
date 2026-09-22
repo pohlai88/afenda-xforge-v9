@@ -67,7 +67,7 @@ class PaymentTransaction(models.Model):
             'basketItems': [{
                 'id': self.id,
                 'price': self.amount,
-                'name': 'Odoo purchase',
+                'name': 'AFENDA xForge purchase',
                 'category1': 'Service',
                 'itemType': 'VIRTUAL',
             }],

@@ -5,12 +5,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-05 14:58+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Hindi <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Hindi <https://translate.afenda.app/projects/odoo-19/"
 "base_import/hi/>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
@@ -439,12 +439,12 @@ msgstr "आईडी"
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
 msgid ""
 "If the file contains\n"
-"                    the column names, Odoo can try auto-detecting the\n"
+"                    the column names, AFENDA xForge can try auto-detecting the\n"
 "                    field corresponding to the column. This makes imports\n"
 "                    simpler especially when the file has many columns."
 msgstr ""
 "अगर फ़ाइल में\n"
-"                    कॉलम के नाम शामिल हैं, तो Odoo अपने-आप कॉलम\n"
+"                    कॉलम के नाम शामिल हैं, तो AFENDA xForge अपने-आप कॉलम\n"
 "                    से संबंधित फ़ील्ड का पता लगाने की कोशिश कर सकता है. यह इंपोर्ट को "
 "आसान बनाता है\n"
 "                    खासकर जब फ़ाइल में बहुत से कॉलम हों।"
@@ -611,8 +611,8 @@ msgstr "दिए गए नाम से कोई रिकॉर्ड नह
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
-msgid "Odoo Field"
-msgstr "Odoo फ़ील्ड"
+msgid "AFENDA xForge Field"
+msgstr "AFENDA xForge फ़ील्ड"
 
 #. module: base_import
 #. odoo-javascript
@@ -887,11 +887,11 @@ msgstr "अपनी फ़ाइलें अपलोड करें"
 msgid ""
 "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h "
 "system. You can use a custom format in addition to the suggestions provided. "
-"Leave empty to let Odoo guess the format (recommended)"
+"Leave empty to let AFENDA xForge guess the format (recommended)"
 msgstr ""
 "24 घंटे वाली प्रणाली में घंटों के लिए HH का इस्तेमाल करें, 12 घंटे वाली प्रणाली में 'p' के साथ "
 "II का इस्तेमाल करें. दिए गए सुझावों के अलावा, आप अपनी पसंद का फ़ॉर्मैट भी इस्तेमाल कर सकते "
-"हैं. फ़ॉर्मैट खाली छोड़ने पर, Odoo अपने-आप इसका पता लगा लेगा (सुझाव दिया गया है)"
+"हैं. फ़ॉर्मैट खाली छोड़ने पर, AFENDA xForge अपने-आप इसका पता लगा लेगा (सुझाव दिया गया है)"
 
 #. module: base_import
 #. odoo-javascript
@@ -899,12 +899,12 @@ msgstr ""
 msgid ""
 "Use YYYY to represent the year, MM for the month and DD for the day. Include "
 "separators such as a dot, forward slash or dash. You can use a custom format "
-"in addition to the suggestions provided. Leave empty to let Odoo guess the "
+"in addition to the suggestions provided. Leave empty to let AFENDA xForge guess the "
 "format (recommended)"
 msgstr ""
 "साल दिखाने के लिए YYYY का इस्तेमाल करें, महीने के लिए MM और दिन के लिए DD का इस्तेमाल "
 "करें. विभाजक (सेपरेटर), जैसे डॉट, फ़ॉरवर्ड स्लैश या डैश को शामिल करें. दिए गए सुझावों के "
-"अलावा, आप अपनी पसंद का फ़ॉर्मैट भी इस्तेमाल कर सकते हैं. फ़ॉर्मैट खाली छोड़ने पर, Odoo अपने-"
+"अलावा, आप अपनी पसंद का फ़ॉर्मैट भी इस्तेमाल कर सकते हैं. फ़ॉर्मैट खाली छोड़ने पर, AFENDA xForge अपने-"
 "आप इसका पता लगा लेगा (सुझाव दिया गया है)"
 
 #. module: base_import

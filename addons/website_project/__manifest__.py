@@ -32,6 +32,6 @@ Generate tasks in Project app from a form published on your website. This module
             'website/static/src/components/autocomplete_with_pages/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

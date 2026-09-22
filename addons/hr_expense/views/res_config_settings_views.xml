@@ -25,7 +25,7 @@
                                 </div>
                                 <div class="content-group" invisible="not hr_expense_use_mailgateway or alias_domain_id">
                                     <div class="mt16">
-                                        <a href="/odoo/settings#email-alias-setting" class="btn-link" role="button"><i class="oi oi-arrow-right"></i> Setup your alias domain</a>
+                                        <a href="/app/settings#email-alias-setting" class="btn-link" role="button"><i class="oi oi-arrow-right"></i> Setup your alias domain</a>
                                     </div>
                                 </div>
                             </setting>
@@ -38,7 +38,7 @@
                                 <field name="module_hr_expense_extract" widget="upgrade_boolean"/>
                             </setting>
                             <setting string="Expense Card" company_dependent="True" id="expense_cards_stripe_issuing"
-                                     help="Create prepaid virtual and physical cards for both one-time and recurring expenses, integrated into Odoo through Stripe Issuing.">
+                                     help="Create prepaid virtual and physical cards for both one-time and recurring expenses, integrated into AFENDA xForge through Stripe Issuing.">
                                 <field name="module_hr_expense_stripe" widget="upgrade_boolean"/>
                                 <div class="content-group" invisible="not module_hr_expense_stripe" name="expenses_stripe_issuing_container">
                                     <div class="text-warning mt16 mb4">

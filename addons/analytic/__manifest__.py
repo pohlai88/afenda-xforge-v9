@@ -10,7 +10,7 @@
 Module for defining analytic accounting object.
 ===============================================
 
-In Odoo, analytic accounts are linked to general accounts but are treated
+In AFENDA xForge, analytic accounts are linked to general accounts but are treated
 totally independently. So, you can enter various different analytic operations
 that have no counterpart in the general financial accounts.
     """,
@@ -43,6 +43,6 @@ that have no counterpart in the general financial accounts.
         ],
     },
     'installable': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

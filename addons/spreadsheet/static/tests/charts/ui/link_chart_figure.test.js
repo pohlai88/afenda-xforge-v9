@@ -131,7 +131,7 @@ test("icon external link is on the chart when its linked to an odoo menu", async
     });
 
     const chartMenu = model.getters.getChartOdooMenu(chartId);
-    expect(chartMenu.id).toBe(1, { message: "Odoo menu is linked to chart" });
+    expect(chartMenu.id).toBe(1, { message: "AFENDA xForge menu is linked to chart" });
     await animationFrame();
     expect(".o-chart-external-link").toHaveCount(1);
 });
@@ -163,7 +163,7 @@ test("icon external link isn't on the chart in dashboard mode", async function (
         odooMenuId: 1,
     });
     const chartMenu = model.getters.getChartOdooMenu(chartId);
-    expect(chartMenu.id).toBe(1, { message: "Odoo menu is linked to chart" });
+    expect(chartMenu.id).toBe(1, { message: "AFENDA xForge menu is linked to chart" });
     model.updateMode("dashboard");
     await animationFrame();
     expect(".o-chart-external-link").toHaveCount(0, { message: "No link icon in dashboard" });
@@ -184,7 +184,7 @@ test("click on icon external link on chart redirect to the odoo menu", async fun
         odooMenuId: 2,
     });
     const chartMenu = model.getters.getChartOdooMenu(chartId);
-    expect(chartMenu.id).toBe(2, { message: "Odoo menu is linked to chart" });
+    expect(chartMenu.id).toBe(2, { message: "AFENDA xForge menu is linked to chart" });
     await animationFrame();
 
     await clickChartExternalLink(fixture);

@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.saas~18\n"
+"Project-Id-Version: AFENDA xForge Server 10.saas~18\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:49+0000\n"
 "PO-Revision-Date: 2026-08-03 09:18+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/"
 "partner_autocomplete/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -39,8 +39,8 @@ msgstr "ບໍລິສັດ"
 #. module: partner_autocomplete
 #. odoo-python
 #: code:addons/partner_autocomplete/models/res_company.py:0
-msgid "Company auto-completed by Odoo Partner Autocomplete Service"
-msgstr "ບໍລິສັດຖືກຕື່ມຂໍ້ມູນອັດຕະໂນມັດໂດຍບໍລິການ Odoo Partner Autocomplete"
+msgid "Company auto-completed by AFENDA xForge Partner Autocomplete Service"
+msgstr "ບໍລິສັດຖືກຕື່ມຂໍ້ມູນອັດຕະໂນມັດໂດຍບໍລິການ AFENDA xForge Partner Autocomplete"
 
 #. module: partner_autocomplete
 #: model:ir.model.fields,field_description:partner_autocomplete.field_res_company__partner_gid
@@ -150,8 +150,8 @@ msgstr "ການຕື່ມຂໍ້ມູນຜູ້ຕິດຕໍ່ອັ
 #. module: partner_autocomplete
 #. odoo-python
 #: code:addons/partner_autocomplete/models/res_partner.py:0
-msgid "Partner created by Odoo Partner Autocomplete Service"
-msgstr "ຜູ້ຕິດຕໍ່ຖືກສ້າງໂດຍບໍລິການ Odoo Partner Autocomplete"
+msgid "Partner created by AFENDA xForge Partner Autocomplete Service"
+msgstr "ຜູ້ຕິດຕໍ່ຖືກສ້າງໂດຍບໍລິການ AFENDA xForge Partner Autocomplete"
 
 #. module: partner_autocomplete
 #. odoo-javascript

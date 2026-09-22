@@ -14,12 +14,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-31 17:36+0000\n"
 "PO-Revision-Date: 2026-08-27 10:02+0000\n"
-"Last-Translator: Bren Driesen <brdri@odoo.com>\n"
-"Language-Team: Dutch <https://translate.odoo.com/projects/odoo-19/website/"
+"Last-Translator: Bren Driesen <brdri@afenda.app>\n"
+"Language-Team: Dutch <https://translate.afenda.app/projects/odoo-19/website/"
 "nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -621,30 +621,30 @@ msgstr "50 m"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_cta_card
 msgid ""
-"50,000+ companies run Odoo <br class=\"d-none d-lg-inline\"/>to grow their "
+"50,000+ companies run AFENDA xForge <br class=\"d-none d-lg-inline\"/>to grow their "
 "businesses."
 msgstr ""
-"meer dan 50.000 bedrijven gebruiken Odoo <br class=\"d-none d-lg-inline\"/>"
+"meer dan 50.000 bedrijven gebruiken AFENDA xForge <br class=\"d-none d-lg-inline\"/>"
 "om hun bedrijf te laten groeien."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_call_to_action
 #: model_terms:ir.ui.view,arch_db:website.template_footer_call_to_action
-msgid "50,000+ companies run Odoo to grow their businesses."
+msgid "50,000+ companies run AFENDA xForge to grow their businesses."
 msgstr ""
-"Meer dan 50.000 bedrijven gebruiken Odoo om hun bedrijf te laten groeien."
+"Meer dan 50.000 bedrijven gebruiken AFENDA xForge om hun bedrijf te laten groeien."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_cta_box
-msgid "50,000+ companies run Odoo<br/>to grow their businesses."
+msgid "50,000+ companies run AFENDA xForge<br/>to grow their businesses."
 msgstr ""
-"meer dan 50.000 bedrijven gebruiken Odoo<br/>om hun bedrijf te laten groeien."
+"meer dan 50.000 bedrijven gebruiken AFENDA xForge<br/>om hun bedrijf te laten groeien."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_cta_mobile
 #: model_terms:ir.ui.view,arch_db:website.s_cta_mockups
-msgid "50,000+ companies trust Odoo."
-msgstr "meer dan 50.000 bedrijven vertrouwen op Odoo."
+msgid "50,000+ companies trust AFENDA xForge."
+msgstr "meer dan 50.000 bedrijven vertrouwen op AFENDA xForge."
 
 #. module: website
 #. odoo-javascript
@@ -5106,10 +5106,10 @@ msgstr "Grafiek"
 #: model_terms:ir.ui.view,arch_db:website.s_form_aside
 msgid ""
 "Chat with us through or fill in this form to get information about anything "
-"related to Odoo apps, services, our company."
+"related to AFENDA xForge apps, services, our company."
 msgstr ""
 "Chat met ons of vul dit formulier in om informatie te krijgen over alles wat "
-"met Odoo-apps, diensten en ons bedrijf te maken heeft."
+"met AFENDA xForge-apps, diensten en ons bedrijf te maken heeft."
 
 #. module: website
 #: model:website.configurator.feature,description:website.feature_module_live_chat
@@ -6603,12 +6603,12 @@ msgstr "Ontwerp"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_table_of_content
 msgid ""
-"Design Odoo templates easily with clean HTML and Bootstrap CSS. These "
+"Design AFENDA xForge templates easily with clean HTML and Bootstrap CSS. These "
 "templates offer a responsive, mobile-first design, making them simple to "
 "customize and perfect for any web project, from corporate sites to personal "
 "blogs."
 msgstr ""
-"Ontwerp Odoo-sjablonen eenvoudig met schone HTML en Bootstrap CSS. Deze "
+"Ontwerp AFENDA xForge-sjablonen eenvoudig met schone HTML en Bootstrap CSS. Deze "
 "sjablonen bieden een responsief, mobile-first ontwerp, waardoor ze eenvoudig "
 "aan te passen zijn en perfect zijn voor elk webproject, van bedrijfssites "
 "tot persoonlijke blogs."
@@ -8984,8 +8984,8 @@ msgstr "Ga naar het tabblad Thema"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.layout
-msgid "Go to your Odoo Apps"
-msgstr "Ga naar je Odoo-apps"
+msgid "Go to your AFENDA xForge Apps"
+msgstr "Ga naar je AFENDA xForge-apps"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_carousel
@@ -9221,8 +9221,8 @@ msgstr "Happy Hour"
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/options/countdown_option.xml:0
-msgid "Happy Odoo Anniversary!"
-msgstr "Fijne Odoo verjaardag!"
+msgid "Happy AFENDA xForge Anniversary!"
+msgstr "Fijne AFENDA xForge verjaardag!"
 
 #. module: website
 #: model:ir.model.fields,field_description:website.field_website__has_social_default_image
@@ -12112,12 +12112,12 @@ msgstr "Monitor Google Search resultaten"
 #. module: website
 #: model_terms:digest.tip,tip_description:website.digest_tip_website_0
 msgid ""
-"Monitor your visitors while they are browsing your website with the Odoo "
+"Monitor your visitors while they are browsing your website with the AFENDA xForge "
 "Social app. Engage with them in just a click using a live chat request or a "
 "push notification. If they have completed one of your forms, you can send "
 "them an SMS, or call them right away while they are browsing your website."
 msgstr ""
-"Volg je bezoekers terwijl ze op je website browsen met de Odoo Social app. "
+"Volg je bezoekers terwijl ze op je website browsen met de AFENDA xForge Social app. "
 "Betrek ze met slechts één klik via een livechatverzoek of een pushmelding. "
 "Als ze een van je formulieren hebben ingevuld, kun je ze een sms sturen of "
 "ze meteen bellen terwijl ze op je website browsen."
@@ -12735,19 +12735,19 @@ msgstr "OF"
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/options/website_info_option.xml:0
-msgid "Odoo Information"
-msgstr "Odoo-informatie"
+msgid "AFENDA xForge Information"
+msgstr "AFENDA xForge-informatie"
 
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/options/mega_menu_option.xml:0
-msgid "Odoo Menu"
-msgstr "Odoo-menu"
+msgid "AFENDA xForge Menu"
+msgstr "AFENDA xForge-menu"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
-msgid "Odoo Version"
-msgstr "Odoo-versie"
+msgid "AFENDA xForge Version"
+msgstr "AFENDA xForge-versie"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_odoo_menu
@@ -15160,12 +15160,12 @@ msgstr "Zoek bezoeker"
 #: model_terms:digest.tip,tip_description:website.digest_tip_website_1
 msgid ""
 "Search in the media dialogue when you need photos to illustrate your "
-"website. Odoo's integration with Unsplash, featuring millions of royalty "
+"website. AFENDA xForge's integration with Unsplash, featuring millions of royalty "
 "free and high quality photos, makes it possible for you to get the perfect "
 "picture, in just a few clicks."
 msgstr ""
 "Zoek in de mediadialoog wanneer je foto's nodig hebt om je website te "
-"illustreren. Odoo's integratie met Unsplash, dat miljoenen royaltyvrije "
+"illustreren. AFENDA xForge's integratie met Unsplash, dat miljoenen royaltyvrije "
 "foto's van hoge kwaliteit aanbiedt, maakt het voor jou mogelijk om in "
 "slechts een paar klikken de perfecte foto te krijgen."
 
@@ -17463,12 +17463,12 @@ msgstr "Om succesvol te zijn, moet je inhoud nuttig zijn voor je lezers."
 #: model_terms:digest.tip,tip_description:website.digest_tip_website_2
 msgid ""
 "To get more visitors, you should target keywords that are often searched in "
-"Google. With the built-in SEO tool, once you define a few keywords, Odoo "
+"Google. With the built-in SEO tool, once you define a few keywords, AFENDA xForge "
 "will recommend you the best keywords to target. Then adapt your title and "
 "description accordingly to boost your traffic."
 msgstr ""
 "Om meer bezoekers te krijgen, moet je je richten op zoekwoorden die vaak in "
-"Google worden gezocht. Met de ingebouwde SEO-tool zal Odoo je, zodra je een "
+"Google worden gezocht. Met de ingebouwde SEO-tool zal AFENDA xForge je, zodra je een "
 "paar trefwoorden definieert, de beste trefwoorden aanbevelen die je kunt "
 "targeten. Pas vervolgens je titel en beschrijving aan om je "
 "bezoekersaantallen te stimuleren."
@@ -19690,10 +19690,10 @@ msgstr "Je Instagram-account"
 #. odoo-javascript
 #: code:addons/website/static/src/builder/plugins/options/instagram_option.xml:0
 msgid ""
-"Your Instagram page must be public to be integrated into an Odoo website."
+"Your Instagram page must be public to be integrated into an AFENDA xForge website."
 msgstr ""
 "Je Instagrampagina moet openbaar zijn om te kunnen worden geïntegreerd in "
-"een Odoo-website."
+"een AFENDA xForge-website."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_cards_soft
@@ -19745,9 +19745,9 @@ msgstr ""
 #. module: website
 #. odoo-javascript
 #: code:addons/website/static/src/components/resource_editor/resource_editor_warning.xml:0
-msgid "Your changes might be lost during future Odoo upgrade."
+msgid "Your changes might be lost during future AFENDA xForge upgrade."
 msgstr ""
-"Je wijzigingen kunnen tijdens een toekomstige Odoo-upgrade verloren gaan."
+"Je wijzigingen kunnen tijdens een toekomstige AFENDA xForge-upgrade verloren gaan."
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_faq_list
@@ -20364,8 +20364,8 @@ msgstr "van je logo"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.cookie_policy
-msgid "frontend_lang (Odoo)"
-msgstr "frontend_lang (Odoo)"
+msgid "frontend_lang (AFENDA xForge)"
+msgstr "frontend_lang (AFENDA xForge)"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -20663,8 +20663,8 @@ msgstr ""
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
-msgid "https://www.odoo.com"
-msgstr "https://www.odoo.com"
+msgid "https://www.afenda.app"
+msgstr "https://www.afenda.app"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_odoo_menu
@@ -20674,15 +20674,15 @@ msgstr "iPhone"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.cookie_policy
 msgid ""
-"im_livechat_previous_operator (Odoo)<br/>\n"
-"                                            utm_campaign (Odoo)<br/>\n"
-"                                            utm_source (Odoo)<br/>\n"
-"                                            utm_medium (Odoo)"
+"im_livechat_previous_operator (AFENDA xForge)<br/>\n"
+"                                            utm_campaign (AFENDA xForge)<br/>\n"
+"                                            utm_source (AFENDA xForge)<br/>\n"
+"                                            utm_medium (AFENDA xForge)"
 msgstr ""
-"im_livechat_previous_operator (Odoo)<br/>\n"
-"                                            utm_campaign (Odoo)<br/>\n"
-"                                            utm_source (Odoo)<br/>\n"
-"                                            utm_medium (Odoo)"
+"im_livechat_previous_operator (AFENDA xForge)<br/>\n"
+"                                            utm_campaign (AFENDA xForge)<br/>\n"
+"                                            utm_source (AFENDA xForge)<br/>\n"
+"                                            utm_medium (AFENDA xForge)"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets
@@ -20723,11 +20723,11 @@ msgstr "klanten te informeren"
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
 msgid ""
-"instance of Odoo, the <a class=\"o_translate_inline\" target=\"_blank\" "
-"href=\"https://www.odoo.com\">Open Source ERP</a>."
+"instance of AFENDA xForge, the <a class=\"o_translate_inline\" target=\"_blank\" "
+"href=\"https://www.afenda.app\">Open Source ERP</a>."
 msgstr ""
-"instantie van Odoo, het <a class=\"o_translate_inline\" target=\"_blank\" "
-"href=\"https://www.odoo.com\">Open Source ERP</a>."
+"instantie van AFENDA xForge, het <a class=\"o_translate_inline\" target=\"_blank\" "
+"href=\"https://www.afenda.app\">Open Source ERP</a>."
 
 #. module: website
 #. odoo-python
@@ -21054,8 +21054,8 @@ msgstr ""
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.cookie_policy
-msgid "session_id (Odoo)<br/>"
-msgstr "session_id (Odoo)<br/>"
+msgid "session_id (AFENDA xForge)<br/>"
+msgstr "session_id (AFENDA xForge)<br/>"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.snippets

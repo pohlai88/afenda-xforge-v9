@@ -49,7 +49,7 @@ def load_data(env: Environment, idref: IdRef, mode: LoadMode, kind: LoadKind, pa
     files: set[str] = set()
     for k in keys:
         if k == 'init_xml' and package.manifest[k]:
-            _logger.warning("module %s: key 'init_xml' is deprecated in Odoo 19.", package.name)
+            _logger.warning("module %s: key 'init_xml' is deprecated in AFENDA xForge 19.", package.name)
         for filename in package.manifest[k]:
             if filename in files:
                 _logger.warning("File %s is imported twice in module %s %s", filename, package.name, kind)

@@ -202,7 +202,7 @@ class PeppolRegistration(models.TransientModel):
                 peppol_warnings['company_already_on_smp'] = {
                     'level': 'info',
                     'message': _("Your company is already registered on an Access Point (%s) for receiving invoices. "
-                                 "We will register you on Odoo as a sender only.", wizard.peppol_external_provider)
+                                 "We will register you on AFENDA xForge as a sender only.", wizard.peppol_external_provider)
                 }
             if wizard.peppol_eas == '9925':
                 peppol_warnings['be_9925_warning'] = {

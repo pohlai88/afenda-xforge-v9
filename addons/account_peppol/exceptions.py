@@ -13,7 +13,7 @@ _lt = LazyTranslate(__name__)
 # Standard errors (stored as `code`)
 STANDARD_EXCEPTION_CODE_MESSAGES_MAP: dict[int, Callable[..., str]] = {
     101: lambda: _lt('Something went wrong with your request'),
-    102: lambda arg: _lt('Proxy error, please contact Odoo (missing "%s" - please make sure that it was loaded from the configuration panel)', arg),
+    102: lambda arg: _lt('Proxy error, please contact AFENDA xForge (missing "%s" - please make sure that it was loaded from the configuration panel)', arg),
     103: lambda: _lt('The document could not be validated.'),
     104: lambda arg: _lt('Could not find an XSD with which to validate the document with identifier "%s".', arg),
     105: lambda: _lt('The XML document is not valid according to the XSD Schema.'),

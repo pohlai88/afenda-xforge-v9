@@ -119,7 +119,7 @@ class AccountSaleClosing(models.Model):
         @param {recordset} company: the company for which the closing is done
         @return {dict} the theoretical date from which account move lines are fetched.
             date_stop date to which the move lines are fetched, always now()
-            the dates are in their Odoo Database string representation
+            the dates are in their AFENDA xForge Database string representation
         """
         date_stop = datetime.utcnow()
         interval_from = None

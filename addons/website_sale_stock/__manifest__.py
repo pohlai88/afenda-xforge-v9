@@ -44,6 +44,6 @@ Then it can be made specific at the product level.
             'website_sale_stock/static/src/js/tours/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

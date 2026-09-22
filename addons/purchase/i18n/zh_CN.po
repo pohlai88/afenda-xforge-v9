@@ -14,12 +14,12 @@
 # "Chloe Wang (chwa)" <chwa@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-07 05:25+0000\n"
-"Last-Translator: \"Chloe Wang (chwa)\" <chwa@odoo.com>\n"
-"Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Chloe Wang (chwa)\" <chwa@afenda.app>\n"
+"Language-Team: Chinese (Simplified Han script) <https://translate.afenda.app/"
 "projects/odoo-19/purchase/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -1387,8 +1387,8 @@ msgstr "草稿询价"
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
-msgstr "将报价请求 PDF 文件拖放到 Odoo 中的报价列表中。享受自动化！"
+"quotations in AFENDA xForge. Enjoy the automation!"
+msgstr "将报价请求 PDF 文件拖放到 AFENDA xForge 中的报价列表中。享受自动化！"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_order__dest_address_id
@@ -2031,8 +2031,8 @@ msgstr "未通知"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Not using Odoo?"
-msgstr "没有使用 Odoo？"
+msgid "Not using AFENDA xForge?"
+msgstr "没有使用 AFENDA xForge？"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__purchase_order_line__display_type__line_note
@@ -2078,8 +2078,8 @@ msgstr "发送错误的消息的数量"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__product_template__purchase_method__purchase
@@ -3001,8 +3001,8 @@ msgstr "星标消息"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Start on Odoo"
-msgstr "开始使用 Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "开始使用 AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_bill_line_match__state
@@ -3513,7 +3513,7 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                    orders or receipts. This allows you to control bills\n"
 "                    you receive from your vendor according to the draft\n"
-"                    document in Odoo."
+"                    document in AFENDA xForge."
 msgstr ""
 "供应商发票能根据销售订单或者收货单预先生成\n"
 "这能帮助你用系统生成的草稿发票和你从供应商那边得到的发票进行比对。"
@@ -3554,8 +3554,8 @@ msgstr "未收到账单"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Want to import this document in Odoo?"
-msgstr "想在 Odoo 中导入此文档？"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "想在 AFENDA xForge 中导入此文档？"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.view_product_supplier_inherit
@@ -3590,24 +3590,24 @@ msgid ""
 "When creating a purchase order, have a look at the vendor's <i>On Time "
 "Delivery</i> rate: the percentage of products shipped on time. If it is too "
 "low, activate the <i>automated reminders</i>. A few days before the due "
-"shipment, Odoo will send the vendor an email to ask confirmation of shipment "
+"shipment, AFENDA xForge will send the vendor an email to ask confirmation of shipment "
 "dates and keep you informed in case of any delays. To get the vendor's "
 "performance statistics, click on the OTD rate."
 msgstr ""
 "创建采购订单时，请查看供应商的<i>准时交货</i>率：准时发货产品的百分比。如果太"
-"低，请激活<i>自动提醒</i>功能。在到期发货前几天，Odoo 会向供应商发送电子邮件"
+"低，请激活<i>自动提醒</i>功能。在到期发货前几天，AFENDA xForge 会向供应商发送电子邮件"
 "，要求确认发货日期，并在出现任何延误时通知您。要获取供应商的业绩统计数据，请"
 "点击 \"OTD 率\"。"
 
 #. module: purchase
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_1
 msgid ""
-"When sending a purchase order by email, Odoo asks the vendor to acknowledge "
+"When sending a purchase order by email, AFENDA xForge asks the vendor to acknowledge "
 "the reception of the order. When the vendor acknowledges the order by "
 "clicking on a button in the email, the information is added on the purchase "
 "order. Use filters to track orders that have not been acknowledged."
 msgstr ""
-"通过电子邮件发送采购订单时，Odoo 会要求供应商确认收到订单。当供应商点击电子邮"
+"通过电子邮件发送采购订单时，AFENDA xForge 会要求供应商确认收到订单。当供应商点击电子邮"
 "件中的按钮确认订单时，相关信息就会添加到采购订单中。使用筛选器跟踪尚未确认的"
 "订单。"
 

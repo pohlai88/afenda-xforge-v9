@@ -9,12 +9,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-06 23:14+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tony Ng (ngto)\" <ngto@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/purchase_mrp/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -115,9 +115,9 @@ msgstr "製造訂單來源單據 %s"
 #. odoo-python
 #: code:addons/purchase_mrp/models/stock_move.py:0
 msgid ""
-"Odoo is not able to generate the anglo saxon entries. The total valuation of "
+"AFENDA xForge is not able to generate the anglo saxon entries. The total valuation of "
 "%s is zero."
-msgstr "Odoo 未能產生英式 (Anglo-Saxon) 會計記項。「%s」的總估值將為零。"
+msgstr "AFENDA xForge 未能產生英式 (Anglo-Saxon) 會計記項。「%s」的總估值將為零。"
 
 #. module: purchase_mrp
 #: model:ir.model,name:purchase_mrp.model_purchase_order

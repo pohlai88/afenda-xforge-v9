@@ -14,12 +14,12 @@
 # "Marta (wacm)" <wacm@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 18:53+0000\n"
-"Last-Translator: \"Marta (wacm)\" <wacm@odoo.com>\n"
-"Language-Team: Czech <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Marta (wacm)\" <wacm@afenda.app>\n"
+"Language-Team: Czech <https://translate.afenda.app/projects/odoo-19/"
 "website_crm_iap_reveal/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -266,9 +266,9 @@ msgstr ""
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__industry_tag_ids
-msgid "Leave empty to always match. Odoo will not create lead if no match"
+msgid "Leave empty to always match. AFENDA xForge will not create lead if no match"
 msgstr ""
-"Ponechejte prázdné, aby se vždy shodovaly. Odoo nevytvoří potenciální "
+"Ponechejte prázdné, aby se vždy shodovaly. AFENDA xForge nevytvoří potenciální "
 "zákazník, pokud nebude shoda"
 
 #. module: website_crm_iap_reveal
@@ -349,8 +349,8 @@ msgstr "Podmínky generování příležitostí"
 #. module: website_crm_iap_reveal
 #. odoo-python
 #: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py:0
-msgid "Opportunity created by Odoo Lead Generation"
-msgstr "Příležitost vytvořená generací Odoo potenciální zákazník"
+msgid "Opportunity created by AFENDA xForge Lead Generation"
+msgstr "Příležitost vytvořená generací AFENDA xForge potenciální zákazník"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__other_role_ids

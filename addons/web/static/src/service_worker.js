@@ -2,7 +2,7 @@
 
 /* eslint-disable no-restricted-globals */
 const cacheName = "odoo-sw-cache";
-const homepageURL = "/odoo";
+const homepageURL = "/app";
 const offLineURL = `${homepageURL}/offline`;
 
 let sessionInfo = null;
@@ -59,7 +59,7 @@ const readDataOnCache = async (url) => {
     if (url === offLineURL) {
         return response;
     }
-    // if you come from /odoo to project the url is now /odoo/project, but it doesn't exist in cache so use /odoo instead
+    // if you come from /app to project the url is now /app/project, but it doesn't exist in cache so use /app instead
     if (!response) {
         return readDataOnCache(homepageURL);
     }
@@ -106,7 +106,7 @@ const navigateOrDisplayOfflinePage = async (request) => {
 
 const serveShareTarget = (event) => {
     // Redirect so the user can refresh the page without resending data.
-    event.respondWith(Response.redirect("/odoo?share_target=trigger"));
+    event.respondWith(Response.redirect("/app?share_target=trigger"));
     event.waitUntil(
         (async () => {
             // The page sends this message to tell the service worker it's ready to receive the file.

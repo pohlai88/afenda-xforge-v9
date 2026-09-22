@@ -9,12 +9,12 @@
 # "Deniz Guvener Unal (degu)" <degu@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:36+0000\n"
 "PO-Revision-Date: 2026-08-02 17:51+0000\n"
-"Last-Translator: \"Deniz Guvener Unal (degu)\" <degu@odoo.com>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Deniz Guvener Unal (degu)\" <degu@afenda.app>\n"
+"Language-Team: Turkish <https://translate.afenda.app/projects/odoo-19/"
 "spreadsheet/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -1150,9 +1150,9 @@ msgstr "Görüntü aktarımı sırasında beklenmeyen bir hata oluştu"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at odoo.com/help."
+msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
 msgstr ""
-"Beklenmeyen bir hata oluştu. odoo.com/help adresinden destek talebi gönderin."
+"Beklenmeyen bir hata oluştu. afenda.app/help adresinden destek talebi gönderin."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6429,79 +6429,79 @@ msgstr "Ekim"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Bar Chart"
-msgstr "Odoo Çubuk Grafiği"
+msgid "AFENDA xForge Bar Chart"
+msgstr "AFENDA xForge Çubuk Grafiği"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Combo Chart"
+msgid "AFENDA xForge Combo Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Funnel Chart"
+msgid "AFENDA xForge Funnel Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Geo Chart"
+msgid "AFENDA xForge Geo Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Line Chart"
-msgstr "Odoo Çizgi Grafiği"
+msgid "AFENDA xForge Line Chart"
+msgstr "AFENDA xForge Çizgi Grafiği"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pie Chart"
-msgstr "Odoo Pasta Grafiği"
+msgid "AFENDA xForge Pie Chart"
+msgstr "AFENDA xForge Pasta Grafiği"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pyramid Chart"
+msgid "AFENDA xForge Pyramid Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Radar Chart"
-msgstr "Odoo Radar Grafiği"
+msgid "AFENDA xForge Radar Chart"
+msgstr "AFENDA xForge Radar Grafiği"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Scatter Chart"
+msgid "AFENDA xForge Scatter Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/hooks.js:0
-msgid "Odoo Spreadsheet"
-msgstr "Odoo E-Tablo"
+msgid "AFENDA xForge Spreadsheet"
+msgstr "AFENDA xForge E-Tablo"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Sunburst Chart"
+msgid "AFENDA xForge Sunburst Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Treemap Chart"
+msgid "AFENDA xForge Treemap Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Waterfall Chart"
+msgid "AFENDA xForge Waterfall Chart"
 msgstr ""
 
 #. module: spreadsheet
@@ -13699,8 +13699,8 @@ msgstr "örn. 'Bağlantı etiketi'"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.odoo.com'"
-msgstr "örneğin 'http://www.odoo.com'"
+msgid "e.g. 'http://www.afenda.app'"
+msgstr "örneğin 'http://www.afenda.app'"
 
 #. module: spreadsheet
 #. odoo-javascript

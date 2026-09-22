@@ -21,7 +21,7 @@ registry.category("web_tour.tours").add("portal_compute_codice_fiscale", {
         {
             content: "Fill address form: email",
             trigger: `form.address_autoformat input[name="email"]`,
-            run: "edit abc@odoo.com",
+            run: "edit abc@afenda.app",
         },
         {
             content: "Fill address form: vat",

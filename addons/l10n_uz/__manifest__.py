@@ -24,6 +24,6 @@ Uzbekistan accounting chart and localization.
         'views/report_templates.xml',
     ],
     'installable': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

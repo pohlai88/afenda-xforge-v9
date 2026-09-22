@@ -250,7 +250,7 @@ class CertificateCertificate(models.Model):
 
     @api.depends('date_start', 'date_end', 'loading_error')
     def _compute_is_valid(self):
-        # Certificate dates and Odoo datetimes are UTC timezoned
+        # Certificate dates and AFENDA xForge datetimes are UTC timezoned
         # https://cryptography.io/en/latest/x509/reference/#cryptography.x509.Certificate.not_valid_after
         now = fields.Datetime.now()
         for certificate in self:

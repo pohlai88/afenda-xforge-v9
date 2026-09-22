@@ -17,12 +17,12 @@
 # Aliraza Habibitanha <alireza.habibitanha@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-09 10:23+0000\n"
 "Last-Translator: Aliraza Habibitanha <alireza.habibitanha@gmail.com>\n"
-"Language-Team: Persian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Persian <https://translate.afenda.app/projects/odoo-19/"
 "hr_attendance/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -240,7 +240,7 @@ msgstr "همه دپارتمان‌ها"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
-msgid "Allow Users to Check in/out from Odoo."
+msgid "Allow Users to Check in/out from AFENDA xForge."
 msgstr "اجازه به کاربران برای ثبت ورود/خروج از اودو."
 
 #. module: hr_attendance
@@ -1532,7 +1532,7 @@ msgstr "تایید"
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
-msgid "Odoo Logo"
+msgid "AFENDA xForge Logo"
 msgstr "لوگوی اودو"
 
 #. module: hr_attendance

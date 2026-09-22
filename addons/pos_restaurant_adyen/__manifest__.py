@@ -20,6 +20,6 @@
             'pos_restaurant_adyen/static/tests/unit/data/**/*'
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

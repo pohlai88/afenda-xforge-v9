@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:30+0000\n"
 "PO-Revision-Date: 2026-08-02 17:56+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/"
 "website_links/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -292,10 +292,10 @@ msgstr "ລະຫັດນີ້ຖືກໃຊ້ແລ້ວ"
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid ""
 "Those trackers can be used in Google Analytics to track clicks and visitors, "
-"or in Odoo reports to track opportunities and related revenues."
+"or in AFENDA xForge reports to track opportunities and related revenues."
 msgstr ""
 "ຕົວຕິດຕາມເຫຼົ່ານີ້ສາມາດຖືກໃຊ້ໃນ Google Analytics ເພື່ອຕິດຕາມການຄລິກ ແລະ ຜູ້ເຂົ້າຊົມ, ຫຼື ໃນລາຍງາ"
-"ນ Odoo ເພື່ອຕິດຕາມໂອກາດ ແລະ ລາຍໄດ້ທີ່ກ່ຽວຂ້ອງ."
+"ນ AFENDA xForge ເພື່ອຕິດຕາມໂອກາດ ແລະ ລາຍໄດ້ທີ່ກ່ຽວຂ້ອງ."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
@@ -363,5 +363,5 @@ msgstr "ຕ.ຢ. LinkedIn, Facebook, ຂໍ້ມູນຕິດຕໍ່, ..."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
-msgid "e.g. https://www.odoo.com/contactus"
-msgstr "ຕ.ຢ. https://www.odoo.com/contactus"
+msgid "e.g. https://www.afenda.app/contactus"
+msgstr "ຕ.ຢ. https://www.afenda.app/contactus"

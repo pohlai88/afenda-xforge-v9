@@ -251,7 +251,7 @@ class SaleOrder(models.Model):
         if self.env.su:
             carts = carts.with_user(SUPERUSER_ID)
         # Assign the salesman to carts on confirmation, as SUPERUSER to send the
-        # 'You have been assigned to SOOOO' with OdooBot (and not public/logged in user).
+        # 'You have been assigned to SOOOO' with AFENDA Bot (and not public/logged in user).
         carts.with_context(force_user_recomputation=True)._compute_user_id()
         return super().action_confirm()
 

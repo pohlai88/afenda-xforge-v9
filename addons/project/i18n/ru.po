@@ -8,12 +8,12 @@
 # "Anastasiia Koroleva (koan)" <koan@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: AFENDA xForge Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-10 11:35+0000\n"
-"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
-"Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/project/"
+"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@afenda.app>\n"
+"Language-Team: Russian <https://translate.afenda.app/projects/odoo-19/project/"
 "ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -1787,11 +1787,11 @@ msgstr "Статус оценок клиентов"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid ""
-"Customers propose feedbacks by email; Odoo creates tasks automatically, and "
+"Customers propose feedbacks by email; AFENDA xForge creates tasks automatically, and "
 "you can\n"
 "      communicate on the task directly."
 msgstr ""
-"Клиенты отправляют отзывы по email; Odoo автоматически создает задачи, и вы "
+"Клиенты отправляют отзывы по email; AFENDA xForge автоматически создает задачи, и вы "
 "можете\n"
 "      общаться по задаче напрямую."
 
@@ -5143,11 +5143,11 @@ msgstr "Интервал должен быть больше 0"
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Модель (тип документа Odoo), которой соответствует этот псевдоним. Любое "
+"Модель (тип документа AFENDA xForge), которой соответствует этот псевдоним. Любое "
 "входящее письмо, не являющееся ответом на существующую запись, приведет к "
 "созданию новой записи этой модели (например, Задачи проекта)"
 
@@ -5155,10 +5155,10 @@ msgstr ""
 #: model:ir.model.fields,help:project.field_project_project__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Имя email-псевдонима, например, 'jobs', если вы хотите получать письма на "
-"адрес <jobs@example.odoo.com>"
+"адрес <jobs@example.afenda.app>"
 
 #. module: project
 #. odoo-python
@@ -6054,11 +6054,11 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid ""
-"You have unsaved changes - no worries! Odoo will automatically save it as "
+"You have unsaved changes - no worries! AFENDA xForge will automatically save it as "
 "you navigate.<br/> You can discard these changes from here or manually save "
 "your task.<br/>Let's save it manually."
 msgstr ""
-"У вас есть несохраненные изменения - не беспокойтесь! Odoo автоматически "
+"У вас есть несохраненные изменения - не беспокойтесь! AFENDA xForge автоматически "
 "сохранит их при навигации.<br/> Вы можете отменить эти изменения здесь или "
 "вручную сохранить вашу задачу.<br/>Давайте сохраним ее вручную."
 

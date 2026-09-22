@@ -31,12 +31,12 @@
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-05 21:42+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Croatian <https://translate.odoo.com/projects/odoo-19/sale/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Croatian <https://translate.afenda.app/projects/odoo-19/sale/"
 "hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +52,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -60,7 +60,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            Ako vaš klijent koristi Odoo 18 ili noviji, podaci o klijentu i "
+"            Ako vaš klijent koristi AFENDA xForge 18 ili noviji, podaci o klijentu i "
 "stavke prodajnih narudžbi\n"
 "            bit će automatski kreirani. Bilo koji drugi PDF koji sadrži "
 "priloženu\n"
@@ -1674,10 +1674,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Na primjer, ako prodajete unaprijed plaćene sate usluga, Odoo vam "
+"Na primjer, ako prodajete unaprijed plaćene sate usluga, AFENDA xForge vam "
 "preporučuje \n"
 "da prodate dodatne sate kada se potroše svi naručeni sati."
 
@@ -2710,10 +2710,10 @@ msgstr "Nacrti faktura"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 "Povucite i ispustite PDF datoteku zahtjeva za ponudu na svoj popis ponuda u "
-"Odoo-u. Uživajte u automatizaciji!"
+"AFENDA xForge-u. Uživajte u automatizaciji!"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
@@ -3675,8 +3675,8 @@ msgstr "Nisu pronađene narudžbe za nadogradnju."
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
-msgstr "Ne koriste Odoo?"
+msgid "Not using AFENDA xForge?"
+msgstr "Ne koriste AFENDA xForge?"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3727,8 +3727,8 @@ msgstr "Broj poruka sa greškama pri isporuci"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 #, fuzzy
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -5154,7 +5154,7 @@ msgstr "Konektor Starshipita"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
+msgid "Start on AFENDA xForge"
 msgstr "Započni na Odoou"
 
 #. module: sale
@@ -6022,8 +6022,8 @@ msgstr "Volumen"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
-msgstr "Želite li uvesti ovaj dokument u Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Želite li uvesti ovaj dokument u AFENDA xForge?"
 
 #. module: sale
 #. odoo-python

@@ -10,6 +10,6 @@ receiver to retrieve the PDF with only the xml file.
     'depends': ['purchase', 'account_edi_ubl_cii'],
     'installable': True,
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

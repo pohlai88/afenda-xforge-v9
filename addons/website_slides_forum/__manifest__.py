@@ -26,7 +26,7 @@
         'data/slide_channel_demo.xml',
     ],
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'assets': {
         'website.website_builder_assets': [

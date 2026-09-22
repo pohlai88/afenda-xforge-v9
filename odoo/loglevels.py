@@ -15,7 +15,7 @@ LOG_CRITICAL = 'critical'
 
 def get_encodings(hint_encoding='utf-8'):
     warnings.warn(
-        "Deprecated since Odoo 18. Mostly nonsensical as the "
+        "Deprecated since AFENDA xForge 18. Mostly nonsensical as the "
         "second/third encoding it yields is latin-1 which always succeeds...",
         stacklevel=2,
         category=DeprecationWarning,
@@ -63,7 +63,7 @@ def ustr(value, hint_encoding='utf-8', errors='strict'):
     :return: unicode string representing the given value
     """
     warnings.warn(
-        "Deprecated since Odoo 18: ustr() is a garbage bag of weirdo fallbacks "
+        "Deprecated since AFENDA xForge 18: ustr() is a garbage bag of weirdo fallbacks "
         "which mostly don't do anything as\n"
         "- the first attempt will always work if errors is not `strict`\n"
         "- if utf8 fails it moves on to latin-1 which always works\n"

@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-02-20 18:37+0000\n"
@@ -32,7 +32,7 @@ msgstr ""
 
 #. module: payment_mercado_pago
 #: model_terms:ir.ui.view,arch_db:payment_mercado_pago.authorization_error
-msgid "An error occurred while linking your Mercado Pago account with Odoo."
+msgid "An error occurred while linking your Mercado Pago account with AFENDA xForge."
 msgstr ""
 
 #. module: payment_mercado_pago

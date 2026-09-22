@@ -31,6 +31,6 @@
             'pos_online_payment_self_order/static/tests/unit/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -22,7 +22,7 @@
                 <Img class="'w-75 m-auto'" style="'margin-block: -0.8em !important;'" src="'/website/static/src/img/snippets_thumbs/s_mega_menu_menu_image_menu.svg'"/>
             </BuilderSelectItem>
             <BuilderSelectItem
-                title.translate="Odoo Menu"
+                title.translate="AFENDA xForge Menu"
                 actionParam="{
                     view: `${templatePrefix}s_mega_menu_odoo_menu`,
                     templateClass: 's_mega_menu_odoo_menu',

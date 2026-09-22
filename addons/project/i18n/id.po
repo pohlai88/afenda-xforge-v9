@@ -14,12 +14,12 @@
 # "Nurul Aini Akrima Sabila (nuaas)" <nuaas@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-09-01 05:11+0000\n"
-"Last-Translator: \"Nurul Aini Akrima Sabila (nuaas)\" <nuaas@odoo.com>\n"
-"Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Nurul Aini Akrima Sabila (nuaas)\" <nuaas@afenda.app>\n"
+"Language-Team: Indonesian <https://translate.afenda.app/projects/odoo-19/"
 "project/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -1660,11 +1660,11 @@ msgstr "Status Rating Pelanggan"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid ""
-"Customers propose feedbacks by email; Odoo creates tasks automatically, and "
+"Customers propose feedbacks by email; AFENDA xForge creates tasks automatically, and "
 "you can\n"
 "      communicate on the task directly."
 msgstr ""
-"Pelanggan mengajukan feedback melalui email; Odoo membuat task secara "
+"Pelanggan mengajukan feedback melalui email; AFENDA xForge membuat task secara "
 "otomatis, dan Anda dapat\n"
 "      berkomunikasi langsung pada task."
 
@@ -5006,11 +5006,11 @@ msgstr "Interval harus lebih dari 0"
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Model (Jenis Dokumen Odoo) di mana alias ini dikaitkan. Email masuk yang "
+"Model (Jenis Dokumen AFENDA xForge) di mana alias ini dikaitkan. Email masuk yang "
 "tidak menjawab catatan yang sudah ada akan menyebabkan pembuatan rekor baru "
 "model ini (misalnya tugas project)"
 
@@ -5018,10 +5018,10 @@ msgstr ""
 #: model:ir.model.fields,help:project.field_project_project__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Nama email alias, misalnya 'pekerjaan' jika Anda ingin menangkap email untuk "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 
 #. module: project
 #. odoo-python
@@ -5920,11 +5920,11 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid ""
-"You have unsaved changes - no worries! Odoo will automatically save it as "
+"You have unsaved changes - no worries! AFENDA xForge will automatically save it as "
 "you navigate.<br/> You can discard these changes from here or manually save "
 "your task.<br/>Let's save it manually."
 msgstr ""
-"Anda memiliki perubahan yang tidak disimpan - jangan khawatir! Odoo akan "
+"Anda memiliki perubahan yang tidak disimpan - jangan khawatir! AFENDA xForge akan "
 "secara otomatis menyimpannya selagi Anda bernavigasi.<br/> Anda dapat "
 "membuang perubahan ini dari sini atau secara manual simpan task Anda.<br/>"
 "Ayo simpan secara manual."

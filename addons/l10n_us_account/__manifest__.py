@@ -2,7 +2,7 @@
 
 {
     'name': 'United States - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'icon': '/account/static/description/l10n.png',
     'countries': ['us'],
     'version': '1.0',
@@ -20,6 +20,6 @@
     ],
     'installable': True,
     'auto_install': ['account'],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

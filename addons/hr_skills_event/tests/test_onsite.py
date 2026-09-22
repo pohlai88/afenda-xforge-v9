@@ -15,7 +15,7 @@ class TestOnsite(HttpCase):
         self.env['event.event'].create({
             'name': 'Test Event',
         })
-        self.start_tour("/odoo", 'hr_skills_event_onsite_tour', login='admin')
+        self.start_tour("/app", 'hr_skills_event_onsite_tour', login='admin')
 
     def test_onsite_event_created_from_action(self):
         """ Ensure that an onsite event created from the Onsite action is visible in its kanban view. """

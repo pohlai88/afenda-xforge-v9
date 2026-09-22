@@ -9,12 +9,12 @@
 # "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 13:08+0000\n"
-"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
-"Language-Team: German <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@afenda.app>\n"
+"Language-Team: German <https://translate.afenda.app/projects/odoo-19/"
 "payment_adyen/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -210,10 +210,10 @@ msgstr "Die Erfassung der Transaktion %s ist fehlgeschlagen."
 #: model_terms:ir.ui.view,arch_db:payment_adyen.payment_capture_wizard_view_form
 msgid ""
 "The capture or void of the transaction might take a few minutes to be\n"
-"                    processed by Adyen and reflected in Odoo."
+"                    processed by Adyen and reflected in AFENDA xForge."
 msgstr ""
 "Die Erfassung oder Stornierung der Transaktion kann einige Minuten dauern,\n"
-"                     bis sie von Adyen verarbeitet und in Odoo wiedergegeben "
+"                     bis sie von Adyen verarbeitet und in AFENDA xForge wiedergegeben "
 "wird."
 
 #. module: payment_adyen

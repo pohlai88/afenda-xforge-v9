@@ -788,7 +788,7 @@ test("automatically cancel incoming call after some time", async () => {
 test("should also invite to the call when inviting to the channel", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     pyEnv["res.users"].create({ partner_id: partnerId });

@@ -698,7 +698,7 @@ class AccountMove(models.Model):
 
     def _l10n_tw_edi_send(self, json_content):
         """
-        Issuing an e-invoice by calling the Ecpay API and update the invoicing result in Odoo
+        Issuing an e-invoice by calling the Ecpay API and update the invoicing result in AFENDA xForge
         """
         self.ensure_one()
         # Ensure to lock the records that will be sent, to avoid risking sending them twice.
@@ -730,7 +730,7 @@ class AccountMove(models.Model):
 
     def _l10n_tw_edi_update_ecpay_invoice_info(self):
         """
-        Searching the e-invoice information from Ecpay API and update the invoice information in Odoo
+        Searching the e-invoice information from Ecpay API and update the invoice information in AFENDA xForge
         """
         self.ensure_one()
         # Ensure to lock the records that will be sent, to avoid risking sending them twice.
@@ -760,7 +760,7 @@ class AccountMove(models.Model):
 
     def _l10n_tw_edi_run_invoice_invalid(self):
         """
-        Cancelling the e-invoice by calling the Ecpay API and update the invoice information in Odoo
+        Cancelling the e-invoice by calling the Ecpay API and update the invoice information in AFENDA xForge
         """
         self.ensure_one()
 
@@ -790,7 +790,7 @@ class AccountMove(models.Model):
             raise UserError(self.env._("Fail to invalidate invoice. Error message: %(error_message)s",
                                        error_message=response_data.get("RtnMsg")))
 
-        # update the invoice information in Odoo
+        # update the invoice information in AFENDA xForge
         self._l10n_tw_edi_update_ecpay_invoice_info()
 
         self._message_log(
@@ -800,7 +800,7 @@ class AccountMove(models.Model):
 
     def _l10n_tw_edi_issue_allowance(self, json_content):
         """
-        Issuing an allowance by calling the Ecpay API and update the refund invoice information in Odoo
+        Issuing an allowance by calling the Ecpay API and update the refund invoice information in AFENDA xForge
         Two methods to issue the allowance
         1. Endpoint: /Allowance
             General allowance, which requires merchants or sellers to get the agreement from the customer first

@@ -16,6 +16,6 @@
             'pos_cashmatic/static/src/cashmatic_service.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

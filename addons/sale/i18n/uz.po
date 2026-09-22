@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 14:20+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/sale/uz/>\n"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/sale/uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -32,14 +32,14 @@ msgstr ""
 #, fuzzy
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
 "            UBL-RequestForQuotation file will work as well.\n"
 "        "
 msgstr ""
-"Agar mijozingiz Odoo 18 yoki undan yuqori versiyasida ishlatsa, mijoz "
+"Agar mijozingiz AFENDA xForge 18 yoki undan yuqori versiyasida ishlatsa, mijoz "
 "ma'lumotlari va sotish buyurtma satrlari avtomatik ravishda yaratiladi. UBL-"
 "RequestForQuotation fayli biriktirilgan har qanday boshqa PDF ham ishlaydi."
 
@@ -1382,10 +1382,10 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 #, fuzzy
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Misol uchun, agar siz oldindan to‘langan xizmat soatlarini sotsangiz, Odoo "
+"Misol uchun, agar siz oldindan to‘langan xizmat soatlarini sotsangiz, AFENDA xForge "
 "barcha buyurtma qilingan soatlar sarflangandan so‘ng qo‘shimcha soatlarni "
 "sotishni tavsiya etadi."
 
@@ -2586,9 +2586,9 @@ msgstr "Hisob-faktura loyihalari"
 #, fuzzy
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
-"Narx so‘rovi PDF faylini Odoo‘dagi narxlar ro‘yxatingizga torting va "
+"Narx so‘rovi PDF faylini AFENDA xForge‘dagi narxlar ro‘yxatingizga torting va "
 "tashlang. Avtomatlashtirish qulayligidan bahramand bo‘ling!"
 
 #. module: sale
@@ -3717,8 +3717,8 @@ msgstr "Qo‘shimcha sotish uchun buyurtmalar topilmadi"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 #, fuzzy
-msgid "Not using Odoo?"
-msgstr "Odoo ishlatmayapsizmi?"
+msgid "Not using AFENDA xForge?"
+msgstr "AFENDA xForge ishlatmayapsizmi?"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3779,8 +3779,8 @@ msgstr "Yetkazib berishda xato bo‘lgan xabarlar soni"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 #, fuzzy
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -5454,8 +5454,8 @@ msgstr "Starshipit ulagichi"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 #, fuzzy
-msgid "Start on Odoo"
-msgstr "Odoo‘da boshlash"
+msgid "Start on AFENDA xForge"
+msgstr "AFENDA xForge‘da boshlash"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__state
@@ -6465,8 +6465,8 @@ msgstr "Hajm"
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 #, fuzzy
-msgid "Want to import this document in Odoo?"
-msgstr "Ushbu hujjatni Odoo dasturiga import qilmoqchimisiz?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Ushbu hujjatni AFENDA xForge dasturiga import qilmoqchimisiz?"
 
 #. module: sale
 #. odoo-python

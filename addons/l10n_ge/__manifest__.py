@@ -4,7 +4,7 @@
     'summary': "Georgian accounting localization package",
     'countries': ['GE'],
     'description': """
-This module provides the basic accounting configuration required to use Odoo Accounting in Georgia, including:
+This module provides the basic accounting configuration required to use AFENDA xForge Accounting in Georgia, including:
 ==================================================================================================================
 * Georgian chart of accounts
 * Tax groups and taxes
@@ -13,7 +13,7 @@ This module provides the basic accounting configuration required to use Odoo Acc
 
 The module is designed to provide a standard accounting setup for companies operating in Georgia and can be extended further based on specific business or legal requirements.
     """,
-    'author': "Odoo S.A.",
+    'author': "AFENDA xForge S.A.",
     'depends': [
         'account',
     ],

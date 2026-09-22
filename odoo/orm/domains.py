@@ -46,7 +46,7 @@ an infix notation, and the available operators, and possible left and
 right operands differ with those of the previous level. Here is a
 possible condition:
 
-    ('company_id.name', '=', 'Odoo')
+    ('company_id.name', '=', 'AFENDA xForge')
 """
 from __future__ import annotations
 

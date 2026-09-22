@@ -13,12 +13,12 @@
 # Rosen Vladimirov <vladimirov.rosen@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 20:26+0000\n"
 "Last-Translator: Rosen Vladimirov <vladimirov.rosen@gmail.com>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/"
 "base_import/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -456,12 +456,12 @@ msgstr "ID"
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
 msgid ""
 "If the file contains\n"
-"                    the column names, Odoo can try auto-detecting the\n"
+"                    the column names, AFENDA xForge can try auto-detecting the\n"
 "                    field corresponding to the column. This makes imports\n"
 "                    simpler especially when the file has many columns."
 msgstr ""
 "Ако файлът съдържа\n"
-"имената на колоните, Odoo може да се опита автоматично да открие\n"
+"имената на колоните, AFENDA xForge може да се опита автоматично да открие\n"
 "полето, съответстващо на колоната. Това прави импортирането\n"
 "по-лесно, особено когато файлът има много колони."
 
@@ -630,8 +630,8 @@ msgstr "Не са намерени съвпадащи записи за след
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
-msgid "Odoo Field"
-msgstr "Odoo поле"
+msgid "AFENDA xForge Field"
+msgstr "AFENDA xForge поле"
 
 #. module: base_import
 #. odoo-javascript
@@ -909,12 +909,12 @@ msgstr "Качете вашите файлове"
 msgid ""
 "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h "
 "system. You can use a custom format in addition to the suggestions provided. "
-"Leave empty to let Odoo guess the format (recommended)"
+"Leave empty to let AFENDA xForge guess the format (recommended)"
 msgstr ""
 "Използвайте HH за часове в 24-часова система, използвайте II в комбинация с "
 "'p' за 12-часова система. Можете да използвате персонализиран формат в "
 "допълнение към предоставените предложения. Оставете празно, за да позволите "
-"на Odoo да познае формата (препоръчително)"
+"на AFENDA xForge да познае формата (препоръчително)"
 
 #. module: base_import
 #. odoo-javascript
@@ -922,13 +922,13 @@ msgstr ""
 msgid ""
 "Use YYYY to represent the year, MM for the month and DD for the day. Include "
 "separators such as a dot, forward slash or dash. You can use a custom format "
-"in addition to the suggestions provided. Leave empty to let Odoo guess the "
+"in addition to the suggestions provided. Leave empty to let AFENDA xForge guess the "
 "format (recommended)"
 msgstr ""
 "Използвайте YYYY, за да представите годината, MM за месеца и DD за деня. "
 "Включете разделители като точка, наклонена черта или тире. Можете да "
 "използвате персонализиран формат в допълнение към предложените. Оставете "
-"празно, за да позволите на Odoo да отгатне формата (препоръчително)"
+"празно, за да позволите на AFENDA xForge да отгатне формата (препоръчително)"
 
 #. module: base_import
 #. odoo-javascript

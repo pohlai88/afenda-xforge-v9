@@ -27,10 +27,10 @@ from odoo.tools.mimetypes import guess_mimetype
 _logger = logging.getLogger(__name__)
 
 BAD_X_SENDFILE_ERROR = """\
-Odoo is running with --x-sendfile but is receiving /web/filestore requests.
+AFENDA xForge is running with --x-sendfile but is receiving /web/filestore requests.
 
 With --x-sendfile enabled, NGINX should be serving the
-/web/filestore route, however Odoo is receiving the
+/web/filestore route, however AFENDA xForge is receiving the
 request.
 
 This usually indicates that NGINX is badly configured,
@@ -304,7 +304,7 @@ class Binary(http.Controller):
                 else:
                     response = http.Stream.from_path(file_path('web/static/img/nologo.png')).get_response()
             except Exception:
-                _logger.warning("While retrieving the company logo, using the Odoo logo instead", exc_info=True)
+                _logger.warning("While retrieving the company logo, using the AFENDA xForge logo instead", exc_info=True)
                 response = http.Stream.from_path(file_path(f'web/static/img/{imgname}{imgext}')).get_response()
 
         return response

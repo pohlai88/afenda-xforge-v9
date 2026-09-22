@@ -5,7 +5,7 @@
     'version': '1.0',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the base module to manage the accounting chart for Bahrain in Odoo.
+This is the base module to manage the accounting chart for Bahrain in AFENDA xForge.
 ===========================================================================
 Bahrain accounting basic charts and localization.
 
@@ -29,6 +29,6 @@ Activates:
     'demo': [
         'demo/demo_company.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

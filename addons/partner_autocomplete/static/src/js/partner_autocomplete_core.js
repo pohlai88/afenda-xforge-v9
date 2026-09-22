@@ -130,7 +130,7 @@ export function usePartnerAutocomplete() {
     }
 
     /**
-     * Use Odoo Autocomplete API to return suggestions
+     * Use AFENDA xForge Autocomplete API to return suggestions
      *
      * @param {string} value
      * @param {boolean} isVAT

@@ -55,7 +55,7 @@ have real delivered quantities in sales orders.
             'sale_timesheet/static/src/components/so_line_field/*',
         ]
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'post_init_hook': '_sale_timesheet_post_init',
 }

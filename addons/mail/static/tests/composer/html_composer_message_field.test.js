@@ -185,7 +185,7 @@ test("mention a partner", async () => {
     await press("enter");
     await animationFrame();
     expect(getContent(editable)).toBe(
-        `<p>\uFEFF<a href="/odoo/res.partner/${serverState.partnerId}" class="o_mail_redirect" data-oe-id="${serverState.partnerId}" data-oe-model="res.partner" target="_blank" contenteditable="false">@Mitchell Admin</a>\uFEFF[]</p>`
+        `<p>\uFEFF<a href="/app/res.partner/${serverState.partnerId}" class="o_mail_redirect" data-oe-id="${serverState.partnerId}" data-oe-model="res.partner" target="_blank" contenteditable="false">@Mitchell Admin</a>\uFEFF[]</p>`
     );
 });
 

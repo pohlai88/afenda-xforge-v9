@@ -4,11 +4,11 @@
     'icon': '/account/static/description/l10n.png',
     'countries': ['pl'],
     'version': '2.1',
-    'author': 'Odoo S.A., Grzegorz Grzelak (OpenGLOBE) (http://www.openglobe.pl)',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'author': 'AFENDA xForge S.A., Grzegorz Grzelak (OpenGLOBE) (http://www.openglobe.pl)',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the module to manage the accounting chart and taxes for Poland in Odoo.
+This is the module to manage the accounting chart and taxes for Poland in AFENDA xForge.
 ==================================================================================
 
 To jest moduł do tworzenia wzorcowego planu kont, podatków, obszarów podatkowych i

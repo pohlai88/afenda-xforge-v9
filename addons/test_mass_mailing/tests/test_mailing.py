@@ -28,7 +28,7 @@ class TestMassMailing(TestMassMailCommon):
         self.assertEqual(
             self._new_mails.filtered(lambda m: m.model == 'res.partner').mapped('author_id'),
             self.user_marketing.partner_id | self.user_marketing_1.partner_id,
-            "When a mailing is sent by OdooBot, the author of the mails must be the author of the mailing."
+            "When a mailing is sent by AFENDA Bot, the author of the mails must be the author of the mailing."
         )
 
         with self.mock_mail_gateway(mail_unlink_sent=False):
@@ -118,13 +118,13 @@ class TestMassMailing(TestMassMailCommon):
             mail_links_info=[[
                 ('url0', 'https://www.odoo.tz/my/%s' % record.name, True, {}),
                 ('url1', 'https://www.odoo.be', True, {}),
-                ('url2', 'https://www.odoo.com', True, {}),
+                ('url2', 'https://www.afenda.app', True, {}),
                 ('url3', 'https://www.odoo.eu', True, {}),
                 ('url4', 'https://www.example.com/foo/bar?baz=qux', True, {'baz': 'qux'}),
                 ('url5', '%s/event/dummy-event-0' % mailing.get_base_url(), True, {}),
                 # view is not shortened and parsed at sending
                 ('url6', '%s/view' % mailing.get_base_url(), False, {}),
-                ('url7', 'mailto:test@odoo.com', False, {}),
+                ('url7', 'mailto:test@afenda.app', False, {}),
                 # unsubscribe is not shortened and parsed at sending
                 ('url8', '%s/unsubscribe_from_list' % mailing.get_base_url(), False, {}),
             ] for record in recipients],

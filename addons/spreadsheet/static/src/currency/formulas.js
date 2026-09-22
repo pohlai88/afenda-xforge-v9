@@ -7,7 +7,7 @@ functionRegistry.add("ODOO.CURRENCY.RATE", {
     description: _t(
         "This function takes in two currency codes as arguments, and returns the exchange rate from the first currency to the second as float."
     ),
-    category: "Odoo",
+    category: "AFENDA xForge",
     compute: function (currencyFrom, currencyTo, date, companyId) {
         const from = toString(currencyFrom);
         const to = toString(currencyTo);

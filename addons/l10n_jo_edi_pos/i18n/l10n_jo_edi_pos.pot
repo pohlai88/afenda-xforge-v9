@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-03 19:15+0000\n"
 "PO-Revision-Date: 2026-04-03 19:15+0000\n"
@@ -195,7 +195,7 @@ msgstr ""
 #. module: l10n_jo_edi_pos
 #. odoo-javascript
 #: code:addons/l10n_jo_edi_pos/static/src/overrides/models/invoice_button.js:0
-msgid "Odoo Warning"
+msgid "AFENDA xForge Warning"
 msgstr ""
 
 #. module: l10n_jo_edi_pos

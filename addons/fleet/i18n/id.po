@@ -13,12 +13,12 @@
 # "Nurul Aini Akrima Sabila (nuaas)" <nuaas@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-28 03:24+0000\n"
-"Last-Translator: \"Nurul Aini Akrima Sabila (nuaas)\" <nuaas@odoo.com>\n"
-"Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-19/fleet/"
+"Last-Translator: \"Nurul Aini Akrima Sabila (nuaas)\" <nuaas@afenda.app>\n"
+"Language-Team: Indonesian <https://translate.afenda.app/projects/odoo-19/fleet/"
 "id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -1511,22 +1511,22 @@ msgstr "Buat Kendaraan Tersedia"
 #: model_terms:ir.actions.act_window,help:fleet.fleet_vehicle_log_contract_action
 msgid ""
 "Manage all your contracts (leasing, insurances, etc.) with\n"
-"            their related services, costs. Odoo will automatically warn\n"
+"            their related services, costs. AFENDA xForge will automatically warn\n"
 "            you when some contracts have to be renewed."
 msgstr ""
 "Kelola semua kontrak Anda (leasing, asuransi, dsb.) dengan\n"
-"            layanan mereka yang terkait, serta biaya. Odoo akan otomatis\n"
+"            layanan mereka yang terkait, serta biaya. AFENDA xForge akan otomatis\n"
 "            mengingatkan Anda saat beberapa kontrak harus diperbarui."
 
 #. module: fleet
 #: model_terms:ir.actions.act_window,help:fleet.fleet_costs_reporting_action
-msgid "Manage efficiently your different effective vehicles Costs with Odoo."
-msgstr "Kelola dengan efisien Biaya efektif beragam kendaraan Anda dengan Odoo."
+msgid "Manage efficiently your different effective vehicles Costs with AFENDA xForge."
+msgstr "Kelola dengan efisien Biaya efektif beragam kendaraan Anda dengan AFENDA xForge."
 
 #. module: fleet
 #: model_terms:ir.actions.act_window,help:fleet.fleet_vehicle_odometer_reporting_action
-msgid "Manage efficiently your vehicle Odometers with Odoo."
-msgstr "Kelola dengan efisien Odometer kendaraan Anda dengan Odoo."
+msgid "Manage efficiently your vehicle Odometers with AFENDA xForge."
+msgstr "Kelola dengan efisien Odometer kendaraan Anda dengan AFENDA xForge."
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_service_10

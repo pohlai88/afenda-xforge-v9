@@ -45,7 +45,7 @@ export class PaymentVivaCom extends PaymentInterface {
         }
         this._show_error(
             _t(
-                "Could not connect to the Odoo server, please check your internet connection and try again."
+                "Could not connect to the AFENDA xForge server, please check your internet connection and try again."
             )
         );
 

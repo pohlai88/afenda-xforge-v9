@@ -14,6 +14,6 @@
             'pos_restaurant_stripe/static/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

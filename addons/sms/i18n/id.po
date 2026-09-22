@@ -12,12 +12,12 @@
 # "Nurul Aini Akrima Sabila (nuaas)" <nuaas@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 17:37+0000\n"
 "PO-Revision-Date: 2026-08-03 01:51+0000\n"
-"Last-Translator: \"Nurul Aini Akrima Sabila (nuaas)\" <nuaas@odoo.com>\n"
-"Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-19/sms/"
+"Last-Translator: \"Nurul Aini Akrima Sabila (nuaas)\" <nuaas@afenda.app>\n"
+"Language-Team: Indonesian <https://translate.afenda.app/projects/odoo-19/sms/"
 "id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -229,10 +229,10 @@ msgstr "Terjadi error saat mengirimkan SMS pada “%(record_name)s”"
 #. odoo-python
 #: code:addons/sms/tools/sms_api.py:0
 msgid ""
-"An unknown error occurred. Please contact Odoo support if this error "
+"An unknown error occurred. Please contact AFENDA xForge support if this error "
 "persists."
 msgstr ""
-"Terjadi error yang tidak diketahui. Silakan hubungi bantuan Odoo bila error "
+"Terjadi error yang tidak diketahui. Silakan hubungi bantuan AFENDA xForge bila error "
 "ini berkelanjutan."
 
 #. module: sms

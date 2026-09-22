@@ -8,12 +8,12 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 12:20+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/mass_mailing_crm/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -96,9 +96,9 @@ msgstr "尚未有 %s。"
 #. odoo-python
 #: code:addons/mass_mailing_crm/models/mailing_mailing.py:0
 msgid ""
-"Note that Odoo cannot track replies if they are sent towards email addresses "
+"Note that AFENDA xForge cannot track replies if they are sent towards email addresses "
 "to this database."
-msgstr "請注意，如果回覆發送至此資料庫的電子郵件地址，Odoo 無法追蹤回覆。"
+msgstr "請注意，如果回覆發送至此資料庫的電子郵件地址，AFENDA xForge 無法追蹤回覆。"
 
 #. module: mass_mailing_crm
 #. odoo-python

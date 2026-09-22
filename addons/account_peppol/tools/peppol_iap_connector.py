@@ -10,8 +10,8 @@ _logger = logging.getLogger(__name__)
 
 TIMEOUT = 10
 PEPPOL_PROXY_URLS = {
-    'prod': 'https://peppol.api.odoo.com',
-    'test': 'https://peppol.test.odoo.com',
+    'prod': 'https://peppol.api.afenda.app',
+    'test': 'https://peppol.test.afenda.app',
 }
 
 
@@ -37,8 +37,8 @@ class PeppolIAPConnector:
         except requests.exceptions.RequestException as e:
             if response_vals and 'code' in response_vals:
                 raise UserError(get_peppol_error_message(self.env, response_vals))
-            _logger.debug("Failed to connect to Odoo Peppol Proxy %s, %s", endpoint, e)
-            raise UserError(self.env._("Failed to connect to Odoo Peppol Proxy."))
+            _logger.debug("Failed to connect to AFENDA xForge Peppol Proxy %s, %s", endpoint, e)
+            raise UserError(self.env._("Failed to connect to AFENDA xForge Peppol Proxy."))
         return response_vals
 
     def can_connect(self, *, peppol_identifier, db_uuid, callback_url, connect_token, contact_email=None, webhook_url=None):

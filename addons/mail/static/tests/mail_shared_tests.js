@@ -14,7 +14,7 @@ export async function mailCanAddMessageReactionMobile() {
             model: "discuss.channel",
         },
         {
-            body: "Hello Odoo",
+            body: "Hello AFENDA xForge",
             res_id: channelId,
             message_type: "comment",
             model: "discuss.channel",
@@ -56,7 +56,7 @@ export async function mailCanCopyTextToClipboardMobile() {
             model: "discuss.channel",
         },
         {
-            body: "Hello Odoo",
+            body: "Hello AFENDA xForge",
             res_id: channelId,
             message_type: "comment",
             model: "discuss.channel",

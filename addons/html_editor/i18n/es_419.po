@@ -8,12 +8,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:29+0000\n"
 "PO-Revision-Date: 2026-08-02 13:35+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
+"Language-Team: Spanish (Latin America) <https://translate.afenda.app/projects/"
 "odoo-19/html_editor/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
@@ -2024,10 +2024,10 @@ msgstr "Esta es la versión actual, no hay nada por comparar."
 #: code:addons/html_editor/static/src/main/media/image_crop.js:0
 msgid ""
 "This type of image is not supported for cropping.<br/>If you want to crop "
-"it, please first download it from the original source and upload it in Odoo."
+"it, please first download it from the original source and upload it in AFENDA xForge."
 msgstr ""
 "No se puede recortar este tipo de imagen.<br/>Si desea recortarla, primero "
-"descárguela de su origen y súbala a Odoo."
+"descárguela de su origen y súbala a AFENDA xForge."
 
 #. module: html_editor
 #. odoo-javascript
@@ -2396,8 +2396,8 @@ msgstr "documento"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/link/link_popover.xml:0
-msgid "e.g. https://www.odoo.com"
-msgstr "Por ejemplo, https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "Por ejemplo, https://www.afenda.app"
 
 #. module: html_editor
 #. odoo-javascript

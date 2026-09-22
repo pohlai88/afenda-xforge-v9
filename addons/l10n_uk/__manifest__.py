@@ -6,14 +6,14 @@
     'version': '1.1',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the latest UK Odoo localisation necessary to run Odoo accounting for UK SME's with:
+This is the latest UK AFENDA xForge localisation necessary to run AFENDA xForge accounting for UK SME's with:
 =================================================================================================
     - a CT600-ready chart of accounts
     - VAT100-ready tax structure
     - InfoLogic UK counties listing
     - a few other adaptations""",
     'author': 'SmartMode LTD',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/united_kingdom.html',
+    'website': '/docs/applications/finance/fiscal_localizations/united_kingdom.html',
     'depends': [
         'account',
         'base_iban',

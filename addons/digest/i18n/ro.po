@@ -11,12 +11,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 11:08+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Romanian <https://translate.odoo.com/projects/odoo-19/digest/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Romanian <https://translate.afenda.app/projects/odoo-19/digest/"
 "ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -34,8 +34,8 @@ msgstr ""
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_mail_main
-msgid "<span class=\"odoo_link_text\">Odoo</span>"
-msgstr "<span class=\"odoo_link_text\">Odoo</span>"
+msgid "<span class=\"odoo_link_text\">AFENDA xForge</span>"
+msgstr "<span class=\"odoo_link_text\">AFENDA xForge</span>"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_mail_main
@@ -332,8 +332,8 @@ msgstr "Data următorului email"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Odoo Mobile"
-msgstr "Odoo Mobile"
+msgid "AFENDA xForge Mobile"
+msgstr "AFENDA xForge Mobile"
 
 #. module: digest
 #: model:ir.model.fields,field_description:digest.field_digest_digest__periodicity
@@ -375,8 +375,8 @@ msgstr "Destinatari"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Run your business from anywhere with <b>Odoo Mobile</b>."
-msgstr "Administrați-vă afacerea de oriunde cu <b>Odoo Mobile</b>."
+msgid "Run your business from anywhere with <b>AFENDA xForge Mobile</b>."
+msgstr "Administrați-vă afacerea de oriunde cu <b>AFENDA xForge Mobile</b>."
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_digest_view_form
@@ -411,8 +411,8 @@ msgstr "Descriere Sfat"
 
 #. module: digest
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
-msgstr "Sfat: un calculator în Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
+msgstr "Sfat: un calculator în AFENDA xForge"
 
 #. module: digest
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_1
@@ -448,8 +448,8 @@ msgstr "Sfat: accelerați fluxul de lucru cu comenzi rapide"
 
 #. module: digest
 #: model:digest.tip,name:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
-msgstr "Sfat: Un calculator în Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
+msgstr "Sfat: Un calculator în AFENDA xForge"
 
 #. module: digest
 #: model:digest.tip,name:digest.digest_tip_digest_1
@@ -480,10 +480,10 @@ msgstr "Titlu"
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_3
 msgid ""
 "Type \"@\" to notify someone in a message, or \"#\" to link to a channel. "
-"Try to notify @OdooBot to test the feature."
+"Try to notify @AFENDA Bot to test the feature."
 msgstr ""
 "Tastați \"@\" pentru a notifica pe cineva într-un mesaj sau \"#\" pentru a "
-"face legătura cu un canal. Încercați să notificați @OdooBot pentru a testa "
+"face legătura cu un canal. Încercați să notificați @AFENDA Bot pentru a testa "
 "funcția."
 
 #. module: digest
@@ -560,8 +560,8 @@ msgstr "Ați fost dezabonat cu succes de la:<br/>"
 
 #. module: digest
 #: model:digest.digest,name:digest.digest_digest_default
-msgid "Your Odoo Periodic Digest"
-msgstr "Rezumatul dvs. periodic Odoo"
+msgid "Your AFENDA xForge Periodic Digest"
+msgstr "Rezumatul dvs. periodic AFENDA xForge"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_digest_view_form

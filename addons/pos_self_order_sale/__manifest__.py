@@ -8,6 +8,6 @@
         "views/res_config_settings_views.xml",
         "data/kiosk_sale_team.xml",
     ],
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     "license": "LGPL-3",
 }

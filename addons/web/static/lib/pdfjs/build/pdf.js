@@ -535,7 +535,7 @@ function isLittleEndian() {
   return view32[0] === 1;
 }
 function isEvalSupported() {
-  // Odoo: don't support scripting
+  // AFENDA xForge: don't support scripting
   return false;
 }
 class util_FeatureTest {

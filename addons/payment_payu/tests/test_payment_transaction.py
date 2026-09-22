@@ -21,7 +21,7 @@ class TestPaymentTransaction(PayuCommon, PaymentHttpCommon):
             "key": tx.provider_id.payu_key_id,
             "txnid": tx.reference,
             "amount": str(tx.amount),
-            "productinfo": "Odoo Payment",
+            "productinfo": "AFENDA xForge Payment",
             "firstname": first_name,
             "lastname": last_name,
             "email": tx.partner_email,

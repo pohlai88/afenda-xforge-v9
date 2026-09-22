@@ -7,11 +7,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:48+0000\n"
 "PO-Revision-Date: 2019-08-26 09:12+0000\n"
-"Last-Translator: Xavier ALT <xal@odoo.com>, 2019\n"
+"Last-Translator: Xavier ALT <xal@afenda.app>, 2019\n"
 "Language-Team: Luxembourgish (https://www.transifex.com/odoo/teams/41243/lb/)\n"
 "Language: lb\n"
 "MIME-Version: 1.0\n"
@@ -1381,7 +1381,7 @@ msgstr ""
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_bom__allow_operation_dependencies
 #: model:ir.model.fields,help:mrp.field_mrp_routing_workcenter__allow_operation_dependencies
-msgid "Create operation level dependencies that will influence both planning and the status of work orders upon MO confirmation. If this feature is ticked, and nothing is specified, Odoo will assume that all operations can be started simultaneously."
+msgid "Create operation level dependencies that will influence both planning and the status of work orders upon MO confirmation. If this feature is ticked, and nothing is specified, AFENDA xForge will assume that all operations can be started simultaneously."
 msgstr ""
 
 #. module: mrp
@@ -5370,7 +5370,7 @@ msgstr ""
 #: model:ir.model.fields,help:mrp.field_stock_move__manual_consumption
 msgid ""
 "When activated, then the registration of consumption for that component is recorded manually exclusively.\n"
-"If not activated, and any of the components consumption is edited manually on the manufacturing order, Odoo assumes manual consumption also."
+"If not activated, and any of the components consumption is edited manually on the manufacturing order, AFENDA xForge assumes manual consumption also."
 msgstr ""
 
 #. module: mrp
@@ -5391,7 +5391,7 @@ msgstr ""
 
 #. module: mrp
 #: model_terms:digest.tip,tip_description:mrp.digest_tip_mrp_0
-msgid "With the Odoo work center control panel, your worker can start work orders in the shop and follow instructions of the worksheet. Quality tests are perfectly integrated into the process. Workers can trigger feedback loops, maintenance alerts, scrap products, etc."
+msgid "With the AFENDA xForge work center control panel, your worker can start work orders in the shop and follow instructions of the worksheet. Quality tests are perfectly integrated into the process. Workers can trigger feedback loops, maintenance alerts, scrap products, etc."
 msgstr ""
 
 #. module: mrp

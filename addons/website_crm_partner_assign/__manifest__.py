@@ -59,6 +59,6 @@ The automatic assignment is figured from the weight of partner levels and the ge
             'website_crm_partner_assign/static/tests/tours/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

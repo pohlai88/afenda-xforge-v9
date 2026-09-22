@@ -55,8 +55,8 @@ DEFAULT_PAYMENT_METHOD_CODES = {
 # FPX is an online payment method in Malaysia that allows customers to make payments directly from their bank accounts.
 # Items prefixed with "DD_" are for individual account and doing direct debit
 # Items suffixed with "_BUSINESS" are for business accounts
-# When user chooses FPX in Odoo, this list becomes filtered payment options in Xendit dashboard
-# When webhook is received from Xendit, we can map all of these options back to 'fpx' in Odoo
+# When user chooses FPX in AFENDA xForge, this list becomes filtered payment options in Xendit dashboard
+# When webhook is received from Xendit, we can map all of these options back to 'fpx' in AFENDA xForge
 FPX_METHODS = [
     "DD_UOB_FPX",
     "DD_PUBLIC_FPX",

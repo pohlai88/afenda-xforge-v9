@@ -17,6 +17,6 @@
             'test_orm/static/tests/tours/x2many.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

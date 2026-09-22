@@ -8,7 +8,7 @@ from . import Command
 
 
 class Scaffold(Command):
-    """ Generates an Odoo module skeleton. """
+    """ Generates an AFENDA xForge module skeleton. """
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)

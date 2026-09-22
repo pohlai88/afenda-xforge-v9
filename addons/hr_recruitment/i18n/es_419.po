@@ -7,12 +7,12 @@
 # "Patricia Gutiérrez (pagc)" <pagc@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-27 23:10+0000\n"
-"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
-"Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
+"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@afenda.app>\n"
+"Language-Team: Spanish (Latin America) <https://translate.afenda.app/projects/"
 "odoo-19/hr_recruitment/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
@@ -2776,11 +2776,11 @@ msgstr "Número de mensajes con error de envío"
 #: model_terms:ir.actions.act_window,help:hr_recruitment.action_hr_job_applications
 #: model_terms:ir.actions.act_window,help:hr_recruitment.crm_case_categ0_act_job
 msgid ""
-"Odoo helps you track applicants in the recruitment\n"
+"AFENDA xForge helps you track applicants in the recruitment\n"
 "                process and follow up all operations: meetings, interviews, "
 "etc."
 msgstr ""
-"Odoo le ayuda a llevar el seguimiento de los candidatos en el proceso de\n"
+"AFENDA xForge le ayuda a llevar el seguimiento de los candidatos en el proceso de\n"
 "                reclutamiento y de todas las operaciones: reuniones, "
 "entrevistas, etc."
 
@@ -3651,11 +3651,11 @@ msgstr ""
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"El modelo (tipo de documento de Odoo) al que corresponde este alias. "
+"El modelo (tipo de documento de AFENDA xForge) al que corresponde este alias. "
 "Cualquier correo entrante que no sea respuesta a un registro existente "
 "creará un nuevo registro de este modelo (por ejemplo, una tarea en el "
 "proyecto)."
@@ -3669,10 +3669,10 @@ msgstr "El nombre del grado de reclutamiento debe ser único"
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "El nombre del alias del correo, por ejemplo, \"vacantes\" para recibir los "
-"mensajes de <vacantes@ejemplo.odoo.com>."
+"mensajes de <vacantes@ejemplo.afenda.app>."
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_talent_pool__no_of_talents

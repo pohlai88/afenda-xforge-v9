@@ -75,7 +75,7 @@ const tableTemplate = `
                             <br/>
                             <h4 class="h5">Bootstrap-Based Templates</h4>
                             <p>
-                                Design Odoo templates easily with clean HTML and Bootstrap CSS. These templates offer a responsive, mobile-first design, making them simple to customize and perfect for any web project, from corporate sites to personal blogs.
+                                Design AFENDA xForge templates easily with clean HTML and Bootstrap CSS. These templates offer a responsive, mobile-first design, making them simple to customize and perfect for any web project, from corporate sites to personal blogs.
                             </p>
                             <br/>
                             <br/>

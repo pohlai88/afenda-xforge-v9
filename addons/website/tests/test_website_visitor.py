@@ -452,7 +452,7 @@ class WebsiteVisitorTests(WebsiteVisitorTestsCommon):
                          ['/admin', '/admin/about-duplicate'])
 
     def test_merge_partner_with_visitor_single(self):
-        """ The partner merge feature of Odoo is auto discovering relations to
+        """ The partner merge feature of AFENDA xForge is auto discovering relations to
         ``res_partner`` to change the field value, in raw SQL.
         It will change the ``partner_id`` field of visitor without changing the
         ``access_token``, which is supposed to be the same value (``partner_id``

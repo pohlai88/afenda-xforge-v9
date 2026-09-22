@@ -17,12 +17,12 @@
 # "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-28 10:09+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Spanish <https://translate.afenda.app/projects/odoo-19/"
 "mass_mailing/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -465,11 +465,11 @@ msgstr ""
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_call_to_action
 msgid ""
-"<font style=\"color: white;\"><strong>50,000+ companies</strong> run Odoo.</"
+"<font style=\"color: white;\"><strong>50,000+ companies</strong> run AFENDA xForge.</"
 "font>"
 msgstr ""
 "<font style=\"color: white;\"><strong>Más de 50.000 empresas</strong> "
-"utilizan Odoo.</font>"
+"utilizan AFENDA xForge.</font>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_numbers
@@ -3635,8 +3635,8 @@ msgstr ""
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_schedule
-msgid "Interactive Odoo demo"
-msgstr "Demostración interactiva de Odoo"
+msgid "Interactive AFENDA xForge demo"
+msgstr "Demostración interactiva de AFENDA xForge"
 
 #. module: mass_mailing
 #: model:ir.model.fields.selection,name:mass_mailing.selection__mailing_trace__failure_type__mail_email_invalid
@@ -4623,10 +4623,10 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailing_lists
 msgid ""
 "No need to import mailing lists, you can send mailings to contacts saved in "
-"other Odoo apps."
+"other AFENDA xForge apps."
 msgstr ""
 "No hay necesidad de importar las listas de correos, puede enviar correos a "
-"contactos que estén guardados en otras aplicaciones de Odoo."
+"contactos que estén guardados en otras aplicaciones de AFENDA xForge."
 
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.mailing_filter_action
@@ -4743,7 +4743,7 @@ msgstr "ABIERTO (%i)"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_section_mobile
-msgid "Odoo Mobile"
+msgid "AFENDA xForge Mobile"
 msgstr ""
 
 #. module: mass_mailing
@@ -6468,11 +6468,11 @@ msgstr "Utilizar lista de exclusión"
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__mass_mailing_outgoing_mail_server
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid ""
-"Use a specific mail server in priority. Otherwise Odoo relies on the first "
+"Use a specific mail server in priority. Otherwise AFENDA xForge relies on the first "
 "outgoing mail server available (based on their sequencing) as it does for "
 "normal mails."
 msgstr ""
-"Use un servidor de correo específico con prioridad. De lo contrario, Odoo "
+"Use un servidor de correo específico con prioridad. De lo contrario, AFENDA xForge "
 "depende en el primer servidor de correo de salida disponible (según su "
 "secuencia) como lo hace para los correos normales."
 
@@ -6807,11 +6807,11 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailings_from_campaign
 msgid ""
 "You don't need to import your mailing lists, you can easily\n"
-"                send emails<br> to any contact saved in other Odoo apps."
+"                send emails<br> to any contact saved in other AFENDA xForge apps."
 msgstr ""
 "No necesita importar sus listas de correo, puede fácilmente\n"
 "                 enviar correos electrónicos<br> a cualquier contacto "
-"guardado en otras aplicaciones de Odoo."
+"guardado en otras aplicaciones de AFENDA xForge."
 
 #. module: mass_mailing
 #. odoo-python

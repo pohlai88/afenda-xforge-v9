@@ -55,15 +55,15 @@ class TestSnippets(HttpCase):
                 'name': 'My Mail Group',
                 'alias_name': 'my_mail_group',
             })
-        self.start_tour(f"/odoo/action-website.website_preview?{path}", "snippets_all_drag_and_drop", login='admin', timeout=600)
+        self.start_tour(f"/app/action-website.website_preview?{path}", "snippets_all_drag_and_drop", login='admin', timeout=600)
 
     def test_04_countdown_preview(self):
         self.start_tour(self.env['website'].get_client_action_url('/'), 'snippet_countdown', login='admin')
 
     def test_05_social_media(self):
         self.env.ref('website.default_website').write({
-            'social_facebook': "https://www.facebook.com/Odoo",
-            'social_twitter': 'https://twitter.com/Odoo',
+            'social_facebook': "https://www.facebook.com/afenda",
+            'social_twitter': 'https://twitter.com/afenda',
             'social_linkedin': 'https://www.linkedin.com/company/odoo',
             'social_youtube': 'https://www.youtube.com/user/OpenERPonline',
             'social_github': 'https://github.com/odoo',

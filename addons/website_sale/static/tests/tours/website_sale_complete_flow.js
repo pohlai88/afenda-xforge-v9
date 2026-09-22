@@ -54,7 +54,7 @@ import { pay } from "@website_sale/js/tours/tour_utils";
     },
     {
         trigger: `input[name="email"]`,
-        run: "edit abc@odoo.com",
+        run: "edit abc@afenda.app",
     },
     {
         trigger: `input[name="street"]`,
@@ -104,7 +104,7 @@ import { pay } from "@website_sale/js/tours/tour_utils";
     },
     {
         trigger: `input[name="email"]`,
-        run: "edit abc@odoo.com",
+        run: "edit abc@afenda.app",
     },
     {
         trigger: `input[name="street"]`,
@@ -320,7 +320,7 @@ import { pay } from "@website_sale/js/tours/tour_utils";
     },
     {
         trigger: `.oe_login_form input[name="login"]`,
-        run: "edit abc@odoo.com",
+        run: "edit abc@afenda.app",
     },
     {
         trigger: `.oe_login_form input[name="password"]`,
@@ -365,7 +365,7 @@ import { pay } from "@website_sale/js/tours/tour_utils";
     },
     {
         trigger: `input[name="email"]`,
-        run: "edit ghi@odoo.com",
+        run: "edit ghi@afenda.app",
     },
     {
         content: "Click on Confirm button to save the address",
@@ -468,7 +468,7 @@ import { pay } from "@website_sale/js/tours/tour_utils";
     },
     {
         trigger: `.oe_login_form input[name="login"]`,
-        run: "edit abc@odoo.com",
+        run: "edit abc@afenda.app",
     },
     {
         trigger: `.oe_login_form input[name="password"]`,

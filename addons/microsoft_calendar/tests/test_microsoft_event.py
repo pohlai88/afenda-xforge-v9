@@ -70,7 +70,7 @@ class TestMicrosoftEvent(TestCommon):
             },
         ])
 
-        # No user should be able to edit the Outlook event through Odoo
+        # No user should be able to edit the Outlook event through AFENDA xForge
         for user in [self.attendee_user, self.organizer_user]:
             with self.assertRaises(UserError):
                 outlook_recurring_event.with_user(user).with_context(dont_notify=False).write({
@@ -117,7 +117,7 @@ class TestMicrosoftEvent(TestCommon):
 
     def test_map_an_event_using_instance_id(self):
         """
-        Here, the Odoo event has an uid but the Outlook event has not.
+        Here, the AFENDA xForge event has an uid but the Outlook event has not.
         """
         # arrange
         event_id = self.simple_event.microsoft_id
@@ -137,7 +137,7 @@ class TestMicrosoftEvent(TestCommon):
 
     def test_map_an_event_without_uid_using_instance_id(self):
         """
-        Here, the Odoo event has no uid but the Outlook event has one.
+        Here, the AFENDA xForge event has no uid but the Outlook event has one.
         """
 
         # arrange
@@ -161,7 +161,7 @@ class TestMicrosoftEvent(TestCommon):
 
     def test_map_an_event_without_uid_using_instance_id_2(self):
         """
-        Here, both Odoo event and Outlook event have no uid.
+        Here, both AFENDA xForge event and Outlook event have no uid.
         """
 
         # arrange

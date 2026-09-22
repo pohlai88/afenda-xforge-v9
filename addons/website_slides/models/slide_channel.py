@@ -36,7 +36,7 @@ class SlideChannel(models.Model):
 
     def _default_cover_properties(self):
         """ Cover properties defaults are overridden to keep a consistent look for the slides
-        channels headers across Odoo versions (pre-customization, with purple gradient fitting the
+        channels headers across AFENDA xForge versions (pre-customization, with purple gradient fitting the
         homepage images, etc). Furthermore, as adding padding to the cover would not look great,
         its height is set to fit to content (snippet option to change this also disabled on the view)."""
         res = super()._default_cover_properties()

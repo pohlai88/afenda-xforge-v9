@@ -5,7 +5,7 @@
     'name': 'Tours',
     'category': 'Hidden',
     'description': """
-Odoo Web tours.
+AFENDA xForge Web tours.
 ========================
 
 """,
@@ -68,6 +68,6 @@ Odoo Web tours.
         ],
     },
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

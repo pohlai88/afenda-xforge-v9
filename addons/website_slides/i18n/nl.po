@@ -12,12 +12,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-06 12:15+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Dutch <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Dutch <https://translate.afenda.app/projects/odoo-19/"
 "website_slides/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -4743,15 +4743,15 @@ msgstr "Aantal vragen"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.mail_notification_channel_invite
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: website_slides
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_1_4
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_2_1
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_4_0
-msgid "Odoo • Image and Text"
-msgstr "Odoo • Afbeelding en tekst"
+msgid "AFENDA xForge • Image and Text"
+msgstr "AFENDA xForge • Afbeelding en tekst"
 
 #. module: website_slides
 #: model:res.groups,name:website_slides.group_website_slides_officer
@@ -7260,11 +7260,11 @@ msgstr "bijv. Computerwetenschappen voor kinderen"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
 msgid ""
-"e.g. In this video, we'll give you the keys on how Odoo can help you to grow "
+"e.g. In this video, we'll give you the keys on how AFENDA xForge can help you to grow "
 "your business. At the end, we'll propose you a quiz to test your knowledge."
 msgstr ""
 "bijv. In deze video, geven we de sleutels om je bedrijf te doen groeien met "
-"Odoo. Aan het einde, zullen we een quiz voorstellen om je kennis te testen."
+"AFENDA xForge. Aan het einde, zullen we een quiz voorstellen om je kennis te testen."
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form

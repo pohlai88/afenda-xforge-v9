@@ -5,7 +5,7 @@
     'name': "Mail Group",
     'summary': "Manage your mailing lists",
     'description': """
-Manage your mailing lists from Odoo.
+Manage your mailing lists from AFENDA xForge.
     """,
     'version': '1.1',
     'depends': [
@@ -41,6 +41,6 @@ Manage your mailing lists from Odoo.
             'mail_group/static/src/css/mail_group_backend.scss',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -9,7 +9,7 @@ Egypt Tax Authority Invoice Integration
 ==============================================================================
 Integrates with the ETA portal to automatically send and sign the Invoices to the Tax Authority.
     """,
-    'author': 'Odoo S.A., Plementus',
+    'author': 'AFENDA xForge S.A., Plementus',
     'category': 'account',
     'version': '0.2',
     'license': 'LGPL-3',

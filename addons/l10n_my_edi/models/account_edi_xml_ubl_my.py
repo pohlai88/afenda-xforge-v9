@@ -196,7 +196,7 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
         partner = vals['partner']
 
         # The API expects the iso3166-2 code for the state, in the same way as it expects the iso3166 code for the countries.
-        # In Odoo, we mostly use these (although there is no standard format) so we'll try to use what Odoo gives us.
+        # In AFENDA xForge, we mostly use these (although there is no standard format) so we'll try to use what AFENDA xForge gives us.
         # For malaysia, the codes were updated..
 
         subentity_code = ''
@@ -366,7 +366,7 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
             # Debit/Credit note original invoice ref.
             # Applies to credit notes, debit notes, refunds for both invoices and self-billed invoices.
             # The original document is mandatory; but in some specific cases it will be empty (sending a credit note for an invoice
-            # managed outside Odoo/...)
+            # managed outside AFENDA xForge/...)
             'cac:BillingReference': {
                 'cac:InvoiceDocumentReference': {
                     'cbc:ID': {'_text': original_document_id or 'NA'},
@@ -410,7 +410,7 @@ class AccountEdiXmlUBLMyInvoisMY(models.AbstractModel):
     def _add_myinvois_document_payment_terms_nodes(self, document_node, vals):
         if vals['invoice_payment_term_id']:
             document_node['cac:PaymentTerms'] = {
-                # The payment term's note is automatically embedded in a <p> tag in Odoo
+                # The payment term's note is automatically embedded in a <p> tag in AFENDA xForge
                 'cbc:Note': {'_text': html2plaintext(vals['invoice_payment_term_id'].note)}
             }
 

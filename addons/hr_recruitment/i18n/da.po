@@ -13,12 +13,12 @@
 # "Kira Petersen François (peti)" <peti@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-02 11:24+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Danish <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Danish <https://translate.afenda.app/projects/odoo-19/"
 "hr_recruitment/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -2760,11 +2760,11 @@ msgstr "Antal beskeder med leveringsfejl"
 #: model_terms:ir.actions.act_window,help:hr_recruitment.action_hr_job_applications
 #: model_terms:ir.actions.act_window,help:hr_recruitment.crm_case_categ0_act_job
 msgid ""
-"Odoo helps you track applicants in the recruitment\n"
+"AFENDA xForge helps you track applicants in the recruitment\n"
 "                process and follow up all operations: meetings, interviews, "
 "etc."
 msgstr ""
-"Odoo hjælper dig med at følge ansøgere gennem ansættelsesprocessen\n"
+"AFENDA xForge hjælper dig med at følge ansøgere gennem ansættelsesprocessen\n"
 "                og holde styr på opfølgning på alle aktiviteter: møder, "
 "samtaler osv."
 
@@ -3622,11 +3622,11 @@ msgstr "Følgende ansøgere mangler en e-mailadresse: %s."
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Modellen (Odoo Documenttype), som dette alias svarer til. Enhver indgående e-"
+"Modellen (AFENDA xForge Documenttype), som dette alias svarer til. Enhver indgående e-"
 "mail, der ikke svarer til en eksisterende post, vil medføre oprettelse af en "
 "ny post af denne model (f.eks. en projektopgave)"
 
@@ -3639,10 +3639,10 @@ msgstr "Navnet på ansættelsesforholdet skal være unikt!"
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Navnet på e-mailaliasset, f.eks. 'jobs', hvis du vil modtage e-mails sendt "
-"til <jobs@eksempel.odoo.com>"
+"til <jobs@eksempel.afenda.app>"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_talent_pool__no_of_talents

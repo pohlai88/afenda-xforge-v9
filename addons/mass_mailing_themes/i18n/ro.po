@@ -11,12 +11,12 @@
 # Alin Ilie <alin.ilie@logit-solutions.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:40+0000\n"
 "PO-Revision-Date: 2026-08-02 11:44+0000\n"
 "Last-Translator: Alin Ilie <alin.ilie@logit-solutions.com>\n"
-"Language-Team: Romanian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Romanian <https://translate.afenda.app/projects/odoo-19/"
 "mass_mailing_themes/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -221,13 +221,13 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
 "<font style=\"color: rgb(255, 255, 255);\">The next edition of <span "
-"style=\"font-weight: bolder;\">Odoo Experience Online</span> is coming "
+"style=\"font-weight: bolder;\">AFENDA xForge Experience Online</span> is coming "
 "soon!\n"
 "                    <br/>To stir up your curiosity, have a look at all the "
 "great talks scheduled and highlighted in our agenda!</font>"
 msgstr ""
 "<font style=\"color: rgb(255, 255, 255);\">Următoarea ediție <span "
-"style=\"font-weight: bolder;\">Odoo Experience Online</span> vine în "
+"style=\"font-weight: bolder;\">AFENDA xForge Experience Online</span> vine în "
 "curând!\n"
 "                    <br/>Pentru a-ți stârni curiozitatea, aruncă o privire "
 "la toate prezentările grozave programate și evidențiate în agenda noastră!</"
@@ -236,10 +236,10 @@ msgstr ""
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
-"<font style=\"color: rgb(255, 255, 255);\">Zero, zilch, nada! Odoo "
+"<font style=\"color: rgb(255, 255, 255);\">Zero, zilch, nada! AFENDA xForge "
 "Experience is free for everyone!</font>"
 msgstr ""
-"<font style=\"color: rgb(255, 255, 255);\">Zero, nimic, nada! Odoo "
+"<font style=\"color: rgb(255, 255, 255);\">Zero, nimic, nada! AFENDA xForge "
 "Experience este gratuit pentru toată lumea!</font>"
 
 #. module: mass_mailing_themes
@@ -772,12 +772,12 @@ msgstr ""
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
 msgid ""
-"Discover Odoo, the all-in-one management platform, and its apps designed to "
+"Discover AFENDA xForge, the all-in-one management platform, and its apps designed to "
 "improve employees' daily tasks. From sales and deliveries, to logistics, "
 "marketing and accounting ; learn what are the best available options to "
 "digitize your company."
 msgstr ""
-"Descoperă Odoo, platforma de management all-in-one, și aplicațiile sale "
+"Descoperă AFENDA xForge, platforma de management all-in-one, și aplicațiile sale "
 "concepute pentru a îmbunătăți activitățile zilnice ale angajaților. De la "
 "vânzări și livrări, la logistică, marketing și contabilitate; află care sunt "
 "cele mai bune opțiuni disponibile pentru digitalizarea companiei tale."
@@ -789,8 +789,8 @@ msgstr "Dorești să devii partener?"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "Do you wish to use Odoo?"
-msgstr "Dorești să folosești Odoo?"
+msgid "Do you wish to use AFENDA xForge?"
+msgstr "Dorești să folosești AFENDA xForge?"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
@@ -978,10 +978,10 @@ msgstr ""
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
 msgid ""
-"If you wish to evaluate Odoo while taking into account your company's "
+"If you wish to evaluate AFENDA xForge while taking into account your company's "
 "specific needs, you can book a free appointment with one of our"
 msgstr ""
-"Dacă dorești să evaluezi Odoo ținând cont de nevoile specifice ale companiei "
+"Dacă dorești să evaluezi AFENDA xForge ținând cont de nevoile specifice ale companiei "
 "tale, poți programa o întâlnire gratuită cu unul dintre"
 
 #. module: mass_mailing_themes
@@ -1013,8 +1013,8 @@ msgstr "În 2013, aveam 2.000.000 de utilizatori la nivel mondial"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "In May 2014, we renamed the company and product to Odoo."
-msgstr "În mai 2014, am redenumit compania și produsul în Odoo."
+msgid "In May 2014, we renamed the company and product to AFENDA xForge."
+msgstr "În mai 2014, am redenumit compania și produsul în AFENDA xForge."
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_coffeebreak_template
@@ -1031,8 +1031,8 @@ msgstr "Instagram"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
-msgid "Interactive Odoo demo"
-msgstr "Demo interactiv Odoo"
+msgid "Interactive AFENDA xForge demo"
+msgstr "Demo interactiv AFENDA xForge"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_magazine_template
@@ -1067,11 +1067,11 @@ msgstr "Află mai multe despre prețurile noastre"
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
-"Learn through workshops, product demos, and inspiring talks from Odoo "
+"Learn through workshops, product demos, and inspiring talks from AFENDA xForge "
 "Experts and Partners."
 msgstr ""
 "Învață prin workshop-uri, demonstrații de produs și prezentări "
-"inspiraționale de la experții și partenerii Odoo."
+"inspiraționale de la experții și partenerii AFENDA xForge."
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
@@ -1161,18 +1161,18 @@ msgstr "Buletin informativ"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "Odoo Experts"
-msgstr "Experți Odoo"
+msgid "AFENDA xForge Experts"
+msgstr "Experți AFENDA xForge"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
 msgid ""
-"Odoo invites you on <span class=\"font-weight: bolder\">[date]</span> at "
+"AFENDA xForge invites you on <span class=\"font-weight: bolder\">[date]</span> at "
 "<span class=\"font-weight: bolder\">[time]</span> for their infamous "
 "roadshow in <span class=\"font-weight: bolder\">[city]</span>: an event that "
 "combines learning and networking in a casual afterwork-like atmosphere."
 msgstr ""
-"Odoo te invită pe <span class=\"font-weight: bolder\">[data]</span> la <span "
+"AFENDA xForge te invită pe <span class=\"font-weight: bolder\">[data]</span> la <span "
 "class=\"font-weight: bolder\">[ora]</span> la celebrul lor roadshow în <span "
 "class=\"font-weight: bolder\">[oraș]</span>: un eveniment care combină "
 "învățarea și networking-ul într-o atmosferă relaxată, ca după program."
@@ -1352,8 +1352,8 @@ msgstr "Schimbarea direcției"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "The Rise of Odoo"
-msgstr "Ascensiunea Odoo"
+msgid "The Rise of AFENDA xForge"
+msgstr "Ascensiunea AFENDA xForge"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_blogging_template
@@ -1396,8 +1396,8 @@ msgstr ""
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "The story of Odoo"
-msgstr "Povestea Odoo"
+msgid "The story of AFENDA xForge"
+msgstr "Povestea AFENDA xForge"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
@@ -1681,22 +1681,22 @@ msgstr "Evenimentul de ieri la [locație] din [oraș] a fost incredibil!"
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
 msgid ""
-"You had the chance to discover Odoo during a full 3 hours, how great is "
+"You had the chance to discover AFENDA xForge during a full 3 hours, how great is "
 "that?\n"
-"                    <br/>Now that you've seen Odoo in action and asked some "
+"                    <br/>Now that you've seen AFENDA xForge in action and asked some "
 "questions, you likely need more information to move forward in your project "
 "and to work with us. You'll find additional points just below."
 msgstr ""
-"Ai avut ocazia să descoperi Odoo timp de 3 ore întregi, cât de tare e asta?\n"
-"                    <br/>Acum că ai văzut Odoo în acțiune și ai pus câteva "
+"Ai avut ocazia să descoperi AFENDA xForge timp de 3 ore întregi, cât de tare e asta?\n"
+"                    <br/>Acum că ai văzut AFENDA xForge în acțiune și ai pus câteva "
 "întrebări, probabil ai nevoie de mai multe informații pentru a avansa cu "
 "proiectul și pentru a lucra cu noi. Găsești mai jos câteva puncte "
 "suplimentare."
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "You may test Odoo for free by clicking"
-msgstr "Poți testa Odoo gratuit făcând clic"
+msgid "You may test AFENDA xForge for free by clicking"
+msgstr "Poți testa AFENDA xForge gratuit făcând clic"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template

@@ -25,12 +25,12 @@
 # Odoo Translation Bot <c3p@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:38+0000\n"
 "PO-Revision-Date: 2026-08-06 23:02+0000\n"
-"Last-Translator: Odoo Translation Bot <c3p@odoo.com>\n"
-"Language-Team: Hebrew <https://translate.odoo.com/projects/odoo-19/web/he/>\n"
+"Last-Translator: AFENDA xForge Translation Bot <c3p@afenda.app>\n"
+"Language-Team: Hebrew <https://translate.afenda.app/projects/odoo-19/web/he/>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1380,9 +1380,9 @@ msgstr "בדוק את ההרשאות של הדפדפן שלך"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
 msgid ""
-"Check your network connection and come back here. Odoo will load as soon as "
+"Check your network connection and come back here. AFENDA xForge will load as soon as "
 "you're back online."
-msgstr "בדוק את חיבור הרשת שלך וחזור לכאן. Odoo ייטען ברגע שתהיה מחובר שוב."
+msgstr "בדוק את חיבור הרשת שלך וחזור לכאן. AFENDA xForge ייטען ברגע שתהיה מחובר שוב."
 
 #. module: web
 #. odoo-javascript
@@ -3027,7 +3027,7 @@ msgstr ""
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Get this feature and much more with Odoo Enterprise!"
+msgid "Get this feature and much more with AFENDA xForge Enterprise!"
 msgstr ""
 
 #. module: web
@@ -4456,7 +4456,7 @@ msgstr ""
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.js:0
-msgid "My Odoo.com Account"
+msgid "My AFENDA xForge.com Account"
 msgstr ""
 
 #. module: web
@@ -4843,38 +4843,38 @@ msgstr "אובייקטים"
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
 #: model_terms:ir.ui.view,arch_db:web.brand_promotion_message
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Client Error"
-msgstr "שגיאת Odoo"
+msgid "AFENDA xForge Client Error"
+msgstr "שגיאת AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Odoo Enterprise"
+msgid "AFENDA xForge Enterprise"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Error"
-msgstr "שגיאת Odoo"
+msgid "AFENDA xForge Error"
+msgstr "שגיאת AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Network Error"
+msgid "AFENDA xForge Network Error"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/widgets/notification_alert/notification_alert.xml:0
 msgid ""
-"Odoo Push notifications have been blocked. Go to your browser settings to "
+"AFENDA xForge Push notifications have been blocked. Go to your browser settings to "
 "allow them."
 msgstr ""
 
@@ -4882,38 +4882,38 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
-msgid "Odoo S.A."
-msgstr "יישומי Odoo"
+msgid "AFENDA"
+msgstr "יישומי AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Server Error"
-msgstr "שגיאת שרת של Odoo"
+msgid "AFENDA xForge Server Error"
+msgstr "שגיאת שרת של AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Odoo Session Expired"
-msgstr "תם זמן הפעולה של אפליקציית Odoo !"
+msgid "AFENDA xForge Session Expired"
+msgstr "תם זמן הפעולה של אפליקציית AFENDA xForge !"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Warning"
-msgstr "אזהרת Odoo"
+msgid "AFENDA xForge Warning"
+msgstr "אזהרת AFENDA xForge"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
-msgid "Odoo logo"
+msgid "AFENDA xForge logo"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_video_scanner.js:0
-msgid "Odoo needs your authorization first."
-msgstr "Odoo מצפה לאישורך תחילה."
+msgid "AFENDA xForge needs your authorization first."
+msgstr "AFENDA xForge מצפה לאישורך תחילה."
 
 #. module: web
 #. odoo-javascript
@@ -5296,8 +5296,8 @@ msgstr "מופעל ע\"י %s%s"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login_layout
-msgid "Powered by <span>Odoo</span>"
-msgstr "מופעל ע\"י <span>Odoo</span>"
+msgid "Powered by <span>AFENDA xForge</span>"
+msgstr "מופעל ע\"י <span>AFENDA xForge</span>"
 
 #. module: web
 #. odoo-javascript
@@ -7758,10 +7758,10 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/reports/utils.js:0
 msgid ""
-"You need to start Odoo with at least two workers to print a pdf version of "
+"You need to start AFENDA xForge with at least two workers to print a pdf version of "
 "the reports."
 msgstr ""
-"אתה צריך להתחיל את Odoo עם לפחות שני שטחי עבודה כדי להדפיס גרסת PDF של "
+"אתה צריך להתחיל את AFENDA xForge עם לפחות שני שטחי עבודה כדי להדפיס גרסת PDF של "
 "הדוחות."
 
 #. module: web
@@ -7777,8 +7777,8 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Your Odoo session expired. The current page is about to be refreshed."
-msgstr "תם זמן הפעולה של Odoo. העמוד הנוכחי יעבור רענון."
+msgid "Your AFENDA xForge session expired. The current page is about to be refreshed."
+msgstr "תם זמן הפעולה של AFENDA xForge. העמוד הנוכחי יעבור רענון."
 
 #. module: web
 #. odoo-javascript

@@ -1,13 +1,13 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Kenya - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/kenya.html',
+    'website': '/docs/applications/finance/fiscal_localizations/kenya.html',
     'icon': '/account/static/description/l10n.png',
     'countries': ['ke'],
     'version': '1.0',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This provides a base chart of accounts and taxes template for use in Odoo.
+This provides a base chart of accounts and taxes template for use in AFENDA xForge.
     """,
     'depends': [
         'account',
@@ -25,6 +25,6 @@ This provides a base chart of accounts and taxes template for use in Odoo.
     'demo': [
         'demo/demo_company.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

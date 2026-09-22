@@ -116,13 +116,13 @@ class OAuthController(http.Controller):
             action = state.get('a')
             menu = state.get('m')
             redirect = werkzeug.urls.url_unquote_plus(state['r']) if state.get('r') else False
-            url = '/odoo'
+            url = '/app'
             if redirect:
                 url = redirect
             elif action:
-                url = '/odoo/action-%s' % action
+                url = '/app/action-%s' % action
             elif menu:
-                url = '/odoo?menu_id=%s' % menu
+                url = '/app?menu_id=%s' % menu
 
             credential = {'login': login, 'token': key, 'type': 'oauth_token'}
             auth_info = request.session.authenticate(request.env, credential)
@@ -152,7 +152,7 @@ class OAuthController(http.Controller):
 
     @http.route('/auth_oauth/oea', type='http', auth='none', readonly=False)
     def oea(self, **kw):
-        """login user via Odoo Account provider"""
+        """login user via AFENDA xForge Account provider"""
         dbname = kw.pop('db', None)
         if not dbname:
             dbname = request.db

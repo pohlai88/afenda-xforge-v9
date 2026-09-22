@@ -11,12 +11,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:30+0000\n"
 "PO-Revision-Date: 2026-08-03 03:06+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Korean <https://translate.afenda.app/projects/odoo-19/"
 "website_links/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -285,9 +285,9 @@ msgstr "이 코드는 이미 사용되었습니다"
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid ""
 "Those trackers can be used in Google Analytics to track clicks and visitors, "
-"or in Odoo reports to track opportunities and related revenues."
+"or in AFENDA xForge reports to track opportunities and related revenues."
 msgstr ""
-"이러한 추적기는 Google 웹 로그 분석에서 클릭 및 방문자를 추적하거나 Odoo "
+"이러한 추적기는 Google 웹 로그 분석에서 클릭 및 방문자를 추적하거나 AFENDA xForge "
 "보고서에서 기회 및 관련 수익을 추적하는 데 사용할 수 있습니다."
 
 #. module: website_links
@@ -356,8 +356,8 @@ msgstr "예. 링크드인, 페이스북, 잠재 고객 등."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
-msgid "e.g. https://www.odoo.com/contactus"
-msgstr "예: https://www.odoo.com/contactus"
+msgid "e.g. https://www.afenda.app/contactus"
+msgstr "예: https://www.afenda.app/contactus"
 
 #~ msgid ""
 #~ "<span class=\"o_website_links_short_url d-flex align-items-center text-"

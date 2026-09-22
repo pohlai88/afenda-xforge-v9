@@ -15,12 +15,12 @@
 # "Andreas Brandl (1st Group SE)" <a.brandl@1st.group>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-09-09 08:11+0000\n"
-"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
-"Language-Team: German <https://translate.odoo.com/projects/odoo-19/stock/de/>"
+"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@afenda.app>\n"
+"Language-Team: German <https://translate.afenda.app/projects/odoo-19/stock/de/>"
 "\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -1828,11 +1828,11 @@ msgstr "Vor dem geplanten Datum"
 #. module: stock
 #: model_terms:res.company,invoice_terms_html:stock.res_company_1
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
 msgstr ""
 "Der nachfolgende Text dient als Anregung und liegt nicht in der "
-"Verantwortung von Odoo S.A."
+"Verantwortung von AFENDA"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_package__quant_ids
@@ -3018,10 +3018,10 @@ msgstr "Standardrouten im Lagerhaus"
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_orderpoint
 msgid ""
-"Define a minimum stock rule so that Odoo automatically creates requests for "
+"Define a minimum stock rule so that AFENDA xForge automatically creates requests for "
 "quotations or confirmed manufacturing orders to resupply your stock."
 msgstr ""
-"Definieren Sie eine Mindestbestandsregel, damit Odoo automatisch "
+"Definieren Sie eine Mindestbestandsregel, damit AFENDA xForge automatisch "
 "Angebotsanfragen oder bestätigte Fertigungsaufträge erstellt, um Ihren "
 "Bestand wieder aufzufüllen."
 
@@ -3034,14 +3034,14 @@ msgstr "Neues Lagerhaus erstellen"
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
 "Define your locations to reflect your warehouse structure and\n"
-"            organization. Odoo is able to manage physical locations\n"
+"            organization. AFENDA xForge is able to manage physical locations\n"
 "            (warehouses, shelves, bin, etc), partner locations (customers,\n"
 "            vendors) and virtual locations which are the counterpart of\n"
 "            the stock operations like the manufacturing orders\n"
 "            consumptions, inventories, etc."
 msgstr ""
 "Definieren Sie Ihre Standorte, um Ihre Lagerstruktur und\n"
-"-organisation zu reflektieren. Odoo ist in der Lage, physische Standorte \n"
+"-organisation zu reflektieren. AFENDA xForge ist in der Lage, physische Standorte \n"
 "(Lagerhallen, Regale, Abfallsysteme usw.), Partnerlagerorte (Kunden, \n"
 "Verkäufer) und virtuelle Standorte zu verwalten, die das Gegenstück \n"
 "zu den Vorräten wie der Fertigungsaufträge, Lagerbestände usw. sind."
@@ -3739,12 +3739,12 @@ msgstr "Leere Lagerorte"
 #. module: stock
 #: model_terms:digest.tip,tip_description:stock.digest_tip_stock_0
 msgid ""
-"Enjoy a quick-paced experience with the Odoo barcode app. It is blazing fast "
+"Enjoy a quick-paced experience with the AFENDA xForge barcode app. It is blazing fast "
 "and works even without a stable internet connection. It supports all flows: "
 "inventory adjustments, batch picking, moving lots or pallets, low inventory "
 "checks, etc. Go to the \"Apps\" menu to activate the barcode interface."
 msgstr ""
-"Genießen Sie zügige Abläufe mit der Odoo-Barcode-App. Sie ist blitzschnell "
+"Genießen Sie zügige Abläufe mit der AFENDA xForge-Barcode-App. Sie ist blitzschnell "
 "und funktioniert auch ohne stabile Internetverbindung. Sie unterstützt alle "
 "Abläufe: Bestandsaufnahme, Stapelkommissionierung, Verschieben von Losen "
 "oder Paletten, Überprüfung von niedrigem Bestand usw. Rufen Sie das Menü „"
@@ -3786,16 +3786,16 @@ msgstr ""
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
-"Every stock operation in Odoo moves the products from one\n"
+"Every stock operation in AFENDA xForge moves the products from one\n"
 "            location to another one.  For instance, if you receive products\n"
-"            from a vendor, Odoo will move products from the Vendor\n"
+"            from a vendor, AFENDA xForge will move products from the Vendor\n"
 "            location to the Stock location. Each report can be performed on\n"
 "            physical, partner or virtual locations."
 msgstr ""
-"Jeder Bestandsvorgang in Odoo bewegt die Produkte von einem \n"
+"Jeder Bestandsvorgang in AFENDA xForge bewegt die Produkte von einem \n"
 "            Lagerort zum anderen. Zum Beispiel, wenn Sie Produkte von einem "
 "\n"
-"            Lieferanten erhalten, wird Odoo Produkte aus dem \n"
+"            Lieferanten erhalten, wird AFENDA xForge Produkte aus dem \n"
 "            Lieferantenstandort an den Lagerort verschieben. Jeder Bericht "
 "kann an physischen,\n"
 "            Partner- oder virtuellen Orten durchgeführt werden."
@@ -4469,85 +4469,85 @@ msgstr "Ob der Benutzer die erwartete Menge sehen kann oder nicht"
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_delivery_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the delivery slip "
+"If this checkbox is ticked, AFENDA xForge will automatically print the delivery slip "
 "of a picking when it is validated."
 msgstr ""
-"Wenn dieses Kontrollkästchen aktiviert ist, druckt Odoo automatisch den "
+"Wenn dieses Kontrollkästchen aktiviert ist, druckt AFENDA xForge automatisch den "
 "Lieferschein einer Kommissionierung aus, wenn diese validiert wird."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_lot_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the lot/SN labels "
 "of a picking when it is validated."
 msgstr ""
-"Wenn dieses Kontrollkästchen aktiviert ist, druckt Odoo automatisch die Los-/"
+"Wenn dieses Kontrollkästchen aktiviert ist, druckt AFENDA xForge automatisch die Los-/"
 "Seriennummeretiketten einer Kommissionierung aus, wenn diese validiert wird."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_package_label
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the package label "
+"If this checkbox is ticked, AFENDA xForge will automatically print the package label "
 "when \"Put in Pack\" button is used."
 msgstr ""
-"Wenn dieses Kontrollkästchen aktiviert ist, druckt Odoo automatisch das "
+"Wenn dieses Kontrollkästchen aktiviert ist, druckt AFENDA xForge automatisch das "
 "Produktetiketten aus, wenn „Verpacken“ verwendet wird."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_packages
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the packages and "
+"If this checkbox is ticked, AFENDA xForge will automatically print the packages and "
 "their contents of a picking when it is validated."
 msgstr ""
-"Wenn dieses Kontrollkästchen aktiviert ist, druckt Odoo automatisch die "
+"Wenn dieses Kontrollkästchen aktiviert ist, druckt AFENDA xForge automatisch die "
 "Pakete und ihre Inhalte einer Kommissionierung aus, wenn diese validiert "
 "wird."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the product labels "
 "of a picking when it is validated."
 msgstr ""
-"Wenn dieses Kontrollkästchen aktiviert ist, druckt Odoo automatisch die "
+"Wenn dieses Kontrollkästchen aktiviert ist, druckt AFENDA xForge automatisch die "
 "Produktetiketten einer Kommissionierung aus, wenn diese validiert wird."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report labels of a picking when it is validated."
 msgstr ""
-"Wenn dieses Kontrollkästchen aktiviert ist, druckt Odoo automatisch die "
+"Wenn dieses Kontrollkästchen aktiviert ist, druckt AFENDA xForge automatisch die "
 "Empfangsberichtsetiketten einer Kommissionierung aus, wenn diese validiert "
 "wird."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report of a picking when it is validated and has assigned moves."
 msgstr ""
-"Wenn dieses Kontrollkästchen aktiviert ist, druckt Odoo automatisch den "
+"Wenn dieses Kontrollkästchen aktiviert ist, druckt AFENDA xForge automatisch den "
 "Empfangsbericht einer Kommissionierung aus, wenn diese validiert wird und "
 "zugewiesende Buchungen hat."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_return_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the return slip of "
+"If this checkbox is ticked, AFENDA xForge will automatically print the return slip of "
 "a picking when it is validated."
 msgstr ""
-"Wenn dieses Kontrollkästchen aktiviert ist, druckt Odoo automatisch den "
+"Wenn dieses Kontrollkästchen aktiviert ist, druckt AFENDA xForge automatisch den "
 "Retourenschein einer Kommissionierung aus, wenn diese validiert wird."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_show_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically show the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically show the reception "
 "report (if there are moves to allocate to) when validating."
 msgstr ""
-"Wenn dieses Kontrollkästchen aktiviert ist, zeigt Odoo bei der Validierung "
+"Wenn dieses Kontrollkästchen aktiviert ist, zeigt AFENDA xForge bei der Validierung "
 "automatisch den Empfangsbericht an (wenn es Bewegungen gibt, die zuzuordnen "
 "sind)."
 
@@ -6414,7 +6414,7 @@ msgstr "Oktober"
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.view_picking_type_form
 msgid ""
-"Odoo opens a PDF preview by default. If you (Enterprise users only) want to "
+"AFENDA xForge opens a PDF preview by default. If you (Enterprise users only) want to "
 "print instantly,\n"
 "                                        install the IoT App on a computer "
 "that is on the same local network as the\n"
@@ -6422,7 +6422,7 @@ msgid ""
 "routing of the reports.\n"
 "                                        <br/>"
 msgstr ""
-"Odoo öffnet die PDF-Vorschau standardmäßig. Wenn Sie (nur Enterprise-"
+"AFENDA xForge öffnet die PDF-Vorschau standardmäßig. Wenn Sie (nur Enterprise-"
 "Benutzer) sofort drucken möchten,\n"
 "                                        installieren Sie die IoT-App auf "
 "Ihrem Rechner, die sich auch demselben lokalen Netzwerk wie\n"

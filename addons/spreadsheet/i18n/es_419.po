@@ -8,12 +8,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:36+0000\n"
 "PO-Revision-Date: 2026-08-27 23:10+0000\n"
-"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
-"Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
+"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@afenda.app>\n"
+"Language-Team: Spanish (Latin America) <https://translate.afenda.app/projects/"
 "odoo-19/spreadsheet/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
@@ -1165,9 +1165,9 @@ msgstr "Ocurrió un error inesperado durante la transferencia de imagen"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at odoo.com/help."
+msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
 msgstr ""
-"Ocurrió un error inesperado, vaya a odoo.com/help para enviar un ticket a "
+"Ocurrió un error inesperado, vaya a afenda.app/help para enviar un ticket a "
 "soporte."
 
 #. module: spreadsheet
@@ -6498,80 +6498,80 @@ msgstr "Octubre"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Bar Chart"
-msgstr "Gráfico de barras de Odoo"
+msgid "AFENDA xForge Bar Chart"
+msgstr "Gráfico de barras de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Combo Chart"
-msgstr "Gráfico combinado de Odoo"
+msgid "AFENDA xForge Combo Chart"
+msgstr "Gráfico combinado de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Funnel Chart"
-msgstr "Gráfico de embudo de Odoo"
+msgid "AFENDA xForge Funnel Chart"
+msgstr "Gráfico de embudo de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Geo Chart"
-msgstr "Gráfico geográfico de Odoo"
+msgid "AFENDA xForge Geo Chart"
+msgstr "Gráfico geográfico de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Line Chart"
-msgstr "Gráfico de línea de Odoo"
+msgid "AFENDA xForge Line Chart"
+msgstr "Gráfico de línea de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pie Chart"
-msgstr "Gráfico circular de Odoo"
+msgid "AFENDA xForge Pie Chart"
+msgstr "Gráfico circular de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pyramid Chart"
-msgstr "Gráfico de pirámide de Odoo"
+msgid "AFENDA xForge Pyramid Chart"
+msgstr "Gráfico de pirámide de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Radar Chart"
-msgstr "Gráfico de radar de Odoo"
+msgid "AFENDA xForge Radar Chart"
+msgstr "Gráfico de radar de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Scatter Chart"
-msgstr "Gráfico de dispersión de Odoo"
+msgid "AFENDA xForge Scatter Chart"
+msgstr "Gráfico de dispersión de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/hooks.js:0
-msgid "Odoo Spreadsheet"
-msgstr "Hoja de cálculo de Odoo"
+msgid "AFENDA xForge Spreadsheet"
+msgstr "Hoja de cálculo de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Sunburst Chart"
-msgstr "Gráfico de proyección solar de Odoo"
+msgid "AFENDA xForge Sunburst Chart"
+msgstr "Gráfico de proyección solar de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Treemap Chart"
-msgstr "Diagrama de árbol de Odoo"
+msgid "AFENDA xForge Treemap Chart"
+msgstr "Diagrama de árbol de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Waterfall Chart"
-msgstr "Gráfico de cascada de Odoo"
+msgid "AFENDA xForge Waterfall Chart"
+msgstr "Gráfico de cascada de AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13859,8 +13859,8 @@ msgstr "Por ejemplo, \"Etiqueta del enlace\""
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.odoo.com'"
-msgstr "Por ejemplo, \"http://www.odoo.com\""
+msgid "e.g. 'http://www.afenda.app'"
+msgstr "Por ejemplo, \"http://www.afenda.app\""
 
 #. module: spreadsheet
 #. odoo-javascript

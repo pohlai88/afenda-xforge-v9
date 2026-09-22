@@ -14,12 +14,12 @@
 # Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:35+0000\n"
 "PO-Revision-Date: 2026-08-05 23:28+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/crm/"
+"Language-Team: Vietnamese <https://translate.afenda.app/projects/odoo-19/crm/"
 "vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -339,7 +339,7 @@ msgid ""
 "board, you'll discover what <t t-out=\"object.company_id.name or ''\">My "
 "Company (San Francisco)</t> has to offer. My name is <t t-"
 "out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the "
-"most out of Odoo. Could we plan a quick demo soon?<br/>\n"
+"most out of AFENDA xForge. Could we plan a quick demo soon?<br/>\n"
 "                            Feel free to reach out at any time!<br/><br/>\n"
 "                            Best,<br/>\n"
 "                            <t t-if=\"object.user_id\">\n"
@@ -390,9 +390,9 @@ msgid ""
 "</td></tr>\n"
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    Powered by <a target=\"_blank\" href=\"https://www.odoo.com?"
+"    Powered by <a target=\"_blank\" href=\"https://www.afenda.app?"
 "utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: "
-"{{object.company_id.email_secondary_color or '#875A7B'}};;\">Odoo</a>\n"
+"{{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
 "</table>\n"
 "        "
@@ -954,7 +954,7 @@ msgstr "Phân loại và phân tích danh mục lead/cơ hội như: Đào tạo
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid ""
-"Click on the breadcrumb to go back to your Pipeline. Odoo will save all "
+"Click on the breadcrumb to go back to your Pipeline. AFENDA xForge will save all "
 "modifications as you navigate."
 msgstr ""
 "Nhấp vào thanh điều hướng để quay lại quy trình bán hàng của bạn. Hệ thống "
@@ -1043,7 +1043,7 @@ msgstr "Ngày hoàn tất"
 #. module: crm
 #. odoo-javascript
 #: code:addons/crm/static/src/views/crm_form/crm_pls_tooltip_button.xml:0
-msgid "Computed by Odoo AI using your data."
+msgid "Computed by AFENDA xForge AI using your data."
 msgstr ""
 
 #. module: crm
@@ -1434,11 +1434,11 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_4
 msgid ""
 "Did you know you can search a company by name or VAT number to instantly "
-"fill in all its data? Odoo autocompletes everything for you: logo, address, "
+"fill in all its data? AFENDA xForge autocompletes everything for you: logo, address, "
 "company size, business information, social media accounts, etc."
 msgstr ""
 "Bạn có biết rằng bạn có thể tìm kiếm một công ty theo tên hoặc số VAT để "
-"điền nhanh tất cả dữ liệu của công ty đó không? Odoo tự động hoàn thành mọi "
+"điền nhanh tất cả dữ liệu của công ty đó không? AFENDA xForge tự động hoàn thành mọi "
 "thứ cho bạn: logo, địa chỉ, quy mô công ty, thông tin doanh nghiệp, tài "
 "khoản mạng xã hội,..."
 
@@ -1446,12 +1446,12 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_5
 msgid ""
 "Did you know you can turn a list of opportunities into a map view, using the "
-"top-right map icon? A lot of screens in Odoo can be turned into a map: "
+"top-right map icon? A lot of screens in AFENDA xForge can be turned into a map: "
 "tasks, contacts, delivery orders, etc."
 msgstr ""
 "Bạn có biết rằng bạn có thể chuyển danh sách các cơ hội thành chế độ xem bản "
 "đồ bằng cách sử dụng biểu tượng bản đồ trên cùng bên phải không? Rất nhiều "
-"màn hình trong Odoo có thể được biến thành bản đồ: nhiệm vụ, liên hệ, đơn "
+"màn hình trong AFENDA xForge có thể được biến thành bản đồ: nhiệm vụ, liên hệ, đơn "
 "giao hàng,..."
 
 #. module: crm
@@ -2478,10 +2478,10 @@ msgstr "MRR"
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
 msgid ""
-"Make and receive calls from Odoo with Ringover's dialer. Track calls, SMS "
+"Make and receive calls from AFENDA xForge with Ringover's dialer. Track calls, SMS "
 "messages, and get AI-powered transcripts of your conversations."
 msgstr ""
-"Gọi và nhận cuộc gọi từ Odoo bằng trình quay số Ringover. Theo dõi cuộc gọi, "
+"Gọi và nhận cuộc gọi từ AFENDA xForge bằng trình quay số Ringover. Theo dõi cuộc gọi, "
 "tin nhắn SMS và nhận bản ghi nội dung cuộc trò chuyện được hỗ trợ bởi AI."
 
 #. module: crm
@@ -2934,25 +2934,25 @@ msgstr "Số tin nhắn bị gửi lỗi"
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_case_form_view_salesteams_opportunity
 msgid ""
-"Odoo helps you keep track of your sales pipeline to follow\n"
+"AFENDA xForge helps you keep track of your sales pipeline to follow\n"
 "                    up potential sales and better forecast your future "
 "revenues."
 msgstr ""
-"Odoo giúp bạn theo dõi quy trình kinh doanh và cơ hội bán hàng\n"
+"AFENDA xForge giúp bạn theo dõi quy trình kinh doanh và cơ hội bán hàng\n"
 "                    đồng thời giúp dự đoán hiệu quả hơn về doanh thu tương "
 "lai của bạn."
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_2
 msgid ""
-"Odoo's artificial intelligence engine predicts the success rate of each "
+"AFENDA xForge's artificial intelligence engine predicts the success rate of each "
 "opportunity based on your history. You can always update the success rate "
-"manually, but if you let Odoo do the job the score is updated while the "
+"manually, but if you let AFENDA xForge do the job the score is updated while the "
 "opportunity moves forward in your sales cycle."
 msgstr ""
-"Công cụ trí tuệ nhân tạo của Odoo dự đoán tỷ lệ thành công của từng cơ hội "
+"Công cụ trí tuệ nhân tạo của AFENDA xForge dự đoán tỷ lệ thành công của từng cơ hội "
 "dựa trên lịch sử của bạn. Bạn luôn có thể cập nhật tỷ lệ thành công theo "
-"cách thủ công, nhưng nếu bạn để Odoo thực hiện, điểm số sẽ được cập nhật "
+"cách thủ công, nhưng nếu bạn để AFENDA xForge thực hiện, điểm số sẽ được cập nhật "
 "trong khi cơ hội tiến triển trong chu trình bán hàng của bạn."
 
 #. module: crm
@@ -3849,11 +3849,11 @@ msgstr "Không thể vừa đạt vừa mất lead %s cùng một lúc."
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Mô hình (Loại tài liệu Odoo) mà bí danh này tương tác. Mọi email đến mà "
+"Mô hình (Loại tài liệu AFENDA xForge) mà bí danh này tương tác. Mọi email đến mà "
 "không phải là email trả lời một bản ghi hiện có sẽ tạo ra một bản ghi mới "
 "trong mô hình này. (ví dụ: Nhiệm vụ dự án)"
 
@@ -3861,10 +3861,10 @@ msgstr ""
 #: model:ir.model.fields,help:crm.field_crm_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Tên của bí danh email, ví dụ: 'jobs' nếu bạn muốn nhận email gửi đến địa chỉ "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead__partner_name
@@ -4007,8 +4007,8 @@ msgstr "Mẹo: Chuyển đổi email đến thành cơ hội"
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_1
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_1
-msgid "Tip: Did you know Odoo has built-in lead mining?"
-msgstr "Mẹo: Bạn có biết Odoo đã tích hợp sẵn tính năng khai thác lead không?"
+msgid "Tip: Did you know AFENDA xForge has built-in lead mining?"
+msgstr "Mẹo: Bạn có biết AFENDA xForge đã tích hợp sẵn tính năng khai thác lead không?"
 
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_4
@@ -4491,8 +4491,8 @@ msgstr "vd: Quá đắt"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
-msgid "e.g. https://www.odoo.com"
-msgstr "vd: https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "vd: https://www.afenda.app"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.sales_team_form_view_in_crm

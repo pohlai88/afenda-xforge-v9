@@ -7,12 +7,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: AFENDA xForge Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:48+0000\n"
 "PO-Revision-Date: 2026-08-07 21:44+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/mrp/lo/>\n"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/mrp/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1429,10 +1429,10 @@ msgstr "ສ້າງໃບງານທີ່ປັບແຕ່ງໄດ້ສຳ
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_bom__allow_operation_dependencies
 #: model:ir.model.fields,help:mrp.field_mrp_routing_workcenter__allow_operation_dependencies
-msgid "Create operation level dependencies that will influence both planning and the status of work orders upon MO confirmation. If this feature is ticked, and nothing is specified, Odoo will assume that all operations can be started simultaneously."
+msgid "Create operation level dependencies that will influence both planning and the status of work orders upon MO confirmation. If this feature is ticked, and nothing is specified, AFENDA xForge will assume that all operations can be started simultaneously."
 msgstr ""
 "ສ້າງການຂຶ້ນຕໍ່ກັນໃນລະດັບການປະຕິບັດງານທີ່ຈະມີຜົນຕໍ່ທັງການວາງແຜນ ແລະ ສະຖານະຂອງໃບສັ່ງວຽກເມື່ອຢືນຢັນ "
-"MO. ຖ້າເລືອກຄຸນສົມບັດນີ້ ແລະ ບໍ່ໄດ້ລະບຸຫຍັງ, Odoo ຈະຖືວ່າທຸກການປະຕິບັດງານສາມາດເລີ່ມພ້ອມກັນໄດ້."
+"MO. ຖ້າເລືອກຄຸນສົມບັດນີ້ ແລະ ບໍ່ໄດ້ລະບຸຫຍັງ, AFENDA xForge ຈະຖືວ່າທຸກການປະຕິບັດງານສາມາດເລີ່ມພ້ອມກັນໄດ້."
 
 #. module: mrp
 #: model:ir.model.fields,field_description:mrp.field_stock_move__created_production_id
@@ -5514,10 +5514,10 @@ msgstr ""
 #: model:ir.model.fields,help:mrp.field_stock_move__manual_consumption
 msgid ""
 "When activated, then the registration of consumption for that component is recorded manually exclusively.\n"
-"If not activated, and any of the components consumption is edited manually on the manufacturing order, Odoo assumes manual consumption also."
+"If not activated, and any of the components consumption is edited manually on the manufacturing order, AFENDA xForge assumes manual consumption also."
 msgstr ""
 "ເມື່ອເປີດໃຊ້ງານ, ການລົງທະບຽນການຊົມໃຊ້ສຳລັບສ່ວນປະກອບນັ້ນຈະຖືກບັນທຶກດ້ວຍຕົນເອງເທົ່ານັ້ນ. ຖ້າບໍ່ເປີດໃຊ້ງາ"
-"ນ ແລະ ການຊົມໃຊ້ສ່ວນປະກອບໃດໜຶ່ງຖືກແກ້ໄຂດ້ວຍຕົນເອງໃນໃບສັ່ງຜະລິດ, Odoo ກໍຈະຖືວ່າເປັນການຊົມໃຊ້ດ້ວຍຕົນ"
+"ນ ແລະ ການຊົມໃຊ້ສ່ວນປະກອບໃດໜຶ່ງຖືກແກ້ໄຂດ້ວຍຕົນເອງໃນໃບສັ່ງຜະລິດ, AFENDA xForge ກໍຈະຖືວ່າເປັນການຊົມໃຊ້ດ້ວຍຕົນ"
 "ເອງຄືກັນ."
 
 #. module: mrp
@@ -5539,9 +5539,9 @@ msgstr ""
 
 #. module: mrp
 #: model_terms:digest.tip,tip_description:mrp.digest_tip_mrp_0
-msgid "With the Odoo work center control panel, your worker can start work orders in the shop and follow instructions of the worksheet. Quality tests are perfectly integrated into the process. Workers can trigger feedback loops, maintenance alerts, scrap products, etc."
+msgid "With the AFENDA xForge work center control panel, your worker can start work orders in the shop and follow instructions of the worksheet. Quality tests are perfectly integrated into the process. Workers can trigger feedback loops, maintenance alerts, scrap products, etc."
 msgstr ""
-"ດ້ວຍແຜງຄວບຄຸມສູນວຽກຂອງ Odoo, ພະນັກງານຂອງທ່ານສາມາດເລີ່ມຄຳສັ່ງວຽກໃນໂຮງງານ ແລະ ປະຕິບັດຕາມຄຳ"
+"ດ້ວຍແຜງຄວບຄຸມສູນວຽກຂອງ AFENDA xForge, ພະນັກງານຂອງທ່ານສາມາດເລີ່ມຄຳສັ່ງວຽກໃນໂຮງງານ ແລະ ປະຕິບັດຕາມຄຳ"
 "ແນະນຳຂອງແຜ່ນງານ. ການທົດສອບຄຸນນະພາບໄດ້ຖືກເຊື່ອມໂຍງເຂົ້າໃນຂະບວນການຢ່າງສົມບູນ. ພະນັກງານສາມາດສົ່"
 "ງຄຳຕິຊົມ, ແຈ້ງເຕືອນການບຳລຸງຮັກສາ, ຄັດອອກຜະລິດຕະພັນເສຍ ແລະ ອື່ນໆ."
 

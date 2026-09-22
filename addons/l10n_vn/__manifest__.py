@@ -5,10 +5,10 @@
     'countries': ['vn'],
     'version': '2.0.3',
     'author': 'General Solutions',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/vietnam.html',
+    'website': '/docs/applications/finance/fiscal_localizations/vietnam.html',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the module to manage the accounting chart, bank information for Vietnam in Odoo.
+This is the module to manage the accounting chart, bank information for Vietnam in AFENDA xForge.
 ========================================================================================
 
 - This module applies to companies based in Vietnamese Accounting Standard (VAS)

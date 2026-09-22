@@ -12,12 +12,12 @@
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-03 08:48+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Norwegian Bokmål <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Norwegian Bokmål <https://translate.afenda.app/projects/odoo-19/"
 "survey/nb_NO/>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -2883,13 +2883,13 @@ msgstr ""
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.certification_report_view_general
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "Odoo Certification"
+msgid "AFENDA xForge Certification"
 msgstr ""
 
 #. module: survey
@@ -4777,7 +4777,7 @@ msgstr "Kommunikasjonshistorikk for nettsted"
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
 msgid ""
-"Welcome to this Odoo certification. You will receive 2 random questions out "
+"Welcome to this AFENDA xForge certification. You will receive 2 random questions out "
 "of a pool of 3."
 msgstr ""
 
@@ -4814,7 +4814,7 @@ msgstr ""
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does one need to get to pass an Odoo Survey?"
+msgid "What does one need to get to pass an AFENDA xForge Survey?"
 msgstr ""
 
 #. module: survey
@@ -4852,7 +4852,7 @@ msgstr ""
 #. module: survey
 #. odoo-javascript
 #: code:addons/survey/static/src/js/tours/survey_tour.js:0
-msgid "Whenever you pick an answer, Odoo saves it for you."
+msgid "Whenever you pick an answer, AFENDA xForge saves it for you."
 msgstr ""
 
 #. module: survey

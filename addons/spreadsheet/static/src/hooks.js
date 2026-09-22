@@ -141,7 +141,7 @@ export function useSpreadsheetNotificationStore() {
         const confirmLabel = cancel ? _t("Yes") : _t("Confirm");
         const cancelLabel = cancel && _t("No");
         dialog.add(ConfirmationDialog, {
-            title: _t("Odoo Spreadsheet"),
+            title: _t("AFENDA xForge Spreadsheet"),
             body,
             confirm,
             cancel: cancel || (() => {}), // Must be defined to display the Cancel button
@@ -171,7 +171,7 @@ export function useSpreadsheetNotificationStore() {
         dialog.add(
             ConfirmationDialog,
             {
-                title: _t("Odoo Spreadsheet"),
+                title: _t("AFENDA xForge Spreadsheet"),
                 body,
             },
             {

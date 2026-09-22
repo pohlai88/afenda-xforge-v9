@@ -19,6 +19,6 @@
             'event_sms/static/src/template_reference_field/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

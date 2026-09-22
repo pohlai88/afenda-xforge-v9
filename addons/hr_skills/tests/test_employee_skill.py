@@ -40,7 +40,7 @@ class TestEmployeeSkills(TransactionCase):
                 'name': "Certificate",
                 'certificate': True,
                 'skills': [
-                    {'name': 'Odoo'},
+                    {'name': 'AFENDA xForge'},
                     {'name': 'Scrum'},
                 ],
                 'levels': [
@@ -71,7 +71,7 @@ class TestEmployeeSkills(TransactionCase):
 # |           Skills              |  |              Level               |
 # |-------------------------------|  |----------------------------------|---------------------------------|
 # | Id  |  Skill Type  |   Name   |  |   Id  |  Skill Type  |   Name    | Index (in skill_type.level_ids) |
-# |   1 |  Certificate |     Odoo |  |     1 |  Certificate |       20% |                               0 |
+# |   1 |  Certificate |     AFENDA xForge |  |     1 |  Certificate |       20% |                               0 |
 # |   2 |  Certificate |    Scrum |  |     2 |  Certificate |       50% |                               1 |
 # |     |              |          |  |     3 |  Certificate |       70% |                               2 |
 # |     |              |          |  |     4 |  Certificate |      100% |                               3 |
@@ -88,8 +88,8 @@ class TestEmployeeSkills(TransactionCase):
 # |                                Employee Skill                                       |
 # |-------------------------------------------------------------------------------------|
 # |  Id  |  Skill Type  |  Skill  |  Level  | Certificate  |  Start Date  |  Stop Date  |
-# |    1 |  Certificate |    Odoo |     50% |        True  |     24-03-02 |           - |
-# |    2 |  Certificate |    Odoo |     20% |        True  |     24-01-01 |    24-04-01 | <- not present in current_employee_skill (because a valid certification for this skill exist)
+# |    1 |  Certificate |    AFENDA xForge |     50% |        True  |     24-03-02 |           - |
+# |    2 |  Certificate |    AFENDA xForge |     20% |        True  |     24-01-01 |    24-04-01 | <- not present in current_employee_skill (because a valid certification for this skill exist)
 # |    3 |    Languages | English |     A2  |       False  |     24-01-01 |           - |
 # |    4 |    Languages |  Arabic |     A2  |       False  |     24-02-01 |           - |
 # |    4 |    Languages |  Arabic |     A1  |       False  |     24-01-01 |    24-01-31 | <- not present in current_employee_skill (because this regular skill is expired)

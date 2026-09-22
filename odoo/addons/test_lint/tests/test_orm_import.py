@@ -14,7 +14,7 @@ import_orm_re = re.compile(r'^(from|import)\s+odoo\.orm', flags=re.MULTILINE)
 class TestDunderinit(lint_case.LintCase):
 
     def test_addons_orm_import(self):
-        """ Test that odoo.orm is not imported in Odoo modules"""
+        """ Test that odoo.orm is not imported in AFENDA xForge modules"""
 
         for manifest in Manifest.all_addon_manifests():
             module_path = Path(manifest.path)

@@ -11,12 +11,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-04 02:15+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/stock/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -1757,9 +1757,9 @@ msgstr "在預定日期之前"
 #. module: stock
 #: model_terms:res.company,invoice_terms_html:stock.res_company_1
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
-msgstr "以下文字僅作為建議，不涉及 Odoo S.A. 的責任."
+msgstr "以下文字僅作為建議，不涉及 AFENDA 的責任."
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_package__quant_ids
@@ -2888,9 +2888,9 @@ msgstr "通過此倉庫的預設路線"
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_orderpoint
 msgid ""
-"Define a minimum stock rule so that Odoo automatically creates requests for "
+"Define a minimum stock rule so that AFENDA xForge automatically creates requests for "
 "quotations or confirmed manufacturing orders to resupply your stock."
-msgstr "定義最低庫存規則，以便 Odoo 自動建立報價請求或確認製造訂單以重新補貨您的庫存."
+msgstr "定義最低庫存規則，以便 AFENDA xForge 自動建立報價請求或確認製造訂單以重新補貨您的庫存."
 
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_warehouse_form
@@ -2901,7 +2901,7 @@ msgstr "定義新倉庫"
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
 "Define your locations to reflect your warehouse structure and\n"
-"            organization. Odoo is able to manage physical locations\n"
+"            organization. AFENDA xForge is able to manage physical locations\n"
 "            (warehouses, shelves, bin, etc), partner locations (customers,\n"
 "            vendors) and virtual locations which are the counterpart of\n"
 "            the stock operations like the manufacturing orders\n"
@@ -3578,12 +3578,12 @@ msgstr "空的位置"
 #. module: stock
 #: model_terms:digest.tip,tip_description:stock.digest_tip_stock_0
 msgid ""
-"Enjoy a quick-paced experience with the Odoo barcode app. It is blazing fast "
+"Enjoy a quick-paced experience with the AFENDA xForge barcode app. It is blazing fast "
 "and works even without a stable internet connection. It supports all flows: "
 "inventory adjustments, batch picking, moving lots or pallets, low inventory "
 "checks, etc. Go to the \"Apps\" menu to activate the barcode interface."
 msgstr ""
-"使用 Odoo 條碼模組享受快節奏的體驗.它速度極快，即使沒有穩定的網路連結也能工"
+"使用 AFENDA xForge 條碼模組享受快節奏的體驗.它速度極快，即使沒有穩定的網路連結也能工"
 "作.它支援全部流程:庫存調整、批次揀選、移動批次或託盤、低庫存檢查等.轉到“模組”"
 "選單以啟用條形碼界面."
 
@@ -3618,9 +3618,9 @@ msgstr ""
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
-"Every stock operation in Odoo moves the products from one\n"
+"Every stock operation in AFENDA xForge moves the products from one\n"
 "            location to another one.  For instance, if you receive products\n"
-"            from a vendor, Odoo will move products from the Vendor\n"
+"            from a vendor, AFENDA xForge will move products from the Vendor\n"
 "            location to the Stock location. Each report can be performed on\n"
 "            physical, partner or virtual locations."
 msgstr ""
@@ -4280,65 +4280,65 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_delivery_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the delivery slip "
+"If this checkbox is ticked, AFENDA xForge will automatically print the delivery slip "
 "of a picking when it is validated."
-msgstr "如果勾選該方格，Odoo 將在揀貨驗證後自動打印交貨單。"
+msgstr "如果勾選該方格，AFENDA xForge 將在揀貨驗證後自動打印交貨單。"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_lot_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the lot/SN labels "
 "of a picking when it is validated."
-msgstr "如果勾選該方格，Odoo 將在驗證揀貨時自動打印揀貨的批次/序號標籤。"
+msgstr "如果勾選該方格，AFENDA xForge 將在驗證揀貨時自動打印揀貨的批次/序號標籤。"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_package_label
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the package label "
+"If this checkbox is ticked, AFENDA xForge will automatically print the package label "
 "when \"Put in Pack\" button is used."
-msgstr "如果勾選該方格，Odoo 將在使用 \"放入包裝\"按鈕時,自動打印包裝標籤。"
+msgstr "如果勾選該方格，AFENDA xForge 將在使用 \"放入包裝\"按鈕時,自動打印包裝標籤。"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_packages
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the packages and "
+"If this checkbox is ticked, AFENDA xForge will automatically print the packages and "
 "their contents of a picking when it is validated."
-msgstr "如果勾選該方格，Odoo 將在採樣驗證時,自動打印採樣包及其內容。"
+msgstr "如果勾選該方格，AFENDA xForge 將在採樣驗證時,自動打印採樣包及其內容。"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the product labels "
 "of a picking when it is validated."
-msgstr "如果勾選該方格，Odoo 將在採摘驗證時,自動打印產品標籤。"
+msgstr "如果勾選該方格，AFENDA xForge 將在採摘驗證時,自動打印產品標籤。"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report labels of a picking when it is validated."
-msgstr "如果勾選該方格，Odoo 將在採摘驗證時,自動打印採摘的接收報告標籤。"
+msgstr "如果勾選該方格，AFENDA xForge 將在採摘驗證時,自動打印採摘的接收報告標籤。"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report of a picking when it is validated and has assigned moves."
-msgstr "如果勾選該方格，Odoo 將在採摘驗證並分配移動後,自動打印採摘的接收報告。"
+msgstr "如果勾選該方格，AFENDA xForge 將在採摘驗證並分配移動後,自動打印採摘的接收報告。"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_return_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the return slip of "
+"If this checkbox is ticked, AFENDA xForge will automatically print the return slip of "
 "a picking when it is validated."
-msgstr "如果勾選該方格，Odoo 將在驗證揀貨時,自動打印退貨單。"
+msgstr "如果勾選該方格，AFENDA xForge 將在驗證揀貨時,自動打印退貨單。"
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_show_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically show the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically show the reception "
 "report (if there are moves to allocate to) when validating."
-msgstr "如果勾選此復選框，Odoo 將在驗證時自動顯示接收報表 (如果有要分配的移動)."
+msgstr "如果勾選此復選框，AFENDA xForge 將在驗證時自動顯示接收報表 (如果有要分配的移動)."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_move__show_operations
@@ -6151,7 +6151,7 @@ msgstr "十月"
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.view_picking_type_form
 msgid ""
-"Odoo opens a PDF preview by default. If you (Enterprise users only) want to "
+"AFENDA xForge opens a PDF preview by default. If you (Enterprise users only) want to "
 "print instantly,\n"
 "                                        install the IoT App on a computer "
 "that is on the same local network as the\n"
@@ -6159,7 +6159,7 @@ msgid ""
 "routing of the reports.\n"
 "                                        <br/>"
 msgstr ""
-"Odoo 預設開啟 PDF 預覽。如果你（只限企業用戶）想立即列印，\n"
+"AFENDA xForge 預設開啟 PDF 預覽。如果你（只限企業用戶）想立即列印，\n"
 "                                        請在與條碼操作員位於同一本地網絡的電"
 "腦上，\n"
 "                                        安裝物聯網（IoT）應用程式，並配置報表"

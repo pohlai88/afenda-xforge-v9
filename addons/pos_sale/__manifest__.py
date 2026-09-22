@@ -38,6 +38,6 @@ This module adds a custom Sales Team for the Point of Sale. This enables you to 
         ],
     },
     'post_init_hook': '_pos_sale_post_init',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

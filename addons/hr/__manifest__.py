@@ -6,7 +6,7 @@
     'category': 'Human Resources/Employees',
     'sequence': 95,
     'summary': 'Centralize employee information',
-    'website': 'https://www.odoo.com/app/employees',
+    'website': 'https://www.afenda.app/app/employees',
     'images': [
         'static/src/img/default_image.png',
     ],
@@ -76,6 +76,6 @@
             'hr/static/tests/tours/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

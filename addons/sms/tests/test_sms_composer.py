@@ -22,13 +22,13 @@ class TestSMSComposerComment(SMSCommon, SMSCase):
         """
         cases = [
             (
-                'Hello there, check this awesome <b>app</b> I found:<br/>https://odoo.com',  # not a `a` link in source
-                '<p>Hello there, check this awesome &lt;b&gt;app&lt;/b&gt; I found:&lt;br/&gt;<a href="https://odoo.com" target="_blank" rel="noreferrer noopener">https://odoo.com</a></p>',
-                'Hello there, check this awesome <b>app</b> I found:<br/>https://odoo.com'
+                'Hello there, check this awesome <b>app</b> I found:<br/>https://afenda.app',  # not a `a` link in source
+                '<p>Hello there, check this awesome &lt;b&gt;app&lt;/b&gt; I found:&lt;br/&gt;<a href="https://afenda.app" target="_blank" rel="noreferrer noopener">https://afenda.app</a></p>',
+                'Hello there, check this awesome <b>app</b> I found:<br/>https://afenda.app'
             ), (
-                'Hello there, check this awesome <b>app</b> I found:<br/><a href="https://odoo.com">Here</a>',   # a link
-                '<p>Hello there, check this awesome &lt;b&gt;app&lt;/b&gt; I found:&lt;br/&gt;&lt;a href="<a href="https://odoo.com" target="_blank" rel="noreferrer noopener">https://odoo.com</a>"&gt;Here&lt;/a&gt;</p>',
-                'Hello there, check this awesome <b>app</b> I found:<br/><a href="https://odoo.com">Here</a>'  # keep all information
+                'Hello there, check this awesome <b>app</b> I found:<br/><a href="https://afenda.app">Here</a>',   # a link
+                '<p>Hello there, check this awesome &lt;b&gt;app&lt;/b&gt; I found:&lt;br/&gt;&lt;a href="<a href="https://afenda.app" target="_blank" rel="noreferrer noopener">https://afenda.app</a>"&gt;Here&lt;/a&gt;</p>',
+                'Hello there, check this awesome <b>app</b> I found:<br/><a href="https://afenda.app">Here</a>'  # keep all information
             )
         ]
 
@@ -51,20 +51,20 @@ class TestSMSComposerComment(SMSCommon, SMSCase):
         # Cases are formatted as sms text, expected notification body
         cases = [
             (
-                "Hello there, check this awesome app I found:\nhttps://odoo.com",
+                "Hello there, check this awesome app I found:\nhttps://afenda.app",
                 '<p>Hello there, check this awesome app I found:<br>'
-                '<a href="https://odoo.com" target="_blank" rel="noreferrer noopener">https://odoo.com</a></p>',
+                '<a href="https://afenda.app" target="_blank" rel="noreferrer noopener">https://afenda.app</a></p>',
             ), (
-                "Hello there, check this awesome <b>app</b> I found:\nhttps://odoo.com",
+                "Hello there, check this awesome <b>app</b> I found:\nhttps://afenda.app",
                 # b is kept as is in notification, but link is still added as well
                 '<p>Hello there, check this awesome &lt;b&gt;app&lt;/b&gt; I found:<br>'
-                '<a href="https://odoo.com" target="_blank" rel="noreferrer noopener">https://odoo.com</a></p>',
+                '<a href="https://afenda.app" target="_blank" rel="noreferrer noopener">https://afenda.app</a></p>',
             ),
             (
                 # Here, we check that the sms sent is the sms written.
-                "Hello there, check this awesome <b>app</b> I found:\n*https://odoo.com*",
+                "Hello there, check this awesome <b>app</b> I found:\n*https://afenda.app*",
                 '<p>Hello there, check this awesome &lt;b&gt;app&lt;/b&gt; I found:<br>'
-                '*<a href="https://odoo.com" target="_blank" rel="noreferrer noopener">https://odoo.com</a>*</p>',
+                '*<a href="https://afenda.app" target="_blank" rel="noreferrer noopener">https://afenda.app</a>*</p>',
             ),
         ]
 

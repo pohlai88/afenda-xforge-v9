@@ -113,7 +113,7 @@ export class RPCCache {
         this.indexedDB = new IndexedDB(name, version + CRYPTO_ALGO);
         this.ramCache = new RamCache();
         this.pendingRequests = {};
-        this.checkSize(); // we want to control the disk space used by Odoo
+        this.checkSize(); // we want to control the disk space used by AFENDA xForge
     }
 
     async checkSize() {

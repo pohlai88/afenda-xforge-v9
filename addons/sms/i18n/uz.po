@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 14:03+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/sms/uz/>\n"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/sms/uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -234,10 +234,10 @@ msgstr "\"%(record_name)s\"ga SMS yuborishda xatolik yuz berdi"
 #: code:addons/sms/tools/sms_api.py:0
 #, fuzzy
 msgid ""
-"An unknown error occurred. Please contact Odoo support if this error "
+"An unknown error occurred. Please contact AFENDA xForge support if this error "
 "persists."
 msgstr ""
-"Noma'lum xatolik yuz berdi. Agar bu xatolik davom etsa, iltimos, Odoo "
+"Noma'lum xatolik yuz berdi. Agar bu xatolik davom etsa, iltimos, AFENDA xForge "
 "qo‘llab-quvvatlash xizmatiga murojaat qiling."
 
 #. module: sms

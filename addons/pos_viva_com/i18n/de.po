@@ -6,12 +6,12 @@
 # "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-17 18:37+0000\n"
 "PO-Revision-Date: 2026-08-04 00:04+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: German <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: German <https://translate.afenda.app/projects/odoo-19/"
 "pos_viva_com/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -55,10 +55,10 @@ msgstr "Client-Geheimnis"
 #. odoo-javascript
 #: code:addons/pos_viva_com/static/src/app/payment_viva_com.js:0
 msgid ""
-"Could not connect to the Odoo server, please check your internet connection "
+"Could not connect to the AFENDA xForge server, please check your internet connection "
 "and try again."
 msgstr ""
-"Verbindung zum Odoo-Server konnte nicht hergestellt werden, bitte prüfen Sie "
+"Verbindung zum AFENDA xForge-Server konnte nicht hergestellt werden, bitte prüfen Sie "
 "Ihre Internetverbindung und versuchen Sie es erneut."
 
 #. module: pos_viva_com
@@ -261,6 +261,6 @@ msgstr ""
 #. module: pos_viva_com
 #. odoo-python
 #: code:addons/pos_viva_com/controllers/main.py:0
-msgid "received a message for a terminal not registered in Odoo: %s"
+msgid "received a message for a terminal not registered in AFENDA xForge: %s"
 msgstr ""
-"hat eine Nachricht für ein nicht in Odoo registriertes Terminal erhalten: %s"
+"hat eine Nachricht für ein nicht in AFENDA xForge registriertes Terminal erhalten: %s"

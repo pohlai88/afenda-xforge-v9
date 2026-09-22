@@ -26,14 +26,14 @@ class PayUOnboardingController(Controller):
         """Handle the PayU OAuth callback.
 
         :param dict data: The authorization code and merchant ID received from PayU, in addition to
-                          the Odoo provider id and CSRF token sent back by the proxy
+                          the AFENDA xForge provider id and CSRF token sent back by the proxy
         :raise Forbidden: If the received CSRF token cannot be verified
         :raise ValidationError: If the provider id does not match any PayU provider
         :return: Redirect to the payment provider form
         """
         _logger.info("Returning from PayU authorization with data:\n%s", pprint.pformat(data))
 
-        # Retrieve the PayU data and Odoo metadata from the redirect data
+        # Retrieve the PayU data and AFENDA xForge metadata from the redirect data
         merchant_id = data.get("merchant_id")
         authorization_code = data.get("auth_code")
         provider_id = int(data["provider_id"])
@@ -50,7 +50,7 @@ class PayUOnboardingController(Controller):
             raise Forbidden
 
         action = self.env.ref("payment.action_payment_provider")
-        redirect_url = f"/odoo/action-{action.id}/{int(provider.id)}"
+        redirect_url = f"/app/action-{action.id}/{int(provider.id)}"
         if not authorization_code:  # The user cancelled the authorization
             return request.redirect(redirect_url)
 

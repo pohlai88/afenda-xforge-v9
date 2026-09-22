@@ -1,14 +1,14 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Finland - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'icon': '/account/static/description/l10n.png',
     'countries': ['fi'],
     'version': '13.0.2',
     'author': 'Avoin.Systems, Tawasta, Vizucom, Sprintit',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the Odoo module to manage the accounting in Finland.
+This is the AFENDA xForge module to manage the accounting in Finland.
 ============================================================
 
 After installing this module, you'll have access to:

@@ -2,7 +2,7 @@
 
 from types import MappingProxyType
 
-OAUTH_URL = "https://payu.api.odoo.com/api/payu/1"
+OAUTH_URL = "https://payu.api.afenda.app/api/payu/1"
 OAUTH_RETURN_ROUTE = "/payment/payu/oauth/return"
 PARTNER_API_URL = "https://partner.payu.in"
 PAYMENT_API_LIVE_URL = "https://secure.payu.in"

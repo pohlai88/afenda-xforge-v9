@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-04-10 18:39+0000\n"
@@ -287,7 +287,7 @@ msgstr ""
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__iap
-msgid "Send via Odoo"
+msgid "Send via AFENDA xForge"
 msgstr ""
 
 #. module: sms_twilio
@@ -327,7 +327,7 @@ msgstr ""
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/wizard/sms_twilio_account_manage.py:0
-msgid "This is a test SMS from Odoo"
+msgid "This is a test SMS from AFENDA xForge"
 msgstr ""
 
 #. module: sms_twilio
@@ -374,13 +374,13 @@ msgstr ""
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown error, please contact Odoo support"
+msgid "Unknown error, please contact AFENDA xForge support"
 msgstr ""
 
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown failure at sending, please contact Odoo support"
+msgid "Unknown failure at sending, please contact AFENDA xForge support"
 msgstr ""
 
 #. module: sms_twilio

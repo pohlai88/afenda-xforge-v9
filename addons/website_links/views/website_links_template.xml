@@ -13,7 +13,7 @@
                                 <div class="mb-3 row">
                                     <label class="col-md-3 col-form-label text-start">Target Link</label>
                                     <div class="col-md-9">
-                                        <input type="text" id="url" class="form-control required-form-control"  required="True" placeholder="e.g. https://www.odoo.com/contactus" t-att-value="u"/>
+                                        <input type="text" id="url" class="form-control required-form-control"  required="True" placeholder="e.g. https://www.afenda.app/contactus" t-att-value="u"/>
                                     </div>
                                 </div>
 
@@ -66,8 +66,8 @@
 
                         <div class="offset-md-1 col-md-4 d-none d-md-block">
                             <p class="text-muted text-justify">Share this page with a <strong>short link</strong> that includes <strong>analytics trackers</strong>.</p>
-                            <p class="text-muted text-justify">Those trackers can be used in Google Analytics to track clicks and visitors, or in Odoo reports to track opportunities and related revenues.</p>
-                            <a target="_blank" href="https://www.odoo.com/documentation/latest/applications/websites/website/reporting/link_tracker.html">Read More</a>
+                            <p class="text-muted text-justify">Those trackers can be used in Google Analytics to track clicks and visitors, or in AFENDA xForge reports to track opportunities and related revenues.</p>
+                            <a target="_blank" href="/docs/applications/websites/website/reporting/link_tracker.html">Read More</a>
                         </div>
                     </div>
 

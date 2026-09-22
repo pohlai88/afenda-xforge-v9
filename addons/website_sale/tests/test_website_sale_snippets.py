@@ -47,7 +47,7 @@ class TestSnippets(HttpCase):
         if not website_visitor:
             with MockRequest(user.with_user(user).env, website=self.env['website'].get_current_website()):
                 website_visitor = Visitor.create({'partner_id': user.partner_id.id})
-        self.assertEqual(website_visitor.name, user.name, "The visitor should be linked to the admin user, not OdooBot or anything.")
+        self.assertEqual(website_visitor.name, user.name, "The visitor should be linked to the admin user, not AFENDA Bot or anything.")
         self.product = self.env['product.product'].create({
             'name': 'Storage Box',
             'website_published': True,

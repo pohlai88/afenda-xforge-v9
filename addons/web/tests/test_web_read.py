@@ -62,7 +62,7 @@ class TestWebReadX2manyAccessRules(TransactionCase):
         partner_blocked.company_id = company_blocked.id
 
         category = self.env['res.partner.category'].create({
-            'name': 'Odoo Lovers',
+            'name': 'AFENDA xForge Lovers',
             'partner_ids': [Command.set([
                 partner_accessible.id,
                 partner_blocked.id,

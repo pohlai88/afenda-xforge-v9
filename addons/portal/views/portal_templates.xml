@@ -110,7 +110,7 @@
                 <span t-if="_user_name" t-attf-class="#{_user_name_class}" t-esc="user_id.name[:23] + '...' if user_id.name and len(user_id.name) &gt; 25 else user_id.name"/>
             </a>
             <div t-attf-class="dropdown-menu js_usermenu #{_dropdown_menu_class}" role="menu">
-                <a groups="base.group_user" href="/odoo" role="menuitem" class="dropdown-item ps-3" id="o_backend_user_dropdown_link">
+                <a groups="base.group_user" href="/app" role="menuitem" class="dropdown-item ps-3" id="o_backend_user_dropdown_link">
                     <i class="fa fa-fw fa-th me-1 small text-primary-emphasis"/> Apps
                 </a>
                 <div id="o_logout_divider" class="dropdown-divider"/>
@@ -280,7 +280,7 @@
                 </div>
                 <t t-if="entries" t-out="entries"/>
                 <div class="d-none d-lg-block mt-5 small text-center text-muted">
-                    Powered by <a target="_blank" href="http://www.odoo.com?utm_source=db&amp;utm_medium=portal" title="odoo"><img src="/web/static/img/logo.png" alt="Odoo Logo" height="15"/></a>
+                    Powered by <a target="_blank" href="http://www.afenda.app?utm_source=db&amp;utm_medium=portal" title="odoo"><img src="/web/static/img/logo.png" alt="AFENDA xForge Logo" height="15"/></a>
                 </div>
             </div>
             <div class="vr d-none d-lg-block bg-300"/>
@@ -507,7 +507,7 @@
             <section t-if="debug and allow_api_keys">
                 <h4>
                 Developer API Keys
-                    <a href="https://www.odoo.com/documentation/latest/developer/reference/external_api.html#api-key" target="_blank">
+                    <a href="/docs/developer/reference/external_api.html#api-key" target="_blank">
                         <i title="Documentation" class="fa fa-fw o_button_icon fa-info-circle"></i>
                     </a>
                 </h4>

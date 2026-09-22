@@ -234,18 +234,18 @@ class TestHrEmployee(TestHrCommon):
             {
                 'name': 'Test User',
                 'login': 'test_user',
-                'email': 'test_user@odoo.com',
+                'email': 'test_user@afenda.app',
             },
             {
                 'name': 'Test User 2',
                 'login': 'test_user_2',
-                'email': 'test_user_2@odoo.com',
+                'email': 'test_user_2@afenda.app',
                 'create_employee': True,
             },
             {
                 'name': 'Test User 3',
                 'login': 'test_user_3',
-                'email': 'test_user_3@odoo.com',
+                'email': 'test_user_3@afenda.app',
                 'create_employee_id': employee.id,
             },
         ])
@@ -264,7 +264,7 @@ class TestHrEmployee(TestHrCommon):
         self.env['res.users'].signup({
             'name': 'Test User',
             'login': 'test_user',
-            'email': 'test_user@odoo.com',
+            'email': 'test_user@afenda.app',
             'password': 'test_user_password',
             'partner_id': partner.id,
         })
@@ -758,7 +758,7 @@ class TestHrEmployeeLinks(HttpCase):
         })
         with mute_logger('odoo.http'):  # ignore raised RedirectWarning
             self.start_tour(
-                f"/odoo/employees/{employee_sonic.id}",
+                f"/app/employees/{employee_sonic.id}",
                 "check_public_employee_link_redirect",
                 login=user_amy.login,
             )

@@ -20,6 +20,6 @@ It allows for comparing products from the wishlist
         ],
     },
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -23,6 +23,6 @@
             'payment_authorize/static/src/scss/payment_authorize.scss',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

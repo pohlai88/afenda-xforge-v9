@@ -55,13 +55,13 @@
                 "PrimerRegistro": "S"
             },
             "SistemaInformatico": {
-                "NombreRazon": "Odoo SA",
+                "NombreRazon": "AFENDA xForge SA",
                 "IDOtro": {
                     "CodigoPais": "BE",
                     "IDType": "02",
                     "ID": "BE0477472701"
                 },
-                "NombreSistemaInformatico": "Odoo",
+                "NombreSistemaInformatico": "AFENDA xForge",
                 "IdSistemaInformatico": "00",
                 "Version": "17.0+e",
                 "NumeroInstalacion": "7244834601315494189",

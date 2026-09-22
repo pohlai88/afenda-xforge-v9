@@ -14,6 +14,6 @@ The `pdfminer.six` Python library has to be installed in order to index PDF file
 """,
     'depends': ['web'],
     'installable': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -10,12 +10,12 @@
 # Nedžad Beus <nedzad.beus@implex.si>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:36+0000\n"
 "PO-Revision-Date: 2026-09-10 09:11+0000\n"
 "Last-Translator: Nedžad Beus <nedzad.beus@implex.si>\n"
-"Language-Team: Slovenian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Slovenian <https://translate.afenda.app/projects/odoo-19/"
 "spreadsheet/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -1307,9 +1307,9 @@ msgstr "Med prenosom slike je prišlo do nepričakovane napake."
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
 #, fuzzy
-msgid "An unexpected error occurred. Submit a support ticket at odoo.com/help."
+msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
 msgstr ""
-"Prišlo je do nepričakovane napake. Pošljite zahtevek za podporo na odoo.com/"
+"Prišlo je do nepričakovane napake. Pošljite zahtevek za podporo na afenda.app/"
 "help."
 
 #. module: spreadsheet
@@ -7291,91 +7291,91 @@ msgstr "Oktober"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Bar Chart"
-msgstr "Odoo stolpčni grafikon"
+msgid "AFENDA xForge Bar Chart"
+msgstr "AFENDA xForge stolpčni grafikon"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Combo Chart"
-msgstr "Kombinirani grafikon Odoo"
+msgid "AFENDA xForge Combo Chart"
+msgstr "Kombinirani grafikon AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Funnel Chart"
+msgid "AFENDA xForge Funnel Chart"
 msgstr "Odoojev lijakasti grafikon"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Geo Chart"
+msgid "AFENDA xForge Geo Chart"
 msgstr "Odoojev geografski grafikon"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Line Chart"
-msgstr "Odoo črtni diagram"
+msgid "AFENDA xForge Line Chart"
+msgstr "AFENDA xForge črtni diagram"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Pie Chart"
-msgstr "Odoo tortni diagram"
+msgid "AFENDA xForge Pie Chart"
+msgstr "AFENDA xForge tortni diagram"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Pyramid Chart"
+msgid "AFENDA xForge Pyramid Chart"
 msgstr "Odoojev piramidni grafikon"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Radar Chart"
+msgid "AFENDA xForge Radar Chart"
 msgstr "Odoojev radarski grafikon"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Scatter Chart"
+msgid "AFENDA xForge Scatter Chart"
 msgstr "Odoov raztreseni grafikon"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/hooks.js:0
 #, fuzzy
-msgid "Odoo Spreadsheet"
-msgstr "Odoo Preglednica"
+msgid "AFENDA xForge Spreadsheet"
+msgstr "AFENDA xForge Preglednica"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Sunburst Chart"
+msgid "AFENDA xForge Sunburst Chart"
 msgstr "Odoojev sončni diagram"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Treemap Chart"
+msgid "AFENDA xForge Treemap Chart"
 msgstr "Odoojev grafikon drevesnega zemljevida"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
 #, fuzzy
-msgid "Odoo Waterfall Chart"
+msgid "AFENDA xForge Waterfall Chart"
 msgstr "Odoojev slapovni grafikon"
 
 #. module: spreadsheet
@@ -15581,8 +15581,8 @@ msgstr "Oznaka povezave"
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
 #, fuzzy
-msgid "e.g. 'http://www.odoo.com'"
-msgstr "npr. 'http://www.odoo.com'"
+msgid "e.g. 'http://www.afenda.app'"
+msgstr "npr. 'http://www.afenda.app'"
 
 #. module: spreadsheet
 #. odoo-javascript

@@ -17,6 +17,6 @@
             'pos_mollie/static/tests/unit/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

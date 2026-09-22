@@ -602,7 +602,7 @@ class AccountMove(models.Model):
                 'name': _("Settings"),
                 'type': 'ir.actions.act_url',
                 'target': 'self',
-                'url': '/odoo/settings#l10n_gr_edi_aade_settings',
+                'url': '/app/settings#l10n_gr_edi_aade_settings',
             },
         }
 

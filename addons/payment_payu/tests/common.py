@@ -19,7 +19,7 @@ class PayuCommon(PaymentCommon):
             "txnid": cls.reference,
             "amount": cls.amount,
             "status": "success",
-            "productinfo": "Odoo Payment",
+            "productinfo": "AFENDA xForge Payment",
             "firstname": cls.partner_first_name,
             "email": cls.partner.email,
             "phone": cls.partner.phone,

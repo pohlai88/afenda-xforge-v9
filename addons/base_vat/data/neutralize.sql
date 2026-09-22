@@ -8,6 +8,6 @@ WHERE key = 'iap_vies.client_identifier';
 
 -- Replace official VIES endpoint with test endpoint
 INSERT INTO ir_config_parameter (key, value)
-VALUES ('iap_vies.endpoint', 'https://vies.test.odoo.com')
+VALUES ('iap_vies.endpoint', 'https://vies.test.afenda.app')
 ON CONFLICT (key) DO UPDATE SET value = EXCLUDED.value
-WHERE ir_config_parameter.value = 'https://vies.api.odoo.com';
+WHERE ir_config_parameter.value = 'https://vies.api.afenda.app';

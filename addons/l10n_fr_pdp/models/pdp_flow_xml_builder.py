@@ -60,7 +60,7 @@ class PdpFlow10XMLBuilder(models.AbstractModel):
                 'Name': {'_text': 'PDP_2728'},
                 'RoleCode': {'_text': 'WK'},
                 'URIUniversalCommunication': {
-                    'URIID': {'_text': 'pdp@odoo.com'},
+                    'URIID': {'_text': 'pdp@afenda.app'},
                 },
             },
             'Issuer': {

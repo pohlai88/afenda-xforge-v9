@@ -11,12 +11,12 @@
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-13 18:39+0000\n"
 "PO-Revision-Date: 2026-08-04 04:16+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Simplified Han script) <https://translate.afenda.app/"
 "projects/odoo-19/payment_authorize/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -232,7 +232,7 @@ msgstr "仅用于识别 Authorize.Net 账户的 ID"
 #. module: payment_authorize
 #: model:ir.model.fields,help:payment_authorize.field_payment_provider__authorize_client_key
 msgid ""
-"The public client key. To generate directly from Odoo or from Authorize.Net "
+"The public client key. To generate directly from AFENDA xForge or from Authorize.Net "
 "backend."
 msgstr "公共客户密钥。直接从Odoo或从Authorize.Net后端生成。"
 

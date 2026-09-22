@@ -16,7 +16,7 @@ from odoo.exceptions import AccessError, UserError
 from odoo.tools.pdf import PdfFileReader, PdfFileWriter
 from odoo.tools.safe_eval import safe_eval
 
-DEFAULT_ENDPOINT = 'https://iap-snailmail.odoo.com'
+DEFAULT_ENDPOINT = 'https://iap-snailmail.afenda.app'
 PRINT_ENDPOINT = '/iap/snailmail/1/print'
 DEFAULT_TIMEOUT = 30
 

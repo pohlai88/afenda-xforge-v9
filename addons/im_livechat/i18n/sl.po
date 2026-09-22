@@ -20,12 +20,12 @@
 # Nedžad Beus <nedzad.beus@implex.si>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-03 18:36+0000\n"
 "PO-Revision-Date: 2026-09-10 11:13+0000\n"
 "Last-Translator: Nedžad Beus <nedzad.beus@implex.si>\n"
-"Language-Team: Slovenian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Slovenian <https://translate.afenda.app/projects/odoo-19/"
 "im_livechat/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -281,10 +281,10 @@ msgstr "Agenti (zgodovina)"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid ""
-"Agents who are inactive in Odoo for more than 30 minutes will be considered "
+"Agents who are inactive in AFENDA xForge for more than 30 minutes will be considered "
 "disconnected."
 msgstr ""
-"Agenti, ki so v Odoo neaktivni več kot 30 minut, bodo obravnavani kot "
+"Agenti, ki so v AFENDA xForge neaktivni več kot 30 minut, bodo obravnavani kot "
 "odklopljeni."
 
 #. module: im_livechat
@@ -2064,8 +2064,8 @@ msgstr "Število sporočil, ki niso bila pravilno dostavljena."
 #. module: im_livechat
 #: model:chatbot.script,title:im_livechat.chatbot_script_welcome_bot_demo
 #: model_terms:ir.ui.view,arch_db:im_livechat.livechat_email_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: im_livechat
 #: model:ir.model.constraint,message:im_livechat.constraint_im_livechat_channel_member_history_channel_id_guest_id_unique

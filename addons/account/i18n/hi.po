@@ -6,12 +6,12 @@
 # "Ujjawal Pathak (pauj)" <pauj@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-06 22:11+0000\n"
-"Last-Translator: \"Ujjawal Pathak (pauj)\" <pauj@odoo.com>\n"
-"Language-Team: Hindi <https://translate.odoo.com/projects/odoo-19/account/"
+"Last-Translator: \"Ujjawal Pathak (pauj)\" <pauj@afenda.app>\n"
+"Language-Team: Hindi <https://translate.afenda.app/projects/odoo-19/account/"
 "hi/>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
@@ -382,10 +382,10 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid ""
-". The journal entries need to be computed by Odoo before being posted in "
+". The journal entries need to be computed by AFENDA xForge before being posted in "
 "your company's currency."
 msgstr ""
-". आपकी कंपनी की करेंसी में एंट्री डालने से पहले, Odoo को उन सभी का हिसाब करना होगा।"
+". आपकी कंपनी की करेंसी में एंट्री डालने से पहले, AFENDA xForge को उन सभी का हिसाब करना होगा।"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
@@ -1562,7 +1562,7 @@ msgid ""
 "                                    </td>\n"
 "                                    <td align=\"right\" style=\"padding-"
 "right: 16px;\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height: 2em; object-fit: contain;"
 "\" class=\"align-baseline w-auto\"/>\n"
 "                                    </td>\n"
@@ -1632,7 +1632,7 @@ msgid ""
 "                                        <div style=\"text-align: center; "
 "padding-top: 24px;\">\n"
 "                                            <a t-if=\"invoice_count != 1\" t-"
-"attf-href=\"/odoo/accounting/action-"
+"attf-href=\"/app/accounting/action-"
 "account.action_account_moves_email_preview?"
 "active_ids={{ invoice_preview_ids }}\" target=\"_blank\" t-attf-"
 "style=\"padding: 12px 24px; font-size: 14px; font-weight: bold; color: "
@@ -1700,7 +1700,7 @@ msgid ""
 "                                        <t t-else=\"\">Incoming Bill</t>\n"
 "                                    </td>\n"
 "                                    <td align=\"right\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height:30px; width:92px; object-"
 "fit:contain;\"/>\n"
 "                                    </td>\n"
@@ -4388,9 +4388,9 @@ msgstr "यह उसी कंपनी का हिस्सा है जि
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_default_terms_and_conditions
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
-msgstr "यह केवल एक सुझाव है, Odoo S.A. इसके लिए जिम्मेदार नहीं है।"
+msgstr "यह केवल एक सुझाव है, AFENDA इसके लिए जिम्मेदार नहीं है।"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__bank_bic
@@ -6538,10 +6538,10 @@ msgstr "तारीख का उदाहरण"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_financial_year_op__opening_date
 msgid ""
-"Date from which the accounting is managed in Odoo. It is the date of the "
+"Date from which the accounting is managed in AFENDA xForge. It is the date of the "
 "opening entry."
 msgstr ""
-"जिस तारीख से Odoo में अकाउंटिंग का काम शुरू होता है, वही शुरुआती एंट्री की तारीख है।"
+"जिस तारीख से AFENDA xForge में अकाउंटिंग का काम शुरू होता है, वही शुरुआती एंट्री की तारीख है।"
 
 #. module: account
 #. odoo-javascript
@@ -11578,7 +11578,7 @@ msgstr "मैन्युअल एंट्री"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__inbound_payment_method_line_ids
 msgid ""
-"Manual: Get paid by any method outside of Odoo.\n"
+"Manual: Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
@@ -11588,7 +11588,7 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"मैनुअल: आप Odoo सिस्टम के बाहर किसी भी तरीके से भुगतान प्राप्त कर सकते हैं, जैसे कैश या "
+"मैनुअल: आप AFENDA xForge सिस्टम के बाहर किसी भी तरीके से भुगतान प्राप्त कर सकते हैं, जैसे कैश या "
 "सीधा बैंक ट्रांसफर.\n"
 "पेमेंट प्रोवाइडर्स: हर पेमेंट प्रोवाइडर का अपना तरीका होता है. आप ग्राहक के सेव किए गए "
 "कार्ड के 'पेमेंट टोकन' का इस्तेमाल करके, ऑनलाइन खरीद या सदस्यता के लिए लेन-देन का अनुरोध "
@@ -11603,14 +11603,14 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__outbound_payment_method_line_ids
 msgid ""
-"Manual: Pay by any method outside of Odoo.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Manual: Pay by any method outside of AFENDA xForge.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit "
 "Transfer file to your bank. Module account_sepa is necessary.\n"
 msgstr ""
-"मैनुअल: आप Odoo सिस्टम के बाहर किसी भी तरीके से भुगतान कर सकते हैं, जैसे नकद या सीधे बैंक "
+"मैनुअल: आप AFENDA xForge सिस्टम के बाहर किसी भी तरीके से भुगतान कर सकते हैं, जैसे नकद या सीधे बैंक "
 "ट्रांसफर से.\n"
-"चेक: आप बिलों का भुगतान चेक के द्वारा कर सकते हैं और उन चेक को Odoo से ही प्रिंट भी कर "
+"चेक: आप बिलों का भुगतान चेक के द्वारा कर सकते हैं और उन चेक को AFENDA xForge से ही प्रिंट भी कर "
 "सकते हैं.\n"
 "SEPA क्रेडिट ट्रांसफ़र: इस सुविधा से आप SEPA में भुगतान कर सकते हैं. इसके लिए आपको अपने बैंक "
 "में एक SEPA क्रेडिट ट्रांसफर फ़ाइल जमा करनी होगी. इस सुविधा का उपयोग करने के लिए "
@@ -11619,11 +11619,11 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -11638,11 +11638,11 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment_register__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -11651,12 +11651,12 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"मैनुअल: आप Odoo सिस्टम के बाहर किसी भी तरीके से भुगतान प्राप्त कर सकते हैं और पेमेंट कर सकत "
+"मैनुअल: आप AFENDA xForge सिस्टम के बाहर किसी भी तरीके से भुगतान प्राप्त कर सकते हैं और पेमेंट कर सकत "
 "हैं, जैसे कैश या सीधा बैंक ट्रांसफर.\n"
 "पेमेंट प्रोवाइडर्स: हर पेमेंट प्रोवाइडर का अपना तरीका होता है. आप ग्राहक के सेव किए गए "
 "कार्ड के 'पेमेंट टोकन' का इस्तेमाल करके, ऑनलाइन खरीद या सदस्यता के लिए लेन-देन का अनुरोध "
 "कर सकते हैं.\n"
-"चेक: आप बिलों का भुगतान चेक के द्वारा कर सकते हैं और उन चेक को Odoo से ही प्रिंट भी कर "
+"चेक: आप बिलों का भुगतान चेक के द्वारा कर सकते हैं और उन चेक को AFENDA xForge से ही प्रिंट भी कर "
 "सकते हैं.\n"
 "बैच डिपॉज़िट: यह सुविधा आपको एक ही बार में कई ग्राहकों के चेक इकट्ठा करके, उन्हें अपने बैंक में "
 "एक साथ जमा करने की अनुमति देती है. इस प्रक्रिया को करने के लिए आपको "
@@ -12654,28 +12654,28 @@ msgstr "अक्टूबर"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report_expression__engine__domain
-msgid "Odoo Domain"
-msgstr "Odoo डोमेन"
+msgid "AFENDA xForge Domain"
+msgstr "AFENDA xForge डोमेन"
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.action_bank_statement_tree
 #: model_terms:ir.actions.act_window,help:account.action_credit_statement_tree
 msgid ""
-"Odoo allows you to reconcile a statement line directly with\n"
+"AFENDA xForge allows you to reconcile a statement line directly with\n"
 "                the related sale or purchase invoices."
 msgstr ""
-"Odoo से आप बैंक स्टेटमेंट की एंट्री \n"
+"AFENDA xForge से आप बैंक स्टेटमेंट की एंट्री \n"
 "को सीधे बेचने या खरीदने वाले बिल से मिला सकते हैं।"
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_customer
-msgid "Odoo helps you easily track all activities related to a customer."
-msgstr "Odoo से आप ग्राहक की सारी जानकारी और काम आसानी से देख सकते हैं।"
+msgid "AFENDA xForge helps you easily track all activities related to a customer."
+msgstr "AFENDA xForge से आप ग्राहक की सारी जानकारी और काम आसानी से देख सकते हैं।"
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_supplier
-msgid "Odoo helps you easily track all activities related to a supplier."
-msgstr "Odoo से आप सप्लायर की सारी जानकारी और काम आसानी से देख सकते हैं।"
+msgid "AFENDA xForge helps you easily track all activities related to a supplier."
+msgstr "AFENDA xForge से आप सप्लायर की सारी जानकारी और काम आसानी से देख सकते हैं।"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_account__internal_group__off
@@ -15603,11 +15603,11 @@ msgstr "<b>इनवॉइसिंग ऐप</b> से ग्राहको�
 msgid ""
 "Send one separate email for each invoice.\n"
 "Any file extension will be accepted.\n"
-"Only PDF and XML files will be interpreted by Odoo"
+"Only PDF and XML files will be interpreted by AFENDA xForge"
 msgstr ""
 "हर इनवॉइस के लिए अलग ईमेल भेजें.\n"
 "कोई भी फ़ाइल एक्सटेंशन स्वीकार की जाएगी.\n"
-"Odoo सिर्फ़ PDF और XML फ़ाइलों को ही पढ़ेगा"
+"AFENDA xForge सिर्फ़ PDF और XML फ़ाइलों को ही पढ़ेगा"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.account_send_payment_receipt_by_email_action
@@ -19439,11 +19439,11 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_account_move__quick_edit_total_amount
 msgid ""
 "Use this field to encode the total amount of the invoice.\n"
-"Odoo will automatically create one invoice line with default values to match "
+"AFENDA xForge will automatically create one invoice line with default values to match "
 "it."
 msgstr ""
 "इस खाली जगह में इनवॉइस की कुल रकम लिखें. \n"
-"Odoo अपने-आप एक इनवॉइस लाइन बना देगा जिसमें पहले से तय जानकारी होगी, ताकि यह रकम "
+"AFENDA xForge अपने-आप एक इनवॉइस लाइन बना देगा जिसमें पहले से तय जानकारी होगी, ताकि यह रकम "
 "इनवॉइस से मेल खा जाए।"
 
 #. module: account
@@ -19761,11 +19761,11 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                orders or receipts. This allows you to control bills\n"
 "                you receive from your vendor according to the draft\n"
-"                document in Odoo."
+"                document in AFENDA xForge."
 msgstr ""
 "वेंडर के बिल परचेज़ ऑर्डर या \n"
 "रसीदों से पहले ही बन सकते हैं, \n"
-"जिससे आप Odoo में ड्राफ्ट बिल के हिसाब से वेंडर से \n"
+"जिससे आप AFENDA xForge में ड्राफ्ट बिल के हिसाब से वेंडर से \n"
 "मिले बिलों को कंट्रोल कर सकते हैं।"
 
 #. module: account
@@ -20021,9 +20021,9 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_account_journal__invoice_reference_model
 msgid ""
 "You can choose different models for each type of reference. The default one "
-"is the Odoo reference."
+"is the AFENDA xForge reference."
 msgstr ""
-"आप हर तरह के रेफ़रंस के लिए अलग-अलग मॉडल चुन सकते हैं. अगर कोई मॉडल नहीं चुनते, तो 'Odoo "
+"आप हर तरह के रेफ़रंस के लिए अलग-अलग मॉडल चुन सकते हैं. अगर कोई मॉडल नहीं चुनते, तो 'AFENDA xForge "
 "रेफ़रंस' ही चुना जाएगा।"
 
 #. module: account
@@ -21084,8 +21084,8 @@ msgstr ""
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
-msgid "e.g. https://www.odoo.com"
-msgstr "जैसे, https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "जैसे, https://www.afenda.app"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form

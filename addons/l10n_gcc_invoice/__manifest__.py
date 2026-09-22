@@ -5,7 +5,7 @@
     'description': """
 Adds Arabic as a secondary language on your invoice, credit note, debit note, vendor bill, and refund bill
 """,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'depends': ['account'],
     'post_init_hook': '_l10n_gcc_invoice_post_init',

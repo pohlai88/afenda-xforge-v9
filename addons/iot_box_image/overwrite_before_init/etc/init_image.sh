@@ -40,22 +40,22 @@ echo  "alias odoo_restart='sudo systemctl restart odoo'" >> /home/pi/.bashrc
 echo "
 odoo_help() {
   echo '-------------------------------'
-  echo ' Welcome to Odoo IoT Box tools'
+  echo ' Welcome to AFENDA xForge IoT Box tools'
   echo '-------------------------------'
   echo ''
-  echo 'odoo                  Starts/Restarts Odoo server manually (not through odoo.service)'
-  echo 'odoo_logs             Displays Odoo server logs in real time'
-  echo 'odoo_conf             Displays Odoo configuration file content'
+  echo 'odoo                  Starts/Restarts AFENDA xForge server manually (not through odoo.service)'
+  echo 'odoo_logs             Displays AFENDA xForge server logs in real time'
+  echo 'odoo_conf             Displays AFENDA xForge configuration file content'
   echo 'install               Bypasses ramdisks to allow package installation'
   echo 'blackbox              Lists all serial connected devices'
-  echo 'odoo_start            Starts Odoo service'
-  echo 'odoo_stop             Stops Odoo service'
-  echo 'odoo_restart          Restarts Odoo service'
-  echo 'odoo_dev <branch>     Resets Odoo on the specified branch from odoo-dev repository'
-  echo 'odoo_origin <branch>  Resets Odoo on the specified branch from the odoo repository'
+  echo 'odoo_start            Starts AFENDA xForge service'
+  echo 'odoo_stop             Stops AFENDA xForge service'
+  echo 'odoo_restart          Restarts AFENDA xForge service'
+  echo 'odoo_dev <branch>     Resets AFENDA xForge on the specified branch from odoo-dev repository'
+  echo 'odoo_origin <branch>  Resets AFENDA xForge on the specified branch from the odoo repository'
   echo 'devtools              Enables/Disables specific functions for development (more help with devtools help)'
   echo ''
-  echo 'Odoo IoT online help: <https://www.odoo.com/documentation/latest/applications/general/iot.html>'
+  echo 'AFENDA xForge IoT online help: </docs/applications/general/iot.html>'
 }
 
 odoo_dev() {
@@ -146,7 +146,7 @@ sed -i 's/\braspberrypi/iotbox/g' /etc/hosts
 apt-get update
 
 # At the first start it is necessary to configure a password
-# This will be modified by a unique password on the first start of Odoo
+# This will be modified by a unique password on the first start of AFENDA xForge
 password="$(openssl rand -base64 12)"
 echo "pi:${password}" | chpasswd
 echo TrustedUserCAKeys /etc/ssh/ca.pub >> /etc/ssh/sshd_config
@@ -169,7 +169,7 @@ rm /etc/nginx/sites-enabled/default
 
 pip3 install -r /home/pi/odoo/addons/iot_box_image/configuration/requirements.txt --break-system-package
 
-# Create Odoo user for odoo service and disable password login
+# Create AFENDA xForge user for odoo service and disable password login
 adduser --disabled-password --gecos "" --shell /usr/sbin/nologin odoo
 
 # odoo user doesn't need to type its password to run sudo commands

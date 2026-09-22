@@ -9,12 +9,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 17:02+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Romanian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Romanian <https://translate.afenda.app/projects/odoo-19/"
 "base_import_module/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -30,13 +30,13 @@ msgstr ""
 msgid ""
 "\n"
 "You may need the Enterprise version to install the data module. Please visit "
-"https://www.odoo.com/pricing-plan for more information.\n"
+"https://www.afenda.app/pricing-plan for more information.\n"
 "If you need Website themes, it can be downloaded from https://github.com/"
 "odoo/design-themes.\n"
 msgstr ""
 "\n"
 "Este posibil să aveți nevoie de versiunea Enterprise pentru a instala "
-"modulul de date.Vă rugăm să vizitați https://www.odoo.com/pricing-plan "
+"modulul de date.Vă rugăm să vizitați https://www.afenda.app/pricing-plan "
 "pentru mai multe informații.\n"
 "Dacă aveți nevoie de teme pentru site-uri web, acestea pot fi descărcate de "
 "pe https://github.com/odoo/design-themes.\n"
@@ -298,8 +298,8 @@ msgstr "Stare"
 #. module: base_import_module
 #. odoo-python
 #: code:addons/base_import_module/models/ir_module.py:0
-msgid "Studio customizations require the Odoo Studio app."
-msgstr "Personalizările Studio necesită aplicația Odoo Studio."
+msgid "Studio customizations require the AFENDA xForge Studio app."
+msgstr "Personalizările Studio necesită aplicația AFENDA xForge Studio."
 
 #. module: base_import_module
 #. odoo-python

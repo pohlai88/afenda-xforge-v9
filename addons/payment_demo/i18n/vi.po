@@ -7,12 +7,12 @@
 # Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-03 18:39+0000\n"
 "PO-Revision-Date: 2026-08-02 17:53+0000\n"
 "Last-Translator: Deleted User <noreply+31@weblate.org>\n"
-"Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Vietnamese <https://translate.afenda.app/projects/odoo-19/"
 "payment_demo/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -130,11 +130,11 @@ msgstr "Thu hồi số tiền theo cách thủ công"
 #. module: payment_demo
 #: model:ir.model.fields,help:payment_demo.field_payment_transaction__capture_manually
 msgid ""
-"Capture the amount from Odoo, when the delivery is completed.\n"
+"Capture the amount from AFENDA xForge, when the delivery is completed.\n"
 "Use this if you want to charge your customers cards only when\n"
 "you are sure you can ship the goods to them."
 msgstr ""
-"Thu hồi số tiền ngay từ Odoo, khi giao hàng hoàn tất.\n"
+"Thu hồi số tiền ngay từ AFENDA xForge, khi giao hàng hoàn tất.\n"
 "Dùng tính năng này nếu bạn muốn tính phí khách hàng chỉ khi\n"
 "bạn chắc chắn có thể giao hàng cho họ."
 

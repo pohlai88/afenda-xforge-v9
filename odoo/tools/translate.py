@@ -708,7 +708,7 @@ def parse_xmlid(xmlid: str, default_module: str) -> tuple[str, str]:
 
 
 def translation_file_reader(source, fileformat='po', module=None):
-    """ Iterate over translation file to return Odoo translation entries """
+    """ Iterate over translation file to return AFENDA xForge translation entries """
     if fileformat == 'csv':
         if module is not None:
             # if `module` is provided, we are reading a data file located in that module
@@ -817,7 +817,7 @@ class XMLDataFileReader:
 
 
 class PoFileReader:
-    """ Iterate over po file to return Odoo translation entries """
+    """ Iterate over po file to return AFENDA xForge translation entries """
     def __init__(self, source):
 
         def get_pot_path(source_name):
@@ -907,7 +907,7 @@ class PoFileReader:
                 _logger.error("malformed po file: unknown occurrence: %s", occurrence)
 
 def TranslationFileWriter(target, fileformat='po', lang=None):
-    """ Iterate over translation file to return Odoo translation entries """
+    """ Iterate over translation file to return AFENDA xForge translation entries """
     if fileformat == 'csv':
         return CSVFileWriter(target)
 
@@ -936,7 +936,7 @@ class CSVFileWriter:
 
 
 class PoFileWriter:
-    """ Iterate over po file to return Odoo translation entries """
+    """ Iterate over po file to return AFENDA xForge translation entries """
     def __init__(self, target, lang):
 
         self.buffer = target

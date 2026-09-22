@@ -7,7 +7,7 @@ defineSpreadsheetActions();
 
 describe.current.tags("headless");
 
-test("Odoo formulas are migrated", () => {
+test("AFENDA xForge formulas are migrated", () => {
     const data = {
         version: 16,
         sheets: [

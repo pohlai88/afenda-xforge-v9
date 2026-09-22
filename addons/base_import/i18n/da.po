@@ -11,12 +11,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-05 03:19+0000\n"
-"Last-Translator: \"Kira Petersen François (peti)\" <peti@odoo.com>\n"
-"Language-Team: Danish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Kira Petersen François (peti)\" <peti@afenda.app>\n"
+"Language-Team: Danish <https://translate.afenda.app/projects/odoo-19/"
 "base_import/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -449,12 +449,12 @@ msgstr "ID"
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
 msgid ""
 "If the file contains\n"
-"                    the column names, Odoo can try auto-detecting the\n"
+"                    the column names, AFENDA xForge can try auto-detecting the\n"
 "                    field corresponding to the column. This makes imports\n"
 "                    simpler especially when the file has many columns."
 msgstr ""
 "Hvis filen indeholder\n"
-"                    kolonnenavne, kan Odoo automatisk forsøge at matche dem "
+"                    kolonnenavne, kan AFENDA xForge automatisk forsøge at matche dem "
 "med de\n"
 "                    tilsvarende felter. Dette gør importen lettere,\n"
 "                    især når filen har mange kolonner."
@@ -623,8 +623,8 @@ msgstr "Ingen matchende poster fundet for følgende navn"
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
-msgid "Odoo Field"
-msgstr "Odoo-felt"
+msgid "AFENDA xForge Field"
+msgstr "AFENDA xForge-felt"
 
 #. module: base_import
 #. odoo-javascript
@@ -903,11 +903,11 @@ msgstr "Upload dine filer"
 msgid ""
 "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h "
 "system. You can use a custom format in addition to the suggestions provided. "
-"Leave empty to let Odoo guess the format (recommended)"
+"Leave empty to let AFENDA xForge guess the format (recommended)"
 msgstr ""
 "Brug HH for timer i et 24-timers system, og brug II sammen med \"p\" for et "
 "12-timers system. Du kan også anvende dit eget format ud over de foreslåede. "
-"Lad feltet stå tomt, så Odoo kan gætte formatet (anbefales)"
+"Lad feltet stå tomt, så AFENDA xForge kan gætte formatet (anbefales)"
 
 #. module: base_import
 #. odoo-javascript
@@ -915,12 +915,12 @@ msgstr ""
 msgid ""
 "Use YYYY to represent the year, MM for the month and DD for the day. Include "
 "separators such as a dot, forward slash or dash. You can use a custom format "
-"in addition to the suggestions provided. Leave empty to let Odoo guess the "
+"in addition to the suggestions provided. Leave empty to let AFENDA xForge guess the "
 "format (recommended)"
 msgstr ""
 "Brug ÅÅÅÅ for år, MM for måned og DD for dag. Indsæt separatorer som "
 "punktum, skråstreg eller bindestreg. Du kan også anvende dit eget format ud "
-"over de foreslåede. Lad feltet stå tomt, så Odoo kan gætte formatet "
+"over de foreslåede. Lad feltet stå tomt, så AFENDA xForge kan gætte formatet "
 "(anbefales)"
 
 #. module: base_import

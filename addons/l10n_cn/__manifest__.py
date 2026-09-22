@@ -7,7 +7,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'author': 'openerp-china',
     'maintainer': 'jeff@osbzr.com',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'description': r"""
 Includes the following data for the Chinese localization
 ========================================================

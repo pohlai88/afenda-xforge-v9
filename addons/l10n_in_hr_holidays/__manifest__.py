@@ -16,7 +16,7 @@
         'views/hr_leave_type_views.xml',
         'views/l10n_in_hr_leave_optional_holiday_views.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'assets': {
         'web.assets_backend': [

@@ -52,13 +52,13 @@ export class ServerDialog extends Component {
     <t t-translation="off">
         <LoadingFullScreen t-if="this.state.waitRestart">
             <t t-set-slot="body">
-                Updating Odoo Server information, please wait...
+                Updating AFENDA xForge Server information, please wait...
             </t>
         </LoadingFullScreen>
 
         <BootstrapDialog identifier="'server-configuration'" btnName="'Configure'">
             <t t-set-slot="header">
-                Configure Odoo Database
+                Configure AFENDA xForge Database
             </t>
             <t t-set-slot="body">
                 <div class="alert alert-warning fs-6 pb-0" role="alert" t-if="!store.base.server_status">

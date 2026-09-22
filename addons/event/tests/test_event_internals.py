@@ -917,7 +917,7 @@ class TestEventRegistrationPhone(EventCase):
         cls.test_event_address = cls.env['res.partner'].create({
             'city': 'Gandhinagar',
             'country_id': cls.env.ref("base.in").id,
-            'name': 'Odoo In',
+            'name': 'AFENDA xForge In',
             'zip': '382007',
         })
         cls.test_event = cls.env['event.event'].create({

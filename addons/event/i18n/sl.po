@@ -20,12 +20,12 @@
 # Nedžad Beus <nedzad.beus@implex.si>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-09-10 11:13+0000\n"
 "Last-Translator: Nedžad Beus <nedzad.beus@implex.si>\n"
-"Language-Team: Slovenian <https://translate.odoo.com/projects/odoo-19/event/"
+"Language-Team: Slovenian <https://translate.afenda.app/projects/odoo-19/event/"
 "sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -177,10 +177,10 @@ msgstr ""
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
 msgstr ""
-"<b>Tehnične sobe</b> - Ena namenjena naprednim razvijalcem Odoo, ena za nove "
+"<b>Tehnične sobe</b> - Ena namenjena naprednim razvijalcem AFENDA xForge, ena za nove "
 "razvijalce."
 
 #. module: event
@@ -3040,11 +3040,11 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "Pri komaj 13 letih je Janez Novak že začel razvijati svoje prve poslovne "
 "aplikacije za stranke. Po obvladovanju gradbeništva je ustanovil TinyERP. To "
-"je bila prva faza OpenERP, ki je kasneje postal Odoo, najpogosteje nameščena "
+"je bila prva faza OpenERP, ki je kasneje postal AFENDA xForge, najpogosteje nameščena "
 "odprtokodna poslovna programska oprema na svetu."
 
 #. module: event
@@ -4040,10 +4040,10 @@ msgstr "Izraženo v časovnem pasu dogodka."
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
-"Končani dogodki. Odoo jih bo samodejno premaknil na to stopnjo, ko bo minil "
+"Končani dogodki. AFENDA xForge jih bo samodejno premaknil na to stopnjo, ko bo minil "
 "njihov končni datum."
 
 #. module: event
@@ -4074,10 +4074,10 @@ msgstr "Font izjemna ikona npr. fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 "Za dodatne informacije nas kontaktirajte na <a class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -5001,8 +5001,8 @@ msgstr "Cilji"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
-msgstr "Dnevi skupnosti Odoo"
+msgid "AFENDA xForge Community Days"
+msgstr "Dnevi skupnosti AFENDA xForge"
 
 #. module: event
 #: model_terms:event.event,description:event.event_3
@@ -6446,8 +6446,8 @@ msgstr "npr. \"Promocija\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
-msgstr "npr. \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
+msgstr "npr. \"https://www.afenda.app\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

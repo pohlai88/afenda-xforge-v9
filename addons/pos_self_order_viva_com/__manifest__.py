@@ -4,7 +4,7 @@
     "category": "Sales/Point Of Sale",
     "depends": ["pos_viva_com", "pos_self_order"],
     "auto_install": True,
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     "license": "LGPL-3",
     "assets": {
         "pos_self_order.assets": [

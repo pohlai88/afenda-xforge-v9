@@ -12,7 +12,7 @@
         <field name="email_to">{{ object.email_formatted }}</field>
         <field name="use_default_to" eval="False"/>
         <field name="body_html" type="html">
-            <div>Hello Odoo</div>
+            <div>Hello AFENDA xForge</div>
         </field>
         <field name="lang">{{ object.lang }}</field>
         <field name="attachment_ids" eval="[(6, 0, [ref('mail_template_test_attachment')])]"/>

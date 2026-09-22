@@ -2880,7 +2880,7 @@ export class PosStore extends WithLazyGetterTrap {
     }
 
     redirectToBackend() {
-        window.location = "/odoo/action-point_of_sale.action_client_pos_menu";
+        window.location = "/app/action-point_of_sale.action_client_pos_menu";
     }
 
     getExcludedProductIds() {

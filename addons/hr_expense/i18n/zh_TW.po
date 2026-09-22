@@ -11,12 +11,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-02 12:14+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/hr_expense/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -449,9 +449,9 @@ msgstr "建立新費用以獲取統計資料。"
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid ""
 "Create prepaid virtual and physical cards for both one-time and recurring "
-"expenses, integrated into Odoo through Stripe Issuing."
+"expenses, integrated into AFENDA xForge through Stripe Issuing."
 msgstr ""
-"利用整合至 Odoo 的 Stripe Issuing 功能，可為單次及經常性支出，建立預付儲值的"
+"利用整合至 AFENDA xForge 的 Stripe Issuing 功能，可為單次及經常性支出，建立預付儲值的"
 "虛擬或實體開支卡。"
 
 #. module: hr_expense
@@ -567,10 +567,10 @@ msgstr "分佈分析賬戶"
 #: model_terms:digest.tip,tip_description:hr_expense.digest_tip_hr_expense_0
 msgid ""
 "Do not keep your expense tickets in your pockets any longer. Just snap a "
-"picture of your receipt and let Odoo digitalizes it for you. The OCR and "
+"picture of your receipt and let AFENDA xForge digitalizes it for you. The OCR and "
 "Artificial Intelligence will fill the data automatically."
 msgstr ""
-"不要再把你的費用收據放在口袋裡了。只需拍下收據的照片，讓 Odoo 為您將其數位化"
+"不要再把你的費用收據放在口袋裡了。只需拍下收據的照片，讓 AFENDA xForge 為您將其數位化"
 "。 OCR 和人工智能將自動辨識資訊。"
 
 #. module: hr_expense
@@ -1142,8 +1142,8 @@ msgstr "讓我們回到你的開支。"
 #: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__module_hr_expense_stripe
 msgid ""
 "Link your stripe issuing account to manage company credit cards for your "
-"employees through Odoo"
-msgstr "連結你的 Stripe Issuing 賬戶，以在 Odoo 為員工管理公司信用卡"
+"employees through AFENDA xForge"
+msgstr "連結你的 Stripe Issuing 賬戶，以在 AFENDA xForge 為員工管理公司信用卡"
 
 #. module: hr_expense
 #. odoo-python
@@ -1346,20 +1346,20 @@ msgstr "根據你的個人開支，計算得出的數字。"
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: hr_expense
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid ""
-"Odoo had a look at your expense, its product, your company and the journal "
+"AFENDA xForge had a look at your expense, its product, your company and the journal "
 "but came back with empty hands.\n"
-"Give Odoo a hand to find an account by setting up an expense account.\n"
+"Give AFENDA xForge a hand to find an account by setting up an expense account.\n"
 "%(expense)s %(expense_name)s.\n"
 msgstr ""
-"Odoo 檢視了你的開支、產品、公司及日記賬，但沒有發現。\n"
-"請考慮設立一個開支賬戶，以幫助 Odoo 查找賬戶。\n"
+"AFENDA xForge 檢視了你的開支、產品、公司及日記賬，但沒有發現。\n"
+"請考慮設立一個開支賬戶，以幫助 AFENDA xForge 查找賬戶。\n"
 "%(expense)s %(expense_name)s。\n"
 
 #. module: hr_expense
@@ -1594,10 +1594,10 @@ msgstr "評分"
 #: code:addons/hr_expense/static/src/js/tours/hr_expense.js:0
 msgid ""
 "Ready? You can save it manually or discard modifications from here. You "
-"don't <em>need to save</em> - Odoo will save eveyrthing for you when you "
+"don't <em>need to save</em> - AFENDA xForge will save eveyrthing for you when you "
 "navigate."
 msgstr ""
-"準備好了嗎？你可在此處手動儲存或捨棄變更。你是<u>無需儲存</u>的：Odoo 會在你"
+"準備好了嗎？你可在此處手動儲存或捨棄變更。你是<u>無需儲存</u>的：AFENDA xForge 會在你"
 "導覽時，為你儲存所有內容。"
 
 #. module: hr_expense
@@ -1712,8 +1712,8 @@ msgstr "掃瞄"
 #. module: hr_expense
 #. odoo-javascript
 #: code:addons/hr_expense/static/src/components/qrcode_action.xml:0
-msgid "Scan this QR code to get the Odoo app:"
-msgstr "掃描此二維碼以獲取 Odoo APP："
+msgid "Scan this QR code to get the AFENDA xForge app:"
+msgstr "掃描此二維碼以獲取 AFENDA xForge APP："
 
 #. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_employee__expense_manager_id

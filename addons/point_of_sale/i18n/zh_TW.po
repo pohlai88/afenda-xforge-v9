@@ -11,12 +11,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:36+0000\n"
 "PO-Revision-Date: 2026-08-02 17:52+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/point_of_sale/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -3992,7 +3992,7 @@ msgstr ""
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/backend/lna_checklist/lna_checklist.xml:0
-msgid "I use an Epson printer (Check supported printers in Odoo documentation)"
+msgid "I use an Epson printer (Check supported printers in AFENDA xForge documentation)"
 msgstr ""
 
 #. module: point_of_sale
@@ -5001,9 +5001,9 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/customer_display/customer_display_data_service.js:0
 msgid ""
-"Make sure there is an IoT Box subscription associated with your Odoo "
+"Make sure there is an IoT Box subscription associated with your AFENDA xForge "
 "database, then restart the IoT Box."
-msgstr "請確保你的 Odoo 資料庫有 IoT Box 物聯網盒子的訂閱計劃，然後重新啟動 IoT Box。"
+msgstr "請確保你的 AFENDA xForge 資料庫有 IoT Box 物聯網盒子的訂閱計劃，然後重新啟動 IoT Box。"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -5650,20 +5650,20 @@ msgstr ""
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/order_receipt.xml:0
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/components/popups/cash_move_popup/cash_move_list_popup/cash_move_list_popup.js:0
 #: code:addons/point_of_sale/static/src/app/utils/error_handlers.js:0
-msgid "Odoo Server Error"
-msgstr "Odoo 伺服器錯誤"
+msgid "AFENDA xForge Server Error"
+msgstr "AFENDA xForge 伺服器錯誤"
 
 #. module: point_of_sale
 #: model:product.template,name:point_of_sale.product_odoo_sneakers_product_template
-msgid "Odoo Sneakers"
-msgstr "Odoo 運動鞋"
+msgid "AFENDA xForge Sneakers"
+msgstr "AFENDA xForge 運動鞋"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -7148,8 +7148,8 @@ msgstr "列印沒有價格的基本收據。可用作送禮。"
 #: model_terms:ir.ui.view,arch_db:point_of_sale.res_config_settings_view_form
 msgid ""
 "Print information on the receipt to allow the customer to easily access the "
-"invoice anytime, from Odoo's portal."
-msgstr "在收據上列印資訊，以便客戶隨時在 Odoo 客戶門戶網站，輕鬆存取發票。"
+"invoice anytime, from AFENDA xForge's portal."
+msgstr "在收據上列印資訊，以便客戶隨時在 AFENDA xForge 客戶門戶網站，輕鬆存取發票。"
 
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.res_config_settings_view_form
@@ -10198,7 +10198,7 @@ msgstr "未同步的訂單"
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/utils/error_handlers.js:0
 msgid ""
-"Until the connection is reestablished, Odoo Point of Sale will operate with "
+"Until the connection is reestablished, AFENDA xForge Point of Sale will operate with "
 "limited functionality."
 msgstr "重新建立連線之前,Odoo銷售點將以有限功能運行。"
 

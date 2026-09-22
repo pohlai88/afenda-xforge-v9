@@ -14,6 +14,6 @@
             'pos_mercado_pago/static/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

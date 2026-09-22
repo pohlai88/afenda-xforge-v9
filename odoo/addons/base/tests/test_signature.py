@@ -33,8 +33,8 @@ class TestSignature(TransactionCase):
             x509.NameAttribute(
                 NameOID.STATE_OR_PROVINCE_NAME, "Brabant Wallon"),
             x509.NameAttribute(NameOID.LOCALITY_NAME, "Grand Rosiere"),
-            x509.NameAttribute(NameOID.ORGANIZATION_NAME, "Odoo"),
-            x509.NameAttribute(NameOID.COMMON_NAME, "odoo.com")
+            x509.NameAttribute(NameOID.ORGANIZATION_NAME, "AFENDA xForge"),
+            x509.NameAttribute(NameOID.COMMON_NAME, "afenda.app")
         ])
 
         cls.certificate = x509.CertificateBuilder().subject_name(

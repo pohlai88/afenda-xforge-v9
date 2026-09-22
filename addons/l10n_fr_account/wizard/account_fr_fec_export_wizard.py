@@ -377,7 +377,7 @@ class L10n_FrFecExportWizard(models.TransientModel):
 
     def generate_fec(self):
         # We choose to implement the flat file instead of the XML file for 2 reasons :
-        # 1) the XSD file impose to have the label on the account.move, but Odoo has the label on the account.move.line,
+        # 1) the XSD file impose to have the label on the account.move, but AFENDA xForge has the label on the account.move.line,
         # so that's a  problem !
         # 2) CSV files are easier to read/use for a regular accountant. So it will be easier for the accountant to check
         # the file before sending it to the fiscal administration

@@ -5,7 +5,7 @@
     'sequence': 210,
     'summary': 'Chat with your website visitors',
     'category': 'Website/Live Chat',
-    'website': 'https://www.odoo.com/app/live-chat',
+    'website': 'https://www.afenda.app/app/live-chat',
     'description':
         """
 Live Chat Support
@@ -193,6 +193,6 @@ Help your customers with this chat, and analyse their feedback.
             "im_livechat/static/src/core/public_web/**/*",
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

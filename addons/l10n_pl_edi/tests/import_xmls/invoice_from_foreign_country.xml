@@ -6,7 +6,7 @@
         <KodFormularza kodSystemowy="FA (3)" wersjaSchemy="1-0E">FA</KodFormularza>
         <WariantFormularza>3</WariantFormularza>
         <DataWytworzeniaFa>2026-02-10T10:50:29Z</DataWytworzeniaFa>
-        <SystemInfo>Odoo</SystemInfo>
+        <SystemInfo>AFENDA xForge</SystemInfo>
     </Naglowek>
     <Podmiot1>
         <DaneIdentyfikacyjne>

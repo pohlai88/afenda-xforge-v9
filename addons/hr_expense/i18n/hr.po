@@ -24,12 +24,12 @@
 # Boris Peko <boris.peko@ecodica.eu>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-02 17:32+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Croatian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Croatian <https://translate.afenda.app/projects/odoo-19/"
 "hr_expense/hr/>\n"
 "Language: hr\n"
 "MIME-Version: 1.0\n"
@@ -466,10 +466,10 @@ msgstr "Kreirajte nove troškove za prikaz statistike."
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid ""
 "Create prepaid virtual and physical cards for both one-time and recurring "
-"expenses, integrated into Odoo through Stripe Issuing."
+"expenses, integrated into AFENDA xForge through Stripe Issuing."
 msgstr ""
 "Kreirajte unaprijed plaćene virtualne i fizičke kartice za jednokratne i "
-"ponavljajuće troškove, integrirane u Odoo putem Stripe Issuing."
+"ponavljajuće troškove, integrirane u AFENDA xForge putem Stripe Issuing."
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__create_uid
@@ -584,11 +584,11 @@ msgstr "Analitički račun distribucije"
 #: model_terms:digest.tip,tip_description:hr_expense.digest_tip_hr_expense_0
 msgid ""
 "Do not keep your expense tickets in your pockets any longer. Just snap a "
-"picture of your receipt and let Odoo digitalizes it for you. The OCR and "
+"picture of your receipt and let AFENDA xForge digitalizes it for you. The OCR and "
 "Artificial Intelligence will fill the data automatically."
 msgstr ""
 "Nemojte više držati svoje račune troškova u džepovima. Samo slikajte svoj "
-"račun i pustite Odoo da ga digitalizira za vas. OCR i umjetna inteligencija "
+"račun i pustite AFENDA xForge da ga digitalizira za vas. OCR i umjetna inteligencija "
 "automatski će popuniti podatke."
 
 #. module: hr_expense
@@ -1164,10 +1164,10 @@ msgstr "Vratimo se na pregled vaših troškova"
 #: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__module_hr_expense_stripe
 msgid ""
 "Link your stripe issuing account to manage company credit cards for your "
-"employees through Odoo"
+"employees through AFENDA xForge"
 msgstr ""
 "Povežite svoj Stripe Issuing račun za upravljanje kreditnim karticama tvrtke "
-"za svoje zaposlenike putem Odoo-a"
+"za svoje zaposlenike putem AFENDA xForge-a"
 
 #. module: hr_expense
 #. odoo-python
@@ -1376,21 +1376,21 @@ msgstr "Brojevi izračunati na temelju vaših osobnih troškova."
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: hr_expense
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid ""
-"Odoo had a look at your expense, its product, your company and the journal "
+"AFENDA xForge had a look at your expense, its product, your company and the journal "
 "but came back with empty hands.\n"
-"Give Odoo a hand to find an account by setting up an expense account.\n"
+"Give AFENDA xForge a hand to find an account by setting up an expense account.\n"
 "%(expense)s %(expense_name)s.\n"
 msgstr ""
-"Odoo je pregledao vaš trošak, njegov proizvod, tvrtku i dnevnik, ali je "
+"AFENDA xForge je pregledao vaš trošak, njegov proizvod, tvrtku i dnevnik, ali je "
 "ostao praznih ruku.\n"
-"Pomozite Odoo-u pronaći konto postavljanjem konta troška.\n"
+"Pomozite AFENDA xForge-u pronaći konto postavljanjem konta troška.\n"
 "%(expense)s %(expense_name)s.\n"
 
 #. module: hr_expense
@@ -1629,11 +1629,11 @@ msgstr "Ocjene"
 #: code:addons/hr_expense/static/src/js/tours/hr_expense.js:0
 msgid ""
 "Ready? You can save it manually or discard modifications from here. You "
-"don't <em>need to save</em> - Odoo will save eveyrthing for you when you "
+"don't <em>need to save</em> - AFENDA xForge will save eveyrthing for you when you "
 "navigate."
 msgstr ""
 "Spremni? Možete ga spremiti ručno ili odbaciti izmjene odavde. <em>Ne morate "
-"spremati</em> - Odoo će sve spremiti za vas dok navigirate."
+"spremati</em> - AFENDA xForge će sve spremiti za vas dok navigirate."
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_refuse_wizard__reason
@@ -1747,8 +1747,8 @@ msgstr "Skenirati"
 #. module: hr_expense
 #. odoo-javascript
 #: code:addons/hr_expense/static/src/components/qrcode_action.xml:0
-msgid "Scan this QR code to get the Odoo app:"
-msgstr "Skenirajte ovaj QR kod za preuzimanje Odoo aplikacije:"
+msgid "Scan this QR code to get the AFENDA xForge app:"
+msgstr "Skenirajte ovaj QR kod za preuzimanje AFENDA xForge aplikacije:"
 
 #. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_employee__expense_manager_id

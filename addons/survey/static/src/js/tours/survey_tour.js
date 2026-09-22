@@ -5,7 +5,7 @@ import { stepUtils } from "@web_tour/tour_utils";
 import { markup } from "@odoo/owl";
 
 registry.category("web_tour.tours").add('survey_tour', {
-    url: "/odoo",
+    url: "/app",
     steps: () => [
     ...stepUtils.goToAppSteps('survey.menu_surveys', markup(_t("Ready to change the way you <b>gather data</b>?"))),
 {
@@ -29,7 +29,7 @@ registry.category("web_tour.tours").add('survey_tour', {
 },
 {
     trigger: 'button[type=submit]',
-    content: _t("Whenever you pick an answer, Odoo saves it for you."),
+    content: _t("Whenever you pick an answer, AFENDA xForge saves it for you."),
     tooltipPosition: 'bottom',
     run: "click",
 },

@@ -6,12 +6,12 @@
 # "Manon Rondou (ronm)" <ronm@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.2\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 19:12+0000\n"
-"Last-Translator: \"Manon Rondou (ronm)\" <ronm@odoo.com>\n"
-"Language-Team: French <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Manon Rondou (ronm)\" <ronm@afenda.app>\n"
+"Language-Team: French <https://translate.afenda.app/projects/odoo-19/"
 "mail_plugin/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -71,10 +71,10 @@ msgstr "Revenu annuel"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid ""
-"Attachments could not be logged in Odoo because their total size exceeded "
+"Attachments could not be logged in AFENDA xForge because their total size exceeded "
 "the allowed maximum."
 msgstr ""
-"Les pièces jointes n'ont pas pu être enregistrées dans Odoo, car leur taille "
+"Les pièces jointes n'ont pas pu être enregistrées dans AFENDA xForge, car leur taille "
 "totale dépassait le maximum autorisé."
 
 #. module: mail_plugin
@@ -468,10 +468,10 @@ msgstr "Aucune société associée à ce contact n'a pu être enrichie"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "No company linked to this contact could be enriched or found in Odoo"
+msgid "No company linked to this contact could be enriched or found in AFENDA xForge"
 msgstr ""
 "Aucune société associée à ce contact n'a pu être enrichie ou trouvée dans "
-"Odoo"
+"AFENDA xForge"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -518,14 +518,14 @@ msgstr "Notifications"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Access Token"
-msgstr "Jeton d'accès Odoo"
+msgid "AFENDA xForge Access Token"
+msgstr "Jeton d'accès AFENDA xForge"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Server URL"
-msgstr "URL serveur Odoo"
+msgid "AFENDA xForge Server URL"
+msgstr "URL serveur AFENDA xForge"
 
 #. module: mail_plugin
 #: model:ir.model.constraint,message:mail_plugin.constraint_res_partner_iap_unique_partner_id
@@ -603,8 +603,8 @@ msgstr "Revenus"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Save in Odoo"
-msgstr "Enregistrer dans Odoo"
+msgid "Save in AFENDA xForge"
+msgstr "Enregistrer dans AFENDA xForge"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -634,8 +634,8 @@ msgstr "Rechercher dans la base de données"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search In Odoo"
-msgstr "Rechercher dans Odoo"
+msgid "Search In AFENDA xForge"
+msgstr "Rechercher dans AFENDA xForge"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -646,8 +646,8 @@ msgstr "Rechercher un contact"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search contact in Odoo..."
-msgstr "Rechercher le contact dans Odoo..."
+msgid "Search contact in AFENDA xForge..."
+msgstr "Rechercher le contact dans AFENDA xForge..."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -679,8 +679,8 @@ msgstr "Cette société n'a pas d'adresse e-mail et n'a pas pu être enrichie."
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "This contact does not exist in the Odoo database."
-msgstr "Ce contact n'existe pas dans la base de données Odoo."
+msgid "This contact does not exist in the AFENDA xForge database."
+msgstr "Ce contact n'existe pas dans la base de données AFENDA xForge."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -709,10 +709,10 @@ msgstr "Ce partenaire n'existe pas"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid ""
-"Warning: Attachments could not be logged in Odoo because their total size "
+"Warning: Attachments could not be logged in AFENDA xForge because their total size "
 "exceeded the allowed maximum."
 msgstr ""
-"Avertissement : les pièces jointes n'ont pas pu être enregistrées dans Odoo "
+"Avertissement : les pièces jointes n'ont pas pu être enregistrées dans AFENDA xForge "
 "car leur taille totale dépassait le maximum autorisé."
 
 #. module: mail_plugin
@@ -753,8 +753,8 @@ msgstr "Vous devez au moins préciser le partner_id ou le nom et l'e-mail"
 
 #. module: mail_plugin
 #: model_terms:ir.ui.view,arch_db:mail_plugin.app_auth
-msgid "access your Odoo database?"
-msgstr "accéder à votre base de données Odoo ?"
+msgid "access your AFENDA xForge database?"
+msgstr "accéder à votre base de données AFENDA xForge ?"
 
 #. module: mail_plugin
 #. odoo-javascript

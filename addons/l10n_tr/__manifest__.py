@@ -6,7 +6,7 @@
     'version': '1.3',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the base module to manage the accounting chart for Türkiye in Odoo
+This is the base module to manage the accounting chart for Türkiye in AFENDA xForge
 ==========================================================================
 
 Türkiye accounting basic charts and localizations
@@ -17,7 +17,7 @@ Activates:
 - Taxes
 - Tax Report
     """,
-    'author': 'Odoo S.A., Drysharks Consulting and Trading Ltd.',
+    'author': 'AFENDA xForge S.A., Drysharks Consulting and Trading Ltd.',
     'depends': [
         'account',
     ],

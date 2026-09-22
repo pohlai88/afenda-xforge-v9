@@ -21,12 +21,12 @@
 # "Marta (wacm)" <wacm@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-05 12:03+0000\n"
-"Last-Translator: \"Marta (wacm)\" <wacm@odoo.com>\n"
-"Language-Team: Polish <https://translate.odoo.com/projects/odoo-19/digest/"
+"Last-Translator: \"Marta (wacm)\" <wacm@afenda.app>\n"
+"Language-Team: Polish <https://translate.afenda.app/projects/odoo-19/digest/"
 "pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -44,8 +44,8 @@ msgstr "<span class=\"button\" id=\"button_open_report\">➔ Otwórz raport</spa
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_mail_main
-msgid "<span class=\"odoo_link_text\">Odoo</span>"
-msgstr "<span class=\"odoo_link_text\">Odoo</span>"
+msgid "<span class=\"odoo_link_text\">AFENDA xForge</span>"
+msgstr "<span class=\"odoo_link_text\">AFENDA xForge</span>"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_mail_main
@@ -342,8 +342,8 @@ msgstr "Data następnego Mailingu"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Odoo Mobile"
-msgstr "Odoo Mobile"
+msgid "AFENDA xForge Mobile"
+msgstr "AFENDA xForge Mobile"
 
 #. module: digest
 #: model:ir.model.fields,field_description:digest.field_digest_digest__periodicity
@@ -385,8 +385,8 @@ msgstr "Odbiorcy"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Run your business from anywhere with <b>Odoo Mobile</b>."
-msgstr "Prowadź biznes skądkolwiek z <b>Odoo Mobile</b>."
+msgid "Run your business from anywhere with <b>AFENDA xForge Mobile</b>."
+msgstr "Prowadź biznes skądkolwiek z <b>AFENDA xForge Mobile</b>."
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_digest_view_form
@@ -421,8 +421,8 @@ msgstr "Opis podpowiedzi"
 
 #. module: digest
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
-msgstr "Podpowiedź: kalkulator w Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
+msgstr "Podpowiedź: kalkulator w AFENDA xForge"
 
 #. module: digest
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_1
@@ -458,8 +458,8 @@ msgstr "Podpowiedź: przyspiesz pracę ze skrótami"
 
 #. module: digest
 #: model:digest.tip,name:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
-msgstr "Podpowiedź: kalkulator w Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
+msgstr "Podpowiedź: kalkulator w AFENDA xForge"
 
 #. module: digest
 #: model:digest.tip,name:digest.digest_tip_digest_1
@@ -490,10 +490,10 @@ msgstr "Tytuł"
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_3
 msgid ""
 "Type \"@\" to notify someone in a message, or \"#\" to link to a channel. "
-"Try to notify @OdooBot to test the feature."
+"Try to notify @AFENDA Bot to test the feature."
 msgstr ""
 "Wpisz \"@\" aby powiadomić kogoś poprzez wiadomość, lub \"#\" aby "
-"podlinkować kanał. Spróbuj powiadomić @OdooBot aby przetestować tą funkcję."
+"podlinkować kanał. Spróbuj powiadomić @AFENDA Bot aby przetestować tą funkcję."
 
 #. module: digest
 #: model:ir.model.fields,help:digest.field_digest_tip__sequence
@@ -569,8 +569,8 @@ msgstr "Zrezygnowałeś z subskrypcji z: <br/>"
 
 #. module: digest
 #: model:digest.digest,name:digest.digest_digest_default
-msgid "Your Odoo Periodic Digest"
-msgstr "Twoje periodyczne podsumowanie Odoo"
+msgid "Your AFENDA xForge Periodic Digest"
+msgstr "Twoje periodyczne podsumowanie AFENDA xForge"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_digest_view_form

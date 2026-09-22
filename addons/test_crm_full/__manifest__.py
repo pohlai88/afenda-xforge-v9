@@ -6,7 +6,7 @@
     'version': '1.0',
     'category': 'Hidden/Tests',
     'description': """
-This module is intended to test the main crm flows of Odoo, both frontend and
+This module is intended to test the main crm flows of AFENDA xForge, both frontend and
 backend. It notably includes IAP bridges modules to test their impact. """,
     'depends': [
         'crm',
@@ -20,6 +20,6 @@ backend. It notably includes IAP bridges modules to test their impact. """,
         'website_crm_partner_assign',
         'website_crm_livechat',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

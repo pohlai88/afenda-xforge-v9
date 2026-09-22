@@ -13,7 +13,7 @@ This module integrates Xendit with different payment flows depending on the paym
 - For `Card` payments, it renders a self-hosted payment form with regular (non-iframe) inputs and 
   relies on the Xendit.js SDK to create a (single-use or multiple-use) token that is used to make
   the payment. When the payment is successful, and the user opts to save the payment method, the
-  token is saved in Odoo. Other communications with Xendit are performed via server-to-server API
+  token is saved in AFENDA xForge. Other communications with Xendit are performed via server-to-server API
   calls.
 
   The JS assets are loaded in JavaScript when the payment form is submitted.

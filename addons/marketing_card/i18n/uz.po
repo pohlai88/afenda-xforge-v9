@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:35+0000\n"
 "PO-Revision-Date: 2026-08-02 13:43+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/"
 "marketing_card/uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
@@ -818,8 +818,8 @@ msgstr "Yetkazib berishda xato yuz bergan xabarlar soni"
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
 #, fuzzy
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__lang
@@ -1302,14 +1302,14 @@ msgstr "masalan, Bosh futbol direktori"
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 #, fuzzy
-msgid "e.g. Join Odoo Experience 2024"
-msgstr "masalan, Odoo Experience 2024-ga qo‘shiling"
+msgid "e.g. Join AFENDA xForge Experience 2024"
+msgstr "masalan, AFENDA xForge Experience 2024-ga qo‘shiling"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
 #, fuzzy
-msgid "e.g. Odoo Experience Talks"
-msgstr "masalan, Odoo Experience ma'ruzalari"
+msgid "e.g. AFENDA xForge Experience Talks"
+msgstr "masalan, AFENDA xForge Experience ma'ruzalari"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form

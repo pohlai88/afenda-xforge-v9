@@ -15,7 +15,7 @@ import { defineLivechatModels } from "./livechat_test_helpers";
 describe.current.tags("desktop");
 defineLivechatModels();
 
-test("push notifications are Odoo toaster on Android", async () => {
+test("push notifications are AFENDA xForge toaster on Android", async () => {
     // Notifications without ServiceWorker in Chrome Android no longer work.
     // This simulates Android Notification behavior by throwing a
     // ServiceWorkerRegistration error as a fallback.

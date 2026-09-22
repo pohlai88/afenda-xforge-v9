@@ -6,12 +6,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-05 00:11+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/sms_twilio/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -296,8 +296,8 @@ msgstr "傳送測試短訊"
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__iap
-msgid "Send via Odoo"
-msgstr "透過 Odoo 傳送"
+msgid "Send via AFENDA xForge"
+msgstr "透過 AFENDA xForge 傳送"
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__twilio
@@ -338,8 +338,8 @@ msgstr "你嘗試發送至的號碼格式不正確"
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/wizard/sms_twilio_account_manage.py:0
-msgid "This is a test SMS from Odoo"
-msgstr "這是由 Odoo 發出的測試短訊"
+msgid "This is a test SMS from AFENDA xForge"
+msgstr "這是由 AFENDA xForge 發出的測試短訊"
 
 #. module: sms_twilio
 #. odoo-python
@@ -385,14 +385,14 @@ msgstr "Twilio 的 StatusCallback 狀態召回網址不正確"
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown error, please contact Odoo support"
-msgstr "發生不明錯誤，請聯絡 Odoo 技術支援"
+msgid "Unknown error, please contact AFENDA xForge support"
+msgstr "發生不明錯誤，請聯絡 AFENDA xForge 技術支援"
 
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown failure at sending, please contact Odoo support"
-msgstr "傳送時發生不明故障，請聯絡 Odoo 技術支援"
+msgid "Unknown failure at sending, please contact AFENDA xForge support"
+msgstr "傳送時發生不明故障，請聯絡 AFENDA xForge 技術支援"
 
 #. module: sms_twilio
 #. odoo-python

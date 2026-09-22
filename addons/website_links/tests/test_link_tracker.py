@@ -17,12 +17,12 @@ class TestLinkTracker(TransactionCase):
         cls.website_1, cls.website_2 = cls.env['website'].create([
             {
                 'name': 'website 1',
-                'domain': 'https://maincompany.odoo.com',
+                'domain': 'https://maincompany.afenda.app',
                 'company_id': cls.company_1.id
             },
             {
                 'name': 'Website 2',
-                'domain': 'https://secondarycompany.odoo.com',
+                'domain': 'https://secondarycompany.afenda.app',
                 'company_id': cls.company_2.id
             }
         ])

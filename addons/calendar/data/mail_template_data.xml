@@ -82,7 +82,7 @@
                 </td>
                 <td style="padding-top: 6px;">
                     <a t-att-href="object.event_id.videocall_location" target="_blank" style="color: #008f8c;">
-                        <t t-if="object.get_base_url() in object.event_id.videocall_location">Odoo Discuss</t>
+                        <t t-if="object.get_base_url() in object.event_id.videocall_location">AFENDA xForge Discuss</t>
                         <t t-else="">Video meeting</t>
                     </a>
                 </td>
@@ -206,7 +206,7 @@
                 </td>
                 <td style="padding-top: 6px;">
                     <a t-att-href="object.event_id.videocall_location" target="_blank" style="color: #008f8c;">
-                        <t t-if="object.event_id.videocall_source == 'discuss'">Odoo Discuss</t>
+                        <t t-if="object.event_id.videocall_source == 'discuss'">AFENDA xForge Discuss</t>
                         <t t-else="">Video meeting</t>
                     </a>
                 </td>
@@ -311,7 +311,7 @@
                 </td>
                 <td style="padding-top: 6px;">
                     <a t-att-href="object.event_id.videocall_location" target="_blank" style="color: #008f8c;">
-                        <t t-if="object.get_base_url() in object.event_id.videocall_location">Odoo Discuss</t>
+                        <t t-if="object.get_base_url() in object.event_id.videocall_location">AFENDA xForge Discuss</t>
                         <t t-else="">Video meeting</t>
                     </a>
                 </td>
@@ -407,7 +407,7 @@
                 </td>
                 <td style="padding-top: 6px;">
                     <a t-att-href="object.videocall_location" target="_blank" style="color: #008f8c;">
-                        <t t-if="object.videocall_source == 'discuss'">Odoo Discuss</t>
+                        <t t-if="object.videocall_source == 'discuss'">AFENDA xForge Discuss</t>
                         <t t-else="">Video meeting</t>
                     </a>
                 </td>

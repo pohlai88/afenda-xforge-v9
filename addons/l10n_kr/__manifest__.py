@@ -7,7 +7,7 @@
     'description': """
 Accounting Module for the Republic of Korea
 ===========================================
-This provides a base chart of accounts and taxes template for use in Odoo.
+This provides a base chart of accounts and taxes template for use in AFENDA xForge.
     """,
     'depends': ['account'],
     'auto_install': ['account'],
@@ -19,6 +19,6 @@ This provides a base chart of accounts and taxes template for use in Odoo.
     'demo': [
         'demo/demo_company.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

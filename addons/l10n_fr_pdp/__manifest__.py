@@ -1,10 +1,10 @@
 {
     'name': 'France - E-Invoicing (Approved Platform)',
     'category': 'Accounting/Localizations/EDI',
-    'website': "https://www.odoo.com/documentation/18.0/applications/finance/fiscal_localizations/france.html#PDP",
+    'website': "/docs/applications/finance/fiscal_localizations/france.html#PDP",
     'description': """
         - Support for the mandatory electronic invoicing in France
-        - Send and receive documents via the Odoo approved platform
+        - Send and receive documents via the AFENDA xForge approved platform
 """,
     'depends': [
         'l10n_fr_account',
@@ -28,7 +28,7 @@
         'wizard/pdp_registration_views.xml',
         'wizard/pdp_response_wizard_views.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'assets': {
         'web.assets_backend': [
             'l10n_fr_pdp/static/src/js/**',

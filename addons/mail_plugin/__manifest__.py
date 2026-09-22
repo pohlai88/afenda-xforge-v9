@@ -7,7 +7,7 @@
     'category': 'Sales/CRM',
     'sequence': 5,
     'summary': 'Allows integration with mail plugins.',
-    'description': "Integrate Odoo with your mailbox, get information about contacts directly inside your mailbox, log content of emails as internal notes",
+    'description': "Integrate AFENDA xForge with your mailbox, get information about contacts directly inside your mailbox, log content of emails as internal notes",
     'depends': [
         'web',
         'contacts',
@@ -19,6 +19,6 @@
         'security/ir.model.access.csv',
     ],
     'installable': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -261,7 +261,7 @@ class ResPartner(models.Model):
 
     @api.model
     def _get_iap_vies_endpoint(self):
-        prod, test = 'https://vies.api.odoo.com', 'https://vies.test.odoo.com'
+        prod, test = 'https://vies.api.afenda.app', 'https://vies.test.afenda.app'
         default_endpoint = test if self.env.ref('base.module_base_vat').demo else prod
         endpoint = self.env['ir.config_parameter'].sudo().get_param('iap_vies.endpoint', default_endpoint)
         if endpoint not in (prod, test):

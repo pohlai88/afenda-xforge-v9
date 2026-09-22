@@ -562,7 +562,7 @@ test("mention 2 different channels that have the same name", async () => {
 test("Post a message containing an email address followed by a mention on another line", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     const channelId = pyEnv["discuss.channel"].create({
@@ -574,9 +574,9 @@ test("Post a message containing an email address followed by a mention on anothe
     });
     await start();
     await openDiscuss(channelId);
-    await insertText(".o-mail-Composer-input", "email@odoo.com\n@Te");
+    await insertText(".o-mail-Composer-input", "email@afenda.app\n@Te");
     await click(".o-mail-Composer-suggestion");
-    await contains(".o-mail-Composer-input", { value: "email@odoo.com\n@TestPartner " });
+    await contains(".o-mail-Composer-input", { value: "email@afenda.app\n@TestPartner " });
     await press("Enter");
     await contains(
         `.o-mail-Message-body .o_mail_redirect[data-oe-id="${partnerId}"][data-oe-model="res.partner"]`,
@@ -914,7 +914,7 @@ test("Transient messages are added at the end of the thread", async () => {
     await click(".o-mail-Composer button[title='Send']:enabled");
     await contains(".o-mail-Message", { count: 2 });
     await contains(":nth-child(1 of .o-mail-Message)", { text: "Mitchell Admin" });
-    await contains(":nth-child(2 of .o-mail-Message)", { text: "OdooBot" });
+    await contains(":nth-child(2 of .o-mail-Message)", { text: "AFENDA Bot" });
 });
 
 test("Can scroll to notification", async () => {

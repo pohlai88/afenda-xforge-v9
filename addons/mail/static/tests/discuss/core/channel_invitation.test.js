@@ -20,7 +20,7 @@ defineMailModels();
 test("should display the channel invitation form after clicking on the invite button of a chat", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     pyEnv["res.users"].create({ partner_id: partnerId });
@@ -43,7 +43,7 @@ test("can invite users in channel from chat window", async () => {
     mockDate("2025-01-01 12:00:00", +1);
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     pyEnv["res.users"].create({ partner_id: partnerId });
@@ -69,11 +69,11 @@ test("can invite users in channel from chat window", async () => {
 test("should be able to search for a new user to invite from an existing chat", async () => {
     const pyEnv = await startServer();
     const partnerId_1 = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     const partnerId_2 = pyEnv["res.partner"].create({
-        email: "testpartner2@odoo.com",
+        email: "testpartner2@afenda.app",
         name: "TestPartner2",
     });
     pyEnv["res.users"].create({ partner_id: partnerId_1 });
@@ -97,7 +97,7 @@ test("should be able to search for a new user to invite from an existing chat", 
 test("Invitation form should display channel group restriction", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     pyEnv["res.users"].create({ partner_id: partnerId });
@@ -122,11 +122,11 @@ test("Invitation form should display channel group restriction", async () => {
 test("should be able to create a new group chat from an existing chat", async () => {
     const pyEnv = await startServer();
     const partnerId_1 = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     const partnerId_2 = pyEnv["res.partner"].create({
-        email: "testpartner2@odoo.com",
+        email: "testpartner2@afenda.app",
         name: "TestPartner2",
     });
     pyEnv["res.users"].create({ partner_id: partnerId_1 });
@@ -186,7 +186,7 @@ test("invite user to self chat opens DM chat with user", async () => {
     const pyEnv = await startServer();
     const guestId = pyEnv["mail.guest"].create({ name: "TestGuest" });
     const partnerId_1 = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     pyEnv["res.users"].create({ partner_id: partnerId_1 });

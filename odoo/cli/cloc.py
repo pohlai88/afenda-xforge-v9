@@ -8,7 +8,7 @@ class Cloc(Command):
     """ Count lines of code per modules """
 
     description = """
-        Odoo cloc is a tool to count the number of relevant lines written
+        AFENDA xForge cloc is a tool to count the number of relevant lines written
         in Python, Javascript or XML. This can be used as rough metric for
         pricing maintenance of customizations.
 

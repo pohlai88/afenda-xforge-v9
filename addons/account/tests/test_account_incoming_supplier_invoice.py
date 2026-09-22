@@ -82,7 +82,7 @@ class TestAccountInvoiceImportMixin:
 
             :param origin: The source from which the attachments came (see `_upload_and_import_attachments`).
 
-            :param attachments_vals: A list of values representing the attachments to be uploaded to Odoo
+            :param attachments_vals: A list of values representing the attachments to be uploaded to AFENDA xForge
 
             :param expected_invoices: a dict {
                 invoice_index (int): {
@@ -206,7 +206,7 @@ class TestAccountInvoiceImportMixin:
         """ Simulate the upload of one or more attachments and their processing by the import framework.
             Keeps track of the created attachments, messages and invoices, and returns them.
 
-            :param origin: The source from which the attachments should be introduced into Odoo.
+            :param origin: The source from which the attachments should be introduced into AFENDA xForge.
                            Possible values:
                                 - 'chatter_message': Simulates a message posted on the chatter of an existing vendor bill.
                                 - 'chatter_upload': Simulates attachments uploaded on the chatter of an existing vendor bill.
@@ -214,7 +214,7 @@ class TestAccountInvoiceImportMixin:
                                 - 'mail_alias': Simulates an incoming e-mail on a purchase journal mail alias.
                                 - 'journal': Simulates attachments uploaded on a purchase journal in the dashboard.
 
-            :param attachments_vals: A list of values representing attachments to upload into Odoo.
+            :param attachments_vals: A list of values representing attachments to upload into AFENDA xForge.
 
             :return: a dict {
                 'ir.attachment': created_attachments,
@@ -320,7 +320,7 @@ class TestAccountIncomingSupplierInvoice(AccountTestInvoicingCommon, TestAccount
             company.extract_in_invoice_digitalization_mode = 'no_send'
             company.extract_out_invoice_digitalization_mode = 'no_send'
 
-        cls.internal_user = cls._create_new_internal_user(login='internal.user@test.odoo.com')
+        cls.internal_user = cls._create_new_internal_user(login='internal.user@test.afenda.app')
 
         cls.supplier_partner = cls.env['res.partner'].create({
             'name': 'Your Supplier',

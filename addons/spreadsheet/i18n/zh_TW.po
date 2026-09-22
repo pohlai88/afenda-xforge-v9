@@ -11,12 +11,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:36+0000\n"
 "PO-Revision-Date: 2026-08-02 12:29+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/spreadsheet/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -1103,7 +1103,7 @@ msgstr "圖像傳輸時發生意外錯誤"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at odoo.com/help."
+msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
 msgstr "發生意外錯誤。請在odoo.com/help提交技術支援請求。"
 
 #. module: spreadsheet
@@ -6299,79 +6299,79 @@ msgstr "十月"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Bar Chart"
-msgstr "Odoo 棒形圖"
+msgid "AFENDA xForge Bar Chart"
+msgstr "AFENDA xForge 棒形圖"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Combo Chart"
+msgid "AFENDA xForge Combo Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Funnel Chart"
+msgid "AFENDA xForge Funnel Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Geo Chart"
+msgid "AFENDA xForge Geo Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Line Chart"
-msgstr "Odoo 折線圖"
+msgid "AFENDA xForge Line Chart"
+msgstr "AFENDA xForge 折線圖"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pie Chart"
-msgstr "Odoo 圓形圖"
+msgid "AFENDA xForge Pie Chart"
+msgstr "AFENDA xForge 圓形圖"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pyramid Chart"
+msgid "AFENDA xForge Pyramid Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Radar Chart"
-msgstr "Odoo 雷達圖"
+msgid "AFENDA xForge Radar Chart"
+msgstr "AFENDA xForge 雷達圖"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Scatter Chart"
+msgid "AFENDA xForge Scatter Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/hooks.js:0
-msgid "Odoo Spreadsheet"
-msgstr "Odoo 試算表"
+msgid "AFENDA xForge Spreadsheet"
+msgstr "AFENDA xForge 試算表"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Sunburst Chart"
+msgid "AFENDA xForge Sunburst Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Treemap Chart"
+msgid "AFENDA xForge Treemap Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Waterfall Chart"
+msgid "AFENDA xForge Waterfall Chart"
 msgstr ""
 
 #. module: spreadsheet
@@ -13340,8 +13340,8 @@ msgstr "例：連結標籤"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.odoo.com'"
-msgstr "例：http://www.odoo.com"
+msgid "e.g. 'http://www.afenda.app'"
+msgstr "例：http://www.afenda.app"
 
 #. module: spreadsheet
 #. odoo-javascript

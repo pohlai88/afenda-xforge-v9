@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-07 16:28+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/survey/lo/>\n"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/survey/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -3000,14 +3000,14 @@ msgstr "ການເກີດຂຶ້ນ"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.certification_report_view_general
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "Odoo Certification"
-msgstr "ໃບຢັ້ງຢືນ Odoo"
+msgid "AFENDA xForge Certification"
+msgstr "ໃບຢັ້ງຢືນ AFENDA xForge"
 
 #. module: survey
 #: model:survey.question.answer,value:survey.vendor_certification_page_2_question_2_choice_5
@@ -4918,10 +4918,10 @@ msgstr "ປະຫວັດການສື່ສານທາງເວັບໄຊ
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
 msgid ""
-"Welcome to this Odoo certification. You will receive 2 random questions out "
+"Welcome to this AFENDA xForge certification. You will receive 2 random questions out "
 "of a pool of 3."
 msgstr ""
-"ຍິນດີຕ້ອນຮັບເຂົ້າສູ່ການຢັ້ງຢືນ Odoo ນີ້. ທ່ານຈະໄດ້ຮັບ 2 ຄຳຖາມແບບສຸ່ມ ຈາກທັງໝົດ 3 ຄຳຖາມ."
+"ຍິນດີຕ້ອນຮັບເຂົ້າສູ່ການຢັ້ງຢືນ AFENDA xForge ນີ້. ທ່ານຈະໄດ້ຮັບ 2 ຄຳຖາມແບບສຸ່ມ ຈາກທັງໝົດ 3 ຄຳຖາມ."
 
 #. module: survey
 #: model:survey.question,title:survey.vendor_certification_page_3_question_5
@@ -4958,8 +4958,8 @@ msgstr "\"ODOO\" ຫຍໍ້ມາຈາກຫຍັງ?"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does one need to get to pass an Odoo Survey?"
-msgstr "ຕ້ອງເຮັດແນວໃດຈຶ່ງຈະຜ່ານແບບສຳຫຼວດ Odoo ໄດ້?"
+msgid "What does one need to get to pass an AFENDA xForge Survey?"
+msgstr "ຕ້ອງເຮັດແນວໃດຈຶ່ງຈະຜ່ານແບບສຳຫຼວດ AFENDA xForge ໄດ້?"
 
 #. module: survey
 #. odoo-python
@@ -4996,8 +4996,8 @@ msgstr "ວັນເດືອນປີເກີດຂອງທ່ານແມ່
 #. module: survey
 #. odoo-javascript
 #: code:addons/survey/static/src/js/tours/survey_tour.js:0
-msgid "Whenever you pick an answer, Odoo saves it for you."
-msgstr "ທຸກຄັ້ງທີ່ທ່ານເລືອກຄຳຕອບ, Odoo ຈະບັນທຶກມັນໄວ້ໃຫ້ທ່ານ."
+msgid "Whenever you pick an answer, AFENDA xForge saves it for you."
+msgstr "ທຸກຄັ້ງທີ່ທ່ານເລືອກຄຳຕອບ, AFENDA xForge ຈະບັນທຶກມັນໄວ້ໃຫ້ທ່ານ."
 
 #. module: survey
 #: model:survey.question,title:survey.survey_feedback_p1_q1

@@ -10,12 +10,12 @@
 # "Manon Rondou (ronm)" <ronm@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~15.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~15.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-04 05:51+0000\n"
-"Last-Translator: \"Manon Rondou (ronm)\" <ronm@odoo.com>\n"
-"Language-Team: French <https://translate.odoo.com/projects/odoo-19/iap/fr/>\n"
+"Last-Translator: \"Manon Rondou (ronm)\" <ronm@afenda.app>\n"
+"Language-Team: French <https://translate.afenda.app/projects/odoo-19/iap/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -55,11 +55,11 @@ msgstr ""
 #. odoo-python
 #: code:addons/iap/tools/iap_tools.py:0
 msgid ""
-"An error occurred while reaching %s. Please contact Odoo support if this "
+"An error occurred while reaching %s. Please contact AFENDA xForge support if this "
 "error persists."
 msgstr ""
 "Une erreur s'est produite en atteignant %s. Veuillez contacter l'assistance "
-"Odoo si cette erreur persiste."
+"AFENDA xForge si cette erreur persiste."
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__balance
@@ -200,8 +200,8 @@ msgstr "Aucun service n'existe avec le nom technique fourni"
 
 #. module: iap
 #: model_terms:ir.ui.view,arch_db:iap.res_config_settings_view_form
-msgid "Odoo IAP"
-msgstr "Odoo IAP"
+msgid "AFENDA xForge IAP"
+msgstr "AFENDA xForge IAP"
 
 #. module: iap
 #. odoo-python

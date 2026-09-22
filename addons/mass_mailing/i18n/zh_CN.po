@@ -19,12 +19,12 @@
 # "Chloe Wang (chwa)" <chwa@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-02 19:54+0000\n"
-"Last-Translator: \"Chloe Wang (chwa)\" <chwa@odoo.com>\n"
-"Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Chloe Wang (chwa)\" <chwa@afenda.app>\n"
+"Language-Team: Chinese (Simplified Han script) <https://translate.afenda.app/"
 "projects/odoo-19/mass_mailing/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -444,7 +444,7 @@ msgstr ""
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_call_to_action
 msgid ""
-"<font style=\"color: white;\"><strong>50,000+ companies</strong> run Odoo.</"
+"<font style=\"color: white;\"><strong>50,000+ companies</strong> run AFENDA xForge.</"
 "font>"
 msgstr ""
 
@@ -3479,8 +3479,8 @@ msgstr ""
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_schedule
-msgid "Interactive Odoo demo"
-msgstr "Odoo 互动功能演示"
+msgid "Interactive AFENDA xForge demo"
+msgstr "AFENDA xForge 互动功能演示"
 
 #. module: mass_mailing
 #: model:ir.model.fields.selection,name:mass_mailing.selection__mailing_trace__failure_type__mail_email_invalid
@@ -4451,7 +4451,7 @@ msgstr "该A/B测试活动的邮件还没有发送!先发送一个，稍后再�
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailing_lists
 msgid ""
 "No need to import mailing lists, you can send mailings to contacts saved in "
-"other Odoo apps."
+"other AFENDA xForge apps."
 msgstr "不需要导入邮件列表，您可以向保存在其他Odoo应用程序的联系人发送邮件。"
 
 #. module: mass_mailing
@@ -4569,7 +4569,7 @@ msgstr "打开了（%i）。"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_section_mobile
-msgid "Odoo Mobile"
+msgid "AFENDA xForge Mobile"
 msgstr ""
 
 #. module: mass_mailing
@@ -6239,7 +6239,7 @@ msgstr ""
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__mass_mailing_outgoing_mail_server
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid ""
-"Use a specific mail server in priority. Otherwise Odoo relies on the first "
+"Use a specific mail server in priority. Otherwise AFENDA xForge relies on the first "
 "outgoing mail server available (based on their sequencing) as it does for "
 "normal mails."
 msgstr ""
@@ -6561,7 +6561,7 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailings_from_campaign
 msgid ""
 "You don't need to import your mailing lists, you can easily\n"
-"                send emails<br> to any contact saved in other Odoo apps."
+"                send emails<br> to any contact saved in other AFENDA xForge apps."
 msgstr ""
 "您不需要导入您的邮件列表，您可以轻松地\n"
 "               <br>向保存在其他Odoo应用程序中的任何联系人</br>发送电子邮"

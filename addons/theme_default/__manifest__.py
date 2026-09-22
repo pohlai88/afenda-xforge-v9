@@ -15,6 +15,6 @@
         'static/description/cover.png',
         'static/description/theme_default_screenshot.jpg',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

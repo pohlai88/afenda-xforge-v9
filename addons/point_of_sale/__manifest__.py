@@ -62,7 +62,7 @@
     ],
     'installable': True,
     'application': True,
-    'website': 'https://www.odoo.com/app/point-of-sale-shop',
+    'website': 'https://www.afenda.app/app/point-of-sale-shop',
     'assets': {
 
         # In general, you DON'T NEED to declare new assets here, just put the
@@ -245,6 +245,6 @@
             'point_of_sale/static/tests/pos/tours/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

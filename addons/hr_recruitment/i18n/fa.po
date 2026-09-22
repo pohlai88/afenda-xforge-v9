@@ -21,12 +21,12 @@
 # Heshmatkhah <maheshmatkhah.soft@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-23 06:12+0000\n"
 "Last-Translator: Heshmatkhah <maheshmatkhah.soft@gmail.com>\n"
-"Language-Team: Persian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Persian <https://translate.afenda.app/projects/odoo-19/"
 "hr_recruitment/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -2760,7 +2760,7 @@ msgstr "تعداد پیامهای با خطای تحویل"
 #: model_terms:ir.actions.act_window,help:hr_recruitment.action_hr_job_applications
 #: model_terms:ir.actions.act_window,help:hr_recruitment.crm_case_categ0_act_job
 msgid ""
-"Odoo helps you track applicants in the recruitment\n"
+"AFENDA xForge helps you track applicants in the recruitment\n"
 "                process and follow up all operations: meetings, interviews, "
 "etc."
 msgstr ""
@@ -3626,11 +3626,11 @@ msgstr "آدرس ایمیل برای متقاضیان زیر موجود نیست
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"مدلی (Odoo Document Kind) که این نام مستعار با آن مطابقت دارد. هر ایمیل "
+"مدلی (AFENDA xForge Document Kind) که این نام مستعار با آن مطابقت دارد. هر ایمیل "
 "دریافتی که به سابقه موجود پاسخ نمی‌دهد باعث ایجاد یک رکورد جدید از این مدل "
 "می‌شود (به عنوان مثال یک وظیفه پروژه)"
 
@@ -3643,10 +3643,10 @@ msgstr "نام درجه استخدام باید یکتا باشد!"
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "نام مستعار ایمیل، به عنوان مثال 'jobs'. اگر می خواهید ایمیل های "
-"<jobs@example.odoo.com> را دریافت کنید"
+"<jobs@example.afenda.app> را دریافت کنید"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_talent_pool__no_of_talents

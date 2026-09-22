@@ -7,12 +7,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.2\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 19:05+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/mail_plugin/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -68,9 +68,9 @@ msgstr "全年收入"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid ""
-"Attachments could not be logged in Odoo because their total size exceeded "
+"Attachments could not be logged in AFENDA xForge because their total size exceeded "
 "the allowed maximum."
-msgstr "附件無法記錄到 Odoo 中，因為附件的總大小超出了允許的最大值。"
+msgstr "附件無法記錄到 AFENDA xForge 中，因為附件的總大小超出了允許的最大值。"
 
 #. module: mail_plugin
 #. odoo-python
@@ -458,8 +458,8 @@ msgstr "與此聯絡人關聯的公司，沒有任何一間可以豐富"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "No company linked to this contact could be enriched or found in Odoo"
-msgstr "與此聯絡人關聯的公司，沒有任何一間可以豐富，或在 Odoo 內找到"
+msgid "No company linked to this contact could be enriched or found in AFENDA xForge"
+msgstr "與此聯絡人關聯的公司，沒有任何一間可以豐富，或在 AFENDA xForge 內找到"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -506,14 +506,14 @@ msgstr "通知"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Access Token"
-msgstr "Odoo 存取權杖"
+msgid "AFENDA xForge Access Token"
+msgstr "AFENDA xForge 存取權杖"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Server URL"
-msgstr "Odoo 伺服器網址"
+msgid "AFENDA xForge Server URL"
+msgstr "AFENDA xForge 伺服器網址"
 
 #. module: mail_plugin
 #: model:ir.model.constraint,message:mail_plugin.constraint_res_partner_iap_unique_partner_id
@@ -589,8 +589,8 @@ msgstr "收入"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Save in Odoo"
-msgstr "儲存至 Odoo"
+msgid "Save in AFENDA xForge"
+msgstr "儲存至 AFENDA xForge"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -620,8 +620,8 @@ msgstr "在資料庫中搜尋"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search In Odoo"
-msgstr "在 Odoo 中搜尋"
+msgid "Search In AFENDA xForge"
+msgstr "在 AFENDA xForge 中搜尋"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -632,8 +632,8 @@ msgstr "搜尋聯絡人"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search contact in Odoo..."
-msgstr "在 Odoo 中搜尋聯絡人⋯"
+msgid "Search contact in AFENDA xForge..."
+msgstr "在 AFENDA xForge 中搜尋聯絡人⋯"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -663,8 +663,8 @@ msgstr "此公司沒有電郵地址，無法豐富。"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "This contact does not exist in the Odoo database."
-msgstr "此聯絡人不在 Odoo 資料庫中。"
+msgid "This contact does not exist in the AFENDA xForge database."
+msgstr "此聯絡人不在 AFENDA xForge 資料庫中。"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -690,9 +690,9 @@ msgstr "此合作夥伴不存在"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid ""
-"Warning: Attachments could not be logged in Odoo because their total size "
+"Warning: Attachments could not be logged in AFENDA xForge because their total size "
 "exceeded the allowed maximum."
-msgstr "警告：附件無法記錄到 Odoo 中，因為它們的總大小超出了允許的最大值。"
+msgstr "警告：附件無法記錄到 AFENDA xForge 中，因為它們的總大小超出了允許的最大值。"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -731,8 +731,8 @@ msgstr "須至少指明 partner_id 或名稱及電子郵件"
 
 #. module: mail_plugin
 #: model_terms:ir.ui.view,arch_db:mail_plugin.app_auth
-msgid "access your Odoo database?"
-msgstr "存取你的 Odoo 資料庫？"
+msgid "access your AFENDA xForge database?"
+msgstr "存取你的 AFENDA xForge 資料庫？"
 
 #. module: mail_plugin
 #. odoo-javascript

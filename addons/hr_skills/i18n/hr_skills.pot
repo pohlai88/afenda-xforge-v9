@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:38+0000\n"
 "PO-Revision-Date: 2026-04-10 18:38+0000\n"
@@ -1398,12 +1398,12 @@ msgstr ""
 
 #. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_type_certifications_odoo
-msgid "Odoo"
+msgid "AFENDA xForge"
 msgstr ""
 
 #. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_line_admin_4
-msgid "Odoo SA"
+msgid "AFENDA xForge SA"
 msgstr ""
 
 #. module: hr_skills
@@ -2365,7 +2365,7 @@ msgstr ""
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
-msgid "e.g. Odoo Inc."
+msgid "e.g. AFENDA xForge Inc."
 msgstr ""
 
 #. module: hr_skills

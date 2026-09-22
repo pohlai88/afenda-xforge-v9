@@ -78,16 +78,16 @@ export const CLIPBOARD_WHITELISTS = {
         "img-thumbnail",
         "rounded",
         "rounded-circle",
-        // Odoo tables
+        // AFENDA xForge tables
         "o_table",
         "table",
         "table-bordered",
         /^padding-/,
         /^shadow/,
-        // Odoo colors
+        // AFENDA xForge colors
         /^text-o-/,
         /^bg-o-/,
-        // Odoo lists
+        // AFENDA xForge lists
         "o_checked",
         "o_checklist",
         "oe-nested",

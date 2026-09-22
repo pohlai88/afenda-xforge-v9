@@ -27,7 +27,7 @@ class TestImLivechatSessionViews(TestImLivechatCommon):
         self._reset_bus()
         action = self.env.ref("im_livechat.discuss_channel_action_from_livechat_channel")
         self.start_tour(
-            f"/odoo/livechat/{self.livechat_channel.id}/action-{action.id}",
+            f"/app/livechat/{self.livechat_channel.id}/action-{action.id}",
             "im_livechat_history_back_and_forth_tour",
             login="operator",
         )
@@ -66,7 +66,7 @@ class TestImLivechatSessionViews(TestImLivechatCommon):
         )
         action = self.env.ref("im_livechat.discuss_channel_action_from_livechat_channel")
         self.start_tour(
-            f"/odoo/livechat/{self.livechat_channel.id}/action-{action.id}",
+            f"/app/livechat/{self.livechat_channel.id}/action-{action.id}",
             "im_livechat_session_history_open",
             login="operator",
         )
@@ -128,5 +128,5 @@ class TestImLivechatLookingForHelpViews(TestImLivechatSessionViews):
         sales_chat.livechat_expertise_ids = sales_expertise
         self._reset_bus()
         self.start_tour(
-            "/odoo/discuss", "im_livechat.looking_for_help_discuss_category_tour", login="agent"
+            "/app/discuss", "im_livechat.looking_for_help_discuss_category_tour", login="agent"
         )

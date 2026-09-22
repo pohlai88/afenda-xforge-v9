@@ -92,7 +92,7 @@ class PaymentTransaction(models.Model):
             self._set_canceled(extra_allowed_states=('done',))
         elif tx_status in const.TRANSACTION_STATUS_MAPPING['refunded']:
             # The payment has been refunded from Authorize.net side before we could refund it. We
-            # create a refund tx on Odoo to reflect the move of the funds.
+            # create a refund tx on AFENDA xForge to reflect the move of the funds.
             self._set_done()
             # Immediately post-process the transaction as the post-processing will not be
             # triggered by a customer browsing the transaction from the portal.

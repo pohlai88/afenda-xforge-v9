@@ -17,9 +17,9 @@ Forms
 - WHT001
     """,
     "version": "1.0",
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     "category": "Accounting/Localizations/Account Charts",
-    "website": "https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html",
+    "website": "/docs/applications/finance/fiscal_localizations.html",
     "depends": [
         "account",
         "l10n_account_withholding_tax",

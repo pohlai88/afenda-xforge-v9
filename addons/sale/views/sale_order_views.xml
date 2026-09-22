@@ -1077,7 +1077,7 @@
             <a
                 role="button"
                 class="btn btn-secondary"
-                href="https://www.odoo.com/documentation/latest/_downloads/4c54b867f6472b9cbcc233b4821d5c7b/sample_quotation.pdf"
+                href="/docs/_downloads/4c54b867f6472b9cbcc233b4821d5c7b/sample_quotation.pdf"
                 target="_blank"
             >
                 Check a sample. It's clean!
@@ -1114,7 +1114,7 @@
             <a
                 role="button"
                 class="btn btn-secondary"
-                href="https://www.odoo.com/documentation/latest/_downloads/4c54b867f6472b9cbcc233b4821d5c7b/sample_quotation.pdf"
+                href="/docs/_downloads/4c54b867f6472b9cbcc233b4821d5c7b/sample_quotation.pdf"
                 target="_blank"
             >
                 Check a sample. It's clean!
@@ -1195,7 +1195,7 @@
             An order is to upsell when delivered quantities are above initially
             ordered quantities, and the invoicing policy is based on ordered quantities.
             </p><p>
-            As an example, if you sell pre-paid hours of services, Odoo recommends you
+            As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you
             to sell extra hours when all ordered hours have been consumed.
             </p>
         </field>

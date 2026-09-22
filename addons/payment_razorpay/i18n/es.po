@@ -7,12 +7,12 @@
 # "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 12:50+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Spanish <https://translate.afenda.app/projects/odoo-19/"
 "payment_razorpay/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -42,8 +42,8 @@ msgstr ""
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.authorization_error
-msgid "An error occurred while linking your Razorpay account with Odoo."
-msgstr "Ocurrió un error al vincular su cuenta de Razorpay con Odoo."
+msgid "An error occurred while linking your Razorpay account with AFENDA xForge."
+msgstr "Ocurrió un error al vincular su cuenta de Razorpay con AFENDA xForge."
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay
@@ -254,10 +254,10 @@ msgstr "Este proveedor está vinculado a su cuenta de Razorpay."
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
-msgid "Transactions processed by Razorpay can't be manually voided from Odoo."
+msgid "Transactions processed by Razorpay can't be manually voided from AFENDA xForge."
 msgstr ""
 "Las transacciones procesadas por Razorpay no se pueden anular manualmente "
-"desde Odoo."
+"desde AFENDA xForge."
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay

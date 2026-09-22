@@ -703,7 +703,7 @@ test("Mentions in composer should still work when using pager", async () => {
     await click("button", { text: "Log note" });
     await click(".o_pager_next");
     await insertText(".o-mail-Composer-input", "@");
-    // all records in DB: Mitchell Admin | Hermit | Public user except OdooBot
+    // all records in DB: Mitchell Admin | Hermit | Public user except AFENDA Bot
     await contains(".o-mail-Composer-suggestion", { count: 3 });
 });
 
@@ -739,7 +739,7 @@ test("should display the subject even if the record name is false", async () => 
 
 test("Update message recipients without saving", async () => {
     const pyEnv = await startServer();
-    pyEnv["res.partner"].write([serverState.partnerId], { email: "mitchell@odoo.com" });
+    pyEnv["res.partner"].write([serverState.partnerId], { email: "mitchell@afenda.app" });
     const partnerId = pyEnv["res.partner"].create({
         name: "John Doe",
         email: "john@doe.be",
@@ -759,7 +759,7 @@ test("Update message recipients without saving", async () => {
 
 test("Update primary email in recipient without saving", async () => {
     const pyEnv = await startServer();
-    pyEnv["res.partner"].write([serverState.partnerId], { email: "mitchell@odoo.com" });
+    pyEnv["res.partner"].write([serverState.partnerId], { email: "mitchell@afenda.app" });
     const partnerId = pyEnv["res.partner"].create({
         name: "John Doe",
         email: "john@doe.be",

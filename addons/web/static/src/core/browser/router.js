@@ -116,7 +116,7 @@ function pathFromActionState(state) {
 }
 
 export function startUrl() {
-    return isScopedApp() ? "scoped_app" : "odoo";
+    return isScopedApp() ? "scoped_app" : "app";
 }
 
 /**
@@ -185,7 +185,7 @@ function urlToState(urlObj) {
 
     const [prefix, ...splitPath] = urlObj.pathname.split("/").filter(Boolean);
 
-    if (["odoo", "scoped_app"].includes(prefix)) {
+    if (["app", "scoped_app"].includes(prefix)) {
         const actionParts = [...splitPath.entries()].filter(
             ([_, part]) => !isNumeric(part) && part !== "new"
         );
@@ -231,7 +231,7 @@ function urlToState(urlObj) {
             state.actionStack = actions;
         }
         if (prefix === "scoped_app" && !isDisplayStandalone()) {
-            // make sure /scoped_app are redirected to /odoo when using the browser instead of the PWA
+            // make sure /scoped_app are redirected to /app when using the browser instead of the PWA
             const url = browser.location.origin + router.stateToUrl(state);
             urlObj.href = url;
         }
@@ -291,7 +291,7 @@ browser.addEventListener("popstate", (ev) => {
 /**
  * When the user navigates the history using the back/forward button, some browsers (Safari iOS and
  * Safari MacOS) can restore the page using the `bfcache` (especially when we come back from an
- * external website). Unfortunately, Odoo wasn't designed to be compatible with this cache, which
+ * external website). Unfortunately, AFENDA xForge wasn't designed to be compatible with this cache, which
  * leads to inconsistencies. When the `bfcache` is used to restore a page, we reload the current
  * page, to be sure that all the elements have been rendered correctly.
  */
@@ -322,13 +322,13 @@ browser.addEventListener("click", (ev) => {
         }
         if (
             browser.location.host === url.host &&
-            browser.location.pathname.startsWith("/odoo") &&
-            (["/web", "/odoo"].includes(url.pathname) || url.pathname.startsWith("/odoo/")) &&
+            browser.location.pathname.startsWith("/app") &&
+            (["/web", "/app"].includes(url.pathname) || url.pathname.startsWith("/app/")) &&
             a.target !== "_blank"
         ) {
             ev.preventDefault();
             state = router.urlToState(url);
-            if (url.pathname.startsWith("/odoo") && url.hash) {
+            if (url.pathname.startsWith("/app") && url.hash) {
                 browser.history.pushState({}, "", url.href);
             }
             new Promise((res) => setTimeout(res, 0)).then(() => routerBus.trigger("ROUTE_CHANGE"));

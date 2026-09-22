@@ -62,7 +62,7 @@ class TestRecruitment(TransactionCase):
             {
                 'active': False,  # Refused/archived application should still count
                 'partner_name': 'Application A',
-                'email_from': 'abc@odoo.com',
+                'email_from': 'abc@afenda.app',
                 'partner_phone': '123',
             },
             {
@@ -71,12 +71,12 @@ class TestRecruitment(TransactionCase):
             },
             {
                 'partner_name': 'Application C',
-                'email_from': 'def@odoo.com',
+                'email_from': 'def@afenda.app',
                 'partner_phone': '123',
             },
             {
                 'partner_name': 'Application D',
-                'email_from': 'abc@odoo.com',
+                'email_from': 'abc@afenda.app',
                 'partner_phone': '456',
             },
             {
@@ -85,7 +85,7 @@ class TestRecruitment(TransactionCase):
             },
             {
                 'partner_name': 'Application F',
-                'email_from': 'ghi@odoo.com',
+                'email_from': 'ghi@afenda.app',
                 'partner_phone': '789',
             },
             {

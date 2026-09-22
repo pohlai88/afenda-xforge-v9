@@ -10,12 +10,12 @@
 # "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 11:44+0000\n"
-"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
-"Language-Team: German <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@afenda.app>\n"
+"Language-Team: German <https://translate.afenda.app/projects/odoo-19/"
 "base_setup/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -140,10 +140,10 @@ msgstr "API-Schlüssel"
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid ""
-"API Keys allow your users to access Odoo with external tools when multi-"
+"API Keys allow your users to access AFENDA xForge with external tools when multi-"
 "factor authentication is enabled."
 msgstr ""
-"API-Schlüssel ermöglichen es Ihren Benutzern, mit externen Tools auf Odoo "
+"API-Schlüssel ermöglichen es Ihren Benutzern, mit externen Tools auf AFENDA xForge "
 "zuzugreifen, wenn die Multi-Faktor-Authentifizierung aktiviert ist."
 
 #. module: base_setup
@@ -495,8 +495,8 @@ msgstr "OAuth-Authentifizierung"
 
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_res_config_settings__module_partner_autocomplete
@@ -591,10 +591,10 @@ msgstr ""
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid ""
-"This name will be used for the application when Odoo is installed through "
+"This name will be used for the application when AFENDA xForge is installed through "
 "the browser."
 msgstr ""
-"Dieser Name wird für die Anwendung verwendet, wenn Odoo über den Browser "
+"Dieser Name wird für die Anwendung verwendet, wenn AFENDA xForge über den Browser "
 "installiert wird."
 
 #. module: base_setup
@@ -641,11 +641,11 @@ msgstr "USt-IdNr."
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid ""
-"When populating your address book, Odoo provides a list of matching "
+"When populating your address book, AFENDA xForge provides a list of matching "
 "companies. When selecting one item, the company data and logo are auto-"
 "filled."
 msgstr ""
-"Beim Auffüllen Ihres Adressbuchs stellt Odoo eine Liste passender "
+"Beim Auffüllen Ihres Adressbuchs stellt AFENDA xForge eine Liste passender "
 "Unternehmen zur Verfügung. Bei der Auswahl eines Artikels werden die "
 "Unternehmensdaten und das Logo automatisch ausgefüllt."
 

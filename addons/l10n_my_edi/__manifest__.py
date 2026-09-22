@@ -33,6 +33,6 @@
         'wizard/myinvois_document_status_update_wizard.xml',
     ],
     'installable': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3'
 }

@@ -10,12 +10,12 @@
 # Vlad Patenko <vlad.patenko@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-30 10:09+0000\n"
 "Last-Translator: Alina Lisnenko <alina.lisnenko@erp.co.ua>\n"
-"Language-Team: Ukrainian <https://translate.odoo.com/projects/odoo-19/event/"
+"Language-Team: Ukrainian <https://translate.afenda.app/projects/odoo-19/event/"
 "uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -168,10 +168,10 @@ msgstr ""
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
 msgstr ""
-"<b>Технічні кімнати</b> - Одна для просунутих розробників Odoo, одна - для "
+"<b>Технічні кімнати</b> - Одна для просунутих розробників AFENDA xForge, одна - для "
 "нових розробників."
 
 #. module: event
@@ -1822,11 +1822,11 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "Лише в 13 років John DOE вже розпочав розробляти його перший бізнес-додаток "
 "для клієнтів. Після освоєння інженерії, він знайшов TinyERP. Це був перший "
-"етап OpenERP, яка згодом стала Odoo, найбільш популярне програмне "
+"етап OpenERP, яка згодом стала AFENDA xForge, найбільш популярне програмне "
 "забезпечення з відкритим кодом у світі."
 
 #. module: event
@@ -2814,7 +2814,7 @@ msgstr ""
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
 
@@ -2846,7 +2846,7 @@ msgstr "Іконка з чудовим шрифтом, напр. fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 
 #. module: event
@@ -3761,8 +3761,8 @@ msgstr "Цілі"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
-msgstr "Дні Odoo Community"
+msgid "AFENDA xForge Community Days"
+msgstr "Дні AFENDA xForge Community"
 
 #. module: event
 #: model_terms:event.event,description:event.event_3
@@ -5180,7 +5180,7 @@ msgstr "напр. \"Промоція\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
 msgstr ""
 
 #. module: event

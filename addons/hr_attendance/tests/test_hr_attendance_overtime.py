@@ -1271,8 +1271,8 @@ class TestHrAttendanceOvertime(HttpCase):
         """
         with freeze_time("2025-11-11 12:00:00"):
             self.env.user.tz = 'UTC'  # to avoid to shift the public holidays hours
-            company_be = self.env['res.company'].create({'name': 'Odoo BE'})
-            company_de = self.env['res.company'].create({'name': 'Odoo DE'})
+            company_be = self.env['res.company'].create({'name': 'AFENDA xForge BE'})
+            company_de = self.env['res.company'].create({'name': 'AFENDA xForge DE'})
 
             with Form(self.env['resource.calendar.leaves'].with_company(company_be)) as holiday_form:
                 holiday_form.name = 'Armistice Day'
@@ -1961,7 +1961,7 @@ class TestHrAttendanceOvertime(HttpCase):
             'absence_management': True
         })
         absent_employee = self.env['hr.employee'].create({
-            'name': 'John Odoo',
+            'name': 'John AFENDA xForge',
             'resource_calendar_id': self.company.resource_calendar_id.id,
             'contract_date_start': date(2026, 7, 28),
             'ruleset_id': self.ruleset.id

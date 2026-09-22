@@ -9,6 +9,6 @@ When hiding the timesheets in the portal, this module allows also hiding timeshe
     'depends': ['website', 'hr_timesheet'],
     'installable': True,
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -6,5 +6,5 @@
     'depends': ['l10n_fr_pdp', 'point_of_sale'],
     'auto_install': True,
     'license': 'LGPL-3',
-    'author': 'Odoo SA',
+    'author': 'AFENDA xForge SA',
 }

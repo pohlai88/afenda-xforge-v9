@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-03 13:48+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/survey/uz/>"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/survey/uz/>"
 "\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
@@ -3549,15 +3549,15 @@ msgstr "Yuz berish"
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.certification_report_view_general
 #, fuzzy
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
 #, fuzzy
-msgid "Odoo Certification"
-msgstr "Odoo sertifikati"
+msgid "AFENDA xForge Certification"
+msgstr "AFENDA xForge sertifikati"
 
 #. module: survey
 #: model:survey.question.answer,value:survey.vendor_certification_page_2_question_2_choice_5
@@ -5841,10 +5841,10 @@ msgstr "Veb-sayt bilan muloqot tarixi"
 #: code:addons/survey/models/templates/survey_survey.py:0
 #, fuzzy
 msgid ""
-"Welcome to this Odoo certification. You will receive 2 random questions out "
+"Welcome to this AFENDA xForge certification. You will receive 2 random questions out "
 "of a pool of 3."
 msgstr ""
-"Ushbu Odoo sertifikatiga xush kelibsiz. Siz 3 ta savoldan iborat to‘plamdan "
+"Ushbu AFENDA xForge sertifikatiga xush kelibsiz. Siz 3 ta savoldan iborat to‘plamdan "
 "2 ta tasodifiy savol olasiz"
 
 #. module: survey
@@ -5890,8 +5890,8 @@ msgstr "\"ODOO\" so‘zi nimani anglatadi?"
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
 #, fuzzy
-msgid "What does one need to get to pass an Odoo Survey?"
-msgstr "Odoo so‘rovnomasidan o‘tish uchun nima talab qilinadi?"
+msgid "What does one need to get to pass an AFENDA xForge Survey?"
+msgstr "AFENDA xForge so‘rovnomasidan o‘tish uchun nima talab qilinadi?"
 
 #. module: survey
 #. odoo-python
@@ -5935,8 +5935,8 @@ msgstr "Tug‘ilgan sanangiz qachon?"
 #. odoo-javascript
 #: code:addons/survey/static/src/js/tours/survey_tour.js:0
 #, fuzzy
-msgid "Whenever you pick an answer, Odoo saves it for you."
-msgstr "Siz javob tanlaganingizda, Odoo uni avtomatik ravishda saqlaydi."
+msgid "Whenever you pick an answer, AFENDA xForge saves it for you."
+msgstr "Siz javob tanlaganingizda, AFENDA xForge uni avtomatik ravishda saqlaydi."
 
 #. module: survey
 #: model:survey.question,title:survey.survey_feedback_p1_q1

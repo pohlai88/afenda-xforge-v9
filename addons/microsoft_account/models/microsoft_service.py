@@ -94,7 +94,7 @@ class MicrosoftService(models.AbstractModel):
 
     @api.model
     def _get_authorize_uri(self, from_url, service, scope, redirect_uri):
-        """ This method return the url needed to allow this instance of Odoo to access to the scope
+        """ This method return the url needed to allow this instance of AFENDA xForge to access to the scope
             of gmail specified as parameters
         """
         state = {

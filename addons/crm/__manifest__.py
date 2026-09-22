@@ -8,7 +8,7 @@
     'category': 'Sales/CRM',
     'sequence': 15,
     'summary': 'Track leads and close opportunities',
-    'website': 'https://www.odoo.com/app/crm',
+    'website': 'https://www.afenda.app/app/crm',
     'depends': [
         'base_setup',
         'sales_team',
@@ -90,6 +90,6 @@
             'crm/static/tests/crm_mock_server.js'
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

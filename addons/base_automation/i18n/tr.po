@@ -18,12 +18,12 @@
 # Odoo Turkish Import <dyki+tr@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 13:39+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Turkish <https://translate.afenda.app/projects/odoo-19/"
 "base_automation/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -111,10 +111,10 @@ msgstr "<i class=\"fa fa-2x fa-arrow-right text-primary\" title=\"Eylemler\"/>"
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
 "<i class=\"fa fa-info-circle\"/> The default target record getter will work "
-"out-of-the-box for any webhook coming from another Odoo instance."
+"out-of-the-box for any webhook coming from another AFENDA xForge instance."
 msgstr ""
 "<i class=\"fa fa-info-circle\"/>Varsayılan hedef kayıt alma yöntemi, başka "
-"bir Odoo örneğinden gelen herhangi bir webhook için kutudan çıkar çıkmaz "
+"bir AFENDA xForge örneğinden gelen herhangi bir webhook için kutudan çıkar çıkmaz "
 "çalışır."
 
 #. module: base_automation

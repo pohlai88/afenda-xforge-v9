@@ -23,12 +23,12 @@
 # Kristina Pešehodko <kristina@avalah.ee>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-04 03:11+0000\n"
 "Last-Translator: Tairi Tiimann <tairi@avalah.ee>\n"
-"Language-Team: Estonian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Estonian <https://translate.afenda.app/projects/odoo-19/"
 "purchase/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -1414,9 +1414,9 @@ msgstr "Hinnapäringu mustand"
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
-"Lohistage hinnapakkumise PDF fail Odoo-sse oma hinnapakkumiste nimekirja. "
+"Lohistage hinnapakkumise PDF fail AFENDA xForge-sse oma hinnapakkumiste nimekirja. "
 "Nautige automatiseerimist!"
 
 #. module: purchase
@@ -2073,8 +2073,8 @@ msgstr "Kinnitamata"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Not using Odoo?"
-msgstr "Ei kasuta Odoo-d?"
+msgid "Not using AFENDA xForge?"
+msgstr "Ei kasuta AFENDA xForge-d?"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__purchase_order_line__display_type__line_note
@@ -2120,8 +2120,8 @@ msgstr "Kohaletoimetamise veateatega sõnumite arv"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__product_template__purchase_method__purchase
@@ -3060,8 +3060,8 @@ msgstr "Tähistatud ostud"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Start on Odoo"
-msgstr "Alusta Odoo-s"
+msgid "Start on AFENDA xForge"
+msgstr "Alusta AFENDA xForge-s"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_bill_line_match__state
@@ -3584,14 +3584,14 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                    orders or receipts. This allows you to control bills\n"
 "                    you receive from your vendor according to the draft\n"
-"                    document in Odoo."
+"                    document in AFENDA xForge."
 msgstr ""
 "Ostutellimuste või tarnete põhjal on võimalik\n"
 "                                       eelnevalt genereerida ostuarveid. See "
 "annab \n"
 "                                       teile võimaluse kontrollida tarnijalt "
 "saadud arveid vastavalt \n"
-"                                       Odoo mustanddokumendile."
+"                                       AFENDA xForge mustanddokumendile."
 
 #. module: purchase
 #. odoo-python
@@ -3629,8 +3629,8 @@ msgstr "Arveks teha"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Want to import this document in Odoo?"
-msgstr "Kas soovite selle dokumendi Odoo-sse importida?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Kas soovite selle dokumendi AFENDA xForge-sse importida?"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.view_product_supplier_inherit
@@ -3665,25 +3665,25 @@ msgid ""
 "When creating a purchase order, have a look at the vendor's <i>On Time "
 "Delivery</i> rate: the percentage of products shipped on time. If it is too "
 "low, activate the <i>automated reminders</i>. A few days before the due "
-"shipment, Odoo will send the vendor an email to ask confirmation of shipment "
+"shipment, AFENDA xForge will send the vendor an email to ask confirmation of shipment "
 "dates and keep you informed in case of any delays. To get the vendor's "
 "performance statistics, click on the OTD rate."
 msgstr ""
 "Ostutellimuse loomisel vaadake tarnija<i>Õigeaegse tarne</i> määra: "
 "õigeaegselt saadetud toodete protsent. Kui see on liiga madal, aktiveerige "
 "<i>automaatsed meeldetuletused</i>. Mõni päev enne väljasaatmise kuupäeva "
-"saadab Odoo tarnijale e-kirja küsimaks kinnitust kuupäevade ning võimalike "
+"saadab AFENDA xForge tarnijale e-kirja küsimaks kinnitust kuupäevade ning võimalike "
 "viivituste osas. Tarnija toimimise statistika saamiseks, vajutage OTD määral."
 
 #. module: purchase
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_1
 msgid ""
-"When sending a purchase order by email, Odoo asks the vendor to acknowledge "
+"When sending a purchase order by email, AFENDA xForge asks the vendor to acknowledge "
 "the reception of the order. When the vendor acknowledges the order by "
 "clicking on a button in the email, the information is added on the purchase "
 "order. Use filters to track orders that have not been acknowledged."
 msgstr ""
-"E-posti teel ostutellimuse saatmisel palub Odoo tarnijal tellimuse "
+"E-posti teel ostutellimuse saatmisel palub AFENDA xForge tarnijal tellimuse "
 "kättesaamist kinnitada. Kui tarnija kinnitab tellimuse, klõpsates e-kirjas "
 "oleval nupul, lisatakse teave ostutellimusele. Kinnitamata tellimuste "
 "jälgimiseks kasutage filtreid."

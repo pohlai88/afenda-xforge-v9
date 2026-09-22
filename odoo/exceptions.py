@@ -1,4 +1,4 @@
-"""The Odoo Exceptions module defines a few core exception types.
+"""The AFENDA xForge Exceptions module defines a few core exception types.
 
 Those types are understood by the RPC layer.
 Any other exception type bubbling until the RPC layer will be

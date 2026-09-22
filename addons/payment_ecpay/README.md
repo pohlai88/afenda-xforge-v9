@@ -8,10 +8,10 @@ This module integrates ECPay using the generic payment with redirection flow bas
 submission provided by the `payment` module.
 
 The outgoing request is a POST form submitted to the ECPay-hosted payment page. ECPay handles the
-full payment experience (method selection, data entry) and notifies Odoo of the outcome via two
+full payment experience (method selection, data entry) and notifies AFENDA xForge of the outcome via two
 independent channels:
 
-- **Return URL** (`/payment/ecpay/return`): ECPay redirects the customer back to Odoo after the
+- **Return URL** (`/payment/ecpay/return`): ECPay redirects the customer back to AFENDA xForge after the
   payment is completed. Both `GET` (deferred payment methods such as CVS or ATM) and `POST`
   (immediate payment methods) are supported.
 - **Webhook** (`/payment/ecpay/webhook`): ECPay sends a server-to-server `POST` notification in
@@ -21,7 +21,7 @@ Both channels verify the `CheckMacValue` signature (SHA-256 over URLencoded sort
 sandwiched by `HashKey` and `HashIV`) before processing the payment data.
 
 Payment method filtering is implemented via the `IgnorePayment` parameter: all ECPay-level methods
-that don't map to the selected Odoo payment method are excluded, nudging the customer toward the
+that don't map to the selected AFENDA xForge payment method are excluded, nudging the customer toward the
 expected option on the ECPay page.
 
 ## Supported features

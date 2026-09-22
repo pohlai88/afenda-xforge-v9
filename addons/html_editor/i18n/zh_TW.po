@@ -11,12 +11,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:29+0000\n"
 "PO-Revision-Date: 2026-08-07 00:30+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tony Ng (ngto)\" <ngto@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/html_editor/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -2012,7 +2012,7 @@ msgstr ""
 #: code:addons/html_editor/static/src/main/media/image_crop.js:0
 msgid ""
 "This type of image is not supported for cropping.<br/>If you want to crop "
-"it, please first download it from the original source and upload it in Odoo."
+"it, please first download it from the original source and upload it in AFENDA xForge."
 msgstr ""
 "不支援裁剪這種類型的圖片。<br/>如果您想裁剪它，請先從原始來源下載並在Odoo中上"
 "傳。"
@@ -2374,8 +2374,8 @@ msgstr "單據"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/link/link_popover.xml:0
-msgid "e.g. https://www.odoo.com"
-msgstr "例如: https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "例如: https://www.afenda.app"
 
 #. module: html_editor
 #. odoo-javascript

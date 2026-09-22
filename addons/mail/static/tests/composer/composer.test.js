@@ -468,7 +468,7 @@ test("composer textarea content is retained when changing channel then going bac
 test("add an emoji after a partner mention", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     const channelId = pyEnv["discuss.channel"].create({
@@ -540,7 +540,7 @@ test("pending mentions are kept when toggling composer", async () => {
 test("composer suggestion should match with input selection", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "Luigi",
     });
     const channelId = pyEnv["discuss.channel"].create({
@@ -834,7 +834,7 @@ test("quick edit last self-message from UP arrow", async () => {
 test("Select composer suggestion via Enter does not send the message", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "shrek@odoo.com",
+        email: "shrek@afenda.app",
         name: "Shrek",
     });
     pyEnv["res.users"].create({ partner_id: partnerId });
@@ -1969,11 +1969,11 @@ test("mentions can be correctly cut with ctrl+A and ctrl+X", async () => {
 test("discard stale mention when replacing it with a longer partner mention", async () => {
     const pyEnv = await startServer();
     const johnId = pyEnv["res.partner"].create({
-        email: "john@odoo.com",
+        email: "john@afenda.app",
         name: "John",
     });
     const johnDoeId = pyEnv["res.partner"].create({
-        email: "john.doe@odoo.com",
+        email: "john.doe@afenda.app",
         name: "John Doe",
     });
     const channelId = pyEnv["discuss.channel"].create({

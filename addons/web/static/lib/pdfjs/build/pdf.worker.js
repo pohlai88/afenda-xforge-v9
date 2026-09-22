@@ -26848,7 +26848,7 @@ class PDFFunctionFactory {
     isEvalSupported = true
   }) {
     this.xref = xref;
-    // Odoo: don't support scripting
+    // AFENDA xForge: don't support scripting
     this.isEvalSupported = false;
   }
   create(fn) {

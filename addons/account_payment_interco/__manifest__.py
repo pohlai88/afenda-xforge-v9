@@ -4,7 +4,7 @@
     'summary': "Enable Intercompany payments to reconcile with their invoices on post.",
     'version': '1.0',
     'depends': ['account_payment'],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'data': [
         'views/res_config_settings_views.xml',

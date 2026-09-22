@@ -92,7 +92,7 @@ def test_02_copy_ids_views_unlink_on_module_update(env):
       theme for a particular website should:
       1. Remove the theme.ir.ui.view record, which is the record pointed by the
          ir.model.data
-         -> This is done through the regular Odoo behavior related to the
+         -> This is done through the regular AFENDA xForge behavior related to the
             ir.model.data and XML file check on upgrade.
       2. Remove the theme.ir.ui.view's copy_ids (sort of the COW views)
          -> Not working for now

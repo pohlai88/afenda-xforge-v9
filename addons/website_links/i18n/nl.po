@@ -10,12 +10,12 @@
 # Bren Driesen <brdri@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:30+0000\n"
 "PO-Revision-Date: 2026-08-04 02:45+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Dutch <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Dutch <https://translate.afenda.app/projects/odoo-19/"
 "website_links/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -298,10 +298,10 @@ msgstr "Deze code is al in gebruik"
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
 msgid ""
 "Those trackers can be used in Google Analytics to track clicks and visitors, "
-"or in Odoo reports to track opportunities and related revenues."
+"or in AFENDA xForge reports to track opportunities and related revenues."
 msgstr ""
 "Deze trackers kunnen worden gebruikt in Google Analytics om klikken en "
-"bezoekers te volgen, of in Odoo rapportages om verkoopkansen en omzet te "
+"bezoekers te volgen, of in AFENDA xForge rapportages om verkoopkansen en omzet te "
 "volgen."
 
 #. module: website_links
@@ -370,8 +370,8 @@ msgstr "bijv. LinkedIn, Facebook, Leads, ..."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
-msgid "e.g. https://www.odoo.com/contactus"
-msgstr "Bijv. https://www.odoo.com/contactus"
+msgid "e.g. https://www.afenda.app/contactus"
+msgstr "Bijv. https://www.afenda.app/contactus"
 
 #~ msgid ""
 #~ "<span class=\"o_website_links_short_url d-flex align-items-center text-"

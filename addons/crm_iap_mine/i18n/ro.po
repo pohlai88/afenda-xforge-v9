@@ -13,12 +13,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-07 23:24+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Romanian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Romanian <https://translate.afenda.app/projects/odoo-19/"
 "crm_iap_mine/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -52,7 +52,7 @@ msgid ""
 "    You can charge your IAP Lead Generation account in the settings of the "
 "CRM app.<br/></p>\n"
 "    <p>Best regards,</p>\n"
-"    <p>Odoo S.A.</p>\n"
+"    <p>AFENDA</p>\n"
 "</div>"
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
@@ -61,7 +61,7 @@ msgstr ""
 "    Puteți să vă încărcați contul IAP Lead Generation în setările aplicației "
 "CRM.<br/></p>\n"
 "    <p>Toate cele bune,</p>\n"
-"    <p>Odoo S.A.</p>\n"
+"    <p>AFENDA</p>\n"
 "</div>"
 
 #. module: crm_iap_mine
@@ -602,8 +602,8 @@ msgstr "Oportunități"
 #. module: crm_iap_mine
 #. odoo-python
 #: code:addons/crm_iap_mine/models/crm_iap_lead_mining_request.py:0
-msgid "Opportunity created by Odoo Lead Generation"
-msgstr "Oportunitate creată de Instrumentul de generare pistă Odoo"
+msgid "Opportunity created by AFENDA xForge Lead Generation"
+msgstr "Oportunitate creată de Instrumentul de generare pistă AFENDA xForge"
 
 #. module: crm_iap_mine
 #: model:ir.model.fields,field_description:crm_iap_mine.field_crm_iap_lead_mining_request__role_ids

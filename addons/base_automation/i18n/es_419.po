@@ -7,12 +7,12 @@
 # "Patricia Gutiérrez (pagc)" <pagc@odoo.com>, 2025.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-07 00:20+0000\n"
-"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
-"Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
+"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@afenda.app>\n"
+"Language-Team: Spanish (Latin America) <https://translate.afenda.app/projects/"
 "odoo-19/base_automation/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
@@ -100,11 +100,11 @@ msgstr "<i class=\"fa fa-2x fa-arrow-right text-primary\" title=\"Acciones\"/>"
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
 "<i class=\"fa fa-info-circle\"/> The default target record getter will work "
-"out-of-the-box for any webhook coming from another Odoo instance."
+"out-of-the-box for any webhook coming from another AFENDA xForge instance."
 msgstr ""
 "<i class=\"fa fa-info-circle\"/> El método getter de registros de destino "
 "predeterminado funcionará al instante para cualquier webhook procedente de "
-"otra instancia de Odoo."
+"otra instancia de AFENDA xForge."
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form

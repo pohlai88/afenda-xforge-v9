@@ -2,7 +2,7 @@
 {
     'name': 'Events Organization',
     'version': '1.9',
-    'website': 'https://www.odoo.com/app/events',
+    'website': 'https://www.afenda.app/app/events',
     'category': 'Marketing/Events',
     'summary': 'Trainings, Conferences, Meetings, Exhibitions, Registrations',
     'description': """
@@ -75,6 +75,6 @@ Key Features
             '/event/static/src/scss/event_full_page_ticket_report_pdf.scss',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

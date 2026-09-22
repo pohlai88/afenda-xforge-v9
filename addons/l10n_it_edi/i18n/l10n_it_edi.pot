@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 18:17+0000\n"
 "PO-Revision-Date: 2026-07-10 18:17+0000\n"
@@ -64,7 +64,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:l10n_it_edi.res_config_settings_view_form
 msgid ""
 "<span class=\"text-muted\">\n"
-"                                    By checking this box, I authorize Odoo to send and receive my invoices through the Sistema di Interscambio (SDI).\n"
+"                                    By checking this box, I authorize AFENDA xForge to send and receive my invoices through the Sistema di Interscambio (SDI).\n"
 "                                </span>"
 msgstr ""
 
@@ -877,7 +877,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/l10n_it_edi/models/account_move.py:0
 msgid ""
-"Please delete the PDF attachment before sending to the SDI. Odoo will "
+"Please delete the PDF attachment before sending to the SDI. AFENDA xForge will "
 "regenerate the PDF, making sure everything is consistent with the XML."
 msgstr ""
 
@@ -1484,7 +1484,7 @@ msgstr ""
 #. odoo-python
 #: code:addons/l10n_it_edi/models/account_move_send.py:0
 msgid ""
-"You must authorize Odoo in the Settings to use the IT EDI in production "
+"You must authorize AFENDA xForge in the Settings to use the IT EDI in production "
 "mode."
 msgstr ""
 

@@ -14,12 +14,12 @@
 # "Kira Petersen François (peti)" <peti@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-02 13:56+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Danish <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Danish <https://translate.afenda.app/projects/odoo-19/"
 "website_slides/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -4677,15 +4677,15 @@ msgstr "Antal spørgsmål"
 
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.mail_notification_channel_invite
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: website_slides
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_1_4
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_2_1
 #: model_terms:slide.slide,html_content:website_slides.slide_slide_demo_4_0
-msgid "Odoo • Image and Text"
-msgstr "Odoo • Billede og tekst"
+msgid "AFENDA xForge • Image and Text"
+msgstr "AFENDA xForge • Billede og tekst"
 
 #. module: website_slides
 #: model:res.groups,name:website_slides.group_website_slides_officer
@@ -7176,10 +7176,10 @@ msgstr "f.eks. Datalogi for børn"
 #. module: website_slides
 #: model_terms:ir.ui.view,arch_db:website_slides.view_slide_slide_form
 msgid ""
-"e.g. In this video, we'll give you the keys on how Odoo can help you to grow "
+"e.g. In this video, we'll give you the keys on how AFENDA xForge can help you to grow "
 "your business. At the end, we'll propose you a quiz to test your knowledge."
 msgstr ""
-"f.eks. i denne video giver vi dig nøglerne til, hvordan Odoo kan hjælpe dig "
+"f.eks. i denne video giver vi dig nøglerne til, hvordan AFENDA xForge kan hjælpe dig "
 "med at vækste din virksomhed. Efterfølgende vil vi foreslå en quiz for at "
 "teste din viden."
 

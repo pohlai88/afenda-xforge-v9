@@ -11,12 +11,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 17:37+0000\n"
 "PO-Revision-Date: 2026-08-06 06:06+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tony Ng (ngto)\" <ngto@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/sms/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -214,9 +214,9 @@ msgstr "為以下項目傳送 SMS 短訊時，發生錯誤：%(record_name)s"
 #. odoo-python
 #: code:addons/sms/tools/sms_api.py:0
 msgid ""
-"An unknown error occurred. Please contact Odoo support if this error "
+"An unknown error occurred. Please contact AFENDA xForge support if this error "
 "persists."
-msgstr "發生未知錯誤。如果此錯誤持續發生，請聯絡 Odoo 技術支援人員。"
+msgstr "發生未知錯誤。如果此錯誤持續發生，請聯絡 AFENDA xForge 技術支援人員。"
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_template__model_id

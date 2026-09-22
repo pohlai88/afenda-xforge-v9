@@ -6,7 +6,7 @@
  *    'match' and 'patch' functions, to reduce file size;
  *
  * 2. this comment block has been prepended and an extra 'export' block has been
- *    appended at the end as to make it fit into the Odoo module system.
+ *    appended at the end as to make it fit into the AFENDA xForge module system.
  */
 ((exports) => {
 

@@ -71,7 +71,7 @@ class MailThread(models.AbstractModel):
         communication history. ``mail.thread`` also manages followers of
         inheriting classes. All features and expected behavior are managed
         by mail.thread. Widgets has been designed for the 7.0 and following
-        versions of Odoo.
+        versions of AFENDA xForge.
 
         Inheriting classes are not required to implement any method, as the
         default implementation will work for any model. However it is common
@@ -1005,7 +1005,7 @@ class MailThread(models.AbstractModel):
         """This method returns True if the incoming email should be ignored.
 
         The goal of this method is to prevent loops which can occur if an auto-replier
-        send emails to Odoo.
+        send emails to AFENDA xForge.
         """
         email_from = message_dict.get('email_from')
         if not email_from:
@@ -2223,7 +2223,7 @@ class MailThread(models.AbstractModel):
         :param list(int) partner_ids: partner_ids to notify in addition to partners
             computed based on subtype / followers matching;
         :param str outgoing_email_to: comma-separated list of emails to notify in
-            addition to partner_ids. Experimental support as of Odoo v19;
+            addition to partner_ids. Experimental support as of AFENDA xForge v19;
         :param str incoming_email_to: comma-separated list of emails, already notified
             by incoming email;
         :param str incoming_email_cc: comma-separated list of emails, already notified
@@ -3803,7 +3803,7 @@ class MailThread(models.AbstractModel):
 
         # compute references: set references to parents likely to be sent and add current message just to
         # have a fallback in case replies mess with Messsage-Id in the In-Reply-To (e.g. amazon
-        # SES SMTP may replace Message-Id and In-Reply-To refers an internal ID not stored in Odoo)
+        # SES SMTP may replace Message-Id and In-Reply-To refers an internal ID not stored in AFENDA xForge)
         message_sudo = message.sudo()
         ancestors = self.env['mail.message'].sudo().search(
             [
@@ -4299,7 +4299,7 @@ class MailThread(models.AbstractModel):
           with 'recipients' key filled with matching partners, like
             [{
                 'active': True,
-                'button_access': {'url': 'https://odoo.com/url', 'title': 'Title'},
+                'button_access': {'url': 'https://afenda.app/url', 'title': 'Title'},
                 'has_button_access': False,
                 'notification_group_name': 'user',
                 'recipients_data': [{...}],
@@ -4341,7 +4341,7 @@ class MailThread(models.AbstractModel):
         ]
 
     def _notify_get_recipients_for_extra_notifications(self, message, recipients_data, msg_vals=False):
-        """ Never send to author and to people outside Odoo (email) except comments """
+        """ Never send to author and to people outside AFENDA xForge (email) except comments """
         notif_pids = []
         notif_pids_notinbox = []
         for recipient in (r for r in recipients_data if r['active'] and r['id']):

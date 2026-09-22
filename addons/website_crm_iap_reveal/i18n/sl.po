@@ -8,12 +8,12 @@
 # NEDŽAD BEUS <nedzad.beus@implex.si>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-27 07:48+0000\n"
 "Last-Translator: Jan Zorko <jan.zorko@implex.si>\n"
-"Language-Team: Slovenian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Slovenian <https://translate.afenda.app/projects/odoo-19/"
 "website_crm_iap_reveal/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -275,9 +275,9 @@ msgstr ""
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__industry_tag_ids
 #, fuzzy
-msgid "Leave empty to always match. Odoo will not create lead if no match"
+msgid "Leave empty to always match. AFENDA xForge will not create lead if no match"
 msgstr ""
-"Pustite prazno, da se vedno ujema. Odoo ne bo ustvaril potencialne stranke, "
+"Pustite prazno, da se vedno ujema. AFENDA xForge ne bo ustvaril potencialne stranke, "
 "če ni ujemanja"
 
 #. module: website_crm_iap_reveal
@@ -367,8 +367,8 @@ msgstr "Pogoji za ustvarjanje priložnosti"
 #. module: website_crm_iap_reveal
 #. odoo-python
 #: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py:0
-msgid "Opportunity created by Odoo Lead Generation"
-msgstr "Priložnost, ustvarjena z Odoo Lead Generation"
+msgid "Opportunity created by AFENDA xForge Lead Generation"
+msgstr "Priložnost, ustvarjena z AFENDA xForge Lead Generation"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,field_description:website_crm_iap_reveal.field_crm_reveal_rule__other_role_ids

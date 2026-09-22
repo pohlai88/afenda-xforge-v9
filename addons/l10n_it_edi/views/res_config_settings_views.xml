@@ -14,7 +14,7 @@
                             <div class="content-group d-flex align-items-center gap-2">
                                 <field name="l10n_it_edi_register" class="oe_inline"/>
                                 <span class="text-muted">
-                                    By checking this box, I authorize Odoo to send and receive my invoices through the Sistema di Interscambio (SDI).
+                                    By checking this box, I authorize AFENDA xForge to send and receive my invoices through the Sistema di Interscambio (SDI).
                                 </span>
                             </div>
                         </div>

@@ -15,12 +15,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-02 11:32+0000\n"
-"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
-"Language-Team: Italian <https://translate.odoo.com/projects/odoo-19/project/"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@afenda.app>\n"
+"Language-Team: Italian <https://translate.afenda.app/projects/odoo-19/project/"
 "it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -1789,11 +1789,11 @@ msgstr "Stato valutazioni cliente"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid ""
-"Customers propose feedbacks by email; Odoo creates tasks automatically, and "
+"Customers propose feedbacks by email; AFENDA xForge creates tasks automatically, and "
 "you can\n"
 "      communicate on the task directly."
 msgstr ""
-"I clienti forniscono riscontri via e-mail. Odoo crea lavori automaticamente "
+"I clienti forniscono riscontri via e-mail. AFENDA xForge crea lavori automaticamente "
 "ed è possibile\n"
 "      comunicare direttamente sul lavoro."
 
@@ -5147,11 +5147,11 @@ msgstr "L'intervallo deve essere maggiore di 0"
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Il modello (tipo di documento Odoo) a cui corrisponde questo alias. Le e-"
+"Il modello (tipo di documento AFENDA xForge) a cui corrisponde questo alias. Le e-"
 "mail in arrivo che non rispondono a un record esistente attivano la "
 "creazione di un nuovo record per questo modello (es. lavoro di un progetto)"
 
@@ -5159,10 +5159,10 @@ msgstr ""
 #: model:ir.model.fields,help:project.field_project_project__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Nome dell’alias e-mail, es. “lavori”, per intercettare le e-mail a "
-"<lavori@example.odoo.com>"
+"<lavori@example.afenda.app>"
 
 #. module: project
 #. odoo-python
@@ -6067,11 +6067,11 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid ""
-"You have unsaved changes - no worries! Odoo will automatically save it as "
+"You have unsaved changes - no worries! AFENDA xForge will automatically save it as "
 "you navigate.<br/> You can discard these changes from here or manually save "
 "your task.<br/>Let's save it manually."
 msgstr ""
-"Sono presenti modifiche non salvate ma non preoccuparti! Odoo le salverà "
+"Sono presenti modifiche non salvate ma non preoccuparti! AFENDA xForge le salverà "
 "automaticamente durante la navigazione.<br/> Puoi rifiutare le modifiche o "
 "salvare manualmente la tua attività.<br/> Salviamola manualmente."
 

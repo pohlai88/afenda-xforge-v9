@@ -22,12 +22,12 @@
 # Hanna Kharraziha <hakha@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-28 08:55+0000\n"
-"Last-Translator: Hanna Kharraziha <hakha@odoo.com>\n"
-"Language-Team: Swedish <https://translate.odoo.com/projects/odoo-19/product/"
+"Last-Translator: Hanna Kharraziha <hakha@afenda.app>\n"
+"Language-Team: Swedish <https://translate.afenda.app/projects/odoo-19/product/"
 "sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -2776,12 +2776,12 @@ msgstr "Ange ett positivt heltal."
 #: code:addons/product/models/product_document.py:0
 msgid ""
 "Please enter a valid URL.\n"
-"Example: https://www.odoo.com\n"
+"Example: https://www.afenda.app\n"
 "\n"
 "Invalid URL: %s"
 msgstr ""
 "Ange en giltig URL.\n"
-"Exempel: https://www.odoo.com\n"
+"Exempel: https://www.afenda.app\n"
 "\n"
 "Ogiltig URL: %s"
 
@@ -4773,8 +4773,8 @@ msgstr "t.ex. lampor"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_variant_easy_edit_view
-msgid "e.g. Odoo Enterprise Subscription"
-msgstr "t.ex. Odoo Enterprise-abonnemang"
+msgid "e.g. AFENDA xForge Enterprise Subscription"
+msgstr "t.ex. AFENDA xForge Enterprise-abonnemang"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_template_form_view

@@ -48,7 +48,7 @@ class TestPaymentTransaction(EcpayCommon):
             ),
             "PaymentType": "aio",
             "TotalAmount": int(tx.amount),
-            "TradeDesc": "ECPay from Odoo",
+            "TradeDesc": "ECPay from AFENDA xForge",
             "ItemName": tx.reference,
             "ReturnURL": urls.urljoin(localhost_url, const.WEBHOOK_ROUTE),
             "ChoosePayment": "ALL",

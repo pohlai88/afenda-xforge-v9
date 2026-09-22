@@ -368,7 +368,7 @@ class TestFillTemporal(common.TransactionCase):
     def test_timestamp_without_timezone(self):
         """Test datetimes.
 
-        Date stored with an hour inside the Odoo model are processed as timestamp
+        Date stored with an hour inside the AFENDA xForge model are processed as timestamp
         without timezone by postgres.
         """
         self.Model.create({'datetime': '1916-08-19 01:30:00', 'value': 7})

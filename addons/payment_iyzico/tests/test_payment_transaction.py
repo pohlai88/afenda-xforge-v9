@@ -28,7 +28,7 @@ class TestPaymentTransaction(IyzicoCommon, PaymentHttpCommon):
             'basketItems': [{
                 'id': tx.id,
                 'price': tx.amount,
-                'name': 'Odoo purchase',
+                'name': 'AFENDA xForge purchase',
                 'category1': 'Service',
                 'itemType': 'VIRTUAL',
             }],

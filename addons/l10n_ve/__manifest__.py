@@ -1,26 +1,26 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Venezuela - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'icon': '/account/static/description/l10n.png',
     'countries': ['ve'],
-    'author': 'Odoo S.A., Vauxoo',
+    'author': 'AFENDA xForge S.A., Vauxoo',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 Chart of Account for Venezuela.
 ===============================
 
 Venezuela doesn't have any chart of account by law, but the default
-proposed in Odoo should comply with some Accepted best practices in Venezuela,
+proposed in AFENDA xForge should comply with some Accepted best practices in Venezuela,
 this plan comply with this practices.
 
 This module has been tested as base for more of 1000 companies, because
 it is based in a mixtures of most common software in the Venezuelan
 market what will allow for sure to accountants feel them first steps with
-Odoo more comfortable.
+AFENDA xForge more comfortable.
 
 This module doesn't pretend be the total localization for Venezuela,
-but it will help you to start really quickly with Odoo in this country.
+but it will help you to start really quickly with AFENDA xForge in this country.
 
 This module give you.
 ---------------------

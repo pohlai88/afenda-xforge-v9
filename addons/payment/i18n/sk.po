@@ -15,12 +15,12 @@
 # Tomáš Píšek <Tomas.Pisek@seznam.cz>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-03 06:57+0000\n"
 "Last-Translator: Tomáš Píšek <Tomas.Pisek@seznam.cz>\n"
-"Language-Team: Slovak <https://translate.odoo.com/projects/odoo-19/payment/"
+"Language-Team: Slovak <https://translate.afenda.app/projects/odoo-19/payment/"
 "sk/>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/> These properties are set to\n"
 "                                match the behavior of providers and that of "
 "their integration with\n"
-"                                Odoo regarding this payment method. Any "
+"                                AFENDA xForge regarding this payment method. Any "
 "change may result in errors\n"
 "                                and should be tested on a test database "
 "first."
@@ -55,7 +55,7 @@ msgstr ""
 "aby\n"
 "                                odpovedali správaniu poskytovateľov a ich "
 "integrácii s\n"
-"                                Odoo, pokiaľ ide o túto platobnú metódu. "
+"                                AFENDA xForge, pokiaľ ide o túto platobnú metódu. "
 "Akákoľvek zmena môže viesť k chybám\n"
 "                                a mala by sa najskôr otestovať na testovacej "
 "databáze."
@@ -672,11 +672,11 @@ msgstr "Zaznamenať transakciu"
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_provider__capture_manually
 msgid ""
-"Capture the amount from Odoo, when the delivery is completed.\n"
+"Capture the amount from AFENDA xForge, when the delivery is completed.\n"
 "Use this if you want to charge your customers cards only when\n"
 "you are sure you can ship the goods to them."
 msgstr ""
-"Zaznamenajte sumu z Odoo po dokončení dodávky.\n"
+"Zaznamenajte sumu z AFENDA xForge po dokončení dodávky.\n"
 "Túto funkciu použite, ak chcete účtovať platby z kariet vašich zákazníkov až "
 "vtedy, keď\n"
 "ste si istí, že im môžete tovar odoslať."
@@ -1691,8 +1691,8 @@ msgstr "Octopus"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__module_to_buy
-msgid "Odoo Enterprise Module"
-msgstr "Odoo modul podnikateľskej edície"
+msgid "AFENDA xForge Enterprise Module"
+msgstr "AFENDA xForge modul podnikateľskej edície"
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_transaction__operation__offline
@@ -2248,10 +2248,10 @@ msgstr "Refundácia"
 #: model:ir.model.fields,help:payment.field_payment_provider__support_refund
 msgid ""
 "Refund is a feature allowing to refund customers directly from the payment "
-"in Odoo."
+"in AFENDA xForge."
 msgstr ""
 "Refundácia je funkcia, ktorá umožňuje vrátiť peniaze zákazníkom priamo z "
-"platby v Odoo."
+"platby v AFENDA xForge."
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form

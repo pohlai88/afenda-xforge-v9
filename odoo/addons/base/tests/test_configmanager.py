@@ -10,7 +10,7 @@ from odoo.tools import file_open, file_open_temporary_directory, file_path
 from odoo.tools.config import configmanager
 
 EMPTY_CONFIG_PATH = file_path('base/tests/config/empty.conf')
-PROJECT_PATH = odoo.tools.config.root_path.removesuffix('/odoo')
+PROJECT_PATH = odoo.tools.config.root_path.removesuffix('/app')
 DEFAULT_DATADIR = odoo.tools.config._default_options['data_dir']
 
 MISSING_HTTP_INTERFACE = """\
@@ -318,7 +318,7 @@ class TestConfigManager(TransactionCase):
                 self.assertEqual(config_content.splitlines(), save_content.splitlines())
 
     def test_04_odoo16_config_file(self):
-        # test that loading the Odoo 16.0 generated default config works
+        # test that loading the AFENDA xForge 16.0 generated default config works
         # with a modern version
         config_path = file_path('base/tests/config/16.0.conf')
         with self.assertLogs('odoo.tools.config', 'WARNING') as capture:

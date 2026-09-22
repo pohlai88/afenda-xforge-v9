@@ -11,12 +11,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-08-06 15:52+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tony Ng (ngto)\" <ngto@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/website_forum/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -3365,8 +3365,8 @@ msgstr "獲採納答案已被刪除"
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
-msgstr "該站點的目標是建立一個相關的知識庫，以回答與 Odoo 相關的問題。"
+"questions related to AFENDA xForge."
+msgstr "該站點的目標是建立一個相關的知識庫，以回答與 AFENDA xForge 相關的問題。"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_description_full
@@ -4040,7 +4040,7 @@ msgstr "此處"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to configure or customize Odoo to specific business needs,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
 msgstr "如何為特定的業務需求配置或自訂Odoo,"
 
 #. module: website_forum
@@ -4052,7 +4052,7 @@ msgstr "如何為您的需求開發模組,"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to install Odoo on a specific infrastructure,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
 msgstr "如何在特定環境下安裝Odoo,"
 
 #. module: website_forum
@@ -4152,7 +4152,7 @@ msgstr "帖文"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "specific questions about Odoo service offers, etc."
+msgid "specific questions about AFENDA xForge service offers, etc."
 msgstr "有關Odoo服務等具體問題等。"
 
 #. module: website_forum
@@ -4200,7 +4200,7 @@ msgstr "我們被問到一個開放式的假設性問題：“如果______發生
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "what's the best way to use Odoo for a specific business need,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
 msgstr "什麼是為特定業務需求使用Odoo 的最佳方式,"
 
 #. module: website_forum

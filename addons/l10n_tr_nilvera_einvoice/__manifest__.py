@@ -15,6 +15,6 @@ For sending and receiving electronic invoices to Nilvera.
         'demo/demo_company.xml',
     ],
     'auto_install': ['l10n_tr_nilvera'],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

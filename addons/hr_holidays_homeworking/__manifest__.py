@@ -14,7 +14,7 @@
             'hr_holidays_homeworking/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'auto_install': True,
 }

@@ -6,7 +6,7 @@
 # Bagavathikumar Ramakrishnan <bagavathikumar@gmail.com>, 2016
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo 9.0\n"
+"Project-Id-Version: AFENDA xForge 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-10-26 21:56+0000\n"
 "PO-Revision-Date: 2016-02-05 09:53+0000\n"

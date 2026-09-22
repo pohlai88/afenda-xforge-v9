@@ -664,7 +664,7 @@ class TestAccountPaymentTerms(AccountTestInvoicingCommon):
     def test_payment_term_multi_company(self):
         """
         Ensure that the payment term is determined by `move.company_id` rather than `user.company_id`.
-        OdooBot has `res.company(1)` set as the default company. The test checks that the payment term correctly reflects
+        AFENDA Bot has `res.company(1)` set as the default company. The test checks that the payment term correctly reflects
         the company associated with the move, independent of the user's default company.
         """
         user_company = self.env['res.company'].create({'name': 'user_company'})

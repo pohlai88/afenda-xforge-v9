@@ -23,12 +23,12 @@
 # Eelma <karin.eelma@impactic.ee>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-08-06 10:51+0000\n"
 "Last-Translator: Eelma <karin.eelma@impactic.ee>\n"
-"Language-Team: Estonian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Estonian <https://translate.afenda.app/projects/odoo-19/"
 "website_forum/et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -3370,9 +3370,9 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
+"questions related to AFENDA xForge."
 msgstr ""
-"Veebilehe eesmärk on luua asjakohane teadmistebaas, kus leiab vastuseid Odoo-"
+"Veebilehe eesmärk on luua asjakohane teadmistebaas, kus leiab vastuseid AFENDA xForge-"
 "ga seotud küsimustele."
 
 #. module: website_forum
@@ -4047,7 +4047,7 @@ msgstr "siin"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to configure or customize Odoo to specific business needs,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
 msgstr ""
 "kuidas konfigureerida või kohandada Odoot konkreetsetele ärivajadustele,"
 
@@ -4060,8 +4060,8 @@ msgstr "kuidas arendada mooduleid vastavalt oma vajadustele,"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to install Odoo on a specific infrastructure,"
-msgstr "kuidas installida Odoo konkreetsele infrastruktuurile,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
+msgstr "kuidas installida AFENDA xForge konkreetsele infrastruktuurile,"
 
 #. module: website_forum
 #. odoo-javascript
@@ -4160,8 +4160,8 @@ msgstr "postitused"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "specific questions about Odoo service offers, etc."
-msgstr "küsimused Odoo teenuse jms kohta."
+msgid "specific questions about AFENDA xForge service offers, etc."
+msgstr "küsimused AFENDA xForge teenuse jms kohta."
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.no_results_message
@@ -4212,8 +4212,8 @@ msgstr ""
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "what's the best way to use Odoo for a specific business need,"
-msgstr "milline on parim viis Odoo kasutamiseks konkreetse ärivajaduse jaoks,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
+msgstr "milline on parim viis AFENDA xForge kasutamiseks konkreetse ärivajaduse jaoks,"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.author_box

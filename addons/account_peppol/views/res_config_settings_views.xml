@@ -81,7 +81,7 @@
                             </div>
                             <!-- deprecated Registered on Peppol -->
                             <div invisible="True" class="mt-3">
-                                <button string="Register with Odoo"
+                                <button string="Register with AFENDA xForge"
                                         name="button_peppol_register_sender_as_receiver"
                                         type="object"
                                         class="btn-primary me-1"

@@ -351,7 +351,7 @@ class AccountEdiXmlUBL20(models.AbstractModel):
         payment_term = invoice.invoice_payment_term_id
         if payment_term:
             document_node['cac:PaymentTerms'] = {
-                # The payment term's note is automatically embedded in a <p> tag in Odoo
+                # The payment term's note is automatically embedded in a <p> tag in AFENDA xForge
                 'cbc:Note': {'_text': html2plaintext(payment_term.note)}
             }
 

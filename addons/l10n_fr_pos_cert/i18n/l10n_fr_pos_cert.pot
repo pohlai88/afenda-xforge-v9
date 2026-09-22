@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-12-30 19:06+0000\n"
 "PO-Revision-Date: 2025-12-30 19:06+0000\n"
@@ -483,7 +483,7 @@ msgstr ""
 
 #. module: l10n_fr_pos_cert
 #: model_terms:ir.actions.act_window,help:l10n_fr_pos_cert.action_list_view_account_sale_closing
-msgid "The closings are created by Odoo"
+msgid "The closings are created by AFENDA xForge"
 msgstr ""
 
 #. module: l10n_fr_pos_cert
@@ -534,7 +534,7 @@ msgstr ""
 
 #. module: l10n_fr_pos_cert
 #: model:ir.model.fields,help:l10n_fr_pos_cert.field_pos_order__pos_version
-msgid "Version of Odoo that created the order"
+msgid "Version of AFENDA xForge that created the order"
 msgstr ""
 
 #. module: l10n_fr_pos_cert

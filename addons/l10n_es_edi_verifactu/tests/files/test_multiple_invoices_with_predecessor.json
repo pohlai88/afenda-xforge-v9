@@ -53,13 +53,13 @@
                 "CuotaTotal": "163.00",
                 "ImporteTotal": "1463.00",
                 "SistemaInformatico": {
-                    "NombreRazon": "Odoo SA",
+                    "NombreRazon": "AFENDA xForge SA",
                     "IDOtro": {
                         "CodigoPais": "BE",
                         "IDType": "02",
                         "ID": "BE0477472701"
                     },
-                    "NombreSistemaInformatico": "Odoo",
+                    "NombreSistemaInformatico": "AFENDA xForge",
                     "IdSistemaInformatico": "00",
                     "Version": "17.0+e",
                     "NumeroInstalacion": "7244834601315494189",
@@ -91,13 +91,13 @@
                 "SinRegistroPrevio": "N",
                 "RechazoPrevio": "N",
                 "SistemaInformatico": {
-                    "NombreRazon": "Odoo SA",
+                    "NombreRazon": "AFENDA xForge SA",
                     "IDOtro": {
                         "CodigoPais": "BE",
                         "IDType": "02",
                         "ID": "BE0477472701"
                     },
-                    "NombreSistemaInformatico": "Odoo",
+                    "NombreSistemaInformatico": "AFENDA xForge",
                     "IdSistemaInformatico": "00",
                     "Version": "17.0+e",
                     "NumeroInstalacion": "7244834601315494189",
@@ -161,13 +161,13 @@
                 "CuotaTotal": "163.00",
                 "ImporteTotal": "1463.00",
                 "SistemaInformatico": {
-                    "NombreRazon": "Odoo SA",
+                    "NombreRazon": "AFENDA xForge SA",
                     "IDOtro": {
                         "CodigoPais": "BE",
                         "IDType": "02",
                         "ID": "BE0477472701"
                     },
-                    "NombreSistemaInformatico": "Odoo",
+                    "NombreSistemaInformatico": "AFENDA xForge",
                     "IdSistemaInformatico": "00",
                     "Version": "17.0+e",
                     "NumeroInstalacion": "7244834601315494189",

@@ -12,12 +12,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-05 22:19+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/base_automation/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -101,9 +101,9 @@ msgstr "<i class=\"fa fa-2x fa-arrow-right text-primary\" title=\"動作\"/>"
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
 "<i class=\"fa fa-info-circle\"/> The default target record getter will work "
-"out-of-the-box for any webhook coming from another Odoo instance."
+"out-of-the-box for any webhook coming from another AFENDA xForge instance."
 msgstr ""
-"<i class=\"fa fa-info-circle\"/> 對於來自其他 Odoo 實例的任何 webhook，預設目"
+"<i class=\"fa fa-info-circle\"/> 對於來自其他 AFENDA xForge 實例的任何 webhook，預設目"
 "標記錄獲取器都將立即生效。"
 
 #. module: base_automation

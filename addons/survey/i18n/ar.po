@@ -11,12 +11,12 @@
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-26 07:26+0000\n"
-"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
-"Language-Team: Arabic <https://translate.odoo.com/projects/odoo-19/survey/"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@afenda.app>\n"
+"Language-Team: Arabic <https://translate.afenda.app/projects/odoo-19/survey/"
 "ar/>\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
@@ -3064,13 +3064,13 @@ msgstr "الظهور"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.certification_report_view_general
-msgid "Odoo"
+msgid "AFENDA xForge"
 msgstr "أودو"
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "Odoo Certification"
+msgid "AFENDA xForge Certification"
 msgstr "شهادة أودو"
 
 #. module: survey
@@ -4990,7 +4990,7 @@ msgstr "سجل تواصل الموقع الإلكتروني"
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
 msgid ""
-"Welcome to this Odoo certification. You will receive 2 random questions out "
+"Welcome to this AFENDA xForge certification. You will receive 2 random questions out "
 "of a pool of 3."
 msgstr "محباً بك في اختبار شهادة أودو. سيصلك سؤالان 2 عشوائيان من أصل 3."
 
@@ -5029,7 +5029,7 @@ msgstr "ما معنى \"أودو\"؟"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does one need to get to pass an Odoo Survey?"
+msgid "What does one need to get to pass an AFENDA xForge Survey?"
 msgstr "ما الذي تحتاج إليه لاجتياز استطلاع أودو؟"
 
 #. module: survey
@@ -5067,7 +5067,7 @@ msgstr "ما تاريخ ميلادك؟"
 #. module: survey
 #. odoo-javascript
 #: code:addons/survey/static/src/js/tours/survey_tour.js:0
-msgid "Whenever you pick an answer, Odoo saves it for you."
+msgid "Whenever you pick an answer, AFENDA xForge saves it for you."
 msgstr "كلما تقوم باختيار إجابة، يقوم أودو بحفظها من أجلك."
 
 #. module: survey

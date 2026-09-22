@@ -94,14 +94,14 @@ class TestViesIAP(HttpCase):
     def test_vies_iap_controller(self):
         """
         If IAP doesn't have the lookup status yet, it returns pending and will retry later.
-        Upon having a new lookup status, it will call the Odoo client db with the updated status
+        Upon having a new lookup status, it will call the AFENDA xForge client db with the updated status
         """
         self.mock_return_status = "pending"
         self.partner.vat = self.RANDOM_VAT
         self.partner.flush_recordset()  # trigger computes
         self.assertFalse(self.partner.vies_valid)
 
-        # At this point, the Odoo db is passively waiting for an update coming from IAP via the webhook
+        # At this point, the AFENDA xForge db is passively waiting for an update coming from IAP via the webhook
         # Let's simulate IAP calling back the db
         # First with an invalid webhook_token
         self.authenticate(None, None)
@@ -156,7 +156,7 @@ class TestViesIAP(HttpCase):
 
     def test_vies_iap_cron(self):
         """
-        Same as previous test, but for cases where the Odoo client db is unreachable (invalid
+        Same as previous test, but for cases where the AFENDA xForge client db is unreachable (invalid
         webhook URL, firewall, localhost, ...). In those cases, a cron runs and calls IAP itself
         (pull updates from IAP instead of letting IAP push the updates).
         """

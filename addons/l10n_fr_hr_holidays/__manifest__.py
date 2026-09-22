@@ -8,7 +8,7 @@
     'summary': 'Management of leaves for part-time workers in France',
     'depends': ['hr_holidays'],
     'auto_install': ['hr_holidays'],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'data': [
         'views/res_config_settings_views.xml',

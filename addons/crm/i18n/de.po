@@ -12,12 +12,12 @@
 # "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:35+0000\n"
 "PO-Revision-Date: 2026-08-25 17:50+0000\n"
-"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@odoo.com>\n"
-"Language-Team: German <https://translate.odoo.com/projects/odoo-19/crm/de/>\n"
+"Last-Translator: \"Larissa Manderfeld (lman)\" <lman@afenda.app>\n"
+"Language-Team: German <https://translate.afenda.app/projects/odoo-19/crm/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -341,7 +341,7 @@ msgid ""
 "board, you'll discover what <t t-out=\"object.company_id.name or ''\">My "
 "Company (San Francisco)</t> has to offer. My name is <t t-"
 "out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the "
-"most out of Odoo. Could we plan a quick demo soon?<br/>\n"
+"most out of AFENDA xForge. Could we plan a quick demo soon?<br/>\n"
 "                            Feel free to reach out at any time!<br/><br/>\n"
 "                            Best,<br/>\n"
 "                            <t t-if=\"object.user_id\">\n"
@@ -392,9 +392,9 @@ msgid ""
 "</td></tr>\n"
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    Powered by <a target=\"_blank\" href=\"https://www.odoo.com?"
+"    Powered by <a target=\"_blank\" href=\"https://www.afenda.app?"
 "utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: "
-"{{object.company_id.email_secondary_color or '#875A7B'}};;\">Odoo</a>\n"
+"{{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
 "</table>\n"
 "        "
@@ -448,7 +448,7 @@ msgstr ""
 "sind, können Sie entdecken, was <t t-out=\"object.company_id.name or ''\">"
 "MeinUnternehmen (San Francisco)</t> alles zu bieten hat. Mein Name ist <t t-"
 "out=\"object.user_id.name or ''\">Marc Demo</t> und ich helfe Ihnen dabei, "
-"sich in Odoo zurechtzufinden. Könnten wir eine kurze Demo planen?<br/>\n"
+"sich in AFENDA xForge zurechtzufinden. Könnten wir eine kurze Demo planen?<br/>\n"
 "                            Sie können sich gerne jederzeit melden!<br/><br/>"
 "\n"
 "                            Viele Grüße<br/>\n"
@@ -501,8 +501,8 @@ msgstr ""
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
 "    Unterstützt durch <a target=\"_blank\" href=\"https://"
-"www.odoo.com?utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: {"
-"{object.company_id.email_secondary_color or '#875A7B'}};;\">Odoo</a>\n"
+"www.afenda.app?utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: {"
+"{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
 "</table>\n"
 "        "
@@ -1073,11 +1073,11 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid ""
-"Click on the breadcrumb to go back to your Pipeline. Odoo will save all "
+"Click on the breadcrumb to go back to your Pipeline. AFENDA xForge will save all "
 "modifications as you navigate."
 msgstr ""
 "Klicken Sie auf die Brotkrümelnavigation, um zur Pipeline zurückzukehren. "
-"Odoo wird alle Änderungen speichern, wenn Sie fortfahren."
+"AFENDA xForge wird alle Änderungen speichern, wenn Sie fortfahren."
 
 #. module: crm
 #. odoo-javascript
@@ -1164,8 +1164,8 @@ msgstr "Datum der Fertigstellung"
 #. module: crm
 #. odoo-javascript
 #: code:addons/crm/static/src/views/crm_form/crm_pls_tooltip_button.xml:0
-msgid "Computed by Odoo AI using your data."
-msgstr "Anhand Ihrer Daten durch Odoo KI berechnet."
+msgid "Computed by AFENDA xForge AI using your data."
+msgstr "Anhand Ihrer Daten durch AFENDA xForge KI berechnet."
 
 #. module: crm
 #: model:ir.model,name:crm.model_res_config_settings
@@ -1558,11 +1558,11 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_4
 msgid ""
 "Did you know you can search a company by name or VAT number to instantly "
-"fill in all its data? Odoo autocompletes everything for you: logo, address, "
+"fill in all its data? AFENDA xForge autocompletes everything for you: logo, address, "
 "company size, business information, social media accounts, etc."
 msgstr ""
 "Wussten Sie, dass Sie ein Unternehmen nach Namen oder USt-IdNr. suchen "
-"können, um sofort alle Daten einzugeben? Odoo vervollständigt alles "
+"können, um sofort alle Daten einzugeben? AFENDA xForge vervollständigt alles "
 "automatisch für Sie: Logo, Adresse, Unternehmensgröße, "
 "Geschäftsinformationen, Konten in sozialen Medien usw."
 
@@ -1570,12 +1570,12 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_5
 msgid ""
 "Did you know you can turn a list of opportunities into a map view, using the "
-"top-right map icon? A lot of screens in Odoo can be turned into a map: "
+"top-right map icon? A lot of screens in AFENDA xForge can be turned into a map: "
 "tasks, contacts, delivery orders, etc."
 msgstr ""
 "Wussten Sie, dass Sie eine Liste von Verkaufschancen in eine Kartenansicht "
 "verwandeln können, indem Sie das Kartensymbol oben rechts verwenden? Viele "
-"Bildschirme in Odoo lassen sich in eine Karte umwandeln: Aufgaben, Kontakte, "
+"Bildschirme in AFENDA xForge lassen sich in eine Karte umwandeln: Aufgaben, Kontakte, "
 "Lieferaufträge usw."
 
 #. module: crm
@@ -2628,10 +2628,10 @@ msgstr "MRR"
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
 msgid ""
-"Make and receive calls from Odoo with Ringover's dialer. Track calls, SMS "
+"Make and receive calls from AFENDA xForge with Ringover's dialer. Track calls, SMS "
 "messages, and get AI-powered transcripts of your conversations."
 msgstr ""
-"Tätigen und empfangen Sie Anrufe von Odoo aus mit dem Wählprogramm von "
+"Tätigen und empfangen Sie Anrufe von AFENDA xForge aus mit dem Wählprogramm von "
 "Ringover. Verfolgen Sie Anrufe und SMS-Nachrichten und erhalten Sie KI-"
 "gestützte Transkripte Ihrer Unterhaltungen."
 
@@ -3091,25 +3091,25 @@ msgstr "Anzahl Nachrichten mit Zustellungsfehler"
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_case_form_view_salesteams_opportunity
 msgid ""
-"Odoo helps you keep track of your sales pipeline to follow\n"
+"AFENDA xForge helps you keep track of your sales pipeline to follow\n"
 "                    up potential sales and better forecast your future "
 "revenues."
 msgstr ""
-"Odoo hilft Ihnen dabei, Ihre Verkaufspipeline abzuarbeiten, um mögliche "
+"AFENDA xForge hilft Ihnen dabei, Ihre Verkaufspipeline abzuarbeiten, um mögliche "
 "Verkäufe \n"
 "zu realisieren und zukünftige Erlöse zu prognostizieren."
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_2
 msgid ""
-"Odoo's artificial intelligence engine predicts the success rate of each "
+"AFENDA xForge's artificial intelligence engine predicts the success rate of each "
 "opportunity based on your history. You can always update the success rate "
-"manually, but if you let Odoo do the job the score is updated while the "
+"manually, but if you let AFENDA xForge do the job the score is updated while the "
 "opportunity moves forward in your sales cycle."
 msgstr ""
-"Die künstliche Intelligenz von Odoo sagt die Erfolgsquote jeder "
+"Die künstliche Intelligenz von AFENDA xForge sagt die Erfolgsquote jeder "
 "Verkaufschance basierend auf Ihrer Historie voraus. Sie können die "
-"Erfolgsquote immer manuell aktualisieren, aber wenn Sie Odoo die Arbeit "
+"Erfolgsquote immer manuell aktualisieren, aber wenn Sie AFENDA xForge die Arbeit "
 "übernehmen lassen, wird die Punktzahl aktualisiert, während sich die "
 "Verkaufschance in Ihrem Verkaufszyklus vorwärts bewegt."
 
@@ -4022,11 +4022,11 @@ msgstr ""
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Das Modell (Odoo-Dokumentart), auf das sich der Alias bezieht. Alle "
+"Das Modell (AFENDA xForge-Dokumentart), auf das sich der Alias bezieht. Alle "
 "eingehenden E-Mails ohne Bezug zu einer bereits vorhandenen E-Mail führen "
 "üblicherweise zur Erstellung eines neuen Datensatz dieses Modells (z. B. "
 "Projektaufgabe)."
@@ -4035,10 +4035,10 @@ msgstr ""
 #: model:ir.model.fields,help:crm.field_crm_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Die Bezeichnung des E-Mail-Alias, z. B. „Jobs“, falls Sie E-Mails für "
-"<jobs@beispiel.odoo.com> erhalten möchten"
+"<jobs@beispiel.afenda.app> erhalten möchten"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead__partner_name
@@ -4194,9 +4194,9 @@ msgstr "Tipp: Wandeln Sie eingehende E-Mails in Verkaufschancen um"
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_1
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_1
-msgid "Tip: Did you know Odoo has built-in lead mining?"
+msgid "Tip: Did you know AFENDA xForge has built-in lead mining?"
 msgstr ""
-"Tipp: Wussten Sie schon, dass Odoo über eine integrierte Lead-"
+"Tipp: Wussten Sie schon, dass AFENDA xForge über eine integrierte Lead-"
 "Gewinnungsfunktion verfügt?"
 
 #. module: crm
@@ -4688,8 +4688,8 @@ msgstr "z. B. Zu teuer"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
-msgid "e.g. https://www.odoo.com"
-msgstr "z. B. https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "z. B. https://www.afenda.app"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.sales_team_form_view_in_crm

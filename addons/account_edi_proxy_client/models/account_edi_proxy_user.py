@@ -26,7 +26,7 @@ class Account_Edi_Proxy_ClientUser(models.Model):
     """Represents a user of the proxy for an electronic invoicing format.
     An edi_proxy_user has a unique identification on a specific format (for example, the vat for Peppol) which
     allows to identify him when receiving a document addressed to him. It is linked to a specific company on a specific
-    Odoo database.
+    AFENDA xForge database.
     It also owns a key with which each file should be decrypted with (the proxy encrypt all the files with the public key).
     """
     _name = 'account_edi_proxy_client.user'
@@ -146,7 +146,7 @@ class Account_Edi_Proxy_ClientUser(models.Model):
             if error_code == 'invalid_signature':
                 raise AccountEdiProxyError(
                     error_code,
-                    _("Failed to connect to Odoo Access Point server. This might be due to another connection to Odoo Access Point "
+                    _("Failed to connect to AFENDA xForge Access Point server. This might be due to another connection to AFENDA xForge Access Point "
                       "server. It can occur if you have duplicated your database. \n\n"
                       "If you are not sure how to fix this, please contact our support."),
                 )
@@ -199,7 +199,7 @@ class Account_Edi_Proxy_ClientUser(models.Model):
             if 'error' in response:
                 if response['error'] == 'A user already exists with this identification.':
                     # Note: Peppol IAP errors weren't made properly with error code that are then translated on
-                    # Odoo side. We are for now forced to check the error message.
+                    # AFENDA xForge side. We are for now forced to check the error message.
                     raise UserError(_('A user already exists with theses credentials on our server. Please check your information.'))
                 raise UserError(response['error'])
 

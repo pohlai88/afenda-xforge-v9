@@ -144,14 +144,14 @@ test("hide conversations in recent if they have mentions", async () => {
         author_id: serverState.partnerId,
         model: "discuss.channel",
         res_id: channelId,
-        body: "@OdooBot",
+        body: "@AFENDA Bot",
     });
     await start();
     triggerHotkey("control+k");
     await insertText(".o_command_palette_search input", "@", { replace: true });
     await contains(".o_command_category span.fw-bold", { text: "Mentions" });
     await contains(".o_command_palette .o_command_category .o_command_name", {
-        text: "OdooBot",
+        text: "AFENDA Bot",
         count: 1,
     });
 });

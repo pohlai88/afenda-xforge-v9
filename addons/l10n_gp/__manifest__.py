@@ -2,7 +2,7 @@
     'name': 'Guadeloupe - Accounting',
     'icon': '/account/static/description/l10n.png',
     'countries': ['gp'],
-    'author': 'Odoo SA',
+    'author': 'AFENDA xForge SA',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the base module to manage the accounting chart for Guadeloupe.

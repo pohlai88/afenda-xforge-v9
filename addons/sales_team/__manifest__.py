@@ -9,7 +9,7 @@
 Using this application you can manage Sales Teams with CRM and/or Sales
 =======================================================================
  """,
-    'website': 'https://www.odoo.com/app/crm',
+    'website': 'https://www.afenda.app/app/crm',
     'depends': ['base', 'mail'],
     'data': [
         'security/sales_team_security.xml',
@@ -33,6 +33,6 @@ Using this application you can manage Sales Teams with CRM and/or Sales
             'sales_team/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

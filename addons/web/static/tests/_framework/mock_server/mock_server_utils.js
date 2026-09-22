@@ -106,7 +106,7 @@ export function makeServerError({
             subType,
             message: description || message,
         },
-        message: message || "Odoo Server Error",
+        message: message || "AFENDA xForge Server Error",
         type: "server",
     });
 }

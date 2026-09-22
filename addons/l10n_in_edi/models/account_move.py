@@ -103,7 +103,7 @@ class AccountMove(models.Model):
                 'action': {
                     'name': _("Documentation"),
                     'type': 'ir.actions.act_url',
-                    'url': 'https://www.odoo.com/documentation/19.0/applications/finance/fiscal_localizations/india.html#gsp-configuration',
+                    'url': '/docs/applications/finance/fiscal_localizations/india.html#gsp-configuration',
                 }
             }
             move.l10n_in_warning = l10n_in_warning

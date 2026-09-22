@@ -37,6 +37,6 @@ This module extend the employee form with a organizational chart.
             'hr_org_chart/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

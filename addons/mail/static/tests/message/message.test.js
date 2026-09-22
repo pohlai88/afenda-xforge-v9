@@ -564,11 +564,11 @@ test("Update the link previews when a message is edited", async () => {
     await start();
     await openDiscuss(channelId);
     await click(".o-mail-Message [title='Edit']");
-    await insertText(".o-mail-Message .o-mail-Composer-input", "http://odoo.com", {
+    await insertText(".o-mail-Message .o-mail-Composer-input", "http://afenda.app", {
         replace: true,
     });
     await click(".o-mail-Message button", { text: "save" });
-    await contains(".o-mail-Message-body", { text: "http://odoo.com" });
+    await contains(".o-mail-Message-body", { text: "http://afenda.app" });
     await waitForSteps(["link_preview"]);
 });
 
@@ -688,7 +688,7 @@ test("mentions and special mentions are kept when editing message", async () => 
 test("can add new mentions when editing message", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     const channelId = pyEnv["discuss.channel"].create({
@@ -725,17 +725,17 @@ test("edit message with multiple mentions keeps the links", async () => {
     const partnersId = pyEnv["res.partner"].create([
         {
             // id: 123
-            email: "testpartner1@odoo.com",
+            email: "testpartner1@afenda.app",
             name: "Test Partner",
         },
         {
             // id: 1234
-            email: "testpartner2@odoo.com",
+            email: "testpartner2@afenda.app",
             name: "Other Partner",
         },
         {
             // id: 125
-            email: "testpartner3@odoo.com",
+            email: "testpartner3@afenda.app",
             name: "Test Partner Junior",
         },
     ]);
@@ -1533,7 +1533,7 @@ test("not highlighting the message if not mentioning the current user inside the
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
         display_name: "testPartner",
-        email: "testPartner@odoo.com",
+        email: "testPartner@afenda.app",
     });
     pyEnv["res.users"].create({ partner_id: partnerId });
     const channelId = pyEnv["discuss.channel"].create({
@@ -1836,7 +1836,7 @@ test("Partner's avatar card should be opened after clicking on their mention", a
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
         name: "Test Partner",
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
     });
     pyEnv["res.users"].create({ partner_id: partnerId });
     await start();
@@ -2397,7 +2397,7 @@ test("Prettify message links", async () => {
     const pyEnv = await startServer();
     const channelId = pyEnv["discuss.channel"].create({ name: "channel1" });
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@odoo.com",
+        email: "testpartner@afenda.app",
         name: "TestPartner",
     });
     const messageId_1 = pyEnv["mail.message"].create({
@@ -2448,11 +2448,11 @@ test("should delete link preview along with message", async () => {
         og_title: "Test Link",
         og_description: "Should be removed with the message.",
         og_type: "article",
-        source_url: "https://www.odoo.com",
+        source_url: "https://www.afenda.app",
     });
     const channelId = pyEnv["discuss.channel"].create({ name: "PreviewTest" });
     pyEnv["mail.message"].create({
-        body: "<a href='https://www.odoo.com'>https://www.odoo.com</a>",
+        body: "<a href='https://www.afenda.app'>https://www.afenda.app</a>",
         message_link_preview_ids: [Command.create({ link_preview_id: linkPreviewId })],
         message_type: "comment",
         model: "discuss.channel",

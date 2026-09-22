@@ -585,7 +585,7 @@ class TestStockValuationWithCOA(PurchaseTestCommon):
         po = po_form.save()
         po.button_confirm()
         delivery = po.picking_ids
-        # it is negative qty transfer so Odoo will create delivery instead of receipt.
+        # it is negative qty transfer so AFENDA xForge will create delivery instead of receipt.
         delivery.partner_id = shipping_partner
         move_line_vals = delivery.move_ids._prepare_move_line_vals()
         move_line = self.env['stock.move.line'].create(move_line_vals)

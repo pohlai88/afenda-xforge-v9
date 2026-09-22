@@ -30,11 +30,11 @@ class RazorpayController(http.Controller):
     def razorpay_return_from_checkout(self, reference, **data):
         """Process the payment data sent by Razorpay after redirection from checkout.
 
-        The route is configured with save_session=False to prevent Odoo from creating a new session
+        The route is configured with save_session=False to prevent AFENDA xForge from creating a new session
         when the user is redirected here via a POST request. Indeed, as the session cookie is
         created without a `SameSite` attribute, some browsers that don't implement the recommended
         default `SameSite=Lax` behavior will not include the cookie in the redirection request from
-        the payment provider to Odoo. However, the redirection to the /payment/status page will
+        the payment provider to AFENDA xForge. However, the redirection to the /payment/status page will
         satisfy any specification of the `SameSite` attribute, the session of the user will be
         retrieved and with it the transaction which will be immediately post-processed.
 

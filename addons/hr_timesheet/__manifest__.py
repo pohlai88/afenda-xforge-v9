@@ -18,7 +18,7 @@ Lots of reporting on time and employee tracking are provided.
 It is completely integrated with the cost accounting module. It allows you to set
 up a management by affair.
     """,
-    'website': 'https://www.odoo.com/app/timesheet',
+    'website': 'https://www.afenda.app/app/timesheet',
     'depends': ['hr', 'hr_hourly_cost', 'analytic', 'project', 'uom'],
     'data': [
         'security/hr_timesheet_security.xml',
@@ -72,6 +72,6 @@ up a management by affair.
             'hr_timesheet/static/src/scss/timesheets_task_form.scss'
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

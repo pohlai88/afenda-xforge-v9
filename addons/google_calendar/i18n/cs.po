@@ -14,12 +14,12 @@
 # "Marta (wacm)" <wacm@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 13:21+0000\n"
 "Last-Translator: Jaroslav Janos <jaroslav.janos.jr@technodat.eu>\n"
-"Language-Team: Czech <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Czech <https://translate.afenda.app/projects/odoo-19/"
 "google_calendar/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -165,8 +165,8 @@ msgstr "Vytvořeno dne"
 
 #. module: google_calendar
 #: model:ir.model.fields.selection,name:google_calendar.selection__google_calendar_account_reset__delete_policy__delete_odoo
-msgid "Delete from Odoo"
-msgstr "Odstranit z Odoo"
+msgid "Delete from AFENDA xForge"
+msgstr "Odstranit z AFENDA xForge"
 
 #. module: google_calendar
 #: model:ir.model.fields.selection,name:google_calendar.selection__google_calendar_account_reset__delete_policy__delete_both
@@ -311,10 +311,10 @@ msgstr "Dokud nebude aktualizováno, nebude synchronizováno."
 #: model:ir.model.fields,help:google_calendar.field_res_users_settings__google_calendar_cal_id
 msgid ""
 "Last Calendar ID who has been synchronized. If it is changed, we remove all "
-"links between GoogleID and Odoo Google Internal ID"
+"links between GoogleID and AFENDA xForge Google Internal ID"
 msgstr ""
 "Poslední ID kalendáře, které bylo synchronizováno. Pokud se změní, "
-"odstraníme všechny odkazy mezi GoogleID a Interním ID Google v Odoo"
+"odstraníme všechny odkazy mezi GoogleID a Interním ID Google v AFENDA xForge"
 
 #. module: google_calendar
 #: model:ir.model.fields,field_description:google_calendar.field_google_calendar_account_reset__write_uid

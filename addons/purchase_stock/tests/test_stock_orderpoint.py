@@ -13,7 +13,7 @@ class TestStockWarehouseOrderpoint(HttpCase):
         })
         self.assertFalse(product.orderpoint_ids)
 
-        self.start_tour("/odoo/replenishment", "test_product_replenishment", login='admin')
+        self.start_tour("/app/replenishment", "test_product_replenishment", login='admin')
 
         self.assertEqual(len(product.orderpoint_ids), 1)
         self.assertEqual(product.orderpoint_ids[0].route_id.name, 'Buy')
@@ -27,4 +27,4 @@ class TestStockWarehouseOrderpoint(HttpCase):
             for company, price, partner in [(company_a, 10.0, partner_a), (company_b, 20.0, partner_b)]
         ])
         self.env.user.company_ids = company_a
-        self.start_tour('/odoo/replenishment', 'test_replenishment_supplier_multicompany_access', login='admin')
+        self.start_tour('/app/replenishment', 'test_replenishment_supplier_multicompany_access', login='admin')

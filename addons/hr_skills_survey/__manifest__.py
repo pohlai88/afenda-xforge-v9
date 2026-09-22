@@ -22,6 +22,6 @@ This module adds certification to resume for employees.
     'demo': [
         'data/hr_resume_demo.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

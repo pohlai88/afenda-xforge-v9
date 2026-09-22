@@ -8,12 +8,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: AFENDA xForge Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 20:19+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Russian <https://translate.afenda.app/projects/odoo-19/"
 "base_automation/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -103,10 +103,10 @@ msgstr "<i class=\"fa fa-2x fa-arrow-right text-primary\" title=\"Actions\"/>"
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form
 msgid ""
 "<i class=\"fa fa-info-circle\"/> The default target record getter will work "
-"out-of-the-box for any webhook coming from another Odoo instance."
+"out-of-the-box for any webhook coming from another AFENDA xForge instance."
 msgstr ""
 "<i class=\"fa fa-info-circle\"/> Получатель целевой записи по умолчанию "
-"будет работать для любого веб-крючка, приходящего от другого экземпляра Odoo."
+"будет работать для любого веб-крючка, приходящего от другого экземпляра AFENDA xForge."
 
 #. module: base_automation
 #: model_terms:ir.ui.view,arch_db:base_automation.view_base_automation_form

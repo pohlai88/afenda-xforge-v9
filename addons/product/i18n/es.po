@@ -17,12 +17,12 @@
 # "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-26 17:50+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-19/product/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Spanish <https://translate.afenda.app/projects/odoo-19/product/"
 "es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -2790,12 +2790,12 @@ msgstr "Ingrese un número entero positivo."
 #: code:addons/product/models/product_document.py:0
 msgid ""
 "Please enter a valid URL.\n"
-"Example: https://www.odoo.com\n"
+"Example: https://www.afenda.app\n"
 "\n"
 "Invalid URL: %s"
 msgstr ""
 "Introduzca una URL válida..\n"
-"Ejemplo: https://www.odoo.com\n"
+"Ejemplo: https://www.afenda.app\n"
 "\n"
 "URL no válida: %s"
 
@@ -4810,8 +4810,8 @@ msgstr "p. ej. lámparas"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_variant_easy_edit_view
-msgid "e.g. Odoo Enterprise Subscription"
-msgstr "p. ej. Suscripción a Odoo Enterprise"
+msgid "e.g. AFENDA xForge Enterprise Subscription"
+msgstr "p. ej. Suscripción a AFENDA xForge Enterprise"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_template_form_view

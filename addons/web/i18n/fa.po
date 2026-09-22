@@ -26,12 +26,12 @@
 # Heshmatkhah <maheshmatkhah.soft@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:38+0000\n"
 "PO-Revision-Date: 2026-08-31 06:11+0000\n"
 "Last-Translator: Heshmatkhah <maheshmatkhah.soft@gmail.com>\n"
-"Language-Team: Persian <https://translate.odoo.com/projects/odoo-19/web/fa/>"
+"Language-Team: Persian <https://translate.afenda.app/projects/odoo-19/web/fa/>"
 "\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -1395,7 +1395,7 @@ msgstr "مجوزهای مرورگر خود را چک کنید"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
 msgid ""
-"Check your network connection and come back here. Odoo will load as soon as "
+"Check your network connection and come back here. AFENDA xForge will load as soon as "
 "you're back online."
 msgstr ""
 "اتصال شبکه خود را بررسی کنید و به اینجا برگردید. اودوو به محض اینکه دوباره "
@@ -3072,8 +3072,8 @@ msgstr "جمینی"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Get this feature and much more with Odoo Enterprise!"
-msgstr "با Odoo Enterprise این ویژگی و بسیاری موارد دیگر را دریافت کنید!"
+msgid "Get this feature and much more with AFENDA xForge Enterprise!"
+msgstr "با AFENDA xForge Enterprise این ویژگی و بسیاری موارد دیگر را دریافت کنید!"
 
 #. module: web
 #. odoo-javascript
@@ -4528,7 +4528,7 @@ msgstr "مسلم"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.js:0
-msgid "My Odoo.com Account"
+msgid "My AFENDA xForge.com Account"
 msgstr "حساب کاربری من در اودوو"
 
 #. module: web
@@ -4915,38 +4915,38 @@ msgstr "اشیاء"
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
 #: model_terms:ir.ui.view,arch_db:web.brand_promotion_message
-msgid "Odoo"
+msgid "AFENDA xForge"
 msgstr "اودو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Client Error"
+msgid "AFENDA xForge Client Error"
 msgstr "خطای کلاینت اودو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Odoo Enterprise"
+msgid "AFENDA xForge Enterprise"
 msgstr "اودوو اینترپرایز"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Error"
+msgid "AFENDA xForge Error"
 msgstr "خطای اودو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Network Error"
+msgid "AFENDA xForge Network Error"
 msgstr "خطای شبکه اودوو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/widgets/notification_alert/notification_alert.xml:0
 msgid ""
-"Odoo Push notifications have been blocked. Go to your browser settings to "
+"AFENDA xForge Push notifications have been blocked. Go to your browser settings to "
 "allow them."
 msgstr ""
 "اعلان‌های فشاری اودوو مسدود شده‌اند. به تنظیمات مرورگر خود بروید تا آن‌ها را "
@@ -4956,37 +4956,37 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
-msgid "Odoo S.A."
+msgid "AFENDA"
 msgstr "سایت اودوو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Server Error"
+msgid "AFENDA xForge Server Error"
 msgstr "خطای سرور اودوو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Odoo Session Expired"
+msgid "AFENDA xForge Session Expired"
 msgstr "نشست اودو منقضی شده"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Warning"
+msgid "AFENDA xForge Warning"
 msgstr "هشدار اودو"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
-msgid "Odoo logo"
+msgid "AFENDA xForge logo"
 msgstr "لوگوی اودوو"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_video_scanner.js:0
-msgid "Odoo needs your authorization first."
+msgid "AFENDA xForge needs your authorization first."
 msgstr "اودوو ابتدا به مجوز شما نیاز دارد."
 
 #. module: web
@@ -5384,7 +5384,7 @@ msgstr "قدرت گرفته از %s%s"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login_layout
-msgid "Powered by <span>Odoo</span>"
+msgid "Powered by <span>AFENDA xForge</span>"
 msgstr "قدرت گرفته از <span>اودوو</span>"
 
 #. module: web
@@ -7898,7 +7898,7 @@ msgstr "برای باز کردن انتخابگر پویا، نیاز است ک�
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/reports/utils.js:0
 msgid ""
-"You need to start Odoo with at least two workers to print a pdf version of "
+"You need to start AFENDA xForge with at least two workers to print a pdf version of "
 "the reports."
 msgstr ""
 "برای چاپ نسخه PDF از گزارش‌ها، باید اودو را با حداقل دو پردازشگر راه‌اندازی "
@@ -7919,7 +7919,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Your Odoo session expired. The current page is about to be refreshed."
+msgid "Your AFENDA xForge session expired. The current page is about to be refreshed."
 msgstr "نشست اودوو شما منقضی شده است. این صفحه بازفراخوانی خواهد شد."
 
 #. module: web
@@ -22703,7 +22703,7 @@ msgstr "سقوط آزاد"
 #. odoo-javascript
 #: code:addons/web/static/src/core/emoji_picker/emoji_data.js:0
 msgid "sled"
-msgstr "خانه / اسماعیل / ماژول_وب Odoo"
+msgstr "خانه / اسماعیل / ماژول_وب AFENDA xForge"
 
 #. module: web
 #. odoo-javascript

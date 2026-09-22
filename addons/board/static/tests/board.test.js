@@ -322,7 +322,7 @@ describe("board_desktop", () => {
         });
 
         await contains(".o_kanban_record").click({ ctrlKey: true });
-        expect.verifySteps(["opened in new window: /odoo/m-partner/1"]);
+        expect.verifySteps(["opened in new window: /app/m-partner/1"]);
     });
 
     test("can open record using action form view", async () => {

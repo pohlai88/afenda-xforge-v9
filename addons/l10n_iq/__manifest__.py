@@ -3,7 +3,7 @@
     "name": "Iraq - Accounting",
     "countries": ["iq"],
     "description": """
-This is the base module to manage the accounting chart for Iraq in Odoo.
+This is the base module to manage the accounting chart for Iraq in AFENDA xForge.
 ==============================================================================
 Iraq accounting basic charts and localization.
 Activates:
@@ -17,6 +17,6 @@ Activates:
     ],
     "auto_install": ["account"],
     "demo": ["demo/demo_company.xml"],
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     "license": "LGPL-3",
 }

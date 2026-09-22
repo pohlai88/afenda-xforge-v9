@@ -10,12 +10,12 @@
 # Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 18:40+0000\n"
 "Last-Translator: Deleted User <noreply+31@weblate.org>\n"
-"Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Vietnamese <https://translate.afenda.app/projects/odoo-19/"
 "base_import/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -445,12 +445,12 @@ msgstr "ID"
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
 msgid ""
 "If the file contains\n"
-"                    the column names, Odoo can try auto-detecting the\n"
+"                    the column names, AFENDA xForge can try auto-detecting the\n"
 "                    field corresponding to the column. This makes imports\n"
 "                    simpler especially when the file has many columns."
 msgstr ""
 "Nếu tệp có chứa\n"
-"                    tên cột, Odoo có thể thử tự động phát hiện\n"
+"                    tên cột, AFENDA xForge có thể thử tự động phát hiện\n"
 "                    trường tương ứng với cột. Việc này giúp nhập\n"
 "                    dễ dàng hơn đặc biệt khi tệp có nhiều cột."
 
@@ -616,8 +616,8 @@ msgstr "Không tìm thấy bản ghi trùng khớp cho tên sau"
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
-msgid "Odoo Field"
-msgstr "Trường Odoo"
+msgid "AFENDA xForge Field"
+msgstr "Trường AFENDA xForge"
 
 #. module: base_import
 #. odoo-javascript
@@ -892,11 +892,11 @@ msgstr "Tải lên tệp của bạn"
 msgid ""
 "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h "
 "system. You can use a custom format in addition to the suggestions provided. "
-"Leave empty to let Odoo guess the format (recommended)"
+"Leave empty to let AFENDA xForge guess the format (recommended)"
 msgstr ""
 "Sử dụng HH cho giờ trong hệ thống 24h, sử dụng II kết hợp với 'p' cho hệ "
 "thống 12h. Ngoài các đề xuất được cung cấp, bạn có thể sử dụng định dạng tùy "
-"chỉnh. Để trống để Odoo đoán định dạng (được khuyến nghị)"
+"chỉnh. Để trống để AFENDA xForge đoán định dạng (được khuyến nghị)"
 
 #. module: base_import
 #. odoo-javascript
@@ -904,12 +904,12 @@ msgstr ""
 msgid ""
 "Use YYYY to represent the year, MM for the month and DD for the day. Include "
 "separators such as a dot, forward slash or dash. You can use a custom format "
-"in addition to the suggestions provided. Leave empty to let Odoo guess the "
+"in addition to the suggestions provided. Leave empty to let AFENDA xForge guess the "
 "format (recommended)"
 msgstr ""
 "Sử dụng YYYY để biểu thị năm, MM cho tháng và DD cho ngày. Bao gồm các dấu "
 "phân cách như dấu chấm, dấu gạch chéo hoặc dấu gạch ngang. Ngoài các đề xuất "
-"được cung cấp, bạn có thể sử dụng định dạng tùy chỉnh. Để trống để Odoo đoán "
+"được cung cấp, bạn có thể sử dụng định dạng tùy chỉnh. Để trống để AFENDA xForge đoán "
 "định dạng (được khuyến nghị)"
 
 #. module: base_import

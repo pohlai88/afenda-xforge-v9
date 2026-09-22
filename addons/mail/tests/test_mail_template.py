@@ -512,7 +512,7 @@ class TestMailTemplateReset(MailCommon):
         reset_action = mail_template_reset.reset_template()
         self.assertTrue(reset_action)
 
-        self.assertEqual(mail_template.body_html.strip(), Markup('<div>Hello Odoo</div>'))
+        self.assertEqual(mail_template.body_html.strip(), Markup('<div>Hello AFENDA xForge</div>'))
         self.assertEqual(mail_template.name, 'Mail: Test Mail Template')
         self.assertEqual(
             mail_template.email_from,
@@ -550,7 +550,7 @@ class TestMailTemplateReset(MailCommon):
             """
             if lang == 'fr_FR':  # fr_FR has translations
                 translation_importer.model_translations['mail.template'] = {
-                    'body_html': {'mail.mail_template_test': {'fr_FR': '<div>Hello Odoo FR</div>'}},
+                    'body_html': {'mail.mail_template_test': {'fr_FR': '<div>Hello AFENDA xForge FR</div>'}},
                     'name':  {'mail.mail_template_test': {'fr_FR': "Mail: Test Mail Template FR"}},
                 }
 
@@ -559,9 +559,9 @@ class TestMailTemplateReset(MailCommon):
             reset_action = mail_template_reset.reset_template()
         self.assertTrue(reset_action)
 
-        self.assertEqual(mail_template.body_html.strip(), Markup('<div>Hello Odoo</div>'))
-        self.assertEqual(mail_template.with_context(lang='en_GB').body_html.strip(), Markup('<div>Hello Odoo</div>'))
-        self.assertEqual(mail_template.with_context(lang='fr_FR').body_html.strip(), Markup('<div>Hello Odoo FR</div>'))
+        self.assertEqual(mail_template.body_html.strip(), Markup('<div>Hello AFENDA xForge</div>'))
+        self.assertEqual(mail_template.with_context(lang='en_GB').body_html.strip(), Markup('<div>Hello AFENDA xForge</div>'))
+        self.assertEqual(mail_template.with_context(lang='fr_FR').body_html.strip(), Markup('<div>Hello AFENDA xForge FR</div>'))
 
         self.assertEqual(mail_template.name, 'Mail: Test Mail Template')
         self.assertEqual(mail_template.with_context(lang='en_GB').name, 'Mail: Test Mail Template')
@@ -573,7 +573,7 @@ class TestMailTemplateUI(HttpCase):
 
     def test_mail_template_dynamic_placeholder_tour(self):
         # keep debug for technical fields visibility
-        self.start_tour('/odoo?debug=1', 'mail_template_dynamic_placeholder_tour', login='admin')
+        self.start_tour('/app?debug=1', 'mail_template_dynamic_placeholder_tour', login='admin')
 
 
 @tagged("mail_template", "-at_install", "post_install")

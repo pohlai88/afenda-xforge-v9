@@ -14,12 +14,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: AFENDA xForge Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-04 02:58+0000\n"
 "Last-Translator: Panagiotis karampaglis <panosdotk@gmail.com>\n"
-"Language-Team: Greek <https://translate.odoo.com/projects/odoo-19/hr_expense/"
+"Language-Team: Greek <https://translate.afenda.app/projects/odoo-19/hr_expense/"
 "el/>\n"
 "Language: el\n"
 "MIME-Version: 1.0\n"
@@ -451,7 +451,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid ""
 "Create prepaid virtual and physical cards for both one-time and recurring "
-"expenses, integrated into Odoo through Stripe Issuing."
+"expenses, integrated into AFENDA xForge through Stripe Issuing."
 msgstr ""
 
 #. module: hr_expense
@@ -567,7 +567,7 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:hr_expense.digest_tip_hr_expense_0
 msgid ""
 "Do not keep your expense tickets in your pockets any longer. Just snap a "
-"picture of your receipt and let Odoo digitalizes it for you. The OCR and "
+"picture of your receipt and let AFENDA xForge digitalizes it for you. The OCR and "
 "Artificial Intelligence will fill the data automatically."
 msgstr ""
 
@@ -1140,7 +1140,7 @@ msgstr ""
 #: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__module_hr_expense_stripe
 msgid ""
 "Link your stripe issuing account to manage company credit cards for your "
-"employees through Odoo"
+"employees through AFENDA xForge"
 msgstr ""
 
 #. module: hr_expense
@@ -1344,16 +1344,16 @@ msgstr ""
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: hr_expense
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid ""
-"Odoo had a look at your expense, its product, your company and the journal "
+"AFENDA xForge had a look at your expense, its product, your company and the journal "
 "but came back with empty hands.\n"
-"Give Odoo a hand to find an account by setting up an expense account.\n"
+"Give AFENDA xForge a hand to find an account by setting up an expense account.\n"
 "%(expense)s %(expense_name)s.\n"
 msgstr ""
 
@@ -1589,7 +1589,7 @@ msgstr "Αξιολογήσεις"
 #: code:addons/hr_expense/static/src/js/tours/hr_expense.js:0
 msgid ""
 "Ready? You can save it manually or discard modifications from here. You "
-"don't <em>need to save</em> - Odoo will save eveyrthing for you when you "
+"don't <em>need to save</em> - AFENDA xForge will save eveyrthing for you when you "
 "navigate."
 msgstr ""
 
@@ -1707,7 +1707,7 @@ msgstr "Σάρωση"
 #. module: hr_expense
 #. odoo-javascript
 #: code:addons/hr_expense/static/src/components/qrcode_action.xml:0
-msgid "Scan this QR code to get the Odoo app:"
+msgid "Scan this QR code to get the AFENDA xForge app:"
 msgstr ""
 
 #. module: hr_expense

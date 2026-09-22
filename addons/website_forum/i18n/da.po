@@ -12,12 +12,12 @@
 # "Kira Petersen François (peti)" <peti@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-08-08 00:47+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Danish <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Danish <https://translate.afenda.app/projects/odoo-19/"
 "website_forum/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
@@ -3430,10 +3430,10 @@ msgstr "Det accepterede svar slettes"
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
+"questions related to AFENDA xForge."
 msgstr ""
 "Formålet med dette site er at oprette en relevant vidensbase, som kan "
-"besvare spørgsmål relateret til Odoo."
+"besvare spørgsmål relateret til AFENDA xForge."
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_description_full
@@ -4120,8 +4120,8 @@ msgstr "her"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to configure or customize Odoo to specific business needs,"
-msgstr "hvordan man konfigurerer og tilpasser Odoo til specifikke finansbehov,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
+msgstr "hvordan man konfigurerer og tilpasser AFENDA xForge til specifikke finansbehov,"
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
@@ -4132,8 +4132,8 @@ msgstr "hvordan man udvikler moduler til egne behov,"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to install Odoo on a specific infrastructure,"
-msgstr "hvordan man installerer Odoo på en specifik infrastruktur,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
+msgstr "hvordan man installerer AFENDA xForge på en specifik infrastruktur,"
 
 #. module: website_forum
 #. odoo-javascript
@@ -4235,7 +4235,7 @@ msgstr "indlæg"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "specific questions about Odoo service offers, etc."
+msgid "specific questions about AFENDA xForge service offers, etc."
 msgstr "specifikke spørgsmål om Odooa tjenesteydelser osv."
 
 #. module: website_forum
@@ -4287,9 +4287,9 @@ msgstr ""
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "what's the best way to use Odoo for a specific business need,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
 msgstr ""
-"hvad er den bedste måde at bruge Odoo til et specifikt forretningsbehov,"
+"hvad er den bedste måde at bruge AFENDA xForge til et specifikt forretningsbehov,"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.author_box

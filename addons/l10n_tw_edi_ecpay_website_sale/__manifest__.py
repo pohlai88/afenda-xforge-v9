@@ -7,8 +7,8 @@
     "description": """
         This bridge module allows the user to input Ecpay information in ecommerce for sending their invoices to the Ecpay system
     """,
-    "website": "https://www.odoo.com",
-    'author': 'Odoo S.A.',
+    "website": "https://www.afenda.app",
+    'author': 'AFENDA xForge S.A.',
     "license": "LGPL-3",
     "depends": [
         "website_sale",

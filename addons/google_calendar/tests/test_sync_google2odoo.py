@@ -1281,7 +1281,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
                     ],
                 },
             ]
-            # Then, Odoo syncs
+            # Then, AFENDA xForge syncs
             with patch.object(
                 GoogleCalendarService,
                 "get_events",
@@ -1396,7 +1396,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
     @patch_api
     def test_event_reminder_emails_with_google_id(self):
         """
-        Odoo shouldn't send email reminders for synced events.
+        AFENDA xForge shouldn't send email reminders for synced events.
         Test that events synced to Google (with a `google_id`)
         are excluded from email alarm notifications.
         """
@@ -1614,7 +1614,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
     @patch_api
     def test_several_attendee_have_the_same_mail(self):
         """
-        In google, One mail = One attendee but on Odoo, some partners could share the same mail
+        In google, One mail = One attendee but on AFENDA xForge, some partners could share the same mail
         This test checks that the deletion of such attendee has no harm: all attendee but the given mail are deleted.
         """
         partner1 = self.env['res.partner'].create({
@@ -1984,7 +1984,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
 
     @patch_api
     def test_partner_order(self):
-        self.private_partner.email = "internal_user@odoo.com"
+        self.private_partner.email = "internal_user@afenda.app"
         self.private_partner.type = "contact"
         user = self.env['res.users'].create({
             'name': 'Test user Calendar',
@@ -1995,7 +1995,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
         values = {
             'id': 'oj44nep1ldf8a3ll02uip0c9aa',
             'description': 'Small mini desc',
-            'organizer': {'email': 'internal_user@odoo.com'},
+            'organizer': {'email': 'internal_user@afenda.app'},
             'summary': 'Pricing new update',
             'visibility': 'public',
             'attendees': [{
@@ -2265,7 +2265,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
     def test_event_guest_modify_permission(self):
         """
         'guestsCanModify' is a permission set on Google side to allow or forbid guests editing the event.
-        This test states that Odoo Calendar:
+        This test states that AFENDA xForge Calendar:
         1. forbids the updates of non-editable events by guests.
         2. allows editable events being updated by guests.
         3. allows guests to stop and restart their synchronizations with Google Calendars.
@@ -2322,12 +2322,12 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
                 'date': None,
             },
         }
-        # Sync events from Google to Odoo and get them after sync.
+        # Sync events from Google to AFENDA xForge and get them after sync.
         self.env['calendar.event']._sync_google2odoo(GoogleEvent([not_editable_event_values, editable_event_values]))
         not_editable_event = self.env['calendar.event'].search([('google_id', '=', not_editable_event_values.get('id'))])
         editable_event = self.env['calendar.event'].search([('google_id', '=', editable_event_values.get('id'))])
 
-        # Assert that event is created in Odoo with proper values for guests_readonly variable.
+        # Assert that event is created in AFENDA xForge with proper values for guests_readonly variable.
         self.assertFalse(editable_event.guests_readonly, "Value 'guestCanModify' received from Google must be True.")
         self.assertTrue(not_editable_event.guests_readonly, "Value 'guestCanModify' received from Google must be False.")
 
@@ -2392,8 +2392,8 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
 
     @patch_api
     def test_create_event_with_default_and_undefined_privacy(self):
-        """ Check if google events are created in Odoo when 'default' privacy setting is defined and also when it is not. """
-        # Sync events from Google to Odoo after adding the privacy property.
+        """ Check if google events are created in AFENDA xForge when 'default' privacy setting is defined and also when it is not. """
+        # Sync events from Google to AFENDA xForge after adding the privacy property.
         sample_event_values = {
             'summary': 'Test',
             'start': {'dateTime': '2020-01-06T10:00:00+01:00'},
@@ -2407,7 +2407,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
         default_privacy_event = {'id': 200, 'privacy': 'default', **sample_event_values}
         self.env['calendar.event']._sync_google2odoo(GoogleEvent([undefined_privacy_event, default_privacy_event]))
 
-        # Ensure that synced events have the correct privacy field in Odoo.
+        # Ensure that synced events have the correct privacy field in AFENDA xForge.
         undefined_privacy_odoo_event = self.env['calendar.event'].search([('google_id', '=', 1)])
         default_privacy_odoo_event = self.env['calendar.event'].search([('google_id', '=', 2)])
         self.assertFalse(undefined_privacy_odoo_event.privacy, "Event with undefined privacy must have False value in privacy field.")
@@ -2417,7 +2417,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
     def test_accepting_recurrent_event_with_this_event_option_synced_by_attendee(self, mock_get_events):
         """
         Test accepting a recurring event with the option "This event" on Google Calendar and syncing the attendee's calendar.
-        Ensure that event is accepeted by attendee in Odoo.
+        Ensure that event is accepeted by attendee in AFENDA xForge.
         """
         recurrence_id = "abcd1"
         recurrence = self.generate_recurring_event(
@@ -2445,7 +2445,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
     def test_accepting_recurrent_event_with_this_event_option_synced_by_organizer(self, mock_get_events):
         """
         Test accepting a recurring event with the option "This event" on Google Calendar and syncing the organizer's calendar.
-        Ensure that event is accepeted by attendee in Odoo.
+        Ensure that event is accepeted by attendee in AFENDA xForge.
         """
         recurrence_id = "abcd2"
         recurrence = self.generate_recurring_event(
@@ -2473,7 +2473,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
     def test_accepting_recurrent_event_with_all_events_option_synced_by_attendee(self, mock_get_events):
         """
         Test accepting a recurring event with the option "All events" on Google Calendar and syncing the attendee's calendar.
-        Ensure that all events are accepeted by attendee in Odoo.
+        Ensure that all events are accepeted by attendee in AFENDA xForge.
         """
         recurrence_id = "abcd3"
         recurrence = self.generate_recurring_event(
@@ -2501,7 +2501,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
     def test_accepting_recurrent_event_with_all_events_option_synced_by_organizer(self, mock_get_events):
         """
         Test accepting a recurring event with the option "All events" on Google Calendar and syncing the organizer's calendar.
-        Ensure that all events are accepeted by attendee in Odoo.
+        Ensure that all events are accepeted by attendee in AFENDA xForge.
         """
         recurrence_id = "abcd4"
         recurrence = self.generate_recurring_event(
@@ -2529,7 +2529,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
     def test_accepting_recurrent_event_with_following_events_option_synced_by_attendee(self, mock_get_events):
         """
         Test accepting a recurring event with the option "This and following events" on Google Calendar and syncing the attendee's calendar.
-        Ensure that affected events are accepeted by attendee in Odoo.
+        Ensure that affected events are accepeted by attendee in AFENDA xForge.
         """
         recurrence_id = "abcd5"
         recurrence = self.generate_recurring_event(
@@ -2563,7 +2563,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
     def test_accepting_recurrent_event_with_all_following_option_synced_by_organizer(self, mock_get_events):
         """
         Test accepting a recurring event with the option "This and following events" on Google Calendar and syncing the organizer's calendar.
-        Ensure that affected events are accepeted by attendee in Odoo.
+        Ensure that affected events are accepeted by attendee in AFENDA xForge.
         """
         recurrence_id = "abcd6"
         recurrence = self.generate_recurring_event(

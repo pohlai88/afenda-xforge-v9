@@ -84,7 +84,7 @@ class MrpBom(models.Model):
         'product.template.attribute.value',
         compute='_compute_possible_product_template_attribute_value_ids')
     allow_operation_dependencies = fields.Boolean('Operation Dependencies',
-        help="Create operation level dependencies that will influence both planning and the status of work orders upon MO confirmation. If this feature is ticked, and nothing is specified, Odoo will assume that all operations can be started simultaneously."
+        help="Create operation level dependencies that will influence both planning and the status of work orders upon MO confirmation. If this feature is ticked, and nothing is specified, AFENDA xForge will assume that all operations can be started simultaneously."
     )
     produce_delay = fields.Integer(
         'Manufacturing Lead Time', default=0,

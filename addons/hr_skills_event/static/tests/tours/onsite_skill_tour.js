@@ -1,7 +1,7 @@
 import { registry } from "@web/core/registry";
 
 registry.category("web_tour.tours").add("hr_skills_event_onsite_tour", {
-    url: "/odoo",
+    url: "/app",
     steps: () => [
         {
             content: "Open Employees app",

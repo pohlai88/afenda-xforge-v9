@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 18:51+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/"
 "mass_mailing_crm/uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
@@ -111,11 +111,11 @@ msgstr "Hali %s mavjud emas!"
 #: code:addons/mass_mailing_crm/models/mailing_mailing.py:0
 #, fuzzy
 msgid ""
-"Note that Odoo cannot track replies if they are sent towards email addresses "
+"Note that AFENDA xForge cannot track replies if they are sent towards email addresses "
 "to this database."
 msgstr ""
 "E'tibor bering, agar javoblar ushbu ma'lumotlar bazasidagi elektron pochta "
-"manzillariga yuborilsa, Odoo ularni kuzatib bora olmaydi."
+"manzillariga yuborilsa, AFENDA xForge ularni kuzatib bora olmaydi."
 
 #. module: mass_mailing_crm
 #. odoo-python

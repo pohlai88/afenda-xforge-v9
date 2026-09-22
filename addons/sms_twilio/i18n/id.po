@@ -6,12 +6,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-02 13:35+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Indonesian <https://translate.afenda.app/projects/odoo-19/"
 "sms_twilio/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -304,8 +304,8 @@ msgstr "Kirim SMS test"
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__iap
-msgid "Send via Odoo"
-msgstr "Kirim melalui Odoo"
+msgid "Send via AFENDA xForge"
+msgstr "Kirim melalui AFENDA xForge"
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__twilio
@@ -346,8 +346,8 @@ msgstr "Nomor yang Anda coba hubungi tidak diformat dengan benar"
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/wizard/sms_twilio_account_manage.py:0
-msgid "This is a test SMS from Odoo"
-msgstr "Ini adalah SMS test dari Odoo"
+msgid "This is a test SMS from AFENDA xForge"
+msgstr "Ini adalah SMS test dari AFENDA xForge"
 
 #. module: sms_twilio
 #. odoo-python
@@ -394,14 +394,14 @@ msgstr "URL Twilio StatusCallback tidak tepat"
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown error, please contact Odoo support"
-msgstr "Error tidak diketahui, silakan hubungi bantuan Odoo"
+msgid "Unknown error, please contact AFENDA xForge support"
+msgstr "Error tidak diketahui, silakan hubungi bantuan AFENDA xForge"
 
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown failure at sending, please contact Odoo support"
-msgstr "Kegagalan tidak diketahui saat mengirim, silakan hubungi bantuan Odoo"
+msgid "Unknown failure at sending, please contact AFENDA xForge support"
+msgstr "Kegagalan tidak diketahui saat mengirim, silakan hubungi bantuan AFENDA xForge"
 
 #. module: sms_twilio
 #. odoo-python

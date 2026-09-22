@@ -8,12 +8,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-07 07:01+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/iap/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -51,9 +51,9 @@ msgstr "帳戶代碼是您使用此服務的驗證密鑰。請勿共享。"
 #. odoo-python
 #: code:addons/iap/tools/iap_tools.py:0
 msgid ""
-"An error occurred while reaching %s. Please contact Odoo support if this "
+"An error occurred while reaching %s. Please contact AFENDA xForge support if this "
 "error persists."
-msgstr "聯絡 %s 時，發生錯誤。如果此錯誤繼續發生，請聯絡 Odoo 技術支援人員。"
+msgstr "聯絡 %s 時，發生錯誤。如果此錯誤繼續發生，請聯絡 AFENDA xForge 技術支援人員。"
 
 #. module: iap
 #: model:ir.model.fields,field_description:iap.field_iap_account__balance
@@ -192,8 +192,8 @@ msgstr "沒有服務使用所提供的技術名稱"
 
 #. module: iap
 #: model_terms:ir.ui.view,arch_db:iap.res_config_settings_view_form
-msgid "Odoo IAP"
-msgstr "Odoo IAP"
+msgid "AFENDA xForge IAP"
+msgstr "AFENDA xForge IAP"
 
 #. module: iap
 #. odoo-python

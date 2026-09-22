@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:29+0000\n"
 "PO-Revision-Date: 2026-08-02 18:43+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/html_editor/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/html_editor/"
 "lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -2008,10 +2008,10 @@ msgstr "ນີ້ແມ່ນເວີຊັນປັດຈຸບັນ, ບໍ�
 #: code:addons/html_editor/static/src/main/media/image_crop.js:0
 msgid ""
 "This type of image is not supported for cropping.<br/>If you want to crop "
-"it, please first download it from the original source and upload it in Odoo."
+"it, please first download it from the original source and upload it in AFENDA xForge."
 msgstr ""
 "ຮູບພາບປະເພດນີ້ບໍ່ຮອງຮັບການຕັດ.<br/>ຫາກທ່ານຕ້ອງການຕັດມັນ, ກະລຸນາດາວໂຫຼດຈາກແຫຼ່ງຕົ້ນສະບັບກ່ອນ ແລ້ວຈຶ່"
-"ງອັບໂຫຼດລົງໃນ Odoo."
+"ງອັບໂຫຼດລົງໃນ AFENDA xForge."
 
 #. module: html_editor
 #. odoo-javascript
@@ -2370,8 +2370,8 @@ msgstr "ເອກະສານ"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/link/link_popover.xml:0
-msgid "e.g. https://www.odoo.com"
-msgstr "ຕົວຢ່າງ: https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "ຕົວຢ່າງ: https://www.afenda.app"
 
 #. module: html_editor
 #. odoo-javascript

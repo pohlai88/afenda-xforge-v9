@@ -32,17 +32,17 @@ class AccountMoveSend(models.AbstractModel):
             if it_alerts := it_moves._l10n_it_edi_export_data_check():
                 alerts.update(**it_alerts)
 
-            # Invite the user to authorize Odoo and start using IT EDI in production mode
+            # Invite the user to authorize AFENDA xForge and start using IT EDI in production mode
             if 'prod' not in it_moves.mapped('l10n_it_edi_proxy_mode'):
                 alerts['l10n_it_edi_invite_authorize'] = {
                     'level': 'info',
-                    'message': _("You must authorize Odoo in the Settings to use the IT EDI in production mode."),
+                    'message': _("You must authorize AFENDA xForge in the Settings to use the IT EDI in production mode."),
                     'action_text': _("View Settings"),
                     'action': {
                         'name': _("Settings"),
                         'type': 'ir.actions.act_url',
                         'target': 'self',
-                        'url': '/odoo/settings#l10n_it_edi_setting',
+                        'url': '/app/settings#l10n_it_edi_setting',
                     },
                 }
 

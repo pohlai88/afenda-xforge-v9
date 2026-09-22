@@ -131,10 +131,10 @@ class TestReports(odoo.tests.TransactionCase):
         minimal_pdf_content = io.BytesIO(tools.file_open('base/tests/minimal.pdf', 'rb').read())
         malformed_pdf_content = io.BytesIO(b'not a pdf')
 
-        with self.assertRaises(UserError, msg="Odoo is unable to merge the generated PDFs."):
+        with self.assertRaises(UserError, msg="AFENDA xForge is unable to merge the generated PDFs."):
             report._merge_pdfs([malformed_pdf_content])
 
-        with self.assertRaises(UserError, msg="Odoo is unable to merge the generated PDFs."):
+        with self.assertRaises(UserError, msg="AFENDA xForge is unable to merge the generated PDFs."):
             report._merge_pdfs([minimal_pdf_content, malformed_pdf_content])
 
         failed_streams = []

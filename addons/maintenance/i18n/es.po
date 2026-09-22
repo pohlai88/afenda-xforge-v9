@@ -10,12 +10,12 @@
 # "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:35+0000\n"
 "PO-Revision-Date: 2026-08-08 07:11+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Spanish <https://translate.afenda.app/projects/odoo-19/"
 "maintenance/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -1507,11 +1507,11 @@ msgstr "Texto"
 #. module: maintenance
 #: model:ir.model.fields,help:maintenance.field_maintenance_team__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"El modelo (tipo de documento de Odoo) al que corresponde este alias. "
+"El modelo (tipo de documento de AFENDA xForge) al que corresponde este alias. "
 "Cualquier correo entrante que no responda a un registro existente, creará un "
 "nuevo registro de este modelo (por ejemplo, una tarea de proyecto)"
 
@@ -1519,10 +1519,10 @@ msgstr ""
 #: model:ir.model.fields,help:maintenance.field_maintenance_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "El nombre del alias del correo electrónico, por ejemplo, «vacantes», para "
-"recibir los correos de <vacantes@ejemplo.odoo.com>"
+"recibir los correos de <vacantes@ejemplo.afenda.app>"
 
 #. module: maintenance
 #. odoo-python

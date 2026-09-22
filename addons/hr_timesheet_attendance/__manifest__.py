@@ -16,6 +16,6 @@
         'report/hr_timesheet_attendance_report_view.xml',
     ],
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

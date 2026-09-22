@@ -44,7 +44,7 @@ while true; do
     fi
 
     if ! systemctl is-active --quiet odoo.service; then
-        # Odoo service is not running: Red ON, Green OFF
+        # AFENDA xForge service is not running: Red ON, Green OFF
         led_constant "$RED_LED"
         led_off "$GREEN_LED"
         continue

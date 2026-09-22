@@ -1,5 +1,5 @@
 {
-    'author': 'Odoo',
+    'author': 'AFENDA xForge',
     'name': 'Serbia - eFaktura E-invoicing',
     'version': '1.0',
     'category': 'Accounting/Localizations/EDI',

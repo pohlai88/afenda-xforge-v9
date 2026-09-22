@@ -5,7 +5,7 @@
     'name': 'DIN 5008',
     'version': '1.0',
     'category': 'Accounting/Localizations',
-    'description': "This is the base module that defines the DIN 5008 standard in Odoo.",
+    'description': "This is the base module that defines the DIN 5008 standard in AFENDA xForge.",
     'depends': ['account'],
     'auto_install': True,
     'countries': ['de', 'ch'],
@@ -21,6 +21,6 @@
             'l10n_din5008/static/src/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

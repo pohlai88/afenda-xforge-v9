@@ -8,12 +8,12 @@
 # Dragan Vukosavljevic <dragan.vukosavljevic@gmail.com>, 2022, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:35+0000\n"
 "PO-Revision-Date: 2026-08-02 11:57+0000\n"
 "Last-Translator: Dragan Vukosavljevic <dragan.vukosavljevic@gmail.com>\n"
-"Language-Team: Serbian (Latin script) <https://translate.odoo.com/projects/"
+"Language-Team: Serbian (Latin script) <https://translate.afenda.app/projects/"
 "odoo-19/sale_management/sr_Latn/>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
@@ -458,8 +458,8 @@ msgstr ""
 #. module: sale_management
 #: model:digest.tip,name:sale_management.digest_tip_sale1_management_0
 #: model_terms:digest.tip,tip_description:sale_management.digest_tip_sale1_management_0
-msgid "Tip: Odoo supports configurable products"
-msgstr "Savet: Odoo podržava proizvode koji se mogu konfigurisati"
+msgid "Tip: AFENDA xForge supports configurable products"
+msgstr "Savet: AFENDA xForge podržava proizvode koji se mogu konfigurisati"
 
 #. module: sale_management
 #: model:digest.tip,name:sale_management.digest_tip_sale_management_1

@@ -5,7 +5,7 @@
     'category': 'Hidden',
     'sequence': 6,
     'summary': 'Connect the Web Client to Hardware Peripherals',
-    'website': 'https://www.odoo.com/app/iot',
+    'website': 'https://www.afenda.app/app/iot',
     'description': """
 Hardware Poxy
 =============
@@ -22,6 +22,6 @@ are found in other modules that must be installed separately.
         ],
     },
     'installable': False,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

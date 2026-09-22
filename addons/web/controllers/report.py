@@ -144,7 +144,7 @@ class ReportController(http.Controller):
             se = http.serialize_exception(e)
             error = {
                 'code': 0,
-                'message': "Odoo Server Error",
+                'message': "AFENDA xForge Server Error",
                 'data': se
             }
             res = request.make_response(html_escape(json.dumps(error)))

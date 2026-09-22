@@ -7,12 +7,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: AFENDA xForge Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:49+0000\n"
 "PO-Revision-Date: 2026-08-05 21:53+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/delivery/lo/>"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/delivery/lo/>"
 "\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -37,11 +37,11 @@ msgstr "<i class=\"oi oi-arrow-right me-1\"/>ເບິ່ງລາຄາ"
 #: code:addons/delivery/models/delivery_carrier.py:0
 msgid ""
 "<p class=\"o_view_nocontent\">\n"
-"                    Buy Odoo Enterprise now to get more providers.\n"
+"                    Buy AFENDA xForge Enterprise now to get more providers.\n"
 "                </p>"
 msgstr ""
 "<p class=\"o_view_nocontent\">\n"
-"                    ຊື້ Odoo Enterprise ດຽວນີ້ເພື່ອເພີ່ມຜູ້ໃຫ້ບໍລິການ.\n"
+"                    ຊື້ AFENDA xForge Enterprise ດຽວນີ້ເພື່ອເພີ່ມຜູ້ໃຫ້ບໍລິການ.\n"
 "                </p>"
 
 #. module: delivery

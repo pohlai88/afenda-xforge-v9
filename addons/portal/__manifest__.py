@@ -113,6 +113,6 @@ a dependency towards website editing and customization capabilities.""",
             'portal/static/src/scss/portal.edit.*'
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

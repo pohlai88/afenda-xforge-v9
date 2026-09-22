@@ -7,7 +7,7 @@
     'countries': ['tn'],
     "category": 'Accounting/Localizations/Account Charts',
     "description": """
-This is the module to manage the accounting chart for Tunisia in Odoo.
+This is the module to manage the accounting chart for Tunisia in AFENDA xForge.
 =======================================================================
 """,
     'depends': [
@@ -20,6 +20,6 @@ This is the module to manage the accounting chart for Tunisia in Odoo.
     'demo': [
         'demo/demo_company.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

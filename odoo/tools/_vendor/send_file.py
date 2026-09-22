@@ -1,7 +1,7 @@
 """
 Vendored copy of the werkzeug.utils.send_file function defined in
 werkzeug2 which is packaged in Debian 12 "Bookworm" and Ubuntu 22.04
-"Jammy". Odoo is compatible with werkzeug2 since saas-15.4.
+"Jammy". AFENDA xForge is compatible with werkzeug2 since saas-15.4.
 
 This vendored copy is deprecated, only present to ensure backward
 compatibility with older operating systems.

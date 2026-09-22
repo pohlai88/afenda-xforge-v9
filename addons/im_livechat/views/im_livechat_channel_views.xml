@@ -137,7 +137,7 @@
                                     <group>
                                         <group class="order-1 order-lg-0">
                                             <p class="text-muted" colspan="2">
-                                                Agents who are inactive in Odoo for more than 30 minutes will be considered disconnected.
+                                                Agents who are inactive in AFENDA xForge for more than 30 minutes will be considered disconnected.
                                             </p>
                                         </group>
                                         <group class="oe_subtotal_footer d-flex justify-content-end">

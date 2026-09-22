@@ -17,7 +17,7 @@ class TestEventCrmHttp(TestEventCrmCommon, HttpCase):
             "name": "Answer test",
             "question_id": question.id,
         })
-        self.start_tour("/odoo", "event_question_answers_rule_creation_tour", login="admin")
+        self.start_tour("/app", "event_question_answers_rule_creation_tour", login="admin")
         # Check that a rule has been created for the answer.
         self.assertEqual(
             len(self.env["event.lead.rule"].search([("name", "=", "event_question_answer_rule")])),
@@ -26,7 +26,7 @@ class TestEventCrmHttp(TestEventCrmCommon, HttpCase):
 
         self.env["event.registration"].create({
             "event_id": self.event_0.id,
-            "email": "event_question_answer_email@odoo.com",
+            "email": "event_question_answer_email@afenda.app",
             "registration_answer_ids": [Command.create({
                 "question_id": question.id,
                 "value_answer_id": answer.id,
@@ -34,6 +34,6 @@ class TestEventCrmHttp(TestEventCrmCommon, HttpCase):
         })
         # Check that the rule generate a lead when the answer is selected by a new registration.
         self.assertEqual(
-            len(self.env["crm.lead"].search([("email_normalized", "=", "event_question_answer_email@odoo.com")])),
+            len(self.env["crm.lead"].search([("email_normalized", "=", "event_question_answer_email@afenda.app")])),
             1
         )

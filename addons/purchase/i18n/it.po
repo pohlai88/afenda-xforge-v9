@@ -12,12 +12,12 @@
 # "Marianna Ciofani (cima)" <cima@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-06 02:52+0000\n"
-"Last-Translator: \"Marianna Ciofani (cima)\" <cima@odoo.com>\n"
-"Language-Team: Italian <https://translate.odoo.com/projects/odoo-19/purchase/"
+"Last-Translator: \"Marianna Ciofani (cima)\" <cima@afenda.app>\n"
+"Language-Team: Italian <https://translate.afenda.app/projects/odoo-19/purchase/"
 "it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -1419,10 +1419,10 @@ msgstr "RdP in bozza"
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 "Trascina e rilascia il file PDF della richiesta di preventivo nell'elenco di "
-"preventivi in Odoo. Goditi l'automazione!"
+"preventivi in AFENDA xForge. Goditi l'automazione!"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_order__dest_address_id
@@ -2081,8 +2081,8 @@ msgstr "Non riconosciuti"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Not using Odoo?"
-msgstr "Non stai utilizzando Odoo?"
+msgid "Not using AFENDA xForge?"
+msgstr "Non stai utilizzando AFENDA xForge?"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__purchase_order_line__display_type__line_note
@@ -2130,8 +2130,8 @@ msgstr "Numero di messaggi con errore di consegna"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__product_template__purchase_method__purchase
@@ -3074,8 +3074,8 @@ msgstr "Preferiti"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Start on Odoo"
-msgstr "Inizia su Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "Inizia su AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_bill_line_match__state
@@ -3606,14 +3606,14 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                    orders or receipts. This allows you to control bills\n"
 "                    you receive from your vendor according to the draft\n"
-"                    document in Odoo."
+"                    document in AFENDA xForge."
 msgstr ""
 "Le fatture fornitore possono essere pregenerate in base agli\n"
 "                    ordini di acquisto o alle ricezioni. Ciò consente di "
 "tenere\n"
 "                    sotto controllo le fatture ricevute dal fornitore in "
 "conformità\n"
-"                    con il documento in bozza di Odoo."
+"                    con il documento in bozza di AFENDA xForge."
 
 #. module: purchase
 #. odoo-python
@@ -3651,8 +3651,8 @@ msgstr "In attesa di fatturazione"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Want to import this document in Odoo?"
-msgstr "Vuoi importare il documento in Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Vuoi importare il documento in AFENDA xForge?"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.view_product_supplier_inherit
@@ -3687,14 +3687,14 @@ msgid ""
 "When creating a purchase order, have a look at the vendor's <i>On Time "
 "Delivery</i> rate: the percentage of products shipped on time. If it is too "
 "low, activate the <i>automated reminders</i>. A few days before the due "
-"shipment, Odoo will send the vendor an email to ask confirmation of shipment "
+"shipment, AFENDA xForge will send the vendor an email to ask confirmation of shipment "
 "dates and keep you informed in case of any delays. To get the vendor's "
 "performance statistics, click on the OTD rate."
 msgstr ""
 "Quando viene creato un ordine di acquisto, dai un'occhiata al tasso di <i>"
 "consegne puntuali</i> del venditore: è la percentuale di prodotti spediti in "
 "tempo. Se è troppo basso, attiva i <i>promemoria automatici</i>. Qualche "
-"giorno prima della spedizione prevista, Odoo invia al fornitore una e-mail "
+"giorno prima della spedizione prevista, AFENDA xForge invia al fornitore una e-mail "
 "per chiedere conferma delle date di spedizione, tenendoti informato in caso "
 "di ritardi. Per ottenere le statistiche di rendimento del fornitore, fai "
 "clic sul tasso di puntualità."
@@ -3702,12 +3702,12 @@ msgstr ""
 #. module: purchase
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_1
 msgid ""
-"When sending a purchase order by email, Odoo asks the vendor to acknowledge "
+"When sending a purchase order by email, AFENDA xForge asks the vendor to acknowledge "
 "the reception of the order. When the vendor acknowledges the order by "
 "clicking on a button in the email, the information is added on the purchase "
 "order. Use filters to track orders that have not been acknowledged."
 msgstr ""
-"Quando viene inviato un ordine di acquisto via e-mail, Odoo chiede al "
+"Quando viene inviato un ordine di acquisto via e-mail, AFENDA xForge chiede al "
 "fornitore di confermare la ricezione dell'ordine. Dopo aver riconosciuto "
 "l'ordine con un clic su un pulsante dentro l'e-mail, l'informazione viene "
 "aggiunta all'ordine di acquisto. Utilizza i filtri per monitorare gli ordini "

@@ -24,12 +24,12 @@
 # "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-28 10:49+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/event/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Catalan <https://translate.afenda.app/projects/odoo-19/event/"
 "ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -178,10 +178,10 @@ msgstr ""
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
 msgstr ""
-"<b>Sales tècniques</b> - Un dedicat als desenvolupadors avançats d'Odoo, un "
+"<b>Sales tècniques</b> - Un dedicat als desenvolupadors avançats d'AFENDA xForge, un "
 "per a nous desenvolupadors."
 
 #. module: event
@@ -2222,12 +2222,12 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "Als 13 anys, John DOE ja estava començant a desenvolupar les seves primeres "
 "aplicacions empresarials per a clients. Després de dominar l'enginyeria "
 "civil, va fundar TinyERP. Aquesta va ser la primera fase de OpenERP que "
-"després es convertiria en Odoo, el programari empresarial de codi obert més "
+"després es convertiria en AFENDA xForge, el programari empresarial de codi obert més "
 "instal·lat a tot el món."
 
 #. module: event
@@ -3222,7 +3222,7 @@ msgstr ""
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
 
@@ -3254,7 +3254,7 @@ msgstr "Icona Font Awesome p.e. fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 
 #. module: event
@@ -4167,7 +4167,7 @@ msgstr "Objectius"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
+msgid "AFENDA xForge Community Days"
 msgstr ""
 
 #. module: event
@@ -5591,7 +5591,7 @@ msgstr ""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
 msgstr ""
 
 #. module: event

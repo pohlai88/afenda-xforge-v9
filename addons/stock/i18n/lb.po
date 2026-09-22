@@ -7,11 +7,11 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:48+0000\n"
 "PO-Revision-Date: 2019-08-26 09:14+0000\n"
-"Last-Translator: Xavier ALT <xal@odoo.com>, 2019\n"
+"Last-Translator: Xavier ALT <xal@afenda.app>, 2019\n"
 "Language-Team: Luxembourgish (https://www.transifex.com/odoo/teams/41243/lb/)\n"
 "Language: lb\n"
 "MIME-Version: 1.0\n"
@@ -1135,7 +1135,7 @@ msgstr ""
 
 #. module: stock
 #: model_terms:res.company,invoice_terms_html:stock.res_company_1
-msgid "Below text serves as a suggestion and doesn’t engage Odoo S.A. responsibility."
+msgid "Below text serves as a suggestion and doesn’t engage AFENDA responsibility."
 msgstr ""
 
 #. module: stock
@@ -2066,7 +2066,7 @@ msgstr ""
 
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_orderpoint
-msgid "Define a minimum stock rule so that Odoo automatically creates requests for quotations or confirmed manufacturing orders to resupply your stock."
+msgid "Define a minimum stock rule so that AFENDA xForge automatically creates requests for quotations or confirmed manufacturing orders to resupply your stock."
 msgstr ""
 
 #. module: stock
@@ -2078,7 +2078,7 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
 "Define your locations to reflect your warehouse structure and\n"
-"            organization. Odoo is able to manage physical locations\n"
+"            organization. AFENDA xForge is able to manage physical locations\n"
 "            (warehouses, shelves, bin, etc), partner locations (customers,\n"
 "            vendors) and virtual locations which are the counterpart of\n"
 "            the stock operations like the manufacturing orders\n"
@@ -2571,7 +2571,7 @@ msgstr ""
 
 #. module: stock
 #: model_terms:digest.tip,tip_description:stock.digest_tip_stock_0
-msgid "Enjoy a quick-paced experience with the Odoo barcode app. It is blazing fast and works even without a stable internet connection. It supports all flows: inventory adjustments, batch picking, moving lots or pallets, low inventory checks, etc. Go to the \"Apps\" menu to activate the barcode interface."
+msgid "Enjoy a quick-paced experience with the AFENDA xForge barcode app. It is blazing fast and works even without a stable internet connection. It supports all flows: inventory adjustments, batch picking, moving lots or pallets, low inventory checks, etc. Go to the \"Apps\" menu to activate the barcode interface."
 msgstr ""
 
 #. module: stock
@@ -2589,9 +2589,9 @@ msgstr ""
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
-"Every stock operation in Odoo moves the products from one\n"
+"Every stock operation in AFENDA xForge moves the products from one\n"
 "            location to another one.  For instance, if you receive products\n"
-"            from a vendor, Odoo will move products from the Vendor\n"
+"            from a vendor, AFENDA xForge will move products from the Vendor\n"
 "            location to the Stock location. Each report can be performed on\n"
 "            physical, partner or virtual locations."
 msgstr ""
@@ -3191,12 +3191,12 @@ msgstr ""
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking__show_reserved
 #: model:ir.model.fields,help:stock.field_stock_picking_type__show_reserved
-msgid "If this checkbox is ticked, Odoo will automatically pre-fill the detailed operations with the corresponding products, locations and lot/serial numbers."
+msgid "If this checkbox is ticked, AFENDA xForge will automatically pre-fill the detailed operations with the corresponding products, locations and lot/serial numbers."
 msgstr ""
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_show_reception_report
-msgid "If this checkbox is ticked, Odoo will automatically show the reception report (if there are moves to allocate to) when validating."
+msgid "If this checkbox is ticked, AFENDA xForge will automatically show the reception report (if there are moves to allocate to) when validating."
 msgstr ""
 
 #. module: stock
@@ -8695,12 +8695,12 @@ msgstr ""
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_warehouse_orderpoint__product_min_qty
-msgid "When the virtual stock goes below the Min Quantity specified for this field, Odoo generates a procurement to bring the forecasted quantity to the Max Quantity."
+msgid "When the virtual stock goes below the Min Quantity specified for this field, AFENDA xForge generates a procurement to bring the forecasted quantity to the Max Quantity."
 msgstr ""
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_warehouse_orderpoint__product_max_qty
-msgid "When the virtual stock goes below the Min Quantity, Odoo generates a procurement to bring the forecasted quantity to the Quantity specified as Max Quantity."
+msgid "When the virtual stock goes below the Min Quantity, AFENDA xForge generates a procurement to bring the forecasted quantity to the Quantity specified as Max Quantity."
 msgstr ""
 
 #. module: stock
@@ -8977,7 +8977,7 @@ msgstr ""
 
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.view_immediate_transfer
-msgid "You have not recorded <i>done</i> quantities yet, by clicking on <i>apply</i> Odoo will process all the quantities."
+msgid "You have not recorded <i>done</i> quantities yet, by clicking on <i>apply</i> AFENDA xForge will process all the quantities."
 msgstr ""
 
 #. module: stock

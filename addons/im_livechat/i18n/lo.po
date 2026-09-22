@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: AFENDA xForge Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:48+0000\n"
 "PO-Revision-Date: 2026-08-03 09:01+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/im_livechat/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/im_livechat/"
 "lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -748,9 +748,9 @@ msgstr "ຜູ້ຕິດຕາມ (ຄູ່ຄ້າ)"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "For websites built with the Odoo CMS, go to Website &gt; Configuration &gt; Settings and select the Website Live Chat Channel you want to add to your website."
+msgid "For websites built with the AFENDA xForge CMS, go to Website &gt; Configuration &gt; Settings and select the Website Live Chat Channel you want to add to your website."
 msgstr ""
-"ສຳລັບເວັບໄຊທ໌ທີ່ສ້າງດ້ວຍ Odoo CMS, ໃຫ້ໄປທີ່ ເວັບໄຊທ໌ &gt; ການກຳນົດຄ່າ &gt; ການຕັ້ງຄ່າ ແລະ ເລືອກ"
+"ສຳລັບເວັບໄຊທ໌ທີ່ສ້າງດ້ວຍ AFENDA xForge CMS, ໃຫ້ໄປທີ່ ເວັບໄຊທ໌ &gt; ການກຳນົດຄ່າ &gt; ການຕັ້ງຄ່າ ແລະ ເລືອກ"
 "ຊ່ອງທາງສົນທະນາສົດທີ່ທ່ານຕ້ອງການເພີ່ມໃສ່ເວັບໄຊທ໌ຂອງທ່ານ."
 
 #. module: im_livechat
@@ -1250,8 +1250,8 @@ msgstr "ຕົກລົງ"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.livechat_email_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.res_users_form_view_simple_modif
@@ -1314,9 +1314,9 @@ msgstr ""
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
-msgid "Operators that do not show any activity In Odoo for more than 30 minutes will be considered as disconnected."
+msgid "Operators that do not show any activity In AFENDA xForge for more than 30 minutes will be considered as disconnected."
 msgstr ""
-"ພະນັກງານທີ່ບໍ່ມີການເຄື່ອນໄຫວໃນ Odoo ເກີນ 30 ນາທີ ຈະຖືກຖືວ່າຕັດການເຊື່ອມຕໍ່."
+"ພະນັກງານທີ່ບໍ່ມີການເຄື່ອນໄຫວໃນ AFENDA xForge ເກີນ 30 ນາທີ ຈະຖືກຖືວ່າຕັດການເຊື່ອມຕໍ່."
 
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.chatbot_script_answer_view_tree

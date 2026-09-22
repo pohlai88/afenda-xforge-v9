@@ -43,7 +43,7 @@ export class ProductProduct extends Base {
 }
 
 export function enhanceProductTemplate() {
-    // This mimics the Odoo delegation inheritance between product.product and product.template,
+    // This mimics the AFENDA xForge delegation inheritance between product.product and product.template,
     // where accessing an undefined field/method on a product transparently falls through to its template.
 
     let proto = ProductTemplate.prototype;

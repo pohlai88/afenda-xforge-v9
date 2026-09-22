@@ -12,12 +12,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:38+0000\n"
 "PO-Revision-Date: 2026-08-03 03:31+0000\n"
-"Last-Translator: Ho Pak Wai <wai@users.noreply.translate.odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: Ho Pak Wai <wai@users.noreply.translate.afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/hr_skills/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -1430,13 +1430,13 @@ msgstr "連結至此技能類型的等級數目"
 
 #. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_type_certifications_odoo
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: hr_skills
 #: model:hr.resume.line,name:hr_skills.employee_resume_line_admin_4
-msgid "Odoo SA"
-msgstr "Odoo SA"
+msgid "AFENDA xForge SA"
+msgstr "AFENDA xForge SA"
 
 #. module: hr_skills
 #: model:hr.skill,name:hr_skills.hr_skill_openness_to_criticism
@@ -2405,7 +2405,7 @@ msgstr "例如.語言"
 
 #. module: hr_skills
 #: model_terms:ir.ui.view,arch_db:hr_skills.resume_line_view_form
-msgid "e.g. Odoo Inc."
+msgid "e.g. AFENDA xForge Inc."
 msgstr "例如 odoo公司"
 
 #. module: hr_skills

@@ -48,7 +48,7 @@ class PeppolConnectorCommon(AccountTestInvoicingCommon):
             }
 
         return (
-            'https://peppol.test.odoo.com/api/peppol/2/can_connect',
+            'https://peppol.test.afenda.app/api/peppol/2/can_connect',
             replacement_method,
         )
 
@@ -58,7 +58,7 @@ class PeppolConnectorCommon(AccountTestInvoicingCommon):
                 return {
                     'status_code': 403,
                     'code': 201,
-                    'message': 'Unable to register, please contact our support team at peppol.support@odoo.com.'
+                    'message': 'Unable to register, please contact our support team at peppol.support@afenda.app.'
                 }
             if success:
                 return {'id_client': id_client, 'refresh_token': 'test_refresh_token', 'peppol_state': peppol_state}
@@ -70,19 +70,19 @@ class PeppolConnectorCommon(AccountTestInvoicingCommon):
                 }
 
         return (
-            'https://peppol.test.odoo.com/api/peppol/2/connect',
+            'https://peppol.test.afenda.app/api/peppol/2/connect',
             replacement_method,
         )
 
     def _mock_register_sender(self, success=True):
         return (
-            'https://peppol.test.odoo.com/api/peppol/1/register_sender',
+            'https://peppol.test.afenda.app/api/peppol/1/register_sender',
             lambda url, **kwargs: self._empty_result_or_error(success=success),
         )
 
     def _mock_register_sender_as_receiver(self, success=True):
         return (
-            'https://peppol.test.odoo.com/api/peppol/1/register_sender_as_receiver',
+            'https://peppol.test.afenda.app/api/peppol/1/register_sender_as_receiver',
             lambda url, **kwargs: self._empty_result_or_error(success=success),
         )
 
@@ -112,7 +112,7 @@ class PeppolConnectorCommon(AccountTestInvoicingCommon):
                 }
 
         return (
-            'https://peppol.test.odoo.com/api/peppol/1/lookup',
+            'https://peppol.test.afenda.app/api/peppol/1/lookup',
             replacement_method,
         )
 
@@ -132,32 +132,32 @@ class PeppolConnectorCommon(AccountTestInvoicingCommon):
                         'error': {
                             'code': "client_gone",
                             'message': "Your registration for this service is no longer valid. "
-                                       "If you see this message, please update the related Odoo app. "
+                                       "If you see this message, please update the related AFENDA xForge app. "
                                        "You will then be able to re-register if needed.",
                         }
                     },
                 }
 
         return (
-            'https://peppol.test.odoo.com/api/peppol/2/participant_status',
+            'https://peppol.test.afenda.app/api/peppol/2/participant_status',
             replacement_method,
         )
 
     def _mock_cancel_peppol_registration(self, success=True):
         return (
-            'https://peppol.test.odoo.com/api/peppol/1/cancel_peppol_registration',
+            'https://peppol.test.afenda.app/api/peppol/1/cancel_peppol_registration',
             lambda url, **kwargs: self._empty_result_or_error(success=success),
         )
 
     def _mock_get_all_documents(self, success=True):
         return (
-            'https://peppol.test.odoo.com/api/peppol/1/get_all_documents',
+            'https://peppol.test.afenda.app/api/peppol/1/get_all_documents',
             lambda url, **kwargs: self._empty_result_or_error(success=success),
         )
 
     def _mock_update_user(self, success=True):
         return (
-            'https://peppol.test.odoo.com/api/peppol/1/update_user',
+            'https://peppol.test.afenda.app/api/peppol/1/update_user',
             lambda url, **kwargs: self._empty_result_or_error(success=success),
         )
 

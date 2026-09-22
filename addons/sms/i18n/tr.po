@@ -25,12 +25,12 @@
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 16:28+0000\n"
-"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/sms/tr/>"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@afenda.app>\n"
+"Language-Team: Turkish <https://translate.afenda.app/projects/odoo-19/sms/tr/>"
 "\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -242,10 +242,10 @@ msgstr "\"%(record_name)s\" adresinden SMS gönderilirken bir hata oluştu"
 #. odoo-python
 #: code:addons/sms/tools/sms_api.py:0
 msgid ""
-"An unknown error occurred. Please contact Odoo support if this error "
+"An unknown error occurred. Please contact AFENDA xForge support if this error "
 "persists."
 msgstr ""
-"Bilinmeyen bir hata oluştu. Bu hata devam ederse lütfen Odoo destek ile "
+"Bilinmeyen bir hata oluştu. Bu hata devam ederse lütfen AFENDA xForge destek ile "
 "iletişime geçin."
 
 #. module: sms

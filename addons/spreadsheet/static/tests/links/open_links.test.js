@@ -26,15 +26,15 @@ test("click a web link", async () => {
     const data = {
         sheets: [
             {
-                cells: { A1: "[Odoo](https://odoo.com)" },
+                cells: { A1: "[AFENDA xForge](https://afenda.app)" },
             },
         ],
     };
     const model = new Model(data, { custom: { env } });
     const cell = getEvaluatedCell(model, "A1");
-    expect(urlRepresentation(cell.link, model.getters)).toBe("https://odoo.com");
+    expect(urlRepresentation(cell.link, model.getters)).toBe("https://afenda.app");
     openLink(cell.link, env);
-    expect.verifySteps(["https://odoo.com"]);
+    expect.verifySteps(["https://afenda.app"]);
 });
 
 test("click a menu link", async () => {

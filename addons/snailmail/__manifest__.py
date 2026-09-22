@@ -34,6 +34,6 @@ Allows users to send documents by post
             'snailmail/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

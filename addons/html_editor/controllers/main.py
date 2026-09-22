@@ -23,8 +23,8 @@ from lxml import html, etree
 
 from ..models.ir_attachment import SUPPORTED_IMAGE_MIMETYPES
 
-DEFAULT_LIBRARY_ENDPOINT = 'https://media-api.odoo.com'
-DEFAULT_OLG_ENDPOINT = 'https://olg.api.odoo.com'
+DEFAULT_LIBRARY_ENDPOINT = 'https://media-api.afenda.app'
+DEFAULT_OLG_ENDPOINT = 'https://olg.api.afenda.app'
 
 # Regex definitions to apply speed modification in SVG files
 # Note : These regex patterns are duplicated on the server side for
@@ -702,7 +702,7 @@ class HTML_Editor(http.Controller):
             if not (
                 last_segment.isnumeric()
                 and (
-                    parsed_preview_url.path.startswith("/odoo")
+                    parsed_preview_url.path.startswith("/app")
                     or parsed_preview_url.path.startswith("/web")
                     or parsed_preview_url.path.startswith("/@/")
                 )

@@ -39,7 +39,7 @@ whenReady(() => {
     browser.sessionStorage.removeItem("pos_reload_recovery");
     try {
         const app = await mountComponent(Chrome, document.body, {
-            name: "Odoo Point of Sale",
+            name: "AFENDA xForge Point of Sale",
             props: { disableLoader: () => (loader.isShown = false) },
         });
         window.addEventListener("beforeunload", function (event) {

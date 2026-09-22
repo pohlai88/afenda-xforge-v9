@@ -1,7 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Argentina - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/argentina.html',
+    'website': '/docs/applications/finance/fiscal_localizations/argentina.html',
     'countries': ['ar'],
     'icon': '/base/static/img/country_flags/ar.png',
     'version': "3.7",
@@ -34,7 +34,7 @@ Demo data for testing:
   * Gritti (Monotributo)
   * Montana Sur. IVA Liberado in Zona Franca
   * Barcelona food (Cliente del Exterior)
-  * Odoo (Proveedor del Exterior)
+  * AFENDA xForge (Proveedor del Exterior)
 
 Highlights:
 

@@ -6,12 +6,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo 9.0\n"
+"Project-Id-Version: AFENDA xForge 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:48+0000\n"
 "PO-Revision-Date: 2026-08-06 18:33+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/purchase/lo/>"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/purchase/lo/>"
 "\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -3013,12 +3013,12 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                    orders or receipts. This allows you to control bills\n"
 "                    you receive from your vendor according to the draft\n"
-"                    document in Odoo."
+"                    document in AFENDA xForge."
 msgstr ""
 "ໃບເກັບເງິນຜູ້ສະໜອງສາມາດສ້າງລ່ວງໜ້າໄດ້ໂດຍອີງຕາມໃບສັ່ງຊື້\n"
 "                    ຫຼື ການຮັບເຄື່ອງ. ນີ້ຊ່ວຍໃຫ້ທ່ານຄວບຄຸມໃບເກັບເງິນ\n"
 "                    ທີ່ທ່ານໄດ້ຮັບຈາກຜູ້ສະໜອງຕາມເອກະສານຮ່າງ\n"
-"                    ໃນ Odoo."
+"                    ໃນ AFENDA xForge."
 
 #. module: purchase
 #. odoo-python
@@ -3091,18 +3091,18 @@ msgstr "ປະຫວັດການສື່ສານເວັບໄຊທ໌"
 
 #. module: purchase
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_0
-msgid "When creating a purchase order, have a look at the vendor's <i>On Time Delivery</i> rate: the percentage of products shipped on time. If it is too low, activate the <i>automated reminders</i>. A few days before the due shipment, Odoo will send the vendor an email to ask confirmation of shipment dates and keep you informed in case of any delays. To get the vendor's performance statistics, click on the OTD rate."
+msgid "When creating a purchase order, have a look at the vendor's <i>On Time Delivery</i> rate: the percentage of products shipped on time. If it is too low, activate the <i>automated reminders</i>. A few days before the due shipment, AFENDA xForge will send the vendor an email to ask confirmation of shipment dates and keep you informed in case of any delays. To get the vendor's performance statistics, click on the OTD rate."
 msgstr ""
 "ເມື່ອສ້າງໃບສັ່ງຊື້, ໃຫ້ເບິ່ງອັດຕາ <i>ການສົ່ງເຄື່ອງກົງເວລາ</i> ຂອງຜູ້ສະໜອງ: ເປີເຊັນຂອງສິນຄ້າທີ່ສົ່ງກົງເວລ"
-"າ. ຫາກມັນຕ່ຳເກີນໄປ, ໃຫ້ເປີດໃຊ້ <i>ການແຈ້ງເຕືອນອັດຕະໂນມັດ</i>. ສອງສາມມື້ກ່ອນກຳນົດສົ່ງ, Odoo ຈະ"
+"າ. ຫາກມັນຕ່ຳເກີນໄປ, ໃຫ້ເປີດໃຊ້ <i>ການແຈ້ງເຕືອນອັດຕະໂນມັດ</i>. ສອງສາມມື້ກ່ອນກຳນົດສົ່ງ, AFENDA xForge ຈະ"
 "ສົ່ງອີເມວຫາຜູ້ສະໜອງເພື່ອຂໍການຢືນຢັນວັນທີສົ່ງ ແລະ ແຈ້ງໃຫ້ທ່ານຊາບຫາກມີການລ່າຊ້າ. ເພື່ອເບິ່ງສະຖິຕິປະສິດທິພາບ"
 "ຂອງຜູ້ສະໜອງ, ໃຫ້ຄລິກທີ່ອັດຕາ OTD."
 
 #. module: purchase
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_1
-msgid "When sending a purchase order by email, Odoo asks the vendor to acknowledge the reception of the order. When the vendor acknowledges the order by clicking on a button in the email, the information is added on the purchase order. Use filters to track orders that have not been acknowledged."
+msgid "When sending a purchase order by email, AFENDA xForge asks the vendor to acknowledge the reception of the order. When the vendor acknowledges the order by clicking on a button in the email, the information is added on the purchase order. Use filters to track orders that have not been acknowledged."
 msgstr ""
-"ເມື່ອສົ່ງໃບສັ່ງຊື້ທາງອີເມວ, Odoo ຈະຂໍໃຫ້ຜູ້ສະໜອງຕອບຮັບການຮັບໃບສັ່ງຊື້. ເມື່ອຜູ້ສະໜອງຕອບຮັບໂດຍການຄລິກປຸ່ມ"
+"ເມື່ອສົ່ງໃບສັ່ງຊື້ທາງອີເມວ, AFENDA xForge ຈະຂໍໃຫ້ຜູ້ສະໜອງຕອບຮັບການຮັບໃບສັ່ງຊື້. ເມື່ອຜູ້ສະໜອງຕອບຮັບໂດຍການຄລິກປຸ່ມ"
 "ໃນອີເມວ, ຂໍ້ມູນຈະຖືກເພີ່ມເຂົ້າໃນໃບສັ່ງຊື້. ໃຊ້ຕົວຕອງເພື່ອຕິດຕາມໃບສັ່ງຊື້ທີ່ຍັງບໍ່ທັນໄດ້ຮັບການຕອບຮັບ."
 
 #. module: purchase

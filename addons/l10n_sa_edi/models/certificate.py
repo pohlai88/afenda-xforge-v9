@@ -60,7 +60,7 @@ class CertificateCertificate(models.Model):
                 "name": _("Locality Name"),
             },
             "egs_serial": {
-                "value": f"1-Odoo|2-{version_info['server_serie']}|3-{journal.id}",
+                "value": f"1-AFENDA xForge|2-{version_info['server_serie']}|3-{journal.id}",
                 "name": _("Journal Serial Number"),
             },
             "org_uid": {

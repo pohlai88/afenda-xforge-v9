@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:53+0000\n"
 "PO-Revision-Date: 2026-06-05 19:53+0000\n"
@@ -652,7 +652,7 @@ msgstr ""
 #. module: l10n_es_edi_verifactu
 #. odoo-python
 #: code:addons/l10n_es_edi_verifactu/models/verifactu_document.py:0
-msgid "The cancelled record is not Veri*Factu registered (inside Odoo)."
+msgid "The cancelled record is not Veri*Factu registered (inside AFENDA xForge)."
 msgstr ""
 
 #. module: l10n_es_edi_verifactu

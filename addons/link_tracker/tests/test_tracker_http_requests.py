@@ -11,7 +11,7 @@ class TestTrackerHttpRequests(MockLinkTracker, common.HttpCase):
         """Ensure that requests with a user agent matching known preview user agents will not be registered as a click"""
         link_tracker = self.env['link.tracker'].create({
                 'url': '/',
-                'title': 'Odoo',
+                'title': 'AFENDA xForge',
             })
         self.assertEqual(len(link_tracker.link_click_ids), 0)
         link = '/r/' + link_tracker.code

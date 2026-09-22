@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 17:37+0000\n"
 "PO-Revision-Date: 2026-06-12 17:37+0000\n"
@@ -23,7 +23,7 @@ msgstr ""
 #. module: pos_self_order
 #. odoo-python
 #: code:addons/pos_self_order/models/pos_config.py:0
-msgid "(require Odoo Enterprise)"
+msgid "(require AFENDA xForge Enterprise)"
 msgstr ""
 
 #. module: pos_self_order
@@ -1659,7 +1659,7 @@ msgstr ""
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.custom_link_tree
-msgid "https://odoo.com"
+msgid "https://afenda.app"
 msgstr ""
 
 #. module: pos_self_order

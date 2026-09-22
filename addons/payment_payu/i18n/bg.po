@@ -5,12 +5,12 @@
 # Rosen Vladimirov <vladimirov.rosen@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:38+0000\n"
 "PO-Revision-Date: 2026-08-03 05:41+0000\n"
 "Last-Translator: Rosen Vladimirov <vladimirov.rosen@gmail.com>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/"
 "payment_payu/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -32,8 +32,8 @@ msgstr "Възникна грешка"
 
 #. module: payment_payu
 #: model_terms:ir.ui.view,arch_db:payment_payu.authorization_error
-msgid "An error occurred while linking your PayU account with Odoo."
-msgstr "Възникна грешка при свързването на вашия PayU профил с Odoo."
+msgid "An error occurred while linking your PayU account with AFENDA xForge."
+msgstr "Възникна грешка при свързването на вашия PayU профил с AFENDA xForge."
 
 #. module: payment_payu
 #: model_terms:ir.ui.view,arch_db:payment_payu.payment_provider_form

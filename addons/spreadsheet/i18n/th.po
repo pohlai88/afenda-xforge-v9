@@ -8,12 +8,12 @@
 # Nusara Boonma <nuboo@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 18.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:36+0000\n"
 "PO-Revision-Date: 2026-08-08 00:20+0000\n"
-"Last-Translator: Odoo Translation Bot <c3p@odoo.com>\n"
-"Language-Team: Thai <https://translate.odoo.com/projects/odoo-19/spreadsheet/"
+"Last-Translator: AFENDA xForge Translation Bot <c3p@afenda.app>\n"
+"Language-Team: Thai <https://translate.afenda.app/projects/odoo-19/spreadsheet/"
 "th/>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
@@ -1113,8 +1113,8 @@ msgstr "เกิดข้อผิดพลาดที่ไม่คาดค
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at odoo.com/help."
-msgstr "เกิดความผิดพลาดอย่างไม่คาดคิด ส่งทิกเก็ตช่วยเหลือที่ odoo.com/help"
+msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
+msgstr "เกิดความผิดพลาดอย่างไม่คาดคิด ส่งทิกเก็ตช่วยเหลือที่ afenda.app/help"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -6331,79 +6331,79 @@ msgstr "ตุลาคม"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Bar Chart"
+msgid "AFENDA xForge Bar Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Combo Chart"
+msgid "AFENDA xForge Combo Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Funnel Chart"
+msgid "AFENDA xForge Funnel Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Geo Chart"
+msgid "AFENDA xForge Geo Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Line Chart"
+msgid "AFENDA xForge Line Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pie Chart"
+msgid "AFENDA xForge Pie Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Pyramid Chart"
+msgid "AFENDA xForge Pyramid Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Radar Chart"
+msgid "AFENDA xForge Radar Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Scatter Chart"
+msgid "AFENDA xForge Scatter Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/hooks.js:0
-msgid "Odoo Spreadsheet"
-msgstr "สเปรดชีต Odoo"
+msgid "AFENDA xForge Spreadsheet"
+msgstr "สเปรดชีต AFENDA xForge"
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Sunburst Chart"
+msgid "AFENDA xForge Sunburst Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Treemap Chart"
+msgid "AFENDA xForge Treemap Chart"
 msgstr ""
 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/chart/plugins/odoo_chart_core_plugin.js:0
-msgid "Odoo Waterfall Chart"
+msgid "AFENDA xForge Waterfall Chart"
 msgstr ""
 
 #. module: spreadsheet
@@ -13412,7 +13412,7 @@ msgstr ""
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.odoo.com'"
+msgid "e.g. 'http://www.afenda.app'"
 msgstr ""
 
 #. module: spreadsheet

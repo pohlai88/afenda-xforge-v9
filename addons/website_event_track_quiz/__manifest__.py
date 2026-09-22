@@ -8,7 +8,7 @@
     'sequence': 1007,
     'version': '1.0',
     'summary': 'Quizzes on tracks',
-    'website': 'https://www.odoo.com/app/events',
+    'website': 'https://www.afenda.app/app/events',
     'depends': [
         'website_profile',
         'website_event_track',
@@ -37,6 +37,6 @@
             'website_event_track_quiz/static/src/xml/quiz_templates.xml',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

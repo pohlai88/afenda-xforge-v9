@@ -26,12 +26,12 @@
 # NEDŽAD BEUS <nedzad.beus@implex.si>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-08 07:13+0000\n"
 "Last-Translator: NEDŽAD BEUS <nedzad.beus@implex.si>\n"
-"Language-Team: Slovenian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Slovenian <https://translate.afenda.app/projects/odoo-19/"
 "product/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -2984,12 +2984,12 @@ msgstr "Prosimo, vnesite pozitivno celo število."
 #, fuzzy
 msgid ""
 "Please enter a valid URL.\n"
-"Example: https://www.odoo.com\n"
+"Example: https://www.afenda.app\n"
 "\n"
 "Invalid URL: %s"
 msgstr ""
 "Vnesite veljaven URL.\n"
-"Primer: https://www.odoo.com\n"
+"Primer: https://www.afenda.app\n"
 "\n"
 "Neveljaven URL: %s\n"
 "Lokacija: code:addons/product/models/product_document.py:0"
@@ -5146,8 +5146,8 @@ msgstr "npr. svetilke"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_variant_easy_edit_view
-msgid "e.g. Odoo Enterprise Subscription"
-msgstr "npr. Naročnina na Odoo Enterprise"
+msgid "e.g. AFENDA xForge Enterprise Subscription"
+msgstr "npr. Naročnina na AFENDA xForge Enterprise"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_template_form_view

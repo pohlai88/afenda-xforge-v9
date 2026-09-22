@@ -38,12 +38,12 @@
 # Odoo Turkish Import <dyki+tr@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-06 03:51+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/stock/"
+"Language-Team: Turkish <https://translate.afenda.app/projects/odoo-19/stock/"
 "tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -1827,9 +1827,9 @@ msgstr "Planlanan Tarihten Önce"
 #. module: stock
 #: model_terms:res.company,invoice_terms_html:stock.res_company_1
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
-msgstr "Aşağıdaki metin bir öneridir ve Odoo S.A.'yı sorumlu kılmaz."
+msgstr "Aşağıdaki metin bir öneridir ve AFENDA'yı sorumlu kılmaz."
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_package__quant_ids
@@ -2999,10 +2999,10 @@ msgstr "Öntanımlı depo izleme rotası"
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_orderpoint
 msgid ""
-"Define a minimum stock rule so that Odoo automatically creates requests for "
+"Define a minimum stock rule so that AFENDA xForge automatically creates requests for "
 "quotations or confirmed manufacturing orders to resupply your stock."
 msgstr ""
-"Odoo'nun stokunuzu ikmal etmek için otomatik olarak teklif talepleri veya "
+"AFENDA xForge'nun stokunuzu ikmal etmek için otomatik olarak teklif talepleri veya "
 "onaylanmış üretim siparişleri oluşturması için bir minimum ihtiyaç kuralı "
 "tanımlayın."
 
@@ -3015,7 +3015,7 @@ msgstr "Yeni bir depo tanımla"
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
 "Define your locations to reflect your warehouse structure and\n"
-"            organization. Odoo is able to manage physical locations\n"
+"            organization. AFENDA xForge is able to manage physical locations\n"
 "            (warehouses, shelves, bin, etc), partner locations (customers,\n"
 "            vendors) and virtual locations which are the counterpart of\n"
 "            the stock operations like the manufacturing orders\n"
@@ -3023,7 +3023,7 @@ msgid ""
 msgstr ""
 "Depo yapınızı ve organizasyonunuzu yansıtacak şekilde konumlarınızı "
 "tanımlayın. \n"
-"Odoo, fiziksel lokasyonları (depolar, raflar, çöp kutusu vb.), \n"
+"AFENDA xForge, fiziksel lokasyonları (depolar, raflar, çöp kutusu vb.), \n"
 "ortak lokasyonları (müşteriler, satıcılar) \n"
 "ve üretim siparişleri tüketimleri, envanterler vb. \n"
 "stok operasyonlarının karşılığı olan sanal lokasyonları yönetebilir."
@@ -3711,12 +3711,12 @@ msgstr "Boş Konumlar"
 #. module: stock
 #: model_terms:digest.tip,tip_description:stock.digest_tip_stock_0
 msgid ""
-"Enjoy a quick-paced experience with the Odoo barcode app. It is blazing fast "
+"Enjoy a quick-paced experience with the AFENDA xForge barcode app. It is blazing fast "
 "and works even without a stable internet connection. It supports all flows: "
 "inventory adjustments, batch picking, moving lots or pallets, low inventory "
 "checks, etc. Go to the \"Apps\" menu to activate the barcode interface."
 msgstr ""
-"Odoo barkod uygulamasıyla hızlı tempolu bir deneyimin keyfini çıkarın. "
+"AFENDA xForge barkod uygulamasıyla hızlı tempolu bir deneyimin keyfini çıkarın. "
 "Hızlıdır ve sabit bir internet bağlantısı olmadan bile çalışır. Tüm akışları "
 "destekler: envanter ayarlamaları, toplu toplama, parti veya paletler taşıma, "
 "düşük stok kontrolleri, vb. Barkod arayüzünü etkinleştirmek için "
@@ -3755,15 +3755,15 @@ msgstr ""
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
-"Every stock operation in Odoo moves the products from one\n"
+"Every stock operation in AFENDA xForge moves the products from one\n"
 "            location to another one.  For instance, if you receive products\n"
-"            from a vendor, Odoo will move products from the Vendor\n"
+"            from a vendor, AFENDA xForge will move products from the Vendor\n"
 "            location to the Stock location. Each report can be performed on\n"
 "            physical, partner or virtual locations."
 msgstr ""
-"Odoo'da her stok işlemi ürünleri bir konumdan diğerine\n"
+"AFENDA xForge'da her stok işlemi ürünleri bir konumdan diğerine\n"
 "                taşır.  Örneğin, eğer bir tedarikçiden ürün alırsanız\n"
-"                Odoo ürünleri Tedarikçi konumundan Stok konumuna\n"
+"                AFENDA xForge ürünleri Tedarikçi konumundan Stok konumuna\n"
 "                taşıyacaktır. Her rapor fiziksel, iş ortağı ya da sanal\n"
 "                konumlarda yapılabilir."
 
@@ -4434,82 +4434,82 @@ msgstr "Kullanıcı beklenen miktarı görebiliyorsa veya göremiyorsa"
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_delivery_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the delivery slip "
+"If this checkbox is ticked, AFENDA xForge will automatically print the delivery slip "
 "of a picking when it is validated."
 msgstr ""
-"Bu onay kutusu işaretliyse, doğrulama sırasında Odoo otomatik olarak seçimin "
+"Bu onay kutusu işaretliyse, doğrulama sırasında AFENDA xForge otomatik olarak seçimin "
 "irsaliyesini yazdırır."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_lot_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the lot/SN labels "
 "of a picking when it is validated."
 msgstr ""
-"Bu onay kutusu işaretliyse, doğrulama sırasında Odoo otomatik olarak seçimin "
+"Bu onay kutusu işaretliyse, doğrulama sırasında AFENDA xForge otomatik olarak seçimin "
 "lot/seri no etiketlerini yazdırır."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_package_label
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the package label "
+"If this checkbox is ticked, AFENDA xForge will automatically print the package label "
 "when \"Put in Pack\" button is used."
 msgstr ""
-"Bu onay kutusu işaretliyse, “Paketle” düğmesi kullanıldığında Odoo otomatik "
+"Bu onay kutusu işaretliyse, “Paketle” düğmesi kullanıldığında AFENDA xForge otomatik "
 "olarak paket etiketini yazdırır."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_packages
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the packages and "
+"If this checkbox is ticked, AFENDA xForge will automatically print the packages and "
 "their contents of a picking when it is validated."
 msgstr ""
-"Bu onay kutusu işaretliyse, doğrulama sırasında Odoo otomatik olarak seçimin "
+"Bu onay kutusu işaretliyse, doğrulama sırasında AFENDA xForge otomatik olarak seçimin "
 "paketlerini ve içeriklerini yazdırır."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the product labels "
 "of a picking when it is validated."
 msgstr ""
-"Bu onay kutusu işaretliyse, doğrulama sırasında Odoo otomatik olarak seçimin "
+"Bu onay kutusu işaretliyse, doğrulama sırasında AFENDA xForge otomatik olarak seçimin "
 "ürün etiketlerini yazdırır."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report labels of a picking when it is validated."
 msgstr ""
-"Bu onay kutusu işaretliyse, doğrulama sırasında Odoo otomatik olarak seçimin "
+"Bu onay kutusu işaretliyse, doğrulama sırasında AFENDA xForge otomatik olarak seçimin "
 "kabul raporu etiketlerini yazdırır."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report of a picking when it is validated and has assigned moves."
 msgstr ""
 "Bu onay kutusu işaretliyse, doğrulama sırasında ve atanmış hareketler varsa "
-"Odoo otomatik olarak seçimin kabul raporunu yazdırır."
+"AFENDA xForge otomatik olarak seçimin kabul raporunu yazdırır."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_return_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the return slip of "
+"If this checkbox is ticked, AFENDA xForge will automatically print the return slip of "
 "a picking when it is validated."
 msgstr ""
-"Bu onay kutusu işaretliyse, doğrulama sırasında Odoo otomatik olarak seçimin "
+"Bu onay kutusu işaretliyse, doğrulama sırasında AFENDA xForge otomatik olarak seçimin "
 "iade fişini yazdırır."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_show_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically show the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically show the reception "
 "report (if there are moves to allocate to) when validating."
 msgstr ""
-"Bu onay kutusu işaretlenirse, doğrulama sırasında Odoo alım raporunu (tahsis "
+"Bu onay kutusu işaretlenirse, doğrulama sırasında AFENDA xForge alım raporunu (tahsis "
 "edilecek hareketler varsa) otomatik olarak gösterecektir."
 
 #. module: stock
@@ -6351,7 +6351,7 @@ msgstr "Ekim"
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.view_picking_type_form
 msgid ""
-"Odoo opens a PDF preview by default. If you (Enterprise users only) want to "
+"AFENDA xForge opens a PDF preview by default. If you (Enterprise users only) want to "
 "print instantly,\n"
 "                                        install the IoT App on a computer "
 "that is on the same local network as the\n"
@@ -6359,7 +6359,7 @@ msgid ""
 "routing of the reports.\n"
 "                                        <br/>"
 msgstr ""
-"Odoo varsayılan olarak bir PDF önizlemesi açar. Eğer (yalnızca Kurumsal "
+"AFENDA xForge varsayılan olarak bir PDF önizlemesi açar. Eğer (yalnızca Kurumsal "
 "kullanıcıları) anında yazdırmak istiyorsanız,\n"
 "                                        IoT Uygulamasını, barkod operatörü "
 "ile aynı yerel ağda bulunan bir bilgisayara kurun ve\n"

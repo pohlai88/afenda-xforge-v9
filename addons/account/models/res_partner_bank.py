@@ -276,7 +276,7 @@ class ResPartnerBank(models.Model):
             or self.env.user.has_group('account.group_validate_bank_account')
             or self.env.user.has_group('base.group_system')
         ) and (
-            # Prevent crons from trusting bank accounts (OdooBot), except when loading demo data
+            # Prevent crons from trusting bank accounts (AFENDA Bot), except when loading demo data
             self.env.user.id != SUPERUSER_ID
             or self.env.context.get('install_mode')
             or tools.config['test_enable']

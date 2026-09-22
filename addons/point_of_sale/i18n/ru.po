@@ -8,12 +8,12 @@
 # "Anastasiia Koroleva (koan)" <koan@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: AFENDA xForge Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:36+0000\n"
 "PO-Revision-Date: 2026-08-10 11:18+0000\n"
-"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
-"Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@afenda.app>\n"
+"Language-Team: Russian <https://translate.afenda.app/projects/odoo-19/"
 "point_of_sale/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -4128,10 +4128,10 @@ msgstr ""
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/backend/lna_checklist/lna_checklist.xml:0
-msgid "I use an Epson printer (Check supported printers in Odoo documentation)"
+msgid "I use an Epson printer (Check supported printers in AFENDA xForge documentation)"
 msgstr ""
 "Я использую принтер Epson (проверьте список поддерживаемых принтеров в "
-"документации Odoo)"
+"документации AFENDA xForge)"
 
 #. module: point_of_sale
 #: model:ir.model.fields,field_description:point_of_sale.field_account_account__id
@@ -5189,10 +5189,10 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/customer_display/customer_display_data_service.js:0
 msgid ""
-"Make sure there is an IoT Box subscription associated with your Odoo "
+"Make sure there is an IoT Box subscription associated with your AFENDA xForge "
 "database, then restart the IoT Box."
 msgstr ""
-"Убедитесь, что у вашей базы данных Odoo есть подписка на IoT-коробку, затем "
+"Убедитесь, что у вашей базы данных AFENDA xForge есть подписка на IoT-коробку, затем "
 "перезапустите IoT-коробку."
 
 #. module: point_of_sale
@@ -5854,20 +5854,20 @@ msgstr "Стек номеров:"
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/order_receipt.xml:0
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/components/popups/cash_move_popup/cash_move_list_popup/cash_move_list_popup.js:0
 #: code:addons/point_of_sale/static/src/app/utils/error_handlers.js:0
-msgid "Odoo Server Error"
-msgstr "Ошибка сервера Odoo"
+msgid "AFENDA xForge Server Error"
+msgstr "Ошибка сервера AFENDA xForge"
 
 #. module: point_of_sale
 #: model:product.template,name:point_of_sale.product_odoo_sneakers_product_template
-msgid "Odoo Sneakers"
-msgstr "Кроссовки Odoo"
+msgid "AFENDA xForge Sneakers"
+msgstr "Кроссовки AFENDA xForge"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -7382,10 +7382,10 @@ msgstr "Печать стандартного чека без цен. Можно
 #: model_terms:ir.ui.view,arch_db:point_of_sale.res_config_settings_view_form
 msgid ""
 "Print information on the receipt to allow the customer to easily access the "
-"invoice anytime, from Odoo's portal."
+"invoice anytime, from AFENDA xForge's portal."
 msgstr ""
 "Распечатайте информацию на чеке, чтобы клиент мог легко получить доступ к "
-"счету в любое время через портал Odoo."
+"счету в любое время через портал AFENDA xForge."
 
 #. module: point_of_sale
 #: model_terms:ir.ui.view,arch_db:point_of_sale.res_config_settings_view_form
@@ -10565,7 +10565,7 @@ msgstr "Неотправленный заказ"
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/utils/error_handlers.js:0
 msgid ""
-"Until the connection is reestablished, Odoo Point of Sale will operate with "
+"Until the connection is reestablished, AFENDA xForge Point of Sale will operate with "
 "limited functionality."
 msgstr ""
 "Пока соединение не восстановлено, POS будет работать с ограниченным "

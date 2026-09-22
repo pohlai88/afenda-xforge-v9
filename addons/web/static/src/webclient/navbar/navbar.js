@@ -209,7 +209,7 @@ export class NavBar extends Component {
     }
 
     getMenuItemHref(payload) {
-        return `/odoo/${payload.actionPath || "action-" + payload.actionID}`;
+        return `/app/${payload.actionPath || "action-" + payload.actionID}`;
     }
 
     _closeAppMenuSidebar() {

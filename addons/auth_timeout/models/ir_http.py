@@ -131,7 +131,7 @@ class IrHttp(models.AbstractModel):
 
         - because the web client, in Javascript, sent an event that the user is inactive
         - because the websocket connection was closed (e.g., the user closed the browser,
-          the last tab to Odoo was closed, internet disconnection, ...)
+          the last tab to AFENDA xForge was closed, internet disconnection, ...)
 
         :param Session session: The user's HTTP session object.
         :param float inactivity_period: Duration of user inactivity in milliseconds.

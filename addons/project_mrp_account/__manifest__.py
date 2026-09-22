@@ -10,6 +10,6 @@
         'data/project_mrp_account_demo.xml',
     ],
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

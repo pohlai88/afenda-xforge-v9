@@ -3,7 +3,7 @@
     'category': 'Hidden',
     'version': '1.0',
     'description': """
-Odoo Dynamic API Documentation
+AFENDA xForge Dynamic API Documentation
 ==============================
 
 This module provides a dynamic documentation page for developpers at the
@@ -59,6 +59,6 @@ the methods over HTTP, with examples in various programming languages.
         ],
     },
     'bootstrap': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

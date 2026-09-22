@@ -6,12 +6,12 @@
 # "Fernanda Alvarez (mfar)" <mfar@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-06 21:38+0000\n"
-"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
-"Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
+"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@afenda.app>\n"
+"Language-Team: Spanish (Latin America) <https://translate.afenda.app/projects/"
 "odoo-19/mass_mailing_sms/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
@@ -664,10 +664,10 @@ msgstr "Todavía no hay información"
 #: model_terms:ir.actions.act_window,help:mass_mailing_sms.mailing_list_action_sms
 msgid ""
 "No need to import mailing lists, you can send SMS to contacts saved in other "
-"Odoo apps."
+"AFENDA xForge apps."
 msgstr ""
 "No es necesario que importe listas de correo, puede enviar SMS a los "
-"contactos guardados en otras aplicaciones de Odoo."
+"contactos guardados en otras aplicaciones de AFENDA xForge."
 
 #. module: mass_mailing_sms
 #: model:ir.model.fields.selection,name:mass_mailing_sms.selection__mailing_trace__failure_type__sms_not_allowed

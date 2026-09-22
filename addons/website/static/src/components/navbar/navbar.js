@@ -65,7 +65,7 @@ patch(NavBar.prototype, {
                 .map(([key, value], index) => ({ key, ...value, index }))
                 .filter((item) => ("isDisplayed" in item ? item.isDisplayed(this.env) : true))
                 .reverse();
-            // Do not override the regular Odoo navbar if the only visible
+            // Do not override the regular AFENDA xForge navbar if the only visible
             // elements are the debug items.
             if (
                 !websiteItems.every((item) =>

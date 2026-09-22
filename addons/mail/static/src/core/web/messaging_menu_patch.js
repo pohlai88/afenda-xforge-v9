@@ -73,7 +73,7 @@ patch(MessagingMenu.prototype, {
     get installationRequest() {
         return {
             body: _t("Come here often? Install the app for quick and easy access!"),
-            displayName: _t("Install Odoo"),
+            displayName: _t("Install AFENDA xForge"),
             onClick: () => {
                 this.pwa.show();
             },

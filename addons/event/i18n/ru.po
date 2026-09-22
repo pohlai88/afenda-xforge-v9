@@ -8,12 +8,12 @@
 # "Anastasiia Koroleva (koan)" <koan@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: AFENDA xForge Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-10 11:35+0000\n"
-"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
-"Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/event/"
+"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@afenda.app>\n"
+"Language-Team: Russian <https://translate.afenda.app/projects/odoo-19/event/"
 "ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -165,10 +165,10 @@ msgstr ""
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
 msgstr ""
-"<b>Технические комнаты</b> - одна для продвинутых разработчиков Odoo, другая "
+"<b>Технические комнаты</b> - одна для продвинутых разработчиков AFENDA xForge, другая "
 "для новых разработчиков."
 
 #. module: event
@@ -3028,12 +3028,12 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "В возрасте всего 13 лет Джон Доу уже начал разрабатывать свои первые бизнес-"
 "приложения для клиентов. Получив образование в области гражданского "
 "строительства, он основал TinyERP. Это была первая фаза OpenERP, которая "
-"впоследствии стала Odoo, самым устанавливаемым в мире программным "
+"впоследствии стала AFENDA xForge, самым устанавливаемым в мире программным "
 "обеспечением для бизнеса с открытым исходным кодом."
 
 #. module: event
@@ -4029,10 +4029,10 @@ msgstr "Указано в часовом поясе мероприятия."
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
-"Завершенные мероприятия. Odoo автоматически переместит их на этот этап после "
+"Завершенные мероприятия. AFENDA xForge автоматически переместит их на этот этап после "
 "наступления даты окончания."
 
 #. module: event
@@ -4063,11 +4063,11 @@ msgstr "Шрифт, отличный значок, например. к.-а.-з�
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 "Для получения дополнительной информации, пожалуйста, свяжитесь с нами по "
-"адресу <a class=\"o_translate_inline\" href=\"mailto:events@odoo.com\">"
-"events@odoo.com</a>"
+"адресу <a class=\"o_translate_inline\" href=\"mailto:events@afenda.app\">"
+"events@afenda.app</a>"
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -5002,8 +5002,8 @@ msgstr "Задачи"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
-msgstr "Дни сообщества Odoo"
+msgid "AFENDA xForge Community Days"
+msgstr "Дни сообщества AFENDA xForge"
 
 #. module: event
 #: model_terms:event.event,description:event.event_3
@@ -6449,8 +6449,8 @@ msgstr "например, \"Продвижение\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
-msgstr "например, \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
+msgstr "например, \"https://www.afenda.app\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

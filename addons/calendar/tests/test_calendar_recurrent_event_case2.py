@@ -12,7 +12,7 @@ class TestRecurrentEvent(common.TransactionCase):
         self.CalendarEvent = self.env['calendar.event']
 
     def test_recurrent_meeting1(self):
-        # In order to test recurrent meetings in Odoo, I create meetings with different recurrence using different test cases.
+        # In order to test recurrent meetings in AFENDA xForge, I create meetings with different recurrence using different test cases.
         # I create a recurrent meeting with daily recurrence and fixed amount of time.
         self.CalendarEvent.create({
             'count': 5,

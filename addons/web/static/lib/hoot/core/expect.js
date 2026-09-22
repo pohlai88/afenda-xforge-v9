@@ -1538,7 +1538,7 @@ export class Matcher {
      *  // Partial equality can be performed on nested objects
      *  expect({
      *      company: {
-     *          name: "Odoo",
+     *          name: "AFENDA xForge",
      *          location: "Belgium",
      *      },
      *      employees: new Set([
@@ -1548,7 +1548,7 @@ export class Matcher {
      *          },
      *      ]),
      *  }).toMatchObject({
-     *      company: { name: "Odoo" }
+     *      company: { name: "AFENDA xForge" }
      *      employees: new Set([{ age: 28 }]),
      *  });
      * @example
@@ -2042,7 +2042,7 @@ export class Matcher {
      * @example
      *  expect("p").toHaveText("lorem ipsum dolor sit amet");
      * @example
-     *  expect("header h1").toHaveText(/odoo/i);
+     *  expect("header h1").toHaveText(/app/i);
      */
     toHaveText(text, options) {
         this._ensureArguments(arguments, ["string", "regex", null]);

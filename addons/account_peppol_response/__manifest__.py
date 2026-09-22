@@ -23,7 +23,7 @@ When receiving a document, you will be able to send a rejection or approval of t
     ],
     'post_init_hook': '_account_peppol_response_post_init',
     'uninstall_hook': '_account_peppol_response_uninstall',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'auto_install': True,
 }

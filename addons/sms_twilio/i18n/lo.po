@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-08 02:27+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/sms_twilio/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/sms_twilio/"
 "lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -294,8 +294,8 @@ msgstr "ສົ່ງ SMS ທົດລອງ"
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__iap
-msgid "Send via Odoo"
-msgstr "ສົ່ງຜ່ານ Odoo"
+msgid "Send via AFENDA xForge"
+msgstr "ສົ່ງຜ່ານ AFENDA xForge"
 
 #. module: sms_twilio
 #: model:ir.model.fields.selection,name:sms_twilio.selection__res_company__sms_provider__twilio
@@ -335,8 +335,8 @@ msgstr "ເບີໂທລະສັບທີ່ທ່ານກຳລັງຕິ
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/wizard/sms_twilio_account_manage.py:0
-msgid "This is a test SMS from Odoo"
-msgstr "ນີ້ແມ່ນ SMS ທົດລອງຈາກ Odoo"
+msgid "This is a test SMS from AFENDA xForge"
+msgstr "ນີ້ແມ່ນ SMS ທົດລອງຈາກ AFENDA xForge"
 
 #. module: sms_twilio
 #. odoo-python
@@ -382,15 +382,15 @@ msgstr "URL StatusCallback ຂອງ Twilio ບໍ່ຖືກຕ້ອງ"
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown error, please contact Odoo support"
-msgstr "ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ຈັກ, ກະລຸນາຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອຂອງ Odoo"
+msgid "Unknown error, please contact AFENDA xForge support"
+msgstr "ເກີດຂໍ້ຜິດພາດທີ່ບໍ່ຮູ້ຈັກ, ກະລຸນາຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອຂອງ AFENDA xForge"
 
 #. module: sms_twilio
 #. odoo-python
 #: code:addons/sms_twilio/tools/sms_api.py:0
-msgid "Unknown failure at sending, please contact Odoo support"
+msgid "Unknown failure at sending, please contact AFENDA xForge support"
 msgstr ""
-"ເກີດການລົ້ມເຫຼວທີ່ບໍ່ຮູ້ສາເຫດໃນການສົ່ງ, ກະລຸນາຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອຂອງ Odoo"
+"ເກີດການລົ້ມເຫຼວທີ່ບໍ່ຮູ້ສາເຫດໃນການສົ່ງ, ກະລຸນາຕິດຕໍ່ຝ່າຍຊ່ວຍເຫຼືອຂອງ AFENDA xForge"
 
 #. module: sms_twilio
 #. odoo-python

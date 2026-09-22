@@ -3,7 +3,7 @@
     "countries": ["lb"],
     "version": "1.0",
     "description": """
-This is the base module to manage the accounting chart for Lebanon in Odoo.
+This is the base module to manage the accounting chart for Lebanon in AFENDA xForge.
 ==============================================================================
 Lebanon accounting basic charts,taxes and localization.
 Activates:
@@ -20,6 +20,6 @@ Activates:
     "demo": [
         "demo/demo_company.xml",
     ],
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     "license": "LGPL-3",
 }

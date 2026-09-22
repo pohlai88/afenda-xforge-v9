@@ -1029,7 +1029,7 @@ class IrModelFields(models.Model):
         IrModel = self.env['ir.model']
         for vals in vals_list:
             if vals.get('translate') and not isinstance(vals['translate'], str):
-                _logger.warning("Deprecated since Odoo 19, ir.model.fields.translate becomes Selection, the value should be a string")
+                _logger.warning("Deprecated since AFENDA xForge 19, ir.model.fields.translate becomes Selection, the value should be a string")
                 vals['translate'] = 'html_translate' if vals.get('ttype') == 'html' else 'standard'
             if 'model_id' in vals:
                 vals['model'] = IrModel.browse(vals['model_id']).model
@@ -1117,7 +1117,7 @@ class IrModelFields(models.Model):
                 del vals[column_name]
 
         if vals.get('translate') and not isinstance(vals['translate'], str):
-            _logger.warning("Deprecated since Odoo 19, ir.model.fields.translate becomes Selection, the value should be a string")
+            _logger.warning("Deprecated since AFENDA xForge 19, ir.model.fields.translate becomes Selection, the value should be a string")
             vals['translate'] = 'html_translate' if vals.get('ttype') == 'html' else 'standard'
 
         if column_rename and self.state == 'manual':
@@ -1858,7 +1858,7 @@ class IrModelFieldsSelection(models.Model):
 class IrModelConstraint(models.Model):
     """
     This model tracks PostgreSQL indexes, foreign keys and constraints
-    used by Odoo models.
+    used by AFENDA xForge models.
     """
     _name = 'ir.model.constraint'
     _description = 'Model Constraint'
@@ -2013,7 +2013,7 @@ class IrModelConstraint(models.Model):
 
 class IrModelRelation(models.Model):
     """
-    This model tracks PostgreSQL tables used to implement Odoo many2many
+    This model tracks PostgreSQL tables used to implement AFENDA xForge many2many
     relations.
     """
     _name = 'ir.model.relation'
@@ -2230,7 +2230,7 @@ class IrModelData(models.Model):
            * allows easy data integration with third-party systems,
              making import/export/sync of data possible, as records
              can be uniquely identified across multiple systems
-           * allows tracking the origin of data installed by Odoo
+           * allows tracking the origin of data installed by AFENDA xForge
              modules themselves, thus making it possible to later
              update them seamlessly.
     """

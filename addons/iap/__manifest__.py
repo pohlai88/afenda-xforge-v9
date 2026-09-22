@@ -8,7 +8,7 @@
     'summary': 'Basic models and helpers to support In-App purchases.',
     'description': """
 This module provides standard tools (account model, context manager and helpers)
-to support In-App purchases inside Odoo. """,
+to support In-App purchases inside AFENDA xForge. """,
     'depends': [
         'web',
         'base_setup'
@@ -27,6 +27,6 @@ to support In-App purchases inside Odoo. """,
             'iap/static/src/**/*.xml',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

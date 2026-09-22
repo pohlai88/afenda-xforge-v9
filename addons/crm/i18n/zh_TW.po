@@ -12,12 +12,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:35+0000\n"
 "PO-Revision-Date: 2026-08-02 18:28+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/crm/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -330,7 +330,7 @@ msgid ""
 "board, you'll discover what <t t-out=\"object.company_id.name or ''\">My "
 "Company (San Francisco)</t> has to offer. My name is <t t-"
 "out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the "
-"most out of Odoo. Could we plan a quick demo soon?<br/>\n"
+"most out of AFENDA xForge. Could we plan a quick demo soon?<br/>\n"
 "                            Feel free to reach out at any time!<br/><br/>\n"
 "                            Best,<br/>\n"
 "                            <t t-if=\"object.user_id\">\n"
@@ -381,9 +381,9 @@ msgid ""
 "</td></tr>\n"
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    Powered by <a target=\"_blank\" href=\"https://www.odoo.com?"
+"    Powered by <a target=\"_blank\" href=\"https://www.afenda.app?"
 "utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: "
-"{{object.company_id.email_secondary_color or '#875A7B'}};;\">Odoo</a>\n"
+"{{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
 "</table>\n"
 "        "
@@ -931,9 +931,9 @@ msgstr "歸類和分析您的潛在商機/商機類別， 例如：培訓、服�
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid ""
-"Click on the breadcrumb to go back to your Pipeline. Odoo will save all "
+"Click on the breadcrumb to go back to your Pipeline. AFENDA xForge will save all "
 "modifications as you navigate."
-msgstr "點擊麵包屑以返回你的管道。Odoo 會在你切換瀏覽畫面時儲存所有修改。"
+msgstr "點擊麵包屑以返回你的管道。AFENDA xForge 會在你切換瀏覽畫面時儲存所有修改。"
 
 #. module: crm
 #. odoo-javascript
@@ -1018,8 +1018,8 @@ msgstr "完成日期"
 #. module: crm
 #. odoo-javascript
 #: code:addons/crm/static/src/views/crm_form/crm_pls_tooltip_button.xml:0
-msgid "Computed by Odoo AI using your data."
-msgstr "由 Odoo AI 使用你的資料計算。"
+msgid "Computed by AFENDA xForge AI using your data."
+msgstr "由 AFENDA xForge AI 使用你的資料計算。"
 
 #. module: crm
 #: model:ir.model,name:crm.model_res_config_settings
@@ -1405,20 +1405,20 @@ msgstr "您是否知道發送給銷售團隊別名的電子郵件會在您的商
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_4
 msgid ""
 "Did you know you can search a company by name or VAT number to instantly "
-"fill in all its data? Odoo autocompletes everything for you: logo, address, "
+"fill in all its data? AFENDA xForge autocompletes everything for you: logo, address, "
 "company size, business information, social media accounts, etc."
 msgstr ""
-"您知道嗎，您可以通過名稱或增值稅號搜索公司以立即填寫其所有資料？ Odoo 會為您"
+"您知道嗎，您可以通過名稱或增值稅號搜索公司以立即填寫其所有資料？ AFENDA xForge 會為您"
 "自動完成所有內容：徽標、地址、公司規模、商業資訊、社交媒體帳戶等。"
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_5
 msgid ""
 "Did you know you can turn a list of opportunities into a map view, using the "
-"top-right map icon? A lot of screens in Odoo can be turned into a map: "
+"top-right map icon? A lot of screens in AFENDA xForge can be turned into a map: "
 "tasks, contacts, delivery orders, etc."
 msgstr ""
-"您是否知道可以使用右上角的地圖圖示將商機列表轉換為地圖視圖？ Odoo 中的很多屏"
+"您是否知道可以使用右上角的地圖圖示將商機列表轉換為地圖視圖？ AFENDA xForge 中的很多屏"
 "幕都可以變成地圖：任務、聯絡人、送貨單等。"
 
 #. module: crm
@@ -2412,10 +2412,10 @@ msgstr "MRR（每月經常收入）"
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
 msgid ""
-"Make and receive calls from Odoo with Ringover's dialer. Track calls, SMS "
+"Make and receive calls from AFENDA xForge with Ringover's dialer. Track calls, SMS "
 "messages, and get AI-powered transcripts of your conversations."
 msgstr ""
-"在 Odoo 介面使用 Ringover 通話工具，以撥打及接聽電話。你可追蹤通話、SMS 短訊"
+"在 AFENDA xForge 介面使用 Ringover 通話工具，以撥打及接聽電話。你可追蹤通話、SMS 短訊"
 "，並以 AI 人工智能，將對話語音轉寫為文字記錄。"
 
 #. module: crm
@@ -2853,7 +2853,7 @@ msgstr "有發送錯誤的郵件數量"
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_case_form_view_salesteams_opportunity
 msgid ""
-"Odoo helps you keep track of your sales pipeline to follow\n"
+"AFENDA xForge helps you keep track of your sales pipeline to follow\n"
 "                    up potential sales and better forecast your future "
 "revenues."
 msgstr ""
@@ -2863,13 +2863,13 @@ msgstr ""
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_2
 msgid ""
-"Odoo's artificial intelligence engine predicts the success rate of each "
+"AFENDA xForge's artificial intelligence engine predicts the success rate of each "
 "opportunity based on your history. You can always update the success rate "
-"manually, but if you let Odoo do the job the score is updated while the "
+"manually, but if you let AFENDA xForge do the job the score is updated while the "
 "opportunity moves forward in your sales cycle."
 msgstr ""
-"Odoo 的人工智能引擎根據您的歷史預測每個商機的成功率。您始終可以手動更新成功率"
-"，但如果您讓 Odoo 來完成這項工作，則當商機在您的銷售週期中向前推進時，分數就"
+"AFENDA xForge 的人工智能引擎根據您的歷史預測每個商機的成功率。您始終可以手動更新成功率"
+"，但如果您讓 AFENDA xForge 來完成這項工作，則當商機在您的銷售週期中向前推進時，分數就"
 "會更新。"
 
 #. module: crm
@@ -3755,7 +3755,7 @@ msgstr "潛在客戶「%s」不可同時設為已贏得及已損失。"
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
@@ -3766,7 +3766,7 @@ msgstr ""
 #: model:ir.model.fields,help:crm.field_crm_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr "郵箱別名，例如填寫 jobs 表示你想捕捉寄往 jobs@example.com 的電郵。"
 
 #. module: crm
@@ -3894,8 +3894,8 @@ msgstr "提示：將收到的電子郵件轉換為商機"
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_1
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_1
-msgid "Tip: Did you know Odoo has built-in lead mining?"
-msgstr "提示：您知道 Odoo 具有內置的潛在商機挖掘功能嗎？"
+msgid "Tip: Did you know AFENDA xForge has built-in lead mining?"
+msgstr "提示：您知道 AFENDA xForge 具有內置的潛在商機挖掘功能嗎？"
 
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_4
@@ -4363,8 +4363,8 @@ msgstr "例如.太貴了"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
-msgid "e.g. https://www.odoo.com"
-msgstr "例如: https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "例如: https://www.afenda.app"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.sales_team_form_view_in_crm

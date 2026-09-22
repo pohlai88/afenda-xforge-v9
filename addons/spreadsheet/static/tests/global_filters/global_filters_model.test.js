@@ -2599,7 +2599,7 @@ test("field matching is removed when list is deleted", async function () {
     });
 });
 
-test("field matching is removed when an Odoo chart is deleted", async function () {
+test("field matching is removed when an AFENDA xForge chart is deleted", async function () {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_pie" });
     const sheetId = model.getters.getActiveSheetId();
     const [chartId] = model.getters.getChartIds(sheetId);

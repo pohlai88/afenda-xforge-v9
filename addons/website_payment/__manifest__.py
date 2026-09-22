@@ -42,6 +42,6 @@ This is a bridge module that adds multi-website support for payment providers.
             'website_payment/static/src/website_builder/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

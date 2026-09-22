@@ -1,6 +1,6 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 r"""\
-Odoo HTTP layer / WSGI application
+AFENDA xForge HTTP layer / WSGI application
 
 The main duty of this module is to prepare and dispatch all http
 requests to their corresponding controllers: from a raw http request
@@ -52,7 +52,7 @@ Here be dragons:
 
 Application.__call__
   WSGI entry point, it sanitizes the request, it wraps it in a werkzeug
-  request and itself in an Odoo http request. The Odoo http request is
+  request and itself in an AFENDA xForge http request. The AFENDA xForge http request is
   exposed at ``http.request`` then it is forwarded to either
   ``_serve_static``, ``_serve_nodb`` or ``_serve_db`` depending on the
   request path and the presence of a database. It is also responsible of
@@ -256,12 +256,12 @@ if geoip2:
 MISSING_CSRF_WARNING = """\
 No CSRF validation token provided for path %r
 
-Odoo URLs are CSRF-protected by default (when accessed with unsafe
+AFENDA xForge URLs are CSRF-protected by default (when accessed with unsafe
 HTTP methods). See
-https://www.odoo.com/documentation/master/developer/reference/addons/http.html#csrf
+/docs/developer/reference/addons/http.html#csrf
 for more details.
 
-* if this endpoint is accessed through Odoo via py-QWeb form, embed a CSRF
+* if this endpoint is accessed through AFENDA xForge via py-QWeb form, embed a CSRF
   token in the form, Tokens are available via `request.csrf_token()`
   can be provided through a hidden input and must be POST-ed named
   `csrf_token` e.g. in your form add:
@@ -418,7 +418,7 @@ def db_filter(dbs, host=None):
         return [db for db in dbs if dbfilter_re.match(db)]
 
     if config['db_name']:
-        # In case --db-filter is not provided and --database is passed, Odoo will
+        # In case --db-filter is not provided and --database is passed, AFENDA xForge will
         # use the value of --database as a comma separated list of exposed databases.
         return sorted(set(config['db_name']).intersection(dbs))
 
@@ -876,7 +876,7 @@ def _generate_routing_rules(modules, nodb_only, converters=None):
         """
         Create dummy controllers that inherit only from the controllers
         defined at the given ``modules`` (often system wide modules or
-        installed modules). Modules in this context are Odoo addons.
+        installed modules). Modules in this context are AFENDA xForge addons.
         """
         # Controllers defined outside of odoo addons are outside of the
         # controller inheritance/extension mechanism.
@@ -1366,7 +1366,7 @@ class GeoIP(collections.abc.Mapping):
     .. code-block:
 
         >>> GeoIP('127.0.0.1').country.iso_code
-        >>> odoo_ip = socket.gethostbyname('odoo.com')
+        >>> odoo_ip = socket.gethostbyname('afenda.app')
         >>> GeoIP(odoo_ip).country.iso_code
         'FR'
     """
@@ -2608,7 +2608,7 @@ class JsonRPCDispatcher(Dispatcher):
         """
         error = {
             'code': 0,  # we don't care of this code
-            'message': "Odoo Server Error",
+            'message': "AFENDA xForge Server Error",
             'data': serialize_exception(exc),
         }
         if isinstance(exc, NotFound):
@@ -2616,7 +2616,7 @@ class JsonRPCDispatcher(Dispatcher):
             error['message'] = "404: Not Found"
         elif isinstance(exc, SessionExpiredException):
             error['code'] = 100
-            error['message'] = "Odoo Session Expired"
+            error['message'] = "AFENDA xForge Session Expired"
 
         return self._response(error=error)
 
@@ -2693,7 +2693,7 @@ class Json2Dispatcher(Dispatcher):
 # =========================================================
 
 class Application:
-    """ Odoo WSGI application """
+    """ AFENDA xForge WSGI application """
     # See also: https://www.python.org/dev/peps/pep-3333
 
     def initialize(self):
@@ -2854,9 +2854,9 @@ class Application:
                         _logger.warning("Database or registry unusable, trying without", exc_info=e.__cause__)
                         request.db = None
                         request.session.logout()
-                        if (httprequest.path.startswith('/odoo/')
+                        if (httprequest.path.startswith('/app/')
                             or httprequest.path in (
-                                '/odoo', '/web', '/web/login', '/test_http/ensure_db',
+                                '/app', '/web', '/web/login', '/test_http/ensure_db',
                             )):
                             # ensure_db() protected routes, remove ?db= from the query string
                             args_nodb = request.httprequest.args.copy()

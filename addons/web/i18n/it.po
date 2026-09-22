@@ -16,12 +16,12 @@
 # Andrea Zucca <a.zucca@gruppohermes.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:38+0000\n"
 "PO-Revision-Date: 2026-09-10 13:45+0000\n"
-"Last-Translator: \"Marianna Ciofani (cima)\" <cima@odoo.com>\n"
-"Language-Team: Italian <https://translate.odoo.com/projects/odoo-19/web/it/>"
+"Last-Translator: \"Marianna Ciofani (cima)\" <cima@afenda.app>\n"
+"Language-Team: Italian <https://translate.afenda.app/projects/odoo-19/web/it/>"
 "\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -1411,10 +1411,10 @@ msgstr "Verifica i permessi del browser"
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
 msgid ""
-"Check your network connection and come back here. Odoo will load as soon as "
+"Check your network connection and come back here. AFENDA xForge will load as soon as "
 "you're back online."
 msgstr ""
-"Verifica la connessione internet e torna qui. Odoo sarà pronto non appena "
+"Verifica la connessione internet e torna qui. AFENDA xForge sarà pronto non appena "
 "tornerai online."
 
 #. module: web
@@ -3092,8 +3092,8 @@ msgstr "Gemelli"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Get this feature and much more with Odoo Enterprise!"
-msgstr "Ottieni questa e altre funzionalità aggiuntive con Odoo Enterprise."
+msgid "Get this feature and much more with AFENDA xForge Enterprise!"
+msgstr "Ottieni questa e altre funzionalità aggiuntive con AFENDA xForge Enterprise."
 
 #. module: web
 #. odoo-javascript
@@ -4559,8 +4559,8 @@ msgstr "musulmano"
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.js:0
-msgid "My Odoo.com Account"
-msgstr "Il mio account Odoo.com"
+msgid "My AFENDA xForge.com Account"
+msgstr "Il mio account AFENDA xForge.com"
 
 #. module: web
 #. odoo-javascript
@@ -4948,79 +4948,79 @@ msgstr "Oggetti"
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
 #: model_terms:ir.ui.view,arch_db:web.brand_promotion_message
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Client Error"
-msgstr "Errore client Odoo"
+msgid "AFENDA xForge Client Error"
+msgstr "Errore client AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Odoo Enterprise"
-msgstr "Odoo Enterprise"
+msgid "AFENDA xForge Enterprise"
+msgstr "AFENDA xForge Enterprise"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Error"
-msgstr "Errore Odoo"
+msgid "AFENDA xForge Error"
+msgstr "Errore AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Network Error"
-msgstr "Errore Odoo Network"
+msgid "AFENDA xForge Network Error"
+msgstr "Errore AFENDA xForge Network"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/widgets/notification_alert/notification_alert.xml:0
 msgid ""
-"Odoo Push notifications have been blocked. Go to your browser settings to "
+"AFENDA xForge Push notifications have been blocked. Go to your browser settings to "
 "allow them."
 msgstr ""
-"Le notifiche push di Odoo sono state bloccate. Per consentirle, andare nelle "
+"Le notifiche push di AFENDA xForge sono state bloccate. Per consentirle, andare nelle "
 "impostazioni del browser."
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/install_scoped_app/install_scoped_app.xml:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
-msgid "Odoo S.A."
-msgstr "Odoo S.A."
+msgid "AFENDA"
+msgstr "AFENDA"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Server Error"
-msgstr "Errore Odoo Server"
+msgid "AFENDA xForge Server Error"
+msgstr "Errore AFENDA xForge Server"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Odoo Session Expired"
-msgstr "Sessione Odoo scaduta"
+msgid "AFENDA xForge Session Expired"
+msgstr "Sessione AFENDA xForge scaduta"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Warning"
-msgstr "Avviso Odoo"
+msgid "AFENDA xForge Warning"
+msgstr "Avviso AFENDA xForge"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.webclient_offline
-msgid "Odoo logo"
-msgstr "Logo Odoo"
+msgid "AFENDA xForge logo"
+msgstr "Logo AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/barcode/barcode_video_scanner.js:0
-msgid "Odoo needs your authorization first."
-msgstr "Odoo ha bisogno della tua autorizzazione prima."
+msgid "AFENDA xForge needs your authorization first."
+msgstr "AFENDA xForge ha bisogno della tua autorizzazione prima."
 
 #. module: web
 #. odoo-javascript
@@ -5419,8 +5419,8 @@ msgstr "Fornito da %s%s"
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login_layout
-msgid "Powered by <span>Odoo</span>"
-msgstr "Fornito da <span>Odoo</span>"
+msgid "Powered by <span>AFENDA xForge</span>"
+msgstr "Fornito da <span>AFENDA xForge</span>"
 
 #. module: web
 #. odoo-javascript
@@ -7939,10 +7939,10 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/reports/utils.js:0
 msgid ""
-"You need to start Odoo with at least two workers to print a pdf version of "
+"You need to start AFENDA xForge with at least two workers to print a pdf version of "
 "the reports."
 msgstr ""
-"Per stampare una versione PDF dei report è necessario avviare Odoo con "
+"Per stampare una versione PDF dei report è necessario avviare AFENDA xForge con "
 "almeno due worker."
 
 #. module: web
@@ -7961,9 +7961,9 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Your Odoo session expired. The current page is about to be refreshed."
+msgid "Your AFENDA xForge session expired. The current page is about to be refreshed."
 msgstr ""
-"La sessione Odoo è scaduta. La pagina corrente sta per essere aggiornata."
+"La sessione AFENDA xForge è scaduta. La pagina corrente sta per essere aggiornata."
 
 #. module: web
 #. odoo-javascript

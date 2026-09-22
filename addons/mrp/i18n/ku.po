@@ -5,12 +5,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-08 00:47+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Kurdish (Sorani) <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Kurdish (Sorani) <https://translate.afenda.app/projects/odoo-19/"
 "mrp/ckb/>\n"
 "Language: ku\n"
 "MIME-Version: 1.0\n"
@@ -1816,7 +1816,7 @@ msgstr ""
 msgid ""
 "Create operation level dependencies that will influence both planning and "
 "the status of work orders upon MO confirmation. If this feature is ticked, "
-"and nothing is specified, Odoo will assume that all operations can be "
+"and nothing is specified, AFENDA xForge will assume that all operations can be "
 "started simultaneously."
 msgstr ""
 
@@ -2076,7 +2076,7 @@ msgstr ""
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_routing_workcenter__cost_mode
 msgid ""
-"Determines the way Odoo calculates the cost of the operation:\n"
+"Determines the way AFENDA xForge calculates the cost of the operation:\n"
 "- Based on Actual time: the cost will be calculated based on tracked time "
 "and real employee costs.\n"
 "- Based on Estimated time: the cost will be calculated based on estimated "
@@ -2762,35 +2762,35 @@ msgstr ""
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_mrp_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the allocation "
+"If this checkbox is ticked, AFENDA xForge will automatically print the allocation "
 "report labels of a MO when it is done."
 msgstr ""
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_mrp_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the allocation "
+"If this checkbox is ticked, AFENDA xForge will automatically print the allocation "
 "report of a MO when it is done and has assigned moves."
 msgstr ""
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_mrp_lot
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN label "
+"If this checkbox is ticked, AFENDA xForge will automatically print the lot/SN label "
 "of a MO when it is done."
 msgstr ""
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_mrp_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the product labels "
 "of a MO when it is done."
 msgstr ""
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_production_order
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the production "
+"If this checkbox is ticked, AFENDA xForge will automatically print the production "
 "order of a MO when it is done."
 msgstr ""
 
@@ -3892,7 +3892,7 @@ msgstr ""
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.view_picking_type_form_inherit_mrp
 msgid ""
-"Odoo opens a PDF preview by default. If you want to print instantly,\n"
+"AFENDA xForge opens a PDF preview by default. If you want to print instantly,\n"
 "                                install the IoT App on a computer that is on "
 "the same local network as the\n"
 "                                barcode operator and configure the routing "
@@ -6342,7 +6342,7 @@ msgid ""
 "When activated, then the registration of consumption for that component is "
 "recorded manually exclusively.\n"
 "If not activated, and any of the components consumption is edited manually "
-"on the manufacturing order, Odoo assumes manual consumption also."
+"on the manufacturing order, AFENDA xForge assumes manual consumption also."
 msgstr ""
 
 #. module: mrp
@@ -6367,7 +6367,7 @@ msgstr ""
 #. module: mrp
 #: model_terms:digest.tip,tip_description:mrp.digest_tip_mrp_0
 msgid ""
-"With the Odoo work center control panel, your worker can start work orders "
+"With the AFENDA xForge work center control panel, your worker can start work orders "
 "in the shop and follow instructions of the worksheet. Quality tests are "
 "perfectly integrated into the process. Workers can trigger feedback loops, "
 "maintenance alerts, scrap products, etc."

@@ -20,6 +20,6 @@ This module adapts the behavior of the PoS when the pos_hr and pos_restaurant ar
             'pos_hr_restaurant/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

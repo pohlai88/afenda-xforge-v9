@@ -19,6 +19,6 @@ Price and Cost Price.
     'data':[
         'views/sale_order_views.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

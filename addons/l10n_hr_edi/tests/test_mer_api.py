@@ -132,7 +132,7 @@ class TestL10nHrEdiMerApi(TestL10nHrEdiCommon, TestAccountMoveSendCommon):
             'OutboundFiscalizationStatus': None,
             'ReceiverBusinessNumber': 'BE0477472701',
             'ReceiverBusinessUnit': None,
-            'ReceiverBusinessName': 'Odoo S.A.',
+            'ReceiverBusinessName': 'AFENDA xForge S.A.',
             'Created': '2025-12-11T13:06:20.3779916',
             'Updated': '2025-12-11T13:08:42.2070931',
             'IssueDate': '2025-12-11T00:00:00',

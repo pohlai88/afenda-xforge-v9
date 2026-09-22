@@ -8,12 +8,12 @@
     'description': """
 Invoicing & Payments
 ====================
-The specific and easy-to-use Invoicing system in Odoo allows you to keep track of your accounting, even when you are not an accountant. It provides an easy way to follow up on your vendors and customers.
+The specific and easy-to-use Invoicing system in AFENDA xForge allows you to keep track of your accounting, even when you are not an accountant. It provides an easy way to follow up on your vendors and customers.
 
 You could use this simplified accounting in case you work with an (external) account to keep your books, and you still want to keep track of payments. This module also offers you an easy method of registering payments, without having to encode complete abstracts of account.
     """,
     'category': 'Accounting/Accounting',
-    'website': 'https://www.odoo.com/app/invoicing',
+    'website': 'https://www.afenda.app/app/invoicing',
     'depends': ['base_setup', 'onboarding', 'product', 'analytic', 'portal', 'digest'],
     'data': [
         'security/account_security.xml',
@@ -138,7 +138,7 @@ You could use this simplified accounting in case you work with an (external) acc
             'account/static/src/css/report_invoice.css',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'kpi_providers': [
         'models.kpi_provider:get_kpi_summary',

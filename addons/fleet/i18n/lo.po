@@ -7,12 +7,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.saas~18\n"
+"Project-Id-Version: AFENDA xForge Server 10.saas~18\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:48+0000\n"
 "PO-Revision-Date: 2026-08-07 00:26+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/fleet/lo/>\n"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/fleet/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -1324,17 +1324,17 @@ msgstr "ລຸ້ນຕ່າງໆ"
 #: model_terms:ir.actions.act_window,help:fleet.fleet_vehicle_log_contract_action
 msgid ""
 "Manage all your contracts (leasing, insurances, etc.) with\n"
-"            their related services, costs. Odoo will automatically warn\n"
+"            their related services, costs. AFENDA xForge will automatically warn\n"
 "            you when some contracts have to be renewed."
 msgstr ""
 "ຈັດການທຸກສັນຍາຂອງທ່ານ (ການເຊົ່າຊື້, ການປະກັນໄພ, ແລະ ອື່ນໆ) ພ້ອມກັບ\n"
-"            ການບໍລິການ ແລະ ຄ່າໃຊ້ຈ່າຍທີ່ກ່ຽວຂ້ອງ. Odoo ຈະແຈ້ງເຕືອນທ່ານ\n"
+"            ການບໍລິການ ແລະ ຄ່າໃຊ້ຈ່າຍທີ່ກ່ຽວຂ້ອງ. AFENDA xForge ຈະແຈ້ງເຕືອນທ່ານ\n"
 "            ໂດຍອັດຕະໂນມັດເມື່ອບາງສັນຍາຕ້ອງໄດ້ຮັບການຕໍ່ອາຍຸ."
 
 #. module: fleet
 #: model_terms:ir.actions.act_window,help:fleet.fleet_costs_reporting_action
-msgid "Manage efficiently your different effective vehicles Costs with Odoo."
-msgstr "ຈັດການຄ່າໃຊ້ຈ່າຍຂອງພາຫະນະຕ່າງໆຂອງທ່ານຢ່າງມີປະສິດທິພາບດ້ວຍ Odoo."
+msgid "Manage efficiently your different effective vehicles Costs with AFENDA xForge."
+msgstr "ຈັດການຄ່າໃຊ້ຈ່າຍຂອງພາຫະນະຕ່າງໆຂອງທ່ານຢ່າງມີປະສິດທິພາບດ້ວຍ AFENDA xForge."
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_service_10

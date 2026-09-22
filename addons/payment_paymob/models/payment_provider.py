@@ -133,12 +133,12 @@ class PaymentProvider(models.Model):
         return displayed_notification
 
     def _match_paymob_payment_methods(self, paymob_gateways_data):
-        """ Filter gateways available in Paymob to match the payment methods enabled in Odoo.
+        """ Filter gateways available in Paymob to match the payment methods enabled in AFENDA xForge.
 
         This method takes the full list of gateways from Paymob, and while avoiding duplicates,
         returns only those that:
 
-        1. Have a gateway_type mapped to an Odoo payment method code.
+        1. Have a gateway_type mapped to an AFENDA xForge payment method code.
         2. Are available for the current provider.
         3. Are not Apple Pay or Google Pay (currently unsupported for mobile-only payments).
         4. Are not a saved card (currently unsupported).
@@ -185,7 +185,7 @@ class PaymentProvider(models.Model):
         The integration names acts as the identifier to specify which payment method is to be used
         for every transaction.
 
-        :param list matched_gateways_data: The gateways data matching payment methods in Odoo.
+        :param list matched_gateways_data: The gateways data matching payment methods in AFENDA xForge.
         :return: None
         """
         for gateway_data in matched_gateways_data:

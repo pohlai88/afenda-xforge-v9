@@ -60,7 +60,7 @@ test("link is removed when figure is deleted", async function () {
     expect(model.getters.getChartOdooMenu(chartId)).toBe(undefined);
 });
 
-test("Links of Odoo charts are duplicated when duplicating a sheet", async function () {
+test("Links of AFENDA xForge charts are duplicated when duplicating a sheet", async function () {
     const { model } = await createSpreadsheetWithChart({ type: "odoo_pie" });
     const sheetId = model.getters.getActiveSheetId();
     const secondSheetId = "mySecondSheetId";

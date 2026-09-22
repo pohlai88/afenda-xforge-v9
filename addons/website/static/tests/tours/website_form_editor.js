@@ -18,7 +18,7 @@ const NB_NON_ESSENTIAL_REQUIRED_FIELDS_IN_DEFAULT_FORM = 2;
 const ESSENTIAL_FIELDS_VALID_DATA_FOR_DEFAULT_FORM = [
     {
         name: "email_from",
-        value: "admin@odoo.com",
+        value: "admin@afenda.app",
     },
     {
         name: "subject",

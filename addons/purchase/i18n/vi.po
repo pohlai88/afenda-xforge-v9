@@ -12,12 +12,12 @@
 # Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 12:58+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Vietnamese <https://translate.afenda.app/projects/odoo-19/"
 "purchase/vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -1410,9 +1410,9 @@ msgstr "RFQ nháp"
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
-"Kéo và thả tệp PDF yêu cầu báo giá vào danh sách báo giá của bạn trong Odoo. "
+"Kéo và thả tệp PDF yêu cầu báo giá vào danh sách báo giá của bạn trong AFENDA xForge. "
 "Tận hưởng tính năng tự động hóa!"
 
 #. module: purchase
@@ -2064,8 +2064,8 @@ msgstr "Không được xác nhận"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Not using Odoo?"
-msgstr "Không sử dụng Odoo?"
+msgid "Not using AFENDA xForge?"
+msgstr "Không sử dụng AFENDA xForge?"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__purchase_order_line__display_type__line_note
@@ -2111,8 +2111,8 @@ msgstr "Số tin nhắn bị gửi lỗi"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__product_template__purchase_method__purchase
@@ -3049,8 +3049,8 @@ msgstr "Được gắn sao"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Start on Odoo"
-msgstr "Bắt đầu trên Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "Bắt đầu trên AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_bill_line_match__state
@@ -3572,13 +3572,13 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                    orders or receipts. This allows you to control bills\n"
 "                    you receive from your vendor according to the draft\n"
-"                    document in Odoo."
+"                    document in AFENDA xForge."
 msgstr ""
 "Hoá đơn mua hàng có thể được tạo trước dựa trên đơn mua hàng\n"
 "                    hay phiếu nhập kho. Điều này cho phép bạn kiểm soát hoá "
 "đơn\n"
 "                    bạn nhận được từ nhà cung cấp theo chứng từ nháp\n"
-"                    trong Odoo."
+"                    trong AFENDA xForge."
 
 #. module: purchase
 #. odoo-python
@@ -3616,8 +3616,8 @@ msgstr "Chờ hoá đơn"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Want to import this document in Odoo?"
-msgstr "Bạn muốn nhập chứng từ này vào Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Bạn muốn nhập chứng từ này vào AFENDA xForge?"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.view_product_supplier_inherit
@@ -3652,13 +3652,13 @@ msgid ""
 "When creating a purchase order, have a look at the vendor's <i>On Time "
 "Delivery</i> rate: the percentage of products shipped on time. If it is too "
 "low, activate the <i>automated reminders</i>. A few days before the due "
-"shipment, Odoo will send the vendor an email to ask confirmation of shipment "
+"shipment, AFENDA xForge will send the vendor an email to ask confirmation of shipment "
 "dates and keep you informed in case of any delays. To get the vendor's "
 "performance statistics, click on the OTD rate."
 msgstr ""
 "Khi tạo đơn mua hàng, hãy xem tỷ lệ <i>Giao hàng đúng hạn</i> của nhà cung "
 "cấp: tỷ lệ sản phẩm được giao đúng hạn. Nếu tỷ lệ này quá thấp, hãy kích "
-"hoạt <i>nhắc nhở tự động</i>. Vài ngày trước khi đến hạn giao hàng, Odoo sẽ "
+"hoạt <i>nhắc nhở tự động</i>. Vài ngày trước khi đến hạn giao hàng, AFENDA xForge sẽ "
 "gửi cho nhà cung cấp một email để yêu cầu xác nhận ngày giao hàng và thông "
 "báo cho bạn trong trường hợp có bất kỳ sự chậm trễ nào. Để nhận thống kê "
 "hiệu suất của nhà cung cấp, hãy nhấp vào tỷ lệ OTD."
@@ -3666,12 +3666,12 @@ msgstr ""
 #. module: purchase
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_1
 msgid ""
-"When sending a purchase order by email, Odoo asks the vendor to acknowledge "
+"When sending a purchase order by email, AFENDA xForge asks the vendor to acknowledge "
 "the reception of the order. When the vendor acknowledges the order by "
 "clicking on a button in the email, the information is added on the purchase "
 "order. Use filters to track orders that have not been acknowledged."
 msgstr ""
-"Khi gửi đơn mua hàng qua email, Odoo yêu cầu nhà cung cấp xác nhận đã nhận "
+"Khi gửi đơn mua hàng qua email, AFENDA xForge yêu cầu nhà cung cấp xác nhận đã nhận "
 "đơn đặt hàng. Khi nhà cung cấp xác nhận đơn đặt hàng bằng cách nhấp vào một "
 "nút trong email, thông tin sẽ được thêm vào đơn đặt hàng. Sử dụng bộ lọc để "
 "theo dõi các đơn đặt hàng chưa được xác nhận."

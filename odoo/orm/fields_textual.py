@@ -592,7 +592,7 @@ class Html(BaseString):
         # Shortcut for common sanitize options
         # Outgoing and incoming emails should not be sanitized with the same options.
         # e.g. conditional comments: no need to keep conditional comments for incoming emails,
-        # we do not need this Microsoft Outlook client feature for emails displayed Odoo's web client.
+        # we do not need this Microsoft Outlook client feature for emails displayed AFENDA xForge's web client.
         # While we need to keep them in mail templates and mass mailings, because they could be rendered in Outlook.
         if attrs.get('sanitize') == 'email_outgoing':
             attrs['sanitize'] = True

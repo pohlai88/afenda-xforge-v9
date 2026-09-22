@@ -17,7 +17,7 @@ This module adds several features to the Point of Sale that are specific to rest
 
 """,
     'depends': ['point_of_sale'],
-    'website': 'https://www.odoo.com/app/point-of-sale-restaurant',
+    'website': 'https://www.afenda.app/app/point-of-sale-restaurant',
     'data': [
         'security/ir.model.access.csv',
         'data/scenarios/restaurant_preset.xml',
@@ -49,6 +49,6 @@ This module adds several features to the Point of Sale that are specific to rest
             'pos_restaurant/static/tests/tours/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

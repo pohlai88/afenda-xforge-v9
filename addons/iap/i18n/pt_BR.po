@@ -9,12 +9,12 @@
 # "Maitê Dietze (madi)" <madi@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~15.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~15.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 11:05+0000\n"
-"Last-Translator: \"Maitê Dietze (madi)\" <madi@odoo.com>\n"
-"Language-Team: Portuguese (Brazil) <https://translate.odoo.com/projects/odoo-"
+"Last-Translator: \"Maitê Dietze (madi)\" <madi@afenda.app>\n"
+"Language-Team: Portuguese (Brazil) <https://translate.afenda.app/projects/odoo-"
 "19/iap/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -55,10 +55,10 @@ msgstr ""
 #. odoo-python
 #: code:addons/iap/tools/iap_tools.py:0
 msgid ""
-"An error occurred while reaching %s. Please contact Odoo support if this "
+"An error occurred while reaching %s. Please contact AFENDA xForge support if this "
 "error persists."
 msgstr ""
-"Ocorreu um erro ao acessar %s. Entre em contato com o suporte do Odoo se "
+"Ocorreu um erro ao acessar %s. Entre em contato com o suporte do AFENDA xForge se "
 "esse erro persistir."
 
 #. module: iap
@@ -199,8 +199,8 @@ msgstr "Não existe nenhum serviço com o nome técnico fornecido"
 
 #. module: iap
 #: model_terms:ir.ui.view,arch_db:iap.res_config_settings_view_form
-msgid "Odoo IAP"
-msgstr "Odoo IAP"
+msgid "AFENDA xForge IAP"
+msgstr "AFENDA xForge IAP"
 
 #. module: iap
 #. odoo-python

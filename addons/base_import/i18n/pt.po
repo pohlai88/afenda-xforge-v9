@@ -15,12 +15,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-07 18:36+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Portuguese <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Portuguese <https://translate.afenda.app/projects/odoo-19/"
 "base_import/pt/>\n"
 "Language: pt\n"
 "MIME-Version: 1.0\n"
@@ -455,12 +455,12 @@ msgstr "ID"
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
 msgid ""
 "If the file contains\n"
-"                    the column names, Odoo can try auto-detecting the\n"
+"                    the column names, AFENDA xForge can try auto-detecting the\n"
 "                    field corresponding to the column. This makes imports\n"
 "                    simpler especially when the file has many columns."
 msgstr ""
 "Se o arquivo contiver \n"
-"os nomes das colunas, o Odoo pode tentar detectar automaticamente \n"
+"os nomes das colunas, o AFENDA xForge pode tentar detectar automaticamente \n"
 "o campo correspondente à coluna. Isso torna as importações mais simples,\n"
 "especialmente quando o arquivo tem muitas colunas."
 
@@ -630,8 +630,8 @@ msgstr "Não foram encontrados registros correspondentes ao seguinte nome"
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
-msgid "Odoo Field"
-msgstr "Campo do Odoo"
+msgid "AFENDA xForge Field"
+msgstr "Campo do AFENDA xForge"
 
 #. module: base_import
 #. odoo-javascript
@@ -915,11 +915,11 @@ msgstr "Carregue os seus ficheiros"
 msgid ""
 "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h "
 "system. You can use a custom format in addition to the suggestions provided. "
-"Leave empty to let Odoo guess the format (recommended)"
+"Leave empty to let AFENDA xForge guess the format (recommended)"
 msgstr ""
 "Use HH para horas em um sistema de 24 horas, use II em conjunto com 'p' para "
 "um sistema de 12 horas (am/pm). É possível usar um formato personalizado "
-"além das sugestões fornecidas. Deixe em branco para que o Odoo adivinhe o "
+"além das sugestões fornecidas. Deixe em branco para que o AFENDA xForge adivinhe o "
 "formato (recomendado)"
 
 #. module: base_import
@@ -928,12 +928,12 @@ msgstr ""
 msgid ""
 "Use YYYY to represent the year, MM for the month and DD for the day. Include "
 "separators such as a dot, forward slash or dash. You can use a custom format "
-"in addition to the suggestions provided. Leave empty to let Odoo guess the "
+"in addition to the suggestions provided. Leave empty to let AFENDA xForge guess the "
 "format (recommended)"
 msgstr ""
 "Use YYYY para representar o ano, MM para o mês e DD para o dia. Inclua "
 "separadores, como ponto, barra ou traço. Você pode usar um formato "
-"personalizado além das sugestões fornecidas. Deixe em branco para que o Odoo "
+"personalizado além das sugestões fornecidas. Deixe em branco para que o AFENDA xForge "
 "adivinhe o formato (recomendado)"
 
 #. module: base_import

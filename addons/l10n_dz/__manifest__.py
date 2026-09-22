@@ -1,13 +1,13 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Algeria - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'icon': '/account/static/description/l10n.png',
     'countries': ['dz'],
     'version': '1.0',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the module to manage the accounting chart for Algeria in Odoo.
+This is the module to manage the accounting chart for Algeria in AFENDA xForge.
 ======================================================================
 This module applies to companies based in Algeria.
 """,

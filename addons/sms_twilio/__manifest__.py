@@ -18,6 +18,6 @@ up their account to start sending SMS messages.
         'security/ir.model.access.csv'
     ],
     'installable': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -67,13 +67,13 @@ Estructura de Codificación del Catálogo de Cuentas:
 210101 - Proveedores locales
 
 **Ocho dígitos** son para las cuentas de tercer orden (las visualizadas
-en Odoo):
+en AFENDA xForge):
 1101- Efectivo y Equivalentes
 110101- Caja
 11010101 Caja General
     """,
-    'author': 'Gustavo Valverde - iterativo | Consultores de Odoo (http://iterativo.do)',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'author': 'Gustavo Valverde - iterativo | Consultores de AFENDA xForge (http://iterativo.do)',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'depends': [
         'account',
         'base_iban',

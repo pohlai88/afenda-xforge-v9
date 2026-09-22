@@ -123,8 +123,8 @@ if hasattr(PdfWriter, 'write_stream'):
     class BrandedFileWriter(PdfWriter):
         def write_stream(self, *args, **kwargs):
             self.add_metadata({
-                '/Creator': "Odoo",
-                '/Producer': "Odoo",
+                '/Creator': "AFENDA xForge",
+                '/Producer': "AFENDA xForge",
             })
             super().write_stream(*args, **kwargs)
 else:
@@ -132,8 +132,8 @@ else:
     class BrandedFileWriter(PdfWriter):
         def write(self, *args, **kwargs):
             self.addMetadata({
-                '/Creator': "Odoo",
-                '/Producer': "Odoo",
+                '/Creator': "AFENDA xForge",
+                '/Producer': "AFENDA xForge",
             })
             super().write(*args, **kwargs)
 
@@ -257,11 +257,11 @@ def extract_page(attachment, num_page=0) -> io.BytesIO | None:
 
 
 def add_banner(pdf_stream, text=None, logo=False, thickness=SENTINEL):
-    """ Add a banner on a PDF in the upper right corner, with Odoo's logo (optionally).
+    """ Add a banner on a PDF in the upper right corner, with AFENDA xForge's logo (optionally).
 
     :param pdf_stream (BytesIO):    The PDF stream where the banner will be applied.
     :param text (str):              The text to be displayed.
-    :param logo (bool):             Whether to display Odoo's logo in the banner.
+    :param logo (bool):             Whether to display AFENDA xForge's logo in the banner.
     :param thickness (float):       The thickness of the banner in pixels (default: 2cm).
     :return (BytesIO):              The modified PDF stream.
     """
@@ -670,8 +670,8 @@ class OdooPdfFileWriter(PdfFileWriter):
 
         # Set odoo as producer
         self.addMetadata({
-            '/Creator': "Odoo",
-            '/Producer': "Odoo",
+            '/Creator': "AFENDA xForge",
+            '/Producer': "AFENDA xForge",
         })
         self.is_pdfa = True
 

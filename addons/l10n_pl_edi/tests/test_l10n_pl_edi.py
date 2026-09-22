@@ -153,7 +153,7 @@ class TestL10nPlEdi(AccountTestInvoicingCommon, CronMixinCase):
     def test_ksef_fa3_standard_vat(self):
         """
         Standard VAT Invoice.
-        This test verifies that a regular Odoo invoice (not a down payment or correction)
+        This test verifies that a regular AFENDA xForge invoice (not a down payment or correction)
         generates a KSeF XML with the invoice type <RodzajFaktury>VAT</RodzajFaktury>.
         It simulates a simple sale of a product.
         """

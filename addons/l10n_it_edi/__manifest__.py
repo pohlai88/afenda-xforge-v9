@@ -11,7 +11,7 @@
 E-invoice implementation
     """,
     'category': 'Accounting/Localizations/EDI',
-    'website': 'http://www.odoo.com/',
+    'website': 'http://www.afenda.app/',
     'data': [
         'security/ir.model.access.csv',
         'data/account.account.tag.csv',
@@ -38,7 +38,7 @@ E-invoice implementation
     'demo': [
         'data/account_invoice_demo.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'post_init_hook': '_l10n_it_edi_post_init',
     'uninstall_hook': 'uninstall_hook',

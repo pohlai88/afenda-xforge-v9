@@ -39,7 +39,7 @@ class WebsiteSale(main.WebsiteSale):
     def activate_coupon(self, code, r='/shop', **kw):
         url_parts = url_parse(r)
         url_query = url_parts.decode_query()
-        url_query.pop('coupon_error', False)  # trust only Odoo error message
+        url_query.pop('coupon_error', False)  # trust only AFENDA xForge error message
         url_query.pop('coupon_error_type', False)
         code = code.strip()
 

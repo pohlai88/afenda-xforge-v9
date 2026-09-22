@@ -19,11 +19,11 @@ websocket.enableTrace(True, level=logging.getLevelName(_logger.getEffectiveLevel
 
 @helpers.require_db
 def send_to_controller(params, method="send_websocket", server_url=None):
-    """Confirm the operation's completion by sending a response back to the Odoo server
+    """Confirm the operation's completion by sending a response back to the AFENDA xForge server
 
     :param params: the parameters to send back to the server
     :param method: method to call on the IoT box controller
-    :param server_url: URL of the Odoo server (provided by decorator).
+    :param server_url: URL of the AFENDA xForge server (provided by decorator).
     """
     request_path = f"{server_url}/iot/box/{method}"
     try:
@@ -132,7 +132,7 @@ class WebsocketClient(Thread):
                         'status': 'success',
                         'result': {
                             'lan_quality': helpers.check_network(),
-                            'wan_quality': helpers.check_network("www.odoo.com"),
+                            'wan_quality': helpers.check_network("www.afenda.app"),
                         }
                     })
                 case 'bundle_changed':
@@ -151,7 +151,7 @@ class WebsocketClient(Thread):
         """This class will not be instantiated if no db is connected.
 
         :param str channel: the channel to subscribe to
-        :param str server_url: URL of the Odoo server (provided by decorator).
+        :param str server_url: URL of the AFENDA xForge server (provided by decorator).
         """
         self.channel = channel
         self.last_message_id = int(helpers.get_conf('last_websocket_message_id') or 0)

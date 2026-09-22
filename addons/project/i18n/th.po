@@ -17,12 +17,12 @@
 # Nusara Boonma <nuboo@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-08 02:08+0000\n"
-"Last-Translator: Nusara Boonma <nuboo@odoo.com>\n"
-"Language-Team: Thai <https://translate.odoo.com/projects/odoo-19/project/th/>"
+"Last-Translator: Nusara Boonma <nuboo@afenda.app>\n"
+"Language-Team: Thai <https://translate.afenda.app/projects/odoo-19/project/th/>"
 "\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
@@ -1636,11 +1636,11 @@ msgstr "สถานะการให้คะแนนของลูกค้
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid ""
-"Customers propose feedbacks by email; Odoo creates tasks automatically, and "
+"Customers propose feedbacks by email; AFENDA xForge creates tasks automatically, and "
 "you can\n"
 "      communicate on the task directly."
 msgstr ""
-"ลูกค้าเสนอข้อเสนอแนะทางอีเมล Odoo จะสร้างงานโดยอัตโนมัติและคุณสามารถ\n"
+"ลูกค้าเสนอข้อเสนอแนะทางอีเมล AFENDA xForge จะสร้างงานโดยอัตโนมัติและคุณสามารถ\n"
 "      สื่อสารเกี่ยวกับงานได้โดยตรง"
 
 #. module: project
@@ -4899,20 +4899,20 @@ msgstr "ช่วงเวลาควรมากกว่า 0"
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"โมเดล (ชนิดเอกสาร Odoo) ซึ่งสอดคล้องกับนามแฝงนี้ อีเมลขาเข้าใดๆ ที่ไม่ตอบกลับบันทึกที่มีอยู่จะทำใ"
+"โมเดล (ชนิดเอกสาร AFENDA xForge) ซึ่งสอดคล้องกับนามแฝงนี้ อีเมลขาเข้าใดๆ ที่ไม่ตอบกลับบันทึกที่มีอยู่จะทำใ"
 "ห้เกิดการสร้างบันทึกใหม่ของโมเดลนี้ (เช่น โปรเจ็กต์งาน)"
 
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
-"ชื่อของนามแฝงอีเมล เช่น 'งาน' หากคุณต้องการรับอีเมลสำหรับ <jobs@example.odoo.com>"
+"ชื่อของนามแฝงอีเมล เช่น 'งาน' หากคุณต้องการรับอีเมลสำหรับ <jobs@example.afenda.app>"
 
 #. module: project
 #. odoo-python
@@ -5760,11 +5760,11 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid ""
-"You have unsaved changes - no worries! Odoo will automatically save it as "
+"You have unsaved changes - no worries! AFENDA xForge will automatically save it as "
 "you navigate.<br/> You can discard these changes from here or manually save "
 "your task.<br/>Let's save it manually."
 msgstr ""
-"คุณยังไม่ได้บันทึกการเปลี่ยนแปลง - แต่ไม่ต้องกังวล! Odoo จะบันทึกให้โดยอัตโนมัติในขณะที่คุณกำลังนำท"
+"คุณยังไม่ได้บันทึกการเปลี่ยนแปลง - แต่ไม่ต้องกังวล! AFENDA xForge จะบันทึกให้โดยอัตโนมัติในขณะที่คุณกำลังนำท"
 "าง <br/> คุณสามารถละทิ้งการเปลี่ยนแปลงเหล่านี้ได้จากที่นี่หรือบันทึกงานของคุณด้วยตนเอง <br/> มา"
 "ลองบันทึกด้วยกัน"
 

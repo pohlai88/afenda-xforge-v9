@@ -4,7 +4,7 @@
     'version': '1.0',
     'category': 'Accounting/Localizations/EDI',
     'summary': 'Electronic Invoicing for Jordan UBL 2.1',
-    'author': 'Odoo S.A., Smart Way Business Solutions',
+    'author': 'AFENDA xForge S.A., Smart Way Business Solutions',
     'description': """
        Allows the users to integrate with JoFotara.
     """,

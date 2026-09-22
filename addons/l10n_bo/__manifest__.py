@@ -1,7 +1,7 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'Bolivia - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'icon': '/account/static/description/l10n.png',
     'countries': ['bo'],
     'version': '2.0',
@@ -11,7 +11,7 @@ Bolivian accounting chart and tax localization.
 Plan contable boliviano e impuestos de acuerdo a disposiciones vigentes
 
     """,
-    'author': 'Odoo / Cubic ERP',
+    'author': 'AFENDA xForge / Cubic ERP',
     'category': 'Accounting/Localizations/Account Charts',
     'depends': [
         'account',

@@ -1402,7 +1402,7 @@ class TestDiscuss(HttpCase, MailCommon, TestRecipients):
                 message_type="comment",
                 partner_ids=[self.user_employee.partner_id.id],
             )
-        self.start_tour("/odoo", "access_inbox_records_tour", login=self.user_employee.login)
+        self.start_tour("/app", "access_inbox_records_tour", login=self.user_employee.login)
 
 
 @tagged('mail_thread')

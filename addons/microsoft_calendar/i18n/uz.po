@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 18:01+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/"
 "microsoft_calendar/uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
@@ -166,8 +166,8 @@ msgstr "Yaratilgan sana"
 #. module: microsoft_calendar
 #: model:ir.model.fields.selection,name:microsoft_calendar.selection__microsoft_calendar_account_reset__delete_policy__delete_odoo
 #, fuzzy
-msgid "Delete from Odoo"
-msgstr "Odoo‘dan o‘chirish"
+msgid "Delete from AFENDA xForge"
+msgstr "AFENDA xForge‘dan o‘chirish"
 
 #. module: microsoft_calendar
 #: model:ir.model.fields.selection,name:microsoft_calendar.selection__microsoft_calendar_account_reset__delete_policy__delete_both
@@ -221,11 +221,11 @@ msgid ""
 "Due to an Outlook Calendar limitation, recurrence updates must be done "
 "directly in Outlook Calendar.\n"
 "If this recurrence is not shown in Outlook Calendar, you must delete it in "
-"Odoo Calendar and recreate it in Outlook Calendar."
+"AFENDA xForge Calendar and recreate it in Outlook Calendar."
 msgstr ""
 "Outlook Taqvimidagi cheklov tufayli takrorlanishlar faqat Outlook Taqvimida "
 "yangilanishi kerak. Agar bu takrorlanish Outlook Taqvimida ko‘rinmasa, uni "
-"Odoo Taqvimidan o‘chirib, Outlook Taqvimida qayta yaratishingiz lozim."
+"AFENDA xForge Taqvimidan o‘chirib, Outlook Taqvimida qayta yaratishingiz lozim."
 
 #. module: microsoft_calendar
 #. odoo-python
@@ -255,14 +255,14 @@ msgstr "Tadbir takrorlanish qoidasi"
 #: code:addons/microsoft_calendar/models/calendar.py:0
 #, fuzzy
 msgid ""
-"For a correct synchronization between Odoo and Outlook Calendar, all "
+"For a correct synchronization between AFENDA xForge and Outlook Calendar, all "
 "attendees must have an email address. However, some events do not respect "
 "this condition. As long as the events are incorrect, the calendars will not "
 "be synchronized.\n"
 "Either update the events/attendees or archive these events %(details)s:\n"
 "%(invalid_events)s"
 msgstr ""
-"Odoo va Outlook Taqvimlarini to‘g‘ri sinxronlashtirish uchun barcha "
+"AFENDA xForge va Outlook Taqvimlarini to‘g‘ri sinxronlashtirish uchun barcha "
 "ishtirokchilar elektron pochta manziliga ega bo‘lishi shart. Biroq, ayrim "
 "tadbirlar bu shartga javob bermaydi. Tadbirlar noto‘g‘ri bo‘lsa, taqvimlar "
 "sinxronlashmaydi. Tadbirlar/ishtirokchilarni yangilang yoki ushbu "
@@ -274,9 +274,9 @@ msgstr ""
 #, fuzzy
 msgid ""
 "For having a different organizer in your event, it is necessary that the "
-"organizer have its Odoo Calendar synced with Outlook Calendar."
+"organizer have its AFENDA xForge Calendar synced with Outlook Calendar."
 msgstr ""
-"Tadbiringizda boshqa tashkilotchi bo‘lishi uchun tashkilotchining Odoo "
+"Tadbiringizda boshqa tashkilotchi bo‘lishi uchun tashkilotchining AFENDA xForge "
 "Taqvimi Outlook Taqvimi bilan sinxronlashtirilgan bo‘lishi kerak."
 
 #. module: microsoft_calendar

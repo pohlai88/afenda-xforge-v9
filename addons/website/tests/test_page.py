@@ -248,7 +248,7 @@ class TestPage(common.TransactionCase):
 
     def test_open_website_url_default_website(self):
         default_website = self.env.ref('website.default_website')
-        default_website.domain = 'https://mysite.odoo.com'
+        default_website.domain = 'https://mysite.afenda.app'
         self.page_1.write({'website_id': default_website.id})
         action = self.page_1.with_context(website_id=default_website.id).open_website_url()
         self.assertNotEqual(action.get('type'), 'ir.actions.act_url',

@@ -15,7 +15,7 @@
         'views/res_partner_view.xml',
     ],
     'installable': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'uninstall_hook': 'uninstall_hook',
     'license': 'LGPL-3'
 }

@@ -7,7 +7,7 @@
     'category': 'Marketing/Events',
     'sequence': 140,
     'summary': 'Publish events, sell tickets',
-    'website': 'https://www.odoo.com/app/events',
+    'website': 'https://www.afenda.app/app/events',
     'depends': [
         'event',
         'website',
@@ -77,6 +77,6 @@
             'website_event/static/src/website_builder/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

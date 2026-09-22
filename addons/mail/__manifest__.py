@@ -11,7 +11,7 @@
 Chat, mail gateway and private channel.
 =======================================
 
-Communicate with your colleagues/customers/guest within Odoo.
+Communicate with your colleagues/customers/guest within AFENDA xForge.
 
 Discuss/Chat
 ------------
@@ -38,10 +38,10 @@ subtypes),...
 Retrieve incoming email on POP/IMAP servers.
 ============================================
 Enter the parameters of your POP/IMAP account(s), and any incoming emails on
-these accounts will be automatically downloaded into your Odoo system. All
+these accounts will be automatically downloaded into your AFENDA xForge system. All
 POP3/IMAP-compatible servers are supported, included those that require an
 encrypted SSL/TLS connection.
-This can be used to easily create email-based workflows for many email-enabled Odoo documents, such as:
+This can be used to easily create email-based workflows for many email-enabled AFENDA xForge documents, such as:
 
 * CRM Leads/Opportunities
 * CRM Claims
@@ -52,14 +52,14 @@ This can be used to easily create email-based workflows for many email-enabled O
 Just install the relevant application, and you can assign any of these document
 types (Leads, Project Issues) to your incoming email accounts. New emails will
 automatically spawn new documents of the chosen type, so it's a snap to create a
-mailbox-to-Odoo integration. Even better: these documents directly act as mini
-conversations synchronized by email. You can reply from within Odoo, and the
+mailbox-to-AFENDA xForge integration. Even better: these documents directly act as mini
+conversations synchronized by email. You can reply from within AFENDA xForge, and the
 answers will automatically be collected when they come back, and attached to the
 same *conversation* document.
 For more specific needs, you may also assign custom-defined actions
 (technically: Server Actions) to be triggered for each incoming mail.
     """,
-    'website': 'https://www.odoo.com/app/discuss',
+    'website': 'https://www.afenda.app/app/discuss',
     'depends': ['base', 'base_setup', 'bus', 'web_tour', 'html_editor'],
     'data': [
         'data/mail_groups.xml',
@@ -262,6 +262,6 @@ For more specific needs, you may also assign custom-defined actions
             ('remove', 'web/static/src/**/*.dark.scss'),
         ]
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

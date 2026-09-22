@@ -33,12 +33,12 @@
 # Saara Hakanen <sahak@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-08-24 05:52+0000\n"
-"Last-Translator: Saara Hakanen <sahak@odoo.com>\n"
-"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: Saara Hakanen <sahak@afenda.app>\n"
+"Language-Team: Finnish <https://translate.afenda.app/projects/odoo-19/"
 "website_forum/fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -3456,7 +3456,7 @@ msgstr "Hyväksytty vastaus on poistettu"
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
+"questions related to AFENDA xForge."
 msgstr ""
 "Tämän sivuston tavoitteena on luoda relevantti tietopohja, joka vastaisi "
 "Odooseen liittyviin kysymyksiin."
@@ -4147,9 +4147,9 @@ msgstr "tähän"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to configure or customize Odoo to specific business needs,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
 msgstr ""
-"kuinka määrittää tai räätälöidä Odoo vastaamaan tiettyä liiketoiminnan "
+"kuinka määrittää tai räätälöidä AFENDA xForge vastaamaan tiettyä liiketoiminnan "
 "tarvetta,"
 
 #. module: website_forum
@@ -4161,8 +4161,8 @@ msgstr "kuinka kehittää moduuleita omaan tarpeeseen,"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to install Odoo on a specific infrastructure,"
-msgstr "kuinka asentaa Odoo tiettyyn infrastruktuuriin,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
+msgstr "kuinka asentaa AFENDA xForge tiettyyn infrastruktuuriin,"
 
 #. module: website_forum
 #. odoo-javascript
@@ -4264,7 +4264,7 @@ msgstr "julkaisut"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "specific questions about Odoo service offers, etc."
+msgid "specific questions about AFENDA xForge service offers, etc."
 msgstr "kysymykset Odoon palveluista tms."
 
 #. module: website_forum
@@ -4316,7 +4316,7 @@ msgstr ""
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "what's the best way to use Odoo for a specific business need,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
 msgstr "mikä on paras tapa käyttää Odoota tiettyyn liiketoimintatarpeeseen,"
 
 #. module: website_forum

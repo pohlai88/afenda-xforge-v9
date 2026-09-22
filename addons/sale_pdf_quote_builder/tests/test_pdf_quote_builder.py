@@ -66,7 +66,7 @@ class TestPDFQuoteBuilder(SaleManagementCommon):
             'res_model': 'product.product',
             'res_id': cls.product.id,
         })
-        cls.internal_user = cls._create_new_internal_user(login='internal.user@test.odoo.com', groups='sales_team.group_sale_salesman')
+        cls.internal_user = cls._create_new_internal_user(login='internal.user@test.afenda.app', groups='sales_team.group_sale_salesman')
         cls.alt_company = cls.env['res.company'].create({'name': "Backup Company"})
 
     def _create_so_form(self, **values):
@@ -363,7 +363,7 @@ class TestPDFQuoteBuilder(SaleManagementCommon):
     def _test_custom_content_kanban_like(self):
         # TODO VCR finish tour and uncomment
         self.start_tour(
-            f'/odoo/sales/{self.sale_order.id}',
+            f'/app/sales/{self.sale_order.id}',
             'custom_content_kanban_like_tour',
             login='admin',
         )

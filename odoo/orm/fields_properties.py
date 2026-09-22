@@ -32,7 +32,7 @@ def check_property_field_value_name(property_name):
 class Properties(Field):
     """ Field that contains a list of properties (aka "sub-field") based on
     a definition defined on a container. Properties are pseudo-fields, acting
-    like Odoo fields but without being independently stored in database.
+    like AFENDA xForge fields but without being independently stored in database.
 
     This field allows a light customization based on a container record. Used
     for relationships such as <project.project> / <project.task>,... New

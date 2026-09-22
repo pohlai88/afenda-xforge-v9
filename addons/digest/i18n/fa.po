@@ -16,12 +16,12 @@
 # Aliraza Habibitanha <alireza.habibitanha@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-09 11:18+0000\n"
 "Last-Translator: Aliraza Habibitanha <alireza.habibitanha@gmail.com>\n"
-"Language-Team: Persian <https://translate.odoo.com/projects/odoo-19/digest/"
+"Language-Team: Persian <https://translate.afenda.app/projects/odoo-19/digest/"
 "fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -38,7 +38,7 @@ msgstr ""
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_mail_main
-msgid "<span class=\"odoo_link_text\">Odoo</span>"
+msgid "<span class=\"odoo_link_text\">AFENDA xForge</span>"
 msgstr "<span class=\"odoo_link_text\">اودو</span>"
 
 #. module: digest
@@ -335,8 +335,8 @@ msgstr "تاریخ ارسال بعدی"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Odoo Mobile"
-msgstr "Odoo موبایل"
+msgid "AFENDA xForge Mobile"
+msgstr "AFENDA xForge موبایل"
 
 #. module: digest
 #: model:ir.model.fields,field_description:digest.field_digest_digest__periodicity
@@ -378,7 +378,7 @@ msgstr "گیرندگان"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Run your business from anywhere with <b>Odoo Mobile</b>."
+msgid "Run your business from anywhere with <b>AFENDA xForge Mobile</b>."
 msgstr "کسب و کار خود را از هر کجا با <b>اودو موبایل</b> مدیریت کنید."
 
 #. module: digest
@@ -414,7 +414,7 @@ msgstr "شرح نکته"
 
 #. module: digest
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
 msgstr "نکته: یک ماشین حساب در اودو"
 
 #. module: digest
@@ -451,7 +451,7 @@ msgstr "نکته: با استفاده از میانبرها، جریان کار 
 
 #. module: digest
 #: model:digest.tip,name:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
 msgstr "نکته: یک ماشین حساب در اودو"
 
 #. module: digest
@@ -483,10 +483,10 @@ msgstr "عنوان"
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_3
 msgid ""
 "Type \"@\" to notify someone in a message, or \"#\" to link to a channel. "
-"Try to notify @OdooBot to test the feature."
+"Try to notify @AFENDA Bot to test the feature."
 msgstr ""
 "برای مطلع کردن کسی در یک پیام از \"@\" استفاده کنید، یا برای لینک کردن به یک "
-"کانال از \"#\" استفاده کنید. سعی کنید @OdooBot را مطلع کنید تا این ویژگی را "
+"کانال از \"#\" استفاده کنید. سعی کنید @AFENDA Bot را مطلع کنید تا این ویژگی را "
 "آزمایش کنید."
 
 #. module: digest
@@ -561,7 +561,7 @@ msgstr "شما با موفقیت از اشتراک خارج شده‌اید از
 
 #. module: digest
 #: model:digest.digest,name:digest.digest_digest_default
-msgid "Your Odoo Periodic Digest"
+msgid "Your AFENDA xForge Periodic Digest"
 msgstr "خلاصه‌ی دوره‌ای اودووی شما"
 
 #. module: digest

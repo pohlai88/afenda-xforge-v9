@@ -2,7 +2,7 @@
 
 {
     'name': 'Greece - myDATA E-invoicing through e-invoo',
-    'author': 'Odoo',
+    'author': 'AFENDA xForge',
     'countries': ['gr'],
     'category': 'Accounting/Localizations/EDI',
     'depends': [

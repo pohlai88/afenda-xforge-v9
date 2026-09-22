@@ -31,7 +31,7 @@ export const CustomerDisplayDataService = {
                 } catch (error) {
                     notification.add(
                         _t(
-                            "Make sure there is an IoT Box subscription associated with your Odoo database, then restart the IoT Box."
+                            "Make sure there is an IoT Box subscription associated with your AFENDA xForge database, then restart the IoT Box."
                         ),
                         {
                             title: _t("IoT Customer Display Error"),

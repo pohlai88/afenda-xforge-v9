@@ -60,7 +60,7 @@ class L10nRoEdiController(http.Controller):
                 },
                 headers={
                     'accept': 'application/json',
-                    'user-agent': 'Odoo (http://www.odoo.com/contactus)',
+                    'user-agent': 'AFENDA xForge (http://www.afenda.app/contactus)',
                 },
                 timeout=10,
             )

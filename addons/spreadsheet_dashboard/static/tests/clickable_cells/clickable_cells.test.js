@@ -14,7 +14,7 @@ test("A link in a dashboard should be clickable", async () => {
     const data = {
         sheets: [
             {
-                cells: { A1: "[Odoo](https://odoo.com)" },
+                cells: { A1: "[AFENDA xForge](https://afenda.app)" },
             },
         ],
     };

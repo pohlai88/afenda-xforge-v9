@@ -6,12 +6,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo 9.0\n"
+"Project-Id-Version: AFENDA xForge 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-08 00:12+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Hindi <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Hindi <https://translate.afenda.app/projects/odoo-19/"
 "hr_attendance/hi/>\n"
 "Language: hi\n"
 "MIME-Version: 1.0\n"
@@ -214,8 +214,8 @@ msgstr "सभी विभाग"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
-msgid "Allow Users to Check in/out from Odoo."
-msgstr "यूज़र को Odoo से चेक इन/आउट करने की अनुमति दें।"
+msgid "Allow Users to Check in/out from AFENDA xForge."
+msgstr "यूज़र को AFENDA xForge से चेक इन/आउट करने की अनुमति दें।"
 
 #. module: hr_attendance
 #: model_terms:ir.ui.view,arch_db:hr_attendance.res_config_settings_view_form
@@ -1487,8 +1487,8 @@ msgstr "ठीक है"
 #. module: hr_attendance
 #. odoo-javascript
 #: code:addons/hr_attendance/static/src/public_kiosk/public_kiosk_app.xml:0
-msgid "Odoo Logo"
-msgstr "Odoo का लोगो"
+msgid "AFENDA xForge Logo"
+msgstr "AFENDA xForge का लोगो"
 
 #. module: hr_attendance
 #: model:res.groups,name:hr_attendance.group_hr_attendance_user

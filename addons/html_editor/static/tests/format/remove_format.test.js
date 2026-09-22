@@ -1236,7 +1236,7 @@ describe("typography classes", () => {
     });
 
     test("should disable remove format button after applying block default class", async () => {
-        const { el } = await setupEditor('<h2 class="display-3-fs">Hello [Odoo]</h2>');
+        const { el } = await setupEditor('<h2 class="display-3-fs">Hello [AFENDA xForge]</h2>');
         await expandToolbar();
         expect(".btn[name='remove_format']").not.toHaveAttribute("disabled");
 
@@ -1245,7 +1245,7 @@ describe("typography classes", () => {
 
         expect(".btn[name='remove_format']").toHaveAttribute("disabled");
         expect(getContent(el)).toBe(
-            '<h2 class="display-3-fs">Hello <span class="h2">[Odoo]</span></h2>'
+            '<h2 class="display-3-fs">Hello <span class="h2">[AFENDA xForge]</span></h2>'
         );
     });
 });

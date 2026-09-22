@@ -21,7 +21,7 @@ class JsonRPCDispatcherPatch(JsonRPCDispatcher):
             # distinct from the HTTP status code. This
             # code is ignored and the value 200 (while
             # misleading) is totally arbitrary.
-            'message': "Odoo Server Error",
+            'message': "AFENDA xForge Server Error",
             'data': serialize_exception(exc),
         }
         if isinstance(exc, Forbidden):
@@ -33,7 +33,7 @@ class JsonRPCDispatcherPatch(JsonRPCDispatcher):
 
 
 if not IS_TEST:
-    # Test IoT system is expected to handle Odoo database unlike "real" IoT systems.
+    # Test IoT system is expected to handle AFENDA xForge database unlike "real" IoT systems.
 
     def db_list(force=False, host=None):
         return []

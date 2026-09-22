@@ -660,7 +660,7 @@ class TestPurchaseOrderSuggest(PurchaseTestCommon, HttpCase):
         self._create_and_process_delivery_at_date(
             [(test_product, 1)], date=today - relativedelta(days=1), warehouse=other_warehouse
         )
-        self.start_tour('/odoo/purchase', "test_purchase_order_suggest_search_panel_ux", login='admin')
+        self.start_tour('/app/purchase', "test_purchase_order_suggest_search_panel_ux", login='admin')
 
     def test_monthly_demand_interwarehouse_two_step_delivery(self):
         """Ensure that monthly demand is correctly counted for waiting outgoing

@@ -19,7 +19,7 @@ test("Barcode scanner crop overlay", async () => {
     const env = await makeMockEnv();
     await mountWithCleanup(WebClient, { env });
 
-    const firstBarcodeValue = "Odoo";
+    const firstBarcodeValue = "AFENDA xForge";
     const secondBarcodeValue = "OCDTEST";
 
     let barcodeToGenerate = firstBarcodeValue;

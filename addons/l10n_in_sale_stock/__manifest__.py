@@ -13,7 +13,7 @@ In Indian EDI we send shipping address details if available
 So this module is to get the warehouse address if the invoice is created from Sale Order
     """,
 
-    'website': "https://www.odoo.com",
+    'website': "https://www.afenda.app",
     'category': 'Accounting/Localizations/Sale',
     'version': '0.1',
 
@@ -24,6 +24,6 @@ So this module is to get the warehouse address if the invoice is created from Sa
     ],
 
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -8,12 +8,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-27 23:10+0000\n"
-"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
-"Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
+"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@afenda.app>\n"
+"Language-Team: Spanish (Latin America) <https://translate.afenda.app/projects/"
 "odoo-19/mass_mailing/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
@@ -458,11 +458,11 @@ msgstr "<font style=\"color: white\">Julian Thorne</font>"
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_call_to_action
 msgid ""
-"<font style=\"color: white;\"><strong>50,000+ companies</strong> run Odoo.</"
+"<font style=\"color: white;\"><strong>50,000+ companies</strong> run AFENDA xForge.</"
 "font>"
 msgstr ""
 "<font style=\"color: white;\"><strong>Más de 50,000 empresas</strong> usan "
-"Odoo.</font>"
+"AFENDA xForge.</font>"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_numbers
@@ -3708,8 +3708,8 @@ msgstr "Integra tus aplicaciones favoritas."
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_schedule
-msgid "Interactive Odoo demo"
-msgstr "Demostración interactiva de Odoo"
+msgid "Interactive AFENDA xForge demo"
+msgstr "Demostración interactiva de AFENDA xForge"
 
 #. module: mass_mailing
 #: model:ir.model.fields.selection,name:mass_mailing.selection__mailing_trace__failure_type__mail_email_invalid
@@ -4701,10 +4701,10 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailing_lists
 msgid ""
 "No need to import mailing lists, you can send mailings to contacts saved in "
-"other Odoo apps."
+"other AFENDA xForge apps."
 msgstr ""
 "No necesita importar las listas de correos, puede enviar correos los "
-"contactos que haya guardado en otras aplicaciones de Odoo."
+"contactos que haya guardado en otras aplicaciones de AFENDA xForge."
 
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.mailing_filter_action
@@ -4821,8 +4821,8 @@ msgstr "ABIERTOS (%i)"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_section_mobile
-msgid "Odoo Mobile"
-msgstr "Odoo móvil"
+msgid "AFENDA xForge Mobile"
+msgstr "AFENDA xForge móvil"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.ab_testing_description
@@ -6575,11 +6575,11 @@ msgstr "Usar lista de exclusión"
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__mass_mailing_outgoing_mail_server
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid ""
-"Use a specific mail server in priority. Otherwise Odoo relies on the first "
+"Use a specific mail server in priority. Otherwise AFENDA xForge relies on the first "
 "outgoing mail server available (based on their sequencing) as it does for "
 "normal mails."
 msgstr ""
-"Use un servidor de correo específico con prioridad. De lo contrario, Odoo "
+"Use un servidor de correo específico con prioridad. De lo contrario, AFENDA xForge "
 "depende del primer servidor de correo saliente disponible (según su "
 "secuencia) como lo hace para los correos normales."
 
@@ -6929,11 +6929,11 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailings_from_campaign
 msgid ""
 "You don't need to import your mailing lists, you can easily\n"
-"                send emails<br> to any contact saved in other Odoo apps."
+"                send emails<br> to any contact saved in other AFENDA xForge apps."
 msgstr ""
 "No necesita importar sus listas de correo, puede\n"
 "                 enviar correos electrónicos con facilidad <br>a cualquier "
-"contacto que haya guardado en otras aplicaciones de Odoo."
+"contacto que haya guardado en otras aplicaciones de AFENDA xForge."
 
 #. module: mass_mailing
 #. odoo-python

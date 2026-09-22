@@ -68,7 +68,7 @@ test("ir.menu linked based on record id which does not exists", async function (
     );
 });
 
-test("Odoo link cells can be imported/exported", async function () {
+test("AFENDA xForge link cells can be imported/exported", async function () {
     const env = await makeSpreadsheetMockEnv({ serverData: getMenuServerData() });
     const model = new Model({}, { custom: { env } });
     setCellContent(model, "A1", "[label](odoo://ir_menu_id/12)");

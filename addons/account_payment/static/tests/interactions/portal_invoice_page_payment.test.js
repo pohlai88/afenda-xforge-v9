@@ -24,7 +24,7 @@ test("portal_invoice_page_payment is started with #portal_pay", async () => {
                 <div class="alert alert-info alert-dismissible fade show d-print-none css_editable_mode_hidden">
                     <div class="text-center">
                         This is a preview of the customer portal.
-                        <a class="alert-link" href="/odoo/action-account.action_move_out_invoice_type/2"><i class="oi oi-arrow-right me-1"></i>Back to edit mode</a>
+                        <a class="alert-link" href="/app/action-account.action_move_out_invoice_type/2"><i class="oi oi-arrow-right me-1"></i>Back to edit mode</a>
                     </div>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" data-oe-model="ir.ui.view" data-oe-id="540" data-oe-field="arch" data-oe-xpath="/t[1]/button[1]"></button>
                 </div>
@@ -76,7 +76,7 @@ test("portal_invoice_page_payment is started with #portal_pay", async () => {
                                         </div>
                                     </div>
                                     <div class="d-none d-lg-block mt-5 small text-center text-muted" data-oe-model="ir.ui.view" data-oe-id="549" data-oe-field="arch" data-oe-xpath="/t[1]/div[1]/div[1]/div[2]">
-                                        Powered by <a target="_blank" href="http://www.odoo.com?utm_source=db&amp;utm_medium=portal" title="odoo"><img src="/web/static/img/logo.png" alt="Odoo Logo" height="15" loading="lazy" style=""></a>
+                                        Powered by <a target="_blank" href="http://www.afenda.app?utm_source=db&amp;utm_medium=portal" title="odoo"><img src="/web/static/img/logo.png" alt="AFENDA xForge Logo" height="15" loading="lazy" style=""></a>
                                     </div>
                                 </div>
                                 <div class="vr d-none d-lg-block bg-300" data-oe-model="ir.ui.view" data-oe-id="549" data-oe-field="arch" data-oe-xpath="/t[1]/div[1]/div[2]"></div>
@@ -113,7 +113,7 @@ test("portal_invoice_page_payment is started with #portal_pay", async () => {
                                                                 </p>
                                                                 <a
                                                                     name="activate_payment_provider"
-                                                                    href="/odoo/action-payment.action_start_payment_onboarding"
+                                                                    href="/app/action-payment.action_start_payment_onboarding"
                                                                     role="button"
                                                                     class="btn btn-primary me-2 d-none"
                                                                     data-oe-model="ir.ui.view"
@@ -123,7 +123,7 @@ test("portal_invoice_page_payment is started with #portal_pay", async () => {
                                                                  >
                                                                      ACTIVATE <t t-out="onboarding_provider.upper()"/>
                                                                 </a>
-                                                                <a role="button" type="action" class="btn-link alert-warning me-2" href="/odoo/action-payment.action_payment_provider" data-oe-model="ir.ui.view" data-oe-id="612" data-oe-field="arch" data-oe-xpath="/t[1]/div[1]/div[2]/a[3]">
+                                                                <a role="button" type="action" class="btn-link alert-warning me-2" href="/app/action-payment.action_payment_provider" data-oe-model="ir.ui.view" data-oe-id="612" data-oe-field="arch" data-oe-xpath="/t[1]/div[1]/div[2]/a[3]">
                                                                 <strong><i class="oi oi-arrow-right"></i> Payment Providers</strong>
                                                                 </a>
                                                             </div>

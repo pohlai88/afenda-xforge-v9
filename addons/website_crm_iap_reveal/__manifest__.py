@@ -22,6 +22,6 @@
         'views/res_config_settings_views.xml',
         'views/crm_menus.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

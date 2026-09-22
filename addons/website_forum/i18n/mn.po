@@ -21,12 +21,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 10:48+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Mongolian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Mongolian <https://translate.afenda.app/projects/odoo-19/"
 "website_forum/mn/>\n"
 "Language: mn\n"
 "MIME-Version: 1.0\n"
@@ -3327,7 +3327,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
+"questions related to AFENDA xForge."
 msgstr ""
 
 #. module: website_forum
@@ -3995,8 +3995,8 @@ msgstr "энд"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to configure or customize Odoo to specific business needs,"
-msgstr "Odoo - г хэрхэн өөрчилж тодорхой бизнес хэрэгцээнд тааруулах,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
+msgstr "AFENDA xForge - г хэрхэн өөрчилж тодорхой бизнес хэрэгцээнд тааруулах,"
 
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
@@ -4007,8 +4007,8 @@ msgstr "хэрхэн өөрийн хэрэгцээнд зориулж модул
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to install Odoo on a specific infrastructure,"
-msgstr "хэрхэн Odoo - г тодорхой дэд бүтэц дээр суулгах,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
+msgstr "хэрхэн AFENDA xForge - г тодорхой дэд бүтэц дээр суулгах,"
 
 #. module: website_forum
 #. odoo-javascript
@@ -4107,8 +4107,8 @@ msgstr ""
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "specific questions about Odoo service offers, etc."
-msgstr "Odoo үйлчилгээний саналуудын тухай тодорхой асуултууд, г.м."
+msgid "specific questions about AFENDA xForge service offers, etc."
+msgstr "AFENDA xForge үйлчилгээний саналуудын тухай тодорхой асуултууд, г.м."
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.no_results_message
@@ -4156,8 +4156,8 @@ msgstr "бидэнд нээлттэй, таамагласан асуулт та�
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "what's the best way to use Odoo for a specific business need,"
-msgstr "Odoo - г тодорхой бизнес хэрэгцээнд ашиглах хамгийн сайн арга юу вэ,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
+msgstr "AFENDA xForge - г тодорхой бизнес хэрэгцээнд ашиглах хамгийн сайн арга юу вэ,"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.author_box

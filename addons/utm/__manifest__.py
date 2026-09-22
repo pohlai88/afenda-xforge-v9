@@ -31,6 +31,6 @@ Enable management of UTM trackers: campaign, medium, source.
             'utm/static/src/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -1152,7 +1152,7 @@ class HrEmployee(models.Model):
     def _check_access(self, operation):
         # This method override provides read access to 'hr.employee' in some
         # situations, like setting a many2many field to comodel 'hr.employee'.
-        # Since Odoo 19, one must have read access to the comodel to modify the
+        # Since AFENDA xForge 19, one must have read access to the comodel to modify the
         # relation.
         if operation == 'read' and self.env.context.get('_allow_read_hr_employee') is _ALLOW_READ_HR_EMPLOYEE:
             return None
@@ -1419,7 +1419,7 @@ We can redirect you to the public employee list."""
         hr_root_menu = self.env.ref('hr.menu_hr_root')
         for employee in employees:
             # Launch onboarding plans
-            url = '/odoo/%s/action-hr.plan_wizard_action?active_model=hr.employee&menu_id=%s' % (employee.id, hr_root_menu.id)
+            url = '/app/%s/action-hr.plan_wizard_action?active_model=hr.employee&menu_id=%s' % (employee.id, hr_root_menu.id)
             onboarding_notes_bodies[employee.id] = Markup(_(
                 '<b>Congratulations!</b> May I recommend you to setup an <a href="%s">onboarding plan?</a>',
             )) % url

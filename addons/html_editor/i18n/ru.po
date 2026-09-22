@@ -8,12 +8,12 @@
 # "Anastasiia Koroleva (koan)" <koan@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-05 19:29+0000\n"
 "PO-Revision-Date: 2026-08-10 11:05+0000\n"
-"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
-"Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@afenda.app>\n"
+"Language-Team: Russian <https://translate.afenda.app/projects/odoo-19/"
 "html_editor/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -2029,11 +2029,11 @@ msgstr "Это текущая версия, сравнивать не с чем.
 #: code:addons/html_editor/static/src/main/media/image_crop.js:0
 msgid ""
 "This type of image is not supported for cropping.<br/>If you want to crop "
-"it, please first download it from the original source and upload it in Odoo."
+"it, please first download it from the original source and upload it in AFENDA xForge."
 msgstr ""
 "Этот тип изображения не поддерживается для обрезки.<br/>Если вы хотите "
 "обрезать изображение, пожалуйста, сначала скачайте его из оригинального "
-"источника и загрузите в Odoo."
+"источника и загрузите в AFENDA xForge."
 
 #. module: html_editor
 #. odoo-javascript
@@ -2402,8 +2402,8 @@ msgstr "документ"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/link/link_popover.xml:0
-msgid "e.g. https://www.odoo.com"
-msgstr "например, https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "например, https://www.afenda.app"
 
 #. module: html_editor
 #. odoo-javascript

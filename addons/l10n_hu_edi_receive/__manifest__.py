@@ -14,7 +14,7 @@ NAV Documentation: https://onlineszamla.nav.gov.hu/files/container/download/2025
         'views/account_move_views.xml',
         'wizard/l10n_hu_edi_receive_bills_wizard_views.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'assets': {
         'web.assets_backend': [

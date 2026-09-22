@@ -160,7 +160,7 @@ test("click on odoo account item", async () => {
     stepAllNetworkCalls();
     await contains("button.dropdown-toggle").click();
     expect(".o-dropdown--menu .dropdown-item").toHaveCount(1);
-    expect(".o-dropdown--menu .dropdown-item").toHaveText("My Odoo.com Account");
+    expect(".o-dropdown--menu .dropdown-item").toHaveText("My AFENDA xForge.com Account");
     await contains(".o-dropdown--menu .dropdown-item").click();
     expect.verifySteps(["/web/session/account", "open https://account-url.com"]);
 });

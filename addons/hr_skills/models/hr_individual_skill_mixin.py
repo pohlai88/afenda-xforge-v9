@@ -76,8 +76,8 @@ class HrIndividualSkillMixin(models.AbstractModel):
                 the new values should be created. This is again to preserve the history of skills on the record.
         Certifications:
             1. There can be many certifications with the same skill_id and skill_level as long as the valid_from and
-                valid_to fields are different, e.g. "Odoo:Certified 2025-1-1 to 2025-12-31" can exist alongside
-                "Odoo:Certified 2024-6-1 to 2025-5-31".
+                valid_to fields are different, e.g. "AFENDA xForge:Certified 2025-1-1 to 2025-12-31" can exist alongside
+                "AFENDA xForge:Certified 2024-6-1 to 2025-5-31".
             2. Certifications can be deleted at any point.
             3. Certifications should not be written to, instead the previous certification should be archived and a new
                 certification with the new values should be created.
@@ -488,7 +488,7 @@ class HrIndividualSkillMixin(models.AbstractModel):
 
         Certifications (`is_certification=True`):
         1. Multiple certifications with the same `skill_id` and `level_id` are allowed if their date ranges differ (e.g.,
-            "Odoo Certified (2024-01-01 → 2024-12-31)" and "Odoo Certified (2024-06-01 → 2025-05-31)" can coexist.)
+            "AFENDA xForge Certified (2024-01-01 → 2024-12-31)" and "AFENDA xForge Certified (2024-06-01 → 2025-05-31)" can coexist.)
 
         Shared Rules:
         - Updates always create new records (archiving old ones) rather than in-place writes.

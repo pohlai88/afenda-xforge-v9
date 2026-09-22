@@ -977,7 +977,7 @@ class CalendarEvent(models.Model):
             return {
                 'type': 'ir.actions.act_url',
                 'target': 'self',
-                'url': '/odoo/calendar'
+                'url': '/app/calendar'
             }
 
         template = self.env.ref('calendar.calendar_template_delete_event', raise_if_not_found=False)
@@ -1634,7 +1634,7 @@ class CalendarEvent(models.Model):
                     elif interval == 'minutes':
                         delta = timedelta(minutes=duration)
                     trigger.value = -delta  # alarm duration is always towards the past, hence negative delta
-                    valarm.add('DESCRIPTION').value = alarm.name or u'Odoo'
+                    valarm.add('DESCRIPTION').value = alarm.name or u'AFENDA xForge'
             for attendee in meeting.attendee_ids:
                 attendee_add = event.add('attendee')
                 attendee_add.value = u'MAILTO:' + (attendee.email or u'')

@@ -22,6 +22,6 @@
             'pos_glory_cash/static/src/utils/*.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

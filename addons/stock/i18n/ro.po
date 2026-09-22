@@ -15,12 +15,12 @@
 # Adrian Cocos <adrian.cocos@capps.ai>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-02 13:15+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Romanian <https://translate.odoo.com/projects/odoo-19/stock/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Romanian <https://translate.afenda.app/projects/odoo-19/stock/"
 "ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -1819,11 +1819,11 @@ msgstr "Înainte de data planificată"
 #. module: stock
 #: model_terms:res.company,invoice_terms_html:stock.res_company_1
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
 msgstr ""
 "Textul de mai jos servește drept sugestie și nu implică responsabilitatea "
-"Odoo S.A."
+"AFENDA"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_package__quant_ids
@@ -2996,10 +2996,10 @@ msgstr "Rute implicite prin depozit"
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_orderpoint
 msgid ""
-"Define a minimum stock rule so that Odoo automatically creates requests for "
+"Define a minimum stock rule so that AFENDA xForge automatically creates requests for "
 "quotations or confirmed manufacturing orders to resupply your stock."
 msgstr ""
-"Definiți o regulă de stoc minim astfel încât Odoo să creeze automat cereri "
+"Definiți o regulă de stoc minim astfel încât AFENDA xForge să creeze automat cereri "
 "de oferte sau comenzi de fabricație confirmate pentru a resupra stocul."
 
 #. module: stock
@@ -3011,14 +3011,14 @@ msgstr "Definiți un nou depozit"
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
 "Define your locations to reflect your warehouse structure and\n"
-"            organization. Odoo is able to manage physical locations\n"
+"            organization. AFENDA xForge is able to manage physical locations\n"
 "            (warehouses, shelves, bin, etc), partner locations (customers,\n"
 "            vendors) and virtual locations which are the counterpart of\n"
 "            the stock operations like the manufacturing orders\n"
 "            consumptions, inventories, etc."
 msgstr ""
 "Definiți locațiile pentru a reflecta structura și organizația depozitului. "
-"Odoo este capabil să gestioneze locațiile fizice (depozite, rafturi, bin "
+"AFENDA xForge este capabil să gestioneze locațiile fizice (depozite, rafturi, bin "
 "etc.), locații partenere (clienți, furnizori) și locații virtuale care sunt "
 "contrapartida operațiunilor de stoc cum ar fi consumul de comenzi de "
 "producție, stocurile etc."
@@ -3712,12 +3712,12 @@ msgstr "Locații goale"
 #. module: stock
 #: model_terms:digest.tip,tip_description:stock.digest_tip_stock_0
 msgid ""
-"Enjoy a quick-paced experience with the Odoo barcode app. It is blazing fast "
+"Enjoy a quick-paced experience with the AFENDA xForge barcode app. It is blazing fast "
 "and works even without a stable internet connection. It supports all flows: "
 "inventory adjustments, batch picking, moving lots or pallets, low inventory "
 "checks, etc. Go to the \"Apps\" menu to activate the barcode interface."
 msgstr ""
-"Bucurați-vă imediat de aplicația cod de bare Odoo. Pornește rapid și "
+"Bucurați-vă imediat de aplicația cod de bare AFENDA xForge. Pornește rapid și "
 "funcționează chiar și fără o conexiune stabilă la internet. Acceptă toate "
 "fluxurile: ajustări de inventar, preluarea loturilor, mutarea loturilor sau "
 "paletelor, verificări de inventar reduse etc. Accesați meniul „Aplicații” "
@@ -3757,14 +3757,14 @@ msgstr ""
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
-"Every stock operation in Odoo moves the products from one\n"
+"Every stock operation in AFENDA xForge moves the products from one\n"
 "            location to another one.  For instance, if you receive products\n"
-"            from a vendor, Odoo will move products from the Vendor\n"
+"            from a vendor, AFENDA xForge will move products from the Vendor\n"
 "            location to the Stock location. Each report can be performed on\n"
 "            physical, partner or virtual locations."
 msgstr ""
-"Fiecare operațiune de stocare din Odoo mută produsele de la o locație la "
-"alta. De exemplu, dacă primiți produse de la un furnizor, Odoo va muta "
+"Fiecare operațiune de stocare din AFENDA xForge mută produsele de la o locație la "
+"alta. De exemplu, dacă primiți produse de la un furnizor, AFENDA xForge va muta "
 "produsele din locația furnizorului în locația Stoc. Fiecare raport poate fi "
 "efectuat pe locații fizice, partenere sau virtuale."
 
@@ -4437,82 +4437,82 @@ msgstr "Dacă utilizatorul poate vedea cantitatea estimată sau nu"
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_delivery_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the delivery slip "
+"If this checkbox is ticked, AFENDA xForge will automatically print the delivery slip "
 "of a picking when it is validated."
 msgstr ""
-"Dacă această casetă este bifată, Odoo va tipări automat borderoul de livrare "
+"Dacă această casetă este bifată, AFENDA xForge va tipări automat borderoul de livrare "
 "al unei ridicări când aceasta este validată."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_lot_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the lot/SN labels "
 "of a picking when it is validated."
 msgstr ""
-"Dacă această casetă este bifată, Odoo va tipări automat etichetele lotului/"
+"Dacă această casetă este bifată, AFENDA xForge va tipări automat etichetele lotului/"
 "SN ale uneri ridicări când aceasta este validată."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_package_label
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the package label "
+"If this checkbox is ticked, AFENDA xForge will automatically print the package label "
 "when \"Put in Pack\" button is used."
 msgstr ""
-"Dacă această casetă este bifată, Odoo va tipări automat etichetele "
+"Dacă această casetă este bifată, AFENDA xForge va tipări automat etichetele "
 "pachetului când butonul \"Puneți în Pachet\" este apăsat."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_packages
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the packages and "
+"If this checkbox is ticked, AFENDA xForge will automatically print the packages and "
 "their contents of a picking when it is validated."
 msgstr ""
-"Dacă această casetă este bifată, Odoo va tipări automat pachetele și "
+"Dacă această casetă este bifată, AFENDA xForge va tipări automat pachetele și "
 "conţinutul acestora ale unei ridicări când aceasta este validată."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the product labels "
 "of a picking when it is validated."
 msgstr ""
-"Dacă această casetă este bifată, Odoo va tipări automat etichetele "
+"Dacă această casetă este bifată, AFENDA xForge va tipări automat etichetele "
 "produsului ale unei ridicări când aceasta este validată."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report labels of a picking when it is validated."
 msgstr ""
-"Dacă această casetă este bifată, Odoo va tipări automat etichetele "
+"Dacă această casetă este bifată, AFENDA xForge va tipări automat etichetele "
 "raportului de recepție ale unei ridicări atunci când aceasta este validată."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report of a picking when it is validated and has assigned moves."
 msgstr ""
-"Dacă această casetă este bifată, Odoo va tipări automat raportul de primire "
+"Dacă această casetă este bifată, AFENDA xForge va tipări automat raportul de primire "
 "al unei ridicări când aceasta este validată și are mișcări atribuite."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_return_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the return slip of "
+"If this checkbox is ticked, AFENDA xForge will automatically print the return slip of "
 "a picking when it is validated."
 msgstr ""
-"Dacă această casetă este bifată, Odoo va tipări automat borderoul de retur "
+"Dacă această casetă este bifată, AFENDA xForge va tipări automat borderoul de retur "
 "al unei ridicări când aceasta este validată."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_show_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically show the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically show the reception "
 "report (if there are moves to allocate to) when validating."
 msgstr ""
-"Dacă această casetă de selectare este bifată, Odoo va afișa automat raportul "
+"Dacă această casetă de selectare este bifată, AFENDA xForge va afișa automat raportul "
 "de primire (dacă există mișcări de alocare) la validare."
 
 #. module: stock
@@ -6368,7 +6368,7 @@ msgstr "Octombrie"
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.view_picking_type_form
 msgid ""
-"Odoo opens a PDF preview by default. If you (Enterprise users only) want to "
+"AFENDA xForge opens a PDF preview by default. If you (Enterprise users only) want to "
 "print instantly,\n"
 "                                        install the IoT App on a computer "
 "that is on the same local network as the\n"
@@ -6376,7 +6376,7 @@ msgid ""
 "routing of the reports.\n"
 "                                        <br/>"
 msgstr ""
-"Odoo deschide implicit o previzualizare PDF. Dacă doriți să tipăriți instant "
+"AFENDA xForge deschide implicit o previzualizare PDF. Dacă doriți să tipăriți instant "
 "(doar pentru utilizatorii Enterprise),\n"
 "instalați aplicația IoT pe un calculator aflat în aceeași rețea locală cu "
 "operatorul de coduri de bare și configurați rutarea rapoartelor.\n"

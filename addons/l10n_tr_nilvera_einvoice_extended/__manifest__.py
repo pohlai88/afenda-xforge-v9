@@ -32,6 +32,6 @@ Features include:
     'auto_install': ['l10n_tr_nilvera_einvoice'],
     'installable': True,
     'post_init_hook': '_l10n_tr_nilvera_einvoice_extended_post_init',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

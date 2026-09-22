@@ -987,5 +987,5 @@ class TestRepairHttp(HttpCase):
             })],
         })
 
-        self.start_tour(f"/odoo/repairs/{repair.id}", "test_repair_without_product_in_parts", login='admin')
+        self.start_tour(f"/app/repairs/{repair.id}", "test_repair_without_product_in_parts", login='admin')
         self.assertTrue(repair.has_uncomplete_moves)

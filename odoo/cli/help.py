@@ -13,7 +13,7 @@ class Help(Command):
     template = textwrap.dedent("""\
         usage: {prog_name} [--addons-path=PATH,...] <command> [...]
 
-        Odoo {version}
+        AFENDA xForge {version}
         Available commands:
 
         {command_list}

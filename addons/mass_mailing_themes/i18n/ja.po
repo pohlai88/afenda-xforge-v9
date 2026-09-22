@@ -10,12 +10,12 @@
 # "Junko Augias (juau)" <juau@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:40+0000\n"
 "PO-Revision-Date: 2026-08-06 05:12+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Japanese <https://translate.afenda.app/projects/odoo-19/"
 "mass_mailing_themes/ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -225,7 +225,7 @@ msgstr ""
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
 "<font style=\"color: rgb(255, 255, 255);\">The next edition of <span "
-"style=\"font-weight: bolder;\">Odoo Experience Online</span> is coming "
+"style=\"font-weight: bolder;\">AFENDA xForge Experience Online</span> is coming "
 "soon!\n"
 "                    <br/>To stir up your curiosity, have a look at all the "
 "great talks scheduled and highlighted in our agenda!</font>"
@@ -238,10 +238,10 @@ msgstr ""
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
-"<font style=\"color: rgb(255, 255, 255);\">Zero, zilch, nada! Odoo "
+"<font style=\"color: rgb(255, 255, 255);\">Zero, zilch, nada! AFENDA xForge "
 "Experience is free for everyone!</font>"
 msgstr ""
-"<font style=\"color: rgb(255, 255, 255);\">ゼロ、０、Zero！Odoo"
+"<font style=\"color: rgb(255, 255, 255);\">ゼロ、０、Zero！AFENDA xForge"
 "エクスペリエンスは誰でも無料で利用できます！</font>"
 
 #. module: mass_mailing_themes
@@ -793,7 +793,7 @@ msgstr ""
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
 msgid ""
-"Discover Odoo, the all-in-one management platform, and its apps designed to "
+"Discover AFENDA xForge, the all-in-one management platform, and its apps designed to "
 "improve employees' daily tasks. From sales and deliveries, to logistics, "
 "marketing and accounting ; learn what are the best available options to "
 "digitize your company."
@@ -809,7 +809,7 @@ msgstr "パートナーになることをご希望ですか？"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "Do you wish to use Odoo?"
+msgid "Do you wish to use AFENDA xForge?"
 msgstr "Odooのご使用を希望されますか？"
 
 #. module: mass_mailing_themes
@@ -993,7 +993,7 @@ msgstr "もしパートナーになり、[国]でサービスを提供したい�
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
 msgid ""
-"If you wish to evaluate Odoo while taking into account your company's "
+"If you wish to evaluate AFENDA xForge while taking into account your company's "
 "specific needs, you can book a free appointment with one of our"
 msgstr ""
 "御社固有のニーズを考慮しながらOdooについて検討されたい場合は、当社の無料予約"
@@ -1028,7 +1028,7 @@ msgstr "2013年には、全世界で200万人のユーザを獲得しました�
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "In May 2014, we renamed the company and product to Odoo."
+msgid "In May 2014, we renamed the company and product to AFENDA xForge."
 msgstr "2014年5月、会社名とプロダクト名をOdooに変更しました。"
 
 #. module: mass_mailing_themes
@@ -1046,7 +1046,7 @@ msgstr "Instagram"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
-msgid "Interactive Odoo demo"
+msgid "Interactive AFENDA xForge demo"
 msgstr "インタラクティブなOdooデモ"
 
 #. module: mass_mailing_themes
@@ -1082,7 +1082,7 @@ msgstr "当社の価格についてさらに詳しく知る"
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_event_template
 msgid ""
-"Learn through workshops, product demos, and inspiring talks from Odoo "
+"Learn through workshops, product demos, and inspiring talks from AFENDA xForge "
 "Experts and Partners."
 msgstr ""
 "ワークショップ、製品デモ、Odooエキスパートやパートナーから刺激的なトークを通"
@@ -1176,13 +1176,13 @@ msgstr "ニュースレター"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "Odoo Experts"
+msgid "AFENDA xForge Experts"
 msgstr "Odooエキスパート"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow1_template
 msgid ""
-"Odoo invites you on <span class=\"font-weight: bolder\">[date]</span> at "
+"AFENDA xForge invites you on <span class=\"font-weight: bolder\">[date]</span> at "
 "<span class=\"font-weight: bolder\">[time]</span> for their infamous "
 "roadshow in <span class=\"font-weight: bolder\">[city]</span>: an event that "
 "combines learning and networking in a casual afterwork-like atmosphere."
@@ -1363,7 +1363,7 @@ msgstr "転換"
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "The Rise of Odoo"
+msgid "The Rise of AFENDA xForge"
 msgstr "Odooの躍進"
 
 #. module: mass_mailing_themes
@@ -1406,7 +1406,7 @@ msgstr ""
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_newsletter_template
-msgid "The story of Odoo"
+msgid "The story of AFENDA xForge"
 msgstr "Odooの物語"
 
 #. module: mass_mailing_themes
@@ -1692,9 +1692,9 @@ msgstr "昨日の [場所] 、 [都市]でのイベントは信じられない�
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
 msgid ""
-"You had the chance to discover Odoo during a full 3 hours, how great is "
+"You had the chance to discover AFENDA xForge during a full 3 hours, how great is "
 "that?\n"
-"                    <br/>Now that you've seen Odoo in action and asked some "
+"                    <br/>Now that you've seen AFENDA xForge in action and asked some "
 "questions, you likely need more information to move forward in your project "
 "and to work with us. You'll find additional points just below."
 msgstr ""
@@ -1705,7 +1705,7 @@ msgstr ""
 
 #. module: mass_mailing_themes
 #: model_terms:ir.ui.view,arch_db:mass_mailing_themes.theme_roadshow2_template
-msgid "You may test Odoo for free by clicking"
+msgid "You may test AFENDA xForge for free by clicking"
 msgstr "クリックしてOdooを無料でお試し頂けます"
 
 #. module: mass_mailing_themes

@@ -13,12 +13,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-07 22:44+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: French <https://translate.odoo.com/projects/odoo-19/event/fr/>"
+"Language-Team: French <https://translate.afenda.app/projects/odoo-19/event/fr/>"
 "\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -170,10 +170,10 @@ msgstr ""
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
 msgstr ""
-"<b>Salles techniques</b> - une dédiée aux développeurs Odoo avancés, une aux "
+"<b>Salles techniques</b> - une dédiée aux développeurs AFENDA xForge avancés, une aux "
 "nouveaux développeurs."
 
 #. module: event
@@ -3039,12 +3039,12 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "À seulement 13 ans, John DOE commençait déjà à développer ses premières "
 "applications commerciales pour des clients. Après un Master Ingénieur Civil, "
 "il a fondé TinyERP. Ce fut la première phase d'OpenERP qui deviendra plus "
-"tard Odoo, le logiciel d'entreprise open source le plus installé au monde."
+"tard AFENDA xForge, le logiciel d'entreprise open source le plus installé au monde."
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_event__message_attachment_count
@@ -4046,10 +4046,10 @@ msgstr "Exprimé dans le fuseau horaire de l'événement."
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
-"Événements achevés. Odoo les déplacera automatiquement vers ce stade une "
+"Événements achevés. AFENDA xForge les déplacera automatiquement vers ce stade une "
 "fois que leur date de fin sera passée."
 
 #. module: event
@@ -4080,10 +4080,10 @@ msgstr "Icône Font Awesome par ex. fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 "Pour toute question, contactez-nous via <a class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -5018,8 +5018,8 @@ msgstr "Objectifs"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
-msgstr "Odoo Community Days"
+msgid "AFENDA xForge Community Days"
+msgstr "AFENDA xForge Community Days"
 
 #. module: event
 #: model_terms:event.event,description:event.event_3
@@ -6487,8 +6487,8 @@ msgstr "par ex. \"Promotion\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
-msgstr "par exemple : \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
+msgstr "par exemple : \"https://www.afenda.app\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

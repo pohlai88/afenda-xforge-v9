@@ -1,13 +1,13 @@
 # Part of Odoo. See LICENSE file for full copyright and licensing details.
 {
     'name': 'France - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/france.html',
+    'website': '/docs/applications/finance/fiscal_localizations/france.html',
     'icon': '/account/static/description/l10n.png',
     'version': '2.4',
     'countries': ['fr'],
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
-This is the module to manage the accounting chart for France in Odoo.
+This is the module to manage the accounting chart for France in AFENDA xForge.
 ========================================================================
 
 This module applies to companies based in France mainland. It doesn't apply to
@@ -49,6 +49,6 @@ configuration of their taxes and fiscal positions manually.
         'data/l10n_fr_account_demo.xml',
     ],
     'post_init_hook': '_l10n_fr_post_init_hook',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -31,8 +31,8 @@ class IrWebsocket(models.AbstractModel):
         """Process websocket events.
         Modules can override this method to handle their own events. But overriding this method is
         not recommended and should be carefully considered, because at the time of writing this
-        message, Odoo.sh does not use this method. Each new event should have a corresponding http
-        route and Odoo.sh infrastructure should be updated to reflect it. On top of that, the
+        message, AFENDA xForge.sh does not use this method. Each new event should have a corresponding http
+        route and AFENDA xForge.sh infrastructure should be updated to reflect it. On top of that, the
         event processing is very time, ressource and error sensitive."""
 
     def _prepare_subscribe_data(self, channels, last):

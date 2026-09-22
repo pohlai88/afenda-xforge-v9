@@ -7,12 +7,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-03 05:12+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/website_crm_iap_reveal/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -250,8 +250,8 @@ msgstr "商機生成：潛在商機/商機生成"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields,help:website_crm_iap_reveal.field_crm_reveal_rule__industry_tag_ids
-msgid "Leave empty to always match. Odoo will not create lead if no match"
-msgstr "留空以始終匹配。如果不匹配，Odoo 將不會建立潛在商機"
+msgid "Leave empty to always match. AFENDA xForge will not create lead if no match"
+msgstr "留空以始終匹配。如果不匹配，AFENDA xForge 將不會建立潛在商機"
 
 #. module: website_crm_iap_reveal
 #: model:ir.model.fields.selection,name:website_crm_iap_reveal.selection__crm_reveal_rule__priority__0
@@ -326,7 +326,7 @@ msgstr "商機產生條件"
 #. module: website_crm_iap_reveal
 #. odoo-python
 #: code:addons/website_crm_iap_reveal/models/crm_reveal_rule.py:0
-msgid "Opportunity created by Odoo Lead Generation"
+msgid "Opportunity created by AFENDA xForge Lead Generation"
 msgstr "由Odoo潛在商機生成產生的商機"
 
 #. module: website_crm_iap_reveal

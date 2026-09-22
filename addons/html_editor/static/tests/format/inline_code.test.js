@@ -78,15 +78,15 @@ test("should paste external block html as plain text inside inline code", async 
     });
 });
 
-test("should paste Odoo editor html as plain text inside inline code", async () => {
+test("should paste AFENDA xForge editor html as plain text inside inline code", async () => {
     await testEditor({
         contentBefore: `<p>ab<code class="o_inline_code">Inline[]Code</code>cd</p>`,
         stepFunction: async (editor) => {
             const clipboardData = new DataTransfer();
-            clipboardData.setData("text/plain", "Hello Odoo self.env.cr._enable_logging()");
+            clipboardData.setData("text/plain", "Hello AFENDA xForge self.env.cr._enable_logging()");
             clipboardData.setData(
                 "application/vnd.odoo.odoo-editor",
-                `<p class="o_paragraph">Hello <strong>Odoo </strong><a href="http://self.env.cr">self.env.cr</a>._enable_logging()</p>`
+                `<p class="o_paragraph">Hello <strong>AFENDA xForge </strong><a href="http://self.env.cr">self.env.cr</a>._enable_logging()</p>`
             );
             const pasteEvent = new ClipboardEvent("paste", {
                 clipboardData,
@@ -94,7 +94,7 @@ test("should paste Odoo editor html as plain text inside inline code", async () 
             });
             editor.editable.dispatchEvent(pasteEvent);
         },
-        contentAfter: `<p>ab<code class="o_inline_code">InlineHello Odoo self.env.cr._enable_logging()[]Code</code>cd</p>`,
+        contentAfter: `<p>ab<code class="o_inline_code">InlineHello AFENDA xForge self.env.cr._enable_logging()[]Code</code>cd</p>`,
     });
 });
 

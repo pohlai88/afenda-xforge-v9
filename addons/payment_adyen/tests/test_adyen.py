@@ -311,9 +311,9 @@ class AdyenTest(AdyenCommon, PaymentHttpCommon):
         self.assertDictEqual(
             application_info, {
                 'externalPlatform': {
-                    'name': 'Odoo',
+                    'name': 'AFENDA xForge',
                     'version': release.version,
-                    'integrator': 'Odoo SA',
+                    'integrator': 'AFENDA xForge SA',
                 }
             },
         )
@@ -330,9 +330,9 @@ class AdyenTest(AdyenCommon, PaymentHttpCommon):
         self.assertDictEqual(
             application_info, {
                 'externalPlatform': {
-                    'name': 'Odoo',
+                    'name': 'AFENDA xForge',
                     'version': release.version,
-                    'integrator': 'Odoo SA',
+                    'integrator': 'AFENDA xForge SA',
                 }
             },
         )

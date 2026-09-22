@@ -13,12 +13,12 @@
 # Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-04 10:05+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/event/"
+"Language-Team: Vietnamese <https://translate.afenda.app/projects/odoo-19/event/"
 "vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -168,10 +168,10 @@ msgstr ""
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
 msgstr ""
-"<b>Phòng kỹ thuật</b> - Một phòng dành cho các nhà phát triển Odoo giàu kinh "
+"<b>Phòng kỹ thuật</b> - Một phòng dành cho các nhà phát triển AFENDA xForge giàu kinh "
 "nghiệm, một phòng dành cho các nhà phát triển mới."
 
 #. module: event
@@ -1845,11 +1845,11 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "Chỉ ở tuổi 13, John DOE đã bắt đầu viết ứng dụng quản lý kinh doanh đầu tiên "
 "cho khách hàng. Sau khi học xong chương trình kỹ sư dân dụng, anh thành lập "
-"TinyERP. Đây chính là bước đầu tiên của OpenERP sau này trở thành Odoo, phần "
+"TinyERP. Đây chính là bước đầu tiên của OpenERP sau này trở thành AFENDA xForge, phần "
 "mềm kinh doanh nguồn mở được cài đặt nhiều nhất trên thế giới."
 
 #. module: event
@@ -2842,10 +2842,10 @@ msgstr ""
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
-"Sự kiện đã kết thúc. Odoo sẽ tự động chuyển chúng đến giai đoạn này sau khi "
+"Sự kiện đã kết thúc. AFENDA xForge sẽ tự động chuyển chúng đến giai đoạn này sau khi "
 "qua ngày kết thúc."
 
 #. module: event
@@ -2876,11 +2876,11 @@ msgstr "Font biểu tượng, ví dụ: fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 "Nếu bạn cần thêm thông tin, vui lòng liên hệ với chúng tôi tại <a "
-"class=\"o_translate_inline\" href=\"mailto:events@odoo.com\">"
-"events@odoo.com</a>"
+"class=\"o_translate_inline\" href=\"mailto:events@afenda.app\">"
+"events@afenda.app</a>"
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -3802,8 +3802,8 @@ msgstr "Mục tiêu"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
-msgstr "Odoo Community Days"
+msgid "AFENDA xForge Community Days"
+msgstr "AFENDA xForge Community Days"
 
 #. module: event
 #: model_terms:event.event,description:event.event_3
@@ -5237,8 +5237,8 @@ msgstr "VD: \"Quảng bá\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
-msgstr "VD: \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
+msgstr "VD: \"https://www.afenda.app\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

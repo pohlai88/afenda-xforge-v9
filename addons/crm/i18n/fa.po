@@ -22,12 +22,12 @@
 # Heshmatkhah <maheshmatkhah.soft@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:35+0000\n"
 "PO-Revision-Date: 2026-09-08 12:11+0000\n"
 "Last-Translator: Aliraza Habibitanha <alireza.habibitanha@gmail.com>\n"
-"Language-Team: Persian <https://translate.odoo.com/projects/odoo-19/crm/fa/>"
+"Language-Team: Persian <https://translate.afenda.app/projects/odoo-19/crm/fa/>"
 "\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -343,7 +343,7 @@ msgid ""
 "board, you'll discover what <t t-out=\"object.company_id.name or ''\">My "
 "Company (San Francisco)</t> has to offer. My name is <t t-"
 "out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the "
-"most out of Odoo. Could we plan a quick demo soon?<br/>\n"
+"most out of AFENDA xForge. Could we plan a quick demo soon?<br/>\n"
 "                            Feel free to reach out at any time!<br/><br/>\n"
 "                            Best,<br/>\n"
 "                            <t t-if=\"object.user_id\">\n"
@@ -394,9 +394,9 @@ msgid ""
 "</td></tr>\n"
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    Powered by <a target=\"_blank\" href=\"https://www.odoo.com?"
+"    Powered by <a target=\"_blank\" href=\"https://www.afenda.app?"
 "utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: "
-"{{object.company_id.email_secondary_color or '#875A7B'}};;\">Odoo</a>\n"
+"{{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
 "</table>\n"
 "        "
@@ -956,10 +956,10 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
 msgid ""
-"Click on the breadcrumb to go back to your Pipeline. Odoo will save all "
+"Click on the breadcrumb to go back to your Pipeline. AFENDA xForge will save all "
 "modifications as you navigate."
 msgstr ""
-"روی منوی عنوان کلیک کنید تا به Pipeline خود بازگردید. Odoo تمام تغییرات را "
+"روی منوی عنوان کلیک کنید تا به Pipeline خود بازگردید. AFENDA xForge تمام تغییرات را "
 "در حین حرکت ذخیره می کند."
 
 #. module: crm
@@ -1045,7 +1045,7 @@ msgstr "تاریخ تکمیل"
 #. module: crm
 #. odoo-javascript
 #: code:addons/crm/static/src/views/crm_form/crm_pls_tooltip_button.xml:0
-msgid "Computed by Odoo AI using your data."
+msgid "Computed by AFENDA xForge AI using your data."
 msgstr "محاسبه شده توسط هوش مصنوعی با استفاده از داده‌های شما."
 
 #. module: crm
@@ -1436,11 +1436,11 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_4
 msgid ""
 "Did you know you can search a company by name or VAT number to instantly "
-"fill in all its data? Odoo autocompletes everything for you: logo, address, "
+"fill in all its data? AFENDA xForge autocompletes everything for you: logo, address, "
 "company size, business information, social media accounts, etc."
 msgstr ""
 "آیا می‌دانستید که می‌توانید یک شرکت را با نام یا شماره مالیات بر ارزش افزوده "
-"پیدا کنید تا فورا تمام داده‌های آن را پر کنید؟ Odoo همه چیز را برای شما خوکار "
+"پیدا کنید تا فورا تمام داده‌های آن را پر کنید؟ AFENDA xForge همه چیز را برای شما خوکار "
 "تکمیل می‌کند: لوگو، آدرس، اندازه شرکت، اطلاعات کسب‌وکار، اکانت های شبکه های "
 "اجتماعی و غیره."
 
@@ -1448,11 +1448,11 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_5
 msgid ""
 "Did you know you can turn a list of opportunities into a map view, using the "
-"top-right map icon? A lot of screens in Odoo can be turned into a map: "
+"top-right map icon? A lot of screens in AFENDA xForge can be turned into a map: "
 "tasks, contacts, delivery orders, etc."
 msgstr ""
 "آیا می دانستید که می‌توانید با استفاده از نماد نقشه سمت راست بالا، فهرستی از "
-"فرصت‌ها را به یک نمایش نقشه تبدیل کنید؟ بسیاری از صفحه نمایش در Odoo را "
+"فرصت‌ها را به یک نمایش نقشه تبدیل کنید؟ بسیاری از صفحه نمایش در AFENDA xForge را "
 "می‌توان به یک نقشه تبدیل کرد: وظایف, مخاطبین, سفارشات تحویل, و غیره."
 
 #. module: crm
@@ -2478,10 +2478,10 @@ msgstr "درآمد تکرارشونده ماهانه"
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form
 msgid ""
-"Make and receive calls from Odoo with Ringover's dialer. Track calls, SMS "
+"Make and receive calls from AFENDA xForge with Ringover's dialer. Track calls, SMS "
 "messages, and get AI-powered transcripts of your conversations."
 msgstr ""
-"با شماره گیر Ringover از Odoo تماس بگیرید و دریافت کنید. تماس‌ها، پیام‌های SMS "
+"با شماره گیر Ringover از AFENDA xForge تماس بگیرید و دریافت کنید. تماس‌ها، پیام‌های SMS "
 "را دنبال کنید و رونوشت‌های مکالمات خود را با هوش مصنوعی دریافت کنید."
 
 #. module: crm
@@ -2929,25 +2929,25 @@ msgstr "تعداد پیامهای با خطای تحویل"
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_case_form_view_salesteams_opportunity
 msgid ""
-"Odoo helps you keep track of your sales pipeline to follow\n"
+"AFENDA xForge helps you keep track of your sales pipeline to follow\n"
 "                    up potential sales and better forecast your future "
 "revenues."
 msgstr ""
-"Odoo به شما کمک می کند فرصت‌های فروش خود را دنبال کنید\n"
+"AFENDA xForge به شما کمک می کند فرصت‌های فروش خود را دنبال کنید\n"
 "                     فروش بالقوه را افزایش داده و درآمد آینده خود را بهتر "
 "پیش بینی کنید."
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_2
 msgid ""
-"Odoo's artificial intelligence engine predicts the success rate of each "
+"AFENDA xForge's artificial intelligence engine predicts the success rate of each "
 "opportunity based on your history. You can always update the success rate "
-"manually, but if you let Odoo do the job the score is updated while the "
+"manually, but if you let AFENDA xForge do the job the score is updated while the "
 "opportunity moves forward in your sales cycle."
 msgstr ""
-"موتور هوش مصنوعی Odoo نرخ موفقیت هر فرصت را براساس سابقه شما پیش‌بینی می‌کند. "
+"موتور هوش مصنوعی AFENDA xForge نرخ موفقیت هر فرصت را براساس سابقه شما پیش‌بینی می‌کند. "
 "همیشه می‌توانید نرخ موفقیت را به صورت دستی به روز کنید، اما اگر اجازه دهید "
-"Odoo کار را انجام دهید در حالی که این فرصت در چرخه فروش شما به جلو حرکت می‌کند"
+"AFENDA xForge کار را انجام دهید در حالی که این فرصت در چرخه فروش شما به جلو حرکت می‌کند"
 "، امتیاز به روز می‌شود."
 
 #. module: crm
@@ -3841,11 +3841,11 @@ msgstr "سرنخ %s نمی‌تواند همزمان برنده و باخته ب
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"مدلی (Odoo Document Kind) که این نام مستعار با آن مطابقت دارد. هر ایمیل "
+"مدلی (AFENDA xForge Document Kind) که این نام مستعار با آن مطابقت دارد. هر ایمیل "
 "دریافتی که به سابقه موجود پاسخ نمی‌دهد باعث ایجاد یک رکورد جدید از این مدل "
 "می‌شود (به عنوان مثال یک وظیفه پروژه)"
 
@@ -3853,10 +3853,10 @@ msgstr ""
 #: model:ir.model.fields,help:crm.field_crm_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "نام مستعار ایمیل، به عنوان مثال 'jobs'. اگر می خواهید ایمیل های "
-"<jobs@example.odoo.com> را دریافت کنید"
+"<jobs@example.afenda.app> را دریافت کنید"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead__partner_name
@@ -4000,8 +4000,8 @@ msgstr "نکته: ایمیل های دریافتی را به فرصت تبدیل
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_1
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_1
-msgid "Tip: Did you know Odoo has built-in lead mining?"
-msgstr "نکته: آیا می دانستید Odoo دارای استخراج سرنخ داخلی است؟"
+msgid "Tip: Did you know AFENDA xForge has built-in lead mining?"
+msgstr "نکته: آیا می دانستید AFENDA xForge دارای استخراج سرنخ داخلی است؟"
 
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_4
@@ -4483,8 +4483,8 @@ msgstr "به عنوان مثال، بیش از حد گران"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
-msgid "e.g. https://www.odoo.com"
-msgstr "مثلا https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "مثلا https://www.afenda.app"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.sales_team_form_view_in_crm

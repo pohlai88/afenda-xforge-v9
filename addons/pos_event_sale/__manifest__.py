@@ -8,5 +8,5 @@
     'installable': True,
     'auto_install': True,
     'license': 'LGPL-3',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
 }

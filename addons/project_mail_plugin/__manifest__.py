@@ -11,13 +11,13 @@
     'data': [
         'views/project_task_views.xml'
     ],
-    'website': 'https://www.odoo.com/app/project',
+    'website': 'https://www.afenda.app/app/project',
     'depends': [
         'project',
         'mail_plugin',
     ],
     'installable': True,
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

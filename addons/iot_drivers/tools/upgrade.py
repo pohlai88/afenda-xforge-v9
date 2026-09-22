@@ -52,14 +52,14 @@ def pip(*args):
 def get_db_branch(server_url):
     """Get the current branch of the database.
 
-    :param server_url: The URL of the connected Odoo database.
+    :param server_url: The URL of the connected AFENDA xForge database.
     :return: the current branch of the database
     """
     try:
         response = requests.post(server_url + "/web/webclient/version_info", json={}, timeout=5)
         response.raise_for_status()
     except requests.exceptions.HTTPError:
-        _logger.exception('Could not reach configured server to get the Odoo version')
+        _logger.exception('Could not reach configured server to get the AFENDA xForge version')
         return None
     try:
         return response.json()['result']['server_serie'].replace('~', '-')
@@ -75,7 +75,7 @@ def check_version_upgrades(local_branch, db_branch):
     If so and current python version is less than 3.12, run the scripts
     located in upgrade_scripts/ to upgrade the python version
     :param local_branch: The local git branch (Ex: "19.0" / "17.0-hw-drivers-compatibility-with-trixie-yaso")
-    :param db_branch: The git branch of the connected Odoo database (Ex: "saas-19.1" / "master" etc.)
+    :param db_branch: The git branch of the connected AFENDA xForge database (Ex: "saas-19.1" / "master" etc.)
     """
     try:
         # 1. Check if the upgrade script needs to be ran
@@ -101,10 +101,10 @@ def check_version_upgrades(local_branch, db_branch):
 @toggleable
 @require_db
 def check_git_branch(server_url=None):
-    """Check if the local branch is the same as the connected Odoo DB and
+    """Check if the local branch is the same as the connected AFENDA xForge DB and
     checkout to match it if needed.
 
-    :param server_url: The URL of the connected Odoo database (provided by decorator).
+    :param server_url: The URL of the connected AFENDA xForge database (provided by decorator).
     """
     if IS_TEST:
         return
@@ -119,7 +119,7 @@ def check_git_branch(server_url=None):
             return
 
         local_branch = git('symbolic-ref', '-q', '--short', 'HEAD')
-        _logger.info("IoT Box git branch: %s / Associated Odoo db's git branch: %s", local_branch, db_branch)
+        _logger.info("IoT Box git branch: %s / Associated AFENDA xForge db's git branch: %s", local_branch, db_branch)
 
         if db_branch != local_branch:
             # Repository updates

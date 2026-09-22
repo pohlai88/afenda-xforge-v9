@@ -30,7 +30,7 @@ test("avatar card preview with hr", async () => {
         name: "sub manager",
     });
     const workLocationId = env["hr.work.location"].create({
-        name: "Odoo",
+        name: "AFENDA xForge",
         location_type: "office",
     });
     const versionId = env["hr.version"].create({
@@ -74,7 +74,7 @@ test("avatar card preview with hr", async () => {
         "Management",
         "Mario@odoo.pro",
         "+585555555",
-        "Odoo",
+        "AFENDA xForge",
     ]);
     await contains(".o_action_manager:eq(0)").click();
     await mailContains(".o_avatar_card", { count: 0 });
@@ -144,7 +144,7 @@ test("avatar card preview with hr (partner_id field)", async () => {
         name: "sub manager",
     });
     const workLocationId = env["hr.work.location"].create({
-        name: "Odoo",
+        name: "AFENDA xForge",
         location_type: "office",
     });
     const versionId = env["hr.version"].create({
@@ -181,7 +181,7 @@ test("avatar card preview with hr (partner_id field)", async () => {
         "Management",
         "Mario@odoo.pro",
         "+585555555",
-        "Odoo",
+        "AFENDA xForge",
     ]);
     await contains(".o_action_manager:eq(0)").click();
     await mailContains(".o_avatar_card", { count: 0 });

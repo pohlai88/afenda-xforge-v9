@@ -5,12 +5,12 @@
 # Rosen Vladimirov <vladimirov.rosen@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 19:27+0000\n"
 "Last-Translator: Rosen Vladimirov <vladimirov.rosen@gmail.com>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/"
 "website_slides_forum/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -404,10 +404,10 @@ msgstr "Опции за блока „Форум на курсове“"
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
+"questions related to AFENDA xForge."
 msgstr ""
 "Целта на този сайт е да създаде относима база от знания, която да отговаря "
-"на въпроси, свързани с Odoo."
+"на въпроси, свързани с AFENDA xForge."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -502,9 +502,9 @@ msgstr "всеки отговор е еднакво валиден: „Кой е
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "how to configure or customize Odoo to specific business needs,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
 msgstr ""
-"как да конфигурирате или персонализирате Odoo за конкретни бизнес нужди,"
+"как да конфигурирате или персонализирате AFENDA xForge за конкретни бизнес нужди,"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -515,8 +515,8 @@ msgstr "как да разработвате модули за собствен�
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "how to install Odoo on a specific infrastructure,"
-msgstr "как да инсталирате Odoo на конкретна инфраструктура,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
+msgstr "как да инсталирате AFENDA xForge на конкретна инфраструктура,"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -527,8 +527,8 @@ msgstr "това е тирада, маскирана като въпрос: „_
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "specific questions about Odoo service offers, etc."
-msgstr "конкретни въпроси относно сервизните предложения на Odoo и т.н."
+msgid "specific questions about AFENDA xForge service offers, etc."
+msgstr "конкретни въпроси относно сервизните предложения на AFENDA xForge и т.н."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -552,8 +552,8 @@ msgstr ""
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "what's the best way to use Odoo for a specific business need,"
-msgstr "кой е най-добрият начин да използвате Odoo за конкретна бизнес нужда,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
+msgstr "кой е най-добрият начин да използвате AFENDA xForge за конкретна бизнес нужда,"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0

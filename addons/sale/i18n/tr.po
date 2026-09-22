@@ -34,12 +34,12 @@
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 11:23+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/sale/tr/>"
+"Language-Team: Turkish <https://translate.afenda.app/projects/odoo-19/sale/tr/>"
 "\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -54,7 +54,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -62,7 +62,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            Müşteriniz Odoo 18 veya daha yüksek bir sürümde çalışıyorsa, "
+"            Müşteriniz AFENDA xForge 18 veya daha yüksek bir sürümde çalışıyorsa, "
 "müşteri verileri ve satış siparişi satırı\n"
 "            otomatik olarak oluşturulacaktır. Ekli bir pdf içeren başka "
 "herhangi bir pdf\n"
@@ -1362,10 +1362,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Örnek olarak, ön ödemeli hizmet saatleri satıyorsanız, Odoo, sipariş edilen "
+"Örnek olarak, ön ödemeli hizmet saatleri satıyorsanız, AFENDA xForge, sipariş edilen "
 "tüm saatler tükendiğinde ek saatler satmanızı önerir."
 
 #. module: sale
@@ -2403,9 +2403,9 @@ msgstr "Taslak Faturalar"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
-"Fiyatlandırma talebi PDF dosyasını Odoo'daki teklifler listenize sürükleyip "
+"Fiyatlandırma talebi PDF dosyasını AFENDA xForge'daki teklifler listenize sürükleyip "
 "bırakın. Otomasyonun tadını çıkarın!"
 
 #. module: sale
@@ -3374,8 +3374,8 @@ msgstr "Satış için sipariş bulunamadı"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
-msgstr "Odoo kullanmıyor musunuz"
+msgid "Not using AFENDA xForge?"
+msgstr "AFENDA xForge kullanmıyor musunuz"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3425,8 +3425,8 @@ msgstr "Teslimat hatası olan mesaj adedi"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -4853,8 +4853,8 @@ msgstr "Starshipit Bağlayıcı"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
-msgstr "Odoo ile başlayın"
+msgid "Start on AFENDA xForge"
+msgstr "AFENDA xForge ile başlayın"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__state
@@ -5726,8 +5726,8 @@ msgstr "Hacim"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
-msgstr "Bu belgeyi Odoo'ya aktarmak mı istiyorsunuz?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Bu belgeyi AFENDA xForge'ya aktarmak mı istiyorsunuz?"
 
 #. module: sale
 #. odoo-python

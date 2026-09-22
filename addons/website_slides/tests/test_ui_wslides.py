@@ -156,7 +156,7 @@ class TestUi(TestUICommon):
             }
         )
         cases = [
-            ("admin", rf"^/odoo/slide.channel/.*highlight_message_id={message.id}"),
+            ("admin", rf"^/app/slide.channel/.*highlight_message_id={message.id}"),
             ("portal", rf"^/slides/.*highlight_message_id={message.id}"),
             (None, rf"^/slides/.*highlight_message_id={message.id}"),
         ]

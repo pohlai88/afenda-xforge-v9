@@ -14,11 +14,11 @@
     </result>
     <ns2:software>
         <ns2:softwareId>BE477472701-170100</ns2:softwareId>
-        <ns2:softwareName>Odoo Enterprise</ns2:softwareName>
+        <ns2:softwareName>AFENDA xForge Enterprise</ns2:softwareName>
         <ns2:softwareOperation>ONLINE_SERVICE</ns2:softwareOperation>
         <ns2:softwareMainVersion>17.0+e</ns2:softwareMainVersion>
-        <ns2:softwareDevName>Odoo SA</ns2:softwareDevName>
-        <ns2:softwareDevContact>andu@odoo.com</ns2:softwareDevContact>
+        <ns2:softwareDevName>AFENDA xForge SA</ns2:softwareDevName>
+        <ns2:softwareDevContact>andu@afenda.app</ns2:softwareDevContact>
         <ns2:softwareDevCountryCode>BE</ns2:softwareDevCountryCode>
         <ns2:softwareDevTaxNumber>477472701</ns2:softwareDevTaxNumber>
     </ns2:software>

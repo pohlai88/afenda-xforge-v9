@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.4a1+e\n"
+"Project-Id-Version: AFENDA xForge Server 18.4a1+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-09 19:04+0000\n"
 "PO-Revision-Date: 2025-08-22 10:31+0400\n"
@@ -136,10 +136,10 @@ msgstr "Yapılandırma Ayarları"
 msgid ""
 "Configure your Nilvera integration settings below to securely send and\n"
 "                                        receive e-documents directly within "
-"Odoo."
+"AFENDA xForge."
 msgstr ""
 "Nilvera entegrasyon ayarlarınızı aşağıda yapılandırarak güvenli bir şekilde\n"
-"                                        e-belgeleri doğrudan Odoo içinde "
+"                                        e-belgeleri doğrudan AFENDA xForge içinde "
 "gönderip alabilirsiniz."
 
 #. module: l10n_tr_nilvera
@@ -385,10 +385,10 @@ msgstr "Nilvera KDV"
 #. odoo-python
 #: code:addons/l10n_tr_nilvera/models/res_config_settings.py:0
 msgid ""
-"Nilvera connection successful but the tax number on Nilvera and Odoo doesn't "
+"Nilvera connection successful but the tax number on Nilvera and AFENDA xForge doesn't "
 "match. Check Nilvera."
 msgstr ""
-"Nilvera bağlantısı başarılı ancak Nilvera ve Odoo'daki vergi numarası "
+"Nilvera bağlantısı başarılı ancak Nilvera ve AFENDA xForge'daki vergi numarası "
 "eşleşmiyor. Nilvera'yı kontrol edin."
 
 #. module: l10n_tr_nilvera
@@ -424,10 +424,10 @@ msgstr "Doğrulanmadı"
 #. odoo-python
 #: code:addons/l10n_tr_nilvera/lib/nilvera_client.py:0
 msgid ""
-"Odoo could not perform this action at the moment, try again later.\n"
+"AFENDA xForge could not perform this action at the moment, try again later.\n"
 "%s - %s"
 msgstr ""
-"Odoo şu anda bu işlemi gerçekleştiremedi, lütfen daha sonra tekrar deneyin.\n"
+"AFENDA xForge şu anda bu işlemi gerçekleştiremedi, lütfen daha sonra tekrar deneyin.\n"
 "%s - %s"
 
 #. module: l10n_tr_nilvera

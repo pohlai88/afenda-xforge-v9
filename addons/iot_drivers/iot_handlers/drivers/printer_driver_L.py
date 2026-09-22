@@ -54,8 +54,8 @@ class PrinterDriver(PrinterDriverBase):
         """
         try:
             with self.cups_lock:
-                job_id = self.conn.createJob(self.device_identifier, 'Odoo print job', {'document-format': CUPS_FORMAT_AUTO})
-                self.conn.startDocument(self.device_identifier, job_id, 'Odoo print job', CUPS_FORMAT_AUTO, 1)
+                job_id = self.conn.createJob(self.device_identifier, 'AFENDA xForge print job', {'document-format': CUPS_FORMAT_AUTO})
+                self.conn.startDocument(self.device_identifier, job_id, 'AFENDA xForge print job', CUPS_FORMAT_AUTO, 1)
                 self.conn.writeRequestData(data, len(data))
                 self.conn.finishDocument(self.device_identifier)
             self.job_ids.append(job_id)
@@ -157,7 +157,7 @@ class PrinterDriver(PrinterDriverBase):
         wlan = identifier = homepage = pairing_code = mac_address = ""
         iot_status = self._get_iot_status()
 
-        wan_quality = helpers.check_network("www.odoo.com")
+        wan_quality = helpers.check_network("www.afenda.app")
         to_gateway_quality = helpers.check_network()
         to_printer_quality = helpers.check_network(self.ip) if self.ip else None
 
@@ -185,7 +185,7 @@ class PrinterDriver(PrinterDriverBase):
         if len(ips) == 0:
             network_quality = ""
         else:
-            network_quality = "\nNetwork quality:\n - To Odoo server: %s\n" % wan_quality
+            network_quality = "\nNetwork quality:\n - To AFENDA xForge server: %s\n" % wan_quality
             if to_gateway_quality:
                 network_quality += " - To Modem: %s\n" % to_gateway_quality
             if to_printer_quality:

@@ -5,12 +5,12 @@
     'version' : '0.1',
     'sequence': 185,
     'category': 'Human Resources/Fleet',
-    'website' : 'https://www.odoo.com/app/fleet',
+    'website' : 'https://www.afenda.app/app/fleet',
     'summary' : 'Manage your fleet and track car costs',
     'description' : """
 Vehicle, leasing, insurances, cost
 ==================================
-With this module, Odoo helps you managing all your vehicles, the
+With this module, AFENDA xForge helps you managing all your vehicles, the
 contracts associated to those vehicle as well as services, costs
 and many other features necessary to the management of your fleet
 of vehicle(s)
@@ -54,6 +54,6 @@ Main Features
             'fleet/static/src/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -12,6 +12,6 @@
             "pos_self_order_pine_labs/static/src/**/*",
         ],
     },
-    "author": "Odoo IN Pvt Ltd",
+    "author": "AFENDA xForge IN Pvt Ltd",
     "license": "LGPL-3",
 }

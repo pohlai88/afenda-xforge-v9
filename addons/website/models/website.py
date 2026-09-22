@@ -46,8 +46,8 @@ DEFAULT_CDN_FILTERS = [
     "^/website/image/",
 ]
 
-DEFAULT_WEBSITE_ENDPOINT = 'https://website.api.odoo.com'
-DEFAULT_OLG_ENDPOINT = 'https://olg.api.odoo.com'
+DEFAULT_WEBSITE_ENDPOINT = 'https://website.api.afenda.app'
+DEFAULT_OLG_ENDPOINT = 'https://olg.api.afenda.app'
 
 DEFAULT_BLOCKED_THIRD_PARTY_DOMAINS = '\n'.join([  # noqa: FLY002
     'youtu.be', 'youtube.com', 'youtube-nocookie.com',
@@ -1361,7 +1361,7 @@ class Website(models.Model):
                 dependencies[model_display_name] += [{
                     'field_name': field_string,
                     'record_name': rec.display_name,
-                    'link': 'website_url' in rec and rec.website_url or f'/odoo/{model_name}/{rec.id}',
+                    'link': 'website_url' in rec and rec.website_url or f'/app/{model_name}/{rec.id}',
                     'model_name': model_display_name,
                 } for rec in dependency_records]
 
@@ -1699,7 +1699,7 @@ class Website(models.Model):
             # everyone except for the website designer which receive `1,0,0,0`.
             # So the "Website/Site/Content/Pages" menu to reach the page manager
             # is not shown to the restricted users, as the action linked model
-            # (website.page) can't be access. It's how the Odoo framework works.
+            # (website.page) can't be access. It's how the AFENDA xForge framework works.
             # Still, we let the restricted editor access this resource for
             # custos granting them read and/or write access on page.
             raise AccessError(_("Access Denied"))
@@ -1828,7 +1828,7 @@ class Website(models.Model):
             action_params["enable_editor"] = 1
         if mode_debug:
             action_params["debug"] = mode_debug
-        return "/odoo/action-website.website_preview?" + urls.url_encode(action_params)
+        return "/app/action-website.website_preview?" + urls.url_encode(action_params)
 
     def get_client_action(self, url, mode_edit=False, website_id=False):
         action = self.env["ir.actions.actions"]._for_xml_id("website.website_preview")

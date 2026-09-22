@@ -12,12 +12,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-09-08 08:11+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tony Ng (ngto)\" <ngto@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/mail/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -52,13 +52,13 @@ msgid ""
 "            <p class=\"o_view_nocontent_smiling_face\">\n"
 "                Add addresses to the Allowed List\n"
 "            </p><p>\n"
-"                To protect you from spam and reply loops, Odoo automatically "
+"                To protect you from spam and reply loops, AFENDA xForge automatically "
 "blocks emails\n"
 "                coming to your gateway past a threshold of <b>%(threshold)i</"
 "b> emails every <b>%(minutes)i</b>\n"
 "                minutes. If there are some addresses from which you need to "
 "receive very frequent\n"
-"                updates, you can however add them below and Odoo will let "
+"                updates, you can however add them below and AFENDA xForge will let "
 "them go through.\n"
 "            </p>"
 msgstr ""
@@ -66,12 +66,12 @@ msgstr ""
 "            <p class=\"o_view_nocontent_smiling_face\">\n"
 "                將地址加入允許清單\n"
 "            </p><p>\n"
-"                為保護你免受垃圾郵件及回覆迴圈的影響，Odoo 會自動封鎖進入你閘"
+"                為保護你免受垃圾郵件及回覆迴圈的影響，AFENDA xForge 會自動封鎖進入你閘"
 "道的電子郵件，\n"
 "                觸發門檻為每 <b>%(minutes)i</b> 分鐘超過 <b>%(threshold)i</"
 "b> 封電郵。\n"
 "                若你需要經常接收某些地址寄出的更新，\n"
-"                你可在下面加入這些地址，Odoo 會讓有關電郵通過。\n"
+"                你可在下面加入這些地址，AFENDA xForge 會讓有關電郵通過。\n"
 "            </p>"
 
 #. module: mail
@@ -5537,7 +5537,7 @@ msgstr "如果無法識別，請立即通過此連結更改密碼：<br/>"
 #. module: mail
 #: model:ir.model.fields,help:mail.field_res_config_settings__alias_domain_id
 msgid ""
-"If you have setup a catch-all email domain redirected to the Odoo server, "
+"If you have setup a catch-all email domain redirected to the AFENDA xForge server, "
 "enter the domain name here."
 msgstr "如果您設定了電子信件域名重導向到Odoo伺服器，請在這裡輸入域名。"
 
@@ -5604,8 +5604,8 @@ msgstr "在 %(country)s"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__res_users__notification_type__inbox
-msgid "In Odoo"
-msgstr "在 Odoo 系統內"
+msgid "In AFENDA xForge"
+msgstr "在 AFENDA xForge 系統內"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_compose_message__scheduled_date
@@ -5712,8 +5712,8 @@ msgstr "安裝"
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/web/messaging_menu_patch.js:0
-msgid "Install Odoo"
-msgstr "安裝 Odoo"
+msgid "Install AFENDA xForge"
+msgstr "安裝 AFENDA xForge"
 
 #. module: mail
 #: model:ir.ui.menu,name:mail.discuss_channel_integrations_menu
@@ -6094,12 +6094,12 @@ msgid ""
 "browser will \n"
 "          keep the private key secret and use it for decrypting the payload\n"
 "- auth: The auth value should be treated as a secret and not shared outside "
-"of Odoo"
+"of AFENDA xForge"
 msgstr ""
 "它指的是通知使用的瀏覽器鍵：\n"
 "- p256dh：瀏覽器產生的訂閱公鑰。 瀏覽器會將\n"
 "          私鑰保密，並用它解密負載\n"
-"- auth：auth 值應被視為秘密，勿在 Odoo 以外分享"
+"- auth：auth 值應被視為秘密，勿在 AFENDA xForge 以外分享"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_tracking_duration_mixin__duration_tracking
@@ -8029,20 +8029,20 @@ msgstr "OS（作業系統）"
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_layout
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_light
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will not send notifications on this device."
-msgstr "Odoo 不會在此裝置上發送通知。"
+msgid "AFENDA xForge will not send notifications on this device."
+msgstr "AFENDA xForge 不會在此裝置上發送通知。"
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will send notifications on this device!"
-msgstr "Odoo 將會在此裝置上發送通知！"
+msgid "AFENDA xForge will send notifications on this device!"
+msgstr "AFENDA xForge 將會在此裝置上發送通知！"
 
 #. module: mail
 #. odoo-javascript
@@ -8166,8 +8166,8 @@ msgstr "僅有自訂模型能被修改。"
 
 #. module: mail
 #: model:ir.model.constraint,message:mail.constraint_res_users_notification_type
-msgid "Only internal user can receive notifications in Odoo"
-msgstr "只限內部用戶才可在 Odoo 內接收通知"
+msgid "Only internal user can receive notifications in AFENDA xForge"
+msgstr "只限內部用戶才可在 AFENDA xForge 內接收通知"
 
 #. module: mail
 #. odoo-python
@@ -8885,11 +8885,11 @@ msgstr "檔案正在上載，請稍等。"
 msgid ""
 "Policy on how to handle Chatter notifications:\n"
 "- By Emails: notifications are sent to your email address\n"
-"- In Odoo: notifications appear in your Odoo Inbox"
+"- In AFENDA xForge: notifications appear in your AFENDA xForge Inbox"
 msgstr ""
 "聊天欄通知的處理方式：\n"
 "- 透過電子郵件：通知將發送至你的電郵地址\n"
-"- 在 Odoo 中：通知會在 Odoo 收件箱中顯示"
+"- 在 AFENDA xForge 中：通知會在 AFENDA xForge 收件箱中顯示"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_alias__alias_contact
@@ -9239,8 +9239,8 @@ msgstr "原因"
 
 #. module: mail
 #: model:res.groups,name:mail.group_mail_notification_type_inbox
-msgid "Receive notifications in Odoo"
-msgstr "在 Odoo 接收通知"
+msgid "Receive notifications in AFENDA xForge"
+msgstr "在 AFENDA xForge 接收通知"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__mail_mail__state__received
@@ -11202,7 +11202,7 @@ msgstr "建立訊息的來源渠道。"
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_alias__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
@@ -11215,7 +11215,7 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr "郵箱別名，例如填寫 jobs 表示你想捕捉寄往 jobs@example.com 的電郵。"
 
 #. module: mail
@@ -11478,10 +11478,10 @@ msgstr "此訊息已被刪除"
 msgid ""
 "This option permanently removes any track of email after it's been sent, "
 "including from the Technical menu in the Settings, in order to preserve "
-"storage space of your Odoo database."
+"storage space of your AFENDA xForge database."
 msgstr ""
 "此選項會在電子郵件發送後永久刪除任何跟踪，包括從設置中的技術選單中刪除，以保"
-"留您的 Odoo 資料庫的存儲空間。"
+"留您的 AFENDA xForge 資料庫的存儲空間。"
 
 #. module: mail
 #. odoo-javascript
@@ -12535,10 +12535,10 @@ msgstr ""
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.odoo.com)."
+"email server (@mycompany.afenda.app)."
 msgstr ""
 "在社區和企業版本中，發送/接收電子信件需要使用自己的電子信件伺服器。線上使用者"
-"已受益於隨時可用的電子信件伺服器 (@mycompany.odoo.com)。"
+"已受益於隨時可用的電子信件伺服器 (@mycompany.afenda.app)。"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

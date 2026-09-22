@@ -405,7 +405,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                     "im_status_access_token": self.user_root.partner_id._get_im_status_access_token(),
                     "is_company": False,
                     "main_user_id": self.user_root.id,
-                    "name": "OdooBot",
+                    "name": "AFENDA Bot",
                     "write_date": fields.Datetime.to_string(self.user_root.partner_id.write_date),
                 },
                 {
@@ -1398,7 +1398,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "create_date": create_date,
                 "date": date,
                 "default_subject": "group restricted channel 1",
-                "email_from": '"OdooBot" <odoobot@example.com>',
+                "email_from": '"AFENDA Bot" <odoobot@example.com>',
                 "id": last_message.id,
                 "incoming_email_cc": False,
                 "incoming_email_to": False,
@@ -1750,7 +1750,7 @@ class TestDiscussFullPerformance(HttpCase, MailCommon):
                 "id": user.partner_id.id,
                 "is_company": False,
                 "main_user_id": user.id,
-                "name": "OdooBot",
+                "name": "AFENDA Bot",
                 "write_date": fields.Datetime.to_string(user.partner_id.write_date),
             }
         if guest:

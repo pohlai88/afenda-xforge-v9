@@ -7,12 +7,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:35+0000\n"
 "PO-Revision-Date: 2026-09-04 17:05+0000\n"
-"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@odoo.com>\n"
-"Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
+"Last-Translator: \"Fernanda Alvarez (mfar)\" <mfar@afenda.app>\n"
+"Language-Team: Spanish (Latin America) <https://translate.afenda.app/projects/"
 "odoo-19/marketing_card/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
@@ -712,8 +712,8 @@ msgstr "Número de mensajes con error de envío"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__lang
@@ -1125,13 +1125,13 @@ msgstr "Por ejemplo, Director financiero"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "e.g. Join Odoo Experience 2024"
-msgstr "Por ejemplo, Asista a Odoo Experience 2024"
+msgid "e.g. Join AFENDA xForge Experience 2024"
+msgstr "Por ejemplo, Asista a AFENDA xForge Experience 2024"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "e.g. Odoo Experience Talks"
-msgstr "Por ejemplo, Plática de Odoo Experience"
+msgid "e.g. AFENDA xForge Experience Talks"
+msgstr "Por ejemplo, Plática de AFENDA xForge Experience"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form

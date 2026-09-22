@@ -8,12 +8,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.2\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-07 21:45+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/contacts/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -104,8 +104,8 @@ msgstr "語言本地化"
 
 #. module: contacts
 #: model_terms:ir.actions.act_window,help:contacts.action_contacts
-msgid "Odoo helps you track all activities related to your contacts."
-msgstr "Odoo 協助你追蹤與你的聯絡人相關的所有活動。"
+msgid "AFENDA xForge helps you track all activities related to your contacts."
+msgstr "AFENDA xForge 協助你追蹤與你的聯絡人相關的所有活動。"
 
 #. module: contacts
 #: model:ir.model,name:contacts.model_res_users

@@ -17,12 +17,12 @@
 # Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 12:44+0000\n"
 "Last-Translator: Deleted User <noreply+31@weblate.org>\n"
-"Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/mail/"
+"Language-Team: Vietnamese <https://translate.afenda.app/projects/odoo-19/mail/"
 "vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -57,13 +57,13 @@ msgid ""
 "            <p class=\"o_view_nocontent_smiling_face\">\n"
 "                Add addresses to the Allowed List\n"
 "            </p><p>\n"
-"                To protect you from spam and reply loops, Odoo automatically "
+"                To protect you from spam and reply loops, AFENDA xForge automatically "
 "blocks emails\n"
 "                coming to your gateway past a threshold of <b>%(threshold)i</"
 "b> emails every <b>%(minutes)i</b>\n"
 "                minutes. If there are some addresses from which you need to "
 "receive very frequent\n"
-"                updates, you can however add them below and Odoo will let "
+"                updates, you can however add them below and AFENDA xForge will let "
 "them go through.\n"
 "            </p>"
 msgstr ""
@@ -71,13 +71,13 @@ msgstr ""
 "            <p class=\"o_view_nocontent_smiling_face\">\n"
 "                Thêm địa chỉ vào Danh sách được phép\n"
 "            </p><p>\n"
-"                Để bảo vệ bạn khỏi thư rác và nhóm trả lời, Odoo tự động "
+"                Để bảo vệ bạn khỏi thư rác và nhóm trả lời, AFENDA xForge tự động "
 "chặn các email\n"
 "                đến cổng email của bạn vượt quá ngưỡng <b>%(threshold)i</b> "
 "email sau mỗi <b>%(minutes)i</b>\n"
 "                phút. Tuy nhiên, nếu có một số địa chỉ mà bạn cần nhận cập "
 "nhật thường xuyên,\n"
-"                thì bạn có thể thêm chúng dưới đây và Odoo sẽ cho phép chúng "
+"                thì bạn có thể thêm chúng dưới đây và AFENDA xForge sẽ cho phép chúng "
 "đi tới hộp thư của bạn.\n"
 "            </p>"
 
@@ -5643,7 +5643,7 @@ msgstr "Nếu không nhận ra, bạn nên đổi mật khẩu ngay qua link nà
 #. module: mail
 #: model:ir.model.fields,help:mail.field_res_config_settings__alias_domain_id
 msgid ""
-"If you have setup a catch-all email domain redirected to the Odoo server, "
+"If you have setup a catch-all email domain redirected to the AFENDA xForge server, "
 "enter the domain name here."
 msgstr ""
 "Nếu bạn đã thiết lập một miền email catch-all chuyển hướng đến Hệ thống, hãy "
@@ -5712,8 +5712,8 @@ msgstr "In %(country)s"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__res_users__notification_type__inbox
-msgid "In Odoo"
-msgstr "Trong Odoo"
+msgid "In AFENDA xForge"
+msgstr "Trong AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_compose_message__scheduled_date
@@ -5823,8 +5823,8 @@ msgstr "Cài đặt"
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/web/messaging_menu_patch.js:0
-msgid "Install Odoo"
-msgstr "Cài đặt Odoo"
+msgid "Install AFENDA xForge"
+msgstr "Cài đặt AFENDA xForge"
 
 #. module: mail
 #: model:ir.ui.menu,name:mail.discuss_channel_integrations_menu
@@ -6220,14 +6220,14 @@ msgid ""
 "browser will \n"
 "          keep the private key secret and use it for decrypting the payload\n"
 "- auth: The auth value should be treated as a secret and not shared outside "
-"of Odoo"
+"of AFENDA xForge"
 msgstr ""
 "Nó đề cập đến các mã khóa trình duyệt được thông báo sử dụng:\n"
 "- p256dh: Là mã khóa đăng ký công khai do trình duyệt tạo ra. Trình duyệt "
 "sẽ\n"
 "          giữ lại bí mật mã khóa riêng tư và sử dụng nó để giải mã payload\n"
 "- auth: Giá trị xác thực phải được coi là bí mật và không được chia sẻ ra "
-"ngoài Odoo"
+"ngoài AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_tracking_duration_mixin__duration_tracking
@@ -8193,20 +8193,20 @@ msgstr "OS"
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_layout
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_light
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will not send notifications on this device."
-msgstr "Odoo sẽ không gửi thông báo trên thiết bị này."
+msgid "AFENDA xForge will not send notifications on this device."
+msgstr "AFENDA xForge sẽ không gửi thông báo trên thiết bị này."
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will send notifications on this device!"
-msgstr "Odoo sẽ gửi thông báo trên thiết bị này!"
+msgid "AFENDA xForge will send notifications on this device!"
+msgstr "AFENDA xForge sẽ gửi thông báo trên thiết bị này!"
 
 #. module: mail
 #. odoo-javascript
@@ -8334,8 +8334,8 @@ msgstr "Chỉ có thể sửa đổi các mô hình tùy chỉnh."
 
 #. module: mail
 #: model:ir.model.constraint,message:mail.constraint_res_users_notification_type
-msgid "Only internal user can receive notifications in Odoo"
-msgstr "Chỉ người dùng nội bộ mới có thể nhận được thông báo trong Odoo"
+msgid "Only internal user can receive notifications in AFENDA xForge"
+msgstr "Chỉ người dùng nội bộ mới có thể nhận được thông báo trong AFENDA xForge"
 
 #. module: mail
 #. odoo-python
@@ -9063,11 +9063,11 @@ msgstr "Hãy chờ khi tệp được tải lên."
 msgid ""
 "Policy on how to handle Chatter notifications:\n"
 "- By Emails: notifications are sent to your email address\n"
-"- In Odoo: notifications appear in your Odoo Inbox"
+"- In AFENDA xForge: notifications appear in your AFENDA xForge Inbox"
 msgstr ""
 "Chính sách xử lý thông báo của cửa sổ trò chuyện:\n"
 "- Bằng email: thông báo được gửi tới địa chỉ email của bạn\n"
-"- Trong Odoo: thông báo xuất hiện trong hộp thư đến Odoo"
+"- Trong AFENDA xForge: thông báo xuất hiện trong hộp thư đến AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_alias__alias_contact
@@ -9428,8 +9428,8 @@ msgstr "Lý do"
 
 #. module: mail
 #: model:res.groups,name:mail.group_mail_notification_type_inbox
-msgid "Receive notifications in Odoo"
-msgstr "Nhận thông báo trong Odoo"
+msgid "Receive notifications in AFENDA xForge"
+msgstr "Nhận thông báo trong AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__mail_mail__state__received
@@ -11418,11 +11418,11 @@ msgstr "Tin nhắn mà từ đó kênh được tạo ra."
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_alias__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Mô hình (Loại tài liệu Odoo) mà bí danh này tương tác. Mọi email đến mà "
+"Mô hình (Loại tài liệu AFENDA xForge) mà bí danh này tương tác. Mọi email đến mà "
 "không phải là email trả lời một bản ghi hiện có sẽ tạo ra một bản ghi mới "
 "trong mô hình này. (ví dụ: Nhiệm vụ dự án)"
 
@@ -11432,10 +11432,10 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Tên của bí danh email, ví dụ: 'jobs' nếu bạn muốn nhận email gửi đến địa chỉ "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 
 #. module: mail
 #. odoo-python
@@ -11706,7 +11706,7 @@ msgstr "Tin nhắn này đã bị xóa"
 msgid ""
 "This option permanently removes any track of email after it's been sent, "
 "including from the Technical menu in the Settings, in order to preserve "
-"storage space of your Odoo database."
+"storage space of your AFENDA xForge database."
 msgstr ""
 "Tùy chọn này sẽ xóa vĩnh viễn mọi dấu vết của email sau khi nó được gửi đi, "
 "bao gồm cả từ menu Kỹ thuật trong Cài đặt, để duy trì không gian lưu trữ "
@@ -12786,7 +12786,7 @@ msgstr ""
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.odoo.com)."
+"email server (@mycompany.afenda.app)."
 msgstr ""
 "Sử dụng máy chủ email của riêng bạn là bắt buộc để gửi/nhận email trong các "
 "phiên bản Cộng đồng và Doanh nghiệp. Người dùng online đã được hưởng lợi từ "

@@ -9,12 +9,12 @@
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 18:32+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Chinese (Simplified Han script) <https://translate.afenda.app/"
 "projects/odoo-19/google_calendar/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -155,8 +155,8 @@ msgstr "创建日期"
 
 #. module: google_calendar
 #: model:ir.model.fields.selection,name:google_calendar.selection__google_calendar_account_reset__delete_policy__delete_odoo
-msgid "Delete from Odoo"
-msgstr "‎从 Odoo 中删除‎"
+msgid "Delete from AFENDA xForge"
+msgstr "‎从 AFENDA xForge 中删除‎"
 
 #. module: google_calendar
 #: model:ir.model.fields.selection,name:google_calendar.selection__google_calendar_account_reset__delete_policy__delete_both
@@ -299,9 +299,9 @@ msgstr "如未更新，则不会同步。"
 #: model:ir.model.fields,help:google_calendar.field_res_users_settings__google_calendar_cal_id
 msgid ""
 "Last Calendar ID who has been synchronized. If it is changed, we remove all "
-"links between GoogleID and Odoo Google Internal ID"
+"links between GoogleID and AFENDA xForge Google Internal ID"
 msgstr ""
-"最后一次同步的日历ID。如果它发生改变， 将清除全部在 GoogleID 和 Odoo Google "
+"最后一次同步的日历ID。如果它发生改变， 将清除全部在 GoogleID 和 AFENDA xForge Google "
 "Internal ID之间的连接"
 
 #. module: google_calendar

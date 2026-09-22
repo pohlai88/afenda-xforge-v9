@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 17.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 18:11+0000\n"
 "PO-Revision-Date: 2024-04-09 04:02+0000\n"
@@ -579,7 +579,7 @@ msgstr ""
 #: code:addons/l10n_vn_edi_viettel/models/account_move.py:0
 msgid ""
 "The invoice has been canceled on sinvoice for reason: %(reason)sBut the "
-"cancellation in Odoo failed with error: %(error)s"
+"cancellation in AFENDA xForge failed with error: %(error)s"
 msgstr ""
 
 #. module: l10n_vn_edi_viettel

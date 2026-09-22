@@ -5,7 +5,7 @@
     'name': 'Blog',
     'category': 'Website/Website',
     'sequence': 200,
-    'website': 'https://www.odoo.com/app/blog',
+    'website': 'https://www.afenda.app/app/blog',
     'summary': 'Publish blog posts, announces, news',
     'version': '1.1',
     'depends': ['website_mail', 'website_partner', 'html_builder'],
@@ -58,6 +58,6 @@
             'website_blog/static/src/website_builder/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -11,12 +11,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-08 02:23+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/event/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -163,9 +163,9 @@ msgstr "<b>商務室</b>- 討論實施方法、最佳銷售實踐等。"
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
-msgstr "<b>技術室</b>- 一間專供高級 Odoo 開發人員使用，一間供新開發人員使用。"
+msgstr "<b>技術室</b>- 一間專供高級 AFENDA xForge 開發人員使用，一間供新開發人員使用。"
 
 #. module: event
 #: model_terms:event.event,description:event.event_0
@@ -1456,7 +1456,7 @@ msgstr ""
 "                    <!-- PWA MARKGETING -->\n"
 "                    <div t-if=\"is_online\">\n"
 "                        <strong>享受最佳的流動裝置體驗：</strong>\n"
-"                        <a href=\"/event\">安裝 Odoo 流動應用程式</a>\n"
+"                        <a href=\"/event\">安裝 AFENDA xForge 流動應用程式</a>\n"
 "                    </div>\n"
 "                </td></tr>\n"
 "                <tr><td style=\"text-align:center;\">\n"
@@ -2281,7 +2281,7 @@ msgstr ""
 "                    <t t-if=\"is_online\">\n"
 "                        <div>\n"
 "                            <strong>享受最佳的流動裝置體驗：</strong>\n"
-"                            <a href=\"/event\">安裝 Odoo 流動應用程式</a>\n"
+"                            <a href=\"/event\">安裝 AFENDA xForge 流動應用程式</a>\n"
 "                        </div>\n"
 "                    </t>\n"
 "                </td></tr>\n"
@@ -2621,10 +2621,10 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "John DOE年僅13歲，已經開始為客戶開發他的第一個商務應用程式。在掌握了土木工程"
-"之後，他創立了TinyERP。這是 OpenERP 的第一階段，後來成為 Odoo，全球安裝最多的"
+"之後，他創立了TinyERP。這是 OpenERP 的第一階段，後來成為 AFENDA xForge，全球安裝最多的"
 "開源業務軟體。"
 
 #. module: event
@@ -3599,9 +3599,9 @@ msgstr "以活動的時區表示。"
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
-msgstr "活動結束。結束日期過後，Odoo 會自動將它們移至此階段。"
+msgstr "活動結束。結束日期過後，AFENDA xForge 會自動將它們移至此階段。"
 
 #. module: event
 #: model:ir.model.fields,field_description:event.field_event_stage__fold
@@ -3631,10 +3631,10 @@ msgstr "Font awesome 圖示，例如，fa-task"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 "若需要更多資訊，歡迎聯絡我們： <a class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -4548,8 +4548,8 @@ msgstr "主題"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
-msgstr "Odoo 社群日"
+msgid "AFENDA xForge Community Days"
+msgstr "AFENDA xForge 社群日"
 
 #. module: event
 #: model_terms:event.event,description:event.event_3
@@ -5938,8 +5938,8 @@ msgstr "例：宣傳推廣"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
-msgstr "例：https://www.odoo.com"
+msgid "e.g. \"https://www.afenda.app\""
+msgstr "例：https://www.afenda.app"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

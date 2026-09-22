@@ -4,7 +4,7 @@
 {
     'name': 'Project',
     'version': '1.4',
-    'website': 'https://www.odoo.com/app/project',
+    'website': 'https://www.afenda.app/app/project',
     'category': 'Services/Project',
     'sequence': 45,
     'summary': 'Organize and plan your projects',
@@ -246,6 +246,6 @@
             'web/static/src/start.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -16,12 +16,12 @@
 # Heshmatkhah <maheshmatkhah.soft@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-23 06:15+0000\n"
 "Last-Translator: Heshmatkhah <maheshmatkhah.soft@gmail.com>\n"
-"Language-Team: Persian <https://translate.odoo.com/projects/odoo-19/payment/"
+"Language-Team: Persian <https://translate.afenda.app/projects/odoo-19/payment/"
 "fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -46,7 +46,7 @@ msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/> These properties are set to\n"
 "                                match the behavior of providers and that of "
 "their integration with\n"
-"                                Odoo regarding this payment method. Any "
+"                                AFENDA xForge regarding this payment method. Any "
 "change may result in errors\n"
 "                                and should be tested on a test database "
 "first."
@@ -670,7 +670,7 @@ msgstr "ضبط تراکنش"
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_provider__capture_manually
 msgid ""
-"Capture the amount from Odoo, when the delivery is completed.\n"
+"Capture the amount from AFENDA xForge, when the delivery is completed.\n"
 "Use this if you want to charge your customers cards only when\n"
 "you are sure you can ship the goods to them."
 msgstr ""
@@ -1685,7 +1685,7 @@ msgstr ""
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__module_to_buy
-msgid "Odoo Enterprise Module"
+msgid "AFENDA xForge Enterprise Module"
 msgstr "ماژول سازمانی اودو"
 
 #. module: payment
@@ -2243,7 +2243,7 @@ msgstr "بازپرداخت"
 #: model:ir.model.fields,help:payment.field_payment_provider__support_refund
 msgid ""
 "Refund is a feature allowing to refund customers directly from the payment "
-"in Odoo."
+"in AFENDA xForge."
 msgstr ""
 "ویژگی بازپرداخت اجازه می‌دهد مستقیماً از طریق پرداخت در اودوو، به مشتریان "
 "بازپرداخت داشته باشید."

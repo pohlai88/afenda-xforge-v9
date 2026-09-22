@@ -6,12 +6,12 @@
 # "Marianna Ciofani (cima)" <cima@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 11:54+0000\n"
-"Last-Translator: \"Marianna Ciofani (cima)\" <cima@odoo.com>\n"
-"Language-Team: Italian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Marianna Ciofani (cima)\" <cima@afenda.app>\n"
+"Language-Team: Italian <https://translate.afenda.app/projects/odoo-19/"
 "payment_razorpay/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -41,10 +41,10 @@ msgstr ""
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.authorization_error
-msgid "An error occurred while linking your Razorpay account with Odoo."
+msgid "An error occurred while linking your Razorpay account with AFENDA xForge."
 msgstr ""
 "Si è verificato un errore durante il collegamento dell'account Razorpay con "
-"Odoo."
+"AFENDA xForge."
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay
@@ -258,10 +258,10 @@ msgstr "Il fornitore è collegato al tuo account Razorpay."
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
-msgid "Transactions processed by Razorpay can't be manually voided from Odoo."
+msgid "Transactions processed by Razorpay can't be manually voided from AFENDA xForge."
 msgstr ""
 "Le operazioni elaborate da Razorpay non possono essere annullate manualmente "
-"da Odoo."
+"da AFENDA xForge."
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay

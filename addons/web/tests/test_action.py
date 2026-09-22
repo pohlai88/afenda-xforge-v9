@@ -234,7 +234,7 @@ class TestLoadBreadcrumbs(HttpCase):
                 },
             }),
         )
-        self.assertEqual(resp.json()['error']['message'], 'Odoo Server Error')
+        self.assertEqual(resp.json()['error']['message'], 'AFENDA xForge Server Error')
 
         resp = self.url_open(
             '/web/action/load_breadcrumbs',
@@ -272,4 +272,4 @@ class TestLoadBreadcrumbs(HttpCase):
                 },
             }),
         )
-        self.assertEqual(resp.json()['error']['message'], 'Odoo Server Error')
+        self.assertEqual(resp.json()['error']['message'], 'AFENDA xForge Server Error')

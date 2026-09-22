@@ -12,12 +12,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 13:37+0000\n"
-"Last-Translator: \"Chloe Wang (chwa)\" <chwa@odoo.com>\n"
-"Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Chloe Wang (chwa)\" <chwa@afenda.app>\n"
+"Language-Team: Chinese (Simplified Han script) <https://translate.afenda.app/"
 "projects/odoo-19/sms/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -213,9 +213,9 @@ msgstr "向 “%(record_name)s” 发送短信时发生错误"
 #. odoo-python
 #: code:addons/sms/tools/sms_api.py:0
 msgid ""
-"An unknown error occurred. Please contact Odoo support if this error "
+"An unknown error occurred. Please contact AFENDA xForge support if this error "
 "persists."
-msgstr "出现未知错误。如果错误仍然存在，请联系 Odoo 支持人员。"
+msgstr "出现未知错误。如果错误仍然存在，请联系 AFENDA xForge 支持人员。"
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_template__model_id

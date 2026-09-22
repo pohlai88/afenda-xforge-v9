@@ -122,7 +122,7 @@ test("change setting on nav bar click in base settings on desktop", async () => 
                         </setting>
                     </block>
                     <block title="Title of group Foo">
-                        <setting help="this is foo" info="this is foo info" documentation="https://www.odoo.com/documentation/1.0/applications/technical/web/settings/this_is_another_test.html">
+                        <setting help="this is foo" info="this is foo info" documentation="/docs/applications/technical/web/settings/this_is_another_test.html">
                             <field name="foo"/>
                         </setting>
                         <setting string="Personalize setting" help="this is full personalize setting">
@@ -173,11 +173,11 @@ test("change setting on nav bar click in base settings on desktop", async () => 
     );
     expect(".o_setting_box a:eq(0)").toHaveAttribute(
         "href",
-        "https://www.odoo.com/documentation/1.0/applications/technical/web/settings/this_is_a_test.html"
+        "/docs/applications/technical/web/settings/this_is_a_test.html"
     );
     expect(".o_setting_box a:eq(1)").toHaveAttribute(
         "href",
-        "https://www.odoo.com/documentation/1.0/applications/technical/web/settings/this_is_another_test.html"
+        "/docs/applications/technical/web/settings/this_is_another_test.html"
     );
 
     await editSearch("Hello there");
@@ -279,7 +279,7 @@ test("change setting on nav bar click in base settings on mobile", async () => {
                         </setting>
                     </block>
                     <block title="Title of group Foo">
-                        <setting help="this is foo" info="this is foo info" documentation="https://www.odoo.com/documentation/1.0/applications/technical/web/settings/this_is_another_test.html">
+                        <setting help="this is foo" info="this is foo info" documentation="/docs/applications/technical/web/settings/this_is_another_test.html">
                             <field name="foo"/>
                         </setting>
                         <setting string="Personalize setting" help="this is full personalize setting">
@@ -329,11 +329,11 @@ test("change setting on nav bar click in base settings on mobile", async () => {
     );
     expect(".o_setting_box a:eq(0)").toHaveAttribute(
         "href",
-        "https://www.odoo.com/documentation/1.0/applications/technical/web/settings/this_is_a_test.html"
+        "/docs/applications/technical/web/settings/this_is_a_test.html"
     );
     expect(".o_setting_box a:eq(1)").toHaveAttribute(
         "href",
-        "https://www.odoo.com/documentation/1.0/applications/technical/web/settings/this_is_another_test.html"
+        "/docs/applications/technical/web/settings/this_is_another_test.html"
     );
 
     await editSearch("Hello there");
@@ -950,7 +950,7 @@ test("settings views does not write the id on the url", async () => {
 
     await getService("action").doAction(1);
     await runAllTimers();
-    expect(browser.location.pathname).toBe("/odoo/settings");
+    expect(browser.location.pathname).toBe("/app/settings");
     expect(".o_field_boolean input").toHaveProperty("disabled", false);
     await click(".o_field_boolean input");
     await animationFrame();
@@ -959,7 +959,7 @@ test("settings views does not write the id on the url", async () => {
 
     await animationFrame();
     expect(router.current.resId).toBe(undefined);
-    expect(browser.location.pathname).toBe("/odoo/settings");
+    expect(browser.location.pathname).toBe("/app/settings");
 });
 
 test.tags("desktop");
@@ -2179,7 +2179,7 @@ test("Open settings from url, with app anchor", async () => {
         </form>
     `;
 
-    redirect("/odoo/settings#crm");
+    redirect("/app/settings#crm");
     await mountWithCleanup(WebClient);
     await animationFrame();
     expect(".selected").toHaveAttribute("data-key", "crm", { message: "crm setting selected" });
@@ -2215,7 +2215,7 @@ test("Open settings from url, with setting id anchor", async () => {
         </form>
     `;
 
-    redirect("/odoo/settings#setting_id");
+    redirect("/app/settings#setting_id");
     await mountWebClient();
     expect(".selected").toHaveAttribute("data-key", "crm", { message: "crm setting selected" });
     expect(queryAllTexts(".settings .o_settings_container .o_form_label")).toEqual(["Foo"]);

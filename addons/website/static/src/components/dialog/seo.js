@@ -793,7 +793,7 @@ export class SeoChecks extends Component {
         const imgEls = this.website.pageDocument.documentElement.querySelectorAll("#wrapwrap img");
 
         imgEls.forEach((el) => {
-            // Find the closest ancestor element containing Odoo metadata.
+            // Find the closest ancestor element containing AFENDA xForge metadata.
             const recordEl = el.closest("[data-oe-model][data-oe-field][data-oe-id]");
             if (!recordEl) {
                 return; // Skip images without a proper metadata wrapper.

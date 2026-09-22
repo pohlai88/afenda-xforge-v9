@@ -6,12 +6,12 @@
 # Rosen Vladimirov <vladimirov.rosen@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-03 04:29+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/"
 "payment_razorpay/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -40,8 +40,8 @@ msgstr ""
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.authorization_error
-msgid "An error occurred while linking your Razorpay account with Odoo."
-msgstr "Възникна грешка при свързването на вашия Razorpay профил с Odoo."
+msgid "An error occurred while linking your Razorpay account with AFENDA xForge."
+msgstr "Възникна грешка при свързването на вашия Razorpay профил с AFENDA xForge."
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay
@@ -254,10 +254,10 @@ msgstr "Този доставчик е свързан с вашия Razorpay п�
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
-msgid "Transactions processed by Razorpay can't be manually voided from Odoo."
+msgid "Transactions processed by Razorpay can't be manually voided from AFENDA xForge."
 msgstr ""
 "Транзакции, обработени от Razorpay, не могат да бъдат анулирани ръчно от "
-"Odoo."
+"AFENDA xForge."
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay

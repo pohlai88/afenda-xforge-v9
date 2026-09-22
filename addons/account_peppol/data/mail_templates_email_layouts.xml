@@ -15,7 +15,7 @@
                     </t>
                     <t t-if="not peppol_info['is_peppol_sent'] and not peppol_info['partner_on_peppol'] and not peppol_info['is_partner_b2c']">
                         <i style="color: #777">
-                            <t t-out="company.name"/> uses <a target="_blank" href="https://www.odoo.com/app/invoicing">Odoo</a> to send invoices, but this one <b t-attf-style="color: {{company.email_secondary_color or '#875A7B'}}">could not be sent via Peppol</b>.
+                            <t t-out="company.name"/> uses <a target="_blank" href="https://www.afenda.app/app/invoicing">AFENDA xForge</a> to send invoices, but this one <b t-attf-style="color: {{company.email_secondary_color or '#875A7B'}}">could not be sent via Peppol</b>.
                             <t t-if="peppol_info['peppol_country'] == 'BE'">
                                 <br/>
                                 In Belgium, electronic invoicing is <u>mandatory as of January 2026</u> - don't wait to register.
@@ -55,7 +55,7 @@
                                         Welcome to Peppol
                                     </span>
                                     <div style="margin-bottom: 5px; margin-top: 18px;">
-                                        <a t-attf-href="/odoo/accounting/" target="_blank"
+                                        <a t-attf-href="/app/accounting/" target="_blank"
                                            t-attf-style="padding: 8px 12px; font-size: 12px; color: {{ object.email_primary_color or '#FFFFFF' }}; text-decoration: none !important; font-weight: 400; background-color: {{ object.email_secondary_color or '#875A7B' }}; border-radius:3px">
                                             Send invoices
                                         </a>
@@ -88,11 +88,11 @@
 
                                     <p>We have successfully added your company to the <strong>Peppol Network</strong>.</p>
 
-                                    <p>You can now <strong>send<t t-if="object.account_peppol_proxy_state == 'receiver'"> and receive</t></strong> electronic invoices via Odoo — completely free of charge.</p>
+                                    <p>You can now <strong>send<t t-if="object.account_peppol_proxy_state == 'receiver'"> and receive</t></strong> electronic invoices via AFENDA xForge — completely free of charge.</p>
 
                                     <p>Best regards,</p>
 
-                                    <p style="margin-bottom: 24px;">The Odoo Team</p>
+                                    <p style="margin-bottom: 24px;">The AFENDA xForge Team</p>
                                 </td>
                             </tr>
                         </table>

@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-01-25 18:36+0000\n"
@@ -22,7 +22,7 @@ msgstr ""
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_mail_main
-msgid "<span class=\"odoo_link_text\">Odoo</span>"
+msgid "<span class=\"odoo_link_text\">AFENDA xForge</span>"
 msgstr ""
 
 #. module: digest
@@ -312,7 +312,7 @@ msgstr ""
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Odoo Mobile"
+msgid "AFENDA xForge Mobile"
 msgstr ""
 
 #. module: digest
@@ -353,7 +353,7 @@ msgstr ""
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Run your business from anywhere with <b>Odoo Mobile</b>."
+msgid "Run your business from anywhere with <b>AFENDA xForge Mobile</b>."
 msgstr ""
 
 #. module: digest
@@ -389,7 +389,7 @@ msgstr ""
 
 #. module: digest
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
 msgstr ""
 
 #. module: digest
@@ -426,7 +426,7 @@ msgstr ""
 
 #. module: digest
 #: model:digest.tip,name:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
 msgstr ""
 
 #. module: digest
@@ -458,7 +458,7 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_3
 msgid ""
 "Type \"@\" to notify someone in a message, or \"#\" to link to a channel. "
-"Try to notify @OdooBot to test the feature."
+"Try to notify @AFENDA Bot to test the feature."
 msgstr ""
 
 #. module: digest
@@ -522,7 +522,7 @@ msgstr ""
 
 #. module: digest
 #: model:digest.digest,name:digest.digest_digest_default
-msgid "Your Odoo Periodic Digest"
+msgid "Your AFENDA xForge Periodic Digest"
 msgstr ""
 
 #. module: digest

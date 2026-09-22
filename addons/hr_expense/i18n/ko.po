@@ -12,12 +12,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-05 22:21+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Korean <https://translate.afenda.app/projects/odoo-19/"
 "hr_expense/ko/>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -456,7 +456,7 @@ msgstr "경비를 생성하여 통계 수치를 확인합니다."
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid ""
 "Create prepaid virtual and physical cards for both one-time and recurring "
-"expenses, integrated into Odoo through Stripe Issuing."
+"expenses, integrated into AFENDA xForge through Stripe Issuing."
 msgstr ""
 
 #. module: hr_expense
@@ -572,7 +572,7 @@ msgstr "분포 분석 계정"
 #: model_terms:digest.tip,tip_description:hr_expense.digest_tip_hr_expense_0
 msgid ""
 "Do not keep your expense tickets in your pockets any longer. Just snap a "
-"picture of your receipt and let Odoo digitalizes it for you. The OCR and "
+"picture of your receipt and let AFENDA xForge digitalizes it for you. The OCR and "
 "Artificial Intelligence will fill the data automatically."
 msgstr ""
 "더 이상 경비 지출 관련 영수증을 아무 곳에나 보관하지 마세요. 영수증을 "
@@ -1150,7 +1150,7 @@ msgstr "다시 비용으로 돌아가 보겠습니다."
 #: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__module_hr_expense_stripe
 msgid ""
 "Link your stripe issuing account to manage company credit cards for your "
-"employees through Odoo"
+"employees through AFENDA xForge"
 msgstr ""
 "Stripe 발급 계정을 연결해두면 Odoo에서 직원용 회사 법인 카드를 관리할 수 "
 "있습니다."
@@ -1358,16 +1358,16 @@ msgstr "개인 경비로 계산된 수치입니다."
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: hr_expense
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid ""
-"Odoo had a look at your expense, its product, your company and the journal "
+"AFENDA xForge had a look at your expense, its product, your company and the journal "
 "but came back with empty hands.\n"
-"Give Odoo a hand to find an account by setting up an expense account.\n"
+"Give AFENDA xForge a hand to find an account by setting up an expense account.\n"
 "%(expense)s %(expense_name)s.\n"
 msgstr ""
 "Odoo에서 경비, 품목, 회사 및 전표를 살펴보았으나 확인된 내용이 "
@@ -1606,7 +1606,7 @@ msgstr "평가"
 #: code:addons/hr_expense/static/src/js/tours/hr_expense.js:0
 msgid ""
 "Ready? You can save it manually or discard modifications from here. You "
-"don't <em>need to save</em> - Odoo will save eveyrthing for you when you "
+"don't <em>need to save</em> - AFENDA xForge will save eveyrthing for you when you "
 "navigate."
 msgstr ""
 "준비되셨나요? 수정 내용을 여기에서 수기로 직접 저장하거나 취소할 수 "
@@ -1725,8 +1725,8 @@ msgstr "스캔"
 #. module: hr_expense
 #. odoo-javascript
 #: code:addons/hr_expense/static/src/components/qrcode_action.xml:0
-msgid "Scan this QR code to get the Odoo app:"
-msgstr "QR 코드를 스캔하여 Odoo 앱을 다운로드하세요:"
+msgid "Scan this QR code to get the AFENDA xForge app:"
+msgstr "QR 코드를 스캔하여 AFENDA xForge 앱을 다운로드하세요:"
 
 #. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_employee__expense_manager_id

@@ -5,7 +5,7 @@
     'name': 'Greece - Accounting',
     'icon': '/account/static/description/l10n.png',
     'countries': ['gr'],
-    'author': 'P. Christeas, Odoo S.A.',
+    'author': 'P. Christeas, AFENDA xForge S.A.',
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the base module to manage the accounting chart for Greece.

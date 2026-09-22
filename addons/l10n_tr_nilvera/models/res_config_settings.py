@@ -39,7 +39,7 @@ class ResConfigSettings(models.TransientModel):
                 else:
                     self.env['bus.bus']._sendone(self.env.user.partner_id, 'simple_notification', {
                         'type': 'success',
-                        'message': _("Nilvera connection successful but the tax number on Nilvera and Odoo doesn't match. Check Nilvera."),
+                        'message': _("Nilvera connection successful but the tax number on Nilvera and AFENDA xForge doesn't match. Check Nilvera."),
                     })
             elif response.status_code == 401:
                 self.env['bus.bus']._sendone(self.env.user.partner_id, 'simple_notification', {

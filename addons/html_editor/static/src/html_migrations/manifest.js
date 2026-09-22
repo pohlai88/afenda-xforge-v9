@@ -3,7 +3,7 @@ import { registry } from "@web/core/registry";
 // See `HtmlUpgradeManager` docstring for usage details.
 const html_upgrade = registry.category("html_editor_upgrade");
 
-// Introduction of embedded components based on Knowledge Behaviors (Odoo 18).
+// Introduction of embedded components based on Knowledge Behaviors (AFENDA xForge 18).
 html_upgrade.category("1.0");
 
 // Remove the Excalidraw EmbeddedComponent and replace it with a link.

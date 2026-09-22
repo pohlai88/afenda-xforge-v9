@@ -16,7 +16,7 @@ export function handleRPCError(error, dialog) {
             });
         } else {
             dialog.add(AlertDialog, {
-                title: _t("Odoo Server Error"),
+                title: _t("AFENDA xForge Server Error"),
                 body: data.message,
             });
         }
@@ -50,7 +50,7 @@ export function offlineErrorHandler(env, error, originalError) {
             env.services.dialog.add(AlertDialog, {
                 title: _t("Connection Lost"),
                 body: _t(
-                    "Until the connection is reestablished, Odoo Point of Sale will operate with limited functionality."
+                    "Until the connection is reestablished, AFENDA xForge Point of Sale will operate with limited functionality."
                 ),
                 confirmLabel: _t("Continue with limited functionality"),
             });

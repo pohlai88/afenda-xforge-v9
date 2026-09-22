@@ -15,12 +15,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-06 09:19+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Thai <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Thai <https://translate.afenda.app/projects/odoo-19/"
 "mass_mailing/th/>\n"
 "Language: th\n"
 "MIME-Version: 1.0\n"
@@ -441,7 +441,7 @@ msgstr ""
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_call_to_action
 msgid ""
-"<font style=\"color: white;\"><strong>50,000+ companies</strong> run Odoo.</"
+"<font style=\"color: white;\"><strong>50,000+ companies</strong> run AFENDA xForge.</"
 "font>"
 msgstr ""
 
@@ -3503,8 +3503,8 @@ msgstr ""
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_schedule
-msgid "Interactive Odoo demo"
-msgstr "การสาธิต Odoo เชิงโต้ตอบ"
+msgid "Interactive AFENDA xForge demo"
+msgstr "การสาธิต AFENDA xForge เชิงโต้ตอบ"
 
 #. module: mass_mailing
 #: model:ir.model.fields.selection,name:mass_mailing.selection__mailing_trace__failure_type__mail_email_invalid
@@ -4485,9 +4485,9 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailing_lists
 msgid ""
 "No need to import mailing lists, you can send mailings to contacts saved in "
-"other Odoo apps."
+"other AFENDA xForge apps."
 msgstr ""
-"ไม่จำเป็นต้องนำเข้ารายชื่ออีเมล คุณสามารถส่งอีเมลไปยังผู้ติดต่อที่บันทึกไว้ในแอป Odoo อื่นๆ ได้"
+"ไม่จำเป็นต้องนำเข้ารายชื่ออีเมล คุณสามารถส่งอีเมลไปยังผู้ติดต่อที่บันทึกไว้ในแอป AFENDA xForge อื่นๆ ได้"
 
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.mailing_filter_action
@@ -4604,7 +4604,7 @@ msgstr "เปิด (%i)"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_section_mobile
-msgid "Odoo Mobile"
+msgid "AFENDA xForge Mobile"
 msgstr ""
 
 #. module: mass_mailing
@@ -6293,11 +6293,11 @@ msgstr ""
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__mass_mailing_outgoing_mail_server
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid ""
-"Use a specific mail server in priority. Otherwise Odoo relies on the first "
+"Use a specific mail server in priority. Otherwise AFENDA xForge relies on the first "
 "outgoing mail server available (based on their sequencing) as it does for "
 "normal mails."
 msgstr ""
-"ใช้เมลเซิร์ฟเวอร์เฉพาะเป็นลำดับความสำคัญ ไม่เช่นนั้น Odoo จะใช้เมลเซิร์ฟเวอร์ขาออกแรกที่มีอยู่ (ต"
+"ใช้เมลเซิร์ฟเวอร์เฉพาะเป็นลำดับความสำคัญ ไม่เช่นนั้น AFENDA xForge จะใช้เมลเซิร์ฟเวอร์ขาออกแรกที่มีอยู่ (ต"
 "ามลำดับ) เช่นเดียวกับที่ใช้กับเมลปกติ"
 
 #. module: mass_mailing
@@ -6622,10 +6622,10 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailings_from_campaign
 msgid ""
 "You don't need to import your mailing lists, you can easily\n"
-"                send emails<br> to any contact saved in other Odoo apps."
+"                send emails<br> to any contact saved in other AFENDA xForge apps."
 msgstr ""
 "คุณไม่จำเป็นต้องนำเข้ารายชื่ออีเมล คุณสามารถ\n"
-"                ส่งอีเมล<br> ไปยังผู้ติดต่อที่บันทึกไว้ในแอป Odoo อื่นๆ ได้อย่างง่ายดาย"
+"                ส่งอีเมล<br> ไปยังผู้ติดต่อที่บันทึกไว้ในแอป AFENDA xForge อื่นๆ ได้อย่างง่ายดาย"
 
 #. module: mass_mailing
 #. odoo-python

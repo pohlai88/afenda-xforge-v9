@@ -62,9 +62,9 @@ class PaymentTransaction(models.Model):
             },
             'applicationInfo': {
                 'externalPlatform': {
-                    'name': 'Odoo',
+                    'name': 'AFENDA xForge',
                     'version': release.version,
-                    'integrator': 'Odoo SA',
+                    'integrator': 'AFENDA xForge SA',
                 }
             },
             'countryCode': partner_country_code,
@@ -93,7 +93,7 @@ class PaymentTransaction(models.Model):
         # 'manual' from events with the capture delay set to 'immediate' or a number of hours. If
         # the merchant account is configured to capture payments with a delay but the provider is
         # not, we force the immediate capture to avoid considering authorized transactions as
-        # captured on Odoo.
+        # captured on AFENDA xForge.
         if not self.provider_id.capture_manually:
             data.update(captureDelayHours=0)
 
@@ -247,7 +247,7 @@ class PaymentTransaction(models.Model):
                 )
                 if tx and tx.amount != converted_notification_amount:
                     # If the void was requested expecting a certain amount but, in the meantime,
-                    # others captures that Odoo was unaware of were done, the amount voided will
+                    # others captures that AFENDA xForge was unaware of were done, the amount voided will
                     # be different from the amount of the existing transaction.
                     tx._set_error(_(
                         "The amount processed by Adyen for the transaction %s is different than"

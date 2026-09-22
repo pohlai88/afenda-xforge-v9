@@ -32,8 +32,8 @@ class AccountEdiProxyClientUser(models.Model):
         # We do not use demo with MyInvois as during a demo, showing the invoice on the pre-prod platform will be better.
         urls['l10n_my_edi'] = {
             'demo': False,
-            'prod': 'https://l10n-my-edi.api.odoo.com',
-            'test': self.env['ir.config_parameter'].sudo().get_param('l10n_my_edi_test_server_url', 'https://l10n-my-edi.test.odoo.com'),
+            'prod': 'https://l10n-my-edi.api.afenda.app',
+            'test': self.env['ir.config_parameter'].sudo().get_param('l10n_my_edi_test_server_url', 'https://l10n-my-edi.test.afenda.app'),
         }
         return urls
 

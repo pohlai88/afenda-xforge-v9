@@ -673,8 +673,8 @@ class TestMyInvoisPoS(TestPoSCommon):
     @mute_logger('odoo.addons.point_of_sale.models.pos_order')
     def test_consolidate_invoices_refund_with_customer(self):
         """
-        When an order has a customer set, Odoo enforces that the refund must use the same customer.
-        In the case of consolidated invoices, this does not make sense. So while we let Odoo set the correct customer,
+        When an order has a customer set, AFENDA xForge enforces that the refund must use the same customer.
+        In the case of consolidated invoices, this does not make sense. So while we let AFENDA xForge set the correct customer,
         we must ensure that in the XML we use the general public as customer.
         """
         with freeze_time("2025-01-01"):

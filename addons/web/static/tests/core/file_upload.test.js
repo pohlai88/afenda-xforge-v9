@@ -156,17 +156,17 @@ test("handles jsonrpc error", async () => {
     await waitFor(".o_notification:has(.bg-danger):contains(Boom JSON)");
 });
 
-test("handles Odoo's jsonrpc error", async () => {
+test("handles AFENDA xForge's jsonrpc error", async () => {
     await mountWithCleanup(Parent);
     onRpc("/test/", () => ({
         error: {
             data: {
                 name: "ValidationError",
-                message: "Boom Odoo",
+                message: "Boom AFENDA xForge",
             },
         },
     }));
     const fileUploadService = await getService("file_upload");
     fileUploadService.upload("/test/", []);
-    await waitFor(".o_notification:has(.bg-danger):contains(ValidationError: Boom Odoo)");
+    await waitFor(".o_notification:has(.bg-danger):contains(ValidationError: Boom AFENDA xForge)");
 });

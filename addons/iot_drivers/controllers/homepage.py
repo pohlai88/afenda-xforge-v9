@@ -66,7 +66,7 @@ class IotBoxOwlHomePage(http.Controller):
         helpers.odoo_restart(0)
         return json.dumps({
             'status': 'success',
-            'message': 'Odoo service restarted',
+            'message': 'AFENDA xForge service restarted',
         })
 
     @route.iot_route('/iot_drivers/iot_logs', type='http', cors='*')
@@ -229,7 +229,7 @@ class IotBoxOwlHomePage(http.Controller):
         interfaces_list = helpers.get_handlers_files_to_load(
             file_path('iot_drivers/iot_handlers/interfaces'))
         return json.dumps({
-            'title': "Odoo's IoT Box - Handlers list",
+            'title': "AFENDA xForge's IoT Box - Handlers list",
             'breadcrumb': 'Handlers list',
             'drivers_list': drivers_list,
             'interfaces_list': interfaces_list,
@@ -410,7 +410,7 @@ class IotBoxOwlHomePage(http.Controller):
         return handlers_loggers_level
 
     def _update_logger_level(self, logger_name, new_level, available_log_levels, handler_folder=False):
-        """Update (if necessary) Odoo's configuration and logger to the given logger_name to the given level.
+        """Update (if necessary) AFENDA xForge's configuration and logger to the given logger_name to the given level.
         The responsibility of saving the config file is not managed here.
 
         :param logger_name: name of the logging logger to change level
@@ -477,7 +477,7 @@ class IotBoxOwlHomePage(http.Controller):
 
     def _get_iot_handler_logger(self, handler_name, handler_folder_name):
         """
-        Get Odoo Iot logger given an IoT handler name
+        Get AFENDA xForge Iot logger given an IoT handler name
         :param handler_name: name of the IoT handler
         :param handler_folder_name: IoT handler folder name (interfaces or drivers)
         :return: logger if any, False otherwise

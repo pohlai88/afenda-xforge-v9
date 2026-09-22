@@ -5,7 +5,7 @@
 {
     'name': 'Manufacturing',
     'version': '2.0',
-    'website': 'https://www.odoo.com/app/manufacturing',
+    'website': 'https://www.afenda.app/app/manufacturing',
     'category': 'Supply Chain/Manufacturing',
     'sequence': 55,
     'summary': 'Manufacturing Orders & BOMs',
@@ -69,6 +69,6 @@
             'mrp/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

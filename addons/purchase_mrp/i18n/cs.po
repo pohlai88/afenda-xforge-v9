@@ -11,12 +11,12 @@
 # "Marta (wacm)" <wacm@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 12:30+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Czech <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Czech <https://translate.afenda.app/projects/odoo-19/"
 "purchase_mrp/cs/>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
@@ -118,10 +118,10 @@ msgstr "Výrobní zdroj %s"
 #. odoo-python
 #: code:addons/purchase_mrp/models/stock_move.py:0
 msgid ""
-"Odoo is not able to generate the anglo saxon entries. The total valuation of "
+"AFENDA xForge is not able to generate the anglo saxon entries. The total valuation of "
 "%s is zero."
 msgstr ""
-"Odoo není schopen generovat anglosaské záznamy. Celkové ocenění %s je nula."
+"AFENDA xForge není schopen generovat anglosaské záznamy. Celkové ocenění %s je nula."
 
 #. module: purchase_mrp
 #: model:ir.model,name:purchase_mrp.model_purchase_order

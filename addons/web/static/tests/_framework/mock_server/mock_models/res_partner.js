@@ -44,7 +44,7 @@ export class ResPartner extends ServerModel {
         {
             id: serverState.odoobotId,
             active: false,
-            name: "OdooBot",
+            name: "AFENDA Bot",
         },
     ];
 }

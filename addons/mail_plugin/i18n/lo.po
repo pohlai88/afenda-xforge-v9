@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-05 01:24+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/mail_plugin/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/mail_plugin/"
 "lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -68,10 +68,10 @@ msgstr "ລາຍຮັບປະຈຳປີ"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid ""
-"Attachments could not be logged in Odoo because their total size exceeded "
+"Attachments could not be logged in AFENDA xForge because their total size exceeded "
 "the allowed maximum."
 msgstr ""
-"ບໍ່ສາມາດບັນທຶກໄຟລ໌ຄັດຕິດເຂົ້າໃນ Odoo ໄດ້ ເນື່ອງຈາກຂະໜາດລວມຂອງພວກມັນເກີນກຳນົດສູງສຸດທີ່ອະນຸຍາດ."
+"ບໍ່ສາມາດບັນທຶກໄຟລ໌ຄັດຕິດເຂົ້າໃນ AFENDA xForge ໄດ້ ເນື່ອງຈາກຂະໜາດລວມຂອງພວກມັນເກີນກຳນົດສູງສຸດທີ່ອະນຸຍາດ."
 
 #. module: mail_plugin
 #. odoo-python
@@ -460,9 +460,9 @@ msgstr "ບໍ່ມີບໍລິສັດທີ່ເຊື່ອມໂຍງ
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "No company linked to this contact could be enriched or found in Odoo"
+msgid "No company linked to this contact could be enriched or found in AFENDA xForge"
 msgstr ""
-"ບໍ່ພົບ ຫຼື ບໍ່ມີບໍລິສັດທີ່ເຊື່ອມໂຍງກັບຜູ້ຕິດຕໍ່ນີ້ທີ່ສາມາດເພີ່ມຂໍ້ມູນໄດ້ໃນ Odoo"
+"ບໍ່ພົບ ຫຼື ບໍ່ມີບໍລິສັດທີ່ເຊື່ອມໂຍງກັບຜູ້ຕິດຕໍ່ນີ້ທີ່ສາມາດເພີ່ມຂໍ້ມູນໄດ້ໃນ AFENDA xForge"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -509,14 +509,14 @@ msgstr "ການແຈ້ງເຕືອນ"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Access Token"
-msgstr "ໂທເຄັນການເຂົ້າເຖິງ Odoo"
+msgid "AFENDA xForge Access Token"
+msgstr "ໂທເຄັນການເຂົ້າເຖິງ AFENDA xForge"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Server URL"
-msgstr "URL ຂອງເຊີບເວີ Odoo"
+msgid "AFENDA xForge Server URL"
+msgstr "URL ຂອງເຊີບເວີ AFENDA xForge"
 
 #. module: mail_plugin
 #: model:ir.model.constraint,message:mail_plugin.constraint_res_partner_iap_unique_partner_id
@@ -593,8 +593,8 @@ msgstr "ລາຍຮັບ"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Save in Odoo"
-msgstr "ບັນທຶກໃນ Odoo"
+msgid "Save in AFENDA xForge"
+msgstr "ບັນທຶກໃນ AFENDA xForge"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -624,8 +624,8 @@ msgstr "ຄົ້ນຫາໃນຖານຂໍ້ມູນ"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search In Odoo"
-msgstr "ຄົ້ນຫາໃນ Odoo"
+msgid "Search In AFENDA xForge"
+msgstr "ຄົ້ນຫາໃນ AFENDA xForge"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -636,8 +636,8 @@ msgstr "ຄົ້ນຫາຜູ້ຕິດຕໍ່"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search contact in Odoo..."
-msgstr "ຄົ້ນຫາຜູ້ຕິດຕໍ່ໃນ Odoo..."
+msgid "Search contact in AFENDA xForge..."
+msgstr "ຄົ້ນຫາຜູ້ຕິດຕໍ່ໃນ AFENDA xForge..."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -667,8 +667,8 @@ msgstr "ບໍລິສັດນີ້ບໍ່ມີທີ່ຢູ່ອີເ
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "This contact does not exist in the Odoo database."
-msgstr "ບໍ່ມີຜູ້ຕິດຕໍ່ນີ້ຢູ່ໃນຖານຂໍ້ມູນ Odoo."
+msgid "This contact does not exist in the AFENDA xForge database."
+msgstr "ບໍ່ມີຜູ້ຕິດຕໍ່ນີ້ຢູ່ໃນຖານຂໍ້ມູນ AFENDA xForge."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -695,10 +695,10 @@ msgstr "ບໍ່ມີຄູ່ຄ້ານີ້"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid ""
-"Warning: Attachments could not be logged in Odoo because their total size "
+"Warning: Attachments could not be logged in AFENDA xForge because their total size "
 "exceeded the allowed maximum."
 msgstr ""
-"ຄຳເຕືອນ: ບໍ່ສາມາດບັນທຶກໄຟລ໌ຄັດຕິດໃນ Odoo ໄດ້ ເນື່ອງຈາກຂະໜາດລວມຂອງພວກມັນເກີນກຳນົດສູງສຸດທີ່ອະນຸຍາ"
+"ຄຳເຕືອນ: ບໍ່ສາມາດບັນທຶກໄຟລ໌ຄັດຕິດໃນ AFENDA xForge ໄດ້ ເນື່ອງຈາກຂະໜາດລວມຂອງພວກມັນເກີນກຳນົດສູງສຸດທີ່ອະນຸຍາ"
 "ດ."
 
 #. module: mail_plugin
@@ -738,8 +738,8 @@ msgstr "ທ່ານຈຳເປັນຕ້ອງລະບຸຢ່າງໜ້
 
 #. module: mail_plugin
 #: model_terms:ir.ui.view,arch_db:mail_plugin.app_auth
-msgid "access your Odoo database?"
-msgstr "ເຂົ້າເຖິງຖານຂໍ້ມູນ Odoo ຂອງທ່ານ?"
+msgid "access your AFENDA xForge database?"
+msgstr "ເຂົ້າເຖິງຖານຂໍ້ມູນ AFENDA xForge ຂອງທ່ານ?"
 
 #. module: mail_plugin
 #. odoo-javascript

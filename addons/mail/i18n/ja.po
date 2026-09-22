@@ -16,12 +16,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-09-08 04:11+0000\n"
-"Last-Translator: \"Junko Augias (juau)\" <juau@odoo.com>\n"
-"Language-Team: Japanese <https://translate.odoo.com/projects/odoo-19/mail/"
+"Last-Translator: \"Junko Augias (juau)\" <juau@afenda.app>\n"
+"Language-Team: Japanese <https://translate.afenda.app/projects/odoo-19/mail/"
 "ja/>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -56,13 +56,13 @@ msgid ""
 "            <p class=\"o_view_nocontent_smiling_face\">\n"
 "                Add addresses to the Allowed List\n"
 "            </p><p>\n"
-"                To protect you from spam and reply loops, Odoo automatically "
+"                To protect you from spam and reply loops, AFENDA xForge automatically "
 "blocks emails\n"
 "                coming to your gateway past a threshold of <b>%(threshold)i</"
 "b> emails every <b>%(minutes)i</b>\n"
 "                minutes. If there are some addresses from which you need to "
 "receive very frequent\n"
-"                updates, you can however add them below and Odoo will let "
+"                updates, you can however add them below and AFENDA xForge will let "
 "them go through.\n"
 "            </p>"
 msgstr ""
@@ -5636,7 +5636,7 @@ msgstr "見覚えがない場合は、以下のリンクからすぐにパスワ
 #. module: mail
 #: model:ir.model.fields,help:mail.field_res_config_settings__alias_domain_id
 msgid ""
-"If you have setup a catch-all email domain redirected to the Odoo server, "
+"If you have setup a catch-all email domain redirected to the AFENDA xForge server, "
 "enter the domain name here."
 msgstr ""
 "Odooサーバーにリダイレクトされるキャッチオール電子メールドメインを"
@@ -5705,7 +5705,7 @@ msgstr "%(country)s表示"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__res_users__notification_type__inbox
-msgid "In Odoo"
+msgid "In AFENDA xForge"
 msgstr "Odoo内"
 
 #. module: mail
@@ -5814,7 +5814,7 @@ msgstr "インストール"
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/web/messaging_menu_patch.js:0
-msgid "Install Odoo"
+msgid "Install AFENDA xForge"
 msgstr "Odooをインストール"
 
 #. module: mail
@@ -6204,7 +6204,7 @@ msgid ""
 "browser will \n"
 "          keep the private key secret and use it for decrypting the payload\n"
 "- auth: The auth value should be treated as a secret and not shared outside "
-"of Odoo"
+"of AFENDA xForge"
 msgstr ""
 "これは、通知で使用されるブラウザーのキーを参照しています: \n"
 "- p256dh: ブラウザが生成したサブスクリプション公開キー。ブラウザは\n"
@@ -8163,19 +8163,19 @@ msgstr "OS"
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_layout
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_light
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will not send notifications on this device."
+msgid "AFENDA xForge will not send notifications on this device."
 msgstr "Odooはこのデバイスで通知を送信しません。"
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will send notifications on this device!"
+msgid "AFENDA xForge will send notifications on this device!"
 msgstr "Odooはこのデバイスで通知を送信します！"
 
 #. module: mail
@@ -8300,7 +8300,7 @@ msgstr "カスタムモデルのみを変更できます。"
 
 #. module: mail
 #: model:ir.model.constraint,message:mail.constraint_res_users_notification_type
-msgid "Only internal user can receive notifications in Odoo"
+msgid "Only internal user can receive notifications in AFENDA xForge"
 msgstr "内部ユーザだけがOdooで通知を受け取ることができます。"
 
 #. module: mail
@@ -9028,7 +9028,7 @@ msgstr "ファイルがアップロードされるまでお待ちください。
 msgid ""
 "Policy on how to handle Chatter notifications:\n"
 "- By Emails: notifications are sent to your email address\n"
-"- In Odoo: notifications appear in your Odoo Inbox"
+"- In AFENDA xForge: notifications appear in your AFENDA xForge Inbox"
 msgstr ""
 "チャター通知の受信方法ポリシー:\n"
 "- メール：通知はあなたのメールアドレスに送信されます\n"
@@ -9395,7 +9395,7 @@ msgstr "理由"
 
 #. module: mail
 #: model:res.groups,name:mail.group_mail_notification_type_inbox
-msgid "Receive notifications in Odoo"
+msgid "Receive notifications in AFENDA xForge"
 msgstr "Odooで通知を受取る"
 
 #. module: mail
@@ -11384,7 +11384,7 @@ msgstr "チャネルが作られた元のメッセージ。"
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_alias__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
@@ -11398,9 +11398,9 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
-"eメールのエイリアス.例えば<jobs@example.odoo.com>のメールを受け取りたい場"
+"eメールのエイリアス.例えば<jobs@example.afenda.app>のメールを受け取りたい場"
 "合'jobs’を選択"
 
 #. module: mail
@@ -11667,7 +11667,7 @@ msgstr "このメッセージは削除されました"
 msgid ""
 "This option permanently removes any track of email after it's been sent, "
 "including from the Technical menu in the Settings, in order to preserve "
-"storage space of your Odoo database."
+"storage space of your AFENDA xForge database."
 msgstr ""
 "このオプションは、Odooデータベースのストレージスペースを維持するために、[管理"
 "設定]の[テクニカル]メニューを含め、送信後に電子メールのトラックを完全に削除し"
@@ -12744,11 +12744,11 @@ msgstr "ピクチャー・イン・ピクチャー機能を使えば、通話中
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.odoo.com)."
+"email server (@mycompany.afenda.app)."
 msgstr ""
 "コミュニティ版と企業版で電子メールを送受信するには、独自の電子メールサーバー"
 "を使用する必要があります。オンラインユーザーは、すぐに使用できる電子"
-"メールサーバー(@ mycompany.odoo.com)の恩恵を受けています。"
+"メールサーバー(@ mycompany.afenda.app)の恩恵を受けています。"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

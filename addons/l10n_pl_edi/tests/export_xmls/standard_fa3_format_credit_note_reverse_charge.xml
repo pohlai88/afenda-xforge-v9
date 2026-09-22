@@ -3,7 +3,7 @@
         <KodFormularza kodSystemowy="FA (3)" wersjaSchemy="1-0E">FA</KodFormularza>
         <WariantFormularza>3</WariantFormularza>
         <DataWytworzeniaFa>___ignore___</DataWytworzeniaFa>
-        <SystemInfo>Odoo</SystemInfo>
+        <SystemInfo>AFENDA xForge</SystemInfo>
       </Naglowek>
       <Podmiot1>
         <PrefiksPodatnika>PL</PrefiksPodatnika>

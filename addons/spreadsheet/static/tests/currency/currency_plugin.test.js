@@ -23,7 +23,7 @@ test("get default currency format when it's not in the config", async () => {
         mockRPC: async function (route, args) {
             if (args.method === "get_company_currency_for_spreadsheet") {
                 return {
-                    code: "Odoo",
+                    code: "AFENDA xForge",
                     symbol: "θ",
                     position: "after",
                     decimalPlaces: 2,
@@ -44,7 +44,7 @@ test("get specific currency format", async () => {
         mockRPC: async function (route, args) {
             if (args.method === "get_company_currency_for_spreadsheet" && args.args[0] === 42) {
                 return {
-                    code: "Odoo",
+                    code: "AFENDA xForge",
                     symbol: "O",
                     position: "after",
                     decimalPlaces: 2,

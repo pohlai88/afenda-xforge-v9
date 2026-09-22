@@ -13,23 +13,23 @@ class TestGamificationBadge(TestHrCommon):
         .create([
             {
                 "name": "demo_user",
-                "login": "demo@odoo.com",
-                "email": "demo@odoo.com",
+                "login": "demo@afenda.app",
+                "email": "demo@afenda.app",
                 "group_ids": [Command.link(cls.env.ref("base.group_user").id)],
             }, {
                 "name": "demo2_user",
-                "login": "demo2@odoo.com",
-                "email": "demo2@odoo.com",
+                "login": "demo2@afenda.app",
+                "email": "demo2@afenda.app",
                 "group_ids": [Command.link(cls.env.ref("base.group_user").id)],
             }, {
                 "name": "demo3_user",
-                "login": "demo3@odoo.com",
-                "email": "demo3@odoo.com",
+                "login": "demo3@afenda.app",
+                "email": "demo3@afenda.app",
                 "group_ids": [Command.link(cls.env.ref("base.group_user").id)],
             }, {
                 "name": "demo4_manager",
-                "login": "demo4@odoo.com",
-                "email": "demo4@odoo.com",
+                "login": "demo4@afenda.app",
+                "email": "demo4@afenda.app",
                 "group_ids": [Command.link(cls.env.ref("hr.group_hr_user").id)],
             },
         ]))

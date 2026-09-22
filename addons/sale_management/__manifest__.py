@@ -34,7 +34,7 @@ The Dashboard for the Sales Manager will include
 * My Quotations
 * Monthly Turnover (Graph)
     """,
-    'website': 'https://www.odoo.com/app/sales',
+    'website': 'https://www.afenda.app/app/sales',
     'depends': ['sale', 'digest'],
     'data': [
         'data/digest_data.xml',
@@ -73,6 +73,6 @@ The Dashboard for the Sales Manager will include
     'pre_init_hook': 'pre_init_hook',
     'post_init_hook': 'post_init_hook',
     'uninstall_hook': 'uninstall_hook',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

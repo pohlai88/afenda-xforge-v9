@@ -4,7 +4,7 @@
     'name': 'Events Sales',
     'version': '1.3',
     'category': 'Marketing/Events',
-    'website': 'https://www.odoo.com/app/events',
+    'website': 'https://www.afenda.app/app/events',
     'description': """
 Creating registration with sales orders.
 ========================================
@@ -47,6 +47,6 @@ this event.
             'event_sale/static/tests/tours/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

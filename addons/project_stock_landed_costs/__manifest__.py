@@ -7,6 +7,6 @@
     'category': 'Supply Chain/Inventory',
     'depends': ['project_stock_account', 'stock_landed_costs'],
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

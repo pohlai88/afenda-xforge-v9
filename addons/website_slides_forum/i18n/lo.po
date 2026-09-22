@@ -5,12 +5,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-03 19:06+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/"
 "website_slides_forum/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -392,9 +392,9 @@ msgstr "ຕົວເລືອກ Snippet ຂອງສະໄລ້ຟໍຣຳ"
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
+"questions related to AFENDA xForge."
 msgstr ""
-"ເປົ້າໝາຍຂອງເວັບໄຊທ໌ນີ້ ແມ່ນເພື່ອສ້າງຖານຄວາມຮູ້ທີ່ກ່ຽວຂ້ອງ ເພື່ອຕອບຄຳຖາມຕ່າງໆ ທີ່ກ່ຽວກັບ Odoo."
+"ເປົ້າໝາຍຂອງເວັບໄຊທ໌ນີ້ ແມ່ນເພື່ອສ້າງຖານຄວາມຮູ້ທີ່ກ່ຽວຂ້ອງ ເພື່ອຕອບຄຳຖາມຕ່າງໆ ທີ່ກ່ຽວກັບ AFENDA xForge."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -484,9 +484,9 @@ msgstr "ທຸກໆຄຳຕອບມີຄວາມຖືກຕ້ອງເທ
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "how to configure or customize Odoo to specific business needs,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
 msgstr ""
-"ວິທີການຕັ້ງຄ່າ ຫຼື ປັບແຕ່ງ Odoo ໃຫ້ເໝາະສົມກັບຄວາມຕ້ອງການທາງທຸລະກິດສະເພາະ,"
+"ວິທີການຕັ້ງຄ່າ ຫຼື ປັບແຕ່ງ AFENDA xForge ໃຫ້ເໝາະສົມກັບຄວາມຕ້ອງການທາງທຸລະກິດສະເພາະ,"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -497,8 +497,8 @@ msgstr "ວິທີການພັດທະນາໂມດູນສຳລັບ
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "how to install Odoo on a specific infrastructure,"
-msgstr "ວິທີການຕິດຕັ້ງ Odoo ໃນໂຄງລ່າງພື້ນຖານສະເພາະ,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
+msgstr "ວິທີການຕິດຕັ້ງ AFENDA xForge ໃນໂຄງລ່າງພື້ນຖານສະເພາະ,"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -510,8 +510,8 @@ msgstr ""
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "specific questions about Odoo service offers, etc."
-msgstr "ຄຳຖາມສະເພາະກ່ຽວກັບການບໍລິການຂອງ Odoo, ແລະ ອື່ນໆ."
+msgid "specific questions about AFENDA xForge service offers, etc."
+msgstr "ຄຳຖາມສະເພາະກ່ຽວກັບການບໍລິການຂອງ AFENDA xForge, ແລະ ອື່ນໆ."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -533,8 +533,8 @@ msgstr "ພວກເຮົາຖືກຖາມຄຳຖາມປາຍເປີ
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "what's the best way to use Odoo for a specific business need,"
-msgstr "ວິທີທີ່ດີທີ່ສຸດໃນການໃຊ້ Odoo ສຳລັບຄວາມຕ້ອງການທາງທຸລະກິດສະເພາະ,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
+msgstr "ວິທີທີ່ດີທີ່ສຸດໃນການໃຊ້ AFENDA xForge ສຳລັບຄວາມຕ້ອງການທາງທຸລະກິດສະເພາະ,"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0

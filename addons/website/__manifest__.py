@@ -6,7 +6,7 @@
     'category': 'Website/Website',
     'sequence': 20,
     'summary': 'Enterprise website builder',
-    'website': 'https://www.odoo.com/app/website',
+    'website': 'https://www.afenda.app/app/website',
     'version': '1.0',
     'depends': [
         'digest',
@@ -514,6 +514,6 @@
             '5': ['s_text_block_h1', 's_text_block', 's_image_gallery', 's_picture'],
         },
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

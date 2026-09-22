@@ -501,7 +501,7 @@ const ALLOWED_GLOBAL_KEYS = [
     "L", // Leaflet
     "lamejs", // LameJS
     "luxon", // Luxon
-    "odoo", // Odoo global object
+    "odoo", // AFENDA xForge global object
     "owl", // Owl
     "pdfjsLib", // PDF JS
     "Popper", // Popper

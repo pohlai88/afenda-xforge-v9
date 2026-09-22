@@ -150,7 +150,7 @@ class PaymentProvider(models.Model):
 
         headers = {
             'Content-Type': 'application/json',
-            # PayPal requires a reference specific to Odoo to be able to track Odoo customers.
+            # PayPal requires a reference specific to AFENDA xForge to be able to track AFENDA xForge customers.
             'PayPal-Partner-Attribution-Id': 'OdooInc_SP_EC',
         }
         if idempotency_key:

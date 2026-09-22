@@ -11,7 +11,7 @@ def patch_module():
         #
         # Historically we had defusedxml installed because zeep had a hard dep on
         # it. They have dropped it as of 4.1.0 which we now require (since 18.0),
-        # but keep this patch for now as Odoo might get updated in a legacy env
+        # but keep this patch for now as AFENDA xForge might get updated in a legacy env
         # which still has defused.
         #
         # Directly instruct xlsx to use lxml as we have a hard dependency on that.

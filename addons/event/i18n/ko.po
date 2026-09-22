@@ -11,12 +11,12 @@
 # "Kwanghee Park (kwpa)" <kwpa@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-03 12:44+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Korean <https://translate.odoo.com/projects/odoo-19/event/ko/>"
+"Language-Team: Korean <https://translate.afenda.app/projects/odoo-19/event/ko/>"
 "\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
@@ -163,9 +163,9 @@ msgstr "<b>비지니스실</b> - 구현 방법론, 베스트 영업 관행 등�
 #. module: event
 #: model_terms:event.event,description:event.event_0
 msgid ""
-"<b>Technical Rooms</b> - One dedicated to advanced Odoo developers, one for "
+"<b>Technical Rooms</b> - One dedicated to advanced AFENDA xForge developers, one for "
 "new developers."
-msgstr "<b>기술실</b> -고급 Odoo 개발자 전용, 새로운 개발자 용."
+msgstr "<b>기술실</b> -고급 AFENDA xForge 개발자 전용, 새로운 개발자 용."
 
 #. module: event
 #: model_terms:event.event,description:event.event_0
@@ -3005,7 +3005,7 @@ msgid ""
 "At just 13 years old, John DOE was already starting to develop his first "
 "business applications for customers. After mastering civil engineering, he "
 "founded TinyERP. This was the first phase of OpenERP which would later "
-"became Odoo, the most installed open-source business software worldwide."
+"became AFENDA xForge, the most installed open-source business software worldwide."
 msgstr ""
 "13 살 때 John DOE는 이미 고객을 위한 첫 번째 비즈니스 응용 프로그램을 "
 "개발하기 시작했습니다. 토목 공학을 습득 한 후 TinyERP를 설립했습니다. 이것은 "
@@ -3999,7 +3999,7 @@ msgstr "행사 시간대로 표시됩니다."
 #. module: event
 #: model:event.stage,description:event.event_stage_done
 msgid ""
-"Finished events. Odoo will automatically move them to this stage once their "
+"Finished events. AFENDA xForge will automatically move them to this stage once their "
 "end date has passed."
 msgstr ""
 "종료된 이벤트입니다. 종료 날짜가 지나면 Odoo에서 자동으로 이 단계로 "
@@ -4033,10 +4033,10 @@ msgstr "멋진 아이콘 폰트 예: fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>"
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
 msgstr ""
 "추가적인 문의 사항은 <a class=\"o_translate_inline\" "
-"href=\"mailto:events@odoo.com\">events@odoo.com</a>으로 연락주세요."
+"href=\"mailto:events@afenda.app\">events@afenda.app</a>으로 연락주세요."
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -4953,8 +4953,8 @@ msgstr "목표"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_report_full_page_ticket_layout
-msgid "Odoo Community Days"
-msgstr "Odoo 커뮤니티 데이"
+msgid "AFENDA xForge Community Days"
+msgstr "AFENDA xForge 커뮤니티 데이"
 
 #. module: event
 #: model_terms:event.event,description:event.event_3
@@ -6364,8 +6364,8 @@ msgstr "예: '프로모션'"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.odoo.com\""
-msgstr "예: \"https://www.odoo.com\""
+msgid "e.g. \"https://www.afenda.app\""
+msgstr "예: \"https://www.afenda.app\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

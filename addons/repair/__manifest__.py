@@ -48,6 +48,6 @@ The following topics are covered by this module:
             'repair/static/tests/tours/*.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

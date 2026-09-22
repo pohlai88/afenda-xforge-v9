@@ -24,7 +24,7 @@ class TestImportModule(odoo.tests.TransactionCase):
 
     def manifest_content(self, manifest={}, /, **values):
         return json.dumps({
-            'author': 'Odoo S.A.',
+            'author': 'AFENDA xForge S.A.',
             'license': 'LGPL-3',
             **manifest,
             **values,

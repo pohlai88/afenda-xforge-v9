@@ -38,6 +38,6 @@ Finally, the module comes with an option to display an attribute summary table i
         ],
     },
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

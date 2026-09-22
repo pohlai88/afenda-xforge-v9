@@ -365,7 +365,7 @@ body .pos-customer_facing_display .pos-payment_info .pos-odoo_logo_container spa
 }
 
 body .pos-customer_facing_display .pos-payment_info .pos-payment_info_details .pos-paymentlines::after {
-    height: 2vw; /* this empty element gives space between the paymentlines and the Odoo logo footer only if there is enough space (depending on the amount of paymentlines) */
+    height: 2vw; /* this empty element gives space between the paymentlines and the AFENDA xForge logo footer only if there is enough space (depending on the amount of paymentlines) */
     content: '';
     display: block;
     width: 100%;

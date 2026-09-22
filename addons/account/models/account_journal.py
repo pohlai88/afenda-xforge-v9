@@ -165,7 +165,7 @@ class AccountJournal(models.Model):
             ('number', "Numbers only (202400001)"),
         ],
         default=_default_invoice_reference_model,
-        help="You can choose different models for each type of reference. The default one is the Odoo reference.",
+        help="You can choose different models for each type of reference. The default one is the AFENDA xForge reference.",
     )
 
     currency_id = fields.Many2one('res.currency', help='The currency used to enter statement', string="Currency")
@@ -212,7 +212,7 @@ class AccountJournal(models.Model):
         inverse_name='journal_id',
         copy=False,
         check_company=True,
-        help="Manual: Get paid by any method outside of Odoo.\n"
+        help="Manual: Get paid by any method outside of AFENDA xForge.\n"
         "Payment Providers: Each payment provider has its own Payment Method. Request a transaction on/to a card thanks to a payment token saved by the partner when buying or subscribing online.\n"
         "Batch Deposit: Collect several customer checks at once generating and submitting a batch deposit to your bank. Module account_batch_payment is necessary.\n"
         "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your partner will have granted to you. Module account_sepa is necessary.\n"
@@ -227,8 +227,8 @@ class AccountJournal(models.Model):
         inverse_name='journal_id',
         copy=False,
         check_company=True,
-        help="Manual: Pay by any method outside of Odoo.\n"
-        "Check: Pay bills by check and print it from Odoo.\n"
+        help="Manual: Pay by any method outside of AFENDA xForge.\n"
+        "Check: Pay bills by check and print it from AFENDA xForge.\n"
         "SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit Transfer file to your bank. Module account_sepa is necessary.\n"
     )
     profit_account_id = fields.Many2one(
@@ -257,7 +257,7 @@ class AccountJournal(models.Model):
     # alias configuration for journals
     alias_name = fields.Char(help="Send one separate email for each invoice.\n"
                                   "Any file extension will be accepted.\n"
-                                  "Only PDF and XML files will be interpreted by Odoo")
+                                  "Only PDF and XML files will be interpreted by AFENDA xForge")
 
     journal_group_ids = fields.Many2many('account.journal.group',
         check_company=True,

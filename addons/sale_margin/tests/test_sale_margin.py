@@ -8,7 +8,7 @@ from odoo.addons.sale.tests.common import SaleCommon
 class TestSaleMargin(SaleCommon):
 
     def test_sale_margin(self):
-        """ Test the sale_margin module in Odoo. """
+        """ Test the sale_margin module in AFENDA xForge. """
         self.product.standard_price = 700.0
         order = self.empty_order
 

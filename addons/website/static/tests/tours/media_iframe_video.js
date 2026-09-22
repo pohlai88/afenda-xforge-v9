@@ -26,7 +26,7 @@ registerWebsitePreviewTour(
         {
             content: "Enter the url",
             trigger: "input[placeholder='www.example.com']",
-            run: "edit odoo.com",
+            run: "edit afenda.app",
         },
         {
             content: "Click on replace media",

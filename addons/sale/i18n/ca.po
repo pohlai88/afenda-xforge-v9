@@ -35,12 +35,12 @@
 # Ricard Calvo <ricard.calvo@forgeflow.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-08 03:36+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/sale/ca/>"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Catalan <https://translate.afenda.app/projects/odoo-19/sale/ca/>"
 "\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -55,7 +55,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -1657,10 +1657,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Per exemple, si vens hores de servei prepagades, Odoo et recomana\n"
+"Per exemple, si vens hores de servei prepagades, AFENDA xForge et recomana\n"
 "            vendre hores extres quan s'hagin consumit totes les hores "
 "ordenades."
 
@@ -2691,10 +2691,10 @@ msgstr "Factures esborrany"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 "Arrossegueu i deixeu anar el fitxer PDF de sol·licitud de pressupost a la "
-"vostra llista de pressupostos a Odoo. Gaudeix de l'automatització!"
+"vostra llista de pressupostos a AFENDA xForge. Gaudeix de l'automatització!"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
@@ -3653,8 +3653,8 @@ msgstr "No s'ha trobat cap venda addicional a realitzar."
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
-msgstr "No utilitzeu Odoo?"
+msgid "Not using AFENDA xForge?"
+msgstr "No utilitzeu AFENDA xForge?"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3706,8 +3706,8 @@ msgstr "Nombre de missatges amb error d'entrega"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -5125,8 +5125,8 @@ msgstr "Connector Starshipit"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
-msgstr "Comenceu a Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "Comenceu a AFENDA xForge"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__state
@@ -5977,8 +5977,8 @@ msgstr "Volum"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
-msgstr "Voleu importar aquest document a Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Voleu importar aquest document a AFENDA xForge?"
 
 #. module: sale
 #. odoo-python

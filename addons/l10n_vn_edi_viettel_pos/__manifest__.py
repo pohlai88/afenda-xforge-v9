@@ -2,10 +2,10 @@
 {
     "name": """Vietnam - POS E-invoicing""",
     'icon': '/account/static/description/l10n.png',
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     'countries': ['vn'],
     "category": "Accounting/Localizations/EDI",
-    'website': 'https://www.odoo.com/documentation/master/applications/finance/fiscal_localizations/vietnam.html',
+    'website': '/docs/applications/finance/fiscal_localizations/vietnam.html',
     "depends": [
         "l10n_vn_edi_viettel",
         "point_of_sale",

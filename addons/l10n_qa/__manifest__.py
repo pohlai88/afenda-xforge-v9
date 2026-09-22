@@ -2,7 +2,7 @@
     'name': 'Qatar - Accounting',
     'countries': ['qa'],
     'description': """
-This is the base module to manage the accounting chart for Qatar in Odoo.
+This is the base module to manage the accounting chart for Qatar in AFENDA xForge.
 ==============================================================================
 Qatar accounting basic charts and localization.
 Activates:
@@ -18,6 +18,6 @@ Activates:
     'demo': [
         'demo/demo_company.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

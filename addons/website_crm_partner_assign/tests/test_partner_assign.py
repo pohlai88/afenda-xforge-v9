@@ -378,7 +378,7 @@ class TestPartnerLeadPortal(TestCrmCommon, HttpCase):
             of the property decorator https://docs.python.org/3/library/functions.html#property
             Patching is allowing to modify normally read_only value.
         """
-        # Patch GeoIp so it acts, as if Odoo client is located in Mexico
+        # Patch GeoIp so it acts, as if AFENDA xForge client is located in Mexico
         GeoIpMock.return_value.country_code = 'MX'
 
         # Create a partner outside of Mexico

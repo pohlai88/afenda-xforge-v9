@@ -5616,7 +5616,7 @@ test(`custom delete confirmation dialog`, async () => {
 
 test(`deleting record which throws UserError should close confirmation dialog`, async () => {
     onRpc("unlink", () => {
-        throw makeServerError({ message: "Odoo Server Error" });
+        throw makeServerError({ message: "AFENDA xForge Server Error" });
     });
 
     await mountView({
@@ -5637,7 +5637,7 @@ test(`deleting record which throws UserError should close confirmation dialog`, 
     await contains(`.modal footer button.btn-primary`).click();
     await waitFor(".modal .modal-title:contains(Invalid Operation)");
 
-    expect.verifyErrors(["Odoo Server Error"]);
+    expect.verifyErrors(["AFENDA xForge Server Error"]);
 });
 
 test.tags("desktop");

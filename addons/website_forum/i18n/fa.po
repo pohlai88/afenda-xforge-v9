@@ -17,12 +17,12 @@
 # Aliraza Habibitanha <alireza.habibitanha@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-08-09 11:17+0000\n"
 "Last-Translator: Aliraza Habibitanha <alireza.habibitanha@gmail.com>\n"
-"Language-Team: Persian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Persian <https://translate.afenda.app/projects/odoo-19/"
 "website_forum/fa/>\n"
 "Language: fa\n"
 "MIME-Version: 1.0\n"
@@ -3419,7 +3419,7 @@ msgstr "پاسخ پذیرفته‌شده حذف شد"
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
+"questions related to AFENDA xForge."
 msgstr ""
 "هدف این سایت ایجاد یک پایگاه دانش مرتبط است که به سوالات مربوط به اودوو پاسخ "
 "دهد."
@@ -4106,7 +4106,7 @@ msgstr "اینجا"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to configure or customize Odoo to specific business needs,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
 msgstr "نحوه پیکربندی یا سفارشی کردن اودوو برای نیازهای تجاری خاص،"
 
 #. module: website_forum
@@ -4118,7 +4118,7 @@ msgstr "چگونه ماژول ها را برای نیاز خود توسعه ده
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to install Odoo on a specific infrastructure,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
 msgstr "نحوه نصب اودوو بر روی یک زیرساخت خاص،"
 
 #. module: website_forum
@@ -4221,7 +4221,7 @@ msgstr "پست‌ها"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "specific questions about Odoo service offers, etc."
+msgid "specific questions about AFENDA xForge service offers, etc."
 msgstr "سوالات خاص در مورد پیشنهادات خدمات اودوو و غیره"
 
 #. module: website_forum
@@ -4273,7 +4273,7 @@ msgstr ""
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "what's the best way to use Odoo for a specific business need,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
 msgstr "بهترین راه برای استفاده از اودوو برای یک نیاز تجاری خاص چیست؟"
 
 #. module: website_forum

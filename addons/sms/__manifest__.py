@@ -10,7 +10,7 @@
 This module gives a framework for SMS text messaging
 ----------------------------------------------------
 
-The service is provided by the In App Purchase Odoo platform.
+The service is provided by the In App Purchase AFENDA xForge platform.
 """,
     'depends': [
         'base',
@@ -51,6 +51,6 @@ The service is provided by the In App Purchase Odoo platform.
             'sms/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

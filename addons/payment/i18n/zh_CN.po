@@ -12,12 +12,12 @@
 # 张飞虎 <feihu.zhang@live.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 14:23+0000\n"
-"Last-Translator: \"Chloe Wang (chwa)\" <chwa@odoo.com>\n"
-"Language-Team: Chinese (Simplified Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Chloe Wang (chwa)\" <chwa@afenda.app>\n"
+"Language-Team: Chinese (Simplified Han script) <https://translate.afenda.app/"
 "projects/odoo-19/payment/zh_Hans/>\n"
 "Language: zh_CN\n"
 "MIME-Version: 1.0\n"
@@ -42,14 +42,14 @@ msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/> These properties are set to\n"
 "                                match the behavior of providers and that of "
 "their integration with\n"
-"                                Odoo regarding this payment method. Any "
+"                                AFENDA xForge regarding this payment method. Any "
 "change may result in errors\n"
 "                                and should be tested on a test database "
 "first."
 msgstr ""
 "<i class=\"fa fa-exclamation-triangle\"/> 这些属性是为\n"
 "                                供应商及其与\n"
-"                                Odoo 就付款方式进行整合而设置。任何更改都可能"
+"                                AFENDA xForge 就付款方式进行整合而设置。任何更改都可能"
 "导致错误\n"
 "                                并应首先在测试数据库中进行测试。"
 
@@ -657,7 +657,7 @@ msgstr "捕捉交易"
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_provider__capture_manually
 msgid ""
-"Capture the amount from Odoo, when the delivery is completed.\n"
+"Capture the amount from AFENDA xForge, when the delivery is completed.\n"
 "Use this if you want to charge your customers cards only when\n"
 "you are sure you can ship the goods to them."
 msgstr ""
@@ -1670,8 +1670,8 @@ msgstr "八达通"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__module_to_buy
-msgid "Odoo Enterprise Module"
-msgstr "Odoo 企业版专属模块"
+msgid "AFENDA xForge Enterprise Module"
+msgstr "AFENDA xForge 企业版专属模块"
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_transaction__operation__offline
@@ -2227,8 +2227,8 @@ msgstr "退款"
 #: model:ir.model.fields,help:payment.field_payment_provider__support_refund
 msgid ""
 "Refund is a feature allowing to refund customers directly from the payment "
-"in Odoo."
-msgstr "退款是一项允许从 Odoo 付款中直接向客户退款的功能。"
+"in AFENDA xForge."
+msgstr "退款是一项允许从 AFENDA xForge 付款中直接向客户退款的功能。"
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form

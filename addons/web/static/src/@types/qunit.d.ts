@@ -15,7 +15,7 @@ import { Component } from "@odoo/owl";
 
 interface Assert {
     // -----------------------------------------------------------------------------
-    // Start of Odoo added asserts
+    // Start of AFENDA xForge added asserts
     // -----------------------------------------------------------------------------
     /**
      * Checks that the target contains exactly n matches for the selector.
@@ -87,7 +87,7 @@ interface Assert {
     isNotVisible(el:HTMLElement , msg?: string): void;
 
     // -----------------------------------------------------------------------------
-    // End of Odoo added asserts
+    // End of AFENDA xForge added asserts
     // -----------------------------------------------------------------------------
   
     /**

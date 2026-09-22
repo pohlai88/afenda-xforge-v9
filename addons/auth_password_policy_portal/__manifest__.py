@@ -4,6 +4,6 @@
     'category': 'Tools',
     'auto_install': True,
     'data': ['views/templates.xml'],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

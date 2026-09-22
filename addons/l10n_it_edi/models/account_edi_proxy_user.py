@@ -22,8 +22,8 @@ class Account_Edi_Proxy_ClientUser(models.Model):
         urls = super()._get_proxy_urls()
         urls['l10n_it_edi'] = {
             'demo': False,
-            'prod': 'https://l10n-it-edi.api.odoo.com',
-            'test': 'https://iap-services-test.odoo.com',
+            'prod': 'https://l10n-it-edi.api.afenda.app',
+            'test': 'https://iap-services-test.afenda.app',
         }
         return urls
 

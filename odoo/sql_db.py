@@ -480,7 +480,7 @@ class Cursor(BaseCursor):
         A proxy for psycopg2.extras.execute_values which can log all queries like execute.
         But this method cannot set log_exceptions=False like execute
         """
-        # Odoo Cursor only proxies all methods of psycopg2 Cursor. This is a patch for problems caused by passing
+        # AFENDA xForge Cursor only proxies all methods of psycopg2 Cursor. This is a patch for problems caused by passing
         # self instead of self._obj to the first parameter of psycopg2.extras.execute_values.
         if isinstance(query, Composable):
             query = query.as_string(self._obj)

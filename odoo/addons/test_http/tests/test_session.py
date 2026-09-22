@@ -437,17 +437,17 @@ class TestSessionRotation(HttpCase):
             self.assertTrue(normalized_path.startswith(root.session_store.path))
             return len(glob.glob(normalized_path))
         self.authenticate('admin', 'admin')
-        self.url_open('/odoo')
+        self.url_open('/app')
         session_one = self.opener.cookies['session_id']
         # Session shouldn't rotate if not expired
-        self.url_open('/odoo')
+        self.url_open('/app')
         self.assertEqual(self.opener.cookies['session_id'], session_one)
         self.assertEqual(get_amount_sessions(session_one), 1)
         # Expire the first session
         session_one_obj = root.session_store.get(session_one)
         session_one_obj['create_time'] -= SESSION_ROTATION_INTERVAL
         root.session_store.save(session_one_obj)
-        self.url_open('/odoo')
+        self.url_open('/app')
         session_two = self.opener.cookies['session_id']
         self.assertNotEqual(session_one, session_two)
         self.assertEqual(get_amount_sessions(session_two), 2)
@@ -455,7 +455,7 @@ class TestSessionRotation(HttpCase):
         session_two_obj = root.session_store.get(session_two)
         session_two_obj['create_time'] -= SESSION_DELETION_TIMER
         root.session_store.save(session_two_obj)
-        self.url_open('/odoo')
+        self.url_open('/app')
         session_three = self.opener.cookies['session_id']
         self.assertEqual(session_three, session_two)
         self.assertEqual(get_amount_sessions(session_three), 1)
@@ -478,7 +478,7 @@ class TestSessionRotation(HttpCase):
         """
         # Obtain a session
         self.authenticate("admin", "admin")
-        self.url_open("/odoo")
+        self.url_open("/app")
         session_id = self.opener.cookies["session_id"]
 
         # Expire the session to trigger the automatic soft rotation
@@ -487,9 +487,9 @@ class TestSessionRotation(HttpCase):
         root.session_store.save(session)
 
         # Check the session doesn't rotate while using the skip header flag
-        self.url_open("/odoo", headers={SESSION_ROTATION_INTERVAL_HEADER_SKIP: "1"})
+        self.url_open("/app", headers={SESSION_ROTATION_INTERVAL_HEADER_SKIP: "1"})
         self.assertEqual(self.opener.cookies["session_id"], session_id)
 
         # Check the session rotates while not using the skip header flag
-        self.url_open("/odoo")
+        self.url_open("/app")
         self.assertNotEqual(self.opener.cookies["session_id"], session_id)

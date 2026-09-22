@@ -11,12 +11,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-09-08 08:11+0000\n"
-"Last-Translator: \"Tony Ng (ngto)\" <ngto@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Tony Ng (ngto)\" <ngto@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/survey/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -3025,13 +3025,13 @@ msgstr "出現"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.certification_report_view_general
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "Odoo Certification"
+msgid "AFENDA xForge Certification"
 msgstr "odoo認證"
 
 #. module: survey
@@ -4938,10 +4938,10 @@ msgstr "網站溝通記錄"
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
 msgid ""
-"Welcome to this Odoo certification. You will receive 2 random questions out "
+"Welcome to this AFENDA xForge certification. You will receive 2 random questions out "
 "of a pool of 3."
 msgstr ""
-"歡迎參加本次 Odoo 認證測驗。我們會由 3 道題目的題庫中，隨機抽取 2 道問題給你"
+"歡迎參加本次 AFENDA xForge 認證測驗。我們會由 3 道題目的題庫中，隨機抽取 2 道問題給你"
 "。"
 
 #. module: survey
@@ -4977,8 +4977,8 @@ msgstr "\"ODOO\"代表什麼？"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does one need to get to pass an Odoo Survey?"
-msgstr "要在 Odoo 調查合格，需要達至甚麼要求？"
+msgid "What does one need to get to pass an AFENDA xForge Survey?"
+msgstr "要在 AFENDA xForge 調查合格，需要達至甚麼要求？"
 
 #. module: survey
 #. odoo-python
@@ -5015,8 +5015,8 @@ msgstr "你的出生日期是？"
 #. module: survey
 #. odoo-javascript
 #: code:addons/survey/static/src/js/tours/survey_tour.js:0
-msgid "Whenever you pick an answer, Odoo saves it for you."
-msgstr "你每次選擇答案時，Odoo 都會儲存你的選擇。"
+msgid "Whenever you pick an answer, AFENDA xForge saves it for you."
+msgstr "你每次選擇答案時，AFENDA xForge 都會儲存你的選擇。"
 
 #. module: survey
 #: model:survey.question,title:survey.survey_feedback_p1_q1

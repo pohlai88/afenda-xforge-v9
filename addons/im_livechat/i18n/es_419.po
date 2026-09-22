@@ -7,12 +7,12 @@
 # "Patricia Gutiérrez (pagc)" <pagc@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-03 18:36+0000\n"
 "PO-Revision-Date: 2026-08-03 08:05+0000\n"
-"Last-Translator: \"Patricia Gutiérrez (pagc)\" <pagc@odoo.com>\n"
-"Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
+"Last-Translator: \"Patricia Gutiérrez (pagc)\" <pagc@afenda.app>\n"
+"Language-Team: Spanish (Latin America) <https://translate.afenda.app/projects/"
 "odoo-19/im_livechat/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
@@ -271,10 +271,10 @@ msgstr "Agentes (historial)"
 #. module: im_livechat
 #: model_terms:ir.ui.view,arch_db:im_livechat.im_livechat_channel_view_form
 msgid ""
-"Agents who are inactive in Odoo for more than 30 minutes will be considered "
+"Agents who are inactive in AFENDA xForge for more than 30 minutes will be considered "
 "disconnected."
 msgstr ""
-"Los agentes que estén inactivos en Odoo por más de 30 minutos se "
+"Los agentes que estén inactivos en AFENDA xForge por más de 30 minutos se "
 "considerarán desconectados."
 
 #. module: im_livechat
@@ -2058,8 +2058,8 @@ msgstr "Número de mensajes con error de envío"
 #. module: im_livechat
 #: model:chatbot.script,title:im_livechat.chatbot_script_welcome_bot_demo
 #: model_terms:ir.ui.view,arch_db:im_livechat.livechat_email_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: im_livechat
 #: model:ir.model.constraint,message:im_livechat.constraint_im_livechat_channel_member_history_channel_id_guest_id_unique

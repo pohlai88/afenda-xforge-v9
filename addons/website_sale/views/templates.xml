@@ -4197,7 +4197,7 @@
                     groups="base.group_system"
                     target="_blank"
                     aria-label="Edit"
-                    t-attf-href="/odoo/action-payment.action_payment_provider/{{tx_sudo.provider_id.id}}"
+                    t-attf-href="/app/action-payment.action_payment_provider/{{tx_sudo.provider_id.id}}"
                 >
                     <i class="fa fa-pencil"/>
                 </a>
@@ -4243,7 +4243,7 @@
         <xpath expr="//t[@t-call='web.brand_promotion_message']" position="replace">
             <t t-call="web.brand_promotion_message">
                 <t t-set="_message">
-                    The #1 <a target="_blank" href="http://www.odoo.com/app/ecommerce?utm_source=db&amp;utm_medium=website">Open Source eCommerce</a>
+                    The #1 <a target="_blank" href="http://www.afenda.app/app/ecommerce?utm_source=db&amp;utm_medium=website">Open Source eCommerce</a>
                 </t>
                 <t t-set="_utm_medium" t-valuef="website"/>
             </t>

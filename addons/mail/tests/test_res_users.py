@@ -61,7 +61,7 @@ class TestUser(MailCommon):
 
     @mute_logger('odoo.sql_db')
     def test_notification_type_constraint(self):
-        with self.assertRaises(IntegrityError, msg='Portal user can not receive notification in Odoo'):
+        with self.assertRaises(IntegrityError, msg='Portal user can not receive notification in AFENDA xForge'):
             mail_new_test_user(
                 self.env,
                 login='user_test_constraint_2',
@@ -198,7 +198,7 @@ class TestUserTours(HttpCaseWithUserDemo):
         # avoid 'reload_context' action in the middle of the tour to ease steps and form save checks
         with patch.object(ResUsersPatchedInTest, 'preference_save', lambda self: True):
             self.start_tour(
-                "/odoo",
+                "/app",
                 "mail/static/tests/tours/user_modify_own_profile_tour.js",
                 login="demo",
             )

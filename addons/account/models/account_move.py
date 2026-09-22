@@ -653,7 +653,7 @@ class AccountMove(models.Model):
     quick_edit_total_amount = fields.Monetary(
         string='Total (Tax inc.)',
         help='Use this field to encode the total amount of the invoice.\n'
-             'Odoo will automatically create one invoice line with default values to match it.',
+             'AFENDA xForge will automatically create one invoice line with default values to match it.',
     )
     quick_encoding_vals = fields.Json(compute='_compute_quick_encoding_vals', exportable=False)
 
@@ -4390,7 +4390,7 @@ class AccountMove(models.Model):
         return ''.join(char for char in ref if char.isdigit())
 
     def _get_invoice_reference_odoo_invoice(self):
-        """ This computes the reference based on the Odoo format.
+        """ This computes the reference based on the AFENDA xForge format.
             We simply return the number of the invoice, defined on the journal
             sequence.
         """
@@ -4398,7 +4398,7 @@ class AccountMove(models.Model):
         return self.name
 
     def _get_invoice_reference_odoo_partner(self):
-        """ This computes the reference based on the Odoo format.
+        """ This computes the reference based on the AFENDA xForge format.
             The data used is the reference set on the partner or its database
             id otherwise. For instance if the reference of the customer is
             'dumb customer 97', the reference will be 'CUST/dumb customer 97'.
@@ -4862,7 +4862,7 @@ class AccountMove(models.Model):
             'auto_post': self.auto_post,  # copy=False to avoid mistakes but should be the same in recurring copies
             'auto_post_until': self.auto_post_until,  # same as above
             'auto_post_origin_id': self.auto_post_origin_id.id,  # same as above
-            'invoice_user_id': self.invoice_user_id.id,  # otherwise user would be OdooBot
+            'invoice_user_id': self.invoice_user_id.id,  # otherwise user would be AFENDA Bot
         })
         if self.invoice_date:
             values.update({'invoice_date': self._apply_delta_recurring_entries(self.invoice_date, self.auto_post_origin_id.invoice_date, self.auto_post)})
@@ -7236,7 +7236,7 @@ class AccountMove(models.Model):
             # This is an existing invoice on which a message was posted either by e-mail or via the webclient.
             attachment_records = self._from_files_data(files_data)
             self._fix_attachments_on_record_from_files_data(valid_files_data, extra_files_data)
-            # Only trigger decoding if the message was sent by an active internal user (note OdooBot is always inactive).
+            # Only trigger decoding if the message was sent by an active internal user (note AFENDA Bot is always inactive).
             if self.env.user.active and self.env.user._is_internal():
                 self._extend_with_attachments(files_data)
 

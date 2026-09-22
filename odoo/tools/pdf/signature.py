@@ -54,7 +54,7 @@ class PdfSigner:
 
 
 
-    def sign_pdf(self, visible_signature: bool = False, field_name: str = "Odoo Signature", signer: Optional[ResUsers] = None) -> Optional[io.BytesIO]:
+    def sign_pdf(self, visible_signature: bool = False, field_name: str = "AFENDA xForge Signature", signer: Optional[ResUsers] = None) -> Optional[io.BytesIO]:
         """Signs the pdf document using a PdfWriter object
 
         Returns:

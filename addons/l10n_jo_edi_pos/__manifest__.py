@@ -1,6 +1,6 @@
 {
     "name": "Jordan Accounting EDI for POS",
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     "countries": ["jo"],
     "version": "1.0",
     "description": """

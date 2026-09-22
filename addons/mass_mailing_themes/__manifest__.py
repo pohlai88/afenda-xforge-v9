@@ -9,7 +9,7 @@ Design gorgeous mails
     """,
     'version': '1.2',
     'sequence': 110,
-    'website': 'https://www.odoo.com/app/mailing',
+    'website': 'https://www.afenda.app/app/mailing',
     'category': 'Marketing/Email Marketing',
     'depends': [
         'mass_mailing',
@@ -20,6 +20,6 @@ Design gorgeous mails
     ],
     'installable': True,
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

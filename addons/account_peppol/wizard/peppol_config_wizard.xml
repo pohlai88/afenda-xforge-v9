@@ -8,13 +8,13 @@
                 <field name="company_id" invisible="1"/>
                 <field name="account_peppol_edi_user" invisible="1"/>
                 <div invisible="account_peppol_proxy_state != 'sender'">
-                    You are sending your e-invoices via Odoo with this Peppol ID <field name="account_peppol_edi_identification" class="oe_inline o_form_label" readonly="1"/>.
+                    You are sending your e-invoices via AFENDA xForge with this Peppol ID <field name="account_peppol_edi_identification" class="oe_inline o_form_label" readonly="1"/>.
                 </div>
                 <div invisible="account_peppol_proxy_state != 'smp_registration'">
                     Your Peppol registration is being processed, it should be active within a day.
                 </div>
                 <div invisible="account_peppol_proxy_state != 'receiver'">
-                    You are sending and receiving your e-invoices via Odoo with this Peppol ID <field name="account_peppol_edi_identification" class="oe_inline o_form_label" readonly="1"/>.
+                    You are sending and receiving your e-invoices via AFENDA xForge with this Peppol ID <field name="account_peppol_edi_identification" class="oe_inline o_form_label" readonly="1"/>.
                 </div>
                 <group string="Company information">
                     <label for="account_peppol_contact_email" class="text-nowrap"/>
@@ -23,10 +23,10 @@
                            required="account_peppol_proxy_state in ('sender', 'smp_registration', 'receiver')"/>
                 </group>
                 <div invisible="1"> <!-- Deprecated -->
-                    <group string="Receive your electronic invoices in Odoo" invisible="account_peppol_proxy_state != 'sender'">
+                    <group string="Receive your electronic invoices in AFENDA xForge" invisible="account_peppol_proxy_state != 'sender'">
                         <div class="text-justify text-muted" colspan="2">
                             Some service support migration keys. If this is your case you can enter your migration key below.
-                            If not, you should de-register from your current service provider and register with Odoo afterward.
+                            If not, you should de-register from your current service provider and register with AFENDA xForge afterward.
                         </div>
                         <field name="account_peppol_migration_key"/>
                     </group>

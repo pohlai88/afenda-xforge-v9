@@ -2,7 +2,7 @@
 
 {
     'name': 'Australia - Accounting',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/australia.html',
+    'website': '/docs/applications/finance/fiscal_localizations/australia.html',
     'icon': '/account/static/description/l10n.png',
     'countries': ['au'],
     'version': '1.1',
@@ -44,6 +44,6 @@ Also:
         'demo/demo_company.xml',
         'demo/res_bank.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

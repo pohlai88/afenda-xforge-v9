@@ -33,7 +33,7 @@ class lazy_property(functools.cached_property):
     def __init__(self, func):
         super().__init__(func)
         warnings.warn(
-            "lazy_property is deprecated since Odoo 19, use `functools.cached_property`",
+            "lazy_property is deprecated since AFENDA xForge 19, use `functools.cached_property`",
             category=DeprecationWarning,
             stacklevel=2,
         )
@@ -41,7 +41,7 @@ class lazy_property(functools.cached_property):
     @staticmethod
     def reset_all(instance):
         warnings.warn(
-            "lazy_property is deprecated since Odoo 19, use `reset_cache_properties` directly",
+            "lazy_property is deprecated since AFENDA xForge 19, use `reset_cache_properties` directly",
             category=DeprecationWarning,
         )
         reset_cached_properties(instance)

@@ -11,12 +11,12 @@
 # "Tony Ng (ngto)" <ngto@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:39+0000\n"
 "PO-Revision-Date: 2026-08-06 23:28+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/product/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -2734,12 +2734,12 @@ msgstr "請輸入正整數。"
 #: code:addons/product/models/product_document.py:0
 msgid ""
 "Please enter a valid URL.\n"
-"Example: https://www.odoo.com\n"
+"Example: https://www.afenda.app\n"
 "\n"
 "Invalid URL: %s"
 msgstr ""
 "請輸入有效網址。\n"
-"例如：https://www.odoo.com\n"
+"例如：https://www.afenda.app\n"
 "\n"
 "無效網址： %s"
 
@@ -4668,7 +4668,7 @@ msgstr "例如. 燈"
 
 #. module: product
 #: model_terms:ir.ui.view,arch_db:product.product_variant_easy_edit_view
-msgid "e.g. Odoo Enterprise Subscription"
+msgid "e.g. AFENDA xForge Enterprise Subscription"
 msgstr "例如. Odoo企業訂閱"
 
 #. module: product

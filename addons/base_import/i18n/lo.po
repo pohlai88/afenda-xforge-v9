@@ -7,12 +7,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 10.saas~18\n"
+"Project-Id-Version: AFENDA xForge Server 10.saas~18\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:49+0000\n"
 "PO-Revision-Date: 2026-08-02 12:44+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/base_import/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/base_import/"
 "lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -341,11 +341,11 @@ msgstr "ໄອດີ"
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
 msgid ""
 "If the file contains\n"
-"                    the column names, Odoo can try auto-detecting the\n"
+"                    the column names, AFENDA xForge can try auto-detecting the\n"
 "                    field corresponding to the column. This makes imports\n"
 "                    simpler especially when the file has many columns."
 msgstr ""
-"ຖ້າໄຟລ໌ມີຊື່ຖັນ, Odoo ສາມາດລອງກວດຫາຟິວທີ່ກົງກັບຖັນນັ້ນໂດຍອັດຕະໂນມັດ. ສິ່ງນີ້ຊ່ວຍໃຫ້ການນຳເຂົ້າງ່າຍຂຶ້ນ ໂດ"
+"ຖ້າໄຟລ໌ມີຊື່ຖັນ, AFENDA xForge ສາມາດລອງກວດຫາຟິວທີ່ກົງກັບຖັນນັ້ນໂດຍອັດຕະໂນມັດ. ສິ່ງນີ້ຊ່ວຍໃຫ້ການນຳເຂົ້າງ່າຍຂຶ້ນ ໂດ"
 "ຍສະເພາະໃນເວລາທີ່ໄຟລ໌ມີຫຼາຍຖັນ."
 
 #. module: base_import
@@ -479,8 +479,8 @@ msgstr "ບໍ່ພົບບັນທຶກທີ່ກົງກັນສຳລ
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_data_content/import_data_content.xml:0
-msgid "Odoo Field"
-msgstr "ຟິວ Odoo"
+msgid "AFENDA xForge Field"
+msgstr "ຟິວ AFENDA xForge"
 
 #. module: base_import
 #. odoo-javascript
@@ -713,18 +713,18 @@ msgstr "ອັບໂຫຼດໄຟລ໌ Excel ຫຼື CSV ເພື່ອນ
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_model.js:0
-msgid "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h system. You can use a custom format in addition to the suggestions provided. Leave empty to let Odoo guess the format (recommended)"
+msgid "Use HH for hours in a 24h system, use II in conjonction with 'p' for a 12h system. You can use a custom format in addition to the suggestions provided. Leave empty to let AFENDA xForge guess the format (recommended)"
 msgstr ""
 "ໃຊ້ HH ສຳລັບຊົ່ວໂມງໃນລະບົບ 24 ຊົ່ວໂມງ, ໃຊ້ II ຮ່ວມກັບ 'p' ສຳລັບລະບົບ 12 ຊົ່ວໂມງ. ທ່ານສາມາດໃຊ້"
-"ຮູບແບບທີ່ກຳນົດເອງນອກຈາກຄຳແນະນຳທີ່ໃຫ້ໄວ້. ປ່ອຍໃຫ້ຫວ່າງເປົ່າເພື່ອໃຫ້ Odoo ຄາດເດົາຮູບແບບ (ແນະນຳ)"
+"ຮູບແບບທີ່ກຳນົດເອງນອກຈາກຄຳແນະນຳທີ່ໃຫ້ໄວ້. ປ່ອຍໃຫ້ຫວ່າງເປົ່າເພື່ອໃຫ້ AFENDA xForge ຄາດເດົາຮູບແບບ (ແນະນຳ)"
 
 #. module: base_import
 #. odoo-javascript
 #: code:addons/base_import/static/src/import_model.js:0
-msgid "Use YYYY to represent the year, MM for the month and DD for the day. Include separators such as a dot, forward slash or dash. You can use a custom format in addition to the suggestions provided. Leave empty to let Odoo guess the format (recommended)"
+msgid "Use YYYY to represent the year, MM for the month and DD for the day. Include separators such as a dot, forward slash or dash. You can use a custom format in addition to the suggestions provided. Leave empty to let AFENDA xForge guess the format (recommended)"
 msgstr ""
 "ໃຊ້ YYYY ເພື່ອແທນປີ, MM ສຳລັບເດືອນ ແລະ DD ສຳລັບວັນ. ລວມທັງຕົວຂັ້ນ ເຊັ່ນ ຈຸດ, ສະແລັດ ຫຼື ຂີດຕໍ່. ທ່າ"
-"ນສາມາດໃຊ້ຮູບແບບທີ່ກຳນົດເອງນອກຈາກຄຳແນະນຳທີ່ໃຫ້ໄວ້. ປ່ອຍໃຫ້ຫວ່າງເປົ່າເພື່ອໃຫ້ Odoo ຄາດເດົາຮູບແບບ "
+"ນສາມາດໃຊ້ຮູບແບບທີ່ກຳນົດເອງນອກຈາກຄຳແນະນຳທີ່ໃຫ້ໄວ້. ປ່ອຍໃຫ້ຫວ່າງເປົ່າເພື່ອໃຫ້ AFENDA xForge ຄາດເດົາຮູບແບບ "
 "(ແນະນຳ)"
 
 #. module: base_import

@@ -4,6 +4,6 @@
     'version': '0.0.1',
     'category': 'Hidden/Tests',
     'sequence': 0,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

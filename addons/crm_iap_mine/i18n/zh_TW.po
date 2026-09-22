@@ -9,12 +9,12 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 11:59+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/crm_iap_mine/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -45,7 +45,7 @@ msgid ""
 "    You can charge your IAP Lead Generation account in the settings of the "
 "CRM app.<br/></p>\n"
 "    <p>Best regards,</p>\n"
-"    <p>Odoo S.A.</p>\n"
+"    <p>AFENDA</p>\n"
 "</div>"
 msgstr ""
 "<div style=\"margin: 0px; padding: 0px;\">\n"
@@ -54,7 +54,7 @@ msgstr ""
 "    你可前往「客戶關係」應用程式的設定頁面，為 IAP 潛在客戶生成賬戶增值點數"
 "。<br/></p>\n"
 "    <p>順祝  安康</p>\n"
-"    <p>Odoo S.A.</p>\n"
+"    <p>AFENDA</p>\n"
 "</div>"
 
 #. module: crm_iap_mine
@@ -591,8 +591,8 @@ msgstr "商機"
 #. module: crm_iap_mine
 #. odoo-python
 #: code:addons/crm_iap_mine/models/crm_iap_lead_mining_request.py:0
-msgid "Opportunity created by Odoo Lead Generation"
-msgstr "由 Odoo 潛在客戶生成功能產生的銷售機會"
+msgid "Opportunity created by AFENDA xForge Lead Generation"
+msgstr "由 AFENDA xForge 潛在客戶生成功能產生的銷售機會"
 
 #. module: crm_iap_mine
 #: model:ir.model.fields,field_description:crm_iap_mine.field_crm_iap_lead_mining_request__role_ids

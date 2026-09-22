@@ -300,7 +300,7 @@ class TestAccountEdiUblCii(TestUblCiiCommon, HttpCase):
     def test_get_invoice_legal_documents_fallback(self):
         company = self.company_data['company']
         company.phone = '11111111111'
-        company.email = 'test@test.odoo.com'
+        company.email = 'test@test.afenda.app'
         german_partner = self.env['res.partner'].create({
             'name': 'German partner',
             'country_id': self.env.ref('base.de').id,

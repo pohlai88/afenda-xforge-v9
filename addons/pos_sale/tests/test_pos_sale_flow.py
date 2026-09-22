@@ -2354,7 +2354,7 @@ class TestPoSSale(TestPointOfSaleHttpCommon):
         })
         sale_order.action_confirm()
 
-        # Simulate what Odoo does when you delete an attribute line that is already
+        # Simulate what AFENDA xForge does when you delete an attribute line that is already
         # referenced by a sale order: it archives the line instead of deleting it.
         attr_line = product_tmpl.with_context(active_test=False).attribute_line_ids
         attr_line.write({'active': False})

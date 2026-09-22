@@ -36,7 +36,7 @@ class PosVivaComController(http.Controller):
                     )
                     payment_method_sudo._retrieve_session_id(data_webhook)
                 else:
-                    _logger.error(_('received a message for a terminal not registered in Odoo: %s', terminal_id))
+                    _logger.error(_('received a message for a terminal not registered in AFENDA xForge: %s', terminal_id))
             return json.dumps({'Key': payment_method_sudo.viva_com_webhook_verification_key})
         else:
             _logger.error(_('received a message for a pos payment provider not registered.'))

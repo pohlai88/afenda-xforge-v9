@@ -4,8 +4,8 @@ from odoo import fields, models
 from odoo.exceptions import RedirectWarning
 
 
-L10N_GR_EDI_DEFAULT_IAP_ENDPOINT = 'https://l10n-gr-edi.api.odoo.com'
-L10N_GR_EDI_DEFAULT_IAP_TEST_ENDPOINT = 'https://l10n-gr-edi.test.odoo.com'
+L10N_GR_EDI_DEFAULT_IAP_ENDPOINT = 'https://l10n-gr-edi.api.afenda.app'
+L10N_GR_EDI_DEFAULT_IAP_TEST_ENDPOINT = 'https://l10n-gr-edi.test.afenda.app'
 L10N_GR_EDI_IAP_ENDPOINT_PARAM = 'l10n_gr_edi.iap_endpoint'
 L10N_GR_EDI_IAP_ROUTE_PREFIX = '/api/l10n_gr_edi/1'
 L10N_GR_EDI_PROXY_TYPE = 'l10n_gr_edi'

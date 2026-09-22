@@ -7,7 +7,7 @@
     'category': 'Marketing/Events',
     'version': '1.0',
     'summary': 'Bridge module to support quiz features during "live" tracks. ',
-    'website': 'https://www.odoo.com/app/events',
+    'website': 'https://www.afenda.app/app/events',
     'depends': [
         'website_event_track_live',
         'website_event_track_quiz',
@@ -23,6 +23,6 @@
             'website_event_track_live_quiz/static/src/xml/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

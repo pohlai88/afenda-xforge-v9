@@ -129,7 +129,7 @@ class WebTourHttp(HttpCase):
             }
         })
         """
-        self.browser_js("/odoo?debug=tests", code, ready=ready, login="admin")
+        self.browser_js("/app?debug=tests", code, ready=ready, login="admin")
         if "website" in IrAsset._get_installed_addons_list():
             self.browser_js("/?debug=tests", code, ready=ready, login="admin")
 
@@ -140,7 +140,7 @@ class WebTourHttp(HttpCase):
         # Do not start any onboarding tour on startup
         admin.tour_enabled = False
 
-        # We want to boot Odoo as in real life (not loading assets for tests)
+        # We want to boot AFENDA xForge as in real life (not loading assets for tests)
         # debug will be equal to 0
         # and the **server** debug mode to False
         self.env["ir.ui.view"].create({
@@ -172,6 +172,6 @@ class WebTourHttp(HttpCase):
             }
         })
         """
-        self.browser_js("/odoo?debug=0", code, ready=ready, login="admin")
+        self.browser_js("/app?debug=0", code, ready=ready, login="admin")
         if "website" in IrAsset._get_installed_addons_list():
             self.browser_js("/?debug=0", code, ready=ready, login="admin")

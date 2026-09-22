@@ -24,7 +24,7 @@ registry.category("web_tour.tours").add("test_validate_customer_info_error", {
         },
         {
             trigger: "input[name=email]",
-            run: "edit test@odoo.com",
+            run: "edit test@afenda.app",
         },
         {
             trigger: "input[name=street]",
@@ -106,7 +106,7 @@ registry.category("web_tour.tours").add("test_checkout_b2c_carrier", {
         },
         {
             trigger: "input[name=email]",
-            run: "edit test@odoo.com",
+            run: "edit test@afenda.app",
         },
         {
             trigger: "input[name=street]",
@@ -183,7 +183,7 @@ registry.category("web_tour.tours").add("test_checkout_b2c_love_code", {
         },
         {
             trigger: "input[name=email]",
-            run: "edit test@odoo.com",
+            run: "edit test@afenda.app",
         },
         {
             trigger: "input[name=street]",
@@ -256,7 +256,7 @@ registry.category("web_tour.tours").add("test_checkout_b2b", {
         },
         {
             trigger: "input[name=email]",
-            run: "edit test@odoo.com",
+            run: "edit test@afenda.app",
         },
         {
             trigger: "input[name=street]",
@@ -312,7 +312,7 @@ registry.category("web_tour.tours").add("test_checkout_b2c_mobile_barcode", {
         },
         {
             trigger: "input[name=email]",
-            run: "edit test@odoo.com",
+            run: "edit test@afenda.app",
         },
         {
             trigger: "input[name=street]",

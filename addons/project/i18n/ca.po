@@ -33,12 +33,12 @@
 # "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-05 18:16+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/project/"
+"Language-Team: Catalan <https://translate.afenda.app/projects/odoo-19/project/"
 "ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -1761,7 +1761,7 @@ msgstr "Estat de les valoracions del client"
 #. odoo-javascript
 #: code:addons/project/static/src/xml/project_task_kanban_examples.xml:0
 msgid ""
-"Customers propose feedbacks by email; Odoo creates tasks automatically, and "
+"Customers propose feedbacks by email; AFENDA xForge creates tasks automatically, and "
 "you can\n"
 "      communicate on the task directly."
 msgstr ""
@@ -5035,11 +5035,11 @@ msgstr "L'interval ha de ser més gran que 0"
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"El model (Tipus de document d'Odoo) al que correspon aquest pseudònim. "
+"El model (Tipus de document d'AFENDA xForge) al que correspon aquest pseudònim. "
 "Qualsevol correu electrònic entrant que no sigui resposta a un registre "
 "existent, causarà la creació d'un nou registre d'aquest model (per exemple, "
 "una tasca de projecte)"
@@ -5048,10 +5048,10 @@ msgstr ""
 #: model:ir.model.fields,help:project.field_project_project__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "El nom del pseudònim de correu electrònic, per exemple, \"jobs\", si voleu "
-"obtenir els correus mitjançant <jobs@example.odoo.com>"
+"obtenir els correus mitjançant <jobs@example.afenda.app>"
 
 #. module: project
 #. odoo-python
@@ -5886,11 +5886,11 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/project/static/src/js/tours/project.js:0
 msgid ""
-"You have unsaved changes - no worries! Odoo will automatically save it as "
+"You have unsaved changes - no worries! AFENDA xForge will automatically save it as "
 "you navigate.<br/> You can discard these changes from here or manually save "
 "your task.<br/>Let's save it manually."
 msgstr ""
-"Teniu canvis sense desar - no us preocupeu! L'Odoo el desarà automàticament "
+"Teniu canvis sense desar - no us preocupeu! L'AFENDA xForge el desarà automàticament "
 "mentre navegueu.<br/> Podeu descartar aquests canvis des d'aquí o desar "
 "manualment la vostra tasca.<br/>Deseu-la manualment."
 

@@ -9,7 +9,7 @@ from odoo.tools import date_utils
 
 class MyInvoisDocumentPoS(models.Model):
     """
-    Odoo's support for consolidated invoice is limited to PoS transactions (for now).
+    AFENDA xForge's support for consolidated invoice is limited to PoS transactions (for now).
     For regular journal entries, they can easily be sent in batch to MyInvois without the need to group them into
     consolidated invoices.
 

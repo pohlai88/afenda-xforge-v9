@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:49+0000\n"
 "PO-Revision-Date: 2022-09-22 05:53+0000\n"
@@ -62,7 +62,7 @@ msgstr ""
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
-msgid "I am a simple bot, but if that's a dog, he is the cutest 😊 <br/>Congratulations, you finished this tour. You can now <b>close this chat window</b>. Enjoy discovering Odoo."
+msgid "I am a simple bot, but if that's a dog, he is the cutest 😊 <br/>Congratulations, you finished this tour. You can now <b>close this chat window</b>. Enjoy discovering AFENDA xForge."
 msgstr ""
 
 #. module: mail_bot
@@ -107,12 +107,12 @@ msgstr ""
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/res_users.py:0
-msgid "Odoo's chat helps employees collaborate efficiently. I'm here to help you discover its features."
+msgid "AFENDA xForge's chat helps employees collaborate efficiently. I'm here to help you discover its features."
 msgstr ""
 
 #. module: mail_bot
 #: model:ir.model.fields,field_description:mail_bot.field_res_users__odoobot_state
-msgid "OdooBot Status"
+msgid "AFENDA Bot Status"
 msgstr ""
 
 #. module: mail_bot
@@ -149,7 +149,7 @@ msgstr ""
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
-msgid "Sorry, I am not listening. To get someone's attention, <b>ping him</b>. Write <span class=\"o_odoobot_command\">@OdooBot</span> and select me."
+msgid "Sorry, I am not listening. To get someone's attention, <b>ping him</b>. Write <span class=\"o_odoobot_command\">@AFENDA Bot</span> and select me."
 msgstr ""
 
 #. module: mail_bot
@@ -179,7 +179,7 @@ msgstr ""
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
-msgid "Unfortunately, I'm just a bot 😞 I don't understand! If you need help discovering our product, please check <a href=\"https://www.odoo.com/documentation\" target=\"_blank\">our documentation</a> or <a href=\"https://www.odoo.com/slides\" target=\"_blank\">our videos</a>."
+msgid "Unfortunately, I'm just a bot 😞 I don't understand! If you need help discovering our product, please check <a href=\"https://www.afenda.app/documentation\" target=\"_blank\">our documentation</a> or <a href=\"https://www.afenda.app/slides\" target=\"_blank\">our videos</a>."
 msgstr ""
 
 #. module: mail_bot
@@ -190,7 +190,7 @@ msgstr ""
 #. module: mail_bot
 #. odoo-python
 #: code:addons/mail_bot/models/mail_bot.py:0
-msgid "Wow you are a natural!<br/>Ping someone with @username to grab their attention. <b>Try to ping me using</b> <span class=\"o_odoobot_command\">@OdooBot</span> in a sentence."
+msgid "Wow you are a natural!<br/>Ping someone with @username to grab their attention. <b>Try to ping me using</b> <span class=\"o_odoobot_command\">@AFENDA Bot</span> in a sentence."
 msgstr ""
 
 #. module: mail_bot

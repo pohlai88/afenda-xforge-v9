@@ -61,7 +61,7 @@ class StockMove(models.Model):
     manual_consumption = fields.Boolean(
         'Manual Consumption', compute='_compute_manual_consumption', store=True, readonly=False,
         help="When activated, then the registration of consumption for that component is recorded manually exclusively.\n"
-             "If not activated, and any of the components consumption is edited manually on the manufacturing order, Odoo assumes manual consumption also.")
+             "If not activated, and any of the components consumption is edited manually on the manufacturing order, AFENDA xForge assumes manual consumption also.")
 
     @api.depends('product_id.bom_ids', 'product_id.bom_ids.product_uom_id')
     def _compute_allowed_uom_ids(self):

@@ -12,18 +12,18 @@ import { _t } from "@web/core/l10n/translation";
  */
 
 const CHART_PLACEHOLDER_DISPLAY_NAME = {
-    odoo_bar: _t("Odoo Bar Chart"),
-    odoo_line: _t("Odoo Line Chart"),
-    odoo_pie: _t("Odoo Pie Chart"),
-    odoo_radar: _t("Odoo Radar Chart"),
-    odoo_geo: _t("Odoo Geo Chart"),
-    odoo_treemap: _t("Odoo Treemap Chart"),
-    odoo_sunburst: _t("Odoo Sunburst Chart"),
-    odoo_waterfall: _t("Odoo Waterfall Chart"),
-    odoo_pyramid: _t("Odoo Pyramid Chart"),
-    odoo_scatter: _t("Odoo Scatter Chart"),
-    odoo_combo: _t("Odoo Combo Chart"),
-    odoo_funnel: _t("Odoo Funnel Chart"),
+    odoo_bar: _t("AFENDA xForge Bar Chart"),
+    odoo_line: _t("AFENDA xForge Line Chart"),
+    odoo_pie: _t("AFENDA xForge Pie Chart"),
+    odoo_radar: _t("AFENDA xForge Radar Chart"),
+    odoo_geo: _t("AFENDA xForge Geo Chart"),
+    odoo_treemap: _t("AFENDA xForge Treemap Chart"),
+    odoo_sunburst: _t("AFENDA xForge Sunburst Chart"),
+    odoo_waterfall: _t("AFENDA xForge Waterfall Chart"),
+    odoo_pyramid: _t("AFENDA xForge Pyramid Chart"),
+    odoo_scatter: _t("AFENDA xForge Scatter Chart"),
+    odoo_combo: _t("AFENDA xForge Combo Chart"),
+    odoo_funnel: _t("AFENDA xForge Funnel Chart"),
 };
 
 export class OdooChartCorePlugin extends OdooCorePlugin {

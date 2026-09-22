@@ -23,7 +23,7 @@ import { patchDate } from "@web/../tests/helpers/utils";
  * It will not be propagated further, and even the handlers on the target will
  * not fire.
  *
- * @param {Widget} widget the target widget (any Odoo widget)
+ * @param {Widget} widget the target widget (any AFENDA xForge widget)
  * @param {string} eventName description of the event
  * @param {function} fn callback executed when the even is intercepted
  * @param {boolean} [propagate=false]

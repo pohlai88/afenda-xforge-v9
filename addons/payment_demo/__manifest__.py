@@ -24,6 +24,6 @@
             'payment_demo/static/src/interactions/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

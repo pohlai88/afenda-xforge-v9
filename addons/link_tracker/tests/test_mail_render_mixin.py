@@ -40,7 +40,7 @@ class TestMailRenderMixin(common.HttpCase):
             '<a href="https://url_with_params.com?a=b&c=d">label</a>',
             '<a href="#"></a>',
             '<a href="mailto:afunemail@somewhere.com">email label</a>',
-            '<a href="https://www.odoo.com?test=%20+3&amp;this=that">THERE > there</a>',
+            '<a href="https://www.afenda.app?test=%20+3&amp;this=that">THERE > there</a>',
             '<a >Without href</a>'
         ]
 
@@ -65,7 +65,7 @@ class TestMailRenderMixin(common.HttpCase):
                 ("label", "=", "label"),
             ],
             [("url", "=", self.base_url + '#')],
-            [("url", "=", "https://www.odoo.com?test=%20+3&this=that"), ("label", "=", "THERE > there")],  # lxml unescaped
+            [("url", "=", "https://www.afenda.app?test=%20+3&this=that"), ("label", "=", "THERE > there")],  # lxml unescaped
         ]
         trackers_to_fail = [
             [("url", "=", "https://test_542152qsdqsd.com"), ("label", "ilike", "_")],
@@ -84,49 +84,49 @@ class TestMailRenderMixin(common.HttpCase):
     @mute_logger("odoo.tests.common.requests")
     def test_shorten_links_html_different_labels(self):
         # Covers multiple additions from web_editor's convert_inline.js classToStyle
-        content = """<p>There is a <a href="https://www.odoo.com">logo.png</a> here,
-<a href="https://www.odoo.com">there</a>, and in this
-<a href="https://www.odoo.com"><!--[if mso]><img src="https://www.odoo.com/logo.png" alt="image" style="1"/><![endif]-->
-<!--[if !mso]><!--><img src="https://www.odoo.com/logo.png" style="2" alt="image"/><!--<![endif]--></a>
-and also <a href="https://www.odoo.com">
-    <p class="o_outlook_hack" style="text-align: center; margin: 0px;"><img src="https://www.odoo.com/logo.png" fakealt="image3" alt="image2's trouble"></img></p>
+        content = """<p>There is a <a href="https://www.afenda.app">logo.png</a> here,
+<a href="https://www.afenda.app">there</a>, and in this
+<a href="https://www.afenda.app"><!--[if mso]><img src="https://www.afenda.app/logo.png" alt="image" style="1"/><![endif]-->
+<!--[if !mso]><!--><img src="https://www.afenda.app/logo.png" style="2" alt="image"/><!--<![endif]--></a>
+and also <a href="https://www.afenda.app">
+    <p class="o_outlook_hack" style="text-align: center; margin: 0px;"><img src="https://www.afenda.app/logo.png" fakealt="image3" alt="image2's trouble"></img></p>
 </a>
-Single/Nested quotes are not <a href="https://www.odoo.com"><img src='https://www.odoo.com/logo.png' alt='"scary"'/></a>
-Nor escaped <a href="https://www.odoo.com">  <img src="https://www.odoo.com/logo.png" alt="ins \' ide"></a>
-Nor escaped <a href="https://www.odoo.com"> blurp <img src="https://www.odoo.com/logo.png" alt="ins \' ide"></a>
-Without matched label because inside tags are a pain and rare: <a href="https://www.odoo.com"><em>here</em></a>
-Without alt, filename is used: <a href="https://www.odoo.com"><img src="https://www.odoo.com/logo.png"></a>
-And here is the same: <a href="https://www.odoo.com"><img src="https://www.odoo.com/logo.png"></a></p>"""
+Single/Nested quotes are not <a href="https://www.afenda.app"><img src='https://www.afenda.app/logo.png' alt='"scary"'/></a>
+Nor escaped <a href="https://www.afenda.app">  <img src="https://www.afenda.app/logo.png" alt="ins \' ide"></a>
+Nor escaped <a href="https://www.afenda.app"> blurp <img src="https://www.afenda.app/logo.png" alt="ins \' ide"></a>
+Without matched label because inside tags are a pain and rare: <a href="https://www.afenda.app"><em>here</em></a>
+Without alt, filename is used: <a href="https://www.afenda.app"><img src="https://www.afenda.app/logo.png"></a>
+And here is the same: <a href="https://www.afenda.app"><img src="https://www.afenda.app/logo.png"></a></p>"""
 
         expected_pattern = re.compile(
             rf"""<p>There is a <a href="{self.base_url}/r/(\w+)+">logo.png</a> here,
 <a href="{self.base_url}/r/(\w+)+">there</a>, and in this
-<a href="{self.base_url}/r/(\w+)+"><!--\[if mso]><img src="https://www.odoo.com/logo.png" alt="image" style="1"/><!\[endif]-->
-<!--\[if !mso]><!--><img src="https://www.odoo.com/logo.png" style="2" alt="image"/><!--<!\[endif]--></a>
+<a href="{self.base_url}/r/(\w+)+"><!--\[if mso]><img src="https://www.afenda.app/logo.png" alt="image" style="1"/><!\[endif]-->
+<!--\[if !mso]><!--><img src="https://www.afenda.app/logo.png" style="2" alt="image"/><!--<!\[endif]--></a>
 and also <a href="{self.base_url}/r/(\w+)+">
-    <p class="o_outlook_hack" style="text-align: center; margin: 0px;"><img src="https://www.odoo.com/logo.png" fakealt="image3" alt="image2\'s trouble"/></p>
+    <p class="o_outlook_hack" style="text-align: center; margin: 0px;"><img src="https://www.afenda.app/logo.png" fakealt="image3" alt="image2\'s trouble"/></p>
 </a>
-Single/Nested quotes are not <a href="{self.base_url}/r/(\w+)+"><img src="https://www.odoo.com/logo.png" alt="&quot;scary&quot;"/></a>
-Nor escaped <a href="{self.base_url}/r/(\w+)+">  <img src="https://www.odoo.com/logo.png" alt="ins \' ide"/></a>
-Nor escaped <a href="{self.base_url}/r/(\w+)+"> blurp <img src="https://www.odoo.com/logo.png" alt="ins \' ide"/></a>
+Single/Nested quotes are not <a href="{self.base_url}/r/(\w+)+"><img src="https://www.afenda.app/logo.png" alt="&quot;scary&quot;"/></a>
+Nor escaped <a href="{self.base_url}/r/(\w+)+">  <img src="https://www.afenda.app/logo.png" alt="ins \' ide"/></a>
+Nor escaped <a href="{self.base_url}/r/(\w+)+"> blurp <img src="https://www.afenda.app/logo.png" alt="ins \' ide"/></a>
 Without matched label because inside tags are a pain and rare: <a href="{self.base_url}/r/(\w+)+"><em>here</em></a>
-Without alt, filename is used: <a href="{self.base_url}/r/(\w+)+"><img src="https://www.odoo.com/logo.png"/></a>
-And here is the same: <a href="{self.base_url}/r/(\w+)+"><img src="https://www.odoo.com/logo.png"/></a></p>"""
+Without alt, filename is used: <a href="{self.base_url}/r/(\w+)+"><img src="https://www.afenda.app/logo.png"/></a>
+And here is the same: <a href="{self.base_url}/r/(\w+)+"><img src="https://www.afenda.app/logo.png"/></a></p>"""
         )
 
         new_content = self.env["mail.render.mixin"]._shorten_links(content, {})
         self.assertRegex(new_content, expected_pattern)
 
         trackers_to_find = [
-            [("url", "=", "https://www.odoo.com"), ("label", "=", "logo.png")],
-            [("url", "=", "https://www.odoo.com"), ("label", "=", "there")],
-            [("url", "=", "https://www.odoo.com"), ("label", "=", "[media] image")],
-            [("url", "=", "https://www.odoo.com"), ("label", "=", "[media] image2's trouble")],
-            [("url", "=", "https://www.odoo.com"), ("label", "=", "blurp")],
-            [("url", "=", "https://www.odoo.com"), ("label", "=", '[media] "scary"')],
-            [("url", "=", "https://www.odoo.com"), ("label", "=", "[media] ins ' ide")],
-            [("url", "=", "https://www.odoo.com"), ("label", "=", False)],
-            [("url", "=", "https://www.odoo.com"), ("label", "=", "[media] logo.png")],
+            [("url", "=", "https://www.afenda.app"), ("label", "=", "logo.png")],
+            [("url", "=", "https://www.afenda.app"), ("label", "=", "there")],
+            [("url", "=", "https://www.afenda.app"), ("label", "=", "[media] image")],
+            [("url", "=", "https://www.afenda.app"), ("label", "=", "[media] image2's trouble")],
+            [("url", "=", "https://www.afenda.app"), ("label", "=", "blurp")],
+            [("url", "=", "https://www.afenda.app"), ("label", "=", '[media] "scary"')],
+            [("url", "=", "https://www.afenda.app"), ("label", "=", "[media] ins ' ide")],
+            [("url", "=", "https://www.afenda.app"), ("label", "=", False)],
+            [("url", "=", "https://www.afenda.app"), ("label", "=", "[media] logo.png")],
         ]
         for tracker_to_find in trackers_to_find:
             with self.subTest(tracker_to_find=tracker_to_find):
@@ -157,12 +157,12 @@ And here is the same: <a href="{self.base_url}/r/(\w+)+"><img src="https://www.o
     def test_shorten_links_html_including_base_url(self):
         content = f"""<p>
 This is a link: <a href="https://www.worldcommunitygrid.org">https://www.worldcommunitygrid.org</a><br/>
-This is another: <a href="{self.base_url}/odoo?debug=1&more=2">{self.base_url}</a><br/>
+This is another: <a href="{self.base_url}/app?debug=1&more=2">{self.base_url}</a><br/>
 And a third: <a href="{self.base_url}">Here</a>
 And a forth: <a href="{self.base_url}">Here</a>
 And a fifth: <a href="{self.base_url}">Here too</a>
-And a 6th: <a href="/odoo">Here2</a><br>
-And a 7th: <a href="{self.base_url}/odoo">Here2</a><br>
+And a 6th: <a href="/app">Here2</a><br>
+And a 7th: <a href="{self.base_url}/app">Here2</a><br>
 And a last, more complex: <a href="https://boinc.berkeley.edu/forum_thread.php?id=14544&postid=106833">There!</a>
 </p>"""
 
@@ -213,7 +213,7 @@ And a last, more complex: <a href="{self.base_url}/r/(\w+)">There!</a>
         self.assertRegex(created_short_url, "{base_url}/r/[\\w]+".format(base_url=self.base_url))
 
         new_content = self.env["mail.render.mixin"]._shorten_links(
-            f'Reusing this old <a href="{created_short_url}">link</a> with a new <a href="https://odoo.com">one</a>', {}
+            f'Reusing this old <a href="{created_short_url}">link</a> with a new <a href="https://afenda.app">one</a>', {}
         )
         expected = re.compile(
             rf'Reusing this old <a href="{created_short_url}">link</a> with a new <a href="{self.base_url}/r/\w+">one</a>'
@@ -224,7 +224,7 @@ And a last, more complex: <a href="{self.base_url}/r/(\w+)">There!</a>
     def test_shorten_links_text_including_base_url(self):
         content = f"""
 This is a link: https://www.worldcommunitygrid.org
-This is another: {self.base_url}/odoo?debug=1&more=2
+This is another: {self.base_url}/app?debug=1&more=2
 A third: {self.base_url}
 A forth: {self.base_url}
 And a last, with question mark: https://boinc.berkeley.edu/forum_thread.php?id=14544&postid=106833"""
@@ -254,7 +254,7 @@ And a last, with question mark: {self.base_url}/r/(\w+)"""
         self.assertRegex(created_short_url, rf"{self.base_url}/r/\w+")
 
         new_content = self.env["mail.render.mixin"]._shorten_links_text(
-            f'Reusing this old link {created_short_url} with a new one, https://odoo.com</a>', {}
+            f'Reusing this old link {created_short_url} with a new one, https://afenda.app</a>', {}
         )
         expected = re.compile(rf'Reusing this old link {created_short_url} with a new one, {self.base_url}/r/\w+')
         self.assertRegex(new_content, expected)

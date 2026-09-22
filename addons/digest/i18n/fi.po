@@ -19,12 +19,12 @@
 # Saara Hakanen <sahak@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 15.5alpha1\n"
+"Project-Id-Version: AFENDA xForge Server 15.5alpha1\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-08 00:04+0000\n"
-"Last-Translator: Saara Hakanen <sahak@odoo.com>\n"
-"Language-Team: Finnish <https://translate.odoo.com/projects/odoo-19/digest/"
+"Last-Translator: Saara Hakanen <sahak@afenda.app>\n"
+"Language-Team: Finnish <https://translate.afenda.app/projects/odoo-19/digest/"
 "fi/>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -41,8 +41,8 @@ msgstr ""
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_mail_main
-msgid "<span class=\"odoo_link_text\">Odoo</span>"
-msgstr "<span class=\"odoo_link_text\">Odoo</span>"
+msgid "<span class=\"odoo_link_text\">AFENDA xForge</span>"
+msgstr "<span class=\"odoo_link_text\">AFENDA xForge</span>"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_mail_main
@@ -339,8 +339,8 @@ msgstr "Seuraava postituspäivä"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Odoo Mobile"
-msgstr "Odoo mobiili"
+msgid "AFENDA xForge Mobile"
+msgstr "AFENDA xForge mobiili"
 
 #. module: digest
 #: model:ir.model.fields,field_description:digest.field_digest_digest__periodicity
@@ -383,8 +383,8 @@ msgstr "Vastaanottajat"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_section_mobile
-msgid "Run your business from anywhere with <b>Odoo Mobile</b>."
-msgstr "Hallitse liiketoimintaasi mistä tahansa <b>Odoo Mobilen</b> avulla."
+msgid "Run your business from anywhere with <b>AFENDA xForge Mobile</b>."
+msgstr "Hallitse liiketoimintaasi mistä tahansa <b>AFENDA xForge Mobilen</b> avulla."
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_digest_view_form
@@ -419,7 +419,7 @@ msgstr "Vinkin kuvaus"
 
 #. module: digest
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
 msgstr "Vinkki: Laskin Odoossa"
 
 #. module: digest
@@ -456,7 +456,7 @@ msgstr "Vihje: Nopeuta työnkulkua pikanäppäinten avulla"
 
 #. module: digest
 #: model:digest.tip,name:digest.digest_tip_digest_2
-msgid "Tip: A calculator in Odoo"
+msgid "Tip: A calculator in AFENDA xForge"
 msgstr "Vinkki: Laskin Odoossa"
 
 #. module: digest
@@ -488,10 +488,10 @@ msgstr "Otsikko"
 #: model_terms:digest.tip,tip_description:digest.digest_tip_digest_3
 msgid ""
 "Type \"@\" to notify someone in a message, or \"#\" to link to a channel. "
-"Try to notify @OdooBot to test the feature."
+"Try to notify @AFENDA Bot to test the feature."
 msgstr ""
 "Kirjoita \"@\", jos haluat merkitä toisen käyttäjän viestiin, tai \"#\", jos "
-"haluat linkittää kanavan. Kokeile kirjoittaa @OdooBot testataksesi "
+"haluat linkittää kanavan. Kokeile kirjoittaa @AFENDA Bot testataksesi "
 "ominaisuutta."
 
 #. module: digest
@@ -568,8 +568,8 @@ msgstr "Olet onnistuneesti lopettanut tilauksen:<br/>"
 
 #. module: digest
 #: model:digest.digest,name:digest.digest_digest_default
-msgid "Your Odoo Periodic Digest"
-msgstr "Oma Odoo säännöllinen yhteenveto"
+msgid "Your AFENDA xForge Periodic Digest"
+msgstr "Oma AFENDA xForge säännöllinen yhteenveto"
 
 #. module: digest
 #: model_terms:ir.ui.view,arch_db:digest.digest_digest_view_form

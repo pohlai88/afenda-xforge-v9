@@ -37,12 +37,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-04 00:50+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Polish <https://translate.odoo.com/projects/odoo-19/survey/"
+"Language-Team: Polish <https://translate.afenda.app/projects/odoo-19/survey/"
 "pl/>\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
@@ -3079,14 +3079,14 @@ msgstr "Występowanie"
 
 #. module: survey
 #: model_terms:ir.ui.view,arch_db:survey.certification_report_view_general
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "Odoo Certification"
-msgstr "Certyfikacja Odoo"
+msgid "AFENDA xForge Certification"
+msgstr "Certyfikacja AFENDA xForge"
 
 #. module: survey
 #: model:survey.question.answer,value:survey.vendor_certification_page_2_question_2_choice_5
@@ -5028,9 +5028,9 @@ msgstr "Historia komunikacji"
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
 msgid ""
-"Welcome to this Odoo certification. You will receive 2 random questions out "
+"Welcome to this AFENDA xForge certification. You will receive 2 random questions out "
 "of a pool of 3."
-msgstr "Witamy w certyfikacji Odoo. Otrzymasz 2 losowe pytania z puli 3."
+msgstr "Witamy w certyfikacji AFENDA xForge. Otrzymasz 2 losowe pytania z puli 3."
 
 #. module: survey
 #: model:survey.question,title:survey.vendor_certification_page_3_question_5
@@ -5069,8 +5069,8 @@ msgstr "Co oznacza skrót \"ODOO\"?"
 #. module: survey
 #. odoo-python
 #: code:addons/survey/models/templates/survey_survey.py:0
-msgid "What does one need to get to pass an Odoo Survey?"
-msgstr "Co trzeba mieć, aby przejść ankietę Odoo?"
+msgid "What does one need to get to pass an AFENDA xForge Survey?"
+msgstr "Co trzeba mieć, aby przejść ankietę AFENDA xForge?"
 
 #. module: survey
 #. odoo-python
@@ -5107,8 +5107,8 @@ msgstr "Kiedy jest Twoja data urodzenia?"
 #. module: survey
 #. odoo-javascript
 #: code:addons/survey/static/src/js/tours/survey_tour.js:0
-msgid "Whenever you pick an answer, Odoo saves it for you."
-msgstr "Za każdym razem, gdy wybierzesz odpowiedź, Odoo zapisze ją dla Ciebie."
+msgid "Whenever you pick an answer, AFENDA xForge saves it for you."
+msgstr "Za każdym razem, gdy wybierzesz odpowiedź, AFENDA xForge zapisze ją dla Ciebie."
 
 #. module: survey
 #: model:survey.question,title:survey.survey_feedback_p1_q1

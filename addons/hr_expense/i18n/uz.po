@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-05 02:09+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/hr_expense/"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/hr_expense/"
 "uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
@@ -531,9 +531,9 @@ msgstr "Statistika olish uchun yangi xarajatlar kiriting."
 #, fuzzy
 msgid ""
 "Create prepaid virtual and physical cards for both one-time and recurring "
-"expenses, integrated into Odoo through Stripe Issuing."
+"expenses, integrated into AFENDA xForge through Stripe Issuing."
 msgstr ""
-"Stripe Issuing orqali Odoo tizimiga integratsiyalashgan bir martalik va "
+"Stripe Issuing orqali AFENDA xForge tizimiga integratsiyalashgan bir martalik va "
 "takroriy xarajatlar uchun oldindan to‘langan virtual va jismoniy kartalarni "
 "yarating."
 
@@ -666,11 +666,11 @@ msgstr "Taqsimot tahliliy hisobi"
 #, fuzzy
 msgid ""
 "Do not keep your expense tickets in your pockets any longer. Just snap a "
-"picture of your receipt and let Odoo digitalizes it for you. The OCR and "
+"picture of your receipt and let AFENDA xForge digitalizes it for you. The OCR and "
 "Artificial Intelligence will fill the data automatically."
 msgstr ""
 "Endi xarajat chiptalarini cho‘ntagingizda saqlamang. Chekingizni rasmga "
-"oling va Odoo uni siz uchun raqamlashtirishiga ruxsat bering. OCR va Sun'iy "
+"oling va AFENDA xForge uni siz uchun raqamlashtirishiga ruxsat bering. OCR va Sun'iy "
 "intellekt ma'lumotlarni avtomatik tarzda to‘ldiradi."
 
 #. module: hr_expense
@@ -1343,9 +1343,9 @@ msgstr "Keling, xarajatlaringizga qaytaylik"
 #, fuzzy
 msgid ""
 "Link your stripe issuing account to manage company credit cards for your "
-"employees through Odoo"
+"employees through AFENDA xForge"
 msgstr ""
-"Xodimlaringiz uchun kompaniya kredit kartalarini Odoo orqali boshqarish "
+"Xodimlaringiz uchun kompaniya kredit kartalarini AFENDA xForge orqali boshqarish "
 "uchun Stripe emissiya hisobingizni ulang"
 
 #. module: hr_expense
@@ -1587,20 +1587,20 @@ msgstr "Shaxsiy xarajatlaringizdan hisoblangan raqamlar."
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
 #, fuzzy
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: hr_expense
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
 #, fuzzy
 msgid ""
-"Odoo had a look at your expense, its product, your company and the journal "
+"AFENDA xForge had a look at your expense, its product, your company and the journal "
 "but came back with empty hands.\n"
-"Give Odoo a hand to find an account by setting up an expense account.\n"
+"Give AFENDA xForge a hand to find an account by setting up an expense account.\n"
 "%(expense)s %(expense_name)s.\n"
 msgstr ""
-"Odoo sizning xarajatingizni, mahsulotingizni, kompaniyangizni va jurnalni "
+"AFENDA xForge sizning xarajatingizni, mahsulotingizni, kompaniyangizni va jurnalni "
 "ko‘rib chiqdi, lekin natija topilmadi. Xarajat hisobini o‘rnatish orqali "
 "hisobni topishda Odooga yordam bering. %(expense)s %(expense_name)s."
 
@@ -1890,11 +1890,11 @@ msgstr "Baholash"
 #, fuzzy
 msgid ""
 "Ready? You can save it manually or discard modifications from here. You "
-"don't <em>need to save</em> - Odoo will save eveyrthing for you when you "
+"don't <em>need to save</em> - AFENDA xForge will save eveyrthing for you when you "
 "navigate."
 msgstr ""
 "Tayyormisiz? Bu yerdan qo‘lda saqlashingiz yoki o‘zgartirishlarni bekor "
-"qilishingiz mumkin. <em>Saqlash</em> shart emas - Odoo navigatsiya paytida "
+"qilishingiz mumkin. <em>Saqlash</em> shart emas - AFENDA xForge navigatsiya paytida "
 "hamma narsani o‘zi saqlaydi."
 
 #. module: hr_expense
@@ -2030,8 +2030,8 @@ msgstr "Skanerlash"
 #. odoo-javascript
 #: code:addons/hr_expense/static/src/components/qrcode_action.xml:0
 #, fuzzy
-msgid "Scan this QR code to get the Odoo app:"
-msgstr "Odoo ilovasini yuklab olish uchun ushbu QR kodni skanerlang:"
+msgid "Scan this QR code to get the AFENDA xForge app:"
+msgstr "AFENDA xForge ilovasini yuklab olish uchun ushbu QR kodni skanerlang:"
 
 #. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_employee__expense_manager_id

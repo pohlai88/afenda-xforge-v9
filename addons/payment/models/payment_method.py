@@ -82,7 +82,7 @@ class PaymentMethod(models.Model):
     )
     support_refund = fields.Selection(
         string="Refund",
-        help="Refund is a feature allowing to refund customers directly from the payment in Odoo.",
+        help="Refund is a feature allowing to refund customers directly from the payment in AFENDA xForge.",
         selection=[
             ('none', "Unsupported"),
             ('full_only', "Full Only"),

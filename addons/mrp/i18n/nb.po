@@ -19,12 +19,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 14:30+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Norwegian Bokmål <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Norwegian Bokmål <https://translate.afenda.app/projects/odoo-19/"
 "mrp/nb_NO/>\n"
 "Language: nb\n"
 "MIME-Version: 1.0\n"
@@ -1891,12 +1891,12 @@ msgstr "Opprett et tilpasset regneark for dine kvalitets kontroller"
 msgid ""
 "Create operation level dependencies that will influence both planning and "
 "the status of work orders upon MO confirmation. If this feature is ticked, "
-"and nothing is specified, Odoo will assume that all operations can be "
+"and nothing is specified, AFENDA xForge will assume that all operations can be "
 "started simultaneously."
 msgstr ""
 "Opprett avhengigheter på operasjonsnivå som vil påvirke både planlegging og "
 "status på arbeidsordrer ved bekreftelse av produksjonsordre. Hvis denne "
-"funksjonen er valgt, og ingenting er spesifisert, vil Odoo anta at alle "
+"funksjonen er valgt, og ingenting er spesifisert, vil AFENDA xForge anta at alle "
 "operasjoner kan startes samtidig."
 
 #. module: mrp
@@ -2168,7 +2168,7 @@ msgstr "Detaljer"
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_mrp_routing_workcenter__cost_mode
 msgid ""
-"Determines the way Odoo calculates the cost of the operation:\n"
+"Determines the way AFENDA xForge calculates the cost of the operation:\n"
 "- Based on Actual time: the cost will be calculated based on tracked time "
 "and real employee costs.\n"
 "- Based on Estimated time: the cost will be calculated based on estimated "
@@ -2862,47 +2862,47 @@ msgstr ""
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_mrp_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the allocation "
+"If this checkbox is ticked, AFENDA xForge will automatically print the allocation "
 "report labels of a MO when it is done."
 msgstr ""
-"Hvis denne avkrysningsboksen er merket, vil Odoo automatisk skrive ut "
+"Hvis denne avkrysningsboksen er merket, vil AFENDA xForge automatisk skrive ut "
 "etikettene for tildelingsrapporten av en produksjonsordre når den er ferdig."
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_mrp_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the allocation "
+"If this checkbox is ticked, AFENDA xForge will automatically print the allocation "
 "report of a MO when it is done and has assigned moves."
 msgstr ""
-"Hvis denne avkrysningsboksen er merket, vil Odoo automatisk skrive ut "
+"Hvis denne avkrysningsboksen er merket, vil AFENDA xForge automatisk skrive ut "
 "tildelingsrapporten for en produksjonsordre når den er ferdig og har "
 "tildelte bevegelser."
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_mrp_lot
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN label "
+"If this checkbox is ticked, AFENDA xForge will automatically print the lot/SN label "
 "of a MO when it is done."
 msgstr ""
-"Hvis denne avkrysningsboksen er merket, vil Odoo automatisk skrive ut Lot/"
+"Hvis denne avkrysningsboksen er merket, vil AFENDA xForge automatisk skrive ut Lot/"
 "serienummeretiketten for en produksjonsordre når den er ferdig."
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_mrp_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the product labels "
 "of a MO when it is done."
 msgstr ""
-"Hvis denne avkrysningsboksen er merket, vil Odoo automatisk skrive ut "
+"Hvis denne avkrysningsboksen er merket, vil AFENDA xForge automatisk skrive ut "
 "produktetikettene for en produksjonsordre når den er ferdig."
 
 #. module: mrp
 #: model:ir.model.fields,help:mrp.field_stock_picking_type__auto_print_done_production_order
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the production "
+"If this checkbox is ticked, AFENDA xForge will automatically print the production "
 "order of a MO when it is done."
 msgstr ""
-"Hvis denne avkrysningsboksen er merket, vil Odoo automatisk skrive ut "
+"Hvis denne avkrysningsboksen er merket, vil AFENDA xForge automatisk skrive ut "
 "produksjonsordren for en produksjonsordre når den er ferdig."
 
 #. module: mrp
@@ -4031,13 +4031,13 @@ msgstr "OEE Mål"
 #. module: mrp
 #: model_terms:ir.ui.view,arch_db:mrp.view_picking_type_form_inherit_mrp
 msgid ""
-"Odoo opens a PDF preview by default. If you want to print instantly,\n"
+"AFENDA xForge opens a PDF preview by default. If you want to print instantly,\n"
 "                                install the IoT App on a computer that is on "
 "the same local network as the\n"
 "                                barcode operator and configure the routing "
 "of the reports."
 msgstr ""
-"Odoo åpner en PDF-forhåndsvisning som standard. Hvis du ønsker å skrive ut "
+"AFENDA xForge åpner en PDF-forhåndsvisning som standard. Hvis du ønsker å skrive ut "
 "umiddelbart,\n"
 "                                installer IoT-appen på en datamaskin som er "
 "på samme lokale nettverk som\n"
@@ -6552,11 +6552,11 @@ msgid ""
 "When activated, then the registration of consumption for that component is "
 "recorded manually exclusively.\n"
 "If not activated, and any of the components consumption is edited manually "
-"on the manufacturing order, Odoo assumes manual consumption also."
+"on the manufacturing order, AFENDA xForge assumes manual consumption also."
 msgstr ""
 "Når dette er aktivert, registreres forbruket av den komponenten manuelt "
 "eksklusivt. Hvis det ikke er aktivert, og noen av komponentene forbruk "
-"redigeres manuelt på produksjonsordren, antar Odoo også manuelt forbruk."
+"redigeres manuelt på produksjonsordren, antar AFENDA xForge også manuelt forbruk."
 
 #. module: mrp
 #: model:ir.model.fields.selection,name:mrp.selection__mrp_bom__ready_to_produce__asap
@@ -6582,12 +6582,12 @@ msgstr ""
 #. module: mrp
 #: model_terms:digest.tip,tip_description:mrp.digest_tip_mrp_0
 msgid ""
-"With the Odoo work center control panel, your worker can start work orders "
+"With the AFENDA xForge work center control panel, your worker can start work orders "
 "in the shop and follow instructions of the worksheet. Quality tests are "
 "perfectly integrated into the process. Workers can trigger feedback loops, "
 "maintenance alerts, scrap products, etc."
 msgstr ""
-"Med Odoo arbeidsstasjonens kontrollpanel kan arbeiderne starte arbeidsordrer "
+"Med AFENDA xForge arbeidsstasjonens kontrollpanel kan arbeiderne starte arbeidsordrer "
 "i verkstedet og følge instruksjonene i arbeidsarket. Kvalitetstester er "
 "perfekt integrert i prosessen. Arbeiderne kan utløse tilbakemeldingssløyfer, "
 "vedlikeholdsalarmer, skrotprodukter osv."

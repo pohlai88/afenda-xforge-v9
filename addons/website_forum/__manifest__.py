@@ -11,7 +11,7 @@
     'description': """
 Ask questions, get answers, no distractions
         """,
-    'website': 'https://www.odoo.com/app/forum',
+    'website': 'https://www.afenda.app/app/forum',
     'depends': [
         'auth_signup',
         'website_mail',
@@ -97,6 +97,6 @@ Ask questions, get answers, no distractions
             'website_forum/static/src/interactions/loader_loading.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

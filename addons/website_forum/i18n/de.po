@@ -11,12 +11,12 @@
 # "Larissa Manderfeld (lman)" <lman@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-02-20 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 17:38+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: German <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: German <https://translate.afenda.app/projects/odoo-19/"
 "website_forum/de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -3459,10 +3459,10 @@ msgstr "Die akzeptierte Antwort wurde gelöscht"
 #: model_terms:ir.ui.view,arch_db:website_forum.faq_karma
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
+"questions related to AFENDA xForge."
 msgstr ""
 "Das Ziel dieser Seite ist es, eine Wissensdatenbank zu schaffen, die Fragen "
-"zu Odoo beantwortet."
+"zu AFENDA xForge beantwortet."
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.post_description_full
@@ -4151,9 +4151,9 @@ msgstr "hier"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to configure or customize Odoo to specific business needs,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
 msgstr ""
-"wie kann man Odoo konfigurieren oder an spezifische Geschäftsanforderungen "
+"wie kann man AFENDA xForge konfigurieren oder an spezifische Geschäftsanforderungen "
 "anpassen kann,"
 
 #. module: website_forum
@@ -4165,8 +4165,8 @@ msgstr "wie man Module für die eigenen Anforderungen entwickelt,"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "how to install Odoo on a specific infrastructure,"
-msgstr "wie man Odoo in bestimmten Umgebungen installiert,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
+msgstr "wie man AFENDA xForge in bestimmten Umgebungen installiert,"
 
 #. module: website_forum
 #. odoo-javascript
@@ -4269,8 +4269,8 @@ msgstr "Beiträge"
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "specific questions about Odoo service offers, etc."
-msgstr "spezifische Fragen zu Odoo-Dienstleistungsangeboten etc."
+msgid "specific questions about AFENDA xForge service offers, etc."
+msgstr "spezifische Fragen zu AFENDA xForge-Dienstleistungsangeboten etc."
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.no_results_message
@@ -4321,8 +4321,8 @@ msgstr ""
 #. module: website_forum
 #: model_terms:forum.forum,faq:website_forum.forum_help
 #: model_terms:ir.ui.view,arch_db:website_forum.default_faq
-msgid "what's the best way to use Odoo for a specific business need,"
-msgstr "wie man Odoo am besten für eine spezifische Geschäftsanforderung nutzt,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
+msgstr "wie man AFENDA xForge am besten für eine spezifische Geschäftsanforderung nutzt,"
 
 #. module: website_forum
 #: model_terms:ir.ui.view,arch_db:website_forum.author_box

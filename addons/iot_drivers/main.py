@@ -75,12 +75,12 @@ class Manager(Thread):
 
     @helpers.require_db
     def _send_all_devices(self, server_url=None):
-        """This method send IoT Box and devices information to Odoo database
+        """This method send IoT Box and devices information to AFENDA xForge database
 
         As the server can be down or not started yet (in case of local testing),
         we retry to send the data several times with a delay between each attempt.
 
-        :param server_url: URL of the Odoo server (provided by decorator).
+        :param server_url: URL of the AFENDA xForge server (provided by decorator).
         """
         iot_box = {
             'identifier': self.identifier,

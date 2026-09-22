@@ -58,7 +58,7 @@ take a recursive form: a domain is not a valid second-level operand.
 
 Unaccent - Accent-insensitive search
 
-Odoo will use the SQL function 'unaccent' when available for the
+AFENDA xForge will use the SQL function 'unaccent' when available for the
 'ilike', 'not ilike' and '=ilike' operators, and enabled in the configuration.
 
 .. todo: The following explanation should be moved in some external

@@ -7,7 +7,7 @@
         'hr_expense',
     ],
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'data': [
         'report/hr_expense_report.xml',
     ],

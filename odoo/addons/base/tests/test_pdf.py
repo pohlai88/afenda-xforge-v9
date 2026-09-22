@@ -96,8 +96,8 @@ class TestPdf(TransactionCase):
         reader_buffer = io.BytesIO(branded_content)
         pdf_reader = pdf.PdfFileReader(reader_buffer)
         pdf_info = pdf_reader.getDocumentInfo()
-        self.assertEqual(pdf_info['/Producer'], 'Odoo')
-        self.assertEqual(pdf_info['/Creator'], 'Odoo')
+        self.assertEqual(pdf_info['/Producer'], 'AFENDA xForge')
+        self.assertEqual(pdf_info['/Creator'], 'AFENDA xForge')
         reader_buffer.close()
 
     def tearDown(self):

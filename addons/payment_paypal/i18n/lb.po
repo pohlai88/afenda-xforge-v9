@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-02-06 08:29+0000\n"
 "PO-Revision-Date: 2019-08-26 09:12+0000\n"
@@ -20,13 +20,13 @@ msgstr ""
 msgid ""
 "<br/><br/>\n"
 "                Thanks,<br/>\n"
-"                <b>The Odoo Team</b>"
+"                <b>The AFENDA xForge Team</b>"
 msgstr ""
 
 #. module: payment_paypal
 #. odoo-python
 #: code:addons/payment_paypal/models/payment_provider.py:0
-msgid "Add your PayPal account to Odoo"
+msgid "Add your PayPal account to AFENDA xForge"
 msgstr ""
 
 #. module: payment_paypal
@@ -46,7 +46,7 @@ msgid ""
 "                <br/><br/>\n"
 "                You have received a payment through PayPal.<br/>\n"
 "                Kindly follow the instructions given by PayPal to create your account.<br/>\n"
-"                Then, help us complete your Paypal credentials in Odoo.<br/><br/>"
+"                Then, help us complete your Paypal credentials in AFENDA xForge.<br/><br/>"
 msgstr ""
 
 #. module: payment_paypal

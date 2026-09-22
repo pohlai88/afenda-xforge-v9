@@ -11,6 +11,6 @@
     ],
     'installable': True,
     'auto_install': ['pos_hr', 'pos_restaurant'],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -58,7 +58,7 @@ class FacebookOptionPlugin extends Plugin {
             ["social_facebook"]
         );
         if (res) {
-            this.facebookUrl = res[0].social_facebook || "https://www.facebook.com/Odoo";
+            this.facebookUrl = res[0].social_facebook || "https://www.facebook.com/afenda";
 
             // WARNING: the call to ignoreDOMMutations is very dangerous,
             // and should be avoided in most cases (if you think you need those, ask html_editor team)

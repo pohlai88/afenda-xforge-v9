@@ -6,9 +6,9 @@
     "icon": '/account/static/description/l10n.png',
     "category": "Accounting/Localizations/Account Charts",
     "description": """
-This is the base module to manage the accounting chart for Republic of Ireland in Odoo.
+This is the base module to manage the accounting chart for Republic of Ireland in AFENDA xForge.
     """,
-    "author": "Odoo SA",
+    "author": "AFENDA xForge SA",
     "depends": [
         "account",
         "base_iban",

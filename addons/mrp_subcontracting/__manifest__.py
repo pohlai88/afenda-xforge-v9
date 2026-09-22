@@ -5,7 +5,7 @@
     'name': "MRP Subcontracting",
     'version': '0.1',
     'summary': "Subcontract Productions",
-    'website': 'https://www.odoo.com/app/manufacturing',
+    'website': 'https://www.afenda.app/app/manufacturing',
     'category': 'Supply Chain/Manufacturing',
     'depends': ['mrp'],
     'data': [
@@ -140,6 +140,6 @@
         ],
     },
     'uninstall_hook': 'uninstall_hook',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -11,12 +11,12 @@ Sri Lanka Tax Invoice
 - VAT registration tracking for companies and partners
     """,
     "category": "Accounting/Localizations",
-    "website": "https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html",
+    "website": "/docs/applications/finance/fiscal_localizations.html",
     "depends": [
         "l10n_lk",
     ],
     "version": "1.0",
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     "installable": True,
     "auto_install": ["l10n_lk"],
     "data": [

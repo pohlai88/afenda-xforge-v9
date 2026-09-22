@@ -7,7 +7,7 @@
     'version': '1.3',
     'category': 'Hidden',
     'description': """
-The kernel of Odoo, needed for all installation.
+The kernel of AFENDA xForge, needed for all installation.
 ===================================================
 """,
     'data': [
@@ -94,6 +94,6 @@ The kernel of Odoo, needed for all installation.
     'installable': True,
     'auto_install': True,
     'post_init_hook': 'post_init',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

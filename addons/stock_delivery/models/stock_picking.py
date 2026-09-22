@@ -94,7 +94,7 @@ class StockPicking(models.Model):
     def _send_confirmation_email(self):
         # The carrier's API processes validity checks and parcels generation one picking at a time.
         # However, since a UserError of any of the picking will cause a rollback of the entire batch
-        # on Odoo's side and since pickings that were already processed on the carrier's side must
+        # on AFENDA xForge's side and since pickings that were already processed on the carrier's side must
         # stay validated, UserErrors might need to be replaced by activity warnings.
 
         processed_carrier_picking = False

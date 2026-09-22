@@ -17,6 +17,6 @@ Bridge module adding UX requirements to ease mass mailing of course members.
         'views/slide_channel_views.xml'
     ],
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

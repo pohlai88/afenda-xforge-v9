@@ -6,10 +6,10 @@
         <field name="arch" type="xml">
             <form>
                 <div invisible="account_peppol_proxy_state != 'sender'">
-                    You are sending your e-invoices via Odoo with this Peppol ID <field name="account_peppol_edi_identification" class="oe_inline o_form_label" readonly="1"/>.
+                    You are sending your e-invoices via AFENDA xForge with this Peppol ID <field name="account_peppol_edi_identification" class="oe_inline o_form_label" readonly="1"/>.
                 </div>
                 <div invisible="account_peppol_proxy_state not in ('smp_registration', 'receiver')">
-                    You are sending and receiving your e-invoices via Odoo with this ID <field name="account_peppol_edi_identification" class="oe_inline o_form_label" readonly="1"/>.
+                    You are sending and receiving your e-invoices via AFENDA xForge with this ID <field name="account_peppol_edi_identification" class="oe_inline o_form_label" readonly="1"/>.
                 </div>
                 <group string="Company information">
                     <label for="account_peppol_contact_email" class="text-nowrap"/>

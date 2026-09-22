@@ -346,7 +346,7 @@ class ChatbotCase(MailCommon, chatbot_common.ChatbotCase):
                                 {
                                     "id": discuss_channel.id,
                                     "livechat_operator_id": self.partner_employee.id,
-                                    "name": "OdooBot Ernest Employee",
+                                    "name": "AFENDA Bot Ernest Employee",
                                 },
                             ],
                             "res.partner": self._filter_partners_fields(
@@ -370,7 +370,7 @@ class ChatbotCase(MailCommon, chatbot_common.ChatbotCase):
             return (channels, message_items)
         with self.assertBus(get_params=get_forward_op_bus_params):
             discuss_channel._forward_human_operator(self.step_forward_operator, users=self.user_employee)
-        self.assertEqual(discuss_channel.name, "OdooBot Ernest Employee")
+        self.assertEqual(discuss_channel.name, "AFENDA Bot Ernest Employee")
         self.assertEqual(discuss_channel.livechat_operator_id, self.partner_employee)
         self.assertEqual(discuss_channel.livechat_outcome, "no_answer")
         self.assertTrue(
@@ -532,7 +532,7 @@ class ChatbotCase(MailCommon, chatbot_common.ChatbotCase):
             },
         ])
         action = self.env.ref('im_livechat.chatbot_script_action')
-        self.start_tour(f"/odoo/action-{action.id}", 'change_chatbot_step_type', login='admin')
+        self.start_tour(f"/app/action-{action.id}", 'change_chatbot_step_type', login='admin')
         self.assertFalse(step.answer_ids, "Answers were not cleared after step_type was changed.")
         self.assertFalse(step_2.triggering_answer_ids, "Step 2 still has stale triggering answers.")
         self.assertFalse(step_3.triggering_answer_ids, "Step 3 still has stale triggering answers.")

@@ -288,7 +288,7 @@ class CalendarEvent(models.Model):
         return commands
 
     def action_mass_archive(self, recurrence_update_setting):
-        """ Delete recurrence in Odoo if in 'all_events' or in 'future_events' edge case, triggering one mail. """
+        """ Delete recurrence in AFENDA xForge if in 'all_events' or in 'future_events' edge case, triggering one mail. """
         self.ensure_one()
         google_service = GoogleCalendarService(self.env['google.service'])
         archive_future_events = recurrence_update_setting == 'future_events' and self == self.recurrence_id.base_event_id
@@ -358,11 +358,11 @@ class CalendarEvent(models.Model):
         if not self.active:
             values['status'] = 'cancelled'
         if self.user_id and self.user_id != self.env.user and not bool(self.user_id.sudo().google_calendar_token):
-            # The organizer is an Odoo user that do not sync his calendar
+            # The organizer is an AFENDA xForge user that do not sync his calendar
             values['extendedProperties']['shared']['%s_owner_id' % self.env.cr.dbname] = self.user_id.id
         elif not self.user_id:
             # We can't store on the shared properties in that case without getting a 403. It can happen when
-            # the owner is not an Odoo user: We don't store the real owner identity (mail)
+            # the owner is not an AFENDA xForge user: We don't store the real owner identity (mail)
             # If we are not the owner, we should change the post values to avoid errors because we don't have
             # write permissions
             # See https://developers.google.com/calendar/concepts/sharing

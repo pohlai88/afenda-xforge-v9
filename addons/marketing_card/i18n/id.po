@@ -8,12 +8,12 @@
 # "Nurul Aini Akrima Sabila (nuaas)" <nuaas@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:35+0000\n"
 "PO-Revision-Date: 2026-08-07 05:23+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Indonesian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Indonesian <https://translate.afenda.app/projects/odoo-19/"
 "marketing_card/id/>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
@@ -708,8 +708,8 @@ msgstr "Jumlah pesan dengan kesalahan pengiriman"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_preview
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: marketing_card
 #: model:ir.model.fields,help:marketing_card.field_card_campaign__lang
@@ -1116,13 +1116,13 @@ msgstr "contoh. CFO Chief Football Officer"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "e.g. Join Odoo Experience 2024"
-msgstr "contoh. Join Odoo Experience 2024"
+msgid "e.g. Join AFENDA xForge Experience 2024"
+msgstr "contoh. Join AFENDA xForge Experience 2024"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form
-msgid "e.g. Odoo Experience Talks"
-msgstr "contoh, Odoo Experience Talks"
+msgid "e.g. AFENDA xForge Experience Talks"
+msgstr "contoh, AFENDA xForge Experience Talks"
 
 #. module: marketing_card
 #: model_terms:ir.ui.view,arch_db:marketing_card.card_campaign_view_form

@@ -80,7 +80,7 @@ class PaymentProvider(models.Model):
             provider.available_currency_ids = [Command.set(currency.ids)]
 
     def _compute_mercado_pago_is_oauth_supported(self):
-        """Return current state of OAuth support by Odoo. To be removed in future versions."""
+        """Return current state of OAuth support by AFENDA xForge. To be removed in future versions."""
         self.mercado_pago_is_oauth_supported = True
 
     # === CONSTRAINT METHODS === #

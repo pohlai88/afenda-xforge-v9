@@ -14,7 +14,7 @@ This module aims to manage employee's attendances.
 Keeps account of the attendances of the employees on the basis of the
 actions(Check in/Check out) performed by them.
        """,
-    'website': 'https://www.odoo.com/app/employees',
+    'website': 'https://www.afenda.app/app/employees',
     'depends': ['hr', 'barcodes', 'base_geolocalize'],
     'data': [
         'data/hr_attendance_overtime_ruleset_data.xml',
@@ -92,7 +92,7 @@ actions(Check in/Check out) performed by them.
 
         ]
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
     'post_init_hook': 'post_init_hook',
     'uninstall_hook': 'uninstall_hook',

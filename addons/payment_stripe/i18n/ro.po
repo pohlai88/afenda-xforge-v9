@@ -6,12 +6,12 @@
 # Dorin Hongu <dhongu@gmail.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-07 01:19+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Romanian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Romanian <https://translate.afenda.app/projects/odoo-19/"
 "payment_stripe/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -82,11 +82,11 @@ msgstr "ID"
 #: model:ir.model.fields,help:payment_stripe.field_payment_provider__stripe_webhook_secret
 msgid ""
 "If a webhook is enabled on your Stripe account, this signing secret must be "
-"set to authenticate the messages sent from Stripe to Odoo."
+"set to authenticate the messages sent from Stripe to AFENDA xForge."
 msgstr ""
 "Dacă un webhook este activat pe contul tău Stripe, acest secret de semnare "
 "trebuie să fie setat pentru a autentifica mesajele trimise de Stripe către "
-"Odoo."
+"AFENDA xForge."
 
 #. module: payment_stripe
 #. odoo-javascript

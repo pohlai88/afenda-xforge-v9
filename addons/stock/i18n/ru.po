@@ -8,12 +8,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: AFENDA xForge Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-10 11:04+0000\n"
-"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
-"Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/stock/"
+"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@afenda.app>\n"
+"Language-Team: Russian <https://translate.afenda.app/projects/odoo-19/stock/"
 "ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -1822,11 +1822,11 @@ msgstr "До назначенной даты"
 #. module: stock
 #: model_terms:res.company,invoice_terms_html:stock.res_company_1
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
 msgstr ""
 "Приведенный ниже текст служит предложением и не влечет за собой "
-"ответственности Odoo S.A."
+"ответственности AFENDA"
 
 #. module: stock
 #: model:ir.model.fields,field_description:stock.field_stock_package__quant_ids
@@ -3001,7 +3001,7 @@ msgstr "Маршруты по умолчанию через склад"
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_orderpoint
 msgid ""
-"Define a minimum stock rule so that Odoo automatically creates requests for "
+"Define a minimum stock rule so that AFENDA xForge automatically creates requests for "
 "quotations or confirmed manufacturing orders to resupply your stock."
 msgstr ""
 "Задайте правило минимального запаса, чтобы система создавала запросы на "
@@ -3017,14 +3017,14 @@ msgstr "Создать новый склад"
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
 "Define your locations to reflect your warehouse structure and\n"
-"            organization. Odoo is able to manage physical locations\n"
+"            organization. AFENDA xForge is able to manage physical locations\n"
 "            (warehouses, shelves, bin, etc), partner locations (customers,\n"
 "            vendors) and virtual locations which are the counterpart of\n"
 "            the stock operations like the manufacturing orders\n"
 "            consumptions, inventories, etc."
 msgstr ""
 "Определите свои местоположения, чтобы отразить структуру склада и\n"
-"             организации. Odoo может управлять физическими местоположениями\n"
+"             организации. AFENDA xForge может управлять физическими местоположениями\n"
 "             (склады, полки, бункер и т. д.), места партнеров (клиенты,\n"
 "             поставщиками) и виртуальными объектами, которые являются "
 "аналогами\n"
@@ -3721,12 +3721,12 @@ msgstr "Пустые локации"
 #. module: stock
 #: model_terms:digest.tip,tip_description:stock.digest_tip_stock_0
 msgid ""
-"Enjoy a quick-paced experience with the Odoo barcode app. It is blazing fast "
+"Enjoy a quick-paced experience with the AFENDA xForge barcode app. It is blazing fast "
 "and works even without a stable internet connection. It supports all flows: "
 "inventory adjustments, batch picking, moving lots or pallets, low inventory "
 "checks, etc. Go to the \"Apps\" menu to activate the barcode interface."
 msgstr ""
-"Наслаждайтесь быстрой работой с приложением Odoo для штрих-кодов. Оно "
+"Наслаждайтесь быстрой работой с приложением AFENDA xForge для штрих-кодов. Оно "
 "работает молниеносно и даже без стабильного подключения к Интернету. Оно "
 "поддерживает все потоки: корректировку запасов, пакетную комплектацию, "
 "перемещение партий или паллет, проверку низкого уровня запасов и т.д. "
@@ -3765,15 +3765,15 @@ msgstr ""
 #. module: stock
 #: model_terms:ir.actions.act_window,help:stock.action_location_form
 msgid ""
-"Every stock operation in Odoo moves the products from one\n"
+"Every stock operation in AFENDA xForge moves the products from one\n"
 "            location to another one.  For instance, if you receive products\n"
-"            from a vendor, Odoo will move products from the Vendor\n"
+"            from a vendor, AFENDA xForge will move products from the Vendor\n"
 "            location to the Stock location. Each report can be performed on\n"
 "            physical, partner or virtual locations."
 msgstr ""
-"Каждая складская операция в Odoo перемещает товары из одного места\n"
+"Каждая складская операция в AFENDA xForge перемещает товары из одного места\n"
 "               хранения в другое. Например, если вы получаете товары \n"
-"               от поставщика, Odoo переместит товары из места хранения\n"
+"               от поставщика, AFENDA xForge переместит товары из места хранения\n"
 "               Поставщика в место хранения Склада. Каждый отчет может быть\n"
 "               выполнен по физическим, контрагентским или виртуальным "
 "местам\n"
@@ -4446,82 +4446,82 @@ msgstr "Определяет, может ли пользователь виде�
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_delivery_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the delivery slip "
+"If this checkbox is ticked, AFENDA xForge will automatically print the delivery slip "
 "of a picking when it is validated."
 msgstr ""
-"Если этот флажок отмечен, Odoo будет автоматически печатать накладную на "
+"Если этот флажок отмечен, AFENDA xForge будет автоматически печатать накладную на "
 "комплектацию, когда она будет подтверждена."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_lot_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the lot/SN labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the lot/SN labels "
 "of a picking when it is validated."
 msgstr ""
-"Если этот флажок установлен, Odoo будет автоматически печатать метки партии/"
+"Если этот флажок установлен, AFENDA xForge будет автоматически печатать метки партии/"
 "SN для комплектации при ее проверке."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_package_label
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the package label "
+"If this checkbox is ticked, AFENDA xForge will automatically print the package label "
 "when \"Put in Pack\" button is used."
 msgstr ""
-"Если этот флажок отмечен, Odoo будет автоматически печатать этикетку "
+"Если этот флажок отмечен, AFENDA xForge будет автоматически печатать этикетку "
 "упаковки при использовании кнопки \"Положить в упаковку\"."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_packages
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the packages and "
+"If this checkbox is ticked, AFENDA xForge will automatically print the packages and "
 "their contents of a picking when it is validated."
 msgstr ""
-"Если этот флажок установлен, Odoo будет автоматически печатать пакеты и их "
+"Если этот флажок установлен, AFENDA xForge будет автоматически печатать пакеты и их "
 "содержимое при проверке комплектации."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_product_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the product labels "
+"If this checkbox is ticked, AFENDA xForge will automatically print the product labels "
 "of a picking when it is validated."
 msgstr ""
-"Если этот флажок установлен, Odoo будет автоматически печатать этикетки "
+"Если этот флажок установлен, AFENDA xForge будет автоматически печатать этикетки "
 "товаров при их проверке."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report_labels
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report labels of a picking when it is validated."
 msgstr ""
-"Если этот флажок установлен, Odoo будет автоматически печатать этикетки "
+"Если этот флажок установлен, AFENDA xForge будет автоматически печатать этикетки "
 "отчета о приеме пикинга при его проверке."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically print the reception "
 "report of a picking when it is validated and has assigned moves."
 msgstr ""
-"Если этот флажок отмечен, Odoo будет автоматически печатать отчет о приеме "
+"Если этот флажок отмечен, AFENDA xForge будет автоматически печатать отчет о приеме "
 "пикинга, когда он будет подтвержден и назначены перемещения."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_print_return_slip
 msgid ""
-"If this checkbox is ticked, Odoo will automatically print the return slip of "
+"If this checkbox is ticked, AFENDA xForge will automatically print the return slip of "
 "a picking when it is validated."
 msgstr ""
-"Если этот флажок отмечен, Odoo будет автоматически печатать возвратный лист "
+"Если этот флажок отмечен, AFENDA xForge будет автоматически печатать возвратный лист "
 "пикинга при его проверке."
 
 #. module: stock
 #: model:ir.model.fields,help:stock.field_stock_picking_type__auto_show_reception_report
 msgid ""
-"If this checkbox is ticked, Odoo will automatically show the reception "
+"If this checkbox is ticked, AFENDA xForge will automatically show the reception "
 "report (if there are moves to allocate to) when validating."
 msgstr ""
-"Если этот флажок установлен, Odoo будет автоматически показывать отчет о "
+"Если этот флажок установлен, AFENDA xForge будет автоматически показывать отчет о "
 "приеме (если есть ходы, которые нужно распределить) при проверке."
 
 #. module: stock
@@ -6378,7 +6378,7 @@ msgstr "Октябрь"
 #. module: stock
 #: model_terms:ir.ui.view,arch_db:stock.view_picking_type_form
 msgid ""
-"Odoo opens a PDF preview by default. If you (Enterprise users only) want to "
+"AFENDA xForge opens a PDF preview by default. If you (Enterprise users only) want to "
 "print instantly,\n"
 "                                        install the IoT App on a computer "
 "that is on the same local network as the\n"
@@ -6386,7 +6386,7 @@ msgid ""
 "routing of the reports.\n"
 "                                        <br/>"
 msgstr ""
-"Odoo по умолчанию открывает предпросмотр PDF. Если вы хотите печатать сразу "
+"AFENDA xForge по умолчанию открывает предпросмотр PDF. Если вы хотите печатать сразу "
 "(только для пользователей Enterprise),\n"
 "                                        установите модуль IoT на компьютер, "
 "подключенный к той же локальной сети, что и оператор\n"

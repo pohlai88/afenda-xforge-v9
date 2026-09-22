@@ -35,6 +35,6 @@
             ('remove', 'pos_online_payment/static/tests/tours/customer_display_tour.js')
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

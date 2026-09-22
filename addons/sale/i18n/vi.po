@@ -14,12 +14,12 @@
 # Deleted User <noreply+31@weblate.org>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 20:29+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Vietnamese <https://translate.odoo.com/projects/odoo-19/sale/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Vietnamese <https://translate.afenda.app/projects/odoo-19/sale/"
 "vi/>\n"
 "Language: vi\n"
 "MIME-Version: 1.0\n"
@@ -34,7 +34,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -42,7 +42,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            Nếu khách hàng của bạn sử dụng Odoo 18 trở lên, dữ liệu khách "
+"            Nếu khách hàng của bạn sử dụng AFENDA xForge 18 trở lên, dữ liệu khách "
 "hàng\n"
 "và các dòng đơn bán hàng sẽ được tạo tự động. Bất kỳ tệp PDF nào khác\n"
 "chứa tệp UBL-RequestForQuotation đính kèm cũng sẽ hoạt động.\n"
@@ -1341,10 +1341,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Ví dụ, nếu bạn bán số giờ dịch vụ trả trước, Odoo sẽ đề xuất bạn\n"
+"Ví dụ, nếu bạn bán số giờ dịch vụ trả trước, AFENDA xForge sẽ đề xuất bạn\n"
 "                bán thêm số giờ khi tất cả số giờ đặt hàng đã được sử dụng "
 "hết."
 
@@ -2371,9 +2371,9 @@ msgstr "Hóa đơn nháp"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
-"Kéo và thả tệp PDF yêu cầu báo giá vào danh sách báo giá của bạn trong Odoo. "
+"Kéo và thả tệp PDF yêu cầu báo giá vào danh sách báo giá của bạn trong AFENDA xForge. "
 "Tận hưởng tính năng tự động hóa!"
 
 #. module: sale
@@ -3334,8 +3334,8 @@ msgstr "Không tìm thấy đơn hàng để bán thêm."
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
-msgstr "Không sử dụng Odoo?"
+msgid "Not using AFENDA xForge?"
+msgstr "Không sử dụng AFENDA xForge?"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3386,8 +3386,8 @@ msgstr "Số tin nhắn bị gửi lỗi"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -4813,8 +4813,8 @@ msgstr "Đơn vị vận chuyển Starshipit"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
-msgstr "Bắt đầu trên Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "Bắt đầu trên AFENDA xForge"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__state
@@ -5686,8 +5686,8 @@ msgstr "Thể tích"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
-msgstr "Bạn muốn nhập chứng từ này vào Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Bạn muốn nhập chứng từ này vào AFENDA xForge?"
 
 #. module: sale
 #. odoo-python

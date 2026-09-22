@@ -18,12 +18,12 @@
 # "Tiffany Chang (tic)" <tic@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-06 08:23+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/"
 "payment/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -48,7 +48,7 @@ msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/> These properties are set to\n"
 "                                match the behavior of providers and that of "
 "their integration with\n"
-"                                Odoo regarding this payment method. Any "
+"                                AFENDA xForge regarding this payment method. Any "
 "change may result in errors\n"
 "                                and should be tested on a test database "
 "first."
@@ -57,7 +57,7 @@ msgstr ""
 "да\n"
 "                                съответстват на поведението на доставчиците "
 "и на тяхната интеграция с\n"
-"                                Odoo за този метод на плащане. Всяка промяна "
+"                                AFENDA xForge за този метод на плащане. Всяка промяна "
 "може да доведе до грешки\n"
 "                                и трябва първо да бъде тествана в тестова "
 "база данни."
@@ -680,11 +680,11 @@ msgstr "Уловете тразакция"
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_provider__capture_manually
 msgid ""
-"Capture the amount from Odoo, when the delivery is completed.\n"
+"Capture the amount from AFENDA xForge, when the delivery is completed.\n"
 "Use this if you want to charge your customers cards only when\n"
 "you are sure you can ship the goods to them."
 msgstr ""
-"Прихванете сумата от Odoo, когато доставката е завършена.\n"
+"Прихванете сумата от AFENDA xForge, когато доставката е завършена.\n"
 "Използвайте това, ако искате да таксувате картите на клиентите си само "
 "когато\n"
 "сте сигурни, че можете да им изпратите стоките."
@@ -1698,8 +1698,8 @@ msgstr "Octopus"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__module_to_buy
-msgid "Odoo Enterprise Module"
-msgstr "Модул Odoo Enterprise"
+msgid "AFENDA xForge Enterprise Module"
+msgstr "Модул AFENDA xForge Enterprise"
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_transaction__operation__offline
@@ -2255,10 +2255,10 @@ msgstr "Кредитно известие"
 #: model:ir.model.fields,help:payment.field_payment_provider__support_refund
 msgid ""
 "Refund is a feature allowing to refund customers directly from the payment "
-"in Odoo."
+"in AFENDA xForge."
 msgstr ""
 "Възстановяването е функция, позволяваща връщане на пари на клиенти директно "
-"от плащането в Odoo."
+"от плащането в AFENDA xForge."
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form

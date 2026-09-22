@@ -7,12 +7,12 @@
 # Hanna Kharraziha <hakha@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 18.0\n"
+"Project-Id-Version: AFENDA xForge Server 18.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-12 16:10+0000\n"
-"Last-Translator: Hanna Kharraziha <hakha@odoo.com>\n"
-"Language-Team: Swedish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: Hanna Kharraziha <hakha@afenda.app>\n"
+"Language-Team: Swedish <https://translate.afenda.app/projects/odoo-19/"
 "microsoft_calendar/sv/>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
@@ -141,8 +141,8 @@ msgstr "Skapad den"
 
 #. module: microsoft_calendar
 #: model:ir.model.fields.selection,name:microsoft_calendar.selection__microsoft_calendar_account_reset__delete_policy__delete_odoo
-msgid "Delete from Odoo"
-msgstr "Ta bort från Odoo"
+msgid "Delete from AFENDA xForge"
+msgstr "Ta bort från AFENDA xForge"
 
 #. module: microsoft_calendar
 #: model:ir.model.fields.selection,name:microsoft_calendar.selection__microsoft_calendar_account_reset__delete_policy__delete_both
@@ -190,12 +190,12 @@ msgid ""
 "Due to an Outlook Calendar limitation, recurrence updates must be done "
 "directly in Outlook Calendar.\n"
 "If this recurrence is not shown in Outlook Calendar, you must delete it in "
-"Odoo Calendar and recreate it in Outlook Calendar."
+"AFENDA xForge Calendar and recreate it in Outlook Calendar."
 msgstr ""
 "På grund av en begränsning i Outlook-kalendern måste uppdateringar av "
 "återkommande göras direkt i Outlook-kalendern.\n"
 "Om denna återkommande händelse inte visas i Outlook-kalendern måste du ta "
-"bort den i Odoo Calendar och återskapa den i Outlook-kalendern."
+"bort den i AFENDA xForge Calendar och återskapa den i Outlook-kalendern."
 
 #. module: microsoft_calendar
 #. odoo-python
@@ -221,14 +221,14 @@ msgstr "Regel för Återkommande Händelse"
 #. odoo-python
 #: code:addons/microsoft_calendar/models/calendar.py:0
 msgid ""
-"For a correct synchronization between Odoo and Outlook Calendar, all "
+"For a correct synchronization between AFENDA xForge and Outlook Calendar, all "
 "attendees must have an email address. However, some events do not respect "
 "this condition. As long as the events are incorrect, the calendars will not "
 "be synchronized.\n"
 "Either update the events/attendees or archive these events %(details)s:\n"
 "%(invalid_events)s"
 msgstr ""
-"För en korrekt synkronisering mellan Odoo och Outlook-kalendern måste alla "
+"För en korrekt synkronisering mellan AFENDA xForge och Outlook-kalendern måste alla "
 "deltagare ha en e-postadress. Vissa evenemang respekterar dock inte detta "
 "villkor. Så länge händelserna är felaktiga kommer kalendrarna inte att "
 "synkroniseras.\n"
@@ -241,10 +241,10 @@ msgstr ""
 #: code:addons/microsoft_calendar/models/calendar.py:0
 msgid ""
 "For having a different organizer in your event, it is necessary that the "
-"organizer have its Odoo Calendar synced with Outlook Calendar."
+"organizer have its AFENDA xForge Calendar synced with Outlook Calendar."
 msgstr ""
 "För att ha en annan arrangör i ditt evenemang är det nödvändigt att "
-"arrangören har sin Odoo-kalender synkroniserad med Outlook-kalendern."
+"arrangören har sin AFENDA xForge-kalender synkroniserad med Outlook-kalendern."
 
 #. module: microsoft_calendar
 #: model:ir.model.fields,field_description:microsoft_calendar.field_calendar_alarm_manager__id

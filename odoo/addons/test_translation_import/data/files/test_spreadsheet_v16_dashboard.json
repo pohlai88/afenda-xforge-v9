@@ -79,12 +79,12 @@
                         "axesDesign": {
                             "x": {
                                 "title": {
-                                    "text": "Odoo Chart horizontal axis title"
+                                    "text": "AFENDA xForge Chart horizontal axis title"
                                 }
                             },
                             "y": {
                                 "title": {
-                                    "text": "Odoo Chart vertical axis title"
+                                    "text": "AFENDA xForge Chart vertical axis title"
                                 }
                             }
                         },

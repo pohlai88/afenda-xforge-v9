@@ -12,12 +12,12 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:36+0000\n"
 "PO-Revision-Date: 2026-08-05 05:29+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Uzbek <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Uzbek <https://translate.afenda.app/projects/odoo-19/"
 "point_of_sale/uz/>\n"
 "Language: uz\n"
 "MIME-Version: 1.0\n"
@@ -4709,7 +4709,7 @@ msgstr ""
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/backend/lna_checklist/lna_checklist.xml:0
-msgid "I use an Epson printer (Check supported printers in Odoo documentation)"
+msgid "I use an Epson printer (Check supported printers in AFENDA xForge documentation)"
 msgstr ""
 
 #. module: point_of_sale
@@ -5867,10 +5867,10 @@ msgstr ""
 #: code:addons/point_of_sale/static/src/customer_display/customer_display_data_service.js:0
 #, fuzzy
 msgid ""
-"Make sure there is an IoT Box subscription associated with your Odoo "
+"Make sure there is an IoT Box subscription associated with your AFENDA xForge "
 "database, then restart the IoT Box."
 msgstr ""
-"Odoo ma'lumotlar bazangiz bilan bog‘liq IoT qutisi obunasi mavjudligiga "
+"AFENDA xForge ma'lumotlar bazangiz bilan bog‘liq IoT qutisi obunasi mavjudligiga "
 "ishonch hosil qiling, so‘ngra IoT qutisini qayta ishga tushiring."
 
 #. module: point_of_sale
@@ -6635,22 +6635,22 @@ msgstr "Raqamlar to‘plami:"
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/screens/receipt_screen/receipt/order_receipt.xml:0
 #, fuzzy
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/app/components/popups/cash_move_popup/cash_move_list_popup/cash_move_list_popup.js:0
 #: code:addons/point_of_sale/static/src/app/utils/error_handlers.js:0
 #, fuzzy
-msgid "Odoo Server Error"
-msgstr "Odoo server xatosi"
+msgid "AFENDA xForge Server Error"
+msgstr "AFENDA xForge server xatosi"
 
 #. module: point_of_sale
 #: model:product.template,name:point_of_sale.product_odoo_sneakers_product_template
 #, fuzzy
-msgid "Odoo Sneakers"
-msgstr "Odoo krossovkalari"
+msgid "AFENDA xForge Sneakers"
+msgstr "AFENDA xForge krossovkalari"
 
 #. module: point_of_sale
 #. odoo-javascript
@@ -8392,9 +8392,9 @@ msgstr "Narxlarsiz asosiy chekni chop etish. Sovg‘alar uchun ishlatish mumkin.
 #, fuzzy
 msgid ""
 "Print information on the receipt to allow the customer to easily access the "
-"invoice anytime, from Odoo's portal."
+"invoice anytime, from AFENDA xForge's portal."
 msgstr ""
-"Mijoz Odoo portalidan istalgan vaqtda hisob-fakturaga oson kirishi uchun "
+"Mijoz AFENDA xForge portalidan istalgan vaqtda hisob-fakturaga oson kirishi uchun "
 "chekdagi ma'lumotlarni chop etish."
 
 #. module: point_of_sale
@@ -12033,10 +12033,10 @@ msgstr "Sinxronlanmagan buyurtma"
 #: code:addons/point_of_sale/static/src/app/utils/error_handlers.js:0
 #, fuzzy
 msgid ""
-"Until the connection is reestablished, Odoo Point of Sale will operate with "
+"Until the connection is reestablished, AFENDA xForge Point of Sale will operate with "
 "limited functionality."
 msgstr ""
-"Aloqa tiklanmaguncha, Odoo Sotuv nuqtasi cheklangan funksiyalar bilan "
+"Aloqa tiklanmaguncha, AFENDA xForge Sotuv nuqtasi cheklangan funksiyalar bilan "
 "ishlaydi."
 
 #. module: point_of_sale

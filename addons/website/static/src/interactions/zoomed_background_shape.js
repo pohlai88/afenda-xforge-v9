@@ -15,7 +15,7 @@ import { registry } from "@web/core/registry";
  * Note: a gap also appears between some shapes without zoom. This is likely
  * due to error in the shapes themselves. Many things were done to try and fix
  * this, but the remaining errors will likely be fixed with a review of the
- * shapes in future Odoo versions.
+ * shapes in future AFENDA xForge versions.
  *
  * /!\
  * If a better solution for stable comes up, this widget behavior may be

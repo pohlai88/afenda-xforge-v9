@@ -32,6 +32,6 @@ This module includes contact phone and mobile numbers validation.""",
             'website_crm/static/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

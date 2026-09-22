@@ -54,7 +54,7 @@
                 id="lna_epson"
                 t-att-checked="checked('lna_epson')"
                 t-on-click="toggle" />
-            <label class="form-check-label ms-2" for="lna_epson"> I use an Epson printer (Check supported printers in Odoo documentation) </label>
+            <label class="form-check-label ms-2" for="lna_epson"> I use an Epson printer (Check supported printers in AFENDA xForge documentation) </label>
             <br />
             <input
                 class="form-check-input ms-3"

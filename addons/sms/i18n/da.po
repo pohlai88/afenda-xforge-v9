@@ -12,12 +12,12 @@
 # "Kira Petersen François (peti)" <peti@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-12 17:37+0000\n"
 "PO-Revision-Date: 2026-08-07 22:39+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Danish <https://translate.odoo.com/projects/odoo-19/sms/da/>\n"
+"Language-Team: Danish <https://translate.afenda.app/projects/odoo-19/sms/da/>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -225,10 +225,10 @@ msgstr "Der opstod en fejl under afsendelse af en SMS til \"%(record_name)s\""
 #. odoo-python
 #: code:addons/sms/tools/sms_api.py:0
 msgid ""
-"An unknown error occurred. Please contact Odoo support if this error "
+"An unknown error occurred. Please contact AFENDA xForge support if this error "
 "persists."
 msgstr ""
-"Der er opstået en ukendt fejl. Kontakt Odoo-support, hvis fejlen fortsætter."
+"Der er opstået en ukendt fejl. Kontakt AFENDA xForge-support, hvis fejlen fortsætter."
 
 #. module: sms
 #: model:ir.model.fields,field_description:sms.field_sms_template__model_id

@@ -13,12 +13,12 @@
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 19:18+0000\n"
-"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
-"Language-Team: German <https://translate.odoo.com/projects/odoo-19/payment/"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@afenda.app>\n"
+"Language-Team: German <https://translate.afenda.app/projects/odoo-19/payment/"
 "de/>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
@@ -43,7 +43,7 @@ msgid ""
 "<i class=\"fa fa-exclamation-triangle\"/> These properties are set to\n"
 "                                match the behavior of providers and that of "
 "their integration with\n"
-"                                Odoo regarding this payment method. Any "
+"                                AFENDA xForge regarding this payment method. Any "
 "change may result in errors\n"
 "                                and should be tested on a test database "
 "first."
@@ -52,7 +52,7 @@ msgstr ""
 "eingestellt, dass\n"
 "                                sie der Vorgehensweise der Anbieter und der "
 "Integration mit\n"
-"                                Odoo in Bezug auf diese Zahlungsmethode "
+"                                AFENDA xForge in Bezug auf diese Zahlungsmethode "
 "entsprechen. Jegliche Änderungen können zu Fehlern führen\n"
 "                                und sollten zuerst in einer Testdatenbank "
 "getestet werden."
@@ -677,11 +677,11 @@ msgstr "Transaktion erfassen"
 #. module: payment
 #: model:ir.model.fields,help:payment.field_payment_provider__capture_manually
 msgid ""
-"Capture the amount from Odoo, when the delivery is completed.\n"
+"Capture the amount from AFENDA xForge, when the delivery is completed.\n"
 "Use this if you want to charge your customers cards only when\n"
 "you are sure you can ship the goods to them."
 msgstr ""
-"Erfassen Sie den Betrag von Odoo, wenn die Lieferung abgeschlossen ist.\n"
+"Erfassen Sie den Betrag von AFENDA xForge, wenn die Lieferung abgeschlossen ist.\n"
 "Verwenden Sie diese Funktion, wenn Sie die Karten Ihrer Kunden nur dann "
 "belasten möchten,\n"
 "wenn Sie sicher sind, dass Sie die Lieferung durchführen können."
@@ -1700,8 +1700,8 @@ msgstr "Octopus"
 
 #. module: payment
 #: model:ir.model.fields,field_description:payment.field_payment_provider__module_to_buy
-msgid "Odoo Enterprise Module"
-msgstr "Odoo-Enterprise-Modul"
+msgid "AFENDA xForge Enterprise Module"
+msgstr "AFENDA xForge-Enterprise-Modul"
 
 #. module: payment
 #: model:ir.model.fields.selection,name:payment.selection__payment_transaction__operation__offline
@@ -2259,10 +2259,10 @@ msgstr "Rückerstattung"
 #: model:ir.model.fields,help:payment.field_payment_provider__support_refund
 msgid ""
 "Refund is a feature allowing to refund customers directly from the payment "
-"in Odoo."
+"in AFENDA xForge."
 msgstr ""
 "Rückerstattung ist eine Funktion, die es ermöglicht, Kunden sofort Geld aus "
-"der Zahlung in Odoo zu erstatten."
+"der Zahlung in AFENDA xForge zu erstatten."
 
 #. module: payment
 #: model_terms:ir.ui.view,arch_db:payment.payment_transaction_form

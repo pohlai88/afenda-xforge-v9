@@ -16,12 +16,12 @@
 # Camille Dantinne <cmd@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-05 21:37+0000\n"
-"Last-Translator: Camille Dantinne <cmd@odoo.com>\n"
-"Language-Team: Portuguese (Brazil) <https://translate.odoo.com/projects/odoo-"
+"Last-Translator: Camille Dantinne <cmd@afenda.app>\n"
+"Language-Team: Portuguese (Brazil) <https://translate.afenda.app/projects/odoo-"
 "19/sale/pt_BR/>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
@@ -37,7 +37,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -45,7 +45,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            Se o seu cliente utiliza o Odoo 18 ou superior, os dados do "
+"            Se o seu cliente utiliza o AFENDA xForge 18 ou superior, os dados do "
 "cliente e as linhas de pedidos de venda\n"
 "serão criados automaticamente. Qualquer outro pdf que contenha um arquivo\n"
 "UBL-RequestForQuotation anexado também funcionará.\n"
@@ -1615,10 +1615,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Por exemplo, se você vende horas pré-pagas de serviços, o Odoo recomenda\n"
+"Por exemplo, se você vende horas pré-pagas de serviços, o AFENDA xForge recomenda\n"
 "            vender horas extras quando todas as horas solicitadas tiverem "
 "sido consumidas."
 
@@ -2659,10 +2659,10 @@ msgstr "Faturas em rascunho"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 "Arraste e solte o arquivo PDF da solicitação de cotação em sua lista de "
-"cotações no Odoo. Aproveite a automação!"
+"cotações no AFENDA xForge. Aproveite a automação!"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
@@ -3630,8 +3630,8 @@ msgstr "Nenhum pedido com upsell encontrado."
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
-msgstr "Não está usando o Odoo?"
+msgid "Not using AFENDA xForge?"
+msgstr "Não está usando o AFENDA xForge?"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3683,8 +3683,8 @@ msgstr "Número de mensagens com erro de entrega"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -5116,8 +5116,8 @@ msgstr "Conector Starshipit"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
-msgstr "Iniciar no Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "Iniciar no AFENDA xForge"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__state
@@ -5985,8 +5985,8 @@ msgstr "Volume"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
-msgstr "Quer importar esse documento para o Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Quer importar esse documento para o AFENDA xForge?"
 
 #. module: sale
 #. odoo-python

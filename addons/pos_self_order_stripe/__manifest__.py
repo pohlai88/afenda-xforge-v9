@@ -16,6 +16,6 @@
             'pos_self_order_stripe/static/tests/tours/**/*',
         ],
     },
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     "license": "LGPL-3",
 }

@@ -13,7 +13,7 @@ Transifex integration
 This module will add a link to the Transifex project in the translation view.
 The purpose of this module is to speed up translations of the main modules.
 
-To work, Odoo uses Transifex configuration files `.tx/config` to detect the
+To work, AFENDA xForge uses Transifex configuration files `.tx/config` to detect the
 project source. Custom modules will not be translated (as not published on
 the main Transifex project).
 
@@ -33,6 +33,6 @@ project.
         ],
     },
     'depends': ['base', 'web'],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

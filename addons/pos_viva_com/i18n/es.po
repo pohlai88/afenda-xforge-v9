@@ -6,12 +6,12 @@
 # "Noemi Pla Garcia (nopl)" <nopl@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-17 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 19:28+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Spanish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Spanish <https://translate.afenda.app/projects/odoo-19/"
 "pos_viva_com/es/>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
@@ -55,10 +55,10 @@ msgstr "Secreto de cliente"
 #. odoo-javascript
 #: code:addons/pos_viva_com/static/src/app/payment_viva_com.js:0
 msgid ""
-"Could not connect to the Odoo server, please check your internet connection "
+"Could not connect to the AFENDA xForge server, please check your internet connection "
 "and try again."
 msgstr ""
-"No se pudo conectar al servidor de Odoo, revise su conexión a internet e "
+"No se pudo conectar al servidor de AFENDA xForge, revise su conexión a internet e "
 "intente de nuevo."
 
 #. module: pos_viva_com
@@ -250,5 +250,5 @@ msgstr "recibió un mensaje para un proveedor de pago del TPV no registrado."
 #. module: pos_viva_com
 #. odoo-python
 #: code:addons/pos_viva_com/controllers/main.py:0
-msgid "received a message for a terminal not registered in Odoo: %s"
-msgstr "recibió un mensaje para un terminal no registrado en Odoo: %s"
+msgid "received a message for a terminal not registered in AFENDA xForge: %s"
+msgstr "recibió un mensaje para un terminal no registrado en AFENDA xForge: %s"

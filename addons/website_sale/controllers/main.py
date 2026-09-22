@@ -672,7 +672,7 @@ class WebsiteSale(payment_portal.PaymentPortal):
             else:
                 raise ValidationError(_("Invalid video URL provided."))
             media_create_data = [Command.create({
-                'name': video_data.get('name', 'Odoo Video'),
+                'name': video_data.get('name', 'AFENDA xForge Video'),
                 'video_url': video_data['src'],
                 'image_1920': thumbnail,
             })]

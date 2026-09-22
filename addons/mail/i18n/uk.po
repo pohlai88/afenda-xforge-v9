@@ -13,12 +13,12 @@
 # Denys Nykula <nykula@ukr.net>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 19:07+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Ukrainian <https://translate.odoo.com/projects/odoo-19/mail/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Ukrainian <https://translate.afenda.app/projects/odoo-19/mail/"
 "uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -50,13 +50,13 @@ msgid ""
 "            <p class=\"o_view_nocontent_smiling_face\">\n"
 "                Add addresses to the Allowed List\n"
 "            </p><p>\n"
-"                To protect you from spam and reply loops, Odoo automatically "
+"                To protect you from spam and reply loops, AFENDA xForge automatically "
 "blocks emails\n"
 "                coming to your gateway past a threshold of <b>%(threshold)i</"
 "b> emails every <b>%(minutes)i</b>\n"
 "                minutes. If there are some addresses from which you need to "
 "receive very frequent\n"
-"                updates, you can however add them below and Odoo will let "
+"                updates, you can however add them below and AFENDA xForge will let "
 "them go through.\n"
 "            </p>"
 msgstr ""
@@ -64,13 +64,13 @@ msgstr ""
 "            <p class=\"o_view_nocontent_smiling_face\">\n"
 "                Додайте адреси до списку дозволених\n"
 "            </p><p>\n"
-"                Щоб захистити вас від спаму та циклів відповідей, Odoo "
+"                Щоб захистити вас від спаму та циклів відповідей, AFENDA xForge "
 "автоматично блокує електронні листи, \n"
 "які надходять на ваш шлюз після порогу <b>%(threshold)i</b> листів кожні <b>%"
 "(minutes)i</b>\n"
 "                хвилин. Якщо є адреси, з яких вам потрібно отримувати дуже "
 "часті \n"
-"оновлення, ви можете додати їх нижче, і Odoo дозволить їм пройти.\n"
+"оновлення, ви можете додати їх нижче, і AFENDA xForge дозволить їм пройти.\n"
 "            </p>"
 
 #. module: mail
@@ -5571,10 +5571,10 @@ msgstr ""
 #. module: mail
 #: model:ir.model.fields,help:mail.field_res_config_settings__alias_domain_id
 msgid ""
-"If you have setup a catch-all email domain redirected to the Odoo server, "
+"If you have setup a catch-all email domain redirected to the AFENDA xForge server, "
 "enter the domain name here."
 msgstr ""
-"Якщо ви встановили домен для всіх, що переадресовується на сервер Odoo, "
+"Якщо ви встановили домен для всіх, що переадресовується на сервер AFENDA xForge, "
 "введіть ім'я домену тут."
 
 #. module: mail
@@ -5640,8 +5640,8 @@ msgstr "В %(country)s"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__res_users__notification_type__inbox
-msgid "In Odoo"
-msgstr "В Odoo"
+msgid "In AFENDA xForge"
+msgstr "В AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_compose_message__scheduled_date
@@ -5749,7 +5749,7 @@ msgstr "Встановити"
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/web/messaging_menu_patch.js:0
-msgid "Install Odoo"
+msgid "Install AFENDA xForge"
 msgstr ""
 
 #. module: mail
@@ -6143,14 +6143,14 @@ msgid ""
 "browser will \n"
 "          keep the private key secret and use it for decrypting the payload\n"
 "- auth: The auth value should be treated as a secret and not shared outside "
-"of Odoo"
+"of AFENDA xForge"
 msgstr ""
 "Це стосується клавіш браузера, які використовуються сповіщенням: \n"
 "- p256dh: Це відкритий ключ підписки, створений браузером. Браузер "
 "зберігатиме секретний ключ\n"
 " та використовуватиме його для розшифровки корисного навантаження\n"
 "- auth: Значення автентифікації слід розглядати як секрет і не "
-"розповсюджувати за межами Odoo"
+"розповсюджувати за межами AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_tracking_duration_mixin__duration_tracking
@@ -8112,20 +8112,20 @@ msgstr "OS"
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_layout
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_light
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will not send notifications on this device."
-msgstr "Odoo не буде надсилати сповіщення на цей пристрій."
+msgid "AFENDA xForge will not send notifications on this device."
+msgstr "AFENDA xForge не буде надсилати сповіщення на цей пристрій."
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will send notifications on this device!"
-msgstr "Odoo буде надсилати сповіщення на цей пристрій!"
+msgid "AFENDA xForge will send notifications on this device!"
+msgstr "AFENDA xForge буде надсилати сповіщення на цей пристрій!"
 
 #. module: mail
 #. odoo-javascript
@@ -8251,8 +8251,8 @@ msgstr "Можна змінити тільки спеціальні моделі
 
 #. module: mail
 #: model:ir.model.constraint,message:mail.constraint_res_users_notification_type
-msgid "Only internal user can receive notifications in Odoo"
-msgstr "Тільки внутрішній користувач може отримувати сповіщення в Odoo"
+msgid "Only internal user can receive notifications in AFENDA xForge"
+msgstr "Тільки внутрішній користувач може отримувати сповіщення в AFENDA xForge"
 
 #. module: mail
 #. odoo-python
@@ -8978,7 +8978,7 @@ msgstr "Зачекайте поки завантажиться файл."
 msgid ""
 "Policy on how to handle Chatter notifications:\n"
 "- By Emails: notifications are sent to your email address\n"
-"- In Odoo: notifications appear in your Odoo Inbox"
+"- In AFENDA xForge: notifications appear in your AFENDA xForge Inbox"
 msgstr ""
 
 #. module: mail
@@ -9337,8 +9337,8 @@ msgstr "Причина"
 
 #. module: mail
 #: model:res.groups,name:mail.group_mail_notification_type_inbox
-msgid "Receive notifications in Odoo"
-msgstr "Отримувати сповіщення в Odoo"
+msgid "Receive notifications in AFENDA xForge"
+msgstr "Отримувати сповіщення в AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__mail_mail__state__received
@@ -11307,11 +11307,11 @@ msgstr ""
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_alias__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Модель (тип документу Odoo), до якої відповідає цей псевдонім. Будь-яка "
+"Модель (тип документу AFENDA xForge), до якої відповідає цей псевдонім. Будь-яка "
 "вхідна електронна пошта, яка не відповідає існуючому запису, призведе до "
 "створення нового запису цієї моделі (наприклад, завдання проекту)"
 
@@ -11321,10 +11321,10 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "Ім'я псевдоніма електронної пошти, наприклад, 'jobs', якщо ви хочете "
-"отримувати повідомлення електронної пошти на <jobs@example.odoo.com>"
+"отримувати повідомлення електронної пошти на <jobs@example.afenda.app>"
 
 #. module: mail
 #. odoo-python
@@ -11587,11 +11587,11 @@ msgstr ""
 msgid ""
 "This option permanently removes any track of email after it's been sent, "
 "including from the Technical menu in the Settings, in order to preserve "
-"storage space of your Odoo database."
+"storage space of your AFENDA xForge database."
 msgstr ""
 "Ця опція назавжди вилучає будь-який запис електронного листа після того, як "
 "його буде надіслано, включно з Технічного меню у Налаштуваннях, щоб зберегти "
-"місце для зберігання вашої бази даних Odoo."
+"місце для зберігання вашої бази даних AFENDA xForge."
 
 #. module: mail
 #. odoo-javascript
@@ -12645,12 +12645,12 @@ msgstr ""
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.odoo.com)."
+"email server (@mycompany.afenda.app)."
 msgstr ""
 "Використання власного сервера електронної пошти потрібне для надсилання та "
 "отримання електронних листів у версії спільноти та версії Enterprise. "
 "Інтернет-користувачі вже користуються готовим до використання електронним "
-"сервером (@ mycompany.odoo.com)."
+"сервером (@ mycompany.afenda.app)."
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

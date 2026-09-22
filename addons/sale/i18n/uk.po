@@ -12,12 +12,12 @@
 # Vlad Patenko <vlad.patenko@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-03 13:40+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Ukrainian <https://translate.odoo.com/projects/odoo-19/sale/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Ukrainian <https://translate.afenda.app/projects/odoo-19/sale/"
 "uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -1179,10 +1179,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Наприклад, якщо ви продаєте попередньо оплачені години послуг, Odoo "
+"Наприклад, якщо ви продаєте попередньо оплачені години послуг, AFENDA xForge "
 "рекомендує вам \n"
 "продавати додаткові години, коли всі замовлені години будуть витрачені."
 
@@ -2205,7 +2205,7 @@ msgstr "Чорнові рахунки"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 
 #. module: sale
@@ -3167,7 +3167,7 @@ msgstr "Не знайдено замовлень для створення до�
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
+msgid "Not using AFENDA xForge?"
 msgstr ""
 
 #. module: sale
@@ -3220,8 +3220,8 @@ msgstr "Кількість повідомлень з помилковою дст
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -4642,7 +4642,7 @@ msgstr ""
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
+msgid "Start on AFENDA xForge"
 msgstr ""
 
 #. module: sale
@@ -5497,7 +5497,7 @@ msgstr "Об'єм"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
 msgstr ""
 
 #. module: sale

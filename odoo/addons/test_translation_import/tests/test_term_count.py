@@ -479,8 +479,8 @@ class TestTranslationFlow(common.TransactionCase):
             'Chart vertical axis title',
             'Scorecard title',
             'Opportunities',
-            'Odoo Chart horizontal axis title',
-            'Odoo Chart vertical axis title'
+            'AFENDA xForge Chart horizontal axis title',
+            'AFENDA xForge Chart vertical axis title'
         })
 
     def test_export_records(self):

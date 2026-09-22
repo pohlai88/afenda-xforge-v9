@@ -699,7 +699,7 @@ class TestEventNotifications(CalendarMailCommon):
             'recurrency': True,
             'rrule_type': 'daily',
             'count': 3,
-            'location': 'Odoo S.A.',
+            'location': 'AFENDA xForge S.A.',
             'privacy': 'public',
             'show_as': 'busy',
         })

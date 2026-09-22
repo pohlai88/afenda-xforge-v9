@@ -9,12 +9,12 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-03 18:26+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/payment_razorpay/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -42,8 +42,8 @@ msgstr "處理付款過程中發生錯誤，請再試一次。"
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.authorization_error
-msgid "An error occurred while linking your Razorpay account with Odoo."
-msgstr "將你的 Razorpay 帳戶連結至 Odoo 時，發生錯誤。"
+msgid "An error occurred while linking your Razorpay account with AFENDA xForge."
+msgstr "將你的 Razorpay 帳戶連結至 AFENDA xForge 時，發生錯誤。"
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay
@@ -252,8 +252,8 @@ msgstr "此服務商已連結至你的 Razorpay 帳戶。"
 #. module: payment_razorpay
 #. odoo-python
 #: code:addons/payment_razorpay/models/payment_transaction.py:0
-msgid "Transactions processed by Razorpay can't be manually voided from Odoo."
-msgstr "由 Razorpay 處理的交易無法在 Odoo 中手動取消。"
+msgid "Transactions processed by Razorpay can't be manually voided from AFENDA xForge."
+msgstr "由 Razorpay 處理的交易無法在 AFENDA xForge 中手動取消。"
 
 #. module: payment_razorpay
 #: model_terms:ir.ui.view,arch_db:payment_razorpay.payment_provider_form_razorpay

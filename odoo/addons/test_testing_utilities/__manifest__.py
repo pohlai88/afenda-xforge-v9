@@ -12,6 +12,6 @@ supposed to do
         'security/ir.model.access.csv',
         'views/menu.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -29,7 +29,7 @@ class XenditCommon(PaymentCommon):
             'description': cls.reference,
             'external_id': cls.reference,
             'paid_amount': cls.amount,
-            'merchant_name': 'Odoo',
+            'merchant_name': 'AFENDA xForge',
             'initial_amount': cls.amount,
             'payment_method': 'BANK_TRANSFER',
             'payment_channel': 'BNI',

@@ -7,7 +7,7 @@
     'category': 'Supply Chain/Purchase',
     'sequence': 35,
     'summary': 'Purchase orders, tenders and agreements',
-    'website': 'https://www.odoo.com/app/purchase',
+    'website': 'https://www.afenda.app/app/purchase',
     'depends': ['account'],
     'data': [
         'security/purchase_security.xml',
@@ -57,6 +57,6 @@
             'purchase/static/tests/tours/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

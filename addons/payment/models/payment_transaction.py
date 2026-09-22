@@ -818,7 +818,7 @@ class PaymentTransaction(models.Model):
             self._set_error(error_message)
             return
 
-        # Negate the amount for refunds, as refunds have a negative amount in Odoo, but all
+        # Negate the amount for refunds, as refunds have a negative amount in AFENDA xForge, but all
         # providers send a positive one.
         if self.operation == 'refund':
             amount = -amount

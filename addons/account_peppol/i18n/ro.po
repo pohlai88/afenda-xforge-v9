@@ -8,12 +8,12 @@
 # Odoo Translation Bot <c3p@odoo.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.4\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.4\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-24 17:38+0000\n"
 "PO-Revision-Date: 2026-08-02 18:29+0000\n"
-"Last-Translator: Odoo Translation Bot <c3p@odoo.com>\n"
-"Language-Team: Romanian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: AFENDA xForge Translation Bot <c3p@afenda.app>\n"
+"Language-Team: Romanian <https://translate.afenda.app/projects/odoo-19/"
 "account_peppol/ro/>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -138,7 +138,7 @@ msgid ""
 "                                    </span>\n"
 "                                    <div style=\"margin-bottom: 5px; margin-"
 "top: 18px;\">\n"
-"                                        <a t-attf-href=\"/odoo/accounting/\" "
+"                                        <a t-attf-href=\"/app/accounting/\" "
 "target=\"_blank\" t-attf-style=\"padding: 8px 12px; font-size: 12px; color: "
 "{{ object.email_primary_color or '#FFFFFF' }}; text-decoration: none !"
 "important; font-weight: 400; background-color: "
@@ -182,12 +182,12 @@ msgid ""
 "\n"
 "                                    <p>You can now <strong>send<t t-"
 "if=\"object.account_peppol_proxy_state == 'receiver'\"> and receive</t></"
-"strong> electronic invoices via Odoo — completely free of charge.</p>\n"
+"strong> electronic invoices via AFENDA xForge — completely free of charge.</p>\n"
 "\n"
 "                                    <p>Best regards,</p>\n"
 "\n"
 "                                    <p style=\"margin-bottom: 24px;\">The "
-"Odoo Team</p>\n"
+"AFENDA xForge Team</p>\n"
 "                                </td>\n"
 "                            </tr>\n"
 "                        </table>\n"
@@ -224,7 +224,7 @@ msgstr ""
 "                                    </span>\n"
 "                                    <div style=\"margin-bottom: 5px; margin-"
 "top: 18px;\">\n"
-"                                        <a t-attf-href=\"/odoo/accounting/\" "
+"                                        <a t-attf-href=\"/app/accounting/\" "
 "target=\"_blank\" t-attf-style=\"padding: 8px 12px; font-size: 12px; color: {"
 "{ object.email_primary_color or '#FFFFFF' }}; text-decoration: none "
 "!important; font-weight: 400; background-color: {{ "
@@ -268,12 +268,12 @@ msgstr ""
 "\n"
 "                                    <p>Acum puteți<strong>să trimiteți<t t-"
 "if=\"object.account_peppol_proxy_state == 'receiver'\"> și să primiți</t></"
-"strong> facturi electronice prin Odoo - complet gratui.</p>\n"
+"strong> facturi electronice prin AFENDA xForge - complet gratui.</p>\n"
 "\n"
 "                                    <p>Cu stimă,</p>\n"
 "\n"
 "                                    <p style=\"margin-bottom: 24px;\">Echipa "
-"Odoo</p>\n"
+"AFENDA xForge</p>\n"
 "                                </td>\n"
 "                            </tr>\n"
 "                        </table>\n"
@@ -1032,8 +1032,8 @@ msgstr "Au apărut erori la crearea documentului EDI (format: %s):"
 #. module: account_peppol
 #. odoo-python
 #: code:addons/account_peppol/tools/peppol_iap_connector.py:0
-msgid "Failed to connect to Odoo Peppol Proxy."
-msgstr "Conectarea la Odoo Peppol Proxy a eșuat."
+msgid "Failed to connect to AFENDA xForge Peppol Proxy."
+msgstr "Conectarea la AFENDA xForge Peppol Proxy a eșuat."
 
 #. module: account_peppol
 #. odoo-python
@@ -1060,8 +1060,8 @@ msgstr ""
 #. module: account_peppol
 #. odoo-javascript
 #: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "Free on Odoo"
-msgstr "Gratuit pe Odoo"
+msgid "Free on AFENDA xForge"
+msgstr "Gratuit pe AFENDA xForge"
 
 #. module: account_peppol
 #. odoo-javascript
@@ -1077,8 +1077,8 @@ msgstr "Am înţeles !"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
-msgid "I accept that Odoo may process my e-invoices,"
-msgstr "Accept ca Odoo să mi proceseze facturile electronice,"
+msgid "I accept that AFENDA xForge may process my e-invoices,"
+msgstr "Accept ca AFENDA xForge să mi proceseze facturile electronice,"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
@@ -1271,19 +1271,19 @@ msgstr ""
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.mail_notification_layout_with_responsible_signature_and_peppol
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: account_peppol
 #: model:ir.model.fields.selection,name:account_peppol.selection__res_partner__peppol_eas__odemo
-msgid "Odoo Demo ID"
-msgstr "ID-ul demo-ului Odoo"
+msgid "AFENDA xForge Demo ID"
+msgstr "ID-ul demo-ului AFENDA xForge"
 
 #. module: account_peppol
 #. odoo-javascript
 #: code:addons/account_peppol/static/src/components/peppol_info/peppol_info.xml:0
-msgid "Odoo keeps you up to date with the new regulation."
-msgstr "Odoo te ține la curent cu noile reglementări."
+msgid "AFENDA xForge keeps you up to date with the new regulation."
+msgstr "AFENDA xForge te ține la curent cu noile reglementări."
 
 #. module: account_peppol
 #. odoo-python
@@ -1625,12 +1625,12 @@ msgstr "Email contact principal"
 msgid ""
 "Primary contact email for Peppol connection related communications and "
 "notifications.\n"
-"In particular, this email is used by Odoo to reconnect your Peppol account "
+"In particular, this email is used by AFENDA xForge to reconnect your Peppol account "
 "in case of database change."
 msgstr ""
 "Email contact principal pentru comunicații și notificări legate de "
 "conexiunea Peppol.\n"
-"În special, acest email este folosit de Odoo pentru a reconecta contul tău "
+"În special, acest email este folosit de AFENDA xForge pentru a reconecta contul tău "
 "Peppol în cazul unei schimbări a bazei de date."
 
 #. module: account_peppol
@@ -1642,10 +1642,10 @@ msgstr "Tip Proxy"
 #. odoo-python
 #: code:addons/account_peppol/exceptions.py:0
 msgid ""
-"Proxy error, please contact Odoo (missing \"%s\" - please make sure that it "
+"Proxy error, please contact AFENDA xForge (missing \"%s\" - please make sure that it "
 "was loaded from the configuration panel)"
 msgstr ""
-"Eroare proxy, te rugăm să contactezi Odoo (lipsă \"%s\" - te rugăm să te "
+"Eroare proxy, te rugăm să contactezi AFENDA xForge (lipsă \"%s\" - te rugăm să te "
 "asiguri că a fost încărcat din panoul de configurare)"
 
 #. module: account_peppol
@@ -1660,8 +1660,8 @@ msgstr "Pregătit de trimis"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_config_wizard_form
-msgid "Receive your electronic invoices in Odoo"
-msgstr "Primește facturile electronice în Odoo"
+msgid "Receive your electronic invoices in AFENDA xForge"
+msgstr "Primește facturile electronice în AFENDA xForge"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
@@ -1680,8 +1680,8 @@ msgstr "Înregistrează această companie pe Peppol"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
-msgid "Register with Odoo"
-msgstr "Înregistrează-te cu Odoo"
+msgid "Register with AFENDA xForge"
+msgstr "Înregistrează-te cu AFENDA xForge"
 
 #. module: account_peppol
 #. odoo-python
@@ -1808,12 +1808,12 @@ msgid ""
 "Some service support migration keys. If this is your case you can enter your "
 "migration key below.\n"
 "                            If not, you should de-register from your current "
-"service provider and register with Odoo afterward."
+"service provider and register with AFENDA xForge afterward."
 msgstr ""
 "Unele servicii suportă chei de migrare. Dacă acesta este cazul tău, poți "
 "introduce cheia de migrare mai jos.\n"
 "                            Dacă nu, ar trebui să te deînregistrezi de la "
-"furnizorul curent de servicii și să te înregistrezi cu Odoo după."
+"furnizorul curent de servicii și să te înregistrezi cu AFENDA xForge după."
 
 #. module: account_peppol
 #. odoo-python
@@ -1830,12 +1830,12 @@ msgstr "Test"
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_registration_form
 msgid ""
 "Test mode allows sending e-invoices through the test Peppol network.<br/>\n"
-"                            By clicking the button below I accept that Odoo "
+"                            By clicking the button below I accept that AFENDA xForge "
 "may process my e-invoices."
 msgstr ""
 "Modul test permite trimiterea facturilor electronice prin rețeaua de test "
 "Peppol.<br/>\n"
-"                            Făcând clic pe butonul de mai jos accept că Odoo "
+"                            Făcând clic pe butonul de mai jos accept că AFENDA xForge "
 "poate procesa facturile mele electronice."
 
 #. module: account_peppol
@@ -2427,8 +2427,8 @@ msgstr "Nu ești autorizat să schimbi adresa de email de contact."
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_config_wizard_form
 msgid ""
-"You are sending and receiving your e-invoices via Odoo with this Peppol ID"
-msgstr "Trimiți și primești facturile electronice prin Odoo cu acest ID Peppol"
+"You are sending and receiving your e-invoices via AFENDA xForge with this Peppol ID"
+msgstr "Trimiți și primești facturile electronice prin AFENDA xForge cu acest ID Peppol"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form
@@ -2437,8 +2437,8 @@ msgstr "Trimiți de la"
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.peppol_config_wizard_form
-msgid "You are sending your e-invoices via Odoo with this Peppol ID"
-msgstr "Trimiți facturile electronice prin Odoo cu acest ID Peppol"
+msgid "You are sending your e-invoices via AFENDA xForge with this Peppol ID"
+msgstr "Trimiți facturile electronice prin AFENDA xForge cu acest ID Peppol"
 
 #. module: account_peppol
 #. odoo-python
@@ -2536,10 +2536,10 @@ msgstr ""
 #: code:addons/account_peppol/wizard/peppol_registration.py:0
 msgid ""
 "Your company is already registered on an Access Point (%s) for receiving "
-"invoices. We will register you on Odoo as a sender only."
+"invoices. We will register you on AFENDA xForge as a sender only."
 msgstr ""
 "Compania ta este deja înregistrată pe un Access Point (%s) pentru primirea "
-"facturilor. Te vom înregistra pe Odoo doar ca expeditor."
+"facturilor. Te vom înregistra pe AFENDA xForge doar ca expeditor."
 
 #. module: account_peppol
 #: model_terms:ir.ui.view,arch_db:account_peppol.res_config_settings_view_form

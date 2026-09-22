@@ -76,7 +76,7 @@ def _db_kpi_summary(database, api_key):
     Retrieve the KPI summary from a single database.
 
     This function connects to the given database, verifies the API key,
-    ensures the database version matches the current Odoo release, and
+    ensures the database version matches the current AFENDA xForge release, and
     calls all registered KPI providers.
 
     :param str database: The name of the database
@@ -153,7 +153,7 @@ class KpiController(Controller):
         The result of this call will only include the databases:
             - that have been found on this server
             - where the provided API key could be verified
-            - that are on the same Odoo version as the current Odoo
+            - that are on the same AFENDA xForge version as the current AFENDA xForge
 
         Databases that don't match one of these points won't be included in the result,
         and should be contacted separately via RPC calls.

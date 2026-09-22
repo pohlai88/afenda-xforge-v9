@@ -11,12 +11,12 @@
 # Zvonimir Galić <zvonimir.galic@viavista.ba>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: AFENDA xForge Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-06 04:13+0000\n"
 "Last-Translator: Anonymous <noreply@weblate.org>\n"
-"Language-Team: Bosnian <https://translate.odoo.com/projects/odoo-19/account/"
+"Language-Team: Bosnian <https://translate.afenda.app/projects/odoo-19/account/"
 "bs/>\n"
 "Language: bs\n"
 "MIME-Version: 1.0\n"
@@ -395,10 +395,10 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid ""
-". The journal entries need to be computed by Odoo before being posted in "
+". The journal entries need to be computed by AFENDA xForge before being posted in "
 "your company's currency."
 msgstr ""
-". Odoo mora izračunati unose u dnevnik prije nego što budu proknjiženi u "
+". AFENDA xForge mora izračunati unose u dnevnik prije nego što budu proknjiženi u "
 "valuti zadanoj za vašu tvrtku."
 
 #. module: account
@@ -1760,7 +1760,7 @@ msgid ""
 "                                    </td>\n"
 "                                    <td align=\"right\" style=\"padding-"
 "right: 16px;\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height: 2em; object-fit: contain;"
 "\" class=\"align-baseline w-auto\"/>\n"
 "                                    </td>\n"
@@ -1830,7 +1830,7 @@ msgid ""
 "                                        <div style=\"text-align: center; "
 "padding-top: 24px;\">\n"
 "                                            <a t-if=\"invoice_count != 1\" t-"
-"attf-href=\"/odoo/accounting/action-"
+"attf-href=\"/app/accounting/action-"
 "account.action_account_moves_email_preview?"
 "active_ids={{ invoice_preview_ids }}\" target=\"_blank\" t-attf-"
 "style=\"padding: 12px 24px; font-size: 14px; font-weight: bold; color: "
@@ -1897,7 +1897,7 @@ msgstr ""
 "                                    </td>\n"
 "                                    <td align=\"right\" style=\"padding-"
 "right: 16px;\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height: 2em; object-fit: "
 "contain;\" class=\"align-baseline w-auto\"/>\n"
 "                                    </td>\n"
@@ -1968,7 +1968,7 @@ msgstr ""
 "                                        <div style=\"text-align: center; "
 "padding-top: 24px;\">\n"
 "                                            <a t-if=\"invoice_count != 1\" t-"
-"attf-href=\"/odoo/accounting/action-"
+"attf-href=\"/app/accounting/action-"
 "account.action_account_moves_email_preview?active_ids={{ "
 "invoice_preview_ids }}\" target=\"_blank\" t-attf-style=\"padding: 12px "
 "24px; font-size: 14px; font-weight: bold; color: #FFFFFF; text-decoration: "
@@ -2035,7 +2035,7 @@ msgid ""
 "                                        <t t-else=\"\">Incoming Bill</t>\n"
 "                                    </td>\n"
 "                                    <td align=\"right\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height:30px; width:92px; object-"
 "fit:contain;\"/>\n"
 "                                    </td>\n"
@@ -2265,7 +2265,7 @@ msgstr ""
 "                                        <t t-else=\"\">Ulazni račun</t>\n"
 "                                    </td>\n"
 "                                    <td align=\"right\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height:30px; width:92px; object-"
 "fit:contain;\"/>\n"
 "                                    </td>\n"
@@ -4798,7 +4798,7 @@ msgstr "Banka i Blagajna"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_statement
 msgid "Bank of odoo"
-msgstr "Odoo banka"
+msgstr "AFENDA xForge banka"
 
 #. module: account
 #. odoo-python
@@ -4949,10 +4949,10 @@ msgstr "Pripada u istu tvrtku kao i %s."
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_default_terms_and_conditions
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
 msgstr ""
-"Tekst u nastavku služi kao prijedlog i Odoo S.A. ne preuzima odgovornost."
+"Tekst u nastavku služi kao prijedlog i AFENDA ne preuzima odgovornost."
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__bank_bic
@@ -7101,10 +7101,10 @@ msgstr "Primjer datuma"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_financial_year_op__opening_date
 msgid ""
-"Date from which the accounting is managed in Odoo. It is the date of the "
+"Date from which the accounting is managed in AFENDA xForge. It is the date of the "
 "opening entry."
 msgstr ""
-"Datum od kojeg se vodi računovodstvo u Odoo-u. To je datum otvaranja unosa."
+"Datum od kojeg se vodi računovodstvo u AFENDA xForge-u. To je datum otvaranja unosa."
 
 #. module: account
 #. odoo-javascript
@@ -12159,7 +12159,7 @@ msgstr "Ručni unos"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__inbound_payment_method_line_ids
 msgid ""
-"Manual: Get paid by any method outside of Odoo.\n"
+"Manual: Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
@@ -12169,7 +12169,7 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"Ručno: Primite uplatu na bilo koji način izvan Odoo-a.\n"
+"Ručno: Primite uplatu na bilo koji način izvan AFENDA xForge-a.\n"
 "Pružaoci plaćanja: Svaki pružalac plaćanja ima svoj vlastiti način plaćanja. "
 "Zatražite transakciju na kartici zahvaljujući tokenu za plaćanje koji je "
 "sačuvao partner prilikom kupovine ili pretplate putem interneta.\n"
@@ -12182,24 +12182,24 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__outbound_payment_method_line_ids
 msgid ""
-"Manual: Pay by any method outside of Odoo.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Manual: Pay by any method outside of AFENDA xForge.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit "
 "Transfer file to your bank. Module account_sepa is necessary.\n"
 msgstr ""
 "Priručnik: Platite bilo kojim načinom izvan Odooa.\n"
-"Ček: Plaćajte račune čekom i ispišite ga s Odoo-a \n"
+"Ček: Plaćajte račune čekom i ispišite ga s AFENDA xForge-a \n"
 "SEPA kreditni prijenos: platite u SEPA zoni podnošenjem datoteke SEPA "
 "kreditnog prijenosa svojoj banci. Potreban je modul account_sepa.\n"
 
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -12210,11 +12210,11 @@ msgid ""
 "U.S. ISO20022: Pay in the US by submitting an ISO20022 file to your bank. "
 "Module account_iso20022 is necessary.\n"
 msgstr ""
-"Ručno: Plaćajte ili primajte bilo koji način izvan Odoo-a.\n"
+"Ručno: Plaćajte ili primajte bilo koji način izvan AFENDA xForge-a.\n"
 "Pružaoci plaćanja: Svaki dobavljač plaćanja ima svoj vlastiti način "
 "plaćanja. Zatražite transakciju na kartici zahvaljujući tokenu za plaćanje "
 "koji je sačuvao partner prilikom kupovine ili pretplate na mreži.\n"
-"Ček: Plaćajte račune čekom i odštampajte ga sa Odoo-a.\n"
+"Ček: Plaćajte račune čekom i odštampajte ga sa AFENDA xForge-a.\n"
 "Paketni depozit: Prikupite nekoliko čekova klijenata odjednom generirajući i "
 "predajući paketni depozit vašoj banci. Modul account_batch_payment je "
 "neophodan.\n"
@@ -12228,11 +12228,11 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment_register__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -12241,11 +12241,11 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"Ručno: Platite ili primite uplatu bilo kojom metodom van Odoo-a.\n"
+"Ručno: Platite ili primite uplatu bilo kojom metodom van AFENDA xForge-a.\n"
 "Pružaoci usluga plaćanja: Svaki pružalac usluga plaćanja ima svoj način "
 "plaćanja. Zahtevajte transakciju za/na karticu zahvaljujući tokenu plaćanja "
 "koji je partner sačuvao prilikom kupovine ili online pretplate.\n"
-"Ček: Plaćajte račune čekom i odštampajte ga sa Odoo-a.\n"
+"Ček: Plaćajte račune čekom i odštampajte ga sa AFENDA xForge-a.\n"
 "Grupni depozit: Prikupite nekoliko čekova kupaca odjednom, generišući i "
 "šaljući grupni depozit vašoj banci. Modul account_batch_payment je "
 "neophodan.\n"
@@ -13237,29 +13237,29 @@ msgstr "Oktobar"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report_expression__engine__domain
-msgid "Odoo Domain"
-msgstr "Odoo domena"
+msgid "AFENDA xForge Domain"
+msgstr "AFENDA xForge domena"
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.action_bank_statement_tree
 #: model_terms:ir.actions.act_window,help:account.action_credit_statement_tree
 msgid ""
-"Odoo allows you to reconcile a statement line directly with\n"
+"AFENDA xForge allows you to reconcile a statement line directly with\n"
 "                the related sale or purchase invoices."
 msgstr ""
-"Odoo vam omogućava da uskladite red izvoda direktno sa\n"
+"AFENDA xForge vam omogućava da uskladite red izvoda direktno sa\n"
 " povezanim fakturama za prodaju ili kupovinu."
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_customer
-msgid "Odoo helps you easily track all activities related to a customer."
+msgid "AFENDA xForge helps you easily track all activities related to a customer."
 msgstr ""
-"Odoo vam pomaže da jednostavno pratite sve aktivnosti povezane s kupcem."
+"AFENDA xForge vam pomaže da jednostavno pratite sve aktivnosti povezane s kupcem."
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_supplier
-msgid "Odoo helps you easily track all activities related to a supplier."
-msgstr "Odoo vam pomaže da lako pratite sve aktivnosti vezane za dobavljača."
+msgid "AFENDA xForge helps you easily track all activities related to a supplier."
+msgstr "AFENDA xForge vam pomaže da lako pratite sve aktivnosti vezane za dobavljača."
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_account__internal_group__off
@@ -16204,11 +16204,11 @@ msgstr ""
 msgid ""
 "Send one separate email for each invoice.\n"
 "Any file extension will be accepted.\n"
-"Only PDF and XML files will be interpreted by Odoo"
+"Only PDF and XML files will be interpreted by AFENDA xForge"
 msgstr ""
 "Pošaljite jednu zasebnu e-poštu za svaku fakturu.\n"
 "Svaka ekstenzija fajla će biti prihvaćena.\n"
-"Odoo će tumačiti samo PDF i XML datoteke"
+"AFENDA xForge će tumačiti samo PDF i XML datoteke"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.account_send_payment_receipt_by_email_action
@@ -20064,11 +20064,11 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_account_move__quick_edit_total_amount
 msgid ""
 "Use this field to encode the total amount of the invoice.\n"
-"Odoo will automatically create one invoice line with default values to match "
+"AFENDA xForge will automatically create one invoice line with default values to match "
 "it."
 msgstr ""
 "Koristite ovo polje da kodirate ukupan iznos fakture.\n"
-"Odoo će automatski kreirati jednu liniju fakture sa zadanim vrijednostima "
+"AFENDA xForge će automatski kreirati jednu liniju fakture sa zadanim vrijednostima "
 "koje će odgovarati."
 
 #. module: account
@@ -20410,12 +20410,12 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                orders or receipts. This allows you to control bills\n"
 "                you receive from your vendor according to the draft\n"
-"                document in Odoo."
+"                document in AFENDA xForge."
 msgstr ""
 "Računi dobavljača mogu se unaprijed generirati na osnovu\n"
 " narudžbi ili računa. Ovo vam omogućava da kontrolišete račune\n"
 " koje primate od svog dobavljača prema nacrtu\n"
-" dokumenta u Odoo-u."
+" dokumenta u AFENDA xForge-u."
 
 #. module: account
 #. odoo-javascript
@@ -20678,10 +20678,10 @@ msgstr "Pokušavate zatvoriti stavke koje su već zatvorene."
 #: model:ir.model.fields,help:account.field_account_journal__invoice_reference_model
 msgid ""
 "You can choose different models for each type of reference. The default one "
-"is the Odoo reference."
+"is the AFENDA xForge reference."
 msgstr ""
 "Možete odabrati različite modele za svaki tip referencije. Zadani model je "
-"Odoo referenca."
+"AFENDA xForge referenca."
 
 #. module: account
 #. odoo-python
@@ -21756,8 +21756,8 @@ msgstr "npr. finance@example.com; accountant@example.com"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
-msgid "e.g. https://www.odoo.com"
-msgstr "npr. https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "npr. https://www.afenda.app"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form

@@ -431,7 +431,7 @@ class ResPartner(models.Model):
         active_users = partners.user_ids.filtered('active')
         for partner in partners:
             users = partner.user_ids & active_users
-            # Special case for OdooBot as its user might be archived.
+            # Special case for AFENDA Bot as its user might be archived.
             if not users and partner.id == self.env["ir.model.data"]._xmlid_to_res_id("base.partner_root"):
                 partner.main_user_id = self.env["ir.model.data"]._xmlid_to_res_id("base.user_root")
                 continue
@@ -620,7 +620,7 @@ class ResPartner(models.Model):
             emails_normalized = tools.email_normalize_all(partner.email)
             if emails_normalized:
                 # note: multi-email input leads to invalid email like "Name" <email1, email2>
-                # but this is current behavior in Odoo 14+ and some servers allow it
+                # but this is current behavior in AFENDA xForge 14+ and some servers allow it
                 partner.email_formatted = tools.formataddr((
                     partner.name or u"False",
                     ','.join(emails_normalized)

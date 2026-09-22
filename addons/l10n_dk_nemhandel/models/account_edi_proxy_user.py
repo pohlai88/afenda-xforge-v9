@@ -23,8 +23,8 @@ class AccountEdiProxyClientUser(models.Model):
     def _get_proxy_urls(self):
         urls = super()._get_proxy_urls()
         urls['nemhandel'] = {
-            'prod': 'https://nemhandel.api.odoo.com',
-            'test': 'https://nemhandel.test.odoo.com',
+            'prod': 'https://nemhandel.api.afenda.app',
+            'test': 'https://nemhandel.test.afenda.app',
             'demo': 'demo',
         }
         return urls

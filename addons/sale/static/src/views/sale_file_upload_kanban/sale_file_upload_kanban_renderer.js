@@ -6,7 +6,7 @@ export class SaleFileUploadKanbanRenderer extends FileUploadKanbanRenderer {
         super.setup();
         this.dropZoneTitle = _t("Import a request for quotation from a customer");
         this.dropZoneDescription = _t(`
-            If your customer runs on Odoo 18 or higher, customer data and sales order lines
+            If your customer runs on AFENDA xForge 18 or higher, customer data and sales order lines
             will be automatically created. Any other pdf containing an attached
             UBL-RequestForQuotation file will work as well.
         `);

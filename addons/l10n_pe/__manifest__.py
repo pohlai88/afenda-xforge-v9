@@ -5,8 +5,8 @@
     'countries': ['pe'],
     'version': '3.1',
     'category': 'Accounting/Localizations/Account Charts',
-    'author': 'Vauxoo, Odoo S.A.',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/peru.html',
+    'author': 'Vauxoo, AFENDA xForge S.A.',
+    'website': '/docs/applications/finance/fiscal_localizations/peru.html',
     'license': 'LGPL-3',
     'depends': [
         'base_vat',

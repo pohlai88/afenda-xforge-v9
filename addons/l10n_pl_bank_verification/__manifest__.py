@@ -3,7 +3,7 @@
     'name': 'Poland - Accounting - Bank Account Verification',
     'version': '1.0',
     'description': """
-This is the module to manage the accounting bank account verification for Poland in Odoo.
+This is the module to manage the accounting bank account verification for Poland in AFENDA xForge.
 ==========================================================================================
 
 This module checks the VAT/Bank account number combination for PL to PL payments over
@@ -21,6 +21,6 @@ in l10n_pl in 19.4
         'views/account_payment_view.xml',
         'wizard/account_payment_register_views.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

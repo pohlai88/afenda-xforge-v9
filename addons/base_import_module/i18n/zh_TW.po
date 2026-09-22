@@ -10,12 +10,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.3\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.3\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 13:12+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Chinese (Traditional Han script) <https://translate.odoo.com/"
+"Language-Team: Chinese (Traditional Han script) <https://translate.afenda.app/"
 "projects/odoo-19/base_import_module/zh_Hant/>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
@@ -30,12 +30,12 @@ msgstr ""
 msgid ""
 "\n"
 "You may need the Enterprise version to install the data module. Please visit "
-"https://www.odoo.com/pricing-plan for more information.\n"
+"https://www.afenda.app/pricing-plan for more information.\n"
 "If you need Website themes, it can be downloaded from https://github.com/"
 "odoo/design-themes.\n"
 msgstr ""
 "\n"
-"您可能需要企業版才可安裝數據模組。請瀏覽 https://www.odoo.com/pricing-plan 獲"
+"您可能需要企業版才可安裝數據模組。請瀏覽 https://www.afenda.app/pricing-plan 獲"
 "取更多資訊。\n"
 "如果需要網站主題，可到 https://github.com/odoo/design-themes 下載。\n"
 
@@ -292,7 +292,7 @@ msgstr "狀態"
 #. module: base_import_module
 #. odoo-python
 #: code:addons/base_import_module/models/ir_module.py:0
-msgid "Studio customizations require the Odoo Studio app."
+msgid "Studio customizations require the AFENDA xForge Studio app."
 msgstr "Studio自訂需要Odoo Studio模組。"
 
 #. module: base_import_module

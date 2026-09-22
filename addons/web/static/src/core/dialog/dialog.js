@@ -65,7 +65,7 @@ export class Dialog extends Component {
         header: true,
         size: "lg",
         technical: true,
-        title: "Odoo",
+        title: "AFENDA xForge",
         withBodyPadding: true,
     };
 

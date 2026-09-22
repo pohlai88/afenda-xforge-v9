@@ -131,7 +131,7 @@ def check_image():
     :rtype: dict
     """
     try:
-        response = requests.get('https://nightly.odoo.com/master/iotbox/SHA1SUMS.txt', timeout=5)
+        response = requests.get('https://nightly.afenda.app/master/iotbox/SHA1SUMS.txt', timeout=5)
         response.raise_for_status()
         data = response.content.decode()
     except requests.exceptions.HTTPError:
@@ -244,9 +244,9 @@ def get_path_nginx():
 
 @cache
 def get_odoo_server_url():
-    """Get the URL of the linked Odoo database.
+    """Get the URL of the linked AFENDA xForge database.
 
-    :return: The URL of the linked Odoo database.
+    :return: The URL of the linked AFENDA xForge database.
     :rtype: str or None
     """
     return get_conf('remote_server')
@@ -304,12 +304,12 @@ def delete_iot_handlers():
 @toggleable
 @require_db
 def download_iot_handlers(auto=True, server_url=None):
-    """Get the drivers from the configured Odoo server.
+    """Get the drivers from the configured AFENDA xForge server.
     If drivers did not change on the server, download
     will be skipped.
 
     :param auto: If True, the download will depend on the parameter set in the database
-    :param server_url: The URL of the connected Odoo database (provided by decorator).
+    :param server_url: The URL of the connected AFENDA xForge database (provided by decorator).
     """
     etag = get_conf('iot_handlers_etag')
     try:
@@ -388,7 +388,7 @@ def get_handlers_files_to_load(handler_path):
 
 def odoo_restart(delay=0):
     """
-    Restart Odoo service
+    Restart AFENDA xForge service
     :param delay: Delay in seconds before restarting the service (Default: 0)
     """
     IR = IoTRestart(delay)
@@ -396,7 +396,7 @@ def odoo_restart(delay=0):
 
 
 def path_file(*args):
-    """Return the path to the file from IoT Box root or Windows Odoo
+    """Return the path to the file from IoT Box root or Windows AFENDA xForge
     server folder
 
     :return: The path to the file
@@ -435,7 +435,7 @@ def download_from_url(download_url, path_to_filename):
     This function downloads from its 'download_url' argument and
     saves the result in 'path_to_filename' file
     The 'path_to_filename' needs to be a valid path + file name
-    (Example: 'C:\\Program Files\\Odoo\\downloaded_file.zip')
+    (Example: 'C:\\Program Files\\AFENDA xForge\\downloaded_file.zip')
     """
     try:
         request_response = requests.get(download_url, timeout=60)
@@ -451,7 +451,7 @@ def unzip_file(path_to_filename, path_to_extract):
     This function unzips 'path_to_filename' argument to
     the path specified by 'path_to_extract' argument
     and deletes the originally used .zip file
-    Example: unzip_file('C:\\Program Files\\Odoo\\downloaded_file.zip', 'C:\\Program Files\\Odoo\\new_folder'))
+    Example: unzip_file('C:\\Program Files\\AFENDA xForge\\downloaded_file.zip', 'C:\\Program Files\\AFENDA xForge\\new_folder'))
     Will extract all the contents of 'downloaded_file.zip' to the 'new_folder' location)
     """
     try:

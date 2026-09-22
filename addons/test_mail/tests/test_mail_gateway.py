@@ -113,8 +113,8 @@ class TestEmailParsing(MailCommon):
     def test_message_parse_eml(self):
         # Test that the parsing of mail with embedded emails as eml(msg) which generates empty attachments, can be processed.
         mail = self.format(test_mail_data.MAIL_EML_ATTACHMENT, email_from='"Sylvie Lelitre" <test.sylvie.lelitre@agrolait.com>', to=f'generic@{self.alias_domain}',
-                           msg_id='<cb7eaf62-58dc-2017-148c-305d0c78892f@odoo.com>',
-                           references='<f3b9f8f8-28fa-2543-cab2-7aa68f679ebb@odoo.com>',
+                           msg_id='<cb7eaf62-58dc-2017-148c-305d0c78892f@afenda.app>',
+                           references='<f3b9f8f8-28fa-2543-cab2-7aa68f679ebb@afenda.app>',
                            subject='Re: test attac',
                            )
         self.env['mail.thread'].message_parse(self.from_string(mail))
@@ -146,9 +146,9 @@ class TestEmailParsing(MailCommon):
         })
         incoming_bounce = self.format(
             test_mail_data.MAIL_BOUNCE_QP_RFC822_HEADERS,
-            email_from='MAILER-DAEMON@mailserver.odoo.com (Mail Delivery System)',
-            email_to='bounce@xxx.odoo.com',
-            delivered_to='bounce@xxx.odoo.com'
+            email_from='MAILER-DAEMON@mailserver.afenda.app (Mail Delivery System)',
+            email_to='bounce@xxx.afenda.app',
+            delivered_to='bounce@xxx.afenda.app'
         )
         msg = self.env['mail.thread'].message_parse(self.from_string(incoming_bounce))
         self.assertEqual(msg['bounced_email'], partner.email, "The sender email should be correctly parsed")
@@ -1828,7 +1828,7 @@ class TestMailgateway(MailGatewayCommon):
                           extra=f'In-Reply-To: <12321321-openerp-{self.test_record.id}-{self.test_record._name}@{socket.gethostname()}>')
 
         # when 6.1 messages are present, compat mode is available
-        # Odoo 10 update: compat mode has been removed and should not work anymore
+        # AFENDA xForge 10 update: compat mode has been removed and should not work anymore
         self.fake_email.write({'message_id': False})
         # Do: compat mode accepts partial-matching emails
         self.assertRaises(
@@ -1909,7 +1909,7 @@ class TestMailgateway(MailGatewayCommon):
     def test_message_hebrew_iso8859_8_i(self):
         # This subject was found inside an email of one of our customer.
         # The charset is iso-8859-8-i which isn't natively supported by
-        # python, check that Odoo is still capable of decoding it.
+        # python, check that AFENDA xForge is still capable of decoding it.
         subject = "בוקר טוב! צריך איימק ושתי מסכים"
         encoded_subject = "=?iso-8859-8-i?B?4eX3+CDo5eEhIPb46eog4Onp7vcg5fn66SDu8evp7Q==?="
 
@@ -1938,7 +1938,7 @@ class TestMailgateway(MailGatewayCommon):
     def test_message_windows_874(self):
         # Email for Thai customers who use Microsoft email service.
         # The charset is windows-874 which isn't natively supported by
-        # python, check that Odoo is still capable of decoding it.
+        # python, check that AFENDA xForge is still capable of decoding it.
         # windows-874 is the Microsoft equivalent of cp874.
         with self.mock_mail_gateway(), \
              RecordCapturer(self.env['mail.test.gateway']) as capture:
@@ -2243,7 +2243,7 @@ class TestMailGatewayLoops(MailGatewayCommon):
 
     @mute_logger('odoo.addons.mail.models.mail_mail', 'odoo.addons.mail.models.mail_thread')
     def test_routing_loop_auto_notif(self):
-        """ Test Odoo servers talking to each other """
+        """ Test AFENDA xForge servers talking to each other """
         with self.mock_mail_gateway():
             record = self.format_and_process(
                 MAIL_TEMPLATE,
@@ -2303,7 +2303,7 @@ class TestMailGatewayLoops(MailGatewayCommon):
             )
         self.assertSentEmail(self.user_employee.email_formatted, [self.alias_partner.email_formatted])
 
-        # simulate this email coming back to the same Odoo server -> msg_id is
+        # simulate this email coming back to the same AFENDA xForge server -> msg_id is
         # a duplicate, hence rejected
         with RecordCapturer(self.env['mail.test.ticket']) as capture_ticket, \
              RecordCapturer(self.env['mail.test.gateway']) as capture_gateway:
@@ -2432,7 +2432,7 @@ class TestMailGatewayReplies(MailGatewayCommon):
         gateway_record._message_log(body='Some log')
         with self.mock_mail_gateway():
             gateway_record.with_user(self.user_employee).message_post(
-                body='Odoo Reply',
+                body='AFENDA xForge Reply',
                 message_type='comment',
                 partner_ids=self.partner_1.ids,
                 subtype_id=self.env.ref('mail.mt_comment').id,
@@ -2441,7 +2441,7 @@ class TestMailGatewayReplies(MailGatewayCommon):
         self.assertMailNotifications(
             reply,
             [{
-                'content': 'Odoo Reply',
+                'content': 'AFENDA xForge Reply',
                 'email_values': {
                     'message_id': reply.message_id,
                     'references': f'{email.message_id} {log.message_id} {reply.message_id}',  # should contain reference to OdooExternal message, logs to fill up history
@@ -2494,7 +2494,7 @@ class TestMailGatewayReplies(MailGatewayCommon):
         # Odoo2 reply
         with self.mock_mail_gateway():
             gateway_record.with_user(self.user_employee).message_post(
-                body='Odoo Reply',
+                body='AFENDA xForge Reply',
                 message_type='comment',
                 partner_ids=self.partner_1.ids,
                 subtype_id=self.env.ref('mail.mt_comment').id,
@@ -2504,7 +2504,7 @@ class TestMailGatewayReplies(MailGatewayCommon):
         self.assertMailNotifications(
             reply,
             [{
-                'content': 'Odoo Reply',
+                'content': 'AFENDA xForge Reply',
                 'email_values': {
                     'message_id': reply.message_id,
                     'references': f'{log.message_id} {odooext_msg.message_id} {reply.message_id}',  # should contain reference to OdooExternal message
@@ -2564,7 +2564,7 @@ class TestMailGatewayReplies(MailGatewayCommon):
 
         with self.mock_mail_gateway():
             gateway_record.with_user(self.user_employee).message_post(
-                body='Odoo Reply 2',
+                body='AFENDA xForge Reply 2',
                 message_type='comment',
                 partner_ids=self.partner_1.ids,
                 subtype_id=self.env.ref('mail.mt_comment').id,
@@ -2574,7 +2574,7 @@ class TestMailGatewayReplies(MailGatewayCommon):
         self.assertMailNotifications(
             reply_3,
             [{
-                'content': 'Odoo Reply 2',
+                'content': 'AFENDA xForge Reply 2',
                 'email_values': {
                     'message_id': reply_3.message_id,
                     'references': f'{odooext_msg.message_id} {reply.message_id} {reply_2.message_id} {reply_3.message_id}',  # should contain reference to OdooExternal message

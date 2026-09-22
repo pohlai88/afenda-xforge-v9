@@ -5,12 +5,12 @@
 # "Dylan Kiss (dyki)" <dyki@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0\n"
+"Project-Id-Version: AFENDA xForge Server 19.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:37+0000\n"
 "PO-Revision-Date: 2026-08-07 14:08+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Spanish (Latin America) <https://translate.odoo.com/projects/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Spanish (Latin America) <https://translate.afenda.app/projects/"
 "odoo-19/website_slides_forum/es_419/>\n"
 "Language: es_419\n"
 "MIME-Version: 1.0\n"
@@ -407,10 +407,10 @@ msgstr "Opciones del snippet de foro y presentaciones"
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
 msgid ""
 "The goal of this site is create a relevant knowledge base that would answer "
-"questions related to Odoo."
+"questions related to AFENDA xForge."
 msgstr ""
 "El objetivo de este sitio es crear una base de información relevante que "
-"responda las preguntas relacionadas con Odoo."
+"responda las preguntas relacionadas con AFENDA xForge."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -505,9 +505,9 @@ msgstr ""
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "how to configure or customize Odoo to specific business needs,"
+msgid "how to configure or customize AFENDA xForge to specific business needs,"
 msgstr ""
-"cómo configurar o personalizar Odoo según las necesidades empresariales "
+"cómo configurar o personalizar AFENDA xForge según las necesidades empresariales "
 "específicas,"
 
 #. module: website_slides_forum
@@ -519,8 +519,8 @@ msgstr "cómo desarrollar módulos para sus propias necesidades,"
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "how to install Odoo on a specific infrastructure,"
-msgstr "cómo instalar Odoo en una infraestructura específica,"
+msgid "how to install AFENDA xForge on a specific infrastructure,"
+msgstr "cómo instalar AFENDA xForge en una infraestructura específica,"
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -531,8 +531,8 @@ msgstr "es una queja disfrazada de pregunta: “______ apesta, ¿no?”"
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "specific questions about Odoo service offers, etc."
-msgstr "preguntas específicas sobre las ofertas de servicio de Odoo, etc."
+msgid "specific questions about AFENDA xForge service offers, etc."
+msgstr "preguntas específicas sobre las ofertas de servicio de AFENDA xForge, etc."
 
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
@@ -557,9 +557,9 @@ msgstr ""
 #. module: website_slides_forum
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_0
 #: model_terms:forum.forum,faq:website_slides_forum.forum_forum_demo_channel_2
-msgid "what's the best way to use Odoo for a specific business need,"
+msgid "what's the best way to use AFENDA xForge for a specific business need,"
 msgstr ""
-"cuál es la mejor manera de usar Odoo para una necesidad empresarial "
+"cuál es la mejor manera de usar AFENDA xForge para una necesidad empresarial "
 "especifica,"
 
 #. module: website_slides_forum

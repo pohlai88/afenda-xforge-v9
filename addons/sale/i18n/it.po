@@ -14,12 +14,12 @@
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-02 13:30+0000\n"
-"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@odoo.com>\n"
-"Language-Team: Italian <https://translate.odoo.com/projects/odoo-19/sale/it/>"
+"Last-Translator: \"Malaz Siddig Elsayed Abuidris (msea)\" <msea@afenda.app>\n"
+"Language-Team: Italian <https://translate.afenda.app/projects/odoo-19/sale/it/>"
 "\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -35,7 +35,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -43,7 +43,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            Se il tuo cliente utilizza Odoo 18 o versioni superiori, i dati "
+"            Se il tuo cliente utilizza AFENDA xForge 18 o versioni superiori, i dati "
 "del cliente e le righe dell'ordine di vendita\n"
 "            verranno creati automaticamente. È valido qualsiasi altro PDF\n"
 "            che abbia un file UBL-RequestForQuotation in allegato.\n"
@@ -1671,10 +1671,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Ad esempio, se vendi ore prepagate per un servizio Odoo ti consiglia di\n"
+"Ad esempio, se vendi ore prepagate per un servizio AFENDA xForge ti consiglia di\n"
 "            vendere ore aggiuntive quando quelle ordinate sono esaurite."
 
 #. module: sale
@@ -2715,10 +2715,10 @@ msgstr "Fatture in bozza"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 "Trascina e rilascia il file PDF della richiesta di preventivo nell'elenco di "
-"preventivi in Odoo. Goditi l'automazione!"
+"preventivi in AFENDA xForge. Goditi l'automazione!"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.view_order_form
@@ -3688,8 +3688,8 @@ msgstr "Nessun ordine per incremento vendite trovato."
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
-msgstr "Non stai utilizzando Odoo?"
+msgid "Not using AFENDA xForge?"
+msgstr "Non stai utilizzando AFENDA xForge?"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3741,8 +3741,8 @@ msgstr "Numero di messaggi con errore di consegna"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -5178,8 +5178,8 @@ msgstr "Connettore Starshipit"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
-msgstr "Inizia su Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "Inizia su AFENDA xForge"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__state
@@ -6062,8 +6062,8 @@ msgstr "Volume"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
-msgstr "Vuoi importare il documento in Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Vuoi importare il documento in AFENDA xForge?"
 
 #. module: sale
 #. odoo-python

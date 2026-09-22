@@ -9,12 +9,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-02 10:48+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Azerbaijani <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Azerbaijani <https://translate.afenda.app/projects/odoo-19/"
 "purchase/az/>\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
@@ -1282,7 +1282,7 @@ msgstr "Qaralama Qiymət Sorğuları"
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 
 #. module: purchase
@@ -1934,7 +1934,7 @@ msgstr "Təsdiqlənmədi"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Not using Odoo?"
+msgid "Not using AFENDA xForge?"
 msgstr ""
 
 #. module: purchase
@@ -1983,8 +1983,8 @@ msgstr "Çatdırılma xətası olan mesajların sayı"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__product_template__purchase_method__purchase
@@ -2914,7 +2914,7 @@ msgstr "İşarələnmiş"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Start on Odoo"
+msgid "Start on AFENDA xForge"
 msgstr ""
 
 #. module: purchase
@@ -3424,7 +3424,7 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                    orders or receipts. This allows you to control bills\n"
 "                    you receive from your vendor according to the draft\n"
-"                    document in Odoo."
+"                    document in AFENDA xForge."
 msgstr ""
 
 #. module: purchase
@@ -3463,7 +3463,7 @@ msgstr "Gözləyən Qaimələr"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Want to import this document in Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
 msgstr ""
 
 #. module: purchase
@@ -3499,7 +3499,7 @@ msgid ""
 "When creating a purchase order, have a look at the vendor's <i>On Time "
 "Delivery</i> rate: the percentage of products shipped on time. If it is too "
 "low, activate the <i>automated reminders</i>. A few days before the due "
-"shipment, Odoo will send the vendor an email to ask confirmation of shipment "
+"shipment, AFENDA xForge will send the vendor an email to ask confirmation of shipment "
 "dates and keep you informed in case of any delays. To get the vendor's "
 "performance statistics, click on the OTD rate."
 msgstr ""
@@ -3507,12 +3507,12 @@ msgstr ""
 #. module: purchase
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_1
 msgid ""
-"When sending a purchase order by email, Odoo asks the vendor to acknowledge "
+"When sending a purchase order by email, AFENDA xForge asks the vendor to acknowledge "
 "the reception of the order. When the vendor acknowledges the order by "
 "clicking on a button in the email, the information is added on the purchase "
 "order. Use filters to track orders that have not been acknowledged."
 msgstr ""
-"E-poçt vasitəsilə satınalma sifarişi göndərərkən, Odoo satıcıdan sifarişin "
+"E-poçt vasitəsilə satınalma sifarişi göndərərkən, AFENDA xForge satıcıdan sifarişin "
 "qəbul edildiyini təsdiqləməsini xahiş edir. Satıcı e-poçtdakı düyməni "
 "klikləməklə sifarişi qəbul etdikdə, məlumat satınalma sifarişinə əlavə "
 "olunur. Təsdiq edilməyən sifarişləri izləmək üçün filtrlərdən istifadə edin."

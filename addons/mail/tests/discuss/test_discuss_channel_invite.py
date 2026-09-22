@@ -18,7 +18,7 @@ class TestDiscussChannelInvite(HttpCase, MailCommon):
         )
         with self.mock_mail_gateway():
             self.start_tour(
-                f"/odoo/discuss?active_id={group_chat.id}", "discuss.invite_by_email", login="bob"
+                f"/app/discuss?active_id={group_chat.id}", "discuss.invite_by_email", login="bob"
             )
         self.assertIn(john.partner_id, group_chat.channel_member_ids.partner_id)
         self.assertNoMail(self.env["res.partner"], "john@test.com")
@@ -168,13 +168,13 @@ class TestDiscussChannelInvite(HttpCase, MailCommon):
             # Channel types that do not allow inviting by email, not selectable.
             *product(
                 [chat, private_channel],
-                ["bob@odoo.com", "alfred@odoo.com", "jane@odoo.com"],
+                ["bob@afenda.app", "alfred@afenda.app", "jane@afenda.app"],
                 [False],
             ),
             # Channel types that allow inviting by email, valid email, selectable.
             *product(
                 [group_chat, public_channel],
-                ["bob@odoo.com", "alfred@odoo.com", "jane@odoo.com"],
+                ["bob@afenda.app", "alfred@afenda.app", "jane@afenda.app"],
                 [True],
             ),
         ]

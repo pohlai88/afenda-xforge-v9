@@ -21,7 +21,7 @@ export class hsnCodeDialog extends Component {
             "l10n_in_get_hsn_code_action",
             []
         );
-        const url = `/odoo/action-${action_xml_id}`;
+        const url = `/app/action-${action_xml_id}`;
         window.open(url, "_blank");
     }
 }

@@ -61,7 +61,7 @@ registry.category("web_tour.tours").add('website_crm_tour', {
 }, {
     content: "Complete Company",
     trigger: "input[name=partner_name]",
-    run: "edit Odoo S.A.",
+    run: "edit AFENDA",
 }, {
     content: "Complete Subject",
     trigger: "input[name=name]",

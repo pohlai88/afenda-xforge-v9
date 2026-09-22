@@ -9,12 +9,12 @@
 # "Marianna Ciofani (cima)" <cima@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~12.5\n"
+"Project-Id-Version: AFENDA xForge Server saas~12.5\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-08 00:31+0000\n"
-"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@odoo.com>\n"
-"Language-Team: Italian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Dylan Kiss (dyki)\" <dyki@afenda.app>\n"
+"Language-Team: Italian <https://translate.afenda.app/projects/odoo-19/"
 "base_import_module/it/>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -30,13 +30,13 @@ msgstr ""
 msgid ""
 "\n"
 "You may need the Enterprise version to install the data module. Please visit "
-"https://www.odoo.com/pricing-plan for more information.\n"
+"https://www.afenda.app/pricing-plan for more information.\n"
 "If you need Website themes, it can be downloaded from https://github.com/"
 "odoo/design-themes.\n"
 msgstr ""
 "\n"
 "Potrebbe essere necessaria la versione Enterprise per installare il modulo "
-"dati. Visita il sito https://www.odoo.com/pricing-plan per maggiorni "
+"dati. Visita il sito https://www.afenda.app/pricing-plan per maggiorni "
 "informazioni.\n"
 "Se hai bisogno di temi per siti web, è possibile scaricarli da https://"
 "github.com/odoo/design-themes.\n"
@@ -304,8 +304,8 @@ msgstr "Stato"
 #. module: base_import_module
 #. odoo-python
 #: code:addons/base_import_module/models/ir_module.py:0
-msgid "Studio customizations require the Odoo Studio app."
-msgstr "Le personalizzazioni Studio richiedono l'applicazione Studio di Odoo"
+msgid "Studio customizations require the AFENDA xForge Studio app."
+msgstr "Le personalizzazioni Studio richiedono l'applicazione Studio di AFENDA xForge"
 
 #. module: base_import_module
 #. odoo-python

@@ -7,12 +7,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: AFENDA xForge Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:48+0000\n"
 "PO-Revision-Date: 2026-08-02 19:36+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/crm/lo/>\n"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/crm/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -301,7 +301,7 @@ msgid ""
 "                        <div>\n"
 "                            Hi <t t-out=\"object.partner_id and object.partner_id.name or ''\">Deco Addict</t>,<br><br>\n"
 "                            Welcome to <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t>.\n"
-"                            It's great to meet you! Now that you're on board, you'll discover what <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t> has to offer. My name is <t t-out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the most out of Odoo. Could we plan a quick demo soon?<br>\n"
+"                            It's great to meet you! Now that you're on board, you'll discover what <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)</t> has to offer. My name is <t t-out=\"object.user_id.name or ''\">Marc Demo</t> and I'll help you get the most out of AFENDA xForge. Could we plan a quick demo soon?<br>\n"
 "                            Feel free to reach out at any time!<br><br>\n"
 "                            Best,<br>\n"
 "                            <t t-if=\"object.user_id\">\n"
@@ -339,7 +339,7 @@ msgid ""
 "</td></tr>\n"
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    Powered by <a target=\"_blank\" href=\"https://www.odoo.com?utm_source=db&amp;utm_medium=email\" style=\"color: #875A7B;\">Odoo</a>\n"
+"    Powered by <a target=\"_blank\" href=\"https://www.afenda.app?utm_source=db&amp;utm_medium=email\" style=\"color: #875A7B;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
 "</table>\n"
 "        "
@@ -392,7 +392,7 @@ msgstr ""
 "                            ຍິນດີທີ່ໄດ້ຮູ້ຈັກກັບທ່ານ! ຕອນນີ້ທ່ານໄດ້ເຂົ້າມາເປັນສ່ວນໜຶ່ງແລ້ວ, ທ່ານຈະໄ"
 "ດ້ພົບກັບສິ່ງທີ່ <t t-out=\"object.company_id.name or ''\">My Company (San Francisco)"
 "</t> ມີໃຫ້ບໍລິການ. ຂ້າພະເຈົ້າຊື່ <t t-out=\"object.user_id.name or ''\">Marc Demo</t> "
-"ແລະ ຈະຊ່ວຍໃຫ້ທ່ານນຳໃຊ້ Odoo ໃຫ້ເກີດປະໂຫຍດສູງສຸດ. ພວກເຮົາສາມາດນັດໝາຍເພື່ອສາທິດການນຳໃຊ້ໂດຍຫຍໍ້ໃ"
+"ແລະ ຈະຊ່ວຍໃຫ້ທ່ານນຳໃຊ້ AFENDA xForge ໃຫ້ເກີດປະໂຫຍດສູງສຸດ. ພວກເຮົາສາມາດນັດໝາຍເພື່ອສາທິດການນຳໃຊ້ໂດຍຫຍໍ້ໃ"
 "ນໄວໆນີ້ໄດ້ບໍ່?<br>\n"
 "                            ສາມາດຕິດຕໍ່ສອບຖາມໄດ້ທຸກເວລາ!<br><br>\n"
 "                            ດ້ວຍຄວາມເຄົາລົບ,<br>\n"
@@ -445,8 +445,8 @@ msgstr ""
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
 "    ຂັບເຄື່ອນໂດຍ <a target=\"_blank\" href=\"https://"
-"www.odoo.com?utm_source=db&amp;utm_medium=email\" style=\"color: #875A7B;\">"
-"Odoo</a>\n"
+"www.afenda.app?utm_source=db&amp;utm_medium=email\" style=\"color: #875A7B;\">"
+"AFENDA xForge</a>\n"
 "</td></tr>\n"
 "</table>\n"
 "        "
@@ -889,9 +889,9 @@ msgstr ""
 #. module: crm
 #. odoo-javascript
 #: code:addons/crm/static/src/js/tours/crm.js:0
-msgid "Click on the breadcrumb to go back to your Pipeline. Odoo will save all modifications as you navigate."
+msgid "Click on the breadcrumb to go back to your Pipeline. AFENDA xForge will save all modifications as you navigate."
 msgstr ""
-"ຄລິກໃສ່ breadcrumb ເພື່ອກັບຄືນໄປຫາ Pipeline ຂອງທ່ານ. Odoo ຈະບັນທຶກການແກ້ໄຂທັງໝົດໃນຂະນະທີ່ທ່າ"
+"ຄລິກໃສ່ breadcrumb ເພື່ອກັບຄືນໄປຫາ Pipeline ຂອງທ່ານ. AFENDA xForge ຈະບັນທຶກການແກ້ໄຂທັງໝົດໃນຂະນະທີ່ທ່າ"
 "ນເລື່ອນເບິ່ງ."
 
 #. module: crm
@@ -1294,17 +1294,17 @@ msgstr ""
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_4
-msgid "Did you know you can search a company by name or VAT number to instantly fill in all its data? Odoo autocompletes everything for you: logo, address, company size, business information, social media accounts, etc."
+msgid "Did you know you can search a company by name or VAT number to instantly fill in all its data? AFENDA xForge autocompletes everything for you: logo, address, company size, business information, social media accounts, etc."
 msgstr ""
-"ທ່ານຮູ້ບໍ່ວ່າທ່ານສາມາດຄົ້ນຫາບໍລິສັດດ້ວຍຊື່ ຫຼື ເລກປະຈຳຕົວຜູ້ເສຍພາສີ ເພື່ອຕື່ມຂໍ້ມູນທັງໝົດໄດ້ທັນທີ? Odoo ຈະຕື່ມຂໍ້ມູ"
+"ທ່ານຮູ້ບໍ່ວ່າທ່ານສາມາດຄົ້ນຫາບໍລິສັດດ້ວຍຊື່ ຫຼື ເລກປະຈຳຕົວຜູ້ເສຍພາສີ ເພື່ອຕື່ມຂໍ້ມູນທັງໝົດໄດ້ທັນທີ? AFENDA xForge ຈະຕື່ມຂໍ້ມູ"
 "ນໃຫ້ທ່ານໂດຍອັດຕະໂນມັດ: ໂລໂກ້, ທີ່ຢູ່, ຂະໜາດບໍລິສັດ, ຂໍ້ມູນທຸລະກິດ, ບັນຊີສື່ສັງຄົມອອນລາຍ ແລະ ອື່ນໆ."
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_5
-msgid "Did you know you can turn a list of opportunities into a map view, using the top-right map icon? A lot of screens in Odoo can be turned into a map: tasks, contacts, delivery orders, etc."
+msgid "Did you know you can turn a list of opportunities into a map view, using the top-right map icon? A lot of screens in AFENDA xForge can be turned into a map: tasks, contacts, delivery orders, etc."
 msgstr ""
 "ທ່ານຮູ້ບໍ່ວ່າທ່ານສາມາດປ່ຽນລາຍການໂອກາດໃຫ້ເປັນມຸມມອງແຜນທີ່ໄດ້ ໂດຍການໃຊ້ໄອຄອນແຜນທີ່ຢູ່ມຸມຂວາເທິງ? ຫຼາຍ"
-"ໜ້າຈໍໃນ Odoo ສາມາດປ່ຽນເປັນແຜນທີ່ໄດ້: ໜ້າວຽກ, ຜູ້ຕິດຕໍ່, ໃບບັນທຶກການສົ່ງເຄື່ອງ ແລະ ອື່ນໆ."
+"ໜ້າຈໍໃນ AFENDA xForge ສາມາດປ່ຽນເປັນແຜນທີ່ໄດ້: ໜ້າວຽກ, ຜູ້ຕິດຕໍ່, ໃບບັນທຶກການສົ່ງເຄື່ອງ ແລະ ອື່ນໆ."
 
 #. module: crm
 #: model:ir.model,name:crm.model_digest_digest
@@ -2589,18 +2589,18 @@ msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ມີຂໍ້ຜິດພ
 #. module: crm
 #: model_terms:ir.actions.act_window,help:crm.crm_case_form_view_salesteams_opportunity
 msgid ""
-"Odoo helps you keep track of your sales pipeline to follow\n"
+"AFENDA xForge helps you keep track of your sales pipeline to follow\n"
 "                    up potential sales and better forecast your future revenues."
 msgstr ""
-"Odoo ຊ່ວຍໃຫ້ທ່ານຕິດຕາມ ຂະບວນການຂາຍ ເພື່ອຕິດຕາມ\n"
+"AFENDA xForge ຊ່ວຍໃຫ້ທ່ານຕິດຕາມ ຂະບວນການຂາຍ ເພື່ອຕິດຕາມ\n"
 "                    ການຂາຍທີ່ມີໂອກາດ ແລະ ຄາດການລາຍຮັບໃນອະນາຄົດໄດ້ດີຂຶ້ນ."
 
 #. module: crm
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_2
-msgid "Odoo's artificial intelligence engine predicts the success rate of each opportunity based on your history. You can always update the success rate manually, but if you let Odoo do the job the score is updated while the opportunity moves forward in your sales cycle."
+msgid "AFENDA xForge's artificial intelligence engine predicts the success rate of each opportunity based on your history. You can always update the success rate manually, but if you let AFENDA xForge do the job the score is updated while the opportunity moves forward in your sales cycle."
 msgstr ""
-"ລະບົບປັນຍາປະດິດ (AI) ຂອງ Odoo ຄາດການອັດຕາຄວາມສຳເລັດຂອງແຕ່ລະໂອກາດ ໂດຍອີງຕາມປະຫວັດຂອງທ່າ"
-"ນ. ທ່ານສາມາດປັບປ່ຽນອັດຕາຄວາມສຳເລັດດ້ວຍຕົນເອງໄດ້ສະເໝີ, ແຕ່ຖ້າໃຫ້ Odoo ຈັດການ ລະບົບຈະປັບປຸງຄະແນ"
+"ລະບົບປັນຍາປະດິດ (AI) ຂອງ AFENDA xForge ຄາດການອັດຕາຄວາມສຳເລັດຂອງແຕ່ລະໂອກາດ ໂດຍອີງຕາມປະຫວັດຂອງທ່າ"
+"ນ. ທ່ານສາມາດປັບປ່ຽນອັດຕາຄວາມສຳເລັດດ້ວຍຕົນເອງໄດ້ສະເໝີ, ແຕ່ຖ້າໃຫ້ AFENDA xForge ຈັດການ ລະບົບຈະປັບປຸງຄະແນ"
 "ນໃຫ້ໂດຍອັດຕະໂນມັດເມື່ອໂອກາດກ້າວໄປສູ່ຂັ້ນຕອນຖັດໄປໃນວົງຈອນການຂາຍ."
 
 #. module: crm
@@ -3441,16 +3441,16 @@ msgstr ""
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_model_id
-msgid "The model (Odoo Document Kind) to which this alias corresponds. Any incoming email that does not reply to an existing record will cause the creation of a new record of this model (e.g. a Project Task)"
+msgid "The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming email that does not reply to an existing record will cause the creation of a new record of this model (e.g. a Project Task)"
 msgstr ""
-"ໂມເດວ (ປະເພດເອກະສານ Odoo) ທີ່ນາມແຝງນີ້ກ່ຽວຂ້ອງ. ອີເມວຂາເຂົ້າໃດໆທີ່ບໍ່ແມ່ນການຕອບກັບຂໍ້ມູນທີ່ມີຢູ່ ຈະເ"
+"ໂມເດວ (ປະເພດເອກະສານ AFENDA xForge) ທີ່ນາມແຝງນີ້ກ່ຽວຂ້ອງ. ອີເມວຂາເຂົ້າໃດໆທີ່ບໍ່ແມ່ນການຕອບກັບຂໍ້ມູນທີ່ມີຢູ່ ຈະເ"
 "ຮັດໃຫ້ເກີດການສ້າງຂໍ້ມູນໃໝ່ໃນໂມເດວນີ້ (ເຊັ່ນ: ໜ້າວຽກໂຄງການ)"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_team__alias_name
-msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.odoo.com>"
+msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.afenda.app>"
 msgstr ""
-"ຊື່ຂອງນາມແຝງອີເມວ, ເຊັ່ນ 'jobs' ຖ້າທ່ານຕ້ອງການຮັບອີເມວສຳລັບ <jobs@example.odoo.com>"
+"ຊື່ຂອງນາມແຝງອີເມວ, ເຊັ່ນ 'jobs' ຖ້າທ່ານຕ້ອງການຮັບອີເມວສຳລັບ <jobs@example.afenda.app>"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead__partner_name
@@ -3570,8 +3570,8 @@ msgstr "ຄຳແນະນຳ: ປ່ຽນອີເມວຂາເຂົ້າ�
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_1
 #: model_terms:digest.tip,tip_description:crm.digest_tip_crm_1
-msgid "Tip: Did you know Odoo has built-in lead mining?"
-msgstr "ຄຳແນະນຳ: ທ່ານຮູ້ບໍວ່າ Odoo ມີລະບົບຄົ້ນຫາ ລູກຄ້າເປົ້າໝາຍ ໃນຕົວ?"
+msgid "Tip: Did you know AFENDA xForge has built-in lead mining?"
+msgstr "ຄຳແນະນຳ: ທ່ານຮູ້ບໍວ່າ AFENDA xForge ມີລະບົບຄົ້ນຫາ ລູກຄ້າເປົ້າໝາຍ ໃນຕົວ?"
 
 #. module: crm
 #: model:digest.tip,name:crm.digest_tip_crm_4
@@ -3975,8 +3975,8 @@ msgstr "ຕົວຢ່າງ: ແພງເກີນໄປ"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
-msgid "e.g. https://www.odoo.com"
-msgstr "ຕົວຢ່າງ: https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "ຕົວຢ່າງ: https://www.afenda.app"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.res_config_settings_view_form

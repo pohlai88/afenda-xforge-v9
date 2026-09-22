@@ -61,7 +61,7 @@ class InteractionService {
         if (!this.owlApp) {
             const { App } = odoo.loader.modules.get("@odoo/owl");
             const appConfig = {
-                name: "Odoo Website",
+                name: "AFENDA xForge Website",
                 getTemplate,
                 env: this.env,
                 dev: this.env.debug,

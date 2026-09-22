@@ -18,7 +18,7 @@ class ResUsers(models.Model):
             ('onboarding_canned', 'Onboarding canned'),
             ('idle', 'Idle'),
             ('disabled', 'Disabled'),
-        ], string="OdooBot Status", readonly=True, required=False)  # keep track of the state: correspond to the code of the last message sent
+        ], string="AFENDA Bot Status", readonly=True, required=False)  # keep track of the state: correspond to the code of the last message sent
     odoobot_failed = fields.Boolean(readonly=True)
 
     @property
@@ -36,7 +36,7 @@ class ResUsers(models.Model):
         channel = self.env['discuss.channel']._get_or_create_chat([odoobot_id, self.partner_id.id])
         message = Markup("%s<br/>%s<br/><b>%s</b> <span class=\"o_odoobot_command\">:)</span>") % (
             _("Hello,"),
-            _("Odoo's chat helps employees collaborate efficiently. I'm here to help you discover its features."),
+            _("AFENDA xForge's chat helps employees collaborate efficiently. I'm here to help you discover its features."),
             _("Try to send me an emoji")
         )
         channel.sudo().message_post(

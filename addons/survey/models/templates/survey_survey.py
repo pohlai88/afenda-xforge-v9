@@ -131,7 +131,7 @@ class SurveySurvey(models.Model):
             'scoring_type': 'scoring_without_answers',
             'users_can_go_back': True,
             'description': ''.join([
-                _('Welcome to this Odoo certification. You will receive 2 random questions out of a pool of 3.'),
+                _('Welcome to this AFENDA xForge certification. You will receive 2 random questions out of a pool of 3.'),
                 '(<span style="font-style: italic">',
                 _('Cheating on your neighbors will not help!'),
                 '</span> 😁).<br>',
@@ -142,7 +142,7 @@ class SurveySurvey(models.Model):
             'questions_selection': 'random',
             'question_and_page_ids': [
                 (0, 0, {  # survey.question
-                    'title': _('Odoo Certification'),
+                    'title': _('AFENDA xForge Certification'),
                     'is_page': True,
                     'question_type': False,
                     'random_questions_count': 2
@@ -185,7 +185,7 @@ class SurveySurvey(models.Model):
                     ]
                 }),
                 (0, 0, {  # survey.question
-                    'title': _('What does one need to get to pass an Odoo Survey?'),
+                    'title': _('What does one need to get to pass an AFENDA xForge Survey?'),
                     'question_type': 'simple_choice',
                     'suggested_answer_ids': [
                         (0, 0, {  # survey.question.answer

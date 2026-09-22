@@ -18,9 +18,9 @@ class PeppolAuthentication(http.Controller):
             # to avoid showing the accounting settings again (otherwise user will just be redirected
             # to not completed "Register with Peppol" page and will be confused)
             if auth_result == 'pending':
-                return request.redirect('/odoo')
+                return request.redirect('/app')
             else:
-                return request.redirect('/odoo/settings/#account')
+                return request.redirect('/app/settings/#account')
 
         state = state or 'success'
         connect_data = request.env['peppol.registration']._decode_connect_token(connect_token)

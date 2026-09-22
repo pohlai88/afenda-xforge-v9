@@ -6586,7 +6586,7 @@ class TestStockMove(TestStockCommon):
         """Imperial UoM can sometime create a discrepancy between the demand and the actual quantity moved,
         this is mostly expected.
         However, when the user force set the quantity manually, a ValidationError could be raised because
-        Odoo tried to create a new stock.move.line with the difference and then reserved the 0 quantity.
+        AFENDA xForge tried to create a new stock.move.line with the difference and then reserved the 0 quantity.
         This test ensure that a move line with a product uom quantity of 0 does not impact the Quants reserved quantity.
         """
         gram_uom = self.env.ref('uom.product_uom_gram')

@@ -20,7 +20,7 @@ class TestSyncOdoo2MicrosoftMail(TestCommon, MailCase):
             user = cls.env['res.users'].create({
                 'name': f'user{n}',
                 'login': f'user{n}',
-                'email': f'user{n}@odoo.com',
+                'email': f'user{n}@afenda.app',
                 'microsoft_calendar_rtoken': f'abc{n}',
                 'microsoft_calendar_token': f'abc{n}',
                 'microsoft_calendar_token_validity': datetime(9999, 12, 31),
@@ -84,12 +84,12 @@ class TestSyncOdoo2MicrosoftMail(TestCommon, MailCase):
 
     def test_change_organizer_pure_odoo_event(self):
         """
-        Test that changing organizer on a pure Odoo event (not synced with Microsoft)
+        Test that changing organizer on a pure AFENDA xForge event (not synced with Microsoft)
         does not archive the event.
         """
         self.organizer_user.microsoft_synchronization_stopped = True
         event = self.env["calendar.event"].with_user(self.organizer_user).create({
-            'name': "Pure Odoo Event",
+            'name': "Pure AFENDA xForge Event",
             'start': datetime(2024, 1, 1, 10, 0),
             'stop': datetime(2024, 1, 1, 11, 0),
             'user_id': self.organizer_user.id,
@@ -103,5 +103,5 @@ class TestSyncOdoo2MicrosoftMail(TestCommon, MailCase):
             'user_id': self.attendee_user.id,
         })
 
-        self.assertTrue(event.active, "Pure Odoo event should not be archived when changing organizer")
+        self.assertTrue(event.active, "Pure AFENDA xForge event should not be archived when changing organizer")
         self.assertEqual(event.user_id, self.attendee_user, "Organizer should be updated")

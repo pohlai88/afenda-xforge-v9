@@ -25,7 +25,7 @@ The whole flow is implemented as:
 
 This module also uses analytic accounting and is compatible with the invoice on timesheet module so that you are able to automatically re-invoice your customers' expenses if your work by project.
     """,
-    'website': 'https://www.odoo.com/app/expenses',
+    'website': 'https://www.afenda.app/app/expenses',
     'depends': ['account', 'web_tour', 'hr'],
     'data': [
         'security/hr_expense_security.xml',
@@ -79,6 +79,6 @@ This module also uses analytic accounting and is compatible with the invoice on 
             'hr_expense/static/tests/expense_list_view.test.js',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

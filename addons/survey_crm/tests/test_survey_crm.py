@@ -68,7 +68,7 @@ class TestSurveyCrm(common.TestSurveyCommon, HttpCase):
         if (sales_team):
             # Add survey manager in a sales team and the survey lead assignment to a sales team
             sales_team = self.env['crm.team'].create({
-                'name': 'Odoo Survey Team',
+                'name': 'AFENDA xForge Survey Team',
                 'use_leads': True
             })
             sales_team.member_ids = [(4, self.survey_manager.id)]

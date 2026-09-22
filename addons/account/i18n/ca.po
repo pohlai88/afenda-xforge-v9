@@ -41,12 +41,12 @@
 # Santiago Payà <santiagopim@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-08 07:26+0000\n"
-"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@odoo.com>\n"
-"Language-Team: Catalan <https://translate.odoo.com/projects/odoo-19/account/"
+"Last-Translator: \"Noemi Pla Garcia (nopl)\" <nopl@afenda.app>\n"
+"Language-Team: Catalan <https://translate.afenda.app/projects/odoo-19/account/"
 "ca/>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
@@ -428,10 +428,10 @@ msgstr ""
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_move_form
 msgid ""
-". The journal entries need to be computed by Odoo before being posted in "
+". The journal entries need to be computed by AFENDA xForge before being posted in "
 "your company's currency."
 msgstr ""
-". Odoo ha de calcular els assentaments abans de publicar-los en la moneda de "
+". AFENDA xForge ha de calcular els assentaments abans de publicar-los en la moneda de "
 "l'empresa."
 
 #. module: account
@@ -1793,7 +1793,7 @@ msgid ""
 "                                    </td>\n"
 "                                    <td align=\"right\" style=\"padding-"
 "right: 16px;\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height: 2em; object-fit: contain;"
 "\" class=\"align-baseline w-auto\"/>\n"
 "                                    </td>\n"
@@ -1863,7 +1863,7 @@ msgid ""
 "                                        <div style=\"text-align: center; "
 "padding-top: 24px;\">\n"
 "                                            <a t-if=\"invoice_count != 1\" t-"
-"attf-href=\"/odoo/accounting/action-"
+"attf-href=\"/app/accounting/action-"
 "account.action_account_moves_email_preview?"
 "active_ids={{ invoice_preview_ids }}\" target=\"_blank\" t-attf-"
 "style=\"padding: 12px 24px; font-size: 14px; font-weight: bold; color: "
@@ -1931,7 +1931,7 @@ msgid ""
 "                                        <t t-else=\"\">Incoming Bill</t>\n"
 "                                    </td>\n"
 "                                    <td align=\"right\">\n"
-"                                        <img alt=\"Odoo\" src=\"/web/static/"
+"                                        <img alt=\"AFENDA xForge\" src=\"/web/static/"
 "img/logo_inverse_white_206px.png\" style=\"height:30px; width:92px; object-"
 "fit:contain;\"/>\n"
 "                                    </td>\n"
@@ -4493,7 +4493,7 @@ msgstr "Banc i caixa"
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.report_statement
 msgid "Bank of odoo"
-msgstr "Banc de Odoo"
+msgstr "Banc de AFENDA xForge"
 
 #. module: account
 #. odoo-python
@@ -4641,11 +4641,11 @@ msgstr "Pertany a la mateixa empresa que %s."
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.account_default_terms_and_conditions
 msgid ""
-"Below text serves as a suggestion and doesn’t engage Odoo S.A. "
+"Below text serves as a suggestion and doesn’t engage AFENDA "
 "responsibility."
 msgstr ""
 "El text següent serveix com a suggeriment i no implica la responsabilitat "
-"d'Odoo S.A."
+"d'AFENDA"
 
 #. module: account
 #: model:ir.model.fields,field_description:account.field_account_setup_bank_manual_config__bank_bic
@@ -6796,10 +6796,10 @@ msgstr "Exemple de data"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_financial_year_op__opening_date
 msgid ""
-"Date from which the accounting is managed in Odoo. It is the date of the "
+"Date from which the accounting is managed in AFENDA xForge. It is the date of the "
 "opening entry."
 msgstr ""
-"Data a partir de la qual es gestiona la comptabilitat a Odoo. És la data de "
+"Data a partir de la qual es gestiona la comptabilitat a AFENDA xForge. És la data de "
 "l'entrada d'obertura."
 
 #. module: account
@@ -11860,7 +11860,7 @@ msgstr "Entrada manual"
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__inbound_payment_method_line_ids
 msgid ""
-"Manual: Get paid by any method outside of Odoo.\n"
+"Manual: Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
@@ -11870,7 +11870,7 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"Manual: Es paga per qualsevol mètode fora d'Odoo.\n"
+"Manual: Es paga per qualsevol mètode fora d'AFENDA xForge.\n"
 "Proveïdors de pagament: Cada proveïdor de pagament té el seu propi mètode de "
 "pagament. Sol·licita una transacció en/a una targeta gràcies a un testimoni "
 "de pagament desat pel company quan es compra o es subscriu en línia.\n"
@@ -11883,13 +11883,13 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_journal__outbound_payment_method_line_ids
 msgid ""
-"Manual: Pay by any method outside of Odoo.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Manual: Pay by any method outside of AFENDA xForge.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "SEPA Credit Transfer: Pay in the SEPA zone by submitting a SEPA Credit "
 "Transfer file to your bank. Module account_sepa is necessary.\n"
 msgstr ""
-"Manual: Pagueu per qualsevol mètode fora d'Odoo.\n"
-"Xec: pagueu factures amb xec i imprimiu-lo des d'Odoo.\n"
+"Manual: Pagueu per qualsevol mètode fora d'AFENDA xForge.\n"
+"Xec: pagueu factures amb xec i imprimiu-lo des d'AFENDA xForge.\n"
 "Transferència de crèdit SEPA: pagueu a la zona SEPA enviant un fitxer de "
 "transferència de crèdit SEPA al vostre banc. Mòdul account_sepa és "
 "necessari.\n"
@@ -11897,11 +11897,11 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -11916,11 +11916,11 @@ msgstr ""
 #. module: account
 #: model:ir.model.fields,help:account.field_account_payment_register__payment_method_line_id
 msgid ""
-"Manual: Pay or Get paid by any method outside of Odoo.\n"
+"Manual: Pay or Get paid by any method outside of AFENDA xForge.\n"
 "Payment Providers: Each payment provider has its own Payment Method. Request "
 "a transaction on/to a card thanks to a payment token saved by the partner "
 "when buying or subscribing online.\n"
-"Check: Pay bills by check and print it from Odoo.\n"
+"Check: Pay bills by check and print it from AFENDA xForge.\n"
 "Batch Deposit: Collect several customer checks at once generating and "
 "submitting a batch deposit to your bank. Module account_batch_payment is "
 "necessary.\n"
@@ -11929,11 +11929,11 @@ msgid ""
 "SEPA Direct Debit: Get paid in the SEPA zone thanks to a mandate your "
 "partner will have granted to you. Module account_sepa is necessary.\n"
 msgstr ""
-"Manual: Paga o rep un pagament per qualsevol mètode fora d'Odoo.\n"
+"Manual: Paga o rep un pagament per qualsevol mètode fora d'AFENDA xForge.\n"
 "Proveïdors de pagament: Cada proveïdor de pagament té el seu propi mètode de "
 "pagament. Sol·licita una transacció en/a una targeta gràcies a un testimoni "
 "de pagament desat pel company quan es compra o es subscriu en línia.\n"
-"Comprovació: Paga factures per xec i imprimeix des d'Odoo.\n"
+"Comprovació: Paga factures per xec i imprimeix des d'AFENDA xForge.\n"
 "Dipòsit per lots: Recolliu diverses comprovacions de client alhora generant "
 "i enviant un dipòsit per lots al vostre banc. El mòdul de pagament de "
 "comptes és necessari.\n"
@@ -12929,31 +12929,31 @@ msgstr "Octubre"
 
 #. module: account
 #: model:ir.model.fields.selection,name:account.selection__account_report_expression__engine__domain
-msgid "Odoo Domain"
-msgstr "Domini Odoo"
+msgid "AFENDA xForge Domain"
+msgstr "Domini AFENDA xForge"
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.action_bank_statement_tree
 #: model_terms:ir.actions.act_window,help:account.action_credit_statement_tree
 msgid ""
-"Odoo allows you to reconcile a statement line directly with\n"
+"AFENDA xForge allows you to reconcile a statement line directly with\n"
 "                the related sale or purchase invoices."
 msgstr ""
-"Odoo us permet conciliar directament una línia d'extracte amb\n"
+"AFENDA xForge us permet conciliar directament una línia d'extracte amb\n"
 "                les factures de compra o venda relacionades."
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_customer
-msgid "Odoo helps you easily track all activities related to a customer."
+msgid "AFENDA xForge helps you easily track all activities related to a customer."
 msgstr ""
-"Odoo us ajuda fàcilment a seguir totes les activitats relacionades amb un "
+"AFENDA xForge us ajuda fàcilment a seguir totes les activitats relacionades amb un "
 "client."
 
 #. module: account
 #: model_terms:ir.actions.act_window,help:account.res_partner_action_supplier
-msgid "Odoo helps you easily track all activities related to a supplier."
+msgid "AFENDA xForge helps you easily track all activities related to a supplier."
 msgstr ""
-"Odoo us ajuda fàcilment a seguir totes les activitats relacionades amb un "
+"AFENDA xForge us ajuda fàcilment a seguir totes les activitats relacionades amb un "
 "proveïdor."
 
 #. module: account
@@ -15900,11 +15900,11 @@ msgstr ""
 msgid ""
 "Send one separate email for each invoice.\n"
 "Any file extension will be accepted.\n"
-"Only PDF and XML files will be interpreted by Odoo"
+"Only PDF and XML files will be interpreted by AFENDA xForge"
 msgstr ""
 "Envia un correu electrònic individual per a cada factura.\n"
 "S'acceptarà qualsevol extensió de fitxer.\n"
-"Només els fitxers PDF i XML seran processats per Odoo"
+"Només els fitxers PDF i XML seran processats per AFENDA xForge"
 
 #. module: account
 #: model:ir.actions.act_window,name:account.account_send_payment_receipt_by_email_action
@@ -19791,11 +19791,11 @@ msgstr ""
 #: model:ir.model.fields,help:account.field_account_move__quick_edit_total_amount
 msgid ""
 "Use this field to encode the total amount of the invoice.\n"
-"Odoo will automatically create one invoice line with default values to match "
+"AFENDA xForge will automatically create one invoice line with default values to match "
 "it."
 msgstr ""
 "Utilitzeu aquest camp per a codificar l'import total de la factura.\n"
-"Odoo crearà automàticament una línia de factura amb valors predeterminats "
+"AFENDA xForge crearà automàticament una línia de factura amb valors predeterminats "
 "per a fer-la coincidir."
 
 #. module: account
@@ -20116,12 +20116,12 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                orders or receipts. This allows you to control bills\n"
 "                you receive from your vendor according to the draft\n"
-"                document in Odoo."
+"                document in AFENDA xForge."
 msgstr ""
 "Les factures de proveïdor es poden generar prèviament a partir de comandes\n"
 "                de compra o rebuts. Això et permet controlar les factures\n"
 "                que reps d'un proveïdor segons el document\n"
-"                provisional d'Odoo."
+"                provisional d'AFENDA xForge."
 
 #. module: account
 #. odoo-javascript
@@ -20380,10 +20380,10 @@ msgstr "Esteu intentant conciliar entrades que ja s'han conciliat."
 #: model:ir.model.fields,help:account.field_account_journal__invoice_reference_model
 msgid ""
 "You can choose different models for each type of reference. The default one "
-"is the Odoo reference."
+"is the AFENDA xForge reference."
 msgstr ""
 "Podeu escollir diferents models per a cada tipus de referència. El per "
-"omissió és la referència Odoo."
+"omissió és la referència AFENDA xForge."
 
 #. module: account
 #. odoo-python
@@ -21463,8 +21463,8 @@ msgstr ""
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
-msgid "e.g. https://www.odoo.com"
-msgstr "per exemple https://www.odoo.com"
+msgid "e.g. https://www.afenda.app"
+msgstr "per exemple https://www.afenda.app"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form

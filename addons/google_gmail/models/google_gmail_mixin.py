@@ -30,7 +30,7 @@ class GoogleGmailMixin(models.AbstractModel):
     # The scope `https://mail.google.com/` is needed for SMTP and IMAP
     # https://developers.google.com/workspace/gmail/imap/xoauth2-protocol
     _SERVICE_SCOPE = 'https://mail.google.com/ https://www.googleapis.com/auth/userinfo.email'
-    _DEFAULT_GMAIL_IAP_ENDPOINT = 'https://gmail.api.odoo.com'
+    _DEFAULT_GMAIL_IAP_ENDPOINT = 'https://gmail.api.afenda.app'
 
     active = fields.Boolean(default=True)
 

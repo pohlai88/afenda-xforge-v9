@@ -29,12 +29,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-06 20:36+0000\n"
 "Last-Translator: Weblate <noreply-mt-weblate@weblate.org>\n"
-"Language-Team: Estonian <https://translate.odoo.com/projects/odoo-19/sale/"
+"Language-Team: Estonian <https://translate.afenda.app/projects/odoo-19/sale/"
 "et/>\n"
 "Language: et\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -1216,10 +1216,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"Näiteks, kui müüte ettemakstud tundidega teenuseid, soovitab Odoo teil müüa "
+"Näiteks, kui müüte ettemakstud tundidega teenuseid, soovitab AFENDA xForge teil müüa "
 "\n"
 "                           lisatunde kuni kõik tellitud tunnid on kasutatud."
 
@@ -2257,9 +2257,9 @@ msgstr "Arvete mustandid"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
-"Lohistage hinnapakkumise PDF fail Odoo-sse oma hinnapakkumiste nimekirja. "
+"Lohistage hinnapakkumise PDF fail AFENDA xForge-sse oma hinnapakkumiste nimekirja. "
 "Nautige automatiseerimist!"
 
 #. module: sale
@@ -3221,7 +3221,7 @@ msgstr "Lisamüügi tellimust ei leitud."
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
+msgid "Not using AFENDA xForge?"
 msgstr "Ei kasuta Odood?"
 
 #. module: sale
@@ -3273,8 +3273,8 @@ msgstr "Kohaletoimetamise veateatega sõnumite arv"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -4697,7 +4697,7 @@ msgstr "Starshipit konnektor"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
+msgid "Start on AFENDA xForge"
 msgstr "Alusta Odoos"
 
 #. module: sale
@@ -5561,7 +5561,7 @@ msgstr "Ruumala"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
 msgstr "Kas soovid seda dokumenti importida Odoosse?"
 
 #. module: sale

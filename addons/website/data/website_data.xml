@@ -210,7 +210,7 @@
                                             <p>The website will not work properly if you reject or discard those cookies.</p>
                                         </td>
                                         <td>
-                                            session_id (Odoo)<br/>
+                                            session_id (AFENDA xForge)<br/>
                                         </td>
                                     </tr>
                                     <tr>
@@ -222,7 +222,7 @@
                                             <p>Your experience may be degraded if you discard those cookies, but the website will still work.</p>
                                         </td>
                                         <td>
-                                            frontend_lang (Odoo)
+                                            frontend_lang (AFENDA xForge)
                                         </td>
                                     </tr>
                                     <tr>
@@ -235,10 +235,10 @@
                                             <p>We may not be able to provide the best service to you if you reject those cookies, but the website will work.</p>
                                         </td>
                                         <td>
-                                            im_livechat_previous_operator (Odoo)<br/>
-                                            utm_campaign (Odoo)<br/>
-                                            utm_source (Odoo)<br/>
-                                            utm_medium (Odoo)
+                                            im_livechat_previous_operator (AFENDA xForge)<br/>
+                                            utm_campaign (AFENDA xForge)<br/>
+                                            utm_source (AFENDA xForge)<br/>
+                                            utm_medium (AFENDA xForge)
                                         </td>
                                     </tr>
                                     <tr>

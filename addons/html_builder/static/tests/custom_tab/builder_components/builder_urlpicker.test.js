@@ -50,10 +50,10 @@ test("BuilderUrlPicker normalizes URL values before committing", async () => {
     const targetEl = queryOne(":iframe .test-options-target");
 
     const testCases = [
-        ["odoo.com", "https://odoo.com"],
-        ["ftp://odoo.com", "ftp://odoo.com"],
-        ["http://odoo.com", "http://odoo.com"],
-        ["https://odoo.com", "https://odoo.com"],
+        ["afenda.app", "https://afenda.app"],
+        ["ftp://afenda.app", "ftp://afenda.app"],
+        ["http://afenda.app", "http://afenda.app"],
+        ["https://afenda.app", "https://afenda.app"],
         ["test@test.com", "mailto:test@test.com"],
         ["mailto:test2@test.com", "mailto:test2@test.com"],
         ["+1555-555-5556", "tel:+1555-555-5556"],
@@ -75,10 +75,10 @@ test("BuilderUrlPicker preserves the current HTTP protocol when committing a bar
         `<div class="test-options-target" href="http://old.example.com">Target</div>`
     );
     await contains(":iframe .test-options-target").click();
-    await contains("[data-action-id='customUrlAction'] input").edit("odoo.com");
+    await contains("[data-action-id='customUrlAction'] input").edit("afenda.app");
 
-    expect(queryOne(":iframe .test-options-target")).toHaveAttribute("href", "http://odoo.com");
-    expect("[data-action-id='customUrlAction'] input").toHaveValue("http://odoo.com");
+    expect(queryOne(":iframe .test-options-target")).toHaveAttribute("href", "http://afenda.app");
+    expect("[data-action-id='customUrlAction'] input").toHaveValue("http://afenda.app");
 });
 
 test("BuilderUrlPicker opens the normalized URL from the preview button", async () => {
@@ -89,8 +89,8 @@ test("BuilderUrlPicker opens the normalized URL from the preview button", async 
 
     await setupHTMLBuilder(`<div class="test-options-target">Target</div>`);
     await contains(":iframe .test-options-target").click();
-    await contains("[data-action-id='customUrlAction'] input").fill("odoo.com");
+    await contains("[data-action-id='customUrlAction'] input").fill("afenda.app");
     await contains("[data-action-id='customUrlAction'] button").click();
 
-    expect.verifySteps(["https://odoo.com _blank"]);
+    expect.verifySteps(["https://afenda.app _blank"]);
 });

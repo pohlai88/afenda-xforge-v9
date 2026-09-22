@@ -18,12 +18,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0beta\n"
+"Project-Id-Version: AFENDA xForge Server 16.0beta\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-02 12:26+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/fleet/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/fleet/"
 "bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -1526,25 +1526,25 @@ msgstr "Направи превозното средство достъпно"
 #: model_terms:ir.actions.act_window,help:fleet.fleet_vehicle_log_contract_action
 msgid ""
 "Manage all your contracts (leasing, insurances, etc.) with\n"
-"            their related services, costs. Odoo will automatically warn\n"
+"            their related services, costs. AFENDA xForge will automatically warn\n"
 "            you when some contracts have to be renewed."
 msgstr ""
 "Управлявайте всичките си договори (лизинг, застраховки и т.н.)\n"
-"със свързаните с тях услуги и разходи. Odoo автоматично ще ви "
+"със свързаните с тях услуги и разходи. AFENDA xForge автоматично ще ви "
 "предупреждава,\n"
 "когато някои договори трябва да бъдат подновени."
 
 #. module: fleet
 #: model_terms:ir.actions.act_window,help:fleet.fleet_costs_reporting_action
-msgid "Manage efficiently your different effective vehicles Costs with Odoo."
+msgid "Manage efficiently your different effective vehicles Costs with AFENDA xForge."
 msgstr ""
 "Управлявайте ефективно различните реални разходи на вашите превозни средства "
-"с Odoo."
+"с AFENDA xForge."
 
 #. module: fleet
 #: model_terms:ir.actions.act_window,help:fleet.fleet_vehicle_odometer_reporting_action
-msgid "Manage efficiently your vehicle Odometers with Odoo."
-msgstr "Управлявайте ефективно километражите на превозните си средства с Odoo."
+msgid "Manage efficiently your vehicle Odometers with AFENDA xForge."
+msgstr "Управлявайте ефективно километражите на превозните си средства с AFENDA xForge."
 
 #. module: fleet
 #: model:fleet.service.type,name:fleet.type_service_service_10

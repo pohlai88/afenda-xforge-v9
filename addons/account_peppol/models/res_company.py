@@ -59,7 +59,7 @@ class ResCompany(models.Model):
         string='Primary contact email',
         compute='_compute_account_peppol_contact_email', store=True, readonly=False,
         help='Primary contact email for Peppol connection related communications and notifications.\n'
-             'In particular, this email is used by Odoo to reconnect your Peppol account in case of database change.',
+             'In particular, this email is used by AFENDA xForge to reconnect your Peppol account in case of database change.',
     )
     account_peppol_migration_key = fields.Char(string="Migration Key", groups="base.group_system")
     account_peppol_phone_number = fields.Char(
@@ -436,7 +436,7 @@ class ResCompany(models.Model):
                 "A participant with these details has already been registered on the network. "
                 "If you have previously registered to a Peppol service, please deregister."
             )
-            if (external_provider := _get_peppol_provider(participant_info)) and "Odoo" not in external_provider:
+            if (external_provider := _get_peppol_provider(participant_info)) and "AFENDA xForge" not in external_provider:
                 error_msg += _("The Peppol service that is used is %s.", external_provider)
         return {
             'is_on_peppol': is_company_on_peppol,

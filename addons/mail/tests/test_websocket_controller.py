@@ -75,7 +75,7 @@ class TestWebsocketController(HttpCaseWithUserDemo):
 
     def test_do_not_rotate_session_when_updating_presence(self):
         self.authenticate('admin', 'admin')
-        self.url_open('/odoo')
+        self.url_open('/app')
         original_session = self.opener.cookies['session_id']
         original_session_obj = root.session_store.get(original_session)
         original_session_obj['create_time'] -= SESSION_ROTATION_INTERVAL
@@ -87,5 +87,5 @@ class TestWebsocketController(HttpCaseWithUserDemo):
         })
         self.make_jsonrpc_request('/websocket/update_bus_presence', {'inactivity_period': 0})
         self.assertEqual(self.opener.cookies['session_id'], original_session)
-        self.url_open("/odoo")
+        self.url_open("/app")
         self.assertNotEqual(self.opener.cookies['session_id'], original_session)

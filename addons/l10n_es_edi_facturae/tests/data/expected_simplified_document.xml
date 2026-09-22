@@ -171,7 +171,7 @@
                 <ds:DigestValue>___ignore___</ds:DigestValue>
               </xades:CertDigest>
               <xades:IssuerSerial>
-                <ds:X509IssuerName>CN=runbot.odoo.com, OU=R&amp;D, O=Odoo, C=BE, ST=Wallonnia, L=Ramillies, 1.2.840.113549.1.9.1=info@odoo.com</ds:X509IssuerName>
+                <ds:X509IssuerName>CN=runbot.afenda.app, OU=R&amp;D, O=AFENDA xForge, C=BE, ST=Wallonnia, L=Ramillies, 1.2.840.113549.1.9.1=info@afenda.app</ds:X509IssuerName>
                 <ds:X509SerialNumber>___ignore___</ds:X509SerialNumber>
               </xades:IssuerSerial>
             </xades:Cert>

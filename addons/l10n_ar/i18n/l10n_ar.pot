@@ -4,7 +4,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 19.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 19.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 19:14+0000\n"
 "PO-Revision-Date: 2026-04-10 19:14+0000\n"
@@ -359,7 +359,7 @@ msgstr ""
 
 #. module: l10n_ar
 #: model:product.template,name:l10n_ar.product_product_exento_product_template
-msgid "Book \"Development in Odoo\" (VAT Exempt)"
+msgid "Book \"Development in AFENDA xForge\" (VAT Exempt)"
 msgstr ""
 
 #. module: l10n_ar

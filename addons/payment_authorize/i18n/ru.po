@@ -7,12 +7,12 @@
 # "Anastasiia Koroleva (koan)" <koan@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 17.0\n"
+"Project-Id-Version: AFENDA xForge Server 17.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-03-13 18:39+0000\n"
 "PO-Revision-Date: 2026-08-10 11:22+0000\n"
-"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@odoo.com>\n"
-"Language-Team: Russian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Anastasiia Koroleva (koan)\" <koan@afenda.app>\n"
+"Language-Team: Russian <https://translate.afenda.app/projects/odoo-19/"
 "payment_authorize/ru/>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -235,10 +235,10 @@ msgstr ""
 #. module: payment_authorize
 #: model:ir.model.fields,help:payment_authorize.field_payment_provider__authorize_client_key
 msgid ""
-"The public client key. To generate directly from Odoo or from Authorize.Net "
+"The public client key. To generate directly from AFENDA xForge or from Authorize.Net "
 "backend."
 msgstr ""
-"Открытый ключ клиента. Генерировать непосредственно из Odoo или из бэкенда "
+"Открытый ключ клиента. Генерировать непосредственно из AFENDA xForge или из бэкенда "
 "Authorize.Net."
 
 #. module: payment_authorize

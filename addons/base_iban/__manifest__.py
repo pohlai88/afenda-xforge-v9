@@ -24,6 +24,6 @@ with a single statement.
             'base_iban/static/src/tests/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -177,7 +177,7 @@ const ODOO_PARTNER_BALANCE_ARGS = () => {
 functionRegistry.add("ODOO.CREDIT", {
     description: _t("Get the total credit for the specified account(s) and period."),
     args: ODOO_FIN_ARGS(),
-    category: "Odoo",
+    category: "AFENDA xForge",
     returns: ["NUMBER"],
     compute: function (
         accountCodes,
@@ -210,7 +210,7 @@ functionRegistry.add("ODOO.CREDIT", {
 functionRegistry.add("ODOO.DEBIT", {
     description: _t("Get the total debit for the specified account(s) and period."),
     args: ODOO_FIN_ARGS(),
-    category: "Odoo",
+    category: "AFENDA xForge",
     returns: ["NUMBER"],
     compute: function (
         accountCodes,
@@ -243,7 +243,7 @@ functionRegistry.add("ODOO.DEBIT", {
 functionRegistry.add("ODOO.BALANCE", {
     description: _t("Get the total balance for the specified account(s) and period."),
     args: ODOO_FIN_ARGS(),
-    category: "Odoo",
+    category: "AFENDA xForge",
     returns: ["NUMBER"],
     compute: function (
         accountCodes,
@@ -285,7 +285,7 @@ functionRegistry.add("ODOO.FISCALYEAR.START", {
         arg("day (date)", _t("The day from which to extract the fiscal year start.")),
         arg("company_id (number, optional)", _t("The company.")),
     ],
-    category: "Odoo",
+    category: "AFENDA xForge",
     returns: ["NUMBER"],
     compute: function (date, companyId = { value: null }) {
         const startDate = this.getters.getFiscalStartDate(
@@ -305,7 +305,7 @@ functionRegistry.add("ODOO.FISCALYEAR.END", {
         arg("day (date)", _t("The day from which to extract the fiscal year end.")),
         arg("company_id (number, optional)", _t("The company.")),
     ],
-    category: "Odoo",
+    category: "AFENDA xForge",
     returns: ["NUMBER"],
     compute: function (date, companyId = { value: null }) {
         const endDate = this.getters.getFiscalEndDate(
@@ -348,7 +348,7 @@ functionRegistry.add("ODOO.ACCOUNT.GROUP", {
             _t("The technical account type (possible values are: %s).", ACCOUNT_TYPES.join(", "))
         ),
     ],
-    category: "Odoo",
+    category: "AFENDA xForge",
     returns: ["NUMBER"],
     compute: function (accountType) {
         const accountTypes = this.getters.getAccountGroupCodes(toString(accountType));
@@ -359,7 +359,7 @@ functionRegistry.add("ODOO.ACCOUNT.GROUP", {
 functionRegistry.add("ODOO.RESIDUAL", {
     description: _t("Return the residual amount for the specified account(s) and period"),
     args: ODOO_RESIDUAL_ARGS(),
-    category: "Odoo",
+    category: "AFENDA xForge",
     returns: ["NUMBER"],
     compute: function (
         accountCodes,
@@ -395,7 +395,7 @@ functionRegistry.add("ODOO.RESIDUAL", {
 functionRegistry.add("ODOO.PARTNER.BALANCE", {
     description: _t("Return the partner balance for the specified account(s) and period"),
     args: ODOO_PARTNER_BALANCE_ARGS(),
-    category: "Odoo",
+    category: "AFENDA xForge",
     returns: ["NUMBER"],
     compute: function (
         partnerIds,
@@ -449,7 +449,7 @@ functionRegistry.add("ODOO.BALANCE.TAG", {
         COMPANY_ARG,
         POSTED_ARG,
     ],
-    category: "Odoo",
+    category: "AFENDA xForge",
     returns: ["NUMBER"],
     compute: function (
         accountTagIds,

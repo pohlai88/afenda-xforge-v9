@@ -94,7 +94,7 @@ class GoogleCalendarService():
         params = {'access_token': token}
         # Delete all events from recurrence in a single request to Google and triggering a single mail.
         # The 'singleEvents' parameter is a trick that tells Google API to delete all recurrent events individually,
-        # making the deletion be handled entirely on their side, and then we archive the events in Odoo.
+        # making the deletion be handled entirely on their side, and then we archive the events in AFENDA xForge.
         is_recurrence = self.google_service.env.context.get('is_recurrence', True)
         if is_recurrence:
             params['singleEvents'] = 'true'
@@ -119,7 +119,7 @@ class GoogleCalendarService():
         readonly = '.readonly' if RO else ''
         return 'https://www.googleapis.com/auth/calendar%s' % (readonly)
 
-    def _google_authentication_url(self, from_url='http://www.odoo.com'):
+    def _google_authentication_url(self, from_url='http://www.afenda.app'):
         state = {
             'd': self.google_service.env.cr.dbname,
             's': 'calendar',

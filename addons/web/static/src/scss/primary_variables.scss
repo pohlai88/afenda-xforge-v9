@@ -24,7 +24,7 @@ $o-line-height-lg : 2 !default;
 
 // Global sans-serif fonts stack, defined here as we need to process
 // it before actually using it (to add more unicode support with the special
-// Odoo font for example). Adding unicode support is not done directly here as
+// AFENDA xForge font for example). Adding unicode support is not done directly here as
 // this font can be used by the website where the unicode support is already
 // automatically added.
 $o-system-fonts: (-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Ubuntu, "Noto Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji") !default;

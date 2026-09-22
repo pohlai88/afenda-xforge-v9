@@ -8,7 +8,7 @@
 # Samkhann Seang <seangsamkhann@gmail.com>, 2018
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 12.0\n"
+"Project-Id-Version: AFENDA xForge Server 12.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:48+0000\n"
 "PO-Revision-Date: 2018-10-08 06:48+0000\n"
@@ -2383,7 +2383,7 @@ msgstr "ID"
 #. module: point_of_sale
 #. odoo-javascript
 #: code:addons/point_of_sale/static/src/js/Popups/ErrorTracebackPopup.js:0
-msgid "IMPORTANT: Bug Report From Odoo Point Of Sale"
+msgid "IMPORTANT: Bug Report From AFENDA xForge Point Of Sale"
 msgstr ""
 
 #. module: point_of_sale
@@ -3931,7 +3931,7 @@ msgstr ""
 #: code:addons/point_of_sale/static/src/app/printer/base_printer.js:0
 msgid ""
 "Please check if the printer is still connected. \n"
-"Some browsers don't allow HTTP calls from websites to devices in the network (for security reasons). If it is the case, you will need to follow Odoo's documentation for 'Self-signed certificate for ePOS printers' and 'Secure connection (HTTPS)' to solve the issue"
+"Some browsers don't allow HTTP calls from websites to devices in the network (for security reasons). If it is the case, you will need to follow AFENDA xForge's documentation for 'Self-signed certificate for ePOS printers' and 'Secure connection (HTTPS)' to solve the issue"
 msgstr ""
 
 #. module: point_of_sale
@@ -6124,13 +6124,13 @@ msgstr ""
 
 #. module: point_of_sale
 #: model:ir.model.fields,help:point_of_sale.field_pos_config__sequence_line_id
-msgid "This sequence is automatically created by Odoo but you can change it to customize the reference numbers of your orders lines."
+msgid "This sequence is automatically created by AFENDA xForge but you can change it to customize the reference numbers of your orders lines."
 msgstr ""
 
 #. module: point_of_sale
 #: model:ir.model.fields,help:point_of_sale.field_pos_config__sequence_id
 #: model:ir.model.fields,help:point_of_sale.field_res_config_settings__pos_sequence_id
-msgid "This sequence is automatically created by Odoo but you can change it to customize the reference numbers of your orders."
+msgid "This sequence is automatically created by AFENDA xForge but you can change it to customize the reference numbers of your orders."
 msgstr ""
 
 #. module: point_of_sale

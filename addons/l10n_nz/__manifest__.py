@@ -15,8 +15,8 @@ Also:
     - activates a number of regional currencies.
     - sets up New Zealand taxes.
     """,
-    'author': 'Odoo S.A., Richard deMeester - Willow IT',
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations.html',
+    'author': 'AFENDA xForge S.A., Richard deMeester - Willow IT',
+    'website': '/docs/applications/finance/fiscal_localizations.html',
     'depends': [
         'account',
     ],

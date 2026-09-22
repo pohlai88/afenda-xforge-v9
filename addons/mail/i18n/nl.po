@@ -13,12 +13,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-17 17:37+0000\n"
 "PO-Revision-Date: 2026-08-27 10:02+0000\n"
-"Last-Translator: Bren Driesen <brdri@odoo.com>\n"
-"Language-Team: Dutch <https://translate.odoo.com/projects/odoo-19/mail/nl/>\n"
+"Last-Translator: Bren Driesen <brdri@afenda.app>\n"
+"Language-Team: Dutch <https://translate.afenda.app/projects/odoo-19/mail/nl/>\n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -52,13 +52,13 @@ msgid ""
 "            <p class=\"o_view_nocontent_smiling_face\">\n"
 "                Add addresses to the Allowed List\n"
 "            </p><p>\n"
-"                To protect you from spam and reply loops, Odoo automatically "
+"                To protect you from spam and reply loops, AFENDA xForge automatically "
 "blocks emails\n"
 "                coming to your gateway past a threshold of <b>%(threshold)i</"
 "b> emails every <b>%(minutes)i</b>\n"
 "                minutes. If there are some addresses from which you need to "
 "receive very frequent\n"
-"                updates, you can however add them below and Odoo will let "
+"                updates, you can however add them below and AFENDA xForge will let "
 "them go through.\n"
 "            </p>"
 msgstr ""
@@ -67,12 +67,12 @@ msgstr ""
 "                Adressen toevoegen aan de toegestane lijst\n"
 "            </p><p>\n"
 "                Om je te beschermen tegen spam en antwoordlussen, blokkeert "
-"Odoo automatisch e-mails\n"
+"AFENDA xForge automatisch e-mails\n"
 "                die naar je gateway komen voorbij een drempel van <b>%"
 "(threshold)i</b> e-mails elke <b>%(minutes)i</b>\n"
 "                minuten. Als er adressen zijn waarvan je heel vaak updates "
 "moet ontvangen,\n"
-"                kan je ze echter hieronder toevoegen en Odoo zal ze "
+"                kan je ze echter hieronder toevoegen en AFENDA xForge zal ze "
 "doorlaten.\n"
 "            </p>"
 
@@ -5714,11 +5714,11 @@ msgstr ""
 #. module: mail
 #: model:ir.model.fields,help:mail.field_res_config_settings__alias_domain_id
 msgid ""
-"If you have setup a catch-all email domain redirected to the Odoo server, "
+"If you have setup a catch-all email domain redirected to the AFENDA xForge server, "
 "enter the domain name here."
 msgstr ""
 "Als je een 'catch-all' e-mailadres hebt aangemaakt, die verwijst naar de "
-"Odoo server, vul dan hier de domeinnaam in."
+"AFENDA xForge server, vul dan hier de domeinnaam in."
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_res_config_settings__use_sfu_server
@@ -5785,8 +5785,8 @@ msgstr "In %(country)s"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__res_users__notification_type__inbox
-msgid "In Odoo"
-msgstr "In Odoo"
+msgid "In AFENDA xForge"
+msgstr "In AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_compose_message__scheduled_date
@@ -5896,8 +5896,8 @@ msgstr "Installeren"
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/web/messaging_menu_patch.js:0
-msgid "Install Odoo"
-msgstr "Installeer Odoo"
+msgid "Install AFENDA xForge"
+msgstr "Installeer AFENDA xForge"
 
 #. module: mail
 #: model:ir.ui.menu,name:mail.discuss_channel_integrations_menu
@@ -6292,7 +6292,7 @@ msgid ""
 "browser will \n"
 "          keep the private key secret and use it for decrypting the payload\n"
 "- auth: The auth value should be treated as a secret and not shared outside "
-"of Odoo"
+"of AFENDA xForge"
 msgstr ""
 "Browsersleutels gebruikt door de melding: \n"
 "- p256dh: Publieke sleutel van het abonnement gegenereerd door de browser. "
@@ -6300,7 +6300,7 @@ msgstr ""
 "          de privésleutel geheim houden en het gebruiken om de payload te "
 "ontcijferen\n"
 "- auth: De auth-waarde moet worden behandeld als een geheim en mag niet "
-"gedeeld worden buiten Odoo"
+"gedeeld worden buiten AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_tracking_duration_mixin__duration_tracking
@@ -8273,20 +8273,20 @@ msgstr "Besturingsysteem"
 #. module: mail
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_layout
 #: model_terms:ir.ui.view,arch_db:mail.mail_notification_light
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will not send notifications on this device."
-msgstr "Odoo zal geen meldingen versturen op dit apparaat."
+msgid "AFENDA xForge will not send notifications on this device."
+msgstr "AFENDA xForge zal geen meldingen versturen op dit apparaat."
 
 #. module: mail
 #. odoo-javascript
 #: code:addons/mail/static/src/core/common/notification_permission_service.js:0
-msgid "Odoo will send notifications on this device!"
-msgstr "Odoo zal meldingen versturen op dit apparaat!"
+msgid "AFENDA xForge will send notifications on this device!"
+msgstr "AFENDA xForge zal meldingen versturen op dit apparaat!"
 
 #. module: mail
 #. odoo-javascript
@@ -8414,8 +8414,8 @@ msgstr "Alleen aangepaste modellen kunnen worden veranderd."
 
 #. module: mail
 #: model:ir.model.constraint,message:mail.constraint_res_users_notification_type
-msgid "Only internal user can receive notifications in Odoo"
-msgstr "Alleen interne gebruikers kunnen meldingen ontvangen in Odoo"
+msgid "Only internal user can receive notifications in AFENDA xForge"
+msgstr "Alleen interne gebruikers kunnen meldingen ontvangen in AFENDA xForge"
 
 #. module: mail
 #. odoo-python
@@ -9154,11 +9154,11 @@ msgstr "Een ogenblik geduld terwijl het bestand wordt geüpload."
 msgid ""
 "Policy on how to handle Chatter notifications:\n"
 "- By Emails: notifications are sent to your email address\n"
-"- In Odoo: notifications appear in your Odoo Inbox"
+"- In AFENDA xForge: notifications appear in your AFENDA xForge Inbox"
 msgstr ""
 "Beleid voor omgang met Chatter-meldingen:\n"
 "- Per e-mail: meldingen worden naar je e-mailadres gestuurd\n"
-"- In Odoo: meldingen verschijnen in je Odoo-inbox"
+"- In AFENDA xForge: meldingen verschijnen in je AFENDA xForge-inbox"
 
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_alias__alias_contact
@@ -9522,8 +9522,8 @@ msgstr "Reden"
 
 #. module: mail
 #: model:res.groups,name:mail.group_mail_notification_type_inbox
-msgid "Receive notifications in Odoo"
-msgstr "Meldingen ontvangen in Odoo"
+msgid "Receive notifications in AFENDA xForge"
+msgstr "Meldingen ontvangen in AFENDA xForge"
 
 #. module: mail
 #: model:ir.model.fields.selection,name:mail.selection__mail_mail__state__received
@@ -11535,11 +11535,11 @@ msgstr "Het bericht waarvan het kanaal is gemaakt."
 #. module: mail
 #: model:ir.model.fields,help:mail.field_mail_alias__alias_model_id
 msgid ""
-"The model (Odoo Document Kind) to which this alias corresponds. Any incoming "
+"The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming "
 "email that does not reply to an existing record will cause the creation of a "
 "new record of this model (e.g. a Project Task)"
 msgstr ""
-"Het model (soort Odoo-Document) waar deze alias bijhoort. Iedere inkomende e-"
+"Het model (soort AFENDA xForge-Document) waar deze alias bijhoort. Iedere inkomende e-"
 "mail die niet bij een bestaande regel hoort zal leiden tot het aanmaken van "
 "een nieuwe regel in dit model (bv. een projecttaak)"
 
@@ -11549,7 +11549,7 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.odoo.com>"
+"<jobs@example.afenda.app>"
 msgstr ""
 "De naam van de e-mailalias, bv. 'vacature' als je alle mails van "
 "<vacature@jouwbedrijf.com> wilt opvangen"
@@ -11832,10 +11832,10 @@ msgstr "Dit bericht is verwijderd"
 msgid ""
 "This option permanently removes any track of email after it's been sent, "
 "including from the Technical menu in the Settings, in order to preserve "
-"storage space of your Odoo database."
+"storage space of your AFENDA xForge database."
 msgstr ""
 "Deze optie verwijdert permanent elk spoor van e-mail nadat het is verzonden, "
-"ook uit het technisch menu in de instellingen, om opslagruimte van je Odoo-"
+"ook uit het technisch menu in de instellingen, om opslagruimte van je AFENDA xForge-"
 "database te behouden."
 
 #. module: mail
@@ -12923,11 +12923,11 @@ msgstr ""
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.odoo.com)."
+"email server (@mycompany.afenda.app)."
 msgstr ""
 "Het gebruik van je eigen e-mailserver is vereist voor het verzenden / "
 "ontvangen van e-mails in Community- en Enterprise-versies. Online gebruikers "
-"profiteren van een kant-en-klare e-mailserver (@ mijnbedrijf.odoo.com)."
+"profiteren van een kant-en-klare e-mailserver (@ mijnbedrijf.afenda.app)."
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

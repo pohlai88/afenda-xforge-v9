@@ -8,12 +8,12 @@
 # "Malaz Siddig Elsayed Abuidris (msea)" <msea@odoo.com>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server saas~18.2\n"
+"Project-Id-Version: AFENDA xForge Server saas~18.2\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-03 14:02+0000\n"
-"Last-Translator: Odoo Turkish Import <dyki+tr@odoo.com>\n"
-"Language-Team: Turkish <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: AFENDA xForge Turkish Import <dyki+tr@afenda.app>\n"
+"Language-Team: Turkish <https://translate.afenda.app/projects/odoo-19/"
 "mail_plugin/tr/>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -71,10 +71,10 @@ msgstr "Yıllık Gelir"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
 msgid ""
-"Attachments could not be logged in Odoo because their total size exceeded "
+"Attachments could not be logged in AFENDA xForge because their total size exceeded "
 "the allowed maximum."
 msgstr ""
-"Ekler Odoo'da günlüğe kaydedilemedi çünkü toplam boyutları izin verilen "
+"Ekler AFENDA xForge'da günlüğe kaydedilemedi çünkü toplam boyutları izin verilen "
 "maksimum değeri aştı."
 
 #. module: mail_plugin
@@ -465,9 +465,9 @@ msgstr "Bu bağlantıyla bağlantılı hiçbir şirket zenginleştirilemedi"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "No company linked to this contact could be enriched or found in Odoo"
+msgid "No company linked to this contact could be enriched or found in AFENDA xForge"
 msgstr ""
-"Bu kişiyle bağlantılı hiçbir şirket Odoo'da zenginleştirilemedi veya "
+"Bu kişiyle bağlantılı hiçbir şirket AFENDA xForge'da zenginleştirilemedi veya "
 "bulunamadı"
 
 #. module: mail_plugin
@@ -515,14 +515,14 @@ msgstr "Bildirimler"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Access Token"
-msgstr "Odoo Erişim Belirteci"
+msgid "AFENDA xForge Access Token"
+msgstr "AFENDA xForge Erişim Belirteci"
 
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Odoo Server URL"
-msgstr "Odoo Sunucu URL'si"
+msgid "AFENDA xForge Server URL"
+msgstr "AFENDA xForge Sunucu URL'si"
 
 #. module: mail_plugin
 #: model:ir.model.constraint,message:mail_plugin.constraint_res_partner_iap_unique_partner_id
@@ -600,8 +600,8 @@ msgstr "Gelirler"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "Save in Odoo"
-msgstr "Odoo'da tasarruf edin"
+msgid "Save in AFENDA xForge"
+msgstr "AFENDA xForge'da tasarruf edin"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -631,8 +631,8 @@ msgstr "Veritabanında Ara"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search In Odoo"
-msgstr "Odoo'da Ara"
+msgid "Search In AFENDA xForge"
+msgstr "AFENDA xForge'da Ara"
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -643,8 +643,8 @@ msgstr "İletişim kişisini ara"
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
-msgid "Search contact in Odoo..."
-msgstr "Odoo'da kişiyi arayın..."
+msgid "Search contact in AFENDA xForge..."
+msgstr "AFENDA xForge'da kişiyi arayın..."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -674,8 +674,8 @@ msgstr "Bu şirketin e-posta adresi yok ve zenginleştirilemedi."
 #. module: mail_plugin
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_gmail.xml:0
-msgid "This contact does not exist in the Odoo database."
-msgstr "Bu kişi Odoo veritabanında yok."
+msgid "This contact does not exist in the AFENDA xForge database."
+msgstr "Bu kişi AFENDA xForge veritabanında yok."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -703,11 +703,11 @@ msgstr "Bu ortak mevcut değil"
 #. odoo-javascript
 #: code:addons/mail_plugin/static/src/to_translate/translations_outlook.xml:0
 msgid ""
-"Warning: Attachments could not be logged in Odoo because their total size "
+"Warning: Attachments could not be logged in AFENDA xForge because their total size "
 "exceeded the allowed maximum."
 msgstr ""
 "Uyarı: Eklerin toplam boyutu izin verilen maksimum değeri aştığı için "
-"Odoo'da oturum açılamadı."
+"AFENDA xForge'da oturum açılamadı."
 
 #. module: mail_plugin
 #. odoo-javascript
@@ -746,7 +746,7 @@ msgstr "En azından partner_id veya adı ve e-postayı belirtmeniz gerekir"
 
 #. module: mail_plugin
 #: model_terms:ir.ui.view,arch_db:mail_plugin.app_auth
-msgid "access your Odoo database?"
+msgid "access your AFENDA xForge database?"
 msgstr "0doo veritabanınıza erişin?"
 
 #. module: mail_plugin

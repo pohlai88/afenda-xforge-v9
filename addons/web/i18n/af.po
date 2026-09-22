@@ -7,7 +7,7 @@
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2023-05-16 13:50+0000\n"
 "PO-Revision-Date: 2022-09-22 05:55+0000\n"
@@ -2162,7 +2162,7 @@ msgstr ""
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/fields/upgrade_dialog.xml:0
-msgid "Get this feature and much more with Odoo Enterprise!"
+msgid "Get this feature and much more with AFENDA xForge Enterprise!"
 msgstr ""
 
 #. module: web
@@ -2835,8 +2835,8 @@ msgstr ""
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.js:0
-msgid "My Odoo.com account"
-msgstr "My Odoo.com rekening"
+msgid "My AFENDA xForge.com account"
+msgstr "My AFENDA xForge.com rekening"
 
 #. module: web
 #. odoo-javascript
@@ -3118,62 +3118,62 @@ msgstr "Objek:"
 #: code:addons/web/static/src/legacy/js/core/dialog.js:0
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
 #: model_terms:ir.ui.view,arch_db:web.brand_promotion_message
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Client Error"
+msgid "AFENDA xForge Client Error"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Error"
+msgid "AFENDA xForge Error"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Network Error"
+msgid "AFENDA xForge Network Error"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/views/widgets/notification_alert/notification_alert.xml:0
-msgid "Odoo Push notifications have been blocked. Go to your browser settings to allow them."
+msgid "AFENDA xForge Push notifications have been blocked. Go to your browser settings to allow them."
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/settings_form_view/widgets/res_config_edition.xml:0
-msgid "Odoo S.A."
+msgid "AFENDA"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Server Error"
+msgid "AFENDA xForge Server Error"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Odoo Session Expired"
+msgid "AFENDA xForge Session Expired"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.js:0
-msgid "Odoo Warning"
+msgid "AFENDA xForge Warning"
 msgstr ""
 
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/barcode/barcode_scanner.js:0
-msgid "Odoo needs your authorization first."
+msgid "AFENDA xForge needs your authorization first."
 msgstr ""
 
 #. module: web
@@ -3449,8 +3449,8 @@ msgstr ""
 
 #. module: web
 #: model_terms:ir.ui.view,arch_db:web.login_layout
-msgid "Powered by <span>Odoo</span>"
-msgstr "Aangedryf deur <span>Odoo</span>"
+msgid "Powered by <span>AFENDA xForge</span>"
+msgstr "Aangedryf deur <span>AFENDA xForge</span>"
 
 #. module: web
 #. odoo-javascript
@@ -5205,7 +5205,7 @@ msgstr ""
 #. module: web
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/actions/reports/utils.js:0
-msgid "You need to start Odoo with at least two workers to print a pdf version of the reports."
+msgid "You need to start AFENDA xForge with at least two workers to print a pdf version of the reports."
 msgstr ""
 
 #. module: web
@@ -5218,7 +5218,7 @@ msgstr ""
 #. odoo-javascript
 #: code:addons/web/static/src/core/errors/error_dialogs.xml:0
 #: code:addons/web/static/src/public/error_notifications.js:0
-msgid "Your Odoo session expired. The current page is about to be refreshed."
+msgid "Your AFENDA xForge session expired. The current page is about to be refreshed."
 msgstr ""
 
 #. module: web

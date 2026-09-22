@@ -4,7 +4,7 @@
     'name': 'Hungary - E-invoicing',
     'version': '1.0.0',
     'category': 'Accounting/Localizations/EDI',
-    'author': 'DO Tech (OdooTech Zrt.), BDSC Business Consulting Kft. & Odoo S.A.',
+    'author': 'DO Tech (OdooTech Zrt.), BDSC Business Consulting Kft. & AFENDA xForge S.A.',
     'description': """
 * Electronically report invoices to the NAV (Hungarian Tax Agency) when issuing physical (paper) invoices.
 * Perform the Tax Audit Export (Adóhatósági Ellenőrzési Adatszolgáltatás) in NAV 3.0 format.

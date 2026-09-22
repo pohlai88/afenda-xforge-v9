@@ -14,7 +14,7 @@
         'views/stock_picking_views.xml',
         'templates/l10n_tr_nilvera_edispatch.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'assets': {
         'web.assets_backend': [
             'l10n_tr_nilvera_edispatch/static/src/views/**/*',

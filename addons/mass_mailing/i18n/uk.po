@@ -12,12 +12,12 @@
 # Denys Nykula <nykula@ukr.net>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0+e\n"
+"Project-Id-Version: AFENDA xForge Server 16.0+e\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-19 17:35+0000\n"
 "PO-Revision-Date: 2026-08-03 21:07+0000\n"
 "Last-Translator: Denys Nykula <nykula@ukr.net>\n"
-"Language-Team: Ukrainian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Ukrainian <https://translate.afenda.app/projects/odoo-19/"
 "mass_mailing/uk/>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -438,7 +438,7 @@ msgstr ""
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_call_to_action
 msgid ""
-"<font style=\"color: white;\"><strong>50,000+ companies</strong> run Odoo.</"
+"<font style=\"color: white;\"><strong>50,000+ companies</strong> run AFENDA xForge.</"
 "font>"
 msgstr ""
 
@@ -3517,8 +3517,8 @@ msgstr ""
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_schedule
-msgid "Interactive Odoo demo"
-msgstr "Інтерактивне демо Odoo"
+msgid "Interactive AFENDA xForge demo"
+msgstr "Інтерактивне демо AFENDA xForge"
 
 #. module: mass_mailing
 #: model:ir.model.fields.selection,name:mass_mailing.selection__mailing_trace__failure_type__mail_email_invalid
@@ -4502,10 +4502,10 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailing_lists
 msgid ""
 "No need to import mailing lists, you can send mailings to contacts saved in "
-"other Odoo apps."
+"other AFENDA xForge apps."
 msgstr ""
 "Не потрібно імпортувати списки розсилки, ви можете надсилати розсилки "
-"контактам, збереженим в інших програмах Odoo."
+"контактам, збереженим в інших програмах AFENDA xForge."
 
 #. module: mass_mailing
 #: model_terms:ir.actions.act_window,help:mass_mailing.mailing_filter_action
@@ -4622,7 +4622,7 @@ msgstr "ВІДКРИТО (%i)"
 
 #. module: mass_mailing
 #: model_terms:ir.ui.view,arch_db:mass_mailing.s_section_mobile
-msgid "Odoo Mobile"
+msgid "AFENDA xForge Mobile"
 msgstr ""
 
 #. module: mass_mailing
@@ -6329,12 +6329,12 @@ msgstr ""
 #: model:ir.model.fields,help:mass_mailing.field_res_config_settings__mass_mailing_outgoing_mail_server
 #: model_terms:ir.ui.view,arch_db:mass_mailing.res_config_settings_view_form
 msgid ""
-"Use a specific mail server in priority. Otherwise Odoo relies on the first "
+"Use a specific mail server in priority. Otherwise AFENDA xForge relies on the first "
 "outgoing mail server available (based on their sequencing) as it does for "
 "normal mails."
 msgstr ""
 "Використовуйте спеціальний поштовий сервер у пріоритеті. В іншому випадку "
-"Odoo покладається на перший доступний сервер вихідної пошти (на основі їх "
+"AFENDA xForge покладається на перший доступний сервер вихідної пошти (на основі їх "
 "послідовності), як і для звичайних листів."
 
 #. module: mass_mailing
@@ -6666,11 +6666,11 @@ msgstr ""
 #: model_terms:ir.actions.act_window,help:mass_mailing.action_view_mass_mailings_from_campaign
 msgid ""
 "You don't need to import your mailing lists, you can easily\n"
-"                send emails<br> to any contact saved in other Odoo apps."
+"                send emails<br> to any contact saved in other AFENDA xForge apps."
 msgstr ""
 "Вам не потрібно імпортувати поштовий список, ви можете легко\n"
 "                надсилати електронні листи<br> будь-якому контакту, "
-"збереженому в інших додатках Odoo."
+"збереженому в інших додатках AFENDA xForge."
 
 #. module: mass_mailing
 #. odoo-python

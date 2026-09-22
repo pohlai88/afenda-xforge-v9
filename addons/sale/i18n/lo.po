@@ -7,12 +7,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo 9.0\n"
+"Project-Id-Version: AFENDA xForge 9.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-10 17:37+0000\n"
 "PO-Revision-Date: 2026-08-15 05:07+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/sale/lo/>\n"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/sale/lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 #: code:addons/sale/static/src/views/sale_file_upload_list/sale_file_upload_list_renderer.js:0
 msgid ""
 "\n"
-"            If your customer runs on Odoo 18 or higher, customer data and "
+"            If your customer runs on AFENDA xForge 18 or higher, customer data and "
 "sales order lines\n"
 "            will be automatically created. Any other pdf containing an "
 "attached\n"
@@ -34,7 +34,7 @@ msgid ""
 "        "
 msgstr ""
 "\n"
-"            ຖ້າລູກຄ້າຂອງທ່ານນຳໃຊ້ Odoo 18 ຫຼື ສູງກວ່າ, ຂໍ້ມູນລູກຄ້າ ແລະ ລາຍການໃບສັ່ງຂາຍ\n"
+"            ຖ້າລູກຄ້າຂອງທ່ານນຳໃຊ້ AFENDA xForge 18 ຫຼື ສູງກວ່າ, ຂໍ້ມູນລູກຄ້າ ແລະ ລາຍການໃບສັ່ງຂາຍ\n"
 "            ຈະຖືກສ້າງຂຶ້ນໂດຍອັດຕະໂນມັດ. ໄຟລ໌ PDF ອື່ນໆ ທີ່ມີການຄັດຕິດ\n"
 "            ໄຟລ໌ UBL-RequestForQuotation ກໍສາມາດນຳໃຊ້ໄດ້ເຊັ່ນກັນ.\n"
 "        "
@@ -1626,10 +1626,10 @@ msgstr ""
 #. module: sale
 #: model_terms:ir.actions.act_window,help:sale.action_orders_upselling
 msgid ""
-"As an example, if you sell pre-paid hours of services, Odoo recommends you\n"
+"As an example, if you sell pre-paid hours of services, AFENDA xForge recommends you\n"
 "            to sell extra hours when all ordered hours have been consumed."
 msgstr ""
-"ຕົວຢ່າງ: ຖ້າທ່ານຂາຍຊົ່ວໂມງການບໍລິການແບບຈ່າຍລ່ວງໜ້າ, Odoo ແນະນຳໃຫ້ທ່ານ\n"
+"ຕົວຢ່າງ: ຖ້າທ່ານຂາຍຊົ່ວໂມງການບໍລິການແບບຈ່າຍລ່ວງໜ້າ, AFENDA xForge ແນະນຳໃຫ້ທ່ານ\n"
 "            ຂາຍຊົ່ວໂມງເພີ່ມເຕີມເມື່ອຊົ່ວໂມງທີ່ສັ່ງຊື້ທັງໝົດໄດ້ຖືກນຳໃຊ້ໝົດແລ້ວ."
 
 #. module: sale
@@ -2658,9 +2658,9 @@ msgstr "ໃບແຈ້ງໜີ້ຮ່າງ"
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
-"ລາກ ແລະ ວາງໄຟລ໌ PDF ໃບຮ້ອງຂໍສະເໜີລາຄາ ລົງໃນລາຍການໃບສະເໜີລາຄາຂອງທ່ານໃນ Odoo. ເພີດເພີນກັບ"
+"ລາກ ແລະ ວາງໄຟລ໌ PDF ໃບຮ້ອງຂໍສະເໜີລາຄາ ລົງໃນລາຍການໃບສະເໜີລາຄາຂອງທ່ານໃນ AFENDA xForge. ເພີດເພີນກັບ"
 "ລະບົບອັດຕະໂນມັດ!"
 
 #. module: sale
@@ -3616,8 +3616,8 @@ msgstr "ບໍ່ພົບໃບສັ່ງຊື້ທີ່ຈະຂາຍເ
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Not using Odoo?"
-msgstr "ບໍ່ໄດ້ໃຊ້ Odoo ບໍ?"
+msgid "Not using AFENDA xForge?"
+msgstr "ບໍ່ໄດ້ໃຊ້ AFENDA xForge ບໍ?"
 
 #. module: sale
 #: model:ir.model.fields.selection,name:sale.selection__sale_order_line__display_type__line_note
@@ -3667,8 +3667,8 @@ msgstr "ຈຳນວນຂໍ້ຄວາມທີ່ມີຂໍ້ຜິດພ
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: sale
 #: model:product.template,description_sale:sale.product_product_1_product_template
@@ -5087,8 +5087,8 @@ msgstr "ຕົວເຊື່ອມຕໍ່ Starshipit"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Start on Odoo"
-msgstr "ເລີ່ມຕົ້ນໃນ Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "ເລີ່ມຕົ້ນໃນ AFENDA xForge"
 
 #. module: sale
 #: model:ir.model.fields,field_description:sale.field_sale_order__state
@@ -5914,8 +5914,8 @@ msgstr "ບໍລິມາດ"
 
 #. module: sale
 #: model_terms:ir.ui.view,arch_db:sale.sale_order_portal_template
-msgid "Want to import this document in Odoo?"
-msgstr "ຕ້ອງການນຳເຂົ້າເອກະສານນີ້ໃນ Odoo ບໍ?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "ຕ້ອງການນຳເຂົ້າເອກະສານນີ້ໃນ AFENDA xForge ບໍ?"
 
 #. module: sale
 #. odoo-python

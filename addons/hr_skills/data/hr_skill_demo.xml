@@ -371,7 +371,7 @@
     </record>
     <!-- Certification -->
     <record id="hr_skill_type_certifications_odoo" model="hr.skill">
-        <field name="name">Odoo</field>
+        <field name="name">AFENDA xForge</field>
         <field name="skill_type_id" ref="hr_skill_type_certifications"/>
         <field name="sequence">89</field>
     </record>

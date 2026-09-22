@@ -40,12 +40,12 @@ registerWebsitePreviewTour('test_image_link', {
     }, {
         content: "enter site URL",
         trigger: ".o_customize_tab [data-container-title='Image'] div[data-action-id='setUrl'] input",
-        run: "edit odoo.com && click body",
+        run: "edit afenda.app && click body",
     },
     ...selectImageSteps,
     {
         content: "check popover content has site URL",
-        trigger: ".o-we-linkpopover a.o_we_url_link[href='https://odoo.com']:contains(https://odoo.com)",
+        trigger: ".o-we-linkpopover a.o_we_url_link[href='https://afenda.app']:contains(https://afenda.app)",
     }, {
         content: "remove URL",
         trigger: ".o_customize_tab [data-container-title='Image'] div[data-action-id='setUrl'] input",

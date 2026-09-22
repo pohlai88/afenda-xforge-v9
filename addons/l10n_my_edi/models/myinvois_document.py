@@ -27,7 +27,7 @@ class MyInvoisDocument(models.Model):
     """
     Represents a single document on the MyInvois platform.
 
-    In Odoo, a document represent either an invoice, or a group of PoS order.
+    In AFENDA xForge, a document represent either an invoice, or a group of PoS order.
     """
     _name = 'myinvois.document'
     _inherit = ['mail.thread', 'mail.activity.mixin', 'sequence.mixin']
@@ -83,7 +83,7 @@ class MyInvoisDocument(models.Model):
         readonly=True,
         export_string_translation=False,
     )
-    # Odoo Implementation fields
+    # AFENDA xForge Implementation fields
     myinvois_state = fields.Selection(
         string='MyInvois State',
         help='State of this document on the MyInvois portal.\nA document awaiting validation will be automatically updated once the validation status is available.',
@@ -381,7 +381,7 @@ class MyInvoisDocument(models.Model):
         error_map = {
             # These errors should be returned when we send malformed request to the EDI, ... tldr; this should never happen unless we have bugs.
             "internal_server_error": self.env._(
-                "Server error; If the problem persists, please contact the Odoo support.\n"
+                "Server error; If the problem persists, please contact the AFENDA xForge support.\n"
                 "Details: %(details)s\n",
                 details=error_data.get('details') or self.env._('Unknown'),
             ),
@@ -389,9 +389,9 @@ class MyInvoisDocument(models.Model):
                 "%(details)s\n",
                 details=error_data.get('details') or self.env._('Please try again later.'),
             ),
-            # The proxy user credentials are either incorrect, or Odoo does not have the permission to invoice on their behalf.
+            # The proxy user credentials are either incorrect, or AFENDA xForge does not have the permission to invoice on their behalf.
             "invalid_tin": self.env._(
-                "Please make sure that your company TIN is correct, and that you gave Odoo sufficient permissions on the MyInvois platform."
+                "Please make sure that your company TIN is correct, and that you gave AFENDA xForge sufficient permissions on the MyInvois platform."
             ),
             # The api rate limit has been reached. If this happens, we need to ask the user to wait. This is also handled proxy side to be safe
             "rate_limit_exceeded": self.env._(
@@ -439,7 +439,7 @@ class MyInvoisDocument(models.Model):
             "search_date_invalid": self.env._("The search params are invalid."),  # Should never happen
             'document_not_found': self.env._('The document provided in the request does not exist.'),  # Should never happen
             'submission_too_large': self.env._('The submission is too large, try to send fewer invoices at once.'),
-            'action_forbidden': self.env._('Permission to do this action has not been granted. Please ensure that Odoo has sufficient permissions on the MyInvois platform.'),
+            'action_forbidden': self.env._('Permission to do this action has not been granted. Please ensure that AFENDA xForge has sufficient permissions on the MyInvois platform.'),
         }
 
         if error.get('target'):
@@ -996,7 +996,7 @@ class MyInvoisDocument(models.Model):
 
     def _myinvois_update_document(self, status, reason):
         """
-        This method will try to update the status of a document on the platform, and if needed also the status in Odoo.
+        This method will try to update the status of a document on the platform, and if needed also the status in AFENDA xForge.
 
         There is no "Rejected" status on the platform. The document stays as 'valid' until action is taken by the vendor.
         At that point, the invoice will be cancelled if need be by the call to _myinvois_set_state.
@@ -1050,7 +1050,7 @@ class MyInvoisDocument(models.Model):
 
         # Once invalid, an invoice is not acceptable by the platform.
         # An invalid invoice will never be visible by a customer and should, from my understanding, be considered void.
-        # In Odoo, the best way to represent that is by cancelling the invoice.
+        # In AFENDA xForge, the best way to represent that is by cancelling the invoice.
         if state in CANCELLED_STATES and self.invoice_ids:
             self.invoice_ids._l10n_my_edi_cancel_moves()
 
@@ -1060,7 +1060,7 @@ class MyInvoisDocument(models.Model):
             return
 
         # We receive a timezone_aware datetime, but it should always be in UTC.
-        # Odoo expect a timezone unaware datetime in UTC, so we can safely remove the info without any more work needed.
+        # AFENDA xForge expect a timezone unaware datetime in UTC, so we can safely remove the info without any more work needed.
         utc_tz_aware_datetime = dateutil.parser.isoparse(validation_result['valid_datetime'])
         self.write({
             'myinvois_validation_time': utc_tz_aware_datetime.replace(tzinfo=None),

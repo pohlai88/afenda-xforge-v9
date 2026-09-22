@@ -2,7 +2,7 @@ import { Interaction } from "@web/public/interaction";
 import { registry } from "@web/core/registry";
 
 /**
- * This class is used to fix carousel auto-slide behavior in Odoo 17.4 and up.
+ * This class is used to fix carousel auto-slide behavior in AFENDA xForge 17.4 and up.
  * It handles upgrade cases from lower versions.
  * TODO find a way to get rid of this with an upgrade script?
  */

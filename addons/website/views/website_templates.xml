@@ -120,7 +120,7 @@
         <t t-set="x_icon" t-value="website.image_url(website, 'favicon')"/>
     </xpath>
     <xpath expr="//head/meta[last()]" position="after">
-        <meta name="generator" content="Odoo"/>
+        <meta name="generator" content="AFENDA xForge"/>
         <t t-set="website_meta" t-value="seo_object and seo_object.sudo().get_website_meta() or {}"/>
         <meta name="default_title" t-att-content="default_title" groups="website.group_website_designer"/>
         <t t-set="no_index" t-value="
@@ -292,11 +292,11 @@
                 <path fill="#FFF" d="M8 8V1a1 1 0 1 1 2 0v8a1 1 0 0 1-1 1H1a1 1 0 1 1 0-2h7z"/>
             </svg>
             <div class="o_frontend_to_backend_buttons d-flex">
-                <a href="#" title="Go to your Odoo Apps" class="o_frontend_to_backend_apps_btn fa fa-th d-flex align-items-center justify-content-center text-decoration-none" data-bs-toggle="dropdown"/>
+                <a href="#" title="Go to your AFENDA xForge Apps" class="o_frontend_to_backend_apps_btn fa fa-th d-flex align-items-center justify-content-center text-decoration-none" data-bs-toggle="dropdown"/>
                 <div class="dropdown-menu o_frontend_to_backend_apps_menu" role="menu">
                     <a role="menuitem" class="dropdown-item" t-out="menu['name']"
                        t-as="menu" t-foreach="env['ir.ui.menu'].with_context(force_action=True).load_menus_root()['children']"
-                       t-attf-href="/odoo/action-#{menu['action'] and menu['action'].split(',')[1] or ''}"/>
+                       t-attf-href="/app/action-#{menu['action'] and menu['action'].split(',')[1] or ''}"/>
                 </div>
                 <a groups="website.group_website_restricted_editor" href="#" title="Edit this content" class="o_frontend_to_backend_edit_btn px-3 d-flex align-items-center justify-content-center text-decoration-none">
                     <img src="/website/static/description/icon.png" alt=""/>Editor
@@ -345,7 +345,7 @@
 <template id="brand_promotion" inherit_id="web.brand_promotion" name="Brand Promotion">
     <xpath expr="//t[@t-call='web.brand_promotion_message']" position="replace">
         <t t-set="_message">
-            Create a <a target="_blank" href="http://www.odoo.com/app/website?utm_source=db&amp;utm_medium=website">free website</a>
+            Create a <a target="_blank" href="http://www.afenda.app/app/website?utm_source=db&amp;utm_medium=website">free website</a>
         </t>
         <t t-call="web.brand_promotion_message"
             _utm_medium.f="website"/>
@@ -1951,7 +1951,7 @@
                 <div class="container s_allow_columns">
                     <div class="row o_grid_mode" data-row-count="3">
                         <div class="o_grid_item g-col-lg-6 g-height-2 offset-1 offset-lg-0 col-10 order-lg-0 col-lg-6" style="z-index: 1; --grid-item-padding-x: 10px; --grid-item-padding-y: 0px; grid-area: 1 / 1 / 3 / 7; order: 0;">
-                            <h2 class="h3-fs">50,000+ companies run Odoo to grow their businesses.</h2>
+                            <h2 class="h3-fs">50,000+ companies run AFENDA xForge to grow their businesses.</h2>
                         </div>
                         <div class="o_grid_item g-col-lg-3 col-lg-3 order-lg-0 g-height-2" style="text-align: center; z-index: 2; --grid-item-padding-x: 10px; --grid-item-padding-y: 0px; grid-area: 1 / 10 / 3 / 13; order: 2;">
                             <a href="/contactus" class="btn btn-primary btn-lg">Get started</a>
@@ -2695,7 +2695,7 @@
             <button type="button" t-attf-class="btn btn-light dropdown-toggle dropdown-toggle-split" t-att-id="'dopprod-%s' % object.id" data-bs-toggle="dropdown"/>
             <div class="dropdown-menu" role="menu" t-att-aria-labelledby="'dopprod-%s' % object.id">
                 <t t-out="0"/>
-                <a role="menuitem" t-attf-href="/odoo/action-#{action}/#{object.id}?menu_id=#{menu or object.env['ir.model.data']._xmlid_to_res_id('website.menu_website_configuration')}"
+                <a role="menuitem" t-attf-href="/app/action-#{action}/#{object.id}?menu_id=#{menu or object.env['ir.model.data']._xmlid_to_res_id('website.menu_website_configuration')}"
                     title='Edit in backend' class="dropdown-item" t-if="publish_edit">Edit</a>
             </div>
         </div>
@@ -2719,21 +2719,21 @@
 </asset>
 
 <!-- Error and special pages -->
-<template id="website_info" name="Odoo Information">
+<template id="website_info" name="AFENDA xForge Information">
     <t t-call="website.layout">
         <div id="wrap" class="o_website_info"/>
     </t>
 </template>
 
-<template id="show_website_info" inherit_id="website.website_info" name="Show Odoo Information">
+<template id="show_website_info" inherit_id="website.website_info" name="Show AFENDA xForge Information">
     <xpath expr="//div[@id='wrap']" position="inside">
         <div class="oe_structure">
             <section class="container">
                 <h1><t t-out="res_company.name"/>
-                    <small groups='base.group_no_one'>Odoo Version <t t-out="version.get('server_version')"/></small>
+                    <small groups='base.group_no_one'>AFENDA xForge Version <t t-out="version.get('server_version')"/></small>
                 </h1>
                 <p>
-                    Information about the <t t-out="res_company.name"/> instance of Odoo, the <a class="o_translate_inline" target="_blank" href="https://www.odoo.com">Open Source ERP</a>.
+                    Information about the <t t-out="res_company.name"/> instance of AFENDA xForge, the <a class="o_translate_inline" target="_blank" href="https://www.afenda.app">Open Source ERP</a>.
                 </p>
 
                 <div class="alert alert-warning alert-dismissable mt16" groups="website.group_website_restricted_editor" role="status">
@@ -2761,7 +2761,7 @@
                     <h2 class='mt32'>Installed Localizations / Account Charts</h2>
                     <dl class="dl-horizontal" t-foreach="l10n" t-as="app">
                         <dt>
-                            <a t-att-href="app.website or 'https://www.odoo.com/app/accounting/' + app.name">
+                            <a t-att-href="app.website or 'https://www.afenda.app/app/accounting/' + app.name">
                                 <t t-out="app.shortdesc"/>
                             </a>
                         </dt>

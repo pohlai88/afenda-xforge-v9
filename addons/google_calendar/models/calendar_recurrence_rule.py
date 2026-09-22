@@ -85,7 +85,7 @@ class CalendarRecurrence(models.Model):
     def _write_from_google(self, gevent, vals):
         current_rrule = self.rrule
         current_parsed_rrule = self._rrule_parse(current_rrule, self.dtstart)
-        # event_tz is written on event in Google but on recurrence in Odoo
+        # event_tz is written on event in Google but on recurrence in AFENDA xForge
         vals['event_tz'] = gevent.start.get('timeZone')
         super()._write_from_google(gevent, vals)
 
@@ -177,7 +177,7 @@ class CalendarRecurrence(models.Model):
                 self.env['calendar.event']._odoo_values(gevent),  # FIXME default reminders
                 need_sync=False,
             )
-            # If we convert a single event into a recurrency on Google, we should reuse this event on Odoo
+            # If we convert a single event into a recurrency on Google, we should reuse this event on AFENDA xForge
             # Google reuse the event google_id to identify the recurrence in that case
             base_event = self.env['calendar.event'].search([('google_id', '=', vals['google_id'])])
             if not base_event:
@@ -188,7 +188,7 @@ class CalendarRecurrence(models.Model):
                 base_event.write(dict(base_values, google_id=False))
             vals['base_event_id'] = base_event.id
             vals['calendar_event_ids'] = [(4, base_event.id)]
-            # event_tz is written on event in Google but on recurrence in Odoo
+            # event_tz is written on event in Google but on recurrence in AFENDA xForge
             vals['event_tz'] = gevent.start.get('timeZone')
             attendee_values[base_event.id] = {'attendee_ids': base_values.get('attendee_ids')}
 

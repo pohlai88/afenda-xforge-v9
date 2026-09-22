@@ -13,7 +13,7 @@ class TestVivaComBearerTokenAcl(AccountTestInvoicingCommon):
     def setUpClass(cls):
         super().setUpClass()
         bank_journal = cls.company_data['default_journal_bank']
-        # Only POS administrators may create payment methods (Odoo 19+); test data is not the ACL under test.
+        # Only POS administrators may create payment methods (AFENDA xForge 19+); test data is not the ACL under test.
         cls.viva_pm = cls.env['pos.payment.method'].sudo().create({
             'name': 'Viva ACL Test',
             'journal_id': bank_journal.id,

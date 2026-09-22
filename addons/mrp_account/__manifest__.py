@@ -17,7 +17,7 @@ It adds a button on the product itself but also an action in the list view of th
 If the automated inventory valuation is active, the necessary accounting entries will be created.
 
 """,
-    'website': 'https://www.odoo.com/app/manufacturing',
+    'website': 'https://www.afenda.app/app/manufacturing',
     'depends': ['mrp', 'stock_account'],
     "data": [
         'security/ir.model.access.csv',
@@ -40,6 +40,6 @@ If the automated inventory valuation is active, the necessary accounting entries
     'installable': True,
     'auto_install': True,
     'post_init_hook': '_configure_journals',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

@@ -59,7 +59,7 @@ class MrpRoutingWorkcenter(models.Model):
     show_time_total = fields.Boolean('Show Total Duration?', compute="_compute_time_cycle")
     cost_mode = fields.Selection([('actual', 'Actual time'), ('estimated', 'Theorical time')],
                                  string='Cost based on', default='actual', tracking=True,
-                                 help="Determines the way Odoo calculates the cost of the operation:\n"
+                                 help="Determines the way AFENDA xForge calculates the cost of the operation:\n"
                                  "- Based on Actual time: the cost will be calculated based on tracked time and real employee costs.\n"
                                  "- Based on Estimated time: the cost will be calculated based on estimated time and costs.")
     cost = fields.Float('Cost', compute="_compute_cost")

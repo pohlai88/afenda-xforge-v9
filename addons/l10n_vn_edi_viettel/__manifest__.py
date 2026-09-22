@@ -5,7 +5,7 @@
     "version": "1.0",
     'countries': ['vn'],
     "category": "Accounting/Localizations/EDI",
-    'website': 'https://www.odoo.com/documentation/latest/applications/finance/fiscal_localizations/vietnam.html',
+    'website': '/docs/applications/finance/fiscal_localizations/vietnam.html',
     "depends": [
         "l10n_vn",
     ],
@@ -25,7 +25,7 @@ Using SInvoice by Viettel
         "wizard/l10n_vn_edi_cancellation_request_views.xml",
     ],
     "installable": True,
-    "author": "Odoo S.A.",
+    "author": "AFENDA xForge S.A.",
     "uninstall_hook": "uninstall_hook",
     "license": "LGPL-3",
 }

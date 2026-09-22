@@ -11,11 +11,11 @@
   </ns3:result>
   <software>
     <softwareId>BE477472701-180100</softwareId>
-    <softwareName>Odoo Enterprise</softwareName>
+    <softwareName>AFENDA xForge Enterprise</softwareName>
     <softwareOperation>ONLINE_SERVICE</softwareOperation>
     <softwareMainVersion>18.0+e</softwareMainVersion>
-    <softwareDevName>Odoo SA</softwareDevName>
-    <softwareDevContact>andu@odoo.com</softwareDevContact>
+    <softwareDevName>AFENDA xForge SA</softwareDevName>
+    <softwareDevContact>andu@afenda.app</softwareDevContact>
     <softwareDevCountryCode>BE</softwareDevCountryCode>
     <softwareDevTaxNumber>477472701</softwareDevTaxNumber>
   </software>

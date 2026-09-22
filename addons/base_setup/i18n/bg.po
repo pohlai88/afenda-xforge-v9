@@ -14,12 +14,12 @@
 # Weblate <noreply-mt-weblate@weblate.org>, 2025, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-25 18:36+0000\n"
 "PO-Revision-Date: 2026-08-06 04:00+0000\n"
-"Last-Translator: \"Tiffany Chang (tic)\" <tic@odoo.com>\n"
-"Language-Team: Bulgarian <https://translate.odoo.com/projects/odoo-19/"
+"Last-Translator: \"Tiffany Chang (tic)\" <tic@afenda.app>\n"
+"Language-Team: Bulgarian <https://translate.afenda.app/projects/odoo-19/"
 "base_setup/bg/>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -144,10 +144,10 @@ msgstr "API ключове"
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid ""
-"API Keys allow your users to access Odoo with external tools when multi-"
+"API Keys allow your users to access AFENDA xForge with external tools when multi-"
 "factor authentication is enabled."
 msgstr ""
-"API ключовете позволяват на вашите потребители да достъпват Odoo с външни "
+"API ключовете позволяват на вашите потребители да достъпват AFENDA xForge с външни "
 "инструменти, когато е активирано многофакторно удостоверяване."
 
 #. module: base_setup
@@ -501,8 +501,8 @@ msgstr "OAuth удостоверяване"
 
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: base_setup
 #: model:ir.model.fields,field_description:base_setup.field_res_config_settings__module_partner_autocomplete
@@ -597,10 +597,10 @@ msgstr ""
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid ""
-"This name will be used for the application when Odoo is installed through "
+"This name will be used for the application when AFENDA xForge is installed through "
 "the browser."
 msgstr ""
-"Това име ще се използва за приложението, когато Odoo е инсталиран през "
+"Това име ще се използва за приложението, когато AFENDA xForge е инсталиран през "
 "браузъра."
 
 #. module: base_setup
@@ -647,11 +647,11 @@ msgstr "ДДС"
 #. module: base_setup
 #: model_terms:ir.ui.view,arch_db:base_setup.res_config_settings_view_form
 msgid ""
-"When populating your address book, Odoo provides a list of matching "
+"When populating your address book, AFENDA xForge provides a list of matching "
 "companies. When selecting one item, the company data and logo are auto-"
 "filled."
 msgstr ""
-"При попълване на вашия адресник Odoo предоставя списък със съвпадащи фирми. "
+"При попълване на вашия адресник AFENDA xForge предоставя списък със съвпадащи фирми. "
 "При избор на елемент данните и логото на фирмата се попълват автоматично."
 
 #. module: base_setup

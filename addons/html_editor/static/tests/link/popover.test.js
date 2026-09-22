@@ -1205,7 +1205,7 @@ describe("link preview", () => {
             description: markup("Test description"),
             link_preview_name: "Task name | Project name",
         }));
-        onRpc("/odoo/project/1/tasks/8", () => "");
+        onRpc("/app/project/1/tasks/8", () => "");
         const { editor, el } = await setupEditor(`<p>[]<br></p>`, {
             config: {
                 allowStripDomain: false,
@@ -1215,7 +1215,7 @@ describe("link preview", () => {
         await animationFrame();
         await click(".o-we-command-name:first");
         await contains(".o-we-linkpopover input.o_we_href_input_link").fill(
-            window.location.origin + "/odoo/project/1/tasks/8"
+            window.location.origin + "/app/project/1/tasks/8"
         );
         await animationFrame();
         expect(".o_we_replace_title_btn").toHaveCount(1);
@@ -1231,24 +1231,24 @@ describe("link preview", () => {
     test("test external link preview", async () => {
         onRpc("/html_editor/link_preview_external", () => ({
             og_description:
-                "From ERP to CRM, eCommerce and CMS. Download Odoo or use it in the cloud. Grow Your Business.",
-            og_image: "https://www.odoo.com/web/image/41207129-1abe7a15/homepage-seo.png",
-            og_title: "Open Source ERP and CRM | Odoo",
+                "From ERP to CRM, eCommerce and CMS. Download AFENDA xForge or use it in the cloud. Grow Your Business.",
+            og_image: "https://www.afenda.app/web/image/41207129-1abe7a15/homepage-seo.png",
+            og_title: "Open Source ERP and CRM | AFENDA xForge",
             og_type: "website",
-            og_site_name: "Odoo",
-            source_url: "http://odoo.com/",
+            og_site_name: "AFENDA xForge",
+            source_url: "http://afenda.app/",
         }));
         const { editor } = await setupEditor(`<p>[]<br></p>`);
         await insertText(editor, "/link");
         await animationFrame();
         await click(".o-we-command-name:first");
-        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://odoo.com/");
+        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://afenda.app/");
         await animationFrame();
         expect(".o_we_replace_title_btn").toHaveCount(1);
         expect(".o_extra_info_card").toHaveCount(1);
-        expect(".o_we_url_link").toHaveText("Open Source ERP and CRM | Odoo");
+        expect(".o_we_url_link").toHaveText("Open Source ERP and CRM | AFENDA xForge");
         expect(".o_we_description_link_preview").toHaveText(
-            "From ERP to CRM, eCommerce and CMS. Download Odoo or use it in the cloud. Grow Your Business."
+            "From ERP to CRM, eCommerce and CMS. Download AFENDA xForge or use it in the cloud. Grow Your Business."
         );
     });
     test("test internal metadata cached correctly", async () => {
@@ -1259,13 +1259,13 @@ describe("link preview", () => {
                 link_preview_name: "Task name | Project name",
             };
         });
-        onRpc("/odoo/cachetest/8", () => "");
+        onRpc("/app/cachetest/8", () => "");
         const { editor } = await setupEditor(`<p>abc[]</p>`);
         await insertText(editor, "/link");
         await animationFrame();
         await click(".o-we-command-name:first");
         await contains(".o-we-linkpopover input.o_we_href_input_link").fill(
-            window.location.origin + "/odoo/cachetest/8"
+            window.location.origin + "/app/cachetest/8"
         );
         await animationFrame();
         expect.verifySteps(["/html_editor/link_preview_internal"]);
@@ -1300,7 +1300,7 @@ describe("link preview", () => {
         });
 
         const currentProtocol = window.location.protocol;
-        onRpc("/odoo/cachetest/8", (request) => {
+        onRpc("/app/cachetest/8", (request) => {
             const urlProtocol = new URL(request.url).protocol;
             expect(urlProtocol).toBe(currentProtocol);
             return "";
@@ -1316,7 +1316,7 @@ describe("link preview", () => {
         await click(".o-we-command-name:first");
 
         const wrongProtocol = currentProtocol === "https:" ? "http:" : "https:";
-        const testUrl = `${wrongProtocol}//${window.location.host}/odoo/cachetest/8`;
+        const testUrl = `${wrongProtocol}//${window.location.host}/app/cachetest/8`;
 
         await contains(".o-we-linkpopover input.o_we_href_input_link").fill(testUrl);
         await animationFrame();
@@ -1343,25 +1343,25 @@ describe("link preview", () => {
         expect.verifySteps([]);
     });
     test("test external metadata cached correctly", async () => {
-        const title = "Open Source ERP and CRM | Odoo";
+        const title = "Open Source ERP and CRM | AFENDA xForge";
         const description =
-            "From ERP to CRM, eCommerce and CMS. Download Odoo or use it in the cloud. Grow Your Business.";
+            "From ERP to CRM, eCommerce and CMS. Download AFENDA xForge or use it in the cloud. Grow Your Business.";
         onRpc("/html_editor/link_preview_external", () => {
             expect.step("/html_editor/link_preview_external");
             return {
                 og_description: description,
-                og_image: "https://www.odoo.com/web/image/41207129-1abe7a15/homepage-seo.png",
+                og_image: "https://www.afenda.app/web/image/41207129-1abe7a15/homepage-seo.png",
                 og_title: title,
                 og_type: "website",
-                og_site_name: "Odoo",
-                source_url: "http://odoo.com/",
+                og_site_name: "AFENDA xForge",
+                source_url: "http://afenda.app/",
             };
         });
         const { editor } = await setupEditor(`<p>[]<br></p>`);
         await insertText(editor, "/link");
         await animationFrame();
         await click(".o-we-command-name:first");
-        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://odoo.com/");
+        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://afenda.app/");
         await animationFrame();
         expect.verifySteps(["/html_editor/link_preview_external"]);
         await waitFor(".o_we_description_link_preview");
@@ -1386,18 +1386,18 @@ describe("link preview", () => {
     test("should change replace URL button to magic wand icon after selection change", async () => {
         onRpc("/html_editor/link_preview_external", () => ({
             og_description:
-                "From ERP to CRM, eCommerce and CMS. Download Odoo or use it in the cloud. Grow Your Business.",
-            og_image: "https://www.odoo.com/web/image/41207129-1abe7a15/homepage-seo.png",
-            og_title: "Open Source ERP and CRM | Odoo",
+                "From ERP to CRM, eCommerce and CMS. Download AFENDA xForge or use it in the cloud. Grow Your Business.",
+            og_image: "https://www.afenda.app/web/image/41207129-1abe7a15/homepage-seo.png",
+            og_title: "Open Source ERP and CRM | AFENDA xForge",
             og_type: "website",
-            og_site_name: "Odoo",
-            source_url: "http://odoo.com/",
+            og_site_name: "AFENDA xForge",
+            source_url: "http://afenda.app/",
         }));
         const { editor } = await setupEditor(`<p>abc</p><p>[]<br></p>`);
         await insertText(editor, "/link");
         await animationFrame();
         await click(".o-we-command-name:first");
-        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://odoo.com/");
+        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://afenda.app/");
         await animationFrame();
         expect("button.o_we_replace_title_btn").toHaveCount(1);
         expect("a.o_we_replace_title_btn").toHaveCount(0);
@@ -1422,7 +1422,7 @@ describe("link preview", () => {
             description: markup("Test description"),
             link_preview_name: "Task name | Project name",
         }));
-        onRpc("/odoo/project/1/tasks/8", () => "");
+        onRpc("/app/project/1/tasks/8", () => "");
         const { editor } = await setupEditor(`<p>[]</p>`, {
             config: {
                 allowStripDomain: false,
@@ -1432,7 +1432,7 @@ describe("link preview", () => {
         await animationFrame();
         await click(".o-we-command-name:first");
         await contains(".o-we-linkpopover input.o_we_href_input_link").fill(
-            window.location.origin + "/odoo/project/1/tasks/8"
+            window.location.origin + "/app/project/1/tasks/8"
         );
         await animationFrame();
         expect(".o_we_replace_title_btn").toHaveCount(1);
@@ -2054,12 +2054,12 @@ describe("label is a valid URL", () => {
         expect(cleanLinkArtifacts(getContent(el))).toBe('<p><a href="tel:123">tel:123[]</a></p>');
     });
     test("popover should display href URL even if label is a valid URL and differs from href", async () => {
-        await setupEditor('<p><a href="https://odoo.com/">googl[]e.com</a></p>');
+        await setupEditor('<p><a href="https://afenda.app/">googl[]e.com</a></p>');
         await waitFor(".o-we-linkpopover", { timeout: 1500 });
-        expect(queryFirst(".o-we-linkpopover a").href).toBe("https://odoo.com/");
+        expect(queryFirst(".o-we-linkpopover a").href).toBe("https://afenda.app/");
         await click(".o_we_edit_link");
         await waitFor(".o_we_href_input_link");
-        expect("input.o_we_href_input_link").toHaveValue("https://odoo.com/");
+        expect("input.o_we_href_input_link").toHaveValue("https://afenda.app/");
     });
     test("Focus should be on URL [label] when editing an existing link", async () => {
         await setupEditor('<p>this is a <a href="http://test.com/">li[]nk</a></p>');

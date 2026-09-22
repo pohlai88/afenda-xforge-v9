@@ -46,6 +46,6 @@
         ],
     },
     'uninstall_hook': 'uninstall_hook',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

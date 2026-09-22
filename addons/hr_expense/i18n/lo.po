@@ -7,12 +7,12 @@
 # Bone NI <bounkirdni@gmail.com>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 11.0\n"
+"Project-Id-Version: AFENDA xForge Server 11.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-07-03 17:35+0000\n"
 "PO-Revision-Date: 2026-08-12 22:09+0000\n"
 "Last-Translator: Bone NI <bounkirdni@gmail.com>\n"
-"Language-Team: Lao <https://translate.odoo.com/projects/odoo-19/hr_expense/"
+"Language-Team: Lao <https://translate.afenda.app/projects/odoo-19/hr_expense/"
 "lo/>\n"
 "Language: lo\n"
 "MIME-Version: 1.0\n"
@@ -448,10 +448,10 @@ msgstr "ສ້າງຄ່າໃຊ້ຈ່າຍໃໝ່ເພື່ອໃຫ
 #: model_terms:ir.ui.view,arch_db:hr_expense.res_config_settings_view_form
 msgid ""
 "Create prepaid virtual and physical cards for both one-time and recurring "
-"expenses, integrated into Odoo through Stripe Issuing."
+"expenses, integrated into AFENDA xForge through Stripe Issuing."
 msgstr ""
 "ສ້າງບັດຈ່າຍລ່ວງໜ້າທັງແບບສະເໝືອນ ແລະ ແບບບັດແທ້ ສຳລັບຄ່າໃຊ້ຈ່າຍຄັ້ງດຽວ ແລະ ຄ່າໃຊ້ຈ່າຍປະຈຳ, ເຊິ່ງເຊື່ອ"
-"ມໂຍງເຂົ້າໃນ Odoo ຜ່ານ Stripe Issuing."
+"ມໂຍງເຂົ້າໃນ AFENDA xForge ຜ່ານ Stripe Issuing."
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense__create_uid
@@ -566,10 +566,10 @@ msgstr "ບັນຊີວິເຄາະການແຈກຢາຍ"
 #: model_terms:digest.tip,tip_description:hr_expense.digest_tip_hr_expense_0
 msgid ""
 "Do not keep your expense tickets in your pockets any longer. Just snap a "
-"picture of your receipt and let Odoo digitalizes it for you. The OCR and "
+"picture of your receipt and let AFENDA xForge digitalizes it for you. The OCR and "
 "Artificial Intelligence will fill the data automatically."
 msgstr ""
-"ບໍ່ຕ້ອງເກັບໃບບິນຄ່າໃຊ້ຈ່າຍໄວ້ໃນຖົງຂອງທ່ານອີກຕໍ່ໄປ. ພຽງແຕ່ຖ່າຍຮູບໃບບິນ ແລະ ໃຫ້ Odoo ແປງເປັນດິຈິຕອນໃຫ້"
+"ບໍ່ຕ້ອງເກັບໃບບິນຄ່າໃຊ້ຈ່າຍໄວ້ໃນຖົງຂອງທ່ານອີກຕໍ່ໄປ. ພຽງແຕ່ຖ່າຍຮູບໃບບິນ ແລະ ໃຫ້ AFENDA xForge ແປງເປັນດິຈິຕອນໃຫ້"
 "ທ່ານ. OCR ແລະ ປັນຍາປະດິດຈະຕື່ມຂໍ້ມູນໃຫ້ໂດຍອັດຕະໂນມັດ."
 
 #. module: hr_expense
@@ -1143,9 +1143,9 @@ msgstr "ກັບຄືນໄປຫາຄ່າໃຊ້ຈ່າຍຂອງທ
 #: model:ir.model.fields,field_description:hr_expense.field_res_config_settings__module_hr_expense_stripe
 msgid ""
 "Link your stripe issuing account to manage company credit cards for your "
-"employees through Odoo"
+"employees through AFENDA xForge"
 msgstr ""
-"ເຊື່ອມຕໍ່ບັນຊີ Stripe Issuing ຂອງທ່ານເພື່ອຈັດການບັດເຄຣດິດບໍລິສັດສຳລັບພະນັກງານຂອງທ່ານຜ່ານ Odoo"
+"ເຊື່ອມຕໍ່ບັນຊີ Stripe Issuing ຂອງທ່ານເພື່ອຈັດການບັດເຄຣດິດບໍລິສັດສຳລັບພະນັກງານຂອງທ່ານຜ່ານ AFENDA xForge"
 
 #. module: hr_expense
 #. odoo-python
@@ -1350,20 +1350,20 @@ msgstr "ຕົວເລກທີ່ຄິດໄລ່ຈາກຄ່າໃຊ້
 #. module: hr_expense
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_register_no_user
 #: model_terms:ir.ui.view,arch_db:hr_expense.hr_expense_template_submitted_expenses
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: hr_expense
 #. odoo-python
 #: code:addons/hr_expense/models/hr_expense.py:0
 msgid ""
-"Odoo had a look at your expense, its product, your company and the journal "
+"AFENDA xForge had a look at your expense, its product, your company and the journal "
 "but came back with empty hands.\n"
-"Give Odoo a hand to find an account by setting up an expense account.\n"
+"Give AFENDA xForge a hand to find an account by setting up an expense account.\n"
 "%(expense)s %(expense_name)s.\n"
 msgstr ""
-"Odoo ໄດ້ກວດສອບຄ່າໃຊ້ຈ່າຍ, ສິນຄ້າ, ບໍລິສັດ ແລະ ປື້ມບັນຊີຂອງທ່ານແລ້ວ ແຕ່ບໍ່ພົບຂໍ້ມູນ.\n"
-"ຊ່ວຍ Odoo ຊອກຫາບັນຊີໂດຍການຕັ້ງຄ່າບັນຊີຄ່າໃຊ້ຈ່າຍ.\n"
+"AFENDA xForge ໄດ້ກວດສອບຄ່າໃຊ້ຈ່າຍ, ສິນຄ້າ, ບໍລິສັດ ແລະ ປື້ມບັນຊີຂອງທ່ານແລ້ວ ແຕ່ບໍ່ພົບຂໍ້ມູນ.\n"
+"ຊ່ວຍ AFENDA xForge ຊອກຫາບັນຊີໂດຍການຕັ້ງຄ່າບັນຊີຄ່າໃຊ້ຈ່າຍ.\n"
 "%(expense)s %(expense_name)s.\n"
 
 #. module: hr_expense
@@ -1601,11 +1601,11 @@ msgstr "ການໃຫ້ຄະແນນ"
 #: code:addons/hr_expense/static/src/js/tours/hr_expense.js:0
 msgid ""
 "Ready? You can save it manually or discard modifications from here. You "
-"don't <em>need to save</em> - Odoo will save eveyrthing for you when you "
+"don't <em>need to save</em> - AFENDA xForge will save eveyrthing for you when you "
 "navigate."
 msgstr ""
 "ພ້ອມແລ້ວບໍ່? ທ່ານສາມາດບັນທຶກດ້ວຍຕົນເອງ ຫຼື ຍົກເລີກການແກ້ໄຂຈາກບ່ອນນີ້. ທ່ານບໍ່ <em>ຈຳເປັນຕ້ອງບັນທຶກ</"
-"em> - Odoo ຈະບັນທຶກທຸກຢ່າງໃຫ້ທ່ານໂດຍອັດຕາໂນມັດເມື່ອທ່ານປ່ຽນໜ້າ."
+"em> - AFENDA xForge ຈະບັນທຶກທຸກຢ່າງໃຫ້ທ່ານໂດຍອັດຕາໂນມັດເມື່ອທ່ານປ່ຽນໜ້າ."
 
 #. module: hr_expense
 #: model:ir.model.fields,field_description:hr_expense.field_hr_expense_refuse_wizard__reason
@@ -1719,8 +1719,8 @@ msgstr "ສະແກນ"
 #. module: hr_expense
 #. odoo-javascript
 #: code:addons/hr_expense/static/src/components/qrcode_action.xml:0
-msgid "Scan this QR code to get the Odoo app:"
-msgstr "ສະແກນ QR code ນີ້ເພື່ອດາວໂຫລດແອັບ Odoo:"
+msgid "Scan this QR code to get the AFENDA xForge app:"
+msgstr "ສະແກນ QR code ນີ້ເພື່ອດາວໂຫລດແອັບ AFENDA xForge:"
 
 #. module: hr_expense
 #: model:ir.model.fields,help:hr_expense.field_hr_employee__expense_manager_id

@@ -26,7 +26,7 @@ test("validSelection", async () => {
     // mail
     preset.mail_template_id = 21;
     expect(comp.validSelection).toBeEmpty();
-    comp.state.email = "good.person@odoo.com";
+    comp.state.email = "good.person@afenda.app";
     expect(Boolean(comp.validSelection)).toBe(true);
     // slots
     preset.use_timing = true;

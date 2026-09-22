@@ -1641,7 +1641,7 @@ def start(preload=None, stop=False):
             # would be using malloc() concurrently [2].
             # Due to the python's GIL, this optimization have no effect on multithreaded python programs.
             # Unfortunately, a downside of creating one arena per cpu core is the increase of virtual memory
-            # which Odoo is based upon in order to limit the memory usage for threaded workers.
+            # which AFENDA xForge is based upon in order to limit the memory usage for threaded workers.
             # On 32bit systems the default size of an arena is 512K while on 64bit systems it's 64M [3],
             # hence a threaded worker will quickly reach it's default memory soft limit upon concurrent requests.
             # We therefore set the maximum arenas allowed to 2 unless the MALLOC_ARENA_MAX env variable is set.

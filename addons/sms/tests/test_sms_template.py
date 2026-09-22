@@ -131,6 +131,6 @@ class TestSMSTemplateReset(TransactionCase):
         reset_action = sms_template_reset.reset_template()
         self.assertTrue(reset_action)
 
-        self.assertEqual(sms_template.body.strip(), Markup('<div>Hello Odoo</div>'))
+        self.assertEqual(sms_template.body.strip(), Markup('<div>Hello AFENDA xForge</div>'))
         # Name is not there in the data file template, so it should be set to False
         self.assertFalse(sms_template.name, "Name should be set to False")

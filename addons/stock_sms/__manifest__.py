@@ -17,7 +17,7 @@
     ],
     'auto_install': True,
     'post_init_hook': '_assign_default_sms_template_picking_id',
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'uninstall_hook': '_reset_sms_text_confirmation',
     'license': 'LGPL-3',
 }

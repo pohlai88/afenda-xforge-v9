@@ -22,12 +22,12 @@
 # NEDŽAD BEUS <nedzad.beus@implex.si>, 2026.
 msgid ""
 msgstr ""
-"Project-Id-Version: Odoo Server 16.0\n"
+"Project-Id-Version: AFENDA xForge Server 16.0\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-04-10 18:37+0000\n"
 "PO-Revision-Date: 2026-08-27 07:47+0000\n"
 "Last-Translator: Jan Zorko <jan.zorko@implex.si>\n"
-"Language-Team: Slovenian <https://translate.odoo.com/projects/odoo-19/"
+"Language-Team: Slovenian <https://translate.afenda.app/projects/odoo-19/"
 "purchase/sl/>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -1491,10 +1491,10 @@ msgstr "Predloga predračuna"
 #, fuzzy
 msgid ""
 "Drag and drop the request for quotation PDF file into your list of "
-"quotations in Odoo. Enjoy the automation!"
+"quotations in AFENDA xForge. Enjoy the automation!"
 msgstr ""
 "Povlecite datoteko PDF z zahtevkom za ponudbo in jo spustite na svoj seznam "
-"ponudb v Odoo. Uživajte v avtomatizaciji!"
+"ponudb v AFENDA xForge. Uživajte v avtomatizaciji!"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_order__dest_address_id
@@ -2188,7 +2188,7 @@ msgstr "Ni potrjeno"
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
 #, fuzzy
-msgid "Not using Odoo?"
+msgid "Not using AFENDA xForge?"
 msgstr "Ne uporabljate Odooja?"
 
 #. module: purchase
@@ -2238,8 +2238,8 @@ msgstr "Število sporočil, ki niso bila pravilno dostavljena."
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
-msgid "Odoo"
-msgstr "Odoo"
+msgid "AFENDA xForge"
+msgstr "AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields.selection,name:purchase.selection__product_template__purchase_method__purchase
@@ -3235,8 +3235,8 @@ msgstr "Označeno"
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
 #, fuzzy
-msgid "Start on Odoo"
-msgstr "Začnite uporabljati Odoo"
+msgid "Start on AFENDA xForge"
+msgstr "Začnite uporabljati AFENDA xForge"
 
 #. module: purchase
 #: model:ir.model.fields,field_description:purchase.field_purchase_bill_line_match__state
@@ -3806,7 +3806,7 @@ msgid ""
 "Vendors bills can be pre-generated based on purchase\n"
 "                    orders or receipts. This allows you to control bills\n"
 "                    you receive from your vendor according to the draft\n"
-"                    document in Odoo."
+"                    document in AFENDA xForge."
 msgstr ""
 "Računi dobaviteljev se lahko vnaprej ustvarijo na podlagi nakupa\n"
 "                    naročila ali potrdila. To vam omogoča nadzor nad računi\n"
@@ -3850,8 +3850,8 @@ msgstr "Računi v čakanju"
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.portal_my_purchase_order
 #, fuzzy
-msgid "Want to import this document in Odoo?"
-msgstr "Želite uvoziti ta dokument v Odoo?"
+msgid "Want to import this document in AFENDA xForge?"
+msgstr "Želite uvoziti ta dokument v AFENDA xForge?"
 
 #. module: purchase
 #: model_terms:ir.ui.view,arch_db:purchase.view_product_supplier_inherit
@@ -3889,14 +3889,14 @@ msgid ""
 "When creating a purchase order, have a look at the vendor's <i>On Time "
 "Delivery</i> rate: the percentage of products shipped on time. If it is too "
 "low, activate the <i>automated reminders</i>. A few days before the due "
-"shipment, Odoo will send the vendor an email to ask confirmation of shipment "
+"shipment, AFENDA xForge will send the vendor an email to ask confirmation of shipment "
 "dates and keep you informed in case of any delays. To get the vendor's "
 "performance statistics, click on the OTD rate."
 msgstr ""
 "Pri ustvarjanju nabavnega naročila si oglejte dobaviteljevo stopnjo <i>"
 "pravočasne dostave</i>: odstotek izdelkov, odposlanih pravočasno. Če je "
 "prenizka, aktivirajte <i>samodejne opomnike</i>. Nekaj dni pred predvideno "
-"odpremo bo Odoo dobavitelju poslal e-pošto z zahtevo za potrditev datumov "
+"odpremo bo AFENDA xForge dobavitelju poslal e-pošto z zahtevo za potrditev datumov "
 "odpreme in vas obvestil v primeru zamud. Če želite pridobiti statistične "
 "podatke o uspešnosti dobavitelja, kliknite stopnjo OTD."
 
@@ -3904,12 +3904,12 @@ msgstr ""
 #: model_terms:digest.tip,tip_description:purchase.digest_tip_purchase_1
 #, fuzzy
 msgid ""
-"When sending a purchase order by email, Odoo asks the vendor to acknowledge "
+"When sending a purchase order by email, AFENDA xForge asks the vendor to acknowledge "
 "the reception of the order. When the vendor acknowledges the order by "
 "clicking on a button in the email, the information is added on the purchase "
 "order. Use filters to track orders that have not been acknowledged."
 msgstr ""
-"Ko pošljete nabavno naročilo po e-pošti, Odoo dobavitelja prosi, naj potrdi "
+"Ko pošljete nabavno naročilo po e-pošti, AFENDA xForge dobavitelja prosi, naj potrdi "
 "prejem naročila. Ko dobavitelj potrdi naročilo s klikom na gumb v e-pošti, "
 "se informacije dodajo na nabavno naročilo. Uporabite filtre za sledenje "
 "naročilom, ki niso bila potrjena."

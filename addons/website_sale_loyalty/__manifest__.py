@@ -38,6 +38,6 @@ Coupon & promotion programs can be edited in the Catalog menu of the Website app
             'website_sale_loyalty/static/src/website_builder/**/*',
         ],
     },
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

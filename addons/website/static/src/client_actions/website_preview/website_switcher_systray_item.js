@@ -38,7 +38,7 @@ export class WebsiteSwitcherSystrayItem extends Component {
             ),
             callback: () => {
                 if (
-                    !session.website_bypass_domain_redirect && // Used by the Odoo support (bugs to be expected)
+                    !session.website_bypass_domain_redirect && // Used by the AFENDA xForge support (bugs to be expected)
                     website.domain &&
                     !isHTTPSorNakedDomainRedirection(website.domain, window.location.origin)
                 ) {

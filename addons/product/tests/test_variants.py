@@ -89,7 +89,7 @@ class TestVariants(ProductVariantsCommon):
                          'Product variants are variants')
 
     def test_variants_pricelist_code(self):
-        vendor = self.env['res.partner'].create({'name': 'Bidou', 'email': 'bidou@odoo.com'})
+        vendor = self.env['res.partner'].create({'name': 'Bidou', 'email': 'bidou@afenda.app'})
         codes = ['bidou-red', 'bidou-green', 'bidou-blue']
         self.env['product.supplierinfo'].create([{
             'partner_id': vendor.id,

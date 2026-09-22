@@ -150,7 +150,7 @@ class TestFlows(AccountPaymentCommon, PaymentHttpCommon):
         partner = self.env['res.partner'].create({'name': 'Alsh'})
         account_user = self.env['res.users'].create({
             'login': 'TestUser',
-            'password': 'Odoo@123',
+            'password': 'AFENDA xForge@123',
             'group_ids': [Command.set(self.env.ref('account.group_account_manager').ids)],
             'partner_id': partner.id
         })
@@ -165,7 +165,7 @@ class TestFlows(AccountPaymentCommon, PaymentHttpCommon):
         self.assertEqual(invoice.payment_state, 'not_paid')
 
         # Must be authenticated before making an http resqest
-        self.authenticate('TestUser', 'Odoo@123')
+        self.authenticate('TestUser', 'AFENDA xForge@123')
         overdue_url = self._build_url('/my/invoices/overdue')
         resp = self._make_http_get_request(overdue_url, {})
 

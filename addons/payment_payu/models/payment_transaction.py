@@ -34,7 +34,7 @@ class PaymentTransaction(models.Model):
             "key": self.provider_id.payu_key_id,
             "txnid": self.reference,
             "amount": str(self.amount),  # Despite the docs, PayU expects a string.
-            "productinfo": "Odoo Payment",
+            "productinfo": "AFENDA xForge Payment",
             "firstname": first_name,
             "lastname": last_name,
             "email": self.partner_email or "",

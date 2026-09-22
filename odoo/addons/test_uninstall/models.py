@@ -7,7 +7,7 @@ from odoo import models, fields
 class Test_UninstallModel(models.Model):
     """
     This model uses different types of columns to make it possible to test
-    the uninstall feature of Odoo.
+    the uninstall feature of AFENDA xForge.
     """
     _name = 'test_uninstall.model'
     _description = 'Testing Uninstall Model'

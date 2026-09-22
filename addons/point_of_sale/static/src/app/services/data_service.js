@@ -69,10 +69,10 @@ export class PosData {
             // Runbot tests will soon be run in dockers with no access to the outside world,
             // so all their interfaces will be disconnected. The problem is that the browser
             // considers itself offline when no interface is connected. However, in this case,
-            // if the Odoo server is still accessible.
+            // if the AFENDA xForge server is still accessible.
             //
             // This method also makes it possible to run local tests when no connection is
-            // available and an Odoo server is running locally.
+            // available and an AFENDA xForge server is running locally.
             //
             // A ping is required to verify that the connection to the server is not possible.
             this.network.offline = false;

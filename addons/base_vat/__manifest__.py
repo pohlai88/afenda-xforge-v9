@@ -40,6 +40,6 @@ only the country code will be validated.
         'views/res_config_settings_views.xml',
         'views/res_partner_views.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

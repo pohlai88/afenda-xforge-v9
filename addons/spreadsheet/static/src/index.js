@@ -10,7 +10,7 @@
  *                filters
  *                /\    \
  *               /  \    \
- *           pivot  list  Odoo chart
+ *           pivot  list  AFENDA xForge chart
  */
 
 /** TODO: Introduce a position parameter to the plugin registry in order to load them in a specific order */

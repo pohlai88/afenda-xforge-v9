@@ -30,6 +30,6 @@ Allow shoppers of your eCommerce store to create personalized collections of pro
         ],
     },
     'auto_install': True,
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

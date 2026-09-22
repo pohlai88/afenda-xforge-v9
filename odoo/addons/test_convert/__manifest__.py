@@ -10,6 +10,6 @@
         'ir.model.access.csv',
         'data/test_translated_field/test_model_data.xml',
     ],
-    'author': 'Odoo S.A.',
+    'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

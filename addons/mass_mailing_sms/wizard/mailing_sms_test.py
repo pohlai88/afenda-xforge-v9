@@ -87,7 +87,7 @@ class MailingSmsTest(models.TransientModel):
         for sent_sms in sent_sms_list:
             recipient = sms_uuid_to_number_map.get(sent_sms.get('uuid'))
             # 'success' and 'sent' IAP/Twilio both resolve to 'pending' SMS state
-            # (= send for Odoo) via IAP_TO_SMS_STATE_SUCCESS
+            # (= send for AFENDA xForge) via IAP_TO_SMS_STATE_SUCCESS
             if sent_sms.get('state') in ('success', 'sent'):
                 notification_messages.append(
                     _('Test SMS successfully sent to %s', recipient)
