@@ -25,4 +25,22 @@
         </xpath>
     </template>
 
+    <!-- Mobile browser chrome color: Ledger Blue, not the Odoo purple -->
+    <template id="webclient_bootstrap" inherit_id="web.webclient_bootstrap" name="AFENDA theme color">
+        <xpath expr="//meta[@name='theme-color']" position="attributes">
+            <attribute name="content">#1E3A8A</attribute>
+        </xpath>
+    </template>
+
+    <!-- Offline page: no stylesheet is served when offline, so the brand values
+         are inlined here. This <style> follows the upstream one, so it wins. -->
+    <template id="webclient_offline" inherit_id="web.webclient_offline" name="AFENDA offline page">
+        <xpath expr="//style" position="after">
+            <style>
+                body{background:#F7F7F5;color:#0F172A;font-family:"Source Sans 3",-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
+                .card button{background-color:#1E3A8A;border:1px solid #1E3A8A;color:#FFFFFF;border-radius:3px}
+            </style>
+        </xpath>
+    </template>
+
 </odoo>

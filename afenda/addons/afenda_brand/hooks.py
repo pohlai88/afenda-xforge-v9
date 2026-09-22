@@ -59,8 +59,10 @@ def post_init_hook(env):
         for field, key in (
             ("primary_color", "primary"),
             ("secondary_color", "ink"),
-            ("email_primary_color", "primary"),
-            ("email_secondary_color", "ink"),
+            # mail names these from the reader's point of view: "primary" is the
+            # button TEXT, "secondary" is the button FILL.
+            ("email_primary_color", "on_primary"),
+            ("email_secondary_color", "primary"),
         ):
             if field in company._fields:
                 vals[field] = BRAND[key]

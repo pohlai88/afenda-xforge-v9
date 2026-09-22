@@ -49,6 +49,27 @@ class TestBranding(HttpCase):
             self.assertNotIn("odoo", src.lower(), f"manifest still serves an Odoo icon: {src}")
             self.assertEqual(self.url_open(src).status_code, 200)
 
+    def test_theme_meta_and_offline(self):
+        self.authenticate("admin", "admin")
+        html = self.url_open("/app").text
+        self.assertIn(f'<meta name="theme-color" content="{BRAND["primary"]}"/>', html)
+        # The offline page is served without any stylesheet, so its colors are
+        # inline. Upstream's <style> keeps the Odoo purple; ours comes after it.
+        offline = self.url_open("/app/offline").text
+        self.assertIn(BRAND["primary"], offline)
+        self.assertGreater(
+            offline.rfind(BRAND["primary"]),
+            offline.rfind("#714B67"),
+            "the AFENDA offline style must follow the Odoo one to win",
+        )
+
+    def test_scoped_app_manifest(self):
+        manifest = self.url_open(
+            "/web/manifest.scoped_app_manifest?app_id=mail&path=/app/discuss"
+        ).json()
+        self.assertEqual(manifest["theme_color"].upper(), BRAND["primary"])
+        self.assertEqual(manifest["background_color"].upper(), BRAND["paper"])
+
     def _logo_size(self, b64):
         # Odoo re-encodes uploaded images, so compare dimensions, not bytes.
         return Image.open(io.BytesIO(base64.b64decode(b64))).size
@@ -60,9 +81,13 @@ class TestBranding(HttpCase):
         self.assertEqual(self._logo_size(company.logo), expected_size)
         self.assertEqual(company.name, BRAND["short"])
         self.assertTrue(company.favicon)
-        self.assertEqual(company.email_primary_color.upper(), BRAND["primary"])
         new_company = self.env["res.company"].create({"name": "Second"})
         self.assertEqual(self._logo_size(new_company.logo), expected_size, "new companies get the AFENDA logo")
+        # mail reads these from the email: "primary" is the CTA button text,
+        # "secondary" is the button fill. A blue-on-blue button is unreadable.
+        for record in (company, new_company):
+            self.assertEqual(record.email_secondary_color.upper(), BRAND["primary"])
+            self.assertEqual(record.email_primary_color.upper(), "#FFFFFF")
 
     def test_system_bot_is_branded(self):
         bot = self.env.ref("base.partner_root")
