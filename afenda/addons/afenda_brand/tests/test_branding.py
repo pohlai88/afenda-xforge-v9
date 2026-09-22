@@ -29,6 +29,13 @@ class TestBranding(HttpCase):
         html = self.url_open("/odoo").text
         self.assertIn("<title>AFENDA xForge</title>", html.replace("\n", ""))
         self.assertNotIn("Powered by Odoo", html)
+        # disable_odoo_online drops the odoo.com entries from the user menu;
+        # make sure its code actually ships in the web client bundle.
+        hrefs = re.findall(r'src="(/web/assets/[^"]+web\.assets_web[^"]*\.js)"', html)
+        self.assertTrue(hrefs, "web.assets_web script not linked from /odoo")
+        js = self.url_open(hrefs[0]).text
+        for item in ("documentation", "support", "odoo_account"):
+            self.assertIn(f'.remove("{item}")', js, f"user menu item {item!r} is not removed")
 
     def test_pwa_manifest_is_branded(self):
         manifest = self.url_open("/web/manifest.webmanifest").json()
