@@ -215,6 +215,17 @@ class RulesTests(unittest.TestCase):
             self.assertNotIn("Odoo", once)
             self.assertNotIn("odoo.com", once)
 
+    def test_cli_folder_keeps_filesystem_paths(self):
+        src = "    Run it as odoo-bin upgrade_code; see /odoo/upgrade_code for details.\n"
+        self.assertEqual(self.rw(src, "odoo/cli/upgrade_code.py"), src)
+
+    def test_percent_encoded_prefix(self):
+        self.assertEqual(self.rw("q = 'redirect=%2Fodoo%2Faction-887'\n", "t.py"), "q = 'redirect=%2Fapp%2Faction-887'\n")
+
+    def test_translator_attribution_kept(self):
+        src = '"Last-Translator: Ron M <ronm@odoo.com>, 2025\\n"\n'
+        self.assertEqual(self.rw(src, "fr.po"), src)
+
 
 if __name__ == "__main__":
     unittest.main()

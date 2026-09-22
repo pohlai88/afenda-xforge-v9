@@ -42,8 +42,9 @@ def build_rules(brand: dict) -> list[Rule]:
             re.compile(r"(?<![\w.])/odoo(?=[/'\"`?#\s)\]]|$)"),
             f"/{prefix}",
             suffixes=URLISH,
-            path_excludes=("iot_box_image",),
+            path_excludes=("iot_box_image", "odoo/cli/"),
         ),
+        Rule("url_prefix_encoded", re.compile(r"%2Fodoo(?=%2F|['\"]|$)"), f"%2F{prefix}", suffixes=URLISH),
         Rule("router_prefix", re.compile(r'"odoo"'), f'"{prefix}"', path_contains=(ROUTER,)),
         # 6. Social/profile handles at domain root (twitter.com/Odoo).
         Rule("social_handle", re.compile(r"(?<![\w.-])((?:www\.)?(?:twitter|x|facebook|linkedin|instagram|youtube|github|tiktok)\.com/)Odoo(?=[/\"'\s)]|$)"), rf"\g<1>{short.lower()}"),
