@@ -21,8 +21,18 @@ class TestBranding(HttpCase):
         self.assertIn("<title>AFENDA xForge</title>", html.replace("\n", ""))
         self.assertIn("/afenda_brand/static/img/favicon.ico", html)
         self.assertIn("AFENDA xForge", html)
+        self.assertIn("o_afenda_login", html, "the login body class is missing")
+        self.assertIn(BRAND["tagline"], html, "the login card is missing the tagline")
         for tell in ODOO_TELLS:
             self.assertNotIn(tell, html, f"login page still shows {tell!r}")
+
+    def test_frontend_css_has_login_surface(self):
+        html = self.url_open("/web/login").text
+        hrefs = re.findall(r'href="(/web/assets/[^"]+web\.assets_frontend[^"]*\.css)"', html)
+        self.assertTrue(hrefs, "web.assets_frontend stylesheet not linked from /web/login")
+        css = self.url_open(hrefs[0]).text.lower()
+        self.assertIn(".o_afenda_login", css, "login.scss is not in the frontend bundle")
+        self.assertIn(BRAND["paper"].lower(), css, "the login ground is not AFENDA paper")
 
     def test_webclient_page_is_branded(self):
         self.authenticate("admin", "admin")
@@ -43,11 +53,13 @@ class TestBranding(HttpCase):
         self.assertEqual(manifest["short_name"], BRAND["short"])
         self.assertEqual(manifest["theme_color"].upper(), BRAND["primary"])
         self.assertNotIn("odoo", str(manifest.get("name", "")).lower())
-        icons = [icon["src"] for icon in manifest["icons"]]
-        self.assertTrue(icons, "manifest lists no icons")
-        for src in icons:
+        self.assertTrue(manifest["icons"], "manifest lists no icons")
+        for icon in manifest["icons"]:
+            src = icon["src"]
             self.assertNotIn("odoo", src.lower(), f"manifest still serves an Odoo icon: {src}")
             self.assertEqual(self.url_open(src).status_code, 200)
+            # Without "maskable" Android crops the tile into a circle.
+            self.assertIn("maskable", icon.get("purpose", ""), f"{src} is not maskable")
 
     def test_theme_meta_and_offline(self):
         self.authenticate("admin", "admin")
@@ -57,6 +69,8 @@ class TestBranding(HttpCase):
         # inline. Upstream's <style> keeps the Odoo purple; ours comes after it.
         offline = self.url_open("/app/offline").text
         self.assertIn(BRAND["primary"], offline)
+        self.assertIn(BRAND["paper"], offline)
+        self.assertIn(BRAND["ink"], offline)
         self.assertGreater(
             offline.rfind(BRAND["primary"]),
             offline.rfind("#714B67"),
@@ -69,6 +83,8 @@ class TestBranding(HttpCase):
         ).json()
         self.assertEqual(manifest["theme_color"].upper(), BRAND["primary"])
         self.assertEqual(manifest["background_color"].upper(), BRAND["paper"])
+        # Recoloring rebuilds the response; the app scope must survive it.
+        self.assertEqual(manifest["scope"], "/app/discuss")
 
     def _logo_size(self, b64):
         # Odoo re-encodes uploaded images, so compare dimensions, not bytes.

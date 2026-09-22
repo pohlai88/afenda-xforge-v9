@@ -1,0 +1,22 @@
+// AFENDA xForge login: a paper ground, one white card, one blue action.
+// Tokens come from primary_variables.scss, which web.assets_frontend pulls in
+// through web._assets_helpers -> web._assets_primary_variables.
+
+.o_afenda_login {
+    background: $o-webclient-background-color;  // paper
+
+    // Upstream puts `bg-100` on this card; two classes beat one, so ours wins.
+    .o_database_list {
+        background: $white;
+        border: 1px solid $border-color;  // hairline
+        border-radius: $o-border-radius;
+    }
+}
+
+// The tagline belongs to the logo lockup: display serif, never a heading.
+.o_afenda_tagline {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-weight: 600;
+    color: $o-brand-secondary;  // graphite
+    font-size: .95rem;
+}

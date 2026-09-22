@@ -48,6 +48,7 @@
         ],
         "web.assets_frontend": [
             "afenda_brand/static/src/scss/fonts.scss",
+            "afenda_brand/static/src/scss/login.scss",
         ],
     },
     "post_init_hook": "post_init_hook",

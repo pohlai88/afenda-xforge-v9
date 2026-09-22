@@ -11,8 +11,21 @@
         </xpath>
     </template>
 
-    <!-- Login card footer: no odoo.com link -->
+    <!-- Login: AFENDA surface, tagline under the logo, no odoo.com link -->
     <template id="login_layout" inherit_id="web.login_layout" name="AFENDA login layout">
+        <!-- Replaces upstream's `bg-100`; login.scss paints the paper ground. -->
+        <xpath expr="//t[@t-set='body_classname']" position="attributes">
+            <attribute name="t-value">'o_afenda_login'</attribute>
+        </xpath>
+        <!-- The card is built with t-attf-class, so hasclass() cannot see it. -->
+        <xpath expr="//div[contains(@t-attf-class, 'o_database_list')]" position="attributes">
+            <attribute name="style">max-width: 360px;</attribute>
+        </xpath>
+        <!-- Not @alt: it is a translated attribute, which ir.ui.view
+             _valid_inheritance refuses as an inheritance selector. -->
+        <xpath expr="//img[contains(@t-attf-src, 'company_logo')]" position="after">
+            <p t-if="afenda_tagline" class="o_afenda_tagline mt-2 mb-0" t-out="afenda_tagline"/>
+        </xpath>
         <xpath expr="//a[contains(@href, 'utm_medium=auth')]" position="replace">
             <span class="text-muted">AFENDA xForge</span>
         </xpath>
@@ -35,7 +48,7 @@
     <!-- Offline page: no stylesheet is served when offline, so the brand values
          are inlined here. This <style> follows the upstream one, so it wins. -->
     <template id="webclient_offline" inherit_id="web.webclient_offline" name="AFENDA offline page">
-        <xpath expr="//style" position="after">
+        <xpath expr="//style[last()]" position="after">
             <style>
                 body{background:#F7F7F5;color:#0F172A;font-family:"Source Sans 3",-apple-system,"Segoe UI",Roboto,Arial,sans-serif}
                 .card button{background-color:#1E3A8A;border:1px solid #1E3A8A;color:#FFFFFF;border-radius:3px}
