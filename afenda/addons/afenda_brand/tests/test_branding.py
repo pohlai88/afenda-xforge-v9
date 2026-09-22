@@ -91,7 +91,25 @@ class TestBranding(HttpCase):
         self.assertIn(BRAND["primary"].lower(), css)
         self.assertIn("source sans 3", css)
         self.assertIn("/afenda_brand/static/fonts/sourcesans3-vf.ttf", css)
+        # o-add-unicode-support-font still appends the non-Latin fallback family.
+        self.assertIn("unicode support noto", css)
         self.assertNotIn("#714b67", css, "Odoo enterprise purple must not survive")
+        # Semantic tokens reach the compiled sheet...
+        for name, color in (
+            ("verified", BRAND["verified"]),
+            ("ember", BRAND["ember"]),
+            ("flag", BRAND["flag"]),
+            ("ink", BRAND["ink"]),
+            ("hairline", BRAND["hairline"]),
+        ):
+            self.assertIn(color.lower(), css, f"AFENDA {name} {color} is missing from the theme")
+        # ...and Odoo's own semantic palette does not. Bootstrap's generic named
+        # colors keep their own hexes whatever the theme (bootstrap_overridden.scss
+        # "Restore BS4 Colors"); only those two declarations may still hold one.
+        bootstrap_named = {"#28a745": "--green: #28a745", "#dc3545": "--red: #dc3545"}
+        for odoo_color in ("#28a745", "#ffac00", "#dc3545", "#f3cc00", "#d2317b", "#f0cda8"):
+            rest = css.replace(bootstrap_named[odoo_color], "") if odoo_color in bootstrap_named else css
+            self.assertNotIn(odoo_color, rest, f"Odoo theme color {odoo_color} must not survive")
         # html_editor hardcodes the community purple in its table picker; our
         # override must come later in the bundle so it wins.
         purple = css.rfind("#71639e")
@@ -99,3 +117,9 @@ class TestBranding(HttpCase):
         self.assertGreater(override, purple, "table picker override must follow the hardcoded purple")
         for match in re.finditer(r"([^{}]+)\{[^{}]*#71639e", css):
             self.assertIn(".o-we-tablepicker", match.group(1), f"unexpected Odoo purple in rule {match.group(1)!r}")
+
+    def test_dark_scheme_overrides_the_tokens(self):
+        bundle = self.env["ir.qweb"]._get_asset_bundle("web.assets_web_dark", css=True, js=False)
+        css = bundle.css().raw.decode().lower()
+        self.assertIn("#0b1120", css, "dark webclient background is missing")
+        self.assertIn("#111827", css, "dark view background is missing")

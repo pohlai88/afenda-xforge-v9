@@ -1,17 +1,80 @@
 // AFENDA xForge identity v2.1 — prepended to web._assets_primary_variables so
 // every `!default` in Odoo's own primary_variables.scss picks these up.
+// Every declaration below is `!default` too: first wins, which lets
+// primary_variables.dark.scss (loaded before this file in web.assets_web_dark)
+// override any token for the dark color scheme.
 // Keep in sync with brand.py.
 
-$o-community-color: #1E3A8A;
-$o-enterprise-color: #1E3A8A;
-$o-brand-odoo: #1E3A8A;
-$o-brand-primary: #1E3A8A;
-$o-brand-secondary: #4B5563;
-$o-action: #1E3A8A;
-$o-main-link-color: #1E3A8A;
+// Brand
+$o-community-color: #1E3A8A !default;
+$o-enterprise-color: #1E3A8A !default;
+$o-enterprise-action-color: #1E3A8A !default;
+$o-brand-odoo: #1E3A8A !default;
+$o-brand-primary: #1E3A8A !default;
+$o-brand-secondary: #4B5563 !default;
+$o-action: #1E3A8A !default;
+$o-main-link-color: #1E3A8A !default;
 
-// Paper behind the views; views themselves stay white.
-$o-webclient-background-color: #F7F7F5;
+// Semantic colors: color means a state, never decoration.
+$o-success: #15803D !default;  // posted, reconciled
+$o-info: #4B5563 !default;     // neutral, informational
+$o-warning: #C2410C !default;  // attention, unposted, overdue
+$o-danger: #B91C1C !default;   // error, locked
 
-$o-font-family-sans-serif: ("Source Sans 3", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
-$o-font-family-monospace: ("Source Code Pro", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace);
+// Fine-tune contextual text colors (drives the `text-x` classes only).
+$o-theme-text-colors: (
+    "success": #15803D,
+    "info": #4B5563,
+    "warning": #C2410C,
+    "danger": #B91C1C,
+) !default;
+
+// Surfaces and rules. Paper behind the views; views themselves stay white.
+$o-webclient-background-color: #F7F7F5 !default;
+$border-color: #E5E7EB !default;  // Bootstrap's own; upstream derives it from $o-gray-300
+
+// Text
+$o-main-text-color: #0F172A !default;
+$o-main-favorite-color: #A16207 !default;
+$o-main-code-color: #4B5563 !default;
+
+// Fonts. o-add-unicode-support-font (web/static/src/scss/utils.scss) appends the
+// Noto fallback family for characters the system fonts do not cover; utils.scss
+// precedes the primary-variables include in every bundle.
+$o-font-family-sans-serif: o-add-unicode-support-font(("Source Sans 3", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif)) !default;
+$o-font-family-monospace: o-add-unicode-support-font(("Source Code Pro", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace)) !default;
+$o-headings-font-family: $o-font-family-sans-serif !default;
+$o-default-report-font: "Source Sans 3" !default;
+
+// Precision, not decoration: corners are nearly square.
+$o-border-radius: o-to-rem(3px) !default;
+$o-border-radius-sm: o-to-rem(2px) !default;
+$o-border-radius-lg: o-to-rem(4px) !default;
+
+// Navbar: ink, not brand. The one blue on screen is the action.
+$o-navbar-background: #0F172A !default;
+$o-navbar-border-bottom: 1px solid #0B1120 !default;
+$o-navbar-badge-bg: #C2410C !default;
+
+// Tag / kanban palette: muted, no two states confusable. Mirrors BRAND["tags"].
+$o-colors: (#9CA3AF, #A33A3A, #B5651D, #A16207, #3B6EA8, #7C4F7F, #9A6B4F,
+            #2F8F8A, #3448A8, #A8447A, #4C8A56, #6B5FA8) !default;
+
+// Website / editor palettes (html_editor/static/src/scss/html_editor.variables.scss).
+// base-1 is ours; base-2 stays upstream.
+$o-color-palettes: (
+    'base-1': (
+        'o-color-1': #1E3A8A,
+        'o-color-2': #E5E7EB,
+        'o-color-3': #F7F7F5,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #0F172A,
+    ),
+    'base-2': (
+        'o-color-1': #337ab7,
+        'o-color-2': #e9ecef,
+        'o-color-3': #F8F9FA,
+        'o-color-4': #FFFFFF,
+        'o-color-5': #343a40,
+    ),
+) !default;

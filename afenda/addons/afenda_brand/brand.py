@@ -1,5 +1,9 @@
 """Single source of truth for the AFENDA xForge identity (v2.1, 2026-09-22).
 
+Keys: product, short, bot, domain, docs_path, url_prefix, tagline, and the
+colors primary, on_primary, ink, paper, graphite, hairline, ember, verified,
+flag, favorite, plus the tags palette.
+
 Keep in sync with static/src/scss/primary_variables.scss.
 """
 
@@ -13,6 +17,7 @@ BRAND = {
     "tagline": "The truth of your business, kept.",
     # Colors
     "primary": "#1E3A8A",  # Ledger Blue: one action per screen
+    "on_primary": "#FFFFFF",  # text and icons drawn on primary
     "ink": "#0F172A",  # text, dark UI
     "paper": "#F7F7F5",  # surfaces
     "graphite": "#4B5563",  # secondary text
@@ -20,4 +25,10 @@ BRAND = {
     "ember": "#C2410C",  # attention, unposted, overdue
     "verified": "#15803D",  # posted, reconciled
     "flag": "#B91C1C",  # error, locked
+    "favorite": "#A16207",  # starred records
+    # Tag / kanban palette, mirrors $o-colors in primary_variables.scss.
+    "tags": [
+        "#9CA3AF", "#A33A3A", "#B5651D", "#A16207", "#3B6EA8", "#7C4F7F",
+        "#9A6B4F", "#2F8F8A", "#3448A8", "#A8447A", "#4C8A56", "#6B5FA8",
+    ],
 }

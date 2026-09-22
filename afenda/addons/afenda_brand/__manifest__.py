@@ -32,6 +32,13 @@
         "web._assets_primary_variables": [
             ("prepend", "afenda_brand/static/src/scss/primary_variables.scss"),
         ],
+        "web.assets_web_dark": [
+            (
+                "before",
+                "afenda_brand/static/src/scss/primary_variables.scss",
+                "afenda_brand/static/src/scss/primary_variables.dark.scss",
+            ),
+        ],
         "web.assets_backend": [
             "afenda_brand/static/src/scss/fonts.scss",
             "afenda_brand/static/src/scss/backend.scss",
