@@ -84,6 +84,17 @@ class DeployStaticTests(unittest.TestCase):
             self.assertRegex(text, rf"WKHTMLTOX_SHA256_{arch}=[0-9a-f]{{64}}\n")
         self.assertIn("sha256sum -c", text)
 
+    def test_init_script_directory_is_traversable(self):
+        # `COPY --chmod=644` into a directory that does not exist yet creates
+        # the directory with 644 as well; the non-root afenda user then cannot
+        # open init_params.py. The Dockerfile must create it 755 first.
+        text = DOCKERFILE.read_text(encoding="utf-8")
+        mkdir = re.search(r"install -d -m 755 /usr/local/lib/afenda\b", text)
+        copy = re.search(r"^COPY\b.*\s/usr/local/lib/afenda/", text, re.MULTILINE)
+        self.assertIsNotNone(mkdir, "Dockerfile never creates /usr/local/lib/afenda with mode 755")
+        self.assertIsNotNone(copy, "Dockerfile no longer copies into /usr/local/lib/afenda")
+        self.assertLess(mkdir.start(), copy.start(), "the 755 directory must exist before the COPY into it")
+
     def test_dockerignore_keeps_every_module_file(self):
         patterns = _dockerignore_patterns()
         addons = REPO / "afenda" / "addons"

@@ -65,7 +65,10 @@ RUN apt-get update \
 
 RUN useradd --create-home --home-dir /home/afenda --shell /bin/sh afenda \
  && mkdir -p /var/lib/afenda /etc/afenda \
- && chown afenda:afenda /var/lib/afenda /etc/afenda
+ && chown afenda:afenda /var/lib/afenda /etc/afenda \
+ && install -d -m 755 /usr/local/lib/afenda
+# ^ Created here because `COPY --chmod=644` into a missing directory gives
+#   the directory 644 too, which the afenda user cannot traverse.
 
 COPY --from=build /opt/venv /opt/venv
 
