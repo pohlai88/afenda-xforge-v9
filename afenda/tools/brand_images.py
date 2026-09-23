@@ -69,10 +69,18 @@ SIZES: dict[str, tuple[int, int]] = {
 # Alpha kept by the report background watermark (Odoo ships its own at 25/255).
 WATERMARK_OPACITY = 0.12
 
+# The Engineered X: two halves meeting at a diamond void, four tapered wedges
+# each ending in one flat cut (matching how the wordmark's own lowercase x
+# terminates on its baseline and x-height, rather than a two-sided corner).
+# Coordinates are the validated identity geometry -- 240-unit frame, ink box
+# 30..210 square, terminal length 56, chamfer 5 -- reprojected into this
+# file's 64-unit tile at 54% ink occupancy. Single fill: this constant only
+# ever takes one {fg}, so the mark carries no internal colour of its own.
 MARK_SVG_INNER = (
-    '<path d="M32 12 L50 42 H41 L32 27 L23 42 H14 Z" fill="{fg}" stroke="{fg}" stroke-width="2.5" stroke-linejoin="round"/>'
-    '<rect x="14" y="46" width="36" height="4" rx="2" fill="{fg}"/>'
-    '<rect x="14" y="52" width="36" height="4" rx="2" fill="{fg}"/>'
+    '<path d="M 14.72 14.72 L 25.472 14.72 L 31.52 29.6 L 29.6 31.52 Z" fill="{fg}"/>'
+    '<path d="M 49.28 14.72 L 38.528 14.72 L 32.48 29.6 L 34.4 31.52 Z" fill="{fg}"/>'
+    '<path d="M 49.28 49.28 L 38.528 49.28 L 32.48 34.4 L 34.4 32.48 Z" fill="{fg}"/>'
+    '<path d="M 14.72 49.28 L 25.472 49.28 L 31.52 34.4 L 29.6 32.48 Z" fill="{fg}"/>'
 )
 
 
@@ -99,15 +107,29 @@ def _rounded(d: ImageDraw.ImageDraw, box, r, fill):
     d.rounded_rectangle(box, radius=r, fill=fill)
 
 
+# Same X as MARK_SVG_INNER, as four PIL polygons instead of an SVG string --
+# _mark is the PNG-rendering path and cannot consume the SVG string directly.
+# box_mark=True is the tile-boxed size (54% ink, matches MARK_SVG_INNER);
+# box_mark=False is the bare/standalone size (75% ink, no tile around it),
+# keeping this file's existing bare-is-bigger-than-boxed ratio (~1.39x).
+_MARK_ARMS_BOXED = (
+    [(14.72, 14.72), (25.472, 14.72), (31.52, 29.6), (29.6, 31.52)],
+    [(49.28, 14.72), (38.528, 14.72), (32.48, 29.6), (34.4, 31.52)],
+    [(49.28, 49.28), (38.528, 49.28), (32.48, 34.4), (34.4, 32.48)],
+    [(14.72, 49.28), (25.472, 49.28), (31.52, 34.4), (29.6, 32.48)],
+)
+_MARK_ARMS_BARE = (
+    [(8, 8), (22.9333, 8), (31.3333, 28.6667), (28.6667, 31.3333)],
+    [(56, 8), (41.0667, 8), (32.6667, 28.6667), (35.3333, 31.3333)],
+    [(56, 56), (41.0667, 56), (32.6667, 35.3333), (35.3333, 32.6667)],
+    [(8, 56), (22.9333, 56), (31.3333, 35.3333), (28.6667, 32.6667)],
+)
+
+
 def _mark(d: ImageDraw.ImageDraw, s: float, fg, box_mark=True):
-    pts = [(32, 12), (50, 42), (41, 42), (32, 27), (23, 42), (14, 42)] if box_mark else [(32, 2), (56, 46), (44, 46), (32, 24), (20, 46), (8, 46)]
-    d.polygon([(x * s, y * s) for x, y in pts], fill=fg)
-    if box_mark:
-        _rounded(d, (14 * s, 46 * s, 50 * s, 50 * s), 2 * s, fg)
-        _rounded(d, (14 * s, 52 * s, 50 * s, 56 * s), 2 * s, fg)
-    else:
-        _rounded(d, (6 * s, 50 * s, 58 * s, 55 * s), 2.5 * s, fg)
-        _rounded(d, (6 * s, 58 * s, 58 * s, 63 * s), 2.5 * s, fg)
+    arms = _MARK_ARMS_BOXED if box_mark else _MARK_ARMS_BARE
+    for pts in arms:
+        d.polygon([(x * s, y * s) for x, y in pts], fill=fg)
 
 
 def tile_png(size: int) -> Image.Image:
