@@ -5,7 +5,11 @@
 #
 # nginx is the only service with a published port. Secrets are files under
 # ./secrets (gitignored), mounted at /run/secrets/<name>.
-name: afenda
+#
+# The project name prefixes every container, volume and network. Not plain
+# `afenda`: an unrelated Compose project of that name can exist on the same
+# host, and `down --remove-orphans` / `down -v` would reach into it.
+name: afenda-deploy
 
 x-xforge-image: &xforge-image
   image: ${XFORGE_IMAGE:-afenda/xforge:local}

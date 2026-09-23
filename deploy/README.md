@@ -108,6 +108,20 @@ docker compose run --rm init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin mo
 ./restore.sh /var/backups/afenda/<stamp> --yes # replaces the database and filestore
 ```
 
+`restore.sh` works against a **running** stack: it execs into `db` and
+restarts `xforge`. On a fresh host, bring the stack up first so `init` creates
+an empty `afenda`, then restore over it:
+
+```bash
+docker compose up -d                          # init creates an empty afenda
+./restore.sh /path/to/<stamp> --yes           # drops and replaces it and the filestore
+```
+
+`restore.sh` drops and recreates the `afenda` database from `afenda.dump`,
+replaces `filestore/afenda`, then restarts `xforge` and reloads nginx. This
+sequence was verified end to end: the restored database kept the original's
+`database.create_date`, and the logo was served from the restored filestore.
+
 `backup.sh` writes `afenda.dump` (`pg_dump -Fc`, run by the db container's own
 client) and `filestore.tgz` (`filestore/afenda` from the `xforge-data` volume),
 both taken while `xforge` is stopped so they match.

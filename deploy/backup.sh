@@ -21,10 +21,11 @@ out="$root/$stamp"
 mkdir -p "$out"
 
 # nginx resolved the old xforge address when it started; reload it so it
-# re-resolves the restarted container.
+# re-resolves the restarted container. A failed reload must not replace the
+# exit status of the script that is ending, hence `|| true`.
 restart_xforge() {
     docker compose start xforge >/dev/null
-    docker compose exec -T nginx nginx -s reload
+    docker compose exec -T nginx nginx -s reload || true
 }
 docker compose stop xforge
 trap restart_xforge EXIT

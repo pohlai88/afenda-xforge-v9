@@ -84,6 +84,13 @@ class DeployStaticTests(unittest.TestCase):
             self.assertRegex(text, rf"WKHTMLTOX_SHA256_{arch}=[0-9a-f]{{64}}\n")
         self.assertIn("sha256sum -c", text)
 
+    def test_compose_project_name_cannot_collide(self):
+        # Plain `afenda` collides with an unrelated Compose project on the
+        # developer machine; `down --remove-orphans` or `down -v` would reach it.
+        names = re.findall(r"^name:\s*(\S+)\s*$",
+                           (DEPLOY / "compose.yaml").read_text(encoding="utf-8"), re.MULTILINE)
+        self.assertEqual(names, ["afenda-deploy"])
+
     def test_init_script_directory_is_traversable(self):
         # `COPY --chmod=644` into a directory that does not exist yet creates
         # the directory with 644 as well; the non-root afenda user then cannot
