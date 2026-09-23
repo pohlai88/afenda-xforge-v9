@@ -3,8 +3,9 @@
 #   ./make-secrets.sh                    # once; needs the image, see README.md
 #   docker compose up -d                 # from this directory
 #
-# nginx is the only service with a published port. Secrets are files under
-# ./secrets (gitignored), mounted at /run/secrets/<name>.
+# nginx is the only service with published ports: the app on 8080 and the
+# landing page on 8081. Secrets are files under ./secrets (gitignored),
+# mounted at /run/secrets/<name>.
 #
 # The project name prefixes every container, volume and network. Not plain
 # `afenda`: an unrelated Compose project of that name can exist on the same
@@ -107,8 +108,17 @@ services:
     restart: unless-stopped
     ports:
       - "${HTTP_PORT:-8080}:80"
+      # The landing page (deploy/site), next to the app.
+      - "${SITE_PORT:-8081}:81"
+    environment:
+      # Written into the page's two links by 40-afenda-site.sh at start.
+      PUBLIC_URL: ${PUBLIC_URL:-http://localhost:8080}
     volumes:
       - ./nginx/afenda.conf:/etc/nginx/conf.d/default.conf:ro
+      - ./site:/usr/share/nginx/site-src:ro
+      # The image runs /docker-entrypoint.d/*.sh only when executable: the
+      # file is committed as mode 100755, and a bind mount keeps that mode.
+      - ./nginx/40-afenda-site.sh:/docker-entrypoint.d/40-afenda-site.sh:ro
     depends_on:
       xforge:
         condition: service_healthy

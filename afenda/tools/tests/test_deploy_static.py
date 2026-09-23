@@ -1,5 +1,7 @@
 """Static checks on the deploy files: no vendor host, pinned build inputs,
-and a build context that carries every module.
+a build context that carries every module, the nexuscanon.com landing page
+(no script, no absolute URL, the generated lockup), redeploy upgrades, and
+the DNS zone (no wildcard, no Resend, Zoho mail kept).
 
 The image is the product, so it must not reach a vendor host at build or run
 time (R7 of the G0 deploy plan proves that at runtime; this proves it in the
@@ -17,6 +19,11 @@ REPO = Path(__file__).resolve().parents[3]
 DEPLOY = REPO / "deploy"
 DOCKERFILE = DEPLOY / "Dockerfile"
 DOCKERIGNORE = REPO / ".dockerignore"
+SITE = DEPLOY / "site"
+
+# Committed binary files under deploy/: exempt from the LF and URL text checks.
+BINARY_SUFFIXES = (".woff2",)
+SVG_NAMESPACE = re.compile(r'\sxmlns(?::\w+)?="http://www\.w3\.org/[^"]*"')
 
 VENDOR_HOSTS = ("odoo.com", "odoocdn")
 
@@ -139,9 +146,114 @@ class DeployStaticTests(unittest.TestCase):
         crlf = [
             str(p.relative_to(REPO))
             for p in DEPLOY.rglob("*")
-            if p.is_file() and p.parent.name != "secrets" and b"\r\n" in p.read_bytes()
+            if p.is_file() and p.parent.name != "secrets" and p.suffix not in BINARY_SUFFIXES
+            and b"\r\n" in p.read_bytes()
         ]
         self.assertEqual(crlf, [], "CRLF in a file that runs inside a Linux container")
+
+    def test_binary_site_files_escape_the_lf_rule(self):
+        # `deploy/** text eol=lf` would rewrite any CR LF byte pair inside a
+        # compressed font on commit; the fonts must be declared binary after it.
+        lines = [l.strip() for l in (REPO / ".gitattributes").read_text(encoding="utf-8").splitlines()]
+        self.assertIn("deploy/**/*.woff2 binary", lines)
+        self.assertGreater(lines.index("deploy/**/*.woff2 binary"), lines.index("deploy/** text eol=lf"))
+
+
+class LandingSiteStaticTests(unittest.TestCase):
+    """The nexuscanon.com landing page under deploy/site (light theme only)."""
+
+    def _page(self):
+        return (SITE / "index.html").read_text(encoding="utf-8")
+
+    def test_page_has_no_script(self):
+        self.assertNotIn("<script", self._page().lower())
+
+    def test_site_names_no_absolute_url(self):
+        # The only URL form is __PUBLIC_URL__/..., substituted at nginx start.
+        # An SVG's xmlns is a namespace name, never fetched, so it is allowed.
+        offenders = []
+        for path in SITE.rglob("*"):
+            if not path.is_file() or path.suffix in BINARY_SUFFIXES:
+                continue
+            text = SVG_NAMESPACE.sub("", path.read_text(encoding="utf-8"))
+            offenders += [f"{path.relative_to(REPO)}: {m}" for m in re.findall(r"https?://\S*", text, re.I)]
+            offenders += [f"{path.relative_to(REPO)}: {m}" for m in re.findall(r"""(?:href|src|srcset|url)\s*[=(]\s*["']?//""", text, re.I)]
+        self.assertEqual(offenders, [], "a site file names an absolute URL")
+        page = self._page()
+        self.assertIn('href="__PUBLIC_URL__/request-access"', page)
+        self.assertIn('href="__PUBLIC_URL__/web/login"', page)
+
+    def test_page_texts_are_exact(self):
+        page = self._page()
+        self.assertIn("<h1>The truth of your business, kept.</h1>", page)
+        self.assertRegex(page, r'<a class="request" href="[^"]+">Request access</a>')
+        self.assertRegex(page, r'<a class="signin" href="[^"]+">Sign in</a>')
+
+    def test_page_is_light_only(self):
+        page = self._page()
+        self.assertNotIn("prefers-color-scheme", page)
+        self.assertIn('<meta name="color-scheme" content="light">', page)
+        self.assertNotIn("<picture", page)
+
+    def test_the_one_lockup_is_the_generated_logo(self):
+        svgs = sorted(p.relative_to(SITE).as_posix() for p in SITE.rglob("*.svg"))
+        self.assertEqual(svgs, ["lockup.svg"])
+        # Byte-equal in git's canonical form. The source's working copy can end
+        # in CR LF on a Windows checkout (core.autocrlf, or the generator), while
+        # deploy/ is LF by .gitattributes; both commit to the same blob.
+        source = REPO / "addons" / "web" / "static" / "img" / "odoo_logo.svg"
+        self.assertEqual((SITE / "lockup.svg").read_bytes(),
+                         source.read_bytes().replace(b"\r\n", b"\n"))
+
+    def test_fonts_are_woff2(self):
+        for name in ("SourceSerif4-Semibold.woff2", "SourceSans3.woff2"):
+            path = SITE / "fonts" / name
+            self.assertTrue(path.is_file(), f"{name} is missing")
+            self.assertEqual(path.read_bytes()[:4], b"wOF2", f"{name} is not woff2")
+        page = self._page()
+        self.assertNotIn(".ttf", page)
+        self.assertNotIn("Source Code Pro", page)
+        self.assertEqual(page.count('format("woff2")'), 2)
+
+    def test_entry_script_substitutes_public_url(self):
+        text = (DEPLOY / "nginx" / "40-afenda-site.sh").read_text(encoding="utf-8")
+        self.assertIn('${PUBLIC_URL:?', text)
+        self.assertIn("__PUBLIC_URL__", text)
+        self.assertTrue(text.startswith("#!/bin/sh\n"))
+
+
+class DeployRedeployAndDnsTests(unittest.TestCase):
+    def test_init_upgrades_modules_on_redeploy(self):
+        # --outdated: a bumped manifest version applies on redeploy, and a
+        # plain restart does not reload module data (odoo/cli/module.py).
+        code = [l for l in (DEPLOY / "init.sh").read_text(encoding="utf-8").splitlines()
+                if not l.lstrip().startswith("#")]
+        self.assertTrue(any(re.search(r'module upgrade --outdated -c "\$RC" \$MODULES\b', l) for l in code),
+                        "init.sh never runs `module upgrade`")
+
+    def _records(self):
+        rows = []
+        for line in (DEPLOY / "dns" / "nexuscanon.com.records").read_text(encoding="utf-8").splitlines():
+            if not line.strip() or line.startswith("#"):
+                continue
+            fields = line.split("\t")
+            self.assertEqual(len(fields), 5, f"not five tab-separated fields: {line!r}")
+            rows.append(tuple(fields))
+        return rows
+
+    def test_dns_zone_has_no_wildcard_and_no_resend(self):
+        rows = self._records()
+        self.assertTrue(rows)
+        for rtype, name, data, _priority, _ttl in rows:
+            self.assertNotIn("*", name, "a wildcard record")
+            self.assertNotEqual(name.split(".")[0], "send", f"a Resend record: {name}")
+            self.assertNotIn("resend", (name + data).lower(), f"a Resend record: {name}")
+            self.assertNotIn("amazonses", data.lower(), f"a Resend record: {name}")
+
+    def test_dns_zone_keeps_zoho_mail(self):
+        mx = {(name, data, priority) for rtype, name, data, priority, _ttl in self._records() if rtype == "MX"}
+        self.assertEqual(mx, {("@", "mx.zoho.com.", "10"), ("@", "mx2.zoho.com.", "20"),
+                              ("@", "mx3.zoho.com.", "50")})
 
 
 if __name__ == "__main__":

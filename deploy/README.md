@@ -5,14 +5,16 @@ A source-built image and a four-service compose stack:
 | Service | Role |
 |---|---|
 | `db` | `postgres:16`, role `xforge`, volume `db-data` |
-| `init` | one-shot: `db init` (first run only), `module install afenda_brand afenda_runtime`, system parameters |
+| `init` | one-shot: `db init` (first run only), `module install afenda_brand afenda_runtime`, `module upgrade --outdated` on an existing database, system parameters |
 | `xforge` | the server: 4 workers, 1 cron thread, gevent on 8072, volume `xforge-data` (`/var/lib/afenda`) |
-| `nginx` | the only published port; the one proxy hop in front of `proxy_mode` |
+| `nginx` | the only published ports; the one proxy hop in front of `proxy_mode`; serves the landing page (`site/`) |
 
 Files: `Dockerfile` (built from the repository root), `entrypoint.sh` (renders
 `/etc/afenda/odoo.conf` from the environment), `init.sh` + `init_params.py`,
 `compose.yaml`, `compose.proof.yaml` (no route out), `compose.tls.yaml` (VPS),
-`nginx/afenda.conf`, `nginx/afenda.tls.conf`, `make-secrets.sh`, `backup.sh`,
+`nginx/afenda.conf`, `nginx/afenda.tls.conf`, `nginx/40-afenda-site.sh`
+(writes `PUBLIC_URL` into the landing page at nginx start), `site/` (the
+landing page), `dns/` (the DigitalOcean zone), `make-secrets.sh`, `backup.sh`,
 `restore.sh`.
 
 Run every command below from `deploy/`.
@@ -24,6 +26,7 @@ docker compose build
 ./make-secrets.sh              # needs the image: it hashes the master password with it
 docker compose up -d
 # http://localhost:8080, login `admin`, password in secrets/admin_password
+# http://localhost:8081, the landing page; its links point at PUBLIC_URL
 ```
 
 Independence proof (xforge, init and db on an `internal: true` network):
@@ -38,8 +41,9 @@ Requires Docker Engine with the Compose plugin **>= 2.24.4**: `compose.tls.yaml`
 uses the `!override` merge tag, which older Compose versions reject. Check with
 `docker compose version`.
 
-1. **DNS.** One `A` record, `app.nexuscanon.com` → the VPS address. Publish no
-   wildcard record for `nexuscanon.com`.
+1. **DNS.** `nexuscanon.com` and `app.nexuscanon.com` → the VPS address, and
+   `www` → `nexuscanon.com`. Publish no wildcard record. The zone is kept as
+   code in `dns/`; see [Moving DNS to DigitalOcean](#moving-dns-to-digitalocean).
 2. **Code.** Check out the release tag with its submodules (`afenda/oca/*`):
 
    ```bash
@@ -66,12 +70,14 @@ uses the `!override` merge tag, which older Compose versions reject. Check with
 
    Keep a copy of `secrets/` somewhere safe outside the host; `db_password`
    and `master_password` cannot be recovered from the stack.
-5. **First certificate.** Issue it before the stack is up, while port 80 is
-   still free:
+5. **First certificate.** One certificate, lineage `app.nexuscanon.com`, for
+   the three names nginx serves. Issue it before the stack is up, while port
+   80 is still free:
 
    ```bash
    mkdir -p /var/www/certbot
-   certbot certonly --standalone -d app.nexuscanon.com
+   certbot certonly --standalone --cert-name app.nexuscanon.com \
+       -d app.nexuscanon.com -d nexuscanon.com -d www.nexuscanon.com
    ```
 
    This stores `authenticator = standalone` in the renewal config, which can
@@ -89,11 +95,20 @@ uses the `!override` merge tag, which older Compose versions reject. Check with
    it so the stored renewal config is webroot plus the reload hook:
 
    ```bash
-   certbot certonly --webroot -w /var/www/certbot -d app.nexuscanon.com \
+   certbot certonly --webroot -w /var/www/certbot --cert-name app.nexuscanon.com \
+       -d app.nexuscanon.com -d nexuscanon.com -d www.nexuscanon.com \
        --force-renewal \
        --deploy-hook 'cd /srv/afenda/deploy && docker compose exec -T nginx nginx -s reload'
    certbot renew --dry-run          # must report success for app.nexuscanon.com
    ```
+
+   A host whose certificate still covers `app.nexuscanon.com` alone: once the
+   bare domain and `www` resolve to it, run this same command (the old
+   config's one port-80 server is the default for every name, so it already
+   serves their challenges), then deploy the new
+   `nginx/afenda.tls.conf`, which expects all three names in the one
+   certificate. Adding `-d` names to the existing `--cert-name` lineage
+   replaces its name list.
 
    From here the distribution's certbot timer renews on its own; no cron
    line is needed for certificates.
@@ -124,13 +139,86 @@ network is provided.
 ## Upgrades
 
 Check out the new tag, `docker compose build`, then `docker compose up -d`.
-`init` reruns: it skips `db init` on the existing database, and installing an
-already-installed module is a no-op. Upgrading module data (`module upgrade`)
-is a separate, deliberate step:
+`init` reruns: it skips `db init` on the existing database, installing an
+already-installed module is a no-op, and then it runs
+`module upgrade --outdated afenda_brand afenda_runtime`. That upgrades a
+module only when its manifest `version` on disk is newer than the one the
+database recorded (`odoo/cli/module.py`), so bumping the version is what
+ships new module data, and a plain restart reloads nothing. To force an
+upgrade without a version bump:
 
 ```bash
 docker compose run --rm init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin module upgrade -c "$RC" afenda_brand afenda_runtime'
 ```
+
+## The landing page
+
+`site/` is the page at `nexuscanon.com`, and at `http://localhost:8081`
+locally: `index.html`, `lockup.svg` and `fonts/`. It is light-only, runs no
+JavaScript and names no host: its two links are written `__PUBLIC_URL__/...`,
+and `nginx/40-afenda-site.sh` replaces that with `PUBLIC_URL` (from `.env`,
+default `http://localhost:8080`) each time nginx starts. After changing the
+page or `PUBLIC_URL`, `docker compose up -d nginx` (or `restart nginx`)
+applies it. `www.nexuscanon.com` redirects to `nexuscanon.com`.
+
+`lockup.svg` is a byte copy of `addons/web/static/img/odoo_logo.svg`, the
+generated product lockup; `afenda/tools/tests/test_deploy_static.py` fails
+when they differ. After the lockup is regenerated, from the repository root:
+
+```bash
+cp addons/web/static/img/odoo_logo.svg deploy/site/lockup.svg
+```
+
+### Regenerating the site fonts
+
+The two woff2 files are subsets (Basic Latin, Latin-1, dashes, quotes,
+ellipsis) of the brand fonts in `afenda_brand`. From the repository root,
+with `fontTools` and `brotli` in `.venv`:
+
+```bash
+.venv/Scripts/python -m fontTools.subset afenda/addons/afenda_brand/static/fonts/SourceSerif4-Semibold.ttf --unicodes="U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-201D,U+2026" --flavor=woff2 --output-file=deploy/site/fonts/SourceSerif4-Semibold.woff2
+.venv/Scripts/python -m fontTools.subset afenda/addons/afenda_brand/static/fonts/SourceSans3-VF.ttf --unicodes="U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-201D,U+2026" --flavor=woff2 --output-file=deploy/site/fonts/SourceSans3.woff2
+```
+
+nginx serves `/fonts/` as immutable for a year and the file names carry no
+hash, so a changed font needs a new file name (and its `@font-face` rule
+updated) to reach browsers that cached the old one.
+
+## Moving DNS to DigitalOcean
+
+The zone is `dns/nexuscanon.com.records` (tab-separated
+`type name data priority ttl`). It has no wildcard and no Resend records.
+`dns/apply-do-dns.sh` creates the domain if it is absent and adds each record
+that is not already there; it never deletes or changes a record. It needs
+`doctl`, authenticated (`doctl auth init`).
+
+1. Apply the zone:
+
+   ```bash
+   ./dns/apply-do-dns.sh <droplet-ipv4>
+   ```
+
+   A name left with two `A`/`CNAME` answers is listed at the end; remove the
+   stale one in the DigitalOcean console.
+2. Before switching, check every name against DigitalOcean's own servers:
+
+   ```bash
+   dig @ns1.digitalocean.com +short nexuscanon.com A
+   dig @ns1.digitalocean.com +short www.nexuscanon.com CNAME
+   dig @ns1.digitalocean.com +short app.nexuscanon.com A
+   dig @ns1.digitalocean.com +short nexuscanon.com MX
+   dig @ns1.digitalocean.com +short nexuscanon.com TXT
+   dig @ns1.digitalocean.com +short zmail._domainkey.nexuscanon.com TXT
+   dig @ns1.digitalocean.com +short _dmarc.nexuscanon.com TXT
+   dig @ns1.digitalocean.com +short nexuscanon.com CAA
+   ```
+
+3. The owner switches the domain's nameservers in Vercel to
+   `ns1.digitalocean.com`, `ns2.digitalocean.com` and `ns3.digitalocean.com`.
+4. Once `dig +short NS nexuscanon.com` lists the DigitalOcean servers: send
+   and receive a test email through Zoho, and confirm that a made-up name
+   does not resolve (`dig +short no-such-name.nexuscanon.com` prints
+   nothing), so no wildcard survived.
 
 ## Backup and restore
 

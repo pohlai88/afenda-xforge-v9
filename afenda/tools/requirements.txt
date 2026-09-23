@@ -3,6 +3,7 @@
 # tree for no visible reason. Bump deliberately, then re-render and review.
 pillow==9.4.0
 fonttools==4.65.0
+brotli==1.1.0  # fontTools woff2 output for deploy/site/fonts
 
 # Build-time only: converts afenda_api_docs/docs/**.md into committed QWeb
 # templates. Pinned because the generated XML is committed and reviewed.

@@ -11,7 +11,13 @@
 #      installed this changes nothing: button_install only moves modules in
 #      state 'uninstalled' (odoo/addons/base/models/ir_module.py _state_update),
 #      so the reload that follows has nothing to install.
-#   3. The system parameters, from init_params.py through `odoo-bin shell`.
+#   3. On a database that was already initialised, `module upgrade --outdated`
+#      for the same modules, so a new module version (a bumped manifest
+#      `version`) applies on redeploy. --outdated upgrades only a module whose
+#      version on disk is newer than the one recorded in the database
+#      (odoo/cli/module.py _upgrade); an unchanged version is left alone, so a
+#      plain restart does not reload module data.
+#   4. The system parameters, from init_params.py through `odoo-bin shell`.
 set -eu
 
 PY=/opt/venv/bin/python
@@ -79,6 +85,12 @@ esac
 echo "afenda-init: installing $MODULES"
 # shellcheck disable=SC2086
 "$PY" "$BIN" module install -c "$RC" $MODULES
+
+if [ "$state" = initialised ]; then
+    echo "afenda-init: upgrading any of $MODULES whose version is newer on disk"
+    # shellcheck disable=SC2086
+    "$PY" "$BIN" module upgrade --outdated -c "$RC" $MODULES
+fi
 
 echo "afenda-init: setting system parameters (web.base.url=$PUBLIC_URL)"
 AFENDA_REQUIRED_MODULES="$MODULES" "$PY" "$BIN" shell -c "$RC" --no-http \

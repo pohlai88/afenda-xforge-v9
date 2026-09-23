@@ -1,3 +1,6 @@
 # Shell scripts and configs under deploy/ run inside Linux containers:
 # keep LF even on a Windows checkout.
 deploy/** text eol=lf
+# Compressed fonts under deploy/ are binary: `text` would rewrite any CR LF
+# byte pair inside them on commit.
+deploy/**/*.woff2 binary

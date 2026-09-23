@@ -1,0 +1,17 @@
+# The nexuscanon.com zone on DigitalOcean DNS, applied by apply-do-dns.sh.
+# One record per line, five TAB-separated fields: type name data priority ttl.
+# priority is empty except for MX. {{DROPLET_IP}} is replaced by the script's
+# argument. CAA data is "<flags> <tag> <value>".
+# Deliberately absent: any wildcard, and every Resend record (send.*,
+# resend._domainkey).
+A	@	{{DROPLET_IP}}		3600
+CNAME	www	@		3600
+A	app	{{DROPLET_IP}}		3600
+MX	@	mx.zoho.com.	10	3600
+MX	@	mx2.zoho.com.	20	3600
+MX	@	mx3.zoho.com.	50	3600
+TXT	@	v=spf1 include:zohomail.com ~all		3600
+TXT	@	zoho-verification=zb25766137.zmverify.zoho.com		3600
+TXT	zmail._domainkey	v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCKreElUM6kSzo5FuRJTMh7RwGu3FL5iy0e2cWdeB+3wV11fSQPznrSC+RL9uhqLQFkIeZ7C+XFMwzROc+Ta3jSfFLCgTvE4rdhbCPe8YdWKtSNXSmNDrstz1jeD8AAMLC1tGLP9Tt8EO2knxwX86QHTnw1tcbPplqjpLUT+M6LjQIDAQAB		3600
+TXT	_dmarc	v=DMARC1; p=none;		3600
+CAA	@	0 issue "letsencrypt.org"		3600
