@@ -19,7 +19,7 @@ from pathlib import Path
 from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.ttLib import TTFont
-from PIL import Image
+from PIL import Image, ImageChops, ImageStat
 
 from afenda.tools import app_icons, brand_images
 
@@ -456,6 +456,42 @@ class AppIconTests(unittest.TestCase):
         self.assertEqual(
             list(fallback.getdata()), list(unmapped.getdata()),
             "the fallback icon is not the same mark an unmapped module gets",
+        )
+
+    def test_the_accent_never_swallows_the_glyph(self):
+        """The accent exists to add a second colour and a third where it crosses
+        the glyph. Past half the glyph's ink it stops reading as an accent and
+        starts reading as a stain, and the thing the icon is meant to say goes
+        with it.
+
+        Measured across the whole set when this was written, the spread ran from
+        0.6% (website_forum) to 52.5% (sale), and the worst offenders were the
+        ones that looked wrong: the accent disc sat behind the shopping basket's
+        slats and turned the lower half into a brown mass. The ceiling is set at
+        half because above that the accent is the larger shape.
+
+        Fails on: moving an accent so it lands on the glyph's body rather than in
+        its empty space, or growing an accent shape without re-checking the set.
+        """
+        from afenda.tools.app_icons import ACCENTS, design_for, _glyph_alpha, accent_mask
+
+        side, ceiling = 256, 0.50
+        worst = []
+        for module in sorted(ACCENTS):
+            design = design_for(module)
+            glyph = _glyph_alpha(design, side)
+            ink = ImageStat.Stat(glyph).sum[0]
+            if not ink:
+                continue
+            covered = ImageStat.Stat(
+                ImageChops.multiply(glyph, accent_mask(design.shape, side))
+            ).sum[0]
+            share = covered / ink
+            if share > ceiling:
+                worst.append(f"{module} {share:.1%}")
+        self.assertEqual(
+            worst, [],
+            "the accent covers more than half the glyph on: " + ", ".join(worst),
         )
 
     def test_base_icons_are_never_invented(self):

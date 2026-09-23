@@ -108,8 +108,8 @@ APP_GLYPHS: dict[str, str] = {
     "account": "f0d6",
     "contacts": "f2b9",
     "crm": "f0f2",
-    "sale": "f291",
-    "sale_management": "f291",
+    "sale": "f290",
+    "sale_management": "f290",
     "purchase": "f0d1",
     "stock": "f1b2",
     "mrp": "f085",
@@ -130,7 +130,7 @@ APP_GLYPHS: dict[str, str] = {
     "website_blog": "f040",
     "website_slides": "f19d",
     "website_forum": "f086",
-    "point_of_sale": "f0d6",
+    "point_of_sale": "f291",
     "event": "f145",
     "im_livechat": "f27a",
     "lunch": "f0f5",
@@ -158,16 +158,22 @@ APP_GLYPHS: dict[str, str] = {
 # Colour A is the family. Colour B and the shape are per module, picked so the
 # accent lands in empty space rather than over the part of the glyph that says
 # which app this is. Where two modules share a glyph (sms/mass_mailing_sms,
-# account/point_of_sale) the accent is what tells them apart; sale and
-# sale_management are one app in two packages and deliberately render alike.
+# sms/mass_mailing_sms) the accent is what tells them apart. sale and
+# sale_management are one app in two packages, so they keep one glyph and
+# differ by accent, the same way the two payment providers do.
 ACCENTS: dict[str, tuple[str, str, str]] = {
     # --- money -----------------------------------------------------------
     "account": (LEDGER, TEAL, "disc-br"),
-    "point_of_sale": (LEDGER, MUSTARD, "disc-bl"),
+    "point_of_sale": (LEDGER, MUSTARD, "dot-br"),
+    # Sales is money, not market: it was mulberry with the basket the till
+    # now carries, and its disc sat straight through the basket's slats.
+    "sale_management": (LEDGER, OCHRE, "dot-br"),
+    "sale": (LEDGER, TEAL, "dot-bl"),
+    "purchase": (LEDGER, OCHRE, "dot-br"),
     "hr_expense": (LEDGER, OCHRE, "disc-br"),
     "payment": (LEDGER, TEAL, "disc-bl"),
     "payment_custom": (LEDGER, OCHRE, "disc-bl"),
-    "payment_demo": (LEDGER, MUSTARD, "disc-br"),
+    "payment_demo": (LEDGER, MUSTARD, "disc-tr"),
     # --- people ----------------------------------------------------------
     "hr": (PLUM, OCHRE, "disc-bl"),
     "contacts": (PLUM, TEAL, "disc-br"),
@@ -181,7 +187,6 @@ ACCENTS: dict[str, tuple[str, str, str]] = {
     # --- operations ------------------------------------------------------
     "stock": (TEAL, OCHRE, "disc-br"),
     "mrp": (TEAL, OCHRE, "disc-bl"),
-    "purchase": (TEAL, OCHRE, "disc-tr"),
     "fleet": (TEAL, PLUM, "disc-br"),
     # --- equipment and upkeep --------------------------------------------
     "maintenance": (SLATE, TEAL, "disc-bl"),
@@ -199,14 +204,12 @@ ACCENTS: dict[str, tuple[str, str, str]] = {
     "website_forum": (INDIGO, MULBERRY, "wedge-tr"),
     # --- market ----------------------------------------------------------
     "crm": (MULBERRY, TEAL, "wedge-tr"),
-    "sale": (MULBERRY, OCHRE, "disc-bl"),
-    "sale_management": (MULBERRY, OCHRE, "disc-bl"),
     "website": (MULBERRY, TEAL, "disc-br"),
     "website_sale": (MULBERRY, OCHRE, "disc-bl"),
     "website_blog": (MULBERRY, TEAL, "disc-br"),  # f040 runs bl->tr; br is empty
     "website_slides": (MULBERRY, MUSTARD, "disc-br"),
     "survey": (MULBERRY, TEAL, "dot-br"),  # f0cb is a numbered list, all of it
-    "utm": (MULBERRY, TEAL, "disc-bl"),
+    "utm": (MULBERRY, TEAL, "bar-t"),  # f0e8 fans out downward; the top is clear
     "event": (MULBERRY, OCHRE, "disc-tr"),
     # --- system ----------------------------------------------------------
     # A cog, a 2x2 grid and a dial are read by their negative space, and the
