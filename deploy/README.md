@@ -111,7 +111,9 @@ uses the `!override` merge tag, which older Compose versions reject. Check with
    replaces its name list.
 
    From here the distribution's certbot timer renews on its own; no cron
-   line is needed for certificates.
+   line is needed for certificates. The one certificate covers `app.`, the
+   bare domain and `www.`, so a broken apex or `www` record fails the whole
+   renewal, `app.nexuscanon.com` included.
 8. **Backups** (root crontab). The folder is private; `backup.sh` also runs
    with `umask 077`, because a dump holds password hashes, TOTP secrets and
    `database.secret`:
@@ -210,8 +212,12 @@ that is not already there; it never deletes or changes a record. It needs
    dig @ns1.digitalocean.com +short nexuscanon.com TXT
    dig @ns1.digitalocean.com +short zmail._domainkey.nexuscanon.com TXT
    dig @ns1.digitalocean.com +short _dmarc.nexuscanon.com TXT
-   dig @ns1.digitalocean.com +short nexuscanon.com CAA
+   dig @ns1.digitalocean.com +short nexuscanon.com CAA   # expect: 0 issue "letsencrypt.org"
    ```
+
+   The CAA answer must be exactly `0 issue "letsencrypt.org"`. If it shows
+   anything else, or nothing, stop here and fix it before switching the
+   nameservers: a wrong CAA record makes Let's Encrypt refuse the certificate.
 
 3. The owner switches the domain's nameservers in Vercel to
    `ns1.digitalocean.com`, `ns2.digitalocean.com` and `ns3.digitalocean.com`.

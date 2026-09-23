@@ -312,6 +312,15 @@ class DeployRedeployAndDnsTests(unittest.TestCase):
             self.assertNotIn("resend", (name + data).lower(), f"a Resend record: {name}")
             self.assertNotIn("amazonses", data.lower(), f"a Resend record: {name}")
 
+    def test_dns_caa_issue_value_is_a_fqdn(self):
+        # DigitalOcean's API answers 422 "Data needs to be a FQDN with issue or
+        # issuewild" to a CAA value without its trailing dot.
+        caa = [data for rtype, _name, data, _p, _t in self._records() if rtype == "CAA"]
+        self.assertEqual(len(caa), 1)
+        flags, tag, value = caa[0].split(" ", 2)
+        self.assertEqual((flags, tag), ("0", "issue"))
+        self.assertTrue(value.strip('"').endswith("."), f"CAA value without trailing dot: {value}")
+
     def test_dns_zone_keeps_zoho_mail(self):
         mx = {(name, data, priority) for rtype, name, data, priority, _ttl in self._records() if rtype == "MX"}
         self.assertEqual(mx, {("@", "mx.zoho.com.", "10"), ("@", "mx2.zoho.com.", "20"),

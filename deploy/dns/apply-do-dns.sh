@@ -13,7 +13,10 @@
 # doctl flags, per docs.digitalocean.com/reference/doctl/reference/compute/
 # domain/records/create/: --record-type, --record-name, --record-data,
 # --record-priority (MX), --record-ttl, and for CAA --record-flags and
-# --record-tag, with the authority domain alone in --record-data.
+# --record-tag, with the authority domain alone in --record-data. The API
+# refuses an issue value without its trailing dot (422 "Data needs to be a
+# FQDN"), so the records file writes letsencrypt.org. and the comparison below
+# ignores that dot either way.
 set -eu
 
 DOMAIN=nexuscanon.com
