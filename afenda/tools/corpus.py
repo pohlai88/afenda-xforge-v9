@@ -97,6 +97,27 @@ def rewrite_corpus(corpus_text: str, rules) -> str:
     return "\n".join(out) + "\n"
 
 
+def emit_utf8(text: str, stream=None) -> None:
+    """Write ``text`` to ``stream`` (default ``sys.stdout``) as UTF-8 bytes.
+
+    The corpus holds non-Latin text (rule rewrites of translated strings), but a
+    Windows console's ``sys.stdout`` is typically opened with the cp1252 codec, whose
+    ``.write()`` raises ``UnicodeEncodeError`` on anything outside Latin-1. Rather than
+    relaxing that encoding (which would require ``errors="replace"`` and silently mangle
+    the very text a reviewer is trying to read), write UTF-8 bytes straight to the
+    stream's underlying binary buffer, bypassing its text encoding entirely. Streams with
+    no ``.buffer`` (e.g. ``io.StringIO`` in tests) fall back to a plain text write, where
+    no encoding translation happens anyway.
+    """
+    stream = sys.stdout if stream is None else stream
+    buffer = getattr(stream, "buffer", None)
+    if buffer is not None:
+        buffer.write(text.encode("utf-8"))
+        buffer.flush()
+    else:
+        stream.write(text)
+
+
 def main(argv: list[str] | None = None) -> int:
     from afenda.tools.rules import RULES
 
@@ -120,7 +141,7 @@ def main(argv: list[str] | None = None) -> int:
         return 0
     golden = GOLDEN.read_text(encoding="utf-8") if GOLDEN.exists() else ""
     diff = list(difflib.unified_diff(golden.splitlines(), rewritten.splitlines(), "golden", "current", lineterm="", n=0))
-    sys.stdout.write("\n".join(diff[:400]) + ("\n" if diff else "no changes vs golden\n"))
+    emit_utf8("\n".join(diff[:400]) + ("\n" if diff else "no changes vs golden\n"))
     return 1 if diff else 0
 
 
