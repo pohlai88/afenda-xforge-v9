@@ -91,6 +91,13 @@ adding agents past that produces conflicts, not speed.
 
 `aliasing.py` stays free of Odoo imports so its tests run without a database.
 
+**Test base classes are not interchangeable.** Any test collected by Odoo's
+module test runner must subclass `odoo.tests.BaseCase` (or a descendant such as
+`TransactionCase` / `HttpCase`). A plain `unittest.TestCase` is silently
+excluded by the tag selector and the suite still reports success. Task 7 is the
+only exception: its tests live outside an addon, under `afenda/tools/tests/`,
+and run via `python -m unittest`, which has no tag selector.
+
 ---
 
 ### Task 1: Module skeleton and the `/docs` route takeover
@@ -303,12 +310,18 @@ This is the plan's one stated requirement. Get it right before anything consumes
 Create `afenda/addons/afenda_api_docs/tests/test_aliasing.py`:
 
 ```python
-import unittest
+from odoo.tests import BaseCase
 
 from odoo.addons.afenda_api_docs.aliasing import alias_prose
 
 
-class TestAliasProse(unittest.TestCase):
+# BaseCase, NOT unittest.TestCase. Odoo's tag selector drops any test class
+# without a `test_tags` attribute (odoo/tests/tag_selector.py:88-90), and only
+# BaseCase subclasses get one, via __init_subclass__ (common.py:309-318). The
+# skip is logged at DEBUG and afenda/odoo.conf runs at `warn`, so a plain
+# unittest.TestCase here does not fail - it silently never runs, and the suite
+# reports green. BaseCase is the right base for a DB-free pure-logic test.
+class TestAliasProse(BaseCase):
     def test_capitalised_product_name(self):
         self.assertEqual(alias_prose("Powered by Odoo"), "Powered by AFENDA xForge")
 
