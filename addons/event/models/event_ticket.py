@@ -47,7 +47,7 @@ class EventEventTicket(models.Model):
     is_sold_out = fields.Boolean(
         'Sold Out', compute='_compute_is_sold_out', help='Whether seats are not available for this ticket.')
     # reports
-    color = fields.Char('Color', default="#875A7B")
+    color = fields.Char('Color', default="#1E3A8A")
 
     @api.depends('end_sale_datetime', 'event_id.date_tz')
     def _compute_is_expired(self):

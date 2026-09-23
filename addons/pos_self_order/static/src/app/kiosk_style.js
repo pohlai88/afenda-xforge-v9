@@ -6,8 +6,8 @@ export function insertKioskStyle(primaryBgColor) {
 
 function generateKioskCSS(companyPrimaryColor) {
     let bgPrimary = companyPrimaryColor;
-    if (!bgPrimary || bgPrimary === "#875A7B") {
-        bgPrimary = "#714B67";
+    if (!bgPrimary || bgPrimary === "#1E3A8A") {
+        bgPrimary = "#1E3A8A";
     }
     const luminance = getLuminance(bgPrimary);
     const isLightBackground = luminance > 0.55;

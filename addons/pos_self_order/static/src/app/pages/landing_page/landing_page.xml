@@ -29,7 +29,7 @@
                             <a type="button"
                                t-on-click="clickMyOrder"
                                class="btn btn-lg btn-secondary w-100 "
-                               style="border-color: #714B67">
+                               style="border-color: #1E3A8A">
                                 <t t-if="draftOrder.length > 0">
                                     My Order
                                 </t>

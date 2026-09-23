@@ -12,7 +12,7 @@
 .css	other	"Noto Sans", Arial, "AFENDA xForge Unicode Support Noto", sans-serif, "Apple Color Emoji",
 .css	other	#odoo-google-map {
 .css	other	#qrcode_odoo_logo {
-.css	other	--odoo-purple: #714B67
+.css	other	--odoo-purple: #1E3A8A
 .css	other	.odoo-bg-primary, .bg-primary, .form-check-input:checked, .nav-pills .nav-link.active {
 .css	other	.odoo-bg-secondary, .bg-secondary {
 .css	other	.odoo-logo {
@@ -33346,7 +33346,7 @@
 .xml	other	<a t-attf-href="/app/action-im_livechat.chatbot_script_action/#{chatbot_script.id}">
 .xml	other	<a t-attf-href="/app/action-survey.action_survey_form/{{survey.id}}">this page</a> ?
 .xml	other	<a t-attf-href="/app/action-website_sale.product_template_action_website/{{channel.product_id.product_tmpl_id.id}}"
-.xml	other	<a t-attf-style="background-color: {{object.user_id.company_id.email_secondary_color or '#875A7B'}}; padding:8px 16px 8px 16px; text-decoration:none; color: {{object.user_id.company_id.email_primary_color or '#FFFFFF'}}; border-radius:5px" t-attf-href="/app/{{ object.module_id.id }}/action-base_install_request.action_base_module_install_review?menu_id={{ ctx['menu_id'] }}">Review Request</a>
+.xml	other	<a t-attf-style="background-color: {{object.user_id.company_id.email_secondary_color or '#1E3A8A'}}; padding:8px 16px 8px 16px; text-decoration:none; color: {{object.user_id.company_id.email_primary_color or '#FFFFFF'}}; border-radius:5px" t-attf-href="/app/{{ object.module_id.id }}/action-base_install_request.action_base_module_install_review?menu_id={{ ctx['menu_id'] }}">Review Request</a>
 .xml	other	<a t-else="" class="mx-2 o_text_link text-primary o_not_editable" target="_blank" t-attf-href="/app/slide.slide/{{slide.id}}" title="Edit in backend"><span class="fa fa-pencil"/></a>
 .xml	other	<a t-else="" t-attf-href="/app/accounting/{{ object.id }}/account.move/{{ invoices.id }}"
 .xml	other	<a t-if="env.user.has_group('survey.group_survey_user')" t-attf-href="/app/action-survey.action_survey_form/{{survey.id}}">
@@ -33699,7 +33699,7 @@
 .xml	other	<span t-out="event.name">AFENDA xForge Community Days</span> <!-- Force some content to avoid messing the layout -->
 .xml	other	<span t-out="line.partner_id.name">Marc Demo</span> <span t-if="line.partner_bank_id and line.partner_bank_id.partner_id != line.partner_id">(<span t-out="line.partner_bank_id.partner_id.name">Bank of odoo</span>)</span>
 .xml	other	<span><field name="l10n_my_accept_processing"/> I accept that AFENDA xForge will process my e-invoices.</span>
-.xml	other	<span>Powered By <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=auth" style="color: #875A7B;">AFENDA xForge</a></span>
+.xml	other	<span>Powered By <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=auth" style="color: #1E3A8A;">AFENDA xForge</a></span>
 .xml	other	<span>Powered by <b> AFENDA xForge </b></span>
 .xml	other	<string>Attachments could not be logged in AFENDA xForge because their total size exceeded the allowed maximum.</string>
 .xml	other	<string>No company linked to this contact could be enriched or found in AFENDA xForge</string>
@@ -33715,7 +33715,7 @@
 .xml	other	<t t-if="object.get_base_url() in object.event_id.videocall_location">AFENDA xForge Discuss</t>
 .xml	other	<t t-if="object.videocall_source == 'discuss'">AFENDA xForge Discuss</t>
 .xml	other	<t t-name="point_of_sale.OdooLogo">
-.xml	other	<t t-out="company.name"/> uses <a target="_blank" href="https://www.nexuscanon.com/app/invoicing">AFENDA xForge</a> to send invoices, but this one <b t-attf-style="color: {{company.email_secondary_color or '#875A7B'}}">could not be sent via Peppol</b>.
+.xml	other	<t t-out="company.name"/> uses <a target="_blank" href="https://www.nexuscanon.com/app/invoicing">AFENDA xForge</a> to send invoices, but this one <b t-attf-style="color: {{company.email_secondary_color or '#1E3A8A'}}">could not be sent via Peppol</b>.
 .xml	other	<t t-out="final_message % (odoo_logo, _message and ('- ' + _message) or '')"/>
 .xml	other	<t t-set="backend_url" t-value="'/app/action-account.action_move_out_invoice/%s' % invoice.id"/>
 .xml	other	<t t-set="backend_url" t-value="'/app/action-account.action_open_settings'"/>
@@ -33758,7 +33758,7 @@
 .xml	other	Enjoy AFENDA xForge!<br />
 .xml	other	Every stock operation in AFENDA xForge moves the products from one
 .xml	other	Get this feature and much more with AFENDA xForge Enterprise!
-.xml	other	Have a look at the <a href="https://www.nexuscanon.com/page/tour?utm_source=db&amp;utm_medium=auth" t-attf-style="color: {{object.company_id.email_secondary_color or '#875A7B'}};">AFENDA xForge Tour</a> to discover the tool.
+.xml	other	Have a look at the <a href="https://www.nexuscanon.com/page/tour?utm_source=db&amp;utm_medium=auth" t-attf-style="color: {{object.company_id.email_secondary_color or '#1E3A8A'}};">AFENDA xForge Tour</a> to discover the tool.
 .xml	other	If not, you should de-register from your current service provider and register with AFENDA xForge afterward.
 .xml	other	Implementations of feature rich, extensible, and cost-effective Open Source software (AFENDA xForge) </li>
 .xml	other	In AFENDA xForge, sales orders and projects are implemented using
@@ -33800,18 +33800,18 @@
 .xml	other	Please refer to the <a href="/docs/applications/finance/fiscal_localizations/india.html#nic-e-invoice-registration">documentation</a> for detailed guidance on accurate configuration.
 .xml	other	Powered by <a href="https://www.nexuscanon.com" target="_blank" class="odoo_link">
 .xml	other	Powered by <a target="_blank" href="http://www.nexuscanon.com?utm_source=db&amp;utm_medium=portal" title="AFENDA"><img src="/web/static/img/logo.png" alt="AFENDA xForge Logo" height="15"/></a>
-.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com" style="text-decoration:none;background-color:transparent;color:#875A7B;">AFENDA xForge</a>
-.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com" t-attf-style="color: {{user.company_id.email_secondary_color or '#875A7B'}};">AFENDA xForge</a>
-.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=auth" t-attf-style="color: {{object.company_id.email_secondary_color or '#875A7B'}};">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com" style="text-decoration:none;background-color:transparent;color:#1E3A8A;">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com" t-attf-style="color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=auth" t-attf-style="color: {{object.company_id.email_secondary_color or '#1E3A8A'}};">AFENDA xForge</a>
 .xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email"
-.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email" style="color: #875A7B;">AFENDA xForge</a>
-.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email" t-attf-style="color: {{company.email_secondary_color or '#875A7B'}};">AFENDA xForge</a>
-.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email" t-attf-style="color: {{object.company_id.email_secondary_color or '#875A7B'}};;">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email" style="color: #1E3A8A;">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email" t-attf-style="color: {{company.email_secondary_color or '#1E3A8A'}};">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email" t-attf-style="color: {{object.company_id.email_secondary_color or '#1E3A8A'}};;">AFENDA xForge</a>
 .xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=expense" style="color: #9E588B;">AFENDA xForge</a>.
-.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=forum" t-attf-style="color: {{object.company_id.email_secondary_color or '#875A7B'}};">AFENDA xForge</a>
-.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=gamification" t-attf-style="color: {{object.user_id.company_id.email_secondary_color or '#875A7B'}};">AFENDA xForge</a>
-.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=website" t-attf-style="color: {{user.company_id.email_secondary_color or '#875A7B'}};">AFENDA xForge</a>
-.xml	other	Powered by <a target="_blank" t-attf-href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium={{ ctx.get('medium', 'auth') }}" t-attf-style="color: {{object.company_id.email_secondary_color or '#875A7B'}};">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=forum" t-attf-style="color: {{object.company_id.email_secondary_color or '#1E3A8A'}};">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=gamification" t-attf-style="color: {{object.user_id.company_id.email_secondary_color or '#1E3A8A'}};">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=website" t-attf-style="color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">AFENDA xForge</a>
+.xml	other	Powered by <a target="_blank" t-attf-href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium={{ ctx.get('medium', 'auth') }}" t-attf-style="color: {{object.company_id.email_secondary_color or '#1E3A8A'}};">AFENDA xForge</a>
 .xml	other	Powered by <img height="32" src="/web/static/img/logo.png" alt="AFENDA xForge Logo"/>
 .xml	other	Sent by <a href="https://www.nexuscanon.com" target="_blank">
 .xml	other	Template registering all the assets required to execute the Livechat from a page containing AFENDA xForge
@@ -33889,7 +33889,7 @@
 .xml	other	src="https://download.odoocdn.com/digests/digest/static/src/img/google_play.png"
 .xml	other	src="https://download.odoocdn.com/digests/digest/static/src/img/google_play.png" />
 .xml	other	src="https://www.nexuscanon.com/web/image/38874595-16ef5349/odoo-mobile.png"
-.xml	other	t-att-style="'color: ' + (company.email_secondary_color or '#875A7B') + ';'">AFENDA xForge</a>
+.xml	other	t-att-style="'color: ' + (company.email_secondary_color or '#1E3A8A') + ';'">AFENDA xForge</a>
 .xml	other	t-attf-href="/app/action-#{menu['action'] and menu['action'].split(',')[1] or ''}"/>
 .xml	other	t-attf-href="/app/action-hr_recruitment_survey.survey_survey_action_recruitment/{{survey.id}}"
 .xml	other	t-attf-href="/app/action-payment.action_payment_provider/{{tx_sudo.provider_id.id}}"

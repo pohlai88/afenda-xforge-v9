@@ -258,7 +258,7 @@ test("Should change the shape color of an image", async () => {
 
     expect(`[data-label="Colors"] .o_we_color_preview:nth-child(1)`).toHaveAttribute(
         "style",
-        `background-color: #714B67`
+        `background-color: #1E3A8A`
     );
     expect(`[data-label="Colors"] .o_we_color_preview:nth-child(2)`).toHaveAttribute(
         "style",
@@ -316,7 +316,7 @@ test("Should change the shape color of an image with a class color", async () =>
 
     expect(`[data-label="Colors"] .o_we_color_preview:nth-child(1)`).toHaveAttribute(
         "style",
-        `background-color: #714B67`
+        `background-color: #1E3A8A`
     );
     expect(`[data-label="Colors"] .o_we_color_preview:nth-child(2)`).toHaveAttribute(
         "style",

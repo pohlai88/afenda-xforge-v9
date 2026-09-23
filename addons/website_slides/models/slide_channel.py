@@ -44,7 +44,7 @@ class SlideChannel(models.Model):
             "background_color_class": "o_cc4",
             'background_color_style': (
                 'background-color: rgba(0, 0, 0, 0); '
-                'background-image: linear-gradient(120deg, #875A7B, #78516F);'
+                'background-image: linear-gradient(120deg, #1E3A8A, #78516F);'
             ),
             'opacity': '0',
             'resize_class': 'cover_auto'

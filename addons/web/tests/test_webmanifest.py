@@ -24,8 +24,8 @@ class WebManifestRoutesTest(HttpCaseWithUserDemo):
         self.assertEqual(data["scope"], "/app")
         self.assertEqual(data["start_url"], "/app")
         self.assertEqual(data["display"], "standalone")
-        self.assertEqual(data["background_color"], "#714B67")
-        self.assertEqual(data["theme_color"], "#714B67")
+        self.assertEqual(data["background_color"], "#1E3A8A")
+        self.assertEqual(data["theme_color"], "#1E3A8A")
         self.assertEqual(data["prefer_related_applications"], False)
         self.assertCountEqual(data["icons"], [
             {'src': '/web/static/img/odoo-icon-192x192.png', 'sizes': '192x192', 'type': 'image/png'},
@@ -50,8 +50,8 @@ class WebManifestRoutesTest(HttpCaseWithUserDemo):
         self.assertEqual(data["scope"], "/app")
         self.assertEqual(data["start_url"], "/app")
         self.assertEqual(data["display"], "standalone")
-        self.assertEqual(data["background_color"], "#714B67")
-        self.assertEqual(data["theme_color"], "#714B67")
+        self.assertEqual(data["background_color"], "#1E3A8A")
+        self.assertEqual(data["theme_color"], "#1E3A8A")
         self.assertEqual(data["prefer_related_applications"], False)
         self.assertCountEqual(data["icons"], [
             {'src': '/web/static/img/odoo-icon-192x192.png', 'sizes': '192x192', 'type': 'image/png'},
@@ -68,8 +68,8 @@ class WebManifestRoutesTest(HttpCaseWithUserDemo):
         self.assertEqual(data["scope"], "/test")
         self.assertEqual(data["start_url"], "/test")
         self.assertEqual(data["display"], "standalone")
-        self.assertEqual(data["background_color"], "#714B67")
-        self.assertEqual(data["theme_color"], "#714B67")
+        self.assertEqual(data["background_color"], "#1E3A8A")
+        self.assertEqual(data["theme_color"], "#1E3A8A")
         self.assertEqual(data["prefer_related_applications"], False)
         self.assertCountEqual(data["icons"], [
             {'src': "/web/static/img/odoo-icon-192x192.png", 'sizes': 'any', 'type': 'image/png'}

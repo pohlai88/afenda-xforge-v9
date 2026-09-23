@@ -31,7 +31,7 @@
                     <table cellspacing="0" cellpadding="0" border="0">
                         <tbody>
                             <tr>
-                                <td t-if="has_button_access" t-att-style="'border-radius: 3px; text-align: center; background: ' + (company.email_secondary_color or '#875A7B') + ';'">
+                                <td t-if="has_button_access" t-att-style="'border-radius: 3px; text-align: center; background: ' + (company.email_secondary_color or '#1E3A8A') + ';'">
                                     <a t-att-href="button_access['url']" t-att-style="'font-size: 12px; color: ' + (company.email_primary_color or '#FFFFFF') + '; display: block; padding: 8px 12px 11px; text-decoration: none !important; font-weight: bold;'">
                                         <t t-out="button_access['title']"/>
                                     </a>
@@ -84,7 +84,7 @@
 </div>
 <div t-if="show_footer" style="color: #555555; font-size:11px;">
     Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email"
-                  t-att-style="'color: ' + (company.email_secondary_color or '#875A7B') + ';'">AFENDA xForge</a>
+                  t-att-style="'color: ' + (company.email_secondary_color or '#1E3A8A') + ';'">AFENDA xForge</a>
     <span t-if="show_unfollow" id="mail_unfollow">
         | <a href="/mail/unfollow" style="text-decoration:none; color:#555555;">Unfollow</a>
     </span>
@@ -158,7 +158,7 @@
 <!-- POWERED BY -->
 <tr><td align="center" style="min-width: 590px;">
         Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email"
-                      t-att-style="'color: ' + (company.email_secondary_color or '#875A7B') + ';'">AFENDA xForge</a>
+                      t-att-style="'color: ' + (company.email_secondary_color or '#1E3A8A') + ';'">AFENDA xForge</a>
     <span t-if="show_unfollow" id="mail_unfollow">
         | <a href="/mail/unfollow" style="text-decoration:none; color:#555555;">Unfollow</a>
     </span>

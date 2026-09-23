@@ -42,7 +42,7 @@
             View</a>
     </div>
     <div style="margin: 16px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Details</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Details</h2>
         <table cellpadding="0" cellspacing="0" border="0" style="font-size: 13px; color: #374151;">
             <tr>
                 <td style="width: 100px; color: #676F7B;">Date &amp; Time</td>
@@ -90,7 +90,7 @@
         </table>
     </div>
     <div style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Attendees</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Attendees</h2>
         <div t-foreach="object.event_id.attendee_ids" t-as="attendee" style="margin-bottom: 5px;">
             <img t-if="attendee.state" t-attf-src="/calendar/static/src/img/state_{{ attendee.state }}.png" style="border:0; width: 15px; height: 15px; vertical-align: text-bottom;" />
             <t t-if="attendee != object">
@@ -102,7 +102,7 @@
         </div>
     </div>
     <div t-if="not is_html_empty(object.event_id.description)" style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Description of the event</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Description of the event</h2>
         <t t-out="object.event_id.description">Internal meeting for discussion for new pricing for product and services.</t>
     </div>
     <p style="margin: 32px 0 0;">
@@ -166,7 +166,7 @@
             View</a>
     </div>
     <div style="margin: 16px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Details</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Details</h2>
         <table cellpadding="0" cellspacing="0" border="0" style="font-size: 13px; color: #374151;">
 		    <tr>
                 <td style="width: 100px; color: #676F7B;">Date &amp; Time</td>
@@ -214,7 +214,7 @@
         </table>
     </div>
     <div style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Attendees</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Attendees</h2>
         <div t-foreach="object.event_id.attendee_ids" t-as="attendee" style="margin-bottom: 5px;">
             <img t-if="attendee.state" t-attf-src="/calendar/static/src/img/state_{{ attendee.state }}.png" style="border:0; width: 15px; height: 15px; vertical-align: text-bottom;" />
             <t t-if="attendee != object">
@@ -226,7 +226,7 @@
         </div>
     </div>
     <div t-if="not is_html_empty(object.event_id.description)" style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Description of the event</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Description of the event</h2>
         <t t-out="object.event_id.description">Internal meeting for discussion for new pricing for product and services.</t>
     </div>
     <p style="margin: 32px 0 0;">
@@ -267,7 +267,7 @@
             View</a>
     </div>
     <div style="margin: 16px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Details</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Details</h2>
         <table cellpadding="0" cellspacing="0" border="0" style="font-size: 13px; color: #374151;">
             <tr>
                 <td style="width: 100px; color: #676F7B;">Date &amp; Time</td>
@@ -319,7 +319,7 @@
         </table>
     </div>
     <div style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Attendees</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Attendees</h2>
         <div t-foreach="object.event_id.attendee_ids" t-as="attendee" style="margin-bottom: 5px;">
             <img t-if="attendee.state" t-attf-src="/calendar/static/src/img/state_{{ attendee.state }}.png" style="border:0; width: 15px; height: 15px; vertical-align: text-bottom;" />
             <t t-if="attendee != object">
@@ -331,7 +331,7 @@
         </div>
     </div>
     <div t-if="not is_html_empty(object.event_id.description)" style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Description of the event</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Description of the event</h2>
         <t t-out="object.event_id.description">Internal meeting for discussion for new pricing for product and services.</t>
     </div>
     <p style="margin: 32px 0 0;">
@@ -367,7 +367,7 @@
         This meeting has been updated.
     </p>
     <div style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Details</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Details</h2>
         <table cellpadding="0" cellspacing="0" border="0" style="font-size: 13px; color: #374151;">
             <tr>
                 <td style="width: 100px; color: #676F7B;">Date &amp; Time</td>
@@ -415,7 +415,7 @@
         </table>
     </div>
     <div style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Attendees</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Attendees</h2>
         <div t-foreach="object.attendee_ids" t-as="attendee" style="margin-bottom: 5px;">
             <img t-if="attendee.state" t-attf-src="/calendar/static/src/img/state_{{ attendee.state }}.png" style="border:0; width: 15px; height: 15px; vertical-align: text-bottom;" />
             <t t-if="attendee.common_name">
@@ -427,7 +427,7 @@
         </div>
     </div>
     <div t-if="not is_html_empty(object.description)" style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Description of the event</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Description of the event</h2>
         <t t-out="object.description">Internal meeting for discussion for new pricing for product and services.</t>
     </div>
     <p style="margin: 32px 0 0;">
@@ -464,7 +464,7 @@
         </span>
     </p>
     <div style="margin: 32px 0 0;">
-        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#875A7B'}};">Details</h2>
+        <h2 t-attf-style="margin-bottom: 12px; font-size: 14px; font-weight: bold; color: {{user.company_id.email_secondary_color or '#1E3A8A'}};">Details</h2>
         <table cellpadding="0" cellspacing="0" border="0" style="font-size: 13px; color: #374151;">
             <tr>
                 <td style="width: 100px; color: #676F7B;">Date &amp; Time</td>

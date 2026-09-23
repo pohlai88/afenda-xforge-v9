@@ -26,6 +26,11 @@ MARKUP = frozenset({".xml", ".html", ".js", ".ts", ".po", ".pot", ".md", ".rst",
 # Formats whose text is only ever displayed. Excludes .js/.ts/.json/.csv,
 # where a quoted ODOO can be an API payload identifier rather than a label.
 DISPLAY = frozenset({".xml", ".html", ".po", ".pot", ".md", ".rst"})
+# The suffixes a colour can actually reach. .svg is deliberately ABSENT:
+# rebrand.TEXT_SUFFIXES does not include it, so the walker never offers an
+# SVG to any rule and listing it here would be inert and misleading. The 16
+# SVG assets carrying Odoo brand colours are an asset problem, not a text one.
+COLOURISH = frozenset({".scss", ".css", ".xml", ".html", ".js", ".py", ".json"})
 URLISH = frozenset({".py", ".js", ".ts", ".xml", ".html", ".md", ".rst", ".po", ".pot", ".json", ".csv"})
 ROUTER = "addons/web/static/src/core/browser/router.js"
 
@@ -70,7 +75,33 @@ def build_rules(brand: dict) -> list[Rule]:
         # 3. Superseded brand domains repaired to the current one. Must run
         #    before docs_link (next) so a stale old-domain documentation link
         #    falls through to /docs/ instead of merely landing on the new
-        #    domain as a bare link.
+        #    domain as a bare link.        # AFENDA assigns colour by ROLE: primary carries action and brand, the
+        # semantic four carry state, and the twelve tags carry category. Odoo's
+        # own brand colours sit in the FUNCTIONAL roles - a primary button, a
+        # PWA theme colour, the fallback behind an email action button - which
+        # is the one place they cannot stay.
+        #
+        # Purple is not banished. #7C4F7F is an AFENDA tag colour and keeps its
+        # categorical job; what changes is purple used AS BRAND.
+        #
+        # Deliberately not applied to .po/.pot. Those carry ~9,200 of the ~10,200
+        # occurrences and are translations of strings, invisible to the product;
+        # rewriting them would be almost all of the churn for none of the effect.
+        Rule(
+            "odoo_brand_colour",
+            re.compile(r"#(?:714b67|875a7b|7c7bad)(?![0-9a-f])", re.I),
+            brand["primary"],
+            suffixes=COLOURISH,
+        ),
+        # The same colour URL-encoded inside a data: URI, where the # is %23.
+        # A plain hex rule misses these entirely.
+        Rule(
+            "odoo_brand_colour_encoded",
+            re.compile(r"%23(?:714b67|875a7b|7c7bad)(?![0-9a-f])", re.I),
+            "%23" + brand["primary"].lstrip("#"),
+            suffixes=COLOURISH,
+        ),
+
         Rule(
             "superseded_domain",
             # \b excludes word-char-prefixed hosts only, so "notafenda.app"
