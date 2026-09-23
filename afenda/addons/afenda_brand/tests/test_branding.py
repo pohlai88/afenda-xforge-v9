@@ -1,7 +1,9 @@
 import ast
 import base64
+import collections
 import inspect
 import io
+import itertools
 import pathlib
 import re
 
@@ -18,6 +20,12 @@ from ..brand import BRAND
 from ..hooks import _UPSTREAM_REPORT_FONT, _apply_company_branding
 
 ODOO_TELLS = ("odoo.com", "Powered by Odoo", "odoo_logo", "Odoo S.A.")
+
+
+def _rgb(colour: str) -> tuple[int, int, int]:
+    """``"#1E3A8A"`` -> ``(30, 58, 138)``."""
+    return tuple(int(colour[i:i + 2], 16) for i in (1, 3, 5))
+
 
 # A 1x1 PNG, base64 as a Binary field stores it: stands in for a favicon an
 # administrator uploaded, and is nothing the addon would ever write itself.
@@ -293,16 +301,26 @@ class TestBranding(HttpCase):
     def test_app_icons_are_branded(self):
         """The apps menu draws `web_icon_data`, a cached copy of the icon file
         taken when `web_icon` was last written
-        (odoo/addons/base/models/ir_ui_menu.py:158-162). Rendering new tiles on
+        (odoo/addons/base/models/ir_ui_menu.py:158-162). Rendering new icons on
         disk does not touch it, so without the refresh step in post_init_hook an
-        existing database keeps Odoo's teal hexagons for every root menu."""
+        existing database keeps Odoo's teal hexagons for every root menu.
+
+        The icons are free-standing duotone marks - a glyph in one brand colour,
+        an accent shape in a second, and the multiply of the two where they
+        cross - so there is no tile edge to probe. What is checked instead is
+        that every colour with real coverage comes from the brand palette, which
+        is exactly what an unrefreshed Odoo hexagon fails.
+        """
         roots = self.env["ir.ui.menu"].sudo().with_context(active_test=False).search(
             [("parent_id", "=", False), ("web_icon", "!=", False)]
         )
         self.assertTrue(roots, "no root menu carries a web_icon")
-        brand = {
-            tuple(int(BRAND[k][i:i + 2], 16) for i in (1, 3, 5)): k
-            for k in ("primary", "graphite")
+        palette = [_rgb(h) for h in [BRAND["primary"]] + BRAND["tags"]]
+        # A colour is legitimate if it is a brand colour or the multiply of two
+        # of them, which is how the overlap of glyph and accent is painted.
+        allowed = set(palette) | {
+            tuple(round(x * y / 255) for x, y in zip(a, b))
+            for a, b in itertools.product(palette, repeat=2)
         }
         checked = 0
         for menu in roots:
@@ -312,12 +330,19 @@ class TestBranding(HttpCase):
             if len(menu.web_icon.split(",")) != 2 or not menu.web_icon_data:
                 continue
             image = Image.open(io.BytesIO(base64.b64decode(menu.web_icon_data))).convert("RGBA")
-            # Mid-top edge: inside the tile whatever the corner radius.
-            pixel = image.getpixel((image.width // 2, 0))[:3]
-            self.assertIn(
-                pixel, brand,
-                f"{menu.name}: {menu.web_icon} is not an AFENDA tile (top edge {pixel})",
-            )
+            pixels = list(image.getdata())
+            clear = sum(1 for p in pixels if p[3] == 0) / len(pixels)
+            self.assertGreater(clear, 0.20, f"{menu.name}: {menu.web_icon} is a filled tile, not a mark")
+            # 3% of the canvas: below that a colour is the antialiased seam
+            # between two shapes, not one of the colours the icon is drawn in.
+            counts = collections.Counter(p[:3] for p in pixels if p[3] == 255)
+            for colour, n in counts.items():
+                if n < 0.03 * len(pixels):
+                    continue
+                self.assertIn(
+                    colour, allowed,
+                    f"{menu.name}: {menu.web_icon} is drawn in {colour}, which is not an AFENDA colour",
+                )
             checked += 1
         # This database installs few apps; Discuss plus the three base root
         # menus (Apps, Settings, Tests) are the floor.
@@ -327,10 +352,19 @@ class TestBranding(HttpCase):
             "a root menu names an image icon but stores no web_icon_data",
         )
         # The apps menu also serves the SVG beside each PNG; #985184 is the
-        # Odoo purple the upstream icon.svg files were drawn in.
+        # Odoo purple and #1AD3BB the Odoo teal the upstream icon.svg files were
+        # drawn in. Discuss is a communication app: indigo glyph, mulberry
+        # accent, and the two multiplied where the accent crosses the bubble.
         svg = self.url_open("/mail/static/description/icon.svg").text
-        self.assertNotIn("#985184", svg, "the mail app icon is still Odoo artwork")
-        self.assertIn(BRAND["primary"], svg, "the mail app icon is not a Ledger Blue tile")
+        for dead in ("#985184", "#1AD3BB"):
+            self.assertNotIn(dead, svg, "the mail app icon is still Odoo artwork")
+        indigo, mulberry = "#3448A8", "#A8447A"
+        self.assertLessEqual({indigo, mulberry}, set(BRAND["tags"]), "the tag palette moved under the icons")
+        overlap = "#%02X%02X%02X" % tuple(
+            round(x * y / 255) for x, y in zip(_rgb(indigo), _rgb(mulberry))
+        )
+        for colour in (indigo, mulberry, overlap):
+            self.assertIn(colour, svg, f"the mail app icon is missing {colour}")
 
     def test_empty_state_is_a_ledger_page(self):
         """Regression: without the backend.scss override the three empty-state

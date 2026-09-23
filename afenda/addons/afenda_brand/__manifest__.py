@@ -4,7 +4,11 @@
     "summary": "Brand the web client, login, emails and portal as AFENDA xForge",
     # 19.0.1.0.1 carries migrations/19.0.1.0.1/post-migrate.py, which re-applies
     # the company branding on update: post_init_hook runs at install only.
-    "version": "19.0.1.0.1",
+    # 19.0.1.0.2 re-reads the cached root-menu icons: the app icons were redrawn
+    # as free-standing duotone marks, and `web_icon_data` is a copy taken when
+    # `web_icon` was last written, so a database that skipped it keeps the old
+    # tiles in the apps menu no matter what is on disk.
+    "version": "19.0.1.0.2",
     "category": "Hidden/Tools",
     "author": "AFENDA",
     "website": "https://afenda.app",
