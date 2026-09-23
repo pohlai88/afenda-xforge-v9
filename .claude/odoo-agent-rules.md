@@ -47,7 +47,14 @@ comment.
 
 ## AFENDA layering
 
-- Root `odoo/` and `addons/` are pristine upstream. Never hand-edit them.
+- Root `odoo/` and `addons/` are pristine in the only sense that matters here:
+  no hand edits, ever. They are not byte-identical to upstream — the identity
+  transform in `afenda/tools/rebrand.py` mechanically rewrites text and images
+  across roughly 23,000 of those files, which is why an upstream merge touches
+  tens of thousands of files and why `git diff` against upstream is not a
+  measure of hand-authored risk (see Metrics discipline below). "Pristine"
+  means untouched by hand, not unmodified; see the Correction ledger below for
+  why that distinction had to be written down.
 - All custom work goes under `afenda/addons/<module>/`.
 - Branding text and image changes go through `afenda/tools/` rules and their
   corpus golden test (`afenda/tools/tests/test_corpus.py`), never ad-hoc edits.
@@ -75,6 +82,11 @@ Authority for a claim about this repository's runtime behaviour, descending:
 5. Upstream Odoo source — comparison and upgrade analysis, never assumed
    identical to this fork.
 6. External articles and forum answers — context only, never authority.
+
+"The release SHA" is the commit the artifact under discussion was built
+from: the release tag, once one is cut, otherwise the checked-out commit.
+There is no release tag yet — cutting one is Phase 0 of the platform spec —
+so today "the release SHA" resolves to the checked-out commit.
 
 This repository is a fork of Odoo 19.0 with roughly 23,000 files rewritten by
 `afenda/tools/rebrand.py`, so a claim verified against upstream GitHub or
@@ -118,6 +130,14 @@ than silently editing the prose. Record each retraction as an entry:
 - `replacement`: the corrected claim, or none if the original is simply
   removed.
 - `introduced_in`: where the false claim first appeared (commit, doc, or ADR).
+
+File a correction under a `## Corrections recorded` heading in the document
+where the false claim lived — a rule corrected in this file is filed in this
+file; a claim in `docs/superpowers/specs/2026-09-23-afenda-platform-architecture.md`
+is filed there, which already carries entries in this style. Assign the next
+`nnnn` by running `grep -rn "AFD-ARCH-CORR" docs/ .claude/` and taking the
+highest number plus one. There is no shared counter, and none is worth
+building for the handful of entries a year this produces.
 
 Three false claims surfaced in one day and are worth keeping as the reason
 this exists: `CLAUDE.md` said port 8069 "is in a Windows reserved range and
