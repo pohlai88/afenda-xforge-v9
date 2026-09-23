@@ -9,7 +9,7 @@
             pattern as afenda_api_docs/views/landing.xml. -->
             <t t-set="no_footer" t-value="True"/>
             <div class="container py-5 text-center">
-                <h1 class="h3">Access to AFENDA xForge is by invitation.</h1>
+                <h1 class="h3">Access to <t t-out="product"/> is by invitation.</h1>
                 <p class="text-muted mt-3">Ask your administrator for an invitation.</p>
             </div>
         </t>

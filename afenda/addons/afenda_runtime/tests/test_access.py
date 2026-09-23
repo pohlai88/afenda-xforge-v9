@@ -1,5 +1,9 @@
 from odoo.tests import HttpCase, tagged
 
+# Written out rather than built from BRAND, so a change to the encoding or the
+# product name fails here instead of following along.
+SUBJECT_QUERY = "subject=Access%20request%20%E2%80%94%20AFENDA%20xForge"
+
 
 @tagged("post_install", "-at_install")
 class TestInviteOnly(HttpCase):
@@ -19,10 +23,16 @@ class TestInviteOnly(HttpCase):
         self.assertEqual(self.url_open("/web/signup").status_code, 404)
 
     def test_request_access_mails_the_company(self):
-        self.env.company.email = "hello@example.com"
-        r = self.url_open("/request-access", allow_redirects=False)
-        self.assertEqual(r.status_code, 303)
-        self.assertTrue(r.headers["Location"].startswith("mailto:hello@example.com?subject="))
+        for email, location in (
+            ("hello@example.com", "mailto:hello@example.com?" + SUBJECT_QUERY),
+            # `+` must be escaped, or dropping `quote` would go unnoticed.
+            ("a+b@example.com", "mailto:a%2Bb@example.com?" + SUBJECT_QUERY),
+        ):
+            with self.subTest(email=email):
+                self.env.company.email = email
+                r = self.url_open("/request-access", allow_redirects=False)
+                self.assertEqual(r.status_code, 303)
+                self.assertEqual(r.headers["Location"], location)
 
     def test_request_access_without_email_explains(self):
         self.env.company.email = False

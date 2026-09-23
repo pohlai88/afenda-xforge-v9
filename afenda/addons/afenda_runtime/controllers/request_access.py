@@ -4,7 +4,9 @@ from odoo import http
 from odoo.http import request
 from odoo.tools import email_normalize, single_email_re
 
-SUBJECT = quote("Access request — AFENDA xForge")
+from odoo.addons.afenda_brand.brand import BRAND
+
+SUBJECT = quote(f"Access request — {BRAND['product']}")
 
 
 def _mailto_address(raw):
@@ -28,6 +30,12 @@ def _mailto_address(raw):
 class RequestAccess(http.Controller):
     @http.route("/request-access", type="http", auth="public", methods=["GET"], sitemap=False)
     def request_access(self):
+        # The company is not the visitor's choice. HTTP routes never put
+        # `allowed_company_ids` in the context, so `request.env.company` is the
+        # public user's fixed company (odoo/orm/environments.py:243), resolved
+        # before `sudo()`. The elevated read is limited to that one `email`
+        # field, which the mailto: redirect exposes anyway. Do not widen what
+        # this sudo reads.
         email = _mailto_address(request.env.company.sudo().email)
         if email:
             # `local=False` keeps the mailto: scheme: with `local=True` the
@@ -38,4 +46,4 @@ class RequestAccess(http.Controller):
             # local part into an escape, so nothing in the address can read
             # as a mailto: header.
             return request.redirect(f"mailto:{quote(email, safe='@')}?subject={SUBJECT}", code=303, local=False)
-        return request.render("afenda_runtime.request_access_by_invitation")
+        return request.render("afenda_runtime.request_access_by_invitation", {"product": BRAND["product"]})
