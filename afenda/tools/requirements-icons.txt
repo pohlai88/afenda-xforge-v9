@@ -1,0 +1,7 @@
+# Build-time only: the xForge icon lab under afenda/tools/xforge_icons_v3.
+# Odoo never imports these at runtime, so they are kept out of the server's
+# own requirements. Both are self-contained wheels with no Python dependencies
+# and no system libraries - which is why they are usable here at all, given
+# that native Cairo on Windows is what this pipeline was built to avoid.
+resvg-py==0.5.0    # rasterises the canonical SVG; the PNG is its output
+pyclipper==1.4.0   # round-join offsetting for soft vertices
