@@ -209,6 +209,10 @@ APP_GLYPHS: dict[str, str] = {
     "website_slides": "f19d",
     "website_forum": "f086",
     "point_of_sale": "f291",
+    # Restaurant is its own app, not the till and not the canteen: f0f5 is
+    # already the Lunch cutlery and f291 the POS basket, so a served cup
+    # carries "table service" without reading as either of them.
+    "pos_restaurant": "f0f4",
     "event": "f145",
     "im_livechat": "f27a",
     "lunch": "f0f5",
@@ -218,6 +222,7 @@ APP_GLYPHS: dict[str, str] = {
     "mass_mailing_sms": "f10b",
     "sms": "f10b",
     "survey": "f0cb",
+    "marketing_card": "f2c2",  # a card, which is what the module makes
     "repair": "f1b3",
     "gamification": "f091",
     "data_recycle": "f1b8",
@@ -267,6 +272,10 @@ ACCENTS: dict[str, tuple[str, str, str]] = {
     "hr_skills": (PLUM, MUSTARD, "disc-br"),
     "hr_timesheet": (PLUM, TEAL, "disc-bl"),
     "lunch": (PLUM, MOSS, "disc-br"),
+    # The shards are scorer candidates only, never hand-assigned. Of the
+    # hand-placed shapes the scorer puts bar-b first (0.243): a line under a
+    # cup reads as the counter it is served on, and misses the handle.
+    "pos_restaurant": (PLUM, OCHRE, "bar-b"),
     "gamification": (PLUM, MUSTARD, "disc-bl"),
     # --- operations ------------------------------------------------------
     "stock": (TEAL, OCHRE, "disc-br"),
@@ -296,6 +305,8 @@ ACCENTS: dict[str, tuple[str, str, str]] = {
     "survey": (MULBERRY, TEAL, "dot-br"),  # f0cb is a numbered list, all of it
     "utm": (MULBERRY, TEAL, "bar-t"),  # f0e8 fans out downward; the top is clear
     "event": (MULBERRY, OCHRE, "disc-tr"),
+    "marketing_card": (MULBERRY, OCHRE, "bar-t"),  # scorer first at 0.160;
+    # the card's lines sit low, so a band across its head clears them
     # --- system ----------------------------------------------------------
     # A cog, a 2x2 grid and a dial are read by their negative space, and the
     # accent fills whatever it crosses: a disc closes the cog's hole and the
