@@ -526,6 +526,15 @@ class TestModelSchema(TransactionCase):
         labels = " ".join(schema["properties"]["odoobot_state"]["x-enum-labels"])
         self.assertNotIn("Odoo", labels)
 
+    def test_every_odoo_field_type_is_mapped(self):
+        # The fallback silently documents an unknown type as a string, which is
+        # a wrong contract rather than a missing one. If Odoo gains a field type,
+        # fail here rather than mis-document it.
+        from odoo.addons.afenda_api_docs.openapi import _TYPE_MAP
+        declared = {f.type for f in self.env["res.partner"]._fields.values()}
+        self.assertTrue(declared)
+        self.assertEqual(declared - set(_TYPE_MAP), set())
+
     def test_help_text_is_aliased(self):
         schema = model_schema(self.env["res.partner"])
         for prop in schema["properties"].values():
@@ -566,7 +575,21 @@ _TYPE_MAP = {
     "many2one": {"type": "integer"},
     "one2many": {"type": "array", "items": {"type": "integer"}},
     "many2many": {"type": "array", "items": {"type": "integer"}},
+    # The three below are easy to miss and two of them are NOT strings.
+    # many2one_reference stores an integer id, with the model name in a
+    # companion Char named by its `model_field` (odoo/orm/fields_reference.py:62).
+    # Falling through to the string fallback would tell an integrator to send
+    # "5" where the ORM wants 5.
+    "many2one_reference": {"type": "integer"},
+    # Reference really is a string, but a structured one: "res_model,res_id"
+    # (odoo/orm/fields_reference.py:17-18). Document the shape.
+    "reference": {"type": "string", "pattern": r"^[a-z_.]+,\d+$"},
+    # A jsonb list of property definitions (odoo/orm/fields_properties.py:850).
+    "properties_definition": {"type": "array", "items": {"type": "object"}},
 }
+# Only reached by a field type added to Odoo after this map was written. A new
+# type documented as a string is a wrong contract, not a missing one, so the
+# test below fails loudly instead of letting it through quietly.
 _FALLBACK = {"type": "string"}
 
 
