@@ -206,7 +206,7 @@ updated) to reach browsers that cached the old one.
 ## Moving DNS to DigitalOcean
 
 The zone is `dns/nexuscanon.com.records` (tab-separated
-`type name data priority ttl`). It has no wildcard and no Resend records.
+`type name data priority ttl`). It has no wildcard; app mail goes out through Resend (the `send.` records and `resend._domainkey`).
 `dns/apply-do-dns.sh` creates the domain if it is absent and adds each record
 that is not already there; it never deletes or changes a record. It needs
 `doctl`, authenticated (`doctl auth init`).

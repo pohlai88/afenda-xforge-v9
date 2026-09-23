@@ -1,7 +1,7 @@
 """Static checks on the deploy files: no vendor host, pinned build inputs,
 a build context that carries every module, the nexuscanon.com landing page
 (same-origin files only, no absolute URL, the generated lockup), redeploy upgrades, and
-the DNS zone (no wildcard, no Resend, Zoho mail kept).
+the DNS zone (no wildcard, Zoho mail kept, app mail through Resend).
 
 The image is the product, so it must not reach a vendor host at build or run
 time (R7 of the G0 deploy plan proves that at runtime; this proves it in the
@@ -308,14 +308,28 @@ class DeployRedeployAndDnsTests(unittest.TestCase):
             rows.append(tuple(fields))
         return rows
 
-    def test_dns_zone_has_no_wildcard_and_no_resend(self):
+    def test_dns_zone_has_no_wildcard(self):
         rows = self._records()
         self.assertTrue(rows)
-        for rtype, name, data, _priority, _ttl in rows:
+        for _rtype, name, _data, _priority, _ttl in rows:
             self.assertNotIn("*", name, "a wildcard record")
-            self.assertNotEqual(name.split(".")[0], "send", f"a Resend record: {name}")
-            self.assertNotIn("resend", (name + data).lower(), f"a Resend record: {name}")
-            self.assertNotIn("amazonses", data.lower(), f"a Resend record: {name}")
+
+    def test_dns_zone_sends_app_mail_through_resend(self):
+        # DigitalOcean blocks outbound SMTP 25/465/587, so the ERP relays
+        # through Resend on 2587. Resend's return path is the send. subdomain
+        # (its own MX and SPF), so the apex SPF stays Zoho's alone.
+        rows = self._records()
+        resend = {(rtype, name) for rtype, name, _d, _p, _t in rows
+                  if name == "send" or name == "resend._domainkey"}
+        self.assertEqual(resend, {("MX", "send"), ("TXT", "send"), ("TXT", "resend._domainkey")})
+        self.assertIn(("MX", "send", "feedback-smtp.ap-northeast-1.amazonses.com.", "10"),
+                      {(r, n, d, p) for r, n, d, p, _t in rows})
+        self.assertIn(("TXT", "send", "v=spf1 include:amazonses.com ~all"),
+                      {(r, n, d) for r, n, d, _p, _t in rows})
+        dkim = [d for r, n, d, _p, _t in rows if (r, n) == ("TXT", "resend._domainkey")]
+        self.assertTrue(dkim[0].startswith("p=MIGf"), dkim)
+        apex_spf = [d for r, n, d, _p, _t in rows if (r, n) == ("TXT", "@") and d.startswith("v=spf1")]
+        self.assertEqual(apex_spf, ["v=spf1 include:zohomail.com ~all"])
 
     def test_dns_caa_issue_value_is_a_fqdn(self):
         # DigitalOcean's API answers 422 "Data needs to be a FQDN with issue or
@@ -327,7 +341,8 @@ class DeployRedeployAndDnsTests(unittest.TestCase):
         self.assertTrue(value.strip('"').endswith("."), f"CAA value without trailing dot: {value}")
 
     def test_dns_zone_keeps_zoho_mail(self):
-        mx = {(name, data, priority) for rtype, name, data, priority, _ttl in self._records() if rtype == "MX"}
+        mx = {(name, data, priority) for rtype, name, data, priority, _ttl in self._records()
+              if rtype == "MX" and name == "@"}
         self.assertEqual(mx, {("@", "mx.zoho.com.", "10"), ("@", "mx2.zoho.com.", "20"),
                               ("@", "mx3.zoho.com.", "50")})
 
