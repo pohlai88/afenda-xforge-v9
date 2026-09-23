@@ -136,18 +136,16 @@ class Tier:
     """One step of the responsive rule."""
 
     __slots__ = ("name", "gradients", "accent_alpha", "overlap_alpha",
-                 "highlight_alpha", "shadow_alpha", "detail", "detail_small",
-                 "sheen", "blur")
+                 "highlight_alpha", "detail", "detail_small", "sheen", "blur")
 
     def __init__(self, name, gradients, accent_alpha, overlap_alpha,
-                 highlight_alpha, shadow_alpha, detail, detail_small=False,
+                 highlight_alpha, detail, detail_small=False,
                  sheen=0.0, blur=0.0):
         self.name = name
         self.gradients = gradients
         self.accent_alpha = accent_alpha
         self.overlap_alpha = overlap_alpha
         self.highlight_alpha = highlight_alpha
-        self.shadow_alpha = shadow_alpha
         self.detail = detail  # draw the object's fine marks (ledger lines, strip)
         # At the smallest sizes a master's fine marks are replaced by an
         # optically equivalent reduction rather than dropped: losing them
@@ -165,12 +163,12 @@ TIERS = {
     # 16-24: flat duotone. No gradient survives two pixels, and a translucent
     # plane at this size turns both colours to mud, so the accent goes opaque.
     "flat": Tier("flat", gradients=False, accent_alpha=1.00, overlap_alpha=1.00,
-                 highlight_alpha=0.0, shadow_alpha=0.0, detail=True, detail_small=True,
+                 highlight_alpha=0.0, detail=True, detail_small=True,
                  sheen=0.0, blur=0.0),
     # 32: reduced material. Gradients return; highlight and shadow do not,
     # because at 32 both land on fewer than two pixels and only blur the edge.
     "reduced": Tier("reduced", gradients=True, accent_alpha=0.92, overlap_alpha=0.96,
-                    highlight_alpha=0.0, shadow_alpha=0.0, detail=True,
+                    highlight_alpha=0.0, detail=True,
                     sheen=0.09, blur=0.0),
     # 48-128: the full crystal material.
     # 48-128: the full crystal material, and the ONLY tier allowed a filter.
@@ -182,7 +180,7 @@ TIERS = {
     # no such line - its planes show as a change of colour, not an edge - and
     # the crystal tier's blur now does the job that stroke was standing in for.
     "crystal": Tier("crystal", gradients=True, accent_alpha=0.82, overlap_alpha=0.80,
-                    highlight_alpha=0.0, shadow_alpha=0.11, detail=True,
+                    highlight_alpha=0.0, detail=True,
                     sheen=0.17, blur=4.5),
 }
 
