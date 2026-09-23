@@ -12,8 +12,9 @@ from Vercel to DigitalOcean. Vercel was a test and is dropped.
 
 Four elements, centred on paper, filling the screen:
 
-1. The AFENDA xForge lockup: `addons/web/static/img/odoo_logo.svg` on light, and
-   `odoo_logo_dark.svg` under `prefers-color-scheme: dark`, via `<picture>`.
+1. The AFENDA xForge lockup, `addons/web/static/img/odoo_logo.svg`. **Light theme only**, by
+   the user's instruction (2026-09-24): no dark mode. The page declares
+   `color-scheme: light`, so browsers never auto-darken it.
 2. `<h1>`: **The truth of your business, kept.**, in Source Serif 4 Semibold.
 3. **Request access**, the only filled button (Ledger Blue), linking to
    `<PUBLIC_URL>/request-access`.
@@ -23,11 +24,11 @@ Constraints:
 - no JavaScript;
 - no request outside its own origin;
 - self-hosted fonts as woff2;
-- WCAG AA contrast in both colour schemes;
+- WCAG AA contrast;
 - no horizontal overflow from 320 px up.
 
-The proposal measured: headline 16.6:1 light / 15.8:1 dark, button 10.4:1 / 6.0:1,
-Sign in 7.1:1 / 7.4:1, 2.6 KB of HTML.
+The proposal measured, in light: headline 16.6:1, button 10.4:1, Sign in 7.1:1. The HTML is
+2.6 KB.
 
 ## Access is by invitation (in `afenda_runtime`)
 
@@ -43,8 +44,8 @@ Sign in 7.1:1 / 7.4:1, 2.6 KB of HTML.
 
 ## Serving
 
-- `deploy/site/` holds the page, the two lockups (checked byte-equal to their generated source
-  by a test) and the woff2 fonts.
+- `deploy/site/` holds the page, the lockup (checked byte-equal to its generated source by a
+  test) and the woff2 fonts.
 - nginx serves it on the bare domain. `www` redirects permanently to the bare domain. Locally
   it is served on `:8081`, next to the app on `:8080`.
 - `PUBLIC_URL` is substituted into the page at nginx start, so no URL is hard-coded.
