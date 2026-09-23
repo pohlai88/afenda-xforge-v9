@@ -156,29 +156,34 @@ docker compose run --rm init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin mo
 ## The landing page
 
 `site/` is the page at `nexuscanon.com`, and at `http://localhost:8081`
-locally: `index.html`, `lockup.svg` and `fonts/`. It is light-only, runs no
-JavaScript and names no host: its two links are written `__PUBLIC_URL__/...`,
+locally: `index.html`, `site.css`, `lockup-dark.svg` and `fonts/`. It is one
+screen in black and white, runs no JavaScript (its entrance is a CSS
+animation) and names no host. Styles come only from `site.css`, never inline,
+so the CSP in `nginx/` is plain `default-src 'self'` with no hash to keep in
+step. Its two links are written `__PUBLIC_URL__/...`,
 and `nginx/40-afenda-site.sh` replaces that with `PUBLIC_URL` (from `.env`,
 default `http://localhost:8080`) each time nginx starts. After changing the
 page or `PUBLIC_URL`, `docker compose up -d nginx` (or `restart nginx`)
 applies it. `www.nexuscanon.com` redirects to `nexuscanon.com`.
 
-`lockup.svg` is a byte copy of `addons/web/static/img/odoo_logo.svg`, the
-generated product lockup; `afenda/tools/tests/test_deploy_static.py` fails
-when they differ. After the lockup is regenerated, from the repository root:
+`lockup-dark.svg` is a byte copy of `addons/web/static/img/odoo_logo_dark.svg`,
+the generated product lockup for a dark ground, in its own colours;
+`afenda/tools/tests/test_deploy_static.py` fails when they differ. After the
+lockup is regenerated, from the repository root:
 
 ```bash
-cp addons/web/static/img/odoo_logo.svg deploy/site/lockup.svg
+cp addons/web/static/img/odoo_logo_dark.svg deploy/site/lockup-dark.svg
 ```
 
-### Regenerating the site fonts
+### Regenerating the site font
 
-The two woff2 files are subsets (Basic Latin, Latin-1, dashes, quotes,
-ellipsis) of the brand fonts in `afenda_brand`. From the repository root,
-with `fontTools` and `brotli` in `.venv`:
+The one woff2 file is a subset (Basic Latin, Latin-1, dashes, quotes,
+ellipsis) of the variable Source Sans 3 in `afenda_brand`, keeping its full
+200–900 weight axis: the page's hairline (250) and heavy (900) weights are
+real, not synthesized. From the repository root, with `fontTools` and
+`brotli` in `.venv`:
 
 ```bash
-.venv/Scripts/python -m fontTools.subset afenda/addons/afenda_brand/static/fonts/SourceSerif4-Semibold.ttf --unicodes="U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-201D,U+2026" --flavor=woff2 --output-file=deploy/site/fonts/SourceSerif4-Semibold.woff2
 .venv/Scripts/python -m fontTools.subset afenda/addons/afenda_brand/static/fonts/SourceSans3-VF.ttf --unicodes="U+0020-007E,U+00A0-00FF,U+2013-2014,U+2018-201D,U+2026" --flavor=woff2 --output-file=deploy/site/fonts/SourceSans3.woff2
 ```
 

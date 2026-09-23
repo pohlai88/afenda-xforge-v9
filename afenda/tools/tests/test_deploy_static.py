@@ -1,6 +1,6 @@
 """Static checks on the deploy files: no vendor host, pinned build inputs,
 a build context that carries every module, the nexuscanon.com landing page
-(no script, no absolute URL, the generated lockup), redeploy upgrades, and
+(same-origin files only, no absolute URL, the generated lockup), redeploy upgrades, and
 the DNS zone (no wildcard, no Resend, Zoho mail kept).
 
 The image is the product, so it must not reach a vendor host at build or run
@@ -10,8 +10,6 @@ to a `.dockerignore` pattern. Needs no database and no Docker, so it lives in
 `afenda/tools/tests/` and runs in the fast
 `python -m unittest discover afenda/tools/tests` suite.
 """
-import base64
-import hashlib
 import os
 import re
 import unittest
@@ -162,13 +160,22 @@ class DeployStaticTests(unittest.TestCase):
 
 
 class LandingSiteStaticTests(unittest.TestCase):
-    """The nexuscanon.com landing page under deploy/site (light theme only)."""
+    """The nexuscanon.com landing page under deploy/site: one screen, black and
+    white, styled and scripted only from same-origin files."""
 
     def _page(self):
         return (SITE / "index.html").read_text(encoding="utf-8")
 
-    def test_page_has_no_script(self):
-        self.assertNotIn("<script", self._page().lower())
+    def test_page_has_no_script_and_no_inline_style(self):
+        # No script at all (the entrance is CSS), and styles only from site.css,
+        # so the CSP needs no hash and no 'unsafe-inline'.
+        page = self._page()
+        self.assertNotIn("<script", page.lower())
+        self.assertEqual([p.name for p in SITE.glob("*.js")], [])
+        self.assertNotIn("<style", page.lower())
+        self.assertNotRegex(page, r"\sstyle=")
+        self.assertIn('<link rel="stylesheet" href="site.css">', page)
+        self.assertTrue((SITE / "site.css").is_file(), "site.css is missing")
 
     def test_site_names_no_absolute_url(self):
         # The only URL form is __PUBLIC_URL__/..., substituted at nginx start.
@@ -187,35 +194,34 @@ class LandingSiteStaticTests(unittest.TestCase):
 
     def test_page_texts_are_exact(self):
         page = self._page()
-        self.assertIn("<h1>The truth of your business, kept.</h1>", page)
-        self.assertRegex(page, r'<a class="request" href="[^"]+">Request access</a>')
-        self.assertRegex(page, r'<a class="signin" href="[^"]+">Sign in</a>')
+        h1 = re.search(r"<h1>(.*?)</h1>", page, re.S).group(1)
+        self.assertEqual(" ".join(re.sub(r"<[^>]+>", " ", h1).split()), "The truth of your business, kept.")
+        self.assertRegex(page, r'<a [^>]*href="__PUBLIC_URL__/request-access"[^>]*>Request access</a>')
+        self.assertRegex(page, r'<a [^>]*href="__PUBLIC_URL__/web/login"[^>]*>Sign in</a>')
 
-    def test_page_is_light_only(self):
-        page = self._page()
-        self.assertNotIn("prefers-color-scheme", page)
-        self.assertIn('<meta name="color-scheme" content="light">', page)
-        self.assertNotIn("<picture", page)
+    def test_page_has_one_fixed_theme(self):
+        # Black and white by design: no scheme switching, one logo file.
+        for name in ("index.html", "site.css"):
+            self.assertNotIn("prefers-color-scheme", (SITE / name).read_text(encoding="utf-8"), name)
+        self.assertNotIn("<picture", self._page())
 
-    def test_the_one_lockup_is_the_generated_logo(self):
+    def test_the_one_lockup_is_the_generated_dark_logo(self):
         svgs = sorted(p.relative_to(SITE).as_posix() for p in SITE.rglob("*.svg"))
-        self.assertEqual(svgs, ["lockup.svg"])
+        self.assertEqual(svgs, ["lockup-dark.svg"])
         # Byte-equal in git's canonical form. The source's working copy can end
         # in CR LF on a Windows checkout (core.autocrlf, or the generator), while
         # deploy/ is LF by .gitattributes; both commit to the same blob.
-        source = REPO / "addons" / "web" / "static" / "img" / "odoo_logo.svg"
-        self.assertEqual((SITE / "lockup.svg").read_bytes(),
+        source = REPO / "addons" / "web" / "static" / "img" / "odoo_logo_dark.svg"
+        self.assertEqual((SITE / "lockup-dark.svg").read_bytes(),
                          source.read_bytes().replace(b"\r\n", b"\n"))
 
     def test_fonts_are_woff2(self):
-        for name in ("SourceSerif4-Semibold.woff2", "SourceSans3.woff2"):
-            path = SITE / "fonts" / name
-            self.assertTrue(path.is_file(), f"{name} is missing")
-            self.assertEqual(path.read_bytes()[:4], b"wOF2", f"{name} is not woff2")
-        page = self._page()
-        self.assertNotIn(".ttf", page)
-        self.assertNotIn("Source Code Pro", page)
-        self.assertEqual(page.count('format("woff2")'), 2)
+        fonts = sorted(p.name for p in (SITE / "fonts").iterdir())
+        self.assertEqual(fonts, ["SourceSans3.woff2"])
+        self.assertEqual((SITE / "fonts" / "SourceSans3.woff2").read_bytes()[:4], b"wOF2")
+        css = (SITE / "site.css").read_text(encoding="utf-8")
+        self.assertNotIn(".ttf", css)
+        self.assertEqual(css.count('format("woff2")'), 1)
 
     def test_entry_script_substitutes_public_url(self):
         text = (DEPLOY / "nginx" / "40-afenda-site.sh").read_text(encoding="utf-8")
@@ -267,11 +273,10 @@ class LandingSiteStaticTests(unittest.TestCase):
         return servers
 
     def test_landing_servers_send_security_headers(self):
-        style = re.search(r"<style>(.*?)</style>", (SITE / "index.html").read_text(encoding="utf-8"), re.S)
-        digest = base64.b64encode(hashlib.sha256(style.group(1).encode("utf-8")).digest()).decode()
+        # Everything is a same-origin file, so 'self' alone allows the page:
+        # no style hash to keep in step, no 'unsafe-inline' anywhere.
         csp = ("add_header Content-Security-Policy \"default-src 'self'; "
-               f"style-src 'self' 'sha256-{digest}'; frame-ancestors 'none'; "
-               "base-uri 'none'; form-action 'none'\" always;")
+               "frame-ancestors 'none'; base-uri 'none'; form-action 'none'\" always;")
         for conf, expected in (("afenda.conf", 1), ("afenda.tls.conf", 1)):
             servers = self._landing_servers(conf)
             self.assertEqual(len(servers), expected, f"{conf}: landing server blocks")
