@@ -88,7 +88,7 @@ from: the release tag, once one is cut, otherwise the checked-out commit. No
 release tag exists yet, and no document currently schedules cutting one —
 the intended tag shape (`xforge-v19.0.1.0.4`, `.5`, `.6` …) appears in the
 platform spec's branch topology
-(`docs/superpowers/specs/2026-09-23-afenda-platform-architecture.md:242,246`),
+(`docs/superpowers/specs/2026-09-23-afenda-platform-architecture.md:242`),
 but scheduling the first cut is unowned. So today "the release SHA" resolves
 to the checked-out commit.
 
