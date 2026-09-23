@@ -32,7 +32,7 @@
         <!-- :86-87 - the "Powered by" anchor. OCA mail_debranding only strips
              anchors whose href matches odoo.com (mail_debranding/models/
              mail_render_mixin.py:28-35); the rebrand rewrote this href to
-             afenda.app, so the anchor survives rendering and is ours to
+             the brand domain, so the anchor survives rendering and is ours to
              replace. The image is absolute because an email has no origin.
              width= as well as height= and a px max-width: Outlook's Word
              engine ignores CSS sizing and would otherwise lay the asset out at

@@ -137,6 +137,11 @@ class RunTests(unittest.TestCase):
 
 from afenda.tools.rules import RULES, load_brand
 
+# Derived, never hard-coded. A literal domain here tests a string the rules stop
+# producing the moment a brand value changes — which is how the placeholder
+# survived in eight assertions until the real domain arrived.
+DOMAIN = load_brand()["domain"]
+
 
 class RulesTests(unittest.TestCase):
     def rw(self, text, name):
@@ -182,7 +187,7 @@ class RulesTests(unittest.TestCase):
         # A versionless link the generic odoo.com rule already rewrote to the
         # brand domain is still off-origin; it must come back to /docs/.
         self.assertEqual(
-            self.rw('return "https://www.afenda.app/documentation/" + serverVersion + this.props.path;\n', "w.js"),
+            self.rw('return "https://www.' + DOMAIN + '/documentation/" + serverVersion + this.props.path;\n', "w.js"),
             'return "/docs/" + serverVersion + this.props.path;\n',
         )
 
@@ -191,13 +196,13 @@ class RulesTests(unittest.TestCase):
         self.assertEqual(self.rw(once, "v.xml"), once)
 
     def test_brand_domain_outside_documentation_is_left_alone(self):
-        for src in ('href="https://www.afenda.app/pricing"\n', "url = 'https://accounts.afenda.app/account'\n"):
+        for src in ('href="https://www.' + DOMAIN + '/pricing"\n', "url = 'https://accounts." + DOMAIN + "/account'\n"):
             self.assertEqual(self.rw(src, "v.xml"), src)
 
     def test_other_odoo_com_links_go_to_domain(self):
-        self.assertEqual(self.rw("https://www.odoo.com?utm_source=db\n", "v.xml"), "https://www.afenda.app?utm_source=db\n")
-        self.assertEqual(self.rw("https://accounts.odoo.com/account\n", "u.js"), "https://accounts.afenda.app/account\n")
-        self.assertEqual(self.rw("info@odoo.com\n", "d.xml"), "info@afenda.app\n")
+        self.assertEqual(self.rw("https://www.odoo.com?utm_source=db\n", "v.xml"), "https://www." + DOMAIN + "?utm_source=db\n")
+        self.assertEqual(self.rw("https://accounts.odoo.com/account\n", "u.js"), "https://accounts." + DOMAIN + "/account\n")
+        self.assertEqual(self.rw("info@odoo.com\n", "d.xml"), "info@" + DOMAIN + "\n")
 
     def test_iap_endpoints_survive(self):
         src = "DEFAULT_ENDPOINT = 'https://iap.odoo.com'\n"
@@ -261,7 +266,7 @@ class RulesTests(unittest.TestCase):
         self.assertEqual(self.rw(src, "fr.po"), src)
 
     def test_odoo_com_case_insensitive(self):
-        self.assertEqual(self.rw("https://accounts.ODOO.COM/account\n", "u.js"), "https://accounts.afenda.app/account\n")
+        self.assertEqual(self.rw("https://accounts.ODOO.COM/account\n", "u.js"), "https://accounts." + DOMAIN + "/account\n")
 
     def test_allcaps_leaves_api_identifiers_alone(self):
         """ODOO in Python and JS payloads is a registered third-party identifier."""
@@ -280,13 +285,13 @@ class RulesTests(unittest.TestCase):
     def test_lowercase_quoted_attribute_value(self):
         self.assertEqual(self.rw('title="odoo"\n', "v.xml"), 'title="AFENDA"\n')
         self.assertEqual(self.rw('placeholder="odoo"\n', "v.xml"), 'placeholder="AFENDA"\n')
-        self.assertEqual(self.rw('x = "https://odoo.com"\n', "a.py"), 'x = "https://afenda.app"\n')
+        self.assertEqual(self.rw('x = "https://odoo.com"\n', "a.py"), 'x = "https://' + DOMAIN + '"\n')
 
     def test_iap_endpoint_protected_in_python_only(self):
         self.assertEqual(self.rw("DEFAULT_ENDPOINT = 'https://iap.odoo.com'\n", "a.py"), "DEFAULT_ENDPOINT = 'https://iap.odoo.com'\n")
 
     def test_iap_endpoint_rewritten_in_template(self):
-        self.assertIn("afenda.app", self.rw('<a href="https://iap-services.odoo.com/iap/sms/pricing">Pricing</a>\n', "v.xml"))
+        self.assertIn(DOMAIN, self.rw('<a href="https://iap-services.odoo.com/iap/sms/pricing">Pricing</a>\n', "v.xml"))
 
     def test_odoo_package_internal_paths_excluded(self):
         self.assertEqual(self.rw("frame.filename.endswith('/odoo/http.py')\n", "odoo/netsvc.py"), "frame.filename.endswith('/odoo/http.py')\n")

@@ -11,7 +11,7 @@ BRAND = {
     "product": "AFENDA xForge",
     "short": "AFENDA",
     "bot": "AFENDA Bot",
-    "domain": "afenda.app",  # placeholder until the real domain is known
+    "domain": "nexuscanon.com",
     "docs_path": "/docs/",  # generated documentation, served same-origin (phase 3)
     "url_prefix": "app",  # browser address prefix, replaces "odoo"
     "tagline": "The truth of your business, kept.",

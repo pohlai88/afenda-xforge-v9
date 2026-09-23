@@ -1,5 +1,6 @@
 from odoo.tests import BaseCase
 
+from odoo.addons.afenda_brand.brand import BRAND
 from odoo.addons.afenda_api_docs.aliasing import alias_prose
 
 
@@ -19,7 +20,13 @@ class TestAliasProse(BaseCase):
         self.assertEqual(alias_prose("Ask OdooBot"), "Ask AFENDA Bot")
 
     def test_domain(self):
-        self.assertEqual(alias_prose("see odoo.com for more"), "see afenda.app for more")
+        # Read the expectation from BRAND rather than hard-coding it: aliasing.py
+        # substitutes BRAND["domain"], so a hard-coded value here goes stale the
+        # moment the real domain lands and tests a string nothing produces.
+        self.assertEqual(
+            alias_prose("see odoo.com for more"),
+            f"see {BRAND['domain']} for more",
+        )
 
     def test_documentation_link_goes_same_origin(self):
         self.assertEqual(
