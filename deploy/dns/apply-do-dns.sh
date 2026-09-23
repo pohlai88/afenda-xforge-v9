@@ -9,6 +9,9 @@
 # record is created only if no record with the same type, name and data
 # exists. It never deletes or changes a record; a clash (say an A record for
 # the same name with another address) is reported for an operator to resolve.
+# SPF and DMARC allow one record per name (RFC 7208 section 4.5, RFC 7489
+# section 6.6.3): when the live one differs from the file it was changed by
+# hand, so the script reports it as drift, creates nothing for it, and exits 3.
 #
 # doctl flags, per docs.digitalocean.com/reference/doctl/reference/compute/
 # domain/records/create/: --record-type, --record-name, --record-data,
@@ -65,6 +68,7 @@ existing=$(printf '%s\n' "$raw" \
 created=0
 skipped=0
 clashes=""
+drifts=""
 while IFS= read -r line || [ -n "$line" ]; do
     case "$line" in ''|'#'*) continue ;; esac
     type=$(printf '%s\n' "$line" | cut -f1)
@@ -94,6 +98,23 @@ while IFS= read -r line || [ -n "$line" ]; do
         skipped=$((skipped + 1))
         continue
     fi
+    if [ "$type" = TXT ]; then
+        case "$data" in
+            'v=spf1'|'v=spf1 '*) single=v=spf1 ;;
+            'v=DMARC1'*) single=v=DMARC1 ;;
+            *) single= ;;
+        esac
+        if [ -n "$single" ]; then
+            live=$(printf '%s\n' "$existing" | awk -F'|' -v n="$name" -v t="$single" \
+                '$1 == "TXT" && $2 == n && index($3, t) == 1 { sub(/^[^|]*\|[^|]*\|/, ""); print }')
+            if [ -n "$live" ]; then
+                echo "  drift    $type $name $live"
+                drifts="$drifts$type $name: zone file has '$data', live has '$live'$TAB"
+                skipped=$((skipped + 1))
+                continue
+            fi
+        fi
+    fi
     if [ "$type" = A ] || [ "$type" = CNAME ]; then
         other=$(printf '%s\n' "$existing" | grep -E "^(A|CNAME)\|$(printf '%s' "$name" | sed 's/\./\\./g')\|" || true)
         [ -z "$other" ] || clashes="$clashes$type $name: also has $(printf '%s' "$other" | tr '\n' ' ')$TAB"
@@ -108,4 +129,10 @@ echo "apply-do-dns: $DOMAIN: $created created, $skipped already present, none de
 if [ -n "$clashes" ]; then
     echo "apply-do-dns: names that now hold more than one A/CNAME answer; remove the stale one by hand:" >&2
     printf '%s' "$clashes" | tr "$TAB" '\n' | sed 's/^/  /' >&2
+fi
+if [ -n "$drifts" ]; then
+    echo "apply-do-dns: drift: SPF/DMARC records changed outside the zone file; nothing was created for them." >&2
+    echo "apply-do-dns: make the file match the live value, or change the live record by hand:" >&2
+    printf '%s' "$drifts" | tr "$TAB" '\n' | sed 's/^/  /' >&2
+    exit 3
 fi

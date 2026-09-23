@@ -80,14 +80,14 @@ Rejected on the way, and not to be reintroduced: the light-only page, a star-tra
 | `@` | TXT | `v=spf1 include:zohomail.com ~all` |
 | `@` | TXT | `zoho-verification=zb25766137.zmverify.zoho.com` |
 | `zmail._domainkey` | TXT | (Zoho DKIM key, copied verbatim from the Vercel inventory) |
-| `_dmarc` | TXT | `v=DMARC1; p=none;` |
+| `_dmarc` | TXT | `v=DMARC1; p=quarantine;` (raised from `p=none` after Zoho passed SPF, DKIM and DMARC end to end) |
 | `@` | CAA | `0 issue "letsencrypt.org."` (the DigitalOcean API requires the trailing dot on input; `dig` should answer `0 issue "letsencrypt.org"`) |
 
 Dropped:
 - Vercel's apex ALIAS;
 - **the wildcard**;
 - the `pki.goog` and `sectigo.com` CAA entries;
-- Resend (the `send.` MX, the `send.` SPF record, `resend._domainkey`).
+- Resend at first; it came back on 2026-09-23 as the ERP's mail relay (the `send.` MX and SPF, `resend._domainkey`), because DigitalOcean blocks outbound SMTP on 25, 465 and 587.
 
 The registration stays at Name.com via Vercel, with auto-renew on (expires 2026-12-07). After
 the switch, the Membrane Vercel connection is revoked. Vercel projects are not touched.
