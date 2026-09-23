@@ -51,8 +51,17 @@ comment.
 - All custom work goes under `afenda/addons/<module>/`.
 - Branding text and image changes go through `afenda/tools/` rules and their
   corpus golden test (`afenda/tools/tests/test_corpus.py`), never ad-hoc edits.
-- Brand values are defined once in `afenda/addons/afenda_brand/brand.py` and
-  mirrored in `static/src/scss/primary_variables.scss`.
+- Brand values the product *uses* are defined once in
+  `afenda/addons/afenda_brand/brand.py` and mirrored in
+  `static/src/scss/primary_variables.scss`. The mirroring is the point: it keeps
+  the UI and the SCSS from drifting apart.
+- Identity-artwork colour is the one carve-out. Shades that exist only inside a
+  drawn mark, tile or badge live in `afenda/tools/brand_images.py`, not in
+  `brand.py`, and are not mirrored into SCSS. They are renderer inputs, not
+  tokens: putting them in `brand.py` would present them as colours the UI may
+  use, which is the drift the rule above exists to prevent. A generator may
+  therefore hold hexes that appear nowhere else — say so in its comments rather
+  than claiming every value comes from `brand.py`.
 
 ## Environment
 
