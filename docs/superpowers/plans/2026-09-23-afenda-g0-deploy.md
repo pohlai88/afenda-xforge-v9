@@ -148,3 +148,34 @@ passing is rerun.
 - Approval to push.
 
 Everything else is executed without stopping.
+
+## Go-live record (2026-09-23)
+
+Live at `https://app.nexuscanon.com`, landing page at `https://nexuscanon.com`.
+
+- **Host:** DigitalOcean droplet `afenda-app-sgp1`, region `sgp1`, `s-4vcpu-8gb`, Ubuntu 24.04,
+  Docker Compose v5.5.1. Cloud firewall `afenda-app` (tag `afenda`) admits 22, 80, 443 only.
+  SSH is key-only (`passwordauthentication no`).
+- **Code:** `/srv/afenda`, shallow clone of `afenda/deidentify-phase1` at `5d04085c2` through a
+  read-only GitHub deploy key, `.env` = `compose.yaml:compose.tls.yaml`.
+- **DNS:** nameservers moved from Vercel to DigitalOcean; the zone is
+  `deploy/dns/nexuscanon.com.records`, applied by `deploy/dns/apply-do-dns.sh` (11 records).
+- **TLS:** one Let's Encrypt certificate for `app.`, the apex and `www`; webroot renewal with
+  the nginx reload script in `/etc/letsencrypt/renewal-hooks/deploy/` (`35cbb7050`);
+  `certbot renew --dry-run` succeeded.
+- **Proof:** the T4 proof, pointed at the live URL and extended with five edge checks (HSTS,
+  Secure session cookie, landing page, `www` and `http` redirects), printed
+  `17/17 checks passed`. Only 22, 80 and 443 listen publicly.
+- **Backup:** `backup.sh` run once by hand (folder 700, files 600); cron 02:40 daily.
+- **Mail:** Zoho verified end to end after the move: a reply from `no-reply@nexuscanon.com`
+  reached Gmail with SPF, DKIM (`d=nexuscanon.com`, `s=zmail`) and DMARC all `pass`.
+
+Found on the way:
+
+- `doctl compute droplet create --ssh-keys` takes a fingerprint; looking the key up by name
+  straight after `ssh-key import` returned empty and produced a keyless droplet.
+- DigitalOcean blocks outbound SMTP (25, 465, 587) on this droplet: `smtp.zoho.com` times out on
+  all three. The ERP cannot send invitation email until that is solved.
+- `iap.odoo.com` resolves from the host. Independence rests on the null adapters
+  (`iap.endpoint` = `http://127.0.0.1:9`, checked by the proof), not on DNS; the optional
+  zero-egress mode in `deploy/README.md` removes the route as well.
