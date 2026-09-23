@@ -216,3 +216,9 @@ Independence audit (2026-09-23, live host at `66558f62`):
   to DigitalOcean; the host, firewall, DNS, object storage (backups) and monitoring are on
   DigitalOcean; mail goes out through Resend and in through Zoho. DMARC reports go to
   `no-reply@nexuscanon.com`.
+
+Restore drill (2026-09-23): the 22:59 backup, pulled from the Spaces bucket (SHA-256 equal to
+the host's original), restored into a throwaway local stack. The restored database carried
+production's `database.uuid`, the Resend server and alias domain; the branded login page, the
+company logo and a 477 KB asset bundle were served from the restored filestore. Found on the
+way: `restore.sh` must run with the stack's own `COMPOSE_FILE` (README, Backup and restore).

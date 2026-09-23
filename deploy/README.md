@@ -276,6 +276,14 @@ docker compose up -d                          # init creates an empty afenda
 ./restore.sh /path/to/<stamp> --yes           # drops and replaces it and the filestore
 ```
 
+Run `restore.sh` with the same `COMPOSE_FILE` the stack was started with (on
+the VPS, `.env` sets it). A restore drill on a stack started with
+`-f compose.yaml -f compose.proof.yaml` but no `.env` restored the data, then
+restarted `init` from `compose.yaml` alone; the internal `backend` network came
+back without the `db` alias and `init` failed with "could not translate host
+name db". `docker compose down` (never `-v`) and `up -d` with the original files
+repaired it, and the restored data was intact.
+
 `restore.sh` drops and recreates the `afenda` database from `afenda.dump`,
 replaces `filestore/afenda`, then restarts `xforge` and reloads nginx. This
 sequence was verified end to end: the restored database kept the original's
