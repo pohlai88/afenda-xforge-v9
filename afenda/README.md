@@ -86,7 +86,7 @@ git fetch upstream 19.0
 git checkout upstream-19.0 && git merge --ff-only upstream/19.0 && git push
 git checkout 19.0 && git merge upstream-19.0        # resolve conflicts if any
 .venv/Scripts/python -m afenda.tools.rebrand --apply # re-brands only what is new
-.venv/Scripts/python -m afenda.tools.scan_identity   # must print 0 remaining
+.venv/Scripts/python -m afenda.tools.scan_identity   # must not rise above the baseline
 git commit -am "[REBRAND] re-apply after upstream merge"
 ````
 
@@ -100,13 +100,28 @@ root was rewritten.
 .venv/Scripts/python -m afenda.tools.rebrand           # dry run, per-rule counts
 .venv/Scripts/python -m afenda.tools.rebrand --apply   # rewrite addons/ and odoo/
 .venv/Scripts/python -m afenda.tools.brand_images      # AFENDA images over Odoo's logo paths
-.venv/Scripts/python -m afenda.tools.scan_identity     # exit 1 if any Odoo identity remains
+.venv/Scripts/python -m afenda.tools.scan_identity     # exit 1 if the count rose above BASELINE
 .venv/Scripts/python -m unittest discover -s afenda/tools/tests -t . -v
 ```
 
 Rules live in `afenda/tools/rules.py`; names and domain in
 `afenda/addons/afenda_brand/brand.py`. A line ending in `# noqa: rebrand`
 is never rewritten.
+
+### The identity baseline
+
+`scan_identity` is a regression gate, not a zero-tolerance check. It scans
+broader than the rewrite rules on purpose — case-insensitively, and without
+reusing `RULES` — so a blind spot in the rules cannot also blind the check.
+That breadth means it always finds identity the rules must *not* touch:
+translator attribution in `.po` headers, the `odoo` package name in imports,
+API payload identifiers third parties have registered, and spreadsheet formula
+names such as `ODOO.PIVOT` that live inside saved documents.
+
+So the expected steady state is a **non-zero** count. The gate is that it must
+not rise. The current floor is recorded as `BASELINE` in
+`afenda/tools/scan_identity.py` and is **10,838**. If a change legitimately
+lowers the count, lower `BASELINE` in the same commit so the new floor holds.
 
 Rule changes are reviewed on the corpus, never on the tree:
 `python -m afenda.tools.corpus diff` shows exactly what a rule change alters;

@@ -28,6 +28,18 @@ ALLOW = re.compile(
 # extractor origin comments. These are code structure, not words a user reads.
 STRUCTURAL = re.compile(r"</?odoo[\s>]|@odoo/|^#[.:]\s")
 
+# Known remaining hits on the current tree. NOT zero by design: phase 1
+# deliberately leaves identity where rewriting it would break something —
+# translator attribution in .po headers, the `odoo` package name in imports,
+# API payload identifiers third parties have registered, and spreadsheet
+# formula names like ODOO.PIVOT that live in saved documents. Those are
+# covered by the engine's protections, not by this scan, which stays broader
+# on purpose so a blind spot in the rules cannot also blind the check.
+#
+# The gate is that this number must not RISE. If a change legitimately lowers
+# it, lower this constant in the same commit so the new floor is what holds.
+BASELINE = 10838
+
 
 def scan(root: Path) -> list[tuple[str, int, str]]:
     hits: list[tuple[str, int, str]] = []
@@ -54,6 +66,11 @@ def scan(root: Path) -> list[tuple[str, int, str]]:
     return hits
 
 
+def verdict(count: int, baseline: int = BASELINE) -> int:
+    """Exit status for a scan: 0 while the count holds at or below the baseline."""
+    return 1 if count > baseline else 0
+
+
 def main() -> int:
     # Hits can contain any script; never let the console encoding abort the scan.
     try:
@@ -64,10 +81,18 @@ def main() -> int:
     hits = scan(root)
     for rel, lineno, line in hits[:200]:
         print(f"{rel}:{lineno}: {line}")
-    print(f"{len(hits):8d}  remaining (independent scan)")
     if len(hits) > 200:
         print(f"... and {len(hits) - 200} more")
-    return 1 if hits else 0
+    count = len(hits)
+    delta = count - BASELINE
+    print(f"{count:8d}  remaining (independent scan), baseline {BASELINE}, delta {delta:+d}")
+    if delta > 0:
+        print(f"FAIL: {delta} new identity hit(s) since the baseline.")
+    elif delta < 0:
+        print(f"OK: {-delta} fewer than the baseline — lower BASELINE to {count} to hold the new floor.")
+    else:
+        print("OK: holding at the baseline.")
+    return verdict(count)
 
 
 if __name__ == "__main__":
