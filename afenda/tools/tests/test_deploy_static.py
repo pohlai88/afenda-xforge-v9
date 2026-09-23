@@ -323,18 +323,26 @@ class DeployRedeployAndDnsTests(unittest.TestCase):
 
     def test_dns_zone_sends_app_mail_through_resend(self):
         # DigitalOcean blocks outbound SMTP 25/465/587, so the ERP relays
-        # through Resend on 2587. Resend's return path is the send. subdomain
-        # (its own MX and SPF), so the apex SPF stays Zoho's alone.
+        # through Resend on 2587. The records are the ones Resend's API lists
+        # for the domain (registered 2026-09-23, region ap-northeast-1): its
+        # return path and SPF are the send. and rsend. CNAMEs, so the apex SPF
+        # stays Zoho's alone.
         rows = self._records()
         resend = {(rtype, name) for rtype, name, _d, _p, _t in rows
-                  if name == "send" or name == "resend._domainkey"}
-        self.assertEqual(resend, {("MX", "send"), ("TXT", "send"), ("TXT", "resend._domainkey")})
-        self.assertIn(("MX", "send", "feedback-smtp.ap-northeast-1.amazonses.com.", "10"),
-                      {(r, n, d, p) for r, n, d, p, _t in rows})
-        self.assertIn(("TXT", "send", "v=spf1 include:amazonses.com ~all"),
-                      {(r, n, d) for r, n, d, _p, _t in rows})
+                  if name in ("send", "rsend", "resend._domainkey")}
+        self.assertEqual(resend, {("CNAME", "send"), ("CNAME", "rsend"), ("TXT", "resend._domainkey")})
+        cnames = {(n, d) for r, n, d, _p, _t in rows if r == "CNAME"}
+        self.assertIn(("send", "send.forge.rmta.net."), cnames)
+        self.assertIn(("rsend", "rsend-apne1.forge.rmta.net."), cnames)
         dkim = [d for r, n, d, _p, _t in rows if (r, n) == ("TXT", "resend._domainkey")]
-        self.assertTrue(dkim[0].startswith("p=MIGf"), dkim)
+        self.assertTrue(dkim[0].startswith("p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDnMGq"), dkim)
+
+    def test_dns_cname_names_hold_nothing_else(self):
+        # RFC 1034 section 3.6.2: a name with a CNAME has no other records.
+        rows = self._records()
+        cname_names = {n for r, n, _d, _p, _t in rows if r == "CNAME"}
+        others = [(r, n) for r, n, _d, _p, _t in rows if n in cname_names and r != "CNAME"]
+        self.assertEqual(others, [])
         apex_spf = [d for r, n, d, _p, _t in rows if (r, n) == ("TXT", "@") and d.startswith("v=spf1")]
         self.assertEqual(apex_spf, ["v=spf1 include:zohomail.com ~all"])
 

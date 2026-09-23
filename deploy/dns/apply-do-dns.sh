@@ -10,8 +10,9 @@
 # exists. It never deletes or changes a record; a clash (say an A record for
 # the same name with another address) is reported for an operator to resolve.
 # SPF and DMARC allow one record per name (RFC 7208 section 4.5, RFC 7489
-# section 6.6.3): when the live one differs from the file it was changed by
-# hand, so the script reports it as drift, creates nothing for it, and exits 3.
+# section 6.6.3), and a DKIM selector one key: when the live one differs from
+# the file it was changed by hand, so the script reports it as drift, creates
+# nothing for it, and exits 3.
 #
 # doctl flags, per docs.digitalocean.com/reference/doctl/reference/compute/
 # domain/records/create/: --record-type, --record-name, --record-data,
@@ -104,6 +105,18 @@ while IFS= read -r line || [ -n "$line" ]; do
             'v=DMARC1'*) single=v=DMARC1 ;;
             *) single= ;;
         esac
+        # One DKIM key per selector: any TXT on <selector>._domainkey.
+        case "$name" in *._domainkey) single= ; single_any=1 ;; *) single_any= ;; esac
+        if [ -n "$single_any" ]; then
+            live=$(printf '%s\n' "$existing" | awk -F'|' -v n="$name" \
+                '$1 == "TXT" && $2 == n { sub(/^[^|]*\|[^|]*\|/, ""); print }')
+            if [ -n "$live" ]; then
+                echo "  drift    $type $name (another key is published)"
+                drifts="$drifts$type $name: zone file has another key than the live one$TAB"
+                skipped=$((skipped + 1))
+                continue
+            fi
+        fi
         if [ -n "$single" ]; then
             live=$(printf '%s\n' "$existing" | awk -F'|' -v n="$name" -v t="$single" \
                 '$1 == "TXT" && $2 == n && index($3, t) == 1 { sub(/^[^|]*\|[^|]*\|/, ""); print }')
@@ -131,7 +144,7 @@ if [ -n "$clashes" ]; then
     printf '%s' "$clashes" | tr "$TAB" '\n' | sed 's/^/  /' >&2
 fi
 if [ -n "$drifts" ]; then
-    echo "apply-do-dns: drift: SPF/DMARC records changed outside the zone file; nothing was created for them." >&2
+    echo "apply-do-dns: drift: SPF/DMARC/DKIM records changed outside the zone file; nothing was created for them." >&2
     echo "apply-do-dns: make the file match the live value, or change the live record by hand:" >&2
     printf '%s' "$drifts" | tr "$TAB" '\n' | sed 's/^/  /' >&2
     exit 3

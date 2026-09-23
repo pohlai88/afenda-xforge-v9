@@ -79,6 +79,17 @@ class ApplyDoDnsDriftTests(unittest.TestCase):
         self.assertIn("drift", proc.stderr)
         self.assertEqual(proc.returncode, 3, proc.stdout + proc.stderr)
 
+    def test_changed_dkim_key_is_reported_not_duplicated(self):
+        # One key per selector: a second resend._domainkey TXT would make
+        # receivers pick either key, so half the signatures would fail.
+        proc, creates = self._run(
+            records=[("TXT", "resend._domainkey", "p=MIGfNEWKEY", "", "3600")],
+            listing=[("TXT", "resend._domainkey", "p=MIGfOLDKEY")])
+        self.assertEqual(creates, [])
+        self.assertIn("drift", proc.stderr)
+        self.assertIn("resend._domainkey", proc.stderr)
+        self.assertEqual(proc.returncode, 3, proc.stdout + proc.stderr)
+
     def test_other_txt_on_the_same_name_is_still_created(self):
         # Only SPF and DMARC are one-per-name; a verification TXT next to the
         # SPF record is a separate record and must be published.

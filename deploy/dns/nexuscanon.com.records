@@ -5,9 +5,10 @@
 # issue/issuewild value that is not a FQDN with its trailing dot (HTTP 422).
 # Deliberately absent: any wildcard.
 # App mail goes out through Resend on port 2587, because DigitalOcean blocks
-# outbound SMTP 25/465/587. Resend's return path is the send. subdomain, so
-# the apex SPF stays Zoho's alone. Region ap-northeast-1 is the Resend
-# account's; the DKIM key is the one Resend issued for nexuscanon.com.
+# outbound SMTP 25/465/587. The Resend records are the ones its API lists for
+# the domain (registered 2026-09-23, region ap-northeast-1): the send. and
+# rsend. CNAMEs carry its return path and SPF, so the apex SPF stays Zoho's
+# alone, and resend._domainkey is its DKIM key. A CNAME name holds nothing else.
 A	@	{{DROPLET_IP}}		3600
 CNAME	www	@		3600
 A	app	{{DROPLET_IP}}		3600
@@ -18,7 +19,7 @@ TXT	@	v=spf1 include:zohomail.com ~all		3600
 TXT	@	zoho-verification=zb25766137.zmverify.zoho.com		3600
 TXT	zmail._domainkey	v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCKreElUM6kSzo5FuRJTMh7RwGu3FL5iy0e2cWdeB+3wV11fSQPznrSC+RL9uhqLQFkIeZ7C+XFMwzROc+Ta3jSfFLCgTvE4rdhbCPe8YdWKtSNXSmNDrstz1jeD8AAMLC1tGLP9Tt8EO2knxwX86QHTnw1tcbPplqjpLUT+M6LjQIDAQAB		3600
 TXT	_dmarc	v=DMARC1; p=quarantine;		3600
-MX	send	feedback-smtp.ap-northeast-1.amazonses.com.	10	3600
-TXT	send	v=spf1 include:amazonses.com ~all		3600
-TXT	resend._domainkey	p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDlsM0tNLqV0u7B5RUXieOazQ6fV2wYD+YbEn4EmwqXhs/HUfNdvCkRe+9AnClXh6zfcq9AMUXzA71+dQQj0urRMg7gqCtWotzOVqEejAgTLceVqiOf2ucAqW6ZOiv8C5kY4DEah1k2fY1sE7YAN6jiIABhiT9XWC8cy4aGKsDppwIDAQAB		3600
+CNAME	send	send.forge.rmta.net.		3600
+CNAME	rsend	rsend-apne1.forge.rmta.net.		3600
+TXT	resend._domainkey	p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDnMGq+pLWQ7e+Hjje72paySKvkI0Mh+gZUiicBAK2iwnGWfMxtUtJZ5aUo7t5k/PiJnB63ir44WGvFESh6YRid+1eieAaGokNbDvDai5Z7/gV1bRmXwYcKww+k2rMblEtv7Ax2AR+SRbzJkopbnUnyv5N5D6bJWvXM1eeP326SqQIDAQAB		3600
 CAA	@	0 issue "letsencrypt.org."		3600
