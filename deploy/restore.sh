@@ -21,7 +21,12 @@ tar -tzf "$src/filestore.tgz" > /dev/null
 cd "$(dirname "$0")"
 docker compose exec -T db pg_restore -l < "$src/afenda.dump" > /dev/null
 
-restart_xforge() { docker compose start xforge >/dev/null; }
+# nginx resolved the old xforge address when it started; reload it so it
+# re-resolves the restarted container.
+restart_xforge() {
+    docker compose start xforge >/dev/null
+    docker compose exec -T nginx nginx -s reload
+}
 docker compose stop xforge
 trap restart_xforge EXIT
 

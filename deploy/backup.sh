@@ -20,7 +20,12 @@ stamp=$(date -u +%Y%m%dT%H%M%SZ)
 out="$root/$stamp"
 mkdir -p "$out"
 
-restart_xforge() { docker compose start xforge >/dev/null; }
+# nginx resolved the old xforge address when it started; reload it so it
+# re-resolves the restarted container.
+restart_xforge() {
+    docker compose start xforge >/dev/null
+    docker compose exec -T nginx nginx -s reload
+}
 docker compose stop xforge
 trap restart_xforge EXIT
 

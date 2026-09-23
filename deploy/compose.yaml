@@ -32,7 +32,9 @@ services:
     volumes:
       - db-data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U xforge -d postgres"]
+      # TCP, not the socket: during first init the image's temporary server
+      # listens on the Unix socket only, and would report ready too early.
+      test: ["CMD-SHELL", "pg_isready -h 127.0.0.1 -U xforge -d postgres"]
       interval: 5s
       timeout: 5s
       retries: 20

@@ -34,6 +34,10 @@ docker compose -f compose.yaml -f compose.proof.yaml up -d
 
 ## VPS
 
+Requires Docker Engine with the Compose plugin **>= 2.24.4**: `compose.tls.yaml`
+uses the `!override` merge tag, which older Compose versions reject. Check with
+`docker compose version`.
+
 1. **DNS.** One `A` record, `app.nexuscanon.com` → the VPS address. Publish no
    wildcard record for `nexuscanon.com`.
 2. **Code.** Check out the release tag with its submodules (`afenda/oca/*`):

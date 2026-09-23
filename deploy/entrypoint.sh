@@ -43,11 +43,14 @@ esac
 
 WORKERS=${WORKERS:-4}
 MAX_CRON_THREADS=${MAX_CRON_THREADS:-1}
-# Per worker process: a worker past the soft limit is recycled after its
-# request, one past the hard limit is killed. 4 workers + cron + gevent at
-# these values fit a 4-6 GiB host alongside PostgreSQL.
-LIMIT_MEMORY_SOFT=${LIMIT_MEMORY_SOFT:-805306368}   # 768 MiB
-LIMIT_MEMORY_HARD=${LIMIT_MEMORY_HARD:-1073741824}  # 1 GiB
+# These cap each worker's ADDRESS SPACE (virtual memory), not its RSS: the
+# soft limit is checked against memory_info().vms (odoo/tools/osutil.py) and
+# the hard limit is set as RLIMIT_AS on the worker (odoo/service/server.py,
+# set_limit_memory_hard). wkhtmltopdf inherits RLIMIT_AS, so a low cap breaks
+# PDF printing. Keep the upstream defaults (odoo/tools/config.py); size RAM
+# through WORKERS instead.
+LIMIT_MEMORY_SOFT=${LIMIT_MEMORY_SOFT:-2147483648}  # 2048 MiB of address space
+LIMIT_MEMORY_HARD=${LIMIT_MEMORY_HARD:-2684354560}  # 2560 MiB of address space
 # Below nginx's proxy_read_timeout (720s), so the worker gives up first.
 LIMIT_TIME_CPU=${LIMIT_TIME_CPU:-300}
 LIMIT_TIME_REAL=${LIMIT_TIME_REAL:-600}
