@@ -44,7 +44,7 @@ class MailBot(models.AbstractModel):
             "bold_end": Markup("</b>"),
             "command_start": Markup("<span class='o_odoobot_command'>"),
             "command_end": Markup("</span>"),
-            "document_link_start": Markup("<a href='https://www.afenda.app/documentation' target='_blank'>"),
+            "document_link_start": Markup("<a href='/docs/' target='_blank'>"),
             "document_link_end": Markup("</a>"),
             "slides_link_start": Markup("<a href='https://www.afenda.app/slides' target='_blank'>"),
             "slides_link_end": Markup("</a>"),

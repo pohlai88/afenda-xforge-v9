@@ -32,10 +32,19 @@ def build_rules(brand: dict) -> list[Rule]:
         Rule("company_name", re.compile(r"Odoo S\.A\."), short),
         # 2. The system bot.
         Rule("bot", re.compile(r"OdooBot"), bot),
-        # 3. Documentation links become same-origin generated docs.
+        # 3. Documentation links become same-origin generated docs. The version
+        #    segment is optional: the web client's documentation_link widget builds
+        #    the settings help URL by concatenation, so its literal ends at
+        #    "/documentation/" and a version-requiring pattern misses it, leaving
+        #    117 settings links to fall through to the odoo_com rule below and
+        #    point off-origin. The brand domain is matched alongside odoo.com so
+        #    links that already took that fall-through come back to /docs/.
         Rule(
             "docs_link",
-            re.compile(r"https?://(?:www\.)?odoo\.com/documentation/(?:\d+\.\d+|latest|master|saas-[\d.]+)/?"),
+            re.compile(
+                rf"https?://(?:www\.)?(?:odoo\.com|{re.escape(domain)})"
+                r"/documentation(?:/(?:\d+\.\d+|latest|master|saas-[\d.]+))?/?"
+            ),
             docs,
         ),
         # 4. Every other odoo.com host or address.

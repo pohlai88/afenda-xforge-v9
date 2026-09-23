@@ -26,7 +26,7 @@ export class DocumentationLink extends Component {
                       "-"
                   )
                 : "master";
-            return "https://www.afenda.app/documentation/" + serverVersion + this.props.path;
+            return "/docs/" + serverVersion + this.props.path;
         }
     }
 

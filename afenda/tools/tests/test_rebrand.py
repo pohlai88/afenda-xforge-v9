@@ -170,6 +170,30 @@ class RulesTests(unittest.TestCase):
             "url = '/docs/'\n",
         )
 
+    def test_versionless_documentation_link_goes_same_origin(self):
+        # The web client builds the settings help URL by concatenation, so the
+        # literal carries no version segment and the versioned pattern misses it.
+        self.assertEqual(
+            self.rw('return "https://www.odoo.com/documentation/" + serverVersion + this.props.path;\n', "w.js"),
+            'return "/docs/" + serverVersion + this.props.path;\n',
+        )
+
+    def test_documentation_link_on_the_brand_domain_is_repaired(self):
+        # A versionless link the generic odoo.com rule already rewrote to the
+        # brand domain is still off-origin; it must come back to /docs/.
+        self.assertEqual(
+            self.rw('return "https://www.afenda.app/documentation/" + serverVersion + this.props.path;\n', "w.js"),
+            'return "/docs/" + serverVersion + this.props.path;\n',
+        )
+
+    def test_documentation_link_rewrite_is_idempotent(self):
+        once = self.rw('href="https://www.odoo.com/documentation/19.0/applications/sales.html"\n', "v.xml")
+        self.assertEqual(self.rw(once, "v.xml"), once)
+
+    def test_brand_domain_outside_documentation_is_left_alone(self):
+        for src in ('href="https://www.afenda.app/pricing"\n', "url = 'https://accounts.afenda.app/account'\n"):
+            self.assertEqual(self.rw(src, "v.xml"), src)
+
     def test_other_odoo_com_links_go_to_domain(self):
         self.assertEqual(self.rw("https://www.odoo.com?utm_source=db\n", "v.xml"), "https://www.afenda.app?utm_source=db\n")
         self.assertEqual(self.rw("https://accounts.odoo.com/account\n", "u.js"), "https://accounts.afenda.app/account\n")
