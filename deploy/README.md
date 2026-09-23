@@ -66,13 +66,16 @@ uses the `!override` merge tag, which older Compose versions reject. Check with
 
    Keep a copy of `secrets/` somewhere safe outside the host; `db_password`
    and `master_password` cannot be recovered from the stack.
-5. **Certificate.** Issue it before nginx first starts, while port 80 is free:
+5. **First certificate.** Issue it before the stack is up, while port 80 is
+   still free:
 
    ```bash
    mkdir -p /var/www/certbot
    certbot certonly --standalone -d app.nexuscanon.com
    ```
 
+   This stores `authenticator = standalone` in the renewal config, which can
+   never renew once nginx holds port 80. Step 7 replaces it.
 6. **Start.**
 
    ```bash
@@ -80,15 +83,43 @@ uses the `!override` merge tag, which older Compose versions reject. Check with
    docker compose logs -f init     # ends with "afenda-init: done"
    ```
 
-7. **Renewal and backups** (root crontab):
+7. **Switch renewal to webroot, once.** nginx now serves
+   `/.well-known/acme-challenge/` on port 80 from `/var/www/certbot`
+   (`nginx/afenda.tls.conf`, mounted by `compose.tls.yaml`). Re-issue through
+   it so the stored renewal config is webroot plus the reload hook:
+
+   ```bash
+   certbot certonly --webroot -w /var/www/certbot -d app.nexuscanon.com \
+       --force-renewal \
+       --deploy-hook 'cd /srv/afenda/deploy && docker compose exec -T nginx nginx -s reload'
+   certbot renew --dry-run          # must report success for app.nexuscanon.com
+   ```
+
+   From here the distribution's certbot timer renews on its own; no cron
+   line is needed for certificates.
+8. **Backups** (root crontab). The folder is private; `backup.sh` also runs
+   with `umask 077`, because a dump holds password hashes, TOTP secrets and
+   `database.secret`:
+
+   ```bash
+   install -d -m 700 /var/backups/afenda
+   ```
 
    ```cron
-   17 3 * * *  certbot renew --webroot -w /var/www/certbot --quiet --deploy-hook "cd /srv/afenda/deploy && docker compose exec nginx nginx -s reload"
    40 2 * * *  /srv/afenda/deploy/backup.sh /var/backups/afenda >> /var/log/afenda-backup.log 2>&1
    ```
 
    Copy `/var/backups/afenda` off the host, and prune it; the script never
    deletes old backups.
+
+### Optional: zero egress
+
+Adding `compose.proof.yaml` to `COMPOSE_FILE` in production
+(`COMPOSE_FILE=compose.yaml:compose.tls.yaml:compose.proof.yaml`) puts
+xforge, init and db on an `internal` network with no outbound route at all;
+only nginx keeps a normal network. Nothing in G0 needs egress. With it on,
+outgoing email over SMTP is blocked until a relay reachable from that
+network is provided.
 
 ## Upgrades
 

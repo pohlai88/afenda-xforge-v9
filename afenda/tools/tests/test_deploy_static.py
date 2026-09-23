@@ -91,6 +91,15 @@ class DeployStaticTests(unittest.TestCase):
                            (DEPLOY / "compose.yaml").read_text(encoding="utf-8"), re.MULTILINE)
         self.assertEqual(names, ["afenda-deploy"])
 
+    def test_backup_output_is_private(self):
+        # Root cron runs with umask 022; the dump holds password hashes, TOTP
+        # secrets and database.secret, so backup.sh must tighten it itself,
+        # before it creates any output.
+        text = (DEPLOY / "backup.sh").read_text(encoding="utf-8")
+        umask = re.search(r"^umask 077$", text, re.MULTILINE)
+        self.assertIsNotNone(umask, "backup.sh does not set umask 077")
+        self.assertLess(umask.start(), text.index("mkdir -p"), "umask 077 must come before the first mkdir")
+
     def test_init_script_directory_is_traversable(self):
         # `COPY --chmod=644` into a directory that does not exist yet creates
         # the directory with 644 as well; the non-root afenda user then cannot

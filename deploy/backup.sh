@@ -11,6 +11,9 @@
 # Output: BACKUP_ROOT/<UTC timestamp>/afenda.dump   (pg_dump -Fc)
 #         BACKUP_ROOT/<UTC timestamp>/filestore.tgz (filestore/afenda)
 set -euo pipefail
+# Private output even under root cron's umask 022: the dump holds password
+# hashes, TOTP secrets and database.secret.
+umask 077
 export MSYS_NO_PATHCONV=1   # Git Bash: keep container paths as written
 
 [ "$#" -eq 1 ] || { echo "usage: $0 BACKUP_ROOT" >&2; exit 2; }

@@ -17,6 +17,13 @@ x-xforge-image: &xforge-image
     context: ..
     dockerfile: deploy/Dockerfile
 
+# Bounded container logs on every service (at most 5 x 10 MB each).
+x-logging: &logging
+  driver: local
+  options:
+    max-size: "10m"
+    max-file: "5"
+
 x-xforge-env: &xforge-env
   PGHOST: db
   PGUSER: xforge
@@ -26,6 +33,7 @@ x-xforge-env: &xforge-env
 services:
   db:
     image: postgres:16
+    logging: *logging
     restart: unless-stopped
     environment:
       POSTGRES_USER: xforge
@@ -47,6 +55,7 @@ services:
 
   init:
     <<: *xforge-image
+    logging: *logging
     command: ["/usr/local/bin/afenda-init"]
     restart: "no"
     environment:
@@ -69,6 +78,7 @@ services:
 
   xforge:
     <<: *xforge-image
+    logging: *logging
     restart: unless-stopped
     environment:
       <<: *xforge-env
@@ -93,6 +103,7 @@ services:
 
   nginx:
     image: nginx:1.27-alpine
+    logging: *logging
     restart: unless-stopped
     ports:
       - "${HTTP_PORT:-8080}:80"
