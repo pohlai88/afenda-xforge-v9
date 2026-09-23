@@ -1,5 +1,5 @@
 AFENDA xForge Website Builder
---------------------
+-----------------------------
 
 Get an awesome and <a href="https://www.nexuscanon.com/app/website">free website</a>,
 easily customizable with the AFENDA xForge <a href="https://www.nexuscanon.com/app/website">website builder</a>.
@@ -95,7 +95,7 @@ Test new color scheme easily; you can change your theme at any time in just a
 click.
 
 Integrated With AFENDA xForge Apps
--------------------------
+----------------------------------
 
 ### e-Commerce
 

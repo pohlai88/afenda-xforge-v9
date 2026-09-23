@@ -7,7 +7,7 @@
     'depends': ['base', 'mail', 'uom'],
     'description': """
 This is the base module for managing products and pricelists in AFENDA xForge.
-========================================================================
+==============================================================================
 
 Products support variants, different pricing methods, vendors information,
 make to stock/order, different units of measure, packaging and properties.

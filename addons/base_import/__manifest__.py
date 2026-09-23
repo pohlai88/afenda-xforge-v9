@@ -2,7 +2,7 @@
     'name': 'Base import',
     'description': """
 New extensible file import for AFENDA xForge
-======================================
+============================================
 
 Re-implement AFENDA xForge's file import system:
 

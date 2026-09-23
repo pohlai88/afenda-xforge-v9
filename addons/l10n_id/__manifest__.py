@@ -7,7 +7,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the latest Indonesian AFENDA xForge localisation necessary to run AFENDA xForge accounting for SMEs with:
-=================================================================================================
+=================================================================================================================
     - generic Indonesian chart of accounts
     - tax structure""",
     'author': 'vitraining.com',

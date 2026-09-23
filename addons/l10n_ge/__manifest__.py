@@ -5,7 +5,7 @@
     'countries': ['GE'],
     'description': """
 This module provides the basic accounting configuration required to use AFENDA xForge Accounting in Georgia, including:
-==================================================================================================================
+=======================================================================================================================
 * Georgian chart of accounts
 * Tax groups and taxes
 * Fiscal Positions

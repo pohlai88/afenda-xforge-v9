@@ -1,5 +1,5 @@
 AFENDA xForge Blog
-----------
+------------------
 
 Write, Design, Promote and Engage with <a href="https://www.nexuscanon.com/app/blog">AFENDA xForge Blog</a>.
 

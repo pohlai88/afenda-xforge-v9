@@ -9,7 +9,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the module to manage the accounting chart and taxes for Poland in AFENDA xForge.
-==================================================================================
+========================================================================================
 
 To jest moduł do tworzenia wzorcowego planu kont, podatków, obszarów podatkowych i
 rejestrów podatkowych. Moduł ustawia też konta do kupna i sprzedaży towarów

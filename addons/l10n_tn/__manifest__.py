@@ -8,7 +8,7 @@
     "category": 'Accounting/Localizations/Account Charts',
     "description": """
 This is the module to manage the accounting chart for Tunisia in AFENDA xForge.
-=======================================================================
+===============================================================================
 """,
     'depends': [
         'account',

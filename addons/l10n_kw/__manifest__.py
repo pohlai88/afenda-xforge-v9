@@ -3,7 +3,7 @@
     'countries': ['kw'],
     'description': """
 This is the base module to manage the accounting chart for Kuwait in AFENDA xForge.
-==============================================================================
+===================================================================================
 Kuwait accounting basic charts and localization.
 Activates:
 - Chart of accounts

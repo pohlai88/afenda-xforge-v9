@@ -1,5 +1,5 @@
 AFENDA xForge Human Resources
---------------------
+-----------------------------
 
 With AFENDA xForge <a href="https://www.nexuscanon.com/app/employees">Human Resources</a>,
 manage the most important asset in your company: People

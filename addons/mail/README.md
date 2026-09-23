@@ -1,5 +1,5 @@
 AFENDA xForge Enterprise Social Network
-------------------------------
+---------------------------------------
 
 Connect with experts, follow what interests you, share documents and promote
 best practices with AFENDA xForge <a href="https://www.nexuscanon.com/app/discuss">Enterprise Social Network</a>. Get work done with

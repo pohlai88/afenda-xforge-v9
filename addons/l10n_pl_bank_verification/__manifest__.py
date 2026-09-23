@@ -4,7 +4,7 @@
     'version': '1.0',
     'description': """
 This is the module to manage the accounting bank account verification for Poland in AFENDA xForge.
-==========================================================================================
+==================================================================================================
 
 This module checks the VAT/Bank account number combination for PL to PL payments over
 15.000 PLN, against the government API

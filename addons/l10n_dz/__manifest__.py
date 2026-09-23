@@ -8,7 +8,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the module to manage the accounting chart for Algeria in AFENDA xForge.
-======================================================================
+===============================================================================
 This module applies to companies based in Algeria.
 """,
     'author': 'Osis',

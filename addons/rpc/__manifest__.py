@@ -2,7 +2,7 @@
     'name': 'RPC endpoints',
     'description': """\
 Standard AFENDA xForge RPC endpoints to models
-=====================================
+==============================================
 
 This module provides the /xmlrpc and /jsonrpc endpoints used to
 programmatically access models.

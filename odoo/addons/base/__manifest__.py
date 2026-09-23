@@ -8,7 +8,7 @@
     'category': 'Hidden',
     'description': """
 The kernel of AFENDA xForge, needed for all installation.
-===================================================
+=========================================================
 """,
     'data': [
         'data/res_bank.xml',

@@ -7,7 +7,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the latest basic South African localisation necessary to run AFENDA xForge in ZA:
-================================================================================
+=========================================================================================
     - a generic chart of accounts
     - SARS VAT Ready Structure""",
     'author': 'Paradigm Digital (https://www.paradigmdigital.co.za)',

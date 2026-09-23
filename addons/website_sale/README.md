@@ -1,5 +1,5 @@
 AFENDA xForge e-Commerce
----------------
+------------------------
 
 ### Optimize sales with an awesome online store.
 

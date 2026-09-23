@@ -4,7 +4,7 @@
     "countries": ["iq"],
     "description": """
 This is the base module to manage the accounting chart for Iraq in AFENDA xForge.
-==============================================================================
+=================================================================================
 Iraq accounting basic charts and localization.
 Activates:
 - Chart of accounts

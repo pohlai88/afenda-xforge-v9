@@ -7,7 +7,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the latest UK AFENDA xForge localisation necessary to run AFENDA xForge accounting for UK SME's with:
-=================================================================================================
+=============================================================================================================
     - a CT600-ready chart of accounts
     - VAT100-ready tax structure
     - InfoLogic UK counties listing

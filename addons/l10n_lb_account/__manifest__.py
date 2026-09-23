@@ -4,7 +4,7 @@
     "version": "1.0",
     "description": """
 This is the base module to manage the accounting chart for Lebanon in AFENDA xForge.
-==============================================================================
+====================================================================================
 Lebanon accounting basic charts,taxes and localization.
 Activates:
 * Chart of Accounts

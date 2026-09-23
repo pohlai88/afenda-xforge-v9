@@ -9,7 +9,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the AFENDA xForge module to manage the accounting in Finland.
-============================================================
+=====================================================================
 
 After installing this module, you'll have access to:
     * Finnish chart of account

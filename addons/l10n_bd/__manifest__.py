@@ -8,7 +8,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the base module to manage the accounting chart for Bangladesh in AFENDA xForge
-==============================================================================
+======================================================================================
 
 Bangladesh accounting basic charts and localization.
 

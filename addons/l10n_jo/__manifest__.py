@@ -4,7 +4,7 @@
     'countries': ['jo'],
     'description': """
 This is the base module to manage the accounting chart for Jordan in AFENDA xForge.
-==============================================================================
+===================================================================================
 
 Jordan accounting basic charts and localization.
 

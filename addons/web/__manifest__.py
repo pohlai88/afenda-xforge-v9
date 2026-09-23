@@ -7,7 +7,7 @@
     'version': '1.0',
     'description': """
 AFENDA xForge Web core module.
-========================
+==============================
 
 This module provides the core of the AFENDA xForge Web Client.
 """,

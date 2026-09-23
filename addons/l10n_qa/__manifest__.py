@@ -3,7 +3,7 @@
     'countries': ['qa'],
     'description': """
 This is the base module to manage the accounting chart for Qatar in AFENDA xForge.
-==============================================================================
+==================================================================================
 Qatar accounting basic charts and localization.
 Activates:
 - Chart of accounts

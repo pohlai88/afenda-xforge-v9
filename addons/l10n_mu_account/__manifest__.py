@@ -6,7 +6,7 @@
     "category": "Accounting/Localizations/Account Charts",
     "description": """
 This is the base module to manage the accounting chart for the Republic of Mauritius in AFENDA xForge.
-==============================================================================================
+======================================================================================================
     - Chart of accounts
     - Taxes
     - Fiscal positions

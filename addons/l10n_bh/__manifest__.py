@@ -6,7 +6,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the base module to manage the accounting chart for Bahrain in AFENDA xForge.
-===========================================================================
+====================================================================================
 Bahrain accounting basic charts and localization.
 
 Activates:

@@ -8,7 +8,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the module to manage the accounting chart for France in AFENDA xForge.
-========================================================================
+==============================================================================
 
 This module applies to companies based in France mainland. It doesn't apply to
 companies based in the DOM-TOMs (Guadeloupe, Martinique, Guyane, Réunion, Mayotte).

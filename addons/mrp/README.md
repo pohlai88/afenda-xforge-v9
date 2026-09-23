@@ -1,5 +1,5 @@
 AFENDA xForge Manufacturing Resource Planning
-------------------------------------
+---------------------------------------------
 
 Manage Bill of Materials, plan manufacturing orders, track work orders with the
 AFENDA xForge <a href="https://www.nexuscanon.com/app/manufacturing">Open Source MRP</a> app.

@@ -4,7 +4,7 @@
     'version': '1.0',
     'description': """
 AFENDA xForge Dynamic API Documentation
-==============================
+=======================================
 
 This module provides a dynamic documentation page for developpers at the
 /doc URL. The documentation is generated using the database to list the

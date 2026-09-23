@@ -9,7 +9,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the module to manage the accounting chart, bank information for Vietnam in AFENDA xForge.
-========================================================================================
+=================================================================================================
 
 - This module applies to companies based in Vietnamese Accounting Standard (VAS)
   with Chart of account under Circular No. 200/2014/TT-BTC

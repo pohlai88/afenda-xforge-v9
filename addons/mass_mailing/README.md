@@ -1,5 +1,5 @@
 AFENDA xForge Mass Mailing
------------------
+--------------------------
 
 Easily send mass mailing to your leads, opportunities or customers
 with AFENDA xForge <a href="https://www.nexuscanon.com/app/email-marketing">Email Marketing</a>. Track
@@ -27,7 +27,7 @@ Easily manage your marketing campaigns, discussion groups, leads and
 opportunities in one simple and powerful platform.
 
 Integrated with AFENDA xForge Apps
--------------------------
+----------------------------------
 
 Get access to mass mailing features from every AFENDA xForge app to improve the way your
 users communicate.

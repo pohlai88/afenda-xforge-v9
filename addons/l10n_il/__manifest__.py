@@ -7,7 +7,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the latest basic Israelian localisation necessary to run AFENDA xForge in Israel:
-================================================================================
+=========================================================================================
 
 This module consists of:
  - Generic Israel Chart of Accounts

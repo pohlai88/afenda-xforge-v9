@@ -9,7 +9,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the base module to manage the accounting chart for Malaysia in AFENDA xForge.
-==============================================================================
+=====================================================================================
     """,
     'depends': [
         'account',

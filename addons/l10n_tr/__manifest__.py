@@ -7,7 +7,7 @@
     'category': 'Accounting/Localizations/Account Charts',
     'description': """
 This is the base module to manage the accounting chart for Türkiye in AFENDA xForge
-==========================================================================
+===================================================================================
 
 Türkiye accounting basic charts and localizations
 -------------------------------------------------
