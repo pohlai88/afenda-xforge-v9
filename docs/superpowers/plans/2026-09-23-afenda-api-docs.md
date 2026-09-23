@@ -19,11 +19,18 @@
 - Commit subjects use Odoo tags: `[ADD]`, `[FIX]`, `[IMP]`.
 - `git status` on the whole tree takes about two minutes. Always scope it: `git status -- afenda docs`.
 - The identity scanner must not rise above `BASELINE` (currently **10838**) in `afenda/tools/scan_identity.py`. Run `.venv/Scripts/python -m afenda.tools.scan_identity` after any task that adds user-visible text; it exits 0 while holding.
+- **A green exit code is not evidence.** `afenda/odoo.conf` sets
+  `log_level = warn`, and the `N failed, M error(s) of K tests` line is emitted
+  by `odoo.tests.result` at INFO. A *passing* run is therefore completely
+  silent, and exit code 0 cannot distinguish "all tests passed" from "zero tests
+  were collected". Always pass `--log-handler=odoo.tests:INFO` and reconcile the
+  printed count against the number of `def test_` methods you expect. Two
+  separate sessions were misled by this in one day.
 - Module test command (the env prefix stops MSYS mangling `/module`):
 
 ```bash
 MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin -c afenda/odoo.conf -d afenda \
-  -u afenda_api_docs --test-enable --test-tags "/afenda_api_docs" --stop-after-init --http-port 8179
+  -u afenda_api_docs --test-enable --test-tags "/afenda_api_docs" --stop-after-init --http-port 8189 \n  --log-handler=odoo.tests:INFO
 ```
 
 - Fast, database-free tests: `.venv/Scripts/python -m unittest discover afenda/tools/tests`.
