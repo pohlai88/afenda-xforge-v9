@@ -84,9 +84,13 @@ Authority for a claim about this repository's runtime behaviour, descending:
 6. External articles and forum answers — context only, never authority.
 
 "The release SHA" is the commit the artifact under discussion was built
-from: the release tag, once one is cut, otherwise the checked-out commit.
-There is no release tag yet — cutting one is Phase 0 of the platform spec —
-so today "the release SHA" resolves to the checked-out commit.
+from: the release tag, once one is cut, otherwise the checked-out commit. No
+release tag exists yet, and no document currently schedules cutting one —
+the intended tag shape (`xforge-v19.0.1.0.4`, `.5`, `.6` …) appears in the
+platform spec's branch topology
+(`docs/superpowers/specs/2026-09-23-afenda-platform-architecture.md:242,246`),
+but scheduling the first cut is unowned. So today "the release SHA" resolves
+to the checked-out commit.
 
 This repository is a fork of Odoo 19.0 with roughly 23,000 files rewritten by
 `afenda/tools/rebrand.py`, so a claim verified against upstream GitHub or
@@ -134,10 +138,13 @@ than silently editing the prose. Record each retraction as an entry:
 File a correction under a `## Corrections recorded` heading in the document
 where the false claim lived — a rule corrected in this file is filed in this
 file; a claim in `docs/superpowers/specs/2026-09-23-afenda-platform-architecture.md`
-is filed there, which already carries entries in this style. Assign the next
-`nnnn` by running `grep -rn "AFD-ARCH-CORR" docs/ .claude/` and taking the
-highest number plus one. There is no shared counter, and none is worth
-building for the handful of entries a year this produces.
+is filed there, whose own `## Corrections recorded` section is the worked
+example for the heading and the location — not for the id scheme: its
+entries predate this format and are unlabeled bullets, not
+`AFD-ARCH-CORR-nnnn` ids. Assign the next `nnnn` by running
+`grep -rn "AFD-ARCH-CORR" docs/ .claude/` and taking the highest number plus
+one. There is no shared counter, and none is worth building for the handful
+of entries a year this produces.
 
 Three false claims surfaced in one day and are worth keeping as the reason
 this exists: `CLAUDE.md` said port 8069 "is in a Windows reserved range and
