@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!--
+    Point every Odoo-hosted service endpoint that a parameter can redirect at
+    the discard port on loopback. A call that slips past the null adapters in
+    models/ then fails at once, locally, instead of reaching an outside host.
+
+    noupdate: `<function>` runs only at install (odoo/tools/convert.py:272-274),
+    so an operator who later points one of these at a service of their own
+    keeps that value across module updates.
+
+    `iap_vies.endpoint` is deliberately absent: base_vat accepts only its two
+    hard-coded hosts and raises on any other value
+    (addons/base_vat/models/res_partner.py:263-268).
+    -->
+    <data noupdate="1">
+        <function model="ir.config_parameter" name="set_param" eval="('iap.endpoint', 'http://127.0.0.1:9')"/>
+        <function model="ir.config_parameter" name="set_param" eval="('sms.endpoint', 'http://127.0.0.1:9')"/>
+        <function model="ir.config_parameter" name="set_param" eval="('snailmail.endpoint', 'http://127.0.0.1:9')"/>
+        <function model="ir.config_parameter" name="set_param" eval="('html_editor.olg_api_endpoint', 'http://127.0.0.1:9')"/>
+        <function model="ir.config_parameter" name="set_param" eval="('html_editor.media_library_endpoint', 'http://127.0.0.1:9')"/>
+        <function model="ir.config_parameter" name="set_param" eval="('iap.partner_autocomplete.endpoint', 'http://127.0.0.1:9')"/>
+        <function model="ir.config_parameter" name="set_param" eval="('enrich.endpoint', 'http://127.0.0.1:9')"/>
+        <function model="ir.config_parameter" name="set_param" eval="('reveal.endpoint', 'http://127.0.0.1:9')"/>
+    </data>
+</odoo>
