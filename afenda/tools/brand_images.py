@@ -92,13 +92,23 @@ def tile_svg() -> str:
 
 
 def lockup_svg(ink: str, sub: str) -> str:
+    """AFENDA is the small tracked label; xForge is the dominant wordmark.
+
+    Both in Source Sans 3 -- a crisp geometric mark next to a heavy display
+    serif read as two different eras. The label carries ``ink`` at a quiet
+    weight; the wordmark carries ``sub`` (the accent) bold and large, so the
+    thing that is actually named is what draws the eye.
+    """
+    sans = "'Source Sans 3', -apple-system, 'Segoe UI', Arial, sans-serif"
     return (
         '<svg xmlns="http://www.w3.org/2000/svg" width="360" height="80" viewBox="0 0 360 80">'
         '<g transform="translate(8 8)"><rect width="64" height="64" rx="12" fill="#1E3A8A"/>'
         + MARK_SVG_INNER.format(fg="#FFFFFF")
         + "</g>"
-        f'<text x="90" y="46" font-family="\'Source Serif 4\', Georgia, serif" font-weight="600" font-size="36" letter-spacing="1.8" fill="{ink}">AFENDA</text>'
-        f'<text x="90" y="70" font-family="\'Source Sans 3\', Arial, sans-serif" font-weight="500" font-size="20" fill="{sub}">xForge</text>'
+        f'<text x="90" y="32" font-family="{sans}" font-weight="600" font-size="13" '
+        f'letter-spacing="2.6" fill="{ink}">AFENDA</text>'
+        f'<text x="88" y="66" font-family="{sans}" font-weight="700" font-size="34" '
+        f'letter-spacing="-0.7" fill="{sub}">xForge</text>'
         "</svg>\n"
     )
 
@@ -177,19 +187,22 @@ def lockup_png(width: int, height: int, ink=INK, sub=BLUE, mark_fill=None) -> Im
 
     ``mark_fill=None`` draws the blue tile with a white mark; a colour draws the
     bare mark in that colour with no tile behind it.
+
+    AFENDA is the small tracked label; xForge is the dominant wordmark, both
+    in Source Sans 3 -- see lockup_svg for why the display serif was dropped.
     """
     W, H, S = 1200, 300, 4
     im = Image.new("RGBA", (W * S, H * S), (0, 0, 0, 0))
     d = ImageDraw.Draw(im)
     glyph = tile_png(220 * S) if mark_fill is None else mark_png(220 * S, mark_fill)
     im.alpha_composite(glyph, (40 * S, 40 * S))
-    serif = _font("SourceSerif4-VF.ttf", 150 * S, **{"Optical Size": 60, "Weight": 600})
-    sans = _font("SourceSans3-VF.ttf", 78 * S, **{"Weight": 500})
+    label = _font("SourceSans3-VF.ttf", 34 * S, **{"Weight": 600})
+    wordmark = _font("SourceSans3-VF.ttf", 130 * S, **{"Weight": 700})
     x = cx = 300 * S
     for ch in "AFENDA":
-        d.text((cx, 62 * S), ch, font=serif, fill=ink)
-        cx += d.textlength(ch, font=serif) + 4 * S
-    d.text((x + 4 * S, 200 * S), "xForge", font=sans, fill=sub)
+        d.text((cx, 78 * S), ch, font=label, fill=ink)
+        cx += d.textlength(ch, font=label) + 6 * S
+    d.text((x - 2 * S, 128 * S), "xForge", font=wordmark, fill=sub)
     im = im.resize((W, H), Image.LANCZOS)
     # Fit into the requested box, centered, keeping aspect ratio.
     scale = min(width / W, height / H)

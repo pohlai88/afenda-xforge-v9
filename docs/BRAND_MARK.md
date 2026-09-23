@@ -69,9 +69,15 @@ represented. The lockup is mark + "AFENDA" (Source Serif 4, 600) +
 "xForge" (Source Sans 3, 500) — never the mark alone with no wordmark, and
 never the wordmark alone with no mark, once there is room for both.
 
-The lockup's type is Source Serif 4 / Source Sans 3 — the product's own
-identity fonts, not the Geist typeface used in any external exploratory
-design board. Nothing in this repo's identity uses Geist.
+The lockup's type is Source Sans 3 throughout — the product's own
+identity font, not the Geist typeface used in any external exploratory
+design board. Nothing in this repo's identity uses Geist. "AFENDA" is
+the small tracked label (600, 2.6 tracking); "xForge" is the dominant
+wordmark (700, tight negative tracking, the accent colour). Source
+Serif 4 stays reserved for the report/document display use it already
+has (`fonts_report.scss`) and does not appear in the lockup — a display
+serif at label weight next to a crisp geometric mark read as two
+different eras side by side.
 
 ## Light and dark
 
