@@ -16,6 +16,12 @@ from odoo.modules.module import load_script
 from odoo.tests import HttpCase, tagged
 from odoo.tools import file_open, is_html_empty
 
+# The generator that drew the icons this module ships, reached from the repo
+# root the server is started in. Only the blend is borrowed: the palette these
+# tests hold the icons to still comes from BRAND, so a generator drawing in the
+# wrong colours would fail here rather than agree with itself.
+from afenda.tools.app_icons import controlled_overlap_colour
+
 from ..brand import BRAND
 from ..hooks import _UPSTREAM_REPORT_FONT, _apply_company_branding
 
@@ -306,21 +312,22 @@ class TestBranding(HttpCase):
         existing database keeps Odoo's teal hexagons for every root menu.
 
         The icons are free-standing duotone marks - a glyph in one brand colour,
-        an accent shape in a second, and the multiply of the two where they
-        cross - so there is no tile edge to probe. What is checked instead is
-        that every colour with real coverage comes from the brand palette, which
-        is exactly what an unrefreshed Odoo hexagon fails.
+        an accent shape in a second, and a controlled darkening of the two where
+        they cross - so there is no tile edge to probe. What is checked instead
+        is that every colour with real coverage comes from the brand palette,
+        which is exactly what an unrefreshed Odoo hexagon fails.
         """
         roots = self.env["ir.ui.menu"].sudo().with_context(active_test=False).search(
             [("parent_id", "=", False), ("web_icon", "!=", False)]
         )
         self.assertTrue(roots, "no root menu carries a web_icon")
         palette = [_rgb(h) for h in [BRAND["primary"]] + BRAND["tags"]]
-        # A colour is legitimate if it is a brand colour or the multiply of two
-        # of them, which is how the overlap of glyph and accent is painted.
+        # A colour is legitimate if it is a brand colour or the crossing of two
+        # of them. The crossing is not a plain multiply: raw multiply sends most
+        # brand pairs to a near-black that reads as a hole, so the generator
+        # eases it back toward the midpoint until it clears a luminance floor.
         allowed = set(palette) | {
-            tuple(round(x * y / 255) for x, y in zip(a, b))
-            for a, b in itertools.product(palette, repeat=2)
+            controlled_overlap_colour(a, b) for a, b in itertools.product(palette, repeat=2)
         }
         checked = 0
         for menu in roots:
@@ -354,17 +361,29 @@ class TestBranding(HttpCase):
         # The apps menu also serves the SVG beside each PNG; #985184 is the
         # Odoo purple and #1AD3BB the Odoo teal the upstream icon.svg files were
         # drawn in. Discuss is a communication app: indigo glyph, mulberry
-        # accent, and the two multiplied where the accent crosses the bubble.
+        # accent, and their crossing where the accent cuts the bubble.
         svg = self.url_open("/mail/static/description/icon.svg").text
         for dead in ("#985184", "#1AD3BB"):
             self.assertNotIn(dead, svg, "the mail app icon is still Odoo artwork")
         indigo, mulberry = "#3448A8", "#A8447A"
         self.assertLessEqual({indigo, mulberry}, set(BRAND["tags"]), "the tag palette moved under the icons")
-        overlap = "#%02X%02X%02X" % tuple(
-            round(x * y / 255) for x, y in zip(_rgb(indigo), _rgb(mulberry))
-        )
+        overlap = "#%02X%02X%02X" % controlled_overlap_colour(_rgb(indigo), _rgb(mulberry))
         for colour in (indigo, mulberry, overlap):
             self.assertIn(colour, svg, f"the mail app icon is missing {colour}")
+        # Every root menu this database installs happens to carry a small corner
+        # accent, so none of their crossings reaches the 3% floor above and the
+        # loop never actually probes an overlap colour. Discuss does: its disc
+        # cuts a third of the bubble. Probing the file the apps menu serves
+        # keeps the colour model under test instead of merely under discussion.
+        served = Image.open(io.BytesIO(
+            self.url_open("/mail/static/description/icon.png").content)).convert("RGBA")
+        counts = collections.Counter(p[:3] for p in served.getdata() if p[3] == 255)
+        self.assertGreater(counts[_rgb(overlap)], 0.03 * served.width * served.height,
+                           f"the mail icon is not drawn with its crossing colour {overlap}")
+        for colour, n in counts.items():
+            if n >= 0.03 * served.width * served.height:
+                self.assertIn(colour, allowed,
+                              f"the mail app icon is drawn in {colour}, which is not an AFENDA colour")
 
     def test_empty_state_is_a_ledger_page(self):
         """Regression: without the backend.scss override the three empty-state

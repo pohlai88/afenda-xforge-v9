@@ -14,7 +14,7 @@ size. So each icon here is built the way Odoo's are:
 
     * a FontAwesome glyph in colour A,
     * a geometric accent shape in colour B overlapping it,
-    * and the multiply of A and B wherever the two cross.
+    * and a controlled darkening of A and B wherever the two cross.
 
 There is no container tile. The mark stands free on transparency, which is what
 makes a row of them legible: the silhouettes differ, not just their contents.
@@ -34,15 +34,16 @@ Run through the image renderer, which calls in here:
 from __future__ import annotations
 
 from functools import lru_cache
+from hashlib import sha1
 from pathlib import Path
-from typing import NamedTuple
+from typing import Iterable, NamedTuple
 
 from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.ttLib import TTFont
-from PIL import Image, ImageChops, ImageDraw, ImageFont
+from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageOps
 
-from .brand_images import MARK_SVG_INNER, SS, WHITE, _mark
+from .brand_images import BOXED_INK, MARK_BOX, MARK_FRAME, SS, WHITE, arms_in, draw_mark, mark_svg
 
 # The AFENDA tag palette (afenda_brand/brand.py "tags") plus Ledger Blue. No
 # hex is invented here; every value below appears in brand.py.
@@ -60,20 +61,48 @@ CLAY = "#9A6B4F"
 VIOLET = "#6B5FA8"
 GREY = "#9CA3AF"
 
-GLYPH_SCALE = 0.88  # the glyph's longer dimension, as a share of the short side
+GLYPH_SCALE = 0.84  # the glyph's longer dimension, as a share of the short side
 SVG_SIDE = 50.0  # every upstream icon.svg is viewBox="0 0 50 50"
 MAX_SUPERSAMPLED = 1024  # a few module icons are thousands of pixels wide
-ACCENT_CLIP_ID = "afenda-accent"  # the clip path the SVG's multiply layer uses
+
+# How much of the glyph's ink the accent may cover.
+#
+# OVERLAP_BAND is what the design wants: enough crossing to make a third colour
+# and some depth, not so much that the accent becomes the larger shape. It is
+# REPORTED, never enforced - see `overlap_report` and the test that prints it.
+# Two thirds of the mapped set sits above it today, and turning it into a gate
+# would bulk-reassign accents that were each placed by eye. MAX_OVERLAP is the
+# gate: past half the glyph the accent reads as a stain.
+#
+# GLYPH_SCALE moved 0.88 -> 0.84 in V2, which changes every one of these
+# numbers (a smaller glyph leaves more of a fixed accent outside it). Re-measure
+# before anyone argues for tightening the gate toward the band.
+OVERLAP_BAND = (0.08, 0.29)
+TARGET_OVERLAP = 0.20
+MAX_OVERLAP = 0.50
+
+# The intersection colour must stay this luminous. Raw RGB multiply of two
+# mid-dark brand colours lands near black - Ledger Blue x Ochre is the worst -
+# and a near-black intersection reads as a hole punched in the mark rather than
+# as two shapes crossing. See `controlled_overlap_colour`.
+MIN_OVERLAP_LUMINANCE = 0.045
+
+# Weights for `accent_score`, which only ever runs for a module with no accent
+# shape of its own. Nothing in ACCENTS reaches it.
+CENTRE_PENALTY = 2.4  # covering the glyph's middle costs more than its corners
+OVERLAP_PENALTY = 5.0  # distance from TARGET_OVERLAP
+EMPTY_ACCENT_PENALTY = 1.5  # an accent that barely touches the glyph is decoration
+AUTO_SCORE_SIDE = 256  # the scorer rasterises here, so its answer is size-independent
+AUTO = "auto"  # a Design.shape asking to be scored, like a shape of None
 
 _REPO = Path(__file__).resolve().parents[2]
 FA_TTF = str(_REPO / "addons" / "web" / "static" / "src" / "libs" / "fontawesome" / "fonts" / "fontawesome-webfont.ttf")
 
-# MARK_SVG_INNER draws in brand_images' 64x64 tile space. This is its ink box
-# there: the Engineered X is four straight-edged wedges with no stroke, so the
-# box is just the extent of their coordinates - a 34.56 square, centred.
-# `test_the_mark_box_matches_the_mark` re-derives it from the paths, so a
-# redrawn mark fails here instead of silently mis-centring every SVG fallback.
-MARK_SVG_BOX = (14.72, 14.72, 49.28, 49.28)
+# The mark's ink box, in the frame brand_images draws it in. Imported rather
+# than measured: the Engineered X is four straight-edged wedges with no stroke,
+# so the box is just the extent of their coordinates, and the one place those
+# coordinates live is brand_images.MARK_ARMS.
+MARK_SVG_BOX = MARK_BOX
 
 # Accent geometry, in a 0..100 box over the icon's SHORT side, so it holds for
 # the handful of non-square icons too. Shapes run off the edge on purpose: a
@@ -91,7 +120,25 @@ ACCENT_SHAPES: dict[str, tuple[str, tuple]] = {
     "wedge-tr": ("polygon", ((46, -4), (104, -4), (104, 58))),
     "bar-b": ("rect", (6, 68, 94, 96, 13)),
     "bar-t": ("rect", (6, 4, 94, 32, 13)),
+    # "shard-*" are the xForge accents: a clipped directional plane with one
+    # angled edge, the same idea as the Engineered X's wedges, rather than a
+    # disc. They are the candidates `choose_accent_shape` picks from for a
+    # module nobody has art-directed. No entry in ACCENTS names one - reassigning
+    # a shape that was placed by eye is a separate decision from offering a
+    # better default.
+    "shard-tr": ("polygon", ((48, -6), (106, -6), (106, 39), (71, 66))),
+    "shard-br": ("polygon", ((71, 34), (106, 61), (106, 106), (48, 106))),
+    "shard-bl": ("polygon", ((29, 34), (-6, 61), (-6, 106), (52, 106))),
+    "shard-tl": ("polygon", ((52, -6), (-6, -6), (-6, 39), (29, 66))),
 }
+
+# What `choose_accent_shape` may pick. Shards first because they carry the
+# brand; discs cross too much of a glyph to be a safe default, so only the
+# gentler "dot-*" and the two bars back the shards up.
+AUTO_ACCENT_CANDIDATES: tuple[str, ...] = (
+    "shard-tr", "shard-br", "shard-bl", "shard-tl",
+    "dot-tr", "dot-br", "dot-bl", "bar-t", "bar-b",
+)
 
 
 class Design(NamedTuple):
@@ -314,8 +361,90 @@ def rgb(colour: str) -> tuple[int, int, int]:
 
 
 def multiply(a: tuple[int, int, int], b: tuple[int, int, int]) -> tuple[int, int, int]:
-    """The third colour: what A and B make where the two shapes cross."""
+    """Plain RGB multiply. Not the drawn colour - see `controlled_overlap_colour`."""
     return tuple(round(x * y / 255) for x, y in zip(a, b))
+
+
+def _linear_channel(c: int) -> float:
+    x = c / 255.0
+    return x / 12.92 if x <= 0.04045 else ((x + 0.055) / 1.055) ** 2.4
+
+
+def relative_luminance(colour: tuple[int, int, int]) -> float:
+    """WCAG relative luminance, 0.0 (black) to 1.0 (white)."""
+    r, g, b = (_linear_channel(v) for v in colour)
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b
+
+
+def _lerp(a: tuple[int, int, int], b: tuple[int, int, int], t: float) -> tuple[int, int, int]:
+    return tuple(round(x + (y - x) * t) for x, y in zip(a, b))
+
+
+def controlled_overlap_colour(a: tuple[int, int, int], b: tuple[int, int, int]) -> tuple[int, int, int]:
+    """The third colour: what A and B make where the two shapes cross.
+
+    Multiply is the right *cue* - the crossing has to read as darker than both
+    shapes, the way two inks overprint - but raw multiply is not a colour
+    anybody chose. Ledger Blue x Ochre multiplies to (21, 23, 16): a near-black
+    that reads as a hole rather than as an overlap, and that is the same
+    near-black plum x teal and indigo x mulberry collapse to, so the family
+    loses the distinctions the second colour was there to make.
+
+    So: mostly multiply, a little of the arithmetic midpoint, and then eased
+    further toward the midpoint until the result clears MIN_OVERLAP_LUMINANCE.
+    The darkening survives; the mud does not.
+    """
+    midpoint = tuple(round((x + y) / 2) for x, y in zip(a, b))
+    colour = _lerp(multiply(a, b), midpoint, 0.28)
+    # Ease, don't jump: the first pair that clears the floor keeps as much of
+    # the multiply as it can. The loop bound is a guard, not a policy - it stops
+    # at the midpoint, which is the lightest this is allowed to go. A pair whose
+    # own midpoint is below the floor would leave here still below it, and
+    # test_the_overlap_colour_clears_the_luminance_floor is what catches that.
+    for _ in range(64):
+        if relative_luminance(colour) >= MIN_OVERLAP_LUMINANCE:
+            break
+        eased = _lerp(colour, midpoint, 0.16)
+        if eased == colour:
+            break
+        colour = eased
+    return colour
+
+
+def _mask_area(mask: Image.Image) -> float:
+    """Alpha-weighted area of an L mask, in whole pixels."""
+    return sum(level * count for level, count in enumerate(mask.histogram())) / 255.0
+
+
+def _mask_intersection(a: Image.Image, b: Image.Image) -> Image.Image:
+    """A and B: the alpha product, which is what coverage actually composes as."""
+    return ImageChops.multiply(a, b)
+
+
+def _mask_only(a: Image.Image, b: Image.Image) -> Image.Image:
+    """A outside B: A * (1 - B).
+
+    Not ``ImageChops.subtract``. Subtract is right only where both masks are 0
+    or 255; on the antialiased rim where the glyph and the accent both sit at,
+    say, half coverage, it yields 0 for both "only" layers and half for the
+    intersection - so the three layers add up to half the coverage the union
+    has, and the seam between glyph and accent renders as a translucent halo.
+    The product form is exact: A*(1-B) + A*B == A at every alpha.
+    """
+    return ImageChops.multiply(a, ImageOps.invert(b))
+
+
+def _central_identity_mask(side: int) -> Image.Image:
+    """The glyph's middle, which an auto-placed accent is penalised for covering.
+
+    This knows nothing about icon semantics. It encodes one default: the centre
+    of a glyph carries more of what the glyph says than its corners do. Every
+    module in ACCENTS names its own shape and never consults this.
+    """
+    mask = Image.new("L", (side, side), 0)
+    p = side * 0.28
+    ImageDraw.Draw(mask).rounded_rectangle((p, p, side - p, side - p), radius=side * 0.09, fill=255)
+    return mask
 
 
 def _supersample(width: int, height: int) -> int:
@@ -361,11 +490,12 @@ def _mark_layer(target: float) -> Image.Image:
     """The AFENDA mark as white ink, ``target`` px on its longer side."""
 
     def render(unit: float) -> Image.Image:
-        mask = Image.new("L", (max(1, round(64 * unit)),) * 2, 0)
-        _mark(ImageDraw.Draw(mask), unit, 255)
+        side = max(1, round(MARK_FRAME * unit))
+        mask = Image.new("L", (side,) * 2, 0)
+        draw_mark(ImageDraw.Draw(mask), arms_in(side, BOXED_INK), [255] * 4)
         return mask
 
-    return _ink_layer(render, target / 64.0, target)
+    return _ink_layer(render, target / MARK_FRAME, target)
 
 
 def _glyph_alpha(design: Design, side: int) -> Image.Image:
@@ -396,12 +526,87 @@ def accent_mask(shape: str, side: int) -> Image.Image:
     return mask
 
 
+def accent_score(glyph: Image.Image, accent: Image.Image) -> float:
+    """How bad this accent is on this glyph. Lower is better.
+
+    A placement engine for modules nobody has looked at, not a replacement for
+    looking. It wants a deliberate crossing near TARGET_OVERLAP, it protects the
+    glyph's middle, and it rejects an accent that only decorates the canvas.
+    """
+    glyph_area = max(_mask_area(glyph), 1.0)
+    accent_area = max(_mask_area(accent), 1.0)
+    overlap = _mask_intersection(glyph, accent)
+    overlap_area = _mask_area(overlap)
+    ratio = overlap_area / glyph_area
+    low, high = OVERLAP_BAND
+
+    score = abs(ratio - TARGET_OVERLAP) * OVERLAP_PENALTY
+    score += _mask_area(_mask_intersection(overlap, _central_identity_mask(glyph.width))) / glyph_area * CENTRE_PENALTY
+    if ratio < low:
+        score += (low - ratio) * 8.0
+    if ratio > high:
+        score += (ratio - high) * 12.0
+    # An accent mostly off in empty space is a sticker, not an overlap.
+    score += max(0.0, 0.16 - overlap_area / accent_area) * EMPTY_ACCENT_PENALTY
+    return score
+
+
+def choose_accent_shape(glyph: Image.Image, side: int,
+                        candidates: Iterable[str] = AUTO_ACCENT_CANDIDATES) -> str:
+    """The least-bad accent for a glyph with no art direction of its own."""
+    ranked = sorted((accent_score(glyph, accent_mask(shape, side)), shape) for shape in candidates)
+    if not ranked:
+        raise ValueError("no accent candidates")
+    return ranked[0][1]
+
+
+@lru_cache(maxsize=None)
+def resolve_design(design: Design) -> Design:
+    """``design`` with a real accent shape, scoring one if the mapping left it open.
+
+    Every module in ACCENTS names its shape and comes back untouched. A shape of
+    None or "auto" alongside an accent is a new or unmapped module asking to be
+    placed; it is scored once, here, at a fixed size, so the PNG and the SVG
+    cannot land on different answers.
+    """
+    if not design.accent or (design.shape and design.shape != AUTO):
+        return design
+    return design._replace(
+        shape=choose_accent_shape(_glyph_alpha(design, AUTO_SCORE_SIDE), AUTO_SCORE_SIDE))
+
+
+def accent_overlap(design: Design, side: int = AUTO_SCORE_SIDE) -> float:
+    """Share of the glyph's ink the accent covers, 0.0 if there is no accent."""
+    design = resolve_design(design)
+    if not design.accent:
+        return 0.0
+    glyph = _glyph_alpha(design, side)
+    ink = _mask_area(glyph)
+    if not ink:
+        return 0.0
+    return _mask_area(_mask_intersection(glyph, accent_mask(design.shape, side))) / ink
+
+
+def overlap_report() -> list[tuple[str, float]]:
+    """(module, overlap share) for every mapped module, worst last.
+
+    Reported, not enforced: see OVERLAP_BAND. The contact sheet and
+    test_the_accent_overlap_band_is_reported both read this.
+    """
+    return sorted(((m, accent_overlap(design_for(m))) for m in ACCENTS), key=lambda r: r[1])
+
+
 def icon_png(width: int, height: int, design: Design) -> Image.Image:
     """The free-standing duotone mark, at exactly width x height.
 
-    Colour A carries the glyph, colour B the accent, and their multiply the
-    overlap - three opaque colours on transparency, no tile.
+    Colour A carries the glyph, colour B the accent, and `controlled_overlap_colour`
+    the crossing - three opaque colours on transparency, no tile.
+
+    The three masks are the exact premultiplied decomposition of the two shapes:
+    glyph*(1-accent), accent*(1-glyph) and glyph*accent. They sum to the union's
+    coverage at every alpha, so the seam has no halo.
     """
+    design = resolve_design(design)
     ss = _supersample(width, height)
     w, h = width * ss, height * ss
     side = min(w, h)
@@ -411,9 +616,9 @@ def icon_png(width: int, height: int, design: Design) -> Image.Image:
         b = rgb(design.accent)
         accent = accent_mask(design.shape, side)
         layers = (
-            (ImageChops.subtract(accent, glyph), b),
-            (ImageChops.subtract(glyph, accent), a),
-            (ImageChops.multiply(glyph, accent), multiply(a, b)),
+            (_mask_only(accent, glyph), b),
+            (_mask_only(glyph, accent), a),
+            (_mask_intersection(glyph, accent), controlled_overlap_colour(a, b)),
         )
     else:
         layers = ((glyph, a),)
@@ -477,28 +682,48 @@ def _mark_svg(fill: str) -> str:
         f"translate({half:g} {half:g}) scale({scale:.5g}) "
         f"translate({-(x0 + x1) / 2:.5g} {-(y0 + y1) / 2:.5g})"
     )
-    return f'<g transform="{transform}">{MARK_SVG_INNER.format(fg=fill)}</g>'
+    return f'<g transform="{transform}">{mark_svg((fill,) * 4)}</g>'
 
 
 def _ink_svg(design: Design, fill: str) -> str:
     return _glyph_svg(design.code, fill) if design.code else _mark_svg(fill)
 
 
+def svg_clip_id(design: Design) -> str:
+    """A clip-path id no other icon will use.
+
+    A constant id is fine while every icon.svg is its own image resource, and
+    wrong the moment two of them are inlined into one document - the second
+    icon's clip silently resolves to the first icon's path, because ids are
+    document-global and the first one wins. Derived from what the icon draws, so
+    it is stable across renders and shows up in diffs only when the icon changes.
+    """
+    payload = f"{design.code}|{design.glyph}|{design.accent}|{design.shape}"
+    return "afenda-accent-" + sha1(payload.encode("utf-8")).hexdigest()[:10]
+
+
 def icon_svg(design: Design) -> str:
     """The same three layers the PNG composites, as vectors.
 
     Accent in B, glyph in A over it, then the glyph again clipped to the accent
-    in the multiply colour - which reproduces exactly what the raster does with
+    in the overlap colour - which reproduces exactly what the raster does with
     its intersection mask, without needing a blend mode no SVG renderer owes us.
+
+    The shape has to be resolved already: scoring it here would mean rasterising
+    inside the vector path, and a second chance for the PNG and the SVG to
+    disagree. `render_all` resolves once and hands the concrete design to both.
     """
     side = f"{SVG_SIDE:g}"
     body = _ink_svg(design, design.glyph)
     if design.accent:
-        overlap = _hex(multiply(rgb(design.glyph), rgb(design.accent)))
+        if not design.shape or design.shape == AUTO:
+            raise ValueError(f"{design.code}: an auto accent must be resolved before it is serialised")
+        clip = svg_clip_id(design)
+        overlap = _hex(controlled_overlap_colour(rgb(design.glyph), rgb(design.accent)))
         body = (
-            f'<defs><clipPath id="{ACCENT_CLIP_ID}">{_accent_svg(design.shape)}</clipPath></defs>'
+            f'<defs><clipPath id="{clip}">{_accent_svg(design.shape)}</clipPath></defs>'
             f'{_accent_svg(design.shape, design.accent)}{body}'
-            f'<g clip-path="url(#{ACCENT_CLIP_ID})">{_ink_svg(design, overlap)}</g>'
+            f'<g clip-path="url(#{clip})">{_ink_svg(design, overlap)}</g>'
         )
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{side}" height="{side}" '
@@ -526,9 +751,9 @@ def render_all(root: Path) -> list[Path]:
         module = png.parents[2].name
         if module in THIRD_PARTY:
             continue
-        written.extend(_render(png, design_for(module)))
+        written.extend(_render(png, resolve_design(design_for(module))))
     for stem, design in sorted(BASE_ICONS.items()):
         png = root.joinpath(BASE_DESCRIPTION, f"{stem}.png")
         if png.exists():
-            written.extend(_render(png, design))
+            written.extend(_render(png, resolve_design(design)))
     return written

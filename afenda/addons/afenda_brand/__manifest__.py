@@ -8,7 +8,7 @@
     # as free-standing duotone marks, and `web_icon_data` is a copy taken when
     # `web_icon` was last written, so a database that skipped it keeps the old
     # tiles in the apps menu no matter what is on disk.
-    "version": "19.0.1.0.2",
+    "version": "19.0.1.0.3",
     "category": "Hidden/Tools",
     "author": "AFENDA",
     "website": "https://afenda.app",

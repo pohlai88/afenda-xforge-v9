@@ -5,21 +5,22 @@ fixture tree once through ``brand_images.render_all`` - which also proves the
 generator is wired into it - and every test reads that one render.
 
 The icons are free-standing duotone marks: a glyph in colour A, an accent shape
-in colour B, and the multiply of the two where they cross. There is no tile, so
-nothing here may assert a filled edge or a background colour; what it asserts
-instead is the three-colour construction, the multiply, and the transparency.
+in colour B, and a controlled darkening of the two where they cross. There is no
+tile, so nothing here may assert a filled edge or a background colour; what it
+asserts instead is the three-colour construction, the overlap colour, and the
+transparency.
 """
 import hashlib
 import re
 import tempfile
 import unittest
-from collections import Counter
+from collections import Counter, defaultdict
 from pathlib import Path
 
 from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.ttLib import TTFont
-from PIL import Image, ImageChops, ImageStat
+from PIL import Image, ImageChops, ImageDraw, ImageStat
 
 from afenda.tools import app_icons, brand_images
 
@@ -150,10 +151,10 @@ class AppIconTests(unittest.TestCase):
         return f"addons/{module}/static/description/{name}"
 
     def _trio(self, module: str):
-        """(A, B, multiply) for a mapped module, as RGB triples."""
+        """(A, B, overlap) for a mapped module, as RGB triples."""
         glyph, accent, _shape = app_icons.ACCENTS[module]
         a, b = app_icons.rgb(glyph), app_icons.rgb(accent)
-        return a, b, app_icons.multiply(a, b)
+        return a, b, app_icons.controlled_overlap_colour(a, b)
 
     # --- discovery -------------------------------------------------------
 
@@ -192,6 +193,14 @@ class AppIconTests(unittest.TestCase):
             self.assertIn(accent, palette, f"{module} accents in a colour outside the brand palette")
             self.assertIn(shape, app_icons.ACCENT_SHAPES, f"{module} names a shape that does not exist")
             self.assertNotEqual(glyph, accent, f"{module} is monotone: the accent would not show")
+            # Every mapped module was placed by eye. The scorer exists for the
+            # ones that were not, and must never quietly take one of these over:
+            # a shape of None or "auto" here is a hand-placed accent lost.
+            self.assertNotIn(shape, (None, app_icons.AUTO),
+                             f"{module} would be auto-placed; its explicit shape was dropped")
+            self.assertEqual(app_icons.resolve_design(app_icons.design_for(module)),
+                             app_icons.design_for(module),
+                             f"{module}'s design was rewritten on its way to the renderer")
 
     # --- the mark --------------------------------------------------------
 
@@ -214,7 +223,7 @@ class AppIconTests(unittest.TestCase):
     def test_the_construction_is_exactly_three_colours(self):
         """The whole design in one assertion, read off an unresampled render so
         there is nothing to round: a mapped icon is colour A, colour B and their
-        multiply and NOTHING else; an unmapped one is the grey mark alone.
+        overlap colour and NOTHING else; an unmapped one is the grey mark alone.
 
         Fails if the accent layer is dropped, if the overlap is painted in A or
         B instead of the third colour, if a background creeps back in, or if
@@ -226,8 +235,8 @@ class AppIconTests(unittest.TestCase):
             a = app_icons.rgb(design.glyph)
             if design.accent:
                 b = app_icons.rgb(design.accent)
-                expected = {a, b, app_icons.multiply(a, b)}
-                self.assertEqual(len(expected), 3, f"{name}: A, B and the multiply are not three colours")
+                expected = {a, b, app_icons.controlled_overlap_colour(a, b)}
+                self.assertEqual(len(expected), 3, f"{name}: A, B and the overlap are not three colours")
             else:
                 expected = {a}
             self.assertEqual(set(_colours(im)), expected,
@@ -244,22 +253,62 @@ class AppIconTests(unittest.TestCase):
             im = self.pngs[module]
             counts = _colours(im)
             floor = im.width * im.height * MIN_SHARE
-            for name, colour in zip(("glyph", "accent", "multiply"), self._trio(module)):
+            for name, colour in zip(("glyph", "accent", "overlap"), self._trio(module)):
                 self.assertGreater(counts[colour], floor,
                                    f"{module}: the {name} colour {colour} covers {counts[colour]} px")
 
-    def test_the_overlap_is_the_multiply_of_the_two_colours(self):
+    def test_the_overlap_colour_darkens_without_collapsing_to_mud(self):
         """Pins the blend itself, for one known pair: account is Ledger Blue
-        over Teal. Fails if the overlap becomes an alpha blend, a screen, or a
-        hand-picked third hex - each of which passes the tests above only by
-        accident and none of which stays in step when a colour changes."""
+        over Teal.
+
+        The overlap has to stay a darkening - lighter than neither ink, or it
+        stops reading as an overprint - while staying a colour. Raw multiply
+        gives (6, 33, 75), luminance 0.016, which is the near-black this
+        replaced. Fails if the overlap reverts to raw multiply, becomes a plain
+        alpha blend or the arithmetic midpoint, or is hand-picked: each passes
+        the tests above by accident and none stays in step when a colour moves.
+        """
         a, b, over = self._trio("account")
         self.assertEqual(a, (30, 58, 138))
         self.assertEqual(b, (47, 143, 138))
-        self.assertEqual(over, (6, 33, 75))  # not the 50% blend (38, 100, 138)
-        self.assertEqual(app_icons.multiply(a, b), over)
+        raw = app_icons.multiply(a, b)
+        self.assertEqual(raw, (6, 33, 75))
+        self.assertLess(app_icons.relative_luminance(raw), app_icons.MIN_OVERLAP_LUMINANCE,
+                        "raw multiply is no longer the mud case this is here to fix")
+        self.assertEqual(over, (22, 66, 106))
+        # Darker than both inks, lighter than the raw multiply, and not the
+        # midpoint (38, 100, 138) the relaxation eases toward.
+        self.assertLess(app_icons.relative_luminance(over), app_icons.relative_luminance(a))
+        self.assertLess(app_icons.relative_luminance(over), app_icons.relative_luminance(b))
+        self.assertGreater(app_icons.relative_luminance(over), app_icons.relative_luminance(raw))
+        self.assertNotEqual(over, tuple(round((x + y) / 2) for x, y in zip(a, b)))
         self.assertGreater(_colours(self.pngs["account"])[over], 0,
-                           "the multiply colour is nowhere in the rendered icon")
+                           "the overlap colour is nowhere in the rendered icon")
+
+    def test_the_overlap_colour_clears_the_luminance_floor(self):
+        """Every pair actually in the tables, not just the one pinned above.
+
+        Eighteen of the twenty-one mapped pairs multiply to below the floor -
+        ledger x mustard bottoms out at 0.007 - so this is the assertion that
+        the rescue reaches all of them and not only the pair someone tested by
+        hand. Fails if the floor is raised past what the easing can deliver, if
+        the easing is shortened, or if a new colour pair is added whose own
+        midpoint is already too dark to rescue.
+        """
+        pairs = {(g, a) for g, a, _s in app_icons.ACCENTS.values()}
+        pairs |= {(d.glyph, d.accent) for d in app_icons.BASE_ICONS.values() if d.accent}
+        self.assertGreaterEqual(len(pairs), 20)
+        rescued = 0
+        for glyph, accent in sorted(pairs):
+            a, b = app_icons.rgb(glyph), app_icons.rgb(accent)
+            over = app_icons.controlled_overlap_colour(a, b)
+            self.assertGreaterEqual(
+                app_icons.relative_luminance(over), app_icons.MIN_OVERLAP_LUMINANCE,
+                f"{glyph} x {accent} crosses at {app_icons._hex(over)}, below the readable floor")
+            self.assertNotIn(over, (a, b), f"{glyph} x {accent} does not read as a crossing at all")
+            rescued += app_icons.relative_luminance(app_icons.multiply(a, b)) < app_icons.MIN_OVERLAP_LUMINANCE
+        self.assertGreater(rescued, len(pairs) // 2,
+                           "raw multiply no longer collapses, so this guard is measuring nothing")
 
     def test_glyph_is_scaled_and_centred(self):
         """The ink is GLYPH_SCALE of the short side and centred - for every
@@ -292,12 +341,13 @@ class AppIconTests(unittest.TestCase):
         self.assertNotEqual(account, technical, "a mapped and an unmapped module render the same mark")
 
     def test_the_mark_box_matches_the_mark(self):
-        """MARK_SVG_BOX is a hand-copied measurement of a shape that lives in
-        another module, so it rots silently: the SVG fallback every unmapped
-        module ships would keep scaling and centring to the old outline. The
-        mark is straight-edged polygons, so its extent is just the extent of
-        its coordinates, and that can be re-derived here."""
-        numbers = [float(n) for n in re.findall(r"-?\d+\.?\d*", brand_images.MARK_SVG_INNER.replace("{fg}", ""))]
+        """MARK_SVG_BOX is what the SVG fallback every unmapped module ships
+        scales and centres to. It is imported from brand_images rather than
+        copied, but that only removes one way for it to rot: `mark_svg` could
+        still emit paths that leave the declared box. The mark is straight-edged
+        polygons, so its extent is just the extent of its coordinates."""
+        paths = re.sub(r'fill="[^"]*"', "", brand_images.mark_svg(("#000000",) * 4))
+        numbers = [float(n) for n in re.findall(r"-?\d+\.?\d*", paths)]
         self.assertTrue(numbers, "the mark is no longer plain polygon coordinates")
         xs, ys = numbers[0::2], numbers[1::2]
         self.assertEqual(app_icons.MARK_SVG_BOX, (min(xs), min(ys), max(xs), max(ys)),
@@ -329,12 +379,13 @@ class AppIconTests(unittest.TestCase):
                 self.assertNotIn("clipPath", svg, f"{module} is unmapped and has no accent to clip to")
                 continue
             glyph, accent, _shape = app_icons.ACCENTS[module]
-            over = app_icons._hex(app_icons.multiply(*(app_icons.rgb(c) for c in (glyph, accent))))
+            over = app_icons._hex(app_icons.controlled_overlap_colour(*(app_icons.rgb(c) for c in (glyph, accent))))
+            clip = app_icons.svg_clip_id(app_icons.design_for(module))
             self.assertIn(f'fill="{glyph}"', svg, f"{module} does not draw its glyph in colour A")
             self.assertIn(f'fill="{accent}"', svg, f"{module} does not draw its accent in colour B")
-            self.assertIn(f'fill="{over}"', svg, f"{module} has no multiply layer")
-            self.assertIn(f'<clipPath id="{app_icons.ACCENT_CLIP_ID}">', svg, module)
-            self.assertIn(f'clip-path="url(#{app_icons.ACCENT_CLIP_ID})"', svg, module)
+            self.assertIn(f'fill="{over}"', svg, f"{module} has no overlap layer")
+            self.assertIn(f'<clipPath id="{clip}">', svg, module)
+            self.assertIn(f'clip-path="url(#{clip})"', svg, module)
             # The multiply layer must be the glyph again, not a fill of the
             # accent: two copies of the same outline, one clipped.
             self.assertEqual(svg.count("<path d="), 2, f"{module} does not draw the glyph twice")
@@ -393,6 +444,253 @@ class AppIconTests(unittest.TestCase):
             for value in (left, right, top, bottom):
                 self.assertTrue(0 < value < side, f"{module} spills out of the icon at {value}")
 
+    # --- V2 quality gates -------------------------------------------------
+
+    def test_the_three_masks_decompose_the_glyph_without_a_halo(self):
+        """Alpha-correct decomposition, asserted where it differs from the
+        subtraction it replaced: the antialiased rim, where the glyph and the
+        accent both sit at partial coverage.
+
+        A*(1-B) + A*B == A at every alpha. ImageChops.subtract does not satisfy
+        that - at glyph 128 against accent 128 it gives 0 for the glyph-only
+        layer and 64 for the intersection, so half the glyph's coverage
+        disappears and the seam between the two shapes renders as a translucent
+        halo. Fails on reverting either _mask_only or _mask_intersection to
+        subtract, and on the two being swapped.
+        """
+        flat = Image.new("L", (32, 32), 128)
+        self.assertAlmostEqual(
+            app_icons._mask_area(app_icons._mask_only(flat, flat))
+            + app_icons._mask_area(app_icons._mask_intersection(flat, flat)),
+            app_icons._mask_area(flat), delta=32 * 32 / 255.0,
+            msg="at half coverage the glyph-only and overlap layers do not add back up to the glyph")
+        # And on real ink, where the partial-coverage rim is a thin ring rather
+        # than the whole canvas.
+        for module in sorted(app_icons.ACCENTS):
+            design = app_icons.design_for(module)
+            glyph = app_icons._glyph_alpha(design, 256)
+            accent = app_icons.accent_mask(design.shape, 256)
+            ink = app_icons._mask_area(glyph)
+            parts = (app_icons._mask_area(app_icons._mask_only(glyph, accent))
+                     + app_icons._mask_area(app_icons._mask_intersection(glyph, accent)))
+            self.assertAlmostEqual(parts / ink, 1.0, delta=0.002,
+                                   msg=f"{module} loses {1 - parts / ink:.2%} of its ink at the accent seam")
+
+    def test_no_glyph_is_cropped_at_the_canvas_edge(self):
+        """At every size the apps menu asks for. The glyph is GLYPH_SCALE of the
+        short side, so it clears the border by about 8% of it - but the accent
+        bleeds off the canvas on purpose, so "does anything touch the edge" is
+        the wrong question. What may not touch the edge is glyph ink: colour A,
+        or the overlap colour, which only exists where the glyph is.
+
+        Fails on GLYPH_SCALE going back above 1.0, on the centring paste losing
+        its floor division, and on an accent being composited under the glyph
+        rather than over it (which would paint A out to the bleeding edge).
+        """
+        designs = [(m, app_icons.design_for(m)) for m in sorted(app_icons.ACCENTS)]
+        designs += [(f"base/{s}", d) for s, d in sorted(app_icons.BASE_ICONS.items())]
+        for name, design in designs:
+            colours = [app_icons.rgb(design.glyph)]
+            accent = None
+            if design.accent:
+                colours.append(app_icons.rgb(design.accent))
+                colours.append(app_icons.controlled_overlap_colour(colours[0], colours[1]))
+                accent = 1
+            for size in (16, 24, 32, 48, 64, 128):
+                im = app_icons.icon_png(size, size, design)
+                px = im.load()
+                edge = {(x, y) for x in range(size) for y in (0, size - 1)}
+                edge |= {(x, y) for y in range(size) for x in (0, size - 1)}
+                cropped = sorted(p for p in edge
+                                 if px[p][3] >= 250 and _nearest(px[p], colours) != accent)
+                self.assertEqual(cropped, [],
+                                 f"{name} at {size}px: glyph ink runs off the canvas at {cropped[:4]}")
+
+    def test_modules_that_share_a_glyph_stay_apart(self):
+        """sale and sale_management are one app in two packages; sms and
+        mass_mailing_sms are two apps drawn with one bubble; hr_expense and
+        payment both use the receipt. Each pair is one glyph, so the accent is
+        the only thing telling them apart in the menu.
+
+        Fails if a duplicated glyph is added without also differing in accent,
+        and if the accent that is meant to separate two of them is moved to a
+        shape and colour that renders near enough identically to be useless.
+        """
+        groups = defaultdict(list)
+        for module, code in app_icons.APP_GLYPHS.items():
+            groups[code].append(module)
+        shared = {code: mods for code, mods in groups.items() if len(mods) > 1}
+        self.assertGreaterEqual(len(shared), 3, "the known same-glyph pairs are gone; re-derive this test")
+        for code, modules in sorted(shared.items()):
+            for i, first in enumerate(modules):
+                for second in modules[i + 1:]:
+                    self.assertNotEqual(app_icons.ACCENTS[first], app_icons.ACCENTS[second],
+                                        f"{first} and {second} share U+{code.upper()} and their whole accent")
+                    a = app_icons.icon_png(64, 64, app_icons.design_for(first))
+                    b = app_icons.icon_png(64, 64, app_icons.design_for(second))
+                    differing = sum(max(band) > 8 for band in
+                                    ImageChops.difference(a, b).getdata()) / (64 * 64)
+                    self.assertGreater(differing, 0.05,
+                                       f"{first} and {second} differ on only {differing:.1%} of the icon")
+        # The two payment providers carry different glyphs outright, so they are
+        # told apart before the accent is reached at all.
+        self.assertNotEqual(app_icons.APP_GLYPHS["payment_custom"], app_icons.APP_GLYPHS["payment_demo"])
+
+    def test_png_and_svg_are_the_same_icon(self):
+        """The two are served side by side in the apps menu, so a browser
+        picking one over the other must not change the picture.
+
+        No SVG rasteriser is installed in this venv (no cairosvg, no svglib), so
+        this is structural rather than pixel-by-pixel: the same three colours,
+        and the same accent at the same coordinates in the same 0..100 box.
+        Fails if either renderer is changed alone - a different overlap colour,
+        an accent scaled in one box and not the other, a shape resolved twice to
+        two different answers.
+        """
+        for module, svg in self.svgs.items():
+            design = app_icons.resolve_design(app_icons.design_for(module))
+            png_colours = set(_colours(app_icons.icon_png(UNRESAMPLED, UNRESAMPLED, design)))
+            svg_colours = {app_icons.rgb(c) for c in re.findall(r'fill="(#[0-9A-Fa-f]{6})"', svg)}
+            self.assertEqual(png_colours, svg_colours,
+                             f"{module}: the PNG and the SVG are not drawn in the same colours")
+            if not design.accent:
+                continue
+            kind, geom = app_icons.ACCENT_SHAPES[design.shape]
+            element = app_icons._accent_svg(design.shape)
+            self.assertIn(element, svg, f"{module}: the SVG does not carry its {design.shape} accent")
+            u = app_icons.SVG_SIDE / 100.0
+            if kind == "polygon":
+                points = re.search(r'points="([^"]+)"', element).group(1)
+                got = [tuple(float(v) for v in p.split(",")) for p in points.split()]
+                want = [(x * u, y * u) for x, y in geom]
+            else:
+                attrs = {k: float(v) for k, v in re.findall(r'(\w+)="(-?[\d.]+)"', element)}
+                if kind == "circle":
+                    got = [attrs["cx"], attrs["cy"], attrs["r"]]
+                    want = [v * u for v in geom]
+                else:
+                    x0, y0, x1, y1, r = geom
+                    got = [attrs["x"], attrs["y"], attrs["width"], attrs["height"], attrs["rx"]]
+                    want = [x0 * u, y0 * u, (x1 - x0) * u, (y1 - y0) * u, r * u]
+            self.assertEqual(got, want,
+                             f"{module}: the SVG accent is not the mask's geometry scaled to the viewBox")
+
+    def test_svg_clip_ids_are_unique_per_icon(self):
+        """Ids are document-global. A constant id is fine while every icon.svg
+        is its own image resource and wrong the moment two are inlined into one
+        page: the second icon's clip resolves to the first icon's accent, so its
+        overlap layer is drawn through the wrong shape.
+
+        Fails on going back to a constant, and on deriving the id from anything
+        that does not separate two icons - the shape alone, say.
+        """
+        designs = {m: app_icons.resolve_design(app_icons.design_for(m)) for m in app_icons.ACCENTS}
+        designs.update({f"base/{s}": app_icons.resolve_design(d)
+                        for s, d in app_icons.BASE_ICONS.items() if d.accent})
+        ids = {name: app_icons.svg_clip_id(d) for name, d in designs.items()}
+        self.assertGreater(len(ids), 40)
+        # One id per distinct picture. Three of the odoo/addons/base icons
+        # deliberately reuse a module's design outright (settings is base's,
+        # modules is web's, board is board's), and two identical pictures
+        # sharing a clip id is right: the clip resolves to the same accent.
+        self.assertEqual(len(set(ids.values())), len(set(designs.values())),
+                         "two different icons share a clip id")
+        collisions = defaultdict(set)
+        for name, clip in ids.items():
+            collisions[clip].add(designs[name])
+        for clip, sharing in collisions.items():
+            self.assertEqual(len(sharing), 1, f"{clip} is shared by {sharing}")
+        account = designs["account"]
+        for changed in (account._replace(code="f0f2"), account._replace(glyph=app_icons.PLUM),
+                        account._replace(accent=app_icons.OCHRE), account._replace(shape="dot-br")):
+            self.assertNotEqual(app_icons.svg_clip_id(changed), app_icons.svg_clip_id(account),
+                                f"the clip id ignores {changed}")
+        # and it is the id the file on disk actually declares and refers to
+        for module in MAPPED:
+            if module in self.svgs:
+                self.assertEqual(self.svgs[module].count(ids[module]), 2, module)
+
+    def test_an_unmapped_accent_is_placed_by_the_scorer(self):
+        """A Design with no shape is a module nobody has art-directed. It gets a
+        scored placement rather than a crash or a silently monotone icon - and
+        the PNG and the SVG must land on the same one, which is why render_all
+        resolves once and hands the concrete design to both.
+
+        Fails if the scorer is bypassed, if it can return something that is not
+        a real candidate, or if the SVG is allowed to serialise an unresolved
+        shape and quietly pick its own.
+        """
+        blank = app_icons.Design(app_icons.APP_GLYPHS["stock"], app_icons.TEAL, app_icons.OCHRE)
+        self.assertIsNone(blank.shape)
+        resolved = app_icons.resolve_design(blank)
+        self.assertIn(resolved.shape, app_icons.AUTO_ACCENT_CANDIDATES)
+        self.assertEqual(app_icons.resolve_design(blank._replace(shape=app_icons.AUTO)), resolved)
+        with self.assertRaises(ValueError):
+            app_icons.icon_svg(blank)
+        with self.assertRaises(ValueError):
+            app_icons.icon_svg(blank._replace(shape=app_icons.AUTO))
+        self.assertIn(app_icons.svg_clip_id(resolved), app_icons.icon_svg(resolved))
+        self.assertEqual(app_icons.icon_png(120, 120, blank).tobytes(),
+                         app_icons.icon_png(120, 120, resolved).tobytes())
+        # A scored placement is held to the same ceiling as a hand-placed one.
+        self.assertLessEqual(app_icons.accent_overlap(resolved), app_icons.MAX_OVERLAP)
+        # The shards are offered, and nothing in the shipped tables uses one:
+        # adding a candidate is not the same as reassigning an icon.
+        self.assertTrue({s for s in app_icons.AUTO_ACCENT_CANDIDATES if s.startswith("shard-")})
+        self.assertEqual({s for _g, _a, s in app_icons.ACCENTS.values() if s.startswith("shard-")}, set())
+
+    def test_the_accent_scorer_prefers_a_deliberate_crossing(self):
+        """The scorer is only worth having if its ranking means something.
+        Against a square glyph, a band covering about a fifth of it must beat
+        one that barely grazes it and one that swallows it.
+
+        Fails if accent_score returns a constant, if the distance-from-target
+        term loses its absolute value, or if the out-of-band penalties go."""
+        side = 200
+        glyph = Image.new("L", (side, side), 0)
+        ImageDraw.Draw(glyph).rectangle((20, 20, 179, 179), fill=255)
+
+        def band(share: float) -> Image.Image:
+            mask = Image.new("L", (side, side), 0)
+            ImageDraw.Draw(mask).rectangle((20, 180 - round(160 * share), 179, 179), fill=255)
+            return mask
+
+        target = app_icons.accent_score(glyph, band(0.20))
+        self.assertLess(target, app_icons.accent_score(glyph, band(0.02)),
+                        "an accent that grazes the glyph scores as well as one that crosses it")
+        self.assertLess(target, app_icons.accent_score(glyph, band(0.60)),
+                        "an accent that swallows the glyph scores as well as one that crosses it")
+        self.assertLess(target, app_icons.accent_score(glyph, band(0.95)))
+        self.assertLess(app_icons.accent_score(glyph, band(0.60)), app_icons.accent_score(glyph, band(0.95)))
+
+    def test_the_accent_overlap_band_is_reported(self):
+        """OVERLAP_BAND is reported, never enforced, and this is where it is
+        reported. Thirty of the forty-five mapped modules sit above it; each of
+        those accents was placed by eye, so turning the band into a gate would
+        bulk-reassign two thirds of the family to fix a number nobody has looked
+        at. test_the_accent_never_swallows_the_glyph is the gate instead.
+
+        GLYPH_SCALE moved 0.88 -> 0.84 in V2 and every share below moved with
+        it - a smaller glyph leaves more of a fixed accent outside itself.
+        Re-measure before arguing to tighten the gate toward the band.
+
+        What this asserts is only that the report is real: one row per mapped
+        module, every share a fraction of the ink. So it cannot go blind while
+        still printing something reassuring.
+        """
+        report = app_icons.overlap_report()
+        self.assertEqual(sorted(m for m, _s in report), sorted(app_icons.ACCENTS))
+        low, high = app_icons.OVERLAP_BAND
+        outside = [(m, s) for m, s in report if not low <= s <= high]
+        print(f"\n  accent overlap at GLYPH_SCALE {app_icons.GLYPH_SCALE}: "
+              f"{len(report) - len(outside)}/{len(report)} inside {low:.0%}-{high:.0%}, "
+              f"{len(outside)} outside")
+        for module, share in outside:
+            print(f"    {share:6.1%}  {module}" + ("   <- no overlap, so no third colour" if not share else ""))
+        for module, share in report:
+            self.assertTrue(0.0 <= share <= 1.0, f"{module}: {share} is not a share of the ink")
+            self.assertLessEqual(share, app_icons.MAX_OVERLAP, module)
+
     # --- what the generator must NOT touch --------------------------------
 
     def test_third_party_provider_icons_are_left_alone(self):
@@ -433,7 +731,7 @@ class AppIconTests(unittest.TestCase):
                 expected = [app_icons.rgb(design.glyph)]
                 if design.accent:
                     b = app_icons.rgb(design.accent)
-                    expected += [b, app_icons.multiply(expected[0], b)]
+                    expected += [b, app_icons.controlled_overlap_colour(expected[0], b)]
                 for colour in expected:
                     self.assertGreater(counts[colour], floor,
                                        f"{stem} is not the duotone every other icon is: {colour} is missing")
@@ -464,31 +762,19 @@ class AppIconTests(unittest.TestCase):
         starts reading as a stain, and the thing the icon is meant to say goes
         with it.
 
-        Measured across the whole set when this was written, the spread ran from
-        0.6% (website_forum) to 52.5% (sale), and the worst offenders were the
-        ones that looked wrong: the accent disc sat behind the shopping basket's
-        slats and turned the lower half into a brown mass. The ceiling is set at
-        half because above that the accent is the larger shape.
+        Measured across the whole set at GLYPH_SCALE 0.84, the spread runs from
+        0.0% (website_forum, whose wedge no longer reaches the glyph at all) to
+        49.6% (event), and the worst offenders are the ones that look wrong: the
+        accent disc sat behind the shopping basket's slats and turned the lower
+        half into a brown mass. The ceiling is set at half because above that the
+        accent is the larger shape. event sits 0.4 points under it, so this has
+        very little slack left.
 
         Fails on: moving an accent so it lands on the glyph's body rather than in
-        its empty space, or growing an accent shape without re-checking the set.
+        its empty space, growing an accent shape without re-checking the set, or
+        shrinking GLYPH_SCALE further without re-checking it either.
         """
-        from afenda.tools.app_icons import ACCENTS, design_for, _glyph_alpha, accent_mask
-
-        side, ceiling = 256, 0.50
-        worst = []
-        for module in sorted(ACCENTS):
-            design = design_for(module)
-            glyph = _glyph_alpha(design, side)
-            ink = ImageStat.Stat(glyph).sum[0]
-            if not ink:
-                continue
-            covered = ImageStat.Stat(
-                ImageChops.multiply(glyph, accent_mask(design.shape, side))
-            ).sum[0]
-            share = covered / ink
-            if share > ceiling:
-                worst.append(f"{module} {share:.1%}")
+        worst = [f"{m} {s:.1%}" for m, s in app_icons.overlap_report() if s > app_icons.MAX_OVERLAP]
         self.assertEqual(
             worst, [],
             "the accent covers more than half the glyph on: " + ", ".join(worst),
