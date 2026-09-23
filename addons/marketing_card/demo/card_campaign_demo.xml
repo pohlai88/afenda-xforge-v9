@@ -10,12 +10,12 @@
         <field name="card_template_id" ref="marketing_card.card_template_drawings"/>
         <field name="post_suggestion">Checkout who joined AFENDA xForge.</field>
         <field name="tag_ids" eval="[Command.link(ref('card_campaign_tag_demo'))]"/>
-        <field name="target_url">https://www.afenda.app/</field>
+        <field name="target_url">https://www.nexuscanon.com/</field>
         <field name="reward_message" type="html">
             <p>You just leveled up your exposure!</p>
-            <p>Check out afenda.app for more!</p>
+            <p>Check out nexuscanon.com for more!</p>
         </field>
-        <field name="reward_target_url">https://www.afenda.app/</field>
+        <field name="reward_target_url">https://www.nexuscanon.com/</field>
         <field name="user_id" ref="base.user_admin"/>
 
         <field name="request_title">Share the news with your community</field>

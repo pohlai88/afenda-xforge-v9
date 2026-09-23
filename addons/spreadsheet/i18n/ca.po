@@ -1128,7 +1128,7 @@ msgstr ""
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
+msgid "An unexpected error occurred. Submit a support ticket at nexuscanon.com/help."
 msgstr ""
 
 #. module: spreadsheet
@@ -13368,7 +13368,7 @@ msgstr ""
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.afenda.app'"
+msgid "e.g. 'http://www.nexuscanon.com'"
 msgstr ""
 
 #. module: spreadsheet

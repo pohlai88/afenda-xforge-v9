@@ -34,7 +34,7 @@ const archs = {
 
 test("Show 'Followers only' placeholder for recipients input when no recipient", async () => {
     const pyEnv = await startServer();
-    const partnerId = pyEnv["res.partner"].create({ name: "test name 1", email: "test1@afenda.app" });
+    const partnerId = pyEnv["res.partner"].create({ name: "test name 1", email: "test1@nexuscanon.com" });
     await start();
     await openFormView("res.partner", partnerId);
     await click("button", { text: "Send message" });

@@ -11,7 +11,7 @@ Taiwan - E-invoicing
 ====================
 This module allows the user to send their invoices to the Ecpay system.
 """,
-    "website": "https://www.afenda.app",
+    "website": "https://www.nexuscanon.com",
     'author': 'AFENDA xForge S.A.',
     "license": "LGPL-3",
     "depends": ["l10n_tw", "base_vat"],

@@ -4,7 +4,7 @@
     'version': '2.7',
     'sequence': 125,
     'summary': 'Manage and publish an eLearning platform',
-    'website': 'https://www.afenda.app/app/elearning',
+    'website': 'https://www.nexuscanon.com/app/elearning',
     'category': 'Website/eLearning',
     'description': """
 Create Online Courses

@@ -1786,8 +1786,8 @@ msgstr "tyhjä = kaikki kassat"
 
 #. module: pos_self_order
 #: model_terms:ir.ui.view,arch_db:pos_self_order.custom_link_tree
-msgid "https://afenda.app"
-msgstr "https://afenda.app"
+msgid "https://nexuscanon.com"
+msgstr "https://nexuscanon.com"
 
 #. module: pos_self_order
 #. odoo-javascript

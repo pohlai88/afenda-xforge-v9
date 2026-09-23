@@ -1,7 +1,7 @@
 Sales Management Made Easy
 --------------------------
 
-From quotes to invoices, in just a few clicks with the AFENDA xForge <a href="https://www.afenda.app/app/crm">Sales Management</a>.
+From quotes to invoices, in just a few clicks with the AFENDA xForge <a href="https://www.nexuscanon.com/app/crm">Sales Management</a>.
 
 Drive your sales operations from quotes to invoices with all the information
 you need, easily accessible. Keep track of long term contracts, automate

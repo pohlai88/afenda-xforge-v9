@@ -3557,9 +3557,9 @@ msgstr "应聘者学历的名称必须唯一"
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"邮件别名的名称，例如：如果您要收取 <jobs@example.afenda.app> 的EMail,别名就要设"
+"邮件别名的名称，例如：如果您要收取 <jobs@example.nexuscanon.com> 的EMail,别名就要设"
 "为：\"jobs\""
 
 #. module: hr_recruitment

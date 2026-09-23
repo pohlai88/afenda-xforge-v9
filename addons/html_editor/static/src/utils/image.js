@@ -116,7 +116,7 @@ export async function isImageCorsProtected(img) {
         // CORS protected. We check upfront if it's the case.
         // Two possible cases:
         // 1. the `src` is an absolute URL from another domain.
-        //    For instance, abc.afenda.app vs abc.com which are actually the
+        //    For instance, abc.nexuscanon.com vs abc.com which are actually the
         //    same database behind.
         // 2. A "attachment-url" which is just a redirect to the real image
         //    which could be hosted on another website.

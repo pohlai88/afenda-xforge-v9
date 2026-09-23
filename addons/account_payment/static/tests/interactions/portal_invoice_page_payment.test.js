@@ -76,7 +76,7 @@ test("portal_invoice_page_payment is started with #portal_pay", async () => {
                                         </div>
                                     </div>
                                     <div class="d-none d-lg-block mt-5 small text-center text-muted" data-oe-model="ir.ui.view" data-oe-id="549" data-oe-field="arch" data-oe-xpath="/t[1]/div[1]/div[1]/div[2]">
-                                        Powered by <a target="_blank" href="http://www.afenda.app?utm_source=db&amp;utm_medium=portal" title="odoo"><img src="/web/static/img/logo.png" alt="AFENDA xForge Logo" height="15" loading="lazy" style=""></a>
+                                        Powered by <a target="_blank" href="http://www.nexuscanon.com?utm_source=db&amp;utm_medium=portal" title="odoo"><img src="/web/static/img/logo.png" alt="AFENDA xForge Logo" height="15" loading="lazy" style=""></a>
                                     </div>
                                 </div>
                                 <div class="vr d-none d-lg-block bg-300" data-oe-model="ir.ui.view" data-oe-id="549" data-oe-field="arch" data-oe-xpath="/t[1]/div[1]/div[2]"></div>

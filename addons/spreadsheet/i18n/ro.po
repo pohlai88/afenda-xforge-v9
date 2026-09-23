@@ -1174,9 +1174,9 @@ msgstr "A apărut o eroare neașteptată în timpul transferului de imagini"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
+msgid "An unexpected error occurred. Submit a support ticket at nexuscanon.com/help."
 msgstr ""
-"A apărut o eroare neașteptată. Trimiteți un tichet de suport la afenda.app/"
+"A apărut o eroare neașteptată. Trimiteți un tichet de suport la nexuscanon.com/"
 "help."
 
 #. module: spreadsheet
@@ -13769,8 +13769,8 @@ msgstr "ex: 'Etichetă link'"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.afenda.app'"
-msgstr "ex: 'http://www.afenda.app'"
+msgid "e.g. 'http://www.nexuscanon.com'"
+msgstr "ex: 'http://www.nexuscanon.com'"
 
 #. module: spreadsheet
 #. odoo-javascript

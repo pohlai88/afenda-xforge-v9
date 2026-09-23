@@ -345,7 +345,7 @@
 <template id="brand_promotion" inherit_id="web.brand_promotion" name="Brand Promotion">
     <xpath expr="//t[@t-call='web.brand_promotion_message']" position="replace">
         <t t-set="_message">
-            Create a <a target="_blank" href="http://www.afenda.app/app/website?utm_source=db&amp;utm_medium=website">free website</a>
+            Create a <a target="_blank" href="http://www.nexuscanon.com/app/website?utm_source=db&amp;utm_medium=website">free website</a>
         </t>
         <t t-call="web.brand_promotion_message"
             _utm_medium.f="website"/>
@@ -2733,7 +2733,7 @@
                     <small groups='base.group_no_one'>AFENDA xForge Version <t t-out="version.get('server_version')"/></small>
                 </h1>
                 <p>
-                    Information about the <t t-out="res_company.name"/> instance of AFENDA xForge, the <a class="o_translate_inline" target="_blank" href="https://www.afenda.app">Open Source ERP</a>.
+                    Information about the <t t-out="res_company.name"/> instance of AFENDA xForge, the <a class="o_translate_inline" target="_blank" href="https://www.nexuscanon.com">Open Source ERP</a>.
                 </p>
 
                 <div class="alert alert-warning alert-dismissable mt16" groups="website.group_website_restricted_editor" role="status">
@@ -2761,7 +2761,7 @@
                     <h2 class='mt32'>Installed Localizations / Account Charts</h2>
                     <dl class="dl-horizontal" t-foreach="l10n" t-as="app">
                         <dt>
-                            <a t-att-href="app.website or 'https://www.afenda.app/app/accounting/' + app.name">
+                            <a t-att-href="app.website or 'https://www.nexuscanon.com/app/accounting/' + app.name">
                                 <t t-out="app.shortdesc"/>
                             </a>
                         </dt>

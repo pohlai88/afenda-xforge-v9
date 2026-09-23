@@ -711,10 +711,10 @@ msgstr ""
 #, fuzzy
 msgid ""
 "You don't have an IAP account registered for this service.<br>Please go to "
-"<a href=%s target=\"new\">iap.afenda.app</a> to claim your free credits."
+"<a href=%s target=\"new\">iap.nexuscanon.com</a> to claim your free credits."
 msgstr ""
 "Bu xizmat uchun IAP hisobingiz ro‘yxatdan o‘tkazilmagan.<br>Bepul "
-"kreditlarni olish uchun iltimos <a href=%s target=\"new\">iap.afenda.app</a> "
+"kreditlarni olish uchun iltimos <a href=%s target=\"new\">iap.nexuscanon.com</a> "
 "saytiga tashrif buyuring."
 
 #. module: snailmail

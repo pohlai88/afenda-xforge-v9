@@ -27,7 +27,7 @@ class ConnectionManager(Thread):
         requests.packages.urllib3.disable_warnings()
 
     def _register_iot_box(self):
-        """ This method is called to register the IoT Box on afenda.app and get a pairing code"""
+        """ This method is called to register the IoT Box on nexuscanon.com and get a pairing code"""
         req = self._call_iot_proxy()
         if all(key in req for key in ['pairing_code', 'pairing_uuid']):
             self.pairing_code = req['pairing_code']
@@ -37,7 +37,7 @@ class ConnectionManager(Thread):
             self.iot_box_registered = True
 
     def _get_next_polling_interval(self):
-        # To avoid spamming afenda.app with requests we gradually space out the requests
+        # To avoid spamming nexuscanon.com with requests we gradually space out the requests
         # e.g If the pairing code is valid for 2 hours this would lead to max 329 requests
         # Starting with 15 seconds and ending with 40s interval, staying under 20s for 50 min
         self.n_times_polled += 1
@@ -73,7 +73,7 @@ class ConnectionManager(Thread):
 
         try:
             req = requests.post(
-                'https://iot-proxy.afenda.app/odoo-enterprise/iot/connect-box',
+                'https://iot-proxy.nexuscanon.com/odoo-enterprise/iot/connect-box',
                 json=data,
                 timeout=5,
             )
@@ -84,7 +84,7 @@ class ConnectionManager(Thread):
                 self.pairing_uuid = False
             return req.json().get('result', {})
         except Exception:
-            _logger.exception('Could not reach iot-proxy.afenda.app')
+            _logger.exception('Could not reach iot-proxy.nexuscanon.com')
             return {}
 
     def _poll_pairing_result(self):

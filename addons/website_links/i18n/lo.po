@@ -363,5 +363,5 @@ msgstr "ຕ.ຢ. LinkedIn, Facebook, ຂໍ້ມູນຕິດຕໍ່, ..."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
-msgid "e.g. https://www.afenda.app/contactus"
-msgstr "ຕ.ຢ. https://www.afenda.app/contactus"
+msgid "e.g. https://www.nexuscanon.com/contactus"
+msgstr "ຕ.ຢ. https://www.nexuscanon.com/contactus"

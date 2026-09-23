@@ -544,7 +544,7 @@ function isMarkdownLink(str) {
 }
 /**
 * Check if the string is a web link.
-* e.g. http://afenda.app
+* e.g. http://nexuscanon.com
 */
 function isWebLink(str) {
 	return WEB_LINK_REGEX.test(str);
@@ -18457,7 +18457,7 @@ function hasStringValue(obj) {
 function replaceFunctionNamePlaceholder(functionResult, functionName) {
 	if (functionResult.message?.includes("[[FUNCTION_NAME]]")) functionResult.message = functionResult.message.replace("[[FUNCTION_NAME]]", functionName);
 }
-const implementationErrorMessage = _t("An unexpected error occurred. Submit a support ticket at afenda.app/help.");
+const implementationErrorMessage = _t("An unexpected error occurred. Submit a support ticket at nexuscanon.com/help.");
 function hasStringMessage(obj) {
 	return obj?.message !== void 0 && typeof obj.message === "string";
 }

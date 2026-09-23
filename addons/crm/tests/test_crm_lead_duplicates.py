@@ -18,12 +18,12 @@ class TestCRMLead(TestCrmCommon):
 
         cls.emails_provider_generic = {
             ('robert.poilvert@gmail.com', 'robert.poilvert@gmail.com'),
-            ('fp@afenda.app', 'fp@afenda.app'),
-            ('fp.alias@mail.afenda.app', 'fp.alias@mail.afenda.app'),
+            ('fp@nexuscanon.com', 'fp@nexuscanon.com'),
+            ('fp.alias@mail.nexuscanon.com', 'fp.alias@mail.nexuscanon.com'),
         }
         cls.emails_provider_company = {
             ('robert.poilvert@mycompany.com', 'mycompany.com'),
-            ('fp@subdomain.afenda.app', 'subdomain.afenda.app'),
+            ('fp@subdomain.nexuscanon.com', 'subdomain.nexuscanon.com'),
         }
 
         # customer data
@@ -65,7 +65,7 @@ class TestCRMLead(TestCrmCommon):
         # base leads on which duplicate detection is performed
         cls.lead_generic = cls.env['crm.lead'].create({
             'country_id': country_us_id,
-            'email_from': 'FP@afenda.app',
+            'email_from': 'FP@nexuscanon.com',
             'name': 'Generic 1',
             'partner_id': cls.test_partners[0].id,
             'phone': '+1 202 555 0123',
@@ -84,42 +84,42 @@ class TestCRMLead(TestCrmCommon):
         cls.lead_generic_email_dupes = cls.env['crm.lead'].create([
             # email based: normalized version used for email domain criterion
             {
-                'email_from': '"Fabulous Fab" <fp@afenda.app>',
-                'name': 'Dupe1 of fp@afenda.app (same email)',
+                'email_from': '"Fabulous Fab" <fp@nexuscanon.com>',
+                'name': 'Dupe1 of fp@nexuscanon.com (same email)',
                 'type': 'lead',
             },
             {
-                'email_from': 'FP@afenda.app',
-                'name': 'Dupe2 of fp@afenda.app (same email)',
+                'email_from': 'FP@nexuscanon.com',
+                'name': 'Dupe2 of fp@nexuscanon.com (same email)',
                 'type': 'lead',
             },
             # phone_sanitized based
             {
-                'email_from': 'not.fp@not.afenda.app',
-                'name': 'Dupe3 of fp@afenda.app (same phone sanitized)',
+                'email_from': 'not.fp@not.nexuscanon.com',
+                'name': 'Dupe3 of fp@nexuscanon.com (same phone sanitized)',
                 'phone': '+1 202 555 0123',
                 'type': 'lead',
             },
             {
-                'email_from': 'not.fp@not.afenda.app',
+                'email_from': 'not.fp@not.nexuscanon.com',
                 'phone': '+1 202 555 0123',
-                'name': 'Dupe4 of fp@afenda.app (same phone sanitized)',
+                'name': 'Dupe4 of fp@nexuscanon.com (same phone sanitized)',
                 'type': 'lead',
             },
             # same commercial entity
             {
-                'name': 'Dupe5 of fp@afenda.app (same commercial entity)',
+                'name': 'Dupe5 of fp@nexuscanon.com (same commercial entity)',
                 'partner_id': cls.test_partners[1].id,
             },
             {
-                'name': 'Dupe6 of fp@afenda.app (same commercial entity)',
+                'name': 'Dupe6 of fp@nexuscanon.com (same commercial entity)',
                 'partner_id': cls.test_company.id,
             }
         ])
         cls.lead_generic_email_notdupes = cls.env['crm.lead'].create([
             # email: check for exact match
             {
-                'email_from': 'not.fp@afenda.app',
+                'email_from': 'not.fp@nexuscanon.com',
                 'name': 'NotADupe1',
                 'type': 'lead',
             },
@@ -139,14 +139,14 @@ class TestCRMLead(TestCrmCommon):
             # phone_sanitized based
             {
                 'email_from': 'not.floppy@not.mycompany.com',
-                'name': 'Dupe3 of fp@afenda.app (same phone sanitized)',
+                'name': 'Dupe3 of fp@nexuscanon.com (same phone sanitized)',
                 'phone': '+1 202 666 4567',
                 'type': 'lead',
             },
             {
                 'email_from': 'not.floppy@not.mycompany.com',
                 'phone': '+1 202 666 4567',
-                'name': 'Dupe4 of fp@afenda.app (same phone sanitized)',
+                'name': 'Dupe4 of fp@nexuscanon.com (same phone sanitized)',
                 'type': 'lead',
             },
         ])
@@ -163,8 +163,8 @@ class TestCRMLead(TestCrmCommon):
         """ Just be sure of initial value for those tests """
         lead_generic = self.lead_generic.with_env(self.env)
         self.assertEqual(lead_generic.phone_sanitized, '+12025550123')
-        self.assertEqual(lead_generic.email_domain_criterion, 'fp@afenda.app')
-        self.assertEqual(lead_generic.email_normalized, 'fp@afenda.app')
+        self.assertEqual(lead_generic.email_domain_criterion, 'fp@nexuscanon.com')
+        self.assertEqual(lead_generic.email_normalized, 'fp@nexuscanon.com')
 
         lead_company = self.lead_company.with_env(self.env)
         self.assertEqual(lead_company.phone_sanitized, '+12026664567')

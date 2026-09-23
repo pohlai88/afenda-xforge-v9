@@ -13,23 +13,23 @@ class TestGamificationBadge(TestHrCommon):
         .create([
             {
                 "name": "demo_user",
-                "login": "demo@afenda.app",
-                "email": "demo@afenda.app",
+                "login": "demo@nexuscanon.com",
+                "email": "demo@nexuscanon.com",
                 "group_ids": [Command.link(cls.env.ref("base.group_user").id)],
             }, {
                 "name": "demo2_user",
-                "login": "demo2@afenda.app",
-                "email": "demo2@afenda.app",
+                "login": "demo2@nexuscanon.com",
+                "email": "demo2@nexuscanon.com",
                 "group_ids": [Command.link(cls.env.ref("base.group_user").id)],
             }, {
                 "name": "demo3_user",
-                "login": "demo3@afenda.app",
-                "email": "demo3@afenda.app",
+                "login": "demo3@nexuscanon.com",
+                "email": "demo3@nexuscanon.com",
                 "group_ids": [Command.link(cls.env.ref("base.group_user").id)],
             }, {
                 "name": "demo4_manager",
-                "login": "demo4@afenda.app",
-                "email": "demo4@afenda.app",
+                "login": "demo4@nexuscanon.com",
+                "email": "demo4@nexuscanon.com",
                 "group_ids": [Command.link(cls.env.ref("hr.group_hr_user").id)],
             },
         ]))

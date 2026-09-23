@@ -928,8 +928,8 @@ msgstr "örn. : OpenWood Dekorasyon"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form
-msgid "e.g. : https://www.afenda.app"
-msgstr "örn. : https://www.afenda.app"
+msgid "e.g. : https://www.nexuscanon.com"
+msgstr "örn. : https://www.nexuscanon.com"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form

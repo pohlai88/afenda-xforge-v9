@@ -3,7 +3,7 @@
     'name': "AFENDA Bot - HR",
     'summary': """Bridge module between hr and mailbot.""",
     'description': """This module adds the AFENDA Bot state and notifications in the user form modified by hr.""",
-    'website': "https://www.afenda.app/app/discuss",
+    'website': "https://www.nexuscanon.com/app/discuss",
     'category': 'Productivity/Discuss',
     'version': '1.0',
     'depends': ['mail_bot', 'hr'],

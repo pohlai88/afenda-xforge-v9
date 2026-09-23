@@ -119,10 +119,10 @@ test("documentation_link: absolute path (http)", async () => {
         arch: /* xml */ `
             <form>
                 <field name="bar"/>
-                <widget name="documentation_link" path="http://www.afenda.app/"/>
+                <widget name="documentation_link" path="http://www.nexuscanon.com/"/>
             </form>`,
     });
-    expect(".o_doc_link").toHaveAttribute("href", "http://www.afenda.app/");
+    expect(".o_doc_link").toHaveAttribute("href", "http://www.nexuscanon.com/");
 });
 
 test("documentation_link: absolute path (https)", async () => {
@@ -132,9 +132,9 @@ test("documentation_link: absolute path (https)", async () => {
         arch: /* xml */ `
         <form>
             <field name="bar"/>
-            <widget name="documentation_link" path="https://www.afenda.app/"/>
+            <widget name="documentation_link" path="https://www.nexuscanon.com/"/>
         </form>`,
     });
 
-    expect(".o_doc_link").toHaveAttribute("href", "https://www.afenda.app/");
+    expect(".o_doc_link").toHaveAttribute("href", "https://www.nexuscanon.com/");
 });

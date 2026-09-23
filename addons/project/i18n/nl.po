@@ -5151,7 +5151,7 @@ msgstr ""
 #: model:ir.model.fields,help:project.field_project_project__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "De naam van de e-mailalias, bv. 'vacature' als je alle mails van "
 "<vacature@jouwbedrijf.com> wilt opvangen"

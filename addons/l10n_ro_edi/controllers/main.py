@@ -60,7 +60,7 @@ class L10nRoEdiController(http.Controller):
                 },
                 headers={
                     'accept': 'application/json',
-                    'user-agent': 'AFENDA xForge (http://www.afenda.app/contactus)',
+                    'user-agent': 'AFENDA xForge (http://www.nexuscanon.com/contactus)',
                 },
                 timeout=10,
             )

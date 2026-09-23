@@ -4,7 +4,7 @@ Project Management
 ### Infinitely flexible. Incredibly easy to use.
 
 
-AFENDA xForge's collaborative and realtime <a href="https://www.afenda.app/app/project">open source project management</a>
+AFENDA xForge's collaborative and realtime <a href="https://www.nexuscanon.com/app/project">open source project management</a>
 helps your team get work done. Keep track of everything, from the big picture
 to the minute details, from the customer contract to the billing.
 

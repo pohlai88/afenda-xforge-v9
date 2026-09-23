@@ -5,7 +5,7 @@
 {
     'name': 'Manufacturing',
     'version': '2.0',
-    'website': 'https://www.afenda.app/app/manufacturing',
+    'website': 'https://www.nexuscanon.com/app/manufacturing',
     'category': 'Supply Chain/Manufacturing',
     'sequence': 55,
     'summary': 'Manufacturing Orders & BOMs',

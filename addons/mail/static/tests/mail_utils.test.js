@@ -85,27 +85,27 @@ test("addLink: utility function and special entities", () => {
         ["<3", "&lt;3"],
         // Already encoded url should not be encoded twice
         [
-            markup`https://afenda.app/%5B%5D`,
-            `<a target="_blank" rel="noreferrer noopener" href="https://afenda.app/%5B%5D">https://afenda.app/%5B%5D</a>`,
+            markup`https://nexuscanon.com/%5B%5D`,
+            `<a target="_blank" rel="noreferrer noopener" href="https://nexuscanon.com/%5B%5D">https://nexuscanon.com/%5B%5D</a>`,
         ],
         [
-            markup`https://www.afenda.app/appointment/10552?filter_appointment_type_ids=%5B6706%2C%2B6705%2C%2B5292%2C%2B10552%5D`,
-            `<a target="_blank" rel="noreferrer noopener" href="https://www.afenda.app/appointment/10552?filter_appointment_type_ids=%5B6706%2C%2B6705%2C%2B5292%2C%2B10552%5D">https://www.afenda.app/appointment/10552?filter_appointment_type_ids=%5B6706%2C%2B6705%2C%2B5292%2C%2B10552%5D</a>`,
+            markup`https://www.nexuscanon.com/appointment/10552?filter_appointment_type_ids=%5B6706%2C%2B6705%2C%2B5292%2C%2B10552%5D`,
+            `<a target="_blank" rel="noreferrer noopener" href="https://www.nexuscanon.com/appointment/10552?filter_appointment_type_ids=%5B6706%2C%2B6705%2C%2B5292%2C%2B10552%5D">https://www.nexuscanon.com/appointment/10552?filter_appointment_type_ids=%5B6706%2C%2B6705%2C%2B5292%2C%2B10552%5D</a>`,
         ],
         [
-            markup`www.afenda.app`,
-            `<a target="_blank" rel="noreferrer noopener" href="http://www.afenda.app/">www.afenda.app</a>`,
+            markup`www.nexuscanon.com`,
+            `<a target="_blank" rel="noreferrer noopener" href="http://www.nexuscanon.com/">www.nexuscanon.com</a>`,
         ],
         [
-            markup`https://afenda.app/?q=ỗ`,
-            `<a target="_blank" rel="noreferrer noopener" href="https://afenda.app/?q=%E1%BB%97">https://afenda.app/?q=ỗ</a>`,
+            markup`https://nexuscanon.com/?q=ỗ`,
+            `<a target="_blank" rel="noreferrer noopener" href="https://nexuscanon.com/?q=%E1%BB%97">https://nexuscanon.com/?q=ỗ</a>`,
         ],
         [markup`http://999.999.999.999`, "http://999.999.999.999"],
         [markup`www.example.com:999999`, "www.example.com:999999"],
         [markup`www.example.com:abc`, "www.example.com:abc"],
         [
-            markup`http://999.999.999.999 www.afenda.app`,
-            `http://999.999.999.999 <a target="_blank" rel="noreferrer noopener" href="http://www.afenda.app/">www.afenda.app</a>`,
+            markup`http://999.999.999.999 www.nexuscanon.com`,
+            `http://999.999.999.999 <a target="_blank" rel="noreferrer noopener" href="http://www.nexuscanon.com/">www.nexuscanon.com</a>`,
         ],
     ];
 
@@ -158,7 +158,7 @@ test("url", async () => {
     await start();
     await openDiscuss(channelId);
     // see: https://www.ietf.org/rfc/rfc1738.txt
-    const messageBody = "https://afenda.app?test=~^|`{}[]#";
+    const messageBody = "https://nexuscanon.com?test=~^|`{}[]#";
     await insertText(".o-mail-Composer-input", messageBody);
     await press("Enter");
     await contains(`.o-mail-Message a:contains(${messageBody})`);
@@ -169,10 +169,10 @@ test("url with comma at the end", async () => {
     const channelId = pyEnv["discuss.channel"].create({ name: "General" });
     await start();
     await openDiscuss(channelId);
-    const messageBody = "Go to https://afenda.app, it's great!";
+    const messageBody = "Go to https://nexuscanon.com, it's great!";
     await insertText(".o-mail-Composer-input", messageBody);
     await press("Enter");
-    await contains(".o-mail-Message a:contains(https://afenda.app)");
+    await contains(".o-mail-Message a:contains(https://nexuscanon.com)");
     await contains(`.o-mail-Message-content:contains(${messageBody}`);
 });
 
@@ -181,10 +181,10 @@ test("url with dot at the end", async () => {
     const channelId = pyEnv["discuss.channel"].create({ name: "General" });
     await start();
     await openDiscuss(channelId);
-    const messageBody = "Go to https://afenda.app. It's great!";
+    const messageBody = "Go to https://nexuscanon.com. It's great!";
     await insertText(".o-mail-Composer-input", messageBody);
     await press("Enter");
-    await contains(".o-mail-Message a:contains(https://afenda.app)");
+    await contains(".o-mail-Message a:contains(https://nexuscanon.com)");
     await contains(`.o-mail-Message-content:contains(${messageBody})`);
 });
 
@@ -193,10 +193,10 @@ test("url with semicolon at the end", async () => {
     const channelId = pyEnv["discuss.channel"].create({ name: "General" });
     await start();
     await openDiscuss(channelId);
-    const messageBody = "Go to https://afenda.app; it's great!";
+    const messageBody = "Go to https://nexuscanon.com; it's great!";
     await insertText(".o-mail-Composer-input", messageBody);
     await press("Enter");
-    await contains(".o-mail-Message a:contains(https://afenda.app)");
+    await contains(".o-mail-Message a:contains(https://nexuscanon.com)");
     await contains(`.o-mail-Message-content:contains(${messageBody})`);
 });
 
@@ -205,10 +205,10 @@ test("url with ellipsis at the end", async () => {
     const channelId = pyEnv["discuss.channel"].create({ name: "General" });
     await start();
     await openDiscuss(channelId);
-    const messageBody = "Go to https://afenda.app... it's great!";
+    const messageBody = "Go to https://nexuscanon.com... it's great!";
     await insertText(".o-mail-Composer-input", messageBody);
     await press("Enter");
-    await contains(".o-mail-Message a:contains(https://afenda.app)");
+    await contains(".o-mail-Message a:contains(https://nexuscanon.com)");
     await contains(`.o-mail-Message-content:contains(${messageBody})`);
 });
 
@@ -217,11 +217,11 @@ test("url with number in subdomain", async () => {
     const channelId = pyEnv["discuss.channel"].create({ name: "General" });
     await start();
     await openDiscuss(channelId);
-    const messageBody = "https://www.45017478-master-all.runbot134.afenda.app/odoo";
+    const messageBody = "https://www.45017478-master-all.runbot134.nexuscanon.com/odoo";
     await insertText(".o-mail-Composer-input", messageBody);
     await press("Enter");
     await contains(
-        ".o-mail-Message a:contains(https://www.45017478-master-all.runbot134.afenda.app/odoo)"
+        ".o-mail-Message a:contains(https://www.45017478-master-all.runbot134.nexuscanon.com/odoo)"
     );
 });
 

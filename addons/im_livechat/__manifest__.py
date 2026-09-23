@@ -5,7 +5,7 @@
     'sequence': 210,
     'summary': 'Chat with your website visitors',
     'category': 'Website/Live Chat',
-    'website': 'https://www.afenda.app/app/live-chat',
+    'website': 'https://www.nexuscanon.com/app/live-chat',
     'description':
         """
 Live Chat Support

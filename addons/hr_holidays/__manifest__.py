@@ -7,7 +7,7 @@
     'category': 'Human Resources/Time Off',
     'sequence': 85,
     'summary': 'Allocate time off and follow leave requests',
-    'website': 'https://www.afenda.app/app/time-off',
+    'website': 'https://www.nexuscanon.com/app/time-off',
     'description': """
 Manage time off requests and allocations
 ========================================

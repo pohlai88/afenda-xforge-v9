@@ -389,7 +389,7 @@ msgid ""
 "</td></tr>\n"
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    Powered by <a target=\"_blank\" href=\"https://www.afenda.app?"
+"    Powered by <a target=\"_blank\" href=\"https://www.nexuscanon.com?"
 "utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: "
 "{{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
@@ -499,7 +499,7 @@ msgstr ""
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
 "    Aangeboden door <a target=\"_blank\" href=\"https://"
-"www.afenda.app?utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: {"
+"www.nexuscanon.com?utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: {"
 "{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
 "</table>\n"
@@ -3985,7 +3985,7 @@ msgstr ""
 #: model:ir.model.fields,help:crm.field_crm_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "De naam van de e-mailalias, bv. 'vacature' als je alle mails van "
 "<vacature@jouwbedrijf.com> wilt opvangen"
@@ -4626,8 +4626,8 @@ msgstr "bijv. Te duur"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
-msgid "e.g. https://www.afenda.app"
-msgstr "bijvoorbeeld https://www.afenda.app"
+msgid "e.g. https://www.nexuscanon.com"
+msgstr "bijvoorbeeld https://www.nexuscanon.com"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.sales_team_form_view_in_crm

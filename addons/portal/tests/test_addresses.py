@@ -40,7 +40,7 @@ class TestPortalAddresses(BaseCommon, HttpCase):
         cls.company_partner = cls.env['res.partner'].create({
             'name': 'Test AFENDA xForge SA',
             'is_company': True,
-            'email': 'odoo@afenda.app',
+            'email': 'odoo@nexuscanon.com',
             'street': 'Chau. de Namur 40',
             'city': 'Ramillies',
             'zip': '1367',

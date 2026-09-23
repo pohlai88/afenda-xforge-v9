@@ -62,7 +62,7 @@ class TestRecruitment(TransactionCase):
             {
                 'active': False,  # Refused/archived application should still count
                 'partner_name': 'Application A',
-                'email_from': 'abc@afenda.app',
+                'email_from': 'abc@nexuscanon.com',
                 'partner_phone': '123',
             },
             {
@@ -71,12 +71,12 @@ class TestRecruitment(TransactionCase):
             },
             {
                 'partner_name': 'Application C',
-                'email_from': 'def@afenda.app',
+                'email_from': 'def@nexuscanon.com',
                 'partner_phone': '123',
             },
             {
                 'partner_name': 'Application D',
-                'email_from': 'abc@afenda.app',
+                'email_from': 'abc@nexuscanon.com',
                 'partner_phone': '456',
             },
             {
@@ -85,7 +85,7 @@ class TestRecruitment(TransactionCase):
             },
             {
                 'partner_name': 'Application F',
-                'email_from': 'ghi@afenda.app',
+                'email_from': 'ghi@nexuscanon.com',
                 'partner_phone': '789',
             },
             {

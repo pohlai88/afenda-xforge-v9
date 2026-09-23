@@ -3653,7 +3653,7 @@ msgstr "Naziv diplome pri zaposlovanju mora biti unikaten!"
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "Naziv e-poštnega vzdevka, npr. 'zaposlovanje', če želite loviti e-pošto za "
 "<zaposlovanje@domena.com>"

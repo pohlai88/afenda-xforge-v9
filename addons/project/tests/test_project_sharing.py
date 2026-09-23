@@ -725,7 +725,7 @@ class TestProjectSharing(TestProjectSharingCommon):
         portal_user = self.env['res.users'].create({
             'name': 'Portal User',
             'login': 'portaluser',
-            'email': 'portaluser@afenda.app',
+            'email': 'portaluser@nexuscanon.com',
             'group_ids': [(6, 0, [self.env.ref('base.group_portal').id])],
         })
         project = self.env['project.project'].create({

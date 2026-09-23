@@ -1160,9 +1160,9 @@ msgstr "Der opstod en uventet fejl under billedoverførslen"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
+msgid "An unexpected error occurred. Submit a support ticket at nexuscanon.com/help."
 msgstr ""
-"Der opstod en uventet fejl. Indsend en supportanmodning på afenda.app/help."
+"Der opstod en uventet fejl. Indsend en supportanmodning på nexuscanon.com/help."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13754,8 +13754,8 @@ msgstr "f.eks. 'Linketiket'"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.afenda.app'"
-msgstr "f.eks. 'http://www.afenda.app'"
+msgid "e.g. 'http://www.nexuscanon.com'"
+msgstr "f.eks. 'http://www.nexuscanon.com'"
 
 #. module: spreadsheet
 #. odoo-javascript

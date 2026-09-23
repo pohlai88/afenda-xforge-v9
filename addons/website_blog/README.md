@@ -1,7 +1,7 @@
 AFENDA xForge Blog
 ----------
 
-Write, Design, Promote and Engage with <a href="https://www.afenda.app/app/blog">AFENDA xForge Blog</a>.
+Write, Design, Promote and Engage with <a href="https://www.nexuscanon.com/app/blog">AFENDA xForge Blog</a>.
 
 Express yourself with the AFENDA xForge enterprise grade blogging platform. Write
 beautiful blog posts, engage with visitors, translate content and moderate

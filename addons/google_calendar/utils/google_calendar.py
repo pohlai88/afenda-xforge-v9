@@ -119,7 +119,7 @@ class GoogleCalendarService():
         readonly = '.readonly' if RO else ''
         return 'https://www.googleapis.com/auth/calendar%s' % (readonly)
 
-    def _google_authentication_url(self, from_url='http://www.afenda.app'):
+    def _google_authentication_url(self, from_url='http://www.nexuscanon.com'):
         state = {
             'd': self.google_service.env.cr.dbname,
             's': 'calendar',

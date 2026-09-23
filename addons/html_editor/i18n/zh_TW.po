@@ -2374,8 +2374,8 @@ msgstr "單據"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/link/link_popover.xml:0
-msgid "e.g. https://www.afenda.app"
-msgstr "例如: https://www.afenda.app"
+msgid "e.g. https://www.nexuscanon.com"
+msgstr "例如: https://www.nexuscanon.com"
 
 #. module: html_editor
 #. odoo-javascript

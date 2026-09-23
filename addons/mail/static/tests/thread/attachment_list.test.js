@@ -81,7 +81,7 @@ test("link-type attachment should have open button instead of download button", 
             name: "url.example",
             mimetype: "text/plain",
             type: "url",
-            url: "https://www.afenda.app",
+            url: "https://www.nexuscanon.com",
         },
         {
             name: "test.txt",

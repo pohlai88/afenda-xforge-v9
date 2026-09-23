@@ -4033,10 +4033,10 @@ msgstr "멋진 아이콘 폰트 예: fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
+"href=\"mailto:events@nexuscanon.com\">events@nexuscanon.com</a>"
 msgstr ""
 "추가적인 문의 사항은 <a class=\"o_translate_inline\" "
-"href=\"mailto:events@afenda.app\">events@afenda.app</a>으로 연락주세요."
+"href=\"mailto:events@nexuscanon.com\">events@nexuscanon.com</a>으로 연락주세요."
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -6364,8 +6364,8 @@ msgstr "예: '프로모션'"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.afenda.app\""
-msgstr "예: \"https://www.afenda.app\""
+msgid "e.g. \"https://www.nexuscanon.com\""
+msgstr "예: \"https://www.nexuscanon.com\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

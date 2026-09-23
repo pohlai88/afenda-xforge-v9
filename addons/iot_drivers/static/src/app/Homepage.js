@@ -172,7 +172,7 @@ export class Homepage extends Component {
                 <hr class="mt-5" />
                 <FooterButtons />
                 <div class="d-flex justify-content-center gap-2 mt-2" t-if="!store.base.is_access_point_up">
-                    <a href="https://www.afenda.app/fr_FR/help" target="_blank" class="link-primary">Help</a>
+                    <a href="https://www.nexuscanon.com/fr_FR/help" target="_blank" class="link-primary">Help</a>
                     <a href="/docs/applications/general/iot.html" target="_blank" class="link-primary">Documentation</a>
                 </div>
             </div>

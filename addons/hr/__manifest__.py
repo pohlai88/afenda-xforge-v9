@@ -6,7 +6,7 @@
     'category': 'Human Resources/Employees',
     'sequence': 95,
     'summary': 'Centralize employee information',
-    'website': 'https://www.afenda.app/app/employees',
+    'website': 'https://www.nexuscanon.com/app/employees',
     'images': [
         'static/src/img/default_image.png',
     ],

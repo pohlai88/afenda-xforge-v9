@@ -2406,8 +2406,8 @@ msgstr "Dokument"
 #. module: html_editor
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/link/link_popover.xml:0
-msgid "e.g. https://www.afenda.app"
-msgstr "z. B. https://www.afenda.app"
+msgid "e.g. https://www.nexuscanon.com"
+msgstr "z. B. https://www.nexuscanon.com"
 
 #. module: html_editor
 #. odoo-javascript

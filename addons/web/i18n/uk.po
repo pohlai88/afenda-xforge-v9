@@ -4507,7 +4507,7 @@ msgstr "Muslim"
 #. odoo-javascript
 #: code:addons/web/static/src/webclient/user_menu/user_menu_items.js:0
 msgid "My AFENDA xForge.com Account"
-msgstr "Мій обліковий запис afenda.app"
+msgstr "Мій обліковий запис nexuscanon.com"
 
 #. module: web
 #. odoo-javascript

@@ -20831,8 +20831,8 @@ msgstr ""
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
-msgid "e.g. https://www.afenda.app"
-msgstr "למשל: https://www.afenda.app"
+msgid "e.g. https://www.nexuscanon.com"
+msgstr "למשל: https://www.nexuscanon.com"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form

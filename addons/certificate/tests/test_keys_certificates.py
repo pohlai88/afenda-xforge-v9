@@ -24,7 +24,7 @@ class TestKeysCertificates(TransactionCase):
             x509.NameAttribute(x509.oid.NameOID.STATE_OR_PROVINCE_NAME, "Brabant wallon"),
             x509.NameAttribute(x509.oid.NameOID.LOCALITY_NAME, "Grand Rosière"),
             x509.NameAttribute(x509.oid.NameOID.ORGANIZATION_NAME, "AFENDA xForge S.A."),
-            x509.NameAttribute(x509.oid.NameOID.COMMON_NAME, "afenda.app"),
+            x509.NameAttribute(x509.oid.NameOID.COMMON_NAME, "nexuscanon.com"),
         ])
 
         private_key = rsa.generate_private_key(public_exponent=65537, key_size=2048)

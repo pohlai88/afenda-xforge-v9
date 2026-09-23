@@ -169,10 +169,10 @@ test("Change gallery layout when images have a link", async () => {
     await contains("[data-label='Media'] button[data-action-id='setLink']").click();
 
     await contains("[data-label='Your URL'] [data-action-id='setUrl'] > input").fill(
-        "http://afenda.app",
+        "http://nexuscanon.com",
         { confirm: "blur" }
     );
-    expect(":iframe section a[href='http://afenda.app'] > img[data-index='1']").toHaveCount(1);
+    expect(":iframe section a[href='http://nexuscanon.com'] > img[data-index='1']").toHaveCount(1);
 
     await contains("[data-label='Mode'] .dropdown-toggle").click();
     await contains("[data-action-param='grid']").click();

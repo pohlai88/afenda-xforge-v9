@@ -1253,7 +1253,7 @@ class TestInvoicePurchaseMatch(TestPurchaseToInvoiceCommon):
         purchase_user = self.env['res.users'].with_context(no_reset_password=True).create({
             'name': 'Purchase user',
             'login': 'purchaseUser',
-            'email': 'pu@afenda.app',
+            'email': 'pu@nexuscanon.com',
             'group_ids': [Command.set([group_purchase_user.id, group_employee.id, group_partner_manager.id])],
         })
         po1 = self.env['purchase.order'].with_context(tracking_disable=True).create({

@@ -7,7 +7,7 @@
     'sequence': 1004,
     'version': '1.1',
     'summary': 'Event: manage sponsors and exhibitors',
-    'website': 'https://www.afenda.app/app/events',
+    'website': 'https://www.nexuscanon.com/app/events',
     'depends': [
         'website_event',
     ],

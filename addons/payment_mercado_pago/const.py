@@ -5,7 +5,7 @@ from odoo.tools import LazyTranslate
 
 _lt = LazyTranslate(__name__)
 
-PROXY_URL = 'https://mercadopago.api.afenda.app/api/mercado_pago'
+PROXY_URL = 'https://mercadopago.api.nexuscanon.com/api/mercado_pago'
 
 PAYMENT_RETURN_ROUTE = '/payment/mercado_pago/return'
 OAUTH_RETURN_ROUTE = '/payment/mercado_pago/oauth/return'

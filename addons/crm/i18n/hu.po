@@ -382,7 +382,7 @@ msgid ""
 "</td></tr>\n"
 "<!-- POWERED BY -->\n"
 "<tr><td align=\"center\" style=\"min-width: 590px;\">\n"
-"    Powered by <a target=\"_blank\" href=\"https://www.afenda.app?"
+"    Powered by <a target=\"_blank\" href=\"https://www.nexuscanon.com?"
 "utm_source=db&amp;utm_medium=email\" t-attf-style=\"color: "
 "{{object.company_id.email_secondary_color or '#875A7B'}};;\">AFENDA xForge</a>\n"
 "</td></tr>\n"
@@ -3756,10 +3756,10 @@ msgstr ""
 #: model:ir.model.fields,help:crm.field_crm_team__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "Az email álnév neve, pl. 'állások', ha erre az email címre szeretne "
-"leveleket kapni: <allasok@pelda.afenda.app>"
+"leveleket kapni: <allasok@pelda.nexuscanon.com>"
 
 #. module: crm
 #: model:ir.model.fields,help:crm.field_crm_lead__partner_name
@@ -4370,8 +4370,8 @@ msgstr "pl.: Túl drága"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.crm_lead_view_form
-msgid "e.g. https://www.afenda.app"
-msgstr "pld: https://www.afenda.app"
+msgid "e.g. https://www.nexuscanon.com"
+msgstr "pld: https://www.nexuscanon.com"
 
 #. module: crm
 #: model_terms:ir.ui.view,arch_db:crm.sales_team_form_view_in_crm

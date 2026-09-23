@@ -7,7 +7,7 @@
     'category': 'Human Resources/Recruitment',
     'sequence': 90,
     'summary': 'Track your recruitment pipeline',
-    'website': 'https://www.afenda.app/app/recruitment',
+    'website': 'https://www.nexuscanon.com/app/recruitment',
     'depends': [
         'hr',
         'calendar',

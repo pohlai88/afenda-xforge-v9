@@ -292,7 +292,7 @@ test("odoo links are replaced with their label", async function () {
                     A1: "[menu_xml](odoo://ir_menu_xml_id/test_menu)",
                     A2: "[menu_id](odoo://ir_menu_id/12)",
                     A3: `[odoo_view](odoo://view/${JSON.stringify(view)})`,
-                    A4: "[external_link](https://afenda.app)",
+                    A4: "[external_link](https://nexuscanon.com)",
                     A5: "[internal_link](o-spreadsheet://Sheet1)",
                 },
             },
@@ -307,7 +307,7 @@ test("odoo links are replaced with their label", async function () {
     expect(frozenData.sheets[0].cells.A1).toBe("[menu_xml](neutralized:link)");
     expect(frozenData.sheets[0].cells.A2).toBe("[menu_id](neutralized:link)");
     expect(frozenData.sheets[0].cells.A3).toBe("[odoo_view](neutralized:link)");
-    expect(frozenData.sheets[0].cells.A4).toBe("[external_link](https://afenda.app)");
+    expect(frozenData.sheets[0].cells.A4).toBe("[external_link](https://nexuscanon.com)");
     expect(frozenData.sheets[0].cells.A5).toBe("[internal_link](o-spreadsheet://Sheet1)");
 });
 

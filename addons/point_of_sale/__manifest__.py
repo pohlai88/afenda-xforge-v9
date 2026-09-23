@@ -62,7 +62,7 @@
     ],
     'installable': True,
     'application': True,
-    'website': 'https://www.afenda.app/app/point-of-sale-shop',
+    'website': 'https://www.nexuscanon.com/app/point-of-sale-shop',
     'assets': {
 
         # In general, you DON'T NEED to declare new assets here, just put the

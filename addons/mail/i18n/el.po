@@ -11139,10 +11139,10 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "Το όνομα του ψευδώνυμου email , π.χ. 'jobs', αν θέλετε να πάρετε emails για "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 
 #. module: mail
 #. odoo-python
@@ -12430,13 +12430,13 @@ msgstr ""
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.afenda.app)."
+"email server (@mycompany.nexuscanon.com)."
 msgstr ""
 "Η χρήση του δικού σας διακομιστή ηλεκτρονικού ταχυδρομείου απαιτείται για "
 "την αποστολή / λήψη μηνυμάτων ηλεκτρονικού ταχυδρομείου στις εκδόσεις "
 "Community και Enterprise. Οι χρήστες του προϊόντος AFENDA xForge Online ήδη "
 "επωφελούνται από έναν έτοιμο προς χρήση διακομιστή ηλεκτρονικού ταχυδρομείου "
-"(@mycompany.afenda.app)."
+"(@mycompany.nexuscanon.com)."
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

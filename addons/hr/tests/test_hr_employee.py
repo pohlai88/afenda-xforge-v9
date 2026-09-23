@@ -234,18 +234,18 @@ class TestHrEmployee(TestHrCommon):
             {
                 'name': 'Test User',
                 'login': 'test_user',
-                'email': 'test_user@afenda.app',
+                'email': 'test_user@nexuscanon.com',
             },
             {
                 'name': 'Test User 2',
                 'login': 'test_user_2',
-                'email': 'test_user_2@afenda.app',
+                'email': 'test_user_2@nexuscanon.com',
                 'create_employee': True,
             },
             {
                 'name': 'Test User 3',
                 'login': 'test_user_3',
-                'email': 'test_user_3@afenda.app',
+                'email': 'test_user_3@nexuscanon.com',
                 'create_employee_id': employee.id,
             },
         ])
@@ -264,7 +264,7 @@ class TestHrEmployee(TestHrCommon):
         self.env['res.users'].signup({
             'name': 'Test User',
             'login': 'test_user',
-            'email': 'test_user@afenda.app',
+            'email': 'test_user@nexuscanon.com',
             'password': 'test_user_password',
             'partner_id': partner.id,
         })

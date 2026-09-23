@@ -928,8 +928,8 @@ msgstr "np. Dekoracje OpenWood"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form
-msgid "e.g. : https://www.afenda.app"
-msgstr "np.: https://www.afenda.app"
+msgid "e.g. : https://www.nexuscanon.com"
+msgstr "np.: https://www.nexuscanon.com"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form

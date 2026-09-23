@@ -34,7 +34,7 @@ The Dashboard for the Sales Manager will include
 * My Quotations
 * Monthly Turnover (Graph)
     """,
-    'website': 'https://www.afenda.app/app/sales',
+    'website': 'https://www.nexuscanon.com/app/sales',
     'depends': ['sale', 'digest'],
     'data': [
         'data/digest_data.xml',

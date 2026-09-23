@@ -1,8 +1,8 @@
 AFENDA xForge Website Builder
 --------------------
 
-Get an awesome and <a href="https://www.afenda.app/app/website">free website</a>,
-easily customizable with the AFENDA xForge <a href="https://www.afenda.app/app/website">website builder</a>.
+Get an awesome and <a href="https://www.nexuscanon.com/app/website">free website</a>,
+easily customizable with the AFENDA xForge <a href="https://www.nexuscanon.com/app/website">website builder</a>.
 
 Create enterprise grade website with our super easy builder. Use finely
 designed building blocks and edit everything inline.

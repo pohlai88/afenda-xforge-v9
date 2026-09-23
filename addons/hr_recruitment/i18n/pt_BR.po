@@ -3654,7 +3654,7 @@ msgstr "O nome do grau de recrutamento deve ser único."
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "O nome do alias de e-mail, por exemplo, 'empregos', se desejar receber e-"
 "mails enviados a <empregos@suaempresa.com.br>"

@@ -3302,10 +3302,10 @@ msgstr "A toborzási fok nevének egyedinek kell lennie!"
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "Az e-mail álnév neve, pl. 'állások', ha erre az e-mailcímre szeretne "
-"leveleket kapni: <allasok@pelda.afenda.app>"
+"leveleket kapni: <allasok@pelda.nexuscanon.com>"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_talent_pool__no_of_talents

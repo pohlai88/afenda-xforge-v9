@@ -562,7 +562,7 @@ test("mention 2 different channels that have the same name", async () => {
 test("Post a message containing an email address followed by a mention on another line", async () => {
     const pyEnv = await startServer();
     const partnerId = pyEnv["res.partner"].create({
-        email: "testpartner@afenda.app",
+        email: "testpartner@nexuscanon.com",
         name: "TestPartner",
     });
     const channelId = pyEnv["discuss.channel"].create({
@@ -574,9 +574,9 @@ test("Post a message containing an email address followed by a mention on anothe
     });
     await start();
     await openDiscuss(channelId);
-    await insertText(".o-mail-Composer-input", "email@afenda.app\n@Te");
+    await insertText(".o-mail-Composer-input", "email@nexuscanon.com\n@Te");
     await click(".o-mail-Composer-suggestion");
-    await contains(".o-mail-Composer-input", { value: "email@afenda.app\n@TestPartner " });
+    await contains(".o-mail-Composer-input", { value: "email@nexuscanon.com\n@TestPartner " });
     await press("Enter");
     await contains(
         `.o-mail-Message-body .o_mail_redirect[data-oe-id="${partnerId}"][data-oe-model="res.partner"]`,

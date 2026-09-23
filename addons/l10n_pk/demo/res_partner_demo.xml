@@ -9,9 +9,9 @@
             <field name="state_id" ref='base.state_pk_pb'/>
             <field name="zip">54000</field>
             <field name="country_id" ref="base.pk"/>
-            <field name="email">support@punjabpartner.afenda.app</field>
+            <field name="email">support@punjabpartner.nexuscanon.com</field>
             <field name="phone">+92 9876543210</field>
-            <field name="website">http://punjabpartner.afenda.app</field>
+            <field name="website">http://punjabpartner.nexuscanon.com</field>
             <field name="vat">4174942</field>
         </record>
 
@@ -23,9 +23,9 @@
             <field name="state_id" ref='base.state_pk_is'/>
             <field name="zip">40000</field>
             <field name="country_id" ref="base.pk"/>
-            <field name="email">support@islamabadvendor.afenda.app</field>
+            <field name="email">support@islamabadvendor.nexuscanon.com</field>
             <field name="phone">+92 1234567890</field>
-            <field name="website">http://islamabadvendor.afenda.app</field>
+            <field name="website">http://islamabadvendor.nexuscanon.com</field>
         </record>
 
 </odoo>

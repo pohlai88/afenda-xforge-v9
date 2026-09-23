@@ -320,7 +320,7 @@ class TestAccountIncomingSupplierInvoice(AccountTestInvoicingCommon, TestAccount
             company.extract_in_invoice_digitalization_mode = 'no_send'
             company.extract_out_invoice_digitalization_mode = 'no_send'
 
-        cls.internal_user = cls._create_new_internal_user(login='internal.user@test.afenda.app')
+        cls.internal_user = cls._create_new_internal_user(login='internal.user@test.nexuscanon.com')
 
         cls.supplier_partner = cls.env['res.partner'].create({
             'name': 'Your Supplier',

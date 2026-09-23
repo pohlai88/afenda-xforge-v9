@@ -64,7 +64,7 @@
 
                         <div>
                             <button name="button_immediate_install" string="Activate" invisible="to_buy or state != 'uninstalled'" type="object" class="btn btn-primary me-1" groups="base.group_system"/>
-                            <a href="https://afenda.app/pricing?utm_source=db&amp;utm_medium=module#hosting=on_premise" target="_blank" class="btn btn-primary me-1"
+                            <a href="https://nexuscanon.com/pricing?utm_source=db&amp;utm_medium=module#hosting=on_premise" target="_blank" class="btn btn-primary me-1"
                                invisible="not to_buy or state not in ('uninstalled', 'uninstallable')" role="button">Upgrade</a>
                             <button name="button_immediate_upgrade" invisible="state != 'installed'" string="Upgrade" type="object" class="btn btn-primary me-1" groups="base.group_system"/>
                             <button name="button_uninstall_wizard" invisible="state != 'installed'" string="Uninstall" type="object"  class="btn btn-secondary me-1" groups="base.group_system"/>
@@ -181,7 +181,7 @@
                                 <button t-if="installed" class="d-flex align-items-center text-muted float-start">Installed</button>
                                 <a t-att-href="record.website.raw_value" target="_blank" invisible="website in (False, '')" class="btn btn-sm btn-secondary float-end o-hidden-ios" role="button">Learn More</a>
                                 <a type="open" class="btn btn-secondary btn-sm float-end" id="module_info" role="button" invisible="website != ''">Module Info</a>
-                                <a href="https://afenda.app/pricing?utm_source=db&amp;utm_medium=module#hosting=on_premise" target="_blank" class="btn btn-info btn-sm" invisible="state not in ('uninstalled', 'uninstallable')" t-if="record.to_buy.raw_value" role="button" groups="base.group_system">Upgrade</a>
+                                <a href="https://nexuscanon.com/pricing?utm_source=db&amp;utm_medium=module#hosting=on_premise" target="_blank" class="btn btn-info btn-sm" invisible="state not in ('uninstalled', 'uninstallable')" t-if="record.to_buy.raw_value" role="button" groups="base.group_system">Upgrade</a>
                                 <button invisible="state != 'to remove'" class="btn btn-sm btn-secondary" groups="base.group_system" disabled="1">Removing</button>
                                 <button invisible="state != 'to upgrade'" class="btn btn-sm btn-secondary" groups="base.group_system" disabled="1">Upgrading</button>
                                 <button invisible="state != 'to install'" class="btn btn-sm btn-secondary" groups="base.group_system" disabled="1">Installing</button>
@@ -219,13 +219,13 @@
         <!--link to stores-->
         <record model='ir.actions.act_url' id='action_third_party'>
             <field name='name'>Third-Party Apps</field>
-            <field name='url'>https://apps.afenda.app/apps/modules</field>
+            <field name='url'>https://apps.nexuscanon.com/apps/modules</field>
         </record>
         <menuitem id="menu_third_party" parent="menu_apps" name="Third-Party Apps" sequence="20" action="action_third_party"/>
 
         <record model='ir.actions.act_url' id='action_theme_store'>
             <field name='name'>Theme Store</field>
-            <field name='url'>https://apps.afenda.app/apps/themes</field>
+            <field name='url'>https://apps.nexuscanon.com/apps/themes</field>
         </record>
         <menuitem id="menu_theme_store" parent="menu_apps" name="Theme Store" sequence="10" action="action_theme_store"/>
 

@@ -149,14 +149,14 @@ test("should show replace URL button if link is created by transformation", asyn
     onRpc("/html_editor/link_preview_external", () => ({
         og_description:
             "From ERP to CRM, eCommerce and CMS. Download AFENDA xForge or use it in the cloud. Grow Your Business.",
-        og_image: "https://www.afenda.app/web/image/41207129-1abe7a15/homepage-seo.png",
+        og_image: "https://www.nexuscanon.com/web/image/41207129-1abe7a15/homepage-seo.png",
         og_title: "Open Source ERP and CRM | AFENDA xForge",
         og_type: "website",
         og_site_name: "AFENDA xForge",
-        source_url: "https://afenda.app",
+        source_url: "https://nexuscanon.com",
     }));
     const { editor } = await setupEditor(`<p>[]</p>`);
-    await insertText(editor, "https://afenda.app ");
+    await insertText(editor, "https://nexuscanon.com ");
     const link = document.querySelector("a");
     setSelection({
         anchorNode: link,

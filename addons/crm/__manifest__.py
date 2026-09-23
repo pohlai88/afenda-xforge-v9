@@ -8,7 +8,7 @@
     'category': 'Sales/CRM',
     'sequence': 15,
     'summary': 'Track leads and close opportunities',
-    'website': 'https://www.afenda.app/app/crm',
+    'website': 'https://www.nexuscanon.com/app/crm',
     'depends': [
         'base_setup',
         'sales_team',

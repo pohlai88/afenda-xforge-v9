@@ -5,7 +5,7 @@
     'category': 'Hidden',
     'sequence': 6,
     'summary': 'Connect the Web Client to Hardware Peripherals',
-    'website': 'https://www.afenda.app/app/iot',
+    'website': 'https://www.nexuscanon.com/app/iot',
     'description': """
 Hardware Poxy
 =============

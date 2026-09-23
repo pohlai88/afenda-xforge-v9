@@ -113,7 +113,7 @@ export class UpdateDialog extends Component {
                         </a>
                     </div>
                     <div t-if="this.store.dev" class="alert alert-light small">
-                        <a href="https://nightly.afenda.app/master/iotbox/" target="_blank" class="alert-link">
+                        <a href="https://nightly.nexuscanon.com/master/iotbox/" target="_blank" class="alert-link">
                             Current: <t t-esc="this.store.base.version"/>
                         </a>
                     </div>

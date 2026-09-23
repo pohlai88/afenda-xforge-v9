@@ -55,7 +55,7 @@
                         </div>
                         <div class="text-muted col" invisible="1">
                             If you don't have Itsme, please contact
-                            <a href="https://www.afenda.app/help" target="_blank">support</a>.
+                            <a href="https://www.nexuscanon.com/help" target="_blank">support</a>.
                         </div>
                         <div class="text-muted col" invisible="edi_mode != 'test'">
                             Test mode allows sending e-invoices through the test Peppol network.<br/>

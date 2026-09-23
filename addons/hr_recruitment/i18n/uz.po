@@ -4097,9 +4097,9 @@ msgstr "Ishga qabul qilish darajasining nomi noyob bo‘lishi kerak!"
 #, fuzzy
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"Elektron pochta taxallusining nomi, masalan <jobs@example.afenda.app> uchun "
+"Elektron pochta taxallusining nomi, masalan <jobs@example.nexuscanon.com> uchun "
 "xatlarni olishni istasangiz, 'jobs'"
 
 #. module: hr_recruitment

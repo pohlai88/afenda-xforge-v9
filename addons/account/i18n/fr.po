@@ -22132,8 +22132,8 @@ msgstr "p. ex. finance@exemple.com ; comptable@exemple.com"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
-msgid "e.g. https://www.afenda.app"
-msgstr "par ex. https://www.afenda.app"
+msgid "e.g. https://www.nexuscanon.com"
+msgstr "par ex. https://www.nexuscanon.com"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form

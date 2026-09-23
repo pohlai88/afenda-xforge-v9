@@ -1155,9 +1155,9 @@ msgstr "Kuvansiirron aikana tapahtui odottamaton virhe"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
+msgid "An unexpected error occurred. Submit a support ticket at nexuscanon.com/help."
 msgstr ""
-"Tapahtui odottamaton virhe. Lähetä tukipyyntö osoitteessa afenda.app/help."
+"Tapahtui odottamaton virhe. Lähetä tukipyyntö osoitteessa nexuscanon.com/help."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13749,8 +13749,8 @@ msgstr "esim. 'Linkin otsikko'"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.afenda.app'"
-msgstr "esim. 'http://www.afenda.app'"
+msgid "e.g. 'http://www.nexuscanon.com'"
+msgstr "esim. 'http://www.nexuscanon.com'"
 
 #. module: spreadsheet
 #. odoo-javascript

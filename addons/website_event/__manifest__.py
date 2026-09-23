@@ -7,7 +7,7 @@
     'category': 'Marketing/Events',
     'sequence': 140,
     'summary': 'Publish events, sell tickets',
-    'website': 'https://www.afenda.app/app/events',
+    'website': 'https://www.nexuscanon.com/app/events',
     'depends': [
         'event',
         'website',

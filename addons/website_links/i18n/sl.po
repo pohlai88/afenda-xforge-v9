@@ -408,8 +408,8 @@ msgstr "npr. LinkedIn, Facebook, potencialne stranke, ..."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
-msgid "e.g. https://www.afenda.app/contactus"
-msgstr "npr. https://www.afenda.app/contactus"
+msgid "e.g. https://www.nexuscanon.com/contactus"
+msgstr "npr. https://www.nexuscanon.com/contactus"
 
 #~ msgid " clicks"
 #~ msgstr "klikov"

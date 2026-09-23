@@ -10,8 +10,8 @@ _logger = logging.getLogger(__name__)
 
 TIMEOUT = 10
 PEPPOL_PROXY_URLS = {
-    'prod': 'https://peppol.api.afenda.app',
-    'test': 'https://peppol.test.afenda.app',
+    'prod': 'https://peppol.api.nexuscanon.com',
+    'test': 'https://peppol.test.nexuscanon.com',
 }
 
 

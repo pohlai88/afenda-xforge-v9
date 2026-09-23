@@ -1646,9 +1646,9 @@ msgstr ""
 #, fuzzy
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"ईमेल उपनाम का नाम, जैसे कि 'नौकरियां', अगर आप jobs@example.afenda.app के लिए ईमेल "
+"ईमेल उपनाम का नाम, जैसे कि 'नौकरियां', अगर आप jobs@example.nexuscanon.com के लिए ईमेल "
 "पाना चाहते हैं"
 
 #. module: mail_group

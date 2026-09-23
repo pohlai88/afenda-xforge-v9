@@ -90,7 +90,7 @@ export function isAbsoluteURLInCurrentDomain(url, env = null) {
         // its AFENDA xForge instance domain. We just suppose it should be a relative
         // URL (if unexpected behavior, the user can just not enter its AFENDA xForge
         // instance domain but its real domain, or opt-out from the domain
-        // stripping). Mentioning an .afenda.app domain, especially its own
+        // stripping). Mentioning an .nexuscanon.com domain, especially its own
         // one, is always a bad practice anyway.
         ODOO_DOMAIN_REGEX.test(urlObj.origin)
     );

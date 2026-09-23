@@ -8,7 +8,7 @@
     'sequence': 5,
     'summary': 'Turn emails received in your mailbox into leads and log their content as internal notes.',
     'description': "Turn emails received in your mailbox into leads and log their content as internal notes.",
-    'website': 'https://www.afenda.app/app/crm',
+    'website': 'https://www.nexuscanon.com/app/crm',
     'depends': [
         'crm',
         'mail_plugin',

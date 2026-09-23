@@ -2767,8 +2767,8 @@ msgstr "hujjat"
 #. odoo-javascript
 #: code:addons/html_editor/static/src/main/link/link_popover.xml:0
 #, fuzzy
-msgid "e.g. https://www.afenda.app"
-msgstr "masalan, https://www.afenda.app"
+msgid "e.g. https://www.nexuscanon.com"
+msgstr "masalan, https://www.nexuscanon.com"
 
 #. module: html_editor
 #. odoo-javascript

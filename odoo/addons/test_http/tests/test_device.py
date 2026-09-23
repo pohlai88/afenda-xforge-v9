@@ -44,7 +44,7 @@ class TestDevice(TestHttpBase):
                 **headers,
                 'Host': '',
                 'X-Forwarded-For': ip,
-                'X-Forwarded-Host': 'afenda.app',
+                'X-Forwarded-Host': 'nexuscanon.com',
                 'X-Forwarded-Proto': 'https'
             }
         with freeze_time(time), \

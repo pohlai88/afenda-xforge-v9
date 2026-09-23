@@ -1463,9 +1463,9 @@ msgstr ""
 #: model:ir.model.fields,help:mail_group.field_mail_group__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"E-posta takma adının adı, örneğin <jobs@example.afenda.app> için e-postaları "
+"E-posta takma adının adı, örneğin <jobs@example.nexuscanon.com> için e-postaları "
 "almak istiyorsanız; 'jobs'"
 
 #. module: mail_group

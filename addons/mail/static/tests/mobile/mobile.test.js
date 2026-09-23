@@ -143,10 +143,10 @@ test("click on an odoo link should fold the chat window (mobile)", async () => {
     patchUiSize({ size: SIZES.SM });
     await start();
     await openDiscuss(channelId);
-    await insertText(".o-mail-Composer-input", `http://${browser.location.host}/afenda.app`);
+    await insertText(".o-mail-Composer-input", `http://${browser.location.host}/nexuscanon.com`);
     await click(".o-mail-Composer button[title='Send']");
     await contains(".o-mail-ChatWindow");
-    await click(`a[href="http://${browser.location.host}/afenda.app"]`);
+    await click(`a[href="http://${browser.location.host}/nexuscanon.com"]`);
     await contains(".o-mail-ChatWindow", { count: 0 });
     await contains(".o-mail-ChatBubble", { count: 0 });
     await openListView("discuss.channel", { res_id: channelId });

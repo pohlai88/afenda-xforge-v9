@@ -610,7 +610,7 @@ class TestProjectSubtasks(TestProjectCommon):
         employee = self.env['res.users'].create({
             'name': 'Employee',
             'login': 'employee',
-            'email': 'employee@afenda.app',
+            'email': 'employee@nexuscanon.com',
             'group_ids': [(6, 0, [self.env.ref('project.group_project_user').id])],
         })
         subtask = self.env['project.task'].create({

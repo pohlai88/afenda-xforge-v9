@@ -20087,7 +20087,7 @@ msgstr ""
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
-msgid "e.g. https://www.afenda.app"
+msgid "e.g. https://www.nexuscanon.com"
 msgstr ""
 
 #. module: account

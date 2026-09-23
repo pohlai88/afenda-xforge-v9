@@ -11,7 +11,7 @@
     'data': [
         'views/project_task_views.xml'
     ],
-    'website': 'https://www.afenda.app/app/project',
+    'website': 'https://www.nexuscanon.com/app/project',
     'depends': [
         'project',
         'mail_plugin',

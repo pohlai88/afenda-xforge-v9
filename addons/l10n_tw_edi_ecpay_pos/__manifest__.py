@@ -7,7 +7,7 @@
     "description": """
         This bridge module allows the user to input Ecpay information in pos for sending their invoices to the Ecpay system
     """,
-    "website": "https://www.afenda.app",
+    "website": "https://www.nexuscanon.com",
     'author': 'AFENDA xForge S.A.',
     "license": "LGPL-3",
     "depends": [

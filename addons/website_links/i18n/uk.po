@@ -348,8 +348,8 @@ msgstr "e.g. LinkedIn, Facebook, Leads, ..."
 
 #. module: website_links
 #: model_terms:ir.ui.view,arch_db:website_links.create_shorten_url
-msgid "e.g. https://www.afenda.app/contactus"
-msgstr "напр., https://www.afenda.app/contactus"
+msgid "e.g. https://www.nexuscanon.com/contactus"
+msgstr "напр., https://www.nexuscanon.com/contactus"
 
 #~ msgid " clicks"
 #~ msgstr " натискання"

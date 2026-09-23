@@ -915,8 +915,8 @@ msgstr "ເຊັ່ນ: OpenWood Decoration"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form
-msgid "e.g. : https://www.afenda.app"
-msgstr "ເຊັ່ນ: https://www.afenda.app"
+msgid "e.g. : https://www.nexuscanon.com"
+msgstr "ເຊັ່ນ: https://www.nexuscanon.com"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form

@@ -1089,7 +1089,7 @@ class TestAccountMoveSend(TestAccountMoveSendCommon):
         wizard_partner_1 = self.create_send_and_print(invoices_success)
         wizard_partner_1.action_send_and_print()
 
-        sp_partner_2 = self.env['res.partner'].create({'name': 'Partner 2', 'email': 'test@test.afenda.app'})
+        sp_partner_2 = self.env['res.partner'].create({'name': 'Partner 2', 'email': 'test@test.nexuscanon.com'})
         self.env.user.partner_id = sp_partner_2
         wizard_partner_2 = self.create_send_and_print(invoices_error)
         wizard_partner_2.action_send_and_print()

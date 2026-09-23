@@ -56,7 +56,7 @@ class SmsApiBase:
 
 
 class SmsApi(SmsApiBase):  # TODO RIGR in master: rename SmsApi to SmsApiIAP, and  SmsApiBase to SmsApi
-    DEFAULT_ENDPOINT = 'https://sms.api.afenda.app'
+    DEFAULT_ENDPOINT = 'https://sms.api.nexuscanon.com'
     PROVIDER_TO_SMS_FAILURE_TYPE = SmsApiBase.PROVIDER_TO_SMS_FAILURE_TYPE | {
         'country_not_supported': 'sms_country_not_supported',
         'insufficient_credit': 'sms_credit',

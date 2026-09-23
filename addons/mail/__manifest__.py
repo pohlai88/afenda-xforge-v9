@@ -59,7 +59,7 @@ same *conversation* document.
 For more specific needs, you may also assign custom-defined actions
 (technically: Server Actions) to be triggered for each incoming mail.
     """,
-    'website': 'https://www.afenda.app/app/discuss',
+    'website': 'https://www.nexuscanon.com/app/discuss',
     'depends': ['base', 'base_setup', 'bus', 'web_tour', 'html_editor'],
     'data': [
         'data/mail_groups.xml',

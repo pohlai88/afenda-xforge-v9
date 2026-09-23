@@ -11215,7 +11215,7 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr "郵箱別名，例如填寫 jobs 表示你想捕捉寄往 jobs@example.com 的電郵。"
 
 #. module: mail
@@ -12535,10 +12535,10 @@ msgstr ""
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.afenda.app)."
+"email server (@mycompany.nexuscanon.com)."
 msgstr ""
 "在社區和企業版本中，發送/接收電子信件需要使用自己的電子信件伺服器。線上使用者"
-"已受益於隨時可用的電子信件伺服器 (@mycompany.afenda.app)。"
+"已受益於隨時可用的電子信件伺服器 (@mycompany.nexuscanon.com)。"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

@@ -1151,9 +1151,9 @@ msgstr "Došlo je do neočekivane greške tijekom prijenosa slike"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
+msgid "An unexpected error occurred. Submit a support ticket at nexuscanon.com/help."
 msgstr ""
-"Došlo je do neočekivane greške. Podnesite zahtjev za podršku na afenda.app/"
+"Došlo je do neočekivane greške. Podnesite zahtjev za podršku na nexuscanon.com/"
 "help."
 
 #. module: spreadsheet
@@ -13685,8 +13685,8 @@ msgstr "npr. 'Oznaka poveznice'"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.afenda.app'"
-msgstr "npr. 'http://www.afenda.app'"
+msgid "e.g. 'http://www.nexuscanon.com'"
+msgstr "npr. 'http://www.nexuscanon.com'"
 
 #. module: spreadsheet
 #. odoo-javascript

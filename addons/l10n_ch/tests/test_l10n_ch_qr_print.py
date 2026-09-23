@@ -86,7 +86,7 @@ class QRPrintTest(AccountTestInvoicingCommon):
             'city': False,
             'street': False,
             'street2': False,
-            'email': 'creditor@game.afenda.app',
+            'email': 'creditor@game.nexuscanon.com',
         })
         self.debtor_partner_ch = self.env['res.partner'].create({
             'name': 'deb partner CH',
@@ -95,7 +95,7 @@ class QRPrintTest(AccountTestInvoicingCommon):
             'city': False,
             'street': False,
             'street2': False,
-            'email': 'debtor_ch@game.afenda.app',
+            'email': 'debtor_ch@game.nexuscanon.com',
         })
         self.debtor_partner_li = self.env['res.partner'].create({
             'name': 'deb partner LI',
@@ -104,7 +104,7 @@ class QRPrintTest(AccountTestInvoicingCommon):
             'city': False,
             'street': False,
             'street2': False,
-            'email': 'debtor_li@game.afenda.app',
+            'email': 'debtor_li@game.nexuscanon.com',
         })
         # QR is not generated for non CH/LI partners, no error should be raised for BE
         self.debtor_partner_be = self.env['res.partner'].create({
@@ -114,7 +114,7 @@ class QRPrintTest(AccountTestInvoicingCommon):
             'city': False,
             'street': False,
             'street2': False,
-            'email': 'debtor_be@game.afenda.app',
+            'email': 'debtor_be@game.nexuscanon.com',
         })
         self.invoice_ch = self.env['account.move'].create({
             'move_type': 'out_invoice',

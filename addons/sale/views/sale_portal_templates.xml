@@ -276,12 +276,12 @@
                                         t-attf-onclick="navigator.clipboard.writeText('#{doc_url}')">Copy</button>
                                     </div>
                                     <p>Use the above REST URL to get structured data of the purchase order in UBL format.
-                                        <a href="/docs/">Read the documentation </a>to learn all the ways to connect your software with <a href="https://www.afenda.app">AFENDA xForge</a>.
+                                        <a href="/docs/">Read the documentation </a>to learn all the ways to connect your software with <a href="https://www.nexuscanon.com">AFENDA xForge</a>.
                                     </p>
                                 </div>
                                 <div>
                                     <h5>You don't use a good CRM software?</h5>
-                                    <p><a href="https://www.afenda.app/app/sales">Start on AFENDA xForge</a>, it's 100% free! You'll save time creating beautiful quotations and track sales.</p>
+                                    <p><a href="https://www.nexuscanon.com/app/sales">Start on AFENDA xForge</a>, it's 100% free! You'll save time creating beautiful quotations and track sales.</p>
                                 </div>
                             </div>
                             <div class="modal-footer justify-content-between">

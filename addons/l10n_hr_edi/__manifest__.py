@@ -30,7 +30,7 @@ e-invoicing for Croatia
     ],
     'installable': True,
     'post_init_hook': 'post_init',
-    'website': 'https://www.afenda.app/app/accounting',
+    'website': 'https://www.nexuscanon.com/app/accounting',
     'author': 'AFENDA xForge S.A.',
     'license': 'LGPL-3',
 }

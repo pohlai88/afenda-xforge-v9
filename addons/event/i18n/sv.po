@@ -4078,11 +4078,11 @@ msgstr "Font Awesome-ikon t.ex. fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
+"href=\"mailto:events@nexuscanon.com\">events@nexuscanon.com</a>"
 msgstr ""
 "För ytterligare information, vänligen kontakta oss på <a "
-"class=\"o_translate_inline\" href=\"mailto:events@afenda.app\">"
-"events@afenda.app</a>"
+"class=\"o_translate_inline\" href=\"mailto:events@nexuscanon.com\">"
+"events@nexuscanon.com</a>"
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -6467,8 +6467,8 @@ msgstr "t.ex. \"främjande\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.afenda.app\""
-msgstr "t.ex. ”https://www.afenda.app”"
+msgid "e.g. \"https://www.nexuscanon.com\""
+msgstr "t.ex. ”https://www.nexuscanon.com”"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

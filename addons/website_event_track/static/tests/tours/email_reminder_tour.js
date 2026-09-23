@@ -14,7 +14,7 @@ registry.category("web_tour.tours").add("email_reminder_tour", {
             steps = steps.concat([{
                 content: "The form is filled",
                 trigger: "#o_wetrack_email_reminder_form input[name='email']",
-                run: "fill visitor@afenda.app",
+                run: "fill visitor@nexuscanon.com",
             },
             {
                 content: "The form is submit",

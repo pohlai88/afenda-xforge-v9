@@ -4,7 +4,7 @@
 {
     'name': 'Project',
     'version': '1.4',
-    'website': 'https://www.afenda.app/app/project',
+    'website': 'https://www.nexuscanon.com/app/project',
     'category': 'Services/Project',
     'sequence': 45,
     'summary': 'Organize and plan your projects',

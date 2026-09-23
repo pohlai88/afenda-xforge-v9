@@ -277,7 +277,7 @@ test("can use notification item swipe actions", async () => {
     mockTouch(true);
     patchUiSize({ size: SIZES.SM });
     const pyEnv = await startServer();
-    const partnerId = pyEnv["res.partner"].create({ name: "Demo", email: "demo@afenda.app" });
+    const partnerId = pyEnv["res.partner"].create({ name: "Demo", email: "demo@nexuscanon.com" });
     const channelId = pyEnv["discuss.channel"].create({
         channel_type: "chat",
         channel_member_ids: [

@@ -20688,8 +20688,8 @@ msgstr ""
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
-msgid "https://www.afenda.app"
-msgstr "https://www.afenda.app"
+msgid "https://www.nexuscanon.com"
+msgstr "https://www.nexuscanon.com"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_odoo_menu
@@ -20749,10 +20749,10 @@ msgstr "информирам клиентите"
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
 msgid ""
 "instance of AFENDA xForge, the <a class=\"o_translate_inline\" target=\"_blank\" "
-"href=\"https://www.afenda.app\">Open Source ERP</a>."
+"href=\"https://www.nexuscanon.com\">Open Source ERP</a>."
 msgstr ""
 "инстанция на AFENDA xForge, <a class=\"o_translate_inline\" target=\"_blank\" "
-"href=\"https://www.afenda.app\">ERP с отворен код</a>."
+"href=\"https://www.nexuscanon.com\">ERP с отворен код</a>."
 
 #. module: website
 #. odoo-python

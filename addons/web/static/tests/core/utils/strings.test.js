@@ -23,14 +23,14 @@ describe.current.tags("headless");
 
 test("escape", () => {
     expect(escape("<a>this is a link</a>")).toBe("&lt;a&gt;this is a link&lt;/a&gt;");
-    expect(escape(`<a href="https://www.afenda.app">odoo<a>`)).toBe(
-        `&lt;a href=&quot;https://www.afenda.app&quot;&gt;odoo&lt;a&gt;`
+    expect(escape(`<a href="https://www.nexuscanon.com">odoo<a>`)).toBe(
+        `&lt;a href=&quot;https://www.nexuscanon.com&quot;&gt;odoo&lt;a&gt;`
     );
-    expect(escape(`<a href='https://www.afenda.app'>odoo<a>`)).toBe(
-        `&lt;a href=&#x27;https://www.afenda.app&#x27;&gt;odoo&lt;a&gt;`
+    expect(escape(`<a href='https://www.nexuscanon.com'>odoo<a>`)).toBe(
+        `&lt;a href=&#x27;https://www.nexuscanon.com&#x27;&gt;odoo&lt;a&gt;`
     );
-    expect(escape("<a href='https://www.afenda.app'>AFENDA xForge`s website<a>")).toBe(
-        `&lt;a href=&#x27;https://www.afenda.app&#x27;&gt;AFENDA xForge&#x60;s website&lt;a&gt;`
+    expect(escape("<a href='https://www.nexuscanon.com'>AFENDA xForge`s website<a>")).toBe(
+        `&lt;a href=&#x27;https://www.nexuscanon.com&#x27;&gt;AFENDA xForge&#x60;s website&lt;a&gt;`
     );
 });
 
@@ -130,10 +130,10 @@ test("isEmail", () => {
     expect(isEmail("")).toBe(false);
     expect(isEmail("test")).toBe(false);
     expect(isEmail("test@odoo")).toBe(false);
-    expect(isEmail("test@odoo@afenda.app")).toBe(false);
-    expect(isEmail("te st@afenda.app")).toBe(false);
+    expect(isEmail("test@odoo@nexuscanon.com")).toBe(false);
+    expect(isEmail("te st@nexuscanon.com")).toBe(false);
 
-    expect(isEmail("test@afenda.app")).toBe(true);
+    expect(isEmail("test@nexuscanon.com")).toBe(true);
 });
 
 test("isNumeric", () => {

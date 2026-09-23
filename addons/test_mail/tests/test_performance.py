@@ -1430,7 +1430,7 @@ class TestMessageToStorePerformance(BaseMailPerformance):
 
         cls.link_previews = cls.env["mail.link.preview"].create(
             [
-                {"source_url": "https://www.afenda.app"},
+                {"source_url": "https://www.nexuscanon.com"},
                 {"source_url": "https://www.example.com"},
             ]
         )

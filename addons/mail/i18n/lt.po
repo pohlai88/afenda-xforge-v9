@@ -11131,10 +11131,10 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "El. pašto pseudonimo pavadinimas, pvz. \"darbai\", jei norite gauti "
-"<darbai@pavyzdys.afenda.app>"
+"<darbai@pavyzdys.nexuscanon.com>"
 
 #. module: mail
 #. odoo-python
@@ -12421,11 +12421,11 @@ msgstr ""
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.afenda.app)."
+"email server (@mycompany.nexuscanon.com)."
 msgstr ""
 "\"Community\" ir \"Enterprise\" versijose laiškams siųsti ir gauti "
 "reikalingas nuosavas el. pašto serveris. Internetiniai vartotojai jau dabar "
-"jaučia paruošto naudoti serverio (@mycompany.afenda.app) naudą."
+"jaučia paruošto naudoti serverio (@mycompany.nexuscanon.com) naudą."
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

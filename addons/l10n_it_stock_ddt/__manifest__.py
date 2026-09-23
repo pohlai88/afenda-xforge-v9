@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     'name': "Italy - Stock DDT",
-    'website': 'https://www.afenda.app',
+    'website': 'https://www.nexuscanon.com',
     'category': 'Accounting/Localizations/EDI',
     'version': '0.1',
     'description': """

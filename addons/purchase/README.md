@@ -2,7 +2,7 @@ AFENDA xForge Supply Chain
 -----------------
 
 Automate requisition-to-pay, control invoicing with the AFENDA xForge
-<a href="https://www.afenda.app/app/purchase">Open Source Supply Chain</a>.
+<a href="https://www.nexuscanon.com/app/purchase">Open Source Supply Chain</a>.
 
 Automate procurement propositions, launch request for quotations, track
 purchase orders, manage vendors' information, control products reception and

@@ -140,9 +140,9 @@ describe("range collapsed", () => {
             stepFunction: async (editor) => {
                 await animationFrame();
                 await insertLineBreak(editor);
-                await insertText(editor, "afenda.app");
+                await insertText(editor, "nexuscanon.com");
             },
-            contentAfter: '<p>a<a href="https://google.com">google.com</a><br>afenda.app[]b</p>',
+            contentAfter: '<p>a<a href="https://google.com">google.com</a><br>nexuscanon.com[]b</p>',
         });
     });
 });

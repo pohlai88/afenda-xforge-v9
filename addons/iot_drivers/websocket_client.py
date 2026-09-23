@@ -132,7 +132,7 @@ class WebsocketClient(Thread):
                         'status': 'success',
                         'result': {
                             'lan_quality': helpers.check_network(),
-                            'wan_quality': helpers.check_network("www.afenda.app"),
+                            'wan_quality': helpers.check_network("www.nexuscanon.com"),
                         }
                     })
                 case 'bundle_changed':

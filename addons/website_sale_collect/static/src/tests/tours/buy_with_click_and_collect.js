@@ -42,7 +42,7 @@ registry.category('web_tour.tours').add(
             },
             {
                 trigger: 'input[name="email"]',
-                run: 'edit test@afenda.app',
+                run: 'edit test@nexuscanon.com',
             },
             {
                 trigger: 'input[name="street"]',

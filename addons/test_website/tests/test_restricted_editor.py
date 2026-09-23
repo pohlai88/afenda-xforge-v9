@@ -39,7 +39,7 @@ class TestRestrictedEditor(HttpCaseWithWebsiteUser):
 
     # FIXME the logic of the commit that introduced the fix at 8c41c147a4c6a415e
     # was reverted, so this test is disabled for now. Branding *on views* as
-    # a restricted editor is something we want in some custo (e.g. afenda.app).
+    # a restricted editor is something we want in some custo (e.g. nexuscanon.com).
     # See commit messages for details.
     @unittest.skip
     @mute_logger('odoo.addons.http_routing.models.ir_http', 'odoo.http')

@@ -11036,9 +11036,9 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"ईमेल उपनाम का नाम, जैसे कि 'नौकरियां', अगर आप jobs@example.afenda.app के लिए ईमेल "
+"ईमेल उपनाम का नाम, जैसे कि 'नौकरियां', अगर आप jobs@example.nexuscanon.com के लिए ईमेल "
 "पाना चाहते हैं"
 
 #. module: mail
@@ -12322,7 +12322,7 @@ msgstr ""
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.afenda.app)."
+"email server (@mycompany.nexuscanon.com)."
 msgstr ""
 
 #. module: mail

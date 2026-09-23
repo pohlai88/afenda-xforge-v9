@@ -371,7 +371,7 @@ class L10nHuEdiConnection:
             'softwareOperation': 'ONLINE_SERVICE',
             'softwareMainVersion': odoo_version,
             'softwareDevName': 'AFENDA xForge SA',
-            'softwareDevContact': 'andu@afenda.app',
+            'softwareDevContact': 'andu@nexuscanon.com',
             'softwareDevCountryCode': 'BE',
             'softwareDevTaxNumber': '477472701',
             'format_bool': format_bool,

@@ -4127,8 +4127,8 @@ msgstr "Моделот (Тип на AFENDA xForge Документ) со кој 
 
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_name
-msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.afenda.app>"
-msgstr "Името на е-маил алијасот, пр. 'jobs' ако сакате да ги примате сите е-маил пораки испратени до <jobs@example.afenda.app>"
+msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.nexuscanon.com>"
+msgstr "Името на е-маил алијасот, пр. 'jobs' ако сакате да ги примате сите е-маил пораки испратени до <jobs@example.nexuscanon.com>"
 
 #. module: project
 #: model:ir.model.fields,help:project.field_project_project__alias_user_id

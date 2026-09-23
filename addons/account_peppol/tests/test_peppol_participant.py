@@ -145,7 +145,7 @@ class TestPeppolParticipant(PeppolConnectorCommon):
         with self._mock_requests([self._mock_update_user()]) as mocks_results:
             config_wizard.button_sync_form_with_peppol_proxy()
             self.assertEqual(
-                mocks_results['called']['https://peppol.test.afenda.app/api/peppol/1/update_user']['kwargs']['json']['params']['update_data']['peppol_contact_email'],
+                mocks_results['called']['https://peppol.test.nexuscanon.com/api/peppol/1/update_user']['kwargs']['json']['params']['update_data']['peppol_contact_email'],
                 'another@email.be',
             )
 

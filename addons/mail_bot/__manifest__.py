@@ -6,7 +6,7 @@
     'version': '1.2',
     'category': 'Productivity/Discuss',
     'summary': 'Add AFENDA Bot in discussions',
-    'website': 'https://www.afenda.app/app/discuss',
+    'website': 'https://www.nexuscanon.com/app/discuss',
     'depends': ['mail'],
     'auto_install': True,
     'installable': True,

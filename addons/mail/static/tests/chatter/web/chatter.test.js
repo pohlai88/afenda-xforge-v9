@@ -739,7 +739,7 @@ test("should display the subject even if the record name is false", async () => 
 
 test("Update message recipients without saving", async () => {
     const pyEnv = await startServer();
-    pyEnv["res.partner"].write([serverState.partnerId], { email: "mitchell@afenda.app" });
+    pyEnv["res.partner"].write([serverState.partnerId], { email: "mitchell@nexuscanon.com" });
     const partnerId = pyEnv["res.partner"].create({
         name: "John Doe",
         email: "john@doe.be",
@@ -759,7 +759,7 @@ test("Update message recipients without saving", async () => {
 
 test("Update primary email in recipient without saving", async () => {
     const pyEnv = await startServer();
-    pyEnv["res.partner"].write([serverState.partnerId], { email: "mitchell@afenda.app" });
+    pyEnv["res.partner"].write([serverState.partnerId], { email: "mitchell@nexuscanon.com" });
     const partnerId = pyEnv["res.partner"].create({
         name: "John Doe",
         email: "john@doe.be",

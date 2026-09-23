@@ -37,7 +37,7 @@ class TestHttpMisc(TestHttpBase):
         # client <-> reverse-proxy <-> odoo
         client_ip = '127.0.0.16'
         reverseproxy_ip = gethostbyname(HOST)
-        host = 'mycompany.afenda.app'
+        host = 'mycompany.nexuscanon.com'
 
         headers = {
             'Host': '',
@@ -77,14 +77,14 @@ class TestHttpMisc(TestHttpBase):
 
         # Valid URLs
         self.assertEqual(root.get_static_file(f'/{uri}'), path, "Valid file")
-        self.assertEqual(root.get_static_file(f'afenda.app/{uri}', host='afenda.app'), path, "Valid file with valid host")
-        self.assertEqual(root.get_static_file(f'http://afenda.app/{uri}', host='afenda.app'), path, "Valid file with valid host")
+        self.assertEqual(root.get_static_file(f'nexuscanon.com/{uri}', host='nexuscanon.com'), path, "Valid file with valid host")
+        self.assertEqual(root.get_static_file(f'http://nexuscanon.com/{uri}', host='nexuscanon.com'), path, "Valid file with valid host")
 
         # Invalid URLs
         self.assertIsNone(root.get_static_file('/test_http/i-dont-exist'), "File doesn't exist")
         self.assertIsNone(root.get_static_file('/test_http/__manifest__.py'), "File is not static")
-        self.assertIsNone(root.get_static_file(f'afenda.app/{uri}'), "No host allowed")
-        self.assertIsNone(root.get_static_file(f'http://afenda.app/{uri}'), "No host allowed")
+        self.assertIsNone(root.get_static_file(f'nexuscanon.com/{uri}'), "No host allowed")
+        self.assertIsNone(root.get_static_file(f'http://nexuscanon.com/{uri}'), "No host allowed")
 
     def test_misc4_rpc_qweb(self):
         jack = new_test_user(self.env, 'jackoneill', context={'lang': 'en_US'})
@@ -123,7 +123,7 @@ class TestHttpMisc(TestHttpBase):
         headers = {
             'Host': '',
             'X-Forwarded-For': TEST_IP,
-            'X-Forwarded-Host': 'afenda.app',
+            'X-Forwarded-Host': 'nexuscanon.com',
             'X-Forwarded-Proto': 'https'
         }
         with patch.dict(odoo.tools.config.options, {'proxy_mode': True}):

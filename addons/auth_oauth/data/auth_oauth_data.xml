@@ -3,9 +3,9 @@
     <data noupdate="1">
         <record id="provider_openerp" model="auth.oauth.provider">
             <field name="name">AFENDA xForge.com Accounts</field>
-            <field name="auth_endpoint">https://accounts.afenda.app/oauth2/auth</field>
+            <field name="auth_endpoint">https://accounts.nexuscanon.com/oauth2/auth</field>
             <field name="scope">userinfo</field>
-            <field name="validation_endpoint">https://accounts.afenda.app/oauth2/tokeninfo</field>
+            <field name="validation_endpoint">https://accounts.nexuscanon.com/oauth2/tokeninfo</field>
             <field name="css_class">o_auth_oauth_provider_icon o_odoo_provider</field>
             <field name="body">Sign in with AFENDA xForge.com</field>
             <field name="enabled" eval="True"/>

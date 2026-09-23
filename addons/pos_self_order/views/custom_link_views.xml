@@ -7,7 +7,7 @@
         <list string="Custom Links" editable="bottom">
             <field name="sequence" widget="handle" />
             <field name="name" placeholder="AFENDA"/>
-            <field name="url" placeholder="https://afenda.app"/>
+            <field name="url" placeholder="https://nexuscanon.com"/>
             <field name="pos_config_ids" widget="many2many_tags" placeholder="empty = all points of sale" options="{'no_create': True}"/>
             <field name="style"/>
             <field name="link_html"/>

@@ -98,7 +98,7 @@ class TestUi(AccountTestInvoicingHttpCommon):
 
     def test_deductible_amount_column(self):
         self.assertFalse(self.env.user.has_group('account.group_partial_purchase_deductibility'))
-        partner = self.env['res.partner'].create({'name': "Test Partner", 'email': "test@test.afenda.app"})
+        partner = self.env['res.partner'].create({'name': "Test Partner", 'email': "test@test.nexuscanon.com"})
         move = self.env['account.move'].create({
             'move_type': 'in_invoice',
             'partner_id': partner.id,

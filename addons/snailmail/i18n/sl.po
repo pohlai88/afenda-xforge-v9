@@ -657,10 +657,10 @@ msgstr ""
 #, fuzzy
 msgid ""
 "You don't have an IAP account registered for this service.<br>Please go to "
-"<a href=%s target=\"new\">iap.afenda.app</a> to claim your free credits."
+"<a href=%s target=\"new\">iap.nexuscanon.com</a> to claim your free credits."
 msgstr ""
 "Za to storitev nimate registriranega računa IAP.<br>Pojdite na <a href=%s "
-"target=\"new\">iap.afenda.app</a>, da prevzamete svoje brezplačne kredite."
+"target=\"new\">iap.nexuscanon.com</a>, da prevzamete svoje brezplačne kredite."
 
 #. module: snailmail
 #. odoo-python

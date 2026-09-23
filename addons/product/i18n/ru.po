@@ -2781,12 +2781,12 @@ msgstr "Пожалуйста, введите целое положительно
 #: code:addons/product/models/product_document.py:0
 msgid ""
 "Please enter a valid URL.\n"
-"Example: https://www.afenda.app\n"
+"Example: https://www.nexuscanon.com\n"
 "\n"
 "Invalid URL: %s"
 msgstr ""
 "Введите действительный URL-адрес.\n"
-"Пример: https://www.afenda.app\n"
+"Пример: https://www.nexuscanon.com\n"
 "\n"
 "Недопустимый URL: %s"
 

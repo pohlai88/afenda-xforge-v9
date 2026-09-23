@@ -19,7 +19,7 @@ defineModels([Contact]);
 onRpc("has_group", () => true);
 
 test("in form view", async () => {
-    Contact._records = [{ id: 1, email: "john.doe@afenda.app" }];
+    Contact._records = [{ id: 1, email: "john.doe@nexuscanon.com" }];
     await mountView({
         type: "form",
         resModel: "contact",
@@ -27,18 +27,18 @@ test("in form view", async () => {
         arch: `<form><field name="email" widget="email"/></form>`,
     });
     expect(`.o_field_email input[type="email"]`).toHaveCount(1);
-    expect(`.o_field_email input[type="email"]`).toHaveValue("john.doe@afenda.app");
+    expect(`.o_field_email input[type="email"]`).toHaveValue("john.doe@nexuscanon.com");
     expect(`.o_field_email a`).toHaveCount(1);
-    expect(`.o_field_email a`).toHaveAttribute("href", "mailto:john.doe@afenda.app");
+    expect(`.o_field_email a`).toHaveAttribute("href", "mailto:john.doe@nexuscanon.com");
     expect(`.o_field_email a`).toHaveAttribute("target", "_blank");
-    await fieldInput("email").edit("new@afenda.app");
-    expect(`.o_field_email input[type="email"]`).toHaveValue("new@afenda.app");
+    await fieldInput("email").edit("new@nexuscanon.com");
+    expect(`.o_field_email input[type="email"]`).toHaveValue("new@nexuscanon.com");
 });
 
 test("in editable list view", async () => {
     Contact._records = [
-        { id: 1, email: "john.doe@afenda.app" },
-        { id: 2, email: "jane.doe@afenda.app" },
+        { id: 1, email: "john.doe@nexuscanon.com" },
+        { id: 2, email: "jane.doe@nexuscanon.com" },
     ];
     await mountView({
         type: "list",
@@ -48,23 +48,23 @@ test("in editable list view", async () => {
     expect(`tbody td:not(.o_list_record_selector) a`).toHaveCount(2);
     expect(`.o_field_email a`).toHaveCount(2);
     expect(queryAllTexts(`tbody td:not(.o_list_record_selector) a`)).toEqual([
-        "john.doe@afenda.app",
-        "jane.doe@afenda.app",
+        "john.doe@nexuscanon.com",
+        "jane.doe@nexuscanon.com",
     ]);
-    expect(".o_field_email a:first").toHaveAttribute("href", "mailto:john.doe@afenda.app");
+    expect(".o_field_email a:first").toHaveAttribute("href", "mailto:john.doe@nexuscanon.com");
     let cell = queryFirst("tbody td:not(.o_list_record_selector)");
     await contains(cell).click();
     expect(cell.parentElement).toHaveClass("o_selected_row");
-    expect(`.o_field_email input[type="email"]`).toHaveValue("john.doe@afenda.app");
-    await fieldInput("email").edit("new@afenda.app");
+    expect(`.o_field_email input[type="email"]`).toHaveValue("john.doe@nexuscanon.com");
+    await fieldInput("email").edit("new@nexuscanon.com");
     await contains(getFixture()).click();
     cell = queryFirst("tbody td:not(.o_list_record_selector)");
     expect(cell.parentElement).not.toHaveClass("o_selected_row");
     expect(queryAllTexts(`tbody td:not(.o_list_record_selector) a`)).toEqual([
-        "new@afenda.app",
-        "jane.doe@afenda.app",
+        "new@nexuscanon.com",
+        "jane.doe@nexuscanon.com",
     ]);
-    expect(".o_field_email a:first").toHaveAttribute("href", "mailto:new@afenda.app");
+    expect(".o_field_email a:first").toHaveAttribute("href", "mailto:new@nexuscanon.com");
 });
 
 test("with empty value", async () => {

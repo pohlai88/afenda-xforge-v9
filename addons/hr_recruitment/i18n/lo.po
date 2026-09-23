@@ -3592,9 +3592,9 @@ msgstr "ຊື່ລະດັບການສຶກສາສຳລັບການ
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"ຊື່ຂອງນາມແຝງອີເມວ, ເຊັ່ນ: 'jobs' ຫາກທ່ານຕ້ອງການຮັບອີເມວສຳລັບ <jobs@example.afenda.app>"
+"ຊື່ຂອງນາມແຝງອີເມວ, ເຊັ່ນ: 'jobs' ຫາກທ່ານຕ້ອງການຮັບອີເມວສຳລັບ <jobs@example.nexuscanon.com>"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_talent_pool__no_of_talents

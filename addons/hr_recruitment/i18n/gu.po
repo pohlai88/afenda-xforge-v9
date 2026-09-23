@@ -2433,7 +2433,7 @@ msgstr ""
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
-msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.afenda.app>"
+msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.nexuscanon.com>"
 msgstr ""
 
 #. module: hr_recruitment

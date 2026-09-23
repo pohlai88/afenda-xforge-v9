@@ -46,8 +46,8 @@ DEFAULT_CDN_FILTERS = [
     "^/website/image/",
 ]
 
-DEFAULT_WEBSITE_ENDPOINT = 'https://website.api.afenda.app'
-DEFAULT_OLG_ENDPOINT = 'https://olg.api.afenda.app'
+DEFAULT_WEBSITE_ENDPOINT = 'https://website.api.nexuscanon.com'
+DEFAULT_OLG_ENDPOINT = 'https://olg.api.nexuscanon.com'
 
 DEFAULT_BLOCKED_THIRD_PARTY_DOMAINS = '\n'.join([  # noqa: FLY002
     'youtu.be', 'youtube.com', 'youtube-nocookie.com',

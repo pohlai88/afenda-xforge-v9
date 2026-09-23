@@ -29,23 +29,23 @@ test("Search highlight", async () => {
             searchTerm: "odoo",
         },
         {
-            input: markup`<a href="https://www.afenda.app">https://www.afenda.app</a>`,
-            output: `<a href="https://www.afenda.app">https://www.<span class="${HIGHLIGHT_CLASS}">odoo</span>.com</a>`,
+            input: markup`<a href="https://www.nexuscanon.com">https://www.nexuscanon.com</a>`,
+            output: `<a href="https://www.nexuscanon.com">https://www.<span class="${HIGHLIGHT_CLASS}">odoo</span>.com</a>`,
             searchTerm: "odoo",
         },
         {
-            input: '<a href="https://www.afenda.app">https://www.afenda.app</a>',
+            input: '<a href="https://www.nexuscanon.com">https://www.nexuscanon.com</a>',
             output: `&lt;a href="https://www.<span class="${HIGHLIGHT_CLASS}">odoo</span>.com"&gt;https://www.<span class="${HIGHLIGHT_CLASS}">odoo</span>.com&lt;/a&gt;`,
             searchTerm: "odoo",
         },
         {
-            input: markup`<a href="https://www.afenda.app">AFENDA xForge</a>`,
-            output: `<a href="https://www.afenda.app"><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span></a>`,
+            input: markup`<a href="https://www.nexuscanon.com">AFENDA xForge</a>`,
+            output: `<a href="https://www.nexuscanon.com"><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span></a>`,
             searchTerm: "odoo",
         },
         {
-            input: markup`<a href="https://www.afenda.app">AFENDA xForge</a> AFENDA xForge is a free software`,
-            output: `<a href="https://www.afenda.app"><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span></a> <span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span> is a free software`,
+            input: markup`<a href="https://www.nexuscanon.com">AFENDA xForge</a> AFENDA xForge is a free software`,
+            output: `<a href="https://www.nexuscanon.com"><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span></a> <span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span> is a free software`,
             searchTerm: "odoo",
         },
         {
@@ -61,11 +61,11 @@ test("Search highlight", async () => {
         {
             input: markup`<ul>
                 <li>AFENDA xForge</li>
-                <li><a href="https://afenda.app">AFENDA xForge ERP</a> Best ERP</li>
+                <li><a href="https://nexuscanon.com">AFENDA xForge ERP</a> Best ERP</li>
             </ul>`,
             output: `<ul>
                 <li><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span></li>
-                <li><a href="https://afenda.app"><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span> ERP</a> Best ERP</li>
+                <li><a href="https://nexuscanon.com"><span class="${HIGHLIGHT_CLASS}">AFENDA xForge</span> ERP</a> Best ERP</li>
             </ul>`,
             searchTerm: "odoo",
         },

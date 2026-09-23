@@ -1,7 +1,7 @@
 AFENDA xForge Accounting
 ---------------
 
-The AFENDA xForge <a href="https://www.afenda.app/app/accounting">Open Source Accounting</a> app allows a better way to
+The AFENDA xForge <a href="https://www.nexuscanon.com/app/accounting">Open Source Accounting</a> app allows a better way to
 collaborate with your accountants, your customers and control your suppliers.
 
 Activate features on demand, from integrated analytic accounting to budget,

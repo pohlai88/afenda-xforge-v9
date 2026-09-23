@@ -11220,9 +11220,9 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"邮件别名的名称，例如：如果您要收取 <jobs@example.afenda.app> 的EMail,别名就要设"
+"邮件别名的名称，例如：如果您要收取 <jobs@example.nexuscanon.com> 的EMail,别名就要设"
 "为：\"jobs\""
 
 #. module: mail
@@ -12536,10 +12536,10 @@ msgstr "使用画中画可让您在进行其他操作时保持通话。"
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.afenda.app)."
+"email server (@mycompany.nexuscanon.com)."
 msgstr ""
 "在社区和企业版本中，发送/接收电子邮件需要使用自己的电子邮件服务器。上线用户已"
-"受益于随时可用的电子邮件服务器 (@mycompany.afenda.app)。"
+"受益于随时可用的电子邮件服务器 (@mycompany.nexuscanon.com)。"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

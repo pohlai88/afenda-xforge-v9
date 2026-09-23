@@ -129,7 +129,7 @@ test("Posting a message in discuss app should not open a chat window after leavi
     });
     await start();
     await openDiscuss(channelId);
-    await insertText(".o-mail-Composer-input", "test https://www.afenda.app/");
+    await insertText(".o-mail-Composer-input", "test https://www.nexuscanon.com/");
     await press("Enter");
     // leaving discuss.
     await openFormView("res.partner", partnerId);

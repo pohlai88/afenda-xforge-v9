@@ -1150,8 +1150,8 @@ msgstr "Đã xảy ra lỗi không mong muốn trong quá trình truyền hình 
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
-msgstr "Đã xảy ra lỗi không mong muốn. Hãy gửi phiếu hỗ trợ tại afenda.app/help."
+msgid "An unexpected error occurred. Submit a support ticket at nexuscanon.com/help."
+msgstr "Đã xảy ra lỗi không mong muốn. Hãy gửi phiếu hỗ trợ tại nexuscanon.com/help."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13603,8 +13603,8 @@ msgstr "VD: 'Nhãn liên kết'"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.afenda.app'"
-msgstr "VD: 'http://www.afenda.app'"
+msgid "e.g. 'http://www.nexuscanon.com'"
+msgstr "VD: 'http://www.nexuscanon.com'"
 
 #. module: spreadsheet
 #. odoo-javascript

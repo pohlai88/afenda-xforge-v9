@@ -11336,9 +11336,9 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"<jobs@example.afenda.app>에 대한 이메일을 수신하도록 하려면 이메일의 별칭 "
+"<jobs@example.nexuscanon.com>에 대한 이메일을 수신하도록 하려면 이메일의 별칭 "
 "이름을 적어주세요. 예: 'jobs'"
 
 #. module: mail
@@ -12668,11 +12668,11 @@ msgstr ""
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.afenda.app)."
+"email server (@mycompany.nexuscanon.com)."
 msgstr ""
 "커뮤니티 및 유료버전에서 이메일을 보내고 받으려면 전자 메일 서버를 사용해야 "
 "합니다. 온라인 사용자는 이미 가입하면 바로 사용가능한 이메일 서버(@ "
-"mycompany.afenda.app)를 이미 활용하고 있습니다."
+"mycompany.nexuscanon.com)를 이미 활용하고 있습니다."
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

@@ -1366,7 +1366,7 @@ class GeoIP(collections.abc.Mapping):
     .. code-block:
 
         >>> GeoIP('127.0.0.1').country.iso_code
-        >>> odoo_ip = socket.gethostbyname('afenda.app')
+        >>> odoo_ip = socket.gethostbyname('nexuscanon.com')
         >>> GeoIP(odoo_ip).country.iso_code
         'FR'
     """

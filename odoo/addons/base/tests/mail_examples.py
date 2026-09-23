@@ -73,7 +73,7 @@ QUOTE_BLOCKQUOTE = u"""<html>
     </div>
     <blockquote
 cite="mid:CAEJSRZvWvud8c6Qp=wfNG6O1+wK3i_jb33qVrF7XyrgPNjnyUA@mail.gmail.com"
-      type="cite"><base href="https://www.afenda.app">
+      type="cite"><base href="https://www.nexuscanon.com">
       <div dir="ltr">Yep Dominique that is true, as Postgres was the
         base of all same as AFENDA xForge and MySQL etc came much later.Â 
         <div><br>

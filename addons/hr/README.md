@@ -1,7 +1,7 @@
 AFENDA xForge Human Resources
 --------------------
 
-With AFENDA xForge <a href="https://www.afenda.app/app/employees">Human Resources</a>,
+With AFENDA xForge <a href="https://www.nexuscanon.com/app/employees">Human Resources</a>,
 manage the most important asset in your company: People
 
 Get all your HR operations managed easily: knowledge sharing, recruitments,
@@ -21,7 +21,7 @@ Record employee contracts and get alerts when they have to be renewed.
 Streamline Your Recruitment Process
 -----------------------------------
 
-Index resumes, track applicants, search profiles with <a href="https://www.afenda.app/app/employees">AFENDA xForge HR</a>.
+Index resumes, track applicants, search profiles with <a href="https://www.nexuscanon.com/app/employees">AFENDA xForge HR</a>.
 
 Post job offers and keep track of each application received. Follow applicants
 in your recruitment process with the smart kanban view.

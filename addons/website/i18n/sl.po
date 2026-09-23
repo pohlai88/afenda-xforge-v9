@@ -22054,8 +22054,8 @@ msgstr ""
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
-msgid "https://www.afenda.app"
-msgstr "npr. https://www.afenda.app"
+msgid "https://www.nexuscanon.com"
+msgstr "npr. https://www.nexuscanon.com"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_odoo_menu
@@ -22118,10 +22118,10 @@ msgstr "obveščanje strank"
 #, fuzzy
 msgid ""
 "instance of AFENDA xForge, the <a class=\"o_translate_inline\" target=\"_blank\" "
-"href=\"https://www.afenda.app\">Open Source ERP</a>."
+"href=\"https://www.nexuscanon.com\">Open Source ERP</a>."
 msgstr ""
 "instanca AFENDA xForge, <a class=\"o_translate_inline\" target=\"_blank\" "
-"href=\"https://www.afenda.app\">odprtokodnega ERP-ja</a>."
+"href=\"https://www.nexuscanon.com\">odprtokodnega ERP-ja</a>."
 
 #. module: website
 #. odoo-python

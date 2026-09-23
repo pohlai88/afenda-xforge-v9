@@ -2970,7 +2970,7 @@ describe("pasting within pre", () => {
     });
 });
 
-const url = "https://www.afenda.app";
+const url = "https://www.nexuscanon.com";
 const imgUrl = "https://download.odoocdn.com/icons/website/static/description/icon.png";
 const videoUrl = "https://www.youtube.com/watch?v=dQw4w9WgXcQ";
 
@@ -3062,11 +3062,11 @@ describe("link", () => {
             const { el, editor } = await setupEditor(
                 `<p>xy<a href="http://test.test/" oe-zws-empty-inline="">\u200B[]</a>z</p>`
             );
-            pasteText(editor, "http://afenda.app");
+            pasteText(editor, "http://nexuscanon.com");
             await animationFrame();
             await expectElementCount(".o-we-powerbox", 0);
             expect(cleanLinkArtifacts(getContent(el))).toBe(
-                `<p>xy<a href="http://afenda.app">http://afenda.app</a>[]z</p>`
+                `<p>xy<a href="http://nexuscanon.com">http://nexuscanon.com</a>[]z</p>`
             );
         });
 
@@ -3108,9 +3108,9 @@ describe("link", () => {
             await testEditor({
                 contentBefore: '<p><a href="http://test.test/">[]\u200B</a></p>',
                 stepFunction: async (editor) => {
-                    pasteText(editor, "abc www.afenda.app xyz");
+                    pasteText(editor, "abc www.nexuscanon.com xyz");
                 },
-                contentAfter: '<p>abc <a href="http://www.afenda.app">www.afenda.app</a> xyz[]</p>',
+                contentAfter: '<p>abc <a href="http://www.nexuscanon.com">www.nexuscanon.com</a> xyz[]</p>',
             });
         });
 
@@ -3118,10 +3118,10 @@ describe("link", () => {
             await testEditor({
                 contentBefore: '<p><a href="http://test.test/">[]\u200B</a></p>',
                 stepFunction: async (editor) => {
-                    pasteText(editor, "afenda.app\ngoogle.com");
+                    pasteText(editor, "nexuscanon.com\ngoogle.com");
                 },
                 contentAfter:
-                    '<div><a href="http://afenda.app">afenda.app</a></div>' +
+                    '<div><a href="http://nexuscanon.com">nexuscanon.com</a></div>' +
                     '<p><a href="http://google.com">google.com</a>[]</p>',
             });
         });
@@ -3132,11 +3132,11 @@ describe("link", () => {
                 stepFunction: async (editor) => {
                     pasteHtml(
                         editor,
-                        '<a href="www.afenda.app">afenda.app</a><br><a href="google.com">google.com</a>'
+                        '<a href="www.nexuscanon.com">nexuscanon.com</a><br><a href="google.com">google.com</a>'
                     );
                 },
                 contentAfter:
-                    '<p><a href="www.afenda.app">afenda.app</a></p><p><a href="https://google.com">google.com[]</a></p>',
+                    '<p><a href="www.nexuscanon.com">nexuscanon.com</a></p><p><a href="https://google.com">google.com[]</a></p>',
             });
         });
         test("should paste html content over an empty link (collapsed) (2)", async () => {
@@ -3145,11 +3145,11 @@ describe("link", () => {
                 stepFunction: async (editor) => {
                     pasteHtml(
                         editor,
-                        '<a href="www.afenda.app">afenda.app</a><br><a href="www.google.com">google.com</a>'
+                        '<a href="www.nexuscanon.com">nexuscanon.com</a><br><a href="www.google.com">google.com</a>'
                     );
                 },
                 contentAfter:
-                    '<p><a href="www.afenda.app">afenda.app</a></p><p><a href="www.google.com">google.com[]</a></p>',
+                    '<p><a href="www.nexuscanon.com">nexuscanon.com</a></p><p><a href="www.google.com">google.com[]</a></p>',
             });
         });
 
@@ -3306,7 +3306,7 @@ describe("link", () => {
             await testEditor({
                 contentBefore: "<p>[abc]</p>",
                 stepFunction: async (editor) => {
-                    pasteText(editor, "www.afenda.app");
+                    pasteText(editor, "www.nexuscanon.com");
                     undo(editor);
                 },
                 contentAfter: "<p>[abc]</p>",
@@ -3317,7 +3317,7 @@ describe("link", () => {
             await testEditor({
                 contentBefore: "<p>[abc]</p>",
                 stepFunction: async (editor) => {
-                    pasteText(editor, "def www.afenda.app xyz");
+                    pasteText(editor, "def www.nexuscanon.com xyz");
                     undo(editor);
                 },
                 contentAfter: "<p>[abc]</p>",
@@ -3330,7 +3330,7 @@ describe("link", () => {
                 stepFunction: async (editor) => {
                     pasteHtml(
                         editor,
-                        '<a href="www.afenda.app">afenda.app</a><br><a href="www.google.com">google.com</a>'
+                        '<a href="www.nexuscanon.com">nexuscanon.com</a><br><a href="www.google.com">google.com</a>'
                     );
                     undo(editor);
                 },
@@ -3434,9 +3434,9 @@ describe("link", () => {
             await testEditor({
                 contentBefore: '<p><a href="#">[xyz]</a></p>',
                 stepFunction: async (editor) => {
-                    pasteText(editor, "www.afenda.app");
+                    pasteText(editor, "www.nexuscanon.com");
                 },
-                contentAfter: '<p><a href="http://www.afenda.app">www.afenda.app</a>[]</p>',
+                contentAfter: '<p><a href="http://www.nexuscanon.com">www.nexuscanon.com</a>[]</p>',
             });
         });
 
@@ -3444,9 +3444,9 @@ describe("link", () => {
             await testEditor({
                 contentBefore: '<p><a href="#">[xyz]</a></p>',
                 stepFunction: async (editor) => {
-                    pasteText(editor, "abc www.afenda.app xyz");
+                    pasteText(editor, "abc www.nexuscanon.com xyz");
                 },
-                contentAfter: '<p>abc <a href="http://www.afenda.app">www.afenda.app</a> xyz[]</p>',
+                contentAfter: '<p>abc <a href="http://www.nexuscanon.com">www.nexuscanon.com</a> xyz[]</p>',
             });
         });
 
@@ -3487,11 +3487,11 @@ describe("link", () => {
                 stepFunction: async (editor) => {
                     pasteHtml(
                         editor,
-                        '<a href="www.afenda.app">afenda.app</a><br><a href="google.com">google.com</a>'
+                        '<a href="www.nexuscanon.com">nexuscanon.com</a><br><a href="google.com">google.com</a>'
                     );
                 },
                 contentAfter:
-                    '<p><a href="www.afenda.app">afenda.app</a></p><p><a href="https://google.com">google.com[]</a></p>',
+                    '<p><a href="www.nexuscanon.com">nexuscanon.com</a></p><p><a href="https://google.com">google.com[]</a></p>',
             });
         });
         test("should paste html content over a link if all of its contents is selected (not collapsed) (2)", async () => {
@@ -3500,11 +3500,11 @@ describe("link", () => {
                 stepFunction: async (editor) => {
                     pasteHtml(
                         editor,
-                        '<a href="www.afenda.app">afenda.app</a><br><a href="www.google.com">google.com</a>'
+                        '<a href="www.nexuscanon.com">nexuscanon.com</a><br><a href="www.google.com">google.com</a>'
                     );
                 },
                 contentAfter:
-                    '<p><a href="www.afenda.app">afenda.app</a></p><p><a href="www.google.com">google.com[]</a></p>',
+                    '<p><a href="www.nexuscanon.com">nexuscanon.com</a></p><p><a href="www.google.com">google.com[]</a></p>',
             });
         });
     });

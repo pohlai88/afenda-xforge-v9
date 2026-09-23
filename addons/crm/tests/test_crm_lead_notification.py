@@ -80,7 +80,7 @@ class NewLeadNotification(TestCrmCommon):
             }, {
                 'name': 'Test Suggestion (partner no email with cc email)',
                 'partner_id': partner_no_email.id,
-                'email_cc': 'test_cc@afenda.app',
+                'email_cc': 'test_cc@nexuscanon.com',
                 'user_id': self.user_sales_leads.id
             }
         ])
@@ -175,7 +175,7 @@ class NewLeadNotification(TestCrmCommon):
                     'create_values': {},
                 }, {
                     'name': '',
-                    'email': 'test_cc@afenda.app',
+                    'email': 'test_cc@nexuscanon.com',
                     'partner_id': False,
                     'create_values': {},
                 },

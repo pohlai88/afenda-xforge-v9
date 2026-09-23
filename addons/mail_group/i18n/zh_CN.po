@@ -1441,9 +1441,9 @@ msgstr ""
 #: model:ir.model.fields,help:mail_group.field_mail_group__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"邮件别名的名称，例如：如果您要收取 <jobs@example.afenda.app> 的EMail,别名就要设"
+"邮件别名的名称，例如：如果您要收取 <jobs@example.nexuscanon.com> 的EMail,别名就要设"
 "为：\"jobs\""
 
 #. module: mail_group

@@ -1006,8 +1006,8 @@ def encapsulate_email(old_email, new_email):
 
     e.g.
     * Old From: "Admin" <admin@gmail.com>
-    * New From: notifications@afenda.app
-    * Output: "Admin" <notifications@afenda.app>
+    * New From: notifications@nexuscanon.com
+    * Output: "Admin" <notifications@nexuscanon.com>
     """
     old_email_split = getaddresses([old_email])
     if not old_email_split or not old_email_split[0]:

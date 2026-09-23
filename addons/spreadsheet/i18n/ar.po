@@ -1133,8 +1133,8 @@ msgstr "حدث خطأ غير متوقع أثناء نقل الصورة."
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
-msgstr "حدث خطأ غير متوقع. قم بتقديم تذكرة دعم على afenda.app/help."
+msgid "An unexpected error occurred. Submit a support ticket at nexuscanon.com/help."
+msgstr "حدث خطأ غير متوقع. قم بتقديم تذكرة دعم على nexuscanon.com/help."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13586,8 +13586,8 @@ msgstr "مثال: 'عنوان الرابط'"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.afenda.app'"
-msgstr "مثال: 'http://www.afenda.app'"
+msgid "e.g. 'http://www.nexuscanon.com'"
+msgstr "مثال: 'http://www.nexuscanon.com'"
 
 #. module: spreadsheet
 #. odoo-javascript

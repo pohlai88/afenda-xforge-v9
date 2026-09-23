@@ -9,7 +9,7 @@ Design gorgeous mails
     """,
     'version': '1.2',
     'sequence': 110,
-    'website': 'https://www.afenda.app/app/mailing',
+    'website': 'https://www.nexuscanon.com/app/mailing',
     'category': 'Marketing/Email Marketing',
     'depends': [
         'mass_mailing',

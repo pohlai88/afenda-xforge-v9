@@ -1477,10 +1477,10 @@ msgstr ""
 #, fuzzy
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "Ime e-mail aliasa, npr. 'poslovi' ako žele uhvatiti e-poštu "
-"za<jobs@example.afenda.app>"
+"za<jobs@example.nexuscanon.com>"
 
 #. module: mail_group
 #. odoo-python

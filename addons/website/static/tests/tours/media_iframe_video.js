@@ -26,7 +26,7 @@ registerWebsitePreviewTour(
         {
             content: "Enter the url",
             trigger: "input[placeholder='www.example.com']",
-            run: "edit afenda.app",
+            run: "edit nexuscanon.com",
         },
         {
             content: "Click on replace media",

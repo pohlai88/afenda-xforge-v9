@@ -475,10 +475,10 @@ describe("Link creation", () => {
         });
         test("typing uppercase URL + space should convert to link", async () => {
             const { editor, el } = await setupEditor("<p>[]</p>");
-            await insertText(editor, "http://afenda.app");
+            await insertText(editor, "http://nexuscanon.com");
             await insertSpace(editor);
             expect(cleanLinkArtifacts(getContent(el))).toBe(
-                '<p><a href="http://afenda.app">http://afenda.app</a>&nbsp;[]</p>'
+                '<p><a href="http://nexuscanon.com">http://nexuscanon.com</a>&nbsp;[]</p>'
             );
         });
     });
@@ -1232,17 +1232,17 @@ describe("link preview", () => {
         onRpc("/html_editor/link_preview_external", () => ({
             og_description:
                 "From ERP to CRM, eCommerce and CMS. Download AFENDA xForge or use it in the cloud. Grow Your Business.",
-            og_image: "https://www.afenda.app/web/image/41207129-1abe7a15/homepage-seo.png",
+            og_image: "https://www.nexuscanon.com/web/image/41207129-1abe7a15/homepage-seo.png",
             og_title: "Open Source ERP and CRM | AFENDA xForge",
             og_type: "website",
             og_site_name: "AFENDA xForge",
-            source_url: "http://afenda.app/",
+            source_url: "http://nexuscanon.com/",
         }));
         const { editor } = await setupEditor(`<p>[]<br></p>`);
         await insertText(editor, "/link");
         await animationFrame();
         await click(".o-we-command-name:first");
-        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://afenda.app/");
+        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://nexuscanon.com/");
         await animationFrame();
         expect(".o_we_replace_title_btn").toHaveCount(1);
         expect(".o_extra_info_card").toHaveCount(1);
@@ -1350,18 +1350,18 @@ describe("link preview", () => {
             expect.step("/html_editor/link_preview_external");
             return {
                 og_description: description,
-                og_image: "https://www.afenda.app/web/image/41207129-1abe7a15/homepage-seo.png",
+                og_image: "https://www.nexuscanon.com/web/image/41207129-1abe7a15/homepage-seo.png",
                 og_title: title,
                 og_type: "website",
                 og_site_name: "AFENDA xForge",
-                source_url: "http://afenda.app/",
+                source_url: "http://nexuscanon.com/",
             };
         });
         const { editor } = await setupEditor(`<p>[]<br></p>`);
         await insertText(editor, "/link");
         await animationFrame();
         await click(".o-we-command-name:first");
-        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://afenda.app/");
+        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://nexuscanon.com/");
         await animationFrame();
         expect.verifySteps(["/html_editor/link_preview_external"]);
         await waitFor(".o_we_description_link_preview");
@@ -1387,17 +1387,17 @@ describe("link preview", () => {
         onRpc("/html_editor/link_preview_external", () => ({
             og_description:
                 "From ERP to CRM, eCommerce and CMS. Download AFENDA xForge or use it in the cloud. Grow Your Business.",
-            og_image: "https://www.afenda.app/web/image/41207129-1abe7a15/homepage-seo.png",
+            og_image: "https://www.nexuscanon.com/web/image/41207129-1abe7a15/homepage-seo.png",
             og_title: "Open Source ERP and CRM | AFENDA xForge",
             og_type: "website",
             og_site_name: "AFENDA xForge",
-            source_url: "http://afenda.app/",
+            source_url: "http://nexuscanon.com/",
         }));
         const { editor } = await setupEditor(`<p>abc</p><p>[]<br></p>`);
         await insertText(editor, "/link");
         await animationFrame();
         await click(".o-we-command-name:first");
-        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://afenda.app/");
+        await contains(".o-we-linkpopover input.o_we_href_input_link").fill("http://nexuscanon.com/");
         await animationFrame();
         expect("button.o_we_replace_title_btn").toHaveCount(1);
         expect("a.o_we_replace_title_btn").toHaveCount(0);
@@ -2054,12 +2054,12 @@ describe("label is a valid URL", () => {
         expect(cleanLinkArtifacts(getContent(el))).toBe('<p><a href="tel:123">tel:123[]</a></p>');
     });
     test("popover should display href URL even if label is a valid URL and differs from href", async () => {
-        await setupEditor('<p><a href="https://afenda.app/">googl[]e.com</a></p>');
+        await setupEditor('<p><a href="https://nexuscanon.com/">googl[]e.com</a></p>');
         await waitFor(".o-we-linkpopover", { timeout: 1500 });
-        expect(queryFirst(".o-we-linkpopover a").href).toBe("https://afenda.app/");
+        expect(queryFirst(".o-we-linkpopover a").href).toBe("https://nexuscanon.com/");
         await click(".o_we_edit_link");
         await waitFor(".o_we_href_input_link");
-        expect("input.o_we_href_input_link").toHaveValue("https://afenda.app/");
+        expect("input.o_we_href_input_link").toHaveValue("https://nexuscanon.com/");
     });
     test("Focus should be on URL [label] when editing an existing link", async () => {
         await setupEditor('<p>this is a <a href="http://test.com/">li[]nk</a></p>');

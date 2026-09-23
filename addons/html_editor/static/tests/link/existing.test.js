@@ -237,7 +237,7 @@ test("should not allow to extend a link if selection spans multiple links (3)", 
 });
 
 test("when label === url popover label input should be empty", async () => {
-    await setupEditor('<p>abc <a href="http://afenda.app">http://odo[]o.com</a> def</p>');
+    await setupEditor('<p>abc <a href="http://nexuscanon.com">http://odo[]o.com</a> def</p>');
     await waitFor(".o-we-linkpopover");
     await click(".o_we_edit_link");
     await waitFor(".o_we_label_link");
@@ -246,7 +246,7 @@ test("when label === url popover label input should be empty", async () => {
 
 test("when label === url changing url should change label", async () => {
     const { el } = await setupEditor(
-        '<p>abc <a href="http://afenda.app">http://odo[]o.com</a> def</p>'
+        '<p>abc <a href="http://nexuscanon.com">http://odo[]o.com</a> def</p>'
     );
     await waitFor(".o-we-linkpopover");
     await click(".o_we_edit_link");

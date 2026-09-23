@@ -80,7 +80,7 @@ export function odooAccountItem(env) {
                     browser.open(url, "_blank");
                 })
                 .catch(() => {
-                    browser.open("https://accounts.afenda.app/account", "_blank");
+                    browser.open("https://accounts.nexuscanon.com/account", "_blank");
                 });
         },
         sequence: 60,

@@ -34,7 +34,7 @@ class TestSMSPost(TestMassMailCommon):
 
     def setUp(self):
         super(TestSMSPost, self).setUp()
-        self._web_base_url = 'https://test.afenda.app'
+        self._web_base_url = 'https://test.nexuscanon.com'
         self.env['ir.config_parameter'].sudo().set_param('web.base.url', self._web_base_url)
 
     def test_body_link_shorten(self):

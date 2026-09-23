@@ -4060,10 +4060,10 @@ msgstr "Ikon font awesome, misalnya fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
+"href=\"mailto:events@nexuscanon.com\">events@nexuscanon.com</a>"
 msgstr ""
 "Untuk informasi tambahan, silakan hubungi kami di <a "
-"class=\"o_translate_inline\" href=\"mailto:events@afenda.app\">acara@afenda.app</"
+"class=\"o_translate_inline\" href=\"mailto:events@nexuscanon.com\">acara@nexuscanon.com</"
 "a>"
 
 #. module: event
@@ -6443,8 +6443,8 @@ msgstr "contoh \"Mempromosikan\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.afenda.app\""
-msgstr "contoh. \"https://www.afenda.app\""
+msgid "e.g. \"https://www.nexuscanon.com\""
+msgstr "contoh. \"https://www.nexuscanon.com\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

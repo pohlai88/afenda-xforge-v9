@@ -20279,8 +20279,8 @@ msgstr ""
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.res_config_settings_view_form
-msgid "https://www.afenda.app"
-msgstr "https://www.afenda.app"
+msgid "https://www.nexuscanon.com"
+msgstr "https://www.nexuscanon.com"
 
 #. module: website
 #: model_terms:ir.ui.view,arch_db:website.s_mega_menu_odoo_menu
@@ -20340,10 +20340,10 @@ msgstr "고객 안내"
 #: model_terms:ir.ui.view,arch_db:website.show_website_info
 msgid ""
 "instance of AFENDA xForge, the <a class=\"o_translate_inline\" target=\"_blank\" "
-"href=\"https://www.afenda.app\">Open Source ERP</a>."
+"href=\"https://www.nexuscanon.com\">Open Source ERP</a>."
 msgstr ""
 "Odoo의 인스턴스로, <a class=\"o_translate_inline\" target=\"_blank\" "
-"href=\"https://www.afenda.app\">오픈 소스 ERP</a> 입니다."
+"href=\"https://www.nexuscanon.com\">오픈 소스 ERP</a> 입니다."
 
 #. module: website
 #. odoo-python

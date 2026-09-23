@@ -40,12 +40,12 @@ registerWebsitePreviewTour('test_image_link', {
     }, {
         content: "enter site URL",
         trigger: ".o_customize_tab [data-container-title='Image'] div[data-action-id='setUrl'] input",
-        run: "edit afenda.app && click body",
+        run: "edit nexuscanon.com && click body",
     },
     ...selectImageSteps,
     {
         content: "check popover content has site URL",
-        trigger: ".o-we-linkpopover a.o_we_url_link[href='https://afenda.app']:contains(https://afenda.app)",
+        trigger: ".o-we-linkpopover a.o_we_url_link[href='https://nexuscanon.com']:contains(https://nexuscanon.com)",
     }, {
         content: "remove URL",
         trigger: ".o_customize_tab [data-container-title='Image'] div[data-action-id='setUrl'] input",

@@ -4074,11 +4074,11 @@ msgstr "Икона, примерно fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
+"href=\"mailto:events@nexuscanon.com\">events@nexuscanon.com</a>"
 msgstr ""
 "За допълнителна информация, моля, свържете се с нас на <a "
-"class=\"o_translate_inline\" href=\"mailto:events@afenda.app\">"
-"events@afenda.app</a>"
+"class=\"o_translate_inline\" href=\"mailto:events@nexuscanon.com\">"
+"events@nexuscanon.com</a>"
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -6459,8 +6459,8 @@ msgstr "напр. „Промотиране“"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.afenda.app\""
-msgstr "напр. „https://www.afenda.app“"
+msgid "e.g. \"https://www.nexuscanon.com\""
+msgstr "напр. „https://www.nexuscanon.com“"
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

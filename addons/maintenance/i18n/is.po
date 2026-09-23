@@ -1273,8 +1273,8 @@ msgstr "The model (AFENDA xForge Document Kind) to which this alias corresponds.
 
 #. module: maintenance
 #: model:ir.model.fields,help:maintenance.field_maintenance_equipment_category__alias_name
-msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.afenda.app>"
-msgstr "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.afenda.app>"
+msgid "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.nexuscanon.com>"
+msgstr "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.nexuscanon.com>"
 
 #. module: maintenance
 #: model:ir.model.fields,help:maintenance.field_maintenance_equipment_category__alias_user_id

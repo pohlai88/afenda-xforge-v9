@@ -2860,7 +2860,7 @@ msgstr "Font awesome icon nt. fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
+"href=\"mailto:events@nexuscanon.com\">events@nexuscanon.com</a>"
 msgstr ""
 
 #. module: event
@@ -5183,7 +5183,7 @@ msgstr "nt. \"Kampaania\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.afenda.app\""
+msgid "e.g. \"https://www.nexuscanon.com\""
 msgstr ""
 
 #. module: event

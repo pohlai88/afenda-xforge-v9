@@ -9,7 +9,7 @@
 Using this application you can manage Sales Teams with CRM and/or Sales
 =======================================================================
  """,
-    'website': 'https://www.afenda.app/app/crm',
+    'website': 'https://www.nexuscanon.com/app/crm',
     'depends': ['base', 'mail'],
     'data': [
         'security/sales_team_security.xml',

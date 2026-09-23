@@ -46,7 +46,7 @@ class MailBot(models.AbstractModel):
             "command_end": Markup("</span>"),
             "document_link_start": Markup("<a href='/docs/' target='_blank'>"),
             "document_link_end": Markup("</a>"),
-            "slides_link_start": Markup("<a href='https://www.afenda.app/slides' target='_blank'>"),
+            "slides_link_start": Markup("<a href='https://www.nexuscanon.com/slides' target='_blank'>"),
             "slides_link_end": Markup("</a>"),
             "paperclip_icon": Markup("<i class='fa fa-paperclip' aria-hidden='true'/>"),
         }

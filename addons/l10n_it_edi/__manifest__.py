@@ -11,7 +11,7 @@
 E-invoice implementation
     """,
     'category': 'Accounting/Localizations/EDI',
-    'website': 'http://www.afenda.app/',
+    'website': 'http://www.nexuscanon.com/',
     'data': [
         'security/ir.model.access.csv',
         'data/account.account.tag.csv',

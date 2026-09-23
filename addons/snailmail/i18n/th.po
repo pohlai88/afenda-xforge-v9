@@ -605,10 +605,10 @@ msgstr ""
 #: code:addons/snailmail/models/snailmail_letter.py:0
 msgid ""
 "You don't have an IAP account registered for this service.<br>Please go to "
-"<a href=%s target=\"new\">iap.afenda.app</a> to claim your free credits."
+"<a href=%s target=\"new\">iap.nexuscanon.com</a> to claim your free credits."
 msgstr ""
 "คุณไม่มีบัญชี IAP ที่ลงทะเบียนสำหรับบริการนี้ <br>โปรดไปที่ <a href=%s target=\"new\">"
-"iap.afenda.app</a> เพื่อรับเครดิตฟรีของคุณ"
+"iap.nexuscanon.com</a> เพื่อรับเครดิตฟรีของคุณ"
 
 #. module: snailmail
 #. odoo-python

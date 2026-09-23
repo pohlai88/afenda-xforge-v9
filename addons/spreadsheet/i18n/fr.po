@@ -1204,10 +1204,10 @@ msgstr "Une erreur inattendue s'est produite lors du transfert de l'image"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
+msgid "An unexpected error occurred. Submit a support ticket at nexuscanon.com/help."
 msgstr ""
 "Une erreur inattendue s'est produite. Soumettez un ticket d'assistance via "
-"afenda.app/help."
+"nexuscanon.com/help."
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13952,8 +13952,8 @@ msgstr "par ex. 'Étiquette du lien'"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.afenda.app'"
-msgstr "par ex. 'http://www.afenda.app'"
+msgid "e.g. 'http://www.nexuscanon.com'"
+msgstr "par ex. 'http://www.nexuscanon.com'"
 
 #. module: spreadsheet
 #. odoo-javascript

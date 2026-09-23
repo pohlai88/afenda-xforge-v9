@@ -4,7 +4,7 @@
 
 API: [Paymob API Checkout](https://developers.paymob.com/egypt/api-reference-guide)
 
-API Backend: [Paymob Internal AFENDA xForge APIs](https://www.afenda.app/odoo/project/4106/tasks/4196623)
+API Backend: [Paymob Internal AFENDA xForge APIs](https://www.nexuscanon.com/odoo/project/4106/tasks/4196623)
 
 This module required two integrations from Paymob. The backend API allows to modify payment methods
 on their portal to set callback URLs and indicate which ones are enabled on AFENDA xForge.

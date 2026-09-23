@@ -11398,9 +11398,9 @@ msgstr ""
 #: model:ir.model.fields,help:mail.field_mail_alias_mixin_optional__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
-"eメールのエイリアス.例えば<jobs@example.afenda.app>のメールを受け取りたい場"
+"eメールのエイリアス.例えば<jobs@example.nexuscanon.com>のメールを受け取りたい場"
 "合'jobs’を選択"
 
 #. module: mail
@@ -12744,11 +12744,11 @@ msgstr "ピクチャー・イン・ピクチャー機能を使えば、通話中
 msgid ""
 "Using your own email server is required to send/receive emails in Community "
 "and Enterprise versions. Online users already benefit from a ready-to-use "
-"email server (@mycompany.afenda.app)."
+"email server (@mycompany.nexuscanon.com)."
 msgstr ""
 "コミュニティ版と企業版で電子メールを送受信するには、独自の電子メールサーバー"
 "を使用する必要があります。オンラインユーザーは、すぐに使用できる電子"
-"メールサーバー(@ mycompany.afenda.app)の恩恵を受けています。"
+"メールサーバー(@ mycompany.nexuscanon.com)の恩恵を受けています。"
 
 #. module: mail
 #: model:ir.model.fields,field_description:mail.field_res_users__out_of_office_message

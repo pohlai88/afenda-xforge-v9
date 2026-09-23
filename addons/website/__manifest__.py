@@ -6,7 +6,7 @@
     'category': 'Website/Website',
     'sequence': 20,
     'summary': 'Enterprise website builder',
-    'website': 'https://www.afenda.app/app/website',
+    'website': 'https://www.nexuscanon.com/app/website',
     'version': '1.0',
     'depends': [
         'digest',

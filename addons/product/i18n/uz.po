@@ -3207,11 +3207,11 @@ msgstr "Iltimos, musbat butun son kiriting."
 #, fuzzy
 msgid ""
 "Please enter a valid URL.\n"
-"Example: https://www.afenda.app\n"
+"Example: https://www.nexuscanon.com\n"
 "\n"
 "Invalid URL: %s"
 msgstr ""
-"Iltimos, to‘g‘ri URL manzilni kiriting. Misol: https://www.afenda.app "
+"Iltimos, to‘g‘ri URL manzilni kiriting. Misol: https://www.nexuscanon.com "
 "Noto‘g‘ri URL: %s"
 
 #. module: product

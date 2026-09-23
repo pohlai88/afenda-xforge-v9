@@ -1079,8 +1079,8 @@ msgstr "Masalan: OpenWood Dekoratsiya"
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form
 #, fuzzy
-msgid "e.g. : https://www.afenda.app"
-msgstr "Masalan: https://www.afenda.app"
+msgid "e.g. : https://www.nexuscanon.com"
+msgstr "Masalan: https://www.nexuscanon.com"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form

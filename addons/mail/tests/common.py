@@ -2085,7 +2085,7 @@ class MailCommon(MailCase):
     @classmethod
     def _setup_push_devices_for_partners(cls, partners, endpoint=None):
         """ Generate keys and devices """
-        endpoint = endpoint or "https://test.afenda.app/webpush/user"
+        endpoint = endpoint or "https://test.nexuscanon.com/webpush/user"
         cls.vapid_public_key = cls.env['mail.push.device'].get_web_push_vapid_public_key()
         return cls.env['mail.push.device'].sudo().create([
             {

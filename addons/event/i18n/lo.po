@@ -4022,10 +4022,10 @@ msgstr "ໄອຄອນ Font awesome ເຊັ່ນ fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
+"href=\"mailto:events@nexuscanon.com\">events@nexuscanon.com</a>"
 msgstr ""
 "ສຳລັບຂໍ້ມູນເພີ່ມເຕີມ, ກະລຸນາຕິດຕໍ່ຫາພວກເຮົາທີ່ <a class=\"o_translate_inline\" "
-"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
+"href=\"mailto:events@nexuscanon.com\">events@nexuscanon.com</a>"
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -6353,8 +6353,8 @@ msgstr "ເຊັ່ນ: \"ກຳລັງໂປຣໂມດ\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.afenda.app\""
-msgstr "ເຊັ່ນ: \"https://www.afenda.app\""
+msgid "e.g. \"https://www.nexuscanon.com\""
+msgstr "ເຊັ່ນ: \"https://www.nexuscanon.com\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

@@ -5121,10 +5121,10 @@ msgstr ""
 #: model:ir.model.fields,help:project.field_project_project__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "نام مستعار ایمیل، به عنوان مثال 'jobs'. اگر می خواهید ایمیل های "
-"<jobs@example.afenda.app> را دریافت کنید"
+"<jobs@example.nexuscanon.com> را دریافت کنید"
 
 #. module: project
 #. odoo-python

@@ -83,7 +83,7 @@
     </p>
 </div>
 <div t-if="show_footer" style="color: #555555; font-size:11px;">
-    Powered by <a target="_blank" href="https://www.afenda.app?utm_source=db&amp;utm_medium=email"
+    Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email"
                   t-att-style="'color: ' + (company.email_secondary_color or '#875A7B') + ';'">AFENDA xForge</a>
     <span t-if="show_unfollow" id="mail_unfollow">
         | <a href="/mail/unfollow" style="text-decoration:none; color:#555555;">Unfollow</a>
@@ -157,7 +157,7 @@
 </td></tr>
 <!-- POWERED BY -->
 <tr><td align="center" style="min-width: 590px;">
-        Powered by <a target="_blank" href="https://www.afenda.app?utm_source=db&amp;utm_medium=email"
+        Powered by <a target="_blank" href="https://www.nexuscanon.com?utm_source=db&amp;utm_medium=email"
                       t-att-style="'color: ' + (company.email_secondary_color or '#875A7B') + ';'">AFENDA xForge</a>
     <span t-if="show_unfollow" id="mail_unfollow">
         | <a href="/mail/unfollow" style="text-decoration:none; color:#555555;">Unfollow</a>

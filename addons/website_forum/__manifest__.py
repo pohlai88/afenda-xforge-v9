@@ -11,7 +11,7 @@
     'description': """
 Ask questions, get answers, no distractions
         """,
-    'website': 'https://www.afenda.app/app/forum',
+    'website': 'https://www.nexuscanon.com/app/forum',
     'depends': [
         'auth_signup',
         'website_mail',

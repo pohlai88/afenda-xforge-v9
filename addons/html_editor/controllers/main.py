@@ -23,8 +23,8 @@ from lxml import html, etree
 
 from ..models.ir_attachment import SUPPORTED_IMAGE_MIMETYPES
 
-DEFAULT_LIBRARY_ENDPOINT = 'https://media-api.afenda.app'
-DEFAULT_OLG_ENDPOINT = 'https://olg.api.afenda.app'
+DEFAULT_LIBRARY_ENDPOINT = 'https://media-api.nexuscanon.com'
+DEFAULT_OLG_ENDPOINT = 'https://olg.api.nexuscanon.com'
 
 # Regex definitions to apply speed modification in SVG files
 # Note : These regex patterns are duplicated on the server side for

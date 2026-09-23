@@ -1100,8 +1100,8 @@ msgstr "图像传输过程中发生意外错误"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js:0
-msgid "An unexpected error occurred. Submit a support ticket at afenda.app/help."
-msgstr "发生意外错误。请在 afenda.app/help 上提交技术支持请求。"
+msgid "An unexpected error occurred. Submit a support ticket at nexuscanon.com/help."
+msgstr "发生意外错误。请在 nexuscanon.com/help 上提交技术支持请求。"
 
 #. module: spreadsheet
 #. odoo-javascript
@@ -13346,8 +13346,8 @@ msgstr "例：链接标签"
 #. module: spreadsheet
 #. odoo-javascript
 #: code:addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.xml:0
-msgid "e.g. 'http://www.afenda.app'"
-msgstr "例：http://www.afenda.app"
+msgid "e.g. 'http://www.nexuscanon.com'"
+msgstr "例：http://www.nexuscanon.com"
 
 #. module: spreadsheet
 #. odoo-javascript

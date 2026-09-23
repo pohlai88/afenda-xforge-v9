@@ -4074,10 +4074,10 @@ msgstr "Icono de Font Awesome, por ejemplo, fa-tasks"
 msgid ""
 "For any additional information, please contact us at <a "
 "class=\"o_translate_inline\" "
-"href=\"mailto:events@afenda.app\">events@afenda.app</a>"
+"href=\"mailto:events@nexuscanon.com\">events@nexuscanon.com</a>"
 msgstr ""
-"Escríbenos a <a class=\"o_translate_inline\" href=\"mailto:events@afenda.app\">"
-"events@afenda.app</a> para obtener más información."
+"Escríbenos a <a class=\"o_translate_inline\" href=\"mailto:events@nexuscanon.com\">"
+"events@nexuscanon.com</a> para obtener más información."
 
 #. module: event
 #: model_terms:event.event,description:event.event_7
@@ -6468,8 +6468,8 @@ msgstr "por ejemplo, \"Promocionar\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.view_event_form
-msgid "e.g. \"https://www.afenda.app\""
-msgstr "Por ejemplo, \"https://www.afenda.app\""
+msgid "e.g. \"https://www.nexuscanon.com\""
+msgstr "Por ejemplo, \"https://www.nexuscanon.com\""
 
 #. module: event
 #: model_terms:ir.ui.view,arch_db:event.event_event_view_form_quick_create

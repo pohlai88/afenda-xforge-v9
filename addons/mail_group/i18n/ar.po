@@ -1456,10 +1456,10 @@ msgstr ""
 #: model:ir.model.fields,help:mail_group.field_mail_group__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "اسم لقب البريد الإلكتروني، مثلًا: 'وظائف' إذا كنت ترغب في جمع الرسائل المرسلة "
-"لـ<jobs@example.afenda.app>"
+"لـ<jobs@example.nexuscanon.com>"
 
 #. module: mail_group
 #. odoo-python

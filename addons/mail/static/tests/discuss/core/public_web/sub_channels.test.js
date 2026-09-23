@@ -236,8 +236,8 @@ test("mention suggestions in thread match channel restrictions", async () => {
     });
     pyEnv["res.users"].write(serverState.userId, { group_ids: [Command.link(groupId)] });
     const [partnerId_1, partnerId_2] = pyEnv["res.partner"].create([
-        { email: "p1@afenda.app", name: "p1" },
-        { email: "p2@afenda.app", name: "p2" },
+        { email: "p1@nexuscanon.com", name: "p1" },
+        { email: "p2@nexuscanon.com", name: "p2" },
     ]);
     pyEnv["res.users"].create([
         { partner_id: partnerId_1, group_ids: [Command.link(groupId)] },
@@ -277,7 +277,7 @@ test("sub-thread is visually muted when mute is active", async () => {
 test("muted channel hides sub-thread unless channel is selected or thread has unread messages", async () => {
     const pyEnv = await startServer();
     const channelId = pyEnv["discuss.channel"].create({ name: "General" });
-    const partnerId2 = pyEnv["res.partner"].create({ email: "p1@afenda.app", name: "p1" });
+    const partnerId2 = pyEnv["res.partner"].create({ email: "p1@nexuscanon.com", name: "p1" });
     const userId2 = pyEnv["res.users"].create({ name: "User 2", partner_id: partnerId2 });
     const partnerId = serverState.partnerId;
     const subChannelId = pyEnv["discuss.channel"].create({

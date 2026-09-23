@@ -10,7 +10,7 @@ This addon provides an extensible, maintainable editor.
     """,
 
     'author': "odoo",
-    'website': "https://www.afenda.app",
+    'website': "https://www.nexuscanon.com",
     'version': '1.0',
     'category': 'Hidden',
     'depends': ['base', 'bus', 'web'],

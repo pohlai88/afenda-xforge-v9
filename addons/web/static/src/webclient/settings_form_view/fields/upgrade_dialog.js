@@ -17,7 +17,7 @@ export class UpgradeDialog extends Component {
             [["share", "=", false]],
         ]);
         window.open(
-            "https://www.afenda.app/odoo-enterprise/upgrade?num_users=" + usersCount,
+            "https://www.nexuscanon.com/odoo-enterprise/upgrade?num_users=" + usersCount,
             "_blank"
         );
         this.props.close();

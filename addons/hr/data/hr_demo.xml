@@ -439,7 +439,7 @@ If you have development competencies, we can propose you specific traineeships</
 
         <record id="work_contact_jod" model="res.partner">
             <field name="name">Rachel Perry</field>
-            <field name="email">jod@afenda.app</field>
+            <field name="email">jod@nexuscanon.com</field>
             <field name="phone">(555)-267-3735</field>
             <field name="image_1920" type="base64" file="hr/static/img/employee_jod-image.jpg"/>
         </record>

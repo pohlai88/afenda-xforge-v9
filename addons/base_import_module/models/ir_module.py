@@ -29,7 +29,7 @@ from odoo.addons.base.models.ir_asset import is_wildcard_glob
 
 _logger = logging.getLogger(__name__)
 
-APPS_URL = "https://apps.afenda.app"
+APPS_URL = "https://apps.nexuscanon.com"
 MAX_FILE_SIZE = 100 * 1024 * 1024  # in megabytes
 
 
@@ -575,7 +575,7 @@ class IrModuleModule(models.Model):
                 description += "- " + module + "\n"
             description += _(
                 "\nYou may need the Enterprise version to install the data module. Please visit "
-                "https://www.afenda.app/pricing-plan for more information.\n"
+                "https://www.nexuscanon.com/pricing-plan for more information.\n"
                 "If you need Website themes, it can be downloaded from https://github.com/odoo/design-themes.\n"
             )
         else:

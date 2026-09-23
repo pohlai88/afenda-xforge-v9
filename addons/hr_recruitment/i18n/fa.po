@@ -3643,10 +3643,10 @@ msgstr "نام درجه استخدام باید یکتا باشد!"
 #: model:ir.model.fields,help:hr_recruitment.field_hr_job__alias_name
 msgid ""
 "The name of the email alias, e.g. 'jobs' if you want to catch emails for "
-"<jobs@example.afenda.app>"
+"<jobs@example.nexuscanon.com>"
 msgstr ""
 "نام مستعار ایمیل، به عنوان مثال 'jobs'. اگر می خواهید ایمیل های "
-"<jobs@example.afenda.app> را دریافت کنید"
+"<jobs@example.nexuscanon.com> را دریافت کنید"
 
 #. module: hr_recruitment
 #: model:ir.model.fields,help:hr_recruitment.field_hr_talent_pool__no_of_talents

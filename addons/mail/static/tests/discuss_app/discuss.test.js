@@ -202,9 +202,9 @@ test("Posting message should transform links.", async () => {
     });
     await start();
     await openDiscuss(channelId);
-    await insertText(".o-mail-Composer-input", "test https://www.afenda.app/");
+    await insertText(".o-mail-Composer-input", "test https://www.nexuscanon.com/");
     await press("Enter");
-    await contains("a[href='https://www.afenda.app/']");
+    await contains("a[href='https://www.nexuscanon.com/']");
 });
 
 test("[text composer] Posting message should transform relevant data to emoji.", async () => {

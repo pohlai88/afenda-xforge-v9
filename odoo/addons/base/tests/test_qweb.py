@@ -650,7 +650,7 @@ class TestQWebNS(TransactionCase):
             'type': 'qweb',
             'arch': """
                 <t t-name="base.dummy">
-                    <Invoice xmlns:od="http://afenda.app/od">
+                    <Invoice xmlns:od="http://nexuscanon.com/od">
                         <od:name t-att-test="'a' + 1"/>
                     </Invoice>
                 </t>

@@ -516,7 +516,7 @@ Received: by mail.example.com (Postfix, from userid 10002)
     id E8166BFACB; Fri, 23 Aug 2013 13:18:02 +0200 (CEST)
 From: "Bruce Wayne" <bruce@wayneenterprises.com>
 Subject: test
-Message-ID: <c0c20fdd-a38e-b296-865b-d9232bf30ce5@afenda.app>
+Message-ID: <c0c20fdd-a38e-b296-865b-d9232bf30ce5@nexuscanon.com>
 Date: Mon, 26 Aug 2019 16:55:09 +0200
 MIME-Version: 1.0
 Content-Type: multipart/mixed;
@@ -661,7 +661,7 @@ Date: Wed, 14 Mar 2018 14:26:58 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
  Thunderbird/52.6.0
 MIME-Version: 1.0
-In-Reply-To: <f3b9f8f8-28fa-2543-cab2-7aa68f679ebb@afenda.app>
+In-Reply-To: <f3b9f8f8-28fa-2543-cab2-7aa68f679ebb@nexuscanon.com>
 Content-Type: multipart/mixed;
  boundary="------------A6B5FD5F68F4D73ECD739009"
 Content-Language: en-US
@@ -710,33 +710,33 @@ ARC-Message-Signature: i=1; a=rsa-sha256; c=relaxed/relaxed; d=google.com; s=arc
          7wXuo/gpYe6E2cPuS2opei8AzjEhYTNzlYXTPvaoxCCTTjfGTaPv22TeRDehuIXngSEl
          Nmmw==
 ARC-Authentication-Results: i=1; mx.google.com;
-       dkim=pass header.i=@afenda.app header.s=mail header.b=MCzhjB9b;
-       spf=pass (google.com: domain of soup@afenda.app designates 149.202.180.44 as permitted sender) smtp.mailfrom=soup@afenda.app;
-       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=afenda.app
-Return-Path: <soup@afenda.app>
-Received: from mail2.afenda.app (mail2.afenda.app. [149.202.180.44])
+       dkim=pass header.i=@nexuscanon.com header.s=mail header.b=MCzhjB9b;
+       spf=pass (google.com: domain of soup@nexuscanon.com designates 149.202.180.44 as permitted sender) smtp.mailfrom=soup@nexuscanon.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=nexuscanon.com
+Return-Path: <soup@nexuscanon.com>
+Received: from mail2.nexuscanon.com (mail2.nexuscanon.com. [149.202.180.44])
         by mx.google.com with ESMTPS id y4si4279200wmy.148.2018.03.05.01.19.22
         (version=TLS1_2 cipher=ECDHE-RSA-AES128-GCM-SHA256 bits=128/128);
         Mon, 05 Mar 2018 01:19:23 -0800 (PST)
-Received-SPF: pass (google.com: domain of soup@afenda.app designates 149.202.180.44 as permitted sender) client-ip=149.202.180.44;
+Received-SPF: pass (google.com: domain of soup@nexuscanon.com designates 149.202.180.44 as permitted sender) client-ip=149.202.180.44;
 Authentication-Results: mx.google.com;
-       dkim=pass header.i=@afenda.app header.s=mail header.b=MCzhjB9b;
-       spf=pass (google.com: domain of soup@afenda.app designates 149.202.180.44 as permitted sender) smtp.mailfrom=soup@afenda.app;
-       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=afenda.app
+       dkim=pass header.i=@nexuscanon.com header.s=mail header.b=MCzhjB9b;
+       spf=pass (google.com: domain of soup@nexuscanon.com designates 149.202.180.44 as permitted sender) smtp.mailfrom=soup@nexuscanon.com;
+       dmarc=pass (p=NONE sp=NONE dis=NONE) header.from=nexuscanon.com
 Received: from [10.10.31.24] (unknown [91.183.114.50])
 	(Authenticated sender: soup)
-	by mail2.afenda.app (Postfix) with ESMTPSA id 7B571A4085
-	for <what@afenda.app>; Mon,  5 Mar 2018 10:19:21 +0100 (CET)
-DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=afenda.app; s=mail;
+	by mail2.nexuscanon.com (Postfix) with ESMTPSA id 7B571A4085
+	for <what@nexuscanon.com>; Mon,  5 Mar 2018 10:19:21 +0100 (CET)
+DKIM-Signature: v=1; a=rsa-sha256; c=simple/simple; d=nexuscanon.com; s=mail;
 	t=1520241562; bh=L2r7Sp/vjogIdM1k8H9zDGDjnhKolsTTLLjndnFC4Jc=;
 	h=To:From:Subject:Date:From;
 	b=MCzhjB9bnsrJ3uKjq+GjujFxmtrq3fc7Vv7Vg2C72EPKnkxgqy6yPjWKtXbBlaiT3
 	 YjKI24aiSQlOeOPQiqFgiDzeqqemNDp+CRuhoYz1Vbz+ESRaHtkWRLb7ZjvohS2k7e
 	 RTq7tUxY2nUL2YrNHV7DFYtJVBwiTuyLP6eAiJdE=
-To: what@afenda.app
-From: Soup <soup@afenda.app>
+To: what@nexuscanon.com
+From: Soup <soup@nexuscanon.com>
 Subject: =?UTF-8?Q?Soupe_du_jour_:_Pois_cass=c3=a9s?=
-Message-ID: <a05d8334-7b7c-df68-c96a-4a88ed19f31b@afenda.app>
+Message-ID: <a05d8334-7b7c-df68-c96a-4a88ed19f31b@nexuscanon.com>
 Date: Mon, 5 Mar 2018 10:19:21 +0100
 User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:52.0) Gecko/20100101
  Thunderbird/52.6.0
@@ -747,7 +747,7 @@ Content-Language: en-US
 X-Spam-Status: No, score=-1.2 required=5.0 tests=ALL_TRUSTED,BAYES_00,
 	HTML_IMAGE_ONLY_08,HTML_MESSAGE,T_REMOTE_IMAGE autolearn=no
 	autolearn_force=no version=3.4.0
-X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on mail2.afenda.app
+X-Spam-Checker-Version: SpamAssassin 3.4.0 (2014-02-07) on mail2.nexuscanon.com
 
 This is a multi-part message in MIME format.
 --------------1F2D18B1129FC2F0B9EECF50
@@ -762,7 +762,7 @@ Soup
 AFENDA xForge S.A.
 Chaussée de Namur, 40
 B-1367 Grand Rosière
-Web: http://www.afenda.app
+Web: http://www.nexuscanon.com
 
 
 --------------1F2D18B1129FC2F0B9EECF50
@@ -785,7 +785,7 @@ Soup
 AFENDA xForge S.A.
 Chaussée de Namur, 40
 B-1367 Grand Rosière
-Web: <a class="moz-txt-link-freetext" href="http://www.afenda.app">http://www.afenda.app</a> </pre>
+Web: <a class="moz-txt-link-freetext" href="http://www.nexuscanon.com">http://www.nexuscanon.com</a> </pre>
   </body>
 </html>
 
@@ -1078,7 +1078,7 @@ aa.com" style=3D"text-decoration:none; color: white;">info@aust-mfg.com</a>=
                       </tr>
                       <tr>
                         <td align=3D"center">
-                            Powered by <a href=3D"https://www.afenda.app">Odo=
+                            Powered by <a href=3D"https://www.nexuscanon.com">Odo=
 o</a>.
                         </td>
                       </tr>
@@ -1212,7 +1212,7 @@ OyI+T2RvbzwvYT4uCjwvcD4KPC9kaXY+CiAgICAgICAg
 
 
 MAIL_BOUNCE_QP_RFC822_HEADERS = """\
-Received: by mailserver.afenda.app (Postfix)
+Received: by mailserver.nexuscanon.com (Postfix)
         id EA0B917B8E4; Tue, 29 Feb 2023 11:11:11 +0100 (CET)
 From: {email_from} 
 Subject: Undelivered Mail Returned to Sender
@@ -1220,13 +1220,13 @@ To: {email_to}
 Auto-Submitted: auto-replied
 MIME-Version: 1.0
 Content-Type: multipart/report; report-type=delivery-status;
-        boundary="DFFDC17AA03.1673346179/mailserver.afenda.app"
-Message-Id: <40230110102259.EA0B917B8E4@mailserver.afenda.app>
+        boundary="DFFDC17AA03.1673346179/mailserver.nexuscanon.com"
+Message-Id: <40230110102259.EA0B917B8E4@mailserver.nexuscanon.com>
 Content-Transfer-Encoding: 7bit
 Delivered-To: {delivered_to}
 Return-Path: <>
 
---DFFDC17AA03.1673346179/mailserver.afenda.app
+--DFFDC17AA03.1673346179/mailserver.nexuscanon.com
 Content-Description: Notification
 Content-Type: text/plain; charset=utf-8
 Content-Transfer-Encoding: quoted-printable
@@ -1240,13 +1240,13 @@ be delivered to one or more recipients.
 ply to
     RCPT TO command)
 
---DFFDC17AA03.1673346179/mailserver.afenda.app
+--DFFDC17AA03.1673346179/mailserver.nexuscanon.com
 Content-Description: Delivery report
 Content-Type: message/delivery-status
 
-Reporting-MTA: dns; mailserver.afenda.app
+Reporting-MTA: dns; mailserver.nexuscanon.com
 X-Postfix-Queue-ID: DFFDC17AA03
-X-Postfix-Sender: rfc822; bounce@xxx.afenda.app
+X-Postfix-Sender: rfc822; bounce@xxx.nexuscanon.com
 Arrival-Date: Tue, 29 Feb 2023 10:10:10 +0100 (CET)
 
 Final-Recipient: rfc822; rdesfrdgtfdrfesd@outlook.com
@@ -1257,15 +1257,15 @@ Remote-MTA: dns; outlook-com.olc.protection.outlook.com
 Diagnostic-Code: smtp; 550 5.5.0 Requested action not taken: mailbox
     unavailable (S2017062302).
 
---DFFDC17AA03.1673346179/mailserver.afenda.app
+--DFFDC17AA03.1673346179/mailserver.nexuscanon.com
 Content-Description: Undelivered Message Headers
 Content-Type: text/rfc822-headers
 Content-Transfer-Encoding: quoted-printable
 
-Return-Path: <bounce@xxx.afenda.app>
-Received: from eupp00.afenda.app (00.72.79.34.bc.googleusercontent.com [34.=
+Return-Path: <bounce@xxx.nexuscanon.com>
+Received: from eupp00.nexuscanon.com (00.72.79.34.bc.googleusercontent.com [34.=
 79.72.00])
-        by mailserver.afenda.app (Postfix) with ESMTPS id DFFDC17AA03;
+        by mailserver.nexuscanon.com (Postfix) with ESMTPS id DFFDC17AA03;
         Tue, 10 Jan 2023 11:22:57 +0100 (CET)
 DKIM-Signature: v=3D1; a=3Drsa-sha256; c=3Dsimple/simple; d=3Dxxx.be;
         s=3Dodoo; t=3D1673346178;
@@ -1277,11 +1277,11 @@ DKIM-Signature: v=3D1; a=3Drsa-sha256; c=3Dsimple/simple; d=3Dxxx.be;
 Message-Id: <368396033905967.1673346177.695352554321289-openerp-11-sale.o=
 rder@eupp00>
 references: <792105153140463.1673746527.352018594741821-openerp-11-sale.o=
-rder@xxx.afenda.app> <368396033905967.1673346177.695352554321289-openerp-11=
+rder@xxx.nexuscanon.com> <368396033905967.1673346177.695352554321289-openerp-11=
 -sale.order@eupp00>
 Subject: Thi is a SO (Ref SO/11)
-From: info@xxx.afenda.app
-Reply-To: "SO/11" <catchall@xxx.afenda.app=
+From: info@xxx.nexuscanon.com
+Reply-To: "SO/11" <catchall@xxx.nexuscanon.com=
 >
 To: "rdesfrdgtfdrfesd@outlook.com" <rdesfrdgtfdrfesd@outlook.com>
 Date: Tue, 29 Feb 2023 06:09:06 -0000
@@ -1290,7 +1290,7 @@ MIME-Version: 1.0
 Content-Type: multipart/mixed; boundary=3D"=3D=3D=3D=3D=3D=3D=3D=3D=3D=3D=
 =3D=3D=3D=3D=3D5706316606908750110=3D=3D"
 
---DFFDC17AA03.1673346179/mailserver.afenda.app--
+--DFFDC17AA03.1673346179/mailserver.nexuscanon.com--
 
 """
 
@@ -1411,7 +1411,7 @@ PDF_PARSED = b'''%PDF-1.1\n%\xc2\xa5\xc2\xb1\xc3\xab\n\n1 0 obj\n  << /Type /Cat
 
 THAI_EMAIL_WINDOWS_874 = '''\
 From: Thai Customer <outlook_windows@outlook.com>
-To: "Thai AFENDA xForge User" <thai-user@afenda.app>
+To: "Thai AFENDA xForge User" <thai-user@nexuscanon.com>
 Subject: =?windows-874?B?4MPX6M2n?=
 Thread-Topic: =?windows-874?B?4MPX6M2n?=
 Thread-Index: AQHahRQ4qiMBoXtK0U2XwaGg8w9Y9g==

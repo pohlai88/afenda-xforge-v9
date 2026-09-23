@@ -1984,7 +1984,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
 
     @patch_api
     def test_partner_order(self):
-        self.private_partner.email = "internal_user@afenda.app"
+        self.private_partner.email = "internal_user@nexuscanon.com"
         self.private_partner.type = "contact"
         user = self.env['res.users'].create({
             'name': 'Test user Calendar',
@@ -1995,7 +1995,7 @@ class TestSyncGoogle2Odoo(TestSyncGoogle):
         values = {
             'id': 'oj44nep1ldf8a3ll02uip0c9aa',
             'description': 'Small mini desc',
-            'organizer': {'email': 'internal_user@afenda.app'},
+            'organizer': {'email': 'internal_user@nexuscanon.com'},
             'summary': 'Pricing new update',
             'visibility': 'public',
             'attendees': [{

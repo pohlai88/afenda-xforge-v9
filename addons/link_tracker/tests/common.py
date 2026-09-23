@@ -38,7 +38,7 @@ class MockLinkTracker(common.BaseCase):
 
         self.assertLinkShortenedHtml(
             message.body,
-            ('url0', 'http://www.afenda.app',  True),
+            ('url0', 'http://www.nexuscanon.com',  True),
             {'utm_campaign': self.utm_c.name, 'utm_medium': self.utm_m.name}
         )
         """
@@ -58,7 +58,7 @@ class MockLinkTracker(common.BaseCase):
 
         self.assertLinkShortenedText(
             message.body,
-            ('http://www.afenda.app',  True),
+            ('http://www.nexuscanon.com',  True),
             {'utm_campaign': self.utm_c.name, 'utm_medium': self.utm_m.name}
         )
         """

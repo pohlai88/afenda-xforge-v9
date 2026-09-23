@@ -4299,7 +4299,7 @@ class MailThread(models.AbstractModel):
           with 'recipients' key filled with matching partners, like
             [{
                 'active': True,
-                'button_access': {'url': 'https://afenda.app/url', 'title': 'Title'},
+                'button_access': {'url': 'https://nexuscanon.com/url', 'title': 'Title'},
                 'has_button_access': False,
                 'notification_group_name': 'user',
                 'recipients_data': [{...}],

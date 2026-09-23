@@ -131,7 +131,7 @@ def check_image():
     :rtype: dict
     """
     try:
-        response = requests.get('https://nightly.afenda.app/master/iotbox/SHA1SUMS.txt', timeout=5)
+        response = requests.get('https://nightly.nexuscanon.com/master/iotbox/SHA1SUMS.txt', timeout=5)
         response.raise_for_status()
         data = response.content.decode()
     except requests.exceptions.HTTPError:

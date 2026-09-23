@@ -617,10 +617,10 @@ msgstr ""
 #: code:addons/snailmail/models/snailmail_letter.py:0
 msgid ""
 "You don't have an IAP account registered for this service.<br>Please go to "
-"<a href=%s target=\"new\">iap.afenda.app</a> to claim your free credits."
+"<a href=%s target=\"new\">iap.nexuscanon.com</a> to claim your free credits."
 msgstr ""
 "Nu aveți un cont IAP înregistrat pentru acest serviciu.<br>Vă rugăm să "
-"accesați <a href=%s target=\"new\">iap.afenda.app</a> pentru a solicita "
+"accesați <a href=%s target=\"new\">iap.nexuscanon.com</a> pentru a solicita "
 "creditele dvs. gratuite."
 
 #. module: snailmail

@@ -22125,8 +22125,8 @@ msgstr "z. B. finanzen@beispiel.com; buchalter@beispiel.com"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.res_company_form_view_onboarding
-msgid "e.g. https://www.afenda.app"
-msgstr "z. B. https://www.afenda.app"
+msgid "e.g. https://www.nexuscanon.com"
+msgstr "z. B. https://www.nexuscanon.com"
 
 #. module: account
 #: model_terms:ir.ui.view,arch_db:account.view_account_journal_form

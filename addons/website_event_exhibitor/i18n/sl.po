@@ -990,8 +990,8 @@ msgstr "npr. : OpenWood Decoration"
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form
 #, fuzzy
-msgid "e.g. : https://www.afenda.app"
-msgstr "npr. : https://www.afenda.app"
+msgid "e.g. : https://www.nexuscanon.com"
+msgstr "npr. : https://www.nexuscanon.com"
 
 #. module: website_event_exhibitor
 #: model_terms:ir.ui.view,arch_db:website_event_exhibitor.event_sponsor_view_form

@@ -3321,7 +3321,7 @@ msgstr ""
 
 #. module: event
 #: model_terms:event.event,description:event.event_2
-msgid "events@afenda.app"
+msgid "events@nexuscanon.com"
 msgstr ""
 
 #. module: event

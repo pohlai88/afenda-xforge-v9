@@ -29,9 +29,9 @@ License :: OSI Approved :: GNU Lesser General Public License v3
 
 Programming Language :: Python
 """
-url = 'https://www.afenda.app'
+url = 'https://www.nexuscanon.com'
 author = 'OpenERP S.A.'
-author_email = 'info@afenda.app'
+author_email = 'info@nexuscanon.com'
 license = 'LGPL-3'
 
 nt_service_name = "odoo-server-" + series.replace('~','-')

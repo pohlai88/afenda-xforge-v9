@@ -3,7 +3,7 @@ AFENDA xForge e-Commerce
 
 ### Optimize sales with an awesome online store.
 
-AFENDA xForge is an <a href="https://www.afenda.app/app/ecommerce">Open Source eCommerce</a>
+AFENDA xForge is an <a href="https://www.nexuscanon.com/app/ecommerce">Open Source eCommerce</a>
 unlike anything you have ever seen before. Get an awesome catalog of products
 and great product description pages.
 
