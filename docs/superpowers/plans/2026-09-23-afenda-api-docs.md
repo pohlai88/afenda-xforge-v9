@@ -30,7 +30,8 @@
 
 ```bash
 MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin -c afenda/odoo.conf -d afenda \
-  -u afenda_api_docs --test-enable --test-tags "/afenda_api_docs" --stop-after-init --http-port 8189 \n  --log-handler=odoo.tests:INFO
+  -u afenda_api_docs --test-enable --test-tags "/afenda_api_docs" --stop-after-init --http-port 8189 \
+  --log-handler=odoo.tests:INFO
 ```
 
 - Fast, database-free tests: `.venv/Scripts/python -m unittest discover afenda/tools/tests`.
@@ -433,8 +434,15 @@ insertion points, never by scanning an assembled document.
 Unlike the build-time rules in `afenda/tools/rules.py`, matching here is
 case-insensitive on the standalone word: those rules must spare lowercase
 `odoo` because a source file contains imports, license headers and module
-paths. A prose field contains none of those. Word boundaries keep this safe
-- `\\bodoo\\b` does not match inside `odoobot_state`.
+paths. A prose field contains none of those.
+
+Word boundaries alone are NOT enough, and the difference is the whole game.
+`_` is a word character, so `\b` correctly blocks `odoobot_state`. `.` is
+not, so `\b` is satisfied by it and `\bodoo\b` eats the `ODOO` in
+`ODOO.BALANCE` - a real spreadsheet function name, and the canonical wire
+value this module exists to protect. Hence the explicit lookarounds: they
+block a dot only where it joins a word character, so a token separator is
+blocked while a sentence-ending period still aliases normally.
 """
 import re
 
@@ -443,13 +451,14 @@ from odoo.addons.afenda_brand.brand import BRAND
 # Ordered. Earlier rules win: the legal name and the bot name must be
 # consumed before the bare product name would split them.
 _RULES = (
-    (re.compile(r"Odoo\s+S\.A\.", re.IGNORECASE), BRAND["short"]),
-    #  on BOTH sides, and it is load-bearing. With re.IGNORECASE and no
-    # boundaries this pattern matches inside `odoobot_state` and
-    # `odoobot_failed`, rewriting them to `AFENDA Bot_state` and
-    # `AFENDA Bot_failed` - corrupting the exact wire values this whole module
-    # exists to protect. `test_identifiers_embedded_in_prose_survive` pins it.
-    (re.compile(r"OdooBot", re.IGNORECASE), BRAND["bot"]),
+    (re.compile(r"Odoo\s+S\.A\.", re.IGNORECASE), BRAND["short"]),
+    # The lookarounds are load-bearing. Unbounded and case-insensitive, this
+    # pattern matches inside `odoobot_state` and `odoobot_failed`, rewriting
+    # them to `AFENDA Bot_state` and `AFENDA Bot_failed` - corrupting the exact
+    # wire values this module exists to protect. `\b` alone fixes only half of
+    # that: `_` is a word character so `\b` blocks it, but `.` is not, so `\b`
+    # still eats the `ODOO` in a dotted token such as `ODOO.BALANCE`.
+    (re.compile(r"(?<![\w.])OdooBot(?!\w)(?!\.\w)", re.IGNORECASE), BRAND["bot"]),
     (
         re.compile(
             r"https?://(?:www\.)?odoo\.com"
@@ -459,7 +468,7 @@ _RULES = (
         BRAND["docs_path"],
     ),
     (re.compile(r"\bodoo\.com\b", re.IGNORECASE), BRAND["domain"]),
-    (re.compile(r"\bodoo\b", re.IGNORECASE), BRAND["product"]),
+    (re.compile(r"(?<![\w.])odoo(?!\w)(?!\.\w)", re.IGNORECASE), BRAND["product"]),
 )
 
 
