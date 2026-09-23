@@ -44,9 +44,14 @@ else
     doctl compute domain create "$DOMAIN" >/dev/null
 fi
 
+# The listing runs on its own so `set -e` stops the script if it fails: sh
+# has no pipefail, and an empty listing would re-create every record (a
+# second SPF TXT record is a permerror, RFC 7208 section 4.5).
+raw=$(doctl compute domain records list "$DOMAIN" --format Type,Name,Data --no-header)
+
 # "type|name|data" per existing record. Data is the last column and may hold
 # spaces (TXT), so it is everything after the second field.
-existing=$(doctl compute domain records list "$DOMAIN" --format Type,Name,Data --no-header \
+existing=$(printf '%s\n' "$raw" \
     | sed -e 's/^[[:space:]]*//' -e 's/[[:space:]]*$//' \
     | sed -e 's/^\([^[:space:]]*\)[[:space:]][[:space:]]*\([^[:space:]]*\)[[:space:]]*/\1|\2|/' \
     | while IFS= read -r row; do
@@ -90,7 +95,8 @@ while IFS= read -r line || [ -n "$line" ]; do
         other=$(printf '%s\n' "$existing" | grep -E "^(A|CNAME)\|$(printf '%s' "$name" | sed 's/\./\\./g')\|" || true)
         [ -z "$other" ] || clashes="$clashes$type $name: also has $(printf '%s' "$other" | tr '\n' ' ')$TAB"
     fi
-    doctl compute domain records create "$DOMAIN" "$@" >/dev/null
+    # </dev/null: the loop's stdin is the records file, which doctl must not read.
+    doctl compute domain records create "$DOMAIN" "$@" </dev/null >/dev/null
     echo "  created  $type $name $data"
     created=$((created + 1))
 done < "$RECORDS"

@@ -10,6 +10,8 @@ to a `.dockerignore` pattern. Needs no database and no Docker, so it lives in
 `afenda/tools/tests/` and runs in the fast
 `python -m unittest discover afenda/tools/tests` suite.
 """
+import base64
+import hashlib
 import os
 import re
 import unittest
@@ -220,6 +222,66 @@ class LandingSiteStaticTests(unittest.TestCase):
         self.assertIn('${PUBLIC_URL:?', text)
         self.assertIn("__PUBLIC_URL__", text)
         self.assertTrue(text.startswith("#!/bin/sh\n"))
+
+    def test_entry_script_drops_one_trailing_slash(self):
+        # The page appends "/request-access" itself; "https://x/" would give "//".
+        text = (DEPLOY / "nginx" / "40-afenda-site.sh").read_text(encoding="utf-8")
+        strip = re.search(r"^PUBLIC_URL=\$\{PUBLIC_URL%/\}$", text, re.MULTILINE)
+        self.assertIsNotNone(strip, "40-afenda-site.sh does not strip a trailing /")
+        self.assertLess(strip.start(), text.index("sed -i"))
+
+    def test_entry_script_rejects_sed_and_attribute_metacharacters(self):
+        # `#` ends the sed expression, `&` and `\` act in its replacement, and
+        # `"` would close the href: each must stop nginx from starting.
+        text = (DEPLOY / "nginx" / "40-afenda-site.sh").read_text(encoding="utf-8")
+        case = re.search(r'case "\$PUBLIC_URL" in\s*\n\s*(.+?)\)\s*\n(.*?);;', text, re.S)
+        self.assertIsNotNone(case, "40-afenda-site.sh has no PUBLIC_URL character check")
+        patterns, body = case.group(1), case.group(2)
+        for pattern in ("*'#'*", "*'&'*", "*'\\'*", "*'\"'*"):
+            self.assertIn(pattern, patterns)
+        self.assertIn(">&2", body)
+        self.assertRegex(body, r"\bexit 1\b")
+        self.assertLess(case.start(), text.index("sed -i"))
+
+    def _landing_servers(self, conf):
+        """(server-level text, [location texts with an add_header]) for each
+        server block that serves deploy/site."""
+        text = (DEPLOY / "nginx" / conf).read_text(encoding="utf-8")
+        text = "\n".join(l for l in text.splitlines() if not l.lstrip().startswith("#"))
+        servers, i = [], 0
+        while (start := text.find("server {", i)) != -1:
+            depth, j = 0, text.index("{", start)
+            while True:
+                depth += {"{": 1, "}": -1}.get(text[j], 0)
+                if depth == 0:
+                    break
+                j += 1
+            block, i = text[start:j + 1], j + 1
+            if "root /usr/share/nginx/site;" not in block:
+                continue
+            locations = re.findall(r"location[^{]*\{[^{}]*\}", block)
+            top = block
+            for loc in locations:
+                top = top.replace(loc, "")
+            servers.append((top, [l for l in locations if "add_header" in l]))
+        return servers
+
+    def test_landing_servers_send_security_headers(self):
+        style = re.search(r"<style>(.*?)</style>", (SITE / "index.html").read_text(encoding="utf-8"), re.S)
+        digest = base64.b64encode(hashlib.sha256(style.group(1).encode("utf-8")).digest()).decode()
+        csp = ("add_header Content-Security-Policy \"default-src 'self'; "
+               f"style-src 'self' 'sha256-{digest}'; frame-ancestors 'none'; "
+               "base-uri 'none'; form-action 'none'\" always;")
+        for conf, expected in (("afenda.conf", 1), ("afenda.tls.conf", 1)):
+            servers = self._landing_servers(conf)
+            self.assertEqual(len(servers), expected, f"{conf}: landing server blocks")
+            for top, locations in servers:
+                # A location with its own add_header inherits none of the server's.
+                for scope in [top] + locations:
+                    self.assertIn("add_header X-Content-Type-Options nosniff always;", scope, conf)
+                    self.assertIn(csp, scope, f"{conf}: CSP missing, or its style hash is stale")
+                    if conf == "afenda.tls.conf":
+                        self.assertIn("add_header Strict-Transport-Security", scope, conf)
 
 
 class DeployRedeployAndDnsTests(unittest.TestCase):
