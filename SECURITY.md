@@ -1,41 +1,66 @@
 # Security Policy
 
-## Supported Versions
+## What this software is
 
-| Version | Supported          |
-| ------- | ------------------ |
-| 19.0    | :white_check_mark: |
-| 18.0    | :white_check_mark: |
-| 17.0    | :white_check_mark: |
-| 16.0    | :white_check_mark: |
-| <=15.0  | :x:                |
+AFENDA xForge is a **modified distribution** of Odoo 19.0 Community. That matters for
+security reporting, because a vulnerability here can have one of three origins and they go
+to different places:
 
-## Reporting a Vulnerability
+| Where the flaw lives | Who can fix it | Where to report |
+|---|---|---|
+| AFENDA's own code (`afenda/addons/`, `afenda/tools/`) | us only | here — see below |
+| The identity transform's effect on upstream code | us only | here — see below |
+| Upstream Odoo, unmodified by us | Odoo, then us | Odoo **and** us |
 
-Please share privately the details of your security vulnerability by contacting our Security Team:
-[Contact Info](https://www.odoo.com/security-report)
+**Do not report AFENDA vulnerabilities to Odoo.** Odoo's security team cannot act on a
+distribution they do not ship, and sending them our details discloses our issue to a third
+party. The reverse also holds: if you find a flaw in upstream Odoo that we merely inherit,
+Odoo should hear about it through their own process — please tell us as well, so we can
+assess our exposure and pick up the fix.
 
-Make sure to include as much information as possible, with the detailed steps to reproduce the problem,
-the versions that are affected, the expected results and actual results, and any other information that
-might help us react faster and more efficiently.
+## Supported versions
 
-We tend to prefer _text-based descriptions_ accompanied with a proof-of-concept script/exploit, rather
-than screenshots and videos.
+| Version | Supported |
+| ------- | --------- |
+| 19.0 | yes — the only release line |
 
-Our [Responsible Disclosure](https://www.odoo.com/security-report) page gives an overview of the
-process, including:
+There are no earlier AFENDA releases. Upstream Odoo's support for its own older series is
+Odoo's business, not ours, and says nothing about this distribution.
 
- - Our Incident Response Procedure (what will happen after you report an issue)
- - Our Rules (what you can and cannot do while researching security issues)
- - Guidelines with **DO REPORT** and **DO NOT REPORT** issues
-   (what kind of issues will be accepted/rejected)
+## Reporting a vulnerability
 
+⚠️ **A disclosure channel is not yet established, and must be before any public or
+customer-facing deployment.** Until it is:
 
-## Important note
+- Prefer GitHub's **private vulnerability reporting** on this repository (Security →
+  Report a vulnerability). This has to be enabled by the repository owner; if you do not
+  see it, it is not on yet.
+- Otherwise contact the repository owner privately. Do **not** open a public issue for a
+  security problem, and do not include exploit details in a pull request.
 
-We receive a majority of security reports that have little to no impact on the security of Odoo or
-the Odoo Cloud, and we ultimately have to reject them. To avoid a disappointing experience when
-contacting us, please try to put together a proof-of-concept attack and take a critical look at
-what's really at risk.
-If the proposed attack scenario turns out unrealistic, your report will probably be rejected.
-Also be sure to review our list of [non-qualifying issues](https://www.odoo.com/security-report#what).
+Whoever sets up the channel should replace this section with a real address and a stated
+response time. An unread mailbox is worse than an admission that there isn't one yet.
+
+## What to include
+
+- The exact steps to reproduce, as text. A short proof-of-concept script is far more useful
+  than a screen recording.
+- The version or commit you tested, and how it was deployed (this distribution differs from
+  stock Odoo in ways that can matter).
+- What you believe is at risk, and for whom — a reader, a tenant, the host.
+- Whether the same flaw appears in unmodified upstream Odoo, if you know.
+
+## Scope
+
+There is no bug bounty and no guaranteed response time. Reports are handled on a
+best-effort basis by a small team. We would rather hear about a real issue late than not at
+all.
+
+Two things that are **in scope** and easy to miss, because they are specific to a
+white-labelled distribution:
+
+- **Identity leaks** — a path, header, asset or outbound request that reveals the upstream
+  product to an end user. Not a memory-safety issue, but a defect we want reported.
+- **Third-party egress** — anything in a deployed instance that contacts a host we do not
+  control. One known case is tracked in the repository's own documentation; others are
+  worth telling us about.
