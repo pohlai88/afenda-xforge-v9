@@ -15,12 +15,23 @@
                     <div class="col-md-6">
                         <h2>Guides</h2>
                         <p class="text-muted">How the apps work, written for people using them.</p>
-                        <a href="/docs/applications">Browse the guides</a>
+                        <!-- No guide index exists yet (only one guide is
+                        generated so far - see landing.py's routing
+                        comment), so this stays plain text instead of a
+                        link. A link to `/docs/applications` would 303 back
+                        to this same page, and a link straight to the one
+                        real guide would misrepresent a single page as an
+                        index of "guides" (plural). Neither is invented
+                        content this module can serve today. -->
+                        <span class="text-muted fst-italic">Guide index not yet generated.</span>
                     </div>
                     <div class="col-md-6">
                         <h2>API reference</h2>
                         <p class="text-muted">Every model and method reachable over the JSON API.</p>
-                        <a href="/docs/api">Open the API reference</a>
+                        <!-- Same reasoning as the guides span: no API
+                        reference is generated yet, so `/docs/api` would
+                        303 back here. -->
+                        <span class="text-muted fst-italic">API reference not yet generated.</span>
                     </div>
                 </div>
             </div>

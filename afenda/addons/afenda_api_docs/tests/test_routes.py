@@ -1,3 +1,5 @@
+import re
+
 from odoo.tests import HttpCase, tagged
 
 
@@ -7,6 +9,28 @@ class TestDocsRoutes(HttpCase):
         res = self.url_open("/docs")
         self.assertEqual(res.status_code, 200)
         self.assertIn("AFENDA", res.text)
+
+    def test_landing_links_do_not_bounce_back_to_the_landing_page(self):
+        # The redirect in docs_landing() sends any subpath naming no guide
+        # straight back to `/docs`. That is correct for a stray in-product
+        # link, but a link the landing page itself renders must not point
+        # at a subpath that does the same thing - that would put a link on
+        # the page whose only effect is returning the visitor to the page
+        # they are already on. This is the check test_routes.py lacked
+        # before: the existing redirect test above only exercises an
+        # unrelated hard-coded path, never the landing page's own <a>
+        # elements.
+        landing = self.url_open("/docs")
+        hrefs = re.findall(r'href="(/docs/[^"]*)"', landing.text)
+        for href in hrefs:
+            res = self.url_open(href, allow_redirects=False)
+            bounces_home = (
+                res.status_code == 303 and res.headers.get("Location") == "/docs"
+            )
+            self.assertFalse(
+                bounces_home,
+                "landing page link %r redirects straight back to /docs" % href,
+            )
 
     def test_landing_carries_no_odoo_identity(self):
         res = self.url_open("/docs")
