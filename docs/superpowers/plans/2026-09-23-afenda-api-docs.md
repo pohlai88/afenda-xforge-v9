@@ -36,11 +36,58 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin -c afen
 | `afenda/addons/afenda_api_docs/__manifest__.py` | Module metadata, deps, data, assets |
 | `afenda/addons/afenda_api_docs/aliasing.py` | Prose-vs-wire brand aliasing. No Odoo imports; pure text |
 | `afenda/addons/afenda_api_docs/openapi.py` | Registry walk → OpenAPI 3.1 dict |
-| `afenda/addons/afenda_api_docs/controllers/main.py` | All `/docs` routes |
-| `afenda/addons/afenda_api_docs/views/templates.xml` | Landing, API page, "not written yet" |
+| `afenda/addons/afenda_api_docs/controllers/landing.py` | The `/docs` landing route |
+| `afenda/addons/afenda_api_docs/controllers/api.py` | `/docs/openapi.json` and `/docs/api` |
+| `afenda/addons/afenda_api_docs/controllers/guides.py` | `/docs[/<version>]/applications/<path>` |
+| `afenda/addons/afenda_api_docs/views/landing.xml` | The landing page |
+| `afenda/addons/afenda_api_docs/views/api.xml` | The Redoc reference page |
+| `afenda/addons/afenda_api_docs/views/guides_chrome.xml` | The "not written yet" page |
 | `afenda/addons/afenda_api_docs/docs/**.md` | Authored guide source |
 | `afenda/addons/afenda_api_docs/views/guides.xml` | Generated from the Markdown; committed |
 | `afenda/tools/build_docs.py` | Markdown → QWeb converter |
+
+The controllers and views are split one file per route group, and the tests one
+file per task, so that concurrent agents never write the same file. Three files
+are shared wiring — `controllers/__init__.py`, `tests/__init__.py` and
+`__manifest__.py`. **No task edits those.** The orchestrator wires them between
+waves; each task's file list says what it creates and the orchestrator adds the
+corresponding import or `data` entry.
+
+## Parallel execution
+
+Tasks run in waves. Within a wave, agents share no file and no database.
+
+| Wave | Agents | Tasks | Database | HTTP port |
+| --- | --- | --- | --- | --- |
+| 0 | 1 | Task 1 | `afenda` | 8179 |
+| 1 | 2 | Task 2 · Task 7 | `afenda` · none (no DB needed) | 8179 · — |
+| 2 | 2 | Tasks 3→4→5 · Task 8 | `afenda` · `afenda_lane2` | 8179 · 8189 |
+| 3 | 1 | Task 6 | `afenda` | 8179 |
+| 4 | 1 | Task 9 | `afenda` | 8179 |
+
+Lane databases are clones, which take about two seconds at this size:
+
+```bash
+.venv/Scripts/python -c "
+import psycopg2
+from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
+c = psycopg2.connect(host='127.0.0.1', port=5444, user='odoo', dbname='postgres')
+c.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+cur = c.cursor()
+cur.execute('DROP DATABASE IF EXISTS afenda_lane2')
+cur.execute('CREATE DATABASE afenda_lane2 TEMPLATE afenda')
+"
+```
+
+Clone only when no process is connected to `afenda`, and re-clone at the start
+of each wave so the lane carries the previous wave's schema.
+
+**Why the ceiling is two, not nine.** Tasks 3, 4 and 5 all edit `openapi.py`
+and each depends on the one before, so they are a single agent's sequential
+work. Task 1 must be alone because every later file lives inside the module it
+creates. Task 6 edits the `controllers/api.py` that Task 5 creates, and Task 9
+reads the output of all of them. Two lanes is the real width of this graph;
+adding agents past that produces conflicts, not speed.
 
 `aliasing.py` stays free of Odoo imports so its tests run without a database.
 
@@ -52,8 +99,8 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin -c afen
 - Create: `afenda/addons/afenda_api_docs/__init__.py`
 - Create: `afenda/addons/afenda_api_docs/__manifest__.py`
 - Create: `afenda/addons/afenda_api_docs/controllers/__init__.py`
-- Create: `afenda/addons/afenda_api_docs/controllers/main.py`
-- Create: `afenda/addons/afenda_api_docs/views/templates.xml`
+- Create: `afenda/addons/afenda_api_docs/controllers/landing.py`
+- Create: `afenda/addons/afenda_api_docs/views/landing.xml`
 - Create: `afenda/addons/afenda_api_docs/tests/__init__.py`
 - Create: `afenda/addons/afenda_api_docs/tests/test_routes.py`
 - Modify: `afenda/addons/afenda_brand/__manifest__.py` (drop `views/docs_placeholder.xml` from `data`)
@@ -129,7 +176,7 @@ from . import controllers
     "auto_install": False,
     # `rpc` owns the /json/2 route this documents; `afenda_brand` owns BRAND.
     "depends": ["web", "rpc", "afenda_brand"],
-    "data": ["views/templates.xml"],
+    "data": ["views/landing.xml"],
 }
 ```
 
@@ -139,7 +186,7 @@ from . import controllers
 from . import main
 ```
 
-`afenda/addons/afenda_api_docs/controllers/main.py`:
+`afenda/addons/afenda_api_docs/controllers/landing.py`:
 
 ```python
 from odoo import http
@@ -152,7 +199,7 @@ class AfendaDocsController(http.Controller):
         return request.render("afenda_api_docs.landing", {})
 ```
 
-`afenda/addons/afenda_api_docs/views/templates.xml`:
+`afenda/addons/afenda_api_docs/views/landing.xml`:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -672,9 +719,9 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 
 **Files:**
 - Modify: `afenda/addons/afenda_api_docs/openapi.py`
-- Modify: `afenda/addons/afenda_api_docs/controllers/main.py`
+- Create: `afenda/addons/afenda_api_docs/controllers/api.py`
 - Modify: `afenda/addons/afenda_api_docs/tests/test_openapi.py`
-- Modify: `afenda/addons/afenda_api_docs/tests/test_routes.py`
+- Create: `afenda/addons/afenda_api_docs/tests/test_api_routes.py`
 
 **Interfaces:**
 - Consumes: `model_schema`, `model_operations`, `path_item`.
@@ -741,7 +788,7 @@ class TestDocument(TransactionCase):
         self.assertIn("res.partner", doc["components"]["schemas"])
 ```
 
-Append to `afenda/addons/afenda_api_docs/tests/test_routes.py`:
+Create `afenda/addons/afenda_api_docs/tests/test_api_routes.py` (same `HttpCase` header as `test_routes.py`):
 
 ```python
     def test_openapi_json_requires_a_session(self):
@@ -830,7 +877,7 @@ def build_document(env, app=None):
     }
 ```
 
-Append to `afenda/addons/afenda_api_docs/controllers/main.py`:
+Create `afenda/addons/afenda_api_docs/controllers/api.py`:
 
 ```python
 import json
@@ -848,7 +895,7 @@ class AfendaDocsController(http.Controller):  # extend the existing class
         )
 ```
 
-Put this method inside the existing `AfendaDocsController` class rather than declaring a second class; move the `import json` and `from ..openapi import build_document` to the top of the file.
+Declare this as its own controller class `AfendaApiController` in `controllers/api.py`. A module may register several controllers; keeping the route groups in separate files is what lets Task 6 and Task 8 run beside each other. The orchestrator adds `from . import api` to `controllers/__init__.py`.
 
 - [ ] **Step 4: Run the tests and make sure they pass**
 
@@ -884,9 +931,9 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 **Files:**
 - Create: `afenda/addons/afenda_api_docs/static/lib/redoc/redoc.standalone.js`
 - Create: `afenda/addons/afenda_api_docs/static/lib/redoc/LICENSE`
-- Modify: `afenda/addons/afenda_api_docs/views/templates.xml`
-- Modify: `afenda/addons/afenda_api_docs/controllers/main.py`
-- Modify: `afenda/addons/afenda_api_docs/tests/test_routes.py`
+- Create: `afenda/addons/afenda_api_docs/views/api.xml`
+- Modify: `afenda/addons/afenda_api_docs/controllers/api.py`
+- Modify: `afenda/addons/afenda_api_docs/tests/test_api_routes.py`
 
 **Interfaces:**
 - Consumes: `/docs/openapi.json` from Task 5.
@@ -909,7 +956,7 @@ Expected: JavaScript, roughly 1 MB.
 
 - [ ] **Step 2: Write the failing test**
 
-Append to `afenda/addons/afenda_api_docs/tests/test_routes.py`:
+Append to `afenda/addons/afenda_api_docs/tests/test_api_routes.py`:
 
 ```python
     def test_api_reference_requires_a_session(self):
@@ -931,7 +978,7 @@ Same command. Expected: the `/docs/api` assertions fail with a 404.
 
 - [ ] **Step 4: Add the route and the template**
 
-Add to `AfendaDocsController` in `controllers/main.py`:
+Add to `AfendaApiController` in `controllers/api.py`:
 
 ```python
     @http.route("/docs/api", type="http", auth="user", website=False, sitemap=False)
@@ -942,7 +989,7 @@ Add to `AfendaDocsController` in `controllers/main.py`:
         )
 ```
 
-Add to `views/templates.xml` inside `<odoo>`:
+Create `views/api.xml` with the usual `<?xml?>`/`<odoo>` wrapper containing:
 
 ```xml
     <template id="api_reference" name="AFENDA API reference">
@@ -1179,8 +1226,8 @@ Co-Authored-By: Claude Opus 5 <noreply@anthropic.com>"
 ### Task 8: Guide routes, the version segment, and the unwritten-page fallback
 
 **Files:**
-- Modify: `afenda/addons/afenda_api_docs/controllers/main.py`
-- Modify: `afenda/addons/afenda_api_docs/views/templates.xml`
+- Create: `afenda/addons/afenda_api_docs/controllers/guides.py`
+- Create: `afenda/addons/afenda_api_docs/views/guides_chrome.xml`
 - Create: `afenda/addons/afenda_api_docs/tests/test_guides.py`
 - Modify: `afenda/addons/afenda_api_docs/tests/__init__.py`
 
@@ -1232,7 +1279,7 @@ Same module test command. Expected: all four fail with 404.
 
 - [ ] **Step 3: Add the routes**
 
-Add to `AfendaDocsController` in `controllers/main.py`:
+Create `controllers/guides.py` with a class `AfendaGuidesController(http.Controller)` containing:
 
 ```python
     # The version segment is what the web client's documentation_link widget
@@ -1256,9 +1303,9 @@ Add to `AfendaDocsController` in `controllers/main.py`:
         return request.render(template, {})
 ```
 
-Add `import re` to the top of the file.
+The file needs `import re` and the same `from odoo import http` / `from odoo.http import request` header as `landing.py`.
 
-Add to `views/templates.xml`:
+Create `views/guides_chrome.xml` with the usual wrapper containing:
 
 ```xml
     <template id="guide_missing" name="AFENDA guide not written yet">
