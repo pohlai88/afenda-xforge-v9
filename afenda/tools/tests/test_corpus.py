@@ -1,7 +1,11 @@
 import difflib
 import io
+import tempfile
 import unittest
+from pathlib import Path
+from unittest import mock
 
+from afenda.tools import corpus as corpus_module
 from afenda.tools.corpus import CORPUS, GOLDEN, emit_utf8, rewrite_corpus
 from afenda.tools.rules import RULES
 
@@ -61,10 +65,16 @@ class EmitUtf8Test(unittest.TestCase):
 
         self.assertEqual(raw.getvalue(), text.encode("utf-8"))
 
-    def test_direct_write_to_the_same_stream_would_raise(self):
-        # Establishes that the cp1252 stream used above is a faithful stand-in for the
-        # real defect: writing the same text to it the naive way (plain .write(), as
-        # corpus.py did before this fix) still raises UnicodeEncodeError.
+    def test_control_naive_write_to_the_same_stream_still_raises(self):
+        """Not a test of `emit_utf8` — a control for the fixture above.
+
+        This never calls `emit_utf8`: it writes straight to the cp1252 stream the same
+        way `corpus.py` did before this fix (plain `.write()`), to show that fixture is a
+        faithful stand-in for the real defect rather than an artificially cooperative
+        double. It passes identically whether `emit_utf8` exists, is broken, or is
+        deleted, so it proves nothing about the fix by itself — see
+        `test_survives_non_latin_character_on_cp1252_stream` for that.
+        """
         _, stream = self._cp1252_stream()
         with self.assertRaises(UnicodeEncodeError):
             stream.write("diff line with ỗ in it\n")
@@ -76,3 +86,35 @@ class EmitUtf8Test(unittest.TestCase):
         emit_utf8(text, stream=stream)
 
         self.assertEqual(stream.getvalue(), text)
+
+
+class CorpusDiffCliUtf8Test(unittest.TestCase):
+    """End-to-end regression: the `diff` subcommand must not crash on real `sys.stdout`.
+
+    Points `corpus.CORPUS`/`corpus.GOLDEN` at a temp pair whose rewritten line contains a
+    non-Latin character, then runs the real `diff` subcommand through `corpus.main()` —
+    exercising the actual argparse -> main -> `emit_utf8(stream=None)` path against the
+    process's real, unpatched `sys.stdout` (no `stream=` override, unlike the unit tests
+    above). This does not depend on the tracked golden.txt or on the real corpus
+    happening to contain non-Latin text right now (e.g. while another agent's rules.py
+    work is in flight and the real corpus/golden pair matches) — it always exercises the
+    non-Latin path, and would catch a future refactor that moved the write back out of
+    `emit_utf8`.
+    """
+
+    def test_diff_subcommand_does_not_crash_on_non_latin_line(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_path = Path(tmp)
+            corpus_file = tmp_path / "corpus.txt"
+            golden_file = tmp_path / "golden.txt"
+            # "other" is always a valid kind (see corpus.KINDS); the line's trailing
+            # word is untouched by any rebrand rule (rules only match Odoo-related
+            # patterns), so it survives rewrite_corpus intact.
+            corpus_file.write_text(".py\tother\tOdoo line with ỗ in it\n", encoding="utf-8")
+            golden_file.write_text("", encoding="utf-8")  # empty golden guarantees a diff
+
+            with mock.patch.object(corpus_module, "CORPUS", corpus_file), \
+                    mock.patch.object(corpus_module, "GOLDEN", golden_file):
+                exit_code = corpus_module.main(["diff"])
+
+        self.assertEqual(exit_code, 1)  # a diff was found, and printing it did not raise

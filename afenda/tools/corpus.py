@@ -108,6 +108,12 @@ def emit_utf8(text: str, stream=None) -> None:
     stream's underlying binary buffer, bypassing its text encoding entirely. Streams with
     no ``.buffer`` (e.g. ``io.StringIO`` in tests) fall back to a plain text write, where
     no encoding translation happens anyway.
+
+    Writing to the buffer also bypasses ``TextIOWrapper``'s newline translation, so
+    output is always LF, even when redirected to a file on Windows (which would
+    otherwise get CRLF). This is deliberate, not an oversight: a diff is machine-readable
+    text, LF matches what ``git diff`` itself emits, and this repository normalises to LF
+    in the object store regardless. Do not reintroduce CRLF translation here.
     """
     stream = sys.stdout if stream is None else stream
     buffer = getattr(stream, "buffer", None)
