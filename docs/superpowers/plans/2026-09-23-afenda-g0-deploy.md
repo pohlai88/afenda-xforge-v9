@@ -179,3 +179,15 @@ Found on the way:
 - `iap.odoo.com` resolves from the host. Independence rests on the null adapters
   (`iap.endpoint` = `http://127.0.0.1:9`, checked by the proof), not on DNS; the optional
   zero-egress mode in `deploy/README.md` removes the route as well.
+
+App mail (2026-09-23, after go-live):
+
+- The ERP relays through Resend: outgoing server `Resend`, `smtp.resend.com:2587`,
+  `starttls_strict`, FROM filter `nexuscanon.com`, a sending-only key scoped to that domain
+  (entered by the owner). Alias domain `nexuscanon.com` sends as `no-reply@nexuscanon.com`.
+- Resend domain `nexuscanon.com` (region ap-northeast-1) verified: DKIM `resend._domainkey`,
+  CNAMEs `send` and `rsend` (`a24b8e20b`); open and click tracking off.
+- End to end: a `mail.mail` sent by the live ERP reached Gmail's inbox with `dkim=pass`
+  (`d=nexuscanon.com`, `s=resend`), `spf=pass` (`rsend.nexuscanon.com`) and `dmarc=pass`
+  at `p=quarantine`; Resend reports it delivered.
+- Open: replies go to `catchall@nexuscanon.com`, which has no mailbox yet.
