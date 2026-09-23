@@ -443,8 +443,13 @@ from odoo.addons.afenda_brand.brand import BRAND
 # Ordered. Earlier rules win: the legal name and the bot name must be
 # consumed before the bare product name would split them.
 _RULES = (
-    (re.compile(r"Odoo\s+S\.A\.", re.IGNORECASE), BRAND["short"]),
-    (re.compile(r"OdooBot", re.IGNORECASE), BRAND["bot"]),
+    (re.compile(r"Odoo\s+S\.A\.", re.IGNORECASE), BRAND["short"]),
+    #  on BOTH sides, and it is load-bearing. With re.IGNORECASE and no
+    # boundaries this pattern matches inside `odoobot_state` and
+    # `odoobot_failed`, rewriting them to `AFENDA Bot_state` and
+    # `AFENDA Bot_failed` - corrupting the exact wire values this whole module
+    # exists to protect. `test_identifiers_embedded_in_prose_survive` pins it.
+    (re.compile(r"OdooBot", re.IGNORECASE), BRAND["bot"]),
     (
         re.compile(
             r"https?://(?:www\.)?odoo\.com"
