@@ -17,12 +17,20 @@ def _guide_xmlid(subpath):
 
 
 class AfendaDocsController(http.Controller):
-    # The catch-all is not decoration: `117` Settings help icons point at
-    # `/docs/19.0/applications/...` and this single route answers both
-    # `/docs` (the landing page) and every `/docs/<subpath>` (a generated
-    # guide, when one exists for that subpath). A subpath that does not name
-    # a guide 404s rather than silently rendering the landing page, so a
-    # broken or stale link is visible instead of masqueraded.
+    # The catch-all is not decoration: dozens of real in-product links point
+    # at `/docs/applications/...` (`grep -rIoh "[\"'(]/docs/[A-Za-z0-9/_.#-]*"
+    # addons/ odoo/` finds them; none match the literal `/docs/19.0/` this
+    # comment used to claim - that pattern has zero occurrences in the tree,
+    # since the rebrand's `docs_link` rule already strips the version), while
+    # only one guide (`guide_applications_general_users`) is generated so
+    # far. This single route answers `/docs` (the landing page) and every
+    # `/docs/<subpath>` (a generated guide, when one exists for that
+    # subpath). A subpath naming no guide redirects to `/docs` instead of
+    # 404ing or rendering the landing page inline at the guide's own URL:
+    # the latter is the masquerade to avoid (a URL claiming to be a guide
+    # that silently is not), but 404 would be honest and still hostile
+    # while most subpaths simply have no guide generated yet. A redirect is
+    # honest (the browser's address bar visibly changes) and usable.
     @http.route(
         ["/docs", "/docs/<path:subpath>"],
         type="http", auth="public", website=False, sitemap=False,
@@ -32,7 +40,7 @@ class AfendaDocsController(http.Controller):
             return request.render("afenda_api_docs.landing", {})
         xmlid = _guide_xmlid(subpath)
         if request.env.ref(xmlid, raise_if_not_found=False) is None:
-            raise request.not_found()
+            return request.redirect("/docs")
         # `no_footer`: same reasoning as `views/landing.xml` - this route is
         # `website=False`, so `request.is_frontend` never turns True and
         # `portal`'s footer-injected language selector 500s on the missing
