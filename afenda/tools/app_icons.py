@@ -44,6 +44,8 @@ from fontTools.ttLib import TTFont
 from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageOps
 
 from .brand_images import BOXED_INK, MARK_BOX, MARK_FRAME, SS, WHITE, arms_in, draw_mark, mark_svg
+from .xforge_icons.paths import bounds, flatten_path, scale_polygons
+from .xforge_icons.v4_shapes import SHAPES as AUTHORED_SHAPES
 
 # The AFENDA tag palette (afenda_brand/brand.py "tags") plus Ledger Blue. Every
 # hex in this block appears in brand.py and is mirrored into SCSS, because these
@@ -138,6 +140,27 @@ ACCENT_SHAPES: dict[str, tuple[str, tuple]] = {
     "shard-tl": ("polygon", ((52, -6), (-6, -6), (-6, 39), (29, 66))),
 }
 
+# The xForge band: a 45 degree plane crossing the icon, in the 0..100 box the
+# accents use. It is never an accent in its own right - nothing in ACCENTS names
+# one - it is the SECOND plane. It exists because the accent, once clipped to the
+# body, leaves two colours where the design promises three: crossing the clipped
+# accent with this band puts the third colour back, and puts it where V3 and V4
+# put theirs, at the intersection of two planes inside the silhouette.
+#
+# A FIXED band does not work, and the measurement is worth keeping: with one
+# band across every icon, 17 of the 50 lost a plane - the accent either missed
+# it entirely (crossing 0.000 on project, purchase, survey) or sat wholly inside
+# it (colour B at 0.001 on web, crm, board). So the band is PLACED per icon, the
+# same principle V3's geometry states for its crossing: a module places its
+# intersection, it does not discover where it fell.
+BAND_WIDTH = 24.0  # perpendicular, in box units: V3's ribbon band is 20-28%
+BAND_OFFSETS = tuple(range(-64, 65, 4))  # perpendicular shift from centre
+BAND_SCORE_SIDE = 128  # the band is scored here, so its answer is size-independent
+# What the crossing should take of the accent. Half would make the two planes
+# the same size and read as a bisected accent; a third keeps the accent legible
+# as one shape with a corner cut by the band.
+BAND_TARGET = 0.34
+
 # What `choose_accent_shape` may pick. Shards first because they carry the
 # brand; discs cross too much of a glyph to be a safe default, so only the
 # gentler "dot-*" and the two bars back the shards up.
@@ -154,6 +177,8 @@ class Design(NamedTuple):
     glyph: str  # colour A
     accent: str | None = None  # colour B; None draws the glyph alone
     shape: str | None = None  # a key of ACCENT_SHAPES
+    art: str | None = None  # a key of AUTHORED_SHAPES; overrides the glyph
+    band: tuple[int, int] | None = None  # (sign, offset) of the xForge band
 
 
 # module -> FontAwesome 4 codepoint. Anything absent gets the AFENDA mark.
@@ -232,7 +257,13 @@ ACCENTS: dict[str, tuple[str, str, str]] = {
     "contacts": (PLUM, TEAL, "disc-br"),
     "hr_attendance": (PLUM, TEAL, "disc-br"),
     "hr_holidays": (PLUM, OCHRE, "bar-t"),  # a disc would cover the calendar face
-    "hr_recruitment": (PLUM, MUSTARD, "wedge-tr"),
+    # wedge-tr met only 3.6% of the briefcase - it was nearly all outside the
+    # glyph, which the renderer used to paint. Clipped to the body it all but
+    # disappeared, taking the third colour with it. The scorer ranks the shards
+    # higher, but the shards are the auto vocabulary and no ACCENTS entry names
+    # one, so this takes the best shape outside that set: a bottom-left dot at
+    # 17.3%, inside OVERLAP_BAND, clear of the handle the briefcase is read by.
+    "hr_recruitment": (PLUM, MUSTARD, "dot-bl"),
     "hr_skills": (PLUM, MUSTARD, "disc-br"),
     "hr_timesheet": (PLUM, TEAL, "disc-bl"),
     "lunch": (PLUM, MOSS, "disc-br"),
@@ -339,12 +370,34 @@ BASE_ICONS: dict[str, Design] = {
 }
 
 
+# module -> a silhouette in afenda/tools/xforge_icons/v4_shapes.py.
+#
+# These five are the only modules whose shape was drawn rather than borrowed
+# from FontAwesome, and they are the five the icon specification names. A glyph
+# is a generic symbol that happens to be near the subject - f0f6 is "a page", not
+# "an invoice"; f0b1 is "a briefcase", not "a pipeline". An authored silhouette
+# says the module. Everything else about the icon - the accent, the band, the
+# three planes, the colours - is identical either way, which is the point: this
+# is one pipeline with two sources of geometry, not two icon systems.
+#
+# Drawing the long tail is incremental and needs no further code: add a shape
+# to v4_shapes.SHAPES and a line here.
+AUTHORED_ART: dict[str, str] = {
+    "account": "accounting",
+    "crm": "crm",
+    "hr": "employees",
+    "stock": "inventory",
+    "mrp": "manufacturing",
+}
+
+
 def design_for(module: str) -> Design:
     """What ``module``'s icon draws - the AFENDA mark if it has no mapping."""
+    art = AUTHORED_ART.get(module)
     code = APP_GLYPHS.get(module)
     if code is None:
-        return Design(None, GREY)
-    return Design(code, *ACCENTS[module])
+        return Design(None, GREY, art=art)
+    return Design(code, *ACCENTS[module], art=art)
 
 
 @lru_cache(maxsize=1)
@@ -514,6 +567,54 @@ def _glyph_alpha(design: Design, side: int) -> Image.Image:
     return mask
 
 
+@lru_cache(maxsize=None)
+def _authored_alpha(art: str, side: int) -> Image.Image:
+    """An authored silhouette, scaled and centred on a side x side box.
+
+    Filled even-odd, so a shape whose contours nest - the gear's teeth around
+    its open centre - keeps its hole, while a shape whose contours are disjoint
+    - the three figures - unions them. That is the rule the SVG masters are
+    authored against, so the PNG and the master agree by construction.
+
+    The mask is binary. It is drawn at the supersampled side and resampled once
+    by the caller, exactly like ``accent_mask``; antialiasing it here would
+    antialias twice.
+    """
+    shape = AUTHORED_SHAPES[art](False)
+    body = flatten_path(shape["body"])
+    contours = list(body)
+    if "aperture" in shape:
+        contours.extend(flatten_path(shape["aperture"]))
+
+    # Fit the body's own ink, not the nominal artboard: the authored shapes sit
+    # in a 300x365 box with uneven margins, and centring on the box would put
+    # every one of them off-centre in a square icon.
+    x0, y0, x1, y1 = bounds(body)
+    target = side * GLYPH_SCALE
+    k = min(target / (x1 - x0), target / (y1 - y0))
+    dx = (side - (x1 - x0) * k) / 2.0 - x0 * k
+    dy = (side - (y1 - y0) * k) / 2.0 - y0 * k
+
+    mask = Image.new("L", (side, side), 0)
+    for poly in scale_polygons(contours, k, k, dx, dy):
+        layer = Image.new("L", (side, side), 0)
+        ImageDraw.Draw(layer).polygon(poly, fill=255)
+        mask = ImageChops.difference(mask, layer)  # XOR on a binary mask
+    return mask
+
+
+def body_alpha(design: Design, side: int) -> Image.Image:
+    """The icon's silhouette: its authored shape, or its glyph.
+
+    The one place the two geometry sources meet. Everything downstream - the
+    accent clip, the band, the three planes - is written against this and does
+    not know or care which source it got.
+    """
+    if design.art:
+        return _authored_alpha(design.art, side)
+    return _glyph_alpha(design, side)
+
+
 def accent_mask(shape: str, side: int) -> Image.Image:
     """Alpha mask for the overlapping accent shape, on a side x side box."""
     kind, geom = ACCENT_SHAPES[shape]
@@ -531,6 +632,63 @@ def accent_mask(shape: str, side: int) -> Image.Image:
     else:
         raise ValueError(kind)
     return mask
+
+
+def band_points(band: tuple[int, int]) -> tuple[tuple[float, float], ...]:
+    """The xForge band as four corners in the 0..100 box.
+
+    ``sign`` is the diagonal - +1 rises to the right, -1 falls to the right -
+    and ``offset`` shifts the band along its own normal, so the pair names one
+    plane out of the two-by-N family the scorer chooses from. The band runs well
+    past the box on both ends on purpose: a plane that stops inside the icon
+    would show its own end, and a plane with a visible end is a stripe.
+    """
+    sign, offset = band
+    k = 2 ** 0.5 / 2
+    dx, dy = (k, -k) if sign > 0 else (k, k)
+    nx, ny = -dy, dx
+    cx, cy = 50.0 + nx * offset, 50.0 + ny * offset
+    hw = BAND_WIDTH / 2.0
+    far = 160.0
+    return (
+        (cx + nx * hw + dx * far, cy + ny * hw + dy * far),
+        (cx + nx * hw - dx * far, cy + ny * hw - dy * far),
+        (cx - nx * hw - dx * far, cy - ny * hw - dy * far),
+        (cx - nx * hw + dx * far, cy - ny * hw + dy * far),
+    )
+
+
+def band_mask(band: tuple[int, int], side: int) -> Image.Image:
+    """Alpha mask for the xForge band, on a side x side box."""
+    mask = Image.new("L", (side, side), 0)
+    u = side / 100.0
+    ImageDraw.Draw(mask).polygon([(x * u, y * u) for x, y in band_points(band)], fill=255)
+    return mask
+
+
+def band_svg(band: tuple[int, int], fill: str | None = None) -> str:
+    """The band as one SVG element, in the same box as ``_accent_svg``."""
+    u = SVG_SIDE / 100.0
+    points = " ".join(f"{x * u:g},{y * u:g}" for x, y in band_points(band))
+    return f'<polygon points="{points}"{f" fill={fill!r}" if fill else ""}/>'.replace("'", '"')
+
+
+def choose_band(accent: Image.Image, side: int) -> tuple[int, int]:
+    """Where to put the band so it takes BAND_TARGET of this accent.
+
+    Scored against the accent ALREADY CLIPPED to the body, because that is the
+    shape the crossing is cut out of. Scoring against the unclipped accent would
+    place the band by an area the icon never shows.
+    """
+    area = max(_mask_area(accent), 1.0)
+    best, best_score = (1, 0), None
+    for sign in (1, -1):
+        for offset in BAND_OFFSETS:
+            ratio = _mask_area(_mask_intersection(accent, band_mask((sign, offset), side))) / area
+            score = abs(ratio - BAND_TARGET)
+            if best_score is None or score < best_score:
+                best, best_score = (sign, offset), score
+    return best
 
 
 def accent_score(glyph: Image.Image, accent: Image.Image) -> float:
@@ -576,10 +734,16 @@ def resolve_design(design: Design) -> Design:
     placed; it is scored once, here, at a fixed size, so the PNG and the SVG
     cannot land on different answers.
     """
-    if not design.accent or (design.shape and design.shape != AUTO):
+    if not design.accent:
         return design
-    return design._replace(
-        shape=choose_accent_shape(_glyph_alpha(design, AUTO_SCORE_SIDE), AUTO_SCORE_SIDE))
+    if not design.shape or design.shape == AUTO:
+        design = design._replace(
+            shape=choose_accent_shape(body_alpha(design, AUTO_SCORE_SIDE), AUTO_SCORE_SIDE))
+    if design.band is None:
+        clipped = _mask_intersection(accent_mask(design.shape, BAND_SCORE_SIDE),
+                                     body_alpha(design, BAND_SCORE_SIDE))
+        design = design._replace(band=choose_band(clipped, BAND_SCORE_SIDE))
+    return design
 
 
 def accent_overlap(design: Design, side: int = AUTO_SCORE_SIDE) -> float:
@@ -587,11 +751,11 @@ def accent_overlap(design: Design, side: int = AUTO_SCORE_SIDE) -> float:
     design = resolve_design(design)
     if not design.accent:
         return 0.0
-    glyph = _glyph_alpha(design, side)
-    ink = _mask_area(glyph)
+    body = body_alpha(design, side)
+    ink = _mask_area(body)
     if not ink:
         return 0.0
-    return _mask_area(_mask_intersection(glyph, accent_mask(design.shape, side))) / ink
+    return _mask_area(_mask_intersection(body, accent_mask(design.shape, side))) / ink
 
 
 def overlap_report() -> list[tuple[str, float]]:
@@ -603,32 +767,63 @@ def overlap_report() -> list[tuple[str, float]]:
     return sorted(((m, accent_overlap(design_for(m))) for m in ACCENTS), key=lambda r: r[1])
 
 
+def plane_masks(design: Design, side: int) -> tuple[tuple[Image.Image, tuple[int, int, int]], ...]:
+    """The icon as (mask, colour) planes on a side x side box, back to front.
+
+    Three planes, and the silhouette is the body:
+
+        1  body minus the accent                    colour A
+        2  body and accent, minus the band          colour B
+        3  body and accent and band                 the crossing colour
+
+    The accent is CLIPPED to the body. Before this it was not, and the part of
+    it hanging outside was painted too, so an icon's true silhouette was its
+    glyph union a disc or a bar floating in empty space. Every icon had that,
+    and at apps-menu size it read as a rendering fault rather than as design.
+
+    Clipping alone would leave two colours - an accent wholly inside the body
+    has no outside part to carry colour B - which is why the band exists. The
+    three masks partition the body exactly:
+
+        body\\accent  +  accent\\band  +  accent&band  ==  body
+
+    and they are alpha-correct, so they sum to the body's coverage at every
+    alpha and the seams carry no halo.
+    """
+    design = resolve_design(design)
+    body = body_alpha(design, side)
+    a = rgb(design.glyph)
+    if not design.accent:
+        return ((body, a),)
+    b = rgb(design.accent)
+    raw = accent_mask(design.shape, side)
+    accent = _mask_intersection(raw, body)  # the accent, clipped to the body
+    band = band_mask(design.band, side)
+    # Plane 1 subtracts the RAW accent, not the clipped one. Both give the same
+    # picture where coverage is full, and they differ along every antialiased
+    # rim: body*(1 - body*accent) leaves a sliver of colour A under the accent's
+    # own soft edge, and the three planes then sum to more than the body - 1.003
+    # of it on hr_holidays, which is a bright halo traced around the accent.
+    # body*(1 - accent) is the exact complement of the other two planes.
+    return (
+        (_mask_only(body, raw), a),
+        (_mask_only(accent, band), b),
+        (_mask_intersection(accent, band), controlled_overlap_colour(a, b)),
+    )
+
+
 def icon_png(width: int, height: int, design: Design) -> Image.Image:
-    """The free-standing duotone mark, at exactly width x height.
+    """The free-standing mark, at exactly width x height.
 
-    Colour A carries the glyph, colour B the accent, and `controlled_overlap_colour`
-    the crossing - three opaque colours on transparency, no tile.
-
-    The three masks are the exact premultiplied decomposition of the two shapes:
-    glyph*(1-accent), accent*(1-glyph) and glyph*accent. They sum to the union's
-    coverage at every alpha, so the seam has no halo.
+    Colour A carries the body, colour B the accent inside it, and
+    `controlled_overlap_colour` where the accent crosses the xForge band -
+    three opaque colours on transparency, no tile. See `plane_masks`.
     """
     design = resolve_design(design)
     ss = _supersample(width, height)
     w, h = width * ss, height * ss
     side = min(w, h)
-    glyph = _glyph_alpha(design, side)
-    a = rgb(design.glyph)
-    if design.accent:
-        b = rgb(design.accent)
-        accent = accent_mask(design.shape, side)
-        layers = (
-            (_mask_only(accent, glyph), b),
-            (_mask_only(glyph, accent), a),
-            (_mask_intersection(glyph, accent), controlled_overlap_colour(a, b)),
-        )
-    else:
-        layers = ((glyph, a),)
+    layers = plane_masks(design, side)
     im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     offset = ((w - side) // 2, (h - side) // 2)
     for mask, colour in layers:
@@ -692,7 +887,34 @@ def _mark_svg(fill: str) -> str:
     return f'<g transform="{transform}">{mark_svg((fill,) * 4)}</g>'
 
 
+def _authored_svg(art: str, fill: str) -> str:
+    """An authored silhouette as one path, fitted the way the mask fits it.
+
+    The path data goes out verbatim - the curves are not flattened here. The
+    raster flattens because Pillow has to; the vector has no reason to, and
+    shipping the authored curves means the SVG is the master rather than a
+    polygonal trace of it.
+    """
+    shape = AUTHORED_SHAPES[art](False)
+    d = shape["body"] + ((" " + shape["aperture"]) if "aperture" in shape else "")
+    x0, y0, x1, y1 = bounds(flatten_path(shape["body"]))
+    scale = SVG_SIDE * GLYPH_SCALE / max(x1 - x0, y1 - y0)
+    half = SVG_SIDE / 2
+    # Both axes written out, and POSITIVE on y. The glyph path comes from a font,
+    # whose y axis points up, so it needs a negative y scale to land upright;
+    # this path is authored in SVG coordinates and is already the right way up.
+    # Writing scale(k k) rather than scale(k) keeps one transform grammar in the
+    # file for anything reading these back.
+    transform = (
+        f"translate({half:g} {half:g}) scale({scale:.5g} {scale:.5g}) "
+        f"translate({-(x0 + x1) / 2:.5g} {-(y0 + y1) / 2:.5g})"
+    )
+    return f'<path d="{d}" fill="{fill}" fill-rule="evenodd" transform="{transform}"/>'
+
+
 def _ink_svg(design: Design, fill: str) -> str:
+    if design.art:
+        return _authored_svg(design.art, fill)
     return _glyph_svg(design.code, fill) if design.code else _mark_svg(fill)
 
 
@@ -705,16 +927,19 @@ def svg_clip_id(design: Design) -> str:
     document-global and the first one wins. Derived from what the icon draws, so
     it is stable across renders and shows up in diffs only when the icon changes.
     """
-    payload = f"{design.code}|{design.glyph}|{design.accent}|{design.shape}"
+    payload = f"{design.code}|{design.glyph}|{design.accent}|{design.shape}|{design.art}"
     return "afenda-accent-" + sha1(payload.encode("utf-8")).hexdigest()[:10]
 
 
 def icon_svg(design: Design) -> str:
-    """The same three layers the PNG composites, as vectors.
+    """The same three planes the PNG composites, as vectors.
 
-    Accent in B, glyph in A over it, then the glyph again clipped to the accent
-    in the overlap colour - which reproduces exactly what the raster does with
-    its intersection mask, without needing a blend mode no SVG renderer owes us.
+    The body in A, the accent over it clipped to the body in B, then the accent
+    again clipped to the body AND the band in the crossing colour. Each layer is
+    opaque and lies inside the one before it, so painting them in order gives
+    the same picture as the raster's partition, without a blend mode no SVG
+    renderer owes us - and the silhouette is the body, because nothing is ever
+    painted outside the body clip.
 
     The shape has to be resolved already: scoring it here would mean rasterising
     inside the vector path, and a second chance for the PNG and the SVG to
@@ -727,10 +952,21 @@ def icon_svg(design: Design) -> str:
             raise ValueError(f"{design.code}: an auto accent must be resolved before it is serialised")
         clip = svg_clip_id(design)
         overlap = _hex(controlled_overlap_colour(rgb(design.glyph), rgb(design.accent)))
+        # The body is PAINTED and the accent CLIPS it, never the other way
+        # round. Painting the accent and clipping it to the body would draw the
+        # same picture, but it would need the body's path a second time inside a
+        # clipPath, and a second copy of a path is a second thing to get wrong.
+        # This way the only shape ever painted is the body, so the silhouette is
+        # the body by construction rather than by agreement.
         body = (
-            f'<defs><clipPath id="{clip}">{_accent_svg(design.shape)}</clipPath></defs>'
-            f'{_accent_svg(design.shape, design.accent)}{body}'
-            f'<g clip-path="url(#{clip})">{_ink_svg(design, overlap)}</g>'
+            f'<defs>'
+            f'<clipPath id="{clip}-accent">{_accent_svg(design.shape)}</clipPath>'
+            f'<clipPath id="{clip}-band">{band_svg(design.band)}</clipPath>'
+            f'</defs>'
+            f'{body}'
+            f'<g clip-path="url(#{clip}-accent)">{_ink_svg(design, design.accent)}</g>'
+            f'<g clip-path="url(#{clip}-accent)"><g clip-path="url(#{clip}-band)">'
+            f'{_ink_svg(design, overlap)}</g></g>'
         )
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{side}" height="{side}" '

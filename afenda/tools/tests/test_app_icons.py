@@ -23,6 +23,7 @@ from fontTools.ttLib import TTFont
 from PIL import Image, ImageChops, ImageDraw, ImageStat
 
 from afenda.tools import app_icons, brand_images
+from afenda.tools.xforge_icons.paths import bounds as path_bounds, flatten_path
 
 GREY = app_icons.rgb(app_icons.GREY)
 
@@ -198,9 +199,19 @@ class AppIconTests(unittest.TestCase):
             # a shape of None or "auto" here is a hand-placed accent lost.
             self.assertNotIn(shape, (None, app_icons.AUTO),
                              f"{module} would be auto-placed; its explicit shape was dropped")
-            self.assertEqual(app_icons.resolve_design(app_icons.design_for(module)),
-                             app_icons.design_for(module),
-                             f"{module}'s design was rewritten on its way to the renderer")
+            original = app_icons.design_for(module)
+            resolved = app_icons.resolve_design(original)
+            self.assertEqual(
+                (resolved.code, resolved.glyph, resolved.accent, resolved.shape, resolved.art),
+                (original.code, original.glyph, original.accent, original.shape, original.art),
+                f"{module}'s design was rewritten on its way to the renderer")
+            # The band is the one field resolution is allowed to fill in. It is
+            # placed against the accent AFTER the accent is clipped to the body,
+            # so it cannot be written in the table beside the shape - the table
+            # does not know the body. Hard-coding one here would be the same
+            # mistake as hard-coding a scored shape.
+            self.assertIsNone(original.band, f"{module} hard-codes a band")
+            self.assertIsNotNone(resolved.band, f"{module} reached the renderer with no band")
 
     # --- the mark --------------------------------------------------------
 
@@ -314,12 +325,18 @@ class AppIconTests(unittest.TestCase):
         """The ink is GLYPH_SCALE of the short side and centred - for every
         glyph, whatever share of its em box it fills. Fails if the glyph is
         missing, sized from the font size instead of the measured ink, stretched
-        to the canvas, or pushed off centre. The glyph is found by colour: the
-        accent runs off the canvas and would swamp any opacity-based box."""
+        to the canvas, or pushed off centre.
+
+        Measured over ALL THREE colours. It used to exclude the accent, because
+        the accent ran off the canvas and would have swamped the box - and that
+        exclusion is exactly what the clipping fix removed. The accent is now
+        inside the body, so every opaque pixel is the icon, and excluding one of
+        its three colours would measure a shape with a bite taken out of it
+        (stock came out at 78.1% that way, against a real span of 84%)."""
         for module, im in self.pngs.items():
             if module in MAPPED:
                 a, b, over = self._trio(module)
-                box = _ink_bbox(im, [a, b, over], accent=1)
+                box = _ink_bbox(im, [a, b, over], accent=None)
             else:
                 box = _ink_bbox(im, [GREY], accent=None)
             self.assertIsNotNone(box, f"{module} has no glyph ink")
@@ -384,11 +401,23 @@ class AppIconTests(unittest.TestCase):
             self.assertIn(f'fill="{glyph}"', svg, f"{module} does not draw its glyph in colour A")
             self.assertIn(f'fill="{accent}"', svg, f"{module} does not draw its accent in colour B")
             self.assertIn(f'fill="{over}"', svg, f"{module} has no overlap layer")
-            self.assertIn(f'<clipPath id="{clip}">', svg, module)
-            self.assertIn(f'clip-path="url(#{clip})"', svg, module)
-            # The multiply layer must be the glyph again, not a fill of the
-            # accent: two copies of the same outline, one clipped.
-            self.assertEqual(svg.count("<path d="), 2, f"{module} does not draw the glyph twice")
+            # Two clips now, because there are two planes to cut the body with:
+            # the accent, and the xForge band the accent crosses.
+            self.assertIn(f'<clipPath id="{clip}-accent">', svg, module)
+            self.assertIn(f'<clipPath id="{clip}-band">', svg, module)
+            self.assertIn(f'clip-path="url(#{clip}-accent)"', svg, module)
+            self.assertIn(f'clip-path="url(#{clip}-band)"', svg, module)
+            # The body, three times: once whole in colour A, once clipped to the
+            # accent in colour B, once clipped to accent AND band in the crossing
+            # colour. It must be the body that repeats, never a fill of the
+            # accent shape - that is what keeps the silhouette the body.
+            self.assertEqual(svg.count("<path d="), 3,
+                             f"{module} does not draw its body three times")
+            # And the accent shape itself is never painted, only ever a clip.
+            body_shape = "<circle" if "circle" in svg else None
+            if body_shape:
+                self.assertEqual(svg.count("<circle"), 1,
+                                 f"{module} paints its accent instead of clipping with it")
 
     def test_svg_accent_geometry_matches_the_masks(self):
         """One table drives both renders. Fails if the SVG shape drifts from the
@@ -417,9 +446,23 @@ class AppIconTests(unittest.TestCase):
         for module in MAPPED:
             pen = SVGPathPen(glyphs)
             glyphs[font.getBestCmap()[int(app_icons.APP_GLYPHS[module], 16)]].draw(pen)
-            if module in self.svgs:
-                self.assertIn(pen.getCommands(), self.svgs[module],
-                              f"{module} does not carry the outline of U+{app_icons.APP_GLYPHS[module].upper()}")
+            if module not in self.svgs:
+                continue
+            art = app_icons.AUTHORED_ART.get(module)
+            if art:
+                # An authored module draws its own silhouette and NOT the glyph
+                # its mapping names - that is the point of authoring it. The
+                # mapping stays in APP_GLYPHS because the fallback path still
+                # needs a glyph if the art is ever withdrawn, and because
+                # test_every_mapped_module_has_an_accent holds the two tables
+                # together by key.
+                self.assertIn(app_icons.AUTHORED_SHAPES[art](False)["body"], self.svgs[module],
+                              f"{module} does not carry its authored silhouette")
+                self.assertNotIn(pen.getCommands(), self.svgs[module],
+                                 f"{module} draws its authored art AND its glyph")
+                continue
+            self.assertIn(pen.getCommands(), self.svgs[module],
+                          f"{module} does not carry the outline of U+{app_icons.APP_GLYPHS[module].upper()}")
 
     def test_svg_transform_places_the_glyph_upright_and_centred(self):
         """The transform is the one piece of this file no pixel can check: a
@@ -429,7 +472,9 @@ class AppIconTests(unittest.TestCase):
         font = TTFont(app_icons.FA_TTF)
         glyphs = font.getGlyphSet()
         side = app_icons.SVG_SIDE
-        for module in ("account", "crm", "sms"):
+        glyph_modules = [m for m in MAPPED if m not in app_icons.AUTHORED_ART][:3]
+        self.assertTrue(glyph_modules, "no glyph-drawn module left to check the font transform on")
+        for module in glyph_modules:
             bounds = BoundsPen(glyphs)
             glyphs[font.getBestCmap()[int(app_icons.APP_GLYPHS[module], 16)]].draw(bounds)
             x0, y0, x1, y1 = bounds.bounds
@@ -443,6 +488,120 @@ class AppIconTests(unittest.TestCase):
             self.assertAlmostEqual((top + bottom) / 2, side / 2, places=2, msg=f"{module} y centre")
             for value in (left, right, top, bottom):
                 self.assertTrue(0 < value < side, f"{module} spills out of the icon at {value}")
+
+    def test_authored_art_is_placed_without_the_font_flip(self):
+        """The authored silhouettes go through the same two-stage transform, but
+        their y scale is POSITIVE: they are drawn in SVG coordinates, which
+        already point down, so flipping them would stand them on their heads.
+        Same GLYPH_SCALE, same centre, same no-spill rule as the glyphs."""
+        side = app_icons.SVG_SIDE
+        self.assertTrue(app_icons.AUTHORED_ART, "no authored art to check")
+        for module, art in sorted(app_icons.AUTHORED_ART.items()):
+            if module not in self.svgs:
+                continue
+            body = flatten_path(app_icons.AUTHORED_SHAPES[art](False)["body"])
+            x0, y0, x1, y1 = path_bounds(body)
+            place = _transform(self.svgs[module])
+            left, top = place(x0, y0)  # SVG's low y is the top
+            right, bottom = place(x1, y1)
+            self.assertLess(top, bottom, f"{module} is drawn upside down")
+            self.assertAlmostEqual(max(right - left, bottom - top), side * app_icons.GLYPH_SCALE, places=2,
+                                   msg=f"{module} is not {app_icons.GLYPH_SCALE:.0%} of the icon")
+            self.assertAlmostEqual((left + right) / 2, side / 2, places=2, msg=f"{module} x centre")
+            self.assertAlmostEqual((top + bottom) / 2, side / 2, places=2, msg=f"{module} y centre")
+            for value in (left, right, top, bottom):
+                self.assertTrue(0 < value < side, f"{module} spills out of the icon at {value}")
+
+    # --- the silhouette ---------------------------------------------------
+
+    def test_the_silhouette_is_the_body_and_nothing_hangs_outside_it(self):
+        """The regression test for the bug that motivated the rewrite.
+
+        The accent used to be painted where it fell OUTSIDE the glyph, so an
+        icon's real outline was its glyph union a disc or a bar hanging in empty
+        space past the edge of the mark. At apps-menu size that read as a
+        rendering fault. Every opaque pixel must lie inside the body now, and
+        this has to hold for both geometry sources - the authored silhouettes
+        and the glyphs - because they go through one compositor.
+        """
+        side = 256
+        for module in sorted(set(MAPPED) | set(app_icons.AUTHORED_ART)):
+            design = app_icons.resolve_design(app_icons.design_for(module))
+            body = app_icons.body_alpha(design, side)
+            painted = None
+            for mask, _colour in app_icons.plane_masks(design, side):
+                painted = mask if painted is None else ImageChops.lighter(painted, mask)
+            outside = app_icons._mask_area(ImageChops.subtract(painted, body))
+            self.assertLess(outside / max(app_icons._mask_area(body), 1.0), 0.001,
+                            f"{module} paints {outside:.0f} px of ink outside its own silhouette")
+
+    def test_the_planes_partition_the_body_without_a_halo(self):
+        """The planes are a partition, not a stack of overlapping shapes: they
+        sum to the body's coverage at every alpha, so no seam between them
+        renders as a translucent line. Fails if a plane is dropped, if two
+        planes double-count the crossing, or if either mask operation is
+        reverted to a subtraction that is not alpha-correct."""
+        side = 256
+        for module in sorted(set(MAPPED) | set(app_icons.AUTHORED_ART)):
+            design = app_icons.resolve_design(app_icons.design_for(module))
+            ink = app_icons._mask_area(app_icons.body_alpha(design, side))
+            total = sum(app_icons._mask_area(m) for m, _c in app_icons.plane_masks(design, side))
+            self.assertAlmostEqual(total / ink, 1.0, delta=0.002,
+                                   msg=f"{module}'s planes cover {total / ink:.3f} of its body, not 1.000")
+
+    def test_the_band_gives_every_mapped_icon_a_real_third_colour(self):
+        """Clipping the accent to the body costs colour B its own area - an
+        accent wholly inside the body has no outside part left to carry it - so
+        the xForge band exists to cut the accent in two and put the third colour
+        back at the crossing of two planes.
+
+        It has to be PLACED to do that. Measured with one fixed band across
+        every icon, 17 of the 50 lost a plane: the accent either missed the band
+        entirely (project, purchase, survey at 0.000) or sat wholly inside it
+        (web, crm, board at 0.001). This is the gate on that.
+        """
+        side = 256
+        floor = 0.02
+        for module in MAPPED:
+            design = app_icons.resolve_design(app_icons.design_for(module))
+            ink = app_icons._mask_area(app_icons.body_alpha(design, side))
+            planes = app_icons.plane_masks(design, side)
+            self.assertEqual(len(planes), 3, f"{module} does not render three planes")
+            for name, (mask, _c) in zip(("colour A", "colour B", "the crossing"), planes):
+                share = app_icons._mask_area(mask) / ink
+                self.assertGreater(share, floor,
+                                   f"{module}: {name} covers {share:.1%} of the body, under the {floor:.0%} floor")
+
+    def test_every_authored_shape_parses_and_stays_inside_its_artboard(self):
+        """The authored art is the other geometry source, and it is data rather
+        than code, so it gets the same scrutiny the glyphs get from the cmap
+        test: every path parses to real contours, and nothing strays outside the
+        artboard it was drawn in."""
+        from afenda.tools.xforge_icons.v4_shapes import H, W
+        self.assertTrue(app_icons.AUTHORED_SHAPES, "there is no authored art")
+        for key, builder in sorted(app_icons.AUTHORED_SHAPES.items()):
+            for micro in (False, True):
+                art = builder(micro)
+                self.assertIn("body", art, f"{key} (micro={micro}) declares no body")
+                for role, d in art.items():
+                    if not isinstance(d, str):
+                        continue  # marks and stages carry coordinates, not paths
+                    contours = flatten_path(d)
+                    self.assertTrue(contours, f"{key}.{role} parses to nothing")
+                    x0, y0, x1, y1 = path_bounds(contours)
+                    self.assertTrue(-W <= x0 and x1 <= 2 * W and -H <= y0 and y1 <= 2 * H,
+                                    f"{key}.{role} runs to ({x0:.0f},{y0:.0f})-({x1:.0f},{y1:.0f})")
+
+    def test_a_module_without_authored_art_still_renders(self):
+        """One pipeline, two geometry sources: the 83 modules with no art of
+        their own must keep working, and must go through the glyph. Fails if the
+        authored path becomes mandatory."""
+        for module in ("sms", "calendar", "x_technical"):
+            design = app_icons.design_for(module)
+            self.assertIsNone(design.art, f"{module} unexpectedly has authored art")
+            im = app_icons.icon_png(64, 64, design)
+            self.assertEqual(im.size, (64, 64))
+            self.assertTrue(_colours(im), f"{module} rendered nothing")
 
     # --- V2 quality gates -------------------------------------------------
 
@@ -602,13 +761,23 @@ class AppIconTests(unittest.TestCase):
             self.assertEqual(len(sharing), 1, f"{clip} is shared by {sharing}")
         account = designs["account"]
         for changed in (account._replace(code="f0f2"), account._replace(glyph=app_icons.PLUM),
-                        account._replace(accent=app_icons.OCHRE), account._replace(shape="dot-br")):
+                        account._replace(accent=app_icons.OCHRE), account._replace(shape="dot-br"),
+                        account._replace(art=None)):
             self.assertNotEqual(app_icons.svg_clip_id(changed), app_icons.svg_clip_id(account),
                                 f"the clip id ignores {changed}")
-        # and it is the id the file on disk actually declares and refers to
+        # and it is the id the file on disk actually declares and refers to.
+        # Two clips are derived from it now - the accent and the band - so the
+        # counts are per derived id rather than one total: declared once each,
+        # and the accent referenced twice because both the colour-B plane and
+        # the crossing plane sit inside it.
         for module in MAPPED:
-            if module in self.svgs:
-                self.assertEqual(self.svgs[module].count(ids[module]), 2, module)
+            if module not in self.svgs:
+                continue
+            svg = self.svgs[module]
+            self.assertEqual(svg.count(f'id="{ids[module]}-accent"'), 1, module)
+            self.assertEqual(svg.count(f'id="{ids[module]}-band"'), 1, module)
+            self.assertEqual(svg.count(f'url(#{ids[module]}-accent)'), 2, module)
+            self.assertEqual(svg.count(f'url(#{ids[module]}-band)'), 1, module)
 
     def test_an_unmapped_accent_is_placed_by_the_scorer(self):
         """A Design with no shape is a module nobody has art-directed. It gets a
