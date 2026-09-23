@@ -334,12 +334,40 @@ class RulesTests(unittest.TestCase):
         # Fires the construction-time guard directly: if BRAND['domain'] were
         # ever also listed in _SUPERSEDED_DOMAINS, build_rules must refuse to
         # build the rule set rather than silently loop on a second rebrand
-        # pass.
+        # pass. assertRaisesRegex (not bare assertRaises) pins this to the
+        # guard actually meant, not any unrelated ValueError.
         from afenda.tools.rules import build_rules, _SUPERSEDED_DOMAINS
         bad_brand = dict(load_brand())
         bad_brand["domain"] = _SUPERSEDED_DOMAINS[0]
-        with self.assertRaises(ValueError):
+        with self.assertRaisesRegex(ValueError, "_SUPERSEDED_DOMAINS"):
             build_rules(bad_brand)
+
+    def test_domain_containing_a_superseded_value_also_raises(self):
+        # Proves the guard tests the match condition, not mere membership:
+        # "app.nexuscanon.com" is not *in* ("nexuscanon.com",), but the
+        # \b-bounded pattern for "nexuscanon.com" still matches inside it
+        # (preceded by ".", a non-word character). A membership-only guard
+        # would miss this and every `rebrand --apply` would grow the domain
+        # another "app." label.
+        from unittest import mock
+        from afenda.tools.rules import build_rules
+        bad_brand = dict(load_brand())
+        bad_brand["domain"] = "app.nexuscanon.com"
+        with mock.patch("afenda.tools.rules._SUPERSEDED_DOMAINS", ("nexuscanon.com",)):
+            with self.assertRaisesRegex(ValueError, "_SUPERSEDED_DOMAINS"):
+                build_rules(bad_brand)
+
+    def test_superseded_domain_word_prefix_not_matched(self):
+        # \b excludes word-char-prefixed hosts: "notafenda.app" must not
+        # become "not" + the current domain.
+        src = "https://notafenda.app/x\n"
+        self.assertEqual(self.rw(src, "v.xml"), src)
+
+    def test_superseded_domain_hyphen_prefix_is_matched(self):
+        # \b does NOT exclude non-word-char prefixes like "-", so
+        # "foo-afenda.app" DOES match -- identical to the existing odoo_com
+        # rule's own behaviour, not a gap introduced by this rule.
+        self.assertEqual(self.rw("https://foo-afenda.app/x\n", "v.xml"), "https://foo-" + DOMAIN + "/x\n")
 
 
 if __name__ == "__main__":

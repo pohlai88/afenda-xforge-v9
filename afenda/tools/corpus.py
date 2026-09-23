@@ -5,6 +5,21 @@
     python -m afenda.tools.corpus diff                         # show what current RULES change vs golden
 
 Lines are keyed by (suffix, path kind) because rules depend on both.
+
+What this corpus structurally cannot cover: `build` derives corpus.txt
+entirely from `git archive <ref>` of a real Odoo tree (normally
+upstream-19.0), so it can only ever hold text that pristine upstream actually
+shipped. A rule that targets an AFENDA-specific value with no upstream
+analogue -- e.g. rules.py's `superseded_domain`, which rewrites the retired
+`afenda.app` domain, a string upstream Odoo never contained -- has zero
+natural occurrences here and always will, regardless of how TRIGGER or the
+rules change. Hand-adding synthetic lines to `corpus.txt` would not fix this:
+the next `build --ref ...` overwrites the file from the git archive alone and
+silently discards anything not actually present there, quietly recreating the
+same blind spot with no warning that coverage was lost. Rules in that
+position get their regression coverage from targeted unit tests in
+`afenda/tools/tests/test_rebrand.py` instead (see the `superseded_domain`
+tests there), which is where it actually lives and survives a rebuild.
 """
 from __future__ import annotations
 

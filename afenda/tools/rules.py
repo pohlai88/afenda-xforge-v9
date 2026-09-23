@@ -11,10 +11,13 @@ from afenda.tools.rebrand import Rule
 # domain that actually shipped goes here, hard-coded and literal -- that is
 # deliberate, not an oversight: a superseded value is a fixed historical fact,
 # never the current brand value (contrast `domain` in build_rules below, which
-# is read from BRAND precisely because it *does* change). Never add the
-# current domain to this tuple -- build_rules raises if it finds it there,
-# because that would make the rule below match its own replacement and loop
-# forever. Migration-local, in the same sense as afenda_brand/hooks.py's
+# is read from BRAND precisely because it *does* change). Never add an entry
+# whose compiled pattern would match the current domain -- build_rules raises
+# if it does, because that would make the rule below match its own
+# replacement and loop forever. Note this is broader than "never list the
+# current domain verbatim": e.g. listing "nexuscanon.com" here while the
+# current domain is "app.nexuscanon.com" would still match (see build_rules).
+# Migration-local, in the same sense as afenda_brand/hooks.py's
 # _SUPERSEDED_EMAIL_COLORS: delete the entry (and, once the tuple is empty,
 # the rule itself) once no tree still carries the old value.
 _SUPERSEDED_DOMAINS = ("afenda.app",)
@@ -38,15 +41,25 @@ def load_brand() -> dict:
 def build_rules(brand: dict) -> list[Rule]:
     product, short, bot = brand["product"], brand["short"], brand["bot"]
     domain, docs, prefix = brand["domain"], brand["docs_path"], brand["url_prefix"]
-    # Impossible-by-construction anti-loop check: if the current domain were
-    # ever also listed as superseded, this rule would match its own
-    # replacement and rebrand would rewrite the tree forever. A raise (not
-    # assert) so the guard holds under `python -O` too.
-    if domain in _SUPERSEDED_DOMAINS:
+    # Impossible-by-construction anti-loop check. Guard on the actual match
+    # condition -- the compiled pattern searching the current domain -- not
+    # on set membership, which is strictly weaker: a future domain such as
+    # "app.nexuscanon.com" is not *in* ("nexuscanon.com",), but the
+    # \b-bounded pattern for "nexuscanon.com" still matches inside it
+    # (preceded by ".", a non-word character), so a membership-only check
+    # would miss it and every `rebrand --apply` would grow the domain another
+    # "app." label. Building the pattern once and reusing it for both the
+    # guard and the Rule below keeps the two in sync by construction. A raise
+    # (not assert) so the guard holds under `python -O` too.
+    superseded_domain_pattern = re.compile(
+        r"\b(?:" + "|".join(re.escape(d) for d in _SUPERSEDED_DOMAINS) + r")\b",
+        re.IGNORECASE,
+    )
+    if superseded_domain_pattern.search(domain):
         raise ValueError(
-            f"BRAND['domain'] ({domain!r}) must never appear in "
-            f"_SUPERSEDED_DOMAINS ({_SUPERSEDED_DOMAINS!r}) -- that would "
-            "make the superseded_domain rule match its own replacement"
+            f"BRAND['domain'] ({domain!r}) matches the superseded_domain "
+            f"pattern built from _SUPERSEDED_DOMAINS ({_SUPERSEDED_DOMAINS!r}) "
+            "-- that would make the rule match its own replacement"
         )
     return [
         # 1. Legal name, everywhere — must run before the standalone "product" rule
@@ -60,14 +73,13 @@ def build_rules(brand: dict) -> list[Rule]:
         #    domain as a bare link.
         Rule(
             "superseded_domain",
-            # \b keeps this from matching inside a longer host like
-            # "notafenda.app": the word-constituent "t" touching "a" has no
-            # boundary between them, so only a bare or dot-/@-prefixed host
-            # is reached. Do not widen this to a bare substring match.
-            re.compile(
-                r"\b(?:" + "|".join(re.escape(d) for d in _SUPERSEDED_DOMAINS) + r")\b",
-                re.IGNORECASE,
-            ),
+            # \b excludes word-char-prefixed hosts only, so "notafenda.app"
+            # correctly does not match. It does NOT exclude non-word-char
+            # prefixes such as "-": "foo-afenda.app" DOES match -- identical
+            # to the odoo_com rule's own behaviour below, so this is
+            # consistent with existing practice, not a gap introduced here.
+            # Do not widen this to a bare substring match.
+            superseded_domain_pattern,
             domain,
         ),
         # 4. Documentation links become same-origin generated docs. The version
