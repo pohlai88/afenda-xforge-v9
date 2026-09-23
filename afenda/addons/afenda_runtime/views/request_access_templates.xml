@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="request_access_by_invitation" name="Access by invitation">
+        <t t-call="web.frontend_layout">
+            <!-- `no_footer`: this module does not depend on `website`, so
+            `request.is_frontend` never turns True and the footer language
+            selector that `portal` injects (addons/portal/views/portal_templates.xml:67-73)
+            has no `frontend_languages` to read, which 500s the render. Same
+            pattern as afenda_api_docs/views/landing.xml. -->
+            <t t-set="no_footer" t-value="True"/>
+            <div class="container py-5 text-center">
+                <h1 class="h3">Access to AFENDA xForge is by invitation.</h1>
+                <p class="text-muted mt-3">Ask your administrator for an invitation.</p>
+            </div>
+        </t>
+    </template>
+</odoo>
