@@ -38,7 +38,7 @@ STRUCTURAL = re.compile(r"</?odoo[\s>]|@odoo/|^#[.:]\s")
 #
 # The gate is that this number must not RISE. If a change legitimately lowers
 # it, lower this constant in the same commit so the new floor is what holds.
-BASELINE = 10838
+BASELINE = 10826
 
 
 def scan(root: Path) -> list[tuple[str, int, str]]:

@@ -33035,18 +33035,18 @@
 .scss	other	font-family: 'AFENDA xForge Unicode Support Noto';
 .scss	other	font-family: 'odoo_ui_icons' !important;
 .scss	other	font-family: 'odoo_ui_icons';
-.scss	other	src: url('https://fonts.odoocdn.com/fonts/noto/NotoSans-#{$type}.woff2') format('woff2'),
-.scss	other	src: url('https://fonts.odoocdn.com/fonts/noto/NotoSansArabic-#{$type}.woff2') format('woff2'),
-.scss	other	src: url('https://fonts.odoocdn.com/fonts/noto/NotoSansHebrew-#{$type}.woff2') format('woff2'),
-.scss	other	src: url('https://fonts.odoocdn.com/fonts/noto/NotoSansTelugu-#{$type}.woff2') format('woff2'),
-.scss	other	url('https://fonts.odoocdn.com/fonts/noto/NotoSans-#{$type}.ttf') format('truetype');
-.scss	other	url('https://fonts.odoocdn.com/fonts/noto/NotoSans-#{$type}.woff') format('woff'),
-.scss	other	url('https://fonts.odoocdn.com/fonts/noto/NotoSansArabic-#{$type}.ttf') format('truetype');
-.scss	other	url('https://fonts.odoocdn.com/fonts/noto/NotoSansArabic-#{$type}.woff') format('woff'),
-.scss	other	url('https://fonts.odoocdn.com/fonts/noto/NotoSansHebrew-#{$type}.ttf') format('truetype');
-.scss	other	url('https://fonts.odoocdn.com/fonts/noto/NotoSansHebrew-#{$type}.woff') format('woff'),
-.scss	other	url('https://fonts.odoocdn.com/fonts/noto/NotoSansTelugu-#{$type}.ttf') format('truetype');
-.scss	other	url('https://fonts.odoocdn.com/fonts/noto/NotoSansTelugu-#{$type}.woff') format('woff'),
+.scss	other	src: local('NotoSans-Regular'),
+.scss	other	src: local('NotoSansArabic-Regular'),
+.scss	other	src: local('NotoSansHebrew-Regular'),
+.scss	other	src: local('NotoSansTelugu-Regular'),
+.scss	other	local('NotoSans-Regular');
+.scss	other	local('NotoSans-Regular'),
+.scss	other	local('NotoSansArabic-Regular');
+.scss	other	local('NotoSansArabic-Regular'),
+.scss	other	local('NotoSansHebrew-Regular');
+.scss	other	local('NotoSansHebrew-Regular'),
+.scss	other	local('NotoSansTelugu-Regular');
+.scss	other	local('NotoSansTelugu-Regular'),
 .sh	iot	# Create AFENDA xForge user for odoo service and disable password login
 .sh	iot	# Download and extract Raspberry Pi OS, ngrok and clone AFENDA xForge repository
 .sh	iot	# AFENDA xForge service is not running: Red ON, Green OFF

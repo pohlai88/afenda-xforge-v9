@@ -136,6 +136,23 @@ def build_rules(brand: dict) -> list[Rule]:
         ),
         # 10. The product name, standalone word only, last so earlier rules win.
         Rule("product", re.compile(r"(?<![\w@/.])Odoo(?!\w)"), product),
+        # 11. Report fonts stop fetching from the Odoo CDN. `fonts.scss`'s non-Latin
+        #     Noto fallback faces (`@font-face` `src:`) point at fonts.odoocdn.com;
+        #     rewriting the `url(...) format(...)` term to `local(...)` makes the
+        #     browser resolve the face locally (or simply not render it) instead of
+        #     reaching out to Odoo's infrastructure. Scoped to .scss only: this
+        #     pattern is specific to fonts.scss's own @font-face syntax and has no
+        #     business matching anything else.
+        Rule(
+            "noto_cdn_local",
+            re.compile(
+                r"url\('https://fonts\.odoocdn\.com/fonts/noto/"
+                r"(NotoSans(?:Arabic|Hebrew|Telugu)?)-#\{\$type\}\.(?:woff2|woff|ttf)'\) "
+                r"format\('(?:woff2|woff|truetype)'\)"
+            ),
+            r"local('\1-Regular')",
+            suffixes=frozenset({".scss"}),
+        ),
     ]
 
 

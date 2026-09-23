@@ -369,6 +369,30 @@ class RulesTests(unittest.TestCase):
         # rule's own behaviour, not a gap introduced by this rule.
         self.assertEqual(self.rw("https://foo-afenda.app/x\n", "v.xml"), "https://foo-" + DOMAIN + "/x\n")
 
+    def test_noto_cdn_local_rewrites_all_source_forms(self):
+        # fonts.scss carries exactly these 4 families x 3 formats = 12 source
+        # forms (see afenda/tools/tests/corpus/corpus.txt:33038-33049); each
+        # must resolve locally instead of fetching from fonts.odoocdn.com.
+        families = ("NotoSans", "NotoSansArabic", "NotoSansHebrew", "NotoSansTelugu")
+        formats = (("woff2", "woff2"), ("woff", "woff"), ("ttf", "truetype"))
+        for family in families:
+            for ext, fmt in formats:
+                src = f"url('https://fonts.odoocdn.com/fonts/noto/{family}-#{{$type}}.{ext}') format('{fmt}')\n"
+                expected = f"local('{family}-Regular')\n"
+                self.assertEqual(self.rw(src, "fonts.scss"), expected, src)
+
+    def test_noto_cdn_local_idempotent(self):
+        src = "url('https://fonts.odoocdn.com/fonts/noto/NotoSansHebrew-#{$type}.woff2') format('woff2')\n"
+        once = self.rw(src, "fonts.scss")
+        self.assertEqual(self.rw(once, "fonts.scss"), once)
+        self.assertNotIn("fonts.odoocdn.com", once)
+
+    def test_noto_cdn_local_scoped_to_scss(self):
+        # Same text in a non-.scss file must survive untouched -- the rule is
+        # specific to fonts.scss's own @font-face syntax.
+        src = "url('https://fonts.odoocdn.com/fonts/noto/NotoSans-#{$type}.woff2') format('woff2')\n"
+        self.assertEqual(self.rw(src, "fonts.js"), src)
+
 
 if __name__ == "__main__":
     unittest.main()

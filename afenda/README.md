@@ -87,10 +87,12 @@ the wordmark as outlines rather than a `font-family`, so nothing downstream
 needs the face either, and the product's type system stays Source Sans 3 /
 Source Serif 4 / Source Code Pro.
 
-One external request remains in a stock install: `addons/web/static/fonts/fonts.scss`
-loads the non-Latin Noto fallback faces from `fonts.odoocdn.com`. Latin text is
-served entirely from `afenda_brand/static/fonts/`; the CDN is only reached when a
-page renders CJK, Arabic or similar. Removing it is phase-2 work.
+No external font request remains in a stock install. `addons/web/static/fonts/fonts.scss`'s
+non-Latin Noto fallback faces (Cyrillic, Hebrew, Arabic, Telugu) used to load from
+`fonts.odoocdn.com`; the `noto_cdn_local` rebrand rule (`afenda/tools/rules.py`) rewrites
+each `@font-face`'s `url(...) format(...)` term to `local(...)`, so the browser resolves
+the face locally instead of reaching Odoo's CDN. Latin text is served entirely from
+`afenda_brand/static/fonts/`.
 
 ### OCA dependencies
 
