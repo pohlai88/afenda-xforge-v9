@@ -92,15 +92,27 @@ uses the `!override` merge tag, which older Compose versions reject. Check with
 7. **Switch renewal to webroot, once.** nginx now serves
    `/.well-known/acme-challenge/` on port 80 from `/var/www/certbot`
    (`nginx/afenda.tls.conf`, mounted by `compose.tls.yaml`). Re-issue through
-   it so the stored renewal config is webroot plus the reload hook:
+   it so the stored renewal config is webroot, after installing the nginx
+   reload hook:
 
    ```bash
+   cat > /etc/letsencrypt/renewal-hooks/deploy/afenda-nginx-reload.sh <<'EOF'
+   #!/bin/sh
+   # Reload the stack's nginx so it serves the renewed certificate.
+   cd /srv/afenda/deploy && docker compose exec -T nginx nginx -s reload
+   EOF
+   chmod 755 /etc/letsencrypt/renewal-hooks/deploy/afenda-nginx-reload.sh
    certbot certonly --webroot -w /var/www/certbot --cert-name app.nexuscanon.com \
        -d app.nexuscanon.com -d nexuscanon.com -d www.nexuscanon.com \
-       --force-renewal \
-       --deploy-hook 'cd /srv/afenda/deploy && docker compose exec -T nginx nginx -s reload'
+       --force-renewal
    certbot renew --dry-run          # must report success for app.nexuscanon.com
    ```
+
+   The reload is a script in `renewal-hooks/deploy/`, which certbot runs
+   after every renewal. It cannot be a `--deploy-hook 'cd … && …'`:
+   certbot checks that the hook's first word is a program on `PATH`, and
+   `cd` is a shell builtin, so it refuses with "Unable to find deploy-hook
+   command cd".
 
    A host whose certificate still covers `app.nexuscanon.com` alone: once the
    bare domain and `www` resolve to it, run this same command (the old
