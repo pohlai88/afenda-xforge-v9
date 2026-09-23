@@ -7,9 +7,9 @@ $lato-font-path: './lato';
     // Cyrillic: U+0400-04FF, U+0500-052F
     @font-face {
         font-family: 'AFENDA xForge Unicode Support Noto';
-        src: url('https://fonts.odoocdn.com/fonts/noto/NotoSans-#{$type}.woff2') format('woff2'),
-             url('https://fonts.odoocdn.com/fonts/noto/NotoSans-#{$type}.woff') format('woff'),
-             url('https://fonts.odoocdn.com/fonts/noto/NotoSans-#{$type}.ttf') format('truetype');
+        src: local('NotoSans-Regular'),
+             local('NotoSans-Regular'),
+             local('NotoSans-Regular');
         font-weight: $weight;
         font-style: $style;
         unicode-range: U+0400-04FF, U+0500-052F;
@@ -17,9 +17,9 @@ $lato-font-path: './lato';
     // Hebrew: U+0590-05FF, U+FB1D-FB4F
     @font-face {
         font-family: 'AFENDA xForge Unicode Support Noto';
-        src: url('https://fonts.odoocdn.com/fonts/noto/NotoSansHebrew-#{$type}.woff2') format('woff2'),
-             url('https://fonts.odoocdn.com/fonts/noto/NotoSansHebrew-#{$type}.woff') format('woff'),
-             url('https://fonts.odoocdn.com/fonts/noto/NotoSansHebrew-#{$type}.ttf') format('truetype');
+        src: local('NotoSansHebrew-Regular'),
+             local('NotoSansHebrew-Regular'),
+             local('NotoSansHebrew-Regular');
         font-weight: $weight;
         font-style: $style;
         unicode-range: U+0590-05FF, U+FB1D-FB4F;
@@ -27,9 +27,9 @@ $lato-font-path: './lato';
     // Arabic: U+0600-06FF, U+0750-077F
     @font-face {
         font-family: 'AFENDA xForge Unicode Support Noto';
-        src: url('https://fonts.odoocdn.com/fonts/noto/NotoSansArabic-#{$type}.woff2') format('woff2'),
-             url('https://fonts.odoocdn.com/fonts/noto/NotoSansArabic-#{$type}.woff') format('woff'),
-             url('https://fonts.odoocdn.com/fonts/noto/NotoSansArabic-#{$type}.ttf') format('truetype');
+        src: local('NotoSansArabic-Regular'),
+             local('NotoSansArabic-Regular'),
+             local('NotoSansArabic-Regular');
         font-weight: $weight;
         font-style: $style;
         unicode-range: U+0600-06FF, U+0750-077F, U+08A0-08FF;
@@ -37,9 +37,9 @@ $lato-font-path: './lato';
     // Telugu: U+0C00-0C7F
     @font-face {
         font-family: 'AFENDA xForge Unicode Support Noto';
-        src: url('https://fonts.odoocdn.com/fonts/noto/NotoSansTelugu-#{$type}.woff2') format('woff2'),
-             url('https://fonts.odoocdn.com/fonts/noto/NotoSansTelugu-#{$type}.woff') format('woff'),
-             url('https://fonts.odoocdn.com/fonts/noto/NotoSansTelugu-#{$type}.ttf') format('truetype');
+        src: local('NotoSansTelugu-Regular'),
+             local('NotoSansTelugu-Regular'),
+             local('NotoSansTelugu-Regular');
         font-weight: $weight;
         font-style: $style;
         unicode-range: U+0C00-0C7F;
