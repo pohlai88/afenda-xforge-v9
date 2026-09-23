@@ -1,0 +1,10 @@
+# Build context for deploy/Dockerfile. Patterns are anchored at the repo root.
+# Never exclude anything under afenda/addons: the image must carry every module.
+/.git
+/.venv
+/.agents
+/.claude
+/.superpowers
+/docs
+/deploy/secrets
+**/__pycache__

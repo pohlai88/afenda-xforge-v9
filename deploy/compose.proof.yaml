@@ -1,0 +1,9 @@
+# Independence proof: xforge, init and db share a network with no route out.
+# nginx is also on `frontend`, a normal network, so only its published port
+# reaches them. If the stack installs, logs in, prints PDFs and runs cron
+# like this, it depends on nothing outside the host.
+#
+#   docker compose -f compose.yaml -f compose.proof.yaml up -d
+networks:
+  backend:
+    internal: true

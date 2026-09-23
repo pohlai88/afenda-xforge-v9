@@ -1,0 +1,87 @@
+#!/bin/sh
+# One-shot initialisation, run by the `init` compose service through the
+# entrypoint (which renders $RC). Safe to rerun on every `compose up`:
+#
+#   1. `db init` only when the database does not exist yet. `db init` sets the
+#      admin login's password from a secret (--password); `-i` would leave it
+#      at admin/admin. An existing, initialised database is left untouched.
+#      An existing database that is NOT initialised stops the run: dropping it
+#      is a decision for an operator, never for a restart.
+#   2. `module install` for the product modules. For a module that is already
+#      installed this changes nothing: button_install only moves modules in
+#      state 'uninstalled' (odoo/addons/base/models/ir_module.py _state_update),
+#      so the reload that follows has nothing to install.
+#   3. The system parameters, from init_params.py through `odoo-bin shell`.
+set -eu
+
+PY=/opt/venv/bin/python
+BIN=/opt/afenda/odoo-bin
+DB=afenda
+MODULES="afenda_brand afenda_runtime"
+: "${RC:?RC is exported by afenda-entrypoint}"
+PUBLIC_URL=${PUBLIC_URL:-http://localhost:8080}
+export PUBLIC_URL
+
+# absent | initialised | uninitialised. psycopg2 takes the connection from
+# PGHOST/PGUSER/PGPASSWORD, exactly as the server does.
+state=$("$PY" - "$DB" <<'PYEOF'
+import sys
+import psycopg2
+
+name = sys.argv[1]
+conn = psycopg2.connect(dbname="postgres")
+try:
+    with conn.cursor() as cr:
+        cr.execute("SELECT 1 FROM pg_database WHERE datname = %s", (name,))
+        exists = cr.fetchone() is not None
+finally:
+    conn.close()
+if not exists:
+    print("absent")
+    sys.exit(0)
+conn = psycopg2.connect(dbname=name)
+try:
+    with conn.cursor() as cr:
+        cr.execute("SELECT to_regclass('public.ir_module_module') IS NOT NULL")
+        has_table = cr.fetchone()[0]
+        installed = False
+        if has_table:
+            cr.execute("SELECT state FROM ir_module_module WHERE name = 'base'")
+            row = cr.fetchone()
+            installed = bool(row) and row[0] == "installed"
+finally:
+    conn.close()
+print("initialised" if installed else "uninitialised")
+PYEOF
+)
+
+case "$state" in
+    absent)
+        admin_password_file=${ADMIN_PASSWORD_FILE:-/run/secrets/admin_password}
+        [ -r "$admin_password_file" ] || { echo "afenda-init: cannot read $admin_password_file" >&2; exit 1; }
+        echo "afenda-init: creating database $DB"
+        "$PY" "$BIN" db -c "$RC" init "$DB" --password "$(cat "$admin_password_file")"
+        ;;
+    initialised)
+        echo "afenda-init: database $DB already initialised, skipping db init"
+        ;;
+    uninitialised)
+        echo "afenda-init: database $DB exists but is not initialised (no installed 'base')." >&2
+        echo "afenda-init: drop it or restore a backup (deploy/restore.sh); refusing to guess." >&2
+        exit 1
+        ;;
+    *)
+        echo "afenda-init: could not determine the state of database $DB: '$state'" >&2
+        exit 1
+        ;;
+esac
+
+echo "afenda-init: installing $MODULES"
+# shellcheck disable=SC2086
+"$PY" "$BIN" module install -c "$RC" $MODULES
+
+echo "afenda-init: setting system parameters (web.base.url=$PUBLIC_URL)"
+AFENDA_REQUIRED_MODULES="$MODULES" "$PY" "$BIN" shell -c "$RC" --no-http \
+    < /usr/local/lib/afenda/init_params.py
+
+echo "afenda-init: done"
