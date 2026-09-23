@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="landing" name="AFENDA Documentation">
+        <t t-call="web.frontend_layout">
+            <!-- `no_footer`: this route is `website=False` (auth=public, no
+            website dependency), so `request.is_frontend` never turns True and
+            `portal`'s footer-injected language selector never gets its
+            required `frontend_languages` value, which crashes the render
+            with a 500. Skipping the footer avoids the missing dependency
+            entirely instead of taking on `website` just to satisfy it. -->
+            <t t-set="no_footer" t-value="True"/>
+            <div class="container py-5">
+                <h1>AFENDA xForge documentation</h1>
+                <div class="row mt-4">
+                    <div class="col-md-6">
+                        <h2>Guides</h2>
+                        <p class="text-muted">How the apps work, written for people using them.</p>
+                        <a href="/docs/applications">Browse the guides</a>
+                    </div>
+                    <div class="col-md-6">
+                        <h2>API reference</h2>
+                        <p class="text-muted">Every model and method reachable over the JSON API.</p>
+                        <a href="/docs/api">Open the API reference</a>
+                    </div>
+                </div>
+            </div>
+        </t>
+    </template>
+</odoo>

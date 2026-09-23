@@ -47,6 +47,40 @@ Installing `afenda_brand` pulls in the OCA modules and applies the identity:
 | PWA / mobile | App name "AFENDA", theme color Ledger Blue, maskable icons, branded offline page (`web_pwa_customize`) |
 | Companies | Default logo is the AFENDA lockup; a company still named "My Company" is renamed "AFENDA" at install |
 
+### The mark, and which colourway goes where
+
+The Engineered X is declared once, in `afenda/tools/brand_images.py`, as
+`MARK_ARMS`: four tapered wedges in a 100-unit frame, ink box 23..77, meeting at
+a diamond void. Every raster and vector surface scales that one tuple — there is
+no second copy of the shape in the repo, and `MarkGeometryTests` pins it against
+a hand transcription of the artwork.
+
+It ships in three approved colourways, and `TARGETS` is the only place that says
+which surface gets which:
+
+| Colourway | Ground | Radius | Mark | Where |
+|---|---|---|---|---|
+| `PRIMARY` | Ink `#09111F` | 22.5% | Two-tone: steel `#D9DEE5`/`#AAB3C0` west, Signal Blue `#659CFF`/`#1F6FFF` east | The badge, where it stands outside the running app: PWA and home-screen icons, the store listing, `afenda_brand`'s own icon set, the login lockup |
+| `LIGHT` | White, `#E3E8EF` hairline | 22.5% | Two-tone: `#6C7581`/`#464F5A` west, `#1F6FFF`/`#0049C1` east | The badge on a surface that is already white and would otherwise read as a sticker |
+| `IN_PRODUCT` | Ledger Blue `#1E3A8A` | 20% | White, one fill | Anything a signed-in user sees while working: the browser tab, the apps-menu fallback, the bot avatar, report artwork |
+
+Two rules the pipeline enforces rather than documents. The bare mark — no tile,
+on transparency — is always one fill (Ledger Blue): a two-tone step needs a known
+ground behind it, and without one it reads as a gradient. And the 108 module
+icons are untouched by all of this; they stay free-standing duotone glyphs, so
+the apps menu never mixes a four-fill mark into a row of two-colour ones.
+
+The lockup pairs the bare mark with the wordmark in Geist — `AFENDA` tracked
+above, `xForge` below with the `x` in Signal Blue. Geist lives in
+`afenda/tools/fonts/`, not in the addon: Odoo serves everything under
+`<addon>/static/` over HTTP whatever the manifest says, so a typeface put there
+would be reachable at a URL and would ship in every deployment for no runtime
+reason. Keeping it beside the renderer is what makes "Geist never reaches the
+product" structural rather than a convention. The generated SVG lockups carry
+the wordmark as outlines rather than a `font-family`, so nothing downstream
+needs the face either, and the product's type system stays Source Sans 3 /
+Source Serif 4 / Source Code Pro.
+
 One external request remains in a stock install: `addons/web/static/fonts/fonts.scss`
 loads the non-Latin Noto fallback faces from `fonts.odoocdn.com`. Latin text is
 served entirely from `afenda_brand/static/fonts/`; the CDN is only reached when a

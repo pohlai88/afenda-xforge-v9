@@ -81,9 +81,8 @@ class TestIdentity(HttpCase):
         menu = self.env.ref("base.menu_administration").with_context(lang="fr_FR")
         self.assertClean(menu.name, "fr_FR menu name")
 
-    def test_docs_placeholder_route_works(self):
-        page = self.url_open("/docs")
-        self.assertEqual(page.status_code, 200)
-        self.assertIn("coming soon", page.text.lower())
-        page2 = self.url_open("/docs/applications/sales.html")
-        self.assertEqual(page2.status_code, 200)
+    def test_docs_route_answers_same_origin(self):
+        # afenda_api_docs owns the content; this module only cares that the
+        # rewritten documentation links resolve on this origin at all.
+        self.assertEqual(self.url_open("/docs").status_code, 200)
+        self.assertEqual(self.url_open("/docs/applications/sales.html").status_code, 200)
