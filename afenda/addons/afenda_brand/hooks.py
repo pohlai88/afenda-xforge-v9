@@ -1,4 +1,5 @@
 import base64
+import hashlib
 
 from odoo.tools import file_open
 
@@ -38,10 +39,55 @@ _SUPERSEDED_EMAIL_COLORS = {
     "email_secondary_color": (BRAND["ink"],),
 }
 
+# sha256 of every company logo AFENDA has shipped before this release, over the
+# raw bytes of static/img/logo.png as it stood then. A company holding one of
+# these holds AFENDA's own superseded artwork, not an administrator's upload, so
+# the logo may be replaced.
+#
+# Why a hash table and not `uses_default_logo`: that field is a *stored* compute
+# (odoo/addons/base/models/res_company.py:175-178) comparing the stored logo
+# against `_get_logo()`, which afenda_brand points at static/img/logo.png
+# (models/res_company.py:46-48). It depends on `partner_id.image_1920`, so
+# redrawing that file does not recompute it -- but the first unrelated write to
+# the partner image does, and then the stored old logo no longer equals the new
+# default, the flag latches False, and the guard below reads AFENDA's own
+# artwork as an administrator's choice and refuses to replace it for good.
+# Hashing the artwork we shipped is the only test that survives that latch.
+#
+# Migration-local in practice, exactly like _SUPERSEDED_EMAIL_COLORS: only
+# migrations/19.0.1.0.3/post-migrate.py opts in. Append a line whenever
+# static/img/logo.png is redrawn; drop older entries once no database predating
+# them remains.
+_SUPERSEDED_LOGO_SHA256 = (
+    # 19.0.1.0.0 - 19.0.1.0.2: the lockup before the Engineered X mark.
+    "1fe623124978f0fe22cbe4de8642e71fafb1cb9b4ce367de96d37cfd24aeceb6",
+)
+
+# Same idea for the two places icon-512.png is copied into the database.
+_SUPERSEDED_ICON_SHA256 = (
+    # 19.0.1.0.0 - 19.0.1.0.2: the tile before the Engineered X mark.
+    "587e3a117db7cedc01cb0c5d91c26c0e6b4da8299d8ab0eba78dc6a4063e5cae",
+)
+
 
 def _is_replaceable(current, replaceable):
     """True while `current` is a value AFENDA may still overwrite."""
     return not current or current.upper() in {value.upper() for value in replaceable}
+
+
+def _is_superseded_image(current, digests):
+    """True when `current` (base64) is AFENDA artwork from an earlier release.
+
+    Anything unreadable counts as not ours, so a corrupt or foreign value is
+    left alone rather than overwritten.
+    """
+    if not current:
+        return False
+    try:
+        raw = base64.b64decode(current)
+    except (TypeError, ValueError):
+        return False
+    return hashlib.sha256(raw).hexdigest() in digests
 
 
 def _read_static(path):
@@ -109,9 +155,9 @@ def _apply_company_branding(env, replace_superseded=False):
     default (or nothing at all), so an administrator's name, logo, font, layout
     or colour is never overwritten, neither by a re-install nor by the
     migration. `replace_superseded` widens that test for the two email colours
-    alone, to also accept a value an earlier AFENDA release wrote and has since
-    superseded; see `_SUPERSEDED_EMAIL_COLORS` for why only the migration
-    passes it.
+    and the logo, to also accept a value an earlier AFENDA release wrote and has
+    since superseded; see `_SUPERSEDED_EMAIL_COLORS` and
+    `_SUPERSEDED_LOGO_SHA256` for why only the migration passes it.
 
     The favicon is deliberately not written here; see `post_init_hook`.
     """
@@ -123,7 +169,17 @@ def _apply_company_branding(env, replace_superseded=False):
     report_layout = env.ref("web.external_layout_standard", raise_if_not_found=False)
     for company in companies:
         vals = {}
-        if company.uses_default_logo or not company.logo:
+        # `uses_default_logo` compares against the logo file as it stands now,
+        # so it stops recognising artwork we shipped earlier; see
+        # _SUPERSEDED_LOGO_SHA256 for why the migration needs the hash test too.
+        if (
+            company.uses_default_logo
+            or not company.logo
+            or (
+                replace_superseded
+                and _is_superseded_image(company.logo, _SUPERSEDED_LOGO_SHA256)
+            )
+        ):
             vals["logo"] = logo
         if company.name in _DEFAULT_COMPANY_NAMES:
             vals["name"] = BRAND["short"]
@@ -184,3 +240,46 @@ def refresh_app_icons(env):
     for menu in roots:
         menu.web_icon = menu.web_icon
     return roots
+
+
+def refresh_cached_brand_images(env):
+    """Re-read the two database copies of icon-512.png from the file on disk.
+
+    Both are copies taken at install time, not references, so redrawing the file
+    leaves them behind:
+
+    - the PWA icon, stored by web_pwa_customize as an `ir.attachment` at
+      /web_pwa_customize/icon.<ext> plus one resized attachment per size
+      (afenda/oca/web/web_pwa_customize/models/res_config_settings.py:29-70);
+    - the system bot's avatar, `res.partner.image_1920` on `base.partner_root`,
+      written by `post_init_hook`.
+
+    Update-only, and guarded: each is rewritten only while it still holds
+    artwork AFENDA itself shipped (`_SUPERSEDED_ICON_SHA256`), so an
+    administrator's own upload survives. `post_init_hook` deliberately does not
+    call this -- at install there is nothing of ours to recognise yet, and the
+    bot still holds Odoo's avatar, which install is meant to replace outright.
+
+    Returns the names of what it rewrote, for the migration to log.
+    """
+    written = []
+    icon = _read_static("img/icon-512.png")
+
+    # The settings model is the only safe writer for the PWA icon: writing the
+    # attachment directly would leave the resized copies stale. `create` fills
+    # every other field from `get_values`, so `execute` writes back the
+    # administrator's current PWA name and colours unchanged.
+    settings = env["res.config.settings"].sudo()
+    stored = env["ir.attachment"].sudo().search(
+        [("url", "=like", settings._pwa_icon_url_base + ".%")], limit=1
+    )
+    if not stored or _is_superseded_image(stored.datas, _SUPERSEDED_ICON_SHA256):
+        settings.create({"pwa_icon": icon}).execute()
+        written.append("pwa_icon")
+
+    bot = env.ref("base.partner_root", raise_if_not_found=False)
+    if bot and _is_superseded_image(bot.sudo().image_1920, _SUPERSEDED_ICON_SHA256):
+        bot.sudo().image_1920 = icon
+        written.append("partner_root.image_1920")
+
+    return written

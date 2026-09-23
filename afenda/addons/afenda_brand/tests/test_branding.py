@@ -1,11 +1,13 @@
 import ast
 import base64
 import collections
+import hashlib
 import inspect
 import io
 import itertools
 import pathlib
 import re
+from unittest import mock
 
 from lxml import etree as lxml_etree
 from lxml import html as lxml_html
@@ -22,8 +24,13 @@ from odoo.tools import file_open, is_html_empty
 # wrong colours would fail here rather than agree with itself.
 from afenda.tools.app_icons import controlled_overlap_colour
 
+from .. import hooks
 from ..brand import BRAND
-from ..hooks import _UPSTREAM_REPORT_FONT, _apply_company_branding
+from ..hooks import (
+    _UPSTREAM_REPORT_FONT,
+    _apply_company_branding,
+    refresh_cached_brand_images,
+)
 
 ODOO_TELLS = ("odoo.com", "Powered by Odoo", "odoo_logo", "Odoo S.A.")
 
@@ -31,6 +38,23 @@ ODOO_TELLS = ("odoo.com", "Powered by Odoo", "odoo_logo", "Odoo S.A.")
 def _rgb(colour: str) -> tuple[int, int, int]:
     """``"#1E3A8A"`` -> ``(30, 58, 138)``."""
     return tuple(int(colour[i:i + 2], 16) for i in (1, 3, 5))
+
+
+def _png_b64(rgb):
+    """A tiny PNG, base64 as a Binary field stores it.
+
+    Stands in for artwork this addon shipped in an earlier release: the real
+    bytes are only in git history, so the tests that need "some blob whose hash
+    we control" make their own and patch the hash table.
+    """
+    buffer = io.BytesIO()
+    Image.new("RGB", (2, 2), rgb).save(buffer, format="PNG")
+    return base64.b64encode(buffer.getvalue())
+
+
+def _on_disk(path):
+    with file_open(f"afenda_brand/static/{path}", "rb") as f:
+        return base64.b64encode(f.read())
 
 
 # A 1x1 PNG, base64 as a Binary field stores it: stands in for a favicon an
@@ -648,3 +672,172 @@ class TestBranding(HttpCase):
         """The `color` an email client ends up reading out of one inline style."""
         values = re.findall(r"(?:^|;)\s*color\s*:\s*([^;]+)", style)
         return values[-1].strip().upper() if values else None
+
+    def test_migration_replaces_the_logo_the_latch_hides(self):
+        """A logo AFENDA shipped earlier is replaceable; an upload is not.
+
+        `_apply_company_branding` writes the logo only while
+        `uses_default_logo` is true, and that field is a stored compute
+        comparing the stored logo against img/logo.png as it stands *now*
+        (odoo/addons/base/models/res_company.py:175-178). The moment it
+        recomputes after the mark is redrawn, our own previous artwork stops
+        matching, the flag latches false, and the logo is frozen as though an
+        administrator had chosen it -- so `-u` can never fix it again.
+
+        Regression this catches: drop the `_SUPERSEDED_LOGO_SHA256` arm of that
+        guard and every database installed before the redraw keeps the old mark
+        on its invoices for good, silently, with the suite still green.
+        """
+        superseded = _png_b64((1, 2, 3))
+        digest = hashlib.sha256(base64.b64decode(superseded)).hexdigest()
+        stale = self.env["res.company"].create({"name": "Stale logo", "logo": superseded})
+        # The premise: writing a logo that is not the current file recomputes the
+        # flag to false. If this ever fails the latch is gone and so is the bug.
+        self.assertFalse(stale.uses_default_logo, "the latch this test is about did not engage")
+
+        # The install hook's call must not touch it: without the hash table it
+        # cannot tell our artwork from an administrator's, so it leaves it.
+        _apply_company_branding(self.env)
+        self.assertEqual(bytes(stale.logo), bytes(superseded),
+                         "the default call must stay conservative about logos")
+
+        # What the migration calls. Only now is the superseded artwork known.
+        with mock.patch.object(hooks, "_SUPERSEDED_LOGO_SHA256", (digest,)):
+            _apply_company_branding(self.env, replace_superseded=True)
+        self.assertEqual(bytes(stale.logo), bytes(_on_disk("img/logo.png")),
+                         "the migration did not refresh a superseded logo")
+
+        # The other half: an upload we have never shipped is never ours to take.
+        chosen = self.env["res.company"].create({"name": "Chosen logo", "logo": _png_b64((9, 8, 7))})
+        before = bytes(chosen.logo)
+        with mock.patch.object(hooks, "_SUPERSEDED_LOGO_SHA256", (digest,)):
+            _apply_company_branding(self.env, replace_superseded=True)
+        self.assertEqual(bytes(chosen.logo), before, "an administrator's logo was overwritten")
+
+    def test_refresh_cached_brand_images_is_guarded(self):
+        """The bot avatar and the PWA icon are copies of icon-512.png, not
+        references, so a redraw leaves them stale -- but only AFENDA's own
+        superseded copy may be replaced.
+
+        Regression: write them unconditionally and every upgrade stomps an
+        administrator's uploaded PWA icon and bot avatar.
+        """
+        ours = _png_b64((4, 5, 6))
+        digest = hashlib.sha256(base64.b64decode(ours)).hexdigest()
+        bot = self.env.ref("base.partner_root").sudo()
+
+        bot.image_1920 = ours
+        with mock.patch.object(hooks, "_SUPERSEDED_ICON_SHA256", (digest,)):
+            written = refresh_cached_brand_images(self.env)
+        self.assertIn("partner_root.image_1920", written)
+        # image_1920 goes through the image pipeline, so compare what it depicts
+        # rather than the bytes: the 2x2 stand-in must be gone.
+        with Image.open(io.BytesIO(base64.b64decode(bot.image_1920))) as refreshed:
+            self.assertEqual(refreshed.size, (512, 512), "the bot avatar is not the 512px mark")
+
+        # An avatar we have never shipped is left exactly as it is.
+        foreign = _png_b64((7, 7, 7))
+        bot.image_1920 = foreign
+        with mock.patch.object(hooks, "_SUPERSEDED_ICON_SHA256", (digest,)):
+            written = refresh_cached_brand_images(self.env)
+        self.assertNotIn("partner_root.image_1920", written)
+        with Image.open(io.BytesIO(base64.b64decode(bot.image_1920))) as kept:
+            self.assertEqual(kept.size, (2, 2), "an administrator's bot avatar was overwritten")
+
+        # The PWA icon lands as a web_pwa_customize attachment, and having landed
+        # is no longer superseded, so a second pass leaves it alone.
+        settings = self.env["res.config.settings"].sudo()
+        stored = self.env["ir.attachment"].sudo().search(
+            [("url", "=like", settings._pwa_icon_url_base + ".%")], limit=1
+        )
+        self.assertTrue(stored, "no PWA icon attachment was written")
+        with mock.patch.object(hooks, "_SUPERSEDED_ICON_SHA256", (digest,)):
+            self.assertNotIn("pwa_icon", refresh_cached_brand_images(self.env),
+                             "the refresh is not idempotent: it rewrites a current icon")
+
+    def test_every_migration_is_loadable_not_only_the_current_one(self):
+        """`test_migration_script_is_wired_to_the_manifest_version` only checks the
+        version the manifest points at, so an older script can rot unnoticed --
+        and it did:
+        19.0.1.0.3 stopped being the manifest version the moment 19.0.1.0.4
+        landed, and nothing was checking it any more.
+
+        Every script here still runs on a real upgrade: Odoo loads each version
+        directory above the installed version and up to the manifest's, in order,
+        so a database on .1 executes all of them. A script that no longer imports
+        or has drifted from `migrate(cr, version)` breaks that upgrade, not this
+        release.
+        """
+        addon = pathlib.Path(__file__).resolve().parent.parent
+        scripts = sorted((addon / "migrations").glob("*/post-migrate.py"))
+        self.assertTrue(scripts, "the migrations directory has gone missing")
+        for script in scripts:
+            version = script.parent.name
+            module = load_script(str(script), f"afenda_brand_{version.replace('.', '_')}")
+            self.assertEqual(
+                tuple(inspect.signature(module.migrate).parameters), ("cr", "version"),
+                f"{version}: Odoo only accepts a migrate(cr, version) signature",
+            )
+
+    def test_every_test_class_would_actually_be_collected(self):
+        """A test class that does not descend from Odoo's `BaseCase` is silently
+        dropped, and this repo's log level hides the reason.
+
+        `TagsSelector` excludes anything without a `test_tags` attribute
+        (odoo/tests/tag_selector.py:88-90), and `test_tags` is assigned by
+        `BaseCase.__init_subclass__` (odoo/tests/common.py:309-318). So a plain
+        `unittest.TestCase` in an addon's tests/ is discovered, then filtered out
+        before it runs -- and the skip is logged at DEBUG, which
+        `afenda/odoo.conf`'s `log_level = warn` swallows. The suite reports green
+        over tests that never executed.
+
+        Found by the session building afenda_api_docs: nine of its twelve tests
+        were invisible this way and the run said "0 failed of 3 tests". Nothing in
+        Odoo enforces or documents the convention, precisely because everything
+        already follows it.
+
+        Static on purpose -- it reads the source of every AFENDA addon rather than
+        importing it, so a module that is not installed in this database is still
+        covered. It lives here because afenda_brand is the addon every other one
+        depends on, and because a guard that only watched its own tests would have
+        missed the case that prompted it.
+        """
+        # Odoo's own case classes, all of which reach BaseCase.
+        odoo_cases = {
+            "BaseCase", "TransactionCase", "SingleTransactionCase", "SavepointCase",
+            "HttpCase", "HttpCaseWithUserDemo", "HttpCaseWithUserPortal",
+            "MailCommon", "TestMailCommon", "AccountTestInvoicingCommon",
+            "TransactionCaseWithUserDemo", "TransactionCaseWithUserPortal",
+        }
+        addons = pathlib.Path(__file__).resolve().parents[2]
+        offenders = []
+        for source in sorted(addons.glob("*/tests/*.py")):
+            tree = ast.parse(source.read_text(encoding="utf-8"))
+            classes = {n.name: n for n in tree.body if isinstance(n, ast.ClassDef)}
+
+            def bases(node, seen=()):
+                """Every base name reachable from `node`, following same-file parents."""
+                for base in node.bases:
+                    name = base.attr if isinstance(base, ast.Attribute) else getattr(base, "id", None)
+                    if not name or name in seen:
+                        continue
+                    yield name
+                    if name in classes:
+                        yield from bases(classes[name], seen + (name,))
+
+            for name, node in classes.items():
+                methods = [n.name for n in node.body
+                           if isinstance(n, ast.FunctionDef) and n.name.startswith("test_")]
+                if not methods:
+                    continue  # a helper or a mixin, never collected on its own
+                reachable = set(bases(node))
+                if not reachable & odoo_cases:
+                    offenders.append(
+                        f"{source.relative_to(addons).as_posix()}::{name} "
+                        f"({len(methods)} tests) inherits {sorted(reachable) or ['object']}"
+                    )
+        self.assertFalse(
+            offenders,
+            "these classes would be silently skipped by TagsSelector, not run:\n  "
+            + "\n  ".join(offenders),
+        )
