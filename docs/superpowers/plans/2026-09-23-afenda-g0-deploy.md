@@ -1,0 +1,150 @@
+# AFENDA xForge: deployable anywhere, zero Odoo S.A. dependency (G0)
+
+## Context
+
+The product (`afenda/deidentify-phase1`, `product_name = 'AFENDA xForge'`) is an Odoo 19.0
+Community source fork that has **no deploy path**. There is no Dockerfile, no production
+config, and no CI. `afenda/odoo.conf` is dev-only, with `workers=0`, `max_cron_threads=0` and
+`list_db=True`. Today's goal is one database for one tenant, built and run with **no call to
+anything Odoo S.A. operates**. The build must not use `nightly.odoo.com`. At runtime, neither
+the server nor users' browsers may contact `iap.odoo.com`, `fonts.odoocdn.com`,
+`services.odoo.com` or the Odoo app store. The deploy is proven locally in Docker first, then
+served at `app.nexuscanon.com`. **Zero hand edits to root `odoo/` or `addons/`.**
+
+**Strategy: adapters at the seams.** Every Odoo coupling is replaced in one of three
+sanctioned places, and upstream merges keep working:
+1. **Configuration**, which needs no code.
+2. An **`_inherit` override** in a new AFENDA module. This is the adapter; its default
+   behaviour is "service not available", with no network call.
+3. A **rebrand rule**, for text inside upstream files. It is re-applied automatically after
+   each upstream merge.
+
+**What the research and the review established:**
+- **Build our own image from our tree, run it with Docker Compose on a VPS, put nginx in
+  front.** Among the proven approaches this is the fastest that fits a repo keeping upstream
+  at its root. Doodba and camptocamp would force the layout to be remapped.
+- **At least 4 workers.** At 2 or 3, wkhtmltopdf PDF rendering deadlocks (odoo/odoo#199880).
+- **nginx is the only proxy with a verified 19.0 websocket configuration.**
+- **A backup is `pg_dump` plus the filestore.** Either one alone is incomplete.
+- **Every claim from the review agent was checked in source.** Four were spot-verified by
+  hand: `odoo/cli/server.py:37-44` refuses a database user named `postgres`;
+  `service/db.py:444-456` makes `list_dbs` ownership-scoped only when `dbfilter` is set; the
+  dev venv is Python 3.11.9; `rl-renderPM` is pinned for win32 only.
+
+## Rulings
+
+| # | Decision | Evidence | Cost if wrong |
+|---|---|---|---|
+| R1 | Image base `python:3.11-slim-bookworm`, not 3.12 | The tests run on 3.11.9 (`.venv/pyvenv.cfg`), so the deployed pins are the ones tested. On 3.12, reportlab 4.1 needs `rl-renderPM`, which `requirements.txt` installs only on win32 (`:91`), so barcodes break (`odoo/tools/barcode.py:30`) | Moving to 3.12 later is a separate change, already planned in the platform spec |
+| R2 | `db_name=afenda` and **no** `dbfilter` | With `dbfilter` set, a restored database owned by another role disappears (`service/db.py:450-455`). With `db_name` alone, Odoo uses it directly (`:444-448`) | None |
+| R3 | Initialise with `odoo-bin db init --password`, then `module install` | `-i` leaves the login as admin/admin (`odoo/cli/db.py:54-87,203-213`) | None |
+| R4 | Neutralize partner autocomplete at `_request_partner_autocomplete`, not `_contact_iap` | `_contact_iap` goes through `iap.account.get`, which commits a new row from a separate cursor (`iap_account.py:171-190`). Returning `(False, False)` gives every caller empty results with no toast (`res_partner.py:94-160`) | Low |
+| R5 | Remove the CDN fonts with a **rebrand rule**, not an asset `replace` | `fonts.scss` is also bundled by `html_builder` (`__manifest__.py:36`) and removed by path in `mass_mailing` (`:85`), and a copied file would break its `./lato` relative paths | Low. It lowers `BASELINE` to 10826 |
+| R6 | Deploy from a tag on `afenda/deidentify-phase1`. `19.0` reconciliation, CI, S3, Redis and the job kernel are deferred | None of them block G0 | None |
+| R7 | Proof of independence is structural: run the whole stack with `xforge` on an `internal: true` Docker network (no internet route) | If it installs, logs in, prints PDFs and runs cron with no route out, it depends on nothing outside | None |
+
+## Tasks
+
+Dispatch T1, T2 and T3 **in parallel**. They share no files. T4 and T5 follow in order.
+
+**T0. Commit the CLAUDE.md discipline rules** (inline, already edited).
+- Files: `CLAUDE.md` and `.claude/odoo-agent-rules.md` (`git add -f`).
+- Commit `[IMP] CLAUDE.md: execution discipline, no trial-and-error, gates once`.
+
+**T1. Rebrand rule that stops the CDN font fetches** (inline or `odoo-backend-dev`). Files: `afenda/tools/rules.py`, `tests/test_rebrand.py`, `tests/corpus/golden.txt`, `scan_identity.py`, `afenda/README.md:90-93`.
+- Add this rule:
+  ```python
+  Rule("noto_cdn_local",
+       re.compile(r"url\('https://fonts\.odoocdn\.com/fonts/noto/(NotoSans(?:Arabic|Hebrew|Telugu)?)-#\{\$type\}\.(?:woff2|woff|ttf)'\) format\('(?:woff2|woff|truetype)'\)"),
+       r"local('\1-Regular')", suffixes=frozenset({".scss"}))
+  ```
+  Match the constructor API in `rules.py` exactly.
+- Tests: each of the 12 source forms is rewritten, and a second pass changes nothing.
+- Order of commands: `corpus diff` (expect exactly the 12 lines at `corpus.txt:33038-33049`) → `corpus golden` → `rebrand` dry run (expect 12 in 1 file) → `rebrand --apply` → `scan_identity`. Set `BASELINE=10826` in the same commit.
+- Two commits: `[IMP] afenda/tools: serve report fonts locally, not from the Odoo CDN`, then `[REBRAND] drop fonts.odoocdn.com from the report assets`.
+
+**T2. New module `afenda/addons/afenda_runtime`** (`odoo-backend-dev`, then `odoo-reviewer`).
+- `depends`: `afenda_brand`, `iap`, `partner_autocomplete`, `base_import_module`.
+- `data/ir_config_parameter.xml` (`noupdate`, `<function model="ir.config_parameter" name="set_param">`) sets each of these to `http://127.0.0.1:9`: `iap.endpoint`, `sms.endpoint`, `snailmail.endpoint`, `html_editor.olg_api_endpoint`, `html_editor.media_library_endpoint`, `iap.partner_autocomplete.endpoint`, `enrich.endpoint`, `reveal.endpoint`. **Never** set `iap_vies.endpoint`; only two values are allowed (`base_vat/models/res_partner.py:263-268`).
+- `models/iap_autocomplete_api.py`: `_request_partner_autocomplete(self, action, params, timeout=15)` returns `(False, False)`.
+- `models/res_partner.py`: `autocomplete_by_vat` returns `[]`, so there is no VIES fallback (`partner_autocomplete/models/res_partner.py:115-118`).
+- `models/ir_module.py`:
+  - `_get_modules_from_apps(...)` returns `[]` (`base_import_module/models/ir_module.py:410-436`);
+  - `_get_industry_categories_from_apps()` returns `[]`;
+  - `button_immediate_install_app()` raises `UserError`.
+- `tests/test_no_odoo_host.py`:
+  - patch `odoo.modules.module.current_test` to `False`; the early returns are at `iap_tools.py:113` and `iap_autocomplete_api.py:20`;
+  - put a recorder on `requests.Session.send` that raises `ConnectionError`;
+  - exercise each entry point;
+  - assert every recorded host is `127.0.0.1` and every entry point returns its Null value.
+- Verify with `--test-tags /afenda_runtime`. **Read the count.**
+- Commit `[ADD] afenda_runtime: null adapters for Odoo-hosted services`.
+
+**T3. Deploy files** (`general-purpose` agent). All are new, under `deploy/` unless stated.
+- **`Dockerfile`**, multi-stage `python:3.11-slim-bookworm`.
+  - Build stage installs `build-essential libpq-dev libldap2-dev libsasl2-dev curl ca-certificates`, runs `pip install -r requirements.txt` into `/opt/venv`, and downloads `wkhtmltox_0.12.6.1-3.bookworm_${TARGETARCH}.deb` from GitHub, checked with `sha256sum -c` against a hash computed once and pinned.
+  - Runtime stage installs `libpq5 libldap-2.5-0 libsasl2-2 libmagic1 fontconfig fonts-noto-core fonts-noto-cjk gsfonts ca-certificates` and `./wkhtmltox.deb`, then runs `fc-cache -f`.
+  - It creates the user `afenda`, with a home directory, and `mkdir+chown /var/lib/afenda /etc/afenda`.
+  - It copies `odoo-bin odoo addons afenda/addons afenda/oca` to `/opt/afenda`, with `COPY --chmod=755` for the scripts.
+  - `ENTRYPOINT` runs the entrypoint, and the command runs `/opt/venv/bin/python /opt/afenda/odoo-bin` directly: the gevent child re-execs `sys.argv[0]` (`server.py:950-953`).
+- **`entrypoint.sh`** renders `/etc/afenda/odoo.conf` (`chmod 600`) from environment variables:
+  - `workers=4`, `max_cron_threads=1`, `list_db=False`, `proxy_mode=True`, `db_name=afenda`;
+  - `data_dir=/var/lib/afenda`, `gevent_port=8072`;
+  - `admin_passwd` = a pbkdf2 hash taken from a secret file (`config.py:207,1036-1046`);
+  - `publisher_warranty_url=http://127.0.0.1:9/`;
+  - memory limits sized per worker, and `addons_path=/opt/afenda/addons,/opt/afenda/afenda/addons,/opt/afenda/afenda/oca/server-brand,/opt/afenda/afenda/oca/web`.
+  It then `exec`s the given command with `-c`. Database credentials come from `PGHOST/PGUSER/PGPASSWORD`. **Never** set `PGDATABASE` (`config.py:372`).
+- **`compose.yaml`** has four services:
+  - `db`: `postgres:16` with `POSTGRES_USER=xforge`, `POSTGRES_DB=postgres`, the password from a secret, a `pg_isready` healthcheck and a named volume.
+  - `init`: a one-shot service that runs `db init afenda -c $RC --password …`, then `module install afenda_brand afenda_runtime -c $RC`, then an `odoo-bin shell -c $RC` script that sets `web.base.url`, `web.base.url.freeze=True` and `report.url=http://127.0.0.1:8069`, and ends with `env.cr.commit()` (`shell.py:147-150`). It is idempotent: it skips when the database already exists.
+  - `xforge`: `depends_on` `init: service_completed_successfully`, with the `data_dir` volume.
+  - `nginx`: the only published port.
+  - `compose.proof.yaml` overrides the network with `internal: true` (R7).
+- **`nginx/afenda.conf`**:
+  - the `map $http_upgrade $connection_upgrade` block;
+  - `/websocket` goes to `xforge:8072` with the Upgrade and Connection headers;
+  - `/` goes to `xforge:8069`;
+  - headers `X-Forwarded-Host/For/Proto` and `X-Real-IP`;
+  - `proxy_read_timeout 720s`, `client_max_body_size 128m`, `location ~ ^/web/database { return 404; }`;
+  - TLS is terminated here, and only here: `proxy_mode` trusts exactly one hop (`http.py:190`);
+  - `nginx/afenda.tls.conf` is the VPS variant with certbot paths.
+- **`backup.sh` / `restore.sh`**: `docker compose exec db pg_dump -Fc` (the server's own client, so no v15/v16 mismatch), plus a tar of the `filestore/afenda` volume taken while `xforge` is stopped, and the reverse for restore.
+- **Other new files:**
+  - `deploy/README.md`: the VPS recipe (clone `--recurse-submodules`, an A record for `app.nexuscanon.com`, secrets, certbot, `compose up`, a backup cron). Do **not** publish wildcard DNS for nexuscanon.com.
+  - `.dockerignore`: `/.git`, `/.venv`, `/.agents`, `/docs` (root only, never `**/docs`), `**/__pycache__`.
+  - `.gitattributes`: `deploy/** text eol=lf`.
+  - `afenda/tools/tests/test_deploy_static.py`: no file under `deploy/`, and no `Dockerfile`, contains `odoo.com` or `odoocdn`; the Dockerfile has no `nightly.`; the `.dockerignore` excludes nothing under `afenda/addons`.
+- Commit `[ADD] deploy: source-built image, compose stack, nginx, backup`, with `git add -f` for the dotfiles.
+
+**T4. Local proof** (orchestrator, run once, in order; `docker compose -f compose.yaml -f compose.proof.yaml`):
+1. `build` succeeds. The build log shows no request to an Odoo host.
+2. `up`. `init` exits 0. `xforge` becomes healthy.
+3. Through nginx on :8080, `/web/login` returns 200 with "AFENDA xForge" in the page, and `/web/database/manager` returns 404.
+4. Log in with the generated admin password (local throwaway only).
+5. `/websocket` upgrades with **101**.
+6. A PDF prints: `report.url` works, and 4 workers do not deadlock.
+7. `ir_cron.lastcall` advances within 2 minutes.
+8. All of this with **no internet route** (R7).
+9. `backup.sh`, then `compose down -v`, `restore.sh`, log in: the data is present.
+
+**T5. Final gates, once each, then commit.**
+- Tools suite (≥ 138 OK plus the new tests).
+- `/afenda_brand,/afenda_api_docs,/afenda_brand_digest,/afenda_runtime`, reading the count.
+- `scan_identity` at 10826 with delta +0.
+- `odoo-reviewer` on T2 and T3.
+- Then ask the user before `git push` and before touching a VPS.
+
+## Verification
+
+Covered by T4 (end-to-end in Docker, with no egress) and T5 (suites, identity gate, review).
+Following CLAUDE.md: during T1 to T3, each edit runs only its narrowest test, and nothing
+passing is rerun.
+
+## Needs the user
+
+- The VPS itself: an Ubuntu or Debian box with Docker and SSH.
+- The DNS A record for `app.nexuscanon.com`.
+- The production secrets (database password and master password), placed as files on the VPS.
+- Approval to push.
+
+Everything else is executed without stopping.

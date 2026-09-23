@@ -169,6 +169,13 @@ behavioural. Report the two counts separately: 23,291 is a distribution
 footprint, not a measure of complexity or risk, and adding the two numbers
 together destroys the only signal either one carries.
 
+## Execution discipline
+
+Binding, and defined once in `CLAUDE.md` § Execution discipline: no trial and
+error, run the narrowest test per edit, run full gates once before the commit,
+never rerun a gate that passed, and stop after the same fix fails twice. Report
+the printed count with every result, or it is not accepted.
+
 ## Environment
 
 - Python: `.venv/Scripts/python` only. Never install into the global interpreter.

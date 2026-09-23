@@ -1,8 +1,48 @@
 # AFENDA xForge (Odoo 19.0)
 
 This repository is upstream Odoo 19.0 plus the AFENDA layer under `afenda/`.
-Root `odoo/` and `addons/` are pristine upstream: never hand-edit them. Custom work
+Root `odoo/` and `addons/` are upstream plus the generated rebrand transform: never
+hand-edit them (text and image changes go through `afenda/tools/` rules). Custom work
 goes under `afenda/addons/`. See `afenda/README.md` for the layout and run steps.
+
+## Execution discipline (binding on every session and sub-agent)
+
+**No trial and error.**
+- Name the cause with evidence (`path:line`, a traceback, a measured value) before
+  changing anything. If you cannot name it, read, trace, or ask `odoo-docs-librarian`.
+  Do not edit something just to see what happens.
+- State the expected output before running a command. A result that contradicts it is a
+  finding to explain, not a reason to rerun.
+- If the same fix fails twice, stop and go back to diagnosis
+  (`superpowers:systematic-debugging`). Do not try a third variation.
+
+**Test the edit, not the world.**
+- Per edit: run the narrowest check that exercises it (one test class or method, e.g.
+  `--test-tags "/module:TestClass.test_x"`, or one `afenda/tools/tests` file). Never the
+  full chain for a small edit.
+- Full gates run **once**, at the end of a unit of work, right before the commit: the
+  tools suite, the touched modules' Odoo suites, `scan_identity`, and `corpus diff` if a
+  rule changed. The `web,test_http` suite runs once per branch.
+- Do not rerun a gate that passed unless something it covers has changed since. Record
+  the command, the printed count and the SHA, and cite that record instead of rerunning.
+- When a gate fails, read the whole failure, fix it, rerun only the failing test, then
+  rerun the full gate once.
+- About to run the same command a third time with no code change in between? Stop and
+  report instead.
+
+**Orchestrators decide; sub-agents execute.**
+- Decide from the spec, the plan and the evidence. Write each ruling as one line
+  (decision · evidence · cost if wrong), then continue. Do not ask the user anything the
+  repo, a committed plan, or this conversation already answers.
+- Stop for the user only for what only they can supply (secrets, credentials, payment,
+  hosts, DNS), for irreversible or outward-facing actions (push, deploy, delete, send),
+  or when two of their stated goals conflict.
+- Dispatch with complete context: the task, the exact files, the acceptance check with
+  its expected count, and what not to touch. If a sub-agent has to rediscover context,
+  the dispatch was defective.
+- Run independent tasks in parallel in one turn. Run tasks that share a file serially.
+  Accept a sub-agent's result only against its acceptance check: a "passed" without the
+  printed count is not accepted.
 
 ## Odoo 19 knowledge
 
