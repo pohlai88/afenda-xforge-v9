@@ -16,6 +16,7 @@ Files: `Dockerfile` (built from the repository root), `entrypoint.sh` (renders
 (writes `PUBLIC_URL` into the landing page at nginx start), `site/` (the
 landing page), `dns/` (the DigitalOcean zone), `make-secrets.sh`, `backup.sh`
 (with `prune-backups.sh`), `offsite.sh` (copies backups off the host),
+`redeploy.sh` (one-command upgrade),
 `restore.sh`.
 
 Run every command below from `deploy/`.
@@ -155,8 +156,21 @@ network is provided.
 
 ## Upgrades
 
-Check out the new tag, `docker compose build`, then `docker compose up -d`.
-`init` reruns: it skips `db init` on the existing database, installing an
+One command, on the VPS, from `deploy/`:
+
+```bash
+./redeploy.sh                   # the branch head; or ./redeploy.sh <commit or tag>
+```
+
+It refuses a checkout with tracked changes, backs up first, fetches the ref
+(shallow) with its submodules, builds, starts the stack, and ends with
+`redeploy: …/web/health passes; now at <commit>`. A failed build puts the
+previous commit back by itself. A failure after the stack started prints the
+commit and the backup to return to, because `init` may already have upgraded
+the database.
+
+What it runs underneath: check out the new commit, `docker compose build`,
+then `docker compose up -d`. `init` reruns: it skips `db init` on the existing database, installing an
 already-installed module is a no-op, and then it runs
 `module upgrade --outdated afenda_brand afenda_runtime`. That upgrades a
 module only when its manifest `version` on disk is newer than the one the

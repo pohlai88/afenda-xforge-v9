@@ -192,6 +192,105 @@ class OffsiteTests(unittest.TestCase):
             self.assertEqual(calls, [])
 
 
+FAKE_GIT = """#!/bin/sh
+[ "$1" = -C ] && shift 2
+printf 'git %s\\n' "$*" >> "$FAKE_LOG"
+case "$*" in
+  "rev-parse --show-toplevel") echo "$FAKE_REPO" ;;
+  *"status --porcelain"*|*"status --short"*) printf '%s' "${FAKE_DIRTY:-}" ;;
+  *"rev-parse HEAD") cat "$FAKE_HEAD" ;;
+  *"checkout --detach FETCH_HEAD") echo newsha > "$FAKE_HEAD" ;;
+  *"checkout --detach "*) for a; do last=$a; done; echo "$last" > "$FAKE_HEAD" ;;
+esac
+exit 0
+"""
+
+FAKE_DOCKER = """#!/bin/sh
+printf 'docker %s\\n' "$*" >> "$FAKE_LOG"
+case "$*" in
+  "compose build") [ "${FAKE_FAIL:-}" = build ] && exit 1 ;;
+  "compose ps -a init"*) echo "${FAKE_INIT_STATE:-exited 0}" ;;
+esac
+exit 0
+"""
+
+FAKE_CURL = """#!/bin/sh
+printf 'curl %s\\n' "$*" >> "$FAKE_LOG"
+[ "${FAKE_FAIL:-}" = health ] && exit 22
+echo '{"status": "pass"}'
+"""
+
+FAKE_BACKUP = """#!/bin/sh
+printf 'backup.sh %s\\n' "$*" >> "$FAKE_LOG"
+mkdir -p "$1/20260923T024000Z"
+"""
+
+
+@unittest.skipUnless(BASH, "needs bash")
+class RedeployTests(unittest.TestCase):
+    """deploy/redeploy.sh [REF]: back up, fetch, build, start, check health."""
+
+    def _run(self, *args, **fake):
+        tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, tmp, True)
+        (tmp / "bin").mkdir()
+        (tmp / "deploy").mkdir()
+        for name, body in (("git", FAKE_GIT), ("docker", FAKE_DOCKER), ("curl", FAKE_CURL)):
+            _write(tmp / "bin" / name, body)
+            os.chmod(tmp / "bin" / name, 0o755)
+        _write(tmp / "deploy" / "backup.sh", FAKE_BACKUP)
+        os.chmod(tmp / "deploy" / "backup.sh", 0o755)
+        shutil.copy(DEPLOY / "redeploy.sh", tmp / "deploy" / "redeploy.sh")
+        _write(tmp / "deploy" / ".env", "COMPOSE_FILE=compose.yaml\nPUBLIC_URL=https://app.example.test/\n")
+        _write(tmp / "head", "oldsha\n")
+        log = tmp / "calls.log"
+        env = dict(os.environ, FAKE_LOG=str(log), FAKE_REPO=str(tmp), FAKE_HEAD=str(tmp / "head"),
+                   BACKUP_ROOT=str(tmp / "backups"), HEALTH_TRIES="2", HEALTH_WAIT="0",
+                   PATH=str(tmp / "bin") + os.pathsep + os.environ.get("PATH", ""))
+        env.update({f"FAKE_{k.upper()}": v for k, v in fake.items()})
+        proc = subprocess.run([BASH, str(tmp / "deploy" / "redeploy.sh"), *args], env=env,
+                              capture_output=True, text=True, timeout=60)
+        calls = log.read_text(encoding="utf-8").splitlines() if log.exists() else []
+        head = (tmp / "head").read_text(encoding="utf-8").strip()
+        return proc, calls, head
+
+    @staticmethod
+    def _index(calls, prefix):
+        return next(i for i, c in enumerate(calls) if c.startswith(prefix))
+
+    def test_backs_up_before_changing_anything_then_checks_health(self):
+        proc, calls, head = self._run("afenda/deidentify-phase1")
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        order = [self._index(calls, p) for p in (
+            "backup.sh", "git fetch --depth 1 origin afenda/deidentify-phase1",
+            "git checkout --detach FETCH_HEAD", "git submodule update --init --depth 1",
+            "docker compose build", "docker compose up -d", "docker compose ps -a init",
+            "curl")]
+        self.assertEqual(order, sorted(order), calls)
+        self.assertIn("https://app.example.test/web/health", [c for c in calls if c.startswith("curl")][0])
+        self.assertEqual(head, "newsha")
+
+    def test_refuses_a_checkout_with_tracked_changes(self):
+        proc, calls, head = self._run(dirty=" M deploy/compose.yaml\n")
+        self.assertEqual(proc.returncode, 1)
+        self.assertFalse([c for c in calls if c.startswith(("backup.sh", "git fetch", "docker"))], calls)
+        self.assertEqual(head, "oldsha")
+
+    def test_a_failed_build_puts_the_previous_commit_back(self):
+        proc, calls, head = self._run(fail="build")
+        self.assertNotEqual(proc.returncode, 0)
+        self.assertEqual(head, "oldsha")
+        self.assertFalse([c for c in calls if c.startswith("docker compose up")], calls)
+
+    def test_a_failed_init_or_health_check_names_the_backup_to_restore(self):
+        for fake in ({"init_state": "exited 1"}, {"fail": "health"}):
+            proc, _calls, _head = self._run(**fake)
+            self.assertNotEqual(proc.returncode, 0, fake)
+            self.assertIn("restore.sh", proc.stderr, fake)
+            self.assertIn("20260923T024000Z", proc.stderr, fake)
+            self.assertIn("oldsha", proc.stderr, fake)
+
+
 @unittest.skipUnless(BASH, "needs bash")
 class DeployScriptsParseTests(unittest.TestCase):
     def test_every_deploy_script_parses(self):
