@@ -248,7 +248,8 @@ ACCENTS: dict[str, tuple[str, str, str]] = {
     "mass_mailing": (INDIGO, MULBERRY, "disc-br"),
     "mass_mailing_sms": (INDIGO, MULBERRY, "disc-bl"),
     "sms": (INDIGO, TEAL, "disc-br"),
-    "website_forum": (INDIGO, MULBERRY, "wedge-tr"),
+    "website_forum": (INDIGO, MULBERRY, "shard-br"),  # wedge-tr fell to 0.0%
+    # overlap at GLYPH_SCALE 0.84 - two colours in a three-colour family.
     # --- market ----------------------------------------------------------
     "crm": (MULBERRY, TEAL, "wedge-tr"),
     "website": (MULBERRY, TEAL, "disc-br"),
