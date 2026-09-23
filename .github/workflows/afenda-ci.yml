@@ -1,0 +1,77 @@
+# AFENDA checks on every push to the product branch: the fast tools suite
+# (no database, no Docker) and `nginx -t` on both deploy configs.
+# The Odoo module suites need PostgreSQL and compiled assets; they are not
+# run here yet.
+name: afenda-ci
+
+on:
+  push:
+    branches: [afenda/deidentify-phase1]
+  pull_request:
+    branches: [afenda/deidentify-phase1]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: afenda-ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  tools:
+    name: tools suite
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          submodules: true
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Install the tools' pinned requirements
+        run: |
+          python -m pip install -r afenda/tools/requirements.txt
+          if [ -f afenda/tools/requirements-icons.txt ]; then
+            python -m pip install -r afenda/tools/requirements-icons.txt
+          fi
+      - name: python -m unittest discover afenda/tools/tests
+        # unittest exits non-zero on any failure or import error; the count
+        # guard catches a discovery that silently found almost nothing.
+        run: |
+          set -o pipefail
+          python -m unittest discover afenda/tools/tests 2>&1 | tee unittest.log
+          ran=$(sed -n 's/^Ran \([0-9][0-9]*\) tests\{0,1\} in .*/\1/p' unittest.log)
+          echo "tests ran: ${ran:-0}"
+          if [ "${ran:-0}" -lt 100 ]; then
+            echo "::error::only ${ran:-0} tests ran; discovery lost test modules"
+            exit 1
+          fi
+
+  nginx:
+    name: nginx -t
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: deploy
+      - name: nginx -t on afenda.conf and afenda.tls.conf
+        # The upstream host `xforge` and the certificate exist only on the
+        # VPS; a hosts entry and a throwaway self-signed pair stand in.
+        run: |
+          d=$(mktemp -d)
+          mkdir -p "$d/live/app.nexuscanon.com"
+          openssl req -x509 -newkey rsa:2048 -nodes -days 1 -subj /CN=app.nexuscanon.com \
+            -keyout "$d/live/app.nexuscanon.com/privkey.pem" \
+            -out "$d/live/app.nexuscanon.com/fullchain.pem"
+          for conf in afenda.conf afenda.tls.conf; do
+            echo "== $conf"
+            docker run --rm --add-host xforge:127.0.0.1 \
+              -v "$PWD/deploy/nginx/$conf:/etc/nginx/conf.d/default.conf:ro" \
+              -v "$d:/etc/letsencrypt:ro" \
+              nginx:1.27-alpine nginx -t
+          done
