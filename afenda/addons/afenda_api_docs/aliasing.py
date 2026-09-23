@@ -16,8 +16,22 @@ insertion points, never by scanning an assembled document.
 Unlike the build-time rules in `afenda/tools/rules.py`, matching here is
 case-insensitive on the standalone word: those rules must spare lowercase
 `odoo` because a source file contains imports, license headers and module
-paths. A prose field contains none of those. Word boundaries keep this safe
-- `\\bodoo\\b` does not match inside `odoobot_state`.
+paths. A prose field contains none of those.
+
+`\b` alone is not enough to protect a wire value from being split. `\b` is
+satisfied by *any* transition between a word character and a non-word
+character, and `.` is a non-word character - so plain `\bodoo\b` correctly
+skips `odoobot_state` (`_` is a word character, so there is no boundary
+there) but happily matches the `ODOO` segment of a dot-delimited token such
+as `ODOO.BALANCE` or `res.odoo.field`, because the dots on either side do
+supply a `\b`. Rules 2 and 5 below use explicit lookarounds instead:
+`(?<![\w.])` on the left and `(?!\w)(?!\.\w)` on the right. The left side
+refuses to match when preceded by a word character *or a dot*, so a leading
+`.odoo` never matches. The right side refuses both a following word
+character and a following `.` that is itself followed by a word character
+- that second clause is what blocks `odoo.BALANCE` while still allowing a
+sentence-ending period such as "runs on odoo." to alias normally, since a
+trailing `.` with nothing (or non-word) after it is not a dotted token.
 """
 import re
 
@@ -27,7 +41,7 @@ from odoo.addons.afenda_brand.brand import BRAND
 # consumed before the bare product name would split them.
 _RULES = (
     (re.compile(r"Odoo\s+S\.A\.", re.IGNORECASE), BRAND["short"]),
-    (re.compile(r"\bOdooBot\b", re.IGNORECASE), BRAND["bot"]),
+    (re.compile(r"(?<![\w.])OdooBot(?!\w)(?!\.\w)", re.IGNORECASE), BRAND["bot"]),
     (
         re.compile(
             r"https?://(?:www\.)?odoo\.com"
@@ -37,7 +51,7 @@ _RULES = (
         BRAND["docs_path"],
     ),
     (re.compile(r"\bodoo\.com\b", re.IGNORECASE), BRAND["domain"]),
-    (re.compile(r"\bodoo\b", re.IGNORECASE), BRAND["product"]),
+    (re.compile(r"(?<![\w.])odoo(?!\w)(?!\.\w)", re.IGNORECASE), BRAND["product"]),
 )
 
 

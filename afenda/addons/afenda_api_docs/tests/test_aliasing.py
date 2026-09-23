@@ -32,6 +32,19 @@ class TestAliasProse(BaseCase):
         for identifier in ("odoobot_state", "odoobot_failed", "delete_odoo"):
             self.assertIn(identifier, alias_prose(f"Set {identifier} to done"))
 
+    def test_dotted_wire_values_survive(self):
+        # `\b` alone is satisfied by a dot on either side, so a naive
+        # `\bodoo\b` would split these into "AFENDA xForge.BALANCE" etc.
+        # ODOO.BALANCE, ODOO.PIVOT and friends are real spreadsheet function
+        # names in this codebase and must reach the reader unchanged.
+        for wire_value in ("ODOO.BALANCE", "ODOO.PIVOT.HEADER", "res.odoo.field"):
+            self.assertIn(wire_value, alias_prose(f"Use {wire_value} here"))
+
+    def test_sentence_ending_period_still_aliases(self):
+        # A trailing "." is punctuation, not a dotted wire token, so this
+        # must not fall into the same guard that protects ODOO.BALANCE.
+        self.assertEqual(alias_prose("This runs on odoo."), "This runs on AFENDA xForge.")
+
     def test_none_and_empty_pass_through(self):
         self.assertIsNone(alias_prose(None))
         self.assertEqual(alias_prose(""), "")
