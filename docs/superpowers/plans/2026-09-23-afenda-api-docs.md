@@ -65,22 +65,50 @@ Tasks run in waves. Within a wave, agents share no file and no database.
 | 3 | 1 | Task 6 | `afenda` | 8179 |
 | 4 | 1 | Task 9 | `afenda` | 8179 |
 
-Lane databases are clones, which take about two seconds at this size:
+A lane is a database clone **plus its filestore**. Cloning the database alone
+is a trap: in Odoo 19 every image field and every asset bundle is
+attachment-backed, so the clone's attachment rows point at files that do not
+exist and the suite fails with `FileNotFoundError ... filestore/<db>/cd/cd37f4...`
+plus 500s on asset-bundle routes. Those read as code regressions and are not.
+This cost another session an hour before it was diagnosed.
+
+Clone both together, deriving the filestore path from Odoo's own config rather
+than hardcoding it:
 
 ```bash
-.venv/Scripts/python -c "
+.venv/Scripts/python - <<'PY'
+import shutil, sys
+from pathlib import Path
 import psycopg2
 from psycopg2.extensions import ISOLATION_LEVEL_AUTOCOMMIT
-c = psycopg2.connect(host='127.0.0.1', port=5444, user='odoo', dbname='postgres')
-c.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
-cur = c.cursor()
-cur.execute('DROP DATABASE IF EXISTS afenda_lane2')
-cur.execute('CREATE DATABASE afenda_lane2 TEMPLATE afenda')
-"
+from odoo.tools import config
+
+SRC, DST = "afenda", "afenda_lane2"
+config.parse_config(["-c", "afenda/odoo.conf"])
+root = Path(config.filestore(SRC)).parent
+
+conn = psycopg2.connect(host="127.0.0.1", port=5444, user="odoo", dbname="postgres")
+conn.set_isolation_level(ISOLATION_LEVEL_AUTOCOMMIT)
+cur = conn.cursor()
+cur.execute("SELECT count(*) FROM pg_stat_activity WHERE datname = %s", (SRC,))
+if cur.fetchone()[0]:
+    sys.exit(f"{SRC} has live connections; TEMPLATE clone needs zero")
+cur.execute(f'DROP DATABASE IF EXISTS "{DST}"')
+cur.execute(f'CREATE DATABASE "{DST}" TEMPLATE "{SRC}"')
+
+shutil.rmtree(root / DST, ignore_errors=True)
+shutil.copytree(root / SRC, root / DST)
+src_n = sum(1 for _ in (root / SRC).rglob("*") if _.is_file())
+dst_n = sum(1 for _ in (root / DST).rglob("*") if _.is_file())
+print(f"cloned {SRC} -> {DST}; filestore {src_n} -> {dst_n} files")
+assert src_n == dst_n, "filestore copy incomplete"
+PY
 ```
 
-Clone only when no process is connected to `afenda`, and re-clone at the start
-of each wave so the lane carries the previous wave's schema.
+Verify the counts match before using the lane. Re-clone at the start of each
+wave so the lane carries the previous wave's schema, and install
+`afenda_api_docs` there if the lane needs to run the `afenda_brand` suite — that
+suite's `test_docs_route_answers_same_origin` 404s without it.
 
 **Why the ceiling is two, not nine.** Tasks 3, 4 and 5 all edit `openapi.py`
 and each depends on the one before, so they are a single agent's sequential
