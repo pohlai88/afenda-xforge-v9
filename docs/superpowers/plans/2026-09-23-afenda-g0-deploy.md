@@ -191,3 +191,28 @@ App mail (2026-09-23, after go-live):
   (`d=nexuscanon.com`, `s=resend`), `spf=pass` (`rsend.nexuscanon.com`) and `dmarc=pass`
   at `p=quarantine`; Resend reports it delivered.
 - Open: replies go to `catchall@nexuscanon.com`, which has no mailbox yet.
+
+Independence audit (2026-09-23, live host at `66558f62`):
+
+- Runtime traffic: a 150 s capture of every outbound TCP SYN and DNS query while the full
+  proof ran (login, websocket, PDF, cron, web client, `/request-access`) saw DNS lookups for
+  `app.nexuscanon.com` only and TCP only to the host's own address and DigitalOcean's metadata
+  service (169.254.169.254, its monitoring agent). Nothing reached Odoo S.A. or any other third
+  party.
+- Service endpoints in the database: `iap.endpoint`, `iap.partner_autocomplete.endpoint`,
+  `enrich.endpoint`, `reveal.endpoint`, `sms.endpoint`, `snailmail.endpoint`,
+  `html_editor.media_library_endpoint` and `html_editor.olg_api_endpoint` are all
+  `http://127.0.0.1:9`. The weekly "Publisher: Update Notification" cron posts to
+  `publisher_warranty_url = http://127.0.0.1:9/` from the rendered `odoo.conf` (the upstream
+  default in `odoo/tools/config.py:215` is still `services.odoo.com`, so the deploy's config
+  line is what keeps it dead).
+- Browser: the login page, the web client and its 6 asset bundles (9.8 MB) name no Odoo or
+  OpenERP host. The only foreign load targets belong to features a user must trigger (video
+  embeds, Unsplash, licence links).
+- Build: images from Docker Hub (`python:3.11-slim-bookworm`, `postgres:16`,
+  `nginx:1.27-alpine`), packages from Debian and PyPI, wkhtmltopdf from GitHub checked against
+  pinned SHA-256; `test_no_vendor_host_in_deploy_files` guards the deploy files in CI.
+- Hosting and DNS: the .com registry and 1.1.1.1, 8.8.8.8 and 9.9.9.9 delegate `nexuscanon.com`
+  to DigitalOcean; the host, firewall, DNS, object storage (backups) and monitoring are on
+  DigitalOcean; mail goes out through Resend and in through Zoho. DMARC reports go to
+  `no-reply@nexuscanon.com`.

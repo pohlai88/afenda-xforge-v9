@@ -18,7 +18,7 @@ MX	@	mx3.zoho.com.	50	3600
 TXT	@	v=spf1 include:zohomail.com ~all		3600
 TXT	@	zoho-verification=zb25766137.zmverify.zoho.com		3600
 TXT	zmail._domainkey	v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCKreElUM6kSzo5FuRJTMh7RwGu3FL5iy0e2cWdeB+3wV11fSQPznrSC+RL9uhqLQFkIeZ7C+XFMwzROc+Ta3jSfFLCgTvE4rdhbCPe8YdWKtSNXSmNDrstz1jeD8AAMLC1tGLP9Tt8EO2knxwX86QHTnw1tcbPplqjpLUT+M6LjQIDAQAB		3600
-TXT	_dmarc	v=DMARC1; p=quarantine;		3600
+TXT	_dmarc	v=DMARC1; p=quarantine; rua=mailto:no-reply@nexuscanon.com;		3600
 CNAME	send	send.forge.rmta.net.		3600
 CNAME	rsend	rsend-apne1.forge.rmta.net.		3600
 TXT	resend._domainkey	p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDnMGq+pLWQ7e+Hjje72paySKvkI0Mh+gZUiicBAK2iwnGWfMxtUtJZ5aUo7t5k/PiJnB63ir44WGvFESh6YRid+1eieAaGokNbDvDai5Z7/gV1bRmXwYcKww+k2rMblEtv7Ax2AR+SRbzJkopbnUnyv5N5D6bJWvXM1eeP326SqQIDAQAB		3600

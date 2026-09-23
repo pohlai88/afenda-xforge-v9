@@ -80,7 +80,7 @@ Rejected on the way, and not to be reintroduced: the light-only page, a star-tra
 | `@` | TXT | `v=spf1 include:zohomail.com ~all` |
 | `@` | TXT | `zoho-verification=zb25766137.zmverify.zoho.com` |
 | `zmail._domainkey` | TXT | (Zoho DKIM key, copied verbatim from the Vercel inventory) |
-| `_dmarc` | TXT | `v=DMARC1; p=quarantine;` (raised from `p=none` after Zoho passed SPF, DKIM and DMARC end to end) |
+| `_dmarc` | TXT | `v=DMARC1; p=quarantine; rua=mailto:no-reply@nexuscanon.com;` (raised from `p=none` after Zoho passed SPF, DKIM and DMARC end to end; aggregate reports to `no-reply@`) |
 | `@` | CAA | `0 issue "letsencrypt.org."` (the DigitalOcean API requires the trailing dot on input; `dig` should answer `0 issue "letsencrypt.org"`) |
 
 Dropped:
