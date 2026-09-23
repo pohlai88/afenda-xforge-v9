@@ -45,8 +45,14 @@ from PIL import Image, ImageChops, ImageDraw, ImageFont, ImageOps
 
 from .brand_images import BOXED_INK, MARK_BOX, MARK_FRAME, SS, WHITE, arms_in, draw_mark, mark_svg
 
-# The AFENDA tag palette (afenda_brand/brand.py "tags") plus Ledger Blue. No
-# hex is invented here; every value below appears in brand.py.
+# The AFENDA tag palette (afenda_brand/brand.py "tags") plus Ledger Blue. Every
+# hex in this block appears in brand.py and is mirrored into SCSS, because these
+# are interface colours: they land on an icon a user reads as a category.
+#
+# The mark imported from brand_images above is the exception the rules allow
+# (.claude/odoo-agent-rules.md, the identity-artwork carve-out). Its shades exist
+# only inside the drawn mark, are deliberately absent from brand.py and SCSS, and
+# must not be reused as UI tokens.
 LEDGER = "#1E3A8A"
 SLATE = "#3B6EA8"
 INDIGO = "#3448A8"
