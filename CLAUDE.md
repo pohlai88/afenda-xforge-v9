@@ -26,7 +26,11 @@ Project agents under `.claude/agents/` share the rules in `.claude/odoo-agent-ru
 
 - Python only from `.venv/Scripts/python`; never install into the global interpreter.
 - Server port 8169, test port 8179, PostgreSQL `127.0.0.1:5444`, database `afenda`.
-- Port 8069 is in a Windows reserved range and cannot be bound.
+- Port 8069 is already taken by the vendor Odoo 19 Windows service (a `nssm.exe`
+  service whose Python listens on `0.0.0.0:8069` against its own bundled PostgreSQL
+  on 5432). Leave it alone and keep using 8169/8179; it is not a Windows reserved
+  range, so a bind failure there means that service is running, not that the port is
+  unusable.
 
 ## Commands (run from the repo root in Git Bash)
 
