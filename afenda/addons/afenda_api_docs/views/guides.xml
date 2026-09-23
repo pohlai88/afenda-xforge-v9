@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="guide_applications_general_users" name="Users and access rights">
+        <t t-call="web.frontend_layout">
+            <div class="container py-5 o_afenda_guide">
+<h1>Users and access rights</h1>
+<p>Every person who signs in to AFENDA xForge is a user record. A user belongs
+to one or more groups, and groups are what grant access to an app.</p>
+<h2>Adding a user</h2>
+<p>Open Settings, then Users, then New. Enter a name and an email address; the
+email address is the login. Save, then use Send Password Reset Instructions
+so the person sets their own password.</p>
+<h2>Granting access to an app</h2>
+<p>On the user form, each installed app offers a level of access. Leave an app
+blank to hide it from that user entirely.</p>
+            </div>
+        </t>
+    </template>
+</odoo>

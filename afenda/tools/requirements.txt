@@ -3,3 +3,7 @@
 # tree for no visible reason. Bump deliberately, then re-render and review.
 pillow==9.4.0
 fonttools==4.65.0
+
+# Build-time only: converts afenda_api_docs/docs/**.md into committed QWeb
+# templates. Pinned because the generated XML is committed and reviewed.
+markdown==3.5.2
