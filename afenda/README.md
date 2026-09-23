@@ -1,15 +1,21 @@
 # AFENDA xForge layer
 
-Everything AFENDA-specific lives in this folder. The `addons/` and `odoo/`
-folders at the repository root are unmodified upstream Odoo 19.0, so upstream
-updates merge cleanly.
+Everything hand-authored for AFENDA lives in this folder. The `addons/` and
+`odoo/` folders at the repository root are **not** pristine upstream: the identity
+transform in `tools/` rewrites text and images across both, so an upstream merge
+touches tens of thousands of files. Those rewrites are generated output, never
+hand edits — which is what makes re-deriving them cheaper than merging them. See
+`docs/superpowers/specs/2026-09-23-afenda-platform-architecture.md`.
 
 ```
 afenda/
-  addons/afenda_brand/   the AFENDA identity: logo, colors, fonts, titles, login, settings
-  oca/server-brand/      OCA debranding modules (git submodule, branch 19.0)
-  oca/web/               OCA web modules: favicon, PWA, no bubbles (git submodule, branch 19.0)
-  odoo.conf              local development configuration
+  addons/afenda_brand/        the AFENDA identity: logo, colors, fonts, titles, login, settings
+  addons/afenda_api_docs/     generated API reference and guides, served at /docs
+  addons/afenda_brand_digest/ AFENDA colors in the periodic digest email (auto-installs)
+  oca/server-brand/           OCA debranding modules (git submodule, branch 19.0)
+  oca/web/                    OCA web modules: favicon, PWA, no bubbles (git submodule, branch 19.0)
+  tools/                      the rebrand engine, icon generators, identity scanner
+  odoo.conf                   local development configuration
 ```
 
 ## First run
@@ -111,22 +117,52 @@ and mirrored in `static/src/scss/primary_variables.scss`.
 ## Branches and upstream updates
 
 - `upstream-19.0`: pristine odoo/odoo. Never edit.
-- `19.0`: `upstream-19.0` + the `[REBRAND]` commit + the `afenda/` layer. This deploys.
+- `afenda/deidentify-phase1`: **the product today** — the identity transform, the
+  three AFENDA modules, the tooling.
+- `19.0`: was documented here as the branch that deploys. **It is not.** It carries
+  the `afenda/` layer but no identity transform at all —
+  `git show 19.0:odoo/release.py` still reports `product_name = 'Odoo'`, and it
+  touches zero files under `odoo/` or `addons/`. Do not deploy from it until the
+  topology is reconciled.
 
-To take an Odoo update:
+### Taking an Odoo update
+
+⚠️ **The procedure that used to be documented here could not run.** This checkout is
+shallow (`.git/shallow`) and `upstream-19.0` is an orphan root commit, so
+`git merge-base upstream/19.0 HEAD` returns nothing and
+`git merge --ff-only upstream/19.0` refuses. `--allow-unrelated-histories` does not
+apply to `--ff-only`, so the old note contradicted the old command.
+
+Fix the ancestry once, then the update becomes routine. `upstream-19.0`'s tree is
+byte-identical to upstream `2d1b7a131`, so re-anchoring moves no content:
+
+````bash
+git fetch --unshallow upstream 19.0
+git branch -f upstream-19.0 2d1b7a131
+````
+
+After that:
 
 ````bash
 git fetch upstream 19.0
-git checkout upstream-19.0 && git merge --ff-only upstream/19.0 && git push
-git checkout 19.0 && git merge upstream-19.0        # resolve conflicts if any
-.venv/Scripts/python -m afenda.tools.rebrand --apply # re-brands only what is new
-.venv/Scripts/python -m afenda.tools.scan_identity   # must not rise above the baseline
-git commit -am "[REBRAND] re-apply after upstream merge"
+git checkout upstream-19.0 && git merge --ff-only upstream/19.0
+git log upstream-19.0@{1}..upstream-19.0 --stat   # read this — it is the review
+git checkout <release branch> && git merge upstream-19.0
+.venv/Scripts/python -m afenda.tools.rebrand --apply  # re-brands only what is new
+.venv/Scripts/python -m afenda.tools.scan_identity    # triage any rise, re-floor any drop
 ````
 
-Note: `upstream/19.0` history is unrelated to our rewritten root, so the
-first merge needs `--allow-unrelated-histories`; see the spec for why the
-root was rewritten.
+Then commit **explicit paths** — never `git commit -am` or `git add -A`. After a
+rebrand run the working tree holds tens of thousands of modified files, and `-a`
+would also sweep in anything a colleague has in flight in the same checkout:
+
+````bash
+git commit --only -F msgfile -- odoo addons afenda
+````
+
+The long-term fix is to stop storing generated output as source, so an upstream
+merge touches the ~119 hand-authored files instead of 23,000. See
+`docs/superpowers/specs/2026-09-23-afenda-platform-architecture.md`.
 
 ## De-identification tools
 

@@ -52,7 +52,8 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin -c afen
 
 ## Branches and commits
 
-- `upstream-19.0` is pristine odoo/odoo, never edited. `19.0` is upstream plus the `[REBRAND]` commit plus `afenda/`. Feature work branches off `19.0`.
+- `upstream-19.0` is pristine odoo/odoo, never edited. **`19.0` is NOT the product**: it carries `afenda/` but no identity transform, and `git show 19.0:odoo/release.py` still reports `product_name = 'Odoo'`. The product is on `afenda/deidentify-phase1`. Branch feature work off that until the topology is reconciled.
+- The checkout is shallow and `upstream-19.0` is an orphan root commit, so `git merge --ff-only upstream/19.0` refuses — see `afenda/README.md` for the one-time re-anchor that fixes it.
 - Commit subjects use Odoo tags: `[ADD]`, `[FIX]`, `[IMP]`, `[REBRAND]`.
 - Stage explicit paths, never `git add -A`: the rebrand script can leave about 19,000 modified files under `addons/` and `odoo/`.
 - Upstream `.gitignore` ignores all dotfiles, so `.claude/` files need `git add -f`. The doc kit under `.agents/` is untracked on purpose.
