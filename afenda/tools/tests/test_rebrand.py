@@ -300,6 +300,47 @@ class RulesTests(unittest.TestCase):
     def test_company_name_in_python_manifest(self):
         self.assertEqual(self.rw("    'author': 'Odoo S.A.',\n", "addons/web/__manifest__.py"), "    'author': 'AFENDA',\n")
 
+    def test_superseded_domain_bare_host(self):
+        self.assertEqual(self.rw("https://afenda.app/pricing\n", "v.xml"), "https://" + DOMAIN + "/pricing\n")
+
+    def test_superseded_domain_subdomain(self):
+        self.assertEqual(self.rw("https://accounts.afenda.app/account\n", "u.js"), "https://accounts." + DOMAIN + "/account\n")
+
+    def test_superseded_domain_email(self):
+        self.assertEqual(self.rw("jane@afenda.app\n", "d.xml"), "jane@" + DOMAIN + "\n")
+
+    def test_superseded_domain_www_url(self):
+        self.assertEqual(self.rw("https://www.afenda.app/x\n", "v.xml"), "https://www." + DOMAIN + "/x\n")
+
+    def test_superseded_domain_documentation_link_still_repaired(self):
+        # superseded_domain must run before docs_link, or this would land on
+        # the new domain as a bare link instead of coming home to /docs/.
+        self.assertEqual(
+            self.rw('href="https://www.afenda.app/documentation/19.0/applications/sales.html"\n', "v.xml"),
+            'href="/docs/applications/sales.html"\n',
+        )
+
+    def test_current_domain_is_not_rewritten_by_superseded_rule(self):
+        # Anti-loop: the domain rules land on must itself be left alone, or a
+        # second rebrand pass would keep rewriting the tree forever.
+        src = "https://" + DOMAIN + "/pricing\n"
+        self.assertEqual(self.rw(src, "v.xml"), src)
+
+    def test_current_domain_never_listed_as_superseded(self):
+        from afenda.tools.rules import _SUPERSEDED_DOMAINS
+        self.assertNotIn(DOMAIN, _SUPERSEDED_DOMAINS)
+
+    def test_current_domain_as_superseded_raises(self):
+        # Fires the construction-time guard directly: if BRAND['domain'] were
+        # ever also listed in _SUPERSEDED_DOMAINS, build_rules must refuse to
+        # build the rule set rather than silently loop on a second rebrand
+        # pass.
+        from afenda.tools.rules import build_rules, _SUPERSEDED_DOMAINS
+        bad_brand = dict(load_brand())
+        bad_brand["domain"] = _SUPERSEDED_DOMAINS[0]
+        with self.assertRaises(ValueError):
+            build_rules(bad_brand)
+
 
 if __name__ == "__main__":
     unittest.main()
