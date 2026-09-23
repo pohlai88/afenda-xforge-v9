@@ -18,6 +18,19 @@ The word *currently* is the strategic content of that table. The goal is not to 
 Odoo — it is to make Odoo **replaceable at AFENDA boundaries where replacement might
 someday matter**. Odoo becomes the ERP kernel, not the whole platform.
 
+As one engineering law:
+
+> AFENDA may depend on an Odoo mechanism. AFENDA **business semantics** must not depend
+> directly on that mechanism when a stable AFENDA boundary is practical.
+
+```
+business modules → AFENDA Storage Interface → ir.attachment
+business workflow → AFENDA Job Kernel       → ir.cron
+clients → AFENDA API Contract → AFENDA Application Service → Odoo ORM
+```
+
+never the reverse direction, where a business module reaches into `ir.attachment` internals.
+
 ## The two constraints
 
 1. **Deployment** — stateful filesystem, PostgreSQL, persistent HTTP/gevent workers and
@@ -73,24 +86,45 @@ fights, for no benefit at this scale.
 |---|---|---|
 | **G0 — now** | One VM, Compose, PostgreSQL, local filestore | Production, safely |
 | **G1** | Immutable CI-built runtime, external backup, restore rehearsal | Reproducibility |
-| **G2** | Object-store attachments; separate web / cron / websocket roles | Stateless app tier |
-| **G3** | N xForge replicas, external PostgreSQL, Redis sessions | Horizontal scale |
+| **G2** | Object-store attachments **and** an external session store; cron split out | **Truly** stateless app tier |
+| **G3** | N xForge replicas, external PostgreSQL, role-specific connection budgets | Horizontal scale |
 | **G4** | Tenant control plane and tenant registry | Real SaaS operations |
 | **G5** | Upstream + semantic patch ledger + generated distribution | Breaks fork maintenance |
 | **G6** | Stable AFENDA APIs and events, selective extraction | Odoo becomes interchangeable |
 
 **Do not jump G0 → G6.** Make each generation operationally boring before proceeding.
 
-### G2 detail — splitting the roles
+### G2 detail — state externalization, then one role split
 
-Odoo's own CLI permits it: `--no-http` starts no HTTP or longpolling workers but may still
-start cron workers, and `max_cron_threads` controls cron separately.
+**Attachments alone do not make the tier stateless.** Sessions are the second filesystem
+dependency (`FilesystemSessionStore`, `http.py:995`), and a container holding local session
+files is still stateful. G2 is not done until both have left the disk:
 
 ```
-AFENDA-WEB    workers = N   max_cron_threads = 0
-AFENDA-CRON   http_enable = False, workers = 0, max_cron_threads = 1
-AFENDA-LIVE   the gevent/websocket workload
+Attachments   local filestore  → AFENDA Storage Interface → S3-compatible
+Sessions      FilesystemStore  → AFENDA Session Interface → Redis (one implementation)
+Cron          inside web       → its own service
 ```
+
+The acceptance test for G2, and it should be automated:
+
+> **Destroying an xForge container destroys zero durable business state.**
+
+Note the *interface* is what belongs to G2; Redis is merely the first implementation, so
+G3 is defined by replicas and connection budgets rather than by a cache product.
+
+Only two roles at G2, not three:
+
+```
+AFENDA-WEB    workers = N, max_cron_threads = 0
+              (the gevent/websocket worker is spawned automatically — see below)
+AFENDA-CRON   http_enable = False, workers = 0, max_cron_threads >= 1
+```
+
+**Do not split the websocket worker out at G2.** `PreforkServer` spawns the gevent child
+itself and respawns it if it dies, so a separate role would either duplicate it or fight it
+for the port. Splitting it is a G3/G4 move, justified by measured websocket load — not by
+the fact that an internal `gevent` command exists. Break one coupling at a time.
 
 Two traps that must be designed around, both verified:
 
@@ -99,14 +133,27 @@ Two traps that must be designed around, both verified:
   `db_name` set will fan out across every tenant. Worse, `list_dbs` only returns databases
   **owned by the connecting role** (`odoo/service/db.py:454`), so with databases owned
   elsewhere the list is empty and **cron silently runs nowhere**.
-- **Exactly one cron role may exist.** Cron does not coordinate across hosts; N
-  cron-enabled instances means N× every scheduled job.
+- **Correction to an earlier claim in this document:** I previously wrote that exactly one
+  cron role may exist because N instances would mean N× every job. **That is wrong.** Odoo
+  coordinates concurrent cron workers through PostgreSQL row locking —
+  `ir_cron._acquire_one_job` selects `FOR NO KEY UPDATE SKIP LOCKED`
+  (`odoo/addons/base/models/ir_cron.py:365`), and the comment at `:330-332` is explicit:
+  "each worker just acquire one available job at a time and lock it so the other workers
+  don't select it too." So redundant cron workers are *supported*.
+  The doctrine is therefore operational, not correctness-driven: **run one cron service
+  initially for simplicity, and add redundancy when HA justifies it.** Cron is closer to
+  horizontally scalable than this document first claimed.
 
 ### G3 detail — connection math before you choose a managed PG
 
-`db_maxconn` is a per-process pool (`sql_db.py:823`), so 8 workers + 1 cron at the default
-64 is **576 connections** against a typical `max_connections = 100`. Lower it to ~8 (each
-HTTP worker is single-threaded) *before* putting a connection-limited PG behind it. And
+`db_maxconn` is a per-process pool (`sql_db.py:823`), and the gevent process has **its own**
+(`db_maxconn_gevent`, `tools/config.py:395`; `sql_db.py:823` selects it when `odoo.evented`).
+So the ceiling is 10 processes, not 9: 8 HTTP + 1 cron + 1 gevent at the default 64 is
+**640 potential connections** against a typical `max_connections = 100`. Plan against the
+ceiling, not observed utilisation, and budget per role rather than globally —
+web ~8, cron ~4, gevent ~4, then measure. At four web replicas that is roughly
+`4 × 8 + 4 + 4 × 4 ≈ 52` planned, which makes PostgreSQL sizing intentional instead of
+accidental. And
 **PgBouncer transaction mode will break Odoo** — it relies on session-scoped state (`SET`,
 advisory locks, server-side cursors). Session mode only, which removes much of the benefit
 people expect from serverless PG.
@@ -173,6 +220,15 @@ upstream SHA → semantic patches → identity compiler → corpus verify
              → identity scan → AFENDA runtime tree → OCI image digest
 ```
 
+**Two metrics, never combined.** Reporting one number hides the whole insight:
+
+```
+AUTHORED DELTA   what humans deliberately changed        ~119 files, 2 behavioural
+DERIVED DELTA    what the AFENDA compiler generated      ~23,172 files
+```
+
+23,291 is not AFENDA's source complexity. It is AFENDA's **distribution footprint**.
+
 The 23,000-file tree becomes a **build artifact**, not the source of truth. Branch topology:
 
 ```
@@ -180,9 +236,33 @@ upstream-19.0    pristine snapshot, real ancestry. Never edited.
      |
 afenda-src       + the 119 hand-authored files. ALL human work happens here.
      |
-19.0             + ONE regenerated [REBRAND] commit. Rebuilt by reset, force-pushed.
-                 Immutable tags are the durable artifact.
+19.0-src         + the 119 hand-authored files. APPEND ONLY.
+     |
+19.0-dist        + generated release snapshots, one commit per release. APPEND ONLY.
+                 Tagged xforge-v19.0.1.0.4, .5, .6 …
 ```
+
+⚠️ **Revised: do not force-push the generated branch.** My first draft had `19.0` reset and
+force-pushed each release, with tags as the durable artifact. That works technically and
+contradicts the thing this platform is being built around — *the system never forgets*. A
+source-control design that deliberately rewrites published history is the wrong foundation
+for a product whose selling point is kept truth. Both branches are append-only instead.
+
+Better still, the generated tree need not live in git at all. CI can emit a release bundle
+and bind its parts cryptographically:
+
+```yaml
+release:              xforge-v19.0.1.0.5
+upstream_sha:         2d1b7a131…
+afenda_source_sha:    84fd3…
+transform_rules_sha:  ce17a…
+generated_tree_sha256: …
+oci_digest:           sha256:…
+test_evidence_sha256: …
+```
+
+That is a traceable product derivation rather than a branch trick, and it is what makes the
+provenance seam below answerable.
 
 **Upstream merges then touch 119 files instead of 23,291**, because nothing generated is
 ever merged — it is re-derived. The `.po` conflict profile that makes the current cadence
@@ -270,15 +350,28 @@ xForge runtime on container infrastructure
 
 ## What to add now, before anything ambitious
 
-Five cheap pieces that prevent xForge being trapped later:
+Six cheap pieces that prevent xForge being trapped later:
 
 1. **AFENDA Runtime Identity** — the release/version/image digest the runtime reports.
 2. **AFENDA Tenant Context** — one place that answers "which tenant is this request".
 3. **AFENDA Storage Interface** — `put/get/delete/exists/stream/checksum`, with
    `LocalFilestoreAdapter` first and an S3-compatible adapter second.
 4. **AFENDA Job Interface** — `job.enqueue(...)`, backed by `ir.cron` initially.
-5. **AFENDA Upstream Delta Manifest** — the separation of generated identity changes from
-   true framework changes.
+5. **AFENDA Upstream Delta Manifest** — the authored/derived separation above. **Start this
+   at G0, not G5.** It is a YAML file a build step writes; by the time the distribution
+   compiler exists you already hold years of trustworthy delta history instead of starting
+   the record then.
+6. **AFENDA Provenance** — a read-only endpoint every instance exposes, which application
+   code must never be able to edit:
+
+   ```json
+   {"product":"AFENDA xForge","release":"19.0.1.0.5","upstream":"odoo/19.0@2d1b7a131",
+    "source":"84fd3…","identity_rules":"ce17a…","image":"sha256:…",
+    "database_schema":"19.0.1.0.5","built_at":"…","environment":"production"}
+   ```
+
+   So that a bug report resolves to an exact runtime, source, upstream, rule set, image and
+   migration level. *Humans may forget how production came to exist; AFENDA must not.*
 
 The **Delta Manifest / Distribution Compiler is the most strategically important**. The
 23,291-file measurement is already enough evidence to distinguish generated identity
@@ -317,12 +410,43 @@ a large white-label fork into a **reproducible AFENDA distribution built on Odoo
   Needs `git add -f` or it works locally and vanishes in CI.
 - **Python 3.12 / `ubuntu:noble`** is the target: Odoo's own 19.0 image is `FROM
   ubuntu:noble`, and the `< 3.12` pin tier carries `cryptography==3.4.8` (a 2021 release)
-  versus `42.0.8` on `>= 3.12`. Dev runs 3.11, so CI must run 3.12.
+  versus `42.0.8` on `>= 3.12`. Dev runs 3.11, so CI must run 3.12 — but **keep 3.11 in CI
+  during the transition**: 3.11 as the existing-compatibility proof, 3.12 as the mandatory
+  release gate. Drop 3.11 from release qualification only once 3.12 has stayed green and the
+  image/icon determinism question above is settled. Flipping the whole environment in one
+  release is the riskier path.
 - **Image generation may not be cross-platform deterministic.** PNG output is version- and
-  platform-sensitive; dev is Windows/3.11, target is Linux/3.12. Until measured: the text
-  rebrand is a build step, image generation stays a committed artifact.
+  platform-sensitive; dev is Windows/3.11, target is Linux/3.12. Formalise the split rather
+  than leaving it to judgement:
+
+  | Class | Transforms | Treatment |
+  |---|---|---|
+  | Deterministic | text, XML, `.po`/`.pot`, Python, JS, SCSS | generated in CI |
+  | Binary | PNG, JPEG, possibly fonts | committed golden until proven |
+
+  The graduation gate is a determinism test: hash the generator's output on Windows and on
+  Linux; equal promotes that artifact to generated, unequal keeps it source-controlled.
 
 ## Corrections recorded
+
+- **`ir.cron` coordinates concurrent workers.** My claim that exactly one cron role may
+  exist was wrong: `_acquire_one_job` uses `FOR NO KEY UPDATE SKIP LOCKED`
+  (`ir_cron.py:365`, comment at `:330-332`). Redundant cron workers are supported; one
+  service is an operational choice, not a correctness requirement. The *real* cron hazard
+  stands and is stronger: never let cron discover databases — assign them explicitly, per
+  runtime, because `cron_database_list()` falls back to `list_dbs(True)` which is scoped by
+  PostgreSQL ownership.
+- **The connection ceiling undercounted.** The gevent process has its own pool
+  (`db_maxconn_gevent`), so it is 10 processes and ~640 potential connections at defaults,
+  not 9 and 576. Budget per role.
+- **G2 was not actually stateless as I defined it.** I listed the session seam and then
+  omitted it from G2. Attachments *and* sessions must both leave the disk before the tier
+  is stateless.
+- **Splitting the websocket role at G2 was too ambitious.** `PreforkServer` spawns and
+  respawns the gevent child itself; a separate role at that stage duplicates or fights it.
+  G3/G4, on measured load.
+- **Force-pushing the generated branch was the wrong foundation.** Append-only, plus a
+  cryptographically bound release manifest, for a platform whose premise is kept truth.
 
 - My earlier "database name == subdomain label" is **superseded** by the tenant registry
   above. Routing should not be welded to naming.
