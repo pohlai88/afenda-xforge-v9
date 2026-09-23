@@ -105,6 +105,7 @@ adding agents past that produces conflicts, not speed.
 - Create: `afenda/addons/afenda_api_docs/tests/test_routes.py`
 - Modify: `afenda/addons/afenda_brand/__manifest__.py` (drop `views/docs_placeholder.xml` from `data`)
 - Modify: `afenda/addons/afenda_brand/controllers/__init__.py:1` (drop `from . import main`)
+- Modify: `afenda/addons/afenda_brand/tests/test_identity.py:84-89` (`test_docs_placeholder_route_works`)
 - Delete: `afenda/addons/afenda_brand/controllers/main.py`
 - Delete: `afenda/addons/afenda_brand/views/docs_placeholder.xml`
 
@@ -141,6 +142,12 @@ class TestDocsRoutes(HttpCase):
         res = self.url_open("/docs")
         for tell in ("Odoo", "odoo.com"):
             self.assertNotIn(tell, res.text)
+
+    def test_settings_help_paths_do_not_404_before_the_guides_land(self):
+        # What the documentation_link widget emits. Until Task 8 these fall
+        # through to the landing page; they must never 404.
+        res = self.url_open("/docs/19.0/applications/finance/accounting.html")
+        self.assertEqual(res.status_code, 200)
 ```
 
 - [ ] **Step 3: Run it to make sure it fails**
@@ -194,8 +201,16 @@ from odoo.http import request
 
 
 class AfendaDocsController(http.Controller):
-    @http.route("/docs", type="http", auth="public", website=False, sitemap=False)
-    def docs_landing(self, **kwargs):
+    # The catch-all is not decoration. The placeholder this replaces answered
+    # `/docs/<path:subpath>` as well as `/docs`, and 117 Settings help icons
+    # point at `/docs/19.0/applications/...`. Without it those 404 from this
+    # task until Task 8 lands. Task 8 adds more specific `/docs/applications`
+    # rules, which werkzeug prefers over this one.
+    @http.route(
+        ["/docs", "/docs/<path:subpath>"],
+        type="http", auth="public", website=False, sitemap=False,
+    )
+    def docs_landing(self, subpath=None, **kwargs):
         return request.render("afenda_api_docs.landing", {})
 ```
 
@@ -238,6 +253,16 @@ from . import home
 ```
 
 In `afenda/addons/afenda_brand/__manifest__.py`, delete the `"views/docs_placeholder.xml",` entry from `data`.
+
+Then fix the test that pins the placeholder. `afenda/addons/afenda_brand/tests/test_identity.py:84` currently asserts the page says "coming soon", which stops being true here. Its real intent is that the rewritten documentation links resolve same-origin, and that intent survives. Replace the method with:
+
+```python
+    def test_docs_route_answers_same_origin(self):
+        # afenda_api_docs owns the content; this module only cares that the
+        # rewritten documentation links resolve on this origin at all.
+        self.assertEqual(self.url_open("/docs").status_code, 200)
+        self.assertEqual(self.url_open("/docs/applications/sales.html").status_code, 200)
+```
 
 - [ ] **Step 6: Run the tests and make sure they pass**
 
