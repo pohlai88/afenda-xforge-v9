@@ -3,6 +3,9 @@
 #
 #   deploy/backup.sh BACKUP_ROOT        (e.g. /var/backups/afenda; keep it out of the repo)
 #
+# After a verified backup it deletes stamps older than KEEP_DAYS days
+# (default 14) through prune-backups.sh, always keeping the newest.
+#
 # xforge is stopped for the duration so the dump and the filestore describe
 # the same moment; it is started again on exit, even after a failure.
 # pg_dump runs inside the db container, so the client always matches the
@@ -45,3 +48,7 @@ tar -tzf "$out/filestore.tgz" > /dev/null
 
 echo "backup: done -> $out"
 ls -l "$out"
+
+# Keep KEEP_DAYS days on the host; offsite.sh keeps a longer history off it.
+# Only after the new backup has been verified above.
+./prune-backups.sh "$root" "${KEEP_DAYS:-14}"

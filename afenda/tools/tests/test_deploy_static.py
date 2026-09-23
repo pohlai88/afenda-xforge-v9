@@ -107,6 +107,13 @@ class DeployStaticTests(unittest.TestCase):
         self.assertIsNotNone(umask, "backup.sh does not set umask 077")
         self.assertLess(umask.start(), text.index("mkdir -p"), "umask 077 must come before the first mkdir")
 
+    def test_backup_prunes_only_after_verifying_the_new_backup(self):
+        text = (DEPLOY / "backup.sh").read_text(encoding="utf-8")
+        prune = text.find("./prune-backups.sh")
+        self.assertNotEqual(prune, -1, "backup.sh never prunes old backups")
+        self.assertLess(text.index("tar -tzf"), prune, "pruning must follow the archive check")
+        self.assertLess(text.index("pg_restore -l"), prune, "pruning must follow the dump check")
+
     def test_init_script_directory_is_traversable(self):
         # `COPY --chmod=644` into a directory that does not exist yet creates
         # the directory with 644 as well; the non-root afenda user then cannot

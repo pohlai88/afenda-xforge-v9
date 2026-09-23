@@ -10,6 +10,7 @@ import os
 import shutil
 import subprocess
 import tempfile
+import time
 import unittest
 from pathlib import Path
 
@@ -95,6 +96,100 @@ class ApplyDoDnsDriftTests(unittest.TestCase):
             listing=[("TXT", "_dmarc", "v=DMARC1; p=quarantine;")])
         self.assertEqual(creates, [])
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+
+
+@unittest.skipUnless(BASH, "needs bash")
+class PruneBackupsTests(unittest.TestCase):
+    """deploy/prune-backups.sh ROOT KEEP_DAYS, called by backup.sh."""
+
+    def _root(self, folders):
+        root = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, root, True)
+        now = time.time()
+        for name, age_days in folders.items():
+            (root / name).mkdir()
+            (root / name / "afenda.dump").write_bytes(b"x")
+            stamp = now - age_days * 86400
+            os.utime(root / name, (stamp, stamp))
+        return root
+
+    def _prune(self, root, days):
+        return subprocess.run([BASH, str(DEPLOY / "prune-backups.sh"), str(root), str(days)],
+                              capture_output=True, text=True, timeout=60)
+
+    def test_deletes_old_stamp_folders_only(self):
+        root = self._root({"20260801T024000Z": 40, "20260905T024000Z": 15,
+                           "20260920T024000Z": 3, "20260923T024000Z": 0, "manual-copy": 40})
+        proc = self._prune(root, 14)
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertEqual(sorted(p.name for p in root.iterdir()),
+                         ["20260920T024000Z", "20260923T024000Z", "manual-copy"])
+
+    def test_never_deletes_the_newest_backup(self):
+        # A host whose backups stopped a month ago must not lose the last one.
+        root = self._root({"20260801T024000Z": 40, "20260802T024000Z": 39})
+        proc = self._prune(root, 14)
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertEqual([p.name for p in root.iterdir()], ["20260802T024000Z"])
+
+    def test_rejects_a_keep_days_that_is_not_a_positive_integer(self):
+        root = self._root({"20260801T024000Z": 40})
+        for bad in ("0", "-3", "14d", ""):
+            self.assertEqual(self._prune(root, bad).returncode, 2, bad)
+        self.assertTrue((root / "20260801T024000Z").exists())
+
+
+FAKE_RCLONE = """#!/bin/sh
+printf '%s\\n' "$*" >> "$FAKE_LOG"
+[ "$1" = "${FAKE_FAIL:-}" ] && exit 1
+exit 0
+"""
+
+
+@unittest.skipUnless(BASH, "needs bash")
+class OffsiteTests(unittest.TestCase):
+    """deploy/offsite.sh ROOT REMOTE: copy, verify, and only then expire."""
+
+    def _run(self, *args, env_extra=None):
+        tmp = Path(tempfile.mkdtemp())
+        self.addCleanup(shutil.rmtree, tmp, True)
+        (tmp / "bin").mkdir()
+        _write(tmp / "bin" / "rclone", FAKE_RCLONE)
+        os.chmod(tmp / "bin" / "rclone", 0o755)
+        (tmp / "backups").mkdir()
+        log = tmp / "rclone.log"
+        env = dict(os.environ, FAKE_LOG=str(log),
+                   PATH=str(tmp / "bin") + os.pathsep + os.environ.get("PATH", ""))
+        env.update(env_extra or {})
+        argv = [a.replace("{root}", str(tmp / "backups")) for a in args]
+        proc = subprocess.run([BASH, str(DEPLOY / "offsite.sh"), *argv], env=env,
+                              capture_output=True, text=True, timeout=60)
+        calls = [line.split()[0] for line in log.read_text(encoding="utf-8").splitlines()] if log.exists() else []
+        full = log.read_text(encoding="utf-8") if log.exists() else ""
+        return proc, calls, full
+
+    def test_copies_verifies_then_expires(self):
+        proc, calls, full = self._run("{root}", "spaces:afenda-backups-sgp1")
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertEqual(calls, ["copy", "check", "delete", "rmdirs"])
+        self.assertIn("--one-way", full)
+        self.assertIn("--min-age 30d", full)
+
+    def test_keep_remote_days_is_configurable(self):
+        proc, _calls, full = self._run("{root}", "spaces:b", env_extra={"KEEP_REMOTE_DAYS": "60"})
+        self.assertEqual(proc.returncode, 0, proc.stderr)
+        self.assertIn("--min-age 60d", full)
+
+    def test_a_failed_verification_expires_nothing(self):
+        proc, calls, _full = self._run("{root}", "spaces:b", env_extra={"FAKE_FAIL": "check"})
+        self.assertNotEqual(proc.returncode, 0)
+        self.assertEqual(calls, ["copy", "check"])
+
+    def test_bad_arguments_touch_nothing(self):
+        for args, extra in ((("{root}",), None), (("{root}", "spaces:b"), {"KEEP_REMOTE_DAYS": "0"})):
+            proc, calls, _full = self._run(*args, env_extra=extra)
+            self.assertEqual(proc.returncode, 2, (args, extra, proc.stderr))
+            self.assertEqual(calls, [])
 
 
 @unittest.skipUnless(BASH, "needs bash")

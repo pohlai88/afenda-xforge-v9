@@ -14,7 +14,8 @@ Files: `Dockerfile` (built from the repository root), `entrypoint.sh` (renders
 `compose.yaml`, `compose.proof.yaml` (no route out), `compose.tls.yaml` (VPS),
 `nginx/afenda.conf`, `nginx/afenda.tls.conf`, `nginx/40-afenda-site.sh`
 (writes `PUBLIC_URL` into the landing page at nginx start), `site/` (the
-landing page), `dns/` (the DigitalOcean zone), `make-secrets.sh`, `backup.sh`,
+landing page), `dns/` (the DigitalOcean zone), `make-secrets.sh`, `backup.sh`
+(with `prune-backups.sh`), `offsite.sh` (copies backups off the host),
 `restore.sh`.
 
 Run every command below from `deploy/`.
@@ -135,11 +136,13 @@ uses the `!override` merge tag, which older Compose versions reject. Check with
    ```
 
    ```cron
-   40 2 * * *  /srv/afenda/deploy/backup.sh /var/backups/afenda >> /var/log/afenda-backup.log 2>&1
+   40 2 * * *  { /srv/afenda/deploy/backup.sh /var/backups/afenda && /srv/afenda/deploy/offsite.sh /var/backups/afenda spaces:afenda-backups-sgp1; } >> /var/log/afenda-backup.log 2>&1
    ```
 
-   Copy `/var/backups/afenda` off the host, and prune it; the script never
-   deletes old backups.
+   `backup.sh` keeps 14 days on the host (`KEEP_DAYS`), always including the
+   newest backup; `offsite.sh` copies every backup off the host, checks the
+   copy, and keeps 30 days there (`KEEP_REMOTE_DAYS`). See
+   [Off-host copies](#off-host-copies) for the one-time rclone setup.
 
 ### Optional: zero egress
 
@@ -263,6 +266,37 @@ docker compose up -d                          # init creates an empty afenda
 replaces `filestore/afenda`, then restarts `xforge` and reloads nginx. This
 sequence was verified end to end: the restored database kept the original's
 `database.create_date`, and the logo was served from the restored filestore.
+
+### Off-host copies
+
+`offsite.sh` pushes `/var/backups/afenda` to a private DigitalOcean Spaces
+bucket, `afenda-backups-sgp1`, with rclone. One-time setup, as root on the
+VPS:
+
+1. Create the bucket in the DigitalOcean console (Spaces Object Storage,
+   region SGP1, private). Creating a bucket needs a full-access key, so it is
+   not scripted.
+2. Create an access key limited to that bucket, on a workstation with
+   `doctl`, and write it straight into the VPS's rclone config without
+   printing it:
+
+   ```bash
+   doctl spaces keys create afenda-backups --grants 'bucket=afenda-backups-sgp1;permission=readwrite' -o json \
+     | python3 -c 'import json,sys; d=json.load(sys.stdin); k=d[0] if isinstance(d,list) else d; print("[spaces]\ntype = s3\nprovider = DigitalOcean\nendpoint = sgp1.digitaloceanspaces.com\nacl = private\nno_check_bucket = true\naccess_key_id = %s\nsecret_access_key = %s" % (k["access_key"], k["secret_key"]))' \
+     | ssh root@<vps> 'apt-get install -y -q rclone >/dev/null && install -d -m 700 /root/.config/rclone && umask 077 && cat > /root/.config/rclone/rclone.conf'
+   ```
+
+   `no_check_bucket = true` stops rclone from trying to create the bucket,
+   which a key limited to one bucket may not do.
+3. Run `./offsite.sh /var/backups/afenda spaces:afenda-backups-sgp1` once
+   by hand; it ends with `offsite: done`.
+
+To restore from the bucket, copy one stamp back and restore it as usual:
+
+```bash
+rclone copy spaces:afenda-backups-sgp1/<stamp> /var/backups/afenda/<stamp>
+./restore.sh /var/backups/afenda/<stamp> --yes
+```
 
 `backup.sh` writes `afenda.dump` (`pg_dump -Fc`, run by the db container's own
 client) and `filestore.tgz` (`filestore/afenda` from the `xforge-data` volume),
