@@ -11,5 +11,5 @@
     "auto_install": False,
     # `rpc` owns the /json/2 route this documents; `afenda_brand` owns BRAND.
     "depends": ["web", "rpc", "afenda_brand"],
-    "data": ["views/landing.xml"],
+    "data": ["views/landing.xml", "views/guides.xml"],
 }
