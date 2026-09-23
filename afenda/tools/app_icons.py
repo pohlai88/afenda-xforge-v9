@@ -834,14 +834,34 @@ def icon_png(width: int, height: int, design: Design) -> Image.Image:
     ss = _supersample(width, height)
     w, h = width * ss, height * ss
     side = min(w, h)
-    layers = plane_masks(design, side)
-    im = Image.new("RGBA", (w, h), (0, 0, 0, 0))
     offset = ((w - side) // 2, (h - side) // 2)
-    for mask, colour in layers:
-        layer = Image.new("RGBA", (side, side), colour + (0,))
-        layer.putalpha(mask)
-        im.alpha_composite(layer, offset)
-    return im if ss == 1 else im.resize((width, height), Image.LANCZOS)
+
+    # The reduction happens in MASK space, one channel at a time, and never on
+    # the composited RGBA. Two faults come from doing it the other way round:
+    #
+    # Resampling a non-premultiplied RGBA mixes colour out of the transparent
+    # pixels, whose RGB is 0,0,0 - so every edge is pulled toward black and the
+    # alpha channel rings, which is where a flat region at exactly alpha 238
+    # beside one at exactly 17 came from.
+    #
+    # And LANCZOS has negative lobes. It overshoots, so a flat fill next to an
+    # edge lands a step ABOVE its own colour: MOSS (76,138,86) rendered as
+    # (77,140,87) across 4% of the calendar icon and 6% of project, which is
+    # what test_app_icons_are_branded catches. The supersampled image is clean;
+    # the overshoot is created entirely by the downscale.
+    #
+    # A mask carries no colour, so nothing can be mixed out of transparency,
+    # and BOX at an exact integer factor is the area average - it cannot
+    # overshoot. Interiors land on the declared colour and edges stay correct.
+    im = Image.new("RGBA", (width, height), (0, 0, 0, 0))
+    for mask, colour in plane_masks(design, side):
+        full = Image.new("L", (w, h), 0)
+        full.paste(mask, offset)
+        reduced = full if ss == 1 else full.resize((width, height), Image.BOX)
+        layer = Image.new("RGBA", (width, height), colour + (0,))
+        layer.putalpha(reduced)
+        im.alpha_composite(layer)
+    return im
 
 
 def _hex(colour: tuple[int, int, int]) -> str:
