@@ -396,3 +396,87 @@ class RulesTests(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
+
+
+class RstUnderlineTests(unittest.TestCase):
+    """Odoo renders module descriptions and READMEs as reStructuredText.
+
+    A title's underline must be at least as long as the title, or docutils
+    warns and the heading renders wrong in the Apps list. Substituting "Odoo"
+    with a longer product name lengthens the title and leaves the underline
+    where it was, which broke 43 headings across the tree - every one of them
+    caused by the transform, none of them wrong upstream.
+    """
+
+    def test_a_lengthened_title_gets_its_rule_repadded(self):
+        src = "Odoo CRM\n--------\n\nbody\n"
+        out, counts = rewrite_text(src, [PRODUCT], Path("addons/crm/README.md"))
+        title, rule = out.split("\n")[:2]
+        self.assertEqual(title, "AFENDA xForge CRM")
+        self.assertEqual(rule, "-" * len(title), "the underline was not repadded to the new title")
+        self.assertEqual(counts.get("rst_underline"), 1)
+
+    def test_the_underline_character_is_preserved(self):
+        for ch in "=-~^`#*+_":
+            src = f"Odoo Accounting\n{ch * 15}\n"
+            out, _ = rewrite_text(src, [PRODUCT], Path("addons/account/README.md"))
+            rule = out.split("\n")[1]
+            self.assertEqual(set(rule), {ch}, f"{ch} was not preserved")
+            self.assertEqual(len(rule), len("AFENDA xForge Accounting"))
+
+    def test_a_rule_that_is_already_long_enough_is_untouched(self):
+        src = "Odoo\n" + "=" * 60 + "\n"
+        out, counts = rewrite_text(src, [PRODUCT], Path("addons/x/README.md"))
+        self.assertEqual(out.split("\n")[1], "=" * 60, "a long enough rule must not be shortened")
+        self.assertNotIn("rst_underline", counts)
+
+    def test_a_title_the_transform_did_not_touch_is_left_alone(self):
+        """The repair exists to undo this transform's own collateral damage. A
+        short underline upstream shipped is upstream's business - and there are
+        none, so anything it touched beyond that would be a new defect."""
+        src = "Some Other Heading\n---\n"
+        out, counts = rewrite_text(src, [PRODUCT], Path("addons/x/README.md"))
+        self.assertEqual(out, src)
+        self.assertNotIn("rst_underline", counts)
+
+    def test_only_where_odoo_renders_rst(self):
+        """.md, .rst and __manifest__.py descriptions are rendered as RST. An
+        ordinary .py file is code: a comment rule under a comment line is not a
+        heading, and padding it would churn source for nothing."""
+        src = "# Odoo notes\n# ----\n"
+        out, counts = rewrite_text(src, [PRODUCT], Path("addons/crm/models/thing.py"))
+        self.assertNotIn("rst_underline", counts)
+        self.assertEqual(out.split("\n")[1], "# ----")
+
+        man = 'Odoo CRM\n--------\n'
+        out2, counts2 = rewrite_text(man, [PRODUCT], Path("addons/crm/__manifest__.py"))
+        self.assertEqual(counts2.get("rst_underline"), 1)
+
+    def test_an_overline_is_not_mistaken_for_an_underline(self):
+        """A rule ABOVE a title is an overline; it is not made short by
+        lengthening the title below it, and padding it alone would leave an
+        RST section with mismatched over and under rules, which is a hard
+        docutils error rather than a warning."""
+        src = "=" * 8 + "\nOdoo CRM\n" + "=" * 8 + "\n"
+        out, _ = rewrite_text(src, [PRODUCT], Path("addons/crm/README.md"))
+        lines = out.split("\n")
+        self.assertEqual(len(lines[0]), len(lines[2]),
+                         "the overline and underline no longer match")
+
+    def test_it_repairs_a_tree_that_is_already_converged(self):
+        """The damage is already in the tree: those titles carry the new name, so
+        a later run has nothing left to substitute and `changed` is empty. If the
+        repair only looked at lines it had just rewritten it would never fire on
+        the very files it was written to fix."""
+        src = "AFENDA xForge CRM\n--------\n"
+        out, counts = rewrite_text(src, [PRODUCT], Path("addons/crm/README.md"))
+        self.assertEqual(counts.get("rst_underline"), 1)
+        self.assertEqual(out.split("\n")[1], "-" * len("AFENDA xForge CRM"))
+
+    def test_it_is_idempotent(self):
+        """Running twice must not keep growing the rule."""
+        src = "AFENDA xForge CRM\n--------\n"
+        once, _ = rewrite_text(src, [PRODUCT], Path("addons/crm/README.md"))
+        twice, counts = rewrite_text(once, [PRODUCT], Path("addons/crm/README.md"))
+        self.assertEqual(once, twice)
+        self.assertNotIn("rst_underline", counts)

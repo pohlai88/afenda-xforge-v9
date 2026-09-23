@@ -24,6 +24,10 @@ TEXT_SUFFIXES = frozenset({
 })
 CODE_SUFFIXES = frozenset({".py", ".js", ".ts", ".scss", ".css", ".template"})
 PO_SUFFIXES = frozenset({".po", ".pot"})
+# Where Odoo renders reStructuredText: READMEs, and the `description` in a
+# manifest. See `repair_rst_underlines`.
+RST_SUFFIXES = frozenset({".md", ".rst"})
+RULE_CHARS = frozenset("=-~^`#*+_")
 
 # Lines never rewritten, in any file.
 PROTECTED_ALWAYS = re.compile(
@@ -74,6 +78,66 @@ def _is_protected(line: str, path: Path) -> bool:
     return False
 
 
+def _is_rule_line(line: str) -> bool:
+    """True if ``line`` is nothing but a run of one reStructuredText rule character.
+
+    Quotes are deliberately NOT rule characters here. RST allows them, but in this
+    tree a line of \"\"\" is a docstring terminator about a hundred times more often
+    than it is a section rule, and treating one as the other would rewrite Python
+    source. The repair below only ever runs where Odoo renders RST anyway; this is
+    the second lock on the same door.
+    """
+    body = line.strip()
+    return len(body) >= 3 and body[0] in RULE_CHARS and set(body) == {body[0]}
+
+
+def repair_rst_underlines(lines: list[str], changed: set[int], markers: tuple[str, ...] = ()) -> int:
+    """Re-pad the RST rule under any title this rewrite just lengthened.
+
+    Odoo renders module descriptions and READMEs as reStructuredText, where a
+    title's rule must be at least as long as the title. Substituting a longer
+    product name into a heading lengthens the title and leaves the rule where it
+    was, so docutils warns and the heading renders wrong in the Apps list.
+
+    A title qualifies if this call just rewrote it, OR if it carries one of the
+    literal strings the rules substitute in. Both are needed. The first alone
+    would never fire on an already-converged tree - the titles say the new name
+    already, so there is nothing left to substitute and the damage would sit
+    there forever. The second alone would miss a title lengthened by a rule
+    whose replacement it does not literally contain.
+
+    That pairing is what keeps the repair to this transform's own collateral
+    damage: a short rule that upstream shipped is upstream's business, and
+    measured across addons/ and odoo/ there are none. Rules are only ever
+    lengthened, never shortened.
+    """
+    fixed = 0
+    candidates = set(changed)
+    if markers:
+        candidates.update(
+            i for i, line in enumerate(lines) if any(m in line for m in markers))
+    for i in sorted(candidates):
+        if i + 1 >= len(lines):
+            continue
+        title, rule = lines[i].rstrip("\r\n"), lines[i + 1].rstrip("\r\n")
+        body, mark = title.strip(), rule.strip()
+        if not body or _is_rule_line(title) or not _is_rule_line(rule):
+            continue
+        if len(mark) >= len(body):
+            continue
+        pad = mark[0] * len(body)
+        lines[i + 1] = pad + lines[i + 1][len(rule):]
+        fixed += 1
+        # A rule ABOVE the title is an overline. RST requires an overline and its
+        # underline to be the same length; padding only the underline turns a
+        # warning into a hard docutils error, so the pair moves together.
+        if i and _is_rule_line(lines[i - 1]):
+            over = lines[i - 1].rstrip("\r\n")
+            if over.strip()[0] == mark[0] and len(over.strip()) == len(mark):
+                lines[i - 1] = pad + lines[i - 1][len(over):]
+    return fixed
+
+
 def rewrite_text(text: str, rules: list[Rule], path: Path) -> tuple[str, dict[str, int]]:
     """Return (new_text, counts). counts maps rule name to replacements made."""
     counts: dict[str, int] = {}
@@ -81,13 +145,29 @@ def rewrite_text(text: str, rules: list[Rule], path: Path) -> tuple[str, dict[st
     if not active:
         return text, counts
     out: list[str] = []
-    for line in text.splitlines(keepends=True):
+    changed: set[int] = set()
+    for index, line in enumerate(text.splitlines(keepends=True)):
         if not _is_protected(line, path):
             for rule in active:
                 line, n = rule.pattern.subn(rule.replacement, line)
                 if n:
                     counts[rule.name] = counts.get(rule.name, 0) + n
+                    changed.add(index)
         out.append(line)
+    # Structural repair, after the substitutions rather than among them: a rule
+    # sees one line at a time and an underline is only wrong relative to the line
+    # above it, so this cannot be expressed as a Rule.
+    if path.suffix in RST_SUFFIXES or path.name == "__manifest__.py":
+        # The literals the rules put into the tree, so the repair can recognise a
+        # title this transform lengthened on an earlier run. Replacements holding
+        # a backreference are not literals and are skipped.
+        markers = tuple(sorted({
+            r.replacement for r in active
+            if "\\" not in r.replacement and len(r.replacement) > 3
+        }))
+        n = repair_rst_underlines(out, changed, markers)
+        if n:
+            counts["rst_underline"] = counts.get("rst_underline", 0) + n
     return "".join(out), counts
 
 
