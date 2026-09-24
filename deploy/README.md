@@ -37,6 +37,20 @@ Independence proof (xforge, init and db on an `internal: true` network):
 docker compose -f compose.yaml -f compose.proof.yaml up -d
 ```
 
+## Updating the base images
+
+Every base image is pinned as `<tag>@sha256:<digest>` (`compose.yaml`,
+`Dockerfile` `ARG PYTHON_IMAGE`), so a rebuild never picks up a moved tag.
+To take an update, resolve the tag's current index digest, replace it, and
+ship it like any change:
+
+    docker buildx imagetools inspect postgres:16 --format '{{json .Manifest.Digest}}'
+    docker buildx imagetools inspect nginx:1.27-alpine --format '{{json .Manifest.Digest}}'
+    docker buildx imagetools inspect python:3.11-slim-bookworm --format '{{json .Manifest.Digest}}'
+
+Stay on the same postgres major version: a new major needs a dump and restore
+(`backup.sh`, then `restore.sh` into a new volume), not a digest bump.
+
 ## VPS
 
 Requires Docker Engine with the Compose plugin **>= 2.24.4**: `compose.tls.yaml`

@@ -10,7 +10,7 @@
 # that were tested. On 3.12 reportlab 4.1 needs rl-renderPM, which
 # requirements.txt only installs on win32.
 
-ARG PYTHON_IMAGE=python:3.11-slim-bookworm
+ARG PYTHON_IMAGE=python:3.11-slim-bookworm@sha256:a36c24f9cbdf4fd0f52d67f0823eeac19c2028c637cecc392d97f980d4fec56b
 
 # --------------------------------------------------------------------------
 # build: compile the Python dependencies into /opt/venv, fetch wkhtmltopdf

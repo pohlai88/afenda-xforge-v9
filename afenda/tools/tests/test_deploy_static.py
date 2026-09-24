@@ -165,6 +165,18 @@ class DeployStaticTests(unittest.TestCase):
         self.assertIn("deploy/**/*.woff2 binary", lines)
         self.assertGreater(lines.index("deploy/**/*.woff2 binary"), lines.index("deploy/** text eol=lf"))
 
+    def test_every_base_image_is_pinned_by_digest(self):
+        # A tag can move under us; a digest cannot. The tag stays for humans.
+        pinned = re.compile(r"^[a-z0-9./-]+:[A-Za-z0-9._-]+@sha256:[0-9a-f]{64}$")
+        compose = (DEPLOY / "compose.yaml").read_text(encoding="utf-8")
+        refs = re.findall(r"^\s+image:\s*(\S+)\s*$", compose, re.MULTILINE)
+        refs = [r for r in refs if not r.startswith("${XFORGE_IMAGE")]
+        self.assertEqual(len(refs), 2, refs)  # postgres and nginx
+        arg = re.search(r"^ARG PYTHON_IMAGE=(\S+)$", DOCKERFILE.read_text(encoding="utf-8"), re.MULTILINE)
+        self.assertIsNotNone(arg)
+        for ref in refs + [arg.group(1)]:
+            self.assertRegex(ref, pinned)
+
 
 class LandingSiteStaticTests(unittest.TestCase):
     """The nexuscanon.com landing page under deploy/site: one screen, black and

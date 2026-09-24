@@ -33,7 +33,7 @@ x-xforge-env: &xforge-env
 
 services:
   db:
-    image: postgres:16
+    image: postgres:16@sha256:a3b7f434b2dc57ce85a67e171163eb8ab1a1ebcb39d27484661f26b1dfbe30d6
     logging: *logging
     restart: unless-stopped
     environment:
@@ -103,7 +103,7 @@ services:
       - backend
 
   nginx:
-    image: nginx:1.27-alpine
+    image: nginx:1.27-alpine@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10
     logging: *logging
     restart: unless-stopped
     ports:
