@@ -89,7 +89,10 @@ class TestBranding(HttpCase):
     def test_login_page_is_branded(self):
         html = self.url_open("/web/login").text
         self.assertIn("<title>AFENDA xForge</title>", html.replace("\n", ""))
-        self.assertIn("/afenda_brand/static/img/favicon.ico", html)
+        # Not the AFENDA file specifically: a configured tenant's own favicon
+        # is served here instead, which is the point of the third fallback.
+        self.assertRegex(html, r'rel="shortcut icon"[^>]*href="[^"]+"',
+                         "the login page links no favicon")
         self.assertIn("AFENDA xForge", html)
         self.assertIn("o_afenda_login", html, "the login body class is missing")
         self.assertIn(BRAND["tagline"], html, "the login card is missing the tagline")
@@ -325,10 +328,23 @@ class TestBranding(HttpCase):
             icon = self.url_open(href.group(1))
             self.assertEqual(icon.status_code, 200, f"{url}: {href.group(1)} is not served")
             self.assertTrue(icon.content, f"{url}: the favicon is empty")
-            # Whatever the route, the bytes are the AFENDA favicon: the hook
-            # wrote the same file onto every company.
-            with file_open("afenda_brand/static/img/favicon.ico", "rb") as f:
-                self.assertEqual(icon.content, f.read(), f"{url} serves a different favicon")
+            # NOT asserted as "the bytes are AFENDA's". That was only ever true
+            # of a database nobody had configured: a tenant with its own favicon
+            # is the feature working, not failing -- the same mistake
+            # test_company_defaults used to make about the company name. What is
+            # pinned instead is the contract: whatever is served is a real image
+            # of the type a tab can render, and when the company HAS a favicon,
+            # that is what is served rather than AFENDA's.
+            self.assertTrue(
+                icon.headers.get("Content-Type", "").startswith("image/"),
+                f"{url}: the favicon is not served as an image",
+            )
+            company = self.env.ref("base.main_company").sudo()
+            if company.favicon:
+                self.assertEqual(
+                    icon.content, base64.b64decode(company.favicon),
+                    f"{url} serves AFENDA's favicon while the tenant has its own",
+                )
 
     def test_pwa_manifest_is_branded(self):
         manifest = self.url_open("/web/manifest.webmanifest").json()

@@ -12,8 +12,16 @@
              per-company favicon field (which the install hook writes and the
              company form offers) would never reach a browser. Order:
              the scoped-app icon, then the company's own, then AFENDA's. -->
+        <!-- web_favicon's `_get_favicon()` resolves the company from the `cids`
+             COOKIE (afenda/oca/web/web_favicon/models/res_company.py:74-83), so
+             on a logged-out page there is no cookie, it returns False, and the
+             tenant's own favicon can never reach the browser tab, which is
+             every visitor's first impression of the product. The third term
+             closes that: the company's favicon by URL, cache-busted on
+             write_date so a replaced icon is picked up rather than cached
+             forever. AFENDA's file stays last, for a company that has none. -->
         <xpath expr="//link[@rel='shortcut icon']" position="attributes">
-            <attribute name="t-att-href">x_icon or env['res.company'].sudo()._get_favicon() or '/afenda_brand/static/img/favicon.ico'</attribute>
+            <attribute name="t-att-href">x_icon or env['res.company'].sudo()._get_favicon() or (env.company.sudo().favicon and '/web/image/res.company/%s/favicon?unique=%s' % (env.company.id, env.company.sudo().write_date.strftime('%Y%m%d%H%M%S'))) or '/afenda_brand/static/img/favicon.ico'</attribute>
         </xpath>
     </template>
 
