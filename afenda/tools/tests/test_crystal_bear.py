@@ -10,9 +10,11 @@ inputs rather than outputs, and it makes this the only thing standing between
 """
 import re
 import unittest
+# The standard library, not lxml: the tools suite runs in CI on
+# afenda/tools/requirements.txt alone, which has no lxml, and a module that
+# fails to import takes all its tests out of the count with it.
+import xml.etree.ElementTree as etree
 from pathlib import Path
-
-from lxml import etree
 
 from afenda.tools.crystal_bear import crystal
 
@@ -47,7 +49,7 @@ def inline_svg():
 
 
 def elements(root):
-    """Real elements only: lxml yields comments from iter() too."""
+    """Real elements only, never a comment node, whichever parser built the tree."""
     return [el for el in root.iter() if isinstance(el.tag, str)]
 
 
