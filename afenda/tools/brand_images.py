@@ -11,6 +11,7 @@ the ``TARGETS`` table's job and only its job -- see "The usage contract" below.
 """
 from __future__ import annotations
 
+import re
 import sys
 from functools import lru_cache
 from pathlib import Path
@@ -207,6 +208,87 @@ ADDON_TARGETS: dict[str, str] = {
     f"{ADDON}/description/icon.png": "badge_png",
     **{f"{ADDON}/img/icon-{n}.png": "badge_png" for n in (16, 32, 48, 64, 128, 192, 256, 512)},
 }
+
+# ---------------------------------------------------------------------------
+# Upstream illustrations that carry Odoo brand colour
+# ---------------------------------------------------------------------------
+# These are artwork, not text, which is why they are here and not in
+# rules.py. `.svg` is deliberately absent from rebrand.TEXT_SUFFIXES (see the
+# comment on COLOURISH): admitting it would hand all 971 SVGs under SCAN_DIRS
+# to every rule, and the pristine-upstream corpus shows the text rules do reach
+# SVG content - a `<title>Odoo Logo</title>` is rewritten - so the blast radius
+# there is real rather than nil. Sixteen named files is the whole problem, so
+# sixteen named files is the fix.
+#
+# Unlike every other target here these are recoloured rather than synthesised:
+# nothing can generate an arbitrary illustration. The substitution is in place
+# and idempotent, so a second run is a no-op and an upstream refresh that
+# reintroduces a purple is picked up.
+#
+# The two Odoo purples are a shade pair, so they map to a brand pair rather
+# than collapsing to one colour. Collapsing is what the text rule does in SCSS,
+# where the lighter purple is a variant of the darker; inside a single drawing
+# it would flatten the artwork. account/multi_ledger.svg is the one file
+# carrying both, and it is the reason this is a mapping and not a constant.
+SVG_SWATCH: dict[str, str] = {
+    "#714b67": "#1E3A8A",  # Odoo primary purple -> Ledger Blue
+    "#875a7b": "#3B6EA8",  # its lighter companion -> the lighter brand blue
+    "#7c7bad": "#1E3A8A",  # the legacy community purple; absent today, mapped anyway
+    # The Odoo teal, which afenda_brand's own icon test names as Odoo artwork
+    # alongside the purple. It maps to the brand's teal rather than to the
+    # primary: account/description/l10n.svg is drawn in this one colour and
+    # nothing else, so sending it to Ledger Blue would not recolour a drawing
+    # so much as replace it with a navy silhouette.
+    "#1ad3bb": "#2F8F8A",
+    # Shade variants of the Odoo purple, which the canonical three-hex list
+    # does not contain and which a hex grep therefore does not find. These were
+    # caught by rendering the recoloured files and looking at them: three of
+    # them sat in the same drawing as a hex that HAD been swapped, so the file
+    # came out half blue and half purple, which reads worse than leaving it
+    # alone. A colour count cannot see that; a picture can.
+    #
+    # Mapped to keep the ramp's order - darker purple to darker blue - so a
+    # drawing that used two shades still has two, and every target stays inside
+    # BRAND (see test_every_replacement_colour_is_in_the_brand_palette).
+    "#6b4862": "#1E3A8A",  # darker than the primary purple -> Ledger Blue
+    "#7d5372": "#3448A8",  # between the two -> the mid brand blue
+    "#906083": "#3B6EA8",  # lighter than the light purple -> the lighter blue
+}
+RECOLOUR: tuple[str, ...] = (
+    "addons/account/static/description/l10n.svg",
+    "addons/account/static/src/img/multi_ledger.svg",
+    "addons/base_automation/static/img/automation.svg",
+    "addons/hr_attendance/static/img/tablet-cam.svg",
+    "addons/hr_attendance/static/img/tablet-pin.svg",
+    "addons/hr_attendance/static/img/tablet-rfid.svg",
+    "addons/mass_mailing/static/shapes/s_newsletter_benefits_popup.svg",
+    "addons/stock/static/img/replenishment.svg",
+    "addons/stock_picking_batch/static/shapes/batch-picking.svg",
+    "addons/stock_picking_batch/static/shapes/cluster-picking.svg",
+    "addons/stock_picking_batch/static/shapes/wave-picking.svg",
+    "addons/survey/static/src/img/classic-ornament-purple.svg",
+    "addons/survey/static/src/img/modern-seal-purple.svg",
+    "addons/survey/static/src/img/survey_background_sample.svg",
+    "addons/web/static/img/neutral_face.svg",
+    "addons/web/static/img/smiling_face.svg",
+    "addons/website_mass_mailing/static/shapes/s_newsletter_benefits_popup.svg",
+)
+_SVG_ODOO_COLOUR = re.compile("|".join(re.escape(h) for h in SVG_SWATCH), re.I)
+
+
+def recolour_svg(text: str) -> str:
+    """Every Odoo brand colour in ``text``, swapped for its brand counterpart.
+
+    Case is preserved the way the file wrote it: SVG editors emit both
+    ``#714B67`` and ``#714b67`` and a rewrite that normalised them would show up
+    as noise in the diff for files that needed no colour change at all.
+    """
+    def swap(m: re.Match[str]) -> str:
+        replacement = SVG_SWATCH[m.group(0).lower()]
+        return replacement if m.group(0).islower() is False else replacement.lower()
+
+    return _SVG_ODOO_COLOUR.sub(swap, text)
+
 
 SIZES: dict[str, tuple[int, int]] = {
     f"{ADDON}/img/logo.png": (1200, 300),
@@ -514,6 +596,28 @@ def render_all(root: Path) -> list[Path]:
         else:
             raise ValueError(kind)
         written.append(path)
+    # The upstream illustrations. Recoloured in place, and only listed as
+    # written when the bytes actually changed, so a second run reports nothing
+    # rather than claiming seventeen files it did not touch.
+    #
+    # newline="" on both sides, which is load-bearing rather than tidy. These
+    # files do not agree on a line ending - base_automation/automation.svg is
+    # CRLF where the rest are LF - and translating on write turns a one-colour
+    # change into a 25-line diff that buries it. Reading with newline="" keeps
+    # the endings in the string; writing with newline="" puts them back
+    # untouched.
+    for rel in RECOLOUR:
+        path = root / rel
+        if not path.is_file():
+            continue
+        with path.open("r", encoding="utf-8", newline="") as fh:
+            before = fh.read()
+        after = recolour_svg(before)
+        if after != before:
+            with path.open("w", encoding="utf-8", newline="") as fh:
+                fh.write(after)
+            written.append(path)
+
     # Imported here rather than at module level: app_icons builds on this
     # module's mark, so a top-level import would be circular.
     from . import app_icons
