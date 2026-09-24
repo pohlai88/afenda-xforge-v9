@@ -196,7 +196,7 @@ precondition for ruling 4's uninstall story, enforced by a test rather than by c
 2. `test_load_company_records_is_idempotent`
 3. `test_load_company_records_uses_env_company`
 
-`afenda_industry_bakery` — 9 tests in `tests/test_pack.py`:
+`afenda_industry_bakery` — 10 tests in `tests/test_pack.py`:
 
 4. `test_products_and_categories_installed`
 5. `test_boms_resolve_components`
@@ -223,7 +223,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --test-tags "/afenda_industry_bakery" --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_base: 4 tests`, `afenda_industry_bakery: 9 tests`. A run that
+Expected: `afenda_industry_base: 4 tests`, `afenda_industry_bakery: 10 tests`. A run that
 prints no count collected nothing. The `afenda_brand` suite runs once at the end too,
 because its collection guard now has two new addons in scope.
 

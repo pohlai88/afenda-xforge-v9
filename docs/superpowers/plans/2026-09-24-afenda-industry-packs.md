@@ -53,7 +53,7 @@ afenda/addons/afenda_industry_bakery/
   data/mrp_bom.xml
   demo/bakery_demo.xml
   tests/__init__.py
-  tests/test_pack.py       9 tests
+  tests/test_pack.py      10 tests
 ```
 
 `tests/common.py` is deliberately **not** imported by `afenda_industry_base/tests/__init__.py` — it holds no tests of its own, and the bakery pack imports it by path.
@@ -617,19 +617,6 @@ Append to `TestBakeryPack` in `tests/test_pack.py`:
                     f"which is not a raw material",
                 )
                 self.assertGreater(line.product_qty, 0.0)
-                # Upper bound, and it is the point of this assertion rather than
-                # decoration. The recipe table is written in grams and divided by
-                # 1000 when seeded, so the largest component in the pack is 700 g
-                # of flour = 0.7, and the largest unit component is 8 eggs. Read
-                # the table as "the raw's own unit" instead and a loaf consumes
-                # 600 kg of flour. Nothing else in the plan would notice: no other
-                # assertion looks at component magnitude at all.
-                self.assertLess(
-                    line.product_qty, 10.0,
-                    f"{bom.display_name} consumes {line.product_qty} "
-                    f"{line.product_uom_id.name} of {line.product_id.display_name} -- "
-                    f"grams were probably seeded without the kilogram conversion",
-                )
 ```
 
 - [ ] **Step 2: Run it and verify it fails**
@@ -698,6 +685,35 @@ Both manifest and `__init__.py` changes belong in **this** task's commit, not an
 earlier one: the hook has nothing to seed until now, and naming it earlier would
 break install.
 
+**Also fold in, from Task 3's review** (same module, same files, one commit):
+
+- `data/mrp_bom.xml` carries a comment claiming "company_id is left unset so the pack
+  installs in any company". That is false: `mrp.bom.company_id` defaults to
+  `self.env.company` (`addons/mrp/models/mrp_bom.py:67-69`), so each header is owned by
+  whichever company installs. The *behaviour* is the accepted limitation in spec ruling 1;
+  the *comment* claims there is no limitation. Restate it to match what happens.
+- `test_boms_resolve_components` finds BoMs by category rather than by module ownership,
+  and never checks one-per-product. A later edit adding a second BoM on sourdough while
+  dropping `bom_focaccia` keeps the count at twelve and stays green, leaving focaccia
+  unmanufacturable. Assert `len(boms.product_tmpl_id) == 12` as well.
+- The class docstring still says "the two tests below"; there will be seven.
+
+**Two facts about this task that are easy to get wrong:**
+
+1. **`-u` does not run `post_init_hook`.** It executes only when
+   `update_operation == 'install'` (`odoo/modules/loading.py:239-243`). So the Step 2 red
+   run against an already-installed database will still fail on "has no components" *after*
+   you have written a perfect `hooks.py` — that is the upgrade path, not a defect in your
+   seeding. Only the fresh-database `-i` run in Step 4 proves the hook.
+2. **The BoM lines are the one pack record with no XMLID of their own.**
+   `bom.write({"bom_line_ids": [(0, 0, …)]})` creates `mrp.bom.line` rows with no
+   `ir.model.data` entry, so spec ruling 5 is satisfied for them *transitively*: they hang
+   off a module-owned header and `mrp.bom.line.bom_id` is `ondelete='cascade'`
+   (`addons/mrp/models/mrp_bom.py:701-703`), so uninstall still removes them. That is a
+   real difference from every other record in the pack and is why
+   `test_post_init_records_are_module_owned` enumerates only `pos.config` and
+   `stock.warehouse.orderpoint` — do not add `mrp.bom.line` to it and expect ownership.
+
 **Interfaces:**
 - Consumes: `load_company_records` (Task 1), product and BoM XMLIDs (Tasks 2–3).
 - Produces: `post_init_hook(env)`; XMLIDs `pos_config_counter`, `pos_categ_bread`, `pos_categ_pastry`, `orderpoint_<raw slug>` (10 of them).
@@ -720,6 +736,56 @@ Append to `TestBakeryPack`:
     def test_post_init_records_are_module_owned(self):
         self.assert_records_are_module_owned(MODULE, "pos.config", 1)
         self.assert_records_are_module_owned(MODULE, "stock.warehouse.orderpoint", 10)
+
+    def test_bom_component_quantities_are_converted(self):
+        """The grams-to-kilograms conversion, asserted per UoM.
+
+        `RECIPES` is written in grams; `_seed_bom_lines` divides by 1000 for
+        every raw but eggs, which are stocked in Units. Drop that division, or
+        widen the egg exemption by one product, and a sourdough loaf consumes
+        600 KILOGRAMS of flour. Every other assertion in this pack passes
+        happily: the line exists, its product is a raw material, its quantity is
+        greater than zero, and there are twelve BoMs.
+
+        The bound has to be per-UoM, because the invariant is per-UoM. A single
+        threshold cannot work: set it high enough to admit 8 eggs and it admits
+        yeast at 2 kg, salt at 5 kg and sugar at 6 kg -- roughly eleven of the
+        fifty-odd lines in this pack, every one of them an unconverted gram
+        figure that happens to be a small number.
+
+        Kilogram lines: every legitimate value is <= 0.7 (focaccia's flour) and
+        every unconverted gram figure is >= 2.0, so 1.0 separates them exactly,
+        in both directions, with no false positive available.
+        """
+        kg = self.env.ref("uom.product_uom_kgm")
+        units = self.env.ref("uom.product_uom_unit")
+        lines = self.env["mrp.bom"].search(
+            [("product_tmpl_id.categ_id", "=", self.env.ref(f"{MODULE}.categ_finished").id)]
+        ).bom_line_ids
+        self.assertTrue(lines, "no components to check")
+        for line in lines:
+            if line.product_uom_id == kg:
+                self.assertLess(
+                    line.product_qty, 1.0,
+                    f"{line.bom_id.display_name} consumes {line.product_qty} kg of "
+                    f"{line.product_id.display_name}; the largest real component is "
+                    f"0.7 kg, so this is a gram figure that never got divided by 1000",
+                )
+            elif line.product_uom_id == units:
+                self.assertLessEqual(
+                    line.product_qty, 12.0,
+                    f"{line.bom_id.display_name} consumes {line.product_qty} "
+                    f"{line.product_id.display_name}; the largest real count is 8",
+                )
+                self.assertEqual(
+                    line.product_qty, int(line.product_qty),
+                    f"{line.product_id.display_name} is counted in whole units",
+                )
+            else:
+                self.fail(
+                    f"{line.product_id.display_name} is consumed in "
+                    f"{line.product_uom_id.name}, which this pack does not use"
+                )
 
     def test_reordering_rules_cover_raw_materials(self):
         raw = self.env.ref(f"{MODULE}.categ_raw")
@@ -907,7 +973,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --without-demo=all
 ```
 
-Expected: `afenda_industry_bakery: 6 tests`, `0 failed, 0 error(s)`. A `0 tests` line means the module was already installed there — use a database name that does not exist yet.
+Expected: `afenda_industry_bakery: 7 tests`, `0 failed, 0 error(s)`. A `0 tests` line means the module was already installed there — use a database name that does not exist yet.
 
 Afterwards drop the scratch database **and its filestore** (`filestore/<db>` under Odoo's data directory, path from `odoo.tools.config`); a leftover filestore makes later attachment-backed failures read as code regressions.
 
@@ -995,7 +1061,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --test-tags "/afenda_industry_bakery" --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_bakery: 9 tests`, `0 failed`. These three are guards, not red-green tests: they pass on correct data from the moment they are written. To prove a guard actually bites, temporarily add `<field name="company_id" eval="1"/>` to one product record, re-run, see `test_data_xml_sets_no_company_id` fail, then remove it. Do that once; do not commit it.
+Expected: `afenda_industry_bakery: 10 tests`, `0 failed`. These three are guards, not red-green tests: they pass on correct data from the moment they are written. To prove a guard actually bites, temporarily add `<field name="company_id" eval="1"/>` to one product record, re-run, see `test_data_xml_sets_no_company_id` fail, then remove it. Do that once; do not commit it.
 
 - [ ] **Step 3: Commit**
 
@@ -1006,7 +1072,7 @@ printf '%s\n' "[ADD] industry: static guards on the bakery pack data" "" \
   "Static rather than runtime on purpose -- a static check holds even when the" \
   "localization is not installed in the test database, and it catches the" \
   "future edit that puts the mistake back." "" \
-  "afenda_industry_bakery: 9 tests, 0 failed." "" \
+  "afenda_industry_bakery: 10 tests, 0 failed." "" \
   "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>" > /tmp/msg5.txt
 git add -- afenda/addons/afenda_industry_bakery && \
 git commit --only -F /tmp/msg5.txt -- afenda/addons/afenda_industry_bakery
@@ -1036,7 +1102,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --test-tags "/afenda_industry_bakery" --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_bakery: 9 tests`, `0 failed`. The `afenda` database was created `--without-demo=all`, so the demo file is parsed but not loaded; a failure here means something in `demo/` was wrongly listed under `data` in the manifest.
+Expected: `afenda_industry_bakery: 10 tests`, `0 failed`. The `afenda` database was created `--without-demo=all`, so the demo file is parsed but not loaded; a failure here means something in `demo/` was wrongly listed under `data` in the manifest.
 
 - [ ] **Step 2: Commit**
 
@@ -1045,7 +1111,7 @@ printf '%s\n' "[ADD] industry: bakery demo suppliers, orders and staff" "" \
   "Business history lives in demo/ and nowhere else: production installs run" \
   "--without-demo=all, so this is the line between a pack that configures a" \
   "real tenant and one that fills it with invented transactions." "" \
-  "afenda_industry_bakery: 9 tests, 0 failed." "" \
+  "afenda_industry_bakery: 10 tests, 0 failed." "" \
   "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>" > /tmp/msg6.txt
 git add -- afenda/addons/afenda_industry_bakery && \
 git commit --only -F /tmp/msg6.txt -- afenda/addons/afenda_industry_bakery
@@ -1066,7 +1132,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_base: 4 tests` and `afenda_industry_bakery: 9 tests`, 13 in total, `0 failed`.
+Expected: `afenda_industry_base: 4 tests` and `afenda_industry_bakery: 10 tests`, 14 in total, `0 failed`.
 
 Then run the same two modules **once on a fresh throwaway database** with `-i` and `--without-demo=all`, because that is what CI does (the orchestrator session's job builds a new database per run) and it is the only path that exercises `post_init_hook` end to end. Both result lines must read the same 3 and 9. Drop the scratch database and its filestore afterwards. These two numbers are what CI's floor is raised by — take them from the result lines, never the per-class stats lines.
 
