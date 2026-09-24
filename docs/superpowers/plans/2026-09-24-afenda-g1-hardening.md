@@ -15,6 +15,15 @@
 - Running digests: `postgres@sha256:a3b7f434b2dc57ce85a67e171163eb8ab1a1ebcb39d27484661f26b1dfbe30d6`, `nginx@sha256:65645c7bb6a0661892a8b03b89d0743208a18dd2f3f17a54ef4b76fb8e2f2a10`; the python base is not cached on the host and is resolved in Task 1.
 - AFENDA tests use `HttpCase` but no `start_tour`/`browser_js`, so CI needs no browser. Odoo prints `"{failed} failed, {errors} error(s) of {testsRun} tests"` (`odoo/tests/result.py:198`).
 
+Proven 2026-09-24 against a throwaway `postgres:16` at the pinned digest, with the SQL extracted verbatim from this plan (`g1proof` harness, scratchpad):
+- the db-init script creates `afenda_app` with `rolsuper = f`, `rolcreatedb = t`; the migrate role block creates it when absent, is idempotent, and `afenda_app` logs in over TCP with the secret's password;
+- as `afenda_app`: `CREATE DATABASE … ENCODING 'unicode' LC_COLLATE 'C' TEMPLATE template0` and `CREATE EXTENSION pg_trgm` (the fresh-host path);
+- on an Odoo-like schema (serial table, trigram GIN index, standalone sequence, view, function, `pg_trgm`) owned by `xforge`: forward, rollback, forward and a repeat run each end with `every object in afenda is owned by <target>` in one transaction; afterwards `afenda_app` ran ALTER TABLE, ALTER SEQUENCE, CREATE SEQUENCE, an insert through the serial, a trigram index and CREATE OR REPLACE VIEW;
+- `pg_dump -U xforge` then `pg_restore --no-owner --role=afenda_app` into a database owned by `afenda_app`: 0 objects owned by anyone else;
+- with another session holding an ACCESS EXCLUSIVE lock, the migration failed after 5 s (`canceling statement due to lock timeout`, exit 3) and rolled back entirely, `ALTER DATABASE` included.
+
+Reviewed 2026-09-24 by an independent read-only agent: 2 blockers (live rollback target and order; CI run on the wrong ref and before its commit), 3 major (migration against a live app without a lock timeout; fresh-host path untested; a check that left a junk record in production), 5 minor; all folded into Tasks 2–5 below.
+
 ## Global Constraints
 
 - CLAUDE.md "Execution discipline" binds every task: name the cause before a change, narrowest test per edit, full gates once before each commit, never rerun a passing gate, stop after the same fix fails twice.
@@ -121,41 +130,61 @@ Run: `cd deploy && docker compose build` → ends with `Image afenda/xforge:loca
 
 ---
 
-### Task 2: Odoo module suites in CI
+### Task 2: Odoo module suites in CI, as a least-privilege role
 
 **Files:**
 - Modify: `.github/workflows/afenda-image.yml`
+- Test: `afenda/tools/tests/test_deploy_static.py`
 
 **Interfaces:**
 - Consumes: the image built in the same job (`afenda/xforge:ci`); the pinned postgres reference from Task 1.
-- Produces: a CI step that fails on any failed/errored Odoo test and on a test count below `ODOO_TESTS_MIN`.
+- Produces: a CI step that fails on any failed/errored Odoo test, on a missing result line, and on a count below `ODOO_TESTS_MIN`. It runs as a `NOSUPERUSER CREATEDB` role, so it also proves the fresh-host path: `odoo-bin -d ci -i …` creates the database itself (`odoo/cli/server.py:104`) and runs `CREATE EXTENSION IF NOT EXISTS pg_trgm` (`odoo/service/db.py:152`).
 
-- [ ] **Step 1: Add the postgres service and the suite step** (job `build`)
+- [ ] **Step 1: Failing test — the workflow's postgres pin must equal compose's** (add to `DeployStaticTests`)
+
+```python
+    def test_ci_postgres_matches_the_pinned_compose_image(self):
+        compose = (DEPLOY / "compose.yaml").read_text(encoding="utf-8")
+        pinned = re.search(r"^\s+image:\s*(postgres:\S+)\s*$", compose, re.MULTILINE).group(1)
+        workflow = (REPO / ".github" / "workflows" / "afenda-image.yml").read_text(encoding="utf-8")
+        used = re.findall(r"^\s+image:\s*(postgres:\S+)\s*$", workflow, re.MULTILINE)
+        self.assertEqual(used, [pinned])
+```
+
+Run: `.venv/Scripts/python -m unittest afenda.tools.tests.test_deploy_static.DeployStaticTests.test_ci_postgres_matches_the_pinned_compose_image` → expect FAIL (`[] != [...]`).
+
+- [ ] **Step 2: Add the service, the role and the suite step** (job `build`, after "The image is AFENDA xForge")
 
 ```yaml
     services:
       postgres:
         image: postgres:16@sha256:a3b7f434b2dc57ce85a67e171163eb8ab1a1ebcb39d27484661f26b1dfbe30d6
         env:
-          POSTGRES_USER: odoo
-          POSTGRES_PASSWORD: odoo
+          POSTGRES_USER: ci_admin
+          POSTGRES_PASSWORD: ci_admin
           POSTGRES_DB: postgres
         ports: ["5432:5432"]
         options: >-
-          --health-cmd "pg_isready -h 127.0.0.1 -U odoo -d postgres"
+          --health-cmd "pg_isready -h 127.0.0.1 -U ci_admin -d postgres"
           --health-interval 5s --health-timeout 5s --health-retries 20
     env:
       ODOO_TESTS_MIN: "1"
 ```
 
 ```yaml
-      - name: Odoo module suites (afenda_*)
+      - name: A least-privilege role, as on the VPS
+        run: |
+          docker run --rm --network host -e PGPASSWORD=ci_admin \
+            postgres:16@sha256:a3b7f434b2dc57ce85a67e171163eb8ab1a1ebcb39d27484661f26b1dfbe30d6 \
+            psql -v ON_ERROR_STOP=1 -h 127.0.0.1 -U ci_admin -d postgres \
+            -c "CREATE ROLE afenda_app LOGIN NOSUPERUSER CREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD 'ci'"
+      - name: Odoo module suites (afenda_*), as afenda_app
         run: |
           set -o pipefail
           mods=afenda_brand,afenda_runtime,afenda_api_docs,afenda_brand_digest
           docker run --rm --network host --entrypoint /opt/venv/bin/python afenda/xforge:ci \
             /opt/afenda/odoo-bin \
-            --db_host 127.0.0.1 --db_port 5432 --db_user odoo --db_password odoo -d ci \
+            --db_host 127.0.0.1 --db_port 5432 --db_user afenda_app --db_password ci -d ci \
             --addons-path /opt/afenda/addons,/opt/afenda/afenda/addons,/opt/afenda/afenda/oca/server-brand,/opt/afenda/afenda/oca/web \
             --data-dir /tmp/afenda-data -i "$mods" \
             --test-enable --test-tags "/afenda_brand,/afenda_runtime,/afenda_api_docs,/afenda_brand_digest" \
@@ -169,10 +198,14 @@ Run: `cd deploy && docker compose build` → ends with `Image afenda/xforge:loca
           [ "$3" -ge "$ODOO_TESTS_MIN" ] || { echo "::error::only $3 tests ran (min $ODOO_TESTS_MIN)"; exit 1; }
 ```
 
-- [ ] **Step 2: Run it once on GitHub** (after the user approves the push): `gh workflow run afenda-image.yml` (keyring login: `env -u GITHUB_TOKEN -u GH_TOKEN`), then `gh run watch <id> --exit-status`.
-Expected: `result: 0 failed, 0 error(s) of N tests`. If failures appear, triage each with its traceback (systematic-debugging) before any change; fixes to `afenda_brand` tests go to the UI session that owns them.
+The result line comes from the `odoo.tests.result` logger (`odoo/service/server.py:717-725`), which `--log-handler odoo.tests:INFO` shows; a run with failures also exits non-zero.
 
-- [ ] **Step 3: Set the floor** to the N printed by the green run: `ODOO_TESTS_MIN: "<N>"`; commit `[IMP] ci: run the afenda Odoo module suites in the built image`.
+- [ ] **Step 3: Gate and commit.** Full tools suite once: `.venv/Scripts/python -m unittest discover afenda/tools/tests` → `OK`, count printed. Commit `[ADD] ci: run the afenda Odoo module suites as a least-privilege role` (workflow + test).
+
+- [ ] **Step 4: First run on the branch** (only after the owner approves the push): push; the `push` trigger runs `afenda-image` because the workflow file is in its `paths`. If a run must be started by hand, pass the branch: `env -u GITHUB_TOKEN -u GH_TOKEN gh workflow run afenda-image.yml --ref afenda/deidentify-phase1`. Watch it with `gh run watch <id> --exit-status`.
+Expected: `result: 0 failed, 0 error(s) of N tests`. Failures are triaged one by one with their traceback (superpowers:systematic-debugging) before any change; a fix inside `afenda_brand` tests goes to the UI session that owns them.
+
+- [ ] **Step 5: Set the floor** to the N the green run printed: `ODOO_TESTS_MIN: "<N from Step 4>"`; commit `[IMP] ci: floor the Odoo suite count at the first green run`.
 
 ---
 
@@ -185,9 +218,9 @@ Expected: `result: 0 failed, 0 error(s) of N tests`. If failures appear, triage 
 - Test: `afenda/tools/tests/test_deploy_static.py`, `afenda/tools/tests/test_deploy_scripts.py`
 
 **Interfaces:**
-- Produces: role `afenda_app` (LOGIN NOSUPERUSER CREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS); secret `db_app_password`; `deploy/migrate-db-role.sh [--rollback] --yes` (exit 0 done, 2 usage); Task 4 and 5 run it.
+- Produces: role `afenda_app` (LOGIN NOSUPERUSER CREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS); secret `db_app_password`; `deploy/migrate-db-role.sh [--rollback] --yes` (exit 0 when every object is owned by the target; non-zero on any failure, psql's 3 for a SQL error such as the lock timeout; 2 usage). Tasks 4 and 5 run it.
 
-- [ ] **Step 1: Failing static tests** (add to `DeployStaticTests`)
+- [ ] **Step 1: Failing tests** (add to `DeployStaticTests`)
 
 ```python
     def test_app_connects_as_the_least_privilege_role(self):
@@ -212,15 +245,15 @@ and in `test_deploy_scripts.py`:
 @unittest.skipUnless(BASH, "needs bash")
 class MigrateDbRoleTests(unittest.TestCase):
     def test_refuses_without_yes(self):
-        for args in ([], ["--rollback"]):
+        for args in ([], ["--rollback"], ["--yes", "extra"]):
             proc = subprocess.run([BASH, str(DEPLOY / "migrate-db-role.sh"), *args],
                                   capture_output=True, text=True, timeout=30)
             self.assertEqual(proc.returncode, 2, (args, proc.stderr))
 ```
 
-- [ ] **Step 2: Run; expect 3 FAIL** (`-m unittest afenda.tools.tests.test_deploy_static afenda.tools.tests.test_deploy_scripts`).
+- [ ] **Step 2: Run the two files; expect 3 FAIL** (`.venv/Scripts/python -m unittest afenda.tools.tests.test_deploy_static afenda.tools.tests.test_deploy_scripts`).
 
-- [ ] **Step 3: `deploy/db-init/10-afenda-app-role.sh`** (runs once, on an empty volume, as the bootstrap superuser)
+- [ ] **Step 3: `deploy/db-init/10-afenda-app-role.sh`** (runs once, on an empty volume, as the bootstrap superuser; the image skips init scripts when `PG_VERSION` exists)
 
 ```sh
 #!/bin/sh
@@ -240,26 +273,39 @@ SQL
 ```bash
 #!/usr/bin/env bash
 # Move the existing afenda database to the least-privilege role afenda_app,
-# or back to xforge with --rollback. Backup first; idempotent.
+# or back to xforge with --rollback. Backup first; idempotent; the app is
+# stopped while ownership moves, so no request or cron creates an object
+# under the old owner mid-way.
 #
 #   deploy/migrate-db-role.sh --yes
 #   deploy/migrate-db-role.sh --rollback --yes
 #
-# Tables go before sequences: ALTER TABLE carries the sequences its columns
-# own, and ALTER SEQUENCE on such a sequence is refused. Extension members
-# (pg_trgm) stay with the superuser. REASSIGN OWNED is not used: it would
-# also hand over the postgres and template databases.
+# Tables go before sequences: ALTER TABLE carries the sequences and indexes
+# its columns own, and ALTER SEQUENCE on such a sequence is refused.
+# Extension members (pg_trgm) stay with the superuser. REASSIGN OWNED is not
+# used: it would also hand over the postgres and template databases. The
+# ownership change is one transaction with a 5 s lock timeout, and it raises
+# unless every object ends up owned by the target.
 set -euo pipefail
 export MSYS_NO_PATHCONV=1
 cd "$(dirname "$0")"
 usage() { echo "usage: $0 [--rollback] --yes" >&2; exit 2; }
 target=afenda_app
-case "${1:-}" in
-    --rollback) target=xforge; shift ;;
-esac
-[ "${1:-}" = "--yes" ] && [ "$#" -eq 1 ] || usage
+if [ "${1:-}" = "--rollback" ]; then target=xforge; shift; fi
+[ "$#" -eq 1 ] && [ "$1" = "--yes" ] || usage
+
+docker compose exec -T db test -s /run/secrets/db_app_password \
+    || { echo "migrate-db-role: the db container has no db_app_password secret; run make-secrets.sh and 'docker compose up -d db' first" >&2; exit 1; }
 
 ./backup.sh "${BACKUP_ROOT:-/var/backups/afenda}"
+
+restart_xforge() {
+    docker compose start xforge >/dev/null
+    docker compose exec -T nginx nginx -s reload || true
+}
+docker compose stop xforge
+trap restart_xforge EXIT
+
 if [ "$target" = afenda_app ]; then
     docker compose exec -T db psql -v ON_ERROR_STOP=1 -U xforge -d postgres <<'SQL'
 \set pw `cat /run/secrets/db_app_password`
@@ -270,11 +316,12 @@ CREATE ROLE afenda_app LOGIN NOSUPERUSER CREATEDB NOCREATEROLE NOREPLICATION NOB
 ALTER ROLE afenda_app PASSWORD :'pw';
 SQL
 fi
-docker compose exec -T db psql -v ON_ERROR_STOP=1 -U xforge -d afenda -v target="$target" <<'SQL'
-SELECT set_config('afenda.target', :'target', false);
+docker compose exec -T db psql -1 -v ON_ERROR_STOP=1 -U xforge -d afenda -v target="$target" <<'SQL'
+SET LOCAL lock_timeout = '5s';
+SELECT set_config('afenda.target', :'target', true);
 ALTER DATABASE afenda OWNER TO :"target";
 DO $$
-DECLARE r record; t text := current_setting('afenda.target');
+DECLARE r record; t text := current_setting('afenda.target'); left_over int;
 BEGIN
   FOR r IN SELECT format('ALTER %s %I.%I OWNER TO %I',
                          CASE c.relkind WHEN 'v' THEN 'VIEW' WHEN 'm' THEN 'MATERIALIZED VIEW' ELSE 'TABLE' END,
@@ -294,24 +341,33 @@ BEGIN
             WHERE n.nspname = 'public' AND pg_get_userbyid(p.proowner) <> t
               AND NOT EXISTS (SELECT 1 FROM pg_depend d WHERE d.objid = p.oid AND d.deptype = 'e')
   LOOP EXECUTE r.q; END LOOP;
+  SELECT count(*) INTO left_over FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
+   WHERE n.nspname = 'public' AND c.relkind IN ('r', 'p', 'v', 'm', 'S')
+     AND pg_get_userbyid(c.relowner) <> t
+     AND NOT EXISTS (SELECT 1 FROM pg_depend d WHERE d.objid = c.oid AND d.deptype = 'e');
+  IF left_over > 0 THEN
+    RAISE EXCEPTION 'migrate-db-role: % objects are not owned by %', left_over, t;
+  END IF;
+  RAISE NOTICE 'migrate-db-role: every object in afenda is owned by %', t;
 END $$;
-SELECT count(*) AS not_owned_by_target FROM pg_class c JOIN pg_namespace n ON n.oid = c.relnamespace
- WHERE n.nspname = 'public' AND c.relkind IN ('r','p','v','m','S')
-   AND pg_get_userbyid(c.relowner) <> current_setting('afenda.target')
-   AND NOT EXISTS (SELECT 1 FROM pg_depend d WHERE d.objid = c.oid AND d.deptype = 'e');
 SQL
-echo "migrate-db-role: afenda now owned by $target; redeploy with the matching compose.yaml"
+echo "migrate-db-role: afenda now owned by $target"
 ```
 
-- [ ] **Step 5: Wire compose** — `x-xforge-env`: `PGUSER: afenda_app`, `PGPASSWORD_FILE: /run/secrets/db_app_password`; `init` and `xforge` `secrets:` list `db_app_password` instead of `db_password`; `db`: add `db_app_password` to `secrets:` and `- ./db-init:/docker-entrypoint-initdb.d:ro` to `volumes:`; top-level `secrets:` gains `db_app_password: {file: ./secrets/db_app_password}`.
+- [ ] **Step 5: Wire compose** — `x-xforge-env`: `PGUSER: afenda_app`, `PGPASSWORD_FILE: /run/secrets/db_app_password`; `init` and `xforge` `secrets:` list `db_app_password` instead of `db_password`; `db`: add `db_app_password` to `secrets:` and `- ./db-init:/docker-entrypoint-initdb.d:ro` to `volumes:`; top-level `secrets:` gains:
 
-- [ ] **Step 6: `make-secrets.sh`** — after `write_new db_password …` add `write_new db_app_password "$(random)" || true`, and list it in the header comment.
+```yaml
+  db_app_password:
+    file: ./secrets/db_app_password
+```
+
+- [ ] **Step 6: `make-secrets.sh`** — after `write_new db_password "$(random)" || true` add `write_new db_app_password "$(random)" || true`, and list `db_app_password` in the header comment ("PostgreSQL password of the afenda_app role the app connects as").
 
 - [ ] **Step 7: `restore.sh:36-37`** — `createdb -U xforge -O afenda_app afenda` and `pg_restore -U xforge -d afenda --no-owner --role=afenda_app`.
 
-- [ ] **Step 8: README** — a "Database roles" paragraph (who uses `xforge`, who uses `afenda_app`, why `CREATEDB` stays: `db init` on a fresh host) and a "Moving an existing host" runbook: `./make-secrets.sh` (adds only `db_app_password`), `./migrate-db-role.sh --yes` (expect `not_owned_by_target = 0`), `./redeploy.sh`; rollback: `./migrate-db-role.sh --rollback --yes`, then `./redeploy.sh <previous commit>`.
+- [ ] **Step 8: README** — a "Database roles" paragraph (`xforge`: the db container's bootstrap superuser, used by `backup.sh`, `restore.sh` and `migrate-db-role.sh`; `afenda_app`: what `init` and the server connect as, owner of `afenda` and every object in it; `CREATEDB` stays because a fresh host's first `init` creates the database) and a "Moving an existing host" runbook: record `prev=$(git -C /srv/afenda rev-parse HEAD)`; check out the new commit; `./make-secrets.sh` (adds only `db_app_password`); `docker compose up -d db`; `./migrate-db-role.sh --yes` (ends `every object in afenda is owned by afenda_app`); `./redeploy.sh`. Rollback: `./redeploy.sh "$prev"` only — the app goes back to connecting as the superuser `xforge`, which can use every object whatever its owner, so ownership stays with `afenda_app`.
 
-- [ ] **Step 9: Run both test files; expect OK** (and `test_every_deploy_script_parses` covers the two new scripts). Commit from the index with `git add --chmod=+x -- deploy/db-init/10-afenda-app-role.sh deploy/migrate-db-role.sh` plus the other paths, guarded: `[IMP] deploy: run the ERP as the least-privilege role afenda_app`.
+- [ ] **Step 9: Gate and commit.** Full tools suite once: `.venv/Scripts/python -m unittest discover afenda/tools/tests` → `OK` with the count (includes `test_every_deploy_script_parses` over the two new scripts). Commit from the index, guarded: `git add --chmod=+x -- deploy/db-init/10-afenda-app-role.sh deploy/migrate-db-role.sh`, `git add` the other paths, compare `git diff --cached --name-only` with the file list, then `git commit -F msg` — `[IMP] deploy: run the ERP as the least-privilege role afenda_app`.
 
 ---
 
@@ -319,27 +375,49 @@ echo "migrate-db-role: afenda now owned by $target; redeploy with the matching c
 
 **Files:** record only: `docs/superpowers/plans/2026-09-23-afenda-g0-deploy.md`
 
-- [ ] **Step 1:** `cd deploy && ./make-secrets.sh` (expect `wrote db_app_password`, others `keeping existing`); `docker compose -p afenda-deploy -f compose.yaml -f compose.proof.yaml up -d db` (db needs the new secret mounted).
-- [ ] **Step 2:** `COMPOSE_FILE="compose.yaml;compose.proof.yaml" COMPOSE_PATH_SEPARATOR=";" BACKUP_ROOT=$TEMP/afenda-g1-rehearsal ./migrate-db-role.sh --yes` (a throwaway folder; delete it after the rehearsal, it holds production data) → expect `not_owned_by_target` `0`.
-- [ ] **Step 3:** same files, `docker compose … up -d` → `init` exits 0, `xforge` healthy.
+All commands run in Git Bash from `deploy/` with the local stack's own files:
+
+```bash
+export MSYS_NO_PATHCONV=1 COMPOSE_FILE="compose.yaml;compose.proof.yaml" COMPOSE_PATH_SEPARATOR=";"
+export BACKUP_ROOT="$TEMP/afenda-g1-rehearsal"   # holds production data: delete it at the end
+```
+
+- [ ] **Step 1: Baseline.** Save the compose file from before Task 3 for the rollback rehearsal: `t3=$(git log --format=%H -1 --grep='run the ERP as the least-privilege role afenda_app'); mkdir -p "$BACKUP_ROOT"; git show "$t3^:deploy/compose.yaml" > "$BACKUP_ROOT.compose.prev.yaml"`. Then `docker compose build` (the image now carries Tasks 1–3), `./make-secrets.sh` (expect `wrote db_app_password`, the rest `keeping existing`), `docker compose up -d db`.
+- [ ] **Step 2: Migrate.** `./migrate-db-role.sh --yes` → backup printed, then `NOTICE: migrate-db-role: every object in afenda is owned by afenda_app`, exit 0.
+- [ ] **Step 3: Start as the app role.** `docker compose up -d` → `init` exited 0, `xforge` healthy.
 - [ ] **Step 4: Verify, each printed once:**
-  - `select rolname, rolsuper from pg_roles where rolname='afenda_app'` → `afenda_app | f`
-  - `select distinct usename from pg_stat_activity where datname='afenda' and usename <> 'xforge'` → `afenda_app`
-  - `curl localhost:8080/web/health` → `{"status": "pass"}`; `/web/login` 200 with `AFENDA xForge`
-  - runtime DDL as the app: `docker compose … run --rm -T init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin shell -c "$RC" --no-http'` with `env["ir.sequence"].create({"name": "g1-rehearsal", "implementation": "standard"}); env.cr.commit(); print("SEQ OK")` → `SEQ OK`
-  - forced upgrade as the app: `… module upgrade -c "$RC" afenda_brand afenda_runtime` → exit 0
-  - backup then `restore.sh` into this stack with the same `COMPOSE_FILE` → health passes, objects owned by `afenda_app`
-- [ ] **Step 5: Rollback drill:** `./migrate-db-role.sh --rollback --yes` → `not_owned_by_target 0` (now xforge); then forward again → `0`. Record every printed value in the G0 record.
+
+```bash
+q() { docker compose exec -T db psql -X -tA -U xforge -d "$1" -c "$2"; }
+q postgres "select rolname||' super='||rolsuper from pg_roles where rolname='afenda_app'"            # afenda_app super=f
+q afenda   "select string_agg(distinct usename, ',') from pg_stat_activity where datname='afenda' and usename <> 'xforge'"   # afenda_app
+q afenda   "select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind in ('r','p','v','m','S') and pg_get_userbyid(c.relowner)<>'afenda_app' and not exists (select 1 from pg_depend d where d.objid=c.oid and d.deptype='e')"   # 0
+curl -s http://localhost:8080/web/health                                                          # {"status": "pass"}
+curl -s http://localhost:8080/web/login | grep -c "AFENDA xForge"                                 # >= 1
+docker compose run --rm -T init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin shell -c "$RC" --no-http' <<'PY'
+env["ir.sequence"].create({"name": "g1-check", "implementation": "standard"})
+env.cr.execute("SELECT current_user")
+print("SEQ OK as", env.cr.fetchone()[0])
+env.cr.rollback()
+PY
+# SEQ OK as afenda_app   (DDL rolled back: nothing is left behind)
+docker compose run --rm -T init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin module upgrade -c "$RC" afenda_brand afenda_runtime'   # exit 0
+```
+
+- [ ] **Step 5: Restore as the app role.** `./backup.sh "$BACKUP_ROOT"`; `./restore.sh "$BACKUP_ROOT/$(ls -1 "$BACKUP_ROOT" | tail -n 1)" --yes`; repeat the ownership query (0) and `/web/health` (pass).
+- [ ] **Step 6: Rehearse the live rollback.** Bring the stack up with the previous compose file (app connects as `xforge` again, ownership unchanged): `docker compose -f "$BACKUP_ROOT.compose.prev.yaml" -f compose.proof.yaml up -d` → `init` exited 0, `/web/health` pass, and `pg_stat_activity` shows `xforge`. Then forward again with `docker compose up -d` (the new files) → `afenda_app` in `pg_stat_activity`, health pass.
+- [ ] **Step 7:** Record every printed value in the G0 record; `rm -rf "$BACKUP_ROOT" "$BACKUP_ROOT.compose.prev.yaml"`; commit `[IMP] docs: record the G1 role rehearsal`.
 
 ---
 
 ### Task 5: Live host
 
-**Precondition:** Tasks 1–4 committed; CI green on the pushed head; the user approved push and this run.
+**Precondition:** Tasks 1–4 committed; CI green on the pushed head; the owner approved the push and this run.
 
-- [ ] **Step 1:** `ssh root@68.183.233.155`; `cd /srv/afenda/deploy && git -C /srv/afenda fetch --depth 1 origin afenda/deidentify-phase1 && git -C /srv/afenda checkout --detach FETCH_HEAD` (so the new scripts exist), then `./make-secrets.sh` → `wrote db_app_password`.
-- [ ] **Step 2:** `docker compose up -d db` (mounts the new secret; db restarts in seconds), then `./migrate-db-role.sh --yes` → backup printed, `not_owned_by_target` `0`.
-- [ ] **Step 3:** `./redeploy.sh` → `…/web/health passes; now at <head>`.
-- [ ] **Step 4: Verify once:** the four checks of Task 4 Step 4 (without the restore), the 17-check proof (`17/17 checks passed`), and a mail test through the Resend server (`mail.mail` state `sent`).
-- [ ] **Step 5: Rollback if any check fails:** `./migrate-db-role.sh --rollback --yes`, then `./redeploy.sh <previous head>`; report with the failing output.
-- [ ] **Step 6:** record the run in the G0 record and memory; commit `[IMP] docs: record the G1 role migration on the live host`.
+- [ ] **Step 1: Record the rollback target first.** `ssh root@68.183.233.155`, `cd /srv/afenda/deploy`, `prev=$(git -C /srv/afenda rev-parse HEAD); echo "$prev"` — write it into the ledger before anything else. (`redeploy.sh`'s own "before" will already be the new head after Step 2.)
+- [ ] **Step 2: Fetch the new scripts.** `git -C /srv/afenda fetch --depth 1 origin afenda/deidentify-phase1 && git -C /srv/afenda checkout --detach FETCH_HEAD && git -C /srv/afenda submodule update --init --depth 1`, then `./make-secrets.sh` → `wrote db_app_password`, the rest `keeping existing`.
+- [ ] **Step 3: Migrate.** `docker compose up -d db` (recreates only `db` with the new secret and init mount; the named volume stays, and init scripts are skipped on an existing volume), then `./migrate-db-role.sh --yes` → backup printed, `every object in afenda is owned by afenda_app`, exit 0. The app is stopped during the SQL and restarted as `xforge` afterwards.
+- [ ] **Step 4: Redeploy.** `./redeploy.sh` → `…/web/health passes; now at <new head>`.
+- [ ] **Step 5: Verify once** (the same commands as Task 4 Step 4, against the live stack): `afenda_app super=f`; `pg_stat_activity` shows `afenda_app`; the ownership query prints `0` (objects created between Step 3 and Step 4 would show here); `/web/health` pass; `SEQ OK as afenda_app` with the rollback; then the 17-check proof prints `17/17 checks passed`, and the `ir_mail_server` row still reads `Resend | t | 2587 | starttls_strict`.
+- [ ] **Step 6: If any check fails:** `./redeploy.sh "$prev"` only — the app reconnects as the superuser `xforge`; leave ownership with `afenda_app`. Report with the failing output; do not retry a variation (CLAUDE.md: stop after the same fix fails twice).
+- [ ] **Step 7:** Record the run in the G0 record and memory; commit `[IMP] docs: record the G1 role migration on the live host`.
