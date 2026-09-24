@@ -232,18 +232,23 @@
         </xpath>
     </template>
 
-    <!-- The sign-in page's headline, and the arrow on the action.
-         The sign-in page speaks in the bear's voice, not a greeting: one line
-         of philosophy, no subline (the owner's direction). "Guard what grows."
-         is the picture read aloud - the bear holding its tree - and it answers
-         the tagline under the lockup ("The truth of your business, kept.").
-         Set here and not on web.login_layout, because the layout is shared by
-         the reset and signup pages, which keep their functional headlines.
+    <!-- THE GROVE: one editorial voice for every logged-out page (the
+         owner's choice). A serif line in the bear's voice - growth, roots, the
+         tree it holds - and one plain sans line under it that says what to do.
+         The AFENDA tagline under the lockup ("The truth of your business,
+         kept.") stays the product's own voice; these lines are the page's.
          Each page names itself in the body of its own t-call (see
-         login_layout's headline slot), so the page keeps exactly one h1. -->
+         login_layout's headline slot), so every page keeps exactly one h1.
+
+         THE ACTIONS, the same on every page: the primary action is solid
+         Ledger Blue; the other way out is one secondary outline button beside
+         or under it - "Request access" on the sign-in page, "Back to sign in"
+         everywhere else. `o_afenda_auth_back` / `o_afenda_auth_secondary` are
+         styled in login.scss. -->
     <template id="login" inherit_id="web.login" name="AFENDA login heading">
         <xpath expr="//t[@t-call='web.login_layout']" position="inside">
-            <t t-set="afenda_headline">Guard what grows.</t>
+            <t t-set="afenda_headline">Growth is kept, not found.</t>
+            <t t-set="afenda_subline">Sign in to your workspace.</t>
         </xpath>
         <!-- The action points forward. `hasclass('btn-primary')` and not
              `[@type='submit']`: in debug mode "Log in as superuser" is a second
@@ -255,16 +260,30 @@
         <xpath expr="//div[hasclass('oe_login_buttons')]/button[hasclass('btn-primary')]" position="inside">
             <i class="fa fa-arrow-right o_afenda_auth_go" role="presentation"/>
         </xpath>
+        <!-- The way in for someone without an account. Access is by invitation
+             (invitation_scope b2b, afenda_runtime), so this is not a signup
+             link: it goes to /request-access, which mails the company or
+             explains. When a database does allow self-signup, auth_signup's
+             own "Don't have an account?" link shows instead (`signup_enabled`,
+             set by auth_signup's web_login, controllers/main.py:25-37). -->
+        <xpath expr="//div[hasclass('oe_login_buttons')]/button[hasclass('btn-primary')]" position="after">
+            <a t-if="not signup_enabled" href="/request-access" role="button"
+               class="btn o_afenda_auth_secondary">Request access</a>
+        </xpath>
     </template>
 
-    <!-- auth_signup's two pages name themselves. Only their own templates are
-         inherited: `auth_signup.fields`, the partial both call, is inherited by
+    <!-- auth_signup's two pages. Only their own templates are inherited:
+         `auth_signup.fields`, the partial both call, is inherited by
          auth_password_policy_signup (its views/signup_templates.xml:2), so it
          is styled through CSS only. -->
     <template id="signup" inherit_id="auth_signup.signup" name="AFENDA signup headline">
         <xpath expr="//t[@t-call='web.login_layout']" position="inside">
-            <t t-set="afenda_headline">Join the workspace.</t>
-            <t t-set="afenda_subline">Set your name and password to get started.</t>
+            <t t-set="afenda_headline">Every forest starts with one tree.</t>
+            <t t-set="afenda_subline">You're invited. Set your name and password.</t>
+        </xpath>
+        <!-- "Already have an account?" becomes the page's back action. -->
+        <xpath expr="//div[hasclass('oe_login_buttons')]/a[contains(@t-attf-href, '/web/login')]" position="replace">
+            <a t-attf-href="/web/login?{{ keep_query() }}" role="button" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" role="presentation"/> Back to sign in</a>
         </xpath>
     </template>
 
@@ -284,23 +303,38 @@
          (ir_qweb._directives_eval_order), so each line is a guarded set. -->
     <template id="reset_password" inherit_id="auth_signup.reset_password" name="AFENDA reset headline">
         <xpath expr="//t[@t-call='web.login_layout']" position="inside">
-            <t t-if="message and token" t-set="afenda_headline">Password updated.</t>
-            <t t-elif="message" t-set="afenda_headline">Check your inbox.</t>
-            <t t-elif="invalid_token" t-set="afenda_headline">This link has expired.</t>
-            <t t-elif="token" t-set="afenda_headline">Choose a new password.</t>
-            <t t-else="" t-set="afenda_headline">Forgot your password?</t>
-            <t t-if="not message and not token" t-set="afenda_subline">We'll email you a link to set a new one.</t>
+            <t t-if="message and token" t-set="afenda_headline">Rooted again.</t>
+            <t t-elif="message" t-set="afenda_headline">Look for our letter.</t>
+            <t t-elif="invalid_token" t-set="afenda_headline">This path has grown over.</t>
+            <t t-elif="token" t-set="afenda_headline">Plant a new password.</t>
+            <t t-else="" t-set="afenda_headline">Roots remember the way back.</t>
+            <t t-if="message and token" t-set="afenda_subline">Sign in with your new password.</t>
+            <t t-elif="message" t-set="afenda_subline">Check your inbox for the link.</t>
+            <t t-elif="invalid_token" t-set="afenda_subline">Links lapse to keep you safe. Ask for a new one.</t>
+            <t t-elif="token" t-set="afenda_subline">Choose one you'll remember.</t>
+            <t t-else="" t-set="afenda_subline">Enter your email; we'll send a link.</t>
+        </xpath>
+        <!-- The back action, in both of the page's blocks: after the link is
+             sent (upstream's float-start "Back to Login") and on the form
+             (upstream's small row, which only showed without a token). -->
+        <xpath expr="//div[hasclass('oe_login_form')]/a" position="replace">
+            <a href="/web/login" role="button" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" role="presentation"/> Back to sign in</a>
+        </xpath>
+        <xpath expr="//form[hasclass('oe_reset_password_form')]//div[hasclass('oe_login_buttons')]/div" position="replace">
+            <a t-attf-href="/web/login?{{ keep_query() }}" role="button" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" role="presentation"/> Back to sign in</a>
         </xpath>
     </template>
 
     <!-- Two-factor: the layout's h1 replaces upstream's `h5.card-title`, so the
-         page has one heading and it is the page's. The words are upstream's.
-         Safe to remove: auth_totp_mail, the other installed inheritor, targets
-         only //form/div[1], //form[1] and the border-top block
-         (addons/auth_totp_mail/views/templates.xml:3-20). -->
+         page has one heading and it is the page's. No subline: the card
+         already says what to enter, in words auth_totp_mail rewrites for its
+         email variant. Safe to remove the h5: auth_totp_mail, the other
+         installed inheritor, targets only //form/div[1], //form[1] and the
+         border-top block (addons/auth_totp_mail/views/templates.xml:3-20).
+         Its "Cancel" (a logout form) is styled as the back action in CSS. -->
     <template id="auth_totp_form" inherit_id="auth_totp.auth_totp_form" name="AFENDA two-factor headline">
         <xpath expr="//t[@t-call='web.login_layout']" position="inside">
-            <t t-set="afenda_headline">Two-factor Authentication</t>
+            <t t-set="afenda_headline">Two roots hold faster.</t>
         </xpath>
         <xpath expr="//h5[hasclass('card-title')]" position="replace"/>
     </template>

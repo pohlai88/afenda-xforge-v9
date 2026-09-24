@@ -308,6 +308,86 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
     }
 
     // ---------------------------------------------------------------------
+    // The other way out. Every page has one primary action and exactly one
+    // secondary one: "Request access" on sign-in, "Back to sign in" everywhere
+    // else (webclient_templates.xml; request_access_templates.xml in
+    // afenda_runtime; the two-factor page's own "Cancel"). The secondary is
+    // the action's geometry with none of its weight: white, one hairline, ink
+    // text - the same family as the passkey button - so the page still holds
+    // exactly one blue thing.
+    // ---------------------------------------------------------------------
+    .o_afenda_auth_secondary,
+    .o_afenda_auth_back,
+    form[action="/web/session/logout"] .btn-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        width: 100%;
+        min-height: $afb-control-h;
+        margin: 0;
+        padding: .375rem 1rem;
+        background: $white;
+        border: 1px solid $border-color;  // hairline
+        border-radius: $o-border-radius;
+        font-size: .9375rem;
+        font-weight: 500;
+        color: $o-main-text-color;  // ink
+        text-decoration: none;
+
+        &:hover {
+            background: $o-webclient-background-color;  // paper
+            color: $o-main-text-color;
+        }
+
+        &:focus-visible {
+            outline: none;
+            border-color: $o-brand-primary;
+            box-shadow: $afb-focus-ring;
+        }
+
+        .fa { font-size: .8125em; color: $o-brand-secondary; }  // graphite
+    }
+
+    // Sign-in: the secondary sits under the full-width action.
+    .oe_login_buttons .o_afenda_auth_secondary {
+        margin-top: .5rem;
+    }
+
+    // Everywhere else the two actions share ONE row - back on the left, the
+    // action on the right - which reads as a choice and costs no height on a
+    // laptop screen. Upstream's row is a `d-grid` (display:grid !important);
+    // only its columns and the order are set here. The passkey/OAuth block
+    // below spans the row. `mb-1` on signup's button is a utility, hence the
+    // !important to level the pair.
+    .oe_login_buttons:has(> .o_afenda_auth_back) {
+        // The back button is as wide as its label, never wrapped; the action
+        // takes the rest of the row.
+        grid-template-columns: auto minmax(0, 1fr);
+        column-gap: .5rem;
+        align-items: stretch;
+
+        > .o_afenda_auth_back { order: -1; white-space: nowrap; }
+        > .btn-primary { margin-bottom: 0 !important; }
+        > .o_login_auth { grid-column: 1 / -1; }
+
+        // A phone's card cannot hold both labels on one line: the pair
+        // stacks, the action first and the way back under it, as on sign-in.
+        @media (max-width: 575.98px) {
+            grid-template-columns: minmax(0, 1fr);
+            row-gap: .5rem;
+
+            > .o_afenda_auth_back { order: 0; }
+        }
+    }
+
+    // Two-factor: its "Cancel" logs the half-signed-in session out, which is
+    // the page's way back; it sits under the action like sign-in's secondary.
+    form[action="/web/session/logout"] .btn-link {
+        margin-top: .5rem;
+    }
+
+    // ---------------------------------------------------------------------
     // Second-tier authentication: the passkey / OAuth block under the action.
     // ---------------------------------------------------------------------
     .o_login_auth {

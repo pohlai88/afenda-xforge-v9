@@ -40,7 +40,8 @@ class TestInviteOnly(HttpCase):
         self.env.company.email = False
         r = self.url_open("/request-access", allow_redirects=False)
         self.assertEqual(r.status_code, 200)
-        self.assertIn("Access to AFENDA xForge is by invitation.", r.text)
+        self.assertIn("The grove is by invitation.", r.text)
+        self.assertIn("Ask your administrator to invite you.", r.text)
         # One of the logged-out pages, so it wears their poster: the auth body
         # class (afenda_brand's login_layout), the inline bear, and the
         # sentence as the page's one h1.
@@ -50,7 +51,10 @@ class TestInviteOnly(HttpCase):
         self.assertEqual(len(doc.find_class("o_afenda_auth_hero")), 1, "the bear is missing")
         titles = doc.xpath("//h1")
         self.assertEqual([t.text_content().strip() for t in titles],
-                         ["Access to AFENDA xForge is by invitation."])
+                         ["The grove is by invitation."])
+        # The page's one action is the way back to sign in.
+        back = doc.find_class("o_afenda_auth_back")
+        self.assertEqual([b.get("href") for b in back], ["/web/login"], "no way back to sign in")
         self.assertEqual(len(doc.find_class("o_afenda_auth_request")), 1,
                          "the moss skin's hook is missing")
         # disable_footer: no "Manage Databases" for someone without an account.

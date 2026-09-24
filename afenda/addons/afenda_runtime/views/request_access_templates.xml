@@ -16,11 +16,15 @@
              account. -->
         <t t-call="web.login_layout">
             <t t-set="disable_footer" t-value="True"/>
-            <t t-set="afenda_headline">Access to <t t-out="product"/> is by invitation.</t>
+            <!-- The Grove, afenda_brand's editorial voice for every logged-out
+                 page: a line in the bear's voice, and what to do under it. -->
+            <t t-set="afenda_headline">The grove is by invitation.</t>
+            <t t-set="afenda_subline">Ask your administrator to invite you.</t>
             <!-- `o_afenda_auth_request` is the hook afenda_brand's
-                 auth_bear.css keys this page's "moss" skin on. -->
-            <div class="o_afenda_auth_request">
-                <p class="mb-0">Ask your administrator for an invitation.</p>
+                 auth_bear.css keys this page's "moss" skin on. The card holds
+                 the page's one action: the way back, styled by login.scss. -->
+            <div class="o_afenda_auth_request d-grid">
+                <a href="/web/login" role="button" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" role="presentation"/> Back to sign in</a>
             </div>
         </t>
     </template>

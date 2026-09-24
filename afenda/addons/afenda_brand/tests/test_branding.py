@@ -558,11 +558,16 @@ class TestBranding(HttpCase):
         the test brings its own token instead. The reset-with-token page is
         reached the same way, with a partner prepared for a reset.
         """
-        login = self._assert_one_poster("/web/login", self.url_open("/web/login"), "Guard what grows.")
-        # The sign-in line is one sentence of philosophy, by the owner's
-        # direction: no subline under it.
-        self.assertFalse(login.find_class("o_afenda_auth_subtitle"),
-                         "/web/login renders a subline under its headline")
+        # The Grove: every page's h1 is a line in the bear's voice, and the
+        # sans subline under it says what to do.
+        login = self._assert_one_poster("/web/login", self.url_open("/web/login"),
+                                        "Growth is kept, not found.")
+        self.assertEqual([s.text_content().strip() for s in login.find_class("o_afenda_auth_subtitle")],
+                         ["Sign in to your workspace."])
+        # The way in for someone without an account: access is by invitation
+        # (b2b), so the sign-in page offers "Request access", not a signup link.
+        self.assertEqual([a.get("href") for a in login.find_class("o_afenda_auth_secondary")],
+                         ["/request-access"], "the sign-in page has no way to ask for access")
 
         probe = self.env["res.partner"].create({"name": "AFENDA signup probe"})
         probe.signup_prepare()
@@ -572,12 +577,13 @@ class TestBranding(HttpCase):
         reset = "/web/reset_password?token=%s" % reset_user.partner_id._generate_signup_token()
 
         for url, headline in (
-            (signup, "Join the workspace."),
-            ("/web/reset_password", "Forgot your password?"),
-            (reset, "Choose a new password."),
+            (signup, "Every forest starts with one tree."),
+            ("/web/reset_password", "Roots remember the way back."),
+            (reset, "Plant a new password."),
         ):
             with self.subTest(url=url):
                 doc = self._assert_one_poster(url, self.url_open(url), headline)
+                self._assert_one_way_back(url, doc)
                 # These routes answer 200 for an invalid token too, with the
                 # error in the card; without this the assertions above would
                 # pass on a page that failed.
@@ -586,19 +592,20 @@ class TestBranding(HttpCase):
                 self.assertFalse(doc.find_class("o_afenda_auth_line"),
                                  f"the tagline reached {url}, whose controller never sets it")
 
-        # "This link has expired.": an unknown token sets `invalid_token` and
-        # an error (addons/auth_signup/controllers/main.py:148-150) and hides
-        # the fields, so the page must not promise a new password.
+        # The expired link: an unknown token sets `invalid_token` and an error
+        # (addons/auth_signup/controllers/main.py:148-150) and hides the
+        # fields, so the page must not promise a new password.
         junk = "/web/reset_password?token=not-a-real-token"
         with self.subTest(url=junk):
-            doc = self._assert_one_poster(junk, self.url_open(junk), "This link has expired.")
+            doc = self._assert_one_poster(junk, self.url_open(junk), "This path has grown over.")
             self.assertTrue(doc.find_class("alert-danger"), "the expired link is not explained")
+            self._assert_one_way_back(junk, doc)
 
         self.authenticate(None, None)
-        # "Password updated.": a token reset that succeeded. The controller
-        # sets `message` after do_signup while `token` is still in the
-        # qcontext (main.py:96-99), so without the `message and token` branch
-        # this would read "Check your inbox." -- a lie about what just happened.
+        # The reset that succeeded. The controller sets `message` after
+        # do_signup while `token` is still in the qcontext (main.py:96-99), so
+        # without the `message and token` branch this would read as "the link
+        # is on its way" -- a lie about what just happened.
         with self.subTest(url="/web/reset_password (token POST)"):
             done = self.url_open(reset, data={
                 "token": reset.split("token=", 1)[1],
@@ -606,18 +613,29 @@ class TestBranding(HttpCase):
                 "confirm_password": "afenda-reset-probe-pw-2026",
                 "csrf_token": http.Request.csrf_token(self),
             })
-            doc = self._assert_one_poster("/web/reset_password (token POST)", done, "Password updated.")
+            doc = self._assert_one_poster("/web/reset_password (token POST)", done, "Rooted again.")
             self.assertTrue(doc.find_class("alert-success"), "the reset was not confirmed")
             self.assertFalse(doc.find_class("alert-danger"), "the token reset failed")
+            self._assert_one_way_back("/web/reset_password (token POST)", doc)
 
-        # "Check your inbox.": the request, once made. Posted like the form
-        # does; the mail it queues is not sent in test mode.
+        # The request, once made. Posted like the form does; the mail it
+        # queues is not sent in test mode.
         sent = self.url_open("/web/reset_password", data={
             "login": reset_user.login,
             "csrf_token": http.Request.csrf_token(self),
         })
-        doc = self._assert_one_poster("/web/reset_password (sent)", sent, "Check your inbox.")
+        doc = self._assert_one_poster("/web/reset_password (sent)", sent, "Look for our letter.")
         self.assertTrue(doc.find_class("alert-success"), "the reset request was not acknowledged")
+        self._assert_one_way_back("/web/reset_password (sent)", doc)
+
+    def _assert_one_way_back(self, label, doc):
+        """Every page but sign-in offers exactly one way back to it, as a button."""
+        backs = doc.find_class("o_afenda_auth_back")
+        self.assertEqual(len(backs), 1, f"{label} does not offer exactly one way back to sign in")
+        self.assertTrue(backs[0].get("href", "").startswith("/web/login"),
+                        f"{label}'s back action does not lead to sign in")
+        self.assertIn("btn", (backs[0].get("class") or "").split(),
+                      f"{label}'s back action is a bare link, not a button")
 
     def test_the_two_factor_page_is_a_poster_with_one_heading(self):
         """/web/login/totp: the layout's h1 replaces upstream's h5 heading.
@@ -640,7 +658,7 @@ class TestBranding(HttpCase):
         })
         self.assertTrue(page.url.endswith("/web/login/totp"),
                         f"the password did not lead to the second factor: {page.url}")
-        doc = self._assert_one_poster("/web/login/totp", page, "Two-factor Authentication")
+        doc = self._assert_one_poster("/web/login/totp", page, "Two roots hold faster.")
         self.assertEqual(len(doc.xpath("//input[@id='totp_token']")), 1,
                          "the 2FA page lost its code field, which its night skin keys on")
         self.assertFalse(doc.xpath("//h5[contains(@class, 'card-title')]"),
