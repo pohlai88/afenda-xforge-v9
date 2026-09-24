@@ -307,3 +307,57 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
             ["buy"],
             "flour is bought, not manufactured",
         )
+
+    # The three below scan this pack's own XML instead of querying records. That
+    # is the point: a static check holds even when the localization whose
+    # accounts and taxes it forbids is not installed in the test database, so it
+    # cannot quietly stop checking. It also catches the future edit that puts
+    # the mistake back, which a record query only catches once the pack has
+    # already installed it somewhere.
+    #
+    # The scans parse XML (afenda_industry_base/tests/common.py:63,74 iterate
+    # ElementTree elements) rather than grepping text, and that distinction is
+    # load-bearing here: data/mrp_bom.xml:15-16, data/product_category.xml:8-9
+    # and data/product_template.xml:5-7 all name company_id, taxes_id and
+    # property_account_* inside comments that state the rule correctly.
+    # stdlib ElementTree drops comment nodes, so `tree.iter("field")` never sees
+    # them; a grep would fail this suite on prose saying the right thing.
+
+    def test_data_xml_sets_no_company_id(self):
+        self.assert_no_field_in_data(
+            MODULE,
+            {"company_id"},
+            "data/ must not pin a company: XML resolves it against whichever "
+            "company loads the file. Company-scoped records belong in hooks.py.",
+        )
+
+    def test_data_xml_hardcodes_no_accounts_or_taxes(self):
+        self.assert_no_field_in_data(
+            MODULE,
+            {
+                "property_account_income_categ_id",
+                "property_account_expense_categ_id",
+                "property_account_creditor_price_difference_categ",
+                "property_stock_account_input_categ_id",
+                "property_stock_account_output_categ_id",
+                "property_stock_valuation_account_id",
+                "taxes_id",
+                "supplier_taxes_id",
+                "journal_id",
+            },
+            "accounts, taxes and journals only exist once a specific l10n_* "
+            "chart is installed; hard-coding them breaks every other country.",
+        )
+        for source in self.pack_data_files(MODULE):
+            body = source.read_text(encoding="utf-8")
+            self.assertNotIn(
+                'ref="l10n_', body, f"{source.name} references a localization XMLID"
+            )
+
+    def test_data_xml_has_no_transactional_records(self):
+        self.assert_no_models_in_data(
+            MODULE,
+            {"purchase.order", "sale.order", "pos.order", "mrp.production", "stock.picking"},
+            "data/ is configuration; business history belongs in demo/, which "
+            "production never loads (--without-demo=all).",
+        )

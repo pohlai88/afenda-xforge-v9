@@ -4,7 +4,15 @@
     <data noupdate="1">
         <!-- No company_id, no taxes_id, no property_account_*: see
              docs/superpowers/specs/2026-09-24-afenda-industry-packs-design.md
-             rulings 1 and 2. Tests 10 and 11 fail the suite if any reappears. -->
+             rulings 1 and 2. tests/test_pack.py's
+             test_data_xml_sets_no_company_id and
+             test_data_xml_hardcodes_no_accounts_or_taxes fail the suite if any
+             reappears. Named, not numbered: they were "tests 10 and 11" while
+             unwritten and landed 9th and 10th, and an ordinal goes stale the
+             next time a test is inserted above them. Those guards parse this
+             file with ElementTree, which drops comment nodes, so the field
+             names in this very comment do not trip them. Keep them parsers,
+             never greps. -->
 
         <!-- Raw materials: lot-tracked and carrying an expiration date, which is
              what a bakery buys an ERP for. expiration_time is a number of days
