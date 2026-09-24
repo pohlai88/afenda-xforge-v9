@@ -39,4 +39,13 @@
         "data/product_template.xml",
         "data/mrp_bom.xml",
     ],
+    # Runs once, at install, and never on -u: odoo/modules/loading.py:239-243
+    # fires it only when update_operation == 'install'. Everything it seeds is
+    # either company-scoped (the POS counter, its categories, the ten
+    # reordering rules) or needs a product.product resolved from a template
+    # XMLID (every BoM line), so none of it can be written as data/ XML. See
+    # hooks.py and afenda_industry_base/seed.py. It requires the installing
+    # company to already have a chart of accounts; see _seed_pos for why, and
+    # for the one install order that cannot satisfy that.
+    "post_init_hook": "post_init_hook",
 }

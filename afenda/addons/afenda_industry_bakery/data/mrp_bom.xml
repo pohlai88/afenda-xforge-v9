@@ -6,15 +6,21 @@
              product.product (addons/mrp/models/mrp_bom.py:684), and the variant
              Odoo auto-creates for a template seeded by XML carries no XMLID of
              its own, so no ref= in this file can name a component. The lines are
-             seeded in Python instead, where env.ref(...).product_variant_id
-             resolves. Until that lands, test_boms_resolve_components fails on
-             "has no components" by design.
+             seeded in Python instead, by hooks.py's _seed_bom_lines, where
+             env.ref(...).product_variant_id resolves.
 
              product_uom_id is uom.product_uom_unit for all twelve because every
              finished good is sold by the piece (data/product_template.xml).
-             company_id is left unset so the pack installs in any company; see
+
+             company_id is absent from these records, which is not the same as
+             the headers being company neutral: mrp.bom.company_id defaults to
+             self.env.company (addons/mrp/models/mrp_bom.py:67-69), so each
+             header is created owned by whichever company installs the pack, and
+             a second company in the same database sees no bills of material at
+             all. That single company ownership is the accepted limitation in
              docs/superpowers/specs/2026-09-24-afenda-industry-packs-design.md
-             rulings 1 and 2. -->
+             rulings 1 and 2; naming the field here would only pin down in XML
+             what the default already decides. -->
         <record id="bom_sourdough" model="mrp.bom">
             <field name="product_tmpl_id" ref="product_sourdough"/>
             <field name="product_qty">1</field>
