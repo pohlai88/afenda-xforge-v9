@@ -71,7 +71,7 @@ jobs:
             --test-enable --test-tags "/afenda_brand,/afenda_runtime,/afenda_api_docs,/afenda_brand_digest" \
             --stop-after-init --http-port 8069 --workers 0 \
             --log-level warn --log-handler odoo.tests:INFO 2>&1 | tee odoo-tests.log
-          line=$(grep -oE '[0-9]+ failed, [0-9]+ error\(s\) of [0-9]+ tests' odoo-tests.log | tail -n 1)
+          line=$(grep -oE '[0-9]+ failed, [0-9]+ error\(s\) of [0-9]+ tests' odoo-tests.log | tail -n 1 || true)
           echo "result: ${line:-none}"
           set -- $(printf '%s' "$line" | grep -oE '[0-9]+')
           [ "$#" -eq 3 ] || { echo "::error::no Odoo test result line"; exit 1; }

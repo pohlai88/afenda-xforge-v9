@@ -4,7 +4,7 @@ A source-built image and a four-service compose stack:
 
 | Service | Role |
 |---|---|
-| `db` | `postgres:16`, role `xforge`, volume `db-data` |
+| `db` | `postgres:16`, volume `db-data`; bootstrap superuser `xforge` (backups, restores, `migrate-db-role.sh`) plus least-privilege `afenda_app` (what `init` and the server connect as) — see [Database roles](#database-roles) |
 | `init` | one-shot: `db init` (first run only), `module install afenda_brand afenda_runtime`, `module upgrade --outdated` on an existing database, system parameters |
 | `xforge` | the server: 4 workers, 1 cron thread, gevent on 8072, volume `xforge-data` (`/var/lib/afenda`) |
 | `nginx` | the only published ports; the one proxy hop in front of `proxy_mode`; serves the landing page (`site/`) |
@@ -85,7 +85,11 @@ uses the `!override` merge tag, which older Compose versions reject. Check with
    ```
 
    Keep a copy of `secrets/` somewhere safe outside the host; `db_password`
-   and `master_password` cannot be recovered from the stack.
+   and `master_password` cannot be recovered from the stack. `secrets/` also
+   holds `db_app_password` once a host has run [Moving an existing
+   host](#moving-an-existing-host) or `make-secrets.sh` has otherwise created
+   it; refresh the off-host copy after that happens, or a restore of the
+   secrets folder alone will be missing it.
 5. **First certificate.** One certificate, lineage `app.nexuscanon.com`, for
    the three names nginx serves. Issue it before the stack is up, while port
    80 is still free:
@@ -303,6 +307,14 @@ replaces `filestore/afenda`, then restarts `xforge` and reloads nginx. This
 sequence was verified end to end: the restored database kept the original's
 `database.create_date`, and the logo was served from the restored filestore.
 
+A restore run with the pre-G1 version of this script (before this branch
+added `afenda_app` and `migrate-db-role.sh`) creates and restores the
+database as `xforge`, so a host restored that way is left with `afenda`
+owned by `xforge` regardless of what owned it before the dump was taken.
+Before a later forward `redeploy.sh` against such a host, run
+`./migrate-db-role.sh --yes` first, or `init`'s `afenda_app` connection will
+get "permission denied" on those objects.
+
 ### Off-host copies
 
 `offsite.sh` pushes `/var/backups/afenda` to a private DigitalOcean Spaces
@@ -351,18 +363,61 @@ start; an existing host moves ownership across with `migrate-db-role.sh`.
 
 ### Moving an existing host
 
+Run every command in this section from `/srv/afenda/deploy`. Avoid the daily
+02:40 UTC backup cron: `backup.sh` stops and starts `xforge` with its own
+trap and has no lock against `migrate-db-role.sh` or `redeploy.sh`, so a
+collision during this window is possible. Hold the cron line for the
+duration and restore it at the end:
+
+```bash
+crontab -l | sed 's|^\(40 2 .*backup.sh.*\)$|# \1|' | crontab -
+```
+
 ```bash
 prev=$(git -C /srv/afenda rev-parse HEAD)   # record it, for rollback
-git -C /srv/afenda checkout <new-commit-or-tag>
+new=<the SHA the green CI run tested>       # record it: redeploy.sh below is pinned to this, not the branch head
+git -C /srv/afenda fetch --depth 1 origin "$new"
+git -C /srv/afenda checkout --detach FETCH_HEAD
+git -C /srv/afenda submodule update --init --depth 1
 ./make-secrets.sh                            # adds only db_app_password
+docker compose build                         # now, before migrating: shrinks the superuser window below to minutes
 docker compose up -d db
 ./migrate-db-role.sh --yes                   # ends "every object in afenda is owned by afenda_app"
-./redeploy.sh
+./redeploy.sh "$new"                         # pinned: a push by another session since $new was recorded is not deployed
+```
+
+The old `xforge`-connected server that `migrate-db-role.sh`'s own trap
+restarts keeps running, still as the superuser, through the backup and
+image build that follow — any object it creates in that window (for
+example an `ir.sequence` for a new journal) ends up owned by `xforge`. After
+`redeploy.sh` finishes, re-check ownership:
+
+```bash
+docker compose exec -T db psql -X -tA -U xforge -d afenda -c \
+  "select count(*) from pg_class c join pg_namespace n on n.oid=c.relnamespace where n.nspname='public' and c.relkind in ('r','p','v','m','S') and pg_get_userbyid(c.relowner)<>'afenda_app' and not exists (select 1 from pg_depend d where d.objid=c.oid and d.deptype='e')"
+```
+
+A non-zero count here means objects created during that window; run
+`./migrate-db-role.sh --yes` once more (idempotent) and re-check before
+treating anything else as a failure.
+
+Restore the cron line, and confirm it took:
+
+```bash
+crontab -l | sed 's|^# \(40 2 .*backup.sh.*\)$|\1|' | crontab -
+crontab -l | grep backup.sh
 ```
 
 Rollback is `./redeploy.sh "$prev"` only: the app goes back to connecting as
 the superuser `xforge`, which can use every object whatever its owner, so
-ownership stays with `afenda_app` and nothing further needs to move.
+ownership stays with `afenda_app` and nothing further needs to move. That
+rebuild starts from `$prev`, older than what the `docker compose build`
+above just cached, so its layers are not the ones sitting in the build
+cache — expect the build alone to take ~10+ minutes, while the app keeps
+running as before. The database stays at whatever module version the
+redeploy left it, which is fine for the older code: `module
+upgrade --outdated` only upgrades a module when the disk version is newer
+than the one the database recorded.
 
 ## Notes
 
