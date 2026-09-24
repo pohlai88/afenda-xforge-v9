@@ -1,0 +1,265 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of AFENDA xForge. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <data noupdate="1">
+        <!-- No company_id, no taxes_id, no property_account_*: see
+             docs/superpowers/specs/2026-09-24-afenda-industry-packs-design.md
+             rulings 1 and 2. Tests 10 and 11 fail the suite if any reappears. -->
+
+        <!-- Raw materials: lot-tracked and carrying an expiration date, which is
+             what a bakery buys an ERP for. expiration_time is a number of days
+             and lives on product.template
+             (addons/product_expiry/models/product_product.py, class ProductTemplate). -->
+        <record id="product_flour_t55" model="product.template">
+            <field name="name">Flour T55</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">270</field>
+            <field name="standard_price">0.85</field>
+        </record>
+        <record id="product_butter" model="product.template">
+            <field name="name">Butter</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">60</field>
+            <field name="standard_price">7.20</field>
+        </record>
+        <record id="product_sugar" model="product.template">
+            <field name="name">Caster Sugar</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">720</field>
+            <field name="standard_price">1.10</field>
+        </record>
+        <record id="product_yeast" model="product.template">
+            <field name="name">Fresh Yeast</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">21</field>
+            <field name="standard_price">3.40</field>
+        </record>
+        <record id="product_salt" model="product.template">
+            <field name="name">Fine Salt</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">1080</field>
+            <field name="standard_price">0.60</field>
+        </record>
+        <record id="product_eggs" model="product.template">
+            <field name="name">Eggs</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">28</field>
+            <field name="standard_price">0.22</field>
+        </record>
+        <record id="product_milk" model="product.template">
+            <field name="name">Whole Milk</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">10</field>
+            <field name="standard_price">1.05</field>
+        </record>
+        <record id="product_chocolate" model="product.template">
+            <field name="name">Dark Chocolate</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">365</field>
+            <field name="standard_price">9.50</field>
+        </record>
+        <record id="product_almond_powder" model="product.template">
+            <field name="name">Almond Powder</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">180</field>
+            <field name="standard_price">12.00</field>
+        </record>
+        <record id="product_vanilla" model="product.template">
+            <field name="name">Vanilla Extract</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_raw"/>
+            <field name="uom_id" ref="uom.product_uom_kgm"/>
+            <field name="tracking">lot</field>
+            <field name="use_expiration_date" eval="True"/>
+            <field name="expiration_time">1080</field>
+            <field name="standard_price">45.00</field>
+        </record>
+
+        <!-- Finished goods: sold over the counter, so list_price rather than
+             standard_price, and no lot tracking. -->
+        <record id="product_sourdough" model="product.template">
+            <field name="name">Sourdough Loaf 800g</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">5.50</field>
+        </record>
+        <record id="product_baguette" model="product.template">
+            <field name="name">Baguette Tradition</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">1.40</field>
+        </record>
+        <record id="product_wholemeal" model="product.template">
+            <field name="name">Wholemeal Loaf 500g</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">3.80</field>
+        </record>
+        <record id="product_croissant" model="product.template">
+            <field name="name">Croissant</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">1.30</field>
+        </record>
+        <record id="product_pain_choc" model="product.template">
+            <field name="name">Pain au Chocolat</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">1.50</field>
+        </record>
+        <record id="product_almond_croissant" model="product.template">
+            <field name="name">Almond Croissant</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">2.20</field>
+        </record>
+        <record id="product_brioche" model="product.template">
+            <field name="name">Brioche Loaf</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">4.60</field>
+        </record>
+        <record id="product_cinnamon_roll" model="product.template">
+            <field name="name">Cinnamon Roll</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">2.40</field>
+        </record>
+        <record id="product_eclair" model="product.template">
+            <field name="name">Chocolate Eclair</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">3.20</field>
+        </record>
+        <record id="product_fruit_tart" model="product.template">
+            <field name="name">Fruit Tart Slice</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">3.90</field>
+        </record>
+        <record id="product_birthday_cake" model="product.template">
+            <field name="name">Birthday Cake</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">28.00</field>
+        </record>
+        <record id="product_focaccia" model="product.template">
+            <field name="name">Focaccia Tray</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_finished"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="list_price">6.50</field>
+        </record>
+
+        <!-- Packaging: bought, consumed with an order, never sold on its own,
+             so standard_price. -->
+        <record id="product_paper_bag" model="product.template">
+            <field name="name">Paper Bag Small</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_packaging"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="standard_price">0.03</field>
+        </record>
+        <record id="product_cake_box" model="product.template">
+            <field name="name">Cake Box</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_packaging"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="standard_price">0.45</field>
+        </record>
+        <record id="product_ribbon" model="product.template">
+            <field name="name">Ribbon Roll</field>
+            <field name="type">consu</field>
+            <field name="is_storable" eval="True"/>
+            <field name="categ_id" ref="categ_packaging"/>
+            <field name="uom_id" ref="uom.product_uom_unit"/>
+            <field name="tracking">none</field>
+            <field name="standard_price">0.02</field>
+        </record>
+    </data>
+</odoo>
