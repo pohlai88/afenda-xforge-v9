@@ -53,7 +53,7 @@ afenda/addons/afenda_industry_bakery/
   data/mrp_bom.xml
   demo/bakery_demo.xml
   tests/__init__.py
-  tests/test_pack.py      10 tests
+  tests/test_pack.py      11 tests
 ```
 
 `tests/common.py` is deliberately **not** imported by `afenda_industry_base/tests/__init__.py` — it holds no tests of its own, and the bakery pack imports it by path.
@@ -1061,7 +1061,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --test-tags "/afenda_industry_bakery" --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_bakery: 10 tests`, `0 failed`. These three are guards, not red-green tests: they pass on correct data from the moment they are written. To prove a guard actually bites, temporarily add `<field name="company_id" eval="1"/>` to one product record, re-run, see `test_data_xml_sets_no_company_id` fail, then remove it. Do that once; do not commit it.
+Expected: `afenda_industry_bakery: 11 tests`, `0 failed`. These three are guards, not red-green tests: they pass on correct data from the moment they are written. To prove a guard actually bites, temporarily add `<field name="company_id" eval="1"/>` to one product record, re-run, see `test_data_xml_sets_no_company_id` fail, then remove it. Do that once; do not commit it.
 
 - [ ] **Step 3: Commit**
 
@@ -1072,7 +1072,7 @@ printf '%s\n' "[ADD] industry: static guards on the bakery pack data" "" \
   "Static rather than runtime on purpose -- a static check holds even when the" \
   "localization is not installed in the test database, and it catches the" \
   "future edit that puts the mistake back." "" \
-  "afenda_industry_bakery: 10 tests, 0 failed." "" \
+  "afenda_industry_bakery: 11 tests, 0 failed." "" \
   "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>" > /tmp/msg5.txt
 git add -- afenda/addons/afenda_industry_bakery && \
 git commit --only -F /tmp/msg5.txt -- afenda/addons/afenda_industry_bakery
@@ -1102,7 +1102,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --test-tags "/afenda_industry_bakery" --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_bakery: 10 tests`, `0 failed`. The `afenda` database was created `--without-demo=all`, so the demo file is parsed but not loaded; a failure here means something in `demo/` was wrongly listed under `data` in the manifest.
+Expected: `afenda_industry_bakery: 11 tests`, `0 failed`. The `afenda` database was created `--without-demo=all`, so the demo file is parsed but not loaded; a failure here means something in `demo/` was wrongly listed under `data` in the manifest.
 
 - [ ] **Step 2: Commit**
 
@@ -1111,7 +1111,7 @@ printf '%s\n' "[ADD] industry: bakery demo suppliers, orders and staff" "" \
   "Business history lives in demo/ and nowhere else: production installs run" \
   "--without-demo=all, so this is the line between a pack that configures a" \
   "real tenant and one that fills it with invented transactions." "" \
-  "afenda_industry_bakery: 10 tests, 0 failed." "" \
+  "afenda_industry_bakery: 11 tests, 0 failed." "" \
   "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>" > /tmp/msg6.txt
 git add -- afenda/addons/afenda_industry_bakery && \
 git commit --only -F /tmp/msg6.txt -- afenda/addons/afenda_industry_bakery
@@ -1132,7 +1132,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_base: 4 tests` and `afenda_industry_bakery: 10 tests`, 14 in total, `0 failed`.
+Expected: `afenda_industry_base: 4 tests` and `afenda_industry_bakery: 11 tests`, 15 in total, `0 failed`.
 
 Then run the same two modules **once on a fresh throwaway database** with `-i` and `--without-demo=all`, because that is what CI does (the orchestrator session's job builds a new database per run) and it is the only path that exercises `post_init_hook` end to end. Both result lines must read the same 3 and 9. Drop the scratch database and its filestore afterwards. These two numbers are what CI's floor is raised by — take them from the result lines, never the per-class stats lines.
 
