@@ -222,3 +222,36 @@ the host's original), restored into a throwaway local stack. The restored databa
 production's `database.uuid`, the Resend server and alias domain; the branded login page, the
 company logo and a 477 KB asset bundle were served from the restored filestore. Found on the
 way: `restore.sh` must run with the stack's own `COMPOSE_FILE` (README, Backup and restore).
+
+G1 role rehearsal (2026-09-24, local `afenda-deploy` stack holding the restored production copy,
+38 modules, source `e5f65888`):
+
+- Image `afenda/xforge:local` `sha256:77e28122…` built from `git archive e5f65888` plus the two
+  OCA submodules, not the working tree, which held a peer session's uncommitted `afenda_brand`
+  edits. `make-secrets.sh`: `wrote db_app_password`, `keeping existing` for `db_password`,
+  `admin_password` and `master_password_hash`.
+- `migrate-db-role.sh --yes`: backup `20260924T035905Z` (dump 2,444,155 B, filestore 2,349,482 B),
+  `CREATE ROLE`, `ALTER ROLE`, `ALTER DATABASE`,
+  `NOTICE: migrate-db-role: every object in afenda is owned by afenda_app`, exit 0.
+- `docker compose up -d`: `init` exited 0 as `afenda_app@db`, `module upgrade --outdated` ran
+  `afenda_brand` 19.0.1.0.4 → 19.0.1.0.5 and `afenda_runtime` 19.0.1.1.0 → 19.0.1.2.0 with both
+  post-migrate scripts; `xforge` healthy. The 19.0.1.2.0 migration took the invitation
+  marketing out: the pre-migration dump's `mail_template` data held `12+ million` and
+  `page/tour` once each, and afterwards none of the four `auth_signup` templates contains
+  either.
+- Verified as the app role: `afenda_app super=false`; sessions on `afenda` other than `xforge`:
+  `afenda_app`; objects in `public` not owned by `afenda_app` (extension members aside): `0`;
+  `/web/health` `{"status": "pass"}`; `AFENDA xForge` on `/web/login`: 2;
+  `SEQ OK as afenda_app` from `odoo-bin shell` creating an `ir.sequence` (rolled back, 0
+  `g1-check` rows left); `module upgrade afenda_brand afenda_runtime` exit 0, 0 ERROR lines.
+- Backup and restore as the app role: backup `20260924T040337Z`, `restore: done`, database
+  owner `afenda_app`, objects not owned by `afenda_app`: `0`, `/web/health` pass.
+- Rollback: the pre-Task-3 `compose.yaml` (from `80b22da2f^`) with `compose.proof.yaml` recreated
+  db, init and xforge; `init` exited 0 as `xforge@db`, `/web/health` pass, the app's sessions
+  `xforge`, ownership still `0` off `afenda_app`. Forward again with the current files: `init`
+  exit 0, `/web/health` pass, the app's sessions `afenda_app`.
+- Found: `docker compose start xforge` in the backup and migrate restart traps also starts the
+  existing `init` container, so during the migration the pre-migration `init` (as `xforge`) ran
+  twice, once after ownership had moved. Here it had nothing outdated to upgrade and created
+  no objects (ownership `0` afterwards), but it would create superuser-owned objects if the
+  running image ever carried a newer module version than the database.
