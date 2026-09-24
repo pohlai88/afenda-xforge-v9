@@ -32,7 +32,7 @@ jobs:
       - name: System libraries for psycopg2 and python-ldap
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libpq-dev libldap2-dev libsasl2-dev
       - name: Python requirements
-        run: pip install -r requirements.txt rl-renderPM ruff
+        run: pip install -r requirements.txt rl-renderPM ruff==0.16.8  # ruff.toml needs >= 0.16.1
       - name: Lint
         run: ruff check afenda/addons
       - name: Install afenda_brand and run its tests
@@ -42,4 +42,4 @@ jobs:
             -d ci -i afenda_brand --test-tags /afenda_brand \
             --stop-after-init --log-level=info 2>&1 | tee odoo.log
           if grep -E " (ERROR|CRITICAL) " odoo.log; then exit 1; fi
-          grep -qE "tests.result: 0 failed, 0 error\(s\)" odoo.log
+          grep -qE "tests.result: 0 failed, 0 error\(s\) of [1-9][0-9]* tests" odoo.log

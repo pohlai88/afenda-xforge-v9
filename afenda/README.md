@@ -45,7 +45,7 @@ The same command CI runs (`.github/workflows/afenda.yml`):
     --test-tags /afenda_brand --stop-after-init
 ```
 
-The log must end with `0 failed, 0 error(s)`. If an upstream merge adds a new
+The log must report `0 failed, 0 error(s) of N tests` with N > 0. If an upstream merge adds a new
 Odoo S.A. host, `test_upstream_odoo_hosts_are_reviewed` fails on purpose: see
 [SPEC.md §5](SPEC.md#5-security-and-the-self-hosted-policy).
 
@@ -59,12 +59,12 @@ Installing `afenda_brand` pulls in the OCA modules and applies the identity:
 | Login page | AFENDA logo, no "Powered by Odoo" link |
 | Web client | Ledger Blue primary color, Source Sans 3 and Source Code Pro (self-hosted woff2), paper background (white when printed), tabular figures on money |
 | Settings | "AFENDA xForge 19.0" edition block, Enterprise upsells removed (`remove_odoo_enterprise`), odoo.com links removed (`disable_odoo_online`) |
-| Emails | "Powered by Odoo" footer removed (`mail_debranding`), AFENDA email colors |
+| Emails | "Powered by Odoo" footer removed (`mail_debranding`), white-on-Ledger-Blue buttons |
 | Portal | Odoo branding removed (`portal_debranding`) |
 | PWA / mobile | App name "AFENDA", theme color Ledger Blue (`web_pwa_customize`) |
-| Companies | Default logo is the AFENDA lockup (treated as a placeholder, so it stays out of customer emails until a real logo is uploaded); a company still named "My Company" is renamed "AFENDA" at install |
-| Discuss | The system bot is "AFENDA Bot", with no Odoo onboarding chat and no "Welcome to Odoo!" post |
-| Odoo S.A. services | IAP, SMS, postal mail, lead enrichment, editor media/AI endpoints point at a closed local port; the VIES cron and "Odoo.com Accounts" login are kept off; IAP apps are never auto-installed. See SPEC.md §5 |
+| Companies | AFENDA colors and favicon, also for companies created later; default logo is the AFENDA lockup (treated as a placeholder, so it stays out of customer emails until a real logo is uploaded); a company still named "My Company" is renamed "AFENDA" at install |
+| Discuss | The system bot is "AFENDA Bot", with no Odoo onboarding chat; the #general welcome post reads "Welcome to AFENDA xForge!" |
+| Odoo S.A. services | IAP, SMS, postal mail, lead enrichment, editor media/AI endpoints point at a closed local port; the VIES cron and "Odoo.com Accounts" login are kept off (re-checked at every start); IAP and SMS apps are not auto-installed unless another app requires them. See SPEC.md §5 |
 
 If you also install the `website` app, add `website_debranding` from
 `oca/server-brand` to remove the website footer branding.
@@ -86,7 +86,7 @@ Reference box: Ubuntu 24.04, 4 vCPU, 8 GB RAM, SSD, PostgreSQL 16 on the same ho
 ```ini
 [options]
 addons_path = /opt/afenda/app/addons,/opt/afenda/app/afenda/addons,/opt/afenda/app/afenda/oca/server-brand,/opt/afenda/app/afenda/oca/web,/opt/afenda/app/afenda/oca/server-tools
-server_wide_modules = base,web,module_change_auto_install
+server_wide_modules = base,rpc,web,module_change_auto_install
 data_dir = /var/lib/afenda
 logfile = /var/log/afenda/odoo.log
 ; A long random string. Never leave it unset: the default master password is "admin".
@@ -110,7 +110,7 @@ db_maxconn_gevent = 32
 publisher_warranty_url = http://127.0.0.1:9/
 
 [module_change_auto_install]
-modules_disabled = partner_autocomplete,snailmail,snailmail_account,crm_iap_enrich,crm_iap_mine
+modules_disabled = iap,iap_mail,iap_crm,partner_autocomplete,snailmail,snailmail_account,sms,crm_sms,crm_iap_enrich,crm_iap_mine
 ```
 
 ### 2. systemd (`/etc/systemd/system/afenda.service`)

@@ -111,12 +111,18 @@ record rules and groups for every `afenda_*` model, backups encrypted at rest.
 
 1. **Network** (the guarantee): the resolver sinks `odoo.com` and `odoocdn.com`;
    nginx sends `Content-Security-Policy: font-src 'self' data:` (README §3–4).
-2. **Not installed**: OCA `module_change_auto_install` stops `partner_autocomplete`,
-   `snailmail`, `snailmail_account`, `crm_iap_enrich`, `crm_iap_mine` from
-   auto-installing (`odoo.conf`).
-3. **Endpoints**: `afenda_brand` points every overridable Odoo S.A. endpoint at a
-   closed local port and keeps the VIES cron and "Odoo.com Accounts" login off
-   (`hooks.py`), so features fail fast instead of hanging.
+2. **Not installed**: OCA `module_change_auto_install` stops `iap`, `iap_mail`,
+   `iap_crm`, `partner_autocomplete`, `snailmail`, `snailmail_account`, `sms`,
+   `crm_sms`, `crm_iap_enrich`, `crm_iap_mine` from auto-installing
+   (`odoo.conf`). An app that hard-depends on one still installs it
+   (`point_of_sale` → `partner_autocomplete`, `base_automation` → `sms`).
+3. **Endpoints**: `afenda_brand.hooks.block_odoo_services` points every
+   overridable Odoo S.A. endpoint at a closed local port and keeps the VIES
+   cron and "Odoo.com Accounts" login off, so features fail fast instead of
+   hanging. It runs at install, in the 19.0.1.1.0 migration and at every
+   start, so upgraded databases and apps installed later are covered. An
+   administrator may point an endpoint at a real (non-Odoo) service; an empty
+   one is reset.
 4. **Guard**: `test_upstream_odoo_hosts_are_reviewed` fails when upstream code
    names an Odoo S.A. host that is not in its reviewed list.
 
@@ -126,10 +132,10 @@ record rules and groups for every `afenda_*` model, backups encrypted at rest.
 | IAP credits, partner autocomplete, SMS, postal mail, lead enrichment/mining, website reveal | iap*.odoo.com, partner-autocomplete, sms.api, iap-snailmail | Not installed (2) + endpoint (3) + network |
 | Editor media library and AI text | media-api, olg.api | Endpoint (3) + network |
 | Website builder APIs | website.api, olg.api | Endpoint (3) + network |
-| VIES VAT validation | vies.api.odoo.com | Cron off (3) + network; use the EU VIES service directly if needed |
+| VIES VAT validation | vies.api.odoo.com | Called only if a company enables *Verify VAT Numbers* (off by default). Cron off (3) + network; use the EU VIES service directly if needed |
 | "Sign in with Odoo.com" | accounts.odoo.com | Provider off (3); use OCA `auth_oidc` for SSO |
 | Apps store, "Industries" filter | apps.odoo.com | OCA `disable_odoo_online` hides the menus; network |
-| Noto fonts for non-Latin scripts | fonts.odoocdn.com | CSP (1); self-host Noto if those scripts are needed |
+| Noto fonts for non-Latin scripts | fonts.odoocdn.com | CSP (1). The AFENDA font stacks deliberately skip Odoo's `o-add-unicode-support-font()` wrapper, so the web client falls back to system fonts for Cyrillic, Hebrew, Arabic and Telugu; self-host Noto if those scripts matter |
 | Digest and mailing images | download.odoocdn.com | Loaded by the recipient's mail client; turn off digest tips or edit templates |
 | Gmail / Outlook OAuth proxy | gmail.api, outlook.api | Community refuses it; configure your own OAuth client |
 | Payment onboarding | stripe/razorpay/payu/mercadopago.api | Enter API keys manually |
