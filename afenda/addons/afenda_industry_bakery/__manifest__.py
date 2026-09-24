@@ -35,6 +35,7 @@
     # before reaching an assertion. Each later task adds its line in the commit
     # that creates the file.
     "data": [
+        "data/res_groups.xml",
         "data/product_category.xml",
         "data/product_template.xml",
         "data/mrp_bom.xml",

@@ -2,6 +2,10 @@
 from odoo.tests import TransactionCase, tagged
 
 from odoo.addons.afenda_industry_base.tests.common import IndustryPackMixin
+# The same rule the hook applied, not a copy of it: a test that restated
+# "units if stocked in units else grams" could agree with itself while both
+# it and the hook were wrong.
+from odoo.addons.afenda_industry_bakery.hooks import line_uom
 
 MODULE = "afenda_industry_bakery"
 
@@ -150,7 +154,7 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
         mrp.bom.line is deliberately absent from this list. The lines carry no
         XMLID of their own -- `bom_line_ids` writes create them without any
         ir.model.data entry -- and they do not need one: mrp.bom.line.bom_id is
-        ondelete='cascade' (addons/mrp/models/mrp_bom.py:701-703), so they go
+        ondelete='cascade' (addons/mrp/models/mrp_bom.py:697-699), so they go
         when the module-owned header goes. Adding them here would assert an
         ownership that by design does not exist.
         """
@@ -158,7 +162,7 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
         self.assert_records_are_module_owned(MODULE, "stock.warehouse.orderpoint", 10)
 
     def test_bom_component_quantities_are_converted(self):
-        """The recipe unit on every component line, bounded per UoM.
+        """Every component line carries the unit its recipe is measured in.
 
         `RECIPES` is written in grams and `_seed_bom_lines` writes the lines in
         grams, because the obvious alternative does not survive the ORM:
@@ -171,23 +175,38 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
         So the regression this guards is a thousandfold error in either
         direction, and the bound has to be per-UoM because the invariant is.
 
+        Which unit a line *should* carry is asked of the product, through the
+        same `line_uom` the hook used, never of a list of XMLIDs written here:
+        a countable raw is counted, a weighed one is measured in grams. A rule
+        stated as `product_suffix == "product_eggs"` would be a fact about
+        today's catalogue, so a countable raw added by a later pack would be
+        written in grams and this test would wave it through.
+
         Grams: every legitimate value is between 1 (yeast, vanilla) and 700
         (focaccia's flour). A line that was divided by 1000 and left in grams is
-        below 1; a kilogram figure mistakenly labelled grams would have to be
-        under a gram to pass, which no recipe here is.
-
-        Kilograms: a hard failure, not a bound. A kg line means somebody
-        reintroduced the division, and the small components are already zero by
-        the time this test could measure them.
+        below 1; a kilogram figure mislabelled as grams would have to be under a
+        gram to pass, which no recipe here is.
         """
-        gram = self.env.ref("uom.product_uom_gram")
         units = self.env.ref("uom.product_uom_unit")
+        gram = self.env.ref("uom.product_uom_gram")
         lines = self.env["mrp.bom"].search(
             [("product_tmpl_id.categ_id", "=", self.env.ref(f"{MODULE}.categ_finished").id)]
         ).bom_line_ids
         self.assertTrue(lines, "no components to check")
         for line in lines:
-            if line.product_uom_id == gram:
+            expected = line_uom(line.product_id, units, gram)
+            self.assertEqual(
+                line.product_uom_id,
+                expected,
+                f"{line.bom_id.display_name} consumes "
+                f"{line.product_id.display_name} in {line.product_uom_id.name}, "
+                f"but it is stocked in {line.product_id.uom_id.name} so the line "
+                f"belongs in {expected.name}. A kilogram line in particular means "
+                f"the grams were divided by 1000, which rounds the small "
+                f"components to zero at the shipped 2-decimal 'Product Unit' "
+                f"precision",
+            )
+            if expected == gram:
                 self.assertGreaterEqual(
                     line.product_qty, 1.0,
                     f"{line.bom_id.display_name} consumes {line.product_qty} g of "
@@ -200,7 +219,7 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
                     f"{line.product_id.display_name}; the largest real component "
                     f"is 700 g",
                 )
-            elif line.product_uom_id == units:
+            else:
                 self.assertLessEqual(
                     line.product_qty, 12.0,
                     f"{line.bom_id.display_name} consumes {line.product_qty} "
@@ -209,15 +228,6 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
                 self.assertEqual(
                     line.product_qty, int(line.product_qty),
                     f"{line.product_id.display_name} is counted in whole units",
-                )
-            else:
-                self.fail(
-                    f"{line.bom_id.display_name} consumes "
-                    f"{line.product_id.display_name} in {line.product_uom_id.name}. "
-                    f"This pack weighs in grams and counts in Units; a kilogram "
-                    f"line in particular means the grams were divided by 1000, "
-                    f"which rounds the small components to zero at the shipped "
-                    f"2-decimal 'Product Unit' precision"
                 )
 
     def test_reordering_rules_cover_raw_materials(self):

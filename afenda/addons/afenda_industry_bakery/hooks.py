@@ -5,7 +5,15 @@ Everything here exists because it cannot honestly be written as XML: the
 records either carry a required `company_id` or need a variant resolved in
 Python. See afenda_industry_base/seed.py for why that matters at uninstall.
 """
+import logging
+
+from odoo import _
+from odoo.exceptions import UserError
+from odoo.fields import Command
+
 from odoo.addons.afenda_industry_base.seed import load_company_records
+
+_logger = logging.getLogger(__name__)
 
 MODULE = "afenda_industry_bakery"
 
@@ -84,6 +92,22 @@ def _variant(env, suffix):
     return env.ref(f"{MODULE}.{suffix}").product_variant_id
 
 
+def line_uom(product, units, gram):
+    """The unit a BoM line should measure `product` in.
+
+    Derived from how the product is stocked, never from its XMLID: a countable
+    raw is counted in its own unit, anything weighed is measured in grams. The
+    alternative -- naming the countable products in a literal -- makes the
+    guarantee depend on today's catalogue, so a countable raw added by a later
+    pack would silently be written as grams and the gram bound in
+    test_bom_component_quantities_are_converted would accept it.
+
+    Takes the two units as arguments rather than resolving them, so the caller
+    resolves once and the test can assert against the same rule the hook used.
+    """
+    return units if product.uom_id == units else gram
+
+
 def _seed_bom_lines(env):
     """Fill the BoM headers from data/mrp_bom.xml.
 
@@ -95,28 +119,76 @@ def _seed_bom_lines(env):
     The lines are the one record in this pack with no XMLID of their own:
     `bom_line_ids` writes create mrp.bom.line rows that ir.model.data never
     sees. Spec ruling 5 holds for them transitively -- mrp.bom.line.bom_id is
-    ondelete='cascade' (addons/mrp/models/mrp_bom.py:701-703), so uninstalling
+    ondelete='cascade' (addons/mrp/models/mrp_bom.py:697-699), so uninstalling
     the module deletes the module-owned header and the lines go with it. That
     is why test_post_init_records_are_module_owned enumerates only pos.config
     and stock.warehouse.orderpoint.
     """
+    units = env.ref("uom.product_uom_unit")
+    gram = env.ref("uom.product_uom_gram")
     for bom_suffix, components in RECIPES:
         bom = env.ref(f"{MODULE}.{bom_suffix}")
         if bom.bom_line_ids:
             continue  # already seeded; the hook is safe to re-run
-        gram = env.ref("uom.product_uom_gram")
         lines = []
         for product_suffix, quantity in components:
             product = _variant(env, product_suffix)
-            # Eggs are counted in their own UoM; everything else is weighed, and
-            # the figure in RECIPES is already the gram count.
-            uom = product.uom_id if product_suffix == "product_eggs" else gram
-            lines.append((0, 0, {
+            lines.append(Command.create({
                 "product_id": product.id,
                 "product_qty": float(quantity),
-                "product_uom_id": uom.id,
+                "product_uom_id": line_uom(product, units, gram).id,
             }))
         bom.write({"bom_line_ids": lines})
+
+
+def _check_accounting_is_set_up(env):
+    """Refuse the install with a message that names this pack.
+
+    Creating a pos.config needs the company to already have a bank journal, ie.
+    a chart of accounts: `payment_method_ids` defaults through
+    `_create_journal_and_payment_methods`, which raises "Ensure that there is an
+    existing bank journal. Check if chart of accounts is installed in your
+    company." when it finds none
+    (addons/point_of_sale/models/pos_config.py:1060-1063). That message is
+    correct and useless here, because it names neither the Bakery pack nor the
+    thing to do about it, and the customer never asked for a POS config -- they
+    clicked Install on Bakery.
+
+    The trap is the default path, not an edge case. This pack is an application,
+    a stock Odoo 19 database has no `account`, and installing Bakery pulls
+    pos_sale -> point_of_sale -> account into the same module graph. `account`
+    defers loading the chart to `_register_hook`
+    (addons/account/models/ir_module.py:102-104), which runs after the whole
+    graph, while a post_init_hook runs during it (odoo/modules/loading.py:243).
+    So on the one install that matters most -- the first one -- the chart does
+    not exist yet.
+
+    Requiring Invoicing before a pack whose job is to configure a POS counter is
+    a legitimate product requirement. Shipping an error that does not say so is
+    not.
+
+    The domain mirrors upstream's own at pos_config.py:1061 exactly, including
+    `parent_ids` (odoo/addons/base/models/res_company.py:55), so this cannot
+    refuse an install that would have succeeded -- with one narrow exception: a
+    company holding a cash payment method and no bank journal passes upstream's
+    guard and fails this one. Such a company has no chart of accounts and could
+    not settle a POS session anyway.
+    """
+    if env["account.journal"].search(
+        [("type", "=", "bank"), ("company_id", "in", env.company.parent_ids.ids)],
+        limit=1,
+    ):
+        return
+    raise UserError(_(
+        "The Bakery industry pack configures a Point of Sale counter, which "
+        "needs a chart of accounts in company %(company)s: there is no bank "
+        "journal to settle takings into.\n\n"
+        "Install Invoicing first and let it set up the chart of accounts for "
+        "this company, then install Bakery. Installing both at once cannot "
+        "work, because the chart is only loaded once the whole installation "
+        "has finished.",
+        company=env.company.display_name,
+    ))
 
 
 def _seed_pos(env):
@@ -128,27 +200,12 @@ def _seed_pos(env):
     to be assigned here instead, because the categories do not exist until this
     hook creates them.
 
-    Creating the pos.config needs the company to already have a chart of
-    accounts: `payment_method_ids` defaults through
-    `_create_journal_and_payment_methods`, which raises "Ensure that there is an
-    existing bank journal" when it finds none
-    (addons/point_of_sale/models/pos_config.py:1060-1063). That is upstream's
-    rule -- point_of_sale itself only ever creates a config from demo data, for
-    the same reason -- and it has one sharp edge worth knowing: `account` defers
-    loading the chart to `_register_hook`
-    (addons/account/models/ir_module.py:102-104), which runs after the whole
-    module graph, while a post_init_hook runs during it
-    (odoo/modules/loading.py:243). So this pack installs cleanly onto a database
-    where accounting is already set up, and fails loudly in the one case where
-    `account` is being installed in the same run -- a green-field
-    `-i afenda_industry_bakery` on an empty database. Install the dependencies
-    first, then the pack.
-
     Only `pos_categ_ids` is written on those templates. product_expiry's
     ProductTemplate.write() clears `use_expiration_date` whenever `tracking` is
     written as 'none' (addons/product_expiry/models/product_product.py:56-59),
     so nothing here may fold a `tracking` value into these writes.
     """
+    _check_accounting_is_set_up(env)
     bread, pastry = load_company_records(env, MODULE, "pos.category", [
         ("pos_categ_bread", {"name": "Bread"}),
         ("pos_categ_pastry", {"name": "Pastry"}),
@@ -159,12 +216,12 @@ def _seed_pos(env):
     loaves = ("product_sourdough", "product_baguette", "product_wholemeal",
               "product_focaccia", "product_brioche")
     for suffix in loaves:
-        env.ref(f"{MODULE}.{suffix}").pos_categ_ids = [(6, 0, bread.ids)]
+        env.ref(f"{MODULE}.{suffix}").pos_categ_ids = [Command.set(bread.ids)]
     pastries = ("product_croissant", "product_pain_choc", "product_almond_croissant",
                 "product_cinnamon_roll", "product_eclair", "product_fruit_tart",
                 "product_birthday_cake")
     for suffix in pastries:
-        env.ref(f"{MODULE}.{suffix}").pos_categ_ids = [(6, 0, pastry.ids)]
+        env.ref(f"{MODULE}.{suffix}").pos_categ_ids = [Command.set(pastry.ids)]
 
 
 def _seed_orderpoints(env):
@@ -173,6 +230,19 @@ def _seed_orderpoints(env):
         [("company_id", "=", env.company.id)], limit=1
     )
     if not warehouse:
+        # Not raised, unlike the POS precondition above: a warehouse-less
+        # company still gets a usable catalogue, recipes and counter, and stock
+        # creates a warehouse per company by default, so reaching this means
+        # something unusual was done deliberately. It must not pass in silence
+        # either -- ten reordering rules the operator asked for would simply not
+        # be there, and test_reordering_rules_cover_raw_materials would fail
+        # with no clue why.
+        _logger.warning(
+            "%s: company %s has no warehouse, so none of the %d reordering "
+            "rules for raw materials were created. Create a warehouse and "
+            "reinstall the pack to get them.",
+            MODULE, env.company.display_name, len(REORDER_RULES),
+        )
         return
     records = []
     for suffix, min_qty, max_qty in REORDER_RULES:
