@@ -24,6 +24,8 @@
   - `post_init_hook(env)` takes a single `env` argument (`afenda/addons/afenda_brand/hooks.py:98`).
 - **No `company_id`, no `property_account_*`, no `taxes_id`/`supplier_taxes_id`, no `journal_id`, no `ref="l10n_*"` anywhere under `data/`.** Tasks 5 enforces this with static tests; violating it fails the suite.
 - Test classes with `test_` methods must reach an Odoo case class **by a base named in the same file**. Use `class X(IndustryPackMixin, TransactionCase)`. See `afenda/addons/afenda_brand/tests/test_branding.py:1537-1553`.
+- **Every industry pack test class carries `@tagged("post_install", "-at_install")`** (import `tagged` from `odoo.tests`), with a comment saying why. Found by Task 1's implementer: `odoo/modules/loading.py:148,282` runs a module's `at_install` suite immediately after that module loads, so a thin-dependency module runs at graph depth 1 — before `account` loads — and `res.partner` then lacks `autopost_bills`, whose column is NOT NULL (`addons/account/models/partner.py:610`). The suite then passes under `-i` and errors under `-u`, which is the documented command in `.claude/odoo-agent-rules.md:186-190`. A pack that only passes when freshly installed is a trap for every later session and splits CI from local runs.
+- **The authoritative test count is the result line** (`<module>: N tests`), not the per-class stats line. `setUpClass`/`tearDownClass` get their own stat ids (`odoo/tests/result.py:117-120`, aggregated `:253-262`), so the stats line reads higher — 5 where the result line says 3. Quote the result line; a CI floor set from the stats line is wrong.
 - `tests/__init__.py` must import each `test_*.py`, or the file never loads.
 - Verification reads the **printed count**, never the exit code. A green run that collected nothing prints nothing and exits 0.
 - Commits: `git add -- <paths> && git commit --only -F <msgfile> -- <paths>` in one shell invocation. Never `git add -A`. Never a full-tree `git status`. Subjects use `[ADD]` / `[FIX]` / `[IMP]`.
@@ -77,13 +79,21 @@ afenda/addons/afenda_industry_bakery/
 
 ```python
 # Part of AFENDA xForge. See LICENSE file for full copyright and licensing details.
-from odoo.tests import TransactionCase
+from odoo.tests import TransactionCase, tagged
 
 from odoo.addons.afenda_industry_base.seed import load_company_records
 
 MODULE = "afenda_industry_base"
 
 
+# post_install is load-bearing here, not habit. odoo/modules/loading.py:148,282
+# runs a module's at_install suite immediately after that module loads, and this
+# module depends only on `base`, so at_install puts it at graph depth 1 -- before
+# `account` loads. res.partner then has no autopost_bills column, which account
+# declares NOT NULL (addons/account/models/partner.py:610), and every test that
+# creates a partner errors. The suite passed under -i and errored under -u, the
+# documented command in .claude/odoo-agent-rules.md:186-190. Do not remove.
+@tagged("post_install", "-at_install")
 class TestSeed(TransactionCase):
     """`load_company_records` is what keeps a pack uninstallable-clean."""
 
@@ -366,13 +376,20 @@ git commit --only -F /tmp/msg1.txt -- afenda/addons/afenda_industry_base
 
 ```python
 # Part of AFENDA xForge. See LICENSE file for full copyright and licensing details.
-from odoo.tests import TransactionCase
+from odoo.tests import TransactionCase, tagged
 
 from odoo.addons.afenda_industry_base.tests.common import IndustryPackMixin
 
 MODULE = "afenda_industry_bakery"
 
 
+# post_install, not at_install: odoo/modules/loading.py:148,282 runs a module's
+# at_install suite the moment that module loads, which for a pack can be before
+# the rest of the graph is up. Task 1 hit exactly that -- res.partner without
+# account's NOT NULL autopost_bills column (addons/account/models/partner.py:610)
+# -- and the result was a suite that passed under -i and errored under -u. Every
+# industry pack carries this tag for that reason; do not remove it.
+@tagged("post_install", "-at_install")
 class TestBakeryPack(IndustryPackMixin, TransactionCase):
     """The bakery preset: what it installs, and what it must never install."""
 
