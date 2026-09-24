@@ -78,11 +78,13 @@
     // Serif display against the sans form: the headline is the voice, the
     // card is the instrument.
     // ---------------------------------------------------------------------
+    // Headline and subline are one group, so they sit tight; the step from the
+    // group down to the card is the rhythm's middle step (see "Poster rhythm").
     .o_afenda_auth_headline {
         display: flex;
         flex-direction: column;
-        gap: .75rem;
-        margin-bottom: clamp(.5rem, 2vw, 1.25rem);
+        gap: .5rem;
+        margin-bottom: clamp(1.5rem, 4vh, 2.25rem);
     }
 
     .o_afenda_auth_title {
@@ -301,7 +303,7 @@
     // one. It is pushed to the foot of the column by the auto margin under
     // the card (see "Vertical placement" below), so it needs none of its own.
     .o_afenda_auth_foot {
-        padding-top: 1rem;
+        padding-top: clamp(1.25rem, 3vh, 2.5rem);
         font-size: .75rem;
         line-height: 1.4;
         color: $o-brand-secondary;  // graphite
@@ -409,11 +411,25 @@
     // whatever the art leaves. Above md it keeps a floor of 22rem so the card
     // never drops to the 300px at which its label rows wrap; the art is the
     // side that gives.
+    // Poster rhythm. No uniform `gap`: one gap for everything put the AFENDA
+    // mark as close to the headline as the headline is to its own subline, so
+    // the page read as one undifferentiated stack. Spacing follows grouping
+    // instead - tight inside a group, wide between groups, widest where the
+    // subject changes:
+    //   lockup + tagline (identity) ... 0.375rem, inside the group
+    //   identity -> headline ........... clamp(2rem, 6vh, 4.5rem), the largest
+    //   headline + subline (message) ... 0.5rem, inside the group
+    //   message -> card ................ clamp(1.5rem, 4vh, 2.25rem)
+    //   card -> footnote ............... clamp(1.25rem, 3vh, 2.5rem), at least
+    // Sized so a 1280x720 screen shows the whole poster without scrolling.
+    // The auto margins under "Vertical placement" add free space on top of
+    // these minima (flex margins never collapse), so the order holds at every
+    // height.
     .o_afenda_auth_form {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
-        gap: clamp(1rem, 3vw, 1.5rem);
+        gap: 0;
         min-width: 0;
         padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 3vw, 3rem) clamp(1.5rem, 4vw, 2rem);
 
@@ -472,6 +488,7 @@
         flex-direction: column;
         align-items: flex-end;
         gap: .375rem;
+        margin-bottom: clamp(2rem, 6vh, 4.5rem);  // identity -> message: the largest step
         text-align: right;
     }
 
