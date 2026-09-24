@@ -2,7 +2,7 @@
 {
     "name": "AFENDA xForge Branding",
     "summary": "Brand the web client, login, emails and portal as AFENDA xForge",
-    "version": "19.0.1.0.0",
+    "version": "19.0.1.1.0",
     "category": "Hidden/Tools",
     "author": "AFENDA",
     "website": "https://afenda.app",
@@ -26,7 +26,6 @@
         "web_no_bubble",
     ],
     "data": [
-        "data/config_data.xml",
         "views/webclient_templates.xml",
     ],
     "assets": {

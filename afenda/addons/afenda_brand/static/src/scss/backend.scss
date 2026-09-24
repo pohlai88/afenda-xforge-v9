@@ -3,7 +3,7 @@
 // html_editor hardcodes the Odoo community purple in its table picker
 // instead of using $o-brand-primary; bring it back to Ledger Blue.
 .o-we-tablepicker .o-we-cell.active {
-    background-color: #1E3A8A;
+    background-color: $o-brand-primary;
 }
 
 // Money and quantities always line up: tabular figures wherever a number is read.

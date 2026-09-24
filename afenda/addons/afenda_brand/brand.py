@@ -3,6 +3,10 @@
 Keep in sync with static/src/scss/primary_variables.scss.
 """
 
+import base64
+
+from odoo.tools import file_open
+
 BRAND = {
     "product": "AFENDA xForge",
     "short": "AFENDA",
@@ -18,3 +22,9 @@ BRAND = {
     "verified": "#15803D",  # posted, reconciled
     "flag": "#B91C1C",  # error, locked
 }
+
+
+def read_static(path):
+    """Base64 content of a file under afenda_brand/static/, ready for a Binary field."""
+    with file_open(f"afenda_brand/static/{path}", "rb") as f:
+        return base64.b64encode(f.read())

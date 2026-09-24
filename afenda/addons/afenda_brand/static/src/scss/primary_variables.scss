@@ -1,17 +1,22 @@
 // AFENDA xForge identity v2.1 — prepended to web._assets_primary_variables so
 // every `!default` in Odoo's own primary_variables.scss picks these up.
 // Keep in sync with brand.py.
+//
+// Everything here is `!default` too: bundles that set a variable before this
+// file, such as the print bundle's white background, keep their own value.
 
-$o-community-color: #1E3A8A;
-$o-enterprise-color: #1E3A8A;
-$o-brand-odoo: #1E3A8A;
-$o-brand-primary: #1E3A8A;
-$o-brand-secondary: #4B5563;
-$o-action: #1E3A8A;
-$o-main-link-color: #1E3A8A;
+$afenda-primary: #1E3A8A !default; // Ledger Blue
+
+$o-community-color: $afenda-primary !default;
+$o-enterprise-color: $afenda-primary !default;
+$o-brand-odoo: $afenda-primary !default;
+$o-brand-primary: $afenda-primary !default;
+$o-brand-secondary: #4B5563 !default;
+$o-action: $afenda-primary !default;
+$o-main-link-color: $afenda-primary !default;
 
 // Paper behind the views; views themselves stay white.
-$o-webclient-background-color: #F7F7F5;
+$o-webclient-background-color: #F7F7F5 !default;
 
-$o-font-family-sans-serif: ("Source Sans 3", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif);
-$o-font-family-monospace: ("Source Code Pro", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace);
+$o-font-family-sans-serif: ("Source Sans 3", -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif) !default;
+$o-font-family-monospace: ("Source Code Pro", SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace) !default;

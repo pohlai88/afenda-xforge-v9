@@ -6,3 +6,7 @@
 	path = afenda/oca/web
 	url = https://github.com/OCA/web.git
 	branch = 19.0
+[submodule "afenda/oca/server-tools"]
+	path = afenda/oca/server-tools
+	url = https://github.com/OCA/server-tools.git
+	branch = 19.0

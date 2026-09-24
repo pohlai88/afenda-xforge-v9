@@ -1,30 +1,24 @@
 // Self-hosted Source superfamily (SIL Open Font License, see static/fonts/OFL.txt).
-// Variable fonts: one file per family covers every weight.
+// Variable fonts: one file per family covers every weight. woff2 is about a
+// third of the TTF size and is supported by every browser the web client runs in.
 
 @font-face {
     font-family: "Source Sans 3";
-    src: url("/afenda_brand/static/fonts/SourceSans3-VF.ttf") format("truetype");
+    src: url("/afenda_brand/static/fonts/SourceSans3-VF.woff2") format("woff2");
     font-weight: 200 900;
     font-style: normal;
     font-display: swap;
 }
 @font-face {
     font-family: "Source Sans 3";
-    src: url("/afenda_brand/static/fonts/SourceSans3-Italic-VF.ttf") format("truetype");
+    src: url("/afenda_brand/static/fonts/SourceSans3-Italic-VF.woff2") format("woff2");
     font-weight: 200 900;
     font-style: italic;
     font-display: swap;
 }
 @font-face {
-    font-family: "Source Serif 4";
-    src: url("/afenda_brand/static/fonts/SourceSerif4-VF.ttf") format("truetype");
-    font-weight: 200 900;
-    font-style: normal;
-    font-display: swap;
-}
-@font-face {
     font-family: "Source Code Pro";
-    src: url("/afenda_brand/static/fonts/SourceCodePro-VF.ttf") format("truetype");
+    src: url("/afenda_brand/static/fonts/SourceCodePro-VF.woff2") format("woff2");
     font-weight: 200 900;
     font-style: normal;
     font-display: swap;

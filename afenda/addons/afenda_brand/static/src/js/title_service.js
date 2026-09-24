@@ -10,6 +10,8 @@ titleService.start = function (...args) {
     const service = originalStart.apply(this, args);
     const setParts = service.setParts;
     service.setParts = (parts) => {
+        // Parts keep insertion order: drop the suffix, apply the caller's
+        // parts, then re-add it so the product name always comes last.
         setParts({ ...parts, zafenda: null });
         setParts({ zafenda: PRODUCT });
     };
