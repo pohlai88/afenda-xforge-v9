@@ -65,6 +65,23 @@ _CUSTOM_FAVICON = (
 )
 
 
+# Manifest versions bumped with no migration work to do.
+#
+# A bump is not only a carrier for a script. deploy/init.sh upgrades with
+# `module upgrade --outdated`, which selects modules by comparing manifest
+# version to installed version, so a view or asset change reaches a deployed
+# database ONLY if the version moves -- there is no manual `-u` in the deploy
+# path. Listing a version here is the deliberate statement that the upgrade
+# needs nothing beyond the reload Odoo already does.
+#
+# Forgetting a script you DID need still fails: you have to come here and say
+# so, in writing, next to the reason.
+_VERSIONS_WITHOUT_MIGRATION = {
+    "19.0.1.0.6": "auth surface, shell theming, mail header -- views and SCSS "
+                  "reload on upgrade; no record needs rewriting",
+}
+
+
 @tagged("post_install", "-at_install")
 class TestBranding(HttpCase):
     """What a normal user sees must say AFENDA, never Odoo."""
@@ -493,15 +510,29 @@ class TestBranding(HttpCase):
         addon = pathlib.Path(__file__).resolve().parent.parent
         version = ast.literal_eval((addon / "__manifest__.py").read_text(encoding="utf-8"))["version"]
         script = addon / "migrations" / version / "post-migrate.py"
-        self.assertTrue(
-            script.is_file(),
-            f"manifest version {version} has no migrations/{version}/post-migrate.py",
-        )
-        module = load_script(str(script), "afenda_brand_post_migrate_under_test")
-        self.assertEqual(
-            tuple(inspect.signature(module.migrate).parameters), ("cr", "version"),
-            "Odoo only accepts a migrate(cr, version) signature",
-        )
+        if version in _VERSIONS_WITHOUT_MIGRATION:
+            self.assertFalse(
+                script.is_file(),
+                f"{version} is declared as needing no migration but ships one; "
+                f"remove it from _VERSIONS_WITHOUT_MIGRATION",
+            )
+        else:
+            self.assertTrue(
+                script.is_file(),
+                f"manifest version {version} has no migrations/{version}/post-migrate.py "
+                f"and is not declared in _VERSIONS_WITHOUT_MIGRATION",
+            )
+        # Every script the module ships, not only the current version's: a
+        # signature Odoo rejects aborts the whole upgrade, and an old directory
+        # still runs on a database far enough behind.
+        scripts = sorted((addon / "migrations").glob("*/post-migrate.py"))
+        self.assertTrue(scripts, "the module ships no migration scripts at all")
+        for path in scripts:
+            module = load_script(str(path), f"afenda_brand_post_migrate_{path.parent.name}")
+            self.assertEqual(
+                tuple(inspect.signature(module.migrate).parameters), ("cr", "version"),
+                f"{path.parent.name}: Odoo only accepts a migrate(cr, version) signature",
+            )
 
     def test_system_bot_is_branded(self):
         bot = self.env.ref("base.partner_root")
