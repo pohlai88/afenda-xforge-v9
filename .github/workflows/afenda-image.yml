@@ -39,7 +39,7 @@ jobs:
           --health-cmd "pg_isready -h 127.0.0.1 -U ci_admin -d postgres"
           --health-interval 5s --health-timeout 5s --health-retries 20
     env:
-      ODOO_TESTS_MIN: "1"
+      ODOO_TESTS_MIN: "72"  # first green run, 943d1d4a4: afenda_api_docs 16, afenda_brand 40, afenda_brand_digest 2, afenda_runtime 14
     steps:
       - uses: actions/checkout@v4
         with:

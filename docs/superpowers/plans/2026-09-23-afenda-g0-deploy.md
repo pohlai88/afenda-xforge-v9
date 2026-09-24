@@ -255,3 +255,10 @@ G1 role rehearsal (2026-09-24, local `afenda-deploy` stack holding the restored 
   twice, once after ownership had moved. Here it had nothing outdated to upgrade and created
   no objects (ownership `0` afterwards), but it would create superuser-owned objects if the
   running image ever carried a newer module version than the database.
+
+G1 on the live host (2026-09-24, Task 5 of docs/superpowers/plans/2026-09-24-afenda-g1-hardening.md):
+
+- Deployed `943d1d4a4c8f4820191a64de6c90fd0f0ea07a4e` (CI green: `0 failed, 0 error(s) of 72 tests`, run as the NOSUPERUSER role on a fresh database); rollback target recorded first: `66558f6232710c9b48f26ce7f462575c5ae8f1e6`.
+- 05:52Z backup cron held (one line commented), pinned commit checked out, `db_app_password` generated, image built; `docker compose up -d db`; `migrate-db-role.sh --yes`: `every object in afenda is owned by afenda_app`, exit 0; `redeploy.sh 943d1d4a4…`: `/web/health passes`.
+- Verified: `afenda_app super=false`; app connections `afenda_app`; database owner `afenda_app`; 0 objects owned by anyone else; `afenda_brand 19.0.1.0.5` (icon-cache migration) and `afenda_runtime 19.0.1.2.0` (invitation text) applied; 0 mail templates with the user-count claim or `/page/tour`; Resend server `true 2587 starttls_strict`; `SEQ OK as afenda_app` with the DDL rolled back; as `afenda_app` a PDF rendered (`%PDF`), 11 crons have run, service endpoints `http://127.0.0.1:9`, HSTS and redirects unchanged; cron restored (one active line) and `offsite.sh` run by hand (`0 differences`).
+- The proof script's admin login failed: the `admin` user was written at 05:23:22Z, before this run, and `secrets/admin_password` no longer matches. The password was not touched; the owner confirms or refreshes the file. The checks that needed that session were run as `afenda_app` instead (above).
