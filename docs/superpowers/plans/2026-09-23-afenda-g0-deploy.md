@@ -265,3 +265,17 @@ G1 on the live host (2026-09-24, Task 5 of docs/superpowers/plans/2026-09-24-afe
 - 05:52Z backup cron held (one line commented), pinned commit checked out, `db_app_password` generated, image built; `docker compose up -d db`; `migrate-db-role.sh --yes`: `every object in afenda is owned by afenda_app`, exit 0; `redeploy.sh 943d1d4a4…`: `/web/health passes`.
 - Verified: `afenda_app super=false`; app connections `afenda_app`; database owner `afenda_app`; 0 objects owned by anyone else; `afenda_brand 19.0.1.0.5` (icon-cache migration) and `afenda_runtime 19.0.1.2.0` (invitation text) applied; 0 mail templates with the user-count claim or `/page/tour`; Resend server `true 2587 starttls_strict`; `SEQ OK as afenda_app` with the DDL rolled back; as `afenda_app` a PDF rendered (`%PDF`), 11 crons have run, service endpoints `http://127.0.0.1:9`, HSTS and redirects unchanged; cron restored (one active line) and `offsite.sh` run by hand (`0 differences`).
 - The proof script's admin login failed: the `admin` user was written at 05:23:22Z, before this run, and `secrets/admin_password` no longer matches. The password was not touched; the owner confirms or refreshes the file. The checks that needed that session were run as `afenda_app` instead (above).
+
+Hardening follow-ups on the live host (2026-09-24, 06:53Z–06:54Z):
+
+- Deployed `47793654e88b2d8cb94eda71b69223b0907a5533` with `redeploy.sh`. It carries the app-only restart traps (`da9bf790f`) and the restore that re-runs `init` (`62cba13b0`). CI was green first: `afenda-ci` passed, and `afenda-image` reported `0 failed, 0 error(s) of 72 tests`. Rollback target: `943d1d4a4c8f4820191a64de6c90fd0f0ea07a4e`. Result: `/web/health passes`, exit 0.
+- Verified:
+  - `afenda_app super=false createdb=true`.
+  - App connections come from `afenda_app`.
+  - 0 objects in `public` are owned by anyone other than `afenda_app`.
+  - Module versions `afenda_brand 19.0.1.0.5` and `afenda_runtime 19.0.1.2.0`.
+  - One `docker start` restart line in each of `backup.sh`, `restore.sh` and `migrate-db-role.sh`, and `restore.sh` re-runs `init`.
+  - One active backup cron line.
+  - `db` and `nginx` were not recreated; `xforge` is healthy.
+  - `/web/health` returns pass, and the landing page returns 200.
+- Still open: `NOCREATEDB` on the live role. It is documented under "Database roles" in `deploy/README.md` and is not applied yet; the owner decides.
