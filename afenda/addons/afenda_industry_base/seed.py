@@ -29,11 +29,26 @@ def load_company_records(env, module, model_name, records, noupdate=True):
     :param str module: the pack's technical name, e.g. ``afenda_industry_bakery``
     :param str model_name: the model to seed, e.g. ``pos.config``
     :param records: list of ``(suffix, values)``; the XMLID is ``module.suffix``
-    :param bool noupdate: flag stored on the XMLID; ``True`` means a module
-        upgrade will not overwrite what the tenant has since edited
+    :param bool noupdate: flag stored on the XMLID, governing later module
+        *upgrades*. It does not protect this call: ``_load_records`` is invoked
+        below with the default ``update=False``, so ``not (update and d_noupdate)``
+        is unconditionally true (odoo/orm/models.py:5178) and calling this a
+        second time rewrites the record whatever the flag says. Harmless on the
+        intended path, where the caller is a ``post_init_hook`` and that fires
+        only at install (odoo/modules/loading.py:240-243) -- but a pack that ever
+        seeds from a migration script would get the opposite of what the flag's
+        name promises.
     :return: the records, in the order given
     """
-    model = env[model_name].sudo()
+    # No .sudo() here, deliberately. Both intended callers already run as
+    # superuser -- a post_init_hook's env, and TransactionCase.env -- so sudo()
+    # would buy nothing, while leaving any future caller (a controller, a wizard)
+    # able to write arbitrary `values` with record rules bypassed.
+    # .claude/odoo-agent-rules.md:37-40 requires a stated reason for sudo(), and
+    # "it was superuser anyway" is a reason to drop it, not to keep it. XMLID
+    # assignment is unaffected: _load_records sudoes its own ir.model.data access
+    # (odoo/orm/models.py:5132).
+    model = env[model_name]
     # Not every seeded model is company-scoped (`pos.category` is not), so only
     # pin the company where the field actually exists.
     pin_company = "company_id" in model._fields

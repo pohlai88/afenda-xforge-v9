@@ -45,3 +45,26 @@ class TestSeed(TransactionCase):
             self.env, MODULE, "res.partner", [("seed_partner_c", {"name": "Seed C"})]
         )
         self.assertEqual(records.company_id, self.env.company)
+
+    def test_load_company_records_skips_company_on_company_less_model(self):
+        """The `pin_company is False` branch: a model with no `company_id`.
+
+        `pos.category` is the real downstream case, but point_of_sale is not a
+        dependency of this module. `res.partner.category` is the same shape in
+        `base`: no `company_id` field (odoo/addons/base/models/res_partner.py:140-154).
+        Without this, seeding any company-less model is untested and a
+        `company_id` passed to a model that has none would raise at install.
+        """
+        model = "res.partner.category"
+        self.assertNotIn(
+            "company_id",
+            self.env[model]._fields,
+            f"{model} was chosen because it has no company_id; if that changed, "
+            f"this test no longer covers the pin_company is False branch",
+        )
+        records = load_company_records(
+            self.env, MODULE, model, [("seed_tag_a", {"name": "Seed Tag A"})]
+        )
+        self.assertEqual(len(records), 1)
+        self.assertEqual(self.env.ref(f"{MODULE}.seed_tag_a"), records)
+        self.assertEqual(records.name, "Seed Tag A")
