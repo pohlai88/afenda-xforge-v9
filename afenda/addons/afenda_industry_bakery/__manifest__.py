@@ -21,6 +21,11 @@
         "stock_account",
         "product_expiry",
     ],
+    # No security/ directory on purpose: this pack declares no models, and a
+    # module that adds no models adds no ir.model.access.csv lines. It ships
+    # data records of models that already carry their own ACLs. The absence is
+    # deliberate, not forgotten -- same contract as
+    # afenda_industry_base/__manifest__.py:12-14.
     # Ordered: a file that references an XML id comes after the file defining it.
     # Only the two files that exist as of this task are listed. Odoo resolves
     # every `data` path at install and raises on a missing one, so a manifest

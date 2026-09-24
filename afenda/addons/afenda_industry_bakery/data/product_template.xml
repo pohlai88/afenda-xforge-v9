@@ -9,7 +9,13 @@
         <!-- Raw materials: lot-tracked and carrying an expiration date, which is
              what a bakery buys an ERP for. expiration_time is a number of days
              and lives on product.template
-             (addons/product_expiry/models/product_product.py, class ProductTemplate). -->
+             (addons/product_expiry/models/product_product.py, class ProductTemplate).
+
+             sale_ok is off: it defaults to True and list_price defaults to 1.0
+             (addons/product/models/product_template.py:116,94-99), so a raw
+             material left at the default is a kilo of flour any salesperson can
+             quote at 1.00. This pack is sold as a configured business, so the
+             ingredients are purchasable but not saleable. -->
         <record id="product_flour_t55" model="product.template">
             <field name="name">Flour T55</field>
             <field name="type">consu</field>
@@ -17,6 +23,7 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_kgm"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">270</field>
             <field name="standard_price">0.85</field>
@@ -28,6 +35,7 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_kgm"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">60</field>
             <field name="standard_price">7.20</field>
@@ -39,6 +47,7 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_kgm"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">720</field>
             <field name="standard_price">1.10</field>
@@ -50,6 +59,7 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_kgm"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">21</field>
             <field name="standard_price">3.40</field>
@@ -61,6 +71,7 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_kgm"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">1080</field>
             <field name="standard_price">0.60</field>
@@ -72,6 +83,7 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">28</field>
             <field name="standard_price">0.22</field>
@@ -83,6 +95,7 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_kgm"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">10</field>
             <field name="standard_price">1.05</field>
@@ -94,6 +107,7 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_kgm"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">365</field>
             <field name="standard_price">9.50</field>
@@ -105,6 +119,7 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_kgm"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">180</field>
             <field name="standard_price">12.00</field>
@@ -116,13 +131,21 @@
             <field name="categ_id" ref="categ_raw"/>
             <field name="uom_id" ref="uom.product_uom_kgm"/>
             <field name="tracking">lot</field>
+            <field name="sale_ok" eval="False"/>
             <field name="use_expiration_date" eval="True"/>
             <field name="expiration_time">1080</field>
             <field name="standard_price">45.00</field>
         </record>
 
         <!-- Finished goods: sold over the counter, so list_price rather than
-             standard_price, and no lot tracking. -->
+             standard_price, and no lot tracking.
+
+             available_in_pos is set here because it defaults to False
+             (addons/point_of_sale/models/product_template.py:24): without it the
+             Bakery Counter that Task 4 creates opens onto an empty product grid,
+             which is the one thing this pack exists to configure. pos_categ_ids
+             is deliberately NOT set, because the POS categories do not exist
+             until Task 4's hook creates them: that assignment belongs there. -->
         <record id="product_sourdough" model="product.template">
             <field name="name">Sourdough Loaf 800g</field>
             <field name="type">consu</field>
@@ -130,6 +153,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">5.50</field>
         </record>
         <record id="product_baguette" model="product.template">
@@ -139,6 +163,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">1.40</field>
         </record>
         <record id="product_wholemeal" model="product.template">
@@ -148,6 +173,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">3.80</field>
         </record>
         <record id="product_croissant" model="product.template">
@@ -157,6 +183,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">1.30</field>
         </record>
         <record id="product_pain_choc" model="product.template">
@@ -166,6 +193,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">1.50</field>
         </record>
         <record id="product_almond_croissant" model="product.template">
@@ -175,6 +203,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">2.20</field>
         </record>
         <record id="product_brioche" model="product.template">
@@ -184,6 +213,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">4.60</field>
         </record>
         <record id="product_cinnamon_roll" model="product.template">
@@ -193,6 +223,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">2.40</field>
         </record>
         <record id="product_eclair" model="product.template">
@@ -202,6 +233,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">3.20</field>
         </record>
         <record id="product_fruit_tart" model="product.template">
@@ -211,6 +243,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">3.90</field>
         </record>
         <record id="product_birthday_cake" model="product.template">
@@ -220,6 +253,7 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">28.00</field>
         </record>
         <record id="product_focaccia" model="product.template">
@@ -229,11 +263,14 @@
             <field name="categ_id" ref="categ_finished"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="available_in_pos" eval="True"/>
             <field name="list_price">6.50</field>
         </record>
 
         <!-- Packaging: bought, consumed with an order, never sold on its own,
-             so standard_price. -->
+             so standard_price, and sale_ok off for the same reason as the raw
+             materials: a ribbon roll costing 0.02 must not be quotable at the
+             default 1.00. -->
         <record id="product_paper_bag" model="product.template">
             <field name="name">Paper Bag Small</field>
             <field name="type">consu</field>
@@ -241,6 +278,7 @@
             <field name="categ_id" ref="categ_packaging"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="sale_ok" eval="False"/>
             <field name="standard_price">0.03</field>
         </record>
         <record id="product_cake_box" model="product.template">
@@ -250,6 +288,7 @@
             <field name="categ_id" ref="categ_packaging"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="sale_ok" eval="False"/>
             <field name="standard_price">0.45</field>
         </record>
         <record id="product_ribbon" model="product.template">
@@ -259,6 +298,7 @@
             <field name="categ_id" ref="categ_packaging"/>
             <field name="uom_id" ref="uom.product_uom_unit"/>
             <field name="tracking">none</field>
+            <field name="sale_ok" eval="False"/>
             <field name="standard_price">0.02</field>
         </record>
     </data>
