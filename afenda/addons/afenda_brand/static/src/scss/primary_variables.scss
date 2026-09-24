@@ -29,6 +29,28 @@ $o-theme-text-colors: (
     "danger": #B91C1C,
 ) !default;
 
+// Neutral ramp. One family, evenly stepped, anchored on values the identity
+// already owns: 300 is the hairline, 700 is graphite ($o-brand-secondary
+// above) and 900 is ink ($o-main-text-color below). Upstream's ramp is
+// Bootstrap's warm grey (#f8f9fa .. #212529, web/static/src/scss/
+// primary_variables.scss:51-59), which sits at a different hue from both the
+// ink and the hairline -- that mismatch is why a secondary button, a rule and
+// a caption can read as three unrelated neutrals on the same screen.
+//
+// This ramp is load-bearing well beyond a fill, so it is changed knowingly:
+// $o-brand-lightsecondary is 100 (:81), $o-component-active-bg mixes the
+// action into 100 (:133), and the Bootstrap secondary/light button maps take
+// 200/300/400 for their fills and 900 for their text (:247-289).
+$o-gray-100: #F9FAFB !default;
+$o-gray-200: #F3F4F6 !default;
+$o-gray-300: #E5E7EB !default;  // the hairline; $border-color below is the same value
+$o-gray-400: #D1D5DB !default;
+$o-gray-500: #9CA3AF !default;
+$o-gray-600: #6B7280 !default;
+$o-gray-700: #4B5563 !default;  // graphite; $o-brand-secondary above
+$o-gray-800: #374151 !default;
+$o-gray-900: #0F172A !default;  // ink; $o-main-text-color below
+
 // Surfaces and rules. Paper behind the views; views themselves stay white.
 $o-webclient-background-color: #F7F7F5 !default;
 $border-color: #E5E7EB !default;  // Bootstrap's own; upstream derives it from $o-gray-300
@@ -46,15 +68,78 @@ $o-font-family-monospace: o-add-unicode-support-font(("Source Code Pro", SFMono-
 $o-headings-font-family: $o-font-family-sans-serif !default;
 $o-default-report-font: "Source Sans 3" !default;
 
+// Type scale. 14px is the reading size and stays the reading size: density on
+// this product is bought with geometry (navbar, control panel, row rhythm),
+// never by shrinking the text someone has to read all day. What these three
+// lines add is ownership -- the 14/13/12 ramp is declared here, so an upstream
+// change to web/static/src/scss/primary_variables.scss:17-20 cannot move the
+// product's reading size without this file moving with it.
+$o-font-size-base: o-to-rem(14px) !default;
+$o-font-size-base-small: o-to-rem(13px) !default;    // chrome: labels, meta
+$o-font-size-base-smaller: o-to-rem(12px) !default;  // chrome: badges, hints
+
 // Precision, not decoration: corners are nearly square.
 $o-border-radius: o-to-rem(3px) !default;
 $o-border-radius-sm: o-to-rem(2px) !default;
 $o-border-radius-lg: o-to-rem(4px) !default;
 
 // Navbar: ink, not brand. The one blue on screen is the action.
+//
+// Every value below is a token navbar.variables.scss already exposes
+// (addons/web/static/src/webclient/navbar/navbar.variables.scss:1-28), so this
+// is the whole treatment -- afenda_brand ships no navbar selectors.
+// Literal hexes on purpose: this file is PREPENDED to
+// web._assets_primary_variables, so $o-white and $o-black do not exist yet.
 $o-navbar-background: #0F172A !default;
 $o-navbar-border-bottom: 1px solid #0B1120 !default;
+
+// Geometry. 48px with 6px of vertical padding leaves the entries a 36px band
+// (navbar.scss:11-12 pads the bar, :10 being where it takes the height; the
+// entry placeholder subtracts that padding back out of the height at
+// navbar.variables.scss:39 and :58), which is the room a hover chip needs to sit
+// inside the bar instead of touching both edges of it.
+$o-navbar-height: 48px !default;
+$o-navbar-padding-v: 6px !default;
+$o-navbar-entry-margin-h: 2px !default;
+$o-navbar-entry-padding-h: .8em !default;
+$o-navbar-entry-border-radius: o-to-rem(3px) !default;  // same corner as everything else
+
+// Hover and active are the same gesture at two strengths -- a lighter film of
+// the ink's own ground, never a second colour. Upstream darkens with
+// rgba(black, .08), which on an already near-black bar reads as nothing.
+$o-navbar-entry-color: rgba(#FFFFFF, .72) !default;
+$o-navbar-entry-color--hover: #FFFFFF !default;
+$o-navbar-entry-bg--hover: rgba(#FFFFFF, .06) !default;
+$o-navbar-entry-color--active: #FFFFFF !default;
+$o-navbar-entry-bg--active: rgba(#FFFFFF, .12) !default;
+
+// The current app names the screen, so it is the one thing in the bar at full
+// strength. Kept close to the entry size: it is a label, not a title.
+$o-navbar-brand-font-size: 1.05em !default;
+$o-navbar-brand-color: #FFFFFF !default;
+
+// The counter is a state, so it keeps the ember. Upstream embosses it with a
+// text-shadow; nothing on this surface is embossed.
 $o-navbar-badge-bg: #C2410C !default;
+$o-navbar-badge-color: #FFFFFF !default;
+$o-navbar-badge-text-shadow: none !default;
+
+// Control panel: the band between the ink chrome and the white sheet.
+//
+// control_panel.variables.scss exposes exactly these two
+// (addons/web/static/src/search/control_panel/control_panel.variables.scss),
+// and upstream defaults the ground to $o-view-background-color, i.e. the panel
+// is the same white as the records under it and only a rule separates them.
+// Paper gives it its own band; the sheet below stays white.
+//
+// Both derive rather than restate, which is also what gives them their dark
+// values for free: primary_variables.dark.scss is loaded BEFORE this file in
+// web.assets_web_dark and sets both sources there, so the panel follows the
+// dark ground (#0B1120) and the dark rule (#1F2937) with nothing to keep in
+// sync. Same reason the navbar entry colours above need no dark counterpart:
+// they are white at low alpha over an ink bar in both schemes.
+$o-control-panel-background-color: $o-webclient-background-color !default;
+$o-control-panel-border-bottom: 1px solid $border-color !default;
 
 // Tag / kanban palette: muted, no two states confusable. Mirrors BRAND["tags"].
 $o-colors: (#9CA3AF, #A33A3A, #B5651D, #A16207, #3B6EA8, #7C4F7F, #9A6B4F,

@@ -8,6 +8,11 @@
     # as free-standing duotone marks, and `web_icon_data` is a copy taken when
     # `web_icon` was last written, so a database that skipped it keeps the old
     # tiles in the apps menu no matter what is on disk.
+    # Deliberately NOT bumped for the auth-surface redesign: this module ties
+    # each version to a migrations/<version>/post-migrate.py
+    # (test_migration_script_is_wired_to_the_manifest_version), and views and
+    # SCSS reload on any -u with nothing for a script to do. A bump would have
+    # meant inventing a no-op migration to satisfy the invariant.
     "version": "19.0.1.0.5",
     "category": "Hidden/Tools",
     "author": "AFENDA",

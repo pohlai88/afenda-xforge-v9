@@ -1,8 +1,30 @@
-// AFENDA xForge login: a paper ground, one white card, one blue action.
+// AFENDA xForge auth surface: /web/login, /web/signup, /web/reset_password and
+// every other page that t-calls web.login_layout.
+//
+// One composition at every width: an ink band across the top carrying both
+// marks - the tenant's own logo on a paper plate at the head of it, the AFENDA
+// lockup and the product line at the far end - and below it the paper ground
+// with one white card on it. Nothing brand-like is inside the card:
+// webclient_templates.xml moves the tenant logo into the band and deletes the
+// card's head outright, so there is no width at which a mark appears there.
+//
+// No layout rule here is inside a media query. The band is not a panel that
+// opens at a breakpoint; it is the page's masthead, and a phone gets the same
+// page a desktop does, wrapped rather than collapsed.
+//
 // Tokens come from primary_variables.scss, which web.assets_frontend pulls in
 // through web._assets_helpers -> web._assets_primary_variables.
+//
+// Rule ORDER in this file is load-bearing for
+// tests/test_branding.py:test_frontend_css_has_login_surface, which reads the
+// FIRST compiled `.o_afenda_login {` block for the paper ground and matches the
+// card with a descendant combinator. So: the ground declaration stays the first
+// thing in this block, no second bare `.o_afenda_login` rule is emitted ahead of
+// it, and `.o_database_list` stays a descendant (never `>`) of it.
 
 .o_afenda_login {
+    // Paper is not decoration here: the form area below the band is
+    // transparent, and this is what paints the ground the card sits on.
     background: $o-webclient-background-color;  // paper
 
     // Upstream dresses this card in `bg-100 border-0`. Both are !important
@@ -13,12 +35,277 @@
         border: 1px solid $border-color;  // hairline
         border-radius: $o-border-radius;
     }
-}
 
-// The tagline belongs to the logo lockup: display serif, never a heading.
-.o_afenda_tagline {
-    font-family: "Source Serif 4", Georgia, serif;
-    font-weight: 600;
-    color: $o-brand-secondary;  // graphite
-    font-size: .95rem;
+    // Room to breathe on a 360px card. `.card-body` is a component class, not
+    // a utility, so a plain declaration outranks it.
+    .o_database_list .card-body {
+        padding: 2rem 1.75rem 1.75rem;
+    }
+
+    // ---------------------------------------------------------------------
+    // The form. Precision, not ornament: one weight of rule, one radius, and
+    // the only saturated colour on the page is the action and its focus ring.
+    // ---------------------------------------------------------------------
+    .form-label,
+    .col-form-label {
+        margin-bottom: .375rem;
+        padding-bottom: 0;
+        font-size: .8125rem;
+        font-weight: 500;
+        line-height: 1.3;
+        color: $o-main-text-color;  // ink
+    }
+
+    .form-control {
+        min-height: 2.75rem;
+        padding: .5rem .75rem;
+        border: 1px solid $border-color;  // hairline
+        border-radius: $o-border-radius;
+        font-size: .9375rem;
+        line-height: 1.4;
+        color: $o-main-text-color;
+
+        &::placeholder {
+            color: rgba($o-brand-secondary, .7);  // graphite, receded
+        }
+
+        // State, not decoration: the ring is the one thing on this page that
+        // says "here". Bootstrap's own :focus shadow is derived from $primary
+        // already; this tightens it to 3px and drops the spread.
+        &:focus {
+            border-color: $o-brand-primary;  // Ledger Blue
+            box-shadow: 0 0 0 3px rgba($o-brand-primary, .12);
+        }
+
+        // Chrome paints an autofilled input its own yellow and ignores
+        // `background-color` on it; an inset shadow taller than the field is
+        // the only way to keep the card surface intact, and
+        // -webkit-text-fill-color the only way to keep the ink. After :focus
+        // because `:-webkit-autofill:focus` has to restate the ring — the
+        // shadow is one property, not two layers that merge.
+        &:-webkit-autofill {
+            -webkit-text-fill-color: $o-main-text-color;
+            box-shadow: 0 0 0 1000px $white inset;
+            caret-color: $o-main-text-color;
+        }
+
+        &:-webkit-autofill:focus {
+            box-shadow: 0 0 0 1000px $white inset,
+                        0 0 0 3px rgba($o-brand-primary, .12);
+        }
+    }
+
+    // The o_show_password toggle sits in the input group and must read as part
+    // of the field's frame, not as a second control. Its `border` utility is
+    // !important and already resolves to the hairline, so only the fill and
+    // the glyph colour are set here.
+    .input-group .btn {
+        background-color: $white;
+        color: $o-brand-secondary;  // graphite
+
+        &:hover { color: $o-main-text-color; }
+    }
+
+    // One action per screen, solid and full width (upstream already sets
+    // d-grid on the button row).
+    .oe_login_buttons .btn-primary {
+        min-height: 2.75rem;
+        font-size: .9375rem;
+        font-weight: 600;
+        border-radius: $o-border-radius;
+    }
+
+    // ---------------------------------------------------------------------
+    // Second-tier authentication: the passkey / OAuth block under the action.
+    // ---------------------------------------------------------------------
+    .o_login_auth {
+        margin-top: 1.5rem;
+
+        // The divider. webclient_templates.xml replaces upstream's utility-
+        // laden <em> with this one, so the rule can be drawn as two hairlines
+        // flanking the word instead of the dashes that stood in for it.
+        .o_afenda_auth_or {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-bottom: 1rem;
+            font-style: normal;
+            font-size: .6875rem;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: $o-brand-secondary;  // graphite
+
+            &::before,
+            &::after {
+                content: "";
+                flex: 1 1 0;
+                border-top: 1px solid $border-color;  // hairline
+            }
+        }
+
+        // "Use a Passkey", and any OAuth provider: a secondary control, which
+        // here means the action's geometry with none of its weight — no fill,
+        // one hairline, ink text.
+        .list-group-item {
+            min-height: 2.75rem;
+            background: $white;
+            border: 1px solid $border-color;  // hairline
+            border-radius: $o-border-radius;
+            font-size: .875rem;
+            font-weight: 500;
+            color: $o-main-text-color;  // ink
+
+            // Bootstrap collapses adjacent list-group borders into a stack;
+            // these read as buttons, so they stand apart.
+            + .list-group-item { margin-top: .5rem; }
+
+            &:hover {
+                background: $o-webclient-background-color;  // paper
+                color: $o-main-text-color;
+            }
+
+            &:focus-visible {
+                outline: none;
+                border-color: $o-brand-primary;
+                box-shadow: 0 0 0 3px rgba($o-brand-primary, .12);
+            }
+
+            .fa { color: $o-brand-secondary; }  // graphite
+        }
+    }
+
+    // The card footer is the quietest line on the page: no underline until it
+    // is asked for, and no blue — the action above it is the only one.
+    .border-top {
+        font-size: .75rem;
+        color: $o-brand-secondary;  // graphite
+
+        a {
+            color: $o-brand-secondary;
+            text-decoration: none;
+
+            &:hover {
+                color: $o-main-text-color;
+                text-decoration: underline;
+            }
+        }
+    }
+
+    // ---------------------------------------------------------------------
+    // The band. Every rule below is unconditional: the masthead is the page at
+    // 360px exactly as it is at 1920px, and only wraps.
+    // ---------------------------------------------------------------------
+    // The page is a stack of two: the band, then everything else on paper.
+    // min-height earns its place by giving the form area a column to be
+    // centred in - without it the card hugs the band on a tall screen.
+    .o_afenda_auth {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    .o_afenda_auth_panel {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        // Subject at the head, attribution at the tail. With wrap, a line
+        // holding a single group sits at the start, so a phone gets the two
+        // groups stacked and left-aligned rather than one of them stranded
+        // against the right edge.
+        justify-content: space-between;
+        gap: 1.25rem clamp(1.5rem, 5vw, 4rem);
+        padding: clamp(1rem, 3vw, 1.75rem) clamp(1rem, 5vw, 4rem);
+        background: $o-main-text-color;  // ink
+    }
+
+    // The plate. `company_logo` is arbitrary customer artwork, almost always
+    // dark ink drawn for a white page - that is where Odoo renders this same
+    // image everywhere else. Paper is the ground it was drawn for, and the one
+    // choice that is safe for artwork we cannot see; ink is not.
+    // No border: the plate is already a light object on a dark band, and a
+    // rule around it would be a second edge saying the same thing.
+    .o_afenda_auth_plate {
+        display: flex;
+        align-items: center;
+        padding: .75rem 1rem;
+        background: $o-webclient-background-color;  // paper
+        border-radius: $o-border-radius;
+    }
+
+    // `res_company.logo_web` is 180x45. Upstream draws it with an inline
+    // `max-height:120px; max-width:100%`, which is an upscale of a raster and
+    // reads soft; login_layout drops that inline style so this cap applies.
+    // Never larger than the bytes actually are.
+    // The tenant mark leads: it is the subject, ours is the maker's mark.
+    //
+    // Bounded by HEIGHT, not by a 180x45 box. logo_web is
+    // image_process(logo, size=(180, 0)) (odoo/addons/base/models/
+    // res_company.py:169-172) -- at most 180 WIDE with a free height, and
+    // expand=False so it never upscales (odoo/tools/image.py:315). Its aspect
+    // ratio is therefore unknown here: this tenant's is 179x172, and a 45px
+    // height cap rendered that at 47x45, smaller than our own lockup and with
+    // the badge's wordmark illegible. A height bound is the only cap that
+    // treats a square badge and a wide lockup alike.
+    //
+    // 64px is a downscale for anything logo_web can return (its height is at
+    // most the artwork's own), so nothing is ever upscaled.
+    .o_afenda_auth_tenant {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 180px;   // logo_web's own width ceiling; never exceeded
+        max-height: 64px;
+    }
+
+    // Ours: the lockup with the product line under it. Deliberately the
+    // smaller mass of the two - 120px of line art on ink against a solid paper
+    // plate up to 212px wide. The instance belongs to the tenant; we are the
+    // maker's mark on it.
+    .o_afenda_auth_mark {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: .5rem;
+    }
+
+    .o_afenda_auth_lockup {
+        width: 120px;
+        height: auto;
+        // 342.254 / 136, the SVG's own viewBox, written as one number so no
+        // Sass division is involved. It reserves the box before the file
+        // lands, which is why the vector cannot shift the band as it loads.
+        aspect-ratio: 2.5166;
+    }
+
+    // The product's one voice, demoted from the display size it carried in the
+    // old tall panel: a band is a short shape, and a 2.5rem serif line in it
+    // would outweigh the tenant. Small, serif, receded - a descriptor under
+    // the mark it belongs to. rgba($white, ...) rather than a token so no new
+    // hex enters the sheet.
+    // Only controllers/home.py:18 (the web_login override) puts
+    // `afenda_tagline` in the qcontext, so /web/signup and /web/reset_password
+    // render the mark block without it. Nothing compensates for that and
+    // nothing needs to: the block is a column of one, at the same place in the
+    // band either way.
+    .o_afenda_auth_line {
+        max-width: 34ch;
+        margin: 0;
+        font-family: "Source Serif 4", Georgia, serif;
+        font-weight: 400;
+        font-size: .8125rem;
+        line-height: 1.4;
+        color: rgba($white, .64);
+    }
+
+    // The paper half of the page. Transparent on purpose: the body's ground
+    // shows through. It takes the height the band leaves and centres the card
+    // in it; `min-height` above (not `height`) means a form taller than the
+    // viewport grows the page instead of being clipped.
+    .o_afenda_auth_form {
+        flex: 1 1 auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
 }

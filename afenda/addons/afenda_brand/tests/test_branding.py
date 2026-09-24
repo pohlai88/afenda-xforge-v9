@@ -104,6 +104,182 @@ class TestBranding(HttpCase):
         self.assertIn("#fff", card.group(1), "the login card is not white")
         self.assertIn(BRAND["hairline"].lower(), card.group(1), "the login card has no hairline border")
 
+    def _frontend_css(self, url="/web/login"):
+        html = self.url_open(url).text
+        hrefs = re.findall(r'href="(/web/assets/[^"]+web\.assets_frontend[^"]*\.css)"', html)
+        self.assertTrue(hrefs, f"web.assets_frontend stylesheet not linked from {url}")
+        return html, self.url_open(hrefs[0]).text.lower()
+
+    def test_auth_band_is_the_masthead_at_every_width(self):
+        """The band sits above the form and is never taken away.
+
+        This replaces a test that pinned the opposite shape - a two-part canvas
+        that opened at the lg breakpoint and collapsed below it. The owner's
+        composition has one form at every width, so the invariant inverts: the
+        band has to be the FIRST thing in the page's stack, its rules have to
+        be unconditional, and no second rule may exist to collapse it. "Exactly
+        one rule" is the load-bearing half - a `display: none` for the band
+        inside some media query is the obvious way to break "at every width",
+        and it would leave the unconditional rule looking perfectly correct.
+        """
+        html, css = self._frontend_css()
+        doc = lxml_html.fromstring(html)
+
+        stack = doc.find_class("o_afenda_auth")
+        self.assertEqual(len(stack), 1, "the auth stack is not rendered exactly once")
+        blocks = [child.get("class") for child in stack[0] if isinstance(child.tag, str)]
+        self.assertEqual(
+            blocks, ["o_afenda_auth_panel", "o_afenda_auth_form"],
+            "the band is not the first block above the form",
+        )
+
+        lockup = "/afenda_brand/static/img/logo_dark.svg"
+        self.assertIn(lockup, html, "the band carries no lockup")
+        self.assertEqual(self.url_open(lockup).status_code, 200, f"{lockup} is not served")
+
+        band = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_panel\s*\{([^}]*)\}", css))
+        self.assertTrue(band, "the band has no rule in the frontend bundle")
+        self.assertEqual(len(band), 1,
+                         "a second rule redraws the band: one of them is width-dependent")
+        self.assertIn(BRAND["ink"].lower(), band[0].group(1), "the band is not ink")
+        self.assertRegex(band[0].group(1), r"display:\s*flex", "the band does not lay out")
+        self._assert_not_media_gated(
+            css, band[0].start(), "the band is drawn only inside a media query")
+
+        # The grid that made the old canvas two columns is gone, not merely
+        # overridden: a leftover `grid-template-columns` would put the band
+        # beside the form again the moment something restored `display: grid`.
+        stacked = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth\s*\{([^}]*)\}", css))
+        self.assertEqual(len(stacked), 1, "the auth stack is not drawn by exactly one rule")
+        self.assertNotIn("grid", stacked[0].group(1), "the two-column grid is still here")
+        self._assert_not_media_gated(
+            css, stacked[0].start(), "the page stacks only inside a media query")
+
+    def test_the_band_carries_both_marks_and_the_card_carries_none(self):
+        """Two marks in the band, two different names, and no mark in the card.
+
+        The tenant owns the instance and we only made it, so the band states a
+        relationship rather than an adjacency: the tenant's own logo is seated
+        on a paper plate at the head of the band and ours is the smaller mark
+        at the tail. The plate's ground is the part worth pinning. Anything
+        `res_company.logo_web` holds is customer artwork drawn for a white page
+        - that is where Odoo renders this same image everywhere else - so it
+        gets paper under it. Paint the plate ink and a real customer's dark
+        logo disappears on a surface we would never see it fail on, because
+        this database's own company logo happens to be light.
+
+        The card half is a DOM property, not a stylesheet one: the head block
+        is deleted by the inheritance, so there is no width, no bundle rebuild
+        and no stylesheet failure that can put a mark back inside the card.
+        """
+        html, css = self._frontend_css()
+        doc = lxml_html.fromstring(html)
+        band = doc.find_class("o_afenda_auth_panel")
+        self.assertEqual(len(band), 1, "the band is not rendered exactly once")
+
+        lockups = doc.find_class("o_afenda_auth_lockup")
+        self.assertEqual(len(lockups), 1, "the product lockup is not rendered exactly once")
+        lockup = lockups[0]
+        self.assertEqual(lockup.get("src"), "/afenda_brand/static/img/logo_dark.svg")
+        self.assertIn(BRAND["product"], lockup.get("alt") or "",
+                      "the product lockup has no accessible name")
+        # An LCP image must not be deferred.
+        self.assertIsNone(lockup.get("loading"), "the product lockup is lazy-loaded")
+        served = self.url_open(lockup.get("src"))
+        self.assertEqual(served.status_code, 200, "the vector lockup is not served")
+        self.assertIn(b"<svg", served.content[:256], "the lockup is not a vector")
+
+        # Upstream's own <img>, moved rather than copied: one element, so one
+        # "Logo" in the accessibility tree, and its src stays upstream's.
+        tenants = doc.xpath("//img[contains(@src, 'company_logo')]")
+        self.assertEqual(len(tenants), 1, "the tenant logo is not rendered exactly once")
+        tenant = tenants[0]
+        self.assertTrue((tenant.get("alt") or "").strip(),
+                        "the tenant logo has no accessible name")
+        self.assertNotEqual(
+            (tenant.get("alt") or "").strip(), (lockup.get("alt") or "").strip(),
+            "both marks announce the same name",
+        )
+        self.assertFalse(tenant.get("style"),
+                         "an inline size still outranks the cap in login.scss")
+
+        for mark, what in ((lockup, "product lockup"), (tenant, "tenant logo")):
+            self.assertIn(band[0], list(mark.iterancestors()), f"the {what} is not in the band")
+
+        # Nothing brand-like inside the card, at any width: no head element
+        # survives the inheritance and the card holds no image at all.
+        self.assertFalse(doc.find_class("o_afenda_card_head"),
+                         "the card head block is still in the page")
+        cards = doc.find_class("o_database_list")
+        self.assertEqual(len(cards), 1, "the login card was not rendered")
+        self.assertFalse(cards[0].xpath(".//img"), "an image still renders inside the card")
+
+        plate = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_plate\s*\{([^}]*)\}", css)
+        self.assertTrue(plate, "the tenant plate has no rule in the frontend bundle")
+        self.assertIn(BRAND["paper"].lower(), plate.group(1),
+                      "the tenant logo is seated on something other than paper")
+        self._assert_not_media_gated(
+            css, plate.start(), "the tenant plate exists only inside a media query")
+
+        box = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_lockup\s*\{([^}]*)\}", css)
+        self.assertTrue(box, "the lockup has no rule in the frontend bundle")
+        # The property name alone would pass on `aspect-ratio: auto`, which
+        # reserves nothing; the point of the rule is the number.
+        self.assertRegex(box.group(1), r"aspect-ratio:\s*2\.5",
+                         "the lockup reserves no box of the lockup's own shape")
+
+        cap = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_tenant\s*\{([^}]*)\}", css)
+        self.assertTrue(cap, "the tenant logo has no rule in the frontend bundle")
+        # Bounded by HEIGHT, and the aspect ratio left free. logo_web is
+        # image_process(logo, size=(180, 0)) (odoo/addons/base/models/
+        # res_company.py:169-172): at most 180 wide, height whatever the
+        # artwork is. A 45px height cap once rendered this tenant's 179x172
+        # badge at 47x45 -- smaller than our own lockup, with its wordmark
+        # illegible -- so the box, not the bound, was the bug.
+        # Asserted as capping properties: `min-width: 180px` contains "180px"
+        # too and would mean the opposite of a cap.
+        for prop, bound in (("max-width", "180px"), ("max-height", "64px")):
+            self.assertRegex(
+                cap.group(1), rf"{prop}:\s*{re.escape(bound)}",
+                f"the tenant logo is not bounded by {prop}",
+            )
+        # ...and nothing fixes a dimension, which would distort an aspect ratio
+        # this rule cannot know.
+        self.assertRegex(cap.group(1), r"width:\s*auto", "the tenant logo has a forced width")
+        self.assertRegex(cap.group(1), r"height:\s*auto", "the tenant logo has a forced height")
+        self._assert_not_media_gated(
+            css, cap.start(), "the tenant logo is capped only inside a media query")
+
+    def test_the_band_composes_without_the_tagline(self):
+        """Every login_layout page but /web/login renders the band without a line.
+
+        Only controllers/home.py:18 (the web_login override) puts
+        `afenda_tagline` in the qcontext, so /web/reset_password and
+        /web/signup get the mark block with nothing under the lockup. The old
+        panel needed a rule for that case - a lockup alone in a tall column was
+        pinned to the top of an empty ink field by space-between, and
+        `:last-child { margin-top: auto }` seated it. A band needs no such
+        compensation, so there is no CSS to assert here and none is invented:
+        the block is a column of one, in the same place in the band either way.
+        What is pinned instead is the page, which is the claim that matters.
+        """
+        if not self.env["ir.module.module"].search_count(
+                [("name", "=", "auth_signup"), ("state", "=", "installed")]):
+            self.skipTest("auth_signup is not installed: no login_layout page without a tagline")
+        page = self.url_open("/web/reset_password")
+        self.assertEqual(page.status_code, 200, "/web/reset_password is not served")
+        doc = lxml_html.fromstring(page.text)
+        self.assertEqual(len(doc.find_class("o_afenda_auth_panel")), 1,
+                         "/web/reset_password renders no band")
+        self.assertEqual(len(doc.find_class("o_afenda_auth_lockup")), 1,
+                         "/web/reset_password renders no lockup")
+        self.assertEqual(len(doc.find_class("o_afenda_auth_tenant")), 1,
+                         "/web/reset_password renders no tenant logo")
+        self.assertFalse(doc.find_class("o_afenda_auth_line"),
+                         "the tagline reached a page whose controller never sets it")
+        self.assertFalse(doc.find_class("o_afenda_card_head"),
+                         "/web/reset_password still has a card head")
+
     def test_webclient_page_is_branded(self):
         self.authenticate("admin", "admin")
         html = self.url_open("/app").text
@@ -181,19 +357,36 @@ class TestBranding(HttpCase):
         return Image.open(io.BytesIO(base64.b64decode(b64))).size
 
     def test_company_defaults(self):
+        """AFENDA is the SYSTEM; the main company is a TENANT.
+
+        This used to assert the main company's own name and logo were AFENDA's,
+        which is only true of a database nobody has configured yet. It is a
+        defaults test, and a tenant that has set its own name and artwork is
+        the hook working, not failing: `_apply_company_branding` renames only a
+        company still carrying an Odoo default (hooks.py:184, against
+        _DEFAULT_COMPANY_NAMES) and guards the logo on `uses_default_logo`.
+        Asserting otherwise made a real tenant's configuration read as a
+        regression -- which is exactly what happened here.
+
+        So the defaults are asserted on a company this test creates and
+        therefore controls. That the hook also reaches an ALREADY EXISTING
+        company at install is a different contract, and it is covered by
+        test_migration_reapplies_company_branding, which builds both companies
+        it needs rather than borrowing whatever the live database has.
+        """
         company = self.env.ref("base.main_company")
         with file_open("afenda_brand/static/img/logo.png", "rb") as f:
             expected_size = Image.open(io.BytesIO(f.read())).size
-        self.assertEqual(self._logo_size(company.logo), expected_size)
-        self.assertEqual(company.name, BRAND["short"])
-        self.assertTrue(company.favicon)
+        self.assertTrue(company.favicon, "the main company has no favicon at all")
         new_company = self.env["res.company"].create({"name": "Second"})
         self.assertEqual(self._logo_size(new_company.logo), expected_size, "new companies get the AFENDA logo")
         # mail reads these from the email: "primary" is the CTA button text,
         # "secondary" is the button fill. A blue-on-blue button is unreadable.
-        for record in (company, new_company):
-            self.assertEqual(record.email_secondary_color.upper(), BRAND["primary"])
-            self.assertEqual(record.email_primary_color.upper(), "#FFFFFF")
+        # Asserted on the company this test created, for the reason in the
+        # docstring: these are tenant-editable too (Settings > Companies), so
+        # reading them off the live main company would be the same mistake.
+        self.assertEqual(new_company.email_secondary_color.upper(), BRAND["primary"])
+        self.assertEqual(new_company.email_primary_color.upper(), "#FFFFFF")
         # Printed documents: the defaults reach companies created after install.
         self.assertEqual(new_company.font, "Source_Sans_3")
         self.assertEqual(
@@ -548,8 +741,276 @@ class TestBranding(HttpCase):
         css = bundle.css().raw.decode().lower()
         # "primary" and "link" are the two values the light sheet never contains,
         # so they are what proves primary_variables.dark.scss was loaded at all.
+        # The scalar tokens only: BRAND["dark"]["ramp"] is pinned through its
+        # consumers in test_neutral_ramp_reaches_both_schemes, because a bare
+        # substring for a ramp step is satisfied by colors this scheme sets
+        # elsewhere and would not fail if the step went missing.
         for name, color in BRAND["dark"].items():
+            if not isinstance(color, str):
+                continue
             self.assertIn(color.lower(), css, f"dark {name} {color} is missing from the dark theme")
+
+    def test_dark_scheme_survives_the_inverted_ramp(self):
+        """The $o-gray-* consumers the inversion alone gets wrong.
+
+        Each is upstream reading the ramp through a Bootstrap-layer variable
+        whose sense only survives walking light-to-dark, so
+        primary_variables.dark.scss restates the variable. Both bundles are
+        pinned: the light half is what proves the restatement is scoped to the
+        dark bundle and did not move the light scheme.
+
+        Not asserted, because it is knowingly unfixed: the pager indicator
+        reads $o-gray-200 directly for border and background
+        (web/static/src/core/pager/pager_indicator.scss:8-10), so in this
+        scheme it is the view color on the view. No token reaches it and this
+        module adds no dark-bundle selectors; the gap is written up in
+        primary_variables.dark.scss beside the fixes that were reachable.
+        """
+        light = self._bundle_css("web.assets_web")
+        dark = self._bundle_css("web.assets_web_dark")
+
+        # Tooltips: caption $o-gray-200 (bootstrap_overridden.scss:236) on a
+        # ground of $o-black (:29). Neither scheme lifts $o-black, which is why
+        # --emphasis-color is asserted too -- it is what makes "the caption must
+        # be the light end of the ramp" a requirement rather than a preference.
+        self.assertIn("--emphasis-color: #000000;", dark, "the dark tooltip ground is no longer black")
+        for css, scheme in ((light, "light"), (dark, "dark")):
+            self.assertIn("--tooltip-color: #f3f4f6;", css,
+                          f"the {scheme} tooltip caption is not readable on a black tooltip")
+
+        # Placeholders: $input-placeholder-color (bootstrap_overridden.scss:306)
+        # over a transparent input (web/static/src/scss/primary_variables
+        # .scss:169), so the view is the ground. 4.5:1 dark against 14.3:1 for
+        # body text; the light value is upstream's own mix, unchanged.
+        self.assertIn("::placeholder{color: #7a818e; opacity: 1;}", dark,
+                      "the dark placeholder is not legible on the dark view")
+        self.assertIn("::placeholder{color: #b7bcc5; opacity: 1;}", light,
+                      "the light placeholder moved")
+
+        # Color scheme: the only declaration that reaches scrollbars, native
+        # <select> popups and date pickers (web/static/src/scss/primary_
+        # variables.scss:13, emitted at webclient.scss:2 and :27).
+        self.assertIn("--o-webclient-color-scheme:dark;", dark, "the dark bundle still declares a bright UA scheme")
+        self.assertIn("color-scheme: dark;", dark, "the dark web client still declares a bright UA scheme")
+        self.assertIn("--o-webclient-color-scheme:bright;", light)
+        self.assertNotIn("--o-webclient-color-scheme:dark;", light)
+
+        # Headings: $o-main-headings-color is $o-black in every scheme upstream
+        # (primary_variables.scss:122 -> $headings-color, bootstrap_overridden
+        # .scss:135), which on the dark view is ink on ink.
+        self.assertIn("--heading-color: #f3f4f6;", dark, "dark headings are still painted black")
+        self.assertIn("--heading-color: #000000;", light, "the light heading color moved")
+
+        # Group separator: $table-group-separator-color is $gray-200
+        # (bootstrap_overridden.scss:146), which in this scheme is the view
+        # itself, so the divider would be drawn in the color it divides.
+        divider = self._rule_bodies(dark, ".table-group-divider")
+        self.assertTrue(divider, "no .table-group-divider rule in the dark bundle")
+        self.assertTrue(any("#1f2937" in body for body in divider),
+                        "the dark group divider is not drawn in the scheme's rule color")
+        self.assertFalse(any("#111827" in body for body in divider),
+                         "the dark group divider is drawn in the view color it separates")
+
+    # --- Web-client chrome ---------------------------------------------
+    # The neutral ramp as static/src/scss/primary_variables.scss declares it,
+    # and as static/src/scss/primary_variables.dark.scss walks it back the
+    # other way. Nine steps, one family; the anchors (hairline, graphite, ink
+    # light; ground, view, rule dark) are commented in both files.
+    #
+    # Read from BRAND, never restated here: four of the eighteen steps are
+    # brand values under another name (hairline, graphite, ink, and the three
+    # dark anchors), so a literal copy in this file would be a third place for
+    # them to drift. brand.py derives the dark ramp from the light one, which
+    # is why only one tuple is spelled out there either.
+    _RAMP = tuple(c.lower() for c in BRAND["ramp"])
+    _RAMP_DARK = tuple(c.lower() for c in BRAND["dark"]["ramp"])
+
+    def _bundle_css(self, name):
+        """One bundle's compiled sheet, lowercased.
+
+        Same route as test_dark_scheme_overrides_the_tokens: no session and no
+        HTTP round trip, so what is pinned is what the bundle compiles to
+        rather than what one page happened to link.
+        """
+        bundle = self.env["ir.qweb"]._get_asset_bundle(name, css=True, js=False)
+        return bundle.css().raw.decode().lower()
+
+    @staticmethod
+    def _rule_bodies(css, selector):
+        """Every declaration block compiled for exactly `selector`."""
+        pattern = re.escape(selector) + r"\{([^{}]*)\}"
+        return [m.group(1) for m in re.finditer(pattern, css)]
+
+    @staticmethod
+    def _media_block_spans(css):
+        """(start, end) of every @media block in the bundle, by brace matching.
+
+        The same reason the lg-only version of this helper existed, asked the
+        other way round. rfind("@media", 0, offset) finds the nearest @media
+        TEXT before a rule, which is not the same as the block CONTAINING it:
+        the compiled bundle holds dozens of already-closed Bootstrap media
+        blocks, so a rule is almost always preceded by one it has nothing to do
+        with. That heuristic used to report "inside lg" for a rule that had
+        been lifted out of its media query; it would now report "media-gated"
+        for every unconditional rule in the file. Matching braces is the only
+        way to ask the question that actually matters.
+
+        Every condition is collected, not just lg. The band is the page at
+        every width, so the invariant is no longer "inside this breakpoint" but
+        "inside none of them", and a `max-width` query would break it exactly
+        as an `lg` one would.
+        """
+        spans = []
+        for opener in re.finditer(r"@media([^{]*)\{", css):
+            depth, index = 1, opener.end()
+            while index < len(css) and depth:
+                if css[index] == "{":
+                    depth += 1
+                elif css[index] == "}":
+                    depth -= 1
+                index += 1
+            spans.append((opener.end(), index))
+        return spans
+
+    def _assert_not_media_gated(self, css, offset, message):
+        spans = self._media_block_spans(css)
+        # Not an assertion about the bundle so much as about this helper: a
+        # bundle with no media blocks at all would make every call below pass
+        # without looking at anything.
+        self.assertTrue(spans, "the bundle carries no media query at all")
+        self.assertFalse(any(start <= offset < end for start, end in spans), message)
+
+    def test_neutral_ramp_reaches_both_schemes(self):
+        """Nine steps light, nine steps dark, each through a named consumer.
+
+        A bare `assertIn(hex, css)` per step proves nothing: four of the nine
+        light steps are colors this theme also sets by another name (#e5e7eb is
+        $border-color, #9ca3af is $o-colors[0], #4b5563 is $o-brand-secondary,
+        #0f172a is $o-main-text-color), so deleting the ramp outright would
+        still leave those four assertions green.
+
+        `--gray-<step>` is the consumer that cannot be satisfied by accident.
+        Bootstrap emits one per entry of $grays in :root
+        (web/static/lib/bootstrap/scss/_root.scss:13-15) under an empty
+        $variable-prefix (web/static/src/scss/bootstrap_overridden.scss:51), and
+        $grays is built from $gray-N <- $o-gray-N (bootstrap_overridden.scss:
+        19-27). Drop a step from our sheet and that property carries upstream's
+        Bootstrap grey instead of ours.
+
+        `.btn-secondary` is the second consumer, and the one that makes the ramp
+        load-bearing rather than merely present: upstream builds its map out of
+        $o-gray-300/-400/-900 (web/static/src/scss/primary_variables.scss:
+        247-257). The dark pair is the point of the inversion -- carry the light
+        ramp into that bundle unchanged and this button is a near-white slab
+        captioned in near-black.
+        """
+        light = self._bundle_css("web.assets_web")
+        dark = self._bundle_css("web.assets_web_dark")
+        for step, color in zip(range(100, 1000, 100), self._RAMP):
+            self.assertIn(f"--gray-{step}: {color};", light,
+                          f"$o-gray-{step} does not reach the light sheet as {color}")
+        for step, color in zip(range(100, 1000, 100), self._RAMP_DARK):
+            self.assertIn(f"--gray-{step}: {color};", dark,
+                          f"dark $o-gray-{step} does not reach the dark sheet as {color}")
+
+        light_btn = self._rule_bodies(light, ".btn-secondary")
+        self.assertTrue(light_btn, "no .btn-secondary rule in the light bundle")
+        self.assertTrue(
+            any("--btn-bg: #e5e7eb" in body and "--btn-color: #0f172a" in body for body in light_btn),
+            "the secondary button is not drawn from the AFENDA ramp",
+        )
+        dark_btn = self._rule_bodies(dark, ".btn-secondary")
+        self.assertTrue(dark_btn, "no .btn-secondary rule in the dark bundle")
+        self.assertTrue(
+            any("--btn-bg: #1f2937" in body and "--btn-color: #f3f4f6" in body for body in dark_btn),
+            "the dark secondary button did not invert with the ramp",
+        )
+        # Upstream hard-codes `hover-color: $o-black` in all three button maps
+        # (:253, :266, :283); primary_variables.dark.scss restates the maps to
+        # take that out, which the ramp on its own cannot do. Asserted from both
+        # ends: the light bundle keeps upstream's map, so it is what proves
+        # "#000000" is the literal Sass emits for $o-black -- without it the
+        # absence below could be satisfied by a different spelling rather than
+        # by the fix.
+        self.assertTrue(
+            any("--btn-hover-color: #000000" in body for body in light_btn),
+            "the light secondary button no longer hovers to $o-black, so the "
+            "dark assertions below no longer pin anything",
+        )
+        for body in dark_btn:
+            self.assertNotIn("--btn-hover-color: #000000", body,
+                             "a dark button still hovers to black text")
+        self.assertTrue(
+            any("--btn-hover-color: #f3f4f6" in body for body in dark_btn),
+            "the dark secondary button does not hover to the ramp's text step",
+        )
+
+    def test_chrome_tokens_reach_the_backend_bundle(self):
+        """Navbar, control panel and list: the band structure of the shell.
+
+        Navbar and control panel are set entirely through the tokens their own
+        variables files expose (navbar.variables.scss, control_panel.
+        variables.scss), so asserting the compiled rule is what proves the
+        token was the lever. The list has no variables file, so its two rules
+        live in backend.scss and are pinned here beside them.
+        """
+        light = self._bundle_css("web.assets_web")
+        dark = self._bundle_css("web.assets_web_dark")
+
+        # Navbar: 48px bar, and the 14px reading size it inherits from
+        # $o-font-size-base. Same geometry in both schemes.
+        navbar = self._rule_bodies(light, ".o_main_navbar")
+        self.assertTrue(
+            any("--o-navbar-height: 48px" in body and "font-size: 0.875rem" in body for body in navbar),
+            "the navbar is not on the AFENDA height and type scale",
+        )
+        # Asserted through the navbar's own custom property rather than the
+        # bare rgba, which any module could coincidentally emit. _rule_bodies
+        # is not usable here: the entry colour reaches the sheet through
+        # @extend placeholders (web/static/src/webclient/navbar/
+        # navbar.variables.scss:45-48), so it compiles into grouped selector
+        # lists rather than a block that starts with one selector.
+        # Lowercased: _bundle_css returns .raw.decode().lower(), so the custom
+        # property's camel case does not survive into the haystack.
+        self.assertIn(
+            "var(--navbar-entry-color, rgba(255, 255, 255, 0.72))", light,
+            "the navbar entries are not drawn as a film of their own ground",
+        )
+
+        # Control panel: a paper band over a white sheet, ruled with the
+        # hairline. Both tokens derive from $o-webclient-background-color and
+        # $border-color, so the dark half of this assertion is also what proves
+        # the derivation holds -- nothing restates them in the dark file.
+        panel = self._rule_bodies(light, ".o_control_panel")
+        self.assertTrue(
+            any(f"background-color: {BRAND['paper'].lower()}" in body
+                and f"1px solid {BRAND['hairline'].lower()}" in body for body in panel),
+            "the control panel is not the AFENDA paper band",
+        )
+        panel_dark = self._rule_bodies(dark, ".o_control_panel")
+        self.assertTrue(
+            any(f"background-color: {BRAND['dark']['background'].lower()}" in body
+                and f"1px solid {BRAND['dark']['border'].lower()}" in body for body in panel_dark),
+            "the control panel did not follow the dark ground and rule",
+        )
+
+        # List: the column head recedes to graphite and gains weight, and the
+        # data cell carries the row rhythm. Read from the ramp, not from
+        # $o-brand-secondary, so the head inverts with the scheme.
+        for css, head_color, scheme in (
+            (light, BRAND["ramp"][6].lower(), "light"),      # graphite, step 700
+            (dark, BRAND["dark"]["ramp"][6].lower(), "dark"),
+        ):
+            heads = self._rule_bodies(css, ".o_list_renderer .o_list_table thead th")
+            self.assertTrue(
+                any("font-weight: 600" in body and head_color in body for body in heads),
+                f"the {scheme} list header is not the AFENDA column head",
+            )
+            cells = self._rule_bodies(css, ".o_list_renderer .o_list_table .o_data_row > .o_data_cell")
+            self.assertTrue(
+                any("padding-top: .375rem" in body for body in cells),
+                f"the {scheme} list lost its row rhythm",
+            )
 
     # --- Email layouts -------------------------------------------------
     # Email clients drop <style>, so these templates are all inline values.
@@ -592,6 +1053,109 @@ class TestBranding(HttpCase):
             xmlid, self._email_context(**overrides), minimal_qcontext=True
         )
 
+    def _assert_mark_leads(self, tree, xmlid):
+        """The AFENDA mark leads the layout instead of trailing it.
+
+        Three claims together, because each alone would still pass with the
+        mark back in the footer or loose in a div:
+
+          * it is inside a table cell -- Outlook renders HTML through Word,
+            which lays out tables and not divs, which is why this whole
+            surface is table-based;
+          * the document carries exactly one;
+          * nothing mail itself emits -- neither the call to action nor the
+            message body -- precedes it in document order.
+
+        The last is the one that actually pins it to the header. An assertion
+        that the mark is merely *present* passed for the whole time it lived
+        in the footer, which is what made it worth nothing here.
+        """
+        marks = tree.xpath("//img[contains(@src, '/afenda_brand/static/img/logo_email_2x.png')]")
+        self.assertEqual(len(marks), 1, f"{xmlid} does not carry exactly one AFENDA mark")
+        mark = marks[0]
+        self.assertEqual(mark.getparent().tag, "td", f"{xmlid}: the mark is not in a table cell")
+        order = {node: index for index, node in enumerate(tree.iter())}
+        # The CTA cell and the message body: one per layout branch, both
+        # emitted by mail's own markup and never by ours.
+        trailing = tree.xpath("//td[a[@href='/x']]") + tree.xpath("//p[normalize-space()='body']")
+        self.assertEqual(len(trailing), 2, f"{xmlid} rendered neither the CTA nor the body")
+        for node in trailing:
+            self.assertLess(
+                order[mark], order[node],
+                f"{xmlid}: the mark does not lead the layout",
+            )
+        return mark
+
+    def test_the_token_files_invent_no_colour(self):
+        """Every hex literal in the module's SCSS is one BRAND declares.
+
+        Scope deliberately stated: this catches hex LITERALS, not colours.
+        A value reached through mix(), darken(), rgba() or a CSS keyword is
+        computed at build time and never appears here as text -- the dark
+        placeholder is exactly that (a mix of two ramp steps, compiling to a
+        value BRAND does not name). Widening this to "every colour" would mean
+        compiling both bundles and diffing every declaration, a different and
+        much slower test. What this one buys is that the cheapest way to
+        introduce a colour -- typing one -- is closed.
+
+        `.claude/odoo-agent-rules.md` puts brand values in brand.py and mirrors
+        them into primary_variables.scss, because SCSS cannot import Python --
+        "the mirroring is the point". Nothing enforced the mirror in the
+        direction that actually drifts: a token file is where a new colour gets
+        invented, one hex at a time, each individually defensible. This asserts
+        the closed set rather than any single value, so the failure arrives at
+        the moment a colour is introduced instead of months later when someone
+        notices three greys that are nearly the same.
+
+        Comments are stripped first: they quote upstream's own values (the
+        Bootstrap warm ramp, $o-black) to explain what is being overridden, and
+        those are prose about foreign colours, not declarations of ours.
+        """
+        allowed = set()
+
+        def collect(value):
+            if isinstance(value, str):
+                if re.fullmatch(r"#[0-9A-Fa-f]{6}", value):
+                    allowed.add(value.lower())
+            elif isinstance(value, dict):
+                for item in value.values():
+                    collect(item)
+            elif isinstance(value, (list, tuple)):
+                for item in value:
+                    collect(item)
+
+        collect(BRAND)
+        # Not a floor on taste, just proof BRAND imported and was walked: an
+        # empty `allowed` would make every comparison below come back clean.
+        self.assertTrue(allowed, "no colours collected from BRAND")
+
+        def expand(literal):
+            """#abc -> #aabbcc, #rrggbbaa -> #rrggbb, so all forms compare."""
+            digits = literal.lower().lstrip("#")
+            if len(digits) == 3:
+                digits = "".join(digit * 2 for digit in digits)
+            return "#" + digits[:6]
+
+        # Every SCSS file the module ships, not only the two token files: the
+        # rule is about brand values the product uses, and login.scss and
+        # backend.scss are just as able to invent one.
+        for name in ("primary_variables.scss", "primary_variables.dark.scss",
+                     "login.scss", "backend.scss"):
+            with file_open(f"afenda_brand/static/src/scss/{name}", "r") as handle:
+                source = handle.read()
+            code = re.sub(r"//[^\n]*", "", source)
+            # base-2 is upstream's editor palette, kept verbatim on purpose
+            # (base-1 beside it is ours); it is the one place foreign colours
+            # are the correct answer.
+            code = re.sub(r"'base-2':\s*\((?:[^()]|\([^()]*\))*\)", "", code)
+            found = {expand(h) for h in re.findall(r"#[0-9A-Fa-f]{3,8}", code)}
+            stray = sorted(found - allowed)
+            self.assertFalse(
+                stray,
+                f"{name} uses {stray} which BRAND does not declare; add it to brand.py "
+                f"with a name and a reason, or express it from a value already there",
+            )
+
     def test_email_cta_contrast(self):
         """Regression for the upstream naming trap: mail's "primary" colour is
         the button TEXT and "secondary" is the button FILL. Swap the two
@@ -613,15 +1177,35 @@ class TestBranding(HttpCase):
 
     def test_email_default_layout_is_branded(self):
         """Regression: without the //body xpath the notification email is
-        Verdana on Odoo's #454748, and the footer links out instead of showing
-        the AFENDA mark."""
+        Verdana on Odoo's #454748, and without the header row the AFENDA mark
+        is either in the footer or not there at all."""
         html = self._render_email_layout("mail.mail_notification_layout")
-        body = lxml_html.fromstring(html).xpath("//body")[0].get("style")
+        tree = lxml_html.fromstring(html)
+        body = tree.xpath("//body")[0].get("style")
         self.assertIn("Source Sans 3", body)
         self.assertNotIn("Verdana", body)
         self.assertIn(BRAND["ink"], body)
-        self.assertIn("/afenda_brand/static/img/logo_email_2x.png", html)
+        self._assert_mark_leads(tree, "mail.mail_notification_layout")
+        # What the move actually bought, and the one thing a footer mark could
+        # never satisfy: upstream's "Powered by" block is gated on show_footer,
+        # so a message with neither header nor footer used to carry no AFENDA
+        # at all. The header row is ungated.
+        bare = self._render_email_layout(
+            "mail.mail_notification_layout",
+            email_notification_force_header=False,
+            email_notification_allow_header=False,
+            email_notification_force_footer=False,
+            email_notification_allow_footer=False,
+            has_button_access=False,
+        )
+        self.assertIn(
+            "/afenda_brand/static/img/logo_email_2x.png", bare,
+            "the mark vanishes on a message with neither header nor footer",
+        )
+        # Nothing outbound, and no orphaned wording left behind by removing it.
         self.assertNotIn("utm_source=db", html, "the outbound 'Powered by' link survived")
+        self.assertNotIn("Powered by", html, "the 'Powered by' wording survived the anchor")
+        self.assertIn("The truth of your business, kept.", html, "the footer sign-off is gone")
         for tell in ("Verdana", "#454748", "#875A7B"):
             self.assertNotIn(tell, html, f"default mail layout still carries {tell!r}")
 
@@ -638,10 +1222,22 @@ class TestBranding(HttpCase):
         # own `color` is still in the string; what matters is which one an
         # email client reads last.
         self.assertEqual(self._last_color(card), BRAND["ink"], "the card text is not ink")
-        footer = tree.xpath("//td[contains(@style, 'font-size:11px')]")[0].get("style")
+        # Anchored on upstream's own padding rather than on "font-size:11px",
+        # which the replaced "Powered by" cell below now also carries.
+        footer = tree.xpath("//td[contains(@style, 'padding: 0 8px 0 8px')]")[0].get("style")
         self.assertIn(f"border-top:1px solid {BRAND['hairline']}", footer)
         self.assertEqual(self._last_color(footer), BRAND["graphite"])
-        self.assertIn("/afenda_brand/static/img/logo_email_2x.png", html)
+        self._assert_mark_leads(tree, "mail.mail_notification_light")
+        # Pinned to the structure the brief names: the first <tr> of the card's
+        # own <tbody>, above upstream's record-name HEADER row.
+        rows = tree.xpath("//table[@width='590']/tbody/tr")
+        self.assertTrue(rows, "the card lost its rows")
+        self.assertEqual(
+            len(rows[0].xpath(".//img[contains(@src, 'logo_email_2x.png')]")), 1,
+            "the AFENDA mark is not in the first row of the card",
+        )
+        self.assertNotIn("Powered by", html, "the 'Powered by' wording survived the anchor")
+        self.assertIn("The truth of your business, kept.", html, "the footer sign-off is gone")
         for tell in ("Verdana", "#F1F1F1", "utm_source=db"):
             self.assertNotIn(tell, html, f"light mail layout still carries {tell!r}")
 
@@ -666,6 +1262,98 @@ class TestBranding(HttpCase):
             self.assertEqual(mark.get("height"), "16", f"{xmlid}: no height attribute")
             self.assertIn("max-width:64px", (mark.get("style") or "").replace(" ", ""))
             self.assertIn("logo_email_2x.png", mark.get("src"))
+
+    def test_email_header_carries_both_marks(self):
+        """The header is a letterhead: the tenant's logo as the subject, ours
+        as the maker's mark, in that order and at that ratio.
+
+        The `?company=` is the load-bearing part. /web/binary/company_logo
+        takes the company from the query string when it is there and otherwise
+        falls back to `request.session.uid or SUPERUSER_ID` and reads THAT
+        user's company (addons/web/controllers/binary.py:264-287). A mail
+        client fetches the image with no Odoo session, so dropping the
+        parameter serves the superuser's company logo to every recipient on a
+        multi-company database -- and the right one on a single-company
+        database, which is exactly why this needs a test and not a reading.
+
+        The absent `width` is deliberate, not an omission: logo_web is
+        `image_process(logo, size=(180, 0))`
+        (odoo/addons/base/models/res_company.py:169-172), at most 180 wide with
+        a free height, so the aspect ratio is unknown at render time and any
+        fixed width/height pair would squash somebody's logo. Height fixed,
+        width free is the only non-distorting contract available.
+        """
+        tenant = self.env["res.company"].create(
+            {"name": "Tenant Co", "logo": _png_b64((9, 9, 9))}
+        )
+        # The premise: this logo does not read as the shipped default. If it
+        # ever did, every assertion below would pass vacuously.
+        self.assertFalse(tenant.uses_default_logo, "the premise failed: this logo reads as default")
+        for xmlid in ("mail.mail_notification_layout", "mail.mail_notification_light"):
+            html = self._render_email_layout(xmlid, company=tenant)
+            tree = lxml_html.fromstring(html)
+            logos = tree.xpath("//img[contains(@src, '/web/binary/company_logo')]")
+            self.assertEqual(len(logos), 1, f"{xmlid} does not carry the tenant logo exactly once")
+            logo = logos[0]
+            self.assertIn(
+                f"company={tenant.id}", logo.get("src"),
+                f"{xmlid}: no explicit ?company=, so a session-less fetch picks the wrong one",
+            )
+            self.assertTrue(
+                logo.get("src").startswith("http"),
+                f"{xmlid}: the tenant logo URL is relative and an email has no origin",
+            )
+            # Most clients block remote images, so for many recipients the alt
+            # text IS the header. Upstream's generic "Logo" would be noise.
+            self.assertEqual(
+                logo.get("alt"), "Tenant Co",
+                f"{xmlid}: a blocked-image header would name no company",
+            )
+            self.assertEqual(logo.get("height"), "32", f"{xmlid}: no height attribute for Outlook")
+            self.assertIsNone(
+                logo.get("width"),
+                f"{xmlid}: a fixed width distorts a logo whose aspect ratio is unknown",
+            )
+            self.assertEqual(logo.getparent().tag, "td", f"{xmlid}: the tenant logo is not in a cell")
+            # Upstream's light layout draws its own copy beside the record name
+            # (mail_templates_email_layouts.xml:126-128); it has to be gone, or
+            # the tenant appears twice and after us instead of before.
+            self.assertNotIn(
+                "/logo.png?company", html, f"{xmlid} carries a second copy of the tenant logo",
+            )
+            mark = tree.xpath("//img[contains(@src, 'logo_email_2x.png')]")[0]
+            order = {node: index for index, node in enumerate(tree.iter())}
+            self.assertLess(order[logo], order[mark], f"{xmlid}: our mark precedes the tenant's")
+            self.assertLess(
+                int(mark.get("height")), int(logo.get("height")),
+                f"{xmlid}: our mark is not the smaller of the two",
+            )
+
+    def test_email_header_omits_a_logo_the_tenant_never_set(self):
+        """A company with no artwork of its own must emit no tenant <img>.
+
+        /web/binary/company_logo falls through to web/static/img/nologo.png, a
+        180x79 fully transparent plate (binary.py:305). On a page that is a
+        blank space; in a mail client with images blocked it is a broken-image
+        icon next to an alt string, which is worse than nothing.
+        `uses_default_logo` is `not company.logo or company.logo ==
+        default_logo` (res_company.py:179-182), so gating on it covers the
+        no-logo case AND the case where the tenant is still showing AFENDA's
+        own shipped mark -- which must never pose as theirs beside ours.
+        """
+        bare = self.env["res.company"].create({"name": "No Logo Co"})
+        bare.logo = False
+        self.assertTrue(bare.uses_default_logo, "the premise failed: this company has a logo")
+        for xmlid in ("mail.mail_notification_layout", "mail.mail_notification_light"):
+            html = self._render_email_layout(xmlid, company=bare)
+            self.assertNotIn(
+                "/web/binary/company_logo", html,
+                f"{xmlid} links artwork the tenant never set",
+            )
+            self.assertIn(
+                "/afenda_brand/static/img/logo_email_2x.png", html,
+                f"{xmlid} dropped the AFENDA mark along with the tenant's",
+            )
 
     @staticmethod
     def _last_color(style):

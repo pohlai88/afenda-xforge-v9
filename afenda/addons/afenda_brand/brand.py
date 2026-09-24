@@ -2,7 +2,8 @@
 
 Keys: product, short, bot, domain, docs_path, url_prefix, tagline, and the
 colors primary, on_primary, ink, paper, graphite, hairline, ember, verified,
-flag, favorite, the tags palette, and the dark sub-dict.
+flag, favorite, the tags palette, the neutral ramp, and the dark sub-dict
+(which carries the dark ramp).
 
 Keep in sync with static/src/scss/primary_variables.scss.
 """
@@ -40,5 +41,42 @@ BRAND = {
         "link": "#A5B4FC",
         "border": "#1F2937",
         "navbar": "#0B1120",
+        # The selected/active ground. Upstream mixes the action into
+        # $o-gray-100 (web/static/src/scss/primary_variables.scss:133), which in
+        # the inverted ramp is the darkest thing on screen -- selection would be
+        # invisible. Named here so the dark scheme invents no colour of its own:
+        # every hex in primary_variables.dark.scss mirrors a value from this
+        # dict, which test_the_token_files_invent_no_colour enforces.
+        "selection": "#1E2A4A",
     },
 }
+
+# Neutral ramp, one family in nine steps, mirroring $o-gray-100..900 in
+# static/src/scss/primary_variables.scss. Three of its steps are brand values
+# this dict already names, so they are read back from it rather than typed a
+# second time: a change to hairline, graphite or ink moves the ramp with it.
+BRAND["ramp"] = (
+    "#F9FAFB",  # 100
+    "#F3F4F6",  # 200
+    BRAND["hairline"],  # 300: the rule
+    "#D1D5DB",  # 400
+    "#9CA3AF",  # 500
+    "#6B7280",  # 600
+    BRAND["graphite"],  # 700: secondary text
+    "#374151",  # 800
+    BRAND["ink"],  # 900: body text
+)
+
+# The same family walked the other way, mirroring
+# static/src/scss/primary_variables.dark.scss. Derived rather than restated, so
+# "same family, same number of steps, opposite direction" is a property of this
+# file instead of a claim in a comment: the dark scheme's own three anchors take
+# 100-300, the middle of the light ramp reverses into 400-800, and 900 is the
+# light ramp's 200 -- the one step light enough to caption the fills above it.
+BRAND["dark"]["ramp"] = (
+    BRAND["dark"]["background"],  # 100: the ground
+    BRAND["dark"]["view"],  # 200: the view
+    BRAND["dark"]["border"],  # 300: the rule
+    *reversed(BRAND["ramp"][3:8]),  # 400-800: #374151 .. #D1D5DB
+    BRAND["ramp"][1],  # 900: what sits on the fills above
+)

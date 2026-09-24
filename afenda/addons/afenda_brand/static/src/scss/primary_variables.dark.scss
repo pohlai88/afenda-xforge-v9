@@ -10,3 +10,154 @@ $o-main-link-color: #A5B4FC !default;
 $border-color: #1F2937 !default;
 $o-navbar-background: #0B1120 !default;
 $o-navbar-border-bottom: 1px solid #1F2937 !default;
+
+// Color scheme. Upstream leaves this `bright` for every bundle
+// (addons/web/static/src/scss/primary_variables.scss:13) and emits it twice --
+// as `--o-webclient-color-scheme` on `:root` and as the `color-scheme`
+// declaration on `.o_web_client`
+// (addons/web/static/src/webclient/webclient.scss:2, :27). It is the only knob
+// that tells the user agent to draw scrollbars, native `<select>` popups and
+// date pickers dark; nothing in our layer can reach those surfaces otherwise.
+$o-webclient-color-scheme: dark !default;
+
+// Neutral ramp, inverted. The light sheet's ramp runs light-to-dark, and every
+// consumer of it reads 100 as "the faintest surface" and 900 as "the text you
+// put on those surfaces". Carrying the light values into this bundle would
+// therefore not merely look wrong, it would invert the contrast of everything
+// derived from it: $o-main-color-muted is rgba($o-gray-700) and would be a
+// near-black on a near-black ground, and the Bootstrap secondary button would
+// be a white-ish slab on an ink UI. Same family and same number of steps as
+// the light ramp, walked the other way, anchored on values this scheme already
+// owns: 200 is the view, 300 is the rule, 900 is the text.
+$o-gray-100: #0B1120 !default;  // the ground; $o-webclient-background-color above
+$o-gray-200: #111827 !default;  // the view; $o-view-background-color above
+$o-gray-300: #1F2937 !default;  // the rule; $border-color above
+$o-gray-400: #374151 !default;
+$o-gray-500: #4B5563 !default;
+$o-gray-600: #6B7280 !default;
+$o-gray-700: #9CA3AF !default;
+$o-gray-800: #D1D5DB !default;
+$o-gray-900: #F3F4F6 !default;  // what sits on the fills above
+
+// Below: the consumers of $o-gray-* that the inversion alone gets wrong.
+// Upstream reads the ramp in places that assume "200 is a faint surface" and
+// "200 is a caption colour" at the same time, which only holds one way round.
+// Each is a `!default` variable declared upstream after this file in the same
+// Sass compilation -- one primary variable and three from
+// bootstrap_overridden.scss -- so restating it here is the whole fix. That
+// reach is not new: $border-color above is bootstrap_overridden.scss:97 and
+// $o-btns-bs-override below is primary_variables.scss:231, and both already
+// land. No selector is added for any of them.
+
+// Headings. $o-main-headings-color is $o-black in every scheme
+// (addons/web/static/src/scss/primary_variables.scss:122), and $o-black is
+// #000000 here too -- this file does not lift it. Bootstrap takes it for
+// $headings-color (bootstrap_overridden.scss:135), which paints every h1-h6,
+// form section title and settings heading, and through $table-active-color
+// (:154) the active table row as well. Ink on ink otherwise.
+$o-main-headings-color: $o-gray-900 !default;
+
+// Tooltips. $tooltip-color is $o-gray-200 (bootstrap_overridden.scss:236),
+// consumed at addons/web/static/src/core/tooltip/tooltip.scss:5; inverted, that
+// is #111827. The ground is Bootstrap's own $tooltip-bg, var(--emphasis-color)
+// -> $body-emphasis-color -> $black -> $o-black (bootstrap_overridden.scss:29)
+// = #000000, which this file does not override -- so the caption would be
+// near-black on black. The ramp's text step is what belongs on that ground.
+$tooltip-color: $o-gray-900 !default;
+
+// Placeholders. Upstream mixes two adjacent ramp steps
+// (bootstrap_overridden.scss:306, `mix($gray-400, $gray-500)`); inverted those
+// are #374151 and #4B5563 and the mix is #414B5A, sitting on a transparent
+// input ($o-input-bg, addons/web/static/src/scss/primary_variables.scss:169)
+// over the #111827 view. Same shape, two steps further up the inverted ramp:
+// #7A818E, 4.5:1 on the view where body text is 14.3:1 -- legible, still
+// plainly secondary.
+$input-placeholder-color: mix($o-gray-600, $o-gray-700, 70%) !default;
+
+// Group separator. $table-group-separator-color is $gray-200
+// (bootstrap_overridden.scss:146), drawn double-width by Bootstrap's
+// .table-group-divider (addons/web/static/lib/bootstrap/scss/_tables.scss:52).
+// In this scheme 200 is the view itself, so the divider is drawn in the colour
+// of the surface it divides. 300 is what this file already calls the rule.
+$table-group-separator-color: $o-gray-300 !default;
+
+// Known gap, deliberately not closed here: the pager indicator reads
+// $o-gray-200 directly for both its border and its background
+// (addons/web/static/src/core/pager/pager_indicator.scss:8-10), with no
+// variable in between, so the chip compiles to #111827 on the #111827 view and
+// disappears. The only token-level fix is moving this ramp's 200 off the view
+// colour, which some forty other consumers of $o-gray-200/$gray-200 across
+// addons/ also read; the only other fix is a selector, which this module does
+// not ship for the dark bundle. Left visible as a gap rather than paid for
+// with either.
+
+// Selection. Upstream's active colour is $o-black
+// (web/static/src/scss/primary_variables.scss:132) and its active ground mixes
+// the action into $o-gray-100, which in this scheme is the darkest thing on
+// screen -- black on near-black. Stated here instead, so all three button maps
+// below inherit a readable pair.
+$o-component-active-bg: #1E2A4A !default;
+$o-component-active-border: #3B5BDB !default;
+$o-component-active-color: #E5E7EB !default;
+
+// Buttons. The ramp above already corrects the fills and the resting text
+// colour, because upstream builds these maps from $o-gray-* -- but its hover
+// rows hard-code `hover-color: $o-black` (:253, :266, :283), which the ramp
+// cannot reach. Bootstrap's mixin takes each entry whole, so a map entry has
+// to restate every state; "primary" is deliberately absent and keeps upstream's
+// (it is built from $o-brand-primary, which this file already lifts).
+// Assigned before upstream's own `$o-btns-bs-override: () !default`, so the
+// map-merge at :231 lays these over the defaults.
+$o-btns-bs-override: (
+    "secondary": (
+        background: $o-gray-300,
+        border: $o-gray-300,
+        color: $o-gray-900,
+
+        hover-background: $o-gray-400,
+        hover-border: $o-gray-400,
+        hover-color: $o-gray-900,
+
+        active-background: $o-component-active-bg,
+        active-border: $o-component-active-border,
+        active-color: $o-component-active-color,
+    ),
+    "light": (
+        background: $o-gray-200,
+        border: $o-gray-200,
+        color: $o-gray-900,
+
+        hover-background: $o-gray-300,
+        hover-border: $o-gray-300,
+        hover-color: $o-gray-900,
+
+        active-background: $o-component-active-bg,
+        active-border: $o-component-active-border,
+        active-color: $o-component-active-color,
+    ),
+) !default;
+
+$o-btns-bs-outline-override: (
+    "secondary": (
+        background: transparent,
+        border: $o-gray-300,
+        color: $o-gray-900,
+
+        hover-background: $o-gray-300,
+        hover-border: $o-gray-400,
+        hover-color: $o-gray-900,
+
+        active-background: $o-component-active-bg,
+        active-border: $o-component-active-border,
+        active-color: $o-component-active-color,
+    ),
+) !default;
+
+// Not restated here on purpose:
+//   - the navbar entry colours are white at low alpha over an ink bar, and the
+//     bar is ink in both schemes;
+//   - $o-control-panel-background-color and $o-control-panel-border-bottom are
+//     derived in primary_variables.scss from $o-webclient-background-color and
+//     $border-color, both of which this file sets above, so the panel follows
+//     the dark ground and the dark rule on its own;
+//   - the type scale is a size, not a colour.
