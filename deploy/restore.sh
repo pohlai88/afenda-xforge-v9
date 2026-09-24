@@ -31,7 +31,8 @@ docker compose exec -T db psql -X -tA -U xforge -d postgres -c "SELECT 1 FROM pg
 # re-resolves the restarted container. A failed reload must not replace the
 # exit status of the script that is ending, hence `|| true`.
 restart_xforge() {
-    docker compose start xforge >/dev/null
+    # By container id: compose start would also start depends_on init, a stale one-shot container.
+    docker start "$(docker compose ps -aq xforge)" >/dev/null
     docker compose exec -T nginx nginx -s reload || true
 }
 docker compose stop xforge
@@ -46,5 +47,13 @@ echo "restore: replacing filestore/afenda"
 docker compose run --rm --no-deps -T --entrypoint sh xforge -c \
     'set -e; mkdir -p /var/lib/afenda/filestore; rm -rf /var/lib/afenda/filestore/afenda; tar -C /var/lib/afenda/filestore -xzf -' \
     < "$src/filestore.tgz"
+
+# restart_xforge (the EXIT trap) brings back only the existing xforge
+# container by id, so init's depends_on no longer runs it for us. Run init
+# here instead: it skips `db init` on this now-existing database but still
+# reapplies this host's web.base.url/report.url and installs or upgrades
+# outdated modules, which a restored dump from another host must get.
+echo "restore: rerunning init to reapply this host's parameters"
+docker compose run --rm -T init
 
 echo "restore: done from $src"

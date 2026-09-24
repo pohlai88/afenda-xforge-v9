@@ -149,8 +149,11 @@ class TestInvitationMail(TransactionCase):
     def test_language_loaded_later_is_cleaned(self):
         self.assertNotIn("fr_FR", self._stored())
         self.env["res.lang"]._activate_lang("fr_FR")
-        # The path res.lang activation and the language wizard take
-        # (odoo/addons/base/models/ir_module.py:893).
+        # _activate_lang only sets active; it loads no terms. Loading them is
+        # what action_unarchive / _activate_and_install_lang and the language
+        # wizard do, through _update_translations
+        # (odoo/addons/base/models/res_lang.py:334-341,
+        # odoo/addons/base/models/ir_module.py:893).
         self.env["ir.module.module"]._load_module_terms(["auth_signup"], ["fr_FR"])
 
         fr_body = self._stored()["fr_FR"]
