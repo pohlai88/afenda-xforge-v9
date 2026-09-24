@@ -279,3 +279,20 @@ Hardening follow-ups on the live host (2026-09-24, 06:53Z–06:54Z):
   - `db` and `nginx` were not recreated; `xforge` is healthy.
   - `/web/health` returns pass, and the landing page returns 200.
 - `NOCREATEDB` applied on the owner's go (07:12Z, the README's `ALTER ROLE afenda_app NOCREATEDB`): the role went from `createdb=true` to `super=false createdb=false createrole=false login=true`, 7 `afenda_app` sessions stayed connected, `/web/health` passed and `/web/login` returned 200. To undo: `ALTER ROLE afenda_app CREATEDB`.
+
+Auth pages release (2026-09-24, 18:49Z-18:53Z):
+
+- Pushed `68b0b99133ac5dfbefab4a63dfde93e311045d06`, the auth release squashed from 17 local commits; industry packs excluded as unfinished. Then pushed `8336f07379e448dc5976dcb65235d754ab223b4f`, test_crystal_bear on the stdlib XML parser, because afenda-ci's tools job has no lxml.
+- CI on `8336f0737`:
+  - afenda-ci: `Ran 273 tests ... OK`;
+  - afenda-image: `0 failed, 0 error(s) of 86 tests` at the raised floor of 86.
+- Production modules before the deploy: `auth_signup` and `auth_totp` installed. They are now afenda_brand dependencies.
+- `redeploy.sh 8336f0737…`: `/web/health passes`, exit 0; rollback target `47793654e88b2d8cb94eda71b69223b0907a5533`.
+- Verified on the live host:
+  - afenda_brand 19.0.1.0.6 and the `afenda_brand.auth_bear` view present; no ERROR in the init log;
+  - `afenda_app super=false createdb=false`, 0 objects owned by another role;
+  - Resend `true 2587 starttls_strict`, one backup cron line;
+  - /web/login: h1 "Growth is kept, not found.", the inline bear, "Request access", no tagline, no odoo.com;
+  - the live frontend bundle carries the one focus ring, the height-bound headline and the bear scales, and no `#017e84`, which also releases the teal rule `3ba94c99c`;
+  - /web/reset_password: h1 "Roots remember the way back." with one back action; /web/signup without a token 404; /web/database/manager 404;
+  - at 1280x633 the sign-in page fits without a scrollbar, with no console errors.
