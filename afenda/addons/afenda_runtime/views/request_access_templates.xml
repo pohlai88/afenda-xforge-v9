@@ -24,7 +24,7 @@
                  auth_bear.css keys this page's "moss" skin on. The card holds
                  the page's one action: the way back, styled by login.scss. -->
             <div class="o_afenda_auth_request d-grid">
-                <a href="/web/login" role="button" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" role="presentation"/> Back to sign in</a>
+                <a href="/web/login" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" aria-hidden="true"/> Back to sign in</a>
             </div>
         </t>
     </template>

@@ -267,6 +267,7 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
             outline: 2px solid $o-brand-primary;
             outline-offset: 2px;
             border-radius: $o-border-radius;
+            box-shadow: none;  // Bootstrap's blurred btn focus shadow: one ring only
         }
     }
 
@@ -334,6 +335,13 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
         font-weight: 500;
         color: $o-main-text-color;  // ink
         text-decoration: none;
+        // Bootstrap's pressed state is `:not(.btn-check) + .btn:active` (0-3-0),
+        // which outranks the rule above and would repaint the button from
+        // --bs-btn-active-* while it is pressed. Setting those variables, the
+        // documented way to theme a .btn, keeps the pressed button white.
+        --bs-btn-active-bg: #{$o-webclient-background-color};
+        --bs-btn-active-border-color: #{$border-color};
+        --bs-btn-active-color: #{$o-main-text-color};
 
         &:hover {
             background: $o-webclient-background-color;  // paper
@@ -367,17 +375,22 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
         column-gap: .5rem;
         align-items: stretch;
 
-        > .o_afenda_auth_back { order: -1; white-space: nowrap; }
+        // The back link is FIRST in the document (webclient_templates.xml
+        // inserts it before the action), so the tab order and the drawn order
+        // agree: back, then the action.
+        > .o_afenda_auth_back { white-space: nowrap; }
         > .btn-primary { margin-bottom: 0 !important; }
         > .o_login_auth { grid-column: 1 / -1; }
 
         // A phone's card cannot hold both labels on one line: the pair
-        // stacks, the action first and the way back under it, as on sign-in.
+        // stacks, the action drawn first and the way back under it, as on
+        // sign-in. Only here does the drawn order differ from the tab order,
+        // and only by putting the action - the thing the page is for - on top.
         @media (max-width: 575.98px) {
             grid-template-columns: minmax(0, 1fr);
             row-gap: .5rem;
 
-            > .o_afenda_auth_back { order: 0; }
+            > .btn-primary { order: -1; }
         }
     }
 

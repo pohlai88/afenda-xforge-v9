@@ -258,16 +258,22 @@
              utility on the i: login.scss spaces it with `gap`, so the glyph and
              the word stay one object. -->
         <xpath expr="//div[hasclass('oe_login_buttons')]/button[hasclass('btn-primary')]" position="inside">
-            <i class="fa fa-arrow-right o_afenda_auth_go" role="presentation"/>
+            <i class="fa fa-arrow-right o_afenda_auth_go" aria-hidden="true"/>
         </xpath>
         <!-- The way in for someone without an account. Access is by invitation
              (invitation_scope b2b, afenda_runtime), so this is not a signup
              link: it goes to /request-access, which mails the company or
              explains. When a database does allow self-signup, auth_signup's
              own "Don't have an account?" link shows instead (`signup_enabled`,
-             set by auth_signup's web_login, controllers/main.py:25-37). -->
+             set by auth_signup's web_login, controllers/main.py:25-37).
+             /request-access is a route of afenda_runtime, which depends on this
+             module rather than the reverse. Deliberate: the button only shows
+             when signup is closed (invitation_scope b2b), and it is
+             afenda_runtime that closes it (data/ir_config_parameter.xml), so a
+             database that shows this button always has the route. auth_signup
+             on its own leaves signup open (b2c) and the button hidden. -->
         <xpath expr="//div[hasclass('oe_login_buttons')]/button[hasclass('btn-primary')]" position="after">
-            <a t-if="not signup_enabled" href="/request-access" role="button"
+            <a t-if="not signup_enabled" href="/request-access"
                class="btn o_afenda_auth_secondary">Request access</a>
         </xpath>
     </template>
@@ -282,8 +288,18 @@
             <t t-set="afenda_subline">You're invited. Set your name and password.</t>
         </xpath>
         <!-- "Already have an account?" becomes the page's back action. -->
-        <xpath expr="//div[hasclass('oe_login_buttons')]/a[contains(@t-attf-href, '/web/login')]" position="replace">
-            <a t-attf-href="/web/login?{{ keep_query() }}" role="button" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" role="presentation"/> Back to sign in</a>
+        <xpath expr="//div[hasclass('oe_login_buttons')]/a[contains(@t-attf-href, '/web/login')]" position="replace"/>
+        <!-- Plain /web/login whenever the page carries a token: keep_query()
+                 with no arguments keeps EVERY parameter (ir_qweb.py:519-527),
+                 token included, and the sign-in page's own "Reset Password"
+                 link keeps it again - an expired link then loops back to
+                 itself, and the secret lands in a second URL. Upstream guards
+                 its keep_query() link with `not token` for the same reason
+                 (auth_signup_login_templates.xml:106-107). Inserted BEFORE the
+                 action, so the tab order runs back -> action, the order the
+                 row draws them in. -->
+        <xpath expr="//div[hasclass('oe_login_buttons')]/button[@type='submit']" position="before">
+            <a t-att-href="'/web/login' if token else '/web/login?' + keep_query()" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" aria-hidden="true"/> Back to sign in</a>
         </xpath>
     </template>
 
@@ -318,10 +334,20 @@
              sent (upstream's float-start "Back to Login") and on the form
              (upstream's small row, which only showed without a token). -->
         <xpath expr="//div[hasclass('oe_login_form')]/a" position="replace">
-            <a href="/web/login" role="button" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" role="presentation"/> Back to sign in</a>
+            <a href="/web/login" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" aria-hidden="true"/> Back to sign in</a>
         </xpath>
-        <xpath expr="//form[hasclass('oe_reset_password_form')]//div[hasclass('oe_login_buttons')]/div" position="replace">
-            <a t-attf-href="/web/login?{{ keep_query() }}" role="button" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" role="presentation"/> Back to sign in</a>
+        <xpath expr="//form[hasclass('oe_reset_password_form')]//div[hasclass('oe_login_buttons')]/div" position="replace"/>
+        <!-- Plain /web/login whenever the page carries a token: keep_query()
+                 with no arguments keeps EVERY parameter (ir_qweb.py:519-527),
+                 token included, and the sign-in page's own "Reset Password"
+                 link keeps it again - an expired link then loops back to
+                 itself, and the secret lands in a second URL. Upstream guards
+                 its keep_query() link with `not token` for the same reason
+                 (auth_signup_login_templates.xml:106-107). Inserted BEFORE the
+                 action, so the tab order runs back -> action, the order the
+                 row draws them in. -->
+        <xpath expr="//form[hasclass('oe_reset_password_form')]//div[hasclass('oe_login_buttons')]/button[@type='submit']" position="before">
+            <a t-att-href="'/web/login' if token else '/web/login?' + keep_query()" class="btn o_afenda_auth_back"><i class="fa fa-arrow-left" aria-hidden="true"/> Back to sign in</a>
         </xpath>
     </template>
 

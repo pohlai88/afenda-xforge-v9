@@ -80,6 +80,8 @@ _CUSTOM_FAVICON = (
 _VERSIONS_WITHOUT_MIGRATION = {
     "19.0.1.0.6": "auth surface, shell theming, mail header -- views and SCSS "
                   "reload on upgrade; no record needs rewriting",
+    "19.0.1.0.7": "auth back links drop reset/signup tokens, tab order, icon a11y "
+                  "-- views and SCSS only",
 }
 
 
@@ -137,6 +139,17 @@ class TestBranding(HttpCase):
         self.assertIn("0 0 0 1px #1e3a8a", css, "the focus ring is not the one Ledger Blue token")
         self.assertIn("min(4vw, 6.5vh)", css.replace(" ,", ","),
                       "login.scss did not compile into the bundle (a stale bundle is being served)")
+        # The two markers above prove the CURRENT file compiled only on a
+        # fresh database. On a reused one, a failed compile serves the
+        # previous bundle with an error block appended
+        # (odoo/addons/base/models/assetsbundle.py:492-516), and that old
+        # bundle may already contain both markers. The error block is what
+        # says it failed.
+        self.assertNotIn("css_error_message", css, "the frontend bundle failed to compile")
+        self.assertNotIn("a css error occured", css, "the frontend bundle failed to compile")
+        # The two-factor page's Cancel is styled as the page's way back.
+        self.assertIn('form[action="/web/session/logout"] .btn-link', css,
+                      "the two-factor Cancel is not styled as the back action")
 
     def _frontend_css(self, url="/web/login"):
         html = self.url_open(url).text
@@ -545,6 +558,29 @@ class TestBranding(HttpCase):
         self.assertFalse(doc.find_class("o_afenda_card_head"), f"{url} still has a card head")
         return doc
 
+    def test_request_access_shows_only_when_signup_is_closed(self):
+        """"Request access" is the way in for an invitation-only database.
+
+        auth_signup's own "Don't have an account?" link covers a database that
+        lets people sign up (b2c), and the two must never show together: the
+        sign-in page offers exactly one way in. `signup_enabled` comes from
+        auth_signup's web_login (addons/auth_signup/controllers/main.py:25-37),
+        which reads auth_signup.invitation_scope.
+        """
+        params = self.env["ir.config_parameter"].sudo()
+        for scope, request_access, signup_link in (("b2c", 0, 1), ("b2b", 1, 0)):
+            with self.subTest(scope=scope):
+                params.set_param("auth_signup.invitation_scope", scope)
+                doc = lxml_html.fromstring(self.url_open("/web/login").text)
+                secondary = doc.find_class("o_afenda_auth_secondary")
+                self.assertEqual(len(secondary), request_access,
+                                 f"'Request access' shown {len(secondary)} times with signup {scope}")
+                if secondary:
+                    self.assertEqual(secondary[0].get("href"), "/request-access")
+                    self.assertIsNone(secondary[0].get("role"), "'Request access' claims a button role")
+                self.assertEqual(len(doc.xpath("//a[contains(@href, '/web/signup')]")), signup_link,
+                                 f"auth_signup's signup link shown wrongly with signup {scope}")
+
     def test_every_auth_page_is_one_poster(self):
         """Every logged-out page: the same poster, its own headline.
 
@@ -634,10 +670,27 @@ class TestBranding(HttpCase):
         """Every page but sign-in offers exactly one way back to it, as a button."""
         backs = doc.find_class("o_afenda_auth_back")
         self.assertEqual(len(backs), 1, f"{label} does not offer exactly one way back to sign in")
-        self.assertTrue(backs[0].get("href", "").startswith("/web/login"),
-                        f"{label}'s back action does not lead to sign in")
-        self.assertIn("btn", (backs[0].get("class") or "").split(),
+        back = backs[0]
+        href = back.get("href", "")
+        self.assertTrue(href.startswith("/web/login"), f"{label}'s back action does not lead to sign in")
+        # keep_query() with no arguments keeps every parameter, the reset or
+        # signup token included: the sign-in page's "Reset Password" link then
+        # carries it straight back to the same (expired) page, and the secret
+        # lands in a second URL.
+        self.assertNotIn("token=", href, f"{label}'s back action carries the page's token")
+        self.assertIn("btn", (back.get("class") or "").split(),
                       f"{label}'s back action is a bare link, not a button")
+        # It navigates, so it is a link, not role=button; its arrow is hidden
+        # from assistive tech so the name is "Back to sign in" alone.
+        self.assertIsNone(back.get("role"), f"{label}'s back link claims a button role")
+        self.assertEqual([i.get("aria-hidden") for i in back.iter("i")], ["true"],
+                         f"{label}'s back arrow is exposed to assistive tech")
+        # Tab order follows the drawn order: back first, then the action.
+        primary = back.getparent().xpath("./button[contains(@class, 'btn-primary')]")
+        if primary:
+            siblings = list(back.getparent())
+            self.assertLess(siblings.index(back), siblings.index(primary[0]),
+                            f"{label}'s back link comes after the action in the tab order")
 
     def test_the_two_factor_page_is_a_poster_with_one_heading(self):
         """/web/login/totp: the layout's h1 replaces upstream's h5 heading.

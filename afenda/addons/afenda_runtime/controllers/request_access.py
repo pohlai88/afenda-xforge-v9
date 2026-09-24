@@ -46,4 +46,4 @@ class RequestAccess(http.Controller):
             # local part into an escape, so nothing in the address can read
             # as a mailto: header.
             return request.redirect(f"mailto:{quote(email, safe='@')}?subject={SUBJECT}", code=303, local=False)
-        return request.render("afenda_runtime.request_access_by_invitation", {"product": BRAND["product"]})
+        return request.render("afenda_runtime.request_access_by_invitation")
