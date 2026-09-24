@@ -131,6 +131,27 @@ warehouse (`addons/stock/models/stock_orderpoint.py:40,44,51`). An XML record re
 those defaults against whichever company happens to load the file — correct for a
 single-company demo, wrong for a multi-tenant product.
 
+**Known limitation, stated rather than papered over.** The hook does not make the pack
+company-*selectable*. At install the environment is `api.Environment(cr, api.SUPERUSER_ID, {})`
+(`odoo/modules/loading.py:404`) — empty context, so `env.company` resolves to the
+superuser's default company, not the company the admin was viewing when they clicked
+install. In a multi-company database, installing from company B seeds company A. Found in
+review of Task 1, before the hook had a caller.
+
+What the hook still buys over XML, which is the part that survives: it can *search* for
+the installing company's warehouse and bind the orderpoints and POS config to it
+(`stock.warehouse.orderpoint` carries `check_company=True` on product, location and
+warehouse, so a mismatch is a hard error, not a silent wrong row). XML cannot express
+that lookup at all. The company *target* is the same either way; the company
+*consistency* is only achievable in Python.
+
+Making the target selectable means either a setting read at install or a post-install
+wizard. Both are the G4 control-plane work this spec already defers under "out of scope",
+so the limitation is documented and deliberately not engineered around. The cost of being
+wrong is bounded: a multi-company tenant that installs from the wrong company gets the
+pack in the main company, and since every record is module-owned (ruling 5), uninstalling
+and reinstalling moves it cleanly. No data is lost.
+
 **2. No accounts, taxes or journals anywhere in the pack.** Not on product categories,
 not on products. Those xml_ids exist only once a specific `l10n_*` chart is installed, so
 hard-coding them makes the pack install in one country and fail in the rest. Everything
