@@ -199,6 +199,18 @@ class DeployStaticTests(unittest.TestCase):
         self.assertIn("createdb -U xforge -O afenda_app afenda", text)
         self.assertIn("--role=afenda_app", text)
 
+    def test_restore_refuses_before_dropping_if_the_app_role_is_missing(self):
+        # dropdb must never run before we know afenda_app exists: createdb
+        # -O afenda_app would fail after afenda is already gone, leaving the
+        # last-resort rollback in a destructive state.
+        text = (DEPLOY / "restore.sh").read_text(encoding="utf-8")
+        role_check = re.search(r"SELECT 1 FROM pg_roles WHERE rolname = 'afenda_app'", text)
+        self.assertIsNotNone(role_check, "restore.sh never checks pg_roles for afenda_app")
+        self.assertLess(role_check.start(), text.index("docker compose stop xforge"),
+                         "the role check must come before xforge is stopped")
+        self.assertLess(role_check.start(), text.index("dropdb"),
+                         "the role check must come before dropdb")
+
 
 class LandingSiteStaticTests(unittest.TestCase):
     """The nexuscanon.com landing page under deploy/site: one screen, black and

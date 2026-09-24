@@ -21,6 +21,12 @@ tar -tzf "$src/filestore.tgz" > /dev/null
 cd "$(dirname "$0")"
 docker compose exec -T db pg_restore -l < "$src/afenda.dump" > /dev/null
 
+# createdb -O afenda_app below needs the role to exist; check before
+# anything is stopped or dropped, so a host where migrate-db-role.sh never
+# reached its first psql step fails here, not after afenda is already gone.
+docker compose exec -T db psql -X -tA -U xforge -d postgres -c "SELECT 1 FROM pg_roles WHERE rolname = 'afenda_app'" | grep -qx 1 \
+    || { echo "restore: role afenda_app does not exist; run migrate-db-role.sh --yes (or start a fresh db volume) first; nothing was changed" >&2; exit 1; }
+
 # nginx resolved the old xforge address when it started; reload it so it
 # re-resolves the restarted container. A failed reload must not replace the
 # exit status of the script that is ending, hence `|| true`.
