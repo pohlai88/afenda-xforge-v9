@@ -53,7 +53,7 @@
 
 /* `--afb-mood` is registered so it can TRANSITION: an unregistered custom property
  * is a token stream and snaps. It is the colour the form borrows from the bear
- * (the aura behind the column, the focus ring, the card's top edge). The
+ * (the aura behind the column and the card's top edge). The
  * initial value is only the parse fallback; the base skin sets the real one. */
 @property --afb-mood {
     syntax: "<color>";
@@ -389,7 +389,7 @@
  * carry structure; shadow, radius, gradient and glass do not"), by the owner's
  * direction: the form must feel emotionally bonded to the bear, and a line
  * drawn between them was ruled out. So the mood reaches the form as ambient
- * colour - a soft radial aura behind the form column, the input focus ring,
+ * colour - a soft radial aura behind the form column,
  * and the card's top edge - and nowhere else. The aura is a pseudo-element of
  * the FORM column, never of the art (the art sits on bare paper; a surface
  * under it reads as a seam). The primary button stays Ledger Blue: it is the
@@ -417,12 +417,9 @@
     border-top: 2px solid color-mix(in oklch, var(--afb-mood) 70%, var(--bear-forest-800));
 }
 
-/* The ring. The border is the mood deepened toward forest-900 so it holds
- * contrast on the white card; the halo is the mood itself, softly. */
-.o_afenda_login .form-control:focus {
-    border-color: color-mix(in oklch, var(--afb-mood) 55%, var(--bear-forest-900));
-    box-shadow: 0 0 0 3px color-mix(in oklch, var(--afb-mood) 30%, transparent);
-}
+/* No focus ring here. The mood-tinted ring with its soft halo read as colour
+ * bloat (the owner's ruling), so focus is one crisp Ledger Blue token for
+ * every control, owned by login.scss ($afb-focus-ring). */
 
 /* The footnote ("Manage Databases", "AFENDA xForge") in gold, by the owner's
  * direction. ember-700 on paper is 6.48:1, ember-800 (hover) 9.08:1, both

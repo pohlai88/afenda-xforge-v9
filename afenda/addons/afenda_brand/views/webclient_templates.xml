@@ -43,17 +43,20 @@
              `.o_afenda_login .o_database_list` (0-2-0, later in the bundle), so
              login.scss owns the border. Adding `border` would make that SCSS
              line dead and its test assertion vacuous.
-             400px, not upstream's 300: the card now carries a heading, a
-             subheading, and two labelled fields whose right-hand affordances
-             ("Choose a user", "Reset Password") share the label row with the
-             label itself. At 300px those rows wrap.
+             The inline `max-width: 300px` is REMOVED (an empty attribute
+             deletes it), not overridden: an inline style outranks every rule
+             in the bundle, and the card's width is not one number any more.
+             login.scss sets 400px - the label rows carry right-hand
+             affordances ("Choose a user", "Reset Password") that wrap at
+             300px - and widens it on the two-row forms (signup, set a new
+             password), whose fields pair up so the page fits a laptop screen.
              `mx-auto` goes too, for the poster: the display headline above the
              card is set flush left, and a centred card under a left-set
              headline reads as two objects that missed each other. With the
              utility gone the card sits on the left edge of its measure, the
              same edge the headline starts on.-->
         <xpath expr="//div[contains(@t-attf-class, 'o_database_list')]" position="attributes">
-            <attribute name="style">max-width: 400px;</attribute>
+            <attribute name="style"/>
             <attribute name="t-attf-class" remove="bg-100 border-0 mx-auto" separator=" "/>
         </xpath>
         <!-- The tenant logo. It is not styled for the card any more: it is

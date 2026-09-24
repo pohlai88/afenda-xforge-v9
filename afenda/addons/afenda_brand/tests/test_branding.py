@@ -124,6 +124,17 @@ class TestBranding(HttpCase):
         self.assertTrue(card, "the login card rule is not in the frontend bundle")
         self.assertIn("#fff", card.group(1), "the login card is not white")
         self.assertIn(BRAND["hairline"].lower(), card.group(1), "the login card has no hairline border")
+        # The card's width lives here now: the view removes upstream's inline
+        # max-width, so without this rule the card stretches across the column.
+        self.assertRegex(card.group(1), r"max-width:\s*400px", "the login card has no width bound")
+        # A Sass error does not fail the page: Odoo logs it and keeps serving
+        # the LAST GOOD bundle, so every test above could pass against a stale
+        # stylesheet. These two lines exist only in the current login.scss -
+        # the one focus ring, and the height-bounded headline - so finding
+        # them proves this file compiled.
+        self.assertIn("0 0 0 1px #1e3a8a", css, "the focus ring is not the one Ledger Blue token")
+        self.assertIn("min(4vw, 6.5vh)", css.replace(" ,", ","),
+                      "login.scss did not compile into the bundle (a stale bundle is being served)")
 
     def _frontend_css(self, url="/web/login"):
         html = self.url_open(url).text

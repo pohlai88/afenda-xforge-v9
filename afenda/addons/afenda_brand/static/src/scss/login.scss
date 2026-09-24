@@ -30,6 +30,12 @@
 // direction of the page: art beside the form above it, art above the form
 // below it. Everything that must exist at every width - the art itself, its
 // left anchor, the card, the lockup - is declared unconditionally, outside it.
+// (A second, at 992px, only pairs the fields of the two tall forms.)
+//
+// The canonical screen is a LAPTOP: every auth page fits about 1280-1536 x
+// 640 of viewport (a 1366x768 screen less the browser's chrome) with no
+// scrollbar. So vertical sizes - control heights, card padding, the column's
+// gaps, the headline - are clamped on vh, and shrink with the height.
 //
 // Tokens come from primary_variables.scss, which web.assets_frontend pulls in
 // through web._assets_helpers -> web._assets_primary_variables.
@@ -40,6 +46,12 @@
 // card with a descendant combinator. So: the ground declaration stays the first
 // thing in this block, no second bare `.o_afenda_login` rule is emitted ahead of
 // it, and `.o_database_list` stays a descendant (never `>`) of it.
+
+// Inputs, the action and the passkey button share one height, down to 38px on
+// a short laptop viewport and up to 44px on a tall one.
+$afb-control-h: clamp(2.375rem, 6vh, 2.75rem);
+// The one focus ring: a crisp 1px of Ledger Blue outside a Ledger Blue border.
+$afb-focus-ring: 0 0 0 1px $o-brand-primary;
 
 .o_afenda_login {
     // Paper is not decoration here: the art and the form areas are both
@@ -59,6 +71,7 @@
     // it. Scoped to this one element, at two low-alpha stops of ink, with no
     // gradient and no glass anywhere else on the surface.
     .o_database_list {
+        max-width: 400px;  // was upstream's inline style, now removed by the view
         background: $white;
         border: 1px solid $border-color;  // hairline
         border-radius: $o-border-radius;
@@ -66,10 +79,47 @@
                     0 16px 40px rgba($o-main-text-color, .08);
     }
 
-    // Room to breathe on a 400px card. `.card-body` is a component class, not
-    // a utility, so a plain declaration outranks it.
+    // Room to breathe on a 400px card, shrinking with the viewport's HEIGHT:
+    // the canonical screen is a laptop (about 1366x650 of viewport once the
+    // browser's chrome is drawn), and every auth page must fit it without a
+    // scrollbar. `.card-body` is a component class, not a utility, so a plain
+    // declaration outranks it.
     .o_database_list .card-body {
-        padding: 2rem 1.75rem 1.75rem;
+        padding: clamp(1.25rem, 4vh, 2rem) 1.75rem clamp(1rem, 3.5vh, 1.75rem);
+    }
+
+    // The two-row forms. Signup (name, email, password, confirm) and "choose
+    // a new password" (password, confirm) are the tallest cards; stacked one
+    // field per row, signup alone is 280px taller than a laptop viewport. From
+    // 992px up their fields pair into two columns and the card widens to the
+    // headline's 34rem measure, so each pair is one row. Everything that is not
+    // a field (alerts, the button row) spans both columns; hidden inputs are
+    // display:none and take no cell.
+    @media (min-width: 992px) {
+        .o_database_list:has(.oe_signup_form),
+        .o_database_list:has(.oe_reset_password_form .field-confirm_password) {
+            max-width: 34rem;
+        }
+
+        .oe_signup_form,
+        .oe_reset_password_form:has(.field-confirm_password) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 1rem;
+
+            > * { grid-column: 1 / -1; }
+
+            > .field-name,
+            > .field-login,
+            > .field-password,
+            > .field-confirm_password { grid-column: auto; }
+
+            // Upstream's `pt-2` on the password field (auth_signup.fields)
+            // separates it from the field above in a single column. Paired, it
+            // only makes the password row 8px taller than the confirm field
+            // beside it. Bootstrap utilities are !important, so this is too.
+            > .field-password { padding-top: 0 !important; }
+        }
     }
 
     // ---------------------------------------------------------------------
@@ -84,13 +134,18 @@
         display: flex;
         flex-direction: column;
         gap: .5rem;
-        margin-bottom: clamp(1.5rem, 4vh, 2.25rem);
+        margin-bottom: clamp(1rem, 3.5vh, 2.25rem);
     }
 
     .o_afenda_auth_title {
         margin: 0;
         font-family: "Source Serif 4", Georgia, serif;
-        font-size: clamp(2.5rem, 4vw, 3.75rem);
+        // Bounded by the SMALLER of width and height, so a short laptop
+        // viewport gets a headline that still fits one line and one screen.
+        // `unquote`: libsass evaluates a bare min() as its own function and
+        // fails on mixed vw/vh ("Incompatible units"), which silently keeps the
+        // last good bundle; quoted, it passes through to CSS as written.
+        font-size: clamp(2rem, unquote("min(4vw, 6.5vh)"), 3.75rem);
         font-weight: 600;
         line-height: 1.05;
         letter-spacing: -.025em;
@@ -124,7 +179,7 @@
     }
 
     .form-control {
-        min-height: 2.75rem;
+        min-height: $afb-control-h;
         padding: .5rem .75rem;
         border: 1px solid $border-color;  // hairline
         border-radius: $o-border-radius;
@@ -136,12 +191,15 @@
             color: rgba($o-brand-secondary, .7);  // graphite, receded
         }
 
-        // State, not decoration: the ring is the one thing on this page that
-        // says "here". Bootstrap's own :focus shadow is derived from $primary
-        // already; this tightens it to 3px and drops the spread.
+        // Focus is one token, drawn crisp: the border turns Ledger Blue and a
+        // 1px ring of the same blue sits outside it - a clean 2px edge, no
+        // blur, no tinted halo, no mood colour (the owner's ruling: the soft
+        // coloured glow read as bloat). Every focusable control on the page
+        // uses this same ring ($afb-focus-ring).
         &:focus {
             border-color: $o-brand-primary;  // Ledger Blue
-            box-shadow: 0 0 0 3px rgba($o-brand-primary, .12);
+            box-shadow: $afb-focus-ring;
+            outline: none;
         }
 
         // Chrome paints an autofilled input its own yellow and ignores
@@ -157,8 +215,7 @@
         }
 
         &:-webkit-autofill:focus {
-            box-shadow: 0 0 0 1000px $white inset,
-                        0 0 0 3px rgba($o-brand-primary, .12);
+            box-shadow: 0 0 0 1000px $white inset, $afb-focus-ring;
         }
     }
 
@@ -174,7 +231,8 @@
 
         &:focus-visible {
             outline: none;
-            box-shadow: 0 0 0 3px rgba($o-brand-primary, .12);
+            border-color: $o-brand-primary !important;  // over its `border` utility
+            box-shadow: $afb-focus-ring;
             position: relative;  // the ring must not be painted under the input
         }
     }
@@ -212,7 +270,7 @@
     // "Log in as superuser" and "Don't have an account?" sit under the action,
     // not beside a label, so they get their own breathing room.
     .oe_login_buttons .btn-link {
-        margin-top: .75rem;
+        margin-top: clamp(.25rem, 1vh, .75rem);
     }
 
     // One action per screen: solid, full width (upstream already sets d-grid on
@@ -224,10 +282,19 @@
         align-items: center;
         justify-content: center;
         gap: .5rem;
-        min-height: 2.75rem;
+        min-height: $afb-control-h;
         font-size: .9375rem;
         font-weight: 600;
         border-radius: $o-border-radius;
+
+        // The action is already Ledger Blue, so its ring stands off it: a
+        // 2px outline of the same token, 2px clear of the button - replacing
+        // Bootstrap's blurred translucent focus shadow.
+        &:focus-visible {
+            box-shadow: none;
+            outline: 2px solid $o-brand-primary;
+            outline-offset: 2px;
+        }
     }
 
     // The arrow is a glyph, not an icon button: it takes the line's colour and
@@ -241,7 +308,7 @@
     // Second-tier authentication: the passkey / OAuth block under the action.
     // ---------------------------------------------------------------------
     .o_login_auth {
-        margin-top: 1.5rem;
+        margin-top: clamp(1rem, 2.5vh, 1.5rem);
 
         // The divider. webclient_templates.xml replaces upstream's utility-
         // laden <em> with this one, so the rule can be drawn as two hairlines
@@ -250,7 +317,7 @@
             display: flex;
             align-items: center;
             gap: .75rem;
-            margin-bottom: 1rem;
+            margin-bottom: clamp(.5rem, 1.5vh, 1rem);
             font-style: normal;
             font-size: .6875rem;
             font-weight: 500;
@@ -270,7 +337,7 @@
         // here means the action's geometry with none of its weight — no fill,
         // one hairline, ink text.
         .list-group-item {
-            min-height: 2.75rem;
+            min-height: $afb-control-h;
             background: $white;
             border: 1px solid $border-color;  // hairline
             border-radius: $o-border-radius;
@@ -290,7 +357,7 @@
             &:focus-visible {
                 outline: none;
                 border-color: $o-brand-primary;
-                box-shadow: 0 0 0 3px rgba($o-brand-primary, .12);
+                box-shadow: $afb-focus-ring;
             }
 
             .fa { color: $o-brand-secondary; }  // graphite
@@ -418,11 +485,12 @@
     // instead - tight inside a group, wide between groups, widest where the
     // subject changes:
     //   lockup + tagline (identity) ... 0.375rem, inside the group
-    //   identity -> headline ........... clamp(2rem, 6vh, 4.5rem), the largest
+    //   identity -> headline ........... clamp(1.25rem, 5vh, 4.5rem), the largest
     //   headline + subline (message) ... 0.5rem, inside the group
-    //   message -> card ................ clamp(1.5rem, 4vh, 2.25rem)
+    //   message -> card ................ clamp(1rem, 3.5vh, 2.25rem)
     //   card -> footnote ............... 0.75rem: the footnote belongs to the card
-    // Sized so a 1280x720 screen shows the whole poster without scrolling.
+    // Every step is on vh, so the whole poster fits a laptop viewport (640px
+    // tall) without scrolling, and the order of the steps holds at any height.
     // The auto margins under "Vertical placement" add free space on top of
     // these minima (flex margins never collapse), so the order holds at every
     // height.
@@ -432,7 +500,7 @@
         flex-direction: column;
         gap: 0;
         min-width: 0;
-        padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 3vw, 3rem) clamp(1.5rem, 4vw, 2rem);
+        padding: clamp(1rem, 3vh, 2.5rem) clamp(1rem, 3vw, 3rem) clamp(1rem, 3vh, 2rem);
 
         @media (min-width: 768px) {
             flex: 1 1 45%;
@@ -489,7 +557,7 @@
         flex-direction: column;
         align-items: flex-end;
         gap: 0;  // the lockup/line spacing is optical, set on the two below
-        margin-bottom: clamp(2rem, 6vh, 4.5rem);  // identity -> message: the largest step
+        margin-bottom: clamp(1.25rem, 5vh, 4.5rem);  // identity -> message: the largest step
         text-align: right;
         --afb-lockup-w: clamp(76px, 18vw, 104px);
     }
