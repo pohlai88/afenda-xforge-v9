@@ -184,6 +184,21 @@ class DeployStaticTests(unittest.TestCase):
         used = re.findall(r"^\s+image:\s*(postgres:\S+)\s*$", workflow, re.MULTILINE)
         self.assertEqual(used, [pinned])
 
+    def test_app_connects_as_the_least_privilege_role(self):
+        compose = (DEPLOY / "compose.yaml").read_text(encoding="utf-8")
+        env = re.search(r"^x-xforge-env: &xforge-env\n((?:  .*\n)+)", compose, re.MULTILINE).group(1)
+        self.assertIn("PGUSER: afenda_app", env)
+        self.assertIn("PGPASSWORD_FILE: /run/secrets/db_app_password", env)
+        self.assertIn("./db-init:/docker-entrypoint-initdb.d:ro", compose)
+        self.assertRegex(compose, r"db_app_password:\n\s+file: \./secrets/db_app_password")
+        # The superuser stays the db container's bootstrap role only.
+        self.assertIn("POSTGRES_USER: xforge", compose)
+
+    def test_restore_recreates_objects_as_the_app_role(self):
+        text = (DEPLOY / "restore.sh").read_text(encoding="utf-8")
+        self.assertIn("createdb -U xforge -O afenda_app afenda", text)
+        self.assertIn("--role=afenda_app", text)
+
 
 class LandingSiteStaticTests(unittest.TestCase):
     """The nexuscanon.com landing page under deploy/site: one screen, black and

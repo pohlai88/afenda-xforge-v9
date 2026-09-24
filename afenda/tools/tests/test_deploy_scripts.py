@@ -303,6 +303,15 @@ class RedeployTests(unittest.TestCase):
 
 
 @unittest.skipUnless(BASH, "needs bash")
+class MigrateDbRoleTests(unittest.TestCase):
+    def test_refuses_without_yes(self):
+        for args in ([], ["--rollback"], ["--yes", "extra"]):
+            proc = subprocess.run([BASH, str(DEPLOY / "migrate-db-role.sh"), *args],
+                                  capture_output=True, text=True, timeout=30)
+            self.assertEqual(proc.returncode, 2, (args, proc.stderr))
+
+
+@unittest.skipUnless(BASH, "needs bash")
 class DeployScriptsParseTests(unittest.TestCase):
     def test_every_deploy_script_parses(self):
         scripts = sorted(p for p in DEPLOY.rglob("*.sh") if "secrets" not in p.parts)

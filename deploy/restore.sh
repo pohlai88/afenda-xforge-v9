@@ -33,8 +33,8 @@ trap restart_xforge EXIT
 
 echo "restore: replacing database afenda"
 docker compose exec -T db dropdb -U xforge --if-exists --force afenda
-docker compose exec -T db createdb -U xforge -O xforge afenda
-docker compose exec -T db pg_restore -U xforge -d afenda --no-owner --role=xforge < "$src/afenda.dump"
+docker compose exec -T db createdb -U xforge -O afenda_app afenda
+docker compose exec -T db pg_restore -U xforge -d afenda --no-owner --role=afenda_app < "$src/afenda.dump"
 
 echo "restore: replacing filestore/afenda"
 docker compose run --rm --no-deps -T --entrypoint sh xforge -c \

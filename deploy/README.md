@@ -338,6 +338,32 @@ rclone copy spaces:afenda-backups-sgp1/<stamp> /var/backups/afenda/<stamp>
 client) and `filestore.tgz` (`filestore/afenda` from the `xforge-data` volume),
 both taken while `xforge` is stopped so they match.
 
+## Database roles
+
+Two PostgreSQL roles: `xforge` is the db container's bootstrap superuser,
+used only by `backup.sh`, `restore.sh` and `migrate-db-role.sh`. `afenda_app`
+is what `init` and the server connect as (`PGUSER`/`PGPASSWORD_FILE` in
+`compose.yaml`'s `x-xforge-env`), and it owns the `afenda` database and every
+object in it. `CREATEDB` stays on `afenda_app` because a fresh host's first
+`init` run creates the database itself. On an empty volume,
+`db-init/10-afenda-app-role.sh` creates the role on the db container's first
+start; an existing host moves ownership across with `migrate-db-role.sh`.
+
+### Moving an existing host
+
+```bash
+prev=$(git -C /srv/afenda rev-parse HEAD)   # record it, for rollback
+git -C /srv/afenda checkout <new-commit-or-tag>
+./make-secrets.sh                            # adds only db_app_password
+docker compose up -d db
+./migrate-db-role.sh --yes                   # ends "every object in afenda is owned by afenda_app"
+./redeploy.sh
+```
+
+Rollback is `./redeploy.sh "$prev"` only: the app goes back to connecting as
+the superuser `xforge`, which can use every object whatever its owner, so
+ownership stays with `afenda_app` and nothing further needs to move.
+
 ## Notes
 
 - `db_name = afenda` and no `dbfilter`: with a filter set, a restored database

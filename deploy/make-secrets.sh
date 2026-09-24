@@ -5,6 +5,7 @@
 #
 # Writes, only for files that do not exist yet:
 #   db_password            PostgreSQL password of the xforge role
+#   db_app_password        PostgreSQL password of the afenda_app role the app connects as
 #   admin_password         password of the `admin` login, set by `db init`
 #   master_password        the database-manager master password (kept for the
 #                          operator; never mounted into a container)
@@ -44,6 +45,7 @@ write_new() {  # name value
 }
 
 write_new db_password "$(random)" || true
+write_new db_app_password "$(random)" || true
 write_new admin_password "$(random)" || true
 
 if [ ! -e "$dir/master_password_hash" ]; then

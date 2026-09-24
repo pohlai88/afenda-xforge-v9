@@ -27,8 +27,8 @@ x-logging: &logging
 
 x-xforge-env: &xforge-env
   PGHOST: db
-  PGUSER: xforge
-  PGPASSWORD_FILE: /run/secrets/db_password
+  PGUSER: afenda_app
+  PGPASSWORD_FILE: /run/secrets/db_app_password
   ADMIN_PASSWD_HASH_FILE: /run/secrets/master_password_hash
 
 services:
@@ -42,8 +42,10 @@ services:
       POSTGRES_PASSWORD_FILE: /run/secrets/db_password
     secrets:
       - db_password
+      - db_app_password
     volumes:
       - db-data:/var/lib/postgresql/data
+      - ./db-init:/docker-entrypoint-initdb.d:ro
     healthcheck:
       # TCP, not the socket: during first init the image's temporary server
       # listens on the Unix socket only, and would report ready too early.
@@ -64,7 +66,7 @@ services:
       ADMIN_PASSWORD_FILE: /run/secrets/admin_password
       PUBLIC_URL: ${PUBLIC_URL:-http://localhost:8080}
     secrets:
-      - db_password
+      - db_app_password
       - master_password_hash
       - admin_password
     volumes:
@@ -84,7 +86,7 @@ services:
     environment:
       <<: *xforge-env
     secrets:
-      - db_password
+      - db_app_password
       - master_password_hash
     volumes:
       - xforge-data:/var/lib/afenda
@@ -137,6 +139,8 @@ volumes:
 secrets:
   db_password:
     file: ./secrets/db_password
+  db_app_password:
+    file: ./secrets/db_app_password
   master_password_hash:
     file: ./secrets/master_password_hash
   admin_password:
