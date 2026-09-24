@@ -378,7 +378,11 @@ _PUR_ARROW = "M112 26 H144 V96 H176 L128 148 L80 96 H112 Z"
 _PUR_SEAM = _bar(70, 186, 160, 12)
 
 _POS_BODY = _rrect(48, 92, 208, 230, 14)
-_POS_SLIP = "M78 20 H178 V96 H162 L148 84 L134 96 L120 84 L106 96 L92 84 L78 96 Z"
+# Taller and narrower than the terminal, so the profile is a box wearing a
+# strip rather than a slightly taller box. Against Accounting at 16px the
+# wide version left a shape difference of 0.059 - both reduced to a rounded
+# rectangle with white rules.
+_POS_SLIP = "M94 14 H166 V98 H152 L140 86 L128 98 L116 86 L104 98 L94 88 Z"
 _POS_KEYS = _bars([(76, 124, 140, 16), (140, 180, 140, 16), (76, 124, 172, 16), (140, 180, 172, 16)])
 
 _BAG_BODY = _rrect(44, 92, 212, 232, 16)
@@ -433,8 +437,10 @@ _ATT_BODY = _dome(108, 62, 110, 206)
 _ATT_CLOCK = _circle(196, 182, 48)
 _ATT_HANDS = "M190 146 H202 V180 H232 V192 H190 Z"
 
-_EVT_BODY = ("M36 60 H220 V108 Q196 108 196 130 Q196 152 220 152 V200 H36 "
-             "V152 Q60 152 60 130 Q60 108 36 108 Z")
+# Deeper bites. At 24 units the waist vanished by 16px and the ticket read as
+# the same rounded rectangle as Contacts and the envelope.
+_EVT_BODY = ("M36 60 H220 V104 Q182 104 182 130 Q182 156 220 156 V200 H36 "
+             "V156 Q74 156 74 130 Q74 104 36 104 Z")
 _EVT_STUB = "M150 60 H162 V200 H150 Z"
 _EVT_MARKS = _bars([(72, 132, 106, 12), (72, 112, 142, 12)])
 
@@ -465,8 +471,12 @@ _SMS_BUBBLE = _bubble(24, 58, 170, 176, 26, "M56 172 L56 218 L102 180 Z")
 _SMS_BEAM = ("M196 60 Q230 108 196 156 L214 172 Q256 110 214 44 Z "
              "M178 88 Q196 108 178 128 L194 142 Q220 108 194 74 Z")
 
-_ENV_BODY = _rrect(28, 68, 228, 200, 16)
-_ENV_FLAP = "M28 84 L128 152 L228 84 V106 L128 174 L28 106 Z"
+# The flap was interior decoration on a plain rounded rectangle, which is the
+# most crowded silhouette in the family. Cutting the V into the top EDGE makes
+# the envelope an envelope from its outline alone.
+_ENV_BODY = ("M44 64 L128 132 L212 64 Q228 64 228 80 V186 Q228 202 212 202 "
+             "H44 Q28 202 28 186 V80 Q28 64 44 64 Z")
+_ENV_FLAP = "M44 64 L128 132 L212 64 L212 96 L128 164 L44 96 Z"
 
 # --- Digital and Knowledge -------------------------------------------------
 _WEB_FRAME = _rrect(26, 48, 230, 208, 16)
@@ -474,8 +484,11 @@ _WEB_BAR = "M26 64 H230 V96 H26 Z"
 _WEB_DOTS = (_circle(50, 80, 9) + " " + _circle(76, 80, 9) + " " + _circle(102, 80, 9))
 _WEB_GLOBE = _circle(128, 152, 42)
 
-_BOOK_LEFT = "M28 64 Q78 46 124 64 V202 Q78 184 28 202 Z"
-_BOOK_RIGHT = "M132 64 Q178 46 228 64 V202 Q178 184 132 202 Z"
+# The gutter was 8 units - half a pixel at 16px - so the book read as one slab.
+# Widened, and each leaf now lifts at the spine, which is what makes an open
+# book an open book in outline.
+_BOOK_LEFT = "M24 70 Q74 44 118 72 V206 Q74 180 24 206 Z"
+_BOOK_RIGHT = "M138 72 Q182 44 232 70 V206 Q182 180 138 206 Z"
 _BOOK_PLAY = "M110 108 L172 140 L110 172 Z"
 
 # --- Equipment -------------------------------------------------------------
