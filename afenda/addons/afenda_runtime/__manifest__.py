@@ -2,7 +2,11 @@
 {
     "name": "AFENDA xForge Runtime",
     "summary": "Null adapters for the services Odoo hosts: nothing leaves the deployment",
-    "version": "19.0.1.2.0",
+    # 19.0.1.2.1: /request-access's back link and the controller's unused
+    # `product` value; a view and a controller only, no migration. Bumped so
+    # `module upgrade --outdated` selects this module on its own, not only
+    # when afenda_brand's upgrade happens to pull it in.
+    "version": "19.0.1.2.1",
     "category": "Hidden/Tools",
     "author": "AFENDA",
     "website": "https://www.nexuscanon.com",

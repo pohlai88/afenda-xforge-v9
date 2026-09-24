@@ -14,7 +14,10 @@
     # `module upgrade --outdated`, which selects modules by comparing manifest
     # version to installed version, so without it none of this reaches a
     # deployed database. Declared in _VERSIONS_WITHOUT_MIGRATION.
-    "version": "19.0.1.0.6",
+    # 19.0.1.0.7: the auth back links stop carrying reset/signup tokens, back
+    # before the action in the tab order, icons hidden from assistive tech.
+    # Views and SCSS only, no migration.
+    "version": "19.0.1.0.7",
     "category": "Hidden/Tools",
     "author": "AFENDA",
     "website": "https://www.nexuscanon.com",
