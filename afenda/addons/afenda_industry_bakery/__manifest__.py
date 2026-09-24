@@ -26,14 +26,17 @@
     # data records of models that already carry their own ACLs. The absence is
     # deliberate, not forgotten -- same contract as
     # afenda_industry_base/__manifest__.py:12-14.
-    # Ordered: a file that references an XML id comes after the file defining it.
-    # Only the two files that exist as of this task are listed. Odoo resolves
-    # every `data` path at install and raises on a missing one, so a manifest
-    # naming data/mrp_bom.xml (Task 3) or demo/bakery_demo.xml (Task 6) would
-    # fail this task's own verification run before reaching an assertion. Each
-    # later task adds its line in the commit that creates the file.
+    # Ordered: a file that references an XML id comes after the file defining it,
+    # which is why data/mrp_bom.xml follows data/product_template.xml -- every
+    # BoM header names a product template by ref.
+    # Only the files that exist as of this task are listed. Odoo resolves every
+    # `data` path at install and raises on a missing one, so a manifest naming
+    # demo/bakery_demo.xml (Task 6) would fail this task's own verification run
+    # before reaching an assertion. Each later task adds its line in the commit
+    # that creates the file.
     "data": [
         "data/product_category.xml",
         "data/product_template.xml",
+        "data/mrp_bom.xml",
     ],
 }

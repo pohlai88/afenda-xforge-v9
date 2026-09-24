@@ -98,3 +98,28 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
             raws.filtered(lambda p: p.expiration_time <= 0).mapped("name"),
             "use_expiration_date with a zero expiration_time expires nothing",
         )
+
+    def test_boms_resolve_components(self):
+        """Every finished good is manufacturable, out of this pack's own raw materials.
+
+        The headers ship in data/mrp_bom.xml; the lines cannot. mrp.bom.line
+        .product_id is a product.product (addons/mrp/models/mrp_bom.py:684) and
+        the variant Odoo auto-creates for a template seeded by XML carries no
+        XMLID of its own, so no `ref=` can name it. The lines are therefore
+        seeded in Python, where env.ref(...).product_variant_id resolves.
+        """
+        boms = self.env["mrp.bom"].search(
+            [("product_tmpl_id.categ_id", "=", self.env.ref(f"{MODULE}.categ_finished").id)]
+        )
+        self.assertEqual(len(boms), 12, "one bill of material per finished good")
+        raw = self.env.ref(f"{MODULE}.categ_raw")
+        for bom in boms:
+            self.assertTrue(bom.bom_line_ids, f"{bom.display_name} has no components")
+            for line in bom.bom_line_ids:
+                self.assertEqual(
+                    line.product_id.categ_id,
+                    raw,
+                    f"{bom.display_name} consumes {line.product_id.display_name}, "
+                    f"which is not a raw material",
+                )
+                self.assertGreater(line.product_qty, 0.0)
