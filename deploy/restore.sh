@@ -48,4 +48,12 @@ docker compose run --rm --no-deps -T --entrypoint sh xforge -c \
     'set -e; mkdir -p /var/lib/afenda/filestore; rm -rf /var/lib/afenda/filestore/afenda; tar -C /var/lib/afenda/filestore -xzf -' \
     < "$src/filestore.tgz"
 
+# restart_xforge (the EXIT trap) brings back only the existing xforge
+# container by id, so init's depends_on no longer runs it for us. Run init
+# here instead: it skips `db init` on this now-existing database but still
+# reapplies this host's web.base.url/report.url and installs or upgrades
+# outdated modules, which a restored dump from another host must get.
+echo "restore: rerunning init to reapply this host's parameters"
+docker compose run --rm -T init
+
 echo "restore: done from $src"

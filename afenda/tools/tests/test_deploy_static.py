@@ -199,6 +199,22 @@ class DeployStaticTests(unittest.TestCase):
         self.assertIn("createdb -U xforge -O afenda_app afenda", text)
         self.assertIn("--role=afenda_app", text)
 
+    def test_restore_reruns_init_before_restarting_xforge(self):
+        # Restarting xforge by container id (not `compose start`) no longer
+        # brings init along, so a restore from another host's backup would
+        # otherwise keep that host's web.base.url and outdated modules.
+        # restore.sh must run init itself, after the data lands and before
+        # the script ends (the trap restarts xforge on EXIT).
+        text = (DEPLOY / "restore.sh").read_text(encoding="utf-8")
+        rerun = text.find("docker compose run --rm -T init")
+        self.assertNotEqual(rerun, -1, "restore.sh never reruns init")
+        self.assertLess(text.index("pg_restore -U xforge -d afenda"), rerun,
+                         "init must rerun after the database is restored")
+        self.assertLess(text.index("tar -C /var/lib/afenda/filestore -xzf -"), rerun,
+                         "init must rerun after the filestore is restored")
+        self.assertLess(rerun, text.rindex("restore: done"),
+                         "init must rerun before the script ends")
+
     def test_restore_refuses_before_dropping_if_the_app_role_is_missing(self):
         # dropdb must never run before we know afenda_app exists: createdb
         # -O afenda_app would fail after afenda is already gone, leaving the
