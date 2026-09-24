@@ -617,6 +617,19 @@ Append to `TestBakeryPack` in `tests/test_pack.py`:
                     f"which is not a raw material",
                 )
                 self.assertGreater(line.product_qty, 0.0)
+                # Upper bound, and it is the point of this assertion rather than
+                # decoration. The recipe table is written in grams and divided by
+                # 1000 when seeded, so the largest component in the pack is 700 g
+                # of flour = 0.7, and the largest unit component is 8 eggs. Read
+                # the table as "the raw's own unit" instead and a loaf consumes
+                # 600 kg of flour. Nothing else in the plan would notice: no other
+                # assertion looks at component magnitude at all.
+                self.assertLess(
+                    line.product_qty, 10.0,
+                    f"{bom.display_name} consumes {line.product_qty} "
+                    f"{line.product_uom_id.name} of {line.product_id.display_name} -- "
+                    f"grams were probably seeded without the kilogram conversion",
+                )
 ```
 
 - [ ] **Step 2: Run it and verify it fails**
@@ -743,7 +756,13 @@ from odoo.addons.afenda_industry_base.seed import load_company_records
 
 MODULE = "afenda_industry_bakery"
 
-# (bom xmlid suffix, [(raw product xmlid suffix, quantity in the raw's own UoM)])
+# (bom xmlid suffix, [(raw product xmlid suffix, quantity in GRAMS)])
+#
+# GRAMS, not the raw's own unit. Every raw but eggs is stocked in kilograms, so
+# these numbers are divided by 1000 in _seed_bom_lines below; eggs are stocked in
+# Units and pass through unchanged. Read this table as "the raw's own UoM" and a
+# sourdough loaf consumes 600 KILOGRAMS of flour -- a thousandfold error that no
+# test in this plan would catch, because nothing asserts component magnitudes.
 RECIPES = [
     ("bom_sourdough", [("product_flour_t55", 600), ("product_salt", 12),
                        ("product_yeast", 8), ("product_milk", 30)]),
@@ -823,14 +842,30 @@ def _seed_bom_lines(env):
 
 
 def _seed_pos(env):
-    """One counter, two POS categories, against env.company."""
-    load_company_records(env, MODULE, "pos.category", [
+    """One counter, two POS categories, and the finished goods put on them.
+
+    Task 2 sets `available_in_pos` on the twelve finished goods, which is what
+    makes them sellable at all (it defaults to False --
+    addons/point_of_sale/models/product_template.py:24). Their POS *category* has
+    to be assigned here instead, because the categories do not exist until this
+    hook creates them.
+    """
+    bread, pastry = load_company_records(env, MODULE, "pos.category", [
         ("pos_categ_bread", {"name": "Bread"}),
         ("pos_categ_pastry", {"name": "Pastry"}),
     ])
     load_company_records(env, MODULE, "pos.config", [
         ("pos_config_counter", {"name": "Bakery Counter"}),
     ])
+    loaves = ("product_sourdough", "product_baguette", "product_wholemeal",
+              "product_focaccia", "product_brioche")
+    for suffix in loaves:
+        env.ref(f"{MODULE}.{suffix}").pos_categ_ids = [(6, 0, bread.ids)]
+    pastries = ("product_croissant", "product_pain_choc", "product_almond_croissant",
+                "product_cinnamon_roll", "product_eclair", "product_fruit_tart",
+                "product_birthday_cake")
+    for suffix in pastries:
+        env.ref(f"{MODULE}.{suffix}").pos_categ_ids = [(6, 0, pastry.ids)]
 
 
 def _seed_orderpoints(env):

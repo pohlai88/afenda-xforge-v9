@@ -152,6 +152,23 @@ wrong is bounded: a multi-company tenant that installs from the wrong company ge
 pack in the main company, and since every record is module-owned (ruling 5), uninstalling
 and reinstalling moves it cleanly. No data is lost.
 
+**The same exposure exists in the `data/` XML, and this ruling previously read as though
+it did not.** `product.template.standard_price` is a non-stored compute whose inverse
+`_set_standard_price` writes `product.product.standard_price`
+(`addons/product/models/product_template.py:100-106,312-318`), and that field is
+`company_dependent=True` (`addons/product/models/product_product.py:62`). So the thirteen
+costs in the catalogue land in the per-company store for whichever company `env.company`
+resolves to at load — the same limitation as above, reached through XML rather than the
+hook. In a two-company tenant, company B sees a flour cost of 0.00, and every MO
+valuation, replenishment cost and margin figure downstream reads zero **with no error
+anywhere**.
+
+Ruling 5's static guard cannot catch it either: `test_data_xml_sets_no_company_id` scans
+for the *field name* `company_id`, and `standard_price` does not contain it. Found in
+review of Task 2. Accepted on the same terms as the hook limitation — bounded, now
+documented, and properly answered by the G4 control plane rather than by a per-company
+XML scheme Odoo's data loader has no way to express.
+
 **2. No accounts, taxes or journals anywhere in the pack.** Not on product categories,
 not on products. Those xml_ids exist only once a specific `l10n_*` chart is installed, so
 hard-coding them makes the pack install in one country and fail in the rest. Everything
