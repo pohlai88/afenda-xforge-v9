@@ -228,7 +228,11 @@
     .o_afenda_auth_plate {
         display: flex;
         align-items: center;
-        padding: .75rem 1rem;
+        // Tight, even inset. The plate is a ground for the artwork, not a
+        // frame around it: enough that the mark never touches the edge and
+        // reads as cropped, and no more. The mark itself carries no padding --
+        // it is trimmed to its own bounding box before it is stored.
+        padding: .5rem;
         background: $o-webclient-background-color;  // paper
         border-radius: $o-border-radius;
     }
@@ -248,14 +252,14 @@
     // the badge's wordmark illegible. A height bound is the only cap that
     // treats a square badge and a wide lockup alike.
     //
-    // 64px is a downscale for anything logo_web can return (its height is at
+    // 72px is a downscale for anything logo_web can return (its height is at
     // most the artwork's own), so nothing is ever upscaled.
     .o_afenda_auth_tenant {
         display: block;
         width: auto;
         height: auto;
         max-width: 180px;   // logo_web's own width ceiling; never exceeded
-        max-height: 64px;
+        max-height: 72px;
     }
 
     // Ours: the lockup with the product line under it. Deliberately the

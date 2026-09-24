@@ -255,7 +255,7 @@ class TestBranding(HttpCase):
         # illegible -- so the box, not the bound, was the bug.
         # Asserted as capping properties: `min-width: 180px` contains "180px"
         # too and would mean the opposite of a cap.
-        for prop, bound in (("max-width", "180px"), ("max-height", "64px")):
+        for prop, bound in (("max-width", "180px"), ("max-height", "72px")):
             self.assertRegex(
                 cap.group(1), rf"{prop}:\s*{re.escape(bound)}",
                 f"the tenant logo is not bounded by {prop}",
