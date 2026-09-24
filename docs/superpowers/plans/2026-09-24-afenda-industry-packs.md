@@ -25,6 +25,7 @@
 - **No `company_id`, no `property_account_*`, no `taxes_id`/`supplier_taxes_id`, no `journal_id`, no `ref="l10n_*"` anywhere under `data/`.** Tasks 5 enforces this with static tests; violating it fails the suite.
 - Test classes with `test_` methods must reach an Odoo case class **by a base named in the same file**. Use `class X(IndustryPackMixin, TransactionCase)`. See `afenda/addons/afenda_brand/tests/test_branding.py:1537-1553`.
 - **Every industry pack test class carries `@tagged("post_install", "-at_install")`** (import `tagged` from `odoo.tests`), with a comment saying why. Found by Task 1's implementer: `odoo/modules/loading.py:148,282` runs a module's `at_install` suite immediately after that module loads, so a thin-dependency module runs at graph depth 1 — before `account` loads — and `res.partner` then lacks `autopost_bills`, whose column is NOT NULL (`addons/account/models/partner.py:610`). The suite then passes under `-i` and errors under `-u`, which is the documented command in `.claude/odoo-agent-rules.md:186-190`. A pack that only passes when freshly installed is a trap for every later session and splits CI from local runs.
+- **`-i <module>` collects nothing on a database where that module is already installed.** `odoo/service/server.py:1598-1599` builds the post-install module list from `registry.updated_modules`, and `-i` on an installed module updates nothing, so the suite selects nothing and prints `0 tests` — which in this quiet config is indistinguishable from success at a glance. Found by Task 1's implementer. Consequences: on a developer machine it is `-u` that runs a suite; and any task whose assertions depend on **install-time** behaviour (anything seeded by `post_init_hook`) must be verified on a **fresh throwaway database**, not on the shared `afenda` one. Create it on `127.0.0.1:5444`, install there, drop it and its filestore afterwards, and never uninstall or otherwise mutate the shared `afenda` database — other sessions are using it.
 - **The authoritative test count is the result line** (`<module>: N tests`), not the per-class stats line. `setUpClass`/`tearDownClass` get their own stat ids (`odoo/tests/result.py:117-120`, aggregated `:253-262`), so the stats line reads higher — 5 where the result line says 3. Quote the result line; a CI floor set from the stats line is wrong.
 - `tests/__init__.py` must import each `test_*.py`, or the file never loads.
 - Verification reads the **printed count**, never the exit code. A green run that collected nothing prints nothing and exits 0.
@@ -858,17 +859,24 @@ def post_init_hook(env):
     _seed_orderpoints(env)
 ```
 
-- [ ] **Step 4: Reinstall and verify the tests pass**
+- [ ] **Step 4: Verify on a fresh database — this task cannot be verified on the shared one**
 
-The hook runs at install, not upgrade, so use `-i` after uninstalling, or drop and recreate the pack. Run:
+`post_init_hook` runs at install only, and `-i` against the shared `afenda` database (where the pack is already installed from Task 2) updates nothing and therefore collects nothing — `0 tests`, which reads like success. Three of this task's assertions are about records the hook creates, so they must be exercised on a database where the install genuinely happens. Do **not** uninstall the pack from the shared database; other sessions are using it.
 
 ```bash
+DB=afenda_t4_scratch
+createdb -h 127.0.0.1 -p 5444 -U odoo "$DB"
 MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
-  -c afenda/odoo.conf -d afenda -i afenda_industry_bakery --test-enable \
-  --test-tags "/afenda_industry_bakery" --stop-after-init --http-port 8179
+  -c afenda/odoo.conf -d "$DB" -i afenda_industry_bakery --test-enable \
+  --test-tags "/afenda_industry_bakery" --stop-after-init --http-port 8179 \
+  --without-demo=all
 ```
 
-Expected: `afenda_industry_bakery: 6 tests`, `0 failed, 0 error(s)`. If `test_post_init_records_are_module_owned` fails, a record was created with `create()` instead of `load_company_records` — fix the hook, not the test.
+Expected: `afenda_industry_bakery: 6 tests`, `0 failed, 0 error(s)`. A `0 tests` line means the module was already installed there — use a database name that does not exist yet.
+
+Afterwards drop the scratch database **and its filestore** (`filestore/<db>` under Odoo's data directory, path from `odoo.tools.config`); a leftover filestore makes later attachment-backed failures read as code regressions.
+
+If `test_post_init_records_are_module_owned` fails, a record was created with `create()` instead of `load_company_records` — fix the hook, not the test.
 
 - [ ] **Step 5: Commit**
 
@@ -1024,6 +1032,8 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
 ```
 
 Expected: `afenda_industry_base: 3 tests` and `afenda_industry_bakery: 9 tests`, 12 in total, `0 failed`.
+
+Then run the same two modules **once on a fresh throwaway database** with `-i` and `--without-demo=all`, because that is what CI does (the orchestrator session's job builds a new database per run) and it is the only path that exercises `post_init_hook` end to end. Both result lines must read the same 3 and 9. Drop the scratch database and its filestore afterwards. These two numbers are what CI's floor is raised by — take them from the result lines, never the per-class stats lines.
 
 - [ ] **Step 2: The `afenda_brand` suite — it now has two new addons in scope**
 
