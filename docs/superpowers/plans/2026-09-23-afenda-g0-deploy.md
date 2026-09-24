@@ -278,4 +278,4 @@ Hardening follow-ups on the live host (2026-09-24, 06:53Z–06:54Z):
   - One active backup cron line.
   - `db` and `nginx` were not recreated; `xforge` is healthy.
   - `/web/health` returns pass, and the landing page returns 200.
-- Still open: `NOCREATEDB` on the live role. It is documented under "Database roles" in `deploy/README.md` and is not applied yet; the owner decides.
+- `NOCREATEDB` applied on the owner's go (07:12Z, the README's `ALTER ROLE afenda_app NOCREATEDB`): the role went from `createdb=true` to `super=false createdb=false createrole=false login=true`, 7 `afenda_app` sessions stayed connected, `/web/health` passed and `/web/login` returned 200. To undo: `ALTER ROLE afenda_app CREATEDB`.
