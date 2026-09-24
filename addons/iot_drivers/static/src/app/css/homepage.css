@@ -34,7 +34,7 @@
 }
 
 .alert.alert-secondary {
-    color: #017E84 !important;
+    color: #1E3A8A !important;
     background-color: #017E8425 !important;
     border-color: #017E8480 !important;
 }
@@ -45,7 +45,7 @@
 }
 
 .odoo-bg-secondary, .bg-secondary {
-    background-color: #017E84 !important;
+    background-color: #1E3A8A !important;
 }
 
 .odoo-pill {

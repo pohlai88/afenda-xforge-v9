@@ -101,6 +101,36 @@ def build_rules(brand: dict) -> list[Rule]:
             "%23" + brand["primary"].lstrip("#"),
             suffixes=COLOURISH,
         ),
+        # Odoo's accent teal, the second half of its identity. It maps to the
+        # primary rather than to the brand's own teal because every surviving
+        # occurrence is an ACTION colour -- $o-enterprise-action-color, a hover
+        # border, a POS accent, a digest email's link -- and this product has
+        # one action colour. Giving enterprise actions a teal of their own
+        # would rebuild the thing the purple rule exists to remove, in a
+        # different hue. (The one SVG drawn entirely in Odoo teal is handled as
+        # artwork in brand_images.SVG_SWATCH and does keep a teal: a drawing
+        # recoloured to navy is a silhouette, not a recolour.)
+        #
+        # The exclusions are where this hex is not brand at all, and rewriting
+        # would be wrong rather than merely unnecessary:
+        #   html_editor tests  - assert the colour picker offers rgb(1,126,132);
+        #                        a rewrite breaks the test it is asserting on
+        #   project_todo data  - sample content demonstrating highlight colours
+        #   o_spreadsheet      - the spreadsheet component's own palette, which
+        #                        is not Odoo's brand and ships upstream verbatim
+        #   dashboard data     - demo dashboard fixtures
+        Rule(
+            "odoo_accent_teal",
+            re.compile(r"#(?:017e84|00a09d)(?![0-9a-f])", re.I),
+            brand["primary"],
+            suffixes=COLOURISH,
+            path_excludes=(
+                "html_editor/static/tests/",
+                "project_todo/data/",
+                "o_spreadsheet/",
+                "spreadsheet_dashboard_website_sale/data/",
+            ),
+        ),
 
         Rule(
             "superseded_domain",
