@@ -44,10 +44,22 @@ TEAL = "#10B981"
 OCHRE = "#C97917"         # 38 deg - the warm accent, measured on three icons
 MUSTARD = "#D49A23"
 
-# Retained because the manifest names them and a reader will look for them. The
-# board does not use these as dominant surfaces; AZURE and COBALT replaced them.
+# Families the board's five never had to name. Each is voiced the same way the
+# five were: the manifest's hue, pulled toward the board's own saturation and
+# depth so it sits in the same material rather than beside it.
+SLATE = "#3B6EA8"         # 212 deg - Equipment, the manifest's own value
+SLATE_HI = "#6E9BD1"
+INK_BLUE = "#2E4C9A"      # 226 deg - Communication, the manifest's #3448A8 calmed
+INK_BLUE_HI = "#5B7FD4"
+MULBERRY_HI = "#E0619F"   # the light end of the magenta family
+MOSS = "#4C8A56"          # 130 deg - Work and Time; also an AFENDA tag colour
+MOSS_HI = "#79B981"
+GREY = "#7C8794"          # System, where the object is plumbing and recedes
+GREY_HI = "#A9B3BE"
+
+# Retained because the manifest names it and a reader will look for it. The
+# board does not use it as a dominant surface; AZURE and COBALT replaced it.
 LEDGER = "#1E3A8A"        # 224 deg - too violet for the board's Accounting
-SLATE = "#3B6EA8"
 
 
 @dataclass(frozen=True)
@@ -155,10 +167,121 @@ SPECS: dict[str, IconSpec] = {
         "fleet", "Fleet", "fleet", "Vehicle / motion plane",
         base=SEA, base_hi=SEA_HI, accent=PLUM, accent_hi=MULBERRY,
         plane="band-diag", deep_plane="shard-br", accent_facet="cab"),
+
+    # --- Commerce, Procurement, Retail, Hospitality, Work and Time ---------
+    #
+    # Deep planes stay in the shaded half of the global light: shard-br projects
+    # to 0.76 along the ramp, fold-br to 0.78, shard-bl to 0.50. shard-tl, at
+    # 0.195, is never used as a deep plane - the gear proved a shadow declared
+    # there does nothing at all.
+    "sale": IconSpec(
+        "sale", "Sales", "sale", "Sales order / forward deal sheet",
+        base=AZURE, base_hi=AZURE_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="band-diag", deep_plane="shard-br", accent_facet="seal"),
+    "purchase": IconSpec(
+        "purchase", "Purchase", "purchase", "Purchase order / inbound package",
+        base=AZURE, base_hi=AZURE_HI, accent=TEAL_DARK, accent_hi=TEAL,
+        plane="shard-tr", deep_plane="shard-br", accent_facet="arrow"),
+    "point_of_sale": IconSpec(
+        "point_of_sale", "Point of Sale", "point_of_sale", "POS terminal / receipt",
+        base=AZURE, base_hi=AZURE_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="band-diag", deep_plane="shard-br", accent_facet="slip"),
+    "website_sale": IconSpec(
+        "website_sale", "eCommerce", "website_sale", "Store bag / digital storefront",
+        base=MULBERRY, base_hi=MULBERRY_HI, accent=TEAL_DARK, accent_hi=TEAL,
+        plane="band-diag", deep_plane="fold-br", accent_facet="handle"),
+    "pos_restaurant": IconSpec(
+        "pos_restaurant", "Restaurant", "pos_restaurant", "Cloche / table ticket",
+        base=PLUM, base_hi=MULBERRY, accent=OCHRE, accent_hi=MUSTARD,
+        plane="fold-tr", deep_plane="shard-br", accent_facet="base"),
+    "lunch": IconSpec(
+        "lunch", "Lunch", "lunch", "Bowl / meal service",
+        base=PLUM, base_hi=MULBERRY, accent=MOSS, accent_hi=MOSS_HI,
+        plane="fold-br", deep_plane="shard-br", accent_facet="base"),
+    "project": IconSpec(
+        "project", "Project", "project", "Task board / project path",
+        base=MOSS, base_hi=MOSS_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="band-diag", deep_plane="shard-br", accent_facet="spine"),
+    "project_todo": IconSpec(
+        "project_todo", "To-do", "project_todo", "Check card / action item",
+        base=MOSS, base_hi=MOSS_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="shard-bl", deep_plane="shard-br", accent_facet="check",
+        front_facet="check"),
+    "calendar": IconSpec(
+        "calendar", "Calendar", "calendar", "Calendar page / date",
+        base=MOSS, base_hi=MOSS_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="fold-tr", deep_plane="shard-br", accent_facet="band"),
+    "hr_holidays": IconSpec(
+        "hr_holidays", "Time Off", "hr_holidays", "Calendar / leave plane",
+        base=PLUM, base_hi=MULBERRY, accent=OCHRE, accent_hi=MUSTARD,
+        plane="fold-tr", deep_plane="shard-br", accent_facet="corner"),
+    "hr_attendance": IconSpec(
+        "hr_attendance", "Attendances", "hr_attendance", "Person / clock check-in",
+        base=PLUM, base_hi=MULBERRY, accent=TEAL_DARK, accent_hi=TEAL,
+        plane="band-diag", deep_plane="shard-br", accent_facet="clock",
+        front_facet="clock"),
+    "event": IconSpec(
+        "event", "Events", "event", "Event ticket / date marker",
+        base=MULBERRY, base_hi=MULBERRY_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="shard-tr", deep_plane="shard-br", accent_facet="stub"),
+
+    # --- Communication, Digital, Knowledge, Equipment, Insights, System ----
+    "mail": IconSpec(
+        "mail", "Discuss", "mail", "Conversation bubbles",
+        base=INK_BLUE, base_hi=INK_BLUE_HI, accent=TEAL_DARK, accent_hi=TEAL,
+        plane="band-diag", deep_plane="shard-br", accent_facet="back"),
+    "im_livechat": IconSpec(
+        "im_livechat", "Live Chat", "im_livechat", "Live chat bubble / pulse",
+        base=INK_BLUE, base_hi=INK_BLUE_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="shard-bl", deep_plane="shard-br", accent_facet="pulse",
+        front_facet="pulse"),
+    "mass_mailing_sms": IconSpec(
+        "mass_mailing_sms", "SMS Marketing", "mass_mailing_sms", "Message / broadcast beam",
+        base=INK_BLUE, base_hi=INK_BLUE_HI, accent=MULBERRY, accent_hi=MULBERRY_HI,
+        plane="band-diag", deep_plane="shard-br", accent_facet="beam"),
+    "mass_mailing": IconSpec(
+        "mass_mailing", "Email Marketing", "mass_mailing", "Envelope / campaign beam",
+        base=INK_BLUE, base_hi=INK_BLUE_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="shard-tr", deep_plane="shard-br", accent_facet="flap"),
+    "website": IconSpec(
+        "website", "Website", "website", "Browser window / globe plane",
+        base=MULBERRY, base_hi=MULBERRY_HI, accent=TEAL_DARK, accent_hi=TEAL,
+        plane="band-diag", deep_plane="shard-br", accent_facet="globe",
+        front_facet="globe"),
+    "website_slides": IconSpec(
+        "website_slides", "eLearning", "website_slides", "Book / play lesson",
+        base=MULBERRY, base_hi=MULBERRY_HI, accent=TEAL_DARK, accent_hi=TEAL,
+        plane="shard-tr", deep_plane="shard-br", accent_facet="right"),
+    "maintenance": IconSpec(
+        "maintenance", "Maintenance", "maintenance", "Wrench / service gear",
+        base=SLATE, base_hi=SLATE_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="shard-bl", deep_plane="shard-br"),
+    "repair": IconSpec(
+        "repair", "Repair", "repair", "Repair tool / broken part",
+        base=SLATE, base_hi=SLATE_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="band-diag", deep_plane="shard-br", accent_facet="partr"),
+    "survey": IconSpec(
+        "survey", "Surveys", "survey", "Survey sheet / response marks",
+        base=MULBERRY, base_hi=MULBERRY_HI, accent=TEAL_DARK, accent_hi=TEAL,
+        plane="band-diag", deep_plane="shard-br", accent_facet="boxes"),
+    "marketing_card": IconSpec(
+        "marketing_card", "Marketing Card", "marketing_card", "Campaign card / media tile",
+        base=MULBERRY, base_hi=MULBERRY_HI, accent=OCHRE, accent_hi=MUSTARD,
+        plane="fold-br", deep_plane="shard-br", accent_facet="back"),
+    "data_recycle": IconSpec(
+        "data_recycle", "Data Recycle", "data_recycle", "Recycle loop / data block",
+        base=GREY, base_hi=GREY_HI, accent=MOSS, accent_hi=MOSS_HI,
+        plane="band-diag", deep_plane="shard-br", accent_facet="block"),
 }
 
 ORDER = ("accounting", "employees", "inventory", "manufacturing", "crm",
-         "hr_expense", "contacts", "hr_recruitment", "hr_skills", "fleet")
+         "hr_expense", "contacts", "hr_recruitment", "hr_skills", "fleet",
+         "sale", "purchase", "point_of_sale", "website_sale", "pos_restaurant",
+         "lunch", "project", "project_todo", "calendar", "hr_holidays",
+         "hr_attendance", "event",
+         "mail", "im_livechat", "mass_mailing_sms", "mass_mailing", "website",
+         "website_slides", "maintenance", "repair", "survey", "marketing_card",
+         "data_recycle")
 
 # Export matrix. SVG is canonical; every one of these is derived from it.
 SIZES = (128, 64, 32, 24, 16)

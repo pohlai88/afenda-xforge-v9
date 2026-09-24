@@ -16,9 +16,10 @@ import math
 import pyclipper
 
 from ..xforge_icons.paths import flatten_path
-from .spec import VIEWBOX
+from .spec import LIVE, VIEWBOX
 
-__all__ = ["MASTERS", "PLANES", "plane_points", "master", "soften", "SOFTEN_RADIUS"]
+__all__ = ["MASTERS", "PLANES", "plane_points", "master", "soften", "fit",
+           "SOFTEN_RADIUS"]
 
 B = VIEWBOX  # 256
 
@@ -101,6 +102,35 @@ def _round_polygon(points, radius: float):
         if not path:
             return points  # the shape is thinner than the radius; leave it alone
     return [(x / CLIP_SCALE, y / CLIP_SCALE) for x, y in path]
+
+
+def fit(d: str, span: float = LIVE * VIEWBOX) -> str:
+    """Scale ``d`` about its own centre until its longer side is ``span``, and
+    centre it in the box.
+
+    A diagonal form - a wrench, a tool laid across the frame - measures smaller
+    than a rectangle drawn to the same coordinates, because its bounding box is
+    the diagonal rather than the shape. Authoring it to look right by eye
+    therefore leaves it optically small, and the frame-fill gate catches it:
+    the wrench came out at 0.67 of the box against a 0.70 floor.
+
+    Flattening and re-emitting, the same way ``soften`` does, so a scaled master
+    and a softened one share one path grammar.
+    """
+    polys = [p for p in flatten_path(d) if len(p) >= 3]
+    xs = [x for p in polys for x, _ in p]
+    ys = [y for p in polys for _, y in p]
+    if not xs:
+        return d
+    w, h = max(xs) - min(xs), max(ys) - min(ys)
+    k = span / max(w, h)
+    cx, cy = (min(xs) + max(xs)) / 2, (min(ys) + max(ys)) / 2
+    mid = VIEWBOX / 2
+    out = []
+    for poly in polys:
+        pts = [((x - cx) * k + mid, (y - cy) * k + mid) for x, y in poly]
+        out.append("M" + " L".join(f"{x:.2f} {y:.2f}" for x, y in pts) + " Z")
+    return " ".join(out)
 
 
 def soften(d: str, radius: float) -> str:
@@ -305,6 +335,187 @@ _FLT_WHEELS = _circle(76, 174, 22) + " " + _circle(192, 174, 22)
 _FLT_WINDOW = "M172 120 H194 L210 142 H172 Z"
 
 
+# ---------------------------------------------------------------------------
+# Shared primitives.
+#
+# Built once because the remaining families repeat the same few forms - a card,
+# a sheet, a bubble - and because two icons that should look related must be
+# related in the geometry, not by coincidence of hand-drawing.
+
+
+def _rrect(x0: float, y0: float, x1: float, y1: float, r: float) -> str:
+    """A rounded rectangle, corners equal."""
+    return (f"M{x0 + r:g} {y0:g} H{x1 - r:g} Q{x1:g} {y0:g} {x1:g} {y0 + r:g} "
+            f"V{y1 - r:g} Q{x1:g} {y1:g} {x1 - r:g} {y1:g} "
+            f"H{x0 + r:g} Q{x0:g} {y1:g} {x0:g} {y1 - r:g} "
+            f"V{y0 + r:g} Q{x0:g} {y0:g} {x0 + r:g} {y0:g} Z")
+
+
+def _bar(x0: float, x1: float, y: float, h: float) -> str:
+    """One ruled mark with round ends - the family's detail vocabulary."""
+    r = h / 2
+    return (f"M{x0 + r:g} {y:g} H{x1 - r:g} Q{x1:g} {y:g} {x1:g} {y + r:g} "
+            f"Q{x1:g} {y + h:g} {x1 - r:g} {y + h:g} H{x0 + r:g} "
+            f"Q{x0:g} {y + h:g} {x0:g} {y + r:g} Q{x0:g} {y:g} {x0 + r:g} {y:g} Z")
+
+
+def _bars(rows) -> str:
+    return " ".join(_bar(*r) for r in rows)
+
+
+# --- Commerce, Procurement, Retail -----------------------------------------
+#
+# Sales and Purchase are both order documents and must not become the same
+# mark. The difference is put in the SILHOUETTE, not the interior: Sales carries
+# a seal breaking its lower edge, Purchase an arrow entering from above. At 16px
+# the ruled lines are gone and only those two profiles remain.
+_SALE_SHEET = _rrect(56, 30, 188, 214, 12)
+_SALE_SEAL = _circle(180, 198, 34)
+_SALE_MARKS = _bars([(82, 162, 74, 11), (82, 162, 104, 11), (82, 132, 134, 11)])
+
+_PUR_BOX = _rrect(44, 116, 212, 230, 12)
+_PUR_ARROW = "M112 26 H144 V96 H176 L128 148 L80 96 H112 Z"
+_PUR_SEAM = _bar(70, 186, 160, 12)
+
+_POS_BODY = _rrect(48, 92, 208, 230, 14)
+_POS_SLIP = "M78 20 H178 V96 H162 L148 84 L134 96 L120 84 L106 96 L92 84 L78 96 Z"
+_POS_KEYS = _bars([(76, 124, 140, 16), (140, 180, 140, 16), (76, 124, 172, 16), (140, 180, 172, 16)])
+
+_BAG_BODY = _rrect(44, 92, 212, 232, 16)
+_BAG_HANDLE = ("M92 100 V74 Q92 34 128 34 Q164 34 164 74 V100 H142 V74 "
+               "Q142 56 128 56 Q114 56 114 74 V100 Z")
+
+# --- Hospitality and People Services ---------------------------------------
+_CLOCHE_DOME = "M40 182 Q40 92 128 92 Q216 92 216 182 Z"
+_CLOCHE_KNOB = _circle(128, 80, 16)
+_CLOCHE_BASE = _rrect(24, 186, 232, 212, 13)
+
+# The bowl needs a FLAT bottom, not a curve meeting at a point. Drawn as a
+# single low point the base sat under it touching at one pixel, and the two read
+# as a bowl and an unrelated bar rather than as a bowl on a stand.
+_BOWL_BODY = "M34 116 H222 V148 Q222 210 166 210 H90 Q34 210 34 148 Z"
+_BOWL_BASE = _rrect(74, 198, 182, 224, 12)
+
+# --- Work and Time ---------------------------------------------------------
+#
+# The calendar body is shared by Calendar and Holidays on purpose - they are the
+# same object in the product - and separated by silhouette: Holidays loses a
+# corner to the plane that takes the day away.
+def _calendar(x0=40, y0=64, x1=216, y1=222, r=14):
+    return _rrect(x0, y0, x1, y1, r)
+
+
+_CAL_RINGS = _rrect(74, 30, 92, 78, 9) + " " + _rrect(164, 30, 182, 78, 9)
+_CAL_BAND = f"M40 78 H216 V112 H40 Z"
+_CAL_DAYS = _bars([(70, 110, 136, 16), (128, 168, 136, 16), (70, 110, 170, 16)])
+_HOL_BODY = ("M54 64 H216 V166 L160 222 H54 Q40 222 40 208 V78 Q40 64 54 64 Z")
+_HOL_CORNER = "M216 166 L160 222 V180 Q160 166 174 166 Z"
+
+_PRJ_SPINE = _rrect(36, 46, 62, 218, 13)
+_PRJ_ROWS = (_rrect(76, 56, 220, 96, 12) + " " + _rrect(76, 112, 190, 152, 12)
+             + " " + _rrect(76, 168, 148, 208, 12))
+
+_TODO_CARD = _rrect(36, 58, 184, 218, 16)
+_TODO_CHECK = "M92 150 L134 192 L232 66 L252 92 L136 236 L70 172 Z"
+
+_ATT_HEAD = _circle(108, 78, 34)
+_ATT_BODY = _dome(108, 62, 110, 206)
+_ATT_CLOCK = _circle(196, 182, 48)
+_ATT_HANDS = "M190 146 H202 V180 H232 V192 H190 Z"
+
+_EVT_BODY = ("M36 60 H220 V108 Q196 108 196 130 Q196 152 220 152 V200 H36 "
+             "V152 Q60 152 60 130 Q60 108 36 108 Z")
+_EVT_STUB = "M150 60 H162 V200 H150 Z"
+_EVT_MARKS = _bars([(72, 132, 106, 12), (72, 112, 142, 12)])
+
+
+# --- Communication ---------------------------------------------------------
+#
+# Three modules share a bubble and must not collapse into one mark. Mail is two
+# bubbles overlapping, Livechat is one bubble with a live pulse beside it, SMS
+# is one bubble broadcasting. The count and the companion carry the difference,
+# because at 16px the interior is gone and only the outline speaks.
+def _bubble(x0, y0, x1, y1, r, tail=None):
+    body = _rrect(x0, y0, x1, y1, r)
+    return body if tail is None else body + " " + tail
+
+
+_MAIL_BACK = _bubble(78, 36, 226, 148, 26)
+_MAIL_FRONT = _bubble(30, 88, 178, 200, 26,
+                      "M62 196 L62 238 L106 200 Z")
+_MAIL_DOTS = (_circle(74, 144, 11) + " " + _circle(104, 144, 11) + " "
+              + _circle(134, 144, 11))
+
+_CHAT_BUBBLE = _bubble(30, 44, 196, 170, 28, "M64 166 L64 214 L112 174 Z")
+_CHAT_PULSE = _circle(212, 68, 26)
+_CHAT_DOTS = (_circle(74, 108, 11) + " " + _circle(108, 108, 11) + " "
+              + _circle(142, 108, 11))
+
+_SMS_BUBBLE = _bubble(24, 58, 170, 176, 26, "M56 172 L56 218 L102 180 Z")
+_SMS_BEAM = ("M196 60 Q230 108 196 156 L214 172 Q256 110 214 44 Z "
+             "M178 88 Q196 108 178 128 L194 142 Q220 108 194 74 Z")
+
+_ENV_BODY = _rrect(28, 68, 228, 200, 16)
+_ENV_FLAP = "M28 84 L128 152 L228 84 V106 L128 174 L28 106 Z"
+
+# --- Digital and Knowledge -------------------------------------------------
+_WEB_FRAME = _rrect(26, 48, 230, 208, 16)
+_WEB_BAR = "M26 64 H230 V96 H26 Z"
+_WEB_DOTS = (_circle(50, 80, 9) + " " + _circle(76, 80, 9) + " " + _circle(102, 80, 9))
+_WEB_GLOBE = _circle(128, 152, 42)
+
+_BOOK_LEFT = "M28 64 Q78 46 124 64 V202 Q78 184 28 202 Z"
+_BOOK_RIGHT = "M132 64 Q178 46 228 64 V202 Q178 184 132 202 Z"
+_BOOK_PLAY = "M110 108 L172 140 L110 172 Z"
+
+# --- Equipment -------------------------------------------------------------
+#
+# Maintenance is a wrench alone. Repair is the same wrench over a part that has
+# come apart - the split is the whole difference and it lives in the silhouette.
+# An open-ended spanner, drawn head-up. The first attempt laid it diagonally and
+# relied on a thin notch for the jaw; softened and scaled it closed to a plain
+# tube and stopped reading as a tool at all. The jaw is now a wide bite out of
+# the head, which is the one feature that has to survive to 16px.
+# Head and handle as two shapes, unioned. Drawn as one outline the jaw ran as
+# deep as the handle was wide and the whole thing read as a tuning fork: two
+# prongs on a stick. A spanner is a BULB with a bite out of it, carrying a
+# narrower handle - the head has to be about three times the handle's width and
+# the jaw shallower than the head is tall.
+_WRENCH = ("M70 40 H108 V76 H148 V40 H186 V106 Q186 132 160 132 H96 "
+           "Q70 132 70 106 Z "
+           "M110 124 H146 V212 Q146 236 128 236 Q110 236 110 212 Z")
+# A part that has come apart: two halves with the break between them, so Repair
+# differs from Maintenance in the silhouette rather than only in an accent.
+# One block, broken. The two halves face each other across a jagged break, so
+# the pair reads as a thing that came apart rather than as two containers.
+_REP_PART_L = "M14 170 H92 L74 198 L92 226 H14 Z"
+_REP_PART_R = "M164 170 H242 V226 H164 L182 198 Z"
+
+# --- Insights and Marketing ------------------------------------------------
+_SUR_SHEET = _rrect(48, 28, 208, 228, 14)
+_SUR_BOXES = (_rrect(72, 62, 104, 94, 7) + " " + _rrect(72, 116, 104, 148, 7)
+              + " " + _rrect(72, 170, 104, 202, 7))
+_SUR_TICK = "M78 78 L90 90 L118 60 L128 72 L90 112 L66 88 Z"
+_SUR_ROWS = _bars([(120, 184, 70, 14), (120, 184, 124, 14), (120, 162, 178, 14)])
+
+_CARD_BACK = _rrect(64, 40, 228, 158, 14)
+_CARD_FRONT = _rrect(28, 92, 192, 218, 14)
+_CARD_ROWS = _bars([(52, 130, 126, 14), (52, 166, 158, 14), (52, 112, 190, 14)])
+
+# --- System ----------------------------------------------------------------
+#
+# Recycle: three arrows chasing a block. Drawn as one closed loop with three
+# heads rather than three separate chevrons, so a downscale cannot orphan one.
+# One loop with one arrowhead, not three chasing chevrons. Three merged into a
+# single blob the moment they were softened and reduced; a ring with a gap reads
+# as "returns to where it started" at any size. The ring is a real hole, cut
+# even-odd by the aperture, the same way the gear's centre is.
+_REC_RING = _circle(128, 122, 86)
+_REC_HOLE = _circle(128, 122, 52)
+_REC_HEAD = "M196 40 L232 106 L160 106 Z"
+_REC_BLOCK = _rrect(100, 94, 156, 150, 12)
+
+
 MASTERS: dict[str, dict[str, str]] = {
     "accounting": {"body": _ACC_BODY, "fold": _ACC_FOLD, "detail": _ACC_MARKS,
                    "detail_small": _ACC_MARKS_SMALL},
@@ -334,6 +545,51 @@ MASTERS: dict[str, dict[str, str]] = {
     # one colour with the chassis they disappeared and the van read as a box.
     "fleet": {"body": soften(_FLT_BOX + " " + _FLT_CAB + " " + _FLT_WHEELS, 4.0),
               "cab": _FLT_CAB, "wheels": _FLT_WHEELS, "detail": _FLT_WINDOW},
+
+    # --- Commerce, Procurement, Retail, Hospitality, Work and Time ---------
+    "sale": {"body": _SALE_SHEET + " " + _SALE_SEAL, "seal": _SALE_SEAL,
+             "detail": _SALE_MARKS},
+    "purchase": {"body": _PUR_BOX + " " + _PUR_ARROW, "arrow": _PUR_ARROW,
+                 "detail": _PUR_SEAM},
+    "point_of_sale": {"body": _POS_BODY + " " + _POS_SLIP, "slip": _POS_SLIP,
+                      "detail": _POS_KEYS},
+    "website_sale": {"body": _BAG_BODY + " " + _BAG_HANDLE, "handle": _BAG_HANDLE},
+    "pos_restaurant": {"body": soften(_CLOCHE_DOME + " " + _CLOCHE_BASE, 3.0)
+                               + " " + _CLOCHE_KNOB,
+                       "base": _CLOCHE_BASE, "knob": _CLOCHE_KNOB},
+    "lunch": {"body": soften(_BOWL_BODY + " " + _BOWL_BASE, 3.0), "base": _BOWL_BASE},
+    "project": {"body": _PRJ_SPINE + " " + _PRJ_ROWS, "spine": _PRJ_SPINE,
+                "rows": _PRJ_ROWS},
+    "project_todo": {"body": _TODO_CARD + " " + _TODO_CHECK, "check": _TODO_CHECK,
+                     "card": _TODO_CARD},
+    "calendar": {"body": _calendar() + " " + _CAL_RINGS, "band": _CAL_BAND,
+                 "detail": _CAL_DAYS},
+    "hr_holidays": {"body": _HOL_BODY + " " + _CAL_RINGS, "corner": _HOL_CORNER,
+                    "band": _CAL_BAND, "detail": _CAL_DAYS},
+    "hr_attendance": {"body": _ATT_HEAD + " " + _ATT_BODY + " " + _ATT_CLOCK,
+                      "clock": _ATT_CLOCK, "detail": _ATT_HANDS},
+    "event": {"body": _EVT_BODY, "stub": _EVT_STUB, "detail": _EVT_MARKS},
+
+    # --- Communication, Digital, Knowledge, Equipment, Insights, System ----
+    "mail": {"body": _MAIL_BACK + " " + _MAIL_FRONT, "back": _MAIL_BACK,
+             "front": _MAIL_FRONT, "detail": _MAIL_DOTS},
+    "im_livechat": {"body": _CHAT_BUBBLE + " " + _CHAT_PULSE, "pulse": _CHAT_PULSE,
+                    "detail": _CHAT_DOTS},
+    "mass_mailing_sms": {"body": _SMS_BUBBLE + " " + _SMS_BEAM, "beam": _SMS_BEAM},
+    "mass_mailing": {"body": _ENV_BODY, "flap": _ENV_FLAP},
+    "website": {"body": _WEB_FRAME, "bar": _WEB_BAR, "globe": _WEB_GLOBE,
+                "detail": _WEB_DOTS},
+    "website_slides": {"body": _BOOK_LEFT + " " + _BOOK_RIGHT, "right": _BOOK_RIGHT,
+                       "detail": _BOOK_PLAY},
+    "maintenance": {"body": fit(soften(_WRENCH, 3.0)), "tool": _WRENCH},
+    "repair": {"body": fit(soften(_WRENCH + " " + _REP_PART_L + " " + _REP_PART_R, 3.0)),
+               "partl": _REP_PART_L, "partr": _REP_PART_R},
+    "survey": {"body": _SUR_SHEET, "boxes": _SUR_BOXES,
+               "detail": _SUR_TICK + " " + _SUR_ROWS},
+    "marketing_card": {"body": _CARD_BACK + " " + _CARD_FRONT, "back": _CARD_BACK,
+                       "front": _CARD_FRONT, "detail": _CARD_ROWS},
+    "data_recycle": {"body": _REC_RING + " " + _REC_HEAD + " " + _REC_BLOCK,
+                     "aperture": _REC_HOLE, "block": _REC_BLOCK},
 }
 
 

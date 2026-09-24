@@ -275,20 +275,35 @@ class DerivationTests(unittest.TestCase):
 
 
 class ApertureTests(unittest.TestCase):
-    def test_a_master_with_an_aperture_keeps_it_open(self):
-        """The gear's hole is its recognition cue, and it is cut by clip-rule,
-        not fill-rule: a clipPath child ignores fill-rule entirely. When the clip
-        falls back to nonzero winding the hole silently fills with whichever
-        planes cross it."""
+    def test_a_master_with_an_aperture_has_it_actually_cut(self):
+        """An aperture is cut by clip-rule, not fill-rule: a clipPath child
+        ignores fill-rule entirely. When the clip falls back to nonzero winding
+        the hole silently fills with whichever planes cross it.
+
+        Two masters carry one and they are not the same case. The gear's hole is
+        its recognition cue and nothing is ever drawn inside it, so it stays
+        wholly clear. Data Recycle is a loop AROUND a block, so its ring gap is
+        what the aperture buys and the centre is legitimately occupied. The
+        invariant they share is that the hole is cut at all - a filled-in
+        aperture reads as a solid blob in both.
+        """
+        FULLY_CLEAR = {"manufacturing"}
         for key in ORDER:
             if "aperture" not in MASTERS[key]:
                 continue
-            im = icon_png(key, 128).convert("RGBA")
-            px = im.load()
-            r = 18  # inside the 20px aperture radius at 128, clear of its edge
-            painted = sum(1 for dy in range(-r, r + 1) for dx in range(-r, r + 1)
-                          if dx * dx + dy * dy <= r * r and px[64 + dx, 64 + dy][3] > 40)
-            self.assertEqual(painted, 0, f"{key}'s aperture is {painted}px filled")
+            px = icon_png(key, 128).convert("RGBA").load()
+            r = 18  # inside the smaller of the two apertures, clear of its edge
+            cells = [(dx, dy) for dy in range(-r, r + 1) for dx in range(-r, r + 1)
+                     if dx * dx + dy * dy <= r * r]
+            painted = sum(1 for dx, dy in cells if px[64 + dx, 64 + dy][3] > 40)
+            open_share = 1 - painted / len(cells)
+            if key in FULLY_CLEAR:
+                self.assertEqual(painted, 0,
+                                 f"{key}'s aperture is {painted}px filled; it must stay clear")
+            else:
+                self.assertGreater(open_share, 0.20,
+                                   f"{key}'s aperture is only {open_share:.0%} open, so it is "
+                                   "not being cut")
 
     def test_the_clip_declares_the_same_rule_as_the_fill(self):
         for key in ORDER:
