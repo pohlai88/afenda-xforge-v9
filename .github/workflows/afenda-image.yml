@@ -63,14 +63,34 @@ jobs:
         run: |
           set -o pipefail
           mods=afenda_brand,afenda_runtime,afenda_api_docs,afenda_brand_digest
-          docker run --rm --network host --entrypoint /opt/venv/bin/python afenda/xforge:ci \
-            /opt/afenda/odoo-bin \
-            --db_host 127.0.0.1 --db_port 5432 --db_user afenda_app --db_password ci -d ci \
-            --addons-path /opt/afenda/addons,/opt/afenda/afenda/addons,/opt/afenda/afenda/oca/server-brand,/opt/afenda/afenda/oca/web \
-            --data-dir /tmp/afenda-data -i "$mods" \
-            --test-enable --test-tags "/afenda_brand,/afenda_runtime,/afenda_api_docs,/afenda_brand_digest" \
-            --stop-after-init --http-port 8069 --workers 0 \
-            --log-level warn --log-handler odoo.tests:INFO 2>&1 | tee odoo-tests.log
+          # afenda_brand's tests import afenda.tools.app_icons, and the image
+          # does not ship afenda/tools (deploy/Dockerfile copies afenda/addons
+          # and afenda/oca only). So this container, and only this one, gets
+          # the checked-out tools mounted read-only and their pinned
+          # requirements installed into /tmp/pydeps; the production image is
+          # unchanged.
+          # requirements.txt, not requirements-icons.txt: the tests import the
+          # brand-image chain app_icons -> brand_images -> xforge_icons, which
+          # needs Pillow and fontTools. requirements-icons.txt (resvg-py,
+          # pyclipper) would only be needed if a test imported
+          # afenda.tools.xforge_icons_v3.
+          # Pillow is filtered out: PYTHONPATH precedes the venv's
+          # site-packages, and Odoo must keep loading the image's own Pillow.
+          docker run --rm --network host \
+            -v "$PWD/afenda/tools:/opt/afenda/afenda/tools:ro" \
+            -e MODS="$mods" \
+            --entrypoint sh afenda/xforge:ci -c '
+              grep -viE "^pillow[=<>~!; ]" /opt/afenda/afenda/tools/requirements.txt > /tmp/tools-requirements.txt &&
+              /opt/venv/bin/pip install -q --no-cache-dir --disable-pip-version-check \
+                --target /tmp/pydeps -r /tmp/tools-requirements.txt &&
+              export PYTHONPATH=/tmp/pydeps &&
+              exec /opt/venv/bin/python /opt/afenda/odoo-bin \
+                --db_host 127.0.0.1 --db_port 5432 --db_user afenda_app --db_password ci -d ci \
+                --addons-path /opt/afenda/addons,/opt/afenda/afenda/addons,/opt/afenda/afenda/oca/server-brand,/opt/afenda/afenda/oca/web \
+                --data-dir /tmp/afenda-data -i "$MODS" \
+                --test-enable --test-tags "/afenda_brand,/afenda_runtime,/afenda_api_docs,/afenda_brand_digest" \
+                --stop-after-init --http-port 8069 --workers 0 \
+                --log-level warn --log-handler odoo.tests:INFO' 2>&1 | tee odoo-tests.log
           line=$(grep -oE '[0-9]+ failed, [0-9]+ error\(s\) of [0-9]+ tests' odoo-tests.log | tail -n 1 || true)
           echo "result: ${line:-none}"
           set -- $(printf '%s' "$line" | grep -oE '[0-9]+')
