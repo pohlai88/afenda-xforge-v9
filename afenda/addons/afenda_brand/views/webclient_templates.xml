@@ -86,7 +86,9 @@
             <attribute name="class" add="o_afenda_card_head" separator=" "/>
         </xpath>
         <xpath expr="//a[contains(@href, 'utm_medium=auth')]" position="replace">
-            <span class="text-muted">AFENDA xForge</span>
+            <!-- Not `text-muted`: that utility's colour is !important and would
+                 override the footnote's gold (auth_bear.css). -->
+            <span class="o_afenda_auth_product">AFENDA xForge</span>
         </xpath>
         <!-- The page. Wrapping is the only way to put siblings around the
              upstream container without restating its markup -

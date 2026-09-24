@@ -424,6 +424,20 @@
     box-shadow: 0 0 0 3px color-mix(in oklch, var(--afb-mood) 30%, transparent);
 }
 
+/* The footnote ("Manage Databases", "AFENDA xForge") in gold, by the owner's
+ * direction. ember-700 on paper is 6.48:1, ember-800 (hover) 9.08:1, both
+ * above AA for this 12px text; the underline on hover keeps the link state
+ * from resting on colour alone. Loaded after login.scss, so this wins over its
+ * graphite at equal specificity. */
+.o_afenda_login .o_afenda_auth_foot,
+.o_afenda_login .o_afenda_auth_foot a {
+    color: var(--bear-ember-700);
+}
+
+.o_afenda_login .o_afenda_auth_foot a:hover {
+    color: var(--bear-ember-800);
+}
+
 /* ------------------------------------------------------------------------
  * Reduced motion: no transform and no animation on any layer that moves.
  * Colour states remain - they are not motion. The four placed layers
