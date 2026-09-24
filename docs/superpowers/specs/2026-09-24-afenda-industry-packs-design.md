@@ -188,6 +188,50 @@ means reinstalling the module.
 **5. Every record the pack creates is module-owned**, XML or hook alike — the
 precondition for ruling 4's uninstall story, enforced by a test rather than by care.
 
+Two exceptions, both found in review of Task 4 and both documented rather than engineered
+around:
+
+**BoM lines are owned transitively, not directly.** `bom.write({"bom_line_ids": …})`
+creates `mrp.bom.line` rows with no `ir.model.data` entry. Uninstall still removes them,
+because they cascade from a module-owned header (`mrp.bom.line.bom_id` is
+`ondelete='cascade'`, `addons/mrp/models/mrp_bom.py:697-699`). The ownership test
+therefore enumerates `pos.config` and `stock.warehouse.orderpoint` only; adding
+`mrp.bom.line` to it would fail for a record that is nonetheless cleaned up correctly.
+
+**Creating a `pos.config` makes Odoo create records the pack cannot own.**
+`_create_journal_and_payment_methods` (`addons/point_of_sale/models/pos_config.py:1032-1073`)
+creates a Cash `account.journal` and Cash and Card `pos.payment.method` records. The
+`_update_xmlids` branch at `:1049-1054` only fires when a `cash_ref` is supplied, which
+`load_company_records` does not pass, so none of them get an `ir.model.data` row. A tenant
+who uninstalls the pack loses the counter but keeps two payment methods and a journal in
+their chart. This is unavoidable for any pack that ships a POS counter — Odoo creates
+those records as a side effect of the config — so it is stated here rather than implied by
+ruling 5's "every record".
+
+**Install order: the pack requires Invoicing to be installed first.** A `pos.config` needs
+a bank journal, therefore a chart of accounts
+(`addons/point_of_sale/models/pos_config.py:1060-1063`). `account` defers chart loading to
+`_register_hook` (`addons/account/models/ir_module.py:97-104`), which runs *after* the
+whole module graph, while `post_init_hook` runs *during* it
+(`odoo/modules/loading.py:239-243`). So the pack cannot be installed in the same run that
+first installs `account` — which is both the single-run CI shape and the Apps-menu click
+on a stock database. The pack pre-flights the bank journal and raises an error naming
+itself and the remedy, rather than either failing with POS's generic message or silently
+shipping without its till.
+
+**Known limitation: components finer than the stock unit's precision round to zero on very
+small manufacturing orders.** `uom.uom.rounding` is not per-unit —
+`_compute_rounding` returns `10 ** -precision_get('Product Unit')`
+(`addons/uom/models/uom_uom.py:62-66`), which ships at 2 decimals — so a raw move's
+quantity is rounded in the product's stock unit. Croissant yeast at 2 g means an MO for one
+or two croissants moves `0.00` kg of yeast and does not deplete stock; by three croissants
+it rounds to `0.01` and by a realistic batch it is exact (500 croissants demand a full
+kilogram). The exposure is therefore single-digit manufacturing orders on the three finest
+raws, not manufacturing generally — a review flagged it with a 500-unit scenario, which
+does not hold because demand scales with the order. Recorded rather than fixed: stocking
+yeast, salt and vanilla in grams would remove it, at the cost of a catalogue and
+replenishment change whose value has not been demonstrated.
+
 ## Tests and acceptance
 
 `afenda_industry_base` — 4 tests in `tests/test_seed.py`:
