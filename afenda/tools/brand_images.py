@@ -193,6 +193,13 @@ ADDON: str = "afenda/addons/afenda_brand/static"
 ADDON_TARGETS: dict[str, str] = {
     f"{ADDON}/img/logo.png": "lockup_png",
     f"{ADDON}/img/logo_dark.png": "lockup_dark_png",
+    # Vector lockups for the auth surface. The SVG branches of render_all carry
+    # their own geometry and take no SIZES row - only the raster kinds look one
+    # up. _text_svg emits the wordmark as outlines, so these need no font at
+    # display time and stay sharp at any DPI, which the 180px logo_web that
+    # /web/binary/company_logo serves cannot be.
+    f"{ADDON}/img/logo.svg": "lockup_svg",
+    f"{ADDON}/img/logo_dark.svg": "lockup_dark_svg",
     f"{ADDON}/img/logo_email_2x.png": "lockup_png",
     f"{ADDON}/img/favicon.ico": "tile_ico",
     f"{ADDON}/img/mark.png": "mark_png",
