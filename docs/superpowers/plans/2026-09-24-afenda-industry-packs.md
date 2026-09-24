@@ -441,24 +441,25 @@ Expected: the module does not exist yet, so the install fails outright. Once Ste
         "stock_account",
         "product_expiry",
     ],
-    # Ordered: bills of material reference products, products reference categories.
+    # Ordered: a file that references an XML id comes after the file defining it.
+    # Only the two files that exist as of this task are listed. Odoo resolves
+    # every `data` path at install and raises on a missing one, so a manifest
+    # naming data/mrp_bom.xml (Task 3) or demo/bakery_demo.xml (Task 6) would
+    # fail this task's own verification run before reaching an assertion. Each
+    # later task adds its line in the commit that creates the file.
     "data": [
         "data/product_category.xml",
         "data/product_template.xml",
-        "data/mrp_bom.xml",
     ],
-    "demo": [
-        "demo/bakery_demo.xml",
-    ],
-    "post_init_hook": "post_init_hook",
 }
 ```
 
-`afenda/addons/afenda_industry_bakery/__init__.py`:
+`afenda/addons/afenda_industry_bakery/__init__.py` — empty but for the licence line.
+`hooks.py` does not exist until Task 4, and `__init__.py` is imported at module
+load, so importing from it here raises at install:
 
 ```python
 # Part of AFENDA xForge. See LICENSE file for full copyright and licensing details.
-from .hooks import post_init_hook
 ```
 
 `afenda/addons/afenda_industry_bakery/data/product_category.xml` — complete file:
@@ -551,6 +552,7 @@ git commit --only -F /tmp/msg2.txt -- afenda/addons/afenda_industry_bakery
 
 **Files:**
 - Create: `afenda/addons/afenda_industry_bakery/data/mrp_bom.xml`
+- Modify: `afenda/addons/afenda_industry_bakery/__manifest__.py` — append `"data/mrp_bom.xml"` to the `data` list, after `data/product_template.xml` (bills of material reference products, so the file must load after them)
 - Modify: `afenda/addons/afenda_industry_bakery/tests/test_pack.py` (add one test)
 
 **Interfaces:**
@@ -657,7 +659,13 @@ git commit --only -F /tmp/msg3.txt -- afenda/addons/afenda_industry_bakery
 
 **Files:**
 - Create: `afenda/addons/afenda_industry_bakery/hooks.py`
+- Modify: `afenda/addons/afenda_industry_bakery/__init__.py` — add `from .hooks import post_init_hook`
+- Modify: `afenda/addons/afenda_industry_bakery/__manifest__.py` — add `"post_init_hook": "post_init_hook",`
 - Modify: `afenda/addons/afenda_industry_bakery/tests/test_pack.py` (add three tests)
+
+Both manifest and `__init__.py` changes belong in **this** task's commit, not an
+earlier one: the hook has nothing to seed until now, and naming it earlier would
+break install.
 
 **Interfaces:**
 - Consumes: `load_company_records` (Task 1), product and BoM XMLIDs (Tasks 2–3).
@@ -950,6 +958,7 @@ git commit --only -F /tmp/msg5.txt -- afenda/addons/afenda_industry_bakery
 
 **Files:**
 - Create: `afenda/addons/afenda_industry_bakery/demo/bakery_demo.xml`
+- Modify: `afenda/addons/afenda_industry_bakery/__manifest__.py` — add the `demo` key: `"demo": ["demo/bakery_demo.xml"],`
 
 **Interfaces:**
 - Consumes: product XMLIDs from Task 2.
