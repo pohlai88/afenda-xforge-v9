@@ -31,7 +31,8 @@ docker compose exec -T db psql -X -tA -U xforge -d postgres -c "SELECT 1 FROM pg
 # re-resolves the restarted container. A failed reload must not replace the
 # exit status of the script that is ending, hence `|| true`.
 restart_xforge() {
-    docker compose start xforge >/dev/null
+    # By container id: compose start would also start depends_on init, a stale one-shot container.
+    docker start "$(docker compose ps -aq xforge)" >/dev/null
     docker compose exec -T nginx nginx -s reload || true
 }
 docker compose stop xforge

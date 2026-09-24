@@ -356,10 +356,27 @@ Two PostgreSQL roles: `xforge` is the db container's bootstrap superuser,
 used only by `backup.sh`, `restore.sh` and `migrate-db-role.sh`. `afenda_app`
 is what `init` and the server connect as (`PGUSER`/`PGPASSWORD_FILE` in
 `compose.yaml`'s `x-xforge-env`), and it owns the `afenda` database and every
-object in it. `CREATEDB` stays on `afenda_app` because a fresh host's first
-`init` run creates the database itself. On an empty volume,
-`db-init/10-afenda-app-role.sh` creates the role on the db container's first
-start; an existing host moves ownership across with `migrate-db-role.sh`.
+object in it. On an empty volume, `db-init/10-afenda-app-role.sh` creates the
+role on the db container's first start; an existing host moves ownership
+across with `migrate-db-role.sh`.
+
+`afenda_app` is created with `CREATEDB` only because a fresh host's first
+`init` run creates the `afenda` database itself (`db init`). A fresh host
+keeps it until that first `init` has created the database. On an initialized
+host, removing it takes away the last privilege beyond owning `afenda`:
+
+```bash
+docker compose exec -T db psql -X -v ON_ERROR_STOP=1 -U xforge -d postgres -c "ALTER ROLE afenda_app NOCREATEDB"
+```
+
+Nothing afterwards needs it back. `init` on an initialized database only
+installs, upgrades and sets parameters (rehearsed: `docker compose run --rm -T
+init`, a restart of `xforge` and `module upgrade afenda_runtime` all pass
+without it). `restore.sh` drops and creates databases as `xforge`, so it is
+unaffected. Re-running `migrate-db-role.sh` does not restore `CREATEDB`: it
+creates the role only when it is absent and otherwise only resets its
+password. The database manager stays closed (`list_db = False`), so the
+server never creates or duplicates a database either.
 
 ### Moving an existing host
 

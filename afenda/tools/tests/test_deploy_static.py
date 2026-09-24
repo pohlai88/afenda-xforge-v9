@@ -211,6 +211,21 @@ class DeployStaticTests(unittest.TestCase):
         self.assertLess(role_check.start(), text.index("dropdb"),
                          "the role check must come before dropdb")
 
+    def test_scripts_restart_only_the_app_container(self):
+        # `docker compose start xforge` also starts xforge's depends_on
+        # (init, service_completed_successfully): the stale one-shot init
+        # container, whose environment can predate the current compose file.
+        # Starting the existing container by id starts it alone.
+        for name in ("backup.sh", "restore.sh", "migrate-db-role.sh"):
+            with self.subTest(script=name):
+                text = (DEPLOY / name).read_text(encoding="utf-8")
+                self.assertNotIn("docker compose start xforge", text)
+                restart = re.search(r"^restart_xforge\(\) \{\n(.*?)^\}", text, re.MULTILINE | re.DOTALL)
+                self.assertIsNotNone(restart, f"{name} has no restart_xforge function")
+                self.assertIn('docker start "$(docker compose ps -aq xforge)"', restart.group(1))
+                self.assertIn("docker compose exec -T nginx nginx -s reload || true", restart.group(1))
+                self.assertIn("trap restart_xforge EXIT", text)
+
 
 class LandingSiteStaticTests(unittest.TestCase):
     """The nexuscanon.com landing page under deploy/site: one screen, black and

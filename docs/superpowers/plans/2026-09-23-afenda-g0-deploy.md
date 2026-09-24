@@ -250,11 +250,14 @@ G1 role rehearsal (2026-09-24, local `afenda-deploy` stack holding the restored 
   db, init and xforge; `init` exited 0 as `xforge@db`, `/web/health` pass, the app's sessions
   `xforge`, ownership still `0` off `afenda_app`. Forward again with the current files: `init`
   exit 0, `/web/health` pass, the app's sessions `afenda_app`.
-- Found: `docker compose start xforge` in the backup and migrate restart traps also starts the
-  existing `init` container, so during the migration the pre-migration `init` (as `xforge`) ran
-  twice, once after ownership had moved. Here it had nothing outdated to upgrade and created
-  no objects (ownership `0` afterwards), but it would create superuser-owned objects if the
-  running image ever carried a newer module version than the database.
+- Found: `docker compose start xforge` in the backup, restore and migrate restart traps also
+  starts the existing `init` container, so during the migration the pre-migration `init` (as
+  `xforge`) ran twice, once after ownership had moved. Here it had nothing outdated to upgrade
+  and created no objects (ownership `0` afterwards), but it would create superuser-owned
+  objects if the running image ever carried a newer module version than the database.
+  Closed by the follow-up "restart only the app after backups and restores": all three traps
+  now start the existing `xforge` container by id (`docker start "$(docker compose ps -aq
+  xforge)"`), so none of them starts `init` any more.
 
 G1 on the live host (2026-09-24, Task 5 of docs/superpowers/plans/2026-09-24-afenda-g1-hardening.md):
 
