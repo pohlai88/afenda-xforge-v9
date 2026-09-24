@@ -1,16 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <template id="request_access_by_invitation" name="Access by invitation">
-        <t t-call="web.frontend_layout">
-            <!-- `no_footer`: this module does not depend on `website`, so
-            `request.is_frontend` never turns True and the footer language
-            selector that `portal` injects (addons/portal/views/portal_templates.xml:67-73)
-            has no `frontend_languages` to read, which 500s the render. Same
-            pattern as afenda_api_docs/views/landing.xml. -->
-            <t t-set="no_footer" t-value="True"/>
-            <div class="container py-5 text-center">
-                <h1 class="h3">Access to <t t-out="product"/> is by invitation.</h1>
-                <p class="text-muted mt-3">Ask your administrator for an invitation.</p>
+        <!-- One of the logged-out pages, so it wears the same poster as the
+             rest: afenda_brand's web.login_layout (the crystal bear, the
+             lockup, a display headline and one card).
+             web.login_layout already sets `no_header` and `no_footer`
+             (addons/web/views/webclient_templates.xml:113-114). `no_footer`
+             is what this page needs besides: this module does not depend on
+             `website`, so `request.is_frontend` never turns True and the
+             footer language selector `portal` injects
+             (addons/portal/views/portal_templates.xml:67-73) has no
+             `frontend_languages` to read, which 500s the render.
+             `disable_footer` drops the card's footnote, whose "Manage
+             Databases" link has no business on a page for people who have no
+             account. -->
+        <t t-call="web.login_layout">
+            <t t-set="disable_footer" t-value="True"/>
+            <t t-set="afenda_headline">Access to <t t-out="product"/> is by invitation.</t>
+            <!-- `o_afenda_auth_request` is the hook afenda_brand's
+                 auth_bear.css keys this page's "moss" skin on. -->
+            <div class="o_afenda_auth_request">
+                <p class="mb-0">Ask your administrator for an invitation.</p>
             </div>
         </t>
     </template>

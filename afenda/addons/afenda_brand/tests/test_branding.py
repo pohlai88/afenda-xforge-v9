@@ -12,10 +12,11 @@ from unittest import mock
 from lxml import etree as lxml_etree
 from lxml import html as lxml_html
 from markupsafe import Markup
-from PIL import Image
+from PIL import Image, ImageColor
 
-from odoo.modules.module import load_script
-from odoo.tests import HttpCase, tagged
+from odoo import http
+from odoo.modules.module import get_manifest, load_script
+from odoo.tests import HttpCase, new_test_user, tagged
 from odoo.tools import file_open, is_html_empty
 
 # The generator that drew the icons this module ships, reached from the repo
@@ -131,16 +132,17 @@ class TestBranding(HttpCase):
         return html, self.url_open(hrefs[0]).text.lower()
 
     def test_the_auth_page_is_art_left_and_card_right(self):
-        """Art on the left, card on the right, and the art never cropped.
+        """Art on the left, form column on the right, and the art never cropped.
 
-        This replaces a test that pinned the ink masthead - a band across the
-        top of the page carrying both marks - which the owner has replaced
-        outright. Two invariants survive the change of shape, and they are the
-        two that were load-bearing all along.
+        Rewritten for the poster: the art is now the INLINE crystal bear
+        (views/auth_bear.xml, t-called by login_layout) rather than an <img>
+        whose src could be fetched, so the "served file is a vector" and "src
+        is the one swap point" assertions went with the <img>. The two
+        invariants that were load-bearing all along survive unchanged.
 
         The first is document order: the art block comes before the form block,
-        which is what makes the page read art-then-card when it stacks below md
-        and art-beside-card above it. It is also what keeps the two in normal
+        which is what makes the page read art-then-form when it stacks below md
+        and art-beside-form above it. It is also what keeps the two in normal
         flow, and therefore what keeps them from ever sharing a pixel.
 
         The second is the one that fails silently, so it is pinned hardest. In
@@ -167,25 +169,13 @@ class TestBranding(HttpCase):
 
         heroes = doc.find_class("o_afenda_auth_hero")
         self.assertEqual(len(heroes), 1, "the hero art is not rendered exactly once")
-        hero = heroes[0]
-        # Decoration, not information: the page names the product in the lockup
-        # opposite, so a second announcement of the same brand is screen-reader
-        # noise. alt="" is how that is said; a missing alt is not.
-        self.assertEqual(hero.get("alt"), "", "the hero art is not marked decorative")
-        # An LCP image must not be deferred.
-        self.assertIsNone(hero.get("loading"), "the hero art is lazy-loaded")
-        served = self.url_open(hero.get("src"))
-        self.assertEqual(served.status_code, 200, f"{hero.get('src')} is not served")
-        self.assertIn(b"<svg", served.content[:256], "the hero art is not a vector")
         # The geometry every measurement in this docstring is stated in. Point
-        # the art at a file with a different viewBox and the left-margin
+        # the slot at art with a different viewBox and the left-margin
         # arithmetic above stops describing it; this is what says so.
-        self.assertIn(b'viewBox="0 0 800 887"', served.content[:256],
-                      "the hero art is not the 800x887 master this crop math describes")
-
-        # Exactly one place in the module names the art: the t-set in
-        # webclient_templates.xml. The stylesheet must not be a second one, or
-        # repointing the art becomes two edits and the second gets forgotten.
+        self.assertEqual(heroes[0].get("viewbox") or heroes[0].get("viewBox"), "0 0 800 887",
+                         "the hero art is not the 800x887 master this crop math describes")
+        # Nothing names an art FILE in the stylesheet: the art is markup now,
+        # and a url() to it would be a second, stale copy.
         self.assertNotIn("crystal_bear", css,
                          "the stylesheet names the art file: the swap point is not single")
 
@@ -197,10 +187,16 @@ class TestBranding(HttpCase):
                          "the art is not seated on the page's bottom edge")
         self._assert_not_media_gated(
             css, art[0].start(), "the art's left anchor exists only inside a media query")
+        # The poster ratio: the bear takes about 55% of a wide page.
+        self.assertRegex(art[1].group(1), r"flex:\s*1\s+1\s+55%",
+                         "the art is not the poster's 55% column above md")
+        self._assert_media_gated(
+            css, art[1].start(), "768px", "the art's poster width is not gated on the md breakpoint")
         # Nothing paints a surface under the art. The artwork carries its own
         # near-paper tone in the muzzle and the lettuce, so a plate, a rule or
-        # a shadow here draws a visible seam around a transparent PNG-looking
-        # edge -- the exact failure the owner's "no panel" ruling is about.
+        # a shadow here draws a visible seam around it -- the exact failure the
+        # owner's "no panel" ruling is about. The mood aura lives on the FORM
+        # column for the same reason.
         for rule in art:
             for seam in ("background", "border", "box-shadow"):
                 self.assertNotIn(seam, rule.group(1),
@@ -229,8 +225,8 @@ class TestBranding(HttpCase):
         # The narrow cap is what keeps the action above the fold once the art
         # is above the card; the wide one is what makes the art large. Both are
         # heights, so neither can touch the left edge.
-        self.assertRegex(hero_rules[0].group(1), r"max-height:\s*\d+vh",
-                         "the art is uncapped at narrow widths and can push the action below the fold")
+        self.assertRegex(hero_rules[0].group(1), r"max-height:\s*28vh",
+                         "the art is not capped at 28vh when it stacks above the form")
         self.assertRegex(hero_rules[1].group(1), r"max-height:\s*\d+vh",
                          "the art is uncapped on a wide screen")
         self._assert_media_gated(
@@ -244,7 +240,7 @@ class TestBranding(HttpCase):
         self._assert_not_media_gated(
             css, stacked[0].start(), "the stacked page exists only inside a media query")
         self.assertRegex(stacked[1].group(1), r"flex-direction:\s*row",
-                         "the page never becomes art-beside-card")
+                         "the page never becomes art-beside-form")
         self._assert_media_gated(
             css, stacked[1].start(), "768px",
             "the two-column page is not gated on the md breakpoint")
@@ -253,10 +249,402 @@ class TestBranding(HttpCase):
         # may be layered behind or over the card -- the tenant greens in the
         # artwork under an input, a placeholder or a focus ring do not hold AA.
         # Two boxes in normal flow cannot overlap, and taking one out of flow
-        # is the only way to make them, so that is what is closed here.
+        # is the only way to make them, so that is what is closed here. The
+        # aura pseudo-element is absolutely placed, but inside the form column
+        # (`inset: 0` of a positioned column), so it cannot reach the art.
         for rule in stacked + art + hero_rules:
             self.assertNotRegex(rule.group(1), r"position:\s*(absolute|fixed)",
                                 "the art is out of flow and can overlap the card")
+        aura = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_form::before\s*\{([^}]*)\}", css)
+        self.assertTrue(aura, "the mood aura is missing from the bundle")
+        self.assertRegex(aura.group(1), r"inset:\s*0",
+                         "the aura is not confined to the form column")
+        column = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_form\s*\{([^}]*position:[^}]*)\}", css)
+        self.assertTrue(column, "the form column has no position rule")
+        self.assertRegex(column.group(1), r"position:\s*relative",
+                         "the aura is not positioned against the form column")
+
+    def test_the_hero_is_the_inline_bear(self):
+        """The bear is markup, so the page's CSS can reach every layer.
+
+        Replaces the <img> hero assertions (alt="", no loading=lazy, a served
+        src): an <img> is opaque to page CSS, which is exactly why the bear
+        moved inline. What an inline copy has to get right instead:
+        - it is decoration: aria-hidden and not focusable, with no text node
+          a screen reader could read;
+        - every layer auth_bear.css binds is present, so no rule is silently
+          dead;
+        - every id is afb- prefixed: the inline copy shares the page's id
+          space, and an unprefixed `haze` or `bear` would collide with
+          anything the page, a portal snippet or an OAuth button calls that.
+        """
+        html = self.url_open("/web/login").text
+        doc = lxml_html.fromstring(html)
+        heroes = doc.find_class("o_afenda_auth_hero")
+        self.assertEqual(len(heroes), 1, "the hero is not rendered exactly once")
+        hero = heroes[0]
+        self.assertEqual(hero.tag, "svg", "the hero is not the inline SVG")
+        self.assertFalse(doc.xpath("//img[contains(concat(' ', @class, ' '), ' o_afenda_auth_hero ')]"),
+                         "an <img> hero still renders")
+        self.assertEqual(hero.get("aria-hidden"), "true", "the bear is announced to screen readers")
+        self.assertEqual(hero.get("focusable"), "false", "the bear takes keyboard focus")
+        self.assertFalse(hero.text_content().strip(), "the bear carries text a reader could announce")
+
+        classes = set()
+        for node in hero.iter():
+            if isinstance(node.tag, str):
+                classes.update((node.get("class") or "").split())
+        for layer in ("afb-haze", "afb-body", "afb-base", "afb-facet", "afb-f1", "afb-f2",
+                      "afb-f3", "afb-shadow", "afb-s1", "afb-s2", "afb-headlight", "afb-sheen",
+                      "afb-rim", "afb-face", "afb-mask", "afb-chin", "afb-bush", "afb-branch"):
+            self.assertIn(layer, classes, f"the bear has no {layer} layer for auth_bear.css to bind")
+
+        ids = [node.get("id") for node in hero.iter() if isinstance(node.tag, str) and node.get("id")]
+        self.assertTrue(ids, "the bear defines no gradients or clip paths")
+        stray = [i for i in ids if not i.startswith("afb-")]
+        self.assertFalse(stray, f"unprefixed ids share the page's id space: {stray}")
+        for needed in ("afb-rimGrad", "afb-sheenEdge", "afb-hazeFade"):
+            self.assertIn(needed, ids, f"#{needed}, which auth_bear.css recolours, is missing")
+        # The face must sit inside its group: the group is what turns.
+        face = [n for n in hero.iter() if isinstance(n.tag, str) and "afb-face" in (n.get("class") or "").split()]
+        self.assertEqual(len(face), 1, "the face is not one group")
+        self.assertIsNone(face[0].get("transform"),
+                          "the face group has its own transform, which the CSS turn would erase")
+        inner = {c for n in face[0].iter() if isinstance(n.tag, str)
+                 for c in (n.get("class") or "").split()}
+        self.assertTrue({"afb-mask", "afb-chin"} <= inner, "the mask and chin are not in the face group")
+
+        # The fallback ruling survives: a tenant with no hero art gets their
+        # own company_logo in the art slot, and a caller that points the slot
+        # at a file still gets an <img>. Nothing in this module puts
+        # afenda_hero in a qcontext, so no served page reaches either branch;
+        # what is checkable is that both exist, in that order, and that the
+        # fallback is upstream's own moved <img>.
+        arch = self.env.ref("web.login_layout").get_combined_arch()
+        tree = lxml_etree.fromstring(arch.encode())
+        slot = tree.xpath("//div[@class='o_afenda_auth_art']")
+        self.assertEqual(len(slot), 1, "the art slot is not in the layout exactly once")
+        branches = [(n.tag, n.get("t-if") or n.get("t-elif") or ("else" if n.get("t-else") is not None else None))
+                    for n in slot[0] if isinstance(n.tag, str)]
+        self.assertEqual(
+            branches,
+            [("t", "afenda_hero is None"), ("img", "afenda_hero"), ("t", "else")],
+            "the art slot is not inline bear / caller's image / tenant fallback",
+        )
+        caller_image = [n for n in slot[0] if isinstance(n.tag, str) and n.tag == "img"]
+        self.assertEqual(caller_image[0].get("alt"), "",
+                         "a caller's hero image is not marked decorative")
+        first = next(n for n in slot[0] if isinstance(n.tag, str))
+        self.assertEqual(first.get("t-call"), "afenda_brand.auth_bear",
+                         "the default branch does not render the inline bear")
+
+    def test_the_bear_stylesheets_reach_the_bundle(self):
+        """Both bear stylesheets are in the compiled web.assets_frontend.
+
+        Checked by content, not by file name: the bundle is one concatenated
+        sheet. `--bear-forest-500` is the generated scales file; the attentive
+        state selector is the hand-written one. Both survive the minifier
+        verbatim because they are plain .css (assetsbundle.py:965-972), which
+        is also what keeps oklch() and color-mix() intact.
+        """
+        _html, css = self._frontend_css()
+        self.assertIn("--bear-forest-500:oklch(", css.replace(" ", ""),
+                      "auth_bear_scales.css is not in web.assets_frontend")
+        self.assertIn(".o_afenda_login:has(#login:focus)", css,
+                      "auth_bear.css is not in web.assets_frontend")
+        self.assertIn("color-mix(in oklch", css, "color-mix() did not survive the bundle")
+        # Load order: the scales must precede the skins that read them, and
+        # login.scss's paper ground must stay the first `.o_afenda_login {`
+        # block (test_frontend_css_has_login_surface reads the first one).
+        self.assertLess(css.index("--bear-forest-500"), css.index("--skin-base"),
+                        "the skins load before the scales they read")
+        ground = re.search(r"\.o_afenda_login\s*\{([^}]*)\}", css)
+        self.assertIn(BRAND["paper"].lower(), ground.group(1),
+                      "a bear stylesheet now owns the first .o_afenda_login block")
+
+    @staticmethod
+    def _css_rules(source):
+        """(prelude, body, enclosing at-rule) for every block in a CSS source.
+
+        Comments are stripped first. @media and @supports are descended into,
+        so the rules inside them are checked like any other; @keyframes and
+        @property come back whole, with their at-rule as the prelude.
+        """
+        code = re.sub(r"/\*.*?\*/", "", source, flags=re.S)
+        rules = []
+
+        def walk(text, context):
+            index = 0
+            while True:
+                opener = text.find("{", index)
+                if opener < 0:
+                    return
+                depth, cursor = 1, opener + 1
+                while depth:
+                    if text[cursor] == "{":
+                        depth += 1
+                    elif text[cursor] == "}":
+                        depth -= 1
+                    cursor += 1
+                prelude, body = text[index:opener].strip(), text[opener + 1:cursor - 1]
+                if prelude.startswith(("@media", "@supports")):
+                    walk(body, prelude)
+                else:
+                    rules.append((prelude, body, context))
+                index = cursor
+
+        walk(code, None)
+        return rules
+
+    @staticmethod
+    def _top_level_selectors(prelude):
+        """Split a selector list on commas that are not inside :has()/:not()."""
+        parts, depth, current = [], 0, ""
+        for char in prelude:
+            depth += (char == "(") - (char == ")")
+            if char == "," and not depth:
+                parts.append(current.strip())
+                current = ""
+            else:
+                current += char
+        parts.append(current.strip())
+        return parts
+
+    def test_the_bear_stylesheet_is_scoped_and_invents_no_colour(self):
+        """auth_bear.css, read as SOURCE: scoped, literal-free, fully defined.
+
+        Scoped: web.assets_frontend also serves the portal and afenda_api_docs,
+        so an unscoped `:has()` or `[class*=afb-]` rule would restyle pages it
+        was never meant for. Every selector starts at `.o_afenda_login`, the
+        body class only web.login_layout pages carry.
+
+        Literal-free: the colour system is scale tokens mixed with color-mix()
+        and nothing else, so a hex, an rgb()/hsl()/oklch() value or a named
+        colour is a colour invented outside the generator. Checked in
+        declaration bodies only: `#afb-rimGrad` and `#login` are selectors.
+
+        Fully defined: `fill: var(--x)` with --x undefined is invalid at
+        computed-value time and falls back to black. Every var() used must be
+        declared by the generated scales or by this file's base skin -- not
+        merely by some page skin or state that is not always active.
+
+        And the motion contract the owner set: nothing moves at rest. Every
+        animation is inside a state rule, the only loop is the submit sweep,
+        reduced motion switches all of it off, and no rule ever puts a CSS
+        transform on the four layers whose placement IS their transform
+        attribute.
+        """
+        with file_open("afenda_brand/static/src/css/auth_bear.css", "r") as handle:
+            source = handle.read()
+        with file_open("afenda_brand/static/src/css/auth_bear_scales.css", "r") as handle:
+            scales = handle.read()
+        rules = self._css_rules(source)
+        self.assertGreater(len(rules), 20, "auth_bear.css parsed into too few rules to mean anything")
+
+        style_rules = [r for r in rules if not r[0].startswith("@")]
+        # At-rules cannot be scoped to a selector, so they are allowed by
+        # kind and held to a namespace instead: @property registers a custom
+        # property for the whole document and @keyframes a global animation
+        # name, and a generic `--mood` or `settle` would collide with anything
+        # else on the page that picks the same word. @media only wraps rules,
+        # and the rules inside it are checked above like any other.
+        for prelude, _body, context in rules:
+            if context is not None:
+                self.assertTrue(context.startswith("@media"),
+                                f"{context!r}: only @media may wrap rules in auth_bear.css")
+            if prelude.startswith("@"):
+                kind, _, name = prelude.partition(" ")
+                self.assertIn(kind, ("@property", "@keyframes"),
+                              f"{prelude!r}: an at-rule auth_bear.css has no reason to use")
+                self.assertTrue(name.strip().lstrip("-").startswith(("afb-", "bear-")),
+                                f"{prelude!r} declares a global name outside afb-/bear-")
+        for prelude, _body, _context in style_rules:
+            for selector in self._top_level_selectors(prelude):
+                self.assertTrue(
+                    selector.startswith(".o_afenda_login"),
+                    f"{selector!r} is not rooted at .o_afenda_login and can leak onto the portal",
+                )
+
+        named = {name.lower() for name in ImageColor.colormap} - {"transparent"}
+        for prelude, body, _context in rules:
+            where = f"auth_bear.css {prelude!r}"
+            self.assertFalse(re.findall(r"#[0-9a-fA-F]{3,8}\b", body), f"{where} holds a hex colour")
+            self.assertFalse(
+                re.findall(r"(?<![\w-])(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch|color)\(", body, flags=re.I),
+                f"{where} holds a colour function literal",
+            )
+            words = set(re.findall(r"(?<![\w#.-])([a-z]+)(?![\w(-])", body.lower()))
+            self.assertFalse(words & named, f"{where} names a colour: {sorted(words & named)}")
+
+        defined = set(re.findall(r"(--[\w-]+)\s*:", re.sub(r"/\*.*?\*/", "", scales, flags=re.S)))
+        base = [body for prelude, body, context in rules if prelude == ".o_afenda_login" and context is None]
+        self.assertTrue(base, "auth_bear.css has no base skin")
+        defined |= set(re.findall(r"(--[\w-]+)\s*:", base[0]))
+        for token in ("--bear-base", "--bear-f1", "--bear-f2", "--bear-f3", "--bear-s1",
+                      "--bear-s2", "--bear-headlight", "--bear-sheen-a", "--bear-sheen-b",
+                      "--bear-rim-a", "--bear-rim-b", "--bear-haze", "--bear-cream",
+                      "--bear-branch", "--afb-mood"):
+            self.assertIn(token, defined, f"the base skin does not define {token}")
+        used = set(re.findall(r"var\(\s*(--[\w-]+)", re.sub(r"/\*.*?\*/", "", source, flags=re.S)))
+        self.assertFalse(used - defined,
+                         f"var() used but never defined, which paints black: {sorted(used - defined)}")
+
+        placed = ("afb-mask", "afb-chin", "afb-bush", "afb-branch")
+        for prelude, body, _context in style_rules:
+            if any(layer in prelude for layer in placed):
+                self.assertNotRegex(
+                    body, r"(?<![\w-])(transform|translate|rotate|scale)\s*:",
+                    f"{prelude!r} moves a layer whose transform attribute places it",
+                )
+
+        for prelude, body, context in style_rules:
+            if re.search(r"(?<![\w-])animation(-name)?\s*:", body) and "none" not in body:
+                self.assertIn(":has(", prelude, f"{prelude!r} animates at rest")
+            if "infinite" in body:
+                self.assertIn(".o_btn_loading", prelude,
+                              f"{prelude!r} loops outside the submit state")
+
+        reduced = [(p, b) for p, b, c in style_rules if c and "prefers-reduced-motion: reduce" in c]
+        self.assertTrue(reduced, "no prefers-reduced-motion block")
+        self.assertTrue(any(".afb-face" in p and re.search(r"animation:\s*none", b)
+                            and re.search(r"transform:\s*none", b) for p, b in reduced),
+                        "reduced motion does not stop the face")
+
+    def _assert_one_poster(self, url, page, headline):
+        """One hero, one lockup, one h1 carrying the page's headline, one card."""
+        self.assertEqual(page.status_code, 200, f"{url} is not served")
+        doc = lxml_html.fromstring(page.text)
+        self.assertIn("o_afenda_login", (doc.body.get("class") or "").split(),
+                      f"{url} does not render the auth body")
+        for klass in ("o_afenda_auth_hero", "o_afenda_auth_lockup"):
+            self.assertEqual(len(doc.find_class(klass)), 1, f"{url} does not render {klass} exactly once")
+        titles = doc.xpath("//h1")
+        self.assertEqual(len(titles), 1, f"{url} does not have exactly one h1")
+        self.assertEqual(titles[0].text_content().strip(), headline, f"{url} has the wrong headline")
+        self.assertIn("o_afenda_auth_title", titles[0].get("class") or "",
+                      f"{url}'s h1 is not the poster headline")
+        self.assertEqual(len(doc.find_class("o_database_list")), 1, f"{url} does not render exactly one card")
+        self.assertFalse(doc.find_class("o_afenda_card_head"), f"{url} still has a card head")
+        return doc
+
+    def test_every_auth_page_is_one_poster(self):
+        """Every logged-out page: the same poster, its own headline.
+
+        Replaces test_the_auth_page_composes_without_the_tagline, which pinned
+        the opposite of today's rule ("no page but /web/login has a title").
+        The headline is now the layout's and every page names itself; what
+        still holds from that test is that only /web/login carries the
+        tagline, because only its controller sets it.
+
+        /web/signup is reached with a token on purpose: `invitation_scope` is
+        b2b here, so the route is a 404 without one. Relaxing that setting to
+        make the test easier would change the product's security posture, so
+        the test brings its own token instead. The reset-with-token page is
+        reached the same way, with a partner prepared for a reset.
+        """
+        self._assert_one_poster("/web/login", self.url_open("/web/login"), "Welcome back.")
+
+        probe = self.env["res.partner"].create({"name": "AFENDA signup probe"})
+        probe.signup_prepare()
+        signup = "/web/signup?token=%s" % probe._generate_signup_token()
+        reset_user = new_test_user(self.env, "afenda_reset_probe@example.com")
+        reset_user.partner_id.signup_prepare(signup_type="reset")
+        reset = "/web/reset_password?token=%s" % reset_user.partner_id._generate_signup_token()
+
+        for url, headline in (
+            (signup, "Join the workspace."),
+            ("/web/reset_password", "Forgot your password?"),
+            (reset, "Choose a new password."),
+        ):
+            with self.subTest(url=url):
+                doc = self._assert_one_poster(url, self.url_open(url), headline)
+                # These routes answer 200 for an invalid token too, with the
+                # error in the card; without this the assertions above would
+                # pass on a page that failed.
+                self.assertFalse(doc.find_class("alert-danger"),
+                                 f"{url} rendered an error instead of the form")
+                self.assertFalse(doc.find_class("o_afenda_auth_line"),
+                                 f"the tagline reached {url}, whose controller never sets it")
+
+        # "This link has expired.": an unknown token sets `invalid_token` and
+        # an error (addons/auth_signup/controllers/main.py:148-150) and hides
+        # the fields, so the page must not promise a new password.
+        junk = "/web/reset_password?token=not-a-real-token"
+        with self.subTest(url=junk):
+            doc = self._assert_one_poster(junk, self.url_open(junk), "This link has expired.")
+            self.assertTrue(doc.find_class("alert-danger"), "the expired link is not explained")
+
+        self.authenticate(None, None)
+        # "Password updated.": a token reset that succeeded. The controller
+        # sets `message` after do_signup while `token` is still in the
+        # qcontext (main.py:96-99), so without the `message and token` branch
+        # this would read "Check your inbox." -- a lie about what just happened.
+        with self.subTest(url="/web/reset_password (token POST)"):
+            done = self.url_open(reset, data={
+                "token": reset.split("token=", 1)[1],
+                "password": "afenda-reset-probe-pw-2026",
+                "confirm_password": "afenda-reset-probe-pw-2026",
+                "csrf_token": http.Request.csrf_token(self),
+            })
+            doc = self._assert_one_poster("/web/reset_password (token POST)", done, "Password updated.")
+            self.assertTrue(doc.find_class("alert-success"), "the reset was not confirmed")
+            self.assertFalse(doc.find_class("alert-danger"), "the token reset failed")
+
+        # "Check your inbox.": the request, once made. Posted like the form
+        # does; the mail it queues is not sent in test mode.
+        sent = self.url_open("/web/reset_password", data={
+            "login": reset_user.login,
+            "csrf_token": http.Request.csrf_token(self),
+        })
+        doc = self._assert_one_poster("/web/reset_password (sent)", sent, "Check your inbox.")
+        self.assertTrue(doc.find_class("alert-success"), "the reset request was not acknowledged")
+
+    def test_the_two_factor_page_is_a_poster_with_one_heading(self):
+        """/web/login/totp: the layout's h1 replaces upstream's h5 heading.
+
+        Reached the way a person reaches it. TOTP is switched on by writing a
+        secret, as addons/auth_totp/tests/test_totp.py:167 does, and the
+        password is posted to /web/login as the form posts it
+        (addons/auth_totp_mail/tests/test_auth_signup.py:68-81 is the same
+        route); web_login then parks the user in `pre_uid` and redirects to
+        the second factor.
+        """
+        user = new_test_user(self.env, "afenda_totp_probe", password="afenda_totp_probe_pw")
+        user.totp_secret = "IRXWM5LT"
+        self.authenticate(None, None)
+        page = self.url_open("/web/login", data={
+            "login": user.login,
+            "password": "afenda_totp_probe_pw",
+            "type": "password",
+            "csrf_token": http.Request.csrf_token(self),
+        })
+        self.assertTrue(page.url.endswith("/web/login/totp"),
+                        f"the password did not lead to the second factor: {page.url}")
+        doc = self._assert_one_poster("/web/login/totp", page, "Two-factor Authentication")
+        self.assertEqual(len(doc.xpath("//input[@id='totp_token']")), 1,
+                         "the 2FA page lost its code field, which its night skin keys on")
+        self.assertFalse(doc.xpath("//h5[contains(@class, 'card-title')]"),
+                         "upstream's h5 heading still renders beside the h1")
+
+    def test_the_manifest_loads_the_bear_first(self):
+        """The layout t-calls afenda_brand.auth_bear, so it must load first;
+        and the templates this module inherits must be in its graph."""
+        manifest = get_manifest("afenda_brand")
+        data = manifest["data"]
+        self.assertIn("views/auth_bear.xml", data, "the inline bear is not loaded")
+        self.assertLess(data.index("views/auth_bear.xml"), data.index("views/webclient_templates.xml"),
+                        "the layout loads before the template it t-calls")
+        for dependency in ("auth_signup", "auth_totp"):
+            self.assertIn(dependency, manifest["depends"],
+                          f"{dependency}'s templates are inherited but it is not declared")
+        frontend = [a if isinstance(a, str) else a[-1] for a in manifest["assets"]["web.assets_frontend"]]
+        self.assertEqual(
+            frontend[frontend.index("afenda_brand/static/src/scss/login.scss"):],
+            ["afenda_brand/static/src/scss/login.scss",
+             "afenda_brand/static/src/css/auth_bear_scales.css",
+             "afenda_brand/static/src/css/auth_bear.css"],
+            "the bear stylesheets are not loaded after login.scss, scales first",
+        )
 
     def test_the_lockup_is_the_only_mark_and_the_card_carries_none(self):
         """One mark, at the top right, in the colourway drawn for paper.
@@ -316,14 +704,15 @@ class TestBranding(HttpCase):
         self.assertRegex(box.group(1), r"aspect-ratio:\s*2\.5",
                          "the lockup reserves no box of the lockup's own shape")
 
-        # The art slot holds exactly one image and, with the hero present, it
-        # is the hero: the tenant's logo is neither doubled onto the page nor
-        # left behind in the card upstream renders it in.
+        # The art slot holds the hero and nothing else: the inline bear, with
+        # no <img> beside it, so the tenant's logo is neither doubled onto the
+        # page nor left behind in the card upstream renders it in.
         art = doc.find_class("o_afenda_auth_art")
         self.assertEqual(len(art), 1, "the art slot is not rendered exactly once")
-        slot_images = art[0].xpath(".//img")
-        self.assertEqual(len(slot_images), 1, "the art slot does not hold exactly one image")
-        self.assertIn("o_afenda_auth_hero", slot_images[0].get("class") or "",
+        self.assertFalse(art[0].xpath(".//img"), "the art slot holds an image beside the bear")
+        slot_art = [n for n in art[0] if isinstance(n.tag, str)]
+        self.assertEqual(len(slot_art), 1, "the art slot does not hold exactly one piece of art")
+        self.assertIn("o_afenda_auth_hero", slot_art[0].get("class") or "",
                       "the art slot holds something other than the hero")
         self.assertFalse(doc.xpath("//img[contains(@src, 'company_logo')]"),
                          "the tenant logo renders alongside the hero")
@@ -344,8 +733,6 @@ class TestBranding(HttpCase):
         # that it sits in the art slot and not back in the card, and that the
         # cap login.scss gives it is a bound and not a box.
         arch = self.env.ref("web.login_layout").get_combined_arch()
-        self.assertEqual(arch.count("crystal_bear.svg"), 1,
-                         "the hero art is named more than once in the template")
         tree = lxml_etree.fromstring(arch.encode())
         fallback = tree.xpath(
             "//div[@class='o_afenda_auth_art']"
@@ -381,58 +768,6 @@ class TestBranding(HttpCase):
                          "the fallback tenant logo has a forced height")
         self._assert_not_media_gated(
             css, cap.start(), "the fallback tenant logo is capped only inside a media query")
-
-    def test_the_auth_page_composes_without_the_tagline(self):
-        """Every login_layout page but /web/login renders the mark line-less.
-
-        Only controllers/home.py:18 (the web_login override) puts
-        `afenda_tagline` in the qcontext, so /web/reset_password and /web/signup
-        get the lockup with nothing under it. The old ink band needed a rule for
-        that case - a lockup alone in a tall column was pinned to the top of an
-        empty ink field by space-between. This page needs none: the mark is a
-        right-aligned column of two lines or of one, in the same place either
-        way, so no CSS is asserted here and none is invented.
-
-        What is pinned instead is that both routes render the WHOLE new page -
-        the art slot, the hero in it and the lockup over the card - rather than
-        a card floating on bare paper, which is what a layout built only
-        against /web/login looks like on them. And that neither is greeted with
-        "Welcome back", which is why that heading lives on web.login and not on
-        the layout all three share.
-
-        /web/signup is reached with a token on purpose: `invitation_scope` is
-        b2b here, so the route is a 404 without one. Relaxing that setting to
-        make the test easier would change the product's security posture, so
-        the test brings its own token instead.
-        """
-        if not self.env["ir.module.module"].search_count(
-                [("name", "=", "auth_signup"), ("state", "=", "installed")]):
-            self.skipTest("auth_signup is not installed: no login_layout page without a tagline")
-
-        probe = self.env["res.partner"].create({"name": "AFENDA signup probe"})
-        probe.signup_prepare()
-        signup = "/web/signup?token=%s" % probe._generate_signup_token()
-
-        for url in ("/web/reset_password", signup):
-            with self.subTest(url=url):
-                page = self.url_open(url)
-                self.assertEqual(page.status_code, 200, f"{url} is not served")
-                doc = lxml_html.fromstring(page.text)
-                # The signup route answers 200 for an invalid token too, with
-                # the error in the card; without this the assertions below
-                # would pass on a page that failed.
-                self.assertFalse(doc.find_class("alert-danger"),
-                                 f"{url} rendered an error instead of the form")
-                for klass in ("o_afenda_auth", "o_afenda_auth_art",
-                              "o_afenda_auth_hero", "o_afenda_auth_lockup"):
-                    self.assertEqual(len(doc.find_class(klass)), 1,
-                                     f"{url} does not render {klass} exactly once")
-                self.assertFalse(doc.find_class("o_afenda_auth_line"),
-                                 f"the tagline reached {url}, whose controller never sets it")
-                self.assertFalse(doc.find_class("o_afenda_auth_title"),
-                                 f"{url} greets the visitor as a returning one")
-                self.assertFalse(doc.find_class("o_afenda_card_head"),
-                                 f"{url} still has a card head")
 
     def test_webclient_page_is_branded(self):
         self.authenticate("admin", "admin")

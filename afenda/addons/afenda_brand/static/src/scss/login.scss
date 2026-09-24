@@ -1,13 +1,19 @@
 // AFENDA xForge auth surface: /web/login, /web/signup, /web/reset_password and
 // every other page that t-calls web.login_layout.
 //
-// A light paper page. The hero art carries the left, seated on the page's
-// bottom-left corner with NO plate, panel or radius of its own - the artwork
-// holds its own near-paper tone in the muzzle and the lettuce, so any surface
-// painted under it shows as a seam. One white card carries the form on the
-// right, and the AFENDA lockup with the product line is the small attribution
-// above it. Nothing is layered behind or over the card: the art and the form
+// A light paper page, composed as a poster. The hero art - the crystal bear,
+// inline so auth_bear.css can reach its layers - carries the left 55%, seated
+// on the page's bottom-left corner with NO plate, panel or radius of its own:
+// the artwork holds its own near-paper tone in the muzzle and the lettuce, so
+// any surface painted under it shows as a seam. The right column reads top to
+// bottom: the AFENDA lockup (small, top right, the same on every page), the
+// page's display headline, one white card carrying the form, and a quiet
+// footnote. Nothing is layered behind or over the card: the art and the form
 // never share a pixel at any width.
+//
+// This file is layout, type and form geometry only. The bear's colour, its
+// moods and the mood the form carries back are auth_bear.css, which is plain
+// CSS on purpose (see the manifest).
 //
 // The LEFT anchor on the art is the one thing here that fails silently. In the
 // master's 800x887 geometry the face mask sits at (30, 210, 241, 432) - about
@@ -67,28 +73,38 @@
     }
 
     // ---------------------------------------------------------------------
-    // The card's own voice: webclient_templates.xml puts this block at the
-    // head of web.login only, because "Welcome back" is false on a password
-    // reset and on a signup.
+    // The poster headline: the page's one h1, set outside the card, above it.
+    // Each page names itself (webclient_templates.xml, `afenda_headline`).
+    // Serif display against the sans form: the headline is the voice, the
+    // card is the instrument.
     // ---------------------------------------------------------------------
-    .o_afenda_auth_intro {
-        margin-bottom: 1.5rem;
+    .o_afenda_auth_headline {
+        display: flex;
+        flex-direction: column;
+        gap: .75rem;
+        margin-bottom: clamp(.5rem, 2vw, 1.25rem);
     }
 
     .o_afenda_auth_title {
-        margin: 0 0 .375rem;
-        font-size: 1.5rem;
+        margin: 0;
+        font-family: "Source Serif 4", Georgia, serif;
+        font-size: clamp(2.5rem, 4vw, 3.75rem);
         font-weight: 600;
-        line-height: 1.2;
-        letter-spacing: -.01em;
+        line-height: 1.05;
+        letter-spacing: -.025em;
         color: $o-main-text-color;  // ink
+        // "Authentication" at 60px is wider than a phone; break the word
+        // rather than push the page sideways.
+        overflow-wrap: break-word;
+        text-wrap: balance;
     }
 
     .o_afenda_auth_subtitle {
         margin: 0;
-        font-size: .875rem;
+        max-width: 34ch;
+        font-size: 1rem;
         line-height: 1.45;
-        color: $o-brand-secondary;  // graphite: 7.6:1 on white
+        color: $o-brand-secondary;  // graphite: 7.1:1 on paper
     }
 
     // ---------------------------------------------------------------------
@@ -279,10 +295,15 @@
         }
     }
 
-    // The card footer is the quietest line on the page: no underline until it
-    // is asked for, and no blue — the action above it is the only one.
-    .border-top {
+    // The footnote: upstream's card footer, moved out under the card by
+    // webclient_templates.xml. The quietest line on the page: no underline
+    // until it is asked for, and no blue - the action above it is the only
+    // one. It is pushed to the foot of the column by the auto margin under
+    // the card (see "Vertical placement" below), so it needs none of its own.
+    .o_afenda_auth_foot {
+        padding-top: 1rem;
         font-size: .75rem;
+        line-height: 1.4;
         color: $o-brand-secondary;  // graphite
 
         a {
@@ -336,9 +357,9 @@
         min-width: 0;
 
         @media (min-width: 768px) {
-            // 42% of the page, grown and shrunk with it. The art is the left
-            // half of the composition; the card gets the rest.
-            flex: 1 1 42%;
+            // 55% of the page, grown and shrunk with it: the bear is the
+            // poster's image, and the form column is the caption beside it.
+            flex: 1 1 55%;
         }
     }
 
@@ -346,6 +367,9 @@
     // scales the WHOLE image down to fit rather than cropping a side of it,
     // which is the only way the face is guaranteed intact at every width. No
     // object-fit and no width/height: the intrinsic 800x887 stays authoritative.
+    // The same rule holds for the inline <svg> and for an <img> a caller
+    // points the slot at: both carry width="800" height="887", and the svg's
+    // viewBox gives it the same ratio.
     // The narrow cap is a height, in vh, and it is what keeps the "Log in"
     // button above the fold on a 375x667 screen once the art is above the card.
     .o_afenda_auth_hero {
@@ -380,20 +404,64 @@
         margin: clamp(1rem, 4vw, 3rem);
     }
 
-    // The form half: the lockup at the top, the card under it. `flex: 1 1 auto`
+    // The form column: lockup, headline, card, footnote. `flex: 1 1 auto`
     // rather than a percentage below md, so a stacked page gives the form
-    // whatever the art leaves.
+    // whatever the art leaves. Above md it keeps a floor of 22rem so the card
+    // never drops to the 300px at which its label rows wrap; the art is the
+    // side that gives.
     .o_afenda_auth_form {
         flex: 1 1 auto;
         display: flex;
         flex-direction: column;
         gap: clamp(1rem, 3vw, 1.5rem);
         min-width: 0;
-        padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 3vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+        padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 3vw, 3rem) clamp(1.5rem, 4vw, 2rem);
 
         @media (min-width: 768px) {
-            flex: 1 1 58%;
+            flex: 1 1 45%;
+            min-width: 22rem;
         }
+    }
+
+    // The headline, the card's measure and the footnote share one left edge
+    // and one width, so the poster reads as a single column of type under the
+    // lockup rather than three things centred on their own. 34rem lets the
+    // display headline run wider than the 400px card beside the art.
+    // `padding-inline` on the headline and the footnote matches the gutter the
+    // upstream .container puts around the card, so all three start on the
+    // same pixel.
+    .o_afenda_auth_headline,
+    .o_afenda_auth_measure,
+    .o_afenda_auth_foot {
+        width: 100%;
+        max-width: 34rem;
+        margin-inline: auto;
+    }
+
+    .o_afenda_auth_headline,
+    .o_afenda_auth_foot {
+        padding-inline: calc(var(--bs-gutter-x, 1.5rem) * .5);
+    }
+
+    // Vertical placement: headline and card sit together in the middle of the
+    // column, whichever of the optional pieces the page renders. The headline
+    // is optional (a page that sets no afenda_headline), and so is the
+    // footnote (`disable_footer`: the 2FA page, /request-access). So the
+    // centring hangs on the two pieces that always exist:
+    // - whatever comes straight after the lockup - the headline, or the card
+    //   when there is no headline - takes an auto margin above it;
+    // - the card's measure always takes an auto margin below it.
+    // The two auto margins split the free space evenly: with a footnote the
+    // pair is centred between the lockup and the footnote (which the lower
+    // margin pushes to the bottom); without one, between the lockup and the
+    // bottom of the column.
+    .o_afenda_auth_mark + .o_afenda_auth_headline,
+    .o_afenda_auth_mark + .o_afenda_auth_measure {
+        margin-top: auto;
+    }
+
+    .o_afenda_auth_measure {
+        margin-bottom: auto;
     }
 
     // Ours: top right, small, right-aligned as a block so the lockup and the
@@ -429,14 +497,12 @@
         color: $o-brand-secondary;  // graphite
     }
 
-    // The card's measure. Takes the height the lockup leaves and centres the
-    // card in it; `min-height` on the page (not `height`) means a form taller
-    // than the viewport grows the page instead of being clipped.
+    // The card's measure. It no longer centres the card on its own: the
+    // headline above and the footnote below place the pair together, and
+    // `min-height` on the page (not `height`) means a form taller than the
+    // viewport grows the page instead of being clipped.
     .o_afenda_auth_measure {
-        flex: 1 1 auto;
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        flex: 0 0 auto;
         min-width: 0;
     }
 }

@@ -27,6 +27,16 @@
         "mail",
         "mail_bot",
         "portal",
+        # Declared because views/webclient_templates.xml inherits their
+        # templates (auth_signup.signup, auth_signup.reset_password,
+        # auth_totp.auth_totp_form), and an inherit_id needs its parent loaded
+        # first. auth_signup already arrives through portal, but only
+        # transitively; auth_totp is otherwise only auto-installed and not in
+        # this module's graph at all, so its view could load after ours.
+        # Upgrading installs a newly declared dependency that is still
+        # uninstalled (odoo/addons/base/models/ir_module.py:739-749).
+        "auth_signup",
+        "auth_totp",
         # OCA/server-brand 19.0
         # `mail_debranding` is deliberately absent: it only acts on a body that
         # still contains an `<a href>` to odoo.com (mail_render_mixin.py:28-32),
@@ -43,6 +53,10 @@
         "web_no_bubble",
     ],
     "data": [
+        # Before webclient_templates.xml: login_layout t-calls
+        # afenda_brand.auth_bear, the inline crystal bear that
+        # afenda/tools/crystal_bear generates.
+        "views/auth_bear.xml",
         "views/webclient_templates.xml",
         "views/mail_templates.xml",
     ],
@@ -69,6 +83,13 @@
         "web.assets_frontend": [
             "afenda_brand/static/src/scss/fonts.scss",
             "afenda_brand/static/src/scss/login.scss",
+            # Plain .css, not .scss: the bundle concatenates it with only a
+            # comment strip and a whitespace collapse
+            # (odoo/addons/base/models/assetsbundle.py:965-972), so oklch() and
+            # color-mix() reach the browser untouched. The generated scales
+            # first, then the skins and states that read them.
+            "afenda_brand/static/src/css/auth_bear_scales.css",
+            "afenda_brand/static/src/css/auth_bear.css",
         ],
         # Printed documents: static font instances (wkhtmltopdf cannot use the
         # variable fonts) plus the document rules.
