@@ -83,7 +83,7 @@ The pack contract. Small on purpose.
   `test_every_test_class_would_actually_be_collected`
   (`afenda/addons/afenda_brand/tests/test_branding.py:1501-1562`): it AST-walks every
   `afenda/addons/*/tests/*.py`, resolves base classes **only within the same file**
-  (`:1537-1545`), and flags any class with `test_` methods whose reachable bases miss
+  (`:1553-1561`), and flags any class with `test_` methods whose reachable bases miss
   Odoo's case classes. A pack test written as `class TestBakeryPack(IndustryPackCase)`
   would resolve to `{IndustryPackCase}`, miss `odoo_cases`, and **fail the afenda_brand
   suite**. Packs therefore declare:
@@ -92,7 +92,7 @@ The pack contract. Small on purpose.
   class TestBakeryPack(IndustryPackMixin, TransactionCase):
   ```
 
-  and the mixin is skipped by the guard because it has no `test_` methods (`:1548-1551`).
+  and the mixin is skipped by the guard because it has no `test_` methods (`:1563-1567`).
 
 Manifest: `version 19.0.1.0.0`, `license LGPL-3`, `author AFENDA`,
 `category Hidden/Tools`, `application False`.
@@ -152,7 +152,7 @@ precondition for ruling 4's uninstall story, enforced by a test rather than by c
 
 ## Tests and acceptance
 
-`afenda_industry_base` — 3 tests in `tests/test_seed.py`:
+`afenda_industry_base` — 4 tests in `tests/test_seed.py`:
 
 1. `test_load_company_records_assigns_xmlid`
 2. `test_load_company_records_is_idempotent`
@@ -185,7 +185,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --test-tags "/afenda_industry_bakery" --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_base: 3 tests`, `afenda_industry_bakery: 9 tests`. A run that
+Expected: `afenda_industry_base: 4 tests`, `afenda_industry_bakery: 9 tests`. A run that
 prints no count collected nothing. The `afenda_brand` suite runs once at the end too,
 because its collection guard now has two new addons in scope.
 

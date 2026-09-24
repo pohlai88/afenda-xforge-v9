@@ -23,7 +23,7 @@
   - UoM XMLIDs that do exist: `uom.product_uom_unit`, `uom.product_uom_gram`, `uom.product_uom_kgm` (`addons/uom/data/uom_data.xml:12,91,95`). Do not invent others.
   - `post_init_hook(env)` takes a single `env` argument (`afenda/addons/afenda_brand/hooks.py:98`).
 - **No `company_id`, no `property_account_*`, no `taxes_id`/`supplier_taxes_id`, no `journal_id`, no `ref="l10n_*"` anywhere under `data/`.** Tasks 5 enforces this with static tests; violating it fails the suite.
-- Test classes with `test_` methods must reach an Odoo case class **by a base named in the same file**. Use `class X(IndustryPackMixin, TransactionCase)`. See `afenda/addons/afenda_brand/tests/test_branding.py:1537-1553`.
+- Test classes with `test_` methods must reach an Odoo case class **by a base named in the same file**. Use `class X(IndustryPackMixin, TransactionCase)`. See `afenda/addons/afenda_brand/tests/test_branding.py:1553-1567 (verified at 9be03d305; another session is editing that file, so re-check before trusting the numbers)`.
 - **Every industry pack test class carries `@tagged("post_install", "-at_install")`** (import `tagged` from `odoo.tests`), with a comment saying why. Found by Task 1's implementer: `odoo/modules/loading.py:148,282` runs a module's `at_install` suite immediately after that module loads, so a thin-dependency module runs at graph depth 1 — before `account` loads — and `res.partner` then lacks `autopost_bills`, whose column is NOT NULL (`addons/account/models/partner.py:610`). The suite then passes under `-i` and errors under `-u`, which is the documented command in `.claude/odoo-agent-rules.md:186-190`. A pack that only passes when freshly installed is a trap for every later session and splits CI from local runs.
 - **`-i <module>` collects nothing on a database where that module is already installed.** `odoo/service/server.py:1598-1599` builds the post-install module list from `registry.updated_modules`, and `-i` on an installed module updates nothing, so the suite selects nothing and prints `0 tests` — which in this quiet config is indistinguishable from success at a glance. Found by Task 1's implementer. Consequences: on a developer machine it is `-u` that runs a suite; and any task whose assertions depend on **install-time** behaviour (anything seeded by `post_init_hook`) must be verified on a **fresh throwaway database**, not on the shared `afenda` one. Create it on `127.0.0.1:5444`, install there, drop it and its filestore afterwards, and never uninstall or otherwise mutate the shared `afenda` database — other sessions are using it.
 - **The authoritative test count is the result line** (`<module>: N tests`), not the per-class stats line. `setUpClass`/`tearDownClass` get their own stat ids (`odoo/tests/result.py:117-120`, aggregated `:253-262`), so the stats line reads higher — 5 where the result line says 3. Quote the result line; a CI floor set from the stats line is wrong.
@@ -42,7 +42,7 @@ afenda/addons/afenda_industry_base/
   seed.py                  load_company_records() — the one piece of machinery
   tests/__init__.py        imports test_seed (NOT common)
   tests/common.py          IndustryPackMixin — assertions, no test_ methods
-  tests/test_seed.py       3 tests
+  tests/test_seed.py       4 tests
 
 afenda/addons/afenda_industry_bakery/
   __init__.py              imports hooks
@@ -233,11 +233,11 @@ def load_company_records(env, module, model_name, records, noupdate=True):
 Deliberately a mixin that does NOT subclass TransactionCase and declares no
 `test_` methods. afenda_brand's `test_every_test_class_would_actually_be_collected`
 resolves a test class's bases only within the same file
-(afenda/addons/afenda_brand/tests/test_branding.py:1537-1545), so a pack test
+(afenda/addons/afenda_brand/tests/test_branding.py:1553-1561), so a pack test
 written as `class TestBakeryPack(IndustryPackCase)` would resolve to
 {IndustryPackCase}, miss Odoo's case classes, and fail that guard. Packs
 therefore declare `class TestBakeryPack(IndustryPackMixin, TransactionCase)`,
-and this mixin is skipped by the guard because it has no `test_` methods (:1548-1551).
+and this mixin is skipped by the guard because it has no `test_` methods (:1563-1567).
 """
 import pathlib
 # stdlib ElementTree, deliberately. The only input is the pack's own XML,
@@ -303,7 +303,7 @@ class IndustryPackMixin:
 - [ ] **Step 4: Run the tests and verify they pass**
 
 Run the Step 2 command again.
-Expected, printed on stdout: `afenda_industry_base: 3 tests` with `0 failed, 0 error(s)`. If no count prints at all, nothing was collected — check that `tests/__init__.py` imports `test_seed`.
+Expected, printed on stdout: `afenda_industry_base: 4 tests` with `0 failed, 0 error(s)`. If no count prints at all, nothing was collected — check that `tests/__init__.py` imports `test_seed`.
 
 - [ ] **Step 5: Commit**
 
@@ -316,8 +316,8 @@ printf '%s\n' "[ADD] industry: the pack contract every AFENDA preset follows" ""
   "leaves orphan POS configs behind forever." "" \
   "The shared assertions ship as a mixin with no test_ methods, because" \
   "afenda_brand's collection guard resolves test bases only within one file" \
-  "(test_branding.py:1537-1545)." "" \
-  "afenda_industry_base: 3 tests, 0 failed." "" \
+  "(test_branding.py:1553-1561)." "" \
+  "afenda_industry_base: 4 tests, 0 failed." "" \
   "Co-Authored-By: Claude Opus 5 (1M context) <noreply@anthropic.com>" > /tmp/msg1.txt
 git add -- afenda/addons/afenda_industry_base && \
 git commit --only -F /tmp/msg1.txt -- afenda/addons/afenda_industry_base
@@ -1031,7 +1031,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_base: 3 tests` and `afenda_industry_bakery: 9 tests`, 12 in total, `0 failed`.
+Expected: `afenda_industry_base: 4 tests` and `afenda_industry_bakery: 9 tests`, 13 in total, `0 failed`.
 
 Then run the same two modules **once on a fresh throwaway database** with `-i` and `--without-demo=all`, because that is what CI does (the orchestrator session's job builds a new database per run) and it is the only path that exercises `post_init_hook` end to end. Both result lines must read the same 3 and 9. Drop the scratch database and its filestore afterwards. These two numbers are what CI's floor is raised by — take them from the result lines, never the per-class stats lines.
 
