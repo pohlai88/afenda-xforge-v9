@@ -1,16 +1,29 @@
 // AFENDA xForge auth surface: /web/login, /web/signup, /web/reset_password and
 // every other page that t-calls web.login_layout.
 //
-// One composition at every width: an ink band across the top carrying both
-// marks - the tenant's own logo on a paper plate at the head of it, the AFENDA
-// lockup and the product line at the far end - and below it the paper ground
-// with one white card on it. Nothing brand-like is inside the card:
-// webclient_templates.xml moves the tenant logo into the band and deletes the
-// card's head outright, so there is no width at which a mark appears there.
+// A light paper page. The hero art carries the left, seated on the page's
+// bottom-left corner with NO plate, panel or radius of its own - the artwork
+// holds its own near-paper tone in the muzzle and the lettuce, so any surface
+// painted under it shows as a seam. One white card carries the form on the
+// right, and the AFENDA lockup with the product line is the small attribution
+// above it. Nothing is layered behind or over the card: the art and the form
+// never share a pixel at any width.
 //
-// No layout rule here is inside a media query. The band is not a panel that
-// opens at a breakpoint; it is the page's masthead, and a phone gets the same
-// page a desktop does, wrapped rather than collapsed.
+// The LEFT anchor on the art is the one thing here that fails silently. In the
+// master's 800x887 geometry the face mask sits at (30, 210, 241, 432) - about
+// 4% of left margin - while the tree already runs to x=0 and y=886. So the
+// tree running off the left and the bottom is the composition; a crop from the
+// left is a cut muzzle, and it reads as a rendering bug rather than a design.
+// Every rule below therefore anchors the art's left edge to the page's left
+// edge and lets the RIGHT side vary with the viewport: `justify-content:
+// flex-start`, no `object-fit`, no negative left offset, and a cap expressed
+// only as a maximum, so the browser scales the whole image down rather than
+// cropping any side of it.
+//
+// One media query, at Bootstrap's md (768px), and it changes only the
+// direction of the page: art beside the form above it, art above the form
+// below it. Everything that must exist at every width - the art itself, its
+// left anchor, the card, the lockup - is declared unconditionally, outside it.
 //
 // Tokens come from primary_variables.scss, which web.assets_frontend pulls in
 // through web._assets_helpers -> web._assets_primary_variables.
@@ -23,23 +36,59 @@
 // it, and `.o_database_list` stays a descendant (never `>`) of it.
 
 .o_afenda_login {
-    // Paper is not decoration here: the form area below the band is
-    // transparent, and this is what paints the ground the card sits on.
+    // Paper is not decoration here: the art and the form areas are both
+    // transparent, and this is what paints the ground everything sits on.
     background: $o-webclient-background-color;  // paper
 
     // Upstream dresses this card in `bg-100 border-0`. Both are !important
     // utilities, so no selector here could win; login_layout strips the two
     // classes instead and these plain declarations then apply.
+    //
+    // NAMED DEVIATION from afenda-superdesign gate row H4 ("Borders and
+    // spacing carry structure; shadow, radius, gradient and glass do not").
+    // The owner's target puts one subtle shadow on this card and nothing else
+    // on the page, and it is doing work the hairline cannot: the card is the
+    // only opaque object on a page whose ground is paper and whose left half
+    // is artwork, so it has to lift off that ground rather than be outlined on
+    // it. Scoped to this one element, at two low-alpha stops of ink, with no
+    // gradient and no glass anywhere else on the surface.
     .o_database_list {
         background: $white;
         border: 1px solid $border-color;  // hairline
         border-radius: $o-border-radius;
+        box-shadow: 0 1px 2px rgba($o-main-text-color, .04),
+                    0 16px 40px rgba($o-main-text-color, .08);
     }
 
-    // Room to breathe on a 360px card. `.card-body` is a component class, not
+    // Room to breathe on a 400px card. `.card-body` is a component class, not
     // a utility, so a plain declaration outranks it.
     .o_database_list .card-body {
         padding: 2rem 1.75rem 1.75rem;
+    }
+
+    // ---------------------------------------------------------------------
+    // The card's own voice: webclient_templates.xml puts this block at the
+    // head of web.login only, because "Welcome back" is false on a password
+    // reset and on a signup.
+    // ---------------------------------------------------------------------
+    .o_afenda_auth_intro {
+        margin-bottom: 1.5rem;
+    }
+
+    .o_afenda_auth_title {
+        margin: 0 0 .375rem;
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: 1.2;
+        letter-spacing: -.01em;
+        color: $o-main-text-color;  // ink
+    }
+
+    .o_afenda_auth_subtitle {
+        margin: 0;
+        font-size: .875rem;
+        line-height: 1.45;
+        color: $o-brand-secondary;  // graphite: 7.6:1 on white
     }
 
     // ---------------------------------------------------------------------
@@ -104,15 +153,70 @@
         color: $o-brand-secondary;  // graphite
 
         &:hover { color: $o-main-text-color; }
+
+        &:focus-visible {
+            outline: none;
+            box-shadow: 0 0 0 3px rgba($o-brand-primary, .12);
+            position: relative;  // the ring must not be painted under the input
+        }
     }
 
-    // One action per screen, solid and full width (upstream already sets
-    // d-grid on the button row).
+    // The affordances that share a row with a label: "Choose a user" (portaled
+    // into the Email label by web.user_switch) and "Reset Password" (added to
+    // the Password label row by auth_signup). Upstream ships them as
+    // `.btn-link`, whose colour is the action's; graphite instead, because the
+    // page holds exactly one blue thing and that is the submit button. 7.6:1
+    // on white, and each keeps a visible focus ring and a hover underline, so
+    // neither depends on colour alone to read as a control.
+    .o_caps_lock_warning .btn-link,
+    .form-label .btn-link,
+    .o_user_switch_btn,
+    .oe_login_buttons .btn-link {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: .8125rem;
+        font-weight: 500;
+        color: $o-brand-secondary;  // graphite
+        text-decoration: none;
+
+        &:hover {
+            color: $o-main-text-color;
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $o-brand-primary;
+            outline-offset: 2px;
+            border-radius: $o-border-radius;
+        }
+    }
+
+    // "Log in as superuser" and "Don't have an account?" sit under the action,
+    // not beside a label, so they get their own breathing room.
+    .oe_login_buttons .btn-link {
+        margin-top: .75rem;
+    }
+
+    // One action per screen: solid, full width (upstream already sets d-grid on
+    // the button row), and pointing forward. `flex` rather than the default
+    // inline-block so the arrow and the word are one object with a gap between
+    // them instead of a text node and a margin.
     .oe_login_buttons .btn-primary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
         min-height: 2.75rem;
         font-size: .9375rem;
         font-weight: 600;
         border-radius: $o-border-radius;
+    }
+
+    // The arrow is a glyph, not an icon button: it takes the line's colour and
+    // rides a touch smaller than the word so it reads as punctuation.
+    .o_afenda_auth_go {
+        font-size: .8125em;
+        line-height: 1;
     }
 
     // ---------------------------------------------------------------------
@@ -189,127 +293,150 @@
                 color: $o-main-text-color;
                 text-decoration: underline;
             }
+
+            &:focus-visible {
+                outline: 2px solid $o-brand-primary;
+                outline-offset: 2px;
+            }
         }
     }
 
     // ---------------------------------------------------------------------
-    // The band. Every rule below is unconditional: the masthead is the page at
-    // 360px exactly as it is at 1920px, and only wraps.
+    // The page: art and form, in that document order.
     // ---------------------------------------------------------------------
-    // The page is a stack of two: the band, then everything else on paper.
-    // min-height earns its place by giving the form area a column to be
-    // centred in - without it the card hugs the band on a tall screen.
+    // Below md the two are a column - art above, form below - and they share
+    // no pixel, no stacking context and no overlap: the tenant greens in the
+    // artwork under an input, a placeholder or a focus ring would not hold AA,
+    // so nothing is ever layered behind or over the card.
+    // Above md the same two boxes become a row. That is the ONLY thing the
+    // breakpoint changes; the art, its left anchor and the card are declared
+    // outside it and exist at every width.
     .o_afenda_auth {
         display: flex;
         flex-direction: column;
         min-height: 100vh;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+            align-items: stretch;
+        }
     }
 
-    .o_afenda_auth_panel {
+    // The art's box. Deliberately bare: no background, no border, no radius,
+    // no shadow. The artwork carries its own near-paper tone, so a plate here
+    // would draw a visible seam around it.
+    // `justify-content: flex-start` is the left anchor and is the reason the
+    // muzzle survives a narrow viewport; `align-items: flex-end` seats the art
+    // on the page's bottom edge, which is where its tree already runs off.
+    .o_afenda_auth_art {
+        flex: 0 0 auto;
         display: flex;
-        flex-wrap: wrap;
-        align-items: center;
-        // Subject at the head, attribution at the tail. With wrap, a line
-        // holding a single group sits at the start, so a phone gets the two
-        // groups stacked and left-aligned rather than one of them stranded
-        // against the right edge.
-        justify-content: space-between;
-        gap: 1.25rem clamp(1.5rem, 5vw, 4rem);
-        padding: clamp(1rem, 3vw, 1.75rem) clamp(1rem, 5vw, 4rem);
-        background: $o-main-text-color;  // ink
+        align-items: flex-end;
+        justify-content: flex-start;
+        min-width: 0;
+
+        @media (min-width: 768px) {
+            // 42% of the page, grown and shrunk with it. The art is the left
+            // half of the composition; the card gets the rest.
+            flex: 1 1 42%;
+        }
     }
 
-    // The plate. `company_logo` is arbitrary customer artwork, almost always
-    // dark ink drawn for a white page - that is where Odoo renders this same
-    // image everywhere else. Paper is the ground it was drawn for, and the one
-    // choice that is safe for artwork we cannot see; ink is not.
-    // No border: the plate is already a light object on a dark band, and a
-    // rule around it would be a second edge saying the same thing.
-    .o_afenda_auth_plate {
-        display: flex;
-        align-items: center;
-        // Tight, even inset. The plate is a ground for the artwork, not a
-        // frame around it: enough that the mark never touches the edge and
-        // reads as cropped, and no more. The mark itself carries no padding --
-        // it is trimmed to its own bounding box before it is stored.
-        padding: .5rem;
-        background: $o-webclient-background-color;  // paper
-        border-radius: $o-border-radius;
+    // Bounded only by maxima, and never by a fixed dimension: the browser then
+    // scales the WHOLE image down to fit rather than cropping a side of it,
+    // which is the only way the face is guaranteed intact at every width. No
+    // object-fit and no width/height: the intrinsic 800x887 stays authoritative.
+    // The narrow cap is a height, in vh, and it is what keeps the "Log in"
+    // button above the fold on a 375x667 screen once the art is above the card.
+    .o_afenda_auth_hero {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 28vh;
+
+        @media (min-width: 768px) {
+            max-height: 92vh;
+        }
     }
 
-    // `res_company.logo_web` is 180x45. Upstream draws it with an inline
-    // `max-height:120px; max-width:100%`, which is an upscale of a raster and
-    // reads soft; login_layout drops that inline style so this cap applies.
-    // Never larger than the bytes actually are.
-    // The tenant mark leads: it is the subject, ours is the maker's mark.
-    //
-    // Bounded by HEIGHT, not by a 180x45 box. logo_web is
+    // `res_company.logo_web` is the fallback the art slot falls back to for a
+    // tenant with no hero art (the t-else branch in webclient_templates.xml).
+    // Bounded by HEIGHT, not by a 180x45 box: logo_web is
     // image_process(logo, size=(180, 0)) (odoo/addons/base/models/
     // res_company.py:169-172) -- at most 180 WIDE with a free height, and
-    // expand=False so it never upscales (odoo/tools/image.py:315). Its aspect
-    // ratio is therefore unknown here: this tenant's is 179x172, and a 45px
-    // height cap rendered that at 47x45, smaller than our own lockup and with
-    // the badge's wordmark illegible. A height bound is the only cap that
-    // treats a square badge and a wide lockup alike.
-    //
-    // 72px is a downscale for anything logo_web can return (its height is at
-    // most the artwork's own), so nothing is ever upscaled.
+    // expand=False so it is never upscaled (odoo/tools/image.py:315). Its
+    // aspect ratio is therefore unknown here: this tenant's is 179x172, and a
+    // 45px height cap once rendered that at 47x45, smaller than our own lockup
+    // and with the badge's wordmark illegible. A height bound is the only cap
+    // that treats a square badge and a wide lockup alike, and 180px stays the
+    // width ceiling because that is the ceiling logo_web itself imposes.
     .o_afenda_auth_tenant {
         display: block;
         width: auto;
         height: auto;
         max-width: 180px;   // logo_web's own width ceiling; never exceeded
-        max-height: 72px;
+        max-height: 128px;
+        margin: clamp(1rem, 4vw, 3rem);
     }
 
-    // Ours: the lockup with the product line under it. Deliberately the
-    // smaller mass of the two - 120px of line art on ink against a solid paper
-    // plate up to 212px wide. The instance belongs to the tenant; we are the
-    // maker's mark on it.
+    // The form half: the lockup at the top, the card under it. `flex: 1 1 auto`
+    // rather than a percentage below md, so a stacked page gives the form
+    // whatever the art leaves.
+    .o_afenda_auth_form {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        gap: clamp(1rem, 3vw, 1.5rem);
+        min-width: 0;
+        padding: clamp(1.25rem, 4vw, 2.5rem) clamp(1rem, 3vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+
+        @media (min-width: 768px) {
+            flex: 1 1 58%;
+        }
+    }
+
+    // Ours: top right, small, right-aligned as a block so the lockup and the
+    // line share one edge. With no tagline (every login_layout page but
+    // /web/login) it is simply a column of one in the same place.
     .o_afenda_auth_mark {
         display: flex;
         flex-direction: column;
-        align-items: flex-start;
-        gap: .5rem;
+        align-items: flex-end;
+        gap: .375rem;
+        text-align: right;
     }
 
     .o_afenda_auth_lockup {
-        width: 120px;
+        width: clamp(76px, 18vw, 104px);
         height: auto;
         // 342.254 / 136, the SVG's own viewBox, written as one number so no
         // Sass division is involved. It reserves the box before the file
-        // lands, which is why the vector cannot shift the band as it loads.
+        // lands, which is why the vector cannot shift the page as it loads.
         aspect-ratio: 2.5166;
     }
 
-    // The product's one voice, demoted from the display size it carried in the
-    // old tall panel: a band is a short shape, and a 2.5rem serif line in it
-    // would outweigh the tenant. Small, serif, receded - a descriptor under
-    // the mark it belongs to. rgba($white, ...) rather than a token so no new
-    // hex enters the sheet.
-    // Only controllers/home.py:18 (the web_login override) puts
-    // `afenda_tagline` in the qcontext, so /web/signup and /web/reset_password
-    // render the mark block without it. Nothing compensates for that and
-    // nothing needs to: the block is a column of one, at the same place in the
-    // band either way.
+    // The product's one voice: small, serif, receded - a descriptor under the
+    // mark it belongs to. Graphite rather than a lightened ink, because this
+    // page is paper: 7.1:1 on #F7F7F5.
     .o_afenda_auth_line {
         max-width: 34ch;
         margin: 0;
         font-family: "Source Serif 4", Georgia, serif;
         font-weight: 400;
-        font-size: .8125rem;
+        font-size: .75rem;
         line-height: 1.4;
-        color: rgba($white, .64);
+        color: $o-brand-secondary;  // graphite
     }
 
-    // The paper half of the page. Transparent on purpose: the body's ground
-    // shows through. It takes the height the band leaves and centres the card
-    // in it; `min-height` above (not `height`) means a form taller than the
-    // viewport grows the page instead of being clipped.
-    .o_afenda_auth_form {
+    // The card's measure. Takes the height the lockup leaves and centres the
+    // card in it; `min-height` on the page (not `height`) means a form taller
+    // than the viewport grows the page instead of being clipped.
+    .o_afenda_auth_measure {
         flex: 1 1 auto;
         display: flex;
         align-items: center;
         justify-content: center;
+        min-width: 0;
     }
 }

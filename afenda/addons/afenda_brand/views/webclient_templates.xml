@@ -25,8 +25,11 @@
         </xpath>
     </template>
 
-    <!-- Login: AFENDA surface, both marks in a band above the form, no
-         odoo.com link -->
+    <!-- Login: a paper page, not a masthead.
+         The hero art carries the left of the page, sitting straight on the
+         paper with no plate of its own; one white card on the right carries
+         the form; the AFENDA lockup and the product line are the small
+         attribution at the top right. No odoo.com link anywhere. -->
     <template id="login_layout" inherit_id="web.login_layout" name="AFENDA login layout">
         <!-- Replaces upstream's `bg-100`; login.scss paints the paper ground. -->
         <xpath expr="//t[@t-set='body_classname']" position="attributes">
@@ -39,24 +42,29 @@
              `.card` (0-1-0, no !important) loses to
              `.o_afenda_login .o_database_list` (0-2-0, later in the bundle), so
              login.scss owns the border. Adding `border` would make that SCSS
-             line dead and its test assertion vacuous. -->
+             line dead and its test assertion vacuous.
+             400px, not upstream's 300: the card now carries a heading, a
+             subheading, and two labelled fields whose right-hand affordances
+             ("Choose a user", "Reset Password") share the label row with the
+             label itself. At 300px those rows wrap.-->
         <xpath expr="//div[contains(@t-attf-class, 'o_database_list')]" position="attributes">
-            <attribute name="style">max-width: 360px;</attribute>
+            <attribute name="style">max-width: 400px;</attribute>
             <attribute name="t-attf-class" remove="bg-100 border-0" separator=" "/>
         </xpath>
         <!-- The tenant logo. It is not styled for the card any more: it is
-             MOVED into the band below, so the card carries no mark at any
-             width. Two things still happen to the element here: it gains the
-             class login.scss caps it with, and it loses its inline size.
+             MOVED into the art slot below, where it is the fallback for a
+             tenant with no hero art, so the card carries no mark at any width.
+             Two things still happen to the element here: it gains the class
+             login.scss caps it with, and it loses its inline size.
              `res_company.logo_web` is capped at 180px wide by the ORM, and
-             upstream's inline `max-height:120px; max-width:100%` would let
-             that 180x45 raster be drawn at the plate's full width - an
-             upscale, and a visibly soft one. An inline style outranks every
-             selector in the bundle, so it is dropped here and login.scss caps
-             the element at its true size.
-             The <img>, its t-attf-src and its alt are otherwise untouched:
-             this is a tenant's identity, not ours, and the `?dbname=` in that
-             src is upstream's to own.
+             upstream's inline `max-height:120px; max-width:100%` would let that
+             raster be drawn at the slot's full width - an upscale, and a
+             visibly soft one. An inline style outranks every selector in the
+             bundle, so it is dropped here and login.scss caps the element at
+             its true size.
+             The img, its t-attf-src and its alt are otherwise untouched: this
+             is a tenant's identity, not ours, and the `?dbname=` in that src is
+             upstream's to own.
              Not @alt anywhere below: it is a translated attribute, which
              ir.ui.view _valid_inheritance refuses as an inheritance selector. -->
         <xpath expr="//img[contains(@t-attf-src, 'company_logo')]" position="attributes">
@@ -75,13 +83,14 @@
         <xpath expr="//a[contains(@href, 'utm_medium=auth')]" position="replace">
             <span class="text-muted">AFENDA xForge</span>
         </xpath>
-        <!-- A band across the top of the page, above the form, at every width.
-             Wrapping is the only way to put a sibling above the upstream
-             container without restating its markup - `position="replace"`
-             substitutes the located node for any element whose text is `$0`
-             (odoo/tools/template_inheritance.py:163-172), so upstream keeps
-             ownership of everything inside the card and a future change to the
-             card body reaches us unedited.
+        <!-- The page. Wrapping is the only way to put siblings around the
+             upstream container without restating its markup -
+             `position="replace"` substitutes the located node INTO any element
+             whose text is `$0` (odoo/tools/template_inheritance.py:163-172), so
+             upstream keeps ownership of everything inside the card and a future
+             change to the card body reaches us unedited. `$0` has to be the
+             text of a real element for that xpath to find it, which is what
+             o_afenda_auth_measure is.
              (If `website` is ever installed, website.login_layout replaces the
              whole `t[@t-call]` at priority 20 and this container disappears;
              afenda_brand does not depend on website and website is uninstalled
@@ -89,53 +98,78 @@
              carries.) -->
         <xpath expr="//t[@t-call='web.frontend_layout']/div[hasclass('container')]" position="replace">
             <div class="o_afenda_auth">
-                <!-- The band carries both marks, and states which is which by
-                     size and position rather than by a label: the tenant's own
-                     logo is the subject, seated on a paper plate at the head of
-                     the band, and the AFENDA lockup is the attribution at the
-                     far end, smaller, with the product's one line under it.
-                     The plate is not decoration. `company_logo` serves
-                     `res_company.logo_web`: arbitrary customer artwork, usually
-                     drawn as dark ink for a white page, because that is where
-                     Odoo puts it everywhere else (report headers, the card this
-                     mark used to sit in). Dropped straight onto an ink band a
-                     real customer's logo could render invisible, and we would
-                     never see it - this database's company logo happens to be a
-                     light mark. The plate gives that artwork the ground it was
-                     drawn for, whatever it turns out to be.
-                     A plain div and not <aside>: an exposed complementary
-                     landmark would need an accessible name, and this is brand
-                     furniture, not a section.
-                     Two images, two different accessible names, each rendered
-                     exactly once: upstream's alt="Logo" on the tenant mark, and
-                     alt="AFENDA xForge" here. The lockup's name is load-bearing
-                     - the card's head is deleted below, so this is the only
-                     place the product names itself on the page.
-                     SVG, and the wordmark is outlined in it, so no font has to
-                     load for the lockup to be right. width/height are the
-                     viewBox, so the box is reserved before the file lands;
-                     login.scss restates the ratio. No loading="lazy": this is
-                     above the fold and plausibly the LCP element. -->
-                <div class="o_afenda_auth_panel">
-                    <div class="o_afenda_auth_plate"/>
+                <!-- ===== THE HERO ART'S ONE REFERENCE. SWAP IT HERE. =====
+                     The only place in this module that names the auth artwork.
+                     login.scss never mentions a path and the img below reads
+                     this variable, so repointing the art is a one-line edit to
+                     the string in this t-set.
+                     The file lives under static/src/img/auth_hero/ and belongs
+                     to the icon generator, not to this template.
+                     `is None`, not `or`: unset means nobody expressed a
+                     preference, so the shipped art is used; a caller that puts
+                     afenda_hero = False in the qcontext opts out and gets the
+                     tenant's own company_logo instead (the t-else branch). `or`
+                     would collapse those two cases and leave the fallback
+                     unreachable. -->
+                <t t-set="afenda_hero" t-value="'/afenda_brand/static/src/img/auth_hero/crystal_bear.svg' if afenda_hero is None else afenda_hero"/>
+                <!-- The art sits straight on the page. No plate, no panel, no
+                     radius: the artwork carries its own near-paper tone in the
+                     muzzle and the lettuce, so any surface painted under it
+                     reads as a seam.
+                     login.scss anchors it to the LEFT edge and lets the right
+                     vary with the viewport. In the master's 800x887 geometry
+                     the face mask starts at x=30, so roughly 4% of margin is
+                     all that stands between a crop from the left and a cut
+                     muzzle; the tree at x=0, y=886 is what is meant to run off
+                     the page.
+                     width/height are the viewBox, so the box is reserved before
+                     the file lands and the art cannot reflow the page as it
+                     loads. alt="" because it is decoration - the page names the
+                     product in the lockup opposite, and a second announcement
+                     of the same brand is noise in a screen reader.
+                     No loading="lazy": this is above the fold and plausibly the
+                     LCP element. -->
+                <div class="o_afenda_auth_art">
+                    <img t-if="afenda_hero" class="o_afenda_auth_hero" alt="" role="presentation"
+                         width="800" height="887" t-att-src="afenda_hero"/>
+                    <t t-else="">
+                        <div class="o_afenda_auth_fallback"/>
+                    </t>
+                </div>
+                <div class="o_afenda_auth_form">
+                    <!-- Ours, small, at the top right: a maker's mark over the
+                         card rather than a masthead over the page. SVG, and the
+                         wordmark is outlined in it, so no font has to load for
+                         the lockup to be right.
+                         logo.svg and not logo_dark.svg: this is a paper page,
+                         and the dark-ground variant draws its wordmark in
+                         #D9DEE5 and #AAB3C0, which on #F7F7F5 is barely there.
+                         Only controllers/home.py:18 (the web_login override)
+                         puts `afenda_tagline` in the qcontext, so /web/signup
+                         and /web/reset_password render this block as the lockup
+                         alone. Nothing compensates for that and nothing needs
+                         to: it is a right-aligned column, of two lines or of
+                         one. -->
                     <div class="o_afenda_auth_mark">
                         <img class="o_afenda_auth_lockup" alt="AFENDA xForge"
                              width="342" height="136"
-                             src="/afenda_brand/static/img/logo_dark.svg"/>
+                             src="/afenda_brand/static/img/logo.svg"/>
                         <p t-if="afenda_tagline" class="o_afenda_auth_line" t-out="afenda_tagline"/>
                     </div>
+                    <div class="o_afenda_auth_measure">$0</div>
                 </div>
-                <div class="o_afenda_auth_form">$0</div>
             </div>
         </xpath>
-        <!-- Move, not copy. The element that lands on the plate is upstream's
-             own <img>, so its src (including the `?dbname=` branch) and its
-             alt stay upstream's to change; a second <img> written here would be
-             a fork of that markup and a second "Logo" in the accessibility
-             tree. `position="move"` inside a `position="inside"` spec is the
-             documented way (odoo/tools/template_inheritance.py:44-49, 216-217).
-             This runs after the band exists, so the plate is addressable. -->
-        <xpath expr="//div[hasclass('o_afenda_auth_plate')]" position="inside">
+        <!-- Move, not copy. The element that lands in the fallback is
+             upstream's own img, so its src (including the `?dbname=` branch)
+             and its alt stay upstream's to change; a second img written here
+             would be a fork of that markup and a second "Logo" in the
+             accessibility tree. `position="move"` inside a `position="inside"`
+             spec is the documented way (odoo/tools/template_inheritance.py:
+             44-49, 216-217). This runs after the art slot exists, so the
+             fallback div is addressable. It renders only when afenda_hero is
+             falsy, which is the t-else branch above. -->
+        <xpath expr="//div[hasclass('o_afenda_auth_fallback')]" position="inside">
             <xpath expr="//img[contains(@t-attf-src, 'company_logo')]" position="move"/>
         </xpath>
         <!-- ...which leaves upstream's head block holding nothing but its own
@@ -145,6 +179,39 @@
              renders inside the card at any width, which is a property of the
              DOM, not of a stylesheet a bundle rebuild could drop. -->
         <xpath expr="//div[hasclass('o_afenda_card_head')]" position="replace"/>
+        <!-- `py-5` is a utility and so !important: while it is on this node no
+             rule in login.scss can own the column's vertical rhythm, and its
+             3rem of top and bottom padding is what pushes the action below the
+             fold on a 375x667 screen now that the art is above the card.
+             `container` stays - it is upstream's layout class and nothing here
+             needs it gone. -->
+        <xpath expr="//div[hasclass('o_afenda_auth_measure')]/div[hasclass('container')]" position="attributes">
+            <attribute name="class" remove="py-5" separator=" "/>
+        </xpath>
+    </template>
+
+    <!-- The card's own voice, and the arrow on the action.
+         On web.login and not on web.login_layout on purpose: "Welcome back" is
+         true of a sign-in and false of a password reset or a signup, and the
+         layout template is shared by all three. auth_signup's pages keep their
+         own copy and their own headings. -->
+    <template id="login" inherit_id="web.login" name="AFENDA login heading">
+        <xpath expr="//div[@id='oe_structure_login_top']" position="before">
+            <div class="o_afenda_auth_intro">
+                <h1 class="o_afenda_auth_title">Welcome back</h1>
+                <p class="o_afenda_auth_subtitle">Log in to your xForge workspace.</p>
+            </div>
+        </xpath>
+        <!-- The action points forward. `hasclass('btn-primary')` and not
+             `[@type='submit']`: in debug mode "Log in as superuser" is a second
+             submit button in this same block, and an xpath matching on the type
+             would take the first one either way - naming the class says which
+             control is meant instead of relying on document order. No margin
+             utility on the i: login.scss spaces it with `gap`, so the glyph and
+             the word stay one object. -->
+        <xpath expr="//div[hasclass('oe_login_buttons')]/button[hasclass('btn-primary')]" position="inside">
+            <i class="fa fa-arrow-right o_afenda_auth_go" role="presentation"/>
+        </xpath>
     </template>
 
     <!-- The divider above the passkey / OAuth buttons. Upstream's <em> is

@@ -130,116 +130,184 @@ class TestBranding(HttpCase):
         self.assertTrue(hrefs, f"web.assets_frontend stylesheet not linked from {url}")
         return html, self.url_open(hrefs[0]).text.lower()
 
-    def test_auth_band_is_the_masthead_at_every_width(self):
-        """The band sits above the form and is never taken away.
+    def test_the_auth_page_is_art_left_and_card_right(self):
+        """Art on the left, card on the right, and the art never cropped.
 
-        This replaces a test that pinned the opposite shape - a two-part canvas
-        that opened at the lg breakpoint and collapsed below it. The owner's
-        composition has one form at every width, so the invariant inverts: the
-        band has to be the FIRST thing in the page's stack, its rules have to
-        be unconditional, and no second rule may exist to collapse it. "Exactly
-        one rule" is the load-bearing half - a `display: none` for the band
-        inside some media query is the obvious way to break "at every width",
-        and it would leave the unconditional rule looking perfectly correct.
+        This replaces a test that pinned the ink masthead - a band across the
+        top of the page carrying both marks - which the owner has replaced
+        outright. Two invariants survive the change of shape, and they are the
+        two that were load-bearing all along.
+
+        The first is document order: the art block comes before the form block,
+        which is what makes the page read art-then-card when it stacks below md
+        and art-beside-card above it. It is also what keeps the two in normal
+        flow, and therefore what keeps them from ever sharing a pixel.
+
+        The second is the one that fails silently, so it is pinned hardest. In
+        the master's 800x887 geometry the face mask sits at (30, 210, 241, 432)
+        -- about 4% of left margin -- while the tree already runs to x=0 and
+        y=886. The tree running off the left and the bottom is the composition;
+        the face being cut is a rendering bug that looks like a drawing. So the
+        art is anchored to its LEFT edge and bounded ONLY by maxima: with no
+        object-fit, no fixed dimension, no minimum and no negative offset, a
+        narrower viewport can only scale the whole image down, never crop a
+        side of it. That is a property of the compiled rules rather than of a
+        screenshot, which is why it is asserted here and not left to the eye.
         """
         html, css = self._frontend_css()
         doc = lxml_html.fromstring(html)
 
         stack = doc.find_class("o_afenda_auth")
-        self.assertEqual(len(stack), 1, "the auth stack is not rendered exactly once")
+        self.assertEqual(len(stack), 1, "the auth page is not rendered exactly once")
         blocks = [child.get("class") for child in stack[0] if isinstance(child.tag, str)]
         self.assertEqual(
-            blocks, ["o_afenda_auth_panel", "o_afenda_auth_form"],
-            "the band is not the first block above the form",
+            blocks, ["o_afenda_auth_art", "o_afenda_auth_form"],
+            "the art is not the first block of the page",
         )
 
-        lockup = "/afenda_brand/static/img/logo_dark.svg"
-        self.assertIn(lockup, html, "the band carries no lockup")
-        self.assertEqual(self.url_open(lockup).status_code, 200, f"{lockup} is not served")
+        heroes = doc.find_class("o_afenda_auth_hero")
+        self.assertEqual(len(heroes), 1, "the hero art is not rendered exactly once")
+        hero = heroes[0]
+        # Decoration, not information: the page names the product in the lockup
+        # opposite, so a second announcement of the same brand is screen-reader
+        # noise. alt="" is how that is said; a missing alt is not.
+        self.assertEqual(hero.get("alt"), "", "the hero art is not marked decorative")
+        # An LCP image must not be deferred.
+        self.assertIsNone(hero.get("loading"), "the hero art is lazy-loaded")
+        served = self.url_open(hero.get("src"))
+        self.assertEqual(served.status_code, 200, f"{hero.get('src')} is not served")
+        self.assertIn(b"<svg", served.content[:256], "the hero art is not a vector")
+        # The geometry every measurement in this docstring is stated in. Point
+        # the art at a file with a different viewBox and the left-margin
+        # arithmetic above stops describing it; this is what says so.
+        self.assertIn(b'viewBox="0 0 800 887"', served.content[:256],
+                      "the hero art is not the 800x887 master this crop math describes")
 
-        band = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_panel\s*\{([^}]*)\}", css))
-        self.assertTrue(band, "the band has no rule in the frontend bundle")
-        self.assertEqual(len(band), 1,
-                         "a second rule redraws the band: one of them is width-dependent")
-        self.assertIn(BRAND["ink"].lower(), band[0].group(1), "the band is not ink")
-        self.assertRegex(band[0].group(1), r"display:\s*flex", "the band does not lay out")
+        # Exactly one place in the module names the art: the t-set in
+        # webclient_templates.xml. The stylesheet must not be a second one, or
+        # repointing the art becomes two edits and the second gets forgotten.
+        self.assertNotIn("crystal_bear", css,
+                         "the stylesheet names the art file: the swap point is not single")
+
+        art = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_art\s*\{([^}]*)\}", css))
+        self.assertEqual(len(art), 2, "the art box is not drawn by exactly two rules")
+        self.assertRegex(art[0].group(1), r"justify-content:\s*flex-start",
+                         "the art is not anchored to its left edge")
+        self.assertRegex(art[0].group(1), r"align-items:\s*flex-end",
+                         "the art is not seated on the page's bottom edge")
         self._assert_not_media_gated(
-            css, band[0].start(), "the band is drawn only inside a media query")
+            css, art[0].start(), "the art's left anchor exists only inside a media query")
+        # Nothing paints a surface under the art. The artwork carries its own
+        # near-paper tone in the muzzle and the lettuce, so a plate, a rule or
+        # a shadow here draws a visible seam around a transparent PNG-looking
+        # edge -- the exact failure the owner's "no panel" ruling is about.
+        for rule in art:
+            for seam in ("background", "border", "box-shadow"):
+                self.assertNotIn(seam, rule.group(1),
+                                 f"the art sits on a {seam}, which shows as a seam")
 
-        # The grid that made the old canvas two columns is gone, not merely
-        # overridden: a leftover `grid-template-columns` would put the band
-        # beside the form again the moment something restored `display: grid`.
+        hero_rules = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_hero\s*\{([^}]*)\}", css))
+        self.assertEqual(len(hero_rules), 2, "the hero art is not sized by exactly two rules")
+        self.assertRegex(hero_rules[0].group(1), r"width:\s*auto",
+                         "the hero art has a forced width")
+        self.assertRegex(hero_rules[0].group(1), r"height:\s*auto",
+                         "the hero art has a forced height")
+        self.assertRegex(hero_rules[0].group(1), r"max-width:\s*100%",
+                         "the hero art may overflow its own box")
+        self._assert_not_media_gated(
+            css, hero_rules[0].start(), "the hero art is sized only inside a media query")
+        # Every bound is a maximum, and no crop mechanism exists in either
+        # rule. object-fit, a minimum, a clip-path and a negative offset are
+        # the four ways the face gets cut while every other assertion in this
+        # test still passes.
+        for rule in hero_rules:
+            body = rule.group(1)
+            for cropper in ("object-fit", "min-width", "min-height", "clip-path"):
+                self.assertNotIn(cropper, body, f"{cropper} can crop the face out of the art")
+            self.assertNotRegex(body, r":\s*-",
+                                "a negative offset pulls the art off its own box")
+        # The narrow cap is what keeps the action above the fold once the art
+        # is above the card; the wide one is what makes the art large. Both are
+        # heights, so neither can touch the left edge.
+        self.assertRegex(hero_rules[0].group(1), r"max-height:\s*\d+vh",
+                         "the art is uncapped at narrow widths and can push the action below the fold")
+        self.assertRegex(hero_rules[1].group(1), r"max-height:\s*\d+vh",
+                         "the art is uncapped on a wide screen")
+        self._assert_media_gated(
+            css, hero_rules[1].start(), "768px",
+            "the art's wide-screen size is not gated on the md breakpoint")
+
         stacked = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth\s*\{([^}]*)\}", css))
-        self.assertEqual(len(stacked), 1, "the auth stack is not drawn by exactly one rule")
-        self.assertNotIn("grid", stacked[0].group(1), "the two-column grid is still here")
+        self.assertEqual(len(stacked), 2, "the page is not drawn by exactly two rules")
+        self.assertRegex(stacked[0].group(1), r"flex-direction:\s*column",
+                         "the page does not stack the art above the form by default")
         self._assert_not_media_gated(
-            css, stacked[0].start(), "the page stacks only inside a media query")
+            css, stacked[0].start(), "the stacked page exists only inside a media query")
+        self.assertRegex(stacked[1].group(1), r"flex-direction:\s*row",
+                         "the page never becomes art-beside-card")
+        self._assert_media_gated(
+            css, stacked[1].start(), "768px",
+            "the two-column page is not gated on the md breakpoint")
 
-    def test_the_band_carries_both_marks_and_the_card_carries_none(self):
-        """Two marks in the band, two different names, and no mark in the card.
+        # The 375px ruling: art and form must never share a pixel, and nothing
+        # may be layered behind or over the card -- the tenant greens in the
+        # artwork under an input, a placeholder or a focus ring do not hold AA.
+        # Two boxes in normal flow cannot overlap, and taking one out of flow
+        # is the only way to make them, so that is what is closed here.
+        for rule in stacked + art + hero_rules:
+            self.assertNotRegex(rule.group(1), r"position:\s*(absolute|fixed)",
+                                "the art is out of flow and can overlap the card")
 
-        The tenant owns the instance and we only made it, so the band states a
-        relationship rather than an adjacency: the tenant's own logo is seated
-        on a paper plate at the head of the band and ours is the smaller mark
-        at the tail. The plate's ground is the part worth pinning. Anything
-        `res_company.logo_web` holds is customer artwork drawn for a white page
-        - that is where Odoo renders this same image everywhere else - so it
-        gets paper under it. Paint the plate ink and a real customer's dark
-        logo disappears on a surface we would never see it fail on, because
-        this database's own company logo happens to be light.
+    def test_the_lockup_is_the_only_mark_and_the_card_carries_none(self):
+        """One mark, at the top right, in the colourway drawn for paper.
+
+        This replaces a test that pinned two marks on an ink band: the tenant's
+        logo on a paper plate at its head and ours at its tail. The owner's
+        page has no band and no plate, and the tenant's logo is no longer a
+        peer of ours on it -- it is what the art slot falls back to for a
+        tenant with no hero art. So the claim inverts: with the art present the
+        lockup is the only mark on the page, and it is outside the card.
+
+        Which lockup is the part worth pinning hardest. logo.svg and
+        logo_dark.svg are one drawing in two colourways: the same byte length,
+        one word apart in the filename. The dark one draws its wordmark in
+        #D9DEE5 and #AAB3C0, which on #F7F7F5 paper is very nearly nothing --
+        and that mistake survives every structural assertion here. So the
+        served bytes are checked for ink, which only the paper colourway has.
 
         The card half is a DOM property, not a stylesheet one: the head block
-        is deleted by the inheritance, so there is no width, no bundle rebuild
-        and no stylesheet failure that can put a mark back inside the card.
+        is deleted by the inheritance, so no width, no bundle rebuild and no
+        stylesheet failure can put a mark back inside the card.
         """
         html, css = self._frontend_css()
         doc = lxml_html.fromstring(html)
-        band = doc.find_class("o_afenda_auth_panel")
-        self.assertEqual(len(band), 1, "the band is not rendered exactly once")
 
         lockups = doc.find_class("o_afenda_auth_lockup")
         self.assertEqual(len(lockups), 1, "the product lockup is not rendered exactly once")
         lockup = lockups[0]
-        self.assertEqual(lockup.get("src"), "/afenda_brand/static/img/logo_dark.svg")
+        self.assertEqual(lockup.get("src"), "/afenda_brand/static/img/logo.svg")
         self.assertIn(BRAND["product"], lockup.get("alt") or "",
                       "the product lockup has no accessible name")
-        # An LCP image must not be deferred.
         self.assertIsNone(lockup.get("loading"), "the product lockup is lazy-loaded")
         served = self.url_open(lockup.get("src"))
         self.assertEqual(served.status_code, 200, "the vector lockup is not served")
         self.assertIn(b"<svg", served.content[:256], "the lockup is not a vector")
+        self.assertIn(BRAND["ink"].encode(), served.content,
+                      "the lockup is not the colourway drawn for a paper page")
 
-        # Upstream's own <img>, moved rather than copied: one element, so one
-        # "Logo" in the accessibility tree, and its src stays upstream's.
-        tenants = doc.xpath("//img[contains(@src, 'company_logo')]")
-        self.assertEqual(len(tenants), 1, "the tenant logo is not rendered exactly once")
-        tenant = tenants[0]
-        self.assertTrue((tenant.get("alt") or "").strip(),
-                        "the tenant logo has no accessible name")
-        self.assertNotEqual(
-            (tenant.get("alt") or "").strip(), (lockup.get("alt") or "").strip(),
-            "both marks announce the same name",
-        )
-        self.assertFalse(tenant.get("style"),
-                         "an inline size still outranks the cap in login.scss")
+        # Over the card, not over the page: it is in the form column and not in
+        # the art slot.
+        forms = doc.find_class("o_afenda_auth_form")
+        self.assertEqual(len(forms), 1, "the form column is not rendered exactly once")
+        self.assertIn(forms[0], list(lockup.iterancestors()),
+                      "the lockup is not in the form column")
 
-        for mark, what in ((lockup, "product lockup"), (tenant, "tenant logo")):
-            self.assertIn(band[0], list(mark.iterancestors()), f"the {what} is not in the band")
-
-        # Nothing brand-like inside the card, at any width: no head element
-        # survives the inheritance and the card holds no image at all.
-        self.assertFalse(doc.find_class("o_afenda_card_head"),
-                         "the card head block is still in the page")
-        cards = doc.find_class("o_database_list")
-        self.assertEqual(len(cards), 1, "the login card was not rendered")
-        self.assertFalse(cards[0].xpath(".//img"), "an image still renders inside the card")
-
-        plate = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_plate\s*\{([^}]*)\}", css)
-        self.assertTrue(plate, "the tenant plate has no rule in the frontend bundle")
-        self.assertIn(BRAND["paper"].lower(), plate.group(1),
-                      "the tenant logo is seated on something other than paper")
+        mark = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_mark\s*\{([^}]*)\}", css)
+        self.assertTrue(mark, "the lockup block has no rule in the frontend bundle")
+        self.assertRegex(mark.group(1), r"align-items:\s*flex-end",
+                         "the lockup is not held to the right of its column")
         self._assert_not_media_gated(
-            css, plate.start(), "the tenant plate exists only inside a media query")
+            css, mark.start(), "the lockup is placed only inside a media query")
 
         box = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_lockup\s*\{([^}]*)\}", css)
         self.assertTrue(box, "the lockup has no rule in the frontend bundle")
@@ -248,8 +316,50 @@ class TestBranding(HttpCase):
         self.assertRegex(box.group(1), r"aspect-ratio:\s*2\.5",
                          "the lockup reserves no box of the lockup's own shape")
 
+        # The art slot holds exactly one image and, with the hero present, it
+        # is the hero: the tenant's logo is neither doubled onto the page nor
+        # left behind in the card upstream renders it in.
+        art = doc.find_class("o_afenda_auth_art")
+        self.assertEqual(len(art), 1, "the art slot is not rendered exactly once")
+        slot_images = art[0].xpath(".//img")
+        self.assertEqual(len(slot_images), 1, "the art slot does not hold exactly one image")
+        self.assertIn("o_afenda_auth_hero", slot_images[0].get("class") or "",
+                      "the art slot holds something other than the hero")
+        self.assertFalse(doc.xpath("//img[contains(@src, 'company_logo')]"),
+                         "the tenant logo renders alongside the hero")
+
+        # Nothing brand-like inside the card, at any width.
+        self.assertFalse(doc.find_class("o_afenda_card_head"),
+                         "the card head block is still in the page")
+        cards = doc.find_class("o_database_list")
+        self.assertEqual(len(cards), 1, "the login card was not rendered")
+        self.assertFalse(cards[0].xpath(".//img"), "an image still renders inside the card")
+
+        # The fallback ruling: a tenant with no hero art gets their own
+        # company_logo in the art slot. Nothing in this module puts
+        # afenda_hero = False in a qcontext, so no served page exercises that
+        # branch and no assertion above can reach it -- said plainly rather
+        # than substituted for. What IS checkable is that the branch exists,
+        # that it holds upstream's own moved <img> rather than a fork of it,
+        # that it sits in the art slot and not back in the card, and that the
+        # cap login.scss gives it is a bound and not a box.
+        arch = self.env.ref("web.login_layout").get_combined_arch()
+        self.assertEqual(arch.count("crystal_bear.svg"), 1,
+                         "the hero art is named more than once in the template")
+        tree = lxml_etree.fromstring(arch.encode())
+        fallback = tree.xpath(
+            "//div[@class='o_afenda_auth_art']"
+            "//div[@class='o_afenda_auth_fallback']"
+            "//img[contains(@t-attf-src, 'company_logo')]")
+        self.assertEqual(len(fallback), 1,
+                         "the art slot has no company_logo fallback for a tenant with no hero art")
+        self.assertIn("o_afenda_auth_tenant", fallback[0].get("class") or "",
+                      "the fallback logo is not the element login.scss caps")
+        self.assertFalse(fallback[0].get("style"),
+                         "an inline size still outranks the cap in login.scss")
+
         cap = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_tenant\s*\{([^}]*)\}", css)
-        self.assertTrue(cap, "the tenant logo has no rule in the frontend bundle")
+        self.assertTrue(cap, "the fallback tenant logo has no rule in the frontend bundle")
         # Bounded by HEIGHT, and the aspect ratio left free. logo_web is
         # image_process(logo, size=(180, 0)) (odoo/addons/base/models/
         # res_company.py:169-172): at most 180 wide, height whatever the
@@ -258,47 +368,71 @@ class TestBranding(HttpCase):
         # illegible -- so the box, not the bound, was the bug.
         # Asserted as capping properties: `min-width: 180px` contains "180px"
         # too and would mean the opposite of a cap.
-        for prop, bound in (("max-width", "180px"), ("max-height", "72px")):
+        for prop, bound in (("max-width", "180px"), ("max-height", "128px")):
             self.assertRegex(
                 cap.group(1), rf"{prop}:\s*{re.escape(bound)}",
-                f"the tenant logo is not bounded by {prop}",
+                f"the fallback tenant logo is not bounded by {prop}",
             )
         # ...and nothing fixes a dimension, which would distort an aspect ratio
         # this rule cannot know.
-        self.assertRegex(cap.group(1), r"width:\s*auto", "the tenant logo has a forced width")
-        self.assertRegex(cap.group(1), r"height:\s*auto", "the tenant logo has a forced height")
+        self.assertRegex(cap.group(1), r"width:\s*auto",
+                         "the fallback tenant logo has a forced width")
+        self.assertRegex(cap.group(1), r"height:\s*auto",
+                         "the fallback tenant logo has a forced height")
         self._assert_not_media_gated(
-            css, cap.start(), "the tenant logo is capped only inside a media query")
+            css, cap.start(), "the fallback tenant logo is capped only inside a media query")
 
-    def test_the_band_composes_without_the_tagline(self):
-        """Every login_layout page but /web/login renders the band without a line.
+    def test_the_auth_page_composes_without_the_tagline(self):
+        """Every login_layout page but /web/login renders the mark line-less.
 
         Only controllers/home.py:18 (the web_login override) puts
-        `afenda_tagline` in the qcontext, so /web/reset_password and
-        /web/signup get the mark block with nothing under the lockup. The old
-        panel needed a rule for that case - a lockup alone in a tall column was
-        pinned to the top of an empty ink field by space-between, and
-        `:last-child { margin-top: auto }` seated it. A band needs no such
-        compensation, so there is no CSS to assert here and none is invented:
-        the block is a column of one, in the same place in the band either way.
-        What is pinned instead is the page, which is the claim that matters.
+        `afenda_tagline` in the qcontext, so /web/reset_password and /web/signup
+        get the lockup with nothing under it. The old ink band needed a rule for
+        that case - a lockup alone in a tall column was pinned to the top of an
+        empty ink field by space-between. This page needs none: the mark is a
+        right-aligned column of two lines or of one, in the same place either
+        way, so no CSS is asserted here and none is invented.
+
+        What is pinned instead is that both routes render the WHOLE new page -
+        the art slot, the hero in it and the lockup over the card - rather than
+        a card floating on bare paper, which is what a layout built only
+        against /web/login looks like on them. And that neither is greeted with
+        "Welcome back", which is why that heading lives on web.login and not on
+        the layout all three share.
+
+        /web/signup is reached with a token on purpose: `invitation_scope` is
+        b2b here, so the route is a 404 without one. Relaxing that setting to
+        make the test easier would change the product's security posture, so
+        the test brings its own token instead.
         """
         if not self.env["ir.module.module"].search_count(
                 [("name", "=", "auth_signup"), ("state", "=", "installed")]):
             self.skipTest("auth_signup is not installed: no login_layout page without a tagline")
-        page = self.url_open("/web/reset_password")
-        self.assertEqual(page.status_code, 200, "/web/reset_password is not served")
-        doc = lxml_html.fromstring(page.text)
-        self.assertEqual(len(doc.find_class("o_afenda_auth_panel")), 1,
-                         "/web/reset_password renders no band")
-        self.assertEqual(len(doc.find_class("o_afenda_auth_lockup")), 1,
-                         "/web/reset_password renders no lockup")
-        self.assertEqual(len(doc.find_class("o_afenda_auth_tenant")), 1,
-                         "/web/reset_password renders no tenant logo")
-        self.assertFalse(doc.find_class("o_afenda_auth_line"),
-                         "the tagline reached a page whose controller never sets it")
-        self.assertFalse(doc.find_class("o_afenda_card_head"),
-                         "/web/reset_password still has a card head")
+
+        probe = self.env["res.partner"].create({"name": "AFENDA signup probe"})
+        probe.signup_prepare()
+        signup = "/web/signup?token=%s" % probe._generate_signup_token()
+
+        for url in ("/web/reset_password", signup):
+            with self.subTest(url=url):
+                page = self.url_open(url)
+                self.assertEqual(page.status_code, 200, f"{url} is not served")
+                doc = lxml_html.fromstring(page.text)
+                # The signup route answers 200 for an invalid token too, with
+                # the error in the card; without this the assertions below
+                # would pass on a page that failed.
+                self.assertFalse(doc.find_class("alert-danger"),
+                                 f"{url} rendered an error instead of the form")
+                for klass in ("o_afenda_auth", "o_afenda_auth_art",
+                              "o_afenda_auth_hero", "o_afenda_auth_lockup"):
+                    self.assertEqual(len(doc.find_class(klass)), 1,
+                                     f"{url} does not render {klass} exactly once")
+                self.assertFalse(doc.find_class("o_afenda_auth_line"),
+                                 f"the tagline reached {url}, whose controller never sets it")
+                self.assertFalse(doc.find_class("o_afenda_auth_title"),
+                                 f"{url} greets the visitor as a returning one")
+                self.assertFalse(doc.find_class("o_afenda_card_head"),
+                                 f"{url} still has a card head")
 
     def test_webclient_page_is_branded(self):
         self.authenticate("admin", "admin")
@@ -890,7 +1024,7 @@ class TestBranding(HttpCase):
 
     @staticmethod
     def _media_block_spans(css):
-        """(start, end) of every @media block in the bundle, by brace matching.
+        """(start, end, condition) of every @media block, by brace matching.
 
         The same reason the lg-only version of this helper existed, asked the
         other way round. rfind("@media", 0, offset) finds the nearest @media
@@ -902,10 +1036,14 @@ class TestBranding(HttpCase):
         for every unconditional rule in the file. Matching braces is the only
         way to ask the question that actually matters.
 
-        Every condition is collected, not just lg. The band is the page at
-        every width, so the invariant is no longer "inside this breakpoint" but
-        "inside none of them", and a `max-width` query would break it exactly
-        as an `lg` one would.
+        Every condition is collected, not just lg, and each span carries the
+        condition text with it. The auth page needs the question asked both
+        ways now: the art, its left anchor and the card must exist at EVERY
+        width (inside no query at all), while the one thing the composition is
+        allowed to change with width -- art beside the card above md, art above
+        it below md -- must be inside a query, and inside the right one. A span
+        that only knew where it started could answer the first question but not
+        the second.
         """
         spans = []
         for opener in re.finditer(r"@media([^{]*)\{", css):
@@ -916,7 +1054,7 @@ class TestBranding(HttpCase):
                 elif css[index] == "}":
                     depth -= 1
                 index += 1
-            spans.append((opener.end(), index))
+            spans.append((opener.end(), index, opener.group(1).strip()))
         return spans
 
     def _assert_not_media_gated(self, css, offset, message):
@@ -925,7 +1063,21 @@ class TestBranding(HttpCase):
         # bundle with no media blocks at all would make every call below pass
         # without looking at anything.
         self.assertTrue(spans, "the bundle carries no media query at all")
-        self.assertFalse(any(start <= offset < end for start, end in spans), message)
+        self.assertFalse(any(start <= offset < end for start, end, _c in spans), message)
+
+    def _assert_media_gated(self, css, offset, condition, message):
+        """The mirror of the above: this rule IS inside a query, and that one.
+
+        Only the innermost enclosing block is compared. A nested query would
+        make "some enclosing block mentions 768px" true of a rule that in fact
+        applies at a completely different width.
+        """
+        spans = self._media_block_spans(css)
+        self.assertTrue(spans, "the bundle carries no media query at all")
+        enclosing = [span for span in spans if span[0] <= offset < span[1]]
+        self.assertTrue(enclosing, message)
+        innermost = max(enclosing, key=lambda span: span[0])
+        self.assertIn(condition, innermost[2], message)
 
     def test_neutral_ramp_reaches_both_schemes(self):
         """Nine steps light, nine steps dark, each through a named consumer.
