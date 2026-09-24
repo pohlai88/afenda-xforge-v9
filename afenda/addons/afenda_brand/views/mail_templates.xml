@@ -11,12 +11,56 @@
 
         Where a change only adds properties, it is written with
         `<attribute name="style" add="..." separator=" "/>` so an upstream edit
-        to a property we do not set survives; only the two places that must
-        *remove* an upstream value (Verdana, #F1F1F1) restate the whole string.
+        to a property we do not set survives; only the places that must
+        *remove* an upstream value (Verdana, #F1F1F1, the "Powered by" line)
+        restate the whole node.
 
         The CTA cell is deliberately untouched: it already reads
         company.email_secondary_color (fill) and company.email_primary_color
         (text), which afenda_brand sets to Ledger Blue on white.
+
+        THE BRAND HEADER ROW, both layouts
+        The mark used to sit in the footer, inside upstream's "Powered by"
+        line. It now leads the layout as a letterhead carrying two marks:
+
+          * the tenant's logo, left and 32px tall - the subject of the mail;
+          * the AFENDA mark, right and 16px tall - the maker's mark.
+
+        Hierarchy is order and size, not a "powered by" label.
+
+        Everything is <table>/<tr>/<td>. Outlook renders HTML through Word,
+        which lays out tables and not divs or flexbox; that is why this whole
+        file is table-based and moving the logo does not change it.
+
+        Tenant logo, four constraints that do not apply on the auth page:
+
+        1. The `?company=` is not optional. /web/binary/company_logo takes the
+           company from the query string when present and otherwise falls back
+           to `request.session.uid or SUPERUSER_ID` and reads THAT user's
+           company (addons/web/controllers/binary.py:264-287). A mail client
+           fetches with no Odoo session, so the fallback would silently serve
+           the superuser's company logo on a multi-company database. The URL is
+           also absolute: an email has no origin.
+        2. Most clients block remote images until the recipient opts in, so for
+           a large share of recipients the alt text *is* the header. Both alts
+           are therefore real names - the company's own, and ours - never
+           upstream's generic "Logo".
+        3. Outlook's Word engine ignores CSS sizing, so both images carry
+           width=/height= HTML attributes as well as the inline px.
+           The tenant image carries height only, on purpose: logo_web is
+           `image_process(logo, size=(180, 0))`
+           (odoo/addons/base/models/res_company.py:169-172) - at most 180 wide
+           with a free height, so its aspect ratio is unknown at render time
+           and any fixed width/height pair would distort it. Fixing the height
+           and letting the width follow is the only non-distorting choice; it
+           bounds the row's vertical rhythm, which is what a header needs.
+        4. The empty-logo case cannot arise. `uses_default_logo` is
+           `not company.logo or company.logo == default_logo`
+           (res_company.py:179-182), so `not uses_default_logo` already means
+           "this tenant uploaded artwork of their own" - which both keeps
+           /web/binary/company_logo from ever falling through to the 180x79
+           transparent web/static/img/nologo.png (binary.py:305) and keeps us
+           from presenting AFENDA's own shipped logo as if it were a tenant's.
 
         Upstream: addons/mail/data/mail_templates_email_layouts.xml.
     -->
@@ -29,20 +73,60 @@
         <xpath expr="//body" position="attributes">
             <attribute name="style">font-family:'Source Sans 3','Segoe UI',Helvetica,Arial,sans-serif; color:#0F172A;</attribute>
         </xpath>
-        <!-- :86-87 - the "Powered by" anchor. OCA mail_debranding only strips
+        <!-- :18 - the first child of the 900px container (:17). Inserting
+             before it puts the brand row above everything mail emits.
+             Deliberately NOT gated on show_header: that flag turns the CTA and
+             record-name block on and off, and the mark has to be there whether
+             or not the message carries a button. logo_email_2x.png is a 128x32
+             transparent mark drawn for this 64x16 box, not the 1200px lockup;
+             displaying it any larger would upscale it. -->
+        <xpath expr="//div[@itemtype='http://schema.org/EmailMessage']" position="before">
+            <table role="presentation" cellspacing="0" cellpadding="0" border="0"
+                   style="width:100%; border-collapse:separate;">
+                <tbody>
+                    <tr>
+                        <td align="left" valign="middle" style="padding:0 8px 12px 0;">
+                            <img t-if="company and not company.uses_default_logo"
+                                 t-att-src="'%s/web/binary/company_logo?company=%s' % (company.get_base_url(), company.id)"
+                                 height="32" t-att-alt="company.name"
+                                 style="height:32px;width:auto;border:0;vertical-align:middle;"/>
+                        </td>
+                        <td align="right" valign="middle" style="padding:0 0 12px 8px;">
+                            <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email_2x.png'"
+                                 width="64" height="16" alt="AFENDA xForge"
+                                 style="width:64px;height:16px;max-width:64px;border:0;vertical-align:middle;"/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </xpath>
+        <!-- :85-91 - the "Powered by" line. OCA mail_debranding only strips
              anchors whose href matches odoo.com (mail_debranding/models/
-             mail_render_mixin.py:28-35); the rebrand rewrote this href to
-             the brand domain, so the anchor survives rendering and is ours to
-             replace. The image is absolute because an email has no origin.
-             width= as well as height= and a px max-width: Outlook's Word
-             engine ignores CSS sizing and would otherwise lay the asset out at
-             its native width. logo_email_2x.png is a 128x32 transparent mark
-             drawn for this 64x16 box, not the 1200px lockup. -->
-        <xpath expr="//a[contains(@href, 'utm_source=db')]" position="replace">
-            <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email_2x.png'"
-                 width="64" height="16" alt="AFENDA xForge"
-                 style="width:64px;height:16px;max-width:64px;border:0;vertical-align:middle;"/>
-            <span style="color:#4B5563; vertical-align:middle;"> The truth of your business, kept.</span>
+             mail_render_mixin.py:28-35); the rebrand rewrote this href to the
+             brand domain, so the anchor survives rendering and is ours to
+             remove. The whole div is restated rather than just the anchor
+             because "Powered by " is a text node of the div and no xpath
+             position can reach it - replacing only the <a> would leave the
+             words dangling in front of whatever took its place.
+
+             What the footer keeps: the tagline, as plain text, not a link.
+             The mark now identifies the sender at the top, so repeating it
+             here would be duplication; but the cell cannot go empty either,
+             because upstream's unfollow span opens with a "|" separator that
+             would be orphaned. A quiet sign-off in graphite is the one thing
+             that both reads correctly before that separator and leaves nothing
+             outbound. The span itself is verbatim upstream: mail_mail strips
+             it with a regex keyed on `id="mail_unfollow"`
+             (addons/mail/models/mail_mail.py:23,383). Its link colour moves
+             from Odoo's #555555 to graphite, since the block is restated
+             anyway and #555555 is not a value brand.py declares. -->
+        <xpath expr="//div[a[contains(@href, 'utm_source=db')]]" position="replace">
+            <div t-if="show_footer" style="color: #4B5563; font-size:11px;">
+                The truth of your business, kept.
+                <span t-if="show_unfollow" id="mail_unfollow">
+                    | <a href="/mail/unfollow" style="text-decoration:none; color:#4B5563;">Unfollow</a>
+                </span>
+            </div>
         </xpath>
     </template>
 
@@ -66,24 +150,62 @@
         <xpath expr="//table[@width='590']" position="attributes">
             <attribute name="style" add="color:#0F172A; border:1px solid #E5E7EB;" separator=" "/>
         </xpath>
-        <!-- :143 - the footer cell; padding-top after upstream's shorthand. -->
-        <xpath expr="//td[contains(@style, 'font-size:11px')]" position="attributes">
+        <!-- :126-128 - upstream already draws the tenant logo, 48px tall, to
+             the RIGHT of the record name. It moves into the brand row below,
+             so this cell has to go: leaving it would render the tenant's
+             artwork twice and put our mark ahead of theirs, which is the
+             opposite of the intended order. The row then has one cell and the
+             rule beneath it still spans colspan="2", which is harmless. -->
+        <xpath expr="//td[img[contains(@t-att-src, '/logo.png?company')]]" position="replace"/>
+        <!-- :107-108 - the brand row, first <tr> of the card's own <tbody>,
+             above upstream's HEADER row. No rule under it: the record block
+             below already ends in an <hr> (:130) and a second line 40px above
+             it would read as noise. -->
+        <xpath expr="//table[@width='590']/tbody/tr[1]" position="before">
+            <tr>
+                <td align="center" style="min-width: 590px; padding: 0 0 16px 0;">
+                    <table role="presentation" border="0" cellpadding="0" cellspacing="0" width="100%"
+                           style="padding: 0; border-collapse:separate;">
+                        <tr>
+                            <td align="left" valign="middle" style="padding:0 8px 0 0;">
+                                <img t-if="company and not company.uses_default_logo"
+                                     t-att-src="'%s/web/binary/company_logo?company=%s' % (company.get_base_url(), company.id)"
+                                     height="32" t-att-alt="company.name"
+                                     style="height:32px;width:auto;border:0;vertical-align:middle;"/>
+                            </td>
+                            <td align="right" valign="middle" style="padding:0 0 0 8px;">
+                                <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email_2x.png'"
+                                     width="64" height="16" alt="AFENDA xForge"
+                                     style="width:64px;height:16px;max-width:64px;border:0;vertical-align:middle;"/>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </xpath>
+        <!-- :143 - the company block's footer cell; padding-top after
+             upstream's shorthand. Anchored on upstream's own padding value
+             rather than on `font-size:11px`, which the replaced "Powered by"
+             cell below now also carries. -->
+        <xpath expr="//td[contains(@style, 'padding: 0 8px 0 8px')]" position="attributes">
             <attribute name="style" add="border-top:1px solid #E5E7EB; padding-top:12px; color:#4B5563;" separator=" "/>
         </xpath>
         <!-- :144 - that cell opens with its own grey rule, which would now draw
              a second line directly under the hairline border above. Collapse it
              rather than delete it, so the cell keeps upstream's structure. -->
-        <xpath expr="//td[contains(@style, 'font-size:11px')]/hr" position="attributes">
+        <xpath expr="//td[contains(@style, 'padding: 0 8px 0 8px')]/hr" position="attributes">
             <attribute name="style">border:medium none;clear:both;display:block;font-size:0px;height:0;line-height:0;margin:0;</attribute>
         </xpath>
-        <!-- :160-161 - the "Powered by" anchor, as above. This row sits on the
-             paper frame, outside the white card, which is why the asset has a
-             transparent background rather than a matted white one. -->
-        <xpath expr="//a[contains(@href, 'utm_source=db')]" position="replace">
-            <img t-att-src="company.get_base_url() + '/afenda_brand/static/img/logo_email_2x.png'"
-                 width="64" height="16" alt="AFENDA xForge"
-                 style="width:64px;height:16px;max-width:64px;border:0;vertical-align:middle;"/>
-            <span style="color:#4B5563; font-size:11px; vertical-align:middle;"> The truth of your business, kept.</span>
+        <!-- :159-165 - the "Powered by" cell, for the reasons given on the
+             default layout above. This row sits on the paper frame, outside
+             the white card. -->
+        <xpath expr="//td[a[contains(@href, 'utm_source=db')]]" position="replace">
+            <td align="center" style="min-width: 590px; padding: 8px 0 0 0; color:#4B5563; font-size:11px;">
+                The truth of your business, kept.
+                <span t-if="show_unfollow" id="mail_unfollow">
+                    | <a href="/mail/unfollow" style="text-decoration:none; color:#4B5563;">Unfollow</a>
+                </span>
+            </td>
         </xpath>
     </template>
 

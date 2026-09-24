@@ -12,10 +12,11 @@ from unittest import mock
 from lxml import etree as lxml_etree
 from lxml import html as lxml_html
 from markupsafe import Markup
-from PIL import Image
+from PIL import Image, ImageColor
 
-from odoo.modules.module import load_script
-from odoo.tests import HttpCase, tagged
+from odoo import http
+from odoo.modules.module import get_manifest, load_script
+from odoo.tests import HttpCase, new_test_user, tagged
 from odoo.tools import file_open, is_html_empty
 
 # The generator that drew the icons this module ships, reached from the repo
@@ -65,6 +66,23 @@ _CUSTOM_FAVICON = (
 )
 
 
+# Manifest versions bumped with no migration work to do.
+#
+# A bump is not only a carrier for a script. deploy/init.sh upgrades with
+# `module upgrade --outdated`, which selects modules by comparing manifest
+# version to installed version, so a view or asset change reaches a deployed
+# database ONLY if the version moves -- there is no manual `-u` in the deploy
+# path. Listing a version here is the deliberate statement that the upgrade
+# needs nothing beyond the reload Odoo already does.
+#
+# Forgetting a script you DID need still fails: you have to come here and say
+# so, in writing, next to the reason.
+_VERSIONS_WITHOUT_MIGRATION = {
+    "19.0.1.0.6": "auth surface, shell theming, mail header -- views and SCSS "
+                  "reload on upgrade; no record needs rewriting",
+}
+
+
 @tagged("post_install", "-at_install")
 class TestBranding(HttpCase):
     """What a normal user sees must say AFENDA, never Odoo."""
@@ -72,10 +90,15 @@ class TestBranding(HttpCase):
     def test_login_page_is_branded(self):
         html = self.url_open("/web/login").text
         self.assertIn("<title>AFENDA xForge</title>", html.replace("\n", ""))
-        self.assertIn("/afenda_brand/static/img/favicon.ico", html)
+        # Not the AFENDA file specifically: a configured tenant's own favicon
+        # is served here instead, which is the point of the third fallback.
+        self.assertRegex(html, r'rel="shortcut icon"[^>]*href="[^"]+"',
+                         "the login page links no favicon")
         self.assertIn("AFENDA xForge", html)
         self.assertIn("o_afenda_login", html, "the login body class is missing")
-        self.assertIn(BRAND["tagline"], html, "the login card is missing the tagline")
+        # The owner removed the tagline from the auth pages: under the lockup it
+        # cost a laptop screen a line the poster could not spare.
+        self.assertNotIn(BRAND["tagline"], html, "the tagline is back on the sign-in page")
         # bg-100 and border-0 are !important utilities: while either is on the
         # card, login.scss cannot paint it whatever the selector or load order.
         card = re.search(r'<div[^>]*\bclass="([^"]*\bo_database_list\b[^"]*)"', html)
@@ -103,6 +126,688 @@ class TestBranding(HttpCase):
         self.assertTrue(card, "the login card rule is not in the frontend bundle")
         self.assertIn("#fff", card.group(1), "the login card is not white")
         self.assertIn(BRAND["hairline"].lower(), card.group(1), "the login card has no hairline border")
+        # The card's width lives here now: the view removes upstream's inline
+        # max-width, so without this rule the card stretches across the column.
+        self.assertRegex(card.group(1), r"max-width:\s*400px", "the login card has no width bound")
+        # A Sass error does not fail the page: Odoo logs it and keeps serving
+        # the LAST GOOD bundle, so every test above could pass against a stale
+        # stylesheet. These two lines exist only in the current login.scss -
+        # the one focus ring, and the height-bounded headline - so finding
+        # them proves this file compiled.
+        self.assertIn("0 0 0 1px #1e3a8a", css, "the focus ring is not the one Ledger Blue token")
+        self.assertIn("min(4vw, 6.5vh)", css.replace(" ,", ","),
+                      "login.scss did not compile into the bundle (a stale bundle is being served)")
+
+    def _frontend_css(self, url="/web/login"):
+        html = self.url_open(url).text
+        hrefs = re.findall(r'href="(/web/assets/[^"]+web\.assets_frontend[^"]*\.css)"', html)
+        self.assertTrue(hrefs, f"web.assets_frontend stylesheet not linked from {url}")
+        return html, self.url_open(hrefs[0]).text.lower()
+
+    def test_the_auth_page_is_art_left_and_card_right(self):
+        """Art on the left, form column on the right, and the art never cropped.
+
+        Rewritten for the poster: the art is now the INLINE crystal bear
+        (views/auth_bear.xml, t-called by login_layout) rather than an <img>
+        whose src could be fetched, so the "served file is a vector" and "src
+        is the one swap point" assertions went with the <img>. The two
+        invariants that were load-bearing all along survive unchanged.
+
+        The first is document order: the art block comes before the form block,
+        which is what makes the page read art-then-form when it stacks below md
+        and art-beside-form above it. It is also what keeps the two in normal
+        flow, and therefore what keeps them from ever sharing a pixel.
+
+        The second is the one that fails silently, so it is pinned hardest. In
+        the master's 800x887 geometry the face mask sits at (30, 210, 241, 432)
+        -- about 4% of left margin -- while the tree already runs to x=0 and
+        y=886. The tree running off the left and the bottom is the composition;
+        the face being cut is a rendering bug that looks like a drawing. So the
+        art is anchored to its LEFT edge and bounded ONLY by maxima: with no
+        object-fit, no fixed dimension, no minimum and no negative offset, a
+        narrower viewport can only scale the whole image down, never crop a
+        side of it. That is a property of the compiled rules rather than of a
+        screenshot, which is why it is asserted here and not left to the eye.
+        """
+        html, css = self._frontend_css()
+        doc = lxml_html.fromstring(html)
+
+        stack = doc.find_class("o_afenda_auth")
+        self.assertEqual(len(stack), 1, "the auth page is not rendered exactly once")
+        blocks = [child.get("class") for child in stack[0] if isinstance(child.tag, str)]
+        self.assertEqual(
+            blocks, ["o_afenda_auth_art", "o_afenda_auth_form"],
+            "the art is not the first block of the page",
+        )
+
+        heroes = doc.find_class("o_afenda_auth_hero")
+        self.assertEqual(len(heroes), 1, "the hero art is not rendered exactly once")
+        # The geometry every measurement in this docstring is stated in. Point
+        # the slot at art with a different viewBox and the left-margin
+        # arithmetic above stops describing it; this is what says so.
+        self.assertEqual(heroes[0].get("viewbox") or heroes[0].get("viewBox"), "0 0 800 887",
+                         "the hero art is not the 800x887 master this crop math describes")
+        # Nothing names an art FILE in the stylesheet: the art is markup now,
+        # and a url() to it would be a second, stale copy.
+        self.assertNotIn("crystal_bear", css,
+                         "the stylesheet names the art file: the swap point is not single")
+
+        art = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_art\s*\{([^}]*)\}", css))
+        self.assertEqual(len(art), 2, "the art box is not drawn by exactly two rules")
+        self.assertRegex(art[0].group(1), r"justify-content:\s*flex-start",
+                         "the art is not anchored to its left edge")
+        self.assertRegex(art[0].group(1), r"align-items:\s*flex-end",
+                         "the art is not seated on the page's bottom edge")
+        self._assert_not_media_gated(
+            css, art[0].start(), "the art's left anchor exists only inside a media query")
+        # The poster ratio: above md the art column HUGS the bear - its width
+        # is the art's own height-bound width, never more than 55% of the page.
+        # A fixed 55% column left a strip of empty paper between the bear and
+        # the form on any screen wider than the art is tall.
+        self.assertRegex(art[1].group(1), r"flex:\s*0\s+1\s+auto",
+                         "the art column does not size to the bear above md")
+        self.assertRegex(art[1].group(1), r"max-width:\s*55%",
+                         "the art column is not capped at 55% of the page above md")
+        self._assert_media_gated(
+            css, art[1].start(), "768px", "the art's poster width is not gated on the md breakpoint")
+        # Nothing paints a surface under the art. The artwork carries its own
+        # near-paper tone in the muzzle and the lettuce, so a plate, a rule or
+        # a shadow here draws a visible seam around it -- the exact failure the
+        # owner's "no panel" ruling is about. The mood aura lives on the FORM
+        # column for the same reason.
+        for rule in art:
+            for seam in ("background", "border", "box-shadow"):
+                self.assertNotIn(seam, rule.group(1),
+                                 f"the art sits on a {seam}, which shows as a seam")
+
+        hero_rules = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_hero\s*\{([^}]*)\}", css))
+        self.assertEqual(len(hero_rules), 2, "the hero art is not sized by exactly two rules")
+        self.assertRegex(hero_rules[0].group(1), r"width:\s*auto",
+                         "the hero art has a forced width")
+        self.assertRegex(hero_rules[0].group(1), r"height:\s*auto",
+                         "the hero art has a forced height")
+        self.assertRegex(hero_rules[0].group(1), r"max-width:\s*100%",
+                         "the hero art may overflow its own box")
+        self._assert_not_media_gated(
+            css, hero_rules[0].start(), "the hero art is sized only inside a media query")
+        # Every bound is a maximum, and no crop mechanism exists in either
+        # rule. object-fit, a minimum, a clip-path and a negative offset are
+        # the four ways the face gets cut while every other assertion in this
+        # test still passes.
+        for rule in hero_rules:
+            body = rule.group(1)
+            for cropper in ("object-fit", "min-width", "min-height", "clip-path"):
+                self.assertNotIn(cropper, body, f"{cropper} can crop the face out of the art")
+            self.assertNotRegex(body, r":\s*-",
+                                "a negative offset pulls the art off its own box")
+        # The narrow cap is what keeps the action above the fold once the art
+        # is above the card; the wide one is what makes the art large. Both are
+        # heights, so neither can touch the left edge.
+        self.assertRegex(hero_rules[0].group(1), r"max-height:\s*28vh",
+                         "the art is not capped at 28vh when it stacks above the form")
+        self.assertRegex(hero_rules[1].group(1), r"max-height:\s*\d+vh",
+                         "the art is uncapped on a wide screen")
+        self._assert_media_gated(
+            css, hero_rules[1].start(), "768px",
+            "the art's wide-screen size is not gated on the md breakpoint")
+
+        stacked = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth\s*\{([^}]*)\}", css))
+        self.assertEqual(len(stacked), 2, "the page is not drawn by exactly two rules")
+        self.assertRegex(stacked[0].group(1), r"flex-direction:\s*column",
+                         "the page does not stack the art above the form by default")
+        self._assert_not_media_gated(
+            css, stacked[0].start(), "the stacked page exists only inside a media query")
+        self.assertRegex(stacked[1].group(1), r"flex-direction:\s*row",
+                         "the page never becomes art-beside-form")
+        self._assert_media_gated(
+            css, stacked[1].start(), "768px",
+            "the two-column page is not gated on the md breakpoint")
+
+        # The 375px ruling: art and form must never share a pixel, and nothing
+        # may be layered behind or over the card -- the tenant greens in the
+        # artwork under an input, a placeholder or a focus ring do not hold AA.
+        # Two boxes in normal flow cannot overlap, and taking one out of flow
+        # is the only way to make them, so that is what is closed here. The
+        # aura pseudo-element is absolutely placed, but inside the form column
+        # (`inset: 0` of a positioned column), so it cannot reach the art.
+        for rule in stacked + art + hero_rules:
+            self.assertNotRegex(rule.group(1), r"position:\s*(absolute|fixed)",
+                                "the art is out of flow and can overlap the card")
+        aura = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_form::before\s*\{([^}]*)\}", css)
+        self.assertTrue(aura, "the mood aura is missing from the bundle")
+        self.assertRegex(aura.group(1), r"inset:\s*0",
+                         "the aura is not confined to the form column")
+        column = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_form\s*\{([^}]*position:[^}]*)\}", css)
+        self.assertTrue(column, "the form column has no position rule")
+        self.assertRegex(column.group(1), r"position:\s*relative",
+                         "the aura is not positioned against the form column")
+
+    def test_the_hero_is_the_inline_bear(self):
+        """The bear is markup, so the page's CSS can reach every layer.
+
+        Replaces the <img> hero assertions (alt="", no loading=lazy, a served
+        src): an <img> is opaque to page CSS, which is exactly why the bear
+        moved inline. What an inline copy has to get right instead:
+        - it is decoration: aria-hidden and not focusable, with no text node
+          a screen reader could read;
+        - every layer auth_bear.css binds is present, so no rule is silently
+          dead;
+        - every id is afb- prefixed: the inline copy shares the page's id
+          space, and an unprefixed `haze` or `bear` would collide with
+          anything the page, a portal snippet or an OAuth button calls that.
+        """
+        html = self.url_open("/web/login").text
+        doc = lxml_html.fromstring(html)
+        heroes = doc.find_class("o_afenda_auth_hero")
+        self.assertEqual(len(heroes), 1, "the hero is not rendered exactly once")
+        hero = heroes[0]
+        self.assertEqual(hero.tag, "svg", "the hero is not the inline SVG")
+        self.assertFalse(doc.xpath("//img[contains(concat(' ', @class, ' '), ' o_afenda_auth_hero ')]"),
+                         "an <img> hero still renders")
+        self.assertEqual(hero.get("aria-hidden"), "true", "the bear is announced to screen readers")
+        self.assertEqual(hero.get("focusable"), "false", "the bear takes keyboard focus")
+        self.assertFalse(hero.text_content().strip(), "the bear carries text a reader could announce")
+
+        classes = set()
+        for node in hero.iter():
+            if isinstance(node.tag, str):
+                classes.update((node.get("class") or "").split())
+        for layer in ("afb-haze", "afb-body", "afb-base", "afb-facet", "afb-f1", "afb-f2",
+                      "afb-f3", "afb-shadow", "afb-s1", "afb-s2", "afb-headlight", "afb-sheen",
+                      "afb-rim", "afb-face", "afb-mask", "afb-chin", "afb-bush", "afb-branch"):
+            self.assertIn(layer, classes, f"the bear has no {layer} layer for auth_bear.css to bind")
+
+        ids = [node.get("id") for node in hero.iter() if isinstance(node.tag, str) and node.get("id")]
+        self.assertTrue(ids, "the bear defines no gradients or clip paths")
+        stray = [i for i in ids if not i.startswith("afb-")]
+        self.assertFalse(stray, f"unprefixed ids share the page's id space: {stray}")
+        for needed in ("afb-rimGrad", "afb-sheenEdge", "afb-hazeFade"):
+            self.assertIn(needed, ids, f"#{needed}, which auth_bear.css recolours, is missing")
+        # The face must sit inside its group: the group is what turns.
+        face = [n for n in hero.iter() if isinstance(n.tag, str) and "afb-face" in (n.get("class") or "").split()]
+        self.assertEqual(len(face), 1, "the face is not one group")
+        self.assertIsNone(face[0].get("transform"),
+                          "the face group has its own transform, which the CSS turn would erase")
+        inner = {c for n in face[0].iter() if isinstance(n.tag, str)
+                 for c in (n.get("class") or "").split()}
+        self.assertTrue({"afb-mask", "afb-chin"} <= inner, "the mask and chin are not in the face group")
+
+        # The fallback ruling survives: a tenant with no hero art gets their
+        # own company_logo in the art slot, and a caller that points the slot
+        # at a file still gets an <img>. Nothing in this module puts
+        # afenda_hero in a qcontext, so no served page reaches either branch;
+        # what is checkable is that both exist, in that order, and that the
+        # fallback is upstream's own moved <img>.
+        arch = self.env.ref("web.login_layout").get_combined_arch()
+        tree = lxml_etree.fromstring(arch.encode())
+        slot = tree.xpath("//div[@class='o_afenda_auth_art']")
+        self.assertEqual(len(slot), 1, "the art slot is not in the layout exactly once")
+        branches = [(n.tag, n.get("t-if") or n.get("t-elif") or ("else" if n.get("t-else") is not None else None))
+                    for n in slot[0] if isinstance(n.tag, str)]
+        self.assertEqual(
+            branches,
+            [("t", "afenda_hero is None"), ("img", "afenda_hero"), ("t", "else")],
+            "the art slot is not inline bear / caller's image / tenant fallback",
+        )
+        caller_image = [n for n in slot[0] if isinstance(n.tag, str) and n.tag == "img"]
+        self.assertEqual(caller_image[0].get("alt"), "",
+                         "a caller's hero image is not marked decorative")
+        first = next(n for n in slot[0] if isinstance(n.tag, str))
+        self.assertEqual(first.get("t-call"), "afenda_brand.auth_bear",
+                         "the default branch does not render the inline bear")
+
+    def test_the_bear_stylesheets_reach_the_bundle(self):
+        """Both bear stylesheets are in the compiled web.assets_frontend.
+
+        Checked by content, not by file name: the bundle is one concatenated
+        sheet. `--bear-forest-500` is the generated scales file; the attentive
+        state selector is the hand-written one. Both survive the minifier
+        verbatim because they are plain .css (assetsbundle.py:965-972), which
+        is also what keeps oklch() and color-mix() intact.
+        """
+        _html, css = self._frontend_css()
+        self.assertIn("--bear-forest-500:oklch(", css.replace(" ", ""),
+                      "auth_bear_scales.css is not in web.assets_frontend")
+        self.assertIn(".o_afenda_login:has(#login:focus)", css,
+                      "auth_bear.css is not in web.assets_frontend")
+        self.assertIn("color-mix(in oklch", css, "color-mix() did not survive the bundle")
+        # Load order: the scales must precede the skins that read them, and
+        # login.scss's paper ground must stay the first `.o_afenda_login {`
+        # block (test_frontend_css_has_login_surface reads the first one).
+        self.assertLess(css.index("--bear-forest-500"), css.index("--skin-base"),
+                        "the skins load before the scales they read")
+        ground = re.search(r"\.o_afenda_login\s*\{([^}]*)\}", css)
+        self.assertIn(BRAND["paper"].lower(), ground.group(1),
+                      "a bear stylesheet now owns the first .o_afenda_login block")
+
+    @staticmethod
+    def _css_rules(source):
+        """(prelude, body, enclosing at-rule) for every block in a CSS source.
+
+        Comments are stripped first. @media and @supports are descended into,
+        so the rules inside them are checked like any other; @keyframes and
+        @property come back whole, with their at-rule as the prelude.
+        """
+        code = re.sub(r"/\*.*?\*/", "", source, flags=re.S)
+        rules = []
+
+        def walk(text, context):
+            index = 0
+            while True:
+                opener = text.find("{", index)
+                if opener < 0:
+                    return
+                depth, cursor = 1, opener + 1
+                while depth:
+                    if text[cursor] == "{":
+                        depth += 1
+                    elif text[cursor] == "}":
+                        depth -= 1
+                    cursor += 1
+                prelude, body = text[index:opener].strip(), text[opener + 1:cursor - 1]
+                if prelude.startswith(("@media", "@supports")):
+                    walk(body, prelude)
+                else:
+                    rules.append((prelude, body, context))
+                index = cursor
+
+        walk(code, None)
+        return rules
+
+    @staticmethod
+    def _top_level_selectors(prelude):
+        """Split a selector list on commas that are not inside :has()/:not()."""
+        parts, depth, current = [], 0, ""
+        for char in prelude:
+            depth += (char == "(") - (char == ")")
+            if char == "," and not depth:
+                parts.append(current.strip())
+                current = ""
+            else:
+                current += char
+        parts.append(current.strip())
+        return parts
+
+    def test_the_bear_stylesheet_is_scoped_and_invents_no_colour(self):
+        """auth_bear.css, read as SOURCE: scoped, literal-free, fully defined.
+
+        Scoped: web.assets_frontend also serves the portal and afenda_api_docs,
+        so an unscoped `:has()` or `[class*=afb-]` rule would restyle pages it
+        was never meant for. Every selector starts at `.o_afenda_login`, the
+        body class only web.login_layout pages carry.
+
+        Literal-free: the colour system is scale tokens mixed with color-mix()
+        and nothing else, so a hex, an rgb()/hsl()/oklch() value or a named
+        colour is a colour invented outside the generator. Checked in
+        declaration bodies only: `#afb-rimGrad` and `#login` are selectors.
+
+        Fully defined: `fill: var(--x)` with --x undefined is invalid at
+        computed-value time and falls back to black. Every var() used must be
+        declared by the generated scales or by this file's base skin -- not
+        merely by some page skin or state that is not always active.
+
+        And the motion contract the owner set: nothing moves at rest. Every
+        animation is inside a state rule, the only loop is the submit sweep,
+        reduced motion switches all of it off, and no rule ever puts a CSS
+        transform on the four layers whose placement IS their transform
+        attribute.
+        """
+        with file_open("afenda_brand/static/src/css/auth_bear.css", "r") as handle:
+            source = handle.read()
+        with file_open("afenda_brand/static/src/css/auth_bear_scales.css", "r") as handle:
+            scales = handle.read()
+        rules = self._css_rules(source)
+        self.assertGreater(len(rules), 20, "auth_bear.css parsed into too few rules to mean anything")
+
+        style_rules = [r for r in rules if not r[0].startswith("@")]
+        # At-rules cannot be scoped to a selector, so they are allowed by
+        # kind and held to a namespace instead: @property registers a custom
+        # property for the whole document and @keyframes a global animation
+        # name, and a generic `--mood` or `settle` would collide with anything
+        # else on the page that picks the same word. @media only wraps rules,
+        # and the rules inside it are checked above like any other.
+        for prelude, _body, context in rules:
+            if context is not None:
+                self.assertTrue(context.startswith("@media"),
+                                f"{context!r}: only @media may wrap rules in auth_bear.css")
+            if prelude.startswith("@"):
+                kind, _, name = prelude.partition(" ")
+                self.assertIn(kind, ("@property", "@keyframes"),
+                              f"{prelude!r}: an at-rule auth_bear.css has no reason to use")
+                self.assertTrue(name.strip().lstrip("-").startswith(("afb-", "bear-")),
+                                f"{prelude!r} declares a global name outside afb-/bear-")
+        for prelude, _body, _context in style_rules:
+            for selector in self._top_level_selectors(prelude):
+                self.assertTrue(
+                    selector.startswith(".o_afenda_login"),
+                    f"{selector!r} is not rooted at .o_afenda_login and can leak onto the portal",
+                )
+
+        named = {name.lower() for name in ImageColor.colormap} - {"transparent"}
+        for prelude, body, _context in rules:
+            where = f"auth_bear.css {prelude!r}"
+            self.assertFalse(re.findall(r"#[0-9a-fA-F]{3,8}\b", body), f"{where} holds a hex colour")
+            self.assertFalse(
+                re.findall(r"(?<![\w-])(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch|color)\(", body, flags=re.I),
+                f"{where} holds a colour function literal",
+            )
+            words = set(re.findall(r"(?<![\w#.-])([a-z]+)(?![\w(-])", body.lower()))
+            self.assertFalse(words & named, f"{where} names a colour: {sorted(words & named)}")
+
+        defined = set(re.findall(r"(--[\w-]+)\s*:", re.sub(r"/\*.*?\*/", "", scales, flags=re.S)))
+        base = [body for prelude, body, context in rules if prelude == ".o_afenda_login" and context is None]
+        self.assertTrue(base, "auth_bear.css has no base skin")
+        defined |= set(re.findall(r"(--[\w-]+)\s*:", base[0]))
+        for token in ("--bear-base", "--bear-f1", "--bear-f2", "--bear-f3", "--bear-s1",
+                      "--bear-s2", "--bear-headlight", "--bear-sheen-a", "--bear-sheen-b",
+                      "--bear-rim-a", "--bear-rim-b", "--bear-haze", "--bear-cream",
+                      "--bear-branch", "--afb-mood"):
+            self.assertIn(token, defined, f"the base skin does not define {token}")
+        used = set(re.findall(r"var\(\s*(--[\w-]+)", re.sub(r"/\*.*?\*/", "", source, flags=re.S)))
+        self.assertFalse(used - defined,
+                         f"var() used but never defined, which paints black: {sorted(used - defined)}")
+
+        placed = ("afb-mask", "afb-chin", "afb-bush", "afb-branch")
+        for prelude, body, _context in style_rules:
+            if any(layer in prelude for layer in placed):
+                self.assertNotRegex(
+                    body, r"(?<![\w-])(transform|translate|rotate|scale)\s*:",
+                    f"{prelude!r} moves a layer whose transform attribute places it",
+                )
+
+        for prelude, body, context in style_rules:
+            if re.search(r"(?<![\w-])animation(-name)?\s*:", body) and "none" not in body:
+                self.assertIn(":has(", prelude, f"{prelude!r} animates at rest")
+            if "infinite" in body:
+                self.assertIn(".o_btn_loading", prelude,
+                              f"{prelude!r} loops outside the submit state")
+
+        reduced = [(p, b) for p, b, c in style_rules if c and "prefers-reduced-motion: reduce" in c]
+        self.assertTrue(reduced, "no prefers-reduced-motion block")
+        self.assertTrue(any(".afb-face" in p and re.search(r"animation:\s*none", b)
+                            and re.search(r"transform:\s*none", b) for p, b in reduced),
+                        "reduced motion does not stop the face")
+
+    def _assert_one_poster(self, url, page, headline):
+        """One hero, one lockup, one h1 carrying the page's headline, one card."""
+        self.assertEqual(page.status_code, 200, f"{url} is not served")
+        doc = lxml_html.fromstring(page.text)
+        self.assertIn("o_afenda_login", (doc.body.get("class") or "").split(),
+                      f"{url} does not render the auth body")
+        for klass in ("o_afenda_auth_hero", "o_afenda_auth_lockup"):
+            self.assertEqual(len(doc.find_class(klass)), 1, f"{url} does not render {klass} exactly once")
+        titles = doc.xpath("//h1")
+        self.assertEqual(len(titles), 1, f"{url} does not have exactly one h1")
+        self.assertEqual(titles[0].text_content().strip(), headline, f"{url} has the wrong headline")
+        self.assertIn("o_afenda_auth_title", titles[0].get("class") or "",
+                      f"{url}'s h1 is not the poster headline")
+        self.assertEqual(len(doc.find_class("o_database_list")), 1, f"{url} does not render exactly one card")
+        self.assertFalse(doc.find_class("o_afenda_card_head"), f"{url} still has a card head")
+        return doc
+
+    def test_every_auth_page_is_one_poster(self):
+        """Every logged-out page: the same poster, its own headline.
+
+        Replaces test_the_auth_page_composes_without_the_tagline, which pinned
+        the opposite of today's rule ("no page but /web/login has a title").
+        The headline is now the layout's and every page names itself. No page
+        carries a tagline any more; the owner removed it from the auth pages.
+
+        /web/signup is reached with a token on purpose: `invitation_scope` is
+        b2b here, so the route is a 404 without one. Relaxing that setting to
+        make the test easier would change the product's security posture, so
+        the test brings its own token instead. The reset-with-token page is
+        reached the same way, with a partner prepared for a reset.
+        """
+        # The Grove: every page's h1 is a line in the bear's voice, and the
+        # sans subline under it says what to do.
+        login = self._assert_one_poster("/web/login", self.url_open("/web/login"),
+                                        "Growth is kept, not found.")
+        self.assertFalse(login.find_class("o_afenda_auth_line"), "a tagline is back on /web/login")
+        self.assertEqual([s.text_content().strip() for s in login.find_class("o_afenda_auth_subtitle")],
+                         ["Sign in to your workspace."])
+        # The way in for someone without an account: access is by invitation
+        # (b2b), so the sign-in page offers "Request access", not a signup link.
+        self.assertEqual([a.get("href") for a in login.find_class("o_afenda_auth_secondary")],
+                         ["/request-access"], "the sign-in page has no way to ask for access")
+
+        probe = self.env["res.partner"].create({"name": "AFENDA signup probe"})
+        probe.signup_prepare()
+        signup = "/web/signup?token=%s" % probe._generate_signup_token()
+        reset_user = new_test_user(self.env, "afenda_reset_probe@example.com")
+        reset_user.partner_id.signup_prepare(signup_type="reset")
+        reset = "/web/reset_password?token=%s" % reset_user.partner_id._generate_signup_token()
+
+        for url, headline in (
+            (signup, "Every forest starts with one tree."),
+            ("/web/reset_password", "Roots remember the way back."),
+            (reset, "Plant a new password."),
+        ):
+            with self.subTest(url=url):
+                doc = self._assert_one_poster(url, self.url_open(url), headline)
+                self._assert_one_way_back(url, doc)
+                # These routes answer 200 for an invalid token too, with the
+                # error in the card; without this the assertions above would
+                # pass on a page that failed.
+                self.assertFalse(doc.find_class("alert-danger"),
+                                 f"{url} rendered an error instead of the form")
+                self.assertFalse(doc.find_class("o_afenda_auth_line"),
+                                 f"a tagline is back on {url}")
+
+        # The expired link: an unknown token sets `invalid_token` and an error
+        # (addons/auth_signup/controllers/main.py:148-150) and hides the
+        # fields, so the page must not promise a new password.
+        junk = "/web/reset_password?token=not-a-real-token"
+        with self.subTest(url=junk):
+            doc = self._assert_one_poster(junk, self.url_open(junk), "This path has grown over.")
+            self.assertTrue(doc.find_class("alert-danger"), "the expired link is not explained")
+            self._assert_one_way_back(junk, doc)
+
+        self.authenticate(None, None)
+        # The reset that succeeded. The controller sets `message` after
+        # do_signup while `token` is still in the qcontext (main.py:96-99), so
+        # without the `message and token` branch this would read as "the link
+        # is on its way" -- a lie about what just happened.
+        with self.subTest(url="/web/reset_password (token POST)"):
+            done = self.url_open(reset, data={
+                "token": reset.split("token=", 1)[1],
+                "password": "afenda-reset-probe-pw-2026",
+                "confirm_password": "afenda-reset-probe-pw-2026",
+                "csrf_token": http.Request.csrf_token(self),
+            })
+            doc = self._assert_one_poster("/web/reset_password (token POST)", done, "Rooted again.")
+            self.assertTrue(doc.find_class("alert-success"), "the reset was not confirmed")
+            self.assertFalse(doc.find_class("alert-danger"), "the token reset failed")
+            self._assert_one_way_back("/web/reset_password (token POST)", doc)
+
+        # The request, once made. Posted like the form does; the mail it
+        # queues is not sent in test mode.
+        sent = self.url_open("/web/reset_password", data={
+            "login": reset_user.login,
+            "csrf_token": http.Request.csrf_token(self),
+        })
+        doc = self._assert_one_poster("/web/reset_password (sent)", sent, "Look for our letter.")
+        self.assertTrue(doc.find_class("alert-success"), "the reset request was not acknowledged")
+        self._assert_one_way_back("/web/reset_password (sent)", doc)
+
+    def _assert_one_way_back(self, label, doc):
+        """Every page but sign-in offers exactly one way back to it, as a button."""
+        backs = doc.find_class("o_afenda_auth_back")
+        self.assertEqual(len(backs), 1, f"{label} does not offer exactly one way back to sign in")
+        self.assertTrue(backs[0].get("href", "").startswith("/web/login"),
+                        f"{label}'s back action does not lead to sign in")
+        self.assertIn("btn", (backs[0].get("class") or "").split(),
+                      f"{label}'s back action is a bare link, not a button")
+
+    def test_the_two_factor_page_is_a_poster_with_one_heading(self):
+        """/web/login/totp: the layout's h1 replaces upstream's h5 heading.
+
+        Reached the way a person reaches it. TOTP is switched on by writing a
+        secret, as addons/auth_totp/tests/test_totp.py:167 does, and the
+        password is posted to /web/login as the form posts it
+        (addons/auth_totp_mail/tests/test_auth_signup.py:68-81 is the same
+        route); web_login then parks the user in `pre_uid` and redirects to
+        the second factor.
+        """
+        user = new_test_user(self.env, "afenda_totp_probe", password="afenda_totp_probe_pw")
+        user.totp_secret = "IRXWM5LT"
+        self.authenticate(None, None)
+        page = self.url_open("/web/login", data={
+            "login": user.login,
+            "password": "afenda_totp_probe_pw",
+            "type": "password",
+            "csrf_token": http.Request.csrf_token(self),
+        })
+        self.assertTrue(page.url.endswith("/web/login/totp"),
+                        f"the password did not lead to the second factor: {page.url}")
+        doc = self._assert_one_poster("/web/login/totp", page, "Two roots hold faster.")
+        self.assertEqual(len(doc.xpath("//input[@id='totp_token']")), 1,
+                         "the 2FA page lost its code field, which its night skin keys on")
+        self.assertFalse(doc.xpath("//h5[contains(@class, 'card-title')]"),
+                         "upstream's h5 heading still renders beside the h1")
+
+    def test_the_manifest_loads_the_bear_first(self):
+        """The layout t-calls afenda_brand.auth_bear, so it must load first;
+        and the templates this module inherits must be in its graph."""
+        manifest = get_manifest("afenda_brand")
+        data = manifest["data"]
+        self.assertIn("views/auth_bear.xml", data, "the inline bear is not loaded")
+        self.assertLess(data.index("views/auth_bear.xml"), data.index("views/webclient_templates.xml"),
+                        "the layout loads before the template it t-calls")
+        for dependency in ("auth_signup", "auth_totp"):
+            self.assertIn(dependency, manifest["depends"],
+                          f"{dependency}'s templates are inherited but it is not declared")
+        frontend = [a if isinstance(a, str) else a[-1] for a in manifest["assets"]["web.assets_frontend"]]
+        self.assertEqual(
+            frontend[frontend.index("afenda_brand/static/src/scss/login.scss"):],
+            ["afenda_brand/static/src/scss/login.scss",
+             "afenda_brand/static/src/css/auth_bear_scales.css",
+             "afenda_brand/static/src/css/auth_bear.css"],
+            "the bear stylesheets are not loaded after login.scss, scales first",
+        )
+
+    def test_the_lockup_is_the_only_mark_and_the_card_carries_none(self):
+        """One mark, at the top right, in the colourway drawn for paper.
+
+        This replaces a test that pinned two marks on an ink band: the tenant's
+        logo on a paper plate at its head and ours at its tail. The owner's
+        page has no band and no plate, and the tenant's logo is no longer a
+        peer of ours on it -- it is what the art slot falls back to for a
+        tenant with no hero art. So the claim inverts: with the art present the
+        lockup is the only mark on the page, and it is outside the card.
+
+        Which lockup is the part worth pinning hardest. logo.svg and
+        logo_dark.svg are one drawing in two colourways: the same byte length,
+        one word apart in the filename. The dark one draws its wordmark in
+        #D9DEE5 and #AAB3C0, which on #F7F7F5 paper is very nearly nothing --
+        and that mistake survives every structural assertion here. So the
+        served bytes are checked for ink, which only the paper colourway has.
+
+        The card half is a DOM property, not a stylesheet one: the head block
+        is deleted by the inheritance, so no width, no bundle rebuild and no
+        stylesheet failure can put a mark back inside the card.
+        """
+        html, css = self._frontend_css()
+        doc = lxml_html.fromstring(html)
+
+        lockups = doc.find_class("o_afenda_auth_lockup")
+        self.assertEqual(len(lockups), 1, "the product lockup is not rendered exactly once")
+        lockup = lockups[0]
+        self.assertEqual(lockup.get("src"), "/afenda_brand/static/img/logo.svg")
+        self.assertIn(BRAND["product"], lockup.get("alt") or "",
+                      "the product lockup has no accessible name")
+        self.assertIsNone(lockup.get("loading"), "the product lockup is lazy-loaded")
+        served = self.url_open(lockup.get("src"))
+        self.assertEqual(served.status_code, 200, "the vector lockup is not served")
+        self.assertIn(b"<svg", served.content[:256], "the lockup is not a vector")
+        self.assertIn(BRAND["ink"].encode(), served.content,
+                      "the lockup is not the colourway drawn for a paper page")
+
+        # Over the card, not over the page: it is in the form column and not in
+        # the art slot.
+        forms = doc.find_class("o_afenda_auth_form")
+        self.assertEqual(len(forms), 1, "the form column is not rendered exactly once")
+        self.assertIn(forms[0], list(lockup.iterancestors()),
+                      "the lockup is not in the form column")
+
+        mark = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_mark\s*\{([^}]*)\}", css)
+        self.assertTrue(mark, "the lockup block has no rule in the frontend bundle")
+        self.assertRegex(mark.group(1), r"align-items:\s*flex-end",
+                         "the lockup is not held to the right of its column")
+        self._assert_not_media_gated(
+            css, mark.start(), "the lockup is placed only inside a media query")
+
+        box = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_lockup\s*\{([^}]*)\}", css)
+        self.assertTrue(box, "the lockup has no rule in the frontend bundle")
+        # The property name alone would pass on `aspect-ratio: auto`, which
+        # reserves nothing; the point of the rule is the number.
+        self.assertRegex(box.group(1), r"aspect-ratio:\s*2\.5",
+                         "the lockup reserves no box of the lockup's own shape")
+
+        # The art slot holds the hero and nothing else: the inline bear, with
+        # no <img> beside it, so the tenant's logo is neither doubled onto the
+        # page nor left behind in the card upstream renders it in.
+        art = doc.find_class("o_afenda_auth_art")
+        self.assertEqual(len(art), 1, "the art slot is not rendered exactly once")
+        self.assertFalse(art[0].xpath(".//img"), "the art slot holds an image beside the bear")
+        slot_art = [n for n in art[0] if isinstance(n.tag, str)]
+        self.assertEqual(len(slot_art), 1, "the art slot does not hold exactly one piece of art")
+        self.assertIn("o_afenda_auth_hero", slot_art[0].get("class") or "",
+                      "the art slot holds something other than the hero")
+        self.assertFalse(doc.xpath("//img[contains(@src, 'company_logo')]"),
+                         "the tenant logo renders alongside the hero")
+
+        # Nothing brand-like inside the card, at any width.
+        self.assertFalse(doc.find_class("o_afenda_card_head"),
+                         "the card head block is still in the page")
+        cards = doc.find_class("o_database_list")
+        self.assertEqual(len(cards), 1, "the login card was not rendered")
+        self.assertFalse(cards[0].xpath(".//img"), "an image still renders inside the card")
+
+        # The fallback ruling: a tenant with no hero art gets their own
+        # company_logo in the art slot. Nothing in this module puts
+        # afenda_hero = False in a qcontext, so no served page exercises that
+        # branch and no assertion above can reach it -- said plainly rather
+        # than substituted for. What IS checkable is that the branch exists,
+        # that it holds upstream's own moved <img> rather than a fork of it,
+        # that it sits in the art slot and not back in the card, and that the
+        # cap login.scss gives it is a bound and not a box.
+        arch = self.env.ref("web.login_layout").get_combined_arch()
+        tree = lxml_etree.fromstring(arch.encode())
+        fallback = tree.xpath(
+            "//div[@class='o_afenda_auth_art']"
+            "//div[@class='o_afenda_auth_fallback']"
+            "//img[contains(@t-attf-src, 'company_logo')]")
+        self.assertEqual(len(fallback), 1,
+                         "the art slot has no company_logo fallback for a tenant with no hero art")
+        self.assertIn("o_afenda_auth_tenant", fallback[0].get("class") or "",
+                      "the fallback logo is not the element login.scss caps")
+        self.assertFalse(fallback[0].get("style"),
+                         "an inline size still outranks the cap in login.scss")
+
+        cap = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_tenant\s*\{([^}]*)\}", css)
+        self.assertTrue(cap, "the fallback tenant logo has no rule in the frontend bundle")
+        # Bounded by HEIGHT, and the aspect ratio left free. logo_web is
+        # image_process(logo, size=(180, 0)) (odoo/addons/base/models/
+        # res_company.py:169-172): at most 180 wide, height whatever the
+        # artwork is. A 45px height cap once rendered this tenant's 179x172
+        # badge at 47x45 -- smaller than our own lockup, with its wordmark
+        # illegible -- so the box, not the bound, was the bug.
+        # Asserted as capping properties: `min-width: 180px` contains "180px"
+        # too and would mean the opposite of a cap.
+        for prop, bound in (("max-width", "180px"), ("max-height", "128px")):
+            self.assertRegex(
+                cap.group(1), rf"{prop}:\s*{re.escape(bound)}",
+                f"the fallback tenant logo is not bounded by {prop}",
+            )
+        # ...and nothing fixes a dimension, which would distort an aspect ratio
+        # this rule cannot know.
+        self.assertRegex(cap.group(1), r"width:\s*auto",
+                         "the fallback tenant logo has a forced width")
+        self.assertRegex(cap.group(1), r"height:\s*auto",
+                         "the fallback tenant logo has a forced height")
+        self._assert_not_media_gated(
+            css, cap.start(), "the fallback tenant logo is capped only inside a media query")
 
     def test_webclient_page_is_branded(self):
         self.authenticate("admin", "admin")
@@ -132,10 +837,23 @@ class TestBranding(HttpCase):
             icon = self.url_open(href.group(1))
             self.assertEqual(icon.status_code, 200, f"{url}: {href.group(1)} is not served")
             self.assertTrue(icon.content, f"{url}: the favicon is empty")
-            # Whatever the route, the bytes are the AFENDA favicon: the hook
-            # wrote the same file onto every company.
-            with file_open("afenda_brand/static/img/favicon.ico", "rb") as f:
-                self.assertEqual(icon.content, f.read(), f"{url} serves a different favicon")
+            # NOT asserted as "the bytes are AFENDA's". That was only ever true
+            # of a database nobody had configured: a tenant with its own favicon
+            # is the feature working, not failing -- the same mistake
+            # test_company_defaults used to make about the company name. What is
+            # pinned instead is the contract: whatever is served is a real image
+            # of the type a tab can render, and when the company HAS a favicon,
+            # that is what is served rather than AFENDA's.
+            self.assertTrue(
+                icon.headers.get("Content-Type", "").startswith("image/"),
+                f"{url}: the favicon is not served as an image",
+            )
+            company = self.env.ref("base.main_company").sudo()
+            if company.favicon:
+                self.assertEqual(
+                    icon.content, base64.b64decode(company.favicon),
+                    f"{url} serves AFENDA's favicon while the tenant has its own",
+                )
 
     def test_pwa_manifest_is_branded(self):
         manifest = self.url_open("/web/manifest.webmanifest").json()
@@ -181,19 +899,36 @@ class TestBranding(HttpCase):
         return Image.open(io.BytesIO(base64.b64decode(b64))).size
 
     def test_company_defaults(self):
+        """AFENDA is the SYSTEM; the main company is a TENANT.
+
+        This used to assert the main company's own name and logo were AFENDA's,
+        which is only true of a database nobody has configured yet. It is a
+        defaults test, and a tenant that has set its own name and artwork is
+        the hook working, not failing: `_apply_company_branding` renames only a
+        company still carrying an Odoo default (hooks.py:184, against
+        _DEFAULT_COMPANY_NAMES) and guards the logo on `uses_default_logo`.
+        Asserting otherwise made a real tenant's configuration read as a
+        regression -- which is exactly what happened here.
+
+        So the defaults are asserted on a company this test creates and
+        therefore controls. That the hook also reaches an ALREADY EXISTING
+        company at install is a different contract, and it is covered by
+        test_migration_reapplies_company_branding, which builds both companies
+        it needs rather than borrowing whatever the live database has.
+        """
         company = self.env.ref("base.main_company")
         with file_open("afenda_brand/static/img/logo.png", "rb") as f:
             expected_size = Image.open(io.BytesIO(f.read())).size
-        self.assertEqual(self._logo_size(company.logo), expected_size)
-        self.assertEqual(company.name, BRAND["short"])
-        self.assertTrue(company.favicon)
+        self.assertTrue(company.favicon, "the main company has no favicon at all")
         new_company = self.env["res.company"].create({"name": "Second"})
         self.assertEqual(self._logo_size(new_company.logo), expected_size, "new companies get the AFENDA logo")
         # mail reads these from the email: "primary" is the CTA button text,
         # "secondary" is the button fill. A blue-on-blue button is unreadable.
-        for record in (company, new_company):
-            self.assertEqual(record.email_secondary_color.upper(), BRAND["primary"])
-            self.assertEqual(record.email_primary_color.upper(), "#FFFFFF")
+        # Asserted on the company this test created, for the reason in the
+        # docstring: these are tenant-editable too (Settings > Companies), so
+        # reading them off the live main company would be the same mistake.
+        self.assertEqual(new_company.email_secondary_color.upper(), BRAND["primary"])
+        self.assertEqual(new_company.email_primary_color.upper(), "#FFFFFF")
         # Printed documents: the defaults reach companies created after install.
         self.assertEqual(new_company.font, "Source_Sans_3")
         self.assertEqual(
@@ -300,15 +1035,29 @@ class TestBranding(HttpCase):
         addon = pathlib.Path(__file__).resolve().parent.parent
         version = ast.literal_eval((addon / "__manifest__.py").read_text(encoding="utf-8"))["version"]
         script = addon / "migrations" / version / "post-migrate.py"
-        self.assertTrue(
-            script.is_file(),
-            f"manifest version {version} has no migrations/{version}/post-migrate.py",
-        )
-        module = load_script(str(script), "afenda_brand_post_migrate_under_test")
-        self.assertEqual(
-            tuple(inspect.signature(module.migrate).parameters), ("cr", "version"),
-            "Odoo only accepts a migrate(cr, version) signature",
-        )
+        if version in _VERSIONS_WITHOUT_MIGRATION:
+            self.assertFalse(
+                script.is_file(),
+                f"{version} is declared as needing no migration but ships one; "
+                f"remove it from _VERSIONS_WITHOUT_MIGRATION",
+            )
+        else:
+            self.assertTrue(
+                script.is_file(),
+                f"manifest version {version} has no migrations/{version}/post-migrate.py "
+                f"and is not declared in _VERSIONS_WITHOUT_MIGRATION",
+            )
+        # Every script the module ships, not only the current version's: a
+        # signature Odoo rejects aborts the whole upgrade, and an old directory
+        # still runs on a database far enough behind.
+        scripts = sorted((addon / "migrations").glob("*/post-migrate.py"))
+        self.assertTrue(scripts, "the module ships no migration scripts at all")
+        for path in scripts:
+            module = load_script(str(path), f"afenda_brand_post_migrate_{path.parent.name}")
+            self.assertEqual(
+                tuple(inspect.signature(module.migrate).parameters), ("cr", "version"),
+                f"{path.parent.name}: Odoo only accepts a migrate(cr, version) signature",
+            )
 
     def test_system_bot_is_branded(self):
         bot = self.env.ref("base.partner_root")
@@ -548,8 +1297,294 @@ class TestBranding(HttpCase):
         css = bundle.css().raw.decode().lower()
         # "primary" and "link" are the two values the light sheet never contains,
         # so they are what proves primary_variables.dark.scss was loaded at all.
+        # The scalar tokens only: BRAND["dark"]["ramp"] is pinned through its
+        # consumers in test_neutral_ramp_reaches_both_schemes, because a bare
+        # substring for a ramp step is satisfied by colors this scheme sets
+        # elsewhere and would not fail if the step went missing.
         for name, color in BRAND["dark"].items():
+            if not isinstance(color, str):
+                continue
             self.assertIn(color.lower(), css, f"dark {name} {color} is missing from the dark theme")
+
+    def test_dark_scheme_survives_the_inverted_ramp(self):
+        """The $o-gray-* consumers the inversion alone gets wrong.
+
+        Each is upstream reading the ramp through a Bootstrap-layer variable
+        whose sense only survives walking light-to-dark, so
+        primary_variables.dark.scss restates the variable. Both bundles are
+        pinned: the light half is what proves the restatement is scoped to the
+        dark bundle and did not move the light scheme.
+
+        Not asserted, because it is knowingly unfixed: the pager indicator
+        reads $o-gray-200 directly for border and background
+        (web/static/src/core/pager/pager_indicator.scss:8-10), so in this
+        scheme it is the view color on the view. No token reaches it and this
+        module adds no dark-bundle selectors; the gap is written up in
+        primary_variables.dark.scss beside the fixes that were reachable.
+        """
+        light = self._bundle_css("web.assets_web")
+        dark = self._bundle_css("web.assets_web_dark")
+
+        # Tooltips: caption $o-gray-200 (bootstrap_overridden.scss:236) on a
+        # ground of $o-black (:29). Neither scheme lifts $o-black, which is why
+        # --emphasis-color is asserted too -- it is what makes "the caption must
+        # be the light end of the ramp" a requirement rather than a preference.
+        self.assertIn("--emphasis-color: #000000;", dark, "the dark tooltip ground is no longer black")
+        for css, scheme in ((light, "light"), (dark, "dark")):
+            self.assertIn("--tooltip-color: #f3f4f6;", css,
+                          f"the {scheme} tooltip caption is not readable on a black tooltip")
+
+        # Placeholders: $input-placeholder-color (bootstrap_overridden.scss:306)
+        # over a transparent input (web/static/src/scss/primary_variables
+        # .scss:169), so the view is the ground. 4.5:1 dark against 14.3:1 for
+        # body text; the light value is upstream's own mix, unchanged.
+        self.assertIn("::placeholder{color: #7a818e; opacity: 1;}", dark,
+                      "the dark placeholder is not legible on the dark view")
+        self.assertIn("::placeholder{color: #b7bcc5; opacity: 1;}", light,
+                      "the light placeholder moved")
+
+        # Color scheme: the only declaration that reaches scrollbars, native
+        # <select> popups and date pickers (web/static/src/scss/primary_
+        # variables.scss:13, emitted at webclient.scss:2 and :27).
+        self.assertIn("--o-webclient-color-scheme:dark;", dark, "the dark bundle still declares a bright UA scheme")
+        self.assertIn("color-scheme: dark;", dark, "the dark web client still declares a bright UA scheme")
+        self.assertIn("--o-webclient-color-scheme:bright;", light)
+        self.assertNotIn("--o-webclient-color-scheme:dark;", light)
+
+        # Headings: $o-main-headings-color is $o-black in every scheme upstream
+        # (primary_variables.scss:122 -> $headings-color, bootstrap_overridden
+        # .scss:135), which on the dark view is ink on ink.
+        self.assertIn("--heading-color: #f3f4f6;", dark, "dark headings are still painted black")
+        self.assertIn("--heading-color: #000000;", light, "the light heading color moved")
+
+        # Group separator: $table-group-separator-color is $gray-200
+        # (bootstrap_overridden.scss:146), which in this scheme is the view
+        # itself, so the divider would be drawn in the color it divides.
+        divider = self._rule_bodies(dark, ".table-group-divider")
+        self.assertTrue(divider, "no .table-group-divider rule in the dark bundle")
+        self.assertTrue(any("#1f2937" in body for body in divider),
+                        "the dark group divider is not drawn in the scheme's rule color")
+        self.assertFalse(any("#111827" in body for body in divider),
+                         "the dark group divider is drawn in the view color it separates")
+
+    # --- Web-client chrome ---------------------------------------------
+    # The neutral ramp as static/src/scss/primary_variables.scss declares it,
+    # and as static/src/scss/primary_variables.dark.scss walks it back the
+    # other way. Nine steps, one family; the anchors (hairline, graphite, ink
+    # light; ground, view, rule dark) are commented in both files.
+    #
+    # Read from BRAND, never restated here: four of the eighteen steps are
+    # brand values under another name (hairline, graphite, ink, and the three
+    # dark anchors), so a literal copy in this file would be a third place for
+    # them to drift. brand.py derives the dark ramp from the light one, which
+    # is why only one tuple is spelled out there either.
+    _RAMP = tuple(c.lower() for c in BRAND["ramp"])
+    _RAMP_DARK = tuple(c.lower() for c in BRAND["dark"]["ramp"])
+
+    def _bundle_css(self, name):
+        """One bundle's compiled sheet, lowercased.
+
+        Same route as test_dark_scheme_overrides_the_tokens: no session and no
+        HTTP round trip, so what is pinned is what the bundle compiles to
+        rather than what one page happened to link.
+        """
+        bundle = self.env["ir.qweb"]._get_asset_bundle(name, css=True, js=False)
+        return bundle.css().raw.decode().lower()
+
+    @staticmethod
+    def _rule_bodies(css, selector):
+        """Every declaration block compiled for exactly `selector`."""
+        pattern = re.escape(selector) + r"\{([^{}]*)\}"
+        return [m.group(1) for m in re.finditer(pattern, css)]
+
+    @staticmethod
+    def _media_block_spans(css):
+        """(start, end, condition) of every @media block, by brace matching.
+
+        The same reason the lg-only version of this helper existed, asked the
+        other way round. rfind("@media", 0, offset) finds the nearest @media
+        TEXT before a rule, which is not the same as the block CONTAINING it:
+        the compiled bundle holds dozens of already-closed Bootstrap media
+        blocks, so a rule is almost always preceded by one it has nothing to do
+        with. That heuristic used to report "inside lg" for a rule that had
+        been lifted out of its media query; it would now report "media-gated"
+        for every unconditional rule in the file. Matching braces is the only
+        way to ask the question that actually matters.
+
+        Every condition is collected, not just lg, and each span carries the
+        condition text with it. The auth page needs the question asked both
+        ways now: the art, its left anchor and the card must exist at EVERY
+        width (inside no query at all), while the one thing the composition is
+        allowed to change with width -- art beside the card above md, art above
+        it below md -- must be inside a query, and inside the right one. A span
+        that only knew where it started could answer the first question but not
+        the second.
+        """
+        spans = []
+        for opener in re.finditer(r"@media([^{]*)\{", css):
+            depth, index = 1, opener.end()
+            while index < len(css) and depth:
+                if css[index] == "{":
+                    depth += 1
+                elif css[index] == "}":
+                    depth -= 1
+                index += 1
+            spans.append((opener.end(), index, opener.group(1).strip()))
+        return spans
+
+    def _assert_not_media_gated(self, css, offset, message):
+        spans = self._media_block_spans(css)
+        # Not an assertion about the bundle so much as about this helper: a
+        # bundle with no media blocks at all would make every call below pass
+        # without looking at anything.
+        self.assertTrue(spans, "the bundle carries no media query at all")
+        self.assertFalse(any(start <= offset < end for start, end, _c in spans), message)
+
+    def _assert_media_gated(self, css, offset, condition, message):
+        """The mirror of the above: this rule IS inside a query, and that one.
+
+        Only the innermost enclosing block is compared. A nested query would
+        make "some enclosing block mentions 768px" true of a rule that in fact
+        applies at a completely different width.
+        """
+        spans = self._media_block_spans(css)
+        self.assertTrue(spans, "the bundle carries no media query at all")
+        enclosing = [span for span in spans if span[0] <= offset < span[1]]
+        self.assertTrue(enclosing, message)
+        innermost = max(enclosing, key=lambda span: span[0])
+        self.assertIn(condition, innermost[2], message)
+
+    def test_neutral_ramp_reaches_both_schemes(self):
+        """Nine steps light, nine steps dark, each through a named consumer.
+
+        A bare `assertIn(hex, css)` per step proves nothing: four of the nine
+        light steps are colors this theme also sets by another name (#e5e7eb is
+        $border-color, #9ca3af is $o-colors[0], #4b5563 is $o-brand-secondary,
+        #0f172a is $o-main-text-color), so deleting the ramp outright would
+        still leave those four assertions green.
+
+        `--gray-<step>` is the consumer that cannot be satisfied by accident.
+        Bootstrap emits one per entry of $grays in :root
+        (web/static/lib/bootstrap/scss/_root.scss:13-15) under an empty
+        $variable-prefix (web/static/src/scss/bootstrap_overridden.scss:51), and
+        $grays is built from $gray-N <- $o-gray-N (bootstrap_overridden.scss:
+        19-27). Drop a step from our sheet and that property carries upstream's
+        Bootstrap grey instead of ours.
+
+        `.btn-secondary` is the second consumer, and the one that makes the ramp
+        load-bearing rather than merely present: upstream builds its map out of
+        $o-gray-300/-400/-900 (web/static/src/scss/primary_variables.scss:
+        247-257). The dark pair is the point of the inversion -- carry the light
+        ramp into that bundle unchanged and this button is a near-white slab
+        captioned in near-black.
+        """
+        light = self._bundle_css("web.assets_web")
+        dark = self._bundle_css("web.assets_web_dark")
+        for step, color in zip(range(100, 1000, 100), self._RAMP):
+            self.assertIn(f"--gray-{step}: {color};", light,
+                          f"$o-gray-{step} does not reach the light sheet as {color}")
+        for step, color in zip(range(100, 1000, 100), self._RAMP_DARK):
+            self.assertIn(f"--gray-{step}: {color};", dark,
+                          f"dark $o-gray-{step} does not reach the dark sheet as {color}")
+
+        light_btn = self._rule_bodies(light, ".btn-secondary")
+        self.assertTrue(light_btn, "no .btn-secondary rule in the light bundle")
+        self.assertTrue(
+            any("--btn-bg: #e5e7eb" in body and "--btn-color: #0f172a" in body for body in light_btn),
+            "the secondary button is not drawn from the AFENDA ramp",
+        )
+        dark_btn = self._rule_bodies(dark, ".btn-secondary")
+        self.assertTrue(dark_btn, "no .btn-secondary rule in the dark bundle")
+        self.assertTrue(
+            any("--btn-bg: #1f2937" in body and "--btn-color: #f3f4f6" in body for body in dark_btn),
+            "the dark secondary button did not invert with the ramp",
+        )
+        # Upstream hard-codes `hover-color: $o-black` in all three button maps
+        # (:253, :266, :283); primary_variables.dark.scss restates the maps to
+        # take that out, which the ramp on its own cannot do. Asserted from both
+        # ends: the light bundle keeps upstream's map, so it is what proves
+        # "#000000" is the literal Sass emits for $o-black -- without it the
+        # absence below could be satisfied by a different spelling rather than
+        # by the fix.
+        self.assertTrue(
+            any("--btn-hover-color: #000000" in body for body in light_btn),
+            "the light secondary button no longer hovers to $o-black, so the "
+            "dark assertions below no longer pin anything",
+        )
+        for body in dark_btn:
+            self.assertNotIn("--btn-hover-color: #000000", body,
+                             "a dark button still hovers to black text")
+        self.assertTrue(
+            any("--btn-hover-color: #f3f4f6" in body for body in dark_btn),
+            "the dark secondary button does not hover to the ramp's text step",
+        )
+
+    def test_chrome_tokens_reach_the_backend_bundle(self):
+        """Navbar, control panel and list: the band structure of the shell.
+
+        Navbar and control panel are set entirely through the tokens their own
+        variables files expose (navbar.variables.scss, control_panel.
+        variables.scss), so asserting the compiled rule is what proves the
+        token was the lever. The list has no variables file, so its two rules
+        live in backend.scss and are pinned here beside them.
+        """
+        light = self._bundle_css("web.assets_web")
+        dark = self._bundle_css("web.assets_web_dark")
+
+        # Navbar: 48px bar, and the 14px reading size it inherits from
+        # $o-font-size-base. Same geometry in both schemes.
+        navbar = self._rule_bodies(light, ".o_main_navbar")
+        self.assertTrue(
+            any("--o-navbar-height: 48px" in body and "font-size: 0.875rem" in body for body in navbar),
+            "the navbar is not on the AFENDA height and type scale",
+        )
+        # Asserted through the navbar's own custom property rather than the
+        # bare rgba, which any module could coincidentally emit. _rule_bodies
+        # is not usable here: the entry colour reaches the sheet through
+        # @extend placeholders (web/static/src/webclient/navbar/
+        # navbar.variables.scss:45-48), so it compiles into grouped selector
+        # lists rather than a block that starts with one selector.
+        # Lowercased: _bundle_css returns .raw.decode().lower(), so the custom
+        # property's camel case does not survive into the haystack.
+        self.assertIn(
+            "var(--navbar-entry-color, rgba(255, 255, 255, 0.72))", light,
+            "the navbar entries are not drawn as a film of their own ground",
+        )
+
+        # Control panel: a paper band over a white sheet, ruled with the
+        # hairline. Both tokens derive from $o-webclient-background-color and
+        # $border-color, so the dark half of this assertion is also what proves
+        # the derivation holds -- nothing restates them in the dark file.
+        panel = self._rule_bodies(light, ".o_control_panel")
+        self.assertTrue(
+            any(f"background-color: {BRAND['paper'].lower()}" in body
+                and f"1px solid {BRAND['hairline'].lower()}" in body for body in panel),
+            "the control panel is not the AFENDA paper band",
+        )
+        panel_dark = self._rule_bodies(dark, ".o_control_panel")
+        self.assertTrue(
+            any(f"background-color: {BRAND['dark']['background'].lower()}" in body
+                and f"1px solid {BRAND['dark']['border'].lower()}" in body for body in panel_dark),
+            "the control panel did not follow the dark ground and rule",
+        )
+
+        # List: the column head recedes to graphite and gains weight, and the
+        # data cell carries the row rhythm. Read from the ramp, not from
+        # $o-brand-secondary, so the head inverts with the scheme.
+        for css, head_color, scheme in (
+            (light, BRAND["ramp"][6].lower(), "light"),      # graphite, step 700
+            (dark, BRAND["dark"]["ramp"][6].lower(), "dark"),
+        ):
+            heads = self._rule_bodies(css, ".o_list_renderer .o_list_table thead th")
+            self.assertTrue(
+                any("font-weight: 600" in body and head_color in body for body in heads),
+                f"the {scheme} list header is not the AFENDA column head",
+            )
+            cells = self._rule_bodies(css, ".o_list_renderer .o_list_table .o_data_row > .o_data_cell")
+            self.assertTrue(
+                any("padding-top: .375rem" in body for body in cells),
+                f"the {scheme} list lost its row rhythm",
+            )
 
     # --- Email layouts -------------------------------------------------
     # Email clients drop <style>, so these templates are all inline values.
@@ -592,6 +1627,109 @@ class TestBranding(HttpCase):
             xmlid, self._email_context(**overrides), minimal_qcontext=True
         )
 
+    def _assert_mark_leads(self, tree, xmlid):
+        """The AFENDA mark leads the layout instead of trailing it.
+
+        Three claims together, because each alone would still pass with the
+        mark back in the footer or loose in a div:
+
+          * it is inside a table cell -- Outlook renders HTML through Word,
+            which lays out tables and not divs, which is why this whole
+            surface is table-based;
+          * the document carries exactly one;
+          * nothing mail itself emits -- neither the call to action nor the
+            message body -- precedes it in document order.
+
+        The last is the one that actually pins it to the header. An assertion
+        that the mark is merely *present* passed for the whole time it lived
+        in the footer, which is what made it worth nothing here.
+        """
+        marks = tree.xpath("//img[contains(@src, '/afenda_brand/static/img/logo_email_2x.png')]")
+        self.assertEqual(len(marks), 1, f"{xmlid} does not carry exactly one AFENDA mark")
+        mark = marks[0]
+        self.assertEqual(mark.getparent().tag, "td", f"{xmlid}: the mark is not in a table cell")
+        order = {node: index for index, node in enumerate(tree.iter())}
+        # The CTA cell and the message body: one per layout branch, both
+        # emitted by mail's own markup and never by ours.
+        trailing = tree.xpath("//td[a[@href='/x']]") + tree.xpath("//p[normalize-space()='body']")
+        self.assertEqual(len(trailing), 2, f"{xmlid} rendered neither the CTA nor the body")
+        for node in trailing:
+            self.assertLess(
+                order[mark], order[node],
+                f"{xmlid}: the mark does not lead the layout",
+            )
+        return mark
+
+    def test_the_token_files_invent_no_colour(self):
+        """Every hex literal in the module's SCSS is one BRAND declares.
+
+        Scope deliberately stated: this catches hex LITERALS, not colours.
+        A value reached through mix(), darken(), rgba() or a CSS keyword is
+        computed at build time and never appears here as text -- the dark
+        placeholder is exactly that (a mix of two ramp steps, compiling to a
+        value BRAND does not name). Widening this to "every colour" would mean
+        compiling both bundles and diffing every declaration, a different and
+        much slower test. What this one buys is that the cheapest way to
+        introduce a colour -- typing one -- is closed.
+
+        `.claude/odoo-agent-rules.md` puts brand values in brand.py and mirrors
+        them into primary_variables.scss, because SCSS cannot import Python --
+        "the mirroring is the point". Nothing enforced the mirror in the
+        direction that actually drifts: a token file is where a new colour gets
+        invented, one hex at a time, each individually defensible. This asserts
+        the closed set rather than any single value, so the failure arrives at
+        the moment a colour is introduced instead of months later when someone
+        notices three greys that are nearly the same.
+
+        Comments are stripped first: they quote upstream's own values (the
+        Bootstrap warm ramp, $o-black) to explain what is being overridden, and
+        those are prose about foreign colours, not declarations of ours.
+        """
+        allowed = set()
+
+        def collect(value):
+            if isinstance(value, str):
+                if re.fullmatch(r"#[0-9A-Fa-f]{6}", value):
+                    allowed.add(value.lower())
+            elif isinstance(value, dict):
+                for item in value.values():
+                    collect(item)
+            elif isinstance(value, (list, tuple)):
+                for item in value:
+                    collect(item)
+
+        collect(BRAND)
+        # Not a floor on taste, just proof BRAND imported and was walked: an
+        # empty `allowed` would make every comparison below come back clean.
+        self.assertTrue(allowed, "no colours collected from BRAND")
+
+        def expand(literal):
+            """#abc -> #aabbcc, #rrggbbaa -> #rrggbb, so all forms compare."""
+            digits = literal.lower().lstrip("#")
+            if len(digits) == 3:
+                digits = "".join(digit * 2 for digit in digits)
+            return "#" + digits[:6]
+
+        # Every SCSS file the module ships, not only the two token files: the
+        # rule is about brand values the product uses, and login.scss and
+        # backend.scss are just as able to invent one.
+        for name in ("primary_variables.scss", "primary_variables.dark.scss",
+                     "login.scss", "backend.scss"):
+            with file_open(f"afenda_brand/static/src/scss/{name}", "r") as handle:
+                source = handle.read()
+            code = re.sub(r"//[^\n]*", "", source)
+            # base-2 is upstream's editor palette, kept verbatim on purpose
+            # (base-1 beside it is ours); it is the one place foreign colours
+            # are the correct answer.
+            code = re.sub(r"'base-2':\s*\((?:[^()]|\([^()]*\))*\)", "", code)
+            found = {expand(h) for h in re.findall(r"#[0-9A-Fa-f]{3,8}", code)}
+            stray = sorted(found - allowed)
+            self.assertFalse(
+                stray,
+                f"{name} uses {stray} which BRAND does not declare; add it to brand.py "
+                f"with a name and a reason, or express it from a value already there",
+            )
+
     def test_email_cta_contrast(self):
         """Regression for the upstream naming trap: mail's "primary" colour is
         the button TEXT and "secondary" is the button FILL. Swap the two
@@ -613,15 +1751,35 @@ class TestBranding(HttpCase):
 
     def test_email_default_layout_is_branded(self):
         """Regression: without the //body xpath the notification email is
-        Verdana on Odoo's #454748, and the footer links out instead of showing
-        the AFENDA mark."""
+        Verdana on Odoo's #454748, and without the header row the AFENDA mark
+        is either in the footer or not there at all."""
         html = self._render_email_layout("mail.mail_notification_layout")
-        body = lxml_html.fromstring(html).xpath("//body")[0].get("style")
+        tree = lxml_html.fromstring(html)
+        body = tree.xpath("//body")[0].get("style")
         self.assertIn("Source Sans 3", body)
         self.assertNotIn("Verdana", body)
         self.assertIn(BRAND["ink"], body)
-        self.assertIn("/afenda_brand/static/img/logo_email_2x.png", html)
+        self._assert_mark_leads(tree, "mail.mail_notification_layout")
+        # What the move actually bought, and the one thing a footer mark could
+        # never satisfy: upstream's "Powered by" block is gated on show_footer,
+        # so a message with neither header nor footer used to carry no AFENDA
+        # at all. The header row is ungated.
+        bare = self._render_email_layout(
+            "mail.mail_notification_layout",
+            email_notification_force_header=False,
+            email_notification_allow_header=False,
+            email_notification_force_footer=False,
+            email_notification_allow_footer=False,
+            has_button_access=False,
+        )
+        self.assertIn(
+            "/afenda_brand/static/img/logo_email_2x.png", bare,
+            "the mark vanishes on a message with neither header nor footer",
+        )
+        # Nothing outbound, and no orphaned wording left behind by removing it.
         self.assertNotIn("utm_source=db", html, "the outbound 'Powered by' link survived")
+        self.assertNotIn("Powered by", html, "the 'Powered by' wording survived the anchor")
+        self.assertIn("The truth of your business, kept.", html, "the footer sign-off is gone")
         for tell in ("Verdana", "#454748", "#875A7B"):
             self.assertNotIn(tell, html, f"default mail layout still carries {tell!r}")
 
@@ -638,10 +1796,22 @@ class TestBranding(HttpCase):
         # own `color` is still in the string; what matters is which one an
         # email client reads last.
         self.assertEqual(self._last_color(card), BRAND["ink"], "the card text is not ink")
-        footer = tree.xpath("//td[contains(@style, 'font-size:11px')]")[0].get("style")
+        # Anchored on upstream's own padding rather than on "font-size:11px",
+        # which the replaced "Powered by" cell below now also carries.
+        footer = tree.xpath("//td[contains(@style, 'padding: 0 8px 0 8px')]")[0].get("style")
         self.assertIn(f"border-top:1px solid {BRAND['hairline']}", footer)
         self.assertEqual(self._last_color(footer), BRAND["graphite"])
-        self.assertIn("/afenda_brand/static/img/logo_email_2x.png", html)
+        self._assert_mark_leads(tree, "mail.mail_notification_light")
+        # Pinned to the structure the brief names: the first <tr> of the card's
+        # own <tbody>, above upstream's record-name HEADER row.
+        rows = tree.xpath("//table[@width='590']/tbody/tr")
+        self.assertTrue(rows, "the card lost its rows")
+        self.assertEqual(
+            len(rows[0].xpath(".//img[contains(@src, 'logo_email_2x.png')]")), 1,
+            "the AFENDA mark is not in the first row of the card",
+        )
+        self.assertNotIn("Powered by", html, "the 'Powered by' wording survived the anchor")
+        self.assertIn("The truth of your business, kept.", html, "the footer sign-off is gone")
         for tell in ("Verdana", "#F1F1F1", "utm_source=db"):
             self.assertNotIn(tell, html, f"light mail layout still carries {tell!r}")
 
@@ -666,6 +1836,98 @@ class TestBranding(HttpCase):
             self.assertEqual(mark.get("height"), "16", f"{xmlid}: no height attribute")
             self.assertIn("max-width:64px", (mark.get("style") or "").replace(" ", ""))
             self.assertIn("logo_email_2x.png", mark.get("src"))
+
+    def test_email_header_carries_both_marks(self):
+        """The header is a letterhead: the tenant's logo as the subject, ours
+        as the maker's mark, in that order and at that ratio.
+
+        The `?company=` is the load-bearing part. /web/binary/company_logo
+        takes the company from the query string when it is there and otherwise
+        falls back to `request.session.uid or SUPERUSER_ID` and reads THAT
+        user's company (addons/web/controllers/binary.py:264-287). A mail
+        client fetches the image with no Odoo session, so dropping the
+        parameter serves the superuser's company logo to every recipient on a
+        multi-company database -- and the right one on a single-company
+        database, which is exactly why this needs a test and not a reading.
+
+        The absent `width` is deliberate, not an omission: logo_web is
+        `image_process(logo, size=(180, 0))`
+        (odoo/addons/base/models/res_company.py:169-172), at most 180 wide with
+        a free height, so the aspect ratio is unknown at render time and any
+        fixed width/height pair would squash somebody's logo. Height fixed,
+        width free is the only non-distorting contract available.
+        """
+        tenant = self.env["res.company"].create(
+            {"name": "Tenant Co", "logo": _png_b64((9, 9, 9))}
+        )
+        # The premise: this logo does not read as the shipped default. If it
+        # ever did, every assertion below would pass vacuously.
+        self.assertFalse(tenant.uses_default_logo, "the premise failed: this logo reads as default")
+        for xmlid in ("mail.mail_notification_layout", "mail.mail_notification_light"):
+            html = self._render_email_layout(xmlid, company=tenant)
+            tree = lxml_html.fromstring(html)
+            logos = tree.xpath("//img[contains(@src, '/web/binary/company_logo')]")
+            self.assertEqual(len(logos), 1, f"{xmlid} does not carry the tenant logo exactly once")
+            logo = logos[0]
+            self.assertIn(
+                f"company={tenant.id}", logo.get("src"),
+                f"{xmlid}: no explicit ?company=, so a session-less fetch picks the wrong one",
+            )
+            self.assertTrue(
+                logo.get("src").startswith("http"),
+                f"{xmlid}: the tenant logo URL is relative and an email has no origin",
+            )
+            # Most clients block remote images, so for many recipients the alt
+            # text IS the header. Upstream's generic "Logo" would be noise.
+            self.assertEqual(
+                logo.get("alt"), "Tenant Co",
+                f"{xmlid}: a blocked-image header would name no company",
+            )
+            self.assertEqual(logo.get("height"), "32", f"{xmlid}: no height attribute for Outlook")
+            self.assertIsNone(
+                logo.get("width"),
+                f"{xmlid}: a fixed width distorts a logo whose aspect ratio is unknown",
+            )
+            self.assertEqual(logo.getparent().tag, "td", f"{xmlid}: the tenant logo is not in a cell")
+            # Upstream's light layout draws its own copy beside the record name
+            # (mail_templates_email_layouts.xml:126-128); it has to be gone, or
+            # the tenant appears twice and after us instead of before.
+            self.assertNotIn(
+                "/logo.png?company", html, f"{xmlid} carries a second copy of the tenant logo",
+            )
+            mark = tree.xpath("//img[contains(@src, 'logo_email_2x.png')]")[0]
+            order = {node: index for index, node in enumerate(tree.iter())}
+            self.assertLess(order[logo], order[mark], f"{xmlid}: our mark precedes the tenant's")
+            self.assertLess(
+                int(mark.get("height")), int(logo.get("height")),
+                f"{xmlid}: our mark is not the smaller of the two",
+            )
+
+    def test_email_header_omits_a_logo_the_tenant_never_set(self):
+        """A company with no artwork of its own must emit no tenant <img>.
+
+        /web/binary/company_logo falls through to web/static/img/nologo.png, a
+        180x79 fully transparent plate (binary.py:305). On a page that is a
+        blank space; in a mail client with images blocked it is a broken-image
+        icon next to an alt string, which is worse than nothing.
+        `uses_default_logo` is `not company.logo or company.logo ==
+        default_logo` (res_company.py:179-182), so gating on it covers the
+        no-logo case AND the case where the tenant is still showing AFENDA's
+        own shipped mark -- which must never pose as theirs beside ours.
+        """
+        bare = self.env["res.company"].create({"name": "No Logo Co"})
+        bare.logo = False
+        self.assertTrue(bare.uses_default_logo, "the premise failed: this company has a logo")
+        for xmlid in ("mail.mail_notification_layout", "mail.mail_notification_light"):
+            html = self._render_email_layout(xmlid, company=bare)
+            self.assertNotIn(
+                "/web/binary/company_logo", html,
+                f"{xmlid} links artwork the tenant never set",
+            )
+            self.assertIn(
+                "/afenda_brand/static/img/logo_email_2x.png", html,
+                f"{xmlid} dropped the AFENDA mark along with the tenant's",
+            )
 
     @staticmethod
     def _last_color(style):

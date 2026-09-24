@@ -62,10 +62,11 @@ class TestIdentity(HttpCase):
         body = mail.body_html
         self.assertClean(body, "notification email")
         # The AFENDA layout, not Odoo's: Ledger Blue on the CTA, the AFENDA
-        # mark where "Powered by Odoo" used to link out, and none of the three
-        # values only mail's own templates can emit.
+        # mark in the header row that now leads the mail (it moved out of the
+        # footer's "Powered by" line, which is gone entirely), and none of the
+        # three values only mail's own templates can emit.
         self.assertIn("#1E3A8A", body, "the CTA is not Ledger Blue")
-        self.assertIn("logo_email_2x.png", body, "the footer has no AFENDA mark")
+        self.assertIn("logo_email_2x.png", body, "the header has no AFENDA mark")
         for tell in ("#875A7B", "#F1F1F1", "Verdana"):
             self.assertNotIn(tell, body, f"notification email still carries {tell!r}")
 

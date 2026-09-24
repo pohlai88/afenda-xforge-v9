@@ -1,4 +1,7 @@
+import colorsys
 import io
+import re
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -6,6 +9,7 @@ from pathlib import Path
 from PIL import Image
 
 from afenda.tools import brand_images
+from afenda.tools.rules import load_brand
 from afenda.tools.brand_images import (
     ADDON_TARGETS,
     CONTRACT,
@@ -305,3 +309,174 @@ def _wedge_colours(cw) -> list:
         cy = sum(y for _, y in arm) / len(arm) * BIG / brand_images.MARK_FRAME
         out.append(im.getpixel((round(cx), round(cy))))
     return out
+
+
+ROOT = Path(__file__).resolve().parents[3]
+# The colours Odoo draws its own artwork in. #985184 and #1AD3BB are the pair
+# afenda_brand's own icon test names as Odoo artwork; the three purples are
+# what rules.py rewrites everywhere that is text rather than artwork.
+ODOO_ARTWORK_COLOURS = ("714b67", "875a7b", "7c7bad", "985184", "1ad3bb")
+_ODOO_ARTWORK = re.compile("#(?:" + "|".join(ODOO_ARTWORK_COLOURS) + r")\b", re.I)
+
+
+class SvgRecolourTests(unittest.TestCase):
+    """The upstream illustrations carrying Odoo brand colour.
+
+    These are the asset half of the brand problem. `.svg` is deliberately
+    absent from rebrand.TEXT_SUFFIXES, so no rule reaches them and only this
+    table does -- which means nothing but a test keeps the table honest.
+    """
+
+    def test_no_svg_in_the_tree_still_carries_an_odoo_brand_colour(self):
+        """The one that catches an upstream refresh adding an eighteenth file.
+
+        Scanning beats trusting RECOLOUR: a hand-maintained list of paths is
+        exactly the thing that goes stale when upstream ships a new
+        illustration, and the failure is invisible -- a purple drawing in a
+        rebranded product that nobody is looking for.
+        """
+        offenders = []
+        for top in ("addons", "odoo", "afenda"):
+            base = ROOT / top
+            if not base.is_dir():
+                continue
+            for path in base.rglob("*.svg"):
+                try:
+                    text = path.read_text(encoding="utf-8")
+                except (UnicodeDecodeError, OSError):
+                    continue
+                hits = _ODOO_ARTWORK.findall(text)
+                if hits:
+                    offenders.append(f"{path.relative_to(ROOT).as_posix()} ({len(hits)})")
+        self.assertEqual(
+            offenders, [],
+            "an SVG still carries Odoo brand colour; add it to "
+            "brand_images.RECOLOUR and re-run the module:\n  " + "\n  ".join(offenders),
+        )
+
+    def test_every_listed_path_exists_and_is_actually_recoloured(self):
+        """A dead entry in RECOLOUR is a lie about what the table covers.
+
+        Both halves matter. A path that no longer exists means upstream moved
+        the file and the colour went unrewritten somewhere else; a path that
+        exists but contains no Odoo colour once meant something and now only
+        suggests the table is bigger than the problem.
+        """
+        missing = [r for r in brand_images.RECOLOUR if not (ROOT / r).is_file()]
+        self.assertEqual(missing, [], f"RECOLOUR names files that do not exist: {missing}")
+
+        upstream = {}
+        for rel in brand_images.RECOLOUR:
+            blob = subprocess.run(
+                ["git", "show", f"upstream-19.0:{rel}"],
+                cwd=ROOT, capture_output=True, text=True,
+            )
+            if blob.returncode == 0:
+                upstream[rel] = len(_ODOO_ARTWORK.findall(blob.stdout))
+        if not upstream:
+            self.skipTest("upstream-19.0 is not available in this checkout")
+        inert = [rel for rel, n in upstream.items() if n == 0]
+        self.assertEqual(
+            inert, [],
+            f"RECOLOUR lists files that carry no Odoo colour upstream either: {inert}",
+        )
+
+    def test_the_two_odoo_purples_do_not_collapse_to_one_brand_colour(self):
+        """Inside one drawing a shade pair has to stay a pair.
+
+        The text rule in rules.py sends both purples to the primary, which is
+        right for SCSS where the lighter one is a variant of the darker. Doing
+        that here would flatten account/multi_ledger.svg, the one file that
+        carries both, into a single-colour silhouette.
+        """
+        swatch = brand_images.SVG_SWATCH
+        self.assertNotEqual(
+            swatch["#714b67"], swatch["#875a7b"],
+            "the two Odoo purples map to the same brand colour and the artwork flattens",
+        )
+
+    def test_recolouring_is_idempotent_and_preserves_line_endings(self):
+        """Re-running must be a no-op, including on the CRLF file.
+
+        base_automation/automation.svg is CRLF where the rest of the table is
+        LF. Translating on write turned its one-colour change into a 25-line
+        diff, which is how a colour edit hides inside a whitespace edit.
+        """
+        once = brand_images.recolour_svg('a="#714B67" b="#875a7b" c="#1AD3BB"')
+        self.assertEqual(brand_images.recolour_svg(once), once, "recolour is not idempotent")
+
+        crlf = 'x="#714B67"\r\ny="1"\r\n'
+        out = brand_images.recolour_svg(crlf)
+        self.assertEqual(out.count("\r\n"), 2, "recolour_svg dropped a CRLF")
+        self.assertNotIn("#714B67", out)
+
+    def test_every_replacement_colour_is_in_the_brand_palette(self):
+        """A recolour that invents a colour is a second palette by accident."""
+        brand = load_brand()
+        allowed = {brand["primary"].upper(), *(t.upper() for t in brand["tags"])}
+        for odoo, replacement in brand_images.SVG_SWATCH.items():
+            self.assertIn(
+                replacement.upper(), allowed,
+                f"{odoo} maps to {replacement}, which is not in BRAND",
+            )
+
+
+class RecolouredFilesAreCoherentTests(unittest.TestCase):
+    """The guard that the five-hex check was not.
+
+    `test_no_svg_in_the_tree_still_carries_an_odoo_brand_colour` looks for five
+    known hexes, and it passed while neutral_face.svg, smiling_face.svg and
+    survey_background_sample.svg each sat half-recoloured: Odoo ships shade
+    VARIANTS of its purple (#6B4862, #7D5372, #906083) that no grep for the
+    canonical three will ever find. Each of those files had one hex swapped to
+    a brand blue and a variant left behind, so the drawing came out blue and
+    purple at once - worse than leaving it alone, and invisible to a colour
+    count. This checks the property that actually matters: a file this table
+    claims to have recoloured carries no purple that is not ours.
+    """
+
+    def test_no_recoloured_file_keeps_a_purple_that_is_not_ours(self):
+        brand = load_brand()
+        ours = {brand["primary"].upper(), *(t.upper() for t in brand["tags"])}
+        # Plus the crossings the icon generator legitimately produces where two
+        # brand tags overlap; those are derived from BRAND, not left over from
+        # Odoo, and they are purple by construction when two purples cross.
+        from afenda.tools.app_icons import controlled_overlap_colour
+        for a in list(ours):
+            for b2 in list(ours):
+                r, g, bl = controlled_overlap_colour(
+                    tuple(int(a[i:i + 2], 16) for i in (1, 3, 5)),
+                    tuple(int(b2[i:i + 2], 16) for i in (1, 3, 5)))
+                ours.add("#%02X%02X%02X" % (r, g, bl))
+
+        offenders = {}
+        for rel in brand_images.RECOLOUR:
+            path = ROOT / rel
+            if not path.is_file():
+                continue
+            text = path.read_text(encoding="utf-8")
+            left = sorted({
+                f"#{m.group(1).upper()}"
+                for m in re.finditer(r"#([0-9a-fA-F]{6})\b", text)
+                if _is_purple_family(m.group(1)) and f"#{m.group(1).upper()}" not in ours
+            })
+            if left:
+                offenders[rel] = left
+        self.assertEqual(
+            offenders, {},
+            "a recoloured SVG still carries a non-brand purple, so the drawing "
+            "is part blue and part purple; add the shade to SVG_SWATCH:\n"
+            + "\n".join(f"  {k}: {v}" for k, v in offenders.items()),
+        )
+
+
+def _is_purple_family(hex6: str) -> bool:
+    """Hue 260-340 with enough saturation and mid lightness to read as purple.
+
+    Hue rather than a hex list, because the hex list is exactly what missed the
+    shade variants. The saturation and value floors keep near-greys and
+    near-blacks out, which would otherwise swamp the result.
+    """
+    r, g, b = (int(hex6[i:i + 2], 16) / 255 for i in (0, 2, 4))
+    hue, sat, val = colorsys.rgb_to_hsv(r, g, b)
+    return 260 <= hue * 360 <= 340 and sat >= 0.18 and 0.15 <= val <= 0.85

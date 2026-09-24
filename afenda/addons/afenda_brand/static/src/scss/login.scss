@@ -1,24 +1,682 @@
-// AFENDA xForge login: a paper ground, one white card, one blue action.
+// AFENDA xForge auth surface: /web/login, /web/signup, /web/reset_password and
+// every other page that t-calls web.login_layout.
+//
+// A light paper page, composed as a poster. The hero art - the crystal bear,
+// inline so auth_bear.css can reach its layers - carries the left 55%, seated
+// on the page's bottom-left corner with NO plate, panel or radius of its own:
+// the artwork holds its own near-paper tone in the muzzle and the lettuce, so
+// any surface painted under it shows as a seam. The right column reads top to
+// bottom: the AFENDA lockup (small, top right, the same on every page), the
+// page's display headline, one white card carrying the form, and a quiet
+// footnote. Nothing is layered behind or over the card: the art and the form
+// never share a pixel at any width.
+//
+// This file is layout, type and form geometry only. The bear's colour, its
+// moods and the mood the form carries back are auth_bear.css, which is plain
+// CSS on purpose (see the manifest).
+//
+// The LEFT anchor on the art is the one thing here that fails silently. In the
+// master's 800x887 geometry the face mask sits at (30, 210, 241, 432) - about
+// 4% of left margin - while the tree already runs to x=0 and y=886. So the
+// tree running off the left and the bottom is the composition; a crop from the
+// left is a cut muzzle, and it reads as a rendering bug rather than a design.
+// Every rule below therefore anchors the art's left edge to the page's left
+// edge and lets the RIGHT side vary with the viewport: `justify-content:
+// flex-start`, no `object-fit`, no negative left offset, and a cap expressed
+// only as a maximum, so the browser scales the whole image down rather than
+// cropping any side of it.
+//
+// One media query, at Bootstrap's md (768px), and it changes only the
+// direction of the page: art beside the form above it, art above the form
+// below it. Everything that must exist at every width - the art itself, its
+// left anchor, the card, the lockup - is declared unconditionally, outside it.
+// (A second, at 1100px, only pairs the fields of the two tall forms.)
+//
+// The canonical screen is a LAPTOP: every auth page fits about 1280-1536 x
+// 640 of viewport (a 1366x768 screen less the browser's chrome) with no
+// scrollbar. So vertical sizes - control heights, card padding, the column's
+// gaps, the headline - are clamped on vh, and shrink with the height.
+//
 // Tokens come from primary_variables.scss, which web.assets_frontend pulls in
 // through web._assets_helpers -> web._assets_primary_variables.
+//
+// Rule ORDER in this file is load-bearing for
+// tests/test_branding.py:test_frontend_css_has_login_surface, which reads the
+// FIRST compiled `.o_afenda_login {` block for the paper ground and matches the
+// card with a descendant combinator. So: the ground declaration stays the first
+// thing in this block, no second bare `.o_afenda_login` rule is emitted ahead of
+// it, and `.o_database_list` stays a descendant (never `>`) of it.
+
+// Inputs, the action and the passkey button share one height, down to 38px on
+// a short laptop viewport and up to 44px on a tall one.
+$afb-control-h: clamp(2.375rem, 6vh, 2.75rem);
+// The one focus ring: a crisp 1px of Ledger Blue outside a Ledger Blue border.
+$afb-focus-ring: 0 0 0 1px $o-brand-primary;
 
 .o_afenda_login {
+    // Paper is not decoration here: the art and the form areas are both
+    // transparent, and this is what paints the ground everything sits on.
     background: $o-webclient-background-color;  // paper
 
     // Upstream dresses this card in `bg-100 border-0`. Both are !important
     // utilities, so no selector here could win; login_layout strips the two
     // classes instead and these plain declarations then apply.
+    //
+    // NAMED DEVIATION from afenda-superdesign gate row H4 ("Borders and
+    // spacing carry structure; shadow, radius, gradient and glass do not").
+    // The owner's target puts one subtle shadow on this card and nothing else
+    // on the page, and it is doing work the hairline cannot: the card is the
+    // only opaque object on a page whose ground is paper and whose left half
+    // is artwork, so it has to lift off that ground rather than be outlined on
+    // it. Scoped to this one element, at two low-alpha stops of ink, with no
+    // gradient and no glass anywhere else on the surface.
     .o_database_list {
+        max-width: 400px;  // was upstream's inline style, now removed by the view
         background: $white;
         border: 1px solid $border-color;  // hairline
         border-radius: $o-border-radius;
+        box-shadow: 0 1px 2px rgba($o-main-text-color, .04),
+                    0 16px 40px rgba($o-main-text-color, .08);
     }
-}
 
-// The tagline belongs to the logo lockup: display serif, never a heading.
-.o_afenda_tagline {
-    font-family: "Source Serif 4", Georgia, serif;
-    font-weight: 600;
-    color: $o-brand-secondary;  // graphite
-    font-size: .95rem;
+    // Room to breathe on a 400px card, shrinking with the viewport's HEIGHT:
+    // the canonical screen is a laptop (about 1366x650 of viewport once the
+    // browser's chrome is drawn), and every auth page must fit it without a
+    // scrollbar. `.card-body` is a component class, not a utility, so a plain
+    // declaration outranks it.
+    .o_database_list .card-body {
+        padding: clamp(1.25rem, 4vh, 2rem) 1.75rem clamp(1rem, 3.5vh, 1.75rem);
+    }
+
+    // The two-row forms. Signup (name, email, password, confirm) and "choose
+    // a new password" (password, confirm) are the tallest cards; stacked one
+    // field per row, signup alone is 280px taller than a laptop viewport. From
+    // 1100px up their fields pair into two columns and the card widens to the
+    // headline's 34rem measure, so each pair is one row. 1100 and not
+    // Bootstrap's 992: at 998px the column left the card 377px, and paired
+    // fields at that width truncate their own values. Everything that is not
+    // a field (alerts, the button row) spans both columns; hidden inputs are
+    // display:none and take no cell.
+    @media (min-width: 1100px) {
+        .o_database_list:has(.oe_signup_form),
+        .o_database_list:has(.oe_reset_password_form .field-confirm_password) {
+            max-width: 34rem;
+        }
+
+        .oe_signup_form,
+        .oe_reset_password_form:has(.field-confirm_password) {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 1rem;
+
+            > * { grid-column: 1 / -1; }
+
+            > .field-name,
+            > .field-login,
+            > .field-password,
+            > .field-confirm_password { grid-column: auto; }
+
+            // Upstream's `pt-2` on the password field (auth_signup.fields)
+            // separates it from the field above in a single column. Paired, it
+            // only makes the password row 8px taller than the confirm field
+            // beside it. Bootstrap utilities are !important, so this is too.
+            > .field-password { padding-top: 0 !important; }
+        }
+    }
+
+    // ---------------------------------------------------------------------
+    // The poster headline: the page's one h1, set outside the card, above it.
+    // Each page names itself (webclient_templates.xml, `afenda_headline`).
+    // Serif display against the sans form: the headline is the voice, the
+    // card is the instrument.
+    // ---------------------------------------------------------------------
+    // Headline and subline are one group, so they sit tight; the step from the
+    // group down to the card is the rhythm's middle step (see "Poster rhythm").
+    .o_afenda_auth_headline {
+        display: flex;
+        flex-direction: column;
+        gap: .5rem;
+        margin-bottom: clamp(1rem, 3.5vh, 2.25rem);
+    }
+
+    .o_afenda_auth_title {
+        margin: 0;
+        font-family: "Source Serif 4", Georgia, serif;
+        // Bounded by the SMALLER of width and height, so a short laptop
+        // viewport gets a headline that still fits one line and one screen.
+        // `unquote`: libsass evaluates a bare min() as its own function and
+        // fails on mixed vw/vh ("Incompatible units"), which silently keeps the
+        // last good bundle; quoted, it passes through to CSS as written.
+        font-size: clamp(2rem, unquote("min(4vw, 6.5vh)"), 3.75rem);
+        font-weight: 600;
+        line-height: 1.05;
+        letter-spacing: -.025em;
+        color: $o-main-text-color;  // ink
+        // "Authentication" at 60px is wider than a phone; break the word
+        // rather than push the page sideways.
+        overflow-wrap: break-word;
+        text-wrap: balance;
+    }
+
+    .o_afenda_auth_subtitle {
+        margin: 0;
+        // No measure of its own: the headline block's 34rem already bounds it,
+        // and a 34ch cap broke one-sentence sublines onto a second line.
+        font-size: 1rem;
+        line-height: 1.45;
+        color: $o-brand-secondary;  // graphite: 7.1:1 on paper
+    }
+
+    // ---------------------------------------------------------------------
+    // The form. Precision, not ornament: one weight of rule, one radius, and
+    // the only saturated colour on the page is the action and its focus ring.
+    // ---------------------------------------------------------------------
+    .form-label,
+    .col-form-label {
+        margin-bottom: .375rem;
+        padding-bottom: 0;
+        font-size: .8125rem;
+        font-weight: 500;
+        line-height: 1.3;
+        color: $o-main-text-color;  // ink
+    }
+
+    .form-control {
+        min-height: $afb-control-h;
+        padding: .5rem .75rem;
+        border: 1px solid $border-color;  // hairline
+        border-radius: $o-border-radius;
+        font-size: .9375rem;
+        line-height: 1.4;
+        color: $o-main-text-color;
+
+        &::placeholder {
+            color: rgba($o-brand-secondary, .7);  // graphite, receded
+        }
+
+        // Focus is one token, drawn crisp: the border turns Ledger Blue and a
+        // 1px ring of the same blue sits outside it - a clean 2px edge, no
+        // blur, no tinted halo, no mood colour (the owner's ruling: the soft
+        // coloured glow read as bloat). Every focusable control on the page
+        // uses this same ring ($afb-focus-ring).
+        &:focus {
+            border-color: $o-brand-primary;  // Ledger Blue
+            box-shadow: $afb-focus-ring;
+            outline: none;
+        }
+
+        // Chrome paints an autofilled input its own yellow and ignores
+        // `background-color` on it; an inset shadow taller than the field is
+        // the only way to keep the card surface intact, and
+        // -webkit-text-fill-color the only way to keep the ink. After :focus
+        // because `:-webkit-autofill:focus` has to restate the ring — the
+        // shadow is one property, not two layers that merge.
+        &:-webkit-autofill {
+            -webkit-text-fill-color: $o-main-text-color;
+            box-shadow: 0 0 0 1000px $white inset;
+            caret-color: $o-main-text-color;
+        }
+
+        &:-webkit-autofill:focus {
+            box-shadow: 0 0 0 1000px $white inset, $afb-focus-ring;
+        }
+    }
+
+    // The o_show_password toggle sits in the input group and must read as part
+    // of the field's frame, not as a second control. Its `border` utility is
+    // !important and already resolves to the hairline, so only the fill and
+    // the glyph colour are set here.
+    .input-group .btn {
+        background-color: $white;
+        color: $o-brand-secondary;  // graphite
+
+        &:hover { color: $o-main-text-color; }
+
+        &:focus-visible {
+            outline: none;
+            border-color: $o-brand-primary !important;  // over its `border` utility
+            box-shadow: $afb-focus-ring;
+            position: relative;  // the ring must not be painted under the input
+        }
+    }
+
+    // The affordances that share a row with a label: "Choose a user" (portaled
+    // into the Email label by web.user_switch) and "Reset Password" (added to
+    // the Password label row by auth_signup). Upstream ships them as
+    // `.btn-link`, whose colour is the action's; graphite instead, because the
+    // page holds exactly one blue thing and that is the submit button. 7.6:1
+    // on white, and each keeps a visible focus ring and a hover underline, so
+    // neither depends on colour alone to read as a control.
+    .o_caps_lock_warning .btn-link,
+    .form-label .btn-link,
+    .o_user_switch_btn,
+    .oe_login_buttons .btn-link {
+        padding-left: 0;
+        padding-right: 0;
+        font-size: .8125rem;
+        font-weight: 500;
+        color: $o-brand-secondary;  // graphite
+        text-decoration: none;
+
+        &:hover {
+            color: $o-main-text-color;
+            text-decoration: underline;
+        }
+
+        &:focus-visible {
+            outline: 2px solid $o-brand-primary;
+            outline-offset: 2px;
+            border-radius: $o-border-radius;
+        }
+    }
+
+    // "Log in as superuser" and "Don't have an account?" sit under the action,
+    // not beside a label, so they get their own breathing room.
+    .oe_login_buttons .btn-link {
+        margin-top: clamp(.25rem, 1vh, .75rem);
+    }
+
+    // One action per screen: solid, full width (upstream already sets d-grid on
+    // the button row), and pointing forward. `flex` rather than the default
+    // inline-block so the arrow and the word are one object with a gap between
+    // them instead of a text node and a margin.
+    .oe_login_buttons .btn-primary {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        min-height: $afb-control-h;
+        font-size: .9375rem;
+        font-weight: 600;
+        border-radius: $o-border-radius;
+
+        // The action is already Ledger Blue, so its ring stands off it: a
+        // 2px outline of the same token, 2px clear of the button - replacing
+        // Bootstrap's blurred translucent focus shadow.
+        &:focus-visible {
+            box-shadow: none;
+            outline: 2px solid $o-brand-primary;
+            outline-offset: 2px;
+        }
+    }
+
+    // The arrow is a glyph, not an icon button: it takes the line's colour and
+    // rides a touch smaller than the word so it reads as punctuation.
+    .o_afenda_auth_go {
+        font-size: .8125em;
+        line-height: 1;
+    }
+
+    // ---------------------------------------------------------------------
+    // The other way out. Every page has one primary action and exactly one
+    // secondary one: "Request access" on sign-in, "Back to sign in" everywhere
+    // else (webclient_templates.xml; request_access_templates.xml in
+    // afenda_runtime; the two-factor page's own "Cancel"). The secondary is
+    // the action's geometry with none of its weight: white, one hairline, ink
+    // text - the same family as the passkey button - so the page still holds
+    // exactly one blue thing.
+    // ---------------------------------------------------------------------
+    .o_afenda_auth_secondary,
+    .o_afenda_auth_back,
+    form[action="/web/session/logout"] .btn-link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: .5rem;
+        width: 100%;
+        min-height: $afb-control-h;
+        margin: 0;
+        padding: .375rem 1rem;
+        background: $white;
+        border: 1px solid $border-color;  // hairline
+        border-radius: $o-border-radius;
+        font-size: .9375rem;
+        font-weight: 500;
+        color: $o-main-text-color;  // ink
+        text-decoration: none;
+
+        &:hover {
+            background: $o-webclient-background-color;  // paper
+            color: $o-main-text-color;
+        }
+
+        &:focus-visible {
+            outline: none;
+            border-color: $o-brand-primary;
+            box-shadow: $afb-focus-ring;
+        }
+
+        .fa { font-size: .8125em; color: $o-brand-secondary; }  // graphite
+    }
+
+    // Sign-in: the secondary sits under the full-width action.
+    .oe_login_buttons .o_afenda_auth_secondary {
+        margin-top: .5rem;
+    }
+
+    // Everywhere else the two actions share ONE row - back on the left, the
+    // action on the right - which reads as a choice and costs no height on a
+    // laptop screen. Upstream's row is a `d-grid` (display:grid !important);
+    // only its columns and the order are set here. The passkey/OAuth block
+    // below spans the row. `mb-1` on signup's button is a utility, hence the
+    // !important to level the pair.
+    .oe_login_buttons:has(> .o_afenda_auth_back) {
+        // The back button is as wide as its label, never wrapped; the action
+        // takes the rest of the row.
+        grid-template-columns: auto minmax(0, 1fr);
+        column-gap: .5rem;
+        align-items: stretch;
+
+        > .o_afenda_auth_back { order: -1; white-space: nowrap; }
+        > .btn-primary { margin-bottom: 0 !important; }
+        > .o_login_auth { grid-column: 1 / -1; }
+
+        // A phone's card cannot hold both labels on one line: the pair
+        // stacks, the action first and the way back under it, as on sign-in.
+        @media (max-width: 575.98px) {
+            grid-template-columns: minmax(0, 1fr);
+            row-gap: .5rem;
+
+            > .o_afenda_auth_back { order: 0; }
+        }
+    }
+
+    // Two-factor: its "Cancel" logs the half-signed-in session out, which is
+    // the page's way back; it sits under the action like sign-in's secondary.
+    form[action="/web/session/logout"] .btn-link {
+        margin-top: .5rem;
+    }
+
+    // ---------------------------------------------------------------------
+    // Second-tier authentication: the passkey / OAuth block under the action.
+    // ---------------------------------------------------------------------
+    .o_login_auth {
+        margin-top: clamp(1rem, 2.5vh, 1.5rem);
+
+        // The divider. webclient_templates.xml replaces upstream's utility-
+        // laden <em> with this one, so the rule can be drawn as two hairlines
+        // flanking the word instead of the dashes that stood in for it.
+        .o_afenda_auth_or {
+            display: flex;
+            align-items: center;
+            gap: .75rem;
+            margin-bottom: clamp(.5rem, 1.5vh, 1rem);
+            font-style: normal;
+            font-size: .6875rem;
+            font-weight: 500;
+            letter-spacing: .12em;
+            text-transform: uppercase;
+            color: $o-brand-secondary;  // graphite
+
+            &::before,
+            &::after {
+                content: "";
+                flex: 1 1 0;
+                border-top: 1px solid $border-color;  // hairline
+            }
+        }
+
+        // "Use a Passkey", and any OAuth provider: a secondary control, which
+        // here means the action's geometry with none of its weight — no fill,
+        // one hairline, ink text.
+        .list-group-item {
+            min-height: $afb-control-h;
+            background: $white;
+            border: 1px solid $border-color;  // hairline
+            border-radius: $o-border-radius;
+            font-size: .875rem;
+            font-weight: 500;
+            color: $o-main-text-color;  // ink
+
+            // Bootstrap collapses adjacent list-group borders into a stack;
+            // these read as buttons, so they stand apart.
+            + .list-group-item { margin-top: .5rem; }
+
+            &:hover {
+                background: $o-webclient-background-color;  // paper
+                color: $o-main-text-color;
+            }
+
+            &:focus-visible {
+                outline: none;
+                border-color: $o-brand-primary;
+                box-shadow: $afb-focus-ring;
+            }
+
+            .fa { color: $o-brand-secondary; }  // graphite
+        }
+    }
+
+    // The footnote: upstream's card footer, moved out under the card by
+    // webclient_templates.xml. The quietest line on the page: no underline
+    // until it is asked for, and no blue - the action above it is the only
+    // one. It belongs to the card, so it sits just under it rather than at the
+    // foot of the column: the centring auto margin goes below the footnote,
+    // not between it and the card (see "Vertical placement" below).
+    .o_afenda_auth_foot {
+        padding-top: .75rem;
+        font-size: .75rem;
+        line-height: 1.4;
+        color: $o-brand-secondary;  // graphite
+
+        a {
+            color: $o-brand-secondary;
+            text-decoration: none;
+
+            &:hover {
+                color: $o-main-text-color;
+                text-decoration: underline;
+            }
+
+            &:focus-visible {
+                outline: 2px solid $o-brand-primary;
+                outline-offset: 2px;
+            }
+        }
+    }
+
+    // ---------------------------------------------------------------------
+    // The page: art and form, in that document order.
+    // ---------------------------------------------------------------------
+    // Below md the two are a column - art above, form below - and they share
+    // no pixel, no stacking context and no overlap: the tenant greens in the
+    // artwork under an input, a placeholder or a focus ring would not hold AA,
+    // so nothing is ever layered behind or over the card.
+    // Above md the same two boxes become a row. That is the ONLY thing the
+    // breakpoint changes; the art, its left anchor and the card are declared
+    // outside it and exist at every width.
+    .o_afenda_auth {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+
+        @media (min-width: 768px) {
+            flex-direction: row;
+            align-items: stretch;
+        }
+    }
+
+    // The art's box. Deliberately bare: no background, no border, no radius,
+    // no shadow. The artwork carries its own near-paper tone, so a plate here
+    // would draw a visible seam around it.
+    // `justify-content: flex-start` is the left anchor and is the reason the
+    // muzzle survives a narrow viewport; `align-items: flex-end` seats the art
+    // on the page's bottom edge, which is where its tree already runs off.
+    .o_afenda_auth_art {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: flex-end;
+        justify-content: flex-start;
+        min-width: 0;
+
+        @media (min-width: 768px) {
+            // The column HUGS the bear: its width is the art's own rendered
+            // width (height-bound at 92vh), capped at 55% of the page. A fixed
+            // 55% column opened a strip of empty paper between the bear and
+            // the form whenever the screen was wider than the art is tall
+            // (180px at 1280x633), and the pair stopped reading as one poster.
+            flex: 0 1 auto;
+            max-width: 55%;
+        }
+    }
+
+    // Bounded only by maxima, and never by a fixed dimension: the browser then
+    // scales the WHOLE image down to fit rather than cropping a side of it,
+    // which is the only way the face is guaranteed intact at every width. No
+    // object-fit and no width/height: the intrinsic 800x887 stays authoritative.
+    // The same rule holds for the inline <svg> and for an <img> a caller
+    // points the slot at: both carry width="800" height="887", and the svg's
+    // viewBox gives it the same ratio.
+    // The narrow cap is a height, in vh, and it is what keeps the "Log in"
+    // button above the fold on a 375x667 screen once the art is above the card.
+    .o_afenda_auth_hero {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 100%;
+        max-height: 28vh;
+
+        @media (min-width: 768px) {
+            max-height: 92vh;
+        }
+    }
+
+    // `res_company.logo_web` is the fallback the art slot falls back to for a
+    // tenant with no hero art (the t-else branch in webclient_templates.xml).
+    // Bounded by HEIGHT, not by a 180x45 box: logo_web is
+    // image_process(logo, size=(180, 0)) (odoo/addons/base/models/
+    // res_company.py:169-172) -- at most 180 WIDE with a free height, and
+    // expand=False so it is never upscaled (odoo/tools/image.py:315). Its
+    // aspect ratio is therefore unknown here: this tenant's is 179x172, and a
+    // 45px height cap once rendered that at 47x45, smaller than our own lockup
+    // and with the badge's wordmark illegible. A height bound is the only cap
+    // that treats a square badge and a wide lockup alike, and 180px stays the
+    // width ceiling because that is the ceiling logo_web itself imposes.
+    .o_afenda_auth_tenant {
+        display: block;
+        width: auto;
+        height: auto;
+        max-width: 180px;   // logo_web's own width ceiling; never exceeded
+        max-height: 128px;
+        margin: clamp(1rem, 4vw, 3rem);
+    }
+
+    // The form column: lockup, headline, card, footnote. `flex: 1 1 auto`
+    // rather than a percentage below md, so a stacked page gives the form
+    // whatever the art leaves. Above md it keeps a floor of 22rem so the card
+    // never drops to the 300px at which its label rows wrap; the art is the
+    // side that gives.
+    // Poster rhythm. No uniform `gap`: one gap for everything put the AFENDA
+    // mark as close to the headline as the headline is to its own subline, so
+    // the page read as one undifferentiated stack. Spacing follows grouping
+    // instead - tight inside a group, wide between groups, widest where the
+    // subject changes:
+    //   the lockup (identity) .......... the AFENDA mark alone
+    //   identity -> headline ........... clamp(1.25rem, 5vh, 4.5rem), the largest
+    //   headline + subline (message) ... 0.5rem, inside the group
+    //   message -> card ................ clamp(1rem, 3.5vh, 2.25rem)
+    //   card -> footnote ............... 0.75rem: the footnote belongs to the card
+    // Every step is on vh, so the whole poster fits a laptop viewport (640px
+    // tall) without scrolling, and the order of the steps holds at any height.
+    // The auto margins under "Vertical placement" add free space on top of
+    // these minima (flex margins never collapse), so the order holds at every
+    // height.
+    .o_afenda_auth_form {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        gap: 0;
+        min-width: 0;
+        padding: clamp(1rem, 3vh, 2.5rem) clamp(1rem, 3vw, 3rem) clamp(1rem, 3vh, 2rem);
+
+        @media (min-width: 768px) {
+            // Whatever the bear leaves; the type starts a fixed step from the
+            // bear rather than floating in the middle of what is left, so the
+            // gap between the two stays the same at every screen width.
+            flex: 1 1 0;
+            min-width: 22rem;
+            padding-left: clamp(1.5rem, 4vw, 4.5rem);
+        }
+    }
+
+    // The headline, the card's measure and the footnote share one left edge
+    // and one width, so the poster reads as a single column of type under the
+    // lockup rather than three things centred on their own. 34rem lets the
+    // display headline run wider than the 400px card beside the art.
+    // `padding-inline` on the headline and the footnote matches the gutter the
+    // upstream .container puts around the card, so all three start on the
+    // same pixel.
+    .o_afenda_auth_headline,
+    .o_afenda_auth_measure,
+    .o_afenda_auth_foot {
+        width: 100%;
+        max-width: 34rem;
+        margin-inline: 0;  // set from the bear's side, not centred in the column
+    }
+
+    .o_afenda_auth_headline,
+    .o_afenda_auth_foot {
+        padding-inline: calc(var(--bs-gutter-x, 1.5rem) * .5);
+    }
+
+    // Vertical placement: headline and card sit together in the middle of the
+    // column, whichever of the optional pieces the page renders. The headline
+    // is optional (a page that sets no afenda_headline), and so is the
+    // footnote (`disable_footer`: the 2FA page, /request-access). So the
+    // centring hangs on the two pieces that always exist:
+    // - whatever comes straight after the lockup - the headline, or the card
+    //   when there is no headline - takes an auto margin above it;
+    // - whatever ends the column - the footnote, or the card when the page
+    //   renders no footnote - takes an auto margin below it.
+    // The two auto margins split the free space evenly, so headline, card and
+    // footnote sit together in the middle of the column below the lockup.
+    .o_afenda_auth_mark + .o_afenda_auth_headline,
+    .o_afenda_auth_mark + .o_afenda_auth_measure {
+        margin-top: auto;
+    }
+
+    .o_afenda_auth_measure:last-child,
+    .o_afenda_auth_foot {
+        margin-bottom: auto;
+    }
+
+    // Ours: top right, small, right-aligned. The lockup alone - the owner
+    // removed the tagline that sat under it, which cost a laptop screen a line
+    // the poster could not spare.
+    .o_afenda_auth_mark {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        margin-bottom: clamp(1.25rem, 5vh, 4.5rem);  // identity -> message: the largest step
+        text-align: right;
+        --afb-lockup-w: clamp(76px, 18vw, 104px);
+    }
+
+    // logo.svg carries padding inside its viewBox: the ink spans 7.0% to
+    // 92.5% of its width and 17.6% to 82.9% of its height (measured by
+    // rendering it). Negative right and bottom margins of exactly that
+    // padding put the wordmark's ink on the column's edge: the "e" of xForge
+    // sits on the same right edge as everything else, and the step down to the
+    // headline is measured from the ink, not from invisible padding. The
+    // height is width / 2.5166, so the bottom inset is 0.171 / 2.5166 = 0.068
+    // of the width.
+    .o_afenda_auth_lockup {
+        width: var(--afb-lockup-w);
+        height: auto;
+        margin-right: calc(var(--afb-lockup-w) * -.075);
+        margin-bottom: calc(var(--afb-lockup-w) * -.068);
+        // 342.254 / 136, the SVG's own viewBox, written as one number so no
+        // Sass division is involved. It reserves the box before the file
+        // lands, which is why the vector cannot shift the page as it loads.
+        aspect-ratio: 2.5166;
+    }
+
+    // The card's measure. It no longer centres the card on its own: the
+    // headline above and the footnote below place the pair together, and
+    // `min-height` on the page (not `height`) means a form taller than the
+    // viewport grows the page instead of being clipped.
+    .o_afenda_auth_measure {
+        flex: 0 0 auto;
+        min-width: 0;
+    }
 }

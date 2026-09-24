@@ -25,6 +25,66 @@
     font-variant-numeric: tabular-nums;
 }
 
+// The list. Two rules, and only because the list has no variables file:
+// list_renderer.scss declares none. The only knobs it exposes are five
+// --ListRenderer-* custom properties on `.o_list_renderer`
+// (addons/web/static/src/views/list/list_renderer.scss:3-7). Two of them do
+// reach the column head -- --ListRenderer-thead-padding-y (:4) and
+// --ListRenderer-thead-bg-color (:5) are consumed at :84-85 -- but none of the
+// five reaches the head's `color` or `font-weight`, and none reaches the data
+// cell's vertical padding, which is exactly what the two rules below set.
+// Everything else this pass touched -- navbar, control panel, the neutral
+// ramp -- went through tokens.
+//
+// Both rules below restate a property upstream already sets, on a selector at
+// or above upstream's specificity, later in the same bundle. No `!important`,
+// no new element, and rows stay rows at every width.
+.o_list_renderer .o_list_table {
+
+    // The column head is chrome, not data. Upstream paints it $headings-color
+    // (list_renderer.scss:86), which on the light sheet is $o-black #000000 --
+    // a full step darker than the ink #0F172A the values under it are set in,
+    // so the head outweighs the records it labels. Graphite recedes it; the
+    // extra weight is what keeps it legible once it has receded. Same
+    // specificity as upstream's own rule (0,2,2), later in the bundle, so it
+    // wins outright.
+    //
+    // $o-gray-700 rather than $o-brand-secondary, although both are #4B5563 on
+    // the light sheet: the ramp inverts in primary_variables.dark.scss and the
+    // brand token does not, so spelling it as the brand token would leave a
+    // graphite head at 2.5:1 on the dark bundle's #0B1120 and 2.3:1 on its
+    // #111827 -- the head takes the webclient ground in a standalone list and
+    // the view ground inside a form (list_renderer.scss:5 sets
+    // --ListRenderer-thead-bg-color to $o-webclient-background-color,
+    // form_controller.scss:907 re-points it at $o-view-background-color).
+    // Read from the ramp it is #9CA3AF there, at
+    // 7.4:1 and 7.0:1 on the same two grounds.
+    thead th {
+        font-weight: 600;  // upstream: $o-font-weight-medium (500) via $table-th-font-weight
+        color: $o-gray-700;  // graphite on the light sheet, its inverse in dark
+    }
+
+    // Row rhythm. Density is bought here, in geometry, and nowhere in the type
+    // scale: the cell keeps the 14px reading size and gives back 2px of air
+    // top and bottom, which is roughly one more row per ten on a full screen.
+    //
+    // Padding rather than `height`, so a cell that has to wrap still grows.
+    // The .5rem it replaces is Bootstrap's `.table-sm > :not(caption) > * > *`
+    // (0,1,1), fed by $o-table-cell-padding-y-sm
+    // (addons/web/static/src/scss/primary_variables.scss:129); list_renderer
+    // .scss sets no vertical padding on .o_data_cell at all, so (0,4,0) is
+    // more than enough to win.
+    //
+    // This applies to the editing row too, and that is intended: upstream's
+    // only rule for a selected cell (:403) zeroes the padding and border of
+    // the widget and input INSIDE it, not the cell, so the cell padding set
+    // here is what gives an open row its height as well as a resting one.
+    .o_data_row > .o_data_cell {
+        padding-top: .375rem;
+        padding-bottom: .375rem;
+    }
+}
+
 // Empty states: one quiet ledger page instead of the three Odoo faces.
 //
 // Upstream draws all three through `:before` background images
