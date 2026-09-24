@@ -230,16 +230,17 @@
     </template>
 
     <!-- The sign-in page's headline, and the arrow on the action.
-         The headline is set here and not on web.login_layout: "Welcome back"
-         is true of a sign-in and false of a reset or a signup, and the layout
-         is shared by all of them. Each page names itself the same way, in the
-         body of its own t-call (see login_layout's headline slot). This
-         replaces the card-internal "Welcome back" intro block, so the page
-         keeps exactly one h1. -->
+         The sign-in page speaks in the bear's voice, not a greeting: one line
+         of philosophy, no subline (the owner's direction). "Guard what grows."
+         is the picture read aloud - the bear holding its tree - and it answers
+         the tagline under the lockup ("The truth of your business, kept.").
+         Set here and not on web.login_layout, because the layout is shared by
+         the reset and signup pages, which keep their functional headlines.
+         Each page names itself in the body of its own t-call (see
+         login_layout's headline slot), so the page keeps exactly one h1. -->
     <template id="login" inherit_id="web.login" name="AFENDA login heading">
         <xpath expr="//t[@t-call='web.login_layout']" position="inside">
-            <t t-set="afenda_headline">Welcome back.</t>
-            <t t-set="afenda_subline">Log in to your xForge workspace.</t>
+            <t t-set="afenda_headline">Guard what grows.</t>
         </xpath>
         <!-- The action points forward. `hasclass('btn-primary')` and not
              `[@type='submit']`: in debug mode "Log in as superuser" is a second

@@ -542,7 +542,11 @@ class TestBranding(HttpCase):
         the test brings its own token instead. The reset-with-token page is
         reached the same way, with a partner prepared for a reset.
         """
-        self._assert_one_poster("/web/login", self.url_open("/web/login"), "Welcome back.")
+        login = self._assert_one_poster("/web/login", self.url_open("/web/login"), "Guard what grows.")
+        # The sign-in line is one sentence of philosophy, by the owner's
+        # direction: no subline under it.
+        self.assertFalse(login.find_class("o_afenda_auth_subtitle"),
+                         "/web/login renders a subline under its headline")
 
         probe = self.env["res.partner"].create({"name": "AFENDA signup probe"})
         probe.signup_prepare()
