@@ -408,8 +408,18 @@ def _calendar(x0=40, y0=64, x1=216, y1=222, r=14):
 _CAL_RINGS = _rrect(74, 30, 92, 78, 9) + " " + _rrect(164, 30, 182, 78, 9)
 _CAL_BAND = f"M40 78 H216 V112 H40 Z"
 _CAL_DAYS = _bars([(70, 110, 136, 16), (128, 168, 136, 16), (70, 110, 170, 16)])
-_HOL_BODY = ("M54 64 H216 V166 L160 222 H54 Q40 222 40 208 V78 Q40 64 54 64 Z")
-_HOL_CORNER = "M216 166 L160 222 V180 Q160 166 174 166 Z"
+# Time Off is a calendar with a day taken out of it, and the bite has to be big
+# enough to change the OUTLINE. Measured against Calendar at 16px the original
+# 56-unit corner moved 9 pixels of 256 and left a shape component of 0.024,
+# against a family median pair distance of 0.282 - the two were separated almost
+# entirely by hue, which is the one thing an apps menu cannot rely on. This cut
+# runs from the right edge to a third of the way along the foot.
+_HOL_BODY = ("M54 64 H216 V112 L104 222 H54 Q40 222 40 208 V78 Q40 64 54 64 Z")
+# The accent rides the cut on the INSIDE. Offset the other way it lay in the
+# space the cut removes and was clipped to the body to nothing: 98% of it fell
+# outside, and the icon rendered with no accent at all while the geometry looked
+# reasonable in the source.
+_HOL_CORNER = "M216 112 L104 222 L52 222 L164 112 Z"
 
 _PRJ_SPINE = _rrect(36, 46, 62, 218, 13)
 _PRJ_ROWS = (_rrect(76, 56, 220, 96, 12) + " " + _rrect(76, 112, 190, 152, 12)
