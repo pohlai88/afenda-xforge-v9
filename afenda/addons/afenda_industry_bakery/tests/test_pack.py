@@ -239,3 +239,71 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
         for rule in rules:
             self.assertEqual(rule.company_id, self.env.company)
             self.assertGreater(rule.product_max_qty, rule.product_min_qty)
+
+    def test_reordering_rules_activate_when_the_tenant_adds_a_vendor(self):
+        """The ten rules are complete except for the one input only a tenant has.
+
+        Seeding a reordering rule is not the same as making replenishment work,
+        and the difference is invisible to every other assertion in this pack.
+        With no vendor on the product, stock resolves no rule at all: the
+        scheduler creates nothing and logs nothing, and only pressing Replenish
+        by hand says "No rule has been found to replenish". The rules sit at
+        qty_to_order 200 forever, looking healthy in the list view.
+
+        What gates it is purchase_stock keeping the warehouse Buy route only
+        for a product that has a vendor
+        (addons/purchase_stock/models/stock_rule.py:167-172). mrp gates the
+        Manufacture route the same way on having a normal BoM
+        (addons/mrp/models/stock_rule.py:73-78), which is why a raw material
+        never resolves to "manufacture the flour".
+
+        So this pack ships no seller_ids on purpose. A bakery's flour supplier
+        is a real commercial relationship, and a placeholder vendor in a
+        tenant's contact list is worse than an empty one. This test supplies
+        the vendor itself to prove that it is the *only* thing missing -- that
+        the warehouse, location, min and max we seeded are right, and the rule
+        activates the moment the tenant names a supplier.
+
+        Do not "fix" the red half of this by putting route_ids on the raws. The
+        Buy route declares product_selectable False
+        (addons/purchase_stock/data/purchase_stock_data.xml:14) and
+        product.template.route_ids reads through a
+        domain=[('product_selectable', '=', True)]
+        (addons/stock/models/product.py:892-894) that Many2many.read applies on
+        every read (odoo/orm/fields_relational.py:1370-1382). The write lands in
+        stock_route_product and can never be read back: measured, not inferred.
+        """
+        flour = self.env.ref(f"{MODULE}.product_flour_t55")
+        orderpoint = self.env["stock.warehouse.orderpoint"].search(
+            [("product_id", "=", flour.product_variant_id.id)]
+        )
+        self.assertEqual(len(orderpoint), 1, "one reordering rule for flour")
+        self.assertFalse(
+            orderpoint.rule_ids,
+            "with no vendor the rule resolves nothing; if this passes, the "
+            "premise of this test has changed and the rest of it proves nothing",
+        )
+
+        vendor = self.env["res.partner"].create({"name": "Test Mill"})
+        self.env["product.supplierinfo"].create({
+            "partner_id": vendor.id,
+            "product_tmpl_id": flour.id,
+            "price": 0.80,
+        })
+        # rule_ids is a non-stored compute (stock_orderpoint.py:73) whose
+        # @api.depends (:191) lists route_id, product_id, location_id,
+        # company_id, warehouse_id and product_id.route_ids -- not seller_ids.
+        # Nothing invalidates it when a vendor appears, so the value cached
+        # earlier in this transaction would still be empty.
+        orderpoint.invalidate_recordset(["rule_ids"])
+
+        self.assertTrue(
+            orderpoint.rule_ids,
+            "a vendor is the only input this pack leaves to the tenant; with "
+            "one set the reordering rule must resolve a supply rule",
+        )
+        self.assertEqual(
+            orderpoint.rule_ids.mapped("action"),
+            ["buy"],
+            "flour is bought, not manufactured",
+        )

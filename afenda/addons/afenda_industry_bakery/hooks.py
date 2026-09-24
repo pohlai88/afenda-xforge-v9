@@ -225,7 +225,22 @@ def _seed_pos(env):
 
 
 def _seed_orderpoints(env):
-    """Replenishment for the raw materials, in the company's own warehouse."""
+    """Replenishment for the raw materials, in the company's own warehouse.
+
+    These rules are complete except for one input the pack deliberately does not
+    supply: a vendor. purchase_stock keeps the warehouse Buy route only for a
+    product that has one (addons/purchase_stock/models/stock_rule.py:167-172),
+    so until the tenant names a supplier each rule sits at its qty_to_order and
+    resolves no supply rule -- the scheduler creates nothing, and only pressing
+    Replenish by hand reports it.
+
+    That is on purpose. A bakery's flour supplier is a real commercial
+    relationship, and a placeholder vendor in a tenant's contact list is worse
+    than an empty one. The min and max levels here are the part the pack does
+    know. test_reordering_rules_activate_when_the_tenant_adds_a_vendor supplies
+    a vendor itself and asserts the rule activates, so the claim in this
+    docstring is executable rather than a promise.
+    """
     warehouse = env["stock.warehouse"].search(
         [("company_id", "=", env.company.id)], limit=1
     )
