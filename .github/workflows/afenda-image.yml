@@ -39,7 +39,7 @@ jobs:
           --health-cmd "pg_isready -h 127.0.0.1 -U ci_admin -d postgres"
           --health-interval 5s --health-timeout 5s --health-retries 20
     env:
-      ODOO_TESTS_MIN: "86"  # auth poster redesign, local runs: afenda_api_docs 16, afenda_brand 54, afenda_brand_digest 2, afenda_runtime 14 (was 72 at 943d1d4a4)
+      ODOO_TESTS_MIN: "87"  # d90f5aa6f, CI printed 87: afenda_api_docs 16, afenda_brand 55, afenda_brand_digest 2, afenda_runtime 14 (86 at 8336f0737, 72 at 943d1d4a4)
     steps:
       - uses: actions/checkout@v4
         with:

@@ -296,3 +296,16 @@ Auth pages release (2026-09-24, 18:49Z-18:53Z):
   - the live frontend bundle carries the one focus ring, the height-bound headline and the bear scales, and no `#017e84`, which also releases the teal rule `3ba94c99c`;
   - /web/reset_password: h1 "Roots remember the way back." with one back action; /web/signup without a token 404; /web/database/manager 404;
   - at 1280x633 the sign-in page fits without a scrollbar, with no console errors.
+
+Auth pages, review round two (2026-09-24, 20:18Z-20:20Z):
+
+- odoo-reviewer on the nine owner-directed commits after `35d64c5cd`: approved with fixes, one Important and live. "Back to sign in" kept the reset/signup token (`keep_query()` keeps every parameter); production rendered `href="/web/login?token=junk-probe"`, and an expired link looped. Fixed in `d90f5aa6f79fda4aa0d36c61d801721d8fbb30c4`, along with the minors: tab order, icon a11y, one focus ring, pressed state, the b2c/b2b "Request access" test, the stale-bundle error-block assertion, and afenda_runtime's unused `product`.
+- CI on `d90f5aa6f`: afenda-ci `Ran 273 tests ... OK`; afenda-image `0 failed, 0 error(s) of 87 tests`. The floor was raised to 87 in the commit that records this.
+- `redeploy.sh d90f5aa6f…`: `/web/health passes`; rollback target `8336f07379e448dc5976dcb65235d754ab223b4f`.
+- Verified live:
+  - afenda_brand 19.0.1.0.7, afenda_runtime 19.0.1.2.1;
+  - `afenda_app super=false createdb=false`, 0 objects owned by another role; 0 ERROR lines in the init log;
+  - expired reset link: back `href="/web/login"`;
+  - /request-access: 200, h1 "The grove is by invitation.", back `/web/login`;
+  - /web/login: "Request access" `href="/request-access"` with no role;
+  - live bundle: no `css_error_message`, and the 2FA Cancel rule and `--bs-btn-active-bg` present.
