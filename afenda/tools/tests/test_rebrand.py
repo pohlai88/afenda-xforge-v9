@@ -480,3 +480,67 @@ class RstUnderlineTests(unittest.TestCase):
         twice, counts = rewrite_text(once, [PRODUCT], Path("addons/crm/README.md"))
         self.assertEqual(once, twice)
         self.assertNotIn("rst_underline", counts)
+
+
+class AccentTealTests(unittest.TestCase):
+    """Odoo's second brand colour, and the four places it is not brand at all.
+
+    The corpus golden test does not cover this rule: the corpus is a
+    deduplicated sample and it happens not to carry any of these lines, so
+    `corpus diff` reported no change when the rule was added. That makes these
+    assertions the only thing standing between the rule and silent drift.
+    """
+
+    def setUp(self):
+        self.rule = next(r for r in RULES if r.name == "odoo_accent_teal")
+
+    def test_it_rewrites_both_odoo_teals(self):
+        for hexcode in ("#017e84", "#017E84", "#00a09d", "#00A09D"):
+            out, counts = rewrite_text(
+                f"color: {hexcode};", [self.rule], Path("addons/web/static/src/x.scss"))
+            self.assertEqual(counts.get("odoo_accent_teal"), 1, f"{hexcode} was not rewritten")
+            self.assertEqual(out, f"color: {load_brand()['primary']};")
+
+    def test_it_does_not_eat_a_longer_hex(self):
+        """#017e8400 is an 8-digit RGBA, not the teal followed by two zeroes."""
+        out, counts = rewrite_text(
+            "color: #017e8400;", [self.rule], Path("addons/web/static/src/x.scss"))
+        self.assertEqual(counts.get("odoo_accent_teal", 0), 0, "the rule swallowed an RGBA hex")
+        self.assertIn("#017e8400", out)
+
+    def test_the_colour_picker_test_is_left_alone(self):
+        """It asserts the picker offers rgb(1, 126, 132).
+
+        Rewriting the value under an assertion about that value turns a passing
+        upstream test into a failing one, and the failure would read as our
+        bug rather than as our edit.
+        """
+        rel = Path("addons/html_editor/static/tests/color_selector.test.js")
+        self.assertFalse(self.rule.applies_to(rel), "the html_editor colour test is being rewritten")
+
+    def test_the_sample_and_demo_content_is_left_alone(self):
+        for rel in (
+            Path("addons/project_todo/data/todo_template.xml"),
+            Path("addons/spreadsheet_dashboard_website_sale/data/files/ecommerce_dashboard.json"),
+        ):
+            self.assertFalse(self.rule.applies_to(rel), f"{rel} is demo content, not brand")
+
+    def test_the_spreadsheet_component_keeps_its_own_palette(self):
+        """o_spreadsheet ships its palette upstream; it is not Odoo's identity."""
+        rel = Path("addons/spreadsheet/static/src/o_spreadsheet/o_spreadsheet.js")
+        self.assertFalse(self.rule.applies_to(rel), "o_spreadsheet's own palette is being rewritten")
+
+    def test_the_real_brand_surfaces_are_still_in_scope(self):
+        """The exclusions must not be so broad that they take the target with them."""
+        for rel in (
+            Path("addons/web/static/src/scss/primary_variables.scss"),
+            Path("addons/digest/models/digest.py"),
+            Path("addons/iot_drivers/static/src/app/css/homepage.css"),
+            Path("addons/web_hierarchy/static/src/hierarchy.variables.scss"),
+        ):
+            self.assertTrue(self.rule.applies_to(rel), f"{rel} is brand and should be rewritten")
+
+    def test_translations_are_out_of_scope_like_every_other_colour_rule(self):
+        """.po carries 171 of these, all translations of the demo template."""
+        rel = Path("addons/project_todo/i18n/fr.po")
+        self.assertFalse(self.rule.applies_to(rel), "a colour rule reached a translation file")
