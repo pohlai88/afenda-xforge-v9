@@ -198,9 +198,14 @@ class TestBranding(HttpCase):
                          "the art is not seated on the page's bottom edge")
         self._assert_not_media_gated(
             css, art[0].start(), "the art's left anchor exists only inside a media query")
-        # The poster ratio: the bear takes about 55% of a wide page.
-        self.assertRegex(art[1].group(1), r"flex:\s*1\s+1\s+55%",
-                         "the art is not the poster's 55% column above md")
+        # The poster ratio: above md the art column HUGS the bear - its width
+        # is the art's own height-bound width, never more than 55% of the page.
+        # A fixed 55% column left a strip of empty paper between the bear and
+        # the form on any screen wider than the art is tall.
+        self.assertRegex(art[1].group(1), r"flex:\s*0\s+1\s+auto",
+                         "the art column does not size to the bear above md")
+        self.assertRegex(art[1].group(1), r"max-width:\s*55%",
+                         "the art column is not capped at 55% of the page above md")
         self._assert_media_gated(
             css, art[1].start(), "768px", "the art's poster width is not gated on the md breakpoint")
         # Nothing paints a surface under the art. The artwork carries its own

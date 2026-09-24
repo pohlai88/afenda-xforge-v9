@@ -30,7 +30,7 @@
 // direction of the page: art beside the form above it, art above the form
 // below it. Everything that must exist at every width - the art itself, its
 // left anchor, the card, the lockup - is declared unconditionally, outside it.
-// (A second, at 992px, only pairs the fields of the two tall forms.)
+// (A second, at 1100px, only pairs the fields of the two tall forms.)
 //
 // The canonical screen is a LAPTOP: every auth page fits about 1280-1536 x
 // 640 of viewport (a 1366x768 screen less the browser's chrome) with no
@@ -91,11 +91,13 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
     // The two-row forms. Signup (name, email, password, confirm) and "choose
     // a new password" (password, confirm) are the tallest cards; stacked one
     // field per row, signup alone is 280px taller than a laptop viewport. From
-    // 992px up their fields pair into two columns and the card widens to the
-    // headline's 34rem measure, so each pair is one row. Everything that is not
+    // 1100px up their fields pair into two columns and the card widens to the
+    // headline's 34rem measure, so each pair is one row. 1100 and not
+    // Bootstrap's 992: at 998px the column left the card 377px, and paired
+    // fields at that width truncate their own values. Everything that is not
     // a field (alerts, the button row) spans both columns; hidden inputs are
     // display:none and take no cell.
-    @media (min-width: 992px) {
+    @media (min-width: 1100px) {
         .o_database_list:has(.oe_signup_form),
         .o_database_list:has(.oe_reset_password_form .field-confirm_password) {
             max-width: 34rem;
@@ -158,7 +160,8 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
 
     .o_afenda_auth_subtitle {
         margin: 0;
-        max-width: 34ch;
+        // No measure of its own: the headline block's 34rem already bounds it,
+        // and a 34ch cap broke one-sentence sublines onto a second line.
         font-size: 1rem;
         line-height: 1.45;
         color: $o-brand-secondary;  // graphite: 7.1:1 on paper
@@ -427,9 +430,13 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
         min-width: 0;
 
         @media (min-width: 768px) {
-            // 55% of the page, grown and shrunk with it: the bear is the
-            // poster's image, and the form column is the caption beside it.
-            flex: 1 1 55%;
+            // The column HUGS the bear: its width is the art's own rendered
+            // width (height-bound at 92vh), capped at 55% of the page. A fixed
+            // 55% column opened a strip of empty paper between the bear and
+            // the form whenever the screen was wider than the art is tall
+            // (180px at 1280x633), and the pair stopped reading as one poster.
+            flex: 0 1 auto;
+            max-width: 55%;
         }
     }
 
@@ -503,8 +510,12 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
         padding: clamp(1rem, 3vh, 2.5rem) clamp(1rem, 3vw, 3rem) clamp(1rem, 3vh, 2rem);
 
         @media (min-width: 768px) {
-            flex: 1 1 45%;
+            // Whatever the bear leaves; the type starts a fixed step from the
+            // bear rather than floating in the middle of what is left, so the
+            // gap between the two stays the same at every screen width.
+            flex: 1 1 0;
             min-width: 22rem;
+            padding-left: clamp(1.5rem, 4vw, 4.5rem);
         }
     }
 
@@ -520,7 +531,7 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
     .o_afenda_auth_foot {
         width: 100%;
         max-width: 34rem;
-        margin-inline: auto;
+        margin-inline: 0;  // set from the bear's side, not centred in the column
     }
 
     .o_afenda_auth_headline,
