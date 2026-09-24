@@ -96,7 +96,9 @@ class TestBranding(HttpCase):
                          "the login page links no favicon")
         self.assertIn("AFENDA xForge", html)
         self.assertIn("o_afenda_login", html, "the login body class is missing")
-        self.assertIn(BRAND["tagline"], html, "the login card is missing the tagline")
+        # The owner removed the tagline from the auth pages: under the lockup it
+        # cost a laptop screen a line the poster could not spare.
+        self.assertNotIn(BRAND["tagline"], html, "the tagline is back on the sign-in page")
         # bg-100 and border-0 are !important utilities: while either is on the
         # card, login.scss cannot paint it whatever the selector or load order.
         card = re.search(r'<div[^>]*\bclass="([^"]*\bo_database_list\b[^"]*)"', html)
@@ -548,9 +550,8 @@ class TestBranding(HttpCase):
 
         Replaces test_the_auth_page_composes_without_the_tagline, which pinned
         the opposite of today's rule ("no page but /web/login has a title").
-        The headline is now the layout's and every page names itself; what
-        still holds from that test is that only /web/login carries the
-        tagline, because only its controller sets it.
+        The headline is now the layout's and every page names itself. No page
+        carries a tagline any more; the owner removed it from the auth pages.
 
         /web/signup is reached with a token on purpose: `invitation_scope` is
         b2b here, so the route is a 404 without one. Relaxing that setting to
@@ -562,6 +563,7 @@ class TestBranding(HttpCase):
         # sans subline under it says what to do.
         login = self._assert_one_poster("/web/login", self.url_open("/web/login"),
                                         "Growth is kept, not found.")
+        self.assertFalse(login.find_class("o_afenda_auth_line"), "a tagline is back on /web/login")
         self.assertEqual([s.text_content().strip() for s in login.find_class("o_afenda_auth_subtitle")],
                          ["Sign in to your workspace."])
         # The way in for someone without an account: access is by invitation
@@ -590,7 +592,7 @@ class TestBranding(HttpCase):
                 self.assertFalse(doc.find_class("alert-danger"),
                                  f"{url} rendered an error instead of the form")
                 self.assertFalse(doc.find_class("o_afenda_auth_line"),
-                                 f"the tagline reached {url}, whose controller never sets it")
+                                 f"a tagline is back on {url}")
 
         # The expired link: an unknown token sets `invalid_token` and an error
         # (addons/auth_signup/controllers/main.py:148-150) and hides the

@@ -155,14 +155,14 @@
                          logo.svg and not logo_dark.svg: this is a paper page,
                          and the dark-ground variant draws its wordmark in
                          #D9DEE5 and #AAB3C0, which on #F7F7F5 is barely there.
-                         Only controllers/home.py:18 (the web_login override)
-                         puts `afenda_tagline` in the qcontext, so every other
-                         page renders this block as the lockup alone. -->
+                         The lockup alone, on every page: the tagline that used
+                         to sit under it was removed by the owner - on a laptop
+                         screen it cost the poster a line it could not spare,
+                         and the headline already speaks for the page. -->
                     <div class="o_afenda_auth_mark">
                         <img class="o_afenda_auth_lockup" alt="AFENDA xForge"
                              width="342" height="136"
                              src="/afenda_brand/static/img/logo.svg"/>
-                        <p t-if="afenda_tagline" class="o_afenda_auth_line" t-out="afenda_tagline"/>
                     </div>
                     <!-- The page's one h1, set OUTSIDE the card. Each page names
                          itself: its inheriting view puts
@@ -235,8 +235,8 @@
     <!-- THE GROVE: one editorial voice for every logged-out page (the
          owner's choice). A serif line in the bear's voice - growth, roots, the
          tree it holds - and one plain sans line under it that says what to do.
-         The AFENDA tagline under the lockup ("The truth of your business,
-         kept.") stays the product's own voice; these lines are the page's.
+         The AFENDA lockup stays the product's only mark, with no tagline under
+         it; these lines are the page's voice.
          Each page names itself in the body of its own t-call (see
          login_layout's headline slot), so every page keeps exactly one h1.
 

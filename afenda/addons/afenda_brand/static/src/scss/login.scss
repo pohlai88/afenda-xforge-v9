@@ -571,7 +571,7 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
     // the page read as one undifferentiated stack. Spacing follows grouping
     // instead - tight inside a group, wide between groups, widest where the
     // subject changes:
-    //   lockup + tagline (identity) ... 0.375rem, inside the group
+    //   the lockup (identity) .......... the AFENDA mark alone
     //   identity -> headline ........... clamp(1.25rem, 5vh, 4.5rem), the largest
     //   headline + subline (message) ... 0.5rem, inside the group
     //   message -> card ................ clamp(1rem, 3.5vh, 2.25rem)
@@ -640,14 +640,13 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
         margin-bottom: auto;
     }
 
-    // Ours: top right, small, right-aligned as a block so the lockup and the
-    // line share one edge. With no tagline (every login_layout page but
-    // /web/login) it is simply a column of one in the same place.
+    // Ours: top right, small, right-aligned. The lockup alone - the owner
+    // removed the tagline that sat under it, which cost a laptop screen a line
+    // the poster could not spare.
     .o_afenda_auth_mark {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
-        gap: 0;  // the lockup/line spacing is optical, set on the two below
         margin-bottom: clamp(1.25rem, 5vh, 4.5rem);  // identity -> message: the largest step
         text-align: right;
         --afb-lockup-w: clamp(76px, 18vw, 104px);
@@ -655,14 +654,12 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
 
     // logo.svg carries padding inside its viewBox: the ink spans 7.0% to
     // 92.5% of its width and 17.6% to 82.9% of its height (measured by
-    // rendering it). Aligning the tagline to the BOX therefore set it 7.5% of
-    // the lockup's width to the right of the wordmark's last letter, and the
-    // gap under it read as the 6px asked for plus 17% of the height of
-    // invisible padding. Negative right and bottom margins of exactly that
-    // padding put the wordmark's ink on the column's edge, so the tagline
-    // below it is flush with the "e" of xForge and its gap is measured from
-    // the ink. The height is width / 2.5166, so the bottom inset is
-    // 0.171 / 2.5166 = 0.068 of the width.
+    // rendering it). Negative right and bottom margins of exactly that
+    // padding put the wordmark's ink on the column's edge: the "e" of xForge
+    // sits on the same right edge as everything else, and the step down to the
+    // headline is measured from the ink, not from invisible padding. The
+    // height is width / 2.5166, so the bottom inset is 0.171 / 2.5166 = 0.068
+    // of the width.
     .o_afenda_auth_lockup {
         width: var(--afb-lockup-w);
         height: auto;
@@ -672,23 +669,6 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
         // Sass division is involved. It reserves the box before the file
         // lands, which is why the vector cannot shift the page as it loads.
         aspect-ratio: 2.5166;
-    }
-
-    // The product's one voice: small, serif, receded - a descriptor under the
-    // mark it belongs to. Graphite rather than a lightened ink, because this
-    // page is paper: 7.1:1 on #F7F7F5.
-    .o_afenda_auth_line {
-        max-width: 34ch;
-        // One line-height's worth of air under the wordmark's ink: close
-        // enough to read as the mark's own descriptor, far enough that the
-        // serif does not touch the sans.
-        margin: .5rem 0 0;
-        letter-spacing: .01em;
-        font-family: "Source Serif 4", Georgia, serif;
-        font-weight: 400;
-        font-size: .75rem;
-        line-height: 1.4;
-        color: $o-brand-secondary;  // graphite
     }
 
     // The card's measure. It no longer centres the card on its own: the
