@@ -27,6 +27,19 @@ jobs:
     name: docker build
     runs-on: ubuntu-24.04
     timeout-minutes: 45
+    services:
+      postgres:
+        image: postgres:16@sha256:a3b7f434b2dc57ce85a67e171163eb8ab1a1ebcb39d27484661f26b1dfbe30d6
+        env:
+          POSTGRES_USER: ci_admin
+          POSTGRES_PASSWORD: ci_admin
+          POSTGRES_DB: postgres
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd "pg_isready -h 127.0.0.1 -U ci_admin -d postgres"
+          --health-interval 5s --health-timeout 5s --health-retries 20
+    env:
+      ODOO_TESTS_MIN: "1"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -40,3 +53,27 @@ jobs:
             -c "import sys; sys.path.insert(0, '/opt/afenda'); import odoo.release as r; print(r.product_name)")
           echo "product_name: $name"
           test "$name" = "AFENDA xForge"
+      - name: A least-privilege role, as on the VPS
+        run: |
+          docker run --rm --network host -e PGPASSWORD=ci_admin \
+            postgres:16@sha256:a3b7f434b2dc57ce85a67e171163eb8ab1a1ebcb39d27484661f26b1dfbe30d6 \
+            psql -v ON_ERROR_STOP=1 -h 127.0.0.1 -U ci_admin -d postgres \
+            -c "CREATE ROLE afenda_app LOGIN NOSUPERUSER CREATEDB NOCREATEROLE NOREPLICATION NOBYPASSRLS PASSWORD 'ci'"
+      - name: Odoo module suites (afenda_*), as afenda_app
+        run: |
+          set -o pipefail
+          mods=afenda_brand,afenda_runtime,afenda_api_docs,afenda_brand_digest
+          docker run --rm --network host --entrypoint /opt/venv/bin/python afenda/xforge:ci \
+            /opt/afenda/odoo-bin \
+            --db_host 127.0.0.1 --db_port 5432 --db_user afenda_app --db_password ci -d ci \
+            --addons-path /opt/afenda/addons,/opt/afenda/afenda/addons,/opt/afenda/afenda/oca/server-brand,/opt/afenda/afenda/oca/web \
+            --data-dir /tmp/afenda-data -i "$mods" \
+            --test-enable --test-tags "/afenda_brand,/afenda_runtime,/afenda_api_docs,/afenda_brand_digest" \
+            --stop-after-init --http-port 8069 --workers 0 \
+            --log-level warn --log-handler odoo.tests:INFO 2>&1 | tee odoo-tests.log
+          line=$(grep -oE '[0-9]+ failed, [0-9]+ error\(s\) of [0-9]+ tests' odoo-tests.log | tail -n 1)
+          echo "result: ${line:-none}"
+          set -- $(printf '%s' "$line" | grep -oE '[0-9]+')
+          [ "$#" -eq 3 ] || { echo "::error::no Odoo test result line"; exit 1; }
+          [ "$1" -eq 0 ] && [ "$2" -eq 0 ] || { echo "::error::$line"; exit 1; }
+          [ "$3" -ge "$ODOO_TESTS_MIN" ] || { echo "::error::only $3 tests ran (min $ODOO_TESTS_MIN)"; exit 1; }

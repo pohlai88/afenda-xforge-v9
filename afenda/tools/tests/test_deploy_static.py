@@ -177,6 +177,13 @@ class DeployStaticTests(unittest.TestCase):
         for ref in refs + [arg.group(1)]:
             self.assertRegex(ref, pinned)
 
+    def test_ci_postgres_matches_the_pinned_compose_image(self):
+        compose = (DEPLOY / "compose.yaml").read_text(encoding="utf-8")
+        pinned = re.search(r"^\s+image:\s*(postgres:\S+)\s*$", compose, re.MULTILINE).group(1)
+        workflow = (REPO / ".github" / "workflows" / "afenda-image.yml").read_text(encoding="utf-8")
+        used = re.findall(r"^\s+image:\s*(postgres:\S+)\s*$", workflow, re.MULTILINE)
+        self.assertEqual(used, [pinned])
+
 
 class LandingSiteStaticTests(unittest.TestCase):
     """The nexuscanon.com landing page under deploy/site: one screen, black and
