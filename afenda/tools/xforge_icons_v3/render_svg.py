@@ -280,6 +280,20 @@ def icon_svg(key: str, size: int = VIEWBOX) -> str:
         if role != spec.front_facet:
             paint_facet(role, d)
 
+    if tier.sheen:
+        # BEFORE the structural planes, not after. A highlight is light landing
+        # on a surface and a shadow is light failing to, so a shadow has to be
+        # able to occlude a highlight - which means being drawn over it.
+        #
+        # Painted last it lifted whatever it fell on, and on CRM the light pool
+        # and the deep plane occupy the same corner: it raised that icon's
+        # darkest value from 47 to 62 and took its entire shadow above the
+        # threshold, against a board floor of 20.
+        #
+        # On the body path, never a rect: a full-bleed rect is a background tile
+        # and this system does not have one.
+        out.append(f'  <path d="{body_d}"{even_odd} fill="url(#{uid}-sheen)"/>\n')
+
     # The secondary structural plane, through the object and clipped to it. This
     # is the deep diagonal the board carries on every icon; without it the solid
     # has no shadow side and the icon reads flat.
@@ -326,11 +340,6 @@ def icon_svg(key: str, size: int = VIEWBOX) -> str:
         for role, d, _colour, *_ in facets:
             if role == spec.front_facet:
                 paint_facet(role, d)
-
-    if tier.sheen:
-        # Painted on the body path, never on a rect: a full-bleed rect is a
-        # background tile, and this system does not have one.
-        out.append(f'  <path d="{body_d}"{even_odd} fill="url(#{uid}-sheen)"/>\n')
 
     if tier.detail and "strip" in art:
         out.append(f'  <g clip-path="url(#{uid}-body)">\n'
