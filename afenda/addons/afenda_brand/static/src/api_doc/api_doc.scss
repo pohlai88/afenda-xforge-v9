@@ -1,0 +1,13 @@
+// /doc API explorer. Its bundle has no primary variables, so the brand
+// colors are literal here: keep them in sync with brand.py.
+
+:root {
+    font-family: "Source Sans 3", -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    --btn-primary: #1E3A8A; // Ledger Blue
+    --text-primary: #1E3A8A;
+}
+
+body[theme="odoo-dark"] {
+    --btn-primary: #1E3A8A;
+    --text-primary: #93C5FD; // Ledger Blue, lightened for dark backgrounds
+}

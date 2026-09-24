@@ -47,6 +47,7 @@ repeated.
 - **HR-1** Leave, attendance, expenses and timesheets are approved by managers and flow to accounting.
 - **PLAT-1** No screen, email or document shows Odoo branding (tested).
 - **PLAT-2** No runtime request reaches Odoo S.A. (§5).
+- **PLAT-3** Each tenant exposes the JSON-2 API on its own subdomain, authenticated with per-user, expiring API keys; errors never carry server tracebacks or internal messages; administrators get the `/doc` explorer (README "API").
 
 **Non-functional:**
 
@@ -59,6 +60,7 @@ repeated.
 | Security | TLS only, 2FA available to every user, master password set, database manager off |
 | Browsers | current Chrome, Edge, Firefox, Safari; PWA installable |
 | Localization | Malaysia first (`l10n_my`); any Odoo localization usable |
+| API | JSON-2 per tenant; rate-limited at nginx; covered end to end by `tests/test_api.py` |
 
 ## 3. Architecture and stack
 
@@ -240,3 +242,6 @@ and test it like our own.
   date already enforce v8's rules; code only for what they miss.
 - **D6 One database per tenant.** Strongest isolation, simplest backup and
   restore per customer, native to Odoo (`dbfilter`).
+- **D7 Upstream-compatible API contract.** Error `name`s (`odoo.exceptions.*`)
+  and the `X-Odoo-Database` header keep their upstream names so existing Odoo
+  client libraries work; only tracebacks and internal 500 messages are removed.

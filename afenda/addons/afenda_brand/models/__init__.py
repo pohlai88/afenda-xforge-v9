@@ -1,1 +1,1 @@
-from . import res_company, res_users
+from . import ir_http, res_company, res_users

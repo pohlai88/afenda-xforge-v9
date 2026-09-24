@@ -64,6 +64,7 @@ Installing `afenda_brand` pulls in the OCA modules and applies the identity:
 | PWA / mobile | App name "AFENDA", theme color Ledger Blue (`web_pwa_customize`) |
 | Companies | AFENDA colors and favicon, also for companies created later; default logo is the AFENDA lockup (treated as a placeholder, so it stays out of customer emails until a real logo is uploaded); a company still named "My Company" is renamed "AFENDA" at install |
 | Discuss | The system bot is "AFENDA Bot", with no Odoo onboarding chat; the #general welcome post reads "Welcome to AFENDA xForge!" |
+| API | `/doc` explorer titled "AFENDA xForge API" in Ledger Blue; JSON-2 errors never include server tracebacks (see "API" below) |
 | Odoo S.A. services | IAP, SMS, postal mail, lead enrichment, editor media/AI endpoints point at a closed local port; the VIES cron and "Odoo.com Accounts" login are kept off (re-checked at every start); IAP and SMS apps are not auto-installed unless another app requires them. See SPEC.md §5 |
 
 If you also install the `website` app, add `website_debranding` from
@@ -71,6 +72,40 @@ If you also install the `website` app, add `website_debranding` from
 
 Brand values (colors, names) are defined once in `addons/afenda_brand/brand.py`
 and mirrored in `static/src/scss/primary_variables.scss`.
+
+## API
+
+Every tenant exposes Odoo 19's external API on its own subdomain; there is no
+shared API host. `dbfilter = ^%d$` binds `acme.afenda.app` to the `acme`
+database, and an `X-Odoo-Database` header cannot point anywhere else.
+
+- **Keys.** A user creates one under Preferences > Account Security > *New API
+  Key* (password confirmation required). Keys act as that user, with that
+  user's access rights; ordinary users get at most 90 days, administrators
+  may create keys without expiry. Revoke them on the same screen.
+- **JSON-2** (preferred): `POST /json/2/<model>/<method>` with a JSON object of
+  named arguments (`ids`, `context`, then the method's parameters). The
+  response is the bare result.
+
+  ```bash
+  curl https://acme.afenda.app/json/2/res.partner/search_read \
+    -H "Authorization: bearer $AFENDA_API_KEY" -H "Content-Type: application/json" \
+    -d '{"domain": [["is_company", "=", true]], "fields": ["name", "email"], "limit": 10}'
+  ```
+
+- **Errors** return `{name, message, arguments, context, debug}` with a status
+  of 401 (bad key), 403 (access), 404 (unknown model or record), 422 (user or
+  validation error) or 500. `afenda_brand` never sends the server traceback
+  (`debug` is empty) and replaces the message of a 500 with "Internal server
+  error"; the server log keeps the details. `name` keeps Odoo's exception
+  class so existing Odoo client libraries work unchanged.
+- **Explorer.** Administrators browse every model, field and method, and try
+  calls, at `/doc` ("AFENDA xForge API").
+- **XML-RPC and JSON-RPC** (`/xmlrpc/2`, `/jsonrpc`) still work, with an API
+  key in place of the password, but are deprecated upstream (removal planned
+  for Odoo 22). Build new integrations on JSON-2.
+- **Browsers.** The API sends no CORS headers: call it from servers, or from
+  pages served by the same tenant.
 
 ## Production on a VPS
 
@@ -180,7 +215,9 @@ server {
 }
 ```
 
-Rate-limit `/web/login` and `/web/reset_password` with `limit_req`.
+Rate-limit `/web/login` and `/web/reset_password` with `limit_req`, and give
+`/json/`, `/xmlrpc/` and `/jsonrpc` their own `limit_req` zone keyed on the
+client address, so one integration cannot starve a tenant's workers.
 
 ### 4. Block Odoo S.A. at the network
 

@@ -25,4 +25,11 @@
         </xpath>
     </template>
 
+    <!-- /doc API explorer: browser tab title -->
+    <template id="api_doc_client" inherit_id="api_doc.docclient" name="AFENDA API explorer">
+        <xpath expr="//t[@t-set='title']" position="replace">
+            <t t-set="title">AFENDA xForge API</t>
+        </xpath>
+    </template>
+
 </odoo>

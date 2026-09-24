@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<templates xml:space="preserve">
+    <t t-name="afenda_brand.DocClient" t-inherit="api_doc.DocClient" t-inherit-mode="extension">
+        <xpath expr="//h2" position="replace">
+            <h2>AFENDA xForge API</h2>
+        </xpath>
+    </t>
+</templates>
