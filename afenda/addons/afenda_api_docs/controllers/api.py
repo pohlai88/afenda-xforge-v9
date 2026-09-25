@@ -4,7 +4,6 @@ from odoo import http
 from odoo.http import request
 
 from ..aliasing import alias_prose
-from ..openapi import build_document
 
 # The Redoc bundle unconditionally renders an "API docs by Redocly" link with
 # a logo fetched from cdn.redoc.ly (static/lib/redoc/README.md). Hiding the
@@ -27,7 +26,15 @@ class AfendaApiController(http.Controller):
         type="http", auth="user", methods=["GET"], website=False, sitemap=False,
     )
     def docs_openapi(self, app=None, **kwargs):
-        return request.make_json_response(build_document(request.env, app=app or None))
+        # Built per user and cached server-side (models/api_docs.py); a shared
+        # HTTP cache must never hold one user's document for another.
+        return request.make_response(
+            request.env["afenda.api.docs"]._openapi_json(app or None),
+            headers=[
+                ("Content-Type", "application/json; charset=utf-8"),
+                ("Cache-Control", "private, no-store"),
+            ],
+        )
 
     @http.route(
         "/docs/api",

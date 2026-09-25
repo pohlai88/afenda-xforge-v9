@@ -27,6 +27,8 @@ class TestApiRoutes(HttpCase):
         res = self.url_open("/docs/openapi.json")
         self.assertEqual(res.status_code, 200)
         self.assertTrue(res.headers["Content-Type"].startswith("application/json"))
+        # Per user and cached server-side; never by a shared cache.
+        self.assertEqual(res.headers["Cache-Control"], "private, no-store")
         self.assertEqual(res.json()["openapi"], "3.1.0")
 
     def test_openapi_json_is_scoped_by_app(self):
