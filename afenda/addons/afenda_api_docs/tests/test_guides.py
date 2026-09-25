@@ -44,3 +44,28 @@ class TestGuideRoutes(HttpCase):
         # part of the page path, which then names no guide.
         self.assertRedirectsToTheIndex("/docs/general/applications/general/users.html")
         self.assertRedirectsToTheIndex("/docs/19/applications/general/users.html")
+
+    def _guide_xmlid_for(self, record, name):
+        self.env["ir.model.data"].create({
+            "module": "afenda_api_docs",
+            "name": f"guide_{name}",
+            "model": record._name,
+            "res_id": record.id,
+        })
+
+    def test_a_guide_xmlid_on_a_non_view_record_is_not_rendered(self):
+        # Only a QWeb view may be rendered from a URL; any other record
+        # that happens to carry a `guide_*` xmlid redirects like a missing page.
+        partner = self.env["res.partner"].create({"name": "Not a guide"})
+        self._guide_xmlid_for(partner, "not_a_view")
+        self.assertRedirectsToTheIndex("/docs/not_a_view")
+
+    def test_a_guide_xmlid_on_a_non_qweb_view_is_not_rendered(self):
+        view = self.env["ir.ui.view"].create({
+            "name": "not a guide",
+            "type": "form",
+            "model": "res.partner",
+            "arch": "<form><field name='name'/></form>",
+        })
+        self._guide_xmlid_for(view, "form_view")
+        self.assertRedirectsToTheIndex("/docs/form_view")

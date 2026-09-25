@@ -32,6 +32,22 @@ def _guide_xmlid(subpath):
     return "afenda_api_docs.guide_%s" % slug
 
 
+def _is_renderable_guide(record):
+    """Whether a record found by `_guide_xmlid` may be rendered from a URL.
+
+    Only a QWeb view: any other record that happens to carry an
+    `afenda_api_docs.guide_*` xmlid - a partner, a form view - is treated as
+    a missing page. sudo() because ir.ui.view is readable by group_system
+    only (odoo/addons/base/security/ir.model.access.csv:35-36) and this
+    route is public; only the yes/no leaves this function.
+    """
+    return (
+        record is not None
+        and record._name == "ir.ui.view"
+        and record.sudo().type == "qweb"
+    )
+
+
 class AfendaDocsController(http.Controller):
     # The catch-all is not decoration: dozens of real in-product links point
     # at `/docs/applications/...` (`grep -rIoh "[\"'(]/docs/[A-Za-z0-9/_.#-]*"
@@ -80,7 +96,7 @@ class AfendaDocsController(http.Controller):
         if subpath is None:
             return request.render("afenda_api_docs.landing", {})
         xmlid = _guide_xmlid(subpath)
-        if request.env.ref(xmlid, raise_if_not_found=False) is None:
+        if not _is_renderable_guide(request.env.ref(xmlid, raise_if_not_found=False)):
             return request.redirect("/docs")
         # `no_footer`: same reasoning as `views/landing.xml` - this route is
         # `website=False`, so `request.is_frontend` never turns True and
