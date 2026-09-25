@@ -1,4 +1,5 @@
 import json
+from unittest.mock import patch
 
 from odoo.service.model import get_public_method
 from odoo.tests import TransactionCase, tagged
@@ -285,3 +286,45 @@ class TestDocument(TransactionCase):
             self.assertNotIn(name, doc["components"]["schemas"])
             self.assertFalse([p for p in doc["paths"] if p.startswith(f"/json/2/{name}/")])
         self.assertIn("res.partner", doc["components"]["schemas"])
+
+
+@tagged("post_install", "-at_install")
+class TestDocumentCache(TransactionCase):
+    def setUp(self):
+        super().setUp()
+        # Another test in the same registry may have filled the entry.
+        self.env.registry.clear_cache()
+        from odoo.addons.afenda_api_docs.models import api_docs
+        self.build = self.startPatcher(
+            patch.object(api_docs, "build_document", wraps=api_docs.build_document)
+        )
+        self.admin = self.env.ref("base.user_admin")
+        self.portal = self.env["res.users"].create({
+            "name": "Docs cache portal",
+            "login": "docs_cache_portal",
+            "group_ids": [(6, 0, [self.env.ref("base.group_portal").id])],
+        })
+
+    def test_second_call_is_served_from_the_cache(self):
+        Docs = self.env["afenda.api.docs"].with_user(self.admin)
+        first = Docs._openapi_json("base")
+        second = Docs._openapi_json("base")
+        self.assertEqual(self.build.call_count, 1)
+        self.assertEqual(first, second)
+        self.assertEqual(json.loads(first)["openapi"], "3.1.0")
+
+    def test_different_groups_get_different_documents(self):
+        admin_doc = json.loads(self.env["afenda.api.docs"].with_user(self.admin)._openapi_json("base"))
+        portal_doc = json.loads(self.env["afenda.api.docs"].with_user(self.portal)._openapi_json("base"))
+        self.assertEqual(self.build.call_count, 2)
+        # ir.cron is readable by group_system only.
+        self.assertIn("ir.cron", admin_doc["components"]["schemas"])
+        self.assertNotIn("ir.cron", portal_doc["components"]["schemas"])
+
+    def test_superuser_does_not_share_an_entry_with_its_groups(self):
+        # env.su bypasses field groups and ACLs (models.py has_access,
+        # _has_field_access), so it must be part of the key.
+        Docs = self.env["afenda.api.docs"].with_user(self.admin)
+        Docs._openapi_json("base")
+        Docs.sudo()._openapi_json("base")
+        self.assertEqual(self.build.call_count, 2)
