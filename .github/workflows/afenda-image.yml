@@ -1,6 +1,7 @@
 # Build the deploy image when something that goes into it changes, check that
 # it carries the product identity, and run the AFENDA Odoo module suites inside
-# it. About ten minutes per run, so it is limited to these paths; a change
+# it. About ten minutes per run, so it is limited to the image's inputs: every
+# COPY source in deploy/Dockerfile, .dockerignore and this file. A change
 # elsewhere is still built on the VPS by deploy/redeploy.sh, which puts the
 # previous commit back if the build fails. Pull requests into main run it too,
 # so the module suites gate a change before it merges, not after.
@@ -12,6 +13,9 @@ on:
     paths:
       - "deploy/**"
       - "afenda/**"
+      - "odoo/**"
+      - "addons/**"
+      - "odoo-bin"
       - "requirements.txt"
       - ".dockerignore"
       - ".github/workflows/afenda-image.yml"
@@ -20,6 +24,9 @@ on:
     paths:
       - "deploy/**"
       - "afenda/**"
+      - "odoo/**"
+      - "addons/**"
+      - "odoo-bin"
       - "requirements.txt"
       - ".dockerignore"
       - ".github/workflows/afenda-image.yml"
