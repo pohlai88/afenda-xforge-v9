@@ -5,7 +5,7 @@ A source-built image and a four-service compose stack:
 | Service | Role |
 |---|---|
 | `db` | `postgres:16`, volume `db-data`; bootstrap superuser `xforge` (backups, restores, `migrate-db-role.sh`) plus least-privilege `afenda_app` (what `init` and the server connect as) — see [Database roles](#database-roles) |
-| `init` | one-shot: `db init` (first run only), `module install afenda_brand afenda_runtime`, `module upgrade --outdated` on an existing database, system parameters |
+| `init` | one-shot: `db init` (first run only), `module install afenda_brand afenda_runtime afenda_api_docs`, `module upgrade --outdated` on an existing database, system parameters |
 | `xforge` | the server: 4 workers, 1 cron thread, gevent on 8072, volume `xforge-data` (`/var/lib/afenda`) |
 | `nginx` | the only published ports; the one proxy hop in front of `proxy_mode`; serves the landing page (`site/`) |
 
@@ -191,15 +191,16 @@ the database.
 
 What it runs underneath: check out the new commit, `docker compose build`,
 then `docker compose up -d`. `init` reruns: it skips `db init` on the existing database, installing an
-already-installed module is a no-op, and then it runs
-`module upgrade --outdated afenda_brand afenda_runtime`. That upgrades a
+already-installed module is a no-op (a module newly added to `MODULES` in `init.sh` is installed
+here, on the existing database), and then it runs
+`module upgrade --outdated afenda_brand afenda_runtime afenda_api_docs`. That upgrades a
 module only when its manifest `version` on disk is newer than the one the
 database recorded (`odoo/cli/module.py`), so bumping the version is what
 ships new module data, and a plain restart reloads nothing. To force an
 upgrade without a version bump:
 
 ```bash
-docker compose run --rm init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin module upgrade -c "$RC" afenda_brand afenda_runtime'
+docker compose run --rm init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin module upgrade -c "$RC" afenda_brand afenda_runtime afenda_api_docs'
 ```
 
 ## The landing page
