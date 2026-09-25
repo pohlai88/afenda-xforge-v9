@@ -16,6 +16,9 @@
         "afenda_industry_base",
         "mrp",
         "mrp_account",
+        # pos_sale lets the counter load and settle sale orders (a cake taken
+        # to order); it pulls sale_management (addons/pos_sale/__manifest__.py:15),
+        # so Sales installs with the pack. Dependency set per the spec, :102.
         "pos_sale",
         "purchase_stock",
         "stock_account",
@@ -42,12 +45,16 @@
         "demo/bakery_demo.xml",
     ],
     # Runs once, at install, and never on -u: odoo/modules/loading.py:239-243
-    # fires it only when update_operation == 'install'. Everything it seeds is
-    # either company-scoped (the POS counter, its categories, the ten
-    # reordering rules) or needs a product.product resolved from a template
-    # XMLID (every BoM line), so none of it can be written as data/ XML. See
+    # fires it only when update_operation == 'install'. It seeds what is
+    # company-scoped (the POS counter and the ten reordering rules) and what
+    # needs a product.product resolved from a template XMLID (every BoM line),
+    # neither of which can be written as data/ XML. The two POS categories are
+    # NOT company-scoped -- pos.category has no company_id
+    # (addons/point_of_sale/models/pos_category.py) -- and are seeded here only
+    # because they are created alongside the counter that shows them. See
     # hooks.py and afenda_industry_base/seed.py. It requires the installing
-    # company to already have a chart of accounts; see _seed_pos for why, and
-    # for the one install order that cannot satisfy that.
+    # company to already have a chart of accounts; see
+    # hooks._check_accounting_is_set_up for why, and for the one install order
+    # that cannot satisfy that.
     "post_init_hook": "post_init_hook",
 }

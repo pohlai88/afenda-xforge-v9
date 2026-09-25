@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Part of AFENDA xForge. See LICENSE file for full copyright and licensing details. -->
 <odoo>
+    <!-- Plain <data>, not noupdate="1" like the rest of data/, and on purpose.
+         It matches the upstream precedent this record copies,
+         addons/sale_timesheet/data/sale_service_data.xml:14-17, which also
+         writes this implication outside a noupdate block. With noupdate="1" the
+         node would be skipped on every -u (odoo/tools/convert.py:360), so the
+         implication would hold only as of install. Without it, each upgrade
+         re-applies (4, uom.group_uom): additive and idempotent, and it leaves
+         any other implied group alone. The cost, accepted: an administrator
+         who removes the implication by hand gets it back on the pack's next
+         upgrade, which is the pack insisting its units stay visible, the
+         reason the record exists (below). -->
     <data>
         <!-- Every unit field on a bill of material is behind uom.group_uom:
              addons/mrp/views/mrp_bom_views.xml:65 on the form and :102 on the

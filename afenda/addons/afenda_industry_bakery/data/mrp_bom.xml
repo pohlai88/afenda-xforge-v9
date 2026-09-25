@@ -17,10 +17,11 @@
              self.env.company (addons/mrp/models/mrp_bom.py:67-69), so each
              header is created owned by whichever company installs the pack, and
              a second company in the same database sees no bills of material at
-             all. That single company ownership is the accepted limitation in
+             all. That single company ownership is accepted, and recorded, in
              docs/superpowers/specs/2026-09-24-afenda-industry-packs-design.md
-             rulings 1 and 2; naming the field here would only pin down in XML
-             what the default already decides. -->
+             ruling 1, in its paragraph on the bill-of-material headers. Naming
+             the field here would only pin down in XML what the default already
+             decides, and test_data_xml_sets_no_company_id forbids it. -->
         <record id="bom_sourdough" model="mrp.bom">
             <field name="product_tmpl_id" ref="product_sourdough"/>
             <field name="product_qty">1</field>

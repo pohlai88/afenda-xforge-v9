@@ -1,11 +1,16 @@
 # Part of AFENDA xForge. See LICENSE file for full copyright and licensing details.
+from odoo.exceptions import UserError
 from odoo.tests import TransactionCase, tagged
 
 from odoo.addons.afenda_industry_base.tests.common import IndustryPackMixin
 # The same rule the hook applied, not a copy of it: a test that restated
 # "units if stocked in units else grams" could agree with itself while both
 # it and the hook were wrong.
-from odoo.addons.afenda_industry_bakery.hooks import _seed_bom_lines, line_uom
+from odoo.addons.afenda_industry_bakery.hooks import (
+    _check_accounting_is_set_up,
+    _seed_bom_lines,
+    line_uom,
+)
 
 MODULE = "afenda_industry_bakery"
 
@@ -172,6 +177,40 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
             "seeded on its bill of material",
         )
         self.assertEqual(len(bom.bom_line_ids), 5, "the croissant recipe has five components")
+
+    def test_install_without_chart_of_accounts_names_this_pack(self):
+        """A company with no bank journal is refused, in the pack's own words.
+
+        The default customer path hits this: installing Bakery on a database
+        without `account` pulls account into the same graph, and the chart only
+        loads after the whole graph (see _check_accounting_is_set_up). Left to
+        upstream, the refusal is point_of_sale's "Ensure that there is an
+        existing bank journal" (addons/point_of_sale/models/pos_config.py:1063),
+        which names neither this pack nor what to do.
+
+        A company created inside a TransactionCase has no chart either: account
+        loads it in cr.precommit (addons/account/models/company.py:491-498),
+        and a TransactionCase never commits. The check reads `env.company`, so
+        the company is selected through `allowed_company_ids`, which is what
+        `env.company` reads.
+        """
+        bare = self.env["res.company"].create({"name": "Bakery Without Books"})
+        env = self.env(context={"allowed_company_ids": [bare.id]})
+        self.assertEqual(env.company, bare)
+        self.assertFalse(
+            env["account.journal"].search([("company_id", "=", bare.id), ("type", "=", "bank")]),
+            "the new company already has a bank journal; the premise of this "
+            "test has changed and the rest of it proves nothing",
+        )
+        with self.assertRaises(UserError) as caught:
+            _check_accounting_is_set_up(env)
+        message = str(caught.exception)
+        self.assertIn("Bakery industry pack", message)
+        self.assertIn("Install Invoicing first", message)
+        self.assertIn(bare.name, message)
+
+        # And the main company, which has its chart, passes.
+        _check_accounting_is_set_up(self.env)
 
     def test_pos_config_belongs_to_env_company(self):
         config = self.env.ref(f"{MODULE}.pos_config_counter")

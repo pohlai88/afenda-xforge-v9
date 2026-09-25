@@ -53,7 +53,7 @@ afenda/addons/afenda_industry_bakery/
   data/mrp_bom.xml
   demo/bakery_demo.xml
   tests/__init__.py
-  tests/test_pack.py      11 tests
+  tests/test_pack.py      13 tests (11 planned; +2 from Task 6 and fix round 1)
 ```
 
 `tests/common.py` is deliberately **not** imported by `afenda_industry_base/tests/__init__.py` — it holds no tests of its own, and the bakery pack imports it by path.
@@ -72,7 +72,7 @@ afenda/addons/afenda_industry_bakery/
 
 **Interfaces:**
 - Consumes: nothing.
-- Produces: `load_company_records(env, module, model_name, records, noupdate=True) -> recordset`, where `records` is a list of `(suffix: str, values: dict)` and the XMLID becomes `f"{module}.{suffix}"`. Also `IndustryPackMixin`, importable as `from odoo.addons.afenda_industry_base.tests.common import IndustryPackMixin`.
+- Produces: `load_company_records(env, module, model_name, records) -> recordset` (the `noupdate` parameter below was removed in fix round 1: seeded XMLIDs are always noupdate, or `_process_end` deletes them on the next `-u` — `odoo/addons/base/models/ir_model.py:2655-2662`), where `records` is a list of `(suffix: str, values: dict)` and the XMLID becomes `f"{module}.{suffix}"`. Also `IndustryPackMixin`, importable as `from odoo.addons.afenda_industry_base.tests.common import IndustryPackMixin`.
 
 - [ ] **Step 1: Write the failing tests**
 
@@ -198,7 +198,7 @@ already exists is routed to the update set rather than created again
 """
 
 
-def load_company_records(env, module, model_name, records, noupdate=True):
+def load_company_records(env, module, model_name, records):  # noupdate param removed, fix round 1
     """Create or update company-scoped records, each owned by ``module``.
 
     :param env: environment; records are created against ``env.company``
@@ -1138,9 +1138,9 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
   --stop-after-init --http-port 8179
 ```
 
-Expected: `afenda_industry_base: 4 tests` and `afenda_industry_bakery: 11 tests`, 15 in total, `0 failed`.
+Expected: `0 failed, 0 error(s) of 17 tests` — `afenda_industry_base` 4 and `afenda_industry_bakery` 13 (updated after fix round 1; the plan originally said 4 and 11).
 
-Then run the same two modules **once on a fresh throwaway database** with `-i` and `--without-demo=all`, because that is what CI does (the orchestrator session's job builds a new database per run) and it is the only path that exercises `post_init_hook` end to end. Both result lines must read the same 3 and 9. Drop the scratch database and its filestore afterwards. These two numbers are what CI's floor is raised by — take them from the result lines, never the per-class stats lines.
+Then run the same two modules **once on a fresh throwaway database** with `-i` and `--without-demo=all`, because that is what CI does (the orchestrator session's job builds a new database per run) and it is the only path that exercises `post_init_hook` end to end. Install `account` first in its own run, then the packs (the hook refuses a company with no chart; see the spec's "Install order"). The result line must read the same 17. Drop the scratch database and its filestore afterwards. These two numbers are what CI's floor is raised by — take them from the result lines, never the per-class stats lines.
 
 - [ ] **Step 2: The `afenda_brand` suite — it now has two new addons in scope**
 
@@ -1166,6 +1166,6 @@ Quote the printed counts from Steps 1 and 2 verbatim, name anything skipped, and
 
 **Spec coverage.** Every spec section maps to a task: the pack contract and `seed.py` → Task 1; the catalogue, shelf life and category rulings → Task 2; bills of material → Tasks 3–4; rulings 1 and 5 (company scoping, module ownership) → Task 4; rulings 2 and 3 (no localization, data vs demo) → Tasks 5–6; the acceptance counts → Task 7. Ruling 4 (`noupdate`) is carried by every `data/` file's `<data noupdate="1">` wrapper, stated in Tasks 2, 3 and 6.
 
-**Type consistency.** `load_company_records(env, module, model_name, records, noupdate=True)` is defined once in Task 1 and called with that exact signature in Task 4. `IndustryPackMixin`'s three helpers — `pack_data_files`, `assert_no_field_in_data`, `assert_no_models_in_data`, plus `assert_records_are_module_owned` — are defined in Task 1 and used in Tasks 4 and 5 under those names. XMLID suffixes in the Task 2 catalogue match the `RECIPES` and `REORDER_RULES` tables in Task 4 exactly.
+**Type consistency.** `load_company_records(env, module, model_name, records)` is defined once in Task 1 and called with that exact signature in Task 4. `IndustryPackMixin`'s three helpers — `pack_data_files`, `assert_no_field_in_data`, `assert_no_models_in_data`, plus `assert_records_are_module_owned` — are defined in Task 1 and used in Tasks 4 and 5 under those names. XMLID suffixes in the Task 2 catalogue match the `RECIPES` and `REORDER_RULES` tables in Task 4 exactly.
 
 **Known rough edge, called out rather than hidden.** Task 3 discovers mid-task that BoM lines cannot be expressed in XML, because `mrp.bom.line.product_id` is a `product.product` (`addons/mrp/models/mrp_bom.py:684`) and the auto-created variant of a seeded template has no XMLID to reference. The plan resolves it by splitting headers (XML, Task 3) from lines (Python, Task 4) and leaves Task 3's test deliberately red at its own commit, with the commit message saying so. An executor who finds a cleaner route — a `product.product` record with its own XMLID per raw material — may take it, but must then update Task 2's expected count of 25 `product.template` records and say so in the commit.

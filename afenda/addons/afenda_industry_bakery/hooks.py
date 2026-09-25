@@ -7,7 +7,6 @@ Python. See afenda_industry_base/seed.py for why that matters at uninstall.
 """
 import logging
 
-from odoo import _
 from odoo.exceptions import UserError
 from odoo.fields import Command
 
@@ -195,7 +194,13 @@ def _check_accounting_is_set_up(env):
         limit=1,
     ):
         return
-    raise UserError(_(
+    # env._, not the module-level `_`: that one finds its language through a
+    # `context`, `self.env` or `uid` local in the calling frame
+    # (odoo/tools/translate.py:526-560), this function has only a bare `env`,
+    # and a hook's env has an empty context -- so it logged a WARNING and
+    # skipped translation. env._ falls back to en_US quietly
+    # (odoo/orm/environments.py:330).
+    raise UserError(env._(
         "The Bakery industry pack configures a Point of Sale counter, which "
         "needs a chart of accounts in company %(company)s: there is no bank "
         "journal to settle takings into.\n\n"
@@ -221,7 +226,6 @@ def _seed_pos(env):
     written as 'none' (addons/product_expiry/models/product_product.py:56-59),
     so nothing here may fold a `tracking` value into these writes.
     """
-    _check_accounting_is_set_up(env)
     bread, pastry = load_company_records(env, MODULE, "pos.category", [
         ("pos_categ_bread", {"name": "Bread"}),
         ("pos_categ_pastry", {"name": "Pastry"}),
@@ -289,6 +293,11 @@ def _seed_orderpoints(env):
 
 
 def post_init_hook(env):
+    # First, before anything is written: a refusal should come before the hook
+    # has seeded half the pack, not after. The install is one transaction, so a
+    # later raise would roll back too -- but the precondition belongs at the
+    # door, where a reader of this function sees it.
+    _check_accounting_is_set_up(env)
     _seed_bom_lines(env)
     _seed_pos(env)
     _seed_orderpoints(env)
