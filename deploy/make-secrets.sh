@@ -3,7 +3,7 @@
 #
 #   deploy/make-secrets.sh
 #
-# Writes, only for files that do not exist yet:
+# Writes, only for files that are missing or empty:
 #   db_password            PostgreSQL password of the xforge role
 #   db_app_password        PostgreSQL password of the afenda_app role the app connects as
 #   admin_password         password of the `admin` login, set by `db init`
@@ -11,8 +11,9 @@
 #                          operator; never mounted into a container)
 #   master_password_hash   its pbkdf2_sha512 hash, the value of admin_passwd
 #
-# Existing files are never overwritten: db_password is baked into the
-# PostgreSQL volume on first start, so replacing it would lock the server out.
+# A file that already holds a value is never overwritten: db_password is baked
+# into the PostgreSQL volume on first start, so replacing it would lock the
+# server out. Emptying a file is therefore the way to ask for a new value.
 #
 # The hash is computed by passlib inside the image, with the same scheme and
 # rounds as the server's own CryptContext (odoo/tools/config.py), so build the
@@ -33,7 +34,10 @@ random() ( set +o pipefail; LC_ALL=C tr -dc 'A-Za-z0-9' < /dev/urandom | head -c
 
 write_new() {  # name value
     local path="$dir/$1"
-    if [ -e "$path" ]; then
+    # -s, not -e: an empty file is never a usable secret, and emptying one is
+    # how a spent value is cleared (admin_password, deploy/secrets/README.md).
+    # Re-running this script is then what refills it.
+    if [ -s "$path" ]; then
         echo "make-secrets: keeping existing $1"
         return 1
     fi
@@ -48,8 +52,8 @@ write_new db_password "$(random)" || true
 write_new db_app_password "$(random)" || true
 write_new admin_password "$(random)" || true
 
-if [ ! -e "$dir/master_password_hash" ]; then
-    if [ ! -e "$dir/master_password" ]; then
+if [ ! -s "$dir/master_password_hash" ]; then
+    if [ ! -s "$dir/master_password" ]; then
         write_new master_password "$(random)"
     fi
     hash=$(docker run --rm -i --entrypoint /opt/venv/bin/python "$image" -c '
