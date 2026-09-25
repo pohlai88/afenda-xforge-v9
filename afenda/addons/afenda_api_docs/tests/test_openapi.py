@@ -369,3 +369,16 @@ class TestDocumentCache(TransactionCase):
         Docs._openapi_json("base")
         Docs.sudo()._openapi_json("base")
         self.assertEqual(self.build.call_count, 2)
+
+    def test_allowed_companies_do_not_share_an_entry(self):
+        # fields_get can depend on records the caller's company-scoped record
+        # rules select (account.analytic.line renames its plan columns after
+        # the plans it can search), so the allowed companies are in the key,
+        # not only the current one.
+        other = self.env["res.company"].create({"name": "Docs cache second company"})
+        self.admin.company_ids |= other
+        main = self.admin.company_id
+        Docs = self.env["afenda.api.docs"].with_user(self.admin)
+        Docs.with_context(allowed_company_ids=[main.id])._openapi_json("base")
+        Docs.with_context(allowed_company_ids=[main.id, other.id])._openapi_json("base")
+        self.assertEqual(self.build.call_count, 2)
