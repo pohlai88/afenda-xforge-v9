@@ -27,6 +27,12 @@ class TestSeed(TransactionCase):
         )
         self.assertEqual(len(records), 1)
         self.assertEqual(self.env.ref(f"{MODULE}.seed_partner_a"), records)
+        # noupdate is what keeps the record alive through the next -u: see
+        # load_company_records' docstring for _process_end.
+        imd = self.env["ir.model.data"].search(
+            [("module", "=", MODULE), ("name", "=", "seed_partner_a")]
+        )
+        self.assertTrue(imd.noupdate, "a seeded XMLID must be noupdate")
 
     def test_load_company_records_is_idempotent(self):
         first = load_company_records(
@@ -41,10 +47,22 @@ class TestSeed(TransactionCase):
         )
 
     def test_load_company_records_uses_env_company(self):
+        """Records land on `env.company`, not on the user's or the main company.
+
+        Called against the main company, this would also pass for a helper that
+        read `env.user.company_id` or `base.main_company` instead -- all three
+        are the same record there. A second company, selected only through
+        `allowed_company_ids` (which is what `env.company` reads), is the one
+        setup where the three differ.
+        """
+        other = self.env["res.company"].create({"name": "Seed Company C2"})
+        self.assertNotEqual(other, self.env.user.company_id)
+        env = self.env(context={"allowed_company_ids": [other.id]})
+        self.assertEqual(env.company, other)
         records = load_company_records(
-            self.env, MODULE, "res.partner", [("seed_partner_c", {"name": "Seed C"})]
+            env, MODULE, "res.partner", [("seed_partner_c", {"name": "Seed C"})]
         )
-        self.assertEqual(records.company_id, self.env.company)
+        self.assertEqual(records.company_id, other)
 
     def test_load_company_records_skips_company_on_company_less_model(self):
         """The `pin_company is False` branch: a model with no `company_id`.
