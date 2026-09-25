@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of AFENDA xForge. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <data noupdate="1">
+        <!-- Top-level on purpose: `product.product_category_all` does not exist
+             in this tree, and product.category.parent_id is optional
+             (addons/product/models/product_category.py:21). No account
+             properties are set here: property_account_* XMLIDs only exist once
+             a specific l10n_* chart is installed, so setting them would make
+             this pack install in one country and fail in every other. -->
+        <record id="categ_finished" model="product.category">
+            <field name="name">Bakery / Finished Goods</field>
+        </record>
+        <record id="categ_raw" model="product.category">
+            <field name="name">Bakery / Raw Materials</field>
+        </record>
+        <record id="categ_packaging" model="product.category">
+            <field name="name">Bakery / Packaging</field>
+        </record>
+    </data>
+</odoo>
