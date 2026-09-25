@@ -2,6 +2,7 @@ import json
 import re
 from unittest.mock import patch
 
+from odoo.exceptions import AccessError
 from odoo.service.model import get_public_method
 from odoo.tests import TransactionCase, tagged
 
@@ -72,6 +73,26 @@ class TestModelSchema(TransactionCase):
         for value in ("res.partner", "res.partner,", ",5"):
             self.assertFalse(pattern.match(value), value)
 
+    def test_group_restricted_fields_follow_the_caller(self):
+        # activity_ids is restricted to base.group_user (mail.activity.mixin);
+        # a portal user must not see it documented, an administrator must.
+        field = self.env["res.partner"]._fields["activity_ids"]
+        self.assertEqual(field.groups, "base.group_user")
+        portal = self.env["res.users"].create({
+            "name": "Docs field portal",
+            "login": "docs_field_portal",
+            "group_ids": [(6, 0, [self.env.ref("base.group_portal").id])],
+        })
+        admin = self.env.ref("base.user_admin")
+        self.assertIn(
+            "activity_ids",
+            model_schema(self.env["res.partner"].with_user(admin))["properties"],
+        )
+        self.assertNotIn(
+            "activity_ids",
+            model_schema(self.env["res.partner"].with_user(portal))["properties"],
+        )
+
     def test_help_text_is_aliased(self):
         schema = model_schema(self.env["res.partner"])
         for prop in schema["properties"].values():
@@ -90,10 +111,21 @@ class TestOperations(TransactionCase):
         for expected in ("search", "read", "create", "write", "unlink"):
             self.assertIn(expected, ops)
 
-    def test_private_methods_are_not_documented(self):
-        ops = model_operations(self.env["res.partner"])
-        for hidden in ("_read", "_write", "browse"):
-            self.assertNotIn(hidden, ops)
+    def test_methods_the_dispatcher_refuses_are_not_documented(self):
+        # Both are defined for res.partner itself, not on `base`, so the
+        # generic-name filter cannot be what drops them: they reach
+        # get_public_method, which must refuse them - an underscore method
+        # (odoo/addons/base/models/res_partner.py:378) and an @api.private
+        # one (addons/auth_signup/models/res_partner.py:90-91).
+        model = self.env["res.partner"]
+        generic = set(dir(type(self.env["base"])))
+        ops = model_operations(model)
+        for name in ("_get_complete_name", "signup_get_auth_param"):
+            self.assertTrue(callable(getattr(type(model), name, None)), name)
+            self.assertNotIn(name, generic, name)
+            with self.assertRaises(AccessError):
+                get_public_method(model, name)
+            self.assertNotIn(name, ops)
 
     def test_web_client_plumbing_is_not_documented(self):
         # Every model inherits ~54 public methods from `base`; most are the
@@ -106,16 +138,11 @@ class TestOperations(TransactionCase):
 
     def test_model_specific_methods_are_documented(self):
         # Methods a model adds itself are its real API surface.
+        # Known public methods, named independently of the generator: two
+        # of res.partner's own, one from its mail.thread mixin.
         ops = model_operations(self.env["res.partner"])
-        for specific in ("address_get", "find_or_create"):
+        for specific in ("address_get", "find_or_create", "create_company", "message_post"):
             self.assertIn(specific, ops)
-
-    def test_every_documented_method_is_actually_callable(self):
-        # The one invariant that matters: the docs must not describe an
-        # operation the dispatcher would 404.
-        model = self.env["res.partner"]
-        for name in model_operations(model):
-            get_public_method(model, name)
 
     def test_path_item_shape(self):
         model = self.env["res.partner"]
