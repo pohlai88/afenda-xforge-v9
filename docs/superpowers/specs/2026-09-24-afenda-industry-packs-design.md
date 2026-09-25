@@ -106,12 +106,22 @@ Manifest: `version 19.0.1.0.0`, `license LGPL-3`, `author AFENDA`,
 | layer | where | content |
 |---|---|---|
 | Product categories | `data` | Finished Goods, Raw Materials, Packaging — no account properties |
-| Products | `data` | Exactly 25: 12 finished, 10 raw, 3 packaging. The counts are fixed here because test 4 asserts them; changing the catalogue means changing the test in the same commit |
+| Products | `data` | Exactly 25: 12 finished, 10 raw, 3 packaging. The counts are fixed here because test 5 (`test_products_and_categories_installed`) asserts them; changing the catalogue means changing the test in the same commit |
 | Shelf life | `data` | Raw materials `tracking='lot'` with `use_expiration_date` — a field on **`product.template`** (`addons/product_expiry/models/product_product.py`, class `ProductTemplate`), not on `product.product` |
 | Bills of material | `data` | One per finished good; components consumed in grams from kg-stocked raws |
 | POS config + POS categories | `post_init_hook` | One "Bakery Counter", against `env.company` |
 | Reordering rules | `post_init_hook` | On raw materials, bound to the company's warehouse |
-| Suppliers, POs, MOs, a POS session, 3 employees | `demo` | Never loaded in production |
+| Suppliers, POs, MOs, a POS session, 3 employees | `demo` | Never loaded in production — see the deviation below |
+
+**Demo deviation, recorded at execution (2026-09-25).** `demo/bakery_demo.xml` ships two
+suppliers, a draft purchase order for each and a draft manufacturing order for forty
+croissants. Two rows of the table above were dropped:
+- **The POS session.** A session has to be opened against the counter, with cash control,
+  and a demo that opens one leaves a tenant-visible open session behind; that is out of
+  pilot scope.
+- **The three employees.** `hr.employee` belongs to `hr`, which is not in this pack's
+  dependency closure, and adding it would install Employees on every production tenant for
+  three demo rows.
 
 `post_init_hook(env)` takes the single-`env` form used by
 `afenda/addons/afenda_brand/hooks.py:98` and `afenda_runtime/__init__.py:6`.
@@ -169,6 +179,14 @@ review of Task 2. Accepted on the same terms as the hook limitation — bounded,
 documented, and properly answered by the G4 control plane rather than by a per-company
 XML scheme Odoo's data loader has no way to express.
 
+**The bill-of-material headers carry the same exposure, and are accepted on the same
+terms.** `data/mrp_bom.xml` names no `company_id`, but `mrp.bom.company_id` defaults to
+`self.env.company` (`addons/mrp/models/mrp_bom.py:67-69`), so each of the twelve headers is
+owned by whichever company `env.company` resolves to at load, and a second company in the
+same database sees no bills of material at all. Naming the field in XML would only pin down
+what the default already decides, and ruling 5's static guard forbids it anyway. Found in
+review of Task 3.
+
 **2. No accounts, taxes or journals anywhere in the pack.** Not on product categories,
 not on products. Those xml_ids exist only once a specific `l10n_*` chart is installed, so
 hard-coding them makes the pack install in one country and fail in the rest. Everything
@@ -180,7 +198,11 @@ real tenant and one that pollutes it with fake transactions. Odoo's own industry
 blur it; ours does not.
 
 **4. Pack content is `noupdate="1"`.** Once a tenant owns their product list, an upgrade
-must not overwrite their prices. Corrections ship as a version bump plus an explicit
+must not overwrite their prices. Records seeded by the hook are always `noupdate` too,
+and there it is not a preference: the hook never reruns on `-u`, so their XMLIDs are never
+reloaded, and `_process_end` deletes every *non*-noupdate XMLID of the module that an update
+did not reload (`odoo/addons/base/models/ir_model.py:2655-2662`). `load_company_records`
+therefore takes no `noupdate` argument. Corrections ship as a version bump plus an explicit
 migration, the pattern `afenda_brand`'s manifest already documents. The development cost
 is understood: re-running `-u` will not refresh seeded data, so iterating on pack content
 means reinstalling the module.
@@ -239,36 +261,46 @@ replenishment change whose value has not been demonstrated.
 1. `test_load_company_records_assigns_xmlid`
 2. `test_load_company_records_is_idempotent`
 3. `test_load_company_records_uses_env_company`
+4. `test_load_company_records_skips_company_on_company_less_model`
 
-`afenda_industry_bakery` — 11 tests in `tests/test_pack.py`:
+`afenda_industry_bakery` — 13 tests in `tests/test_pack.py`:
 
-4. `test_products_and_categories_installed`
-5. `test_boms_resolve_components`
-6. `test_pos_config_belongs_to_env_company`
-7. `test_post_init_records_are_module_owned`
-8. `test_reordering_rules_cover_raw_materials`
-9. `test_raw_materials_use_expiration`
-10. `test_data_xml_sets_no_company_id`
-11. `test_data_xml_hardcodes_no_accounts_or_taxes`
-12. `test_data_xml_has_no_transactional_records`
+5. `test_products_and_categories_installed`
+6. `test_raw_materials_use_expiration`
+7. `test_boms_resolve_components`
+8. `test_bom_seeding_fills_draft_orders_created_before_it`
+9. `test_install_without_chart_of_accounts_names_this_pack`
+10. `test_pos_config_belongs_to_env_company`
+11. `test_post_init_records_are_module_owned`
+12. `test_bom_component_quantities_are_converted`
+13. `test_reordering_rules_cover_raw_materials`
+14. `test_reordering_rules_activate_when_the_tenant_adds_a_vendor`
+15. `test_data_xml_sets_no_company_id`
+16. `test_data_xml_hardcodes_no_accounts_or_taxes`
+17. `test_data_xml_has_no_transactional_records`
 
-Tests 10–12 are **static scans of the pack's own XML**, deliberately: a static check
+Tests 15–17 are **static scans of the pack's own XML**, deliberately: a static check
 holds even when the relevant localization is not installed in the test database, and it
-catches a future edit that reintroduces the mistake. Test 7 replaces the
+catches a future edit that reintroduces the mistake. Test 11 replaces the
 "uninstall is clean" test that cannot honestly be written — a real uninstall mutates the
 registry and cannot run inside a `TransactionCase`, so the design asserts the
 `ir.model.data` ownership that *causes* clean uninstall instead.
 
-Acceptance, per module, reading the printed count and never the exit code:
+Acceptance, per module, reading the printed result line and never the exit code. On a
+fresh database, `account` goes in first (see "Install order" above), then the packs:
 
 ```bash
-MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
-  -c afenda/odoo.conf -d afenda -i afenda_industry_bakery --test-enable \
-  --test-tags "/afenda_industry_bakery" --stop-after-init --http-port 8179
+.venv/Scripts/python odoo-bin -c afenda/odoo.conf -d <fresh> -i account \
+  --without-demo=all --stop-after-init
+.venv/Scripts/python odoo-bin -c afenda/odoo.conf -d <fresh> \
+  -i afenda_industry_base,afenda_industry_bakery --without-demo=all --test-enable \
+  --test-tags "/afenda_industry_base,/afenda_industry_bakery" --stop-after-init
 ```
 
-Expected: `afenda_industry_base: 4 tests`, `afenda_industry_bakery: 11 tests`. A run that
-prints no count collected nothing. The `afenda_brand` suite runs once at the end too,
+Expected: `0 failed, 0 error(s) of 17 tests` — 4 for `afenda_industry_base` and 13 for
+`afenda_industry_bakery`. The per-module `odoo.tests.stats` lines read higher (6 and 15),
+because `setUpClass`/`tearDownClass` get their own stat ids; they are not the count. A run
+that prints no count collected nothing. The `afenda_brand` suite runs once at the end too,
 because its collection guard now has two new addons in scope.
 
 ## Out of scope
