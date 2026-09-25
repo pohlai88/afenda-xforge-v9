@@ -1,6 +1,7 @@
 # AFENDA-owned API contract and generated documentation assets: design
 
-Date: 2026-09-25. Status: **proposed, awaiting owner approval.** It follows
+Date: 2026-09-25. Status: **phase 1 approved by the owner on 2026-09-25**, with the decisions
+recorded at the end. It follows
 `2026-09-23-afenda-docs-generation-design.md`, which built the live `/docs/openapi.json`
 and `/docs/api`.
 
@@ -175,3 +176,30 @@ reference, not as a tutorial.
    cheapest moment to change it.
 2. **Confirm the supported-app list** in 1.3, or name other apps.
 3. **SDKs (1.5): now, or later?** They are optional for phase 1's value.
+
+## Owner decisions (2026-09-25)
+
+1. **Phase 1 approved**, including the Problem Details error contract.
+2. **Coverage is every installable Community application.** That is 34 today: every
+   `addons/*/__manifest__.py` with `application: True` that is installable. This replaces the
+   short list in 1.3, and the list is derived rather than hand-kept, so a new Community app is
+   picked up. Every concrete model lands in exactly one document:
+   - **`core.json`:** a model whose defining module (`_original_module`) is in the dependency
+     closure of every installed application (`base`, `web` and the like), or of none (the
+     AFENDA modules, for instance).
+   - **Otherwise:** the document of the application with the smallest dependency closure that
+     contains the defining module. A tie goes to the alphabetically first. So `sale.order`
+     (defined in `sale`, not itself an application) lands with the most specific app that
+     pulls `sale` in.
+3. **Client SDKs (1.5) are deferred until the first outside integrator.** They are generated
+   from the same committed files, so adding them later costs little. Until then they would be
+   an unused release artifact to maintain.
+4. **Change detection is our own checker, not oasdiff** (a ruling made while planning, recorded
+   here because it replaces 1.4's tool):
+   - **Why:** our documents are OpenAPI 3.1. oasdiff's stable line (v1.32.1) is the 3.0
+     line, and its 3.1 support exists only as beta tags (`v2.2.0-openapi31.beta.1` to `.4`,
+     seen 2026-09-25). A beta dependency should not gate every PR.
+   - **What:** our documents have one known shape (a path per `model/method`, a schema per
+     model), so `afenda/tools/api_diff.py` compares two committed sets directly. It reports
+     the same breaking classes 1.4 lists, plus additions, and writes the changelog section.
+   - **Revisit:** when oasdiff ships 3.1 in a stable release.
