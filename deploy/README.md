@@ -28,6 +28,8 @@ docker compose build
 ./make-secrets.sh              # needs the image: it hashes the master password with it
 docker compose up -d
 # http://localhost:8080, login `admin`, password in secrets/admin_password
+#   -- only on a database this step just created. That file is spent after the
+#   first init and is not kept in step with the account; see secrets/README.md.
 # http://localhost:8081, the landing page; its links point at PUBLIC_URL
 ```
 

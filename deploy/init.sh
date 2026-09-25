@@ -65,6 +65,13 @@ case "$state" in
     absent)
         admin_password_file=${ADMIN_PASSWORD_FILE:-/run/secrets/admin_password}
         [ -r "$admin_password_file" ] || { echo "afenda-init: cannot read $admin_password_file" >&2; exit 1; }
+        # Empty is not a password: `db init --password ''` stores a hash of the
+        # empty string, and _check_credentials rejects an empty submitted
+        # password outright (odoo/addons/base/models/res_users.py:350), so the
+        # admin account would be unusable until someone reset it. The file is
+        # also deliberately emptied once spent (deploy/secrets/README.md), so an
+        # empty one here means a first init without a fresh secret.
+        [ -s "$admin_password_file" ] || { echo "afenda-init: $admin_password_file is empty; run deploy/make-secrets.sh before a first init" >&2; exit 1; }
         echo "afenda-init: creating database $DB"
         "$PY" "$BIN" db -c "$RC" init "$DB" --password "$(cat "$admin_password_file")"
         ;;
