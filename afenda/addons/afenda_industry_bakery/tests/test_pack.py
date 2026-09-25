@@ -5,7 +5,7 @@ from odoo.addons.afenda_industry_base.tests.common import IndustryPackMixin
 # The same rule the hook applied, not a copy of it: a test that restated
 # "units if stocked in units else grams" could agree with itself while both
 # it and the hook were wrong.
-from odoo.addons.afenda_industry_bakery.hooks import line_uom
+from odoo.addons.afenda_industry_bakery.hooks import _seed_bom_lines, line_uom
 
 MODULE = "afenda_industry_bakery"
 
@@ -137,6 +137,41 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
                     f"which is not a raw material",
                 )
                 self.assertGreater(line.product_qty, 0.0)
+
+    def test_bom_seeding_fills_draft_orders_created_before_it(self):
+        """A draft MO made against a header before its lines existed gets them.
+
+        That is not a hypothetical order of events, it is the demo install:
+        Odoo loads a module's demo/ files before its post_init_hook
+        (odoo/modules/loading.py:216-218, then :239-243), so
+        demo/bakery_demo.xml's croissant MO is created against bom_croissant
+        while the header still has no lines. mrp.production computes its
+        components from `bom_id`, not from `bom_id.bom_line_ids`
+        (addons/mrp/models/mrp_production.py:819), so nothing would ever fill
+        that MO in: a demo order for forty croissants that consumes nothing.
+        """
+        bom = self.env.ref(f"{MODULE}.bom_croissant")
+        bom.bom_line_ids.unlink()
+        production = self.env["mrp.production"].create({
+            "product_id": bom.product_tmpl_id.product_variant_id.id,
+            "bom_id": bom.id,
+            "product_qty": 40,
+        })
+        self.assertFalse(
+            production.move_raw_ids,
+            "an MO on a header with no lines has no components; if it does, "
+            "the premise of this test has changed and the rest proves nothing",
+        )
+
+        _seed_bom_lines(self.env)
+
+        self.assertEqual(
+            len(production.move_raw_ids),
+            len(bom.bom_line_ids),
+            "the draft MO must pick up one component move per line the hook "
+            "seeded on its bill of material",
+        )
+        self.assertEqual(len(bom.bom_line_ids), 5, "the croissant recipe has five components")
 
     def test_pos_config_belongs_to_env_company(self):
         config = self.env.ref(f"{MODULE}.pos_config_counter")

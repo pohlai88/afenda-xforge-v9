@@ -29,16 +29,17 @@
     # Ordered: a file that references an XML id comes after the file defining it,
     # which is why data/mrp_bom.xml follows data/product_template.xml -- every
     # BoM header names a product template by ref.
-    # Only the files that exist as of this task are listed. Odoo resolves every
-    # `data` path at install and raises on a missing one, so a manifest naming
-    # demo/bakery_demo.xml (Task 6) would fail this task's own verification run
-    # before reaching an assertion. Each later task adds its line in the commit
-    # that creates the file.
     "data": [
         "data/res_groups.xml",
         "data/product_category.xml",
         "data/product_template.xml",
         "data/mrp_bom.xml",
+    ],
+    # Business history only: suppliers, draft purchase orders and a draft
+    # manufacturing order. Never under `data`, which production loads; see
+    # demo/bakery_demo.xml for what shapes each record.
+    "demo": [
+        "demo/bakery_demo.xml",
     ],
     # Runs once, at install, and never on -u: odoo/modules/loading.py:239-243
     # fires it only when update_operation == 'install'. Everything it seeds is
