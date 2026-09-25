@@ -8,7 +8,7 @@
 
 **Tech Stack:** Docker Compose v2 (Compose v5.x on the VPS), PostgreSQL 16, Odoo 19 (`odoo-bin`), GitHub Actions, bash/sh, Python 3.11 unittest.
 
-**Spec:** `docs/superpowers/plans/2026-09-23-afenda-g0-deploy.md` ("Deferred to G1", go-live record, independence audit). Facts established 2026-09-24 on the live host:
+**Spec:** `docs/superpowers/plans/2026-09-23-afenda-g0-deploy.md` (decision R6's deferrals, go-live record, independence audit). Facts established 2026-09-24 on the live host:
 - `pg_roles`: `xforge | rolsuper t | rolcreatedb t`; `afenda` is owned by `xforge`; extensions in `afenda`: `plpgsql, pg_trgm`.
 - Every service reads `PGUSER: xforge` / `PGPASSWORD_FILE: /run/secrets/db_password` from the `x-xforge-env` anchor (`deploy/compose.yaml:27-31`); `restore.sh:36-37` creates the database with `-O xforge` and restores with `--role=xforge`.
 - `odoo-bin db init` refuses an existing database (`odoo/cli/db.py:257-263`) and creates it with `CREATE DATABASE` (`odoo/service/db.py:128-147`), so the app role needs `CREATEDB` for a fresh host.
@@ -32,7 +32,8 @@ Reviewed 2026-09-24 by an independent read-only agent: 2 blockers (live rollback
 - Live deploys go only through `deploy/redeploy.sh` after a push the user approved. Never `docker compose down -v`. Never touch the older compose project named `afenda` on the workstation.
 - Every live step starts with a verified backup and has a written rollback; stop and report if a verification does not print its expected value.
 - Secrets are generated on the host and never printed; tests and scripts check them only as booleans.
-- Out of scope here (still deferred): the arm64 image and bold non-Latin report fonts; backup pruning and monitoring alerts already shipped in G0.
+- Out of scope here (still deferred): the arm64 image and bold non-Latin report fonts; backup pruning already shipped in G0 (`deploy/prune-backups.sh`); monitoring is
+  DigitalOcean's agent, configured outside this repo.
 - The local rehearsal stack holds a restored copy of production data: never publish its volumes, and delete rehearsal backup folders afterwards.
 - The new role is named exactly `afenda_app`; its password file is `deploy/secrets/db_app_password`; the Docker secret is `db_app_password`.
 

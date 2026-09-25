@@ -1,7 +1,7 @@
 # AFENDA checks on every push to the product branch: the fast tools suite
 # (no database, no Docker) and `nginx -t` on both deploy configs.
-# The Odoo module suites need PostgreSQL and compiled assets; they are not
-# run here yet.
+# The Odoo module suites need PostgreSQL and the built image; they run in
+# afenda-image.yml.
 name: afenda-ci
 
 on:

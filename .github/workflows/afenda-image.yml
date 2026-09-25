@@ -1,11 +1,21 @@
-# Build the deploy image when something that goes into it changes, and check
-# that it carries the product identity. About ten minutes per run, so it is
-# limited to these paths; a change elsewhere is still built on the VPS by
-# deploy/redeploy.sh, which puts the previous commit back if the build fails.
+# Build the deploy image when something that goes into it changes, check that
+# it carries the product identity, and run the AFENDA Odoo module suites inside
+# it. About ten minutes per run, so it is limited to these paths; a change
+# elsewhere is still built on the VPS by deploy/redeploy.sh, which puts the
+# previous commit back if the build fails. Pull requests into main run it too,
+# so the module suites gate a change before it merges, not after.
 name: afenda-image
 
 on:
   push:
+    branches: [main]
+    paths:
+      - "deploy/**"
+      - "afenda/**"
+      - "requirements.txt"
+      - ".dockerignore"
+      - ".github/workflows/afenda-image.yml"
+  pull_request:
     branches: [main]
     paths:
       - "deploy/**"
