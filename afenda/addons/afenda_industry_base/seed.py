@@ -22,22 +22,27 @@ already exists is routed to the update set rather than created again
 """
 
 
-def load_company_records(env, module, model_name, records, noupdate=True):
+def load_company_records(env, module, model_name, records):
     """Create or update company-scoped records, each owned by ``module``.
+
+    Every XMLID is stored ``noupdate=True``, and that is not a choice left to
+    the caller. A seeded record is never reloaded on ``-u``: the hook that made
+    it runs only at install (odoo/modules/loading.py:239-243), so its XMLID is
+    never in ``registry.loaded_xmlids``, and at the end of every update
+    ``_process_end`` deletes each of the module's *non*-noupdate XMLIDs missing
+    from that set, record included (odoo/addons/base/models/ir_model.py:2655-2662).
+    ``noupdate=False`` would therefore have the next upgrade delete the tenant's
+    POS counter and reordering rules.
+
+    The flag does not protect *this* call, though: ``_load_records`` is invoked
+    with its default ``update=False``, so ``not (update and d_noupdate)`` is
+    true (odoo/orm/models.py:5178) and a second call rewrites the record.
+    Harmless on the intended path, a ``post_init_hook``, which fires once.
 
     :param env: environment; records are created against ``env.company``
     :param str module: the pack's technical name, e.g. ``afenda_industry_bakery``
     :param str model_name: the model to seed, e.g. ``pos.config``
     :param records: list of ``(suffix, values)``; the XMLID is ``module.suffix``
-    :param bool noupdate: flag stored on the XMLID, governing later module
-        *upgrades*. It does not protect this call: ``_load_records`` is invoked
-        below with the default ``update=False``, so ``not (update and d_noupdate)``
-        is unconditionally true (odoo/orm/models.py:5178) and calling this a
-        second time rewrites the record whatever the flag says. Harmless on the
-        intended path, where the caller is a ``post_init_hook`` and that fires
-        only at install (odoo/modules/loading.py:240-243) -- but a pack that ever
-        seeds from a migration script would get the opposite of what the flag's
-        name promises.
     :return: the records, in the order given
     """
     # No .sudo() here, deliberately. Both intended callers already run as
@@ -55,7 +60,7 @@ def load_company_records(env, module, model_name, records, noupdate=True):
     data_list = [
         {
             "xml_id": f"{module}.{suffix}",
-            "noupdate": noupdate,
+            "noupdate": True,
             "values": dict(values, company_id=env.company.id) if pin_company else dict(values),
         }
         for suffix, values in records
