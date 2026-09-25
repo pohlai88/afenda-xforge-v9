@@ -23,9 +23,9 @@ class TestBakeryPack(IndustryPackMixin, TransactionCase):
     def _pack_records(self, model):
         """The records of `model` this module owns, as a recordset.
 
-        Not a `test_` method, so afenda_brand's collection guard ignores it; the
-        seven tests below still resolve to TransactionCase through a base named
-        in this file.
+        Not a `test_` method, so afenda_brand's collection guard ignores it;
+        every test in this class still resolves to TransactionCase through a
+        base named in this file.
         """
         data = self.env["ir.model.data"].search(
             [("module", "=", MODULE), ("model", "=", model)]
