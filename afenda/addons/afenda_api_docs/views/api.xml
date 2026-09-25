@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <template id="api_reference" name="AFENDA API reference">
+        <t t-call="web.frontend_layout">
+            <!-- Same reason as views/landing.xml: this route is website=False,
+            so portal's footer language selector would 500. -->
+            <t t-set="no_footer" t-value="True"/>
+            <style>
+                /* The bundle's "API docs by Redocly" attribution (see
+                static/lib/redoc/README.md); its logo is already refused by
+                the page's Content-Security-Policy. */
+                redoc a[href^="https://redocly.com/"] { display: none; }
+            </style>
+            <form t-if="apps" method="get" action="/docs/api"
+                  class="container d-flex align-items-center gap-2 py-3">
+                <label for="afenda_api_app" class="col-form-label">App</label>
+                <select id="afenda_api_app" name="app" class="form-select w-auto">
+                    <option value="">Core models</option>
+                    <t t-foreach="apps" t-as="choice">
+                        <option t-att-value="choice[0]" t-att-selected="choice[0] == app"
+                                t-out="choice[1]"/>
+                    </t>
+                </select>
+                <button type="submit" class="btn btn-primary">Show</button>
+            </form>
+            <redoc t-att-spec-url="spec_url"/>
+            <script type="text/javascript"
+                    src="/afenda_api_docs/static/lib/redoc/redoc.standalone.js"/>
+        </t>
+    </template>
+</odoo>

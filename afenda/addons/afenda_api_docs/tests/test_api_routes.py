@@ -1,4 +1,11 @@
+import hashlib
+import pathlib
+import re
+
 from odoo.tests import HttpCase, tagged
+
+REDOC = pathlib.Path(__file__).resolve().parents[1] / "static" / "lib" / "redoc"
+REDOC_URL = "/afenda_api_docs/static/lib/redoc/redoc.standalone.js"
 
 
 @tagged("post_install", "-at_install")
@@ -28,3 +35,67 @@ class TestApiRoutes(HttpCase):
         tags = {t["name"] for t in doc["tags"]}
         self.assertIn("mail.message", tags)
         self.assertNotIn("res.partner", tags)
+
+    def test_api_reference_requires_a_session(self):
+        self.assertRedirectsToLogin("/docs/api")
+
+    def test_api_reference_renders_and_loads_redoc_from_this_origin(self):
+        self.authenticate("admin", "admin")
+        res = self.url_open("/docs/api")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn(f'src="{REDOC_URL}"', res.text)
+        self.assertIn('<redoc spec-url="/docs/openapi.json"', res.text)
+        self.assertNotIn("cdn.", res.text)
+        self.assertNotIn("Odoo", res.text)
+
+    def test_api_reference_passes_the_app_through(self):
+        self.authenticate("admin", "admin")
+        res = self.url_open("/docs/api?app=mail")
+        self.assertIn('spec-url="/docs/openapi.json?app=mail"', res.text)
+
+    def test_api_reference_refuses_third_party_images(self):
+        # The bundle renders a logo from cdn.redoc.ly unconditionally; the
+        # policy is what stops the browser fetching it (see static/lib/redoc/README.md).
+        self.authenticate("admin", "admin")
+        policy = self.url_open("/docs/api").headers["Content-Security-Policy"]
+        self.assertIn("img-src 'self' data:", policy)
+
+    def test_app_picker_lists_installed_apps_to_whoever_can_read_modules(self):
+        self.authenticate("admin", "admin")
+        res = self.url_open("/docs/api?app=mail")
+        # QWeb renders a true t-att-selected as selected="True".
+        self.assertRegex(res.text, r'<option value="mail" selected="[^"]*">')
+        self.assertIn('<option value="base"', res.text)
+
+    def test_app_picker_is_absent_for_users_who_cannot_read_modules(self):
+        # ir.module.module is readable by group_system
+        # (odoo/addons/base/security/ir.model.access.csv:25) and, once
+        # base_install_request is installed, by group_user too (its
+        # security/ir.model.access.csv:5) - never by portal. The page does
+        # not sudo() around that.
+        self.env["res.users"].create({
+            "name": "Docs portal",
+            "login": "docs_portal",
+            "password": "docs_portal_pw",
+            "group_ids": [(6, 0, [self.env.ref("base.group_portal").id])],
+        })
+        self.authenticate("docs_portal", "docs_portal_pw")
+        res = self.url_open("/docs/api")
+        self.assertEqual(res.status_code, 200)
+        self.assertIn("<redoc", res.text)
+        self.assertNotIn("<option", res.text)
+
+    def test_landing_links_to_the_api_reference(self):
+        self.assertIn('href="/docs/api"', self.url_open("/docs").text)
+
+    def test_vendored_redoc_is_served_and_matches_its_recorded_hash(self):
+        recorded = re.search(
+            r"^sha256: ([0-9a-f]{64})  redoc\.standalone\.js$",
+            (REDOC / "README.md").read_text(encoding="utf-8"),
+            re.MULTILINE,
+        ).group(1)
+        res = self.url_open(REDOC_URL)
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(hashlib.sha256(res.content).hexdigest(), recorded)
+        for name in ("LICENSE", "redoc.standalone.js.LICENSE.txt"):
+            self.assertTrue((REDOC / name).is_file(), name)
