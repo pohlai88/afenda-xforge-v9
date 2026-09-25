@@ -10,7 +10,9 @@ hand edits — which is what makes re-deriving them cheaper than merging them. S
 ```
 afenda/
   addons/afenda_brand/        the AFENDA identity: logo, colors, fonts, titles, login, settings
-  addons/afenda_api_docs/     guides served at /docs (the generated API reference is not built yet)
+  addons/afenda_api_docs/     /docs: user guides, and the API reference generated from the live registry
+  addons/afenda_industry_base/    the industry preset contract (seed helper, test mixin)
+  addons/afenda_industry_bakery/  the bakery preset: catalogue, bills of material, POS, replenishment
   addons/afenda_runtime/      null adapters for Odoo-hosted services: nothing leaves the deployment
   addons/afenda_brand_digest/ AFENDA colors in the periodic digest email (auto-installs)
   oca/server-brand/           OCA debranding modules (git submodule, branch 19.0)
@@ -176,6 +178,7 @@ merge touches the ~119 hand-authored files instead of 23,000. See
 .venv/Scripts/python -m afenda.tools.rebrand --apply   # rewrite addons/ and odoo/
 .venv/Scripts/python -m afenda.tools.brand_images      # AFENDA images over Odoo's logo paths
 .venv/Scripts/python -m afenda.tools.scan_identity     # exit 1 if the count rose above BASELINE
+.venv/Scripts/python -m afenda.tools.build_docs        # regenerate guide QWeb from Markdown
 .venv/Scripts/python -m unittest discover -s afenda/tools/tests -t . -v
 ```
 
@@ -195,9 +198,27 @@ names such as `ODOO.PIVOT` that live inside saved documents.
 
 So the expected steady state is a **non-zero** count. The gate is that it must
 not rise. The current floor is recorded as `BASELINE` in
-`afenda/tools/scan_identity.py` and is **10,838**. If a change legitimately
+`afenda/tools/scan_identity.py` and is **10,826**. If a change legitimately
 lowers the count, lower `BASELINE` in the same commit so the new floor holds.
 
 Rule changes are reviewed on the corpus, never on the tree:
 `python -m afenda.tools.corpus diff` shows exactly what a rule change alters;
 after review, `python -m afenda.tools.corpus golden` and commit both files.
+
+## Documentation at /docs
+
+`/docs` is served by `afenda_api_docs`:
+
+- **Guides** are authored as Markdown in `afenda/addons/afenda_api_docs/docs/`,
+  mirroring the `documentation=` paths the product links to. `views/guides.xml`
+  is generated from them by `python -m afenda.tools.build_docs` and committed;
+  never hand-edit it (`afenda/tools/tests/test_build_docs_sync.py` fails if the
+  two disagree). A link to a page with no guide yet redirects to `/docs`.
+- **The API reference** is `/docs/api` (a vendored Redoc, no CDN) over
+  `/docs/openapi.json`, an OpenAPI 3.1 document generated per request from the
+  live registry for the signed-in user (`auth='user'`), scoped per app with
+  `?app=<module>`.
+- Odoo identity is aliased to AFENDA in prose only, never in wire values
+  (model names, field names, selection keys); `tests/test_identity.py` crawls
+  the pages and documents to hold that line. `scan_identity` does not cover
+  `afenda/`, so those tests are this module's identity gate.
