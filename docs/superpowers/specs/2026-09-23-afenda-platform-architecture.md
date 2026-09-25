@@ -380,6 +380,22 @@ a large white-label fork into a **reproducible AFENDA distribution built on Odoo
 
 ## Defects found while verifying (fix before a release)
 
+> **Status 2026-09-25**, checked against the tree:
+> - **Fixed:**
+>   - Root `README.md` and `SECURITY.md` rewritten, with no `odoo.com` link.
+>   - Branch `19.0` retired to the tag `archive/19.0`.
+>   - `afenda_api_docs` guides reachable: in the manifest, served by the catch-all, versioned and `.html` links resolved, `test_guides_in_sync` present.
+>   - `fonts.odoocdn.com` removed (`BASELINE` 10826).
+>   - `data_dir` set by `deploy/entrypoint.sh`.
+>   - Production cron set in `deploy/entrypoint.sh`. `afenda/odoo.conf` stays at 0 as a dev-only config.
+>   - `.dockerignore` tracked.
+>   - The Pillow conflict: the tools follow the root's tiers. 126 generated images are byte-identical between 3.11 + 9.4.0 and 3.12 + 10.2.0.
+>   - Python 3.12 in CI for the tools suite, with 3.11 kept.
+> - **Still open:**
+>   - The scan scope. No `odoo.com` link remains at the root, but widening to `doc/`, `setup/` and `debian/` (1,177 hits, mostly CLA records and packaging) needs an allowlist design.
+>   - The Odoo image on 3.12 / `ubuntu:noble`.
+>   - The Windows-side determinism hash.
+
 - **`scan_identity`'s blast radius is `SCAN_DIRS = ("addons", "odoo")`**
   (`afenda/tools/rebrand.py:18`). Nothing at the repo root, in `debian/`, `setup/` or
   `doc/` is in scope — which is *why* the root `README.md` is still verbatim upstream Odoo
