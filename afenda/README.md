@@ -118,14 +118,14 @@ and mirrored in `static/src/scss/primary_variables.scss`.
 
 ## Branches and upstream updates
 
-- `upstream-19.0`: pristine odoo/odoo. Never edit.
-- `afenda/deidentify-phase1`: **the product today** — the identity transform, the
-  three AFENDA modules, the tooling.
-- `19.0`: was documented here as the branch that deploys. **It is not.** It carries
-  the `afenda/` layer but no identity transform at all —
-  `git show 19.0:odoo/release.py` still reports `product_name = 'Odoo'`, and it
-  touches zero files under `odoo/` or `addons/`. Do not deploy from it until the
-  topology is reconciled.
+- `main`: **the one branch** — the product, what production runs: the identity
+  transform, the AFENDA modules, the tooling. Branch short-lived work off it.
+- Upstream is the `upstream` remote (`odoo/odoo`, branch `19.0`), not a branch here.
+- Retired branches are tags under `archive/` (2026-09-25): `archive/19.0` (the old
+  default, which never carried the identity transform), `archive/upstream-19.0`
+  (the pristine anchor, root `19ebd007c`), `archive/brand-identity`,
+  `archive/cloud-api-hardening` (a cloud session's unmerged API work) and
+  `archive/industry-packs-wip` (the unfinished industry preset packs).
 
 ### Taking an Odoo update
 
@@ -135,12 +135,14 @@ shallow (`.git/shallow`) and `upstream-19.0` is an orphan root commit, so
 `git merge --ff-only upstream/19.0` refuses. `--allow-unrelated-histories` does not
 apply to `--ff-only`, so the old note contradicted the old command.
 
-Fix the ancestry once, then the update becomes routine. `upstream-19.0`'s tree is
-byte-identical to upstream `2d1b7a131`, so re-anchoring moves no content:
+Fix the ancestry once, then the update becomes routine. The fork's anchor
+(`archive/upstream-19.0`, root `19ebd007c`) has a tree byte-identical to upstream
+`2d1b7a131`, so a LOCAL anchor branch on the real upstream commit moves no content.
+It stays local: the repository keeps one branch, `main`.
 
 ````bash
 git fetch --unshallow upstream 19.0
-git branch -f upstream-19.0 2d1b7a131
+git branch upstream-19.0 2d1b7a131
 ````
 
 After that:
@@ -149,7 +151,7 @@ After that:
 git fetch upstream 19.0
 git checkout upstream-19.0 && git merge --ff-only upstream/19.0
 git log upstream-19.0@{1}..upstream-19.0 --stat   # read this — it is the review
-git checkout <release branch> && git merge upstream-19.0
+git checkout main && git merge upstream-19.0
 .venv/Scripts/python -m afenda.tools.rebrand --apply  # re-brands only what is new
 .venv/Scripts/python -m afenda.tools.scan_identity    # triage any rise, re-floor any drop
 ````

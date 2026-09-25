@@ -270,10 +270,10 @@ class RedeployTests(unittest.TestCase):
         return next(i for i, c in enumerate(calls) if c.startswith(prefix))
 
     def test_backs_up_before_changing_anything_then_checks_health(self):
-        proc, calls, head = self._run("afenda/deidentify-phase1")
+        proc, calls, head = self._run("main")
         self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
         order = [self._index(calls, p) for p in (
-            "backup.sh", "git fetch --depth 1 origin afenda/deidentify-phase1",
+            "backup.sh", "git fetch --depth 1 origin main",
             "git checkout --detach FETCH_HEAD", "git submodule update --init --depth 1",
             "docker compose build", "docker compose up -d", "docker compose ps -a init",
             "curl")]

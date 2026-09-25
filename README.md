@@ -94,15 +94,16 @@ baseline in the same commit, or the gate goes slack.
 
 ## Branches
 
-| | |
-|---|---|
-| `upstream-19.0` | pristine `odoo/odoo`. Never edited |
-| `afenda/deidentify-phase1` | **the product today** — the identity transform, the AFENDA modules, the tooling |
-| `19.0` | historically documented as the release branch. **It does not currently carry the identity transform** |
+One branch: **`main`** — the product, what production runs (the identity transform, the
+AFENDA modules, the tooling). CI runs on it and `deploy/redeploy.sh` defaults to it.
 
-That last row is a known defect, not a description of intent — `git show 19.0:odoo/release.py`
-still reports `product_name = 'Odoo'`. Reconciling the branch topology is the first item in
-the architecture spec, and nothing should be deployed from `19.0` until it is done.
+Upstream Odoo is reached through the `upstream` remote (`odoo/odoo`, branch `19.0`), not a
+branch of this repository. Every retired line of work is kept as a tag under `archive/`
+(since 2026-09-25): the old `19.0` (which never carried the identity transform),
+`upstream-19.0` (the pristine snapshot the fork was anchored on), `afenda/brand-identity`,
+a cloud session's unmerged API hardening (`archive/cloud-api-hardening`) and the unfinished
+industry preset packs (`archive/industry-packs-wip`). `git fetch origin 'refs/tags/archive/*:refs/tags/archive/*'`
+brings them back; a branch is `git switch -c <name> archive/<tag>` away.
 
 Commit subjects use Odoo's tags: `[ADD]`, `[FIX]`, `[IMP]`, `[REBRAND]`. Stage explicit
 paths — the rebrand can leave tens of thousands of modified files, so `git add -A` is never

@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 # Upgrade the running stack to a pushed commit, in one command.
 #
-#   deploy/redeploy.sh [REF]      (default afenda/deidentify-phase1)
+#   deploy/redeploy.sh [REF]      (default main, the one production branch)
 #
 # In order, stopping at the first failure:
 #   1. refuse if the checkout has tracked changes: a hand edit on the host
@@ -18,7 +18,7 @@ set -euo pipefail
 export MSYS_NO_PATHCONV=1   # Git Bash: keep container paths as written
 
 cd "$(dirname "$0")"
-ref=${1:-afenda/deidentify-phase1}
+ref=${1:-main}
 backup_root=${BACKUP_ROOT:-/var/backups/afenda}
 tries=${HEALTH_TRIES:-60}
 wait_s=${HEALTH_WAIT:-5}

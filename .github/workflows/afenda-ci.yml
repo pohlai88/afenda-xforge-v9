@@ -6,9 +6,9 @@ name: afenda-ci
 
 on:
   push:
-    branches: [afenda/deidentify-phase1]
+    branches: [main]
   pull_request:
-    branches: [afenda/deidentify-phase1]
+    branches: [main]
   workflow_dispatch:
 
 permissions:

@@ -6,7 +6,7 @@ name: afenda-image
 
 on:
   push:
-    branches: [afenda/deidentify-phase1]
+    branches: [main]
     paths:
       - "deploy/**"
       - "afenda/**"
