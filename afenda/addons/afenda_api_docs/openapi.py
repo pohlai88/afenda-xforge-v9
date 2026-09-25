@@ -5,9 +5,12 @@ wire values (model, field, method and parameter names, selection keys) are
 inserted verbatim. See `aliasing.py` for why the split is structural.
 """
 import inspect
+import json
 
 from odoo.exceptions import AccessError
 from odoo.service.model import get_public_method
+
+from odoo.addons.afenda_brand.brand import BRAND
 
 from .aliasing import alias_prose
 
@@ -143,20 +146,107 @@ def _annotation_schema(annotation):
     return {"type": types[0] if len(types) == 1 else types}
 
 
-def model_operations(model):
-    """Every method on `model` the /json/2 dispatcher would accept.
+# The methods every model inherits from `base` that belong in an integrator's
+# reference: CRUD, the search family, field introspection, name lookup and
+# `formatted_read_group` (the public grouping API in 19.0; `read_group` is
+# deprecated). The rest of what `base` exposes (~54 public methods in all:
+# web_search_read, web_save, onchange, get_views, search_panel_*, and
+# conveniences such as copy, default_get, name_create, action_archive) is
+# left out - still callable, just not advertised. Measured on the `base` app
+# (89 models): every inherited method made its document 8 MiB and 1.2 s to
+# build; this set, with the shared components below, brings it under 1 MiB.
+_ORM_CORE = frozenset({
+    "create",
+    "fields_get",
+    "formatted_read_group",
+    "name_search",
+    "read",
+    "search",
+    "search_count",
+    "search_read",
+    "unlink",
+    "write",
+})
 
-    Delegates the rule to `get_public_method`, the same function the
+
+def model_operations(model):
+    """The documented methods of `model`, each one the /json/2 dispatcher accepts.
+
+    Acceptance is delegated to `get_public_method`, the same function the
     dispatcher calls (addons/rpc/controllers/json2.py), so this cannot drift
-    into documenting a 404.
+    into documenting a 404. Of the methods every model inherits from `base`
+    only `_ORM_CORE` is kept; every method a model or its mixins add is kept.
     """
+    generic = set(dir(type(model.env["base"]))) - _ORM_CORE
     operations = {}
     for name in sorted(dir(type(model))):
+        if name in generic:
+            continue
         try:
             operations[name] = get_public_method(model, name)
         except (AttributeError, AccessError):
             continue
     return operations
+
+
+# Shared components. Every path item references these rather than inlining
+# them: repeated on each of the ~1,700 operations of the `base` app they cost
+# ~600 bytes apiece, which is most of what pushed that document past budget.
+_COMPONENT_SCHEMAS = {
+    # The body Json2Dispatcher.handle_error sends for a 404 or a 422: the dict
+    # `serialize_exception` builds (odoo/http.py:469).
+    "Error": {
+        "type": "object",
+        "title": "Error",
+        "properties": {
+            "name": {"type": "string", "description": "Qualified exception class name."},
+            "message": {"type": "string"},
+            "arguments": {"type": "array"},
+            "context": {"type": "object"},
+            "debug": {"type": "string", "description": "Server traceback."},
+        },
+    },
+    "Ids": {
+        "type": "array",
+        "items": {"type": "integer"},
+        "description": "Record ids the method is called on.",
+    },
+    "Context": {
+        "type": "object",
+        "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    },
+}
+_COMPONENT_RESPONSES = {
+    "NotFound": {
+        "description": "The model or method does not exist.",
+        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
+    },
+    "Unprocessable": {
+        "description": (
+            "The arguments do not match the method signature, "
+            "or ids were sent to a method that takes none."
+        ),
+        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
+    },
+}
+
+
+def _summary_paragraph(func):
+    """The first prose paragraph of a method's docstring.
+
+    Only the first paragraph: Redoc renders descriptions as Markdown, so the
+    reST field lists that follow (`:param x:`, `:raise:`) show as literal
+    text, and the parameters are already described by the request schema. A
+    leading paragraph that merely restates the call signature, as in
+    `search(domain[, offset=0]...)`, is skipped.
+    """
+    doc = inspect.getdoc(func) or ""
+    for paragraph in doc.split("\n\n"):
+        text = " ".join(paragraph.split())
+        if not text or text.startswith(":") or text.startswith(f"{func.__name__}("):
+            continue
+        return text
+    return ""
 
 
 def path_item(model_name, method_name, func):
@@ -171,15 +261,8 @@ def path_item(model_name, method_name, func):
     # @api.model and @api.model_create_multi set `_api_model`; the dispatcher
     # answers 422 to a call that sends `ids` to one of those.
     if not getattr(func, "_api_model", False):
-        properties["ids"] = {
-            "type": "array",
-            "items": {"type": "integer"},
-            "description": "Record ids the method is called on.",
-        }
-    properties["context"] = {
-        "type": "object",
-        "description": "Context for the call, such as lang, tz and allowed_company_ids.",
-    }
+        properties["ids"] = {"$ref": "#/components/schemas/Ids"}
+    properties["context"] = {"$ref": "#/components/schemas/Context"}
     required = []
     parameters = list(inspect.signature(func).parameters.values())
     for param in parameters[1:]:  # [0] is the recordset the dispatcher binds
@@ -196,23 +279,148 @@ def path_item(model_name, method_name, func):
     body = {"type": "object", "properties": properties}
     if required:
         body["required"] = required
+    post = {
+        "operationId": f"{model_name}.{method_name}",
+        # A wire value, inserted verbatim: the summary is the method name
+        # the caller puts in the URL, so it is never passed to alias_prose.
+        "summary": method_name,
+        "tags": [model_name],
+        "requestBody": {
+            "required": True,
+            "content": {"application/json": {"schema": body}},
+        },
+        "responses": {
+            "200": {"description": "Success."},
+            "404": {"$ref": "#/components/responses/NotFound"},
+            "422": {"$ref": "#/components/responses/Unprocessable"},
+        },
+    }
+    description = alias_prose(_summary_paragraph(func))
+    if description:
+        post["description"] = description
+    return {"post": post}
+
+
+# Emitted when no ?app= is given, so the default URL is useful rather than
+# empty. Intersected with the registry: a model whose module is not installed
+# does not exist.
+_CORE_MODELS = (
+    "res.partner",
+    "res.users",
+    "product.template",
+    "sale.order",
+    "account.move",
+    "stock.picking",
+)
+
+
+def models_for_app(env, app):
+    """Names of the concrete models one module defines.
+
+    Candidates come from ir.model.data rather than ir.model.modules: the
+    latter reads as the obvious choice and is a non-stored computed field
+    (odoo/addons/base/models/ir_model.py, `compute='_in_modules'`), so it
+    cannot appear in a search domain. But ir.model.data also holds an xmlid
+    such as `mail.model_res_partner` for every model a module merely
+    *extends*, so the candidates are narrowed to the models whose class was
+    first defined by `app` (`_original_module`, set once at definition in
+    odoo/orm/model_classes.py:183). Abstract models have no table and
+    nothing to call on them, so they are left out.
+
+    sudo() because ir.model.data is not readable by every user; only model
+    *names* leave this function, and build_document filters those by the
+    caller's own read access.
+    """
+    data = env["ir.model.data"].sudo().search(
+        [("module", "=", app), ("model", "=", "ir.model")]
+    )
+    models = env["ir.model"].sudo().browse(data.mapped("res_id"))
+    return sorted(
+        m.model for m in models
+        if m.model in env
+        and env[m.model]._original_module == app
+        and not env[m.model]._abstract
+    )
+
+
+def _share_request_bodies(paths):
+    """Move every request body used by two or more operations into components.
+
+    A method no model overrides - `search`, `read`, `write`... - has the
+    same signature, hence the same body, on every model in the document.
+    Inlined, that body is repeated once per model; shared, it is written
+    once and referenced. Rewrites `paths` in place and returns the
+    `components.requestBodies` mapping, named after the first method that
+    uses each body (suffixed when two different bodies share a method name).
+    """
+    def key(item):
+        return json.dumps(item["post"]["requestBody"], sort_keys=True)
+
+    counts = {}
+    for item in paths.values():
+        counts[key(item)] = counts.get(key(item), 0) + 1
+
+    shared, names = {}, {}
+    for path, item in paths.items():
+        body_key = key(item)
+        if counts[body_key] < 2:
+            continue
+        if body_key not in names:
+            method_name = path.rsplit("/", 1)[1]
+            name, n = method_name, 1
+            while name in shared:
+                n += 1
+                name = f"{method_name}_{n}"
+            names[body_key] = name
+            shared[name] = item["post"]["requestBody"]
+        item["post"]["requestBody"] = {"$ref": f"#/components/requestBodies/{names[body_key]}"}
+    return shared
+
+
+def build_document(env, app=None):
+    """An OpenAPI 3.1 document for one app, or for the core set.
+
+    Generated for `env.user`: models it cannot read are left out entirely,
+    and `fields_get` drops fields outside its groups.
+    """
+    names = models_for_app(env, app) if app else [m for m in _CORE_MODELS if m in env]
+
+    paths = {}
+    schemas = dict(_COMPONENT_SCHEMAS)
+    tags = []
+    for name in names:
+        model = env[name]
+        if not model.has_access("read"):
+            continue
+        schemas[name] = model_schema(model)
+        tags.append({"name": name, "description": alias_prose(model._description or name)})
+        for method_name, func in model_operations(model).items():
+            paths[f"/json/2/{name}/{method_name}"] = path_item(name, method_name, func)
+    request_bodies = _share_request_bodies(paths)
+
     return {
-        "post": {
-            "operationId": f"{model_name}.{method_name}",
-            # A wire value, inserted verbatim: the summary is the method name
-            # the caller puts in the URL, so it is never passed to alias_prose.
-            "summary": method_name,
-            "description": alias_prose(inspect.getdoc(func) or ""),
-            "tags": [model_name],
-            "requestBody": {
-                "required": True,
-                "content": {"application/json": {"schema": body}},
+        "openapi": "3.1.0",
+        "info": {
+            "title": alias_prose(f"{BRAND['product']} JSON API"),
+            "version": "2",
+            "description": alias_prose(
+                "Every model and method reachable over POST /json/2/<model>/<method>. "
+                "Generated from the running system for the signed-in user, so it "
+                "shows only what that user may read."
+            ),
+        },
+        "servers": [{"url": "/"}],
+        "tags": tags,
+        "paths": paths,
+        # Document-wide: every operation is /json/2, and /json/2 is
+        # auth='bearer' (an API key in the Authorization header).
+        "security": [{"bearerAuth": []}],
+        "components": {
+            "schemas": schemas,
+            "responses": _COMPONENT_RESPONSES,
+            "requestBodies": request_bodies,
+            "securitySchemes": {
+                "bearerAuth": {"type": "http", "scheme": "bearer"}
             },
-            "responses": {
-                "200": {"description": "Success."},
-                "404": {"description": "The model or method does not exist."},
-                "422": {"description": "The arguments do not match the method signature."},
-            },
-            "security": [{"bearerAuth": []}],
-        }
+        },
     }
