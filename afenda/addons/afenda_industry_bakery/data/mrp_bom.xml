@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of AFENDA xForge. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <data noupdate="1">
+        <!-- Headers only, on purpose. mrp.bom.line.product_id is a
+             product.product (addons/mrp/models/mrp_bom.py:684), and the variant
+             Odoo auto-creates for a template seeded by XML carries no XMLID of
+             its own, so no ref= in this file can name a component. The lines are
+             seeded in Python instead, by hooks.py's _seed_bom_lines, where
+             env.ref(...).product_variant_id resolves.
+
+             product_uom_id is uom.product_uom_unit for all twelve because every
+             finished good is sold by the piece (data/product_template.xml).
+
+             company_id is absent from these records, which is not the same as
+             the headers being company neutral: mrp.bom.company_id defaults to
+             self.env.company (addons/mrp/models/mrp_bom.py:67-69), so each
+             header is created owned by whichever company installs the pack, and
+             a second company in the same database sees no bills of material at
+             all. That single company ownership is the accepted limitation in
+             docs/superpowers/specs/2026-09-24-afenda-industry-packs-design.md
+             rulings 1 and 2; naming the field here would only pin down in XML
+             what the default already decides. -->
+        <record id="bom_sourdough" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_sourdough"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_baguette" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_baguette"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_wholemeal" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_wholemeal"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_croissant" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_croissant"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_pain_choc" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_pain_choc"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_almond_croissant" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_almond_croissant"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_brioche" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_brioche"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_cinnamon_roll" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_cinnamon_roll"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_eclair" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_eclair"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_fruit_tart" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_fruit_tart"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_birthday_cake" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_birthday_cake"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+        <record id="bom_focaccia" model="mrp.bom">
+            <field name="product_tmpl_id" ref="product_focaccia"/>
+            <field name="product_qty">1</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="type">normal</field>
+        </record>
+    </data>
+</odoo>

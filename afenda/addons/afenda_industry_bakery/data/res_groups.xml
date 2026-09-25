@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of AFENDA xForge. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <data>
+        <!-- Every unit field on a bill of material is behind uom.group_uom:
+             addons/mrp/views/mrp_bom_views.xml:65 on the form and :102 on the
+             component list. That group is granted to nobody by default
+             (addons/uom/security/uom_security.xml:4 declares it with no
+             implied_ids and no users), and sale_timesheet is the only module in
+             the tree that implies it.
+
+             This pack cannot leave it ungranted. Its components are measured in
+             grams against raw materials stocked in kilograms, which is the
+             whole point of hooks.py's line_uom. Without the group the croissant
+             recipe renders "Flour T55 55" with the unit column hidden, beside a
+             product the same screen says is stocked in kg. That reads as 55 kg
+             of flour in a croissant. The thousandfold misreading the gram lines
+             were chosen to prevent then comes back on the screen instead of in
+             the data, which is worse: the data is right, so no test can see it.
+
+             Granting it to base.group_user follows the one existing precedent,
+             addons/sale_timesheet/data/sale_service_data.xml:15-17. Writing to
+             another module's group is what that idiom does; note it is not
+             undone by uninstalling this pack. -->
+        <record id="base.group_user" model="res.groups">
+            <field name="implied_ids" eval="[(4, ref('uom.group_uom'))]"/>
+        </record>
+    </data>
+</odoo>
