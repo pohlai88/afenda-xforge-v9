@@ -1,8 +1,10 @@
 name: AFENDA
 
 # The Definition of Done gate (afenda/SPEC.md §7): lint the AFENDA layer, then
-# install it on a fresh database and run its tests against this repository's
-# own Odoo tree.
+# install it on a fresh database and run its tests, plus the upstream API-key
+# UI tour and /doc tests under AFENDA's overrides, against this repository's
+# own Odoo tree. A green push to 19.0 or a claude/* branch is then promoted to
+# `stable`, the only branch servers deploy from (README "Upgrades").
 on:
   push:
   pull_request:
@@ -32,14 +34,44 @@ jobs:
       - name: System libraries for psycopg2 and python-ldap
         run: sudo apt-get update && sudo apt-get install -y --no-install-recommends libpq-dev libldap2-dev libsasl2-dev
       - name: Python requirements
-        run: pip install -r requirements.txt rl-renderPM ruff==0.16.8  # ruff.toml needs >= 0.16.1
+        run: pip install -r requirements.txt rl-renderPM websocket-client ruff==0.16.8  # ruff.toml needs >= 0.16.1; websocket-client drives the browser tours
       - name: Lint
         run: ruff check afenda/addons
-      - name: Install afenda_brand and run its tests
+      - name: Install afenda_brand and run the tests
         run: |
           python odoo-bin -c afenda/odoo.conf \
             --db_host localhost --db_port 5432 --db_user odoo --db_password odoo \
-            -d ci -i afenda_brand --test-tags /afenda_brand \
+            -d ci -i afenda_brand --test-tags /afenda_brand,/auth_totp:TestAPIKeys,/api_doc \
             --stop-after-init --log-level=info 2>&1 | tee odoo.log
           if grep -E " (ERROR|CRITICAL) " odoo.log; then exit 1; fi
           grep -qE "tests.result: 0 failed, 0 error\(s\) of [1-9][0-9]* tests" odoo.log
+          # A missing browser or library skips tests silently: treat it as a failure.
+          if grep -E ": skipped " odoo.log; then exit 1; fi
+
+  promote:
+    # Promote-on-green instead of pull requests: only a commit that passed the
+    # gate reaches `stable`. The push is fast-forward only: a commit that does
+    # not descend from the current `stable` is refused and this job fails, so
+    # bring `stable` into the branch and push again. Never force-push here.
+    needs: test
+    if: >-
+      github.event_name == 'push' &&
+      (github.ref == 'refs/heads/19.0' || startsWith(github.ref, 'refs/heads/claude/'))
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    concurrency:
+      group: promote-stable
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Fast-forward stable and tag the release
+        run: |
+          git push origin "HEAD:refs/heads/stable"
+          tag="stable-$(date -u +%Y%m%d)-$(git rev-parse --short=8 HEAD)"
+          # A re-run of the same commit keeps its first tag.
+          if ! git ls-remote --exit-code --tags origin "refs/tags/stable-*-$(git rev-parse --short=8 HEAD)" >/dev/null; then
+            git tag "$tag" && git push origin "refs/tags/$tag"
+          fi

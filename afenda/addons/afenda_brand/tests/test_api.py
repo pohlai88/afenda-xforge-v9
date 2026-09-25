@@ -1,9 +1,11 @@
 import json
 import re
 from datetime import datetime, timedelta
+from http import HTTPStatus
+from unittest.mock import patch
 
 from odoo.tests import HttpCase, new_test_user, tagged
-from odoo.tools import mute_logger
+from odoo.tools import config, mute_logger
 
 from odoo.addons.afenda_brand.brand import BRAND
 
@@ -58,24 +60,30 @@ class TestExternalApi(HttpCase):
                 self.assertIn("bearer", res.headers.get("WWW-Authenticate", "").lower())
 
     @mute_logger("odoo.http", "odoo.sql_db")
-    def test_json2_errors_hide_server_internals(self):
+    def test_json2_errors_are_problem_details(self):
         cases = [
-            # (model, method, payload, status)
-            ("no.such.model", "search", {"domain": []}, 404),
-            ("res.users", "create", {"vals_list": [{"name": "Twin", "login": "admin"}]}, 422),
-            ("res.partner", "read", {"ids": [1], "fields": ["no_such_field"]}, 500),
+            # (model, method, payload, status, code)
+            ("no.such.model", "search", {"domain": []}, 404, "not_found"),
+            ("res.users", "create", {"vals_list": [{"name": "Twin", "login": "admin"}]}, 422, "validation_error"),
+            ("res.partner", "read", {"ids": [1], "fields": ["no_such_field"]}, 500, "internal_error"),
         ]
-        for model, method, payload, status in cases:
+        for model, method, payload, status, code in cases:
             with self.subTest(model=model, method=method):
                 res = self.json2(model, method, payload)
                 self.assertEqual(res.status_code, status, res.text)
+                self.assertTrue(res.headers["Content-Type"].startswith("application/problem+json"))
                 body = res.json()
-                self.assertEqual(body["debug"], "", "server traceback leaked to the API client")
+                self.assertEqual(set(body), {"type", "title", "status", "code", "detail", "message"})
+                self.assertEqual((body["status"], body["code"]), (status, code))
+                self.assertEqual(body["title"], HTTPStatus(status).phrase)
+                self.assertEqual(body["message"], body["detail"])
+                self.assertNotIn("odoo", res.text.lower(), "error body exposes the framework")
                 self.assertNotIn("Traceback", res.text)
-                self.assertTrue(body["name"])
                 if status == 500:
-                    self.assertEqual(body["message"], "Internal server error")
-                    self.assertNotIn("no_such_field", res.text)
+                    self.assertEqual(body["detail"], "Internal server error")
+
+        res = self.json2("res.partner", "search", {"domain": []}, key="not-a-real-key")
+        self.assertEqual(res.json()["code"], "unauthenticated")
 
     def test_xmlrpc_with_api_key(self):
         db = self.env.cr.dbname
@@ -84,6 +92,26 @@ class TestExternalApi(HttpCase):
         self.assertEqual(uid, self.env.ref("base.user_admin").id)
         count = self.xmlrpc_object.execute_kw(db, uid, self.api_key, "res.partner", "search_count", [[]])
         self.assertGreater(count, 0)
+
+    @mute_logger("odoo.addons.rpc.controllers.xmlrpc", "odoo.addons.base.models.res_users")
+    def test_xmlrpc_refuses_passwords(self):
+        """RPC takes API keys only: a password never works outside the browser login."""
+        self.assertFalse(self.xmlrpc_common.authenticate(self.env.cr.dbname, "admin", "admin", {}))
+
+    def test_tenant_isolation_by_subdomain(self):
+        """Production routing (dbfilter ^%d$): a host reaches its own database only."""
+        db = self.env.cr.dbname
+        headers = {**CT_JSON, "Authorization": f"Bearer {self.api_key}"}
+        url, payload = "/json/2/res.partner/search_count", json.dumps({"domain": []})
+        with patch.dict(config.options, {"dbfilter": "^%d$"}):
+            for host, extra, status in (
+                (f"{db}.localhost", {}, 200),
+                ("other.localhost", {}, 404),
+                ("other.localhost", {"X-Odoo-Database": db}, 404),
+            ):
+                with self.subTest(host=host, header=bool(extra)):
+                    res = self.url_open(url, data=payload, headers={**headers, "Host": host, **extra})
+                    self.assertEqual(res.status_code, status, res.text[:200])
 
     def test_json_version(self):
         res = self.url_open("/json/version")

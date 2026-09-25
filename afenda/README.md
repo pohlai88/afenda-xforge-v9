@@ -40,12 +40,14 @@ file. On Windows use `.venv\Scripts\python` instead of `.venv/bin/python`.
 The same command CI runs (`.github/workflows/afenda.yml`):
 
 ```bash
-.venv/bin/pip install ruff && .venv/bin/ruff check afenda/addons
+.venv/bin/pip install ruff==0.16.8 websocket-client && .venv/bin/ruff check afenda/addons
 .venv/bin/python odoo-bin -c afenda/odoo.conf -d afenda_test -i afenda_brand \
-    --test-tags /afenda_brand --stop-after-init
+    --test-tags /afenda_brand,/auth_totp:TestAPIKeys,/api_doc --stop-after-init
 ```
 
-The log must report `0 failed, 0 error(s) of N tests` with N > 0. If an upstream merge adds a new
+The browser tours need Chrome or Chromium on `PATH` (or `ODOO_BROWSER_BIN`).
+The log must report `0 failed, 0 error(s) of N tests` with N > 0 and no
+`skipped` line: CI treats a skipped test as a failure. If an upstream merge adds a new
 Odoo S.A. host, `test_upstream_odoo_hosts_are_reviewed` fails on purpose: see
 [SPEC.md §5](SPEC.md#5-security-and-the-self-hosted-policy).
 
@@ -93,19 +95,31 @@ database, and an `X-Odoo-Database` header cannot point anywhere else.
     -d '{"domain": [["is_company", "=", true]], "fields": ["name", "email"], "limit": 10}'
   ```
 
-- **Errors** return `{name, message, arguments, context, debug}` with a status
-  of 401 (bad key), 403 (access), 404 (unknown model or record), 422 (user or
-  validation error) or 500. `afenda_brand` never sends the server traceback
-  (`debug` is empty) and replaces the message of a 500 with "Internal server
-  error"; the server log keeps the details. `name` keeps Odoo's exception
-  class so existing Odoo client libraries work unchanged.
+- **Errors** follow [RFC 9457](https://www.rfc-editor.org/rfc/rfc9457)
+  Problem Details (`Content-Type: application/problem+json`):
+
+  ```json
+  {"type": "about:blank", "title": "Unprocessable Entity", "status": 422,
+   "code": "validation_error", "detail": "You can not have two users with the same login!",
+   "message": "You can not have two users with the same login!"}
+  ```
+
+  `title` is the standard HTTP reason phrase. `code` is stable and meant for programs: `unauthenticated` (401),
+  `access_denied` (403), `not_found` (404), `conflict` (409),
+  `validation_error` / `user_error` (422), `invalid_request` (other 4xx),
+  `internal_error` (500). `detail` is for people; a 500 always says "Internal
+  server error" and the server log keeps the traceback. `message` repeats
+  `detail` for the `/doc` explorer.
 - **Explorer.** Administrators browse every model, field and method, and try
   calls, at `/doc` ("AFENDA xForge API").
-- **XML-RPC and JSON-RPC** (`/xmlrpc/2`, `/jsonrpc`) still work, with an API
-  key in place of the password, but are deprecated upstream (removal planned
-  for Odoo 22). Build new integrations on JSON-2.
-- **Browsers.** The API sends no CORS headers: call it from servers, or from
-  pages served by the same tenant.
+- **XML-RPC and JSON-RPC** (`/xmlrpc/2`, `/jsonrpc`) accept **API keys only**:
+  a password is refused even when correct, so a leaked or guessed password
+  is useless outside the browser login. They are deprecated upstream
+  (removal planned for Odoo 22): build new integrations on JSON-2 only.
+- **Browsers.** The API sends no CORS headers, on purpose. Pages served by the
+  tenant (web client, portal, website) use the login session. A separate web
+  app must call the API from its own server (the Backend-for-Frontend
+  pattern), which keeps the API key out of the browser.
 
 ## Production on a VPS
 
@@ -215,9 +229,49 @@ server {
 }
 ```
 
-Rate-limit `/web/login` and `/web/reset_password` with `limit_req`, and give
-`/json/`, `/xmlrpc/` and `/jsonrpc` their own `limit_req` zone keyed on the
-client address, so one integration cannot starve a tenant's workers.
+**Rate limits and unknown tenants** (in the `http` block and the `server`
+block above):
+
+```nginx
+# http { ... }
+limit_req_zone $binary_remote_addr zone=afenda_login:10m rate=5r/m;
+limit_req_zone $binary_remote_addr zone=afenda_api:10m   rate=10r/s;
+limit_req_status 429;
+# Tenant registry, written by provisioning: one "<subdomain> 1;" line each.
+map $host $afenda_tenant { default 0; include /etc/nginx/afenda-tenants.map; }
+
+# server { ... }
+if ($afenda_tenant = 0) { return 404; }   # unknown subdomain never reaches Odoo
+location ~ ^/web/(login|reset_password) {
+    limit_req zone=afenda_login burst=5;
+    proxy_pass http://afenda;
+}
+location ~ ^/(json|xmlrpc|jsonrpc)/ {
+    limit_req zone=afenda_api burst=20 nodelay;
+    proxy_pass http://afenda;
+}
+```
+
+`afenda-tenants.map` lines use the full host, e.g. `acme.afenda.app 1;`.
+Odoo also slows down repeated failed logins by itself
+(`base.login_cooldown_after`, default 5 failures, and
+`base.login_cooldown_duration`, default 60 s). Add fail2ban for repeat
+offenders:
+
+```ini
+# /etc/fail2ban/filter.d/afenda.conf
+[Definition]
+failregex = odoo\.addons\.base\.models\.res_users: Login failed for login:\S* from <HOST>$
+# /etc/fail2ban/jail.d/afenda.conf
+[afenda]
+enabled = true
+port = http,https
+filter = afenda
+logpath = /var/log/afenda/odoo.log
+maxretry = 10
+findtime = 600
+bantime = 3600
+```
 
 ### 4. Block Odoo S.A. at the network
 
@@ -252,10 +306,19 @@ and cron workers rely on `LISTEN/NOTIFY`.
   webhooks), log in, open an invoice PDF.
 - Targets: RPO ≤ 24 h, RTO ≤ 2 h. For minutes of RPO add pgBackRest (WAL archiving).
 
-### 7. Upgrades
+### 7. Releases and upgrades
+
+Servers deploy only the **`stable`** branch, or a `stable-YYYYMMDD-<sha>` tag.
+Nothing reaches `stable` by hand or by review: every push to `19.0` or a
+`claude/*` branch runs the CI gate, and only a green run fast-forwards
+`stable` and tags it. A push that does not descend from the current `stable`
+is refused, so merge `stable` into the branch and push again. Rollback means
+deploying the previous `stable-*` tag. Once, in GitHub > Settings > Branches,
+protect `stable` so only GitHub Actions can push to it.
 
 1. `git fetch` upstream and merge its `19.0` into this repository;
-   `git submodule update --remote` for the OCA branches.
+   `git submodule update --remote` for the OCA branches. Push, let the gate
+   promote it, then deploy the new `stable-*` tag.
 2. Restore production to a staging database, `odoo-bin neutralize`, then
    `click-odoo-update -c /etc/afenda/odoo.conf -d <staging>` (updates only
    modules whose code changed). Run the tests.

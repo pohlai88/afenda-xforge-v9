@@ -47,7 +47,7 @@ repeated.
 - **HR-1** Leave, attendance, expenses and timesheets are approved by managers and flow to accounting.
 - **PLAT-1** No screen, email or document shows Odoo branding (tested).
 - **PLAT-2** No runtime request reaches Odoo S.A. (§5).
-- **PLAT-3** Each tenant exposes the JSON-2 API on its own subdomain, authenticated with per-user, expiring API keys; errors never carry server tracebacks or internal messages; administrators get the `/doc` explorer (README "API").
+- **PLAT-3** Each tenant exposes the JSON-2 API on its own subdomain, authenticated with per-user, expiring API keys; XML-RPC/JSON-RPC accept API keys only; errors are RFC 9457 Problem Details with stable codes and never carry server tracebacks or internal messages; no CORS (Backend-for-Frontend for separate web apps); unknown subdomains stop at nginx; administrators get the `/doc` explorer (README "API").
 
 **Non-functional:**
 
@@ -60,7 +60,7 @@ repeated.
 | Security | TLS only, 2FA available to every user, master password set, database manager off |
 | Browsers | current Chrome, Edge, Firefox, Safari; PWA installable |
 | Localization | Malaysia first (`l10n_my`); any Odoo localization usable |
-| API | JSON-2 per tenant; rate-limited at nginx; covered end to end by `tests/test_api.py` |
+| API | JSON-2 per tenant; 10 req/s per client and 5 logins/min at nginx, plus fail2ban; covered end to end by `tests/test_api.py` and the upstream API-key UI tour |
 
 ## 3. Architecture and stack
 
@@ -161,7 +161,8 @@ A change is done when:
 
 1. `.github/workflows/afenda.yml` is green: `ruff check afenda/addons`, then a
    fresh database installs `afenda_brand` and every changed `afenda_*` module
-   with their tests passing and no ERROR in the log.
+   with their tests passing, no ERROR and no skipped test in the log. A green
+   push is promoted to `stable` automatically; there are no pull requests.
 2. New behaviour has a test; a bug fix has a test that failed before it.
 3. Schema changes were upgraded (`-u`) on a restored copy of production data.
 4. `odoo/` and `addons/` are untouched (`git diff --stat` shows none).
@@ -242,6 +243,13 @@ and test it like our own.
   date already enforce v8's rules; code only for what they miss.
 - **D6 One database per tenant.** Strongest isolation, simplest backup and
   restore per customer, native to Odoo (`dbfilter`).
-- **D7 Upstream-compatible API contract.** Error `name`s (`odoo.exceptions.*`)
-  and the `X-Odoo-Database` header keep their upstream names so existing Odoo
-  client libraries work; only tracebacks and internal 500 messages are removed.
+- **D7 AFENDA owns the API contract.** Errors are RFC 9457 Problem Details
+  with AFENDA's stable `code`s, not Odoo exception classes; Odoo client
+  libraries are not a compatibility target. `X-Odoo-Database` stays because
+  renaming it means editing upstream, and subdomain routing makes it inert.
+- **D8 API keys only for RPC.** XML-RPC/JSON-RPC refuse passwords
+  (`_rpc_api_keys_only`, the mechanism upstream uses for 2FA users).
+- **D9 Promote on green, no pull requests.** CI gates every push; only green
+  commits fast-forward `stable`, the only branch servers deploy.
+- **D10 `/doc` stays administrator-only** and keeps listing installed modules:
+  tenant administrators already see the Apps list.
