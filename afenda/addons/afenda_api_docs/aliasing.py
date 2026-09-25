@@ -1,4 +1,4 @@
-"""Brand aliasing for generated documentation.
+r"""Brand aliasing for generated documentation.
 
 Two classes of string appear in a generated document and they must never be
 treated alike:
