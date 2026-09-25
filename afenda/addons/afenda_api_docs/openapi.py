@@ -41,7 +41,8 @@ _TYPE_MAP = {
     # "5" where the ORM wants 5.
     "many2one_reference": {"type": "integer"},
     # Reference really is a string, but a structured one: "res_model,res_id".
-    "reference": {"type": "string", "pattern": r"^[a-z_.]+,\d+$"},
+    # Model names carry digits (l10n_*), hence 0-9 in the model part.
+    "reference": {"type": "string", "pattern": r"^[a-z0-9_.]+,\d+$"},
     # A jsonb list of property definitions (odoo/orm/fields_properties.py).
     "properties_definition": {"type": "array", "items": {"type": "object"}},
 }
@@ -217,6 +218,21 @@ _COMPONENT_SCHEMAS = {
     },
 }
 _COMPONENT_RESPONSES = {
+    # Json2Dispatcher.handle_error (odoo/http.py) serialises each of these
+    # into the Error schema: werkzeug HTTPExceptions and UserError alike.
+    "Unauthorized": {
+        # _auth_method_bearer raises werkzeug Unauthorized for a missing or
+        # invalid API key (odoo/addons/base/models/ir_http.py).
+        "description": "No API key, or an invalid one, in the Authorization header.",
+        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
+    },
+    "Forbidden": {
+        # AccessError, http_status 403 (odoo/exceptions.py): a private method
+        # (get_public_method, odoo/service/model.py), or no access right or
+        # record rule for the records the call touches.
+        "description": "The user may not call this method or touch these records.",
+        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
+    },
     "NotFound": {
         "description": "The model or method does not exist.",
         "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
@@ -291,6 +307,8 @@ def path_item(model_name, method_name, func):
         },
         "responses": {
             "200": {"description": "Success."},
+            "401": {"$ref": "#/components/responses/Unauthorized"},
+            "403": {"$ref": "#/components/responses/Forbidden"},
             "404": {"$ref": "#/components/responses/NotFound"},
             "422": {"$ref": "#/components/responses/Unprocessable"},
         },

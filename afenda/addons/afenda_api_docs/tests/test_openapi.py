@@ -1,4 +1,5 @@
 import json
+import re
 from unittest.mock import patch
 
 from odoo.service.model import get_public_method
@@ -62,6 +63,15 @@ class TestModelSchema(TransactionCase):
         self.assertTrue(declared)
         self.assertEqual(declared - set(_TYPE_MAP), set())
 
+    def test_reference_pattern_accepts_model_names_with_digits(self):
+        # Model names carry digits (l10n_*), and a reference is "model,id".
+        from odoo.addons.afenda_api_docs.openapi import _TYPE_MAP
+        pattern = re.compile(_TYPE_MAP["reference"]["pattern"])
+        for value in ("res.partner,5", "l10n_in.gst.report,12", "l10n_be_hr.x2,1"):
+            self.assertTrue(pattern.match(value), value)
+        for value in ("res.partner", "res.partner,", ",5"):
+            self.assertFalse(pattern.match(value), value)
+
     def test_help_text_is_aliased(self):
         schema = model_schema(self.env["res.partner"])
         for prop in schema["properties"].values():
@@ -116,8 +126,8 @@ class TestOperations(TransactionCase):
         # the components (TestDocument.test_every_ref_resolves).
         self.assertEqual(body["properties"]["ids"], {"$ref": "#/components/schemas/Ids"})
         self.assertEqual(body["properties"]["context"], {"$ref": "#/components/schemas/Context"})
-        self.assertIn("404", item["post"]["responses"])
-        self.assertIn("422", item["post"]["responses"])
+        for status in ("401", "403", "404", "422"):
+            self.assertIn(status, item["post"]["responses"])
 
     def test_method_docstring_is_aliased(self):
         model = self.env["res.partner"]
@@ -226,7 +236,11 @@ class TestDocument(TransactionCase):
             set(error["properties"]), {"name", "message", "arguments", "context", "debug"}
         )
         item = doc["paths"]["/json/2/res.partner/read"]["post"]
-        for status in ("404", "422"):
+        # 401: no or a bad API key (odoo/addons/base/models/ir_http.py
+        # _auth_method_bearer raises werkzeug Unauthorized); 403: AccessError
+        # (odoo/exceptions.py, http_status 403), e.g. a private method
+        # (odoo/service/model.py get_public_method) or no ACL for the call.
+        for status in ("401", "403", "404", "422"):
             name = item["responses"][status]["$ref"].rsplit("/", 1)[1]
             response = doc["components"]["responses"][name]
             schema = response["content"]["application/json"]["schema"]
