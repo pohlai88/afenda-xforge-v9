@@ -23,7 +23,7 @@ set -eu
 PY=/opt/venv/bin/python
 BIN=/opt/afenda/odoo-bin
 DB=afenda
-MODULES="afenda_brand afenda_runtime"
+MODULES="afenda_brand afenda_runtime afenda_api_docs"
 : "${RC:?RC is exported by afenda-entrypoint}"
 PUBLIC_URL=${PUBLIC_URL:-http://localhost:8080}
 export PUBLIC_URL
