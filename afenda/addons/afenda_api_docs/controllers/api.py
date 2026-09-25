@@ -11,8 +11,9 @@ from ..openapi import build_document
 # link with CSS would not stop an <img> from loading, and patching the
 # vendored file would break its recorded hash, so the browser is told to
 # refuse third-party images on this one page instead. Same per-response
-# mechanism upstream uses on the login page (addons/web/controllers/home.py).
-_API_PAGE_CSP = "img-src 'self' data:"
+# mechanism upstream uses on the login page (addons/web/controllers/home.py:153),
+# including its `frame-ancestors 'self'` against framing by another origin.
+_API_PAGE_CSP = "img-src 'self' data:; frame-ancestors 'self'"
 
 
 class AfendaApiController(http.Controller):

@@ -23,7 +23,18 @@
                 </select>
                 <button type="submit" class="btn btn-primary">Show</button>
             </form>
-            <redoc t-att-spec-url="spec_url"/>
+            <!-- sanitize="true" is load-bearing, not cosmetic. Field help
+            (translatable, importable from .po), model descriptions and method
+            docstrings reach Redoc as Markdown, and Redoc 2.5.4 injects the
+            rendered HTML with dangerouslySetInnerHTML, passing it through
+            DOMPurify only when the option is on:
+            `Dm=(e,t)=>e?Rm.sanitize(t):t` and
+            `this.sanitize=Ei(e.sanitize||e.untrustedSpec)` (byte 769951 of
+            static/lib/redoc/redoc.standalone.js). The element's attributes
+            become options through the bundle's `Gw` (kebab-case to camelCase,
+            values as strings), and `Ei` reads a string as `"false"!==value`,
+            so the attribute must be present and not "false". -->
+            <redoc t-att-spec-url="spec_url" sanitize="true"/>
             <script type="text/javascript"
                     src="/afenda_api_docs/static/lib/redoc/redoc.standalone.js"/>
         </t>

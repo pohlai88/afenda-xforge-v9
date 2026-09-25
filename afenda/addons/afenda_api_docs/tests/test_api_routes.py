@@ -44,9 +44,16 @@ class TestApiRoutes(HttpCase):
         res = self.url_open("/docs/api")
         self.assertEqual(res.status_code, 200)
         self.assertIn(f'src="{REDOC_URL}"', res.text)
-        self.assertIn('<redoc spec-url="/docs/openapi.json"', res.text)
+        self.assertRegex(res.text, r'<redoc [^>]*spec-url="/docs/openapi.json"')
         self.assertNotIn("cdn.", res.text)
         self.assertNotIn("Odoo", res.text)
+
+    def test_api_reference_asks_redoc_to_sanitize_markdown(self):
+        # Field help, model descriptions and docstrings reach Redoc as
+        # Markdown; without this option the bundle injects their raw HTML.
+        self.authenticate("admin", "admin")
+        res = self.url_open("/docs/api")
+        self.assertRegex(res.text, r'<redoc [^>]*sanitize="true"')
 
     def test_api_reference_passes_the_app_through(self):
         self.authenticate("admin", "admin")
@@ -59,6 +66,7 @@ class TestApiRoutes(HttpCase):
         self.authenticate("admin", "admin")
         policy = self.url_open("/docs/api").headers["Content-Security-Policy"]
         self.assertIn("img-src 'self' data:", policy)
+        self.assertIn("frame-ancestors 'self'", policy)
 
     def test_app_picker_lists_installed_apps_to_whoever_can_read_modules(self):
         self.authenticate("admin", "admin")
