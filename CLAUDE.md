@@ -44,6 +44,15 @@ goes under `afenda/addons/`. See `afenda/README.md` for the layout and run steps
   Accept a sub-agent's result only against its acceptance check: a "passed" without the
   printed count is not accepted.
 
+## Handoffs between sessions
+
+Before starting work, read the newest file in `docs/superpowers/handoffs/`. It records what the
+previous session (cloud or local) shipped, the owner's binding decisions, what waits on the
+owner, and what is still open. At present that is `2026-09-25-cloud-session.md`, which holds
+two owner rulings that are easy to miss: do not hand-write guide pages, and do not start G2.
+A session that ends with work in flight writes a new dated handoff there. It does not rely on
+a scratch ledger, which dies with a cloud container.
+
 ## Odoo 19 knowledge
 
 A version-locked copy of the official Odoo 19.0 developer documentation lives at
