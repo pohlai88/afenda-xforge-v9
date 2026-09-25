@@ -1094,6 +1094,12 @@ Contents: two suppliers (`res.partner` — "Moulin Dupont" for flour and "Laiter
 
 This is the only file allowed to create transactional records — Task 5's guard scans `data/`, not `demo/`, and that asymmetry is the point.
 
+**Deviations recorded at execution (2026-09-25):**
+- **No `hr.employee` records.** `hr` is not in the pack's dependency closure (it stays `uninstalled` after the pack installs), so the records would fail to load, and adding `hr` to `depends` would install Employees on every production tenant for three demo rows. Restoring them is a one-line `depends` change if that trade is wanted.
+- **`_seed_bom_lines` now queues a `move_raw_ids` recompute for draft MOs on the BoMs it fills.** Demo loads before `post_init_hook` (`odoo/modules/loading.py:216-218`, then `:239-243`), so the croissant MO is created against a header with no lines, and `_compute_move_raw_ids` depends on `bom_id`, not `bom_id.bom_line_ids` (`addons/mrp/models/mrp_production.py:819`): without this it keeps zero components. New test `test_bom_seeding_fills_draft_orders_created_before_it`, so **the bakery count is 12, not 11**, from this task on.
+- The purchase orders stay draft: confirming one adds the vendor to the product (`addons/purchase/models/purchase_order.py:633`), which would break the premise of `test_reordering_rules_activate_when_the_tenant_adds_a_vendor` on a demo database.
+- Verified with demo actually loaded, on a throwaway database with `--with-demo` (account first, then the packs): `0 failed, 0 error(s) of 16 tests`, the MO has 5 component moves. A `--without-demo` run never parses `demo/` beyond the translation reader, which is the only place a malformed demo file shows up (as a WARNING).
+
 - [ ] **Step 1: Write the file, then verify production installs are unaffected**
 
 ```bash

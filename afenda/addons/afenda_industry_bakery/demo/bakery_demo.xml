@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Part of AFENDA xForge. See LICENSE file for full copyright and licensing details. -->
+<odoo>
+    <data noupdate="1">
+        <!-- Business history, and the only file in this pack allowed to hold
+             any: test_data_xml_has_no_transactional_records scans data/, not
+             demo/, and production installs run without demo, so nothing here
+             ever reaches a real tenant.
+
+             Three things in here are shaped by facts outside this file:
+
+             * The purchase orders stay draft RFQs. Confirming one runs
+               _add_supplier_to_product (addons/purchase/models/purchase_order.py:633,
+               in button_confirm), which would give flour a vendor and make the
+               reordering rules resolve a Buy rule on a demo database, the
+               opposite of the premise
+               test_reordering_rules_activate_when_the_tenant_adds_a_vendor
+               checks before it adds a vendor of its own.
+
+             * Components and the MO name product.product records, and the
+               variants of this pack's templates carry no XMLID (see
+               data/mrp_bom.xml). The PO lines resolve them in eval, as upstream
+               does (addons/purchase/data/purchase_demo.xml), and the MO with
+               search=, which odoo/tools/convert.py:406-420 supports for a
+               many2one.
+
+             * The croissant MO is created before its bill of material has
+               lines: demo loads before post_init_hook
+               (odoo/modules/loading.py:216-218, then :239-243). hooks.py's
+               _seed_bom_lines fills draft MOs like this one in when it seeds
+               the lines.
+
+             No employees, although the plan lists three. hr.employee belongs
+             to `hr`, which is not in this pack's dependency closure, and adding
+             it would install Employees on every production tenant for the sake
+             of three demo rows. -->
+
+        <record id="demo_partner_moulin_dupont" model="res.partner">
+            <field name="name">Moulin Dupont</field>
+            <field name="is_company" eval="True"/>
+        </record>
+        <record id="demo_partner_laiterie_verte" model="res.partner">
+            <field name="name">Laiterie Verte</field>
+            <field name="is_company" eval="True"/>
+        </record>
+
+        <record id="demo_po_moulin_dupont" model="purchase.order">
+            <field name="partner_id" ref="demo_partner_moulin_dupont"/>
+            <field name="order_line" model="purchase.order.line" eval="[
+                Command.create({
+                    'product_id': obj().env.ref('afenda_industry_bakery.product_flour_t55').product_variant_id.id,
+                    'product_qty': 200.0,
+                    'product_uom_id': ref('uom.product_uom_kgm'),
+                    'price_unit': 0.85,
+                }),
+            ]"/>
+        </record>
+
+        <record id="demo_po_laiterie_verte" model="purchase.order">
+            <field name="partner_id" ref="demo_partner_laiterie_verte"/>
+            <field name="order_line" model="purchase.order.line" eval="[
+                Command.create({
+                    'product_id': obj().env.ref('afenda_industry_bakery.product_butter').product_variant_id.id,
+                    'product_qty': 40.0,
+                    'product_uom_id': ref('uom.product_uom_kgm'),
+                    'price_unit': 7.20,
+                }),
+                Command.create({
+                    'product_id': obj().env.ref('afenda_industry_bakery.product_milk').product_variant_id.id,
+                    'product_qty': 50.0,
+                    'product_uom_id': ref('uom.product_uom_kgm'),
+                    'price_unit': 1.05,
+                }),
+                Command.create({
+                    'product_id': obj().env.ref('afenda_industry_bakery.product_eggs').product_variant_id.id,
+                    'product_qty': 360.0,
+                    'product_uom_id': ref('uom.product_uom_unit'),
+                    'price_unit': 0.22,
+                }),
+            ]"/>
+        </record>
+
+        <record id="demo_mo_croissant" model="mrp.production">
+            <field name="product_id" search="[('product_tmpl_id', '=', ref('product_croissant'))]"/>
+            <field name="product_qty">40</field>
+            <field name="product_uom_id" ref="uom.product_uom_unit"/>
+            <field name="bom_id" ref="bom_croissant"/>
+        </record>
+    </data>
+</odoo>

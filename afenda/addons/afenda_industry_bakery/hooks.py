@@ -126,6 +126,7 @@ def _seed_bom_lines(env):
     """
     units = env.ref("uom.product_uom_unit")
     gram = env.ref("uom.product_uom_gram")
+    seeded = env["mrp.bom"]
     for bom_suffix, components in RECIPES:
         bom = env.ref(f"{MODULE}.{bom_suffix}")
         if bom.bom_line_ids:
@@ -139,6 +140,21 @@ def _seed_bom_lines(env):
                 "product_uom_id": line_uom(product, units, gram).id,
             }))
         bom.write({"bom_line_ids": lines})
+        seeded |= bom
+
+    # A draft MO already pointing at one of these headers was created while it
+    # had no lines, and would keep no components for good: move_raw_ids depends
+    # on `bom_id`, not on `bom_id.bom_line_ids`
+    # (addons/mrp/models/mrp_production.py:819), so writing the lines does not
+    # reach it. The demo install produces exactly that MO, because a module's
+    # demo/ loads before its post_init_hook (odoo/modules/loading.py:216-218,
+    # then :239-243). Queue the recompute the ORM did not; it runs on the next
+    # read or flush. Covered by test_bom_seeding_fills_draft_orders_created_before_it.
+    if seeded:
+        drafts = env["mrp.production"].search(
+            [("bom_id", "in", seeded.ids), ("state", "=", "draft")]
+        )
+        env.add_to_compute(drafts._fields["move_raw_ids"], drafts)
 
 
 def _check_accounting_is_set_up(env):
