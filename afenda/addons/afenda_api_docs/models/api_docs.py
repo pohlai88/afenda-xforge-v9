@@ -35,8 +35,12 @@ class AfendaApiDocs(models.AbstractModel):
           group), odoo/addons/base/models/res_users.py:571 (adds
           `self._origin == self.env.user`, never true for an empty
           recordset);
-        * the current company, conservatively: a dynamic selection may be
-          computed from it.
+        * the current company, and the allowed companies: `fields_get` can
+          depend on records the caller's record rules select, and those
+          rules read `company_ids` - account.analytic.line renames its plan
+          columns after the plans the caller can search
+          (addons/analytic/models/analytic_line.py:108-118, rule in
+          addons/analytic/security/analytic_security.xml:9).
 
         The registry version needs no key: every Registry starts with fresh
         caches (odoo/orm/registry.py:243) and load()/setup_models() clear them
@@ -52,8 +56,9 @@ class AfendaApiDocs(models.AbstractModel):
             self.env.su,
             tuple(sorted(self.env.user.all_group_ids.ids)),
             self.env.company.id,
+            tuple(sorted(self.env.companies.ids)),
         )
 
-    @tools.ormcache("app", "lang", "su", "group_ids", "company_id")
-    def _openapi_json_cached(self, app, lang, su, group_ids, company_id):
+    @tools.ormcache("app", "lang", "su", "group_ids", "company_id", "company_ids")
+    def _openapi_json_cached(self, app, lang, su, group_ids, company_id, company_ids):
         return json.dumps(build_document(self.env, app=app))
