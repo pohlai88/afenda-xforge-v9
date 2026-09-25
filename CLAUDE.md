@@ -62,9 +62,68 @@ Project agents under `.claude/agents/` share the rules in `.claude/odoo-agent-ru
 - `odoo-reviewer`: read-only review against kit rules and layering.
 - `odoo-test-runner`: runs test tags with the known environment, reports failures.
 
+## Superpowers skills
+
+`.claude/settings.json` enables `superpowers@superpowers-marketplace` for every session
+(it loads at session start; `claude plugin list` shows it). Use these, in this order of
+a unit of work; this file wins wherever a skill's default differs:
+
+- `superpowers:brainstorming` before new features or behaviour changes. Specs go to
+  `docs/superpowers/specs/YYYY-MM-DD-<topic>.md`.
+- `superpowers:writing-plans` for any multi-step task, before code. Plans go to
+  `docs/superpowers/plans/YYYY-MM-DD-<topic>.md`; a committed plan is what
+  orchestrators decide from.
+- `superpowers:subagent-driven-development` to execute a plan through the project
+  agents above (dispatch rules under **Execution discipline** apply);
+  `superpowers:dispatching-parallel-agents` for independent tasks in one turn;
+  `superpowers:executing-plans` only when working inline.
+- `superpowers:test-driven-development` for every feature or fix: the test lands with
+  the code, and each run is the narrowest one (**Test the edit, not the world**).
+- `superpowers:systematic-debugging` on any failure, before proposing a fix.
+- `superpowers:verification-before-completion` before claiming done: cite the printed
+  test count and the SHA, never an exit code.
+- `superpowers:requesting-code-review` (with `odoo-reviewer`) before merging to `main`;
+  `superpowers:receiving-code-review` when answering review.
+- `superpowers:finishing-a-development-branch` to integrate: the target is `main`.
+
+Skip `superpowers:using-git-worktrees`: a cloud session is already an isolated
+container, and locally a second checkout of this tree is large; commit with
+`git commit --only` instead (see **Gotchas**).
+
+## Cloud sessions (Claude Code on the web)
+
+A cloud session is a fresh Ubuntu container, not the Windows machine above.
+`.claude/hooks/session-start.sh` (a SessionStart hook; it exits at once when
+`CLAUDE_CODE_REMOTE` is not `true`, so local sessions never run it) prepares it before
+the first prompt:
+
+- build headers for psycopg2 and python-ldap, via apt;
+- `git submodule update --init --depth 1` (the OCA addons on `addons_path`);
+- a Python 3.11 `.venv` with `requirements.txt`, both `afenda/tools/requirements*.txt`
+  and ruff; `.venv/Scripts` links to `.venv/bin`, so every command below runs verbatim;
+- a PostgreSQL cluster `afenda` on `127.0.0.1:5444` with a passwordless `odoo`
+  superuser, as `afenda/odoo.conf` expects.
+
+Each step is guarded: about 90 s on a cold container, about 2 s warm. The hook is
+synchronous, so the session starts only once it finishes. Differences from local:
+
+- The database is not created by the hook. Run the "first run" command below once per
+  container before any Odoo test (about 30 s); the test command's `-u` upgrades an
+  installed module, it does not install one.
+- The Odoo doc kit (`.agents/`) is untracked, so it is absent in the cloud;
+  `odoo-docs-librarian` answers from `odoo/`, `addons/` and the kit only when present.
+- No vendor service holds 8069, and the MSYS prefix on test commands is harmless on Linux.
+- Odoo warns "Running as user 'root' is a security risk"; that is expected in the container.
+- Anything not committed and pushed is lost when the container is reclaimed.
+- Changing the hook: keep it idempotent and non-interactive, then run
+  `CLAUDE_CODE_REMOTE=true CLAUDE_PROJECT_DIR=$PWD .claude/hooks/session-start.sh`
+  twice (cold, then warm) and cite both exit codes before committing. It takes effect
+  for new sessions once it is on `main`.
+
 ## Environment
 
 - Python only from `.venv/Scripts/python`; never install into the global interpreter.
+  (Cloud sessions: see **Cloud sessions** above; the same path works there.)
 - Server port 8169, test port 8179, PostgreSQL `127.0.0.1:5444`, database `afenda`.
 - Port 8069 is already taken by the vendor Odoo 19 Windows service (a `nssm.exe`
   service whose Python listens on `0.0.0.0:8069` against its own bundled PostgreSQL
