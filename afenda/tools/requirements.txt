@@ -1,7 +1,15 @@
 # Pinned: the rendered PNGs are committed, and Pillow's encoder and LANCZOS
 # filter are version-sensitive - an unpinned upgrade rewrites every icon in the
 # tree for no visible reason. Bump deliberately, then re-render and review.
-pillow==9.4.0
+# The pins follow the root requirements.txt tier by tier, so the tools and the
+# server share one venv; 9.4.0 has no 3.12 wheel and does not build there.
+# Each tier is admitted only once measured: on 2026-09-25 all 126 images that
+# app_icons and brand_images generate were byte-identical under 3.11 + 9.4.0
+# and 3.12 + 10.2.0 (Linux), and equal to the committed files. On 3.13+ this
+# file installs no Pillow at all, on purpose: measure a tier the same way
+# before adding its line.
+pillow==9.4.0 ; python_version < '3.12'
+pillow==10.2.0 ; python_version >= '3.12' and python_version < '3.13'
 fonttools==4.65.0
 brotli==1.1.0  # fontTools woff2 output for deploy/site/fonts
 
