@@ -2,12 +2,9 @@ from odoo.tests import BaseCase, HttpCase, tagged
 
 from odoo.addons.afenda_api_docs.aliasing import alias_prose
 
-# afenda.tools is repo tooling, importable because odoo-bin puts the repo root
-# (its own directory) first on sys.path - the premise the spec's parity test
-# rests on. The guide-sync half of the plan's Task 9 is not repeated here:
+# The guide-sync half of the plan's Task 9 is not repeated here:
 # afenda/tools/tests/test_build_docs_sync.py already holds views/guides.xml
 # to its Markdown without a database.
-from afenda.tools import rules as file_rules
 
 ODOO_TELLS = ("Odoo", "odoo.com", "OdooBot", "Odoo S.A.")
 
@@ -22,6 +19,18 @@ class TestAliasingParity(BaseCase):
         # The runtime aliaser is deliberately broader (case-insensitive), but
         # it must never disagree with the build-time rules where both apply:
         # capitalised identity in text any file type would carry.
+        #
+        # afenda.tools is repo tooling, importable only because odoo-bin puts
+        # its own directory - the repo root - first on sys.path. Imported
+        # here, not at module level: a failed module-level import would make
+        # odoo/tests/loader.py fail on the whole tests package and silently
+        # take every test in this addon with it. CI still runs this test:
+        # .github/workflows/afenda-image.yml runs /opt/afenda/odoo-bin with
+        # the checked-out afenda/tools mounted at /opt/afenda/afenda/tools.
+        try:
+            from afenda.tools import rules as file_rules  # noqa: PLC0415
+        except ImportError as exc:
+            self.skipTest(f"afenda.tools is not importable (repo root not on sys.path): {exc}")
         global_rules = [
             rule for rule in file_rules.RULES
             if rule.suffixes is None and not rule.path_contains and not rule.path_excludes
