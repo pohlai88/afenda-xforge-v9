@@ -291,11 +291,16 @@ fresh database, `account` goes in first (see "Install order" above), then the pa
 
 ```bash
 .venv/Scripts/python odoo-bin -c afenda/odoo.conf -d <fresh> -i account \
-  --without-demo=all --stop-after-init
-.venv/Scripts/python odoo-bin -c afenda/odoo.conf -d <fresh> \
+  --without-demo=all --stop-after-init --http-port 8179
+MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
+  -c afenda/odoo.conf -d <fresh> \
   -i afenda_industry_base,afenda_industry_bakery --without-demo=all --test-enable \
-  --test-tags "/afenda_industry_base,/afenda_industry_bakery" --stop-after-init
+  --test-tags "/afenda_industry_base,/afenda_industry_bakery" --stop-after-init --http-port 8179
 ```
+
+The `MSYS_*` prefix stops Git Bash from mangling the `/module` tags, and `--test-enable`
+always starts HTTP (`odoo/service/server.py:659`), so the test port keeps the run off the
+dev server's 8169 (CLAUDE.md, Commands).
 
 Expected: `0 failed, 0 error(s) of 17 tests` — 4 for `afenda_industry_base` and 13 for
 `afenda_industry_bakery`. The per-module `odoo.tests.stats` lines read higher (6 and 15),

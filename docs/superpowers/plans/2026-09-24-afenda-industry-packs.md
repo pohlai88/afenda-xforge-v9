@@ -205,8 +205,6 @@ def load_company_records(env, module, model_name, records):  # noupdate param re
     :param str module: the pack's technical name, e.g. ``afenda_industry_bakery``
     :param str model_name: the model to seed, e.g. ``pos.config``
     :param records: list of ``(suffix, values)``; the XMLID is ``module.suffix``
-    :param bool noupdate: flag stored on the XMLID; ``True`` means a module
-        upgrade will not overwrite what the tenant has since edited
     :return: the records, in the order given
     """
     model = env[model_name].sudo()
@@ -216,7 +214,7 @@ def load_company_records(env, module, model_name, records):  # noupdate param re
     data_list = [
         {
             "xml_id": f"{module}.{suffix}",
-            "noupdate": noupdate,
+            "noupdate": True,  # always: `_process_end` deletes non-noupdate XMLIDs on -u
             "values": dict(values, company_id=env.company.id) if pin_company else dict(values),
         }
         for suffix, values in records
@@ -1140,7 +1138,7 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
 
 Expected: `0 failed, 0 error(s) of 17 tests` — `afenda_industry_base` 4 and `afenda_industry_bakery` 13 (updated after fix round 1; the plan originally said 4 and 11).
 
-Then run the same two modules **once on a fresh throwaway database** with `-i` and `--without-demo=all`, because that is what CI does (the orchestrator session's job builds a new database per run) and it is the only path that exercises `post_init_hook` end to end. Install `account` first in its own run, then the packs (the hook refuses a company with no chart; see the spec's "Install order"). The result line must read the same 17. Drop the scratch database and its filestore afterwards. These two numbers are what CI's floor is raised by — take them from the result lines, never the per-class stats lines.
+Then run the same two modules **once on a fresh throwaway database** with `-i` and `--without-demo=all`, because that is what CI does (the orchestrator session's job builds a new database per run) and it is the only path that exercises `post_init_hook` end to end. Install `account` first in its own run, then the packs (the hook refuses a company with no chart; see the spec's "Install order"). The result line must read the same 17. Drop the scratch database and its filestore afterwards. That number (17) is what CI's floor is raised by — take them from the result lines, never the per-class stats lines.
 
 - [ ] **Step 2: The `afenda_brand` suite — it now has two new addons in scope**
 
