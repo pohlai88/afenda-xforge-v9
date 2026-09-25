@@ -2,7 +2,7 @@
 
 ## Context
 
-The product (`afenda/deidentify-phase1`, `product_name = 'AFENDA xForge'`) is an Odoo 19.0
+The product (`afenda/deidentify-phase1`, renamed `main` on 2026-09-25, `product_name = 'AFENDA xForge'`) is an Odoo 19.0
 Community source fork that has **no deploy path**. There is no Dockerfile, no production
 config, and no CI. `afenda/odoo.conf` is dev-only, with `workers=0`, `max_cron_threads=0` and
 `list_db=True`. Today's goal is one database for one tenant, built and run with **no call to
@@ -156,7 +156,7 @@ Live at `https://app.nexuscanon.com`, landing page at `https://nexuscanon.com`.
 - **Host:** DigitalOcean droplet `afenda-app-sgp1`, region `sgp1`, `s-4vcpu-8gb`, Ubuntu 24.04,
   Docker Compose v5.5.1. Cloud firewall `afenda-app` (tag `afenda`) admits 22, 80, 443 only.
   SSH is key-only (`passwordauthentication no`).
-- **Code:** `/srv/afenda`, shallow clone of `afenda/deidentify-phase1` at `5d04085c2` through a
+- **Code:** `/srv/afenda`, shallow clone of `afenda/deidentify-phase1` (now `main`) at `5d04085c2` through a
   read-only GitHub deploy key, `.env` = `compose.yaml:compose.tls.yaml`.
 - **DNS:** nameservers moved from Vercel to DigitalOcean; the zone is
   `deploy/dns/nexuscanon.com.records`, applied by `deploy/dns/apply-do-dns.sh` (11 records).
@@ -175,7 +175,8 @@ Found on the way:
 - `doctl compute droplet create --ssh-keys` takes a fingerprint; looking the key up by name
   straight after `ssh-key import` returned empty and produced a keyless droplet.
 - DigitalOcean blocks outbound SMTP (25, 465, 587) on this droplet: `smtp.zoho.com` times out on
-  all three. The ERP cannot send invitation email until that is solved.
+  all three. The ERP cannot send invitation email until that is solved. (Solved the same
+  day: the Resend relay on port 2587, under "App mail" below.)
 - `iap.odoo.com` resolves from the host. Independence rests on the null adapters
   (`iap.endpoint` = `http://127.0.0.1:9`, checked by the proof), not on DNS; the optional
   zero-egress mode in `deploy/README.md` removes the route as well.

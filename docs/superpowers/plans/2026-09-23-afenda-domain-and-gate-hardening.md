@@ -1,7 +1,7 @@
 # AFENDA domain cutover and gate hardening — implementation plan
 
 Spec: `docs/superpowers/specs/2026-09-23-afenda-platform-architecture.md`
-Date: 2026-09-23. Branch: `afenda/deidentify-phase1`.
+Date: 2026-09-23. Branch: `afenda/deidentify-phase1` (renamed `main` on 2026-09-25).
 
 ## Context
 

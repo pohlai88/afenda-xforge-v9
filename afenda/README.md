@@ -10,7 +10,8 @@ hand edits — which is what makes re-deriving them cheaper than merging them. S
 ```
 afenda/
   addons/afenda_brand/        the AFENDA identity: logo, colors, fonts, titles, login, settings
-  addons/afenda_api_docs/     generated API reference and guides, served at /docs
+  addons/afenda_api_docs/     guides served at /docs (the generated API reference is not built yet)
+  addons/afenda_runtime/      null adapters for Odoo-hosted services: nothing leaves the deployment
   addons/afenda_brand_digest/ AFENDA colors in the periodic digest email (auto-installs)
   oca/server-brand/           OCA debranding modules (git submodule, branch 19.0)
   oca/web/                    OCA web modules: favicon, PWA, no bubbles (git submodule, branch 19.0)
