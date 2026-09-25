@@ -1,17 +1,33 @@
+import re
+
 from odoo import http
 from odoo.http import request
+
+# A leading version segment, as the web client's documentation_link widget
+# concatenates it ("/docs/" + serverVersion + path). Accepted and ignored:
+# the generated documentation is not versioned. Same forms the prose
+# aliaser strips from a documentation URL (aliasing.py): "19.0", "saas-18.4",
+# "latest", "master". Anything else is part of the page path.
+_VERSION_SEGMENT = re.compile(r"^(?:\d+\.\d+|latest|master|saas-[\d.]+)$")
 
 
 def _guide_xmlid(subpath):
     """Map a `/docs/<subpath>` URL onto the generated guide template it names.
 
-    Mirrors `afenda/tools/build_docs.py:slug_for` (same `/` and `.` folding),
-    duplicated rather than imported: that module is repo dev tooling invoked
-    with `python -m afenda.tools.build_docs`, not part of the installed
-    addon, and nothing guarantees the repo root is on `sys.path` at runtime.
-    `slug_for` also strips a trailing `.md`, which a URL never carries, so
-    the two are otherwise identical.
+    Drops a leading version segment and a trailing `.html` first, so both
+    link shapes in the product - `/docs/19.0/applications/general/users.html`
+    from the widget and `/docs/applications/general/users.html` hand-written
+    - reach `guide_applications_general_users`. The rest mirrors
+    `afenda/tools/build_docs.py:slug_for` (same `/` and `.` folding; it
+    strips `.md` where this strips `.html`), duplicated rather than
+    imported: that module is repo dev tooling invoked with
+    `python -m afenda.tools.build_docs`, not part of the installed addon,
+    and nothing guarantees the repo root is on `sys.path` at runtime.
     """
+    first, sep, rest = subpath.partition("/")
+    if sep and _VERSION_SEGMENT.match(first):
+        subpath = rest
+    subpath = subpath.removesuffix(".html")
     slug = subpath.replace("/", "_").replace(".", "_")
     return "afenda_api_docs.guide_%s" % slug
 
@@ -35,26 +51,18 @@ class AfendaDocsController(http.Controller):
     # `docs_link` rule already strips the version"; that was false, and is
     # corrected here.
     #
-    # Only one guide (`guide_applications_general_users`) is generated so
-    # far, and `_guide_xmlid` above cannot reach even that one, for two
-    # separate reasons. It folds a subpath into a template id by replacing
-    # `/` and `.` with `_` without stripping either a leading version
-    # segment or a trailing `.html`. The runtime widget's URL,
-    # `/docs/19.0/applications/general/users.html`, folds to
-    # `guide_19_0_applications_general_users_html`; the hand-written
-    # literal, `/docs/applications/general/users.html`
-    # (`addons/auth_totp/views/templates.xml:12`, `.html` still present),
-    # folds to `guide_applications_general_users_html`. Neither matches the
-    # shipped id `guide_applications_general_users`, which
-    # `afenda/tools/build_docs.py:slug_for` produces because it strips a
-    # trailing `.md` (never `.html`) from a committed Markdown filename and
-    # never sees a version segment at all, since it walks the source tree
-    # rather than a URL. So no in-product link, of either shape, reaches
-    # the one guide that exists today; every one of them redirects to
-    # `/docs` instead. Nothing 404s or 500s because of this - the redirect
-    # below covers it - so this is a routing gap to fix later, not an
-    # outage now. Making `_guide_xmlid` version- and suffix-tolerant is
-    # follow-up work with its own brief; it is not done here.
+    # Both link shapes reach a guide when one is generated for the page:
+    # `_guide_xmlid` drops the widget's version segment and the `.html`
+    # suffix before folding the path into a template id, so the runtime
+    # widget's `/docs/19.0/applications/general/users.html` and the
+    # hand-written `/docs/applications/general/users.html`
+    # (`addons/auth_totp/views/templates.xml:12`) both render
+    # `guide_applications_general_users`, the id
+    # `afenda/tools/build_docs.py:slug_for` gives
+    # `applications/general/users.md`. An earlier version of this comment
+    # recorded that neither shape reached the guide; tests/test_guides.py
+    # now pins both. Only one guide is generated so far, so most in-product
+    # links still name no guide and take the redirect below.
     #
     # This single route answers `/docs` (the landing page) and every
     # `/docs/<subpath>` (a generated guide, when one exists for that
