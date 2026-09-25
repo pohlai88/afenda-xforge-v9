@@ -1,5 +1,6 @@
-# AFENDA checks on every push to the product branch: the fast tools suite
-# (no database, no Docker) and `nginx -t` on both deploy configs.
+# AFENDA checks on every push to the product branch and every pull request
+# into it: the fast tools suite (no database, no Docker) on Python 3.11 and
+# 3.12, and `nginx -t` on both deploy configs.
 # The Odoo module suites need PostgreSQL and the built image; they run in
 # afenda-image.yml.
 name: afenda-ci
@@ -20,9 +21,16 @@ concurrency:
 
 jobs:
   tools:
-    name: tools suite
+    # 3.11 is what development and the image run today; 3.12 is the target
+    # (the platform spec's "Python 3.12 / ubuntu:noble"). Both stay until 3.12
+    # has held green; the 3.11 job keeps its original check name.
+    name: tools suite${{ matrix.python != '3.11' && format(' (Python {0})', matrix.python) || '' }}
     runs-on: ubuntu-24.04
     timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ["3.11", "3.12"]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -30,7 +38,7 @@ jobs:
           submodules: true
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
+          python-version: ${{ matrix.python }}
       - name: Install the tools' pinned requirements
         run: |
           python -m pip install -r afenda/tools/requirements.txt
