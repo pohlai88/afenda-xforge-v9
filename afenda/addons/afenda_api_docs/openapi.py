@@ -4,6 +4,11 @@ Every prose string passes through `alias_prose` at the point it is inserted;
 wire values (model, field, method and parameter names, selection keys) are
 inserted verbatim. See `aliasing.py` for why the split is structural.
 """
+import inspect
+
+from odoo.exceptions import AccessError
+from odoo.service.model import get_public_method
+
 from .aliasing import alias_prose
 
 # Odoo field type -> JSON Schema fragment. Relational fields are documented as
@@ -78,3 +83,136 @@ def model_schema(model):
     if required:
         schema["required"] = sorted(required)
     return schema
+
+
+# Annotation name -> JSON Schema type. Annotations arrive as *strings*: the ORM
+# (odoo/orm/models.py:22) and most addons use `from __future__ import
+# annotations`, so `search`'s `limit` reads as "int | None", never as the
+# `int` type. A map keyed on type objects would therefore match nothing.
+# Anything not listed here - a model class, `Self`, a TypeVar - leaves the
+# whole parameter untyped rather than guessed at.
+_ANNOTATION_TYPES = {
+    "str": "string",
+    "int": "integer",
+    "float": "number",
+    "bool": "boolean",
+    "None": "null",
+    "list": "array",
+    "tuple": "array",
+    "set": "array",
+    "frozenset": "array",
+    "Sequence": "array",
+    "Iterable": "array",
+    "Collection": "array",
+    # odoo/orm/types.py: a domain is a list of terms, a values dict an object.
+    "DomainType": "array",
+    "dict": "object",
+    "Mapping": "object",
+    "ValuesType": "object",
+}
+
+
+def _split_union(text):
+    """Split "a | b[c | d]" at top-level pipes only."""
+    parts, depth, start = [], 0, 0
+    for i, char in enumerate(text):
+        if char == "[":
+            depth += 1
+        elif char == "]":
+            depth -= 1
+        elif char == "|" and depth == 0:
+            parts.append(text[start:i])
+            start = i + 1
+    parts.append(text[start:])
+    return [part.strip() for part in parts]
+
+
+def _annotation_schema(annotation):
+    if annotation is inspect.Parameter.empty:
+        return {}
+    if not isinstance(annotation, str):
+        annotation = inspect.formatannotation(annotation)
+    types = []
+    for part in _split_union(annotation):
+        name = part.split("[", 1)[0].rsplit(".", 1)[-1]
+        json_type = _ANNOTATION_TYPES.get(name)
+        if json_type is None:
+            return {}
+        if json_type not in types:
+            types.append(json_type)
+    return {"type": types[0] if len(types) == 1 else types}
+
+
+def model_operations(model):
+    """Every method on `model` the /json/2 dispatcher would accept.
+
+    Delegates the rule to `get_public_method`, the same function the
+    dispatcher calls (addons/rpc/controllers/json2.py), so this cannot drift
+    into documenting a 404.
+    """
+    operations = {}
+    for name in sorted(dir(type(model))):
+        try:
+            operations[name] = get_public_method(model, name)
+        except (AttributeError, AccessError):
+            continue
+    return operations
+
+
+def path_item(model_name, method_name, func):
+    """The OpenAPI path item for POST /json/2/<model>/<method>.
+
+    Mirrors how the dispatcher binds the body: `ids` browses the recordset
+    passed as the method's first argument, `context` is applied with
+    `with_context`, and every remaining key is bound by name through
+    `inspect.signature(func).bind(records, **kwargs)`.
+    """
+    properties = {}
+    # @api.model and @api.model_create_multi set `_api_model`; the dispatcher
+    # answers 422 to a call that sends `ids` to one of those.
+    if not getattr(func, "_api_model", False):
+        properties["ids"] = {
+            "type": "array",
+            "items": {"type": "integer"},
+            "description": "Record ids the method is called on.",
+        }
+    properties["context"] = {
+        "type": "object",
+        "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    }
+    required = []
+    parameters = list(inspect.signature(func).parameters.values())
+    for param in parameters[1:]:  # [0] is the recordset the dispatcher binds
+        if param.kind in (param.VAR_POSITIONAL, param.VAR_KEYWORD, param.POSITIONAL_ONLY):
+            continue
+        # The dispatcher's own signature consumes these two keys, so a method
+        # parameter of the same name can never be reached through the body.
+        if param.name in ("ids", "context"):
+            continue
+        properties[param.name] = _annotation_schema(param.annotation)
+        if param.default is param.empty:
+            required.append(param.name)
+
+    body = {"type": "object", "properties": properties}
+    if required:
+        body["required"] = required
+    return {
+        "post": {
+            "operationId": f"{model_name}.{method_name}",
+            # A wire value, inserted verbatim: the summary is the method name
+            # the caller puts in the URL, so it is never passed to alias_prose.
+            "summary": method_name,
+            "description": alias_prose(inspect.getdoc(func) or ""),
+            "tags": [model_name],
+            "requestBody": {
+                "required": True,
+                "content": {"application/json": {"schema": body}},
+            },
+            "responses": {
+                "200": {"description": "Success."},
+                "404": {"description": "The model or method does not exist."},
+                "422": {"description": "The arguments do not match the method signature."},
+            },
+            "security": [{"bearerAuth": []}],
+        }
+    }
