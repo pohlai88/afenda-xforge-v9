@@ -2,7 +2,7 @@
 from datetime import datetime, timedelta
 from unittest.mock import patch
 
-from odoo.exceptions import AccessDenied, LockError, UserError
+from odoo.exceptions import AccessDenied, LockError, MissingError, UserError
 from odoo.tests import HttpCase, mute_logger, new_test_user, tagged
 from odoo.tools import config
 
@@ -60,6 +60,10 @@ class TestProblemDetails(HttpCase):
         # Subclass order wins over the generic UserError mapping.
         self.assertEqual(problem_code(AccessDenied("x"), 403), "access_denied")
         self.assertEqual(problem_code(LockError("x"), 409), "conflict")
+        # The exception class wins over a mismatched status too: these are
+        # what pins "checked in this order" rather than "status decides".
+        self.assertEqual(problem_code(AccessDenied("x"), 422), "access_denied")
+        self.assertEqual(problem_code(MissingError("x"), 422), "not_found")
         # Any other 4xx not in the table falls back to invalid_request.
         self.assertEqual(problem_code(Exception("x"), 418), "invalid_request")
         # 5xx is always internal_error, whatever the exception.
@@ -110,11 +114,12 @@ class TestProblemDetails(HttpCase):
 
     def test_missing_record_is_problem_404_without_internals(self):
         missing_id = self.env["res.partner"].search([], order="id desc", limit=1).id + 1000
-        r = self.url_open(
-            "/json/2/res.partner/write",
-            json={"ids": [missing_id], "vals": {"name": "x"}},
-            headers=self._bearer(self.admin_key),
-        )
+        with mute_logger("odoo.http"):
+            r = self.url_open(
+                "/json/2/res.partner/write",
+                json={"ids": [missing_id], "vals": {"name": "x"}},
+                headers=self._bearer(self.admin_key),
+            )
         self.assertEqual(r.status_code, 404)
         self.assertEqual(
             r.headers.get("Content-Type"), "application/problem+json; charset=utf-8",
@@ -125,8 +130,12 @@ class TestProblemDetails(HttpCase):
         self.assertEqual(body["detail"], "Record does not exist or has been deleted.")
         self._assert_contract_keys(body, fivexx=False)
         raw = r.text
-        self.assertNotIn(str(self.admin.id), raw)
+        # The raw MissingError message is "...(Record: res.partner(<id>,),
+        # User: <uid>)": assert the actual leak shapes, not a bare digit that
+        # could coincidentally appear in the id or a status code.
         self.assertNotIn("res.partner(", raw)
+        self.assertNotIn("User:", raw)
+        self.assertNotIn(f"User: {self.admin.id}", raw)
 
     def test_bad_arguments_are_problem_422(self):
         r = self.url_open(
@@ -187,15 +196,16 @@ class TestProblemDetails(HttpCase):
                     "/json/2/res.partner/search", json={"domain": []}, headers={},
                 ),
             ),
-            (
+        ]
+        with mute_logger("odoo.http"):
+            cases.append((
                 404,
                 self.url_open(
                     "/json/2/res.partner/write",
                     json={"ids": [missing_id], "vals": {"name": "x"}},
                     headers=self._bearer(self.admin_key),
                 ),
-            ),
-        ]
+            ))
         with (
             mute_logger("odoo.http"),
             self.assertLogs("odoo.addons.afenda_runtime", "ERROR"),
