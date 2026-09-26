@@ -11,8 +11,10 @@ from odoo.exceptions import AccessError
 from odoo.service.model import get_public_method
 
 from odoo.addons.afenda_brand.brand import BRAND
+from odoo.addons.afenda_runtime.problems import PROBLEM_CODES
 
 from .aliasing import alias_prose
+from .api_version import API_VERSION
 
 # Odoo field type -> JSON Schema fragment. Relational fields are documented as
 # the ids the /json/2 route actually accepts and returns, not as nested
@@ -194,18 +196,33 @@ def model_operations(model):
 # them: repeated on each of the ~1,700 operations of the `base` app they cost
 # ~600 bytes apiece, which is most of what pushed that document past budget.
 _COMPONENT_SCHEMAS = {
-    # The body Json2Dispatcher.handle_error sends for a 404 or a 422: the dict
-    # `serialize_exception` builds (odoo/http.py:469).
+    # An RFC 9457 (https://www.rfc-editor.org/rfc/rfc9457) Problem Details
+    # object: what `afenda_runtime`'s `ir.http._handle_error` override sends
+    # for every JSON-2 4xx or 5xx (never upstream's exception name, raw
+    # arguments, context or traceback - see that module's docstring).
     "Error": {
         "type": "object",
         "title": "Error",
         "properties": {
-            "name": {"type": "string", "description": "Qualified exception class name."},
-            "message": {"type": "string"},
-            "arguments": {"type": "array"},
-            "context": {"type": "object"},
-            "debug": {"type": "string", "description": "Server traceback."},
+            "type": {
+                "type": "string",
+                "format": "uri-reference",
+                "description": "A reference to the error code's entry on /docs/api/errors.",
+            },
+            "title": {"type": "string", "description": "The HTTP reason phrase."},
+            "status": {"type": "integer"},
+            "code": {
+                "type": "string",
+                "enum": [code for code, _status, _description in PROBLEM_CODES],
+            },
+            "detail": {"type": "string"},
+            "message": {"type": "string", "description": "Repeats detail."},
+            "instance": {
+                "type": "string",
+                "description": "An opaque id for this occurrence; present on 5xx only.",
+            },
         },
+        "required": ["type", "title", "status", "code", "detail"],
     },
     "Ids": {
         "type": "array",
@@ -217,32 +234,23 @@ _COMPONENT_SCHEMAS = {
         "description": "Context for the call, such as lang, tz and allowed_company_ids.",
     },
 }
+# One line per PROBLEM_CODES entry, in its documentation order: "401
+# unauthenticated", "403 access_denied", and so on.
+_PROBLEM_STATUSES = "; ".join(
+    f"{status} {code}" for code, status, _description in PROBLEM_CODES
+)
 _COMPONENT_RESPONSES = {
-    # Json2Dispatcher.handle_error (odoo/http.py) serialises each of these
-    # into the Error schema: werkzeug HTTPExceptions and UserError alike.
-    "Unauthorized": {
-        # _auth_method_bearer raises werkzeug Unauthorized for a missing or
-        # invalid API key (odoo/addons/base/models/ir_http.py).
-        "description": "No API key, or an invalid one, in the Authorization header.",
-        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
-    },
-    "Forbidden": {
-        # AccessError, http_status 403 (odoo/exceptions.py): a private method
-        # (get_public_method, odoo/service/model.py), or no access right or
-        # record rule for the records the call touches.
-        "description": "The user may not call this method or touch these records.",
-        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
-    },
-    "NotFound": {
-        "description": "The model or method does not exist.",
-        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
-    },
-    "Unprocessable": {
+    # Shared by every operation's 4XX and 5XX: `afenda_runtime`'s
+    # `ir.http._handle_error` override answers every JSON-2 error this shape,
+    # never upstream's per-exception body.
+    "Problem": {
         "description": (
-            "The arguments do not match the method signature, "
-            "or ids were sent to a method that takes none."
+            "An RFC 9457 Problem Details object. code is one of: "
+            + _PROBLEM_STATUSES + ". See /docs/api/errors for what each means."
         ),
-        "content": {"application/json": {"schema": {"$ref": "#/components/schemas/Error"}}},
+        "content": {
+            "application/problem+json": {"schema": {"$ref": "#/components/schemas/Error"}},
+        },
     },
 }
 
@@ -307,10 +315,8 @@ def path_item(model_name, method_name, func):
         },
         "responses": {
             "200": {"description": "Success."},
-            "401": {"$ref": "#/components/responses/Unauthorized"},
-            "403": {"$ref": "#/components/responses/Forbidden"},
-            "404": {"$ref": "#/components/responses/NotFound"},
-            "422": {"$ref": "#/components/responses/Unprocessable"},
+            "4XX": {"$ref": "#/components/responses/Problem"},
+            "5XX": {"$ref": "#/components/responses/Problem"},
         },
     }
     description = alias_prose(_summary_paragraph(func))
@@ -420,7 +426,7 @@ def build_document(env, app=None):
         "openapi": "3.1.0",
         "info": {
             "title": alias_prose(f"{BRAND['product']} JSON API"),
-            "version": "2",
+            "version": API_VERSION,
             "description": alias_prose(
                 "Every model and method reachable over POST /json/2/<model>/<method>. "
                 "Generated from the running system for the signed-in user, so it "

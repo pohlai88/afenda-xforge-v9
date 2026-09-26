@@ -3,6 +3,8 @@ from werkzeug.urls import url_encode
 from odoo import http
 from odoo.http import request
 
+from odoo.addons.afenda_runtime.problems import PROBLEM_CODES
+
 from ..aliasing import alias_prose
 
 # The Redoc bundle unconditionally renders an "API docs by Redocly" link with
@@ -51,6 +53,24 @@ class AfendaApiController(http.Controller):
         })
         response.headers["Content-Security-Policy"] = _API_PAGE_CSP
         return response
+
+    # auth='public': the "type" field of every JSON-2 error body, signed in
+    # or not, points here (afenda_runtime/problems.py, models/ir_http.py), so
+    # this page must be reachable without a session too.
+    @http.route(
+        "/docs/api/errors",
+        type="http", auth="public", methods=["GET"], website=False, sitemap=False,
+    )
+    def docs_api_errors(self, **kwargs):
+        # no_footer: same reasoning as landing.py:103-107 - this route is
+        # website=False, so request.is_frontend never turns True and
+        # portal's footer-injected language selector 500s on the missing
+        # frontend_languages value. The template is generated and never
+        # sets this itself, so it is supplied here instead.
+        return request.render("afenda_api_docs.api_errors", {
+            "codes": PROBLEM_CODES,
+            "no_footer": True,
+        })
 
     def _app_choices(self):
         """(name, label) of each installed module that defines a concrete model.

@@ -6,6 +6,7 @@ from odoo.exceptions import AccessError
 from odoo.service.model import get_public_method
 from odoo.tests import TransactionCase, tagged
 
+from odoo.addons.afenda_api_docs.api_version import API_VERSION
 from odoo.addons.afenda_api_docs.openapi import (
     build_document,
     model_operations,
@@ -13,6 +14,7 @@ from odoo.addons.afenda_api_docs.openapi import (
     models_for_app,
     path_item,
 )
+from odoo.addons.afenda_runtime.problems import PROBLEM_CODES
 
 CORE = ("res.partner", "res.users", "product.template",
         "sale.order", "account.move", "stock.picking")
@@ -153,8 +155,7 @@ class TestOperations(TransactionCase):
         # the components (TestDocument.test_every_ref_resolves).
         self.assertEqual(body["properties"]["ids"], {"$ref": "#/components/schemas/Ids"})
         self.assertEqual(body["properties"]["context"], {"$ref": "#/components/schemas/Context"})
-        for status in ("401", "403", "404", "422"):
-            self.assertIn(status, item["post"]["responses"])
+        self.assertEqual(set(item["post"]["responses"]), {"200", "4XX", "5XX"})
 
     def test_method_docstring_is_aliased(self):
         model = self.env["res.partner"]
@@ -254,24 +255,32 @@ class TestDocument(TransactionCase):
         # Vacuous otherwise: a document with no $ref at all passes the loop.
         self.assertTrue(refs)
 
-    def test_error_responses_use_the_dispatcher_error_shape(self):
-        # odoo/http.py serialize_exception: what Json2Dispatcher.handle_error
-        # sends back for a 404 or a 422.
+    def test_info_version_is_the_api_version(self):
+        # info.version documents the AFENDA contract (api_version.py), not
+        # the Odoo release the server happens to run.
+        doc = build_document(self.env)
+        self.assertEqual(doc["info"]["version"], API_VERSION)
+
+    def test_error_schema_is_problem_details(self):
         doc = build_document(self.env)
         error = doc["components"]["schemas"]["Error"]
+        self.assertEqual(error["required"], ["type", "title", "status", "code", "detail"])
         self.assertEqual(
-            set(error["properties"]), {"name", "message", "arguments", "context", "debug"}
+            error["properties"]["code"]["enum"],
+            [code for code, _status, _description in PROBLEM_CODES],
         )
-        item = doc["paths"]["/json/2/res.partner/read"]["post"]
-        # 401: no or a bad API key (odoo/addons/base/models/ir_http.py
-        # _auth_method_bearer raises werkzeug Unauthorized); 403: AccessError
-        # (odoo/exceptions.py, http_status 403), e.g. a private method
-        # (odoo/service/model.py get_public_method) or no ACL for the call.
-        for status in ("401", "403", "404", "422"):
-            name = item["responses"][status]["$ref"].rsplit("/", 1)[1]
-            response = doc["components"]["responses"][name]
-            schema = response["content"]["application/json"]["schema"]
-            self.assertEqual(schema, {"$ref": "#/components/schemas/Error"})
+
+    def test_every_operation_answers_4xx_and_5xx_with_problem(self):
+        doc = build_document(self.env)
+        self.assertTrue(doc["paths"])
+        for item in doc["paths"].values():
+            responses = item["post"]["responses"]
+            self.assertEqual(set(responses), {"200", "4XX", "5XX"})
+            self.assertEqual(responses["4XX"], {"$ref": "#/components/responses/Problem"})
+            self.assertEqual(responses["5XX"], {"$ref": "#/components/responses/Problem"})
+        problem = doc["components"]["responses"]["Problem"]
+        schema = problem["content"]["application/problem+json"]["schema"]
+        self.assertEqual(schema, {"$ref": "#/components/schemas/Error"})
 
     def test_a_body_shared_by_many_models_is_written_once(self):
         # A method no model overrides has one signature, hence one body, on
