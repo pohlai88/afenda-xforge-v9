@@ -58,6 +58,34 @@ jobs:
             exit 1
           fi
 
+  api_contract:
+    # No database, no Docker: api_diff reads the committed openapi/ documents
+    # and the base ref's git objects only, so this runs on every pull request
+    # regardless of what afenda-image.yml's path filters would build.
+    name: api contract
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Fetch main as the base contract
+        # A depth-1 checkout has no history to diff against, and api_diff
+        # needs a local ref to read the base documents from.
+        run: git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: python -m afenda.tools.api_diff check --base-ref origin/main
+        # api_diff is standard-library only, so no install step precedes
+        # this. It always prints the three change lists (breaking, additive,
+        # descriptive); keep them in the PR's Summary tab even when the
+        # check fails, so a breaking change is visible without opening logs.
+        run: |
+          set -o pipefail
+          python -m afenda.tools.api_diff check --base-ref origin/main 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+
   nginx:
     name: nginx -t
     runs-on: ubuntu-24.04

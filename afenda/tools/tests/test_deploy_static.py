@@ -184,6 +184,28 @@ class DeployStaticTests(unittest.TestCase):
         used = re.findall(r"^\s+image:\s*(postgres:\S+)\s*$", workflow, re.MULTILINE)
         self.assertEqual(used, [pinned])
 
+    def test_ci_regenerates_the_api_asset_and_gates_changes(self):
+        image = (REPO / ".github" / "workflows" / "afenda-image.yml").read_text(encoding="utf-8")
+        step = re.search(r"^ {6}- name: API asset is current\n((?: {8}.*\n|\n)+)", image, re.MULTILINE)
+        self.assertIsNotNone(step, 'no "API asset is current" step in afenda-image.yml')
+        body = step.group(1)
+        self.assertIn("timeout-minutes:", body, "the asset step has no timeout-minutes")
+        # `-i` is mandatory: without it stdin is empty and the export is a
+        # silent no-op (see the Task 6 brief).
+        self.assertRegex(body, r"docker run -i --rm --network host[\s\S]*?< afenda/tools/export_openapi_shell\.py")
+        self.assertIn("afenda-openapi: wrote", body)
+        # The printed N is checked against the committed asset files, and
+        # must be greater than zero.
+        self.assertIn("ls afenda/addons/afenda_api_docs/openapi/*.json | wc -l", body)
+        self.assertIn("-gt 0", body)
+        self.assertIn("git status --porcelain -- afenda/addons/afenda_api_docs/openapi", body)
+
+        ci = (REPO / ".github" / "workflows" / "afenda-ci.yml").read_text(encoding="utf-8")
+        # A shallow checkout has no history to diff against; api_diff needs a
+        # local base ref, so main is fetched at depth 1 before the check.
+        self.assertIn("git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main", ci)
+        self.assertIn("python -m afenda.tools.api_diff check --base-ref origin/main", ci)
+
     def test_app_connects_as_the_least_privilege_role(self):
         compose = (DEPLOY / "compose.yaml").read_text(encoding="utf-8")
         env = re.search(r"^x-xforge-env: &xforge-env\n((?:  .*\n)+)", compose, re.MULTILINE).group(1)
