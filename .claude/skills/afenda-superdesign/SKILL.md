@@ -60,7 +60,9 @@ design advice will reach for the left column:
 Product character: quiet, dense, precise enterprise software. Borders, spacing
 and type over shadow; restrained radius; semantic colour; tabular numerals;
 status never colour-only. No card soup, glass, marketing gradients, icon
-rainbows or decorative motion.
+rainbows or decorative motion. One owner-named exception: the auth-page hero's
+four-season loop (`docs/superpowers/specs/2026-09-26-four-season-bear.md`), confined
+to `.o_afenda_auth_stage` and the generated `auth_bear_seasons.css`; it never spreads.
 
 ## Route the request first
 
