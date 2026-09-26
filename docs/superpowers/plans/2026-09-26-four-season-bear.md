@@ -33,23 +33,23 @@ branch, restarted from `main` c5545d38f. Route: WARM (refines the approved cryst
   `afb-season-twinkle`, `afb-season-gleam`. Hand-written keyframes keep `afb-settle`,
   `afb-startle`, `afb-charge`.
 
-## Season table (hue-step of the `--bear-*` scales)
+## Season table (hue-step of the `--bear-*` scales; revised by the owner's guidance, 2026-09-26)
 
 | role | spring | summer | autumn | winter |
 |---|---|---|---|---|
-| base | moss-600 | aurora-600 | ember-600 | aurora-600 |
-| f1 | mint-600 | mint-600 | rust-600 | dusk-600 |
-| s1 | forest-600 | forest-600 | rust-600 | dusk-600 |
-| s2 | moss-600 | aurora-600 | dusk-600 | aurora-600 |
-| headlight | moss-500 | mint-500 | ember-500 | aurora-500 |
-| f2 | moss-300 | aurora-300 | ember-300 | aurora-200 |
-| f3 | mint-200 | mint-200 | ember-200 | dusk-100 |
+| base | rose-600 | forest-600 | ember-600 | aurora-600 |
+| f1 | moss-600 | mint-600 | rust-600 | dusk-600 |
+| s1 | rose-600 | forest-600 | rust-600 | dusk-600 |
+| s2 | moss-600 | moss-600 | dusk-600 | aurora-600 |
+| headlight | rose-500 | mint-500 | ember-500 | aurora-600 |
+| f2 | rose-300 | moss-300 | ember-300 | aurora-200 |
+| f3 | moss-200 | moss-200 | ember-200 | dusk-100 |
 | sheen | rose-100 | ember-100 | rust-200 | aurora-50 |
-| rim-a / rim-b | rose-200 / rose-50 | ember-200 / ember-50 | ember-100 / ember-50 | dusk-100 / aurora-50 |
+| rim-a / rim-b | rose-200 / ember-50 | ember-200 / ember-50 | ember-100 / ember-50 | dusk-100 / aurora-50 |
 | haze | rose-200 | ember-100 | rust-200 | aurora-100 |
-| particle tones 1/2/3 | rose-200, rose-100 | ember-50, ember-100 | rust-400, ember-400, rust-300 | aurora-50, dusk-50 |
+| particle tones 1/2/3 | rose-200, rose-100, rose-50 | ember-50, ember-100 | rust-400, ember-400, rust-300 | aurora-50, dusk-50 |
 
-Face-side roles (base, f1, s1, s2, headlight) ≥ step 500/600; lit side ≤ 400. If a measured
+Winter headlight moved aurora-500 → aurora-600 in T1 (measured 2.99:1 against the page cream at 500; 4.35 at 600). Particle counts per the owner's guidance: spring 9 petals, summer 6 glints, autumn 8 leaves, winter 16 flakes (14 dots, 2 stars); the gleam peaks at ≤ 0.35 opacity and never crosses the face. Face-side roles (base, f1, s1, s2, headlight) ≥ step 500/600; lit side ≤ 400. If a measured
 contrast misses 3:1 (tests below), move the step one notch within that side of the window and
 record it in the spec.
 
