@@ -184,7 +184,7 @@ diagnose-first procedure for a red check (log line → cause as `path:line` → 
 one fix GREEN → gates once → one push; the same fix failing twice stops for a report), and
 the merge (rebase and merge) and post-merge steps. `.github/PULL_REQUEST_TEMPLATE.md` asks for
 the evidence, and the `pr evidence` check (`afenda-pr.yml`, `afenda/tools/pr_evidence.py`)
-fails a PR whose description cites no printed test count and no commit. Spec:
+fails a PR whose description lacks a printed test count or lacks a commit id. Spec:
 `docs/superpowers/specs/2026-09-26-pr-stewardship.md`.
 
 ## Branches and commits
@@ -211,4 +211,9 @@ fails a PR whose description cites no printed test count and no commit. Spec:
   `api_diff`, `corpus`, `scan_identity`, `pr_evidence`) the third time it runs in one session
   on an unchanged tree. Cite the earlier count, change code, or stop and report; the hook fails
   open on any internal error.
+- `git commit --only <path>` refuses a path git does not track yet ("pathspec … did not match any
+  file(s) known to git"): `git add` it (`git add -f` under `.claude/`) in the same shell call first.
+- The rerun guard's tree fingerprint covers `afenda .github .claude docs CLAUDE.md deploy` only (an
+  unscoped diff costs about two minutes per call), so a `[REBRAND]` apply or an upstream merge is
+  invisible to it: the first run after one is new evidence; say so where you cite it.
 - Ask "does this code call X" with an AST walk, not grep: grep matches the name inside docstrings, including ones stating it is deliberately *not* called.

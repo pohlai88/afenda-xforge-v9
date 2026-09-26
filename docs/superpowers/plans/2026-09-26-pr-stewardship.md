@@ -9,7 +9,8 @@ Spec: `docs/superpowers/specs/2026-09-26-pr-stewardship.md`. Branch: the PR #5 h
   `${{ }}` expression appears inside any `run:` script of the new workflow.
 - Count patterns accepted as printed evidence: `Ran <N> test` / `Ran <N> tests` (unittest) and
   `of <N> tests` (Odoo's `odoo.tests.result` line). Commit id: 7–40 lowercase hex characters as
-  a whole word. Both must appear after a line whose text is `Verification` as a Markdown heading
+  a whole word, containing at least one letter a–f unless it is a full 40-character id (sweep
+  finding R1-2: a bare issue number must not pass as a commit). Both must appear after a line whose text is `Verification` as a Markdown heading
   (`#`–`####`) or bold paragraph (`**Verification**`), case-insensitive, before the next heading
   of the same or higher level (bold-paragraph form: to the end of the body).
 - Commit subjects use Odoo tags; stage explicit paths; `.claude/` needs `git add -f`.

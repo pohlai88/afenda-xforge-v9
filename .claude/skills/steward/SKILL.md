@@ -8,7 +8,9 @@ description: "Use when a pull request into main in afenda-xforge-v9 is opened, r
 **A pull request is driven, not waited on, and every move on it is backed by evidence.**
 
 `CLAUDE.md` → "Execution discipline" binds every session; this skill applies it to the pull
-request. Where the two differ, `CLAUDE.md` wins. Spec:
+request. Where the two differ, `CLAUDE.md` wins. Its stop-before-push rule stands: every push
+below happens only under the owner's standing instruction to drive this PR (given for PR #5 on
+2026-09-26); without one, stop and ask before the first push. Spec:
 `docs/superpowers/specs/2026-09-26-pr-stewardship.md`.
 
 ## Done — the PR merges only when all of these hold on its current head commit

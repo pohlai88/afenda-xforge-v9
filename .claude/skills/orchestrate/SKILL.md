@@ -35,7 +35,8 @@ Record the table in the plan or the ledger. "They look independent" is not a map
 ## 2. Slowest signal first
 
 Some things only the real environment proves: a CI workflow, the Docker image, a fresh-database
-install, the deploy path. Start them **on the first push that contains them** — with
+install, the deploy path. Start them **on the first push that contains them** (a push itself needs the owner's standing
+instruction for this branch, per `CLAUDE.md`'s stop list) — with
 `workflow_dispatch` on the branch if no event would — and let them run while reviews and other
 lanes run. Never leave the slowest signal for last.
 
