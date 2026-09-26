@@ -178,3 +178,62 @@ those files changes.
 - Flaky-test policy, no blind re-runs: tenki.cloud/blog/flaky-test-quarantine-github-actions
 - Pre-push hooks are skippable with `--no-verify`, so server-side required checks stay the net:
   gitscripts.com/git-pre-push-hook
+
+## Corrections after review (2026-09-26, owner: "proceed to implement")
+
+The review in `reports/Gates CI and agent rules review.md` (local, not committed) checked this
+spec against Claude Code's hooks and permissions docs and against git and Actions behaviour.
+These corrections bind the plan; where they differ from the decisions above, they win.
+
+1. **The push gate fails closed by its own code, not the harness.** A hook timeout (default 600 s)
+   does not block, and any exit code other than 2 does not block. `push_gate.py` therefore:
+   - runs every subprocess with a short timeout (5 s, as `rerun_guard.py` does);
+   - wraps its whole body so any exception exits 2 with the reason.
+2. **"No bypass" means no bypass inside the hook.** `claude --settings '{"disableAllHooks": true}'`
+   can switch every hook off. For agents as for humans, the real backstop is required status checks
+   (decision 6).
+3. **The gate checks the tip tree of the ref being pushed.** The refspec is resolved with
+   `git rev-parse`, including bare `git push`, `HEAD`, `HEAD:refs/heads/x`, `<sha>:main`, `+ref`,
+   `--force-with-lease[=…]` and `--delete`. A delete or tag-only push needs no stamp. Anything that
+   cannot be resolved is blocked.
+4. **Residual risk, named.** A wrapper script, alias, Makefile target, or a raw `curl`/`gh api`
+   write to GitHub is invisible to a PreToolUse hook on `git push`. Branch protection covers it.
+5. **One shared git-identity helper.** `afenda/tools/_git_identity.py` provides the scoped tree
+   fingerprint and the tree sha, used by `rerun_guard.py`, `check.py` and `push_gate.py`. It holds
+   the one copy of the scoped path list.
+6. **The image cache is measured, not assumed.**
+   - Settings: `cache-to: type=gha,mode=max,scope=afenda-image`, `load: true`, `--progress=plain`.
+   - The acceptance compares the `docker build` step time across two runs and reports the layers
+     marked `CACHED`.
+   - If the gha cache does not warm without a registry push (moby/buildkit#2887), the PR says so
+     with the numbers. It does not add a registry.
+7. **The `edited` filter is a job-level `if:`.** It is
+   `github.event.action != 'edited' || github.event.changes.body != null`.
+8. **`pr_evidence` reads the PR's commits from the GitHub API** (`GET /repos/{repo}/pulls/{n}/commits`
+   with the job's `GITHUB_TOKEN` and `pull-requests: read`), not from `git rev-list`. The shallow
+   checkout lacks the graph.
+9. **The metric** is 23,291 files in `odoo/` and `addons/` after a rebrand apply (119 hand-authored,
+   23,172 generated), not "about 19,000".
+10. **Floors stay in the workflow.** CI keeps its own gate commands. A static test asserts that each
+    CI command equals the command `check.py` runs for the same gate, so the two cannot drift.
+    `check.py` does not own the floors.
+11. **Folded in from the review:**
+    - **Repairs:**
+      - `corpus.py`'s default ref and the brand-image test that silently skips;
+      - the superdesign skill's dangling references;
+      - `launch.json` references;
+      - `api_contract`'s push fetch fails open;
+      - the steward skill says the required checks are not live yet;
+      - `scan()` gets unit tests.
+    - **Optimizations:**
+      - sparse checkout for the `tools` and `api_contract` jobs, with no submodules in `tools`;
+      - `lru_cache` on `icon_png`;
+      - `permissions.deny` for edits to root `odoo/` and `addons/`;
+      - `permissionMode: plan` for the librarian and the reviewer;
+      - `model: sonnet` for the test runner;
+      - the duplicated Environment section leaves `odoo-agent-rules.md`.
+    - **Not adopted:**
+      - the `code-review`, `commit-commands`, `hookify` and `pr-review-toolkit` plugins;
+      - `claude-code-action` in `@claude`-mention mode;
+      - `security-guidance`, pending a cost check;
+      - moving CLAUDE.md sections into `.claude/rules/` (its own later plan).
