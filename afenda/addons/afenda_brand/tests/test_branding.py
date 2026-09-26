@@ -191,8 +191,10 @@ class TestBranding(HttpCase):
         stack = doc.find_class("o_afenda_auth")
         self.assertEqual(len(stack), 1, "the auth page is not rendered exactly once")
         blocks = [child.get("class") for child in stack[0] if isinstance(child.tag, str)]
+        # The season layer (tenant-signature spec) leads with its two fixed, aria-hidden
+        # layers; they take no space in the flow, so the art is still the first block.
         self.assertEqual(
-            blocks, ["o_afenda_auth_art", "o_afenda_auth_form"],
+            blocks, ["o_afenda_seasons", "o_afenda_weather", "o_afenda_auth_art", "o_afenda_auth_form"],
             "the art is not the first block of the page",
         )
 
@@ -789,8 +791,9 @@ class TestBranding(HttpCase):
             frontend[frontend.index("afenda_brand/static/src/scss/login.scss"):],
             ["afenda_brand/static/src/scss/login.scss",
              "afenda_brand/static/src/css/auth_bear_scales.css",
-             "afenda_brand/static/src/css/auth_bear.css"],
-            "the bear stylesheets are not loaded after login.scss, scales first",
+             "afenda_brand/static/src/css/auth_bear.css",
+             "afenda_brand/static/src/css/auth_seasons.css"],
+            "the bear stylesheets are not loaded after login.scss, scales first, the season layer last",
         )
 
     def test_the_lockup_is_the_only_mark_and_the_card_carries_none(self):
