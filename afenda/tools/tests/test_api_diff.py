@@ -1,9 +1,14 @@
 """Tests for the OpenAPI change checker and version gate.
 
-All fixtures are built in code: neither the committed OpenAPI documents nor
+Most fixtures are built in code: neither the committed OpenAPI documents nor
 `api_version.py` exist yet (other tasks in the same plan produce them), so
-nothing here reads the real tree.
+most of this file never reads the real tree. `BaseRefTests` is the one
+exception, a git-backed test in this checkout's own history, the way
+test_brand_images.py's `test_every_listed_path_exists_and_is_actually_recoloured`
+reads real git blobs rather than fixtures.
 """
+import contextlib
+import io
 import json
 import unittest
 
@@ -11,11 +16,13 @@ from afenda.tools.api_diff import (
     Changes,
     ContractSummary,
     base_contract,
+    base_ref_exists,
     changelog_section,
     check,
     diff,
     format_changes_report,
     load_set,
+    main,
     render_changelog,
     required_bump,
 )
@@ -256,6 +263,29 @@ class BaseContractTests(unittest.TestCase):
         self.assertIn("initial contract", section)
 
 
+class BaseRefTests(unittest.TestCase):
+    """`base_ref_exists` (and the `check`/`changelog` CLI paths that gate on
+    it) must fail loudly on a `--base-ref` that does not exist, rather than
+    let `list_base`'s empty result read as the legitimate "no base contract"
+    (`BaseContractTests` above) -- a nonexistent ref is a broken invocation
+    (a typo, or a commit this checkout never fetched), not an empty base.
+    """
+
+    def test_check_exits_2_on_a_nonexistent_base_ref(self):
+        # This exact ref will never exist in real git history; HEAD (used
+        # implicitly by every other test here reading the real repo) always
+        # does, so this is not "git itself is unavailable".
+        bogus = "definitely-not-a-real-ref-9c8f1a2"
+        self.assertFalse(base_ref_exists(bogus))
+
+        stderr = io.StringIO()
+        with contextlib.redirect_stderr(stderr):
+            status = main(["check", "--base-ref", bogus])
+        self.assertEqual(status, 2)
+        self.assertIn(bogus, stderr.getvalue())
+        self.assertIn("does not exist", stderr.getvalue())
+
+
 class RequiredBumpTests(unittest.TestCase):
     def test_required_bump_major_for_breaking(self):
         changes = Changes(breaking=["removed x"], additive=[], descriptive=[])
@@ -299,6 +329,17 @@ class CheckTests(unittest.TestCase):
         changelog = "# API changelog\n\n## 1.0.0 — initial contract\n"
         errors = check(None, "1.0.0", changes, changelog)
         self.assertEqual(errors, [])
+
+    def test_check_reports_a_downgrade_as_an_error_not_a_patch(self):
+        # 2.0.0 -> 1.9.0 must never read as a "patch" bump (a minor digit
+        # dropping while the major digit also drops is still a downgrade).
+        changes = Changes(breaking=[], additive=[], descriptive=[])
+        changelog = "# API changelog\n\n## 1.9.0 — descriptive change\n"
+        errors = check("2.0.0", "1.9.0", changes, changelog)
+        self.assertTrue(
+            any("lower than base version" in e and "2.0.0" in e and "1.9.0" in e for e in errors),
+            errors,
+        )
 
 
 class ChangelogTests(unittest.TestCase):

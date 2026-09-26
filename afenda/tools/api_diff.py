@@ -56,11 +56,35 @@ class ContractSummary:
 # Reading documents: base (a git ref) and head (the working tree).
 # --------------------------------------------------------------------------
 
+def base_ref_exists(ref: str) -> bool:
+    """Whether `ref` resolves to a commit at all.
+
+    `git ls-tree` on a nonexistent ref also exits non-zero, the same as it
+    does when the ref exists but ASSET_DIR is simply absent there — so
+    `list_base` cannot tell "no base contract" (a real ref, predating the
+    asset) apart from "no such ref" (a broken invocation: a typo, a
+    `--base-ref` naming a commit the checkout never fetched) by its return
+    value alone. Callers must check this first and fail loudly on a missing
+    ref, rather than let it read as an innocuous empty base contract.
+    """
+    result = subprocess.run(
+        ["git", "rev-parse", "--verify", "--quiet", f"{ref}^{{commit}}"],
+        capture_output=True,
+        text=True,
+    )
+    return result.returncode == 0
+
+
 def list_base(ref: str) -> list:
     """The committed `*.json` documents under ASSET_DIR at `ref`.
 
-    An empty list means no base contract: either `ref` does not exist, or
-    ASSET_DIR is absent at that ref (both make `git ls-tree` report nothing).
+    An empty list means no base contract: ASSET_DIR is absent at `ref` — a
+    real, existing ref that predates the asset (or never carried it). `ref`
+    itself must already be known to exist (`base_ref_exists`); this function
+    does not distinguish a missing ref from a missing ASSET_DIR (`git
+    ls-tree` reports nothing for either), so a caller that skips that check
+    would silently read a bad `--base-ref` as "no base contract" instead of
+    an error.
     """
     result = subprocess.run(
         ["git", "ls-tree", "--name-only", ref, f"{ASSET_DIR}/"],
@@ -271,10 +295,20 @@ def required_bump(changes: Changes) -> "Literal['major', 'minor', 'none']":
 # --------------------------------------------------------------------------
 
 def _version_bump(base_version: str, head_version: str) -> str:
+    """The bump class from `base_version` to `head_version`.
+
+    `"downgrade"` when `head_version` is lower than `base_version` (tuple
+    comparison over the three integer parts: a lower major always sorts
+    below regardless of minor/patch, matching semantic-version ordering) -
+    `check` reports that as an error in its own right, never as a silent
+    `"patch"`.
+    """
     base_parts = tuple(int(part) for part in base_version.split("."))
     head_parts = tuple(int(part) for part in head_version.split("."))
     if head_parts == base_parts:
         return "none"
+    if head_parts < base_parts:
+        return "downgrade"
     if head_parts[0] > base_parts[0]:
         return "major"
     if head_parts[0] == base_parts[0] and head_parts[1:2] > base_parts[1:2]:
@@ -283,7 +317,8 @@ def _version_bump(base_version: str, head_version: str) -> str:
 
 
 def check(base_version, head_version: str, changes: Changes, changelog: str) -> list:
-    """The gate errors: an insufficient version bump, or a missing changelog section.
+    """The gate errors: a downgrade, an insufficient version bump, or a
+    missing changelog section.
 
     When `base_version` is None (no base contract), the bump check does not
     apply: the check passes as long as `changelog` has a section for
@@ -293,11 +328,17 @@ def check(base_version, head_version: str, changes: Changes, changelog: str) -> 
     required = required_bump(changes)
 
     if base_version is not None:
-        bump_rank = _BUMP_RANK[_version_bump(base_version, head_version)]
-        if required == "major" and bump_rank < _BUMP_RANK["major"]:
-            errors.append("breaking changes require a MAJOR version bump")
-        elif required == "minor" and bump_rank < _BUMP_RANK["minor"]:
-            errors.append("additive changes require at least a MINOR version bump")
+        bump = _version_bump(base_version, head_version)
+        if bump == "downgrade":
+            errors.append(
+                f"head version {head_version} is lower than base version {base_version}"
+            )
+        else:
+            bump_rank = _BUMP_RANK[bump]
+            if required == "major" and bump_rank < _BUMP_RANK["major"]:
+                errors.append("breaking changes require a MAJOR version bump")
+            elif required == "minor" and bump_rank < _BUMP_RANK["minor"]:
+                errors.append("additive changes require at least a MINOR version bump")
 
     if base_version != head_version:
         heading = re.compile(rf"^## {re.escape(head_version)}\b", re.MULTILINE)
@@ -433,6 +474,9 @@ def _changelog_path() -> Path:
 
 
 def _cmd_check(args: argparse.Namespace) -> int:
+    if not base_ref_exists(args.base_ref):
+        print(f"error: base ref {args.base_ref!r} does not exist", file=sys.stderr)
+        return 2
     base_names, base_version = _base_contract_at(args.base_ref)
     base = load_set(lambda name: get_text_at_ref(args.base_ref, name), base_names)
     head = _load_head()
@@ -457,6 +501,9 @@ def _cmd_check(args: argparse.Namespace) -> int:
 
 
 def _cmd_changelog(args: argparse.Namespace) -> int:
+    if not base_ref_exists(args.base_ref):
+        print(f"error: base ref {args.base_ref!r} does not exist", file=sys.stderr)
+        return 2
     base_names, base_version = _base_contract_at(args.base_ref)
     base = load_set(lambda name: get_text_at_ref(args.base_ref, name), base_names)
     head_names = list_head()
