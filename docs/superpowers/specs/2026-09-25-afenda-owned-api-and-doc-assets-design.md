@@ -341,7 +341,15 @@ the body disagree, the entry wins.
     - `pytz` is unpinned (`requirements.txt:80`);
     - language selections come from installed languages.
   - **disposition:** AMENDED
-  - **replacement:** committed documents omit `enum` for selections computed at runtime (a
-    callable or a method name) and mark them `x-afenda-dynamic-enum: true`. The live
-    per-request document keeps them.
+  - **replacement:** committed documents omit `enum` for environment-derived selections and
+    mark them `x-afenda-dynamic-enum: true`. The live per-request document keeps them. A
+    selection counts as environment-derived when either:
+    - its `selection` is a callable or a method name; or
+    - the field, resolved through its related chain, is listed in
+      `ENVIRONMENT_DERIVED_SELECTIONS`.
+  - **Amended 2026-09-26, found implementing Task 3:** `res.partner.tz` is a *static* list
+    that is built from `pytz` at import (`fields.Selection(_tzs…)`,
+    `odoo/addons/base/models/res_partner.py:223`), so the callable test alone missed it. A
+    grep finds `_tzs` is the only such import-time list, so the constant starts as
+    `{("res.partner", "tz")}`.
   - **introduced_in:** 79b38fcce
