@@ -29,9 +29,23 @@ LAYER_CLASSES = (
     "afb-shadow", "afb-s1", "afb-s2", "afb-headlight", "afb-sheen", "afb-rim",
     "afb-face", "afb-bush", "afb-branch",
 )
-SCALE_HUES = ("aurora", "dusk", "ember", "forest", "mint", "moss")
+# The season layer's classes, the plan's name contract, spelled out for the
+# same reason. The hero list above is unchanged: the seasons live in a sibling
+# SVG, never inside the bear.
+SEASON_CLASSES = (
+    "afb-gleam-clip", "afb-gleam", "afb-season", "afb-spring", "afb-summer",
+    "afb-autumn", "afb-winter", "afb-p", "afb-fall", "afb-snow", "afb-twinkle",
+    "afb-petal", "afb-leaf", "afb-flake", "afb-glint", "afb-tone-1", "afb-tone-2",
+    "afb-tone-3",
+)
+SEASONS = ("spring", "summer", "autumn", "winter")
+SCALE_HUES = ("aurora", "dusk", "ember", "forest", "mint", "moss", "rose", "rust")
 SCALE_STEPS = (50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950)
 TOKEN = re.compile(r"^\s*(--bear-[a-z0-9-]+):\s*oklch\(([\d.]+)% ([\d.]+) ([\d.]+)\);$", re.M)
+# The contract every line of the page's bear CSS keeps (auth_bear.css header).
+COLOUR_LITERAL = re.compile(r"#[0-9a-fA-F]{3,8}\b|\b(?:rgba?|hsla?|oklch|oklab|lab|lch|hwb)\(")
+ANIMATABLE = re.compile(r"^(?:translate|rotate|scale|transform|opacity|--afb-s-[a-z0-9-]+|--afb-on-[a-z]+)$")
+HOLD_START = {"spring": 0.0, "summer": 25.0, "autumn": 50.0, "winter": 75.0}
 
 
 def svg_root():
@@ -42,10 +56,66 @@ def template_root():
     return etree.fromstring((ROOT / crystal.TEMPLATE_TARGET).read_bytes())
 
 
+def stage():
+    divs = [el for el in template_root().iter("div") if el.get("class") == "o_afenda_auth_stage"]
+    assert len(divs) == 1, f"expected one stage, found {len(divs)}"
+    return divs[0]
+
+
 def inline_svg():
-    svgs = template_root().findall(f".//{SVG_NS}svg")
-    assert len(svgs) == 1, f"expected one inline svg, found {len(svgs)}"
-    return svgs[0]
+    """The hero: the stage's first SVG, the bear."""
+    return stage()[0]
+
+
+def season_svg():
+    """The season layer: the stage's second SVG, the particles."""
+    return stage()[1]
+
+
+def season_css():
+    return (ROOT / crystal.SEASONS_TARGET).read_text(encoding="utf-8")
+
+
+def css_blocks(css):
+    """(selector, body) for every innermost block, comments stripped, at-rule
+    heads kept apart: good enough for a flat generated file, and it refuses
+    the nesting it cannot read rather than misreading it."""
+    css = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+    out, stack, buf = [], [], ""
+    for ch in css:
+        if ch == "{":
+            stack.append(buf.strip())
+            buf = ""
+        elif ch == "}":
+            head = stack.pop()
+            if buf.strip():
+                out.append((head, buf.strip(), tuple(stack)))
+            buf = ""
+        else:
+            buf += ch
+    return out
+
+
+def declarations(body):
+    return {k.strip(): v.strip() for k, v in
+            (d.split(":", 1) for d in body.split(";") if ":" in d)}
+
+
+def keyframes(css, name):
+    """{stop percentage: {property: value}} for one @keyframes block."""
+    frames = {}
+    for sel, body, outer in css_blocks(css):
+        if outer and outer[-1] == f"@keyframes {name}":
+            for stop in sel.split(","):
+                stop = stop.strip()
+                pct = {"from": 0.0, "to": 100.0}.get(stop)
+                pct = float(stop.rstrip("%")) if pct is None else pct
+                frames.setdefault(pct, {}).update(declarations(body))
+    return frames
+
+
+def contrast(a, b):
+    return crystal.contrast_ratio(crystal.oklch_to_srgb(a), crystal.oklch_to_srgb(b))
 
 
 def elements(root):
@@ -87,6 +157,12 @@ class CrystalBearTests(unittest.TestCase):
             path = Path(crystal.HERE) / name
             self.assertTrue(path.is_file(), f"the traced input {name} is missing")
             self.assertGreater(path.stat().st_size, 500, f"{name} is suspiciously small")
+
+    def test_the_standalone_carries_no_season(self):
+        """The four seasons belong to the page; the standalone file is the bear."""
+        svg = crystal.build()
+        for name in ("afb-season", "afb-gleam", "o_afenda_auth_stage", "o_afenda_auth_season", "afb-p "):
+            self.assertNotIn(name, svg, f"the standalone bear took the season layer's {name}")
 
     def test_rendering_is_idempotent(self):
         """A second run must write nothing, or every build dirties the tree."""
@@ -155,6 +231,12 @@ class CrystalBearOutputsTests(unittest.TestCase):
                          "auth_bear.xml is not what the generator produces; regenerate with "
                          "`python -m afenda.tools.crystal_bear`")
 
+    def test_the_committed_seasons_are_what_the_generator_produces(self):
+        committed = (ROOT / crystal.SEASONS_TARGET).read_text(encoding="utf-8")
+        self.assertEqual(crystal.build_seasons_css(), committed,
+                         "auth_bear_seasons.css is not what the generator produces; regenerate with "
+                         "`python -m afenda.tools.crystal_bear`")
+
     def test_the_committed_scales_are_what_the_generator_produces(self):
         committed = (ROOT / crystal.SCALES_TARGET).read_text(encoding="utf-8")
         self.assertEqual(crystal.build_scales_css(), committed,
@@ -164,9 +246,10 @@ class CrystalBearOutputsTests(unittest.TestCase):
     def test_the_inline_bear_is_the_standalone_bear_verbatim(self):
         """Undo the indent and the root attributes and it must be build() exactly."""
         text = (ROOT / crystal.TEMPLATE_TARGET).read_text(encoding="utf-8")
-        start = text.index("        <svg ")
+        indent = " " * 12
+        start = text.index(indent + "<svg ")
         end = text.index("</svg>", start) + len("</svg>")
-        body = "\n".join(line[8:] if line.startswith("        ") else line
+        body = "\n".join(line[12:] if line.startswith(indent) else line
                          for line in text[start:end].split("\n"))
         self.assertTrue(body.startswith(crystal.SVG_ROOT_INLINE))
         self.assertEqual(crystal.SVG_ROOT + body[len(crystal.SVG_ROOT_INLINE):], crystal.build(),
@@ -197,12 +280,31 @@ class CrystalBearOutputsTests(unittest.TestCase):
                 face = [el for el in elements(root) if "afb-face" in (el.get("class") or "").split()]
                 self.assertEqual(face[0].tag, f"{SVG_NS}g")
                 self.assertEqual([el.get("class") for el in face[0]], ["afb-mask", "afb-chin"])
+                self.assertFalse(flat & set(SEASON_CLASSES) - {"afb-p"},
+                                 f"{label}: a season class reached the bear itself")
+
+    def test_every_season_class_is_present_on_the_season_layer(self):
+        found = classes(season_svg())
+        flat = set().union(*found)
+        for cls in SEASON_CLASSES:
+            self.assertIn(cls, flat, f"no season-layer element carries the class {cls}")
+        groups = [c for c in found if "afb-season" in c]
+        self.assertEqual(sorted(tuple(sorted(c - {"afb-season"})) for c in groups),
+                         [(f"afb-{s}",) for s in sorted(SEASONS)],
+                         "the season layer is not one group per season")
+        clip = [el for el in elements(season_svg()) if el.get("class") == "afb-gleam-clip"]
+        self.assertEqual(len(clip), 1)
+        self.assertEqual(clip[0].get("clip-path"), "url(#afb-seasonClip)")
+        self.assertEqual(sum(1 for c in found if "afb-gleam" in c), 1, "not exactly one gleam")
 
     def test_every_id_is_prefixed_and_every_reference_resolves(self):
         """The inline copy shares the page's id namespace, so a bare id collides."""
-        for label, root in (("svg", svg_root()), ("xml", inline_svg())):
+        every = []
+        for label, root in (("svg", svg_root()), ("xml", inline_svg()), ("season", season_svg())):
             with self.subTest(output=label):
                 ids = [el.get("id") for el in elements(root) if el.get("id") is not None]
+                if label != "svg":
+                    every += ids
                 self.assertTrue(ids, f"{label}: no ids at all")
                 self.assertEqual(len(ids), len(set(ids)), f"{label}: duplicate ids")
                 for i in ids:
@@ -217,6 +319,7 @@ class CrystalBearOutputsTests(unittest.TestCase):
                 for r in refs:
                     self.assertTrue(r.startswith("afb-") and r in ids,
                                     f"{label}: url(#{r}) points at no afb- id")
+        self.assertEqual(len(every), len(set(every)), "the hero and the season layer share an id on the page")
 
     def test_the_template_is_plain_markup(self):
         """One template, no QWeb directives, no text: nothing for QWeb to evaluate."""
@@ -231,21 +334,35 @@ class CrystalBearOutputsTests(unittest.TestCase):
             if isinstance(el.tag, str):
                 self.assertFalse((el.text or "").strip(), f"text inside <{el.tag}>")
             self.assertFalse((el.tail or "").strip(), "text between elements")
+        # One stage, the template's only child, holding exactly the two SVGs:
+        # the hero, then the season layer drawn over it.
+        tpl = root.find("template")
+        self.assertEqual([el.tag for el in tpl], ["div"])
+        self.assertEqual(tpl[0].get("class"), "o_afenda_auth_stage")
+        self.assertEqual([el.tag for el in stage()], [f"{SVG_NS}svg", f"{SVG_NS}svg"])
+        self.assertEqual(len(root.findall(f".//{SVG_NS}svg")), 2)
         svg = inline_svg()
         self.assertEqual(svg.get("viewBox"), f"0 0 {crystal.W} {crystal.H}")
         self.assertEqual((svg.get("width"), svg.get("height")), (str(crystal.W), str(crystal.H)))
         self.assertEqual(svg.get("class"), "o_afenda_auth_hero")
         self.assertEqual((svg.get("aria-hidden"), svg.get("focusable")), ("true", "false"))
+        season = season_svg()
+        self.assertEqual(season.get("viewBox"), f"0 0 {crystal.W} {crystal.H}")
+        self.assertEqual(season.get("class"), "o_afenda_auth_season")
+        self.assertEqual((season.get("aria-hidden"), season.get("focusable")), ("true", "false"))
         self.assertIsNone(svg_root().get("aria-hidden"),
                           "the standalone file took the inline-only attributes")
 
     def test_the_scales_define_every_hue_and_step(self):
         tokens, css = scale_tokens()
-        expected = {f"--bear-{h}-{s}" for h in SCALE_HUES for s in SCALE_STEPS} | {"--bear-tenant"}
-        self.assertEqual(len(expected), 6 * 11 + 1)
+        expected = ({f"--bear-{h}-{s}" for h in SCALE_HUES for s in SCALE_STEPS}
+                    | {"--bear-tenant", "--bear-ink"})
+        self.assertEqual(len(expected), 90)
         self.assertEqual(set(tokens), expected)
         declared = re.findall(r"^\s*--bear-", css, re.M)
-        self.assertEqual(len(declared), 6 * 11 + 1, "a token is declared twice or malformed")
+        self.assertEqual(len(declared), 90, "a token is declared twice or malformed")
+        self.assertEqual(tokens["--bear-ink"][2], tokens["--bear-tenant"][2],
+                         "the ink panel is no longer the tenant's own hue")
         self.assertIn(".o_afenda_login {", css)
         self.assertNotIn("url(", css)
 
@@ -276,3 +393,200 @@ class CrystalBearOutputsTests(unittest.TestCase):
         for rgb in ((0.1, 0.34, 0.24), (0.9, 0.2, 0.7), (0.02, 0.5, 0.98)):
             for got, want in zip(crystal.oklab_to_srgb(crystal.srgb_to_oklab(rgb)), rgb):
                 self.assertAlmostEqual(got, want, places=6)
+
+
+class CrystalBearSeasonLayerTests(unittest.TestCase):
+    """The particles: counts, placement, determinism, and nothing the page's
+    CSS cannot move without touching layout."""
+
+    def particles(self, season):
+        group = next(el for el in elements(season_svg())
+                     if f"afb-{season}" in (el.get("class") or "").split())
+        return [el for el in group if "afb-p" in (el.get("class") or "").split()]
+
+    def test_the_particle_counts_are_the_plan_and_deterministic(self):
+        want = {"spring": ("afb-petal", 9), "summer": ("afb-glint", 6),
+                "autumn": ("afb-leaf", 8), "winter": ("afb-flake", 16)}
+        for season, (shape, n) in want.items():
+            with self.subTest(season=season):
+                ps = self.particles(season)
+                self.assertEqual(len(ps), n)
+                for p in ps:
+                    self.assertEqual(len(p), 1, "a particle wrapper holds one shape")
+                    self.assertIn(shape, p[0].get("class").split())
+                    self.assertRegex(p.get("style"), r"^animation-duration:[\d.,s]+;animation-delay:[-\d.,s]+$")
+        stars = [p for p in self.particles("winter") if p[0].tag == f"{SVG_NS}path"]
+        self.assertEqual(len(stars), 2, "not two six-arm star flakes")
+        self.assertEqual(crystal.build_season(), crystal.build_season(), "the season layer is not deterministic")
+
+    def test_the_season_layer_has_no_transform_attribute(self):
+        """CSS moves the particles; a transform attribute IS the CSS transform
+        property in SVG 2, so one here would be overwritten by the sway."""
+        for el in elements(season_svg()):
+            self.assertIsNone(el.get("transform"), f"<{el.tag}> carries a transform attribute")
+
+    def test_fallers_start_above_the_canvas_and_glints_sit_inside_the_bear(self):
+        num = re.compile(r"-?\d+(?:\.\d+)?")
+        for season in ("spring", "autumn", "winter"):
+            for p in self.particles(season):
+                shape = p[0]
+                if shape.tag == f"{SVG_NS}circle":
+                    xs, ys = [float(shape.get("cx"))], [float(shape.get("cy")) + float(shape.get("r"))]
+                else:
+                    vals = [float(v) for v in num.findall(shape.get("d"))]
+                    xs, ys = vals[0::2], vals[1::2]
+                self.assertLess(max(ys), 0, f"{season}: a faller starts on the canvas")
+                self.assertTrue(0 <= sum(xs) / len(xs) <= crystal.W, f"{season}: a faller is off the canvas")
+        for p in self.particles("summer"):
+            vals = [float(v) for v in num.findall(p[0].get("d"))]
+            tips = list(zip(vals[0::2], vals[1::2]))
+            for x, y in tips:
+                self.assertTrue(crystal.in_bear(x, y), f"a glint point ({x}, {y}) is off the bear")
+            self.assertGreaterEqual(min(x for x, _ in tips), 400, "a glint is off the lit flank")
+
+    def test_glints_and_the_gleam_keep_off_the_face(self):
+        """The face is the bear's; the light never crosses it. Fallers may."""
+        x0, y0, x1, y1 = crystal.FACE_BOX
+        num = re.compile(r"-?\d+(?:\.\d+)?")
+        for p in self.particles("summer"):
+            vals = [float(v) for v in num.findall(p[0].get("d"))]
+            for x, y in zip(vals[0::2], vals[1::2]):
+                self.assertFalse(x0 <= x <= x1 and y0 <= y <= y1, f"a glint point ({x}, {y}) is on the face")
+        frames = keyframes(season_css(), "afb-season-gleam")
+        shifts = [float(f["translate"].split()[0].removesuffix("px")) for f in frames.values() if "translate" in f]
+        peak = max(float(f["opacity"]) for f in frames.values() if "opacity" in f)
+        self.assertLessEqual(peak, 0.35, "the gleam is brighter than the owner's ceiling")
+        band = next(el for el in elements(season_svg()) if el.get("class") == "afb-gleam")
+        vals = [float(v) for v in num.findall(band.get("d"))]
+        pts = list(zip(vals[0::2], vals[1::2]))
+        # The band moves left only, so its left edge at its furthest-left shift
+        # decides it; the edge is straight, so its ends over the face rows do.
+        (ax, ay), (bx, by) = pts[0], pts[3]
+        for y in (y0, y1):
+            left = ax + (bx - ax) * (y - ay) / (by - ay) + min(shifts)
+            self.assertGreater(left, x1, f"the gleam reaches the face at y {y} (x {left:.1f})")
+
+    def test_in_bear_knows_inside_from_outside(self):
+        self.assertTrue(crystal.in_bear(135, 321), "the muzzle is not in the bear")
+        self.assertFalse(crystal.in_bear(790, 20), "the top-right paper is in the bear")
+        self.assertFalse(crystal.in_bear(780, 870), "the bottom-right paper is in the bear")
+        self.assertFalse(crystal.in_bear(-1, 400), "a point left of the canvas is in the bear")
+
+    def test_particle_fallbacks_are_not_brand_colours(self):
+        """Fallback fills are the season scales' own colours, never AFENDA's."""
+        from afenda.tools.rules import load_brand
+        ours = {c.upper() for c in re.findall(r"#[0-9A-Fa-f]{6}\b", repr(load_brand()))}
+        fills = set()
+        for el in elements(season_svg()):
+            for name in ("fill", "stroke", "stop-color"):
+                value = el.get(name) or ""
+                if value.startswith("#"):
+                    fills.add(value.upper())
+        self.assertGreaterEqual(len(fills), 8, "the particles lost their fallback fills")
+        self.assertEqual(fills & ours, set(), "a season fallback is a BRAND colour")
+
+
+class CrystalBearSeasonStyleTests(unittest.TestCase):
+    """auth_bear_seasons.css: the palette, the engine, the contract."""
+
+    def test_the_palette_stands_off_the_ink_and_the_cream(self):
+        """3:1, the spec's design target, on the printed tokens.
+
+        Every body role and every particle tone against the ink panel; the
+        face-side roles against the cream mark as well, measured against the
+        darkest cream the page can draw it in (the art's own cream and the two
+        50-steps the page's cream mixes).
+        """
+        tokens, _css = scale_tokens()
+        ink = tokens["--bear-ink"]
+        creams = [crystal.oklab_to_oklch(crystal.srgb_to_oklab(
+            tuple(int(crystal.RAMP["cream"][i:i + 2], 16) / 255 for i in (1, 3, 5))))]
+        creams += [tokens["--bear-forest-50"], tokens["--bear-moss-50"]]
+        for season, roles in crystal.SEASONS.items():
+            for role, (hue, step) in roles.items():
+                lch = tokens[f"--bear-{hue}-{step}"]
+                with self.subTest(season=season, role=role):
+                    self.assertGreaterEqual(contrast(lch, ink), 3.0, f"{hue}-{step} on the ink")
+                    if role in crystal.FACE_SIDE:
+                        self.assertGreaterEqual(step, 500, "a face-side role left the window")
+                        for cream in creams:
+                            self.assertGreaterEqual(contrast(lch, cream), 3.0, f"{hue}-{step} under the cream")
+                    else:
+                        self.assertLessEqual(step, 400, "a lit-side role left the window")
+            for hue, step in crystal.PARTICLE_TONES[season]:
+                with self.subTest(season=season, tone=f"{hue}-{step}"):
+                    self.assertGreaterEqual(contrast(tokens[f"--bear-{hue}-{step}"], ink), 3.0)
+
+    def test_the_cycle_is_32s_with_the_planned_stops(self):
+        css = season_css()
+        frames = keyframes(css, "afb-season-cycle")
+        holds = sorted(HOLD_START.values()) + [100.0]
+        swell = [21.875, 46.875, 71.875, 96.875]
+        self.assertEqual(sorted(frames), sorted(holds + [h + 18.75 for h in holds[:-1]] + swell))
+        for season, start in HOLD_START.items():
+            for pct in (start, start + 18.75) + ((100.0,) if season == "spring" else ()):
+                f = frames[pct]
+                self.assertEqual(f["--afb-s-swell"], "0.85")
+                for other in SEASONS:
+                    self.assertEqual(f[f"--afb-on-{other}"], "1" if other == season else "0",
+                                     f"{pct}%: --afb-on-{other}")
+                for role, (hue, step) in crystal.SEASONS[season].items():
+                    self.assertEqual(f[f"--afb-s-{role}"], f"var(--bear-{hue}-{step})")
+        for pct in swell:
+            self.assertEqual(frames[pct], {"--afb-s-swell": "1"})
+        stage = [b for s, b, o in css_blocks(css) if s == ".o_afenda_login .o_afenda_auth_stage" and not o]
+        self.assertEqual(len(stage), 1)
+        self.assertEqual(declarations(stage[0])["animation"], "afb-season-cycle 32s ease-in-out infinite")
+
+    def test_the_static_blocks_are_the_hold_values_and_the_phase(self):
+        """The loop starts on today's season, and reduced motion shows only it."""
+        css = season_css()
+        blocks = {s: declarations(b) for s, b, o in css_blocks(css) if not o}
+        for season, start in HOLD_START.items():
+            sel = (".o_afenda_login .o_afenda_auth_stage" if season == "spring" else
+                   f'.o_afenda_login .o_afenda_auth_art[data-afb-season="{season}"] .o_afenda_auth_stage')
+            with self.subTest(season=season):
+                block = blocks[sel]
+                hold = keyframes(css, "afb-season-cycle")[start]
+                for prop, value in hold.items():
+                    self.assertEqual(block[prop], value, f"{season}: static {prop} is not the hold value")
+                if season != "spring":
+                    self.assertEqual(block["animation-delay"], f"-{int(start * 32 / 100)}s")
+        motion = [(s, b) for s, b, o in css_blocks(css) if o == ("@media (prefers-reduced-motion: reduce)",)]
+        rules = {s: re.sub(r"\s+", " ", b) for s, b in motion}
+        self.assertEqual(rules.get(".o_afenda_login .o_afenda_auth_stage"), "animation: none !important;")
+        self.assertEqual(rules.get(".o_afenda_login .o_afenda_auth_stage .o_afenda_auth_season *"),
+                         "animation-play-state: paused !important;")
+
+    def test_the_seasons_stylesheet_keeps_the_page_contract(self):
+        """Scoped, literal-free, and it animates only what the compositor can."""
+        css = season_css()
+        self.assertTrue(css.startswith(f"/* {crystal.GENERATED_BY}"))
+        self.assertNotIn("url(", css)
+        bare = re.sub(r"/\*.*?\*/", "", css, flags=re.S)
+        # Values only: a selector such as #afb-gleamGrad is an id, not a colour.
+        for _sel, body, _outer in css_blocks(css):
+            for prop, value in declarations(body).items():
+                self.assertIsNone(COLOUR_LITERAL.search(value), f"a colour literal in {prop}: {value}")
+        for at in re.findall(r"@([a-z-]+)", bare):
+            self.assertIn(at, ("property", "keyframes", "media"))
+        names = set(re.findall(r"@keyframes\s+([\w-]+)", bare))
+        self.assertEqual(names, {"afb-season-cycle", "afb-season-fall", "afb-season-sway", "afb-season-drift",
+                                 "afb-season-spin", "afb-season-twinkle", "afb-season-gleam"})
+        for sel, body, outer in css_blocks(css):
+            if outer and outer[-1].startswith("@keyframes"):
+                for prop in declarations(body):
+                    self.assertRegex(prop, ANIMATABLE, f"{outer[-1]} animates {prop}")
+            elif sel.startswith("@property"):
+                self.assertRegex(sel, r"^@property --afb-(?:s-[a-z0-9-]+|on-[a-z]+)$")
+            else:
+                for part in sel.split(","):
+                    self.assertTrue(part.strip().startswith(".o_afenda_login .o_afenda_auth_") and
+                                    ".o_afenda_auth_stage" in part, f"unscoped selector {part!r}")
+                for value in declarations(body).values():
+                    for var in re.findall(r"var\((--[\w-]+)\)", value):
+                        self.assertRegex(var, r"^--(?:bear-(?:[a-z]+-\d+|ink)|afb-(?:s|on)-[a-z0-9-]+)$")
+                if "animation" in body:
+                    for name in re.findall(r"afb-[\w-]+", declarations(body).get("animation-name", "")
+                                           + declarations(body).get("animation", "")):
+                        self.assertIn(name, names)
