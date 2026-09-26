@@ -12,13 +12,14 @@
 
 ## Verification
 
-<!-- Printed counts, never exit codes: `afenda-pr`'s `pr evidence` check
-     requires at least one `Ran N tests` / `of N tests` line and one commit
-     id in this section. -->
+<!-- Printed counts, never exit codes; the commit the run was on. `afenda-pr`'s
+     `pr evidence` check requires at least one `Ran N tests` / `of N tests`
+     line and one commit id in this section -- paste the real, printed
+     values below, do not leave the placeholders in. -->
 
-| Gate | Command | Printed result | SHA |
+| Gate | Command | Printed result | Commit |
 |---|---|---|---|
-| Tools suite | `python -m unittest discover afenda/tools/tests` | `Ran 307 tests … OK (skipped=1)` | `5d6b77378` |
+| Tools suite | `python -m unittest discover afenda/tools/tests` | *paste the printed `Ran … tests` line* | *paste the commit id* |
 
 ## For the owner
 

@@ -20,6 +20,16 @@ normalised command text, and that fingerprint. The same command on the same
 unchanged tree is allowed twice and blocked the third time; editing any
 fingerprinted path resets the count because the fingerprint changes.
 
+The fingerprint deliberately excludes `odoo/` and `addons/`: an unscoped
+`git status`/`git diff` costs about two minutes per Bash call on this tree
+(see the scope comment above), so a `[REBRAND]` apply or an upstream merge
+that only touches those trees is invisible to it -- the fingerprint, and
+therefore the run count, does not change. The run right after one of those
+is legitimately new, not a rerun of the same tree; cite that in the commit
+or PR message, or proceed from a change under a fingerprinted path
+(`afenda .github .claude docs CLAUDE.md deploy`) so the count resets on its
+own.
+
 Any failure -- malformed input, no git, not a repository, a slow git call --
 fails open (exit 0): this hook must never be the reason real work is blocked.
 
@@ -37,7 +47,7 @@ from pathlib import Path
 
 # Gate patterns, case-sensitive, matched against the raw command text.
 _GATE_PATTERNS = (
-    re.compile(r"\bunittest\b"),
+    re.compile(r"-m\s+unittest\b"),
     re.compile(r"\bafenda\.tools\.api_diff\b"),
     re.compile(r"\bafenda\.tools\.corpus\b"),
     re.compile(r"\bafenda\.tools\.scan_identity\b"),

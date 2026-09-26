@@ -17,6 +17,12 @@ Evidence appearing only *before* the section does not count (rule f of the
 plan's Task 1): the section boundaries are computed first, and the two
 patterns are searched for only inside them.
 
+A commit id is a whole-word run of 7 to 40 lowercase hex characters that
+either contains at least one letter a-f, or is exactly 40 hex characters
+long. This excludes a bare decimal run such as an issue or PR reference
+(`#1234567`), which is 7-40 digits but neither has a hex letter nor reaches
+the full 40-character length of a real SHA.
+
 Standard library only. CLI: reads `PR_BODY` from the environment (never from
 a shell-interpolated `${{ }}` in the calling workflow), prints one
 `::error::<message>` per failure and exits 1, or prints `pr evidence: ok` and
@@ -33,11 +39,23 @@ _ANY_HEADING_RE = re.compile(r"^(#{1,4})\s+\S")
 _BOLD_RE = re.compile(r"^\*\*verification\*\*", re.IGNORECASE)
 
 _COUNT_RE = re.compile(r"\bran\s+\d+\s+tests?\b|\bof\s+\d+\s+tests\b", re.IGNORECASE)
-_SHA_RE = re.compile(r"\b[0-9a-f]{7,40}\b")
+_SHA_CANDIDATE_RE = re.compile(r"\b[0-9a-f]{7,40}\b")
 
 _NO_SECTION = "the PR description has no Verification section"
 _NO_COUNT = "the Verification section has no printed test count (e.g. 'Ran N tests' or 'of N tests')"
-_NO_SHA = "the Verification section has no commit id (7-40 lowercase hex characters)"
+_NO_SHA = "the Verification section has no commit id (7-40 lowercase hex characters, with a letter a-f, or 40 hex characters)"
+
+
+def _is_commit_id(token: str) -> bool:
+    """A candidate whole-word hex run counts as a commit id only when it
+    could not plausibly be a bare decimal reference (e.g. `#1234567`): it
+    either has at least one a-f letter, or is the full 40-character length
+    of a real SHA."""
+    return len(token) == 40 or any(ch in "abcdef" for ch in token)
+
+
+def _has_commit_id(text: str) -> bool:
+    return any(_is_commit_id(token) for token in _SHA_CANDIDATE_RE.findall(text))
 
 
 def _find_section(lines: list) -> "tuple[int, int] | None":
@@ -82,7 +100,7 @@ def check(body) -> list:
     errors = []
     if not _COUNT_RE.search(section_text):
         errors.append(_NO_COUNT)
-    if not _SHA_RE.search(section_text):
+    if not _has_commit_id(section_text):
         errors.append(_NO_SHA)
     return errors
 
