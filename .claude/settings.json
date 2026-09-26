@@ -2,7 +2,9 @@
   "permissions": {
     "deny": [
       "Edit(/odoo/**)",
-      "Edit(/addons/**)"
+      "Edit(/addons/**)",
+      "Edit(/afenda/addons/afenda_brand/static/src/img/auth_hero/crystal_bear.svg)",
+      "Edit(/afenda/addons/afenda_brand/views/auth_bear.xml)"
     ]
   },
   "extraKnownMarketplaces": {
