@@ -53,6 +53,17 @@
     --bear-forest-800: oklch(39.00% 0.059 161.96);
     --bear-forest-900: oklch(32.00% 0.047 161.96);
     --bear-forest-950: oklch(23.00% 0.034 161.96);
+    --bear-frost-50: oklch(97.50% 0.008 230.00);
+    --bear-frost-100: oklch(95.00% 0.016 230.00);
+    --bear-frost-200: oklch(90.00% 0.030 230.00);
+    --bear-frost-300: oklch(83.00% 0.043 230.00);
+    --bear-frost-400: oklch(74.00% 0.054 230.00);
+    --bear-frost-500: oklch(64.00% 0.060 230.00);
+    --bear-frost-600: oklch(55.00% 0.060 230.00);
+    --bear-frost-700: oklch(47.00% 0.057 230.00);
+    --bear-frost-800: oklch(39.00% 0.048 230.00);
+    --bear-frost-900: oklch(32.00% 0.038 230.00);
+    --bear-frost-950: oklch(23.00% 0.027 230.00);
     --bear-mint-50: oklch(97.50% 0.012 165.00);
     --bear-mint-100: oklch(95.00% 0.025 165.00);
     --bear-mint-200: oklch(90.00% 0.045 165.00);

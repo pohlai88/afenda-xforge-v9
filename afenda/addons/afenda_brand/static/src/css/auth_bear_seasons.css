@@ -100,11 +100,11 @@
  * still, which is all reduced motion shows. */
 .o_afenda_login .o_afenda_auth_stage {
     --afb-s-base: var(--bear-rose-600);
-    --afb-s-f1: var(--bear-moss-600);
+    --afb-s-f1: var(--bear-rose-600);
     --afb-s-f2: var(--bear-rose-300);
     --afb-s-f3: var(--bear-moss-200);
     --afb-s-s1: var(--bear-rose-600);
-    --afb-s-s2: var(--bear-moss-600);
+    --afb-s-s2: var(--bear-rose-600);
     --afb-s-headlight: var(--bear-rose-500);
     --afb-s-sheen: var(--bear-rose-100);
     --afb-s-rim-a: var(--bear-rose-200);
@@ -142,7 +142,7 @@
     --afb-s-f2: var(--bear-ember-300);
     --afb-s-f3: var(--bear-ember-200);
     --afb-s-s1: var(--bear-rust-600);
-    --afb-s-s2: var(--bear-dusk-600);
+    --afb-s-s2: var(--bear-rust-600);
     --afb-s-headlight: var(--bear-ember-500);
     --afb-s-sheen: var(--bear-rust-200);
     --afb-s-rim-a: var(--bear-ember-100);
@@ -156,15 +156,15 @@
     animation-delay: -16s;
 }
 .o_afenda_login .o_afenda_auth_art[data-afb-season="winter"] .o_afenda_auth_stage {
-    --afb-s-base: var(--bear-aurora-600);
-    --afb-s-f1: var(--bear-dusk-600);
+    --afb-s-base: var(--bear-frost-600);
+    --afb-s-f1: var(--bear-frost-600);
     --afb-s-f2: var(--bear-aurora-200);
-    --afb-s-f3: var(--bear-dusk-100);
-    --afb-s-s1: var(--bear-dusk-600);
-    --afb-s-s2: var(--bear-aurora-600);
+    --afb-s-f3: var(--bear-frost-100);
+    --afb-s-s1: var(--bear-frost-600);
+    --afb-s-s2: var(--bear-frost-600);
     --afb-s-headlight: var(--bear-aurora-600);
     --afb-s-sheen: var(--bear-aurora-50);
-    --afb-s-rim-a: var(--bear-dusk-100);
+    --afb-s-rim-a: var(--bear-frost-100);
     --afb-s-rim-b: var(--bear-aurora-50);
     --afb-s-haze: var(--bear-aurora-100);
     --afb-on-spring: 0;
@@ -178,11 +178,11 @@
 @keyframes afb-season-cycle {
     0%, 18.75%, 100% {
         --afb-s-base: var(--bear-rose-600);
-        --afb-s-f1: var(--bear-moss-600);
+        --afb-s-f1: var(--bear-rose-600);
         --afb-s-f2: var(--bear-rose-300);
         --afb-s-f3: var(--bear-moss-200);
         --afb-s-s1: var(--bear-rose-600);
-        --afb-s-s2: var(--bear-moss-600);
+        --afb-s-s2: var(--bear-rose-600);
         --afb-s-headlight: var(--bear-rose-500);
         --afb-s-sheen: var(--bear-rose-100);
         --afb-s-rim-a: var(--bear-rose-200);
@@ -224,7 +224,7 @@
         --afb-s-f2: var(--bear-ember-300);
         --afb-s-f3: var(--bear-ember-200);
         --afb-s-s1: var(--bear-rust-600);
-        --afb-s-s2: var(--bear-dusk-600);
+        --afb-s-s2: var(--bear-rust-600);
         --afb-s-headlight: var(--bear-ember-500);
         --afb-s-sheen: var(--bear-rust-200);
         --afb-s-rim-a: var(--bear-ember-100);
@@ -240,15 +240,15 @@
         --afb-s-swell: 1;
     }
     75%, 93.75% {
-        --afb-s-base: var(--bear-aurora-600);
-        --afb-s-f1: var(--bear-dusk-600);
+        --afb-s-base: var(--bear-frost-600);
+        --afb-s-f1: var(--bear-frost-600);
         --afb-s-f2: var(--bear-aurora-200);
-        --afb-s-f3: var(--bear-dusk-100);
-        --afb-s-s1: var(--bear-dusk-600);
-        --afb-s-s2: var(--bear-aurora-600);
+        --afb-s-f3: var(--bear-frost-100);
+        --afb-s-s1: var(--bear-frost-600);
+        --afb-s-s2: var(--bear-frost-600);
         --afb-s-headlight: var(--bear-aurora-600);
         --afb-s-sheen: var(--bear-aurora-50);
-        --afb-s-rim-a: var(--bear-dusk-100);
+        --afb-s-rim-a: var(--bear-frost-100);
         --afb-s-rim-b: var(--bear-aurora-50);
         --afb-s-haze: var(--bear-aurora-100);
         --afb-on-spring: 0;
@@ -278,9 +278,9 @@
 .o_afenda_login .o_afenda_auth_stage .afb-autumn .afb-tone-2 { fill: var(--bear-ember-400); }
 .o_afenda_login .o_afenda_auth_stage .afb-autumn .afb-tone-3 { fill: var(--bear-rust-300); }
 .o_afenda_login .o_afenda_auth_stage .afb-winter .afb-tone-1 { fill: var(--bear-aurora-50); }
-.o_afenda_login .o_afenda_auth_stage .afb-winter .afb-tone-2 { fill: var(--bear-dusk-50); }
+.o_afenda_login .o_afenda_auth_stage .afb-winter .afb-tone-2 { fill: var(--bear-frost-50); }
 .o_afenda_login .o_afenda_auth_stage .afb-winter circle.afb-tone-1 { stroke: var(--bear-aurora-50); }
-.o_afenda_login .o_afenda_auth_stage .afb-winter circle.afb-tone-2 { stroke: var(--bear-dusk-50); }
+.o_afenda_login .o_afenda_auth_stage .afb-winter circle.afb-tone-2 { stroke: var(--bear-frost-50); }
 .o_afenda_login .o_afenda_auth_stage #afb-gleamGrad stop { stop-color: var(--afb-s-rim-b); }
 
 /* Motion. Durations and delays are per particle, inline in the markup;
@@ -317,7 +317,7 @@
 
 @keyframes afb-season-fall {
     from { translate: 0 0; }
-    to { translate: 0 960px; }
+    to { translate: 0 1814px; }
 }
 /* A pendulum: slow at the ends of each swing, fastest through the middle,
  * where the particle turns edge-on (its width narrows) as if tumbling. */
