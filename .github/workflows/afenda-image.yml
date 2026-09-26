@@ -59,7 +59,7 @@ jobs:
           --health-interval 5s --health-timeout 5s --health-retries 20
     env:
       PACK_TESTS_MIN: "17"  # industry packs: afenda_industry_base 4, afenda_industry_bakery 13 (local, fresh database, fac7cbd6e)
-      ODOO_TESTS_MIN: "183"  # measured by the Task 7 fresh-database simulation (afenda_t7, e5b3b81a5): "0 failed, 0 error(s) of 183 tests when loading database 'afenda_t7'" for afenda_brand,afenda_brand_digest,afenda_runtime,afenda_api_docs together
+      ODOO_TESTS_MIN: "184"  # measured by the API-assets fix-wave's database reuse (afenda_t7, atop 174c6ac5e before this wave's own commit): "0 failed, 0 error(s) of 184 tests when loading database 'afenda_t7'" for afenda_brand,afenda_brand_digest,afenda_runtime,afenda_api_docs together (183 + 1: TestCommittedAsset's new size-budget test)
     steps:
       - uses: actions/checkout@v4
         with:
@@ -152,6 +152,7 @@ jobs:
         # refuses a database whose installed applications differ from
         # asset_rules.manifest_applications, and `ci` also carries the
         # industry packs installed without every other application.
+        id: asset
         timeout-minutes: 20
         run: |
           set -o pipefail
@@ -193,8 +194,12 @@ jobs:
           fi
       - name: Upload the regenerated API asset
         # Runs even when the step above failed the staleness check, so a
-        # stale run still offers the regenerated files for download.
-        if: always()
+        # stale run still offers the regenerated files for download - but
+        # not when that step itself never ran (an earlier step in this job
+        # failed first, skipping it): uploading then would offer the
+        # unregenerated, committed files under a name that promises they
+        # were regenerated.
+        if: always() && steps.asset.outcome != 'skipped'
         uses: actions/upload-artifact@v4
         with:
           name: openapi-asset
