@@ -22,7 +22,8 @@ goes under `afenda/addons/`. See `afenda/README.md` for the layout and run steps
   full chain for a small edit.
 - Full gates run **once**, at the end of a unit of work, right before the commit: the
   tools suite, the touched modules' Odoo suites, `scan_identity`, and `corpus diff` if a
-  rule changed. The `web,test_http` suite runs once per branch.
+  rule changed. The `web,test_http` suite runs once per branch, and `python -m
+  afenda.tools.check` gates the one push (Gotchas has `push_gate.py`).
 - Do not rerun a gate that passed unless something it covers has changed since. Record
   the command, the printed count and the SHA, and cite that record instead of rerunning.
 - When a gate fails, read the whole failure, fix it, rerun only the failing test, then
@@ -150,7 +151,7 @@ synchronous, so the session starts only once it finishes. Differences from local
 # first run
 git submodule update --init --depth 1
 .venv/Scripts/python odoo-bin -c afenda/odoo.conf -d afenda -i afenda_brand --stop-after-init --without-demo=all
-# server (or the "odoo-afenda" launch config)
+# server
 .venv/Scripts/python odoo-bin -c afenda/odoo.conf -d afenda
 # Odoo tests for one module; the env prefix stops MSYS from mangling "/module"
 MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin -c afenda/odoo.conf -d afenda -u afenda_brand --test-enable --test-tags "/afenda_brand" --stop-after-init --http-port 8179
@@ -184,7 +185,8 @@ diagnose-first procedure for a red check (log line → cause as `path:line` → 
 one fix GREEN → gates once → one push; the same fix failing twice stops for a report), and
 the merge (rebase and merge) and post-merge steps. `.github/PULL_REQUEST_TEMPLATE.md` asks for
 the evidence, and the `pr evidence` check (`afenda-pr.yml`, `afenda/tools/pr_evidence.py`)
-fails a PR whose description lacks a printed test count or lacks a commit id. Spec:
+fails a PR whose description lacks a printed test count or lacks a commit id, and every push
+that opens or updates it is itself gated (Gotchas has `push_gate.py`). Spec:
 `docs/superpowers/specs/2026-09-26-pr-stewardship.md`.
 
 ## Branches and commits
@@ -193,7 +195,7 @@ fails a PR whose description lacks a printed test count or lacks a commit id. Sp
 - Upstream is the `upstream` remote (`odoo/odoo` `19.0`). Retired branches are tags under `archive/`: `archive/19.0` (never the product), `archive/upstream-19.0` (the fork's orphan anchor), `archive/brand-identity`, `archive/cloud-api-hardening`, `archive/industry-packs-wip` (unfinished industry packs — resume from there).
 - The checkout is shallow and the fork's anchor is an orphan root commit, so `git merge --ff-only upstream/19.0` refuses — see `afenda/README.md` for the one-time local re-anchor that fixes it.
 - Commit subjects use Odoo tags: `[ADD]`, `[FIX]`, `[IMP]`, `[REBRAND]`.
-- Stage explicit paths, never `git add -A`: the rebrand script can leave about 19,000 modified files under `addons/` and `odoo/`.
+- Stage explicit paths, never `git add -A`: the rebrand script can leave 23,291 changed files (119 hand-authored, 23,172 rebrand-generated) under `addons/` and `odoo/`.
 - Upstream `.gitignore` ignores all dotfiles, so `.claude/` files need `git add -f`. The doc kit under `.agents/` is untracked on purpose.
 
 ## Gotchas
@@ -211,9 +213,7 @@ fails a PR whose description lacks a printed test count or lacks a commit id. Sp
   `api_diff`, `corpus`, `scan_identity`, `pr_evidence`) the third time it runs in one session
   on an unchanged tree. Cite the earlier count, change code, or stop and report; the hook fails
   open on any internal error.
-- `git commit --only <path>` refuses a path git does not track yet ("pathspec … did not match any
-  file(s) known to git"): `git add` it (`git add -f` under `.claude/`) in the same shell call first.
-- The rerun guard's tree fingerprint covers `afenda .github .claude docs CLAUDE.md deploy` only (an
-  unscoped diff costs about two minutes per call), so a `[REBRAND]` apply or an upstream merge is
-  invisible to it: the first run after one is new evidence; say so where you cite it.
+- `git commit --only <path>` refuses a path git does not track yet ("pathspec … did not match any file(s) known to git"): `git add` it (`git add -f` under `.claude/`) in the same shell call first.
+- The scoped fingerprint (`afenda/tools/_git_identity.py`'s `SCOPED_PATHS`, the one copy `rerun_guard.py`, `check.py` and `push_gate.py` share) covers `afenda .github .claude docs CLAUDE.md deploy` only (an unscoped diff costs about two minutes per call), so a `[REBRAND]` apply or an upstream merge is invisible to it: the first run after one is new evidence; say so where you cite it.
+- `.claude/hooks/push_gate.py` (PreToolUse on `git push` and the three GitHub-write MCP tools) blocks a push whose tip tree has no passing stamp in `.git/afenda-check/`; run `python -m afenda.tools.check` first. `disableAllHooks`, a wrapper script, an alias, or a raw `gh api`/`curl` write all bypass it — branch protection on `main` is the real backstop, not the hook.
 - Ask "does this code call X" with an AST walk, not grep: grep matches the name inside docstrings, including ones stating it is deliberately *not* called.

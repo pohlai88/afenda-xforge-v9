@@ -19,7 +19,9 @@ below happens only under the owner's standing instruction to drive this PR (give
    `api contract`, `nginx -t`), `afenda-pr` (`pr evidence`), and `afenda-image` (`docker build`:
    always required; skipped counts as passed — its own `changes` job decides from the diff
    whether to run the real build or skip it, and GitHub reports a skip as success). A green run
-   on an older SHA proves nothing about the head.
+   on an older SHA proves nothing about the head. This list is the intended required-checks
+   setting on `main`'s branch protection; until the owner sets it, nothing but this skill and
+   the local push gate enforces it.
 2. **No merge conflict** with `main`.
 3. **No open review thread** waiting on the PR's side: every one is fixed and resolved, or
    answered with a reason.
@@ -60,9 +62,10 @@ option on any event.
    a workflow or deploy file, a unit test for code) and see it fail — the RED line with its
    failure count.
 5. **Fix at the cause**, one change. Run that test: the GREEN line.
-6. **Gates once** for what the change touches (`CLAUDE.md` → "Test the edit, not the world"),
-   then **one push**. The commit message carries the cause, the evidence line, the guard, and
-   the RED, GREEN and gate counts.
+6. **Gates once** for what the change touches — `python -m afenda.tools.check` (`CLAUDE.md` →
+   "Test the edit, not the world") — then **one push**; `.claude/hooks/push_gate.py` enforces
+   that the stamp exists. The commit message carries the cause, the evidence line, the guard,
+   and the RED, GREEN and gate counts.
 7. **Re-run a job without a change only** when it died before any test body ran (checkout,
    install, runner loss) or it passed on this exact SHA before — once. "Flaky" is not a cause.
 8. **Same fix fails twice → stop.** Go back to step 1 with the new log. Never try a third

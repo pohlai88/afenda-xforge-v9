@@ -34,8 +34,8 @@ editing a rendered PNG or SVG.
 | Binding rules every `odoo-*` sub-agent also reads | `.claude/odoo-agent-rules.md` |
 | Any Odoo 19 API, view attribute, widget, registry or hook | `.agents/Odoo_19_Developer_LLM_Kit/` — start at its `AGENTS.md` and `llms.txt` |
 | What the kit omits (autodoc docstrings) | the source itself: `odoo/orm/`, `odoo/http.py`, `odoo/addons/base/models/`, `addons/web/static/src/` |
-| Module layout, manifest keys, the access-CSV rule | `.claude/skills/afenda-odoo-dev/references/module-anatomy.md` |
-| Whether a test run proved anything | `.claude/skills/afenda-odoo-dev/references/verification.md` — read the printed count, never `exit 0` |
+| Module layout, manifest keys, the access-CSV rule | `.claude/odoo-agent-rules.md` |
+| Whether a test run proved anything | `superpowers:verification-before-completion` — read the printed count, never `exit 0` |
 | Brand text, wordmark, logo, module icons | `afenda/tools/` rules plus the corpus golden test; never the rendered output |
 | Run steps, ports, the layout | `afenda/README.md` |
 

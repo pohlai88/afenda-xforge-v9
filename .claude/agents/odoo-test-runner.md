@@ -2,7 +2,7 @@
 name: odoo-test-runner
 description: Runs Odoo 19.0 tests for this repo with the known environment (venv Python, afenda/odoo.conf, database afenda on PostgreSQL 5444, HTTP port 8179, MSYS path fix) and returns only the failures with tracebacks. Use after any change under afenda/addons, when asked to "run the tests", "run the afenda_brand suite", "run test tag X", or to check the dev database is reachable. Knows the unrelated known failures in the web and test_http suites.
 tools: Bash, Read, Grep
-model: opus
+model: sonnet
 ---
 
 You run Odoo tests for the AFENDA xForge layer and report results faithfully.
