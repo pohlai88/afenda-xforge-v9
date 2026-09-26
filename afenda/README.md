@@ -213,11 +213,72 @@ after review, `python -m afenda.tools.corpus golden` and commit both files.
   mirroring the `documentation=` paths the product links to. `views/guides.xml`
   is generated from them by `python -m afenda.tools.build_docs` and committed;
   never hand-edit it (`afenda/tools/tests/test_build_docs_sync.py` fails if the
-  two disagree). A link to a page with no guide yet redirects to `/docs`.
+  two disagree). A link to a page with no guide yet redirects to `/docs`. Hand-written
+  guide pages beyond that are an owner-rejected idea (see the handoffs) — do not add any.
 - **The API reference** is `/docs/api` (a vendored Redoc, no CDN) over
   `/docs/openapi.json`, an OpenAPI 3.1 document generated per request from the
   live registry for the signed-in user (`auth='user'`), scoped per app with
   `?app=<module>`.
+- **The error contract.** Every `/json/2/<model>/<method>` error is rewritten by
+  `afenda_runtime`'s `ir.http._handle_error` into an RFC 9457
+  (https://www.rfc-editor.org/rfc/rfc9457) Problem Details body
+  (`application/problem+json`): `type` (`/docs/api/errors#<code>`), `title`, `status`,
+  a stable `code`, `detail`/`message`, and on 5xx an opaque `instance` id — never the
+  exception class name, its raw arguments, or the server traceback (those stay in the
+  server log only). The stable codes and their one-line meanings are listed at
+  `/docs/api/errors` (`auth='public'`, since the `type` URI must resolve signed out too);
+  the vocabulary itself lives in `afenda_runtime/problems.py` (`PROBLEM_CODES`).
+  Three cases are answered before Odoo dispatches to `ir.http._handle_error` at all, and so
+  keep upstream's plain HTML body instead of a Problem Details one (AFD-ARCH-CORR-0003):
+  a wrong `Content-Type` (415), an unknown database (nodb 404), and a failure while a
+  read-only request re-acquires its cursor (`odoo/http.py:2317-2324` → `2889`, e.g. pool
+  exhaustion or a lost connection) — the last one would need a server-wide patch of
+  `Json2Dispatcher.handle_error` to cover, so it is documented rather than patched.
+- **The OpenAPI asset** — `afenda/addons/afenda_api_docs/openapi/<area>.json`, one file per
+  non-empty area, plus `openapi/CHANGELOG.md` — is the repository's committed, versioned
+  publication of the same contract the live `/docs/openapi.json` serves, generated once as
+  `base.user_admin` (`su=False`, `lang=en_US`) on a fresh installation with every Community
+  application installed, never at request time (`.dockerignore` excludes `/docs` from the
+  production image, so files under a `docs/` tree could never have been served — the asset
+  lives under `afenda_api_docs/openapi/` instead). Because it is built as the administrator
+  on default settings, it shows exactly the groups every app grants that role by default;
+  fields gated behind an optional feature group the admin does not hold by default (e.g.
+  multi-currency) are absent from it (AFD-ARCH-CORR-0006). A field whose selection values
+  come from the environment rather than the model definition (installed languages, or a
+  field listed in `openapi.py`'s `ENVIRONMENT_DERIVED_SELECTIONS`, starting with
+  `("res.partner", "tz")`, `pytz`-derived) omits `enum` in the asset and is marked
+  `x-afenda-dynamic-enum: true`; the live per-request document still lists the values.
+  Each committed document is budgeted at 1.5 MiB (AFD-ARCH-CORR-0008); the live per-request
+  document keeps the tighter 1 MiB budget from per-operation response entries collapsing to
+  shared `4XX`/`5XX` references. Which module's models land in which area file is decided in
+  this order (AFD-ARCH-CORR-0007): a model defined by an application module belongs to that
+  application; otherwise an `ir.*` model goes to a `technical` document; otherwise the
+  smallest-closure rule.
+  - **Regenerate it** either by downloading CI's `openapi-asset` artifact (`afenda-image.yml`,
+    uploaded from every run, stale or not) or by running the exporter yourself, through
+    `odoo-bin shell` on a fresh database with every Community application installed:
+    see `CLAUDE.md`'s Commands section for the exact invocation. It prints
+    `afenda-openapi: wrote <N> documents` (N = 33 today) and never writes anything else to
+    stdout on success. A `[REBRAND]` apply or an upstream merge changes generated help text
+    and therefore the asset's descriptions, so regenerate and commit it after either —
+    that is a descriptive-only change (see below), no version bump needed.
+  - **The version rule.** `afenda_api_docs/api_version.py`'s `API_VERSION` is the AFENDA
+    JSON API's own semantic version, independent of the Odoo release
+    (AFD-ARCH-CORR-0004). A breaking change (a removed operation, schema or property, a
+    property newly required, a narrowed type or enum) requires a MAJOR bump; an additive
+    change (a new operation, schema, property, or enum value) requires at least a MINOR
+    bump; a descriptive-only change (help text, a description, a title) needs no bump.
+  - **`afenda/tools/api_diff.py`** is the checker and the changelog writer, standard-library
+    only, reading the committed documents at a base git ref and at HEAD:
+    `python -m afenda.tools.api_diff check --base-ref origin/main` gates the version bump
+    against the computed change classes and fails if `CHANGELOG.md` has no section for the
+    current version; `python -m afenda.tools.api_diff changelog --base-ref origin/main`
+    writes that section. Against no base contract (the asset's own first commit, or a
+    diff target that predates it), every item in HEAD is additive by construction, so
+    `check` prints the three change-class counts (breaking, additive, descriptive) instead
+    of the full lists, and `changelog` writes one summary line (documents, operations,
+    schemas counted) instead of a per-item list; a real version-to-version diff prints and
+    writes the full Breaking/Additive/Descriptive lists in both commands.
 - Odoo identity is aliased to AFENDA in prose only, never in wire values
   (model names, field names, selection keys); `tests/test_identity.py` crawls
   the pages and documents to hold that line. `scan_identity` does not cover

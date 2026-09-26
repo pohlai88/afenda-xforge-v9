@@ -59,7 +59,7 @@ jobs:
           --health-interval 5s --health-timeout 5s --health-retries 20
     env:
       PACK_TESTS_MIN: "17"  # industry packs: afenda_industry_base 4, afenda_industry_bakery 13 (local, fresh database, fac7cbd6e)
-      ODOO_TESTS_MIN: "177"  # 146 (local CI simulation, e10a49a36) + 8 (afenda_runtime Problem Details, Task 1) + 23 (afenda_api_docs 75->98, Tasks 2-4); to be confirmed by the Task 7 simulation
+      ODOO_TESTS_MIN: "183"  # measured by the Task 7 fresh-database simulation (afenda_t7, e5b3b81a5): "0 failed, 0 error(s) of 183 tests when loading database 'afenda_t7'" for afenda_brand,afenda_brand_digest,afenda_runtime,afenda_api_docs together
     steps:
       - uses: actions/checkout@v4
         with:
