@@ -35,7 +35,8 @@ came from the job log in one pass, but the method used lived only in the session
 3. **CI enforces the evidence.** A new workflow `afenda-pr.yml`, job `pr evidence`, runs on every
    pull request into `main`, including when its description is edited, and fails unless the
    description has a `Verification` section holding at least one printed test count (`Ran N
-   tests` or `of N tests`) and at least one commit id. The check is
+   tests` or `of N tests`) and at least one commit id (7–40 hex characters with at least one
+   letter a–f, or a full 40-character id). The check is
    `afenda/tools/pr_evidence.py` (standard library only), unit-tested in the tools suite. The
    body reaches the script through `env:`, never through `${{ }}` inside the script.
 4. **Merge method: rebase and merge,** as PRs #2–#4 were (each commit kept, author dates intact,

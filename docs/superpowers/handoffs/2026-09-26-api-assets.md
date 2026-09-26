@@ -38,6 +38,19 @@ section (`docs/superpowers/plans/2026-09-25-afenda-owned-api-assets.md`), the sp
 "Corrections recorded" section (next), and, for every deviation the ledger ruled on that
 neither of those already covers, "Rulings made during execution" below.
 
+## Also on this branch: how work and PRs are driven (binding, see `CLAUDE.md`)
+
+- `.claude/skills/steward/SKILL.md` — the one procedure from "PR opened" to "PR closed": done
+  list, event order, diagnose-first handling of a red check, stop conditions, rebase-and-merge.
+- `.claude/skills/orchestrate/SKILL.md` — a conflict map before any dispatch, the slowest
+  real-environment signal started first, reviews as one parallel sweep by dimension, one fix wave,
+  one scoped re-review.
+- `pr evidence` (`.github/workflows/afenda-pr.yml`, `afenda/tools/pr_evidence.py`) — fails a PR into
+  `main` whose description's Verification section lacks a printed test count or a commit id; the
+  blank template fails it.
+- `.claude/hooks/rerun_guard.py` (PreToolUse) — blocks the third identical gate command in one
+  session on an unchanged tree; ledger under `.claude/.rerun-ledger/`; fails open.
+
 ## Corrections filed against the design spec
 
 Recorded in `docs/superpowers/specs/2026-09-25-afenda-owned-api-and-doc-assets-design.md`,
