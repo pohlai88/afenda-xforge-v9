@@ -172,6 +172,18 @@ committed OpenAPI asset's descriptions (field `help`, model docstrings): regener
 with the exporter above and commit the result. That is a descriptive-only change to the
 contract (no operation, schema or requirement changed), so it needs no `API_VERSION` bump.
 
+## Pull requests
+
+`.claude/skills/steward/SKILL.md` is binding on every pull request into `main`, for agents and
+people alike: what "done" means (CI green on the head SHA, no conflict, no open thread, a
+current Verification table, the owner's go-ahead), the order events are worked, the
+diagnose-first procedure for a red check (log line → cause as `path:line` → guard test RED →
+one fix GREEN → gates once → one push; the same fix failing twice stops for a report), and
+the merge (rebase and merge) and post-merge steps. `.github/PULL_REQUEST_TEMPLATE.md` asks for
+the evidence, and the `pr evidence` check (`afenda-pr.yml`, `afenda/tools/pr_evidence.py`)
+fails a PR whose description cites no printed test count and no commit. Spec:
+`docs/superpowers/specs/2026-09-26-pr-stewardship.md`.
+
 ## Branches and commits
 
 - **One branch: `main`** — the product, what production runs; GitHub's default; CI and `deploy/redeploy.sh` use it. Branch short-lived work off it. (Renamed from `afenda/deidentify-phase1` on 2026-09-25; GitHub redirects the old name, but push to `main`.)
