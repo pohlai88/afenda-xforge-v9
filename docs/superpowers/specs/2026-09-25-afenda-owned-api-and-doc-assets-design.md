@@ -286,6 +286,7 @@ the body disagree, the entry wins.
     default settings. The documented surface is the administrator's on a fresh
     installation. Fields behind optional feature groups (e.g. multi-currency) are not in it.
   - **introduced_in:** 79b38fcce
+  - **owner_approval:** approved by the owner on 2026-09-26, as merged in PR #5.
 - `id`: AFD-ARCH-CORR-0007
   - **previous_claim:** owner decision 2's rule: `core` for modules in every application's
     closure or none, else the smallest closure.
@@ -300,17 +301,25 @@ the body disagree, the entry wins.
 
     Measured: `core` 927 KiB, `technical` 745 KiB, `mail` 557 KiB.
   - **introduced_in:** 1243e57a9
+  - **owner_approval:** approved by the owner on 2026-09-26 as implemented (PR #5), which
+    checks steps 1 and 2 in the other order: an `ir.*` model goes to `technical` first
+    (`afenda_api_docs/assets.py`, `asset_areas`). No model is affected today: every `ir.*`
+    `_name` in an application module extends a model first defined in `base`.
 - `id`: AFD-ARCH-CORR-0008
   - **previous_claim:** "each committed document stays under 1 MiB … If it does not, narrow
     what the document includes" (phase 1 acceptance).
   - **evidence:** `account` measures 1166 KiB, 55 models and 1012 operations, all genuine
     accounting API surface.
-  - **disposition:** AMENDED, **for the owner's attention:**
+  - **disposition:** AMENDED
   - **replacement:** committed asset documents are budgeted at 1.5 MiB each. The live
     per-request document keeps 1 MiB. The per-operation response entries shrink to shared
     `4XX` and `5XX` references, and the final sizes are re-measured before the budget is
     fixed.
   - **introduced_in:** 79b38fcce
+  - **owner_approval:** approved by the owner on 2026-09-26: 1.5 MiB (1,572,864 bytes) per
+    committed document, enforced by
+    `TestCommittedAsset.test_committed_asset_stays_under_the_size_budget`; the largest,
+    `account.json`, measured 1,031,064 bytes at merge.
 - `id`: AFD-ARCH-CORR-0009
   - **previous_claim:** "every committed document validates against the OpenAPI 3.1
     meta-schema" (phase 1 acceptance).

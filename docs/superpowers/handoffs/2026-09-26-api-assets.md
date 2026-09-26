@@ -7,10 +7,10 @@ it disagrees with the tree, the tree wins. Correct this file rather than work ar
 
 ## Start here
 
-1. `git log --oneline -20` on this branch (`claude/superpowerskill-agent-setup-x5fcyv`,
-   HEAD after this session's commit) to see Tasks 1-7's commits. This branch has **not**
-   been merged to `main` and no PR was opened for it (see "Owner decisions" below) — check
-   before assuming any of this is live.
+1. **Merged.** PR #5 (https://github.com/pohlai88/afenda-xforge-v9/pull/5) landed on `main` on
+   2026-09-26 by rebase and merge; `main` was then `4b0ac1c2f`. On that commit the push runs of
+   `afenda-ci` and `afenda-image` passed, and `afenda-deploy` passed with its "not set up yet"
+   notice (no `DEPLOY_SSH_KEY`; the redeploy step was skipped, nothing reached the host).
 2. `CLAUDE.md` → "Superpowers skills" says which skills to use and where `CLAUDE.md`
    overrides them. Its "Commands" section now also has the OpenAPI asset exporter and
    `api_diff` invocations (added by this session).
@@ -77,16 +77,16 @@ each; read that section for the full evidence and replacement text.
 - **AFD-ARCH-CORR-0005** (AMENDED): the asset lives at
   `afenda/addons/afenda_api_docs/openapi/<area>.json` plus `CHANGELOG.md` alongside, not
   under `docs/` — `.dockerignore` excludes `/docs` from the production image.
-- **AFD-ARCH-CORR-0006** (AMENDED, **for the owner's attention**): generated as
+- **AFD-ARCH-CORR-0006** (AMENDED, approved by the owner 2026-09-26): generated as
   `base.user_admin` (`su=False`, `lang=en_US`) on default settings, not a dedicated
   API-reference role. The documented surface is the administrator's on a fresh install;
   fields behind an optional feature group the admin doesn't hold by default (e.g.
   multi-currency) are absent.
-- **AFD-ARCH-CORR-0007** (AMENDED): area attribution is checked in order — a model defined
+- **AFD-ARCH-CORR-0007** (AMENDED, approved by the owner 2026-09-26 as implemented, `ir.*` first): area attribution is checked in order — a model defined
   by an application module belongs to that application; otherwise `ir.*` models form a
   `technical` document; otherwise the original smallest-closure rule. Measured: `core`
   927 KiB, `technical` 745 KiB, `mail` 557 KiB.
-- **AFD-ARCH-CORR-0008** (AMENDED, **for the owner's attention**): the per-committed-document
+- **AFD-ARCH-CORR-0008** (AMENDED, approved by the owner 2026-09-26): the per-committed-document
   size budget is 1.5 MiB, not 1 MiB — `account` alone measures over 1 MiB of genuine
   accounting API surface (55 models, 1012 operations). The live per-request document keeps
   the tighter 1 MiB budget, achieved by collapsing per-operation response entries to shared
@@ -312,7 +312,7 @@ to `"187"`, with a comment citing this measurement and the SHA it ran atop (`426
   real version-to-version diff prints the full lists.
 - This handoff file.
 
-No PR was opened for this branch (see "Owner decisions").
+(At the time; the branch later went up as PR #5, merged 2026-09-26.)
 
 ## What this fix wave changed (whole-branch review fixes, atop `174c6ac5e`)
 
@@ -375,7 +375,7 @@ test files.
     `test_ci_odoo_bin_calls_all_pass_the_afenda_addons_path`, that parses every `odoo-bin`
     invocation out of the workflow file and asserts each one carries it.
 
-No PR was opened for this branch either (see "Owner decisions").
+(At the time; the branch later went up as PR #5, merged 2026-09-26.)
 
 ## Owner decisions carried over (binding, from 2026-09-25)
 
@@ -385,33 +385,20 @@ No PR was opened for this branch either (see "Owner decisions").
 
 ## Waiting on the owner
 
-1. **AFD-ARCH-CORR-0008** — the 1.5 MiB per-committed-document size budget (up from the
-   original 1 MiB), because `account` alone is over 1 MiB of genuine accounting surface.
-   Needs the owner's sign-off on the number; `account.json` currently measures
-   1,031,048 bytes (~1007 KiB), comfortably under 1.5 MiB.
-2. **AFD-ARCH-CORR-0007** — the area-attribution rule, in the order the code actually checks
-   it (`assets.py`'s `asset_areas`, then `asset_rules.py`'s `assign_area`): abstract and
-   transient models are excluded; an `ir.*`-named model goes to `technical`; otherwise a
-   model defined by an application module belongs to that application; otherwise a model
-   whose module is in every installed application's dependency closure, or in none of them,
-   goes to `core` (unchanged from the plan's original rule — `asset_rules.py:59-61` still
-   applies it); otherwise the application with the smallest closure containing the module,
-   an equal tie going to the alphabetically first application name. The `ir.*` → `technical`
-   check running before application ownership is a deliberate deviation from CORR-0007's own
-   listing order (which puts application ownership first); it has no effect today, since
-   every `ir.*`-named model in an application module extends a model first defined in `base`.
-3. **AFD-ARCH-CORR-0006** — the asset documents the administrator's default-settings surface,
-   not a dedicated API-reference role with every feature group. Fields behind an optional
-   feature group (multi-currency, etc.) are simply absent from the committed contract.
-4. **PR #5 is open** (https://github.com/pohlai88/afenda-xforge-v9/pull/5), opened on the owner's
-   instruction of 2026-09-26 and driven to merge by `.claude/skills/steward/SKILL.md`. Its
-   description supersedes the draft below, which is kept as written.
-5. **Required status checks on `main`** (repository settings → branches, or a ruleset):
-   require `tools suite`, `tools suite (Python 3.12)`, `api contract`, `nginx -t`,
-   `docker build` and `pr evidence` before merging. Only the owner can set this; until then the
-   checks bind agents (through the steward skill) but not a manual merge.
+AFD-ARCH-CORR-0006, 0007 and 0008 were approved by the owner on 2026-09-26; each entry in the
+spec's "Corrections recorded" now carries an `owner_approval` line (0007 as implemented, `ir.*`
+checked first). PR #5 is merged (see "Start here"). What remains needs the owner's own hands:
 
-## Draft PR body (not submitted — for the controller/owner)
+1. **Required status checks on `main`** (repository settings → branches, or a ruleset):
+   require `tools suite`, `tools suite (Python 3.12)`, `api contract`, `nginx -t`,
+   `docker build` and `pr evidence` before merging. No agent tool can change repository
+   settings; until the owner sets it, the checks bind agents (through the steward skill) but
+   not a manual merge.
+2. **Automatic-deploy setup** on the host (`deploy/README.md` → "Automatic deploys"): a
+   terminal task the owner keeps for themselves. Until the `production` environment's secrets
+   exist, every `afenda-deploy` run ends with the "not set up yet" notice.
+
+## Draft PR body (historical — superseded by PR #5's description)
 
 > **Title:** `[FIX] api docs: whole-branch review fix wave (tools, CI, docs, tests)`
 >
