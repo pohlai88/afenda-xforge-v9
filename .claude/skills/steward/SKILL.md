@@ -16,9 +16,10 @@ below happens only under the owner's standing instruction to drive this PR (give
 ## Done — the PR merges only when all of these hold on its current head commit
 
 1. **CI green on that exact SHA**: `afenda-ci` (`tools suite`, `tools suite (Python 3.12)`,
-   `api contract`, `nginx -t`), `afenda-pr` (`pr evidence`), and `afenda-image`
-   (`docker build`) whenever its path filter ran it. A green run on an older SHA proves nothing
-   about the head.
+   `api contract`, `nginx -t`), `afenda-pr` (`pr evidence`), and `afenda-image` (`docker build`:
+   always required; skipped counts as passed — its own `changes` job decides from the diff
+   whether to run the real build or skip it, and GitHub reports a skip as success). A green run
+   on an older SHA proves nothing about the head.
 2. **No merge conflict** with `main`.
 3. **No open review thread** waiting on the PR's side: every one is fixed and resolved, or
    answered with a reason.

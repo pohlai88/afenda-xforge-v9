@@ -42,11 +42,13 @@ came from the job log in one pass, but the method used lived only in the session
 4. **Merge method: rebase and merge,** as PRs #2–#4 were (each commit kept, author dates intact,
    the owner as committer). A PR merges only when the steward skill's "done" list holds.
 5. **Required status checks are the owner's action.** Branch protection on `main` requiring
-   `tools suite`, `tools suite (Python 3.12)`, `api contract`, `nginx -t` and `pr evidence` is
-   what makes the checks binding on a human merge too (`docker build`, i.e. `afenda-image`, is
-   not in that list: it runs only when a PR touches the image's inputs, so on a docs-only PR
-   it never reports and a required check on it would block the merge forever). No agent can
-   set it; the handoff lists it under "Waiting on the owner".
+   `tools suite`, `tools suite (Python 3.12)`, `api contract`, `nginx -t`, `docker build` and
+   `pr evidence` is what makes the checks binding on a human merge too (`docker build` reports
+   success when skipped on a PR that touches no image input: `afenda-image.yml`'s `changes` job
+   decides that from the actual diff, not from the workflow's own `on:` paths filter, so the
+   `build` job is skipped by `if:` rather than never running at all, and GitHub counts a job
+   skipped by `if:` as success for required status checks). No agent can set it; the handoff
+   lists it under "Waiting on the owner".
 
 ## Non-goals
 
