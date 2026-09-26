@@ -18,7 +18,6 @@ from odoo import http
 from odoo.modules.module import get_manifest, load_script
 from odoo.tests import HttpCase, new_test_user, tagged
 from odoo.tools import file_open, is_html_empty
-from odoo.tools.misc import file_path
 
 # The generator that drew the icons this module ships, reached from the repo
 # root the server is started in. Only the blend is borrowed: the palette these
@@ -191,10 +190,8 @@ class TestBranding(HttpCase):
         stack = doc.find_class("o_afenda_auth")
         self.assertEqual(len(stack), 1, "the auth page is not rendered exactly once")
         blocks = [child.get("class") for child in stack[0] if isinstance(child.tag, str)]
-        # The season layer (tenant-signature spec) leads with its two fixed, aria-hidden
-        # layers; they take no space in the flow, so the art is still the first block.
         self.assertEqual(
-            blocks, ["o_afenda_seasons", "o_afenda_weather", "o_afenda_auth_art", "o_afenda_auth_form"],
+            blocks, ["o_afenda_auth_art", "o_afenda_auth_form"],
             "the art is not the first block of the page",
         )
 
@@ -397,57 +394,6 @@ class TestBranding(HttpCase):
         ground = re.search(r"\.o_afenda_login\s*\{([^}]*)\}", css)
         self.assertIn(BRAND["paper"].lower(), ground.group(1),
                       "a bear stylesheet now owns the first .o_afenda_login block")
-
-    def test_the_season_layer_surrounds_the_signature(self):
-        """The season layer sits AROUND the tenant signature, never in it.
-
-        docs/superpowers/specs/2026-09-26-tenant-signature.md: two aria-hidden layers of four
-        sheets each, the weather 18 particles a sheet, starting on today's season (server UTC
-        date, northern meteorological order). None of it is inside the bear's art, and the
-        bear's SVG carries no season class. (The bear's own bytes are pinned by
-        afenda/tools/tests/test_tenant_signature.py.)
-        """
-        import datetime
-        doc = lxml_html.fromstring(self.url_open("/web/login").text)
-        names = ["spring", "summer", "autumn", "winter"]
-        today = names[((datetime.date.today().month % 12) // 3 + 3) % 4]
-        for layer in ("o_afenda_seasons", "o_afenda_weather"):
-            nodes = doc.xpath(f"//div[contains(concat(' ', @class, ' '), ' {layer} ')]")
-            self.assertEqual(len(nodes), 1, f"{layer} is not on the login page exactly once")
-            node = nodes[0]
-            self.assertEqual(node.get("aria-hidden"), "true", f"{layer} is not aria-hidden")
-            self.assertEqual(node.get("data-afs-season"), today, f"{layer} does not start on today's season")
-            sheets = node.xpath("./div[contains(@class, 'afs-sheet')]")
-            self.assertEqual([s.get("class").split()[-1] for s in sheets], [f"afs-{n}" for n in names])
-            self.assertFalse(node.xpath("ancestor::*[contains(@class, 'o_afenda_auth_art')]"),
-                             f"{layer} is inside the bear's art")
-        self.assertEqual(len(doc.xpath("//div[contains(@class, 'o_afenda_weather')]//span[@class='afs-p']")), 72)
-        hero = doc.xpath("//svg[contains(@class, 'o_afenda_auth_hero')]")
-        self.assertEqual(len(hero), 1, "the signature bear is not inline on the login page")
-        self.assertNotIn("afs-", lxml_html.tostring(hero[0], encoding="unicode"))
-
-    def test_the_season_stylesheet_is_scoped_and_moves_only_opacity_and_transform(self):
-        """auth_seasons.css: every rule under .o_afenda_login, nothing reaching into the bear,
-        keyframes that animate only opacity and transform, and a reduced-motion block."""
-        path = file_path("afenda_brand/static/src/css/auth_seasons.css")
-        with open(path, encoding="utf-8") as handle:
-            source = re.sub(r"/\*.*?\*/", "", handle.read(), flags=re.S)
-        _html, css = self._frontend_css()
-        self.assertIn(".o_afenda_weather", css, "auth_seasons.css is not in web.assets_frontend")
-        for frames in re.findall(r"@keyframes\s+[\w-]+\s*\{((?:[^{}]*\{[^{}]*\})*)[^{}]*\}", source):
-            props = set(re.findall(r"([a-z-]+)\s*:", frames))
-            self.assertLessEqual(props, {"opacity", "transform"}, f"a season keyframe animates {props}")
-        body = re.sub(r"@keyframes\s+[\w-]+\s*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}", "", source)
-        body = re.sub(r"@media[^{]*\{", "", body)
-        for prelude in re.findall(r"([^{}]+)\{[^{}]*\}", body):
-            for selector in prelude.split(","):
-                selector = selector.strip()
-                if not selector:
-                    continue
-                self.assertTrue(selector.startswith(".o_afenda_login"), f"unscoped selector {selector!r}")
-                self.assertNotRegex(selector, r"afb-|o_afenda_auth_hero|o_afenda_auth_lockup",
-                                    f"{selector!r} reaches into the signature")
-        self.assertIn("prefers-reduced-motion: reduce", source)
 
     @staticmethod
     def _css_rules(source):
@@ -791,9 +737,8 @@ class TestBranding(HttpCase):
             frontend[frontend.index("afenda_brand/static/src/scss/login.scss"):],
             ["afenda_brand/static/src/scss/login.scss",
              "afenda_brand/static/src/css/auth_bear_scales.css",
-             "afenda_brand/static/src/css/auth_bear.css",
-             "afenda_brand/static/src/css/auth_seasons.css"],
-            "the bear stylesheets are not loaded after login.scss, scales first, the season layer last",
+             "afenda_brand/static/src/css/auth_bear.css"],
+            "the bear stylesheets are not loaded after login.scss, scales first",
         )
 
     def test_the_lockup_is_the_only_mark_and_the_card_carries_none(self):

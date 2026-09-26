@@ -108,35 +108,6 @@
              carries.) -->
         <xpath expr="//t[@t-call='web.frontend_layout']/div[hasclass('container')]" position="replace">
             <div class="o_afenda_auth">
-                <!-- ===== THE SEASON LAYER =====
-                     Built AROUND the tenant signature, never in it
-                     (docs/superpowers/specs/2026-09-26-tenant-signature.md): the
-                     bear below is untouched. Two fixed, aria-hidden layers, four
-                     sheets each, cross-faded on a 32 s loop by auth_seasons.css:
-                     the paper tints under everything, the weather over the page and
-                     the bear but under the form. Each sheet's delay puts today's
-                     season (server UTC date, northern meteorological order; a
-                     brand cycle, not a climate) first: sheet i comes up after
-                     ((i - today) mod 4) * 8 s. -->
-                <t t-set="afs_names" t-value="['spring', 'summer', 'autumn', 'winter']"/>
-                <t t-set="afs_today" t-value="(datetime.date.today().month % 12) // 3"/>
-                <t t-set="afs_k" t-value="(afs_today + 3) % 4"/>
-                <div class="o_afenda_seasons" aria-hidden="true" t-att-data-afs-season="afs_names[afs_k]">
-                    <t t-foreach="afs_names" t-as="afs_name">
-                        <div t-attf-class="afs-sheet afs-#{afs_name}"
-                             t-attf-style="animation-delay: -#{(32 - ((afs_name_index - afs_k) % 4) * 8) % 32}s"/>
-                    </t>
-                </div>
-                <div class="o_afenda_weather" aria-hidden="true" t-att-data-afs-season="afs_names[afs_k]">
-                    <t t-foreach="afs_names" t-as="afs_name">
-                        <div t-attf-class="afs-sheet afs-#{afs_name}"
-                             t-attf-style="animation-delay: -#{(32 - ((afs_name_index - afs_k) % 4) * 8) % 32}s">
-                            <t t-foreach="range(18)" t-as="afs_i">
-                                <span class="afs-p" t-attf-style="--x: #{(afs_i * 37 + afs_name_index * 13) % 100}%; --y: #{(afs_i * 53 + afs_name_index * 17) % 92}vh; --t: #{13 + (afs_i * 5 + afs_name_index) % 9}s; --d: -#{(afs_i * 7 + afs_name_index * 3) % 22}s; --s: #{0.7 + (afs_i % 4) * 0.15}"/>
-                            </t>
-                        </div>
-                    </t>
-                </div>
                 <!-- ===== THE HERO ART =====
                      Three cases on `afenda_hero`; the opt-out semantics are the
                      ones this slot has always had:

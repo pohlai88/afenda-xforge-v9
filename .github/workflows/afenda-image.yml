@@ -102,7 +102,7 @@ jobs:
           --health-interval 5s --health-timeout 5s --health-retries 20
     env:
       PACK_TESTS_MIN: "17"  # industry packs: afenda_industry_base 4, afenda_industry_bakery 13 (local, fresh database, fac7cbd6e)
-      ODOO_TESTS_MIN: "189"  # the four AFENDA modules together, measured on the tenant-signature restore: 187 at c5545d38f + 2 season-layer tests in afenda_brand (the four-season stage's 3 tests are gone with it)
+      ODOO_TESTS_MIN: "187"  # the four AFENDA modules together, measured at c5545d38f, the tenant-signature auth page this version restores (the four-season stage's 3 tests are gone with it)
     steps:
       - uses: actions/checkout@v4
         with:
