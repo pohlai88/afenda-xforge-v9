@@ -84,7 +84,10 @@ PUSH_ALONE = (
 
 _PUSH_RE = re.compile(r"\bpush\b")
 _ENV_ASSIGNMENT_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*=")
-_GIT_ENV_RE = re.compile(r"^GIT_(DIR|WORK_TREE|COMMON_DIR|NAMESPACE|INDEX_FILE)=")
+_GIT_ENV_RE = re.compile(
+    r"^GIT_(DIR|WORK_TREE|COMMON_DIR|NAMESPACE|INDEX_FILE"
+    r"|CONFIG_(COUNT|PARAMETERS|KEY_\d+|VALUE_\d+|GLOBAL|SYSTEM|NOSYSTEM))="
+)
 _OPERATOR_CHARS = set("|&;<>()")
 _HEREDOC_RE = re.compile(r"(?<!<)<<(-?)\s*(['\"]?)([A-Za-z_][\w.-]*)\2")
 _SHELL_WORD_RE = re.compile(r"(?:^|[\s/;&|(])(?:ba|z|da|k)?sh(?:\.exe)?(?=\s|$)")
@@ -276,8 +279,11 @@ def _find_pushes(command: str, cwd: str, env: dict | None = None, depth: int = 0
             continue
         git_cwd, index = cwd, 1
         subcommand = None
+        config_option = None
         while index < len(argv):
             arg = argv[index]
+            if arg in ("-c", "--config-env") or arg.startswith(("--config-env=", "-c")) and arg != "-C":
+                config_option = config_option or arg.split("=", 1)[0][:12]
             if arg == "-C" and index + 1 < len(argv):
                 if git_cwd is not None:
                     git_cwd = os.path.normpath(
@@ -293,6 +299,11 @@ def _find_pushes(command: str, cwd: str, env: dict | None = None, depth: int = 0
             else:
                 subcommand = arg
                 break
+        if subcommand == "push" and config_option:
+            raise _Blocked(
+                f"`git {config_option}` can change what a push sends (remote.*.push, "
+                "push.default); push without per-command config"
+            )
         if subcommand == "push":
             if git_cwd is None:
                 raise _Blocked("`cd -` before the push leaves the directory unknown")
@@ -404,7 +415,8 @@ def _evaluate(git_identity, cwd, args):
         return None
 
     refspecs = []
-    specs = positional[1:]
+    # `--repo <remote>` names the remote, so every positional is a refspec (Codex P1, PR #9).
+    specs = positional if "--repo" in flags else positional[1:]
     index = 0
     while index < len(specs):
         if specs[index] == "tag" and index + 1 < len(specs):

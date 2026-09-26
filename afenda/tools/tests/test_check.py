@@ -417,6 +417,21 @@ class CheckMainTests(_TempRepo):
         self.assertIn("no stamp", out.getvalue())
         self.assertFalse(self.stamp().exists())
 
+    def test_a_sibling_base_with_the_same_merge_base_earns_no_stamp(self):
+        # Codex P1 on PR #9: the API gate compares against the base's tip, so a
+        # sibling ref sharing the merge base could pass a contract origin/main fails.
+        _git(["update-ref", "refs/remotes/origin/main", "main"], self.repo)
+        _git(["checkout", "-q", "-b", "sibling", "main"], self.repo)
+        self.write("afenda/tools/other.py", "other = 1\n")
+        self.commit("sibling", "afenda/tools/other.py")
+        _git(["checkout", "-q", "feature"], self.repo)
+        out = io.StringIO()
+        with redirect_stdout(out):
+            code = check.main(["--base", "sibling"], cwd=self.repo, executor=_Executor())
+        self.assertEqual(code, 0)
+        self.assertIn("no stamp", out.getvalue())
+        self.assertFalse(self.stamp().exists())
+
     def test_the_default_base_still_earns_a_stamp(self):
         _git(["update-ref", "refs/remotes/origin/main", "main"], self.repo)
         code, out, _executor = self.run_check()

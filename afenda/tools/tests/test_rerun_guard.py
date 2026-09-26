@@ -233,6 +233,24 @@ class RerunGuardTestCase(unittest.TestCase):
         ledger_file = self.repo / ".git" / "afenda-rerun-ledger.json"
         self.assertTrue(ledger_file.exists())
 
+    def test_the_ledger_update_holds_a_repository_lock(self):
+        # Codex P2 on PR #9: two sessions must not both read count N and both write N+1.
+        # The load-check-increment-save runs under an exclusive lock on a sibling file.
+        import threading
+        command = "python -m unittest afenda.tools.tests.test_rerun_guard"
+        barrier = threading.Barrier(4)
+        results = []
+        def one():
+            barrier.wait()
+            results.append(rerun_guard.main(self._payload(command, session_id=threading.current_thread().name), self.env)[0])
+        threads = [threading.Thread(target=one, name=f"s{i}") for i in range(4)]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+        self.assertEqual(sorted(results), [0, 0, 2, 2])
+        self.assertTrue(hasattr(rerun_guard, "_ledger_lock"))
+
     def _three(self, *commands):
         """Run the commands in order; return the exit codes."""
         return [rerun_guard.main(self._payload(c), self.env)[0] for c in commands]

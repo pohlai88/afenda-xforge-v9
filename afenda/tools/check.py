@@ -347,13 +347,15 @@ def main(argv=None, *, cwd=None, executor=None) -> int:
         return 1
 
     reason = None
+    # The API gate compares against the base's tip, so a stamp needs the base tip itself to be
+    # origin/main's, not only a shared merge base (Codex P1, PR #9).
     try:
-        default_base = _git_identity.run_git(["merge-base", DEFAULT_BASE, "HEAD"], root).strip()
+        default_tip = _git_identity.rev_sha(root, DEFAULT_BASE)
     except _git_identity.GitIdentityError:
-        default_base = None  # no origin/main here (a scratch repo): the base passed is all there is
+        default_tip = None  # no origin/main here (a scratch repo): the base passed is all there is
     if dirty:
         reason = "the tree has uncommitted scoped changes"
-    elif default_base and default_base != merge_base:
+    elif default_tip and default_tip != _git_identity.rev_sha(root, args.base):
         reason = f"the gates were chosen against {args.base!r}, not {DEFAULT_BASE}"
     elif not set(selected) <= set(to_run):
         reason = "not every selected gate ran (" + ", ".join(
