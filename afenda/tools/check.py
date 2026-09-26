@@ -322,8 +322,8 @@ def main(argv=None, *, cwd=None, executor=None) -> int:
 
     if dirty and not args.gate:
         print(
-            "check: refused. It certifies a commit, and these tracked paths have "
-            "uncommitted changes (commit them, or name gates with --gate to run "
+            "check: refused. It certifies a commit, and these paths have "
+            "uncommitted or untracked changes (commit them, or name gates with --gate to run "
             "them without a stamp):"
         )
         for path in dirty:
