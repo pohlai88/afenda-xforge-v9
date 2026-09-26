@@ -262,9 +262,9 @@ that measurement; the two earlier waves' counts are superseded, not repeated.
 
 | What | Command | Printed result |
 |---|---|---|
-| Tools suite | `.venv/Scripts/python -m unittest discover afenda/tools/tests` | `Ran 307 tests` … `OK (skipped=1)` |
+| Tools suite | `.venv/Scripts/python -m unittest discover afenda/tools/tests` | `Ran 339 tests` … `OK (skipped=1)` at e6b7a72aa = 307 (Task 7 fix wave) + 15 (`pr evidence`, d0816c80c) + 11 (rerun guard, 4263d6729) + 6 (sweep fix wave, e6b7a72aa) |
 | `test_api_diff` alone (inside the tools suite) | `.venv/Scripts/python -m unittest afenda.tools.tests.test_api_diff -v` | `Ran 27 tests` … `OK` |
-| `test_deploy_static` alone (inside the tools suite) | `.venv/Scripts/python -m unittest afenda.tools.tests.test_deploy_static -v` | `Ran 35 tests in 0.016s` … `OK` |
+| `test_deploy_static` alone (inside the tools suite) | `.venv/Scripts/python -m unittest afenda.tools.tests.test_deploy_static -v` | `Ran 37 tests` … `OK` at e6b7a72aa (+1 the `--addons-path` guard, +1 the `afenda-pr.yml` guard) |
 | Four AFENDA modules together (CI shape), reused db `afenda_t7`, port 8179 | `-u afenda_brand,afenda_brand_digest,afenda_runtime,afenda_api_docs --test-enable --test-tags "/afenda_brand,/afenda_brand_digest,/afenda_runtime,/afenda_api_docs"` | `odoo.tests.result: 0 failed, 0 error(s) of 187 tests when loading database 'afenda_t7'` |
 | `TestCommittedAsset` + `TestSpecRouteGuard` alone, same db | `--test-tags "/afenda_api_docs:TestCommittedAsset,/afenda_api_docs:TestSpecRouteGuard"` | `odoo.tests.result: 0 failed, 0 error(s) of 6 tests when loading database 'afenda_t7'` |
 | Asset export, `afenda_assets` (reused; -u afenda_runtime,afenda_api_docs first) | `OUT_DIR=... ADDONS_ROOT=addons odoo-bin shell … < afenda/tools/export_openapi_shell.py`, run twice with `PYTHONHASHSEED=1` then `=2` | `afenda-openapi: wrote 33 documents` both times, no diff between the two runs; this wave's fix touches every document's shared `Error` schema and `Problem` response description (`required` gains `message`; the `invalid_request` status text changes from `422` to `4xx`), so, unlike the two prior waves, all 33 `.json` files differ from the previously-committed version — largest is `account.json` at 1,031,064 B (budget 1,572,864 B) |
