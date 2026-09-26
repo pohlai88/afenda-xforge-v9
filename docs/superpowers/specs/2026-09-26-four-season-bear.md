@@ -49,12 +49,45 @@ produced this spec). Plan: `docs/superpowers/plans/2026-09-26-four-season-bear.m
 - **Per-page skins** (dawn, tide, night, moss) shrink to the form-side mood aura; the seasons own
   the bear's palette. The eight form-state reactions keep working.
 
+## Owner design guidance adopted (2026-09-26, second pass)
+
+- **One bear, four moods.** Silhouette, face and geometry never change; only facet colour,
+  highlights, rim, haze and particles do. Personalities: spring rose, soft pink and fresh green;
+  summer emerald and warm gold; autumn rust, amber and copper; winter blue-grey, silver and icy
+  white. The season table in the plan follows these, inside the contrast window.
+- **Particles support the bear** (roughly: bear 100 %, season colour 60 %, rim and glow 35 %,
+  particles 20 %): spring 9 petals, summer 6 glints, autumn 8 leaves, winter 16 flakes. Glints and
+  the gleam never sit over the face; nothing ever enters the form column.
+- **The gleam** is a slow, very low-opacity diagonal reflection, once per season.
+- **Form states stay subtle and keep the season**: focus changes sheen, rim and facet brightness
+  by about 5–8 %; an error adds a warm rim and one settle, never recolouring the bear; success is
+  a short soft glow.
+- **This is a brand season cycle, not a climate.** The tenant is in Malaysia, where four
+  meteorological seasons do not occur; the northern-hemisphere months only order the cycle and
+  pick the reduced-motion still. A hemisphere- or locale-aware choice is a possible later
+  change, not part of this work.
+- **Pause-ready.** The loop lives on one element (`.o_afenda_auth_stage`), so a later on-page
+  pause control is one `:has(...)` rule that sets `animation-play-state: paused` there. No
+  redesign is needed if the WCAG 2.2.2 decision is revisited.
+- **Targets:** 60 fps on desktop, 30+ fps on a low-power phone; nothing animates `filter`,
+  `box-shadow` or a blur per frame.
+- **Not adopted:** "animating CSS custom properties is cheap". Registered custom properties
+  animate on the main thread and repaint what they colour, which is why the colour loop is
+  confined to the stage and the bear repaints only during the four cross-fades.
+- **Composition re-framed (owner, 2026-09-26).** Desktop ≥ 1200 px: the ink column is 40–45 % of
+  the width; tablet 768–1199 px: 35–40 %; phone: a 180–250 px dark banner above the form. Inside
+  the column the bear is about 70–80 % of its width and 75–85 % of its height, with an 8–10 %
+  top safe zone, a left offset of −4 % to +2 % and a bottom offset of −3 % to 0; the face is
+  always fully visible. This replaces the earlier "hero box unchanged" acceptance.
+
 ## Acceptance
 
 - Every auth page (`/web/login`, `/web/signup?token`, `/web/reset_password` in all its states,
   `/web/login/totp`, `/request-access`) shows the stage: panel, luminous bear, season layer.
 - The loop starts on today's season; under reduced motion only today's season shows, still.
-- Layout: the hero's box matches `main` within 0.5 px at 1440, 1366, 1280, 1024, 390, 360 px.
+- Layout: the re-framed proportions above hold at 1440×900, 1366×768, 1280×633, 1024×768,
+  390×844 and 360×640; the face is fully visible at each; no horizontal scroll at 360 px; no
+  particle enters the form column.
 - At rest: no layout per frame, no running CSS transition; frame p95 ≤ 20 ms.
 - Seen rendered at a wide and a narrow viewport, all four seasons, before merge; the owner sees
   the stills and a full-loop video.
