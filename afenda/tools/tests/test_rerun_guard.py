@@ -1,8 +1,11 @@
 """Tests for the rerun-guard PreToolUse hook (`.claude/hooks/rerun_guard.py`).
 
-The hook blocks a gate command (a test suite, `api_diff`, `corpus`,
-`scan_identity`, `pr_evidence`) the third time it is issued in one session on
-an unchanged tree. It is loaded by path (not as a package: it lives under
+The hook blocks a gate (a unittest or pytest run, an Odoo test run,
+`afenda.tools.check`, `api_diff`, `corpus`, `scan_identity`, `pr_evidence`)
+the third time it runs on an unchanged scoped tree, counted in one ledger that
+every session and sub-agent of the repository shares
+(`<git common dir>/afenda-rerun-ledger.json`), and keyed on the gate's
+semantic identity, not its command text. It is loaded by path (not as a package: it lives under
 `.claude/`, a dotfile directory upstream's `.gitignore` excludes from normal
 package discovery) and driven through its `main(stdin_text, env) -> (exit_code,
 stderr_text)` entry point, the way `test_api_diff.py`'s `BaseRefTests` reads
@@ -14,9 +17,12 @@ import importlib.util
 import json
 import subprocess
 import tempfile
+import time
 import unittest
 import unittest.mock
 from pathlib import Path
+
+from afenda.tools import _git_identity
 
 _HOOK_PATH = (
     Path(__file__).resolve().parents[3] / ".claude" / "hooks" / "rerun_guard.py"
@@ -44,7 +50,7 @@ class RerunGuardTestCase(unittest.TestCase):
     """Builds a throwaway git repo (git init, one committed file under
     `afenda/`) per test, and a temporary ledger directory pointed at via
     `RERUN_GUARD_LEDGER_DIR`, so nothing here reads or writes this checkout's
-    own `.claude/.rerun-ledger`."""
+    own `.git/afenda-rerun-ledger.json`."""
 
     def setUp(self):
         self._tmp = tempfile.TemporaryDirectory()
@@ -90,13 +96,12 @@ class RerunGuardTestCase(unittest.TestCase):
         # A non-gate command must return before any git subprocess is
         # spawned at all -- not merely happen to pass on a repo that
         # tolerates it.
-        with unittest.mock.patch.object(rerun_guard, "_run_git") as mock_run_git:
-            exit_code, stderr = rerun_guard.main(
-                self._payload("ls -la afenda"), self.env
-            )
-        self.assertEqual(exit_code, 0)
-        self.assertEqual(stderr, "")
-        mock_run_git.assert_not_called()
+        with unittest.mock.patch("subprocess.run") as mock_run:
+            for command in ("ls -la afenda", "grep -n pytest afenda/x.py",
+                            "grep -rn afenda.tools.check docs"):
+                exit_code, stderr = rerun_guard.main(self._payload(command), self.env)
+                self.assertEqual((exit_code, stderr), (0, ""), command)
+        mock_run.assert_not_called()
 
     def test_non_bash_tool_passes_without_touching_git(self):
         # A gate-looking command under a non-Bash tool must not even reach
@@ -177,18 +182,14 @@ class RerunGuardTestCase(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(stderr, "")
 
-    def test_different_session_id_has_its_own_count(self):
+    def test_a_different_session_shares_the_count(self):
+        # One ledger per repository: a sub-agent (its own session id) must
+        # inherit the count, not start a fresh one.
         command = "python -m unittest afenda.tools.tests.test_rerun_guard"
         rerun_guard.main(self._payload(command, session_id="session-a"), self.env)
         rerun_guard.main(self._payload(command, session_id="session-a"), self.env)
-        third_a = rerun_guard.main(self._payload(command, session_id="session-a"), self.env)
-        self.assertEqual(third_a[0], 2)
-
-        # A different session id must not have inherited session-a's count.
-        first_b = rerun_guard.main(self._payload(command, session_id="session-b"), self.env)
-        second_b = rerun_guard.main(self._payload(command, session_id="session-b"), self.env)
-        self.assertEqual(first_b, (0, ""))
-        self.assertEqual(second_b, (0, ""))
+        third_b = rerun_guard.main(self._payload(command, session_id="session-b"), self.env)
+        self.assertEqual(third_b[0], 2)
 
     def test_malformed_json_passes(self):
         exit_code, stderr = rerun_guard.main("{not json", self.env)
@@ -221,16 +222,117 @@ class RerunGuardTestCase(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(stderr, "")
 
-    def test_ledger_dir_defaults_under_repo_when_env_var_absent(self):
+    def test_ledger_defaults_to_the_common_git_dir_when_env_var_absent(self):
         # No RERUN_GUARD_LEDGER_DIR: the ledger must land at
-        # <repo>/.claude/.rerun-ledger/<session id>.json.
+        # <repo>/.git/afenda-rerun-ledger.json.
         command = "python -m unittest afenda.tools.tests.test_rerun_guard"
         rerun_guard.main(self._payload(command, session_id="default-dir"), {})
         rerun_guard.main(self._payload(command, session_id="default-dir"), {})
         third = rerun_guard.main(self._payload(command, session_id="default-dir"), {})
         self.assertEqual(third[0], 2)
-        ledger_file = self.repo / ".claude" / ".rerun-ledger" / "default-dir.json"
+        ledger_file = self.repo / ".git" / "afenda-rerun-ledger.json"
         self.assertTrue(ledger_file.exists())
+
+    def _three(self, *commands):
+        """Run the commands in order; return the exit codes."""
+        return [rerun_guard.main(self._payload(c), self.env)[0] for c in commands]
+
+    def test_verbosity_failfast_redirection_and_env_prefix_are_the_same_gate(self):
+        codes = self._three(
+            "python -m unittest afenda.tools.tests.test_a afenda.tools.tests.test_b",
+            "MSYS_NO_PATHCONV=1 .venv/Scripts/python -m unittest -v --failfast "
+            "afenda.tools.tests.test_b afenda.tools.tests.test_a 2>&1 | tail -5",
+            "cd /x && .venv/Scripts/python -m unittest -q afenda.tools.tests.test_a "
+            "afenda.tools.tests.test_b > out.log",
+        )
+        self.assertEqual(codes, [0, 0, 2])
+
+    def test_odoo_test_tags_are_a_sorted_set(self):
+        codes = self._three(
+            "python odoo-bin -c afenda/odoo.conf -d a -u m --test-enable --test-tags /m1,/m2 --stop-after-init",
+            'MSYS2_ARG_CONV_EXCL="*" python odoo-bin --test-enable -d a --test-tags "/m2,/m1"',
+            "python odoo-bin --test-enable --test-tags=/m1,/m2 --http-port 8179",
+        )
+        self.assertEqual(codes, [0, 0, 2])
+
+    def test_different_targets_are_different_gates(self):
+        codes = self._three(
+            "python -m unittest afenda.tools.tests.test_a",
+            "python -m unittest afenda.tools.tests.test_a",
+            "python -m unittest afenda.tools.tests.test_b",
+        )
+        self.assertEqual(codes, [0, 0, 0])
+
+    def test_check_is_a_gate_keyed_on_its_gates(self):
+        codes = self._three(
+            ".venv/Scripts/python -m afenda.tools.check --gate tools --gate odoo",
+            ".venv/Scripts/python -m afenda.tools.check --db x --gate odoo --gate tools",
+            ".venv/Scripts/python -m afenda.tools.check --gate api_contract",
+        )
+        self.assertEqual(codes, [0, 0, 0])
+        third = rerun_guard.main(
+            self._payload("python -m afenda.tools.check --gate=odoo --gate=tools"), self.env
+        )
+        self.assertEqual(third[0], 2)
+
+    def test_check_list_is_not_a_gate_run(self):
+        codes = self._three(*["python -m afenda.tools.check --list"] * 3)
+        self.assertEqual(codes, [0, 0, 0])
+
+    def test_pytest_is_a_gate(self):
+        codes = self._three("pytest tests/a.py -q", "python -m pytest tests/a.py", "pytest -v tests/a.py")
+        self.assertEqual(codes, [0, 0, 2])
+
+    def test_a_compound_command_counts_each_gate(self):
+        self._three(
+            "python -m unittest afenda.tools.tests.test_a",
+            "python -m unittest afenda.tools.tests.test_a",
+        )
+        exit_code, stderr = rerun_guard.main(
+            self._payload("python -m afenda.tools.scan_identity && python -m unittest afenda.tools.tests.test_a"),
+            self.env,
+        )
+        self.assertEqual(exit_code, 2)
+        self.assertIn("unittest", stderr)
+
+    def test_entries_older_than_seven_days_are_pruned(self):
+        ledger = self.ledger_dir / "afenda-rerun-ledger.json"
+        self.ledger_dir.mkdir(parents=True)
+        old = time.time() - 8 * 24 * 3600
+        ledger.write_text(json.dumps({"stale": {"count": 2, "time": old, "gate": "x"}}), encoding="utf-8")
+        rerun_guard.main(self._payload("python -m unittest afenda.tools.tests.test_a"), self.env)
+        data = json.loads(ledger.read_text(encoding="utf-8"))
+        self.assertNotIn("stale", data)
+        self.assertEqual(len(data), 1)
+
+    def test_fingerprint_comes_from_the_shared_helper(self):
+        with unittest.mock.patch.object(
+            _git_identity, "scoped_fingerprint", return_value="fixed"
+        ) as fingerprint:
+            rerun_guard.main(self._payload("python -m unittest afenda.tools.tests.test_a"), self.env)
+        fingerprint.assert_called_once()
+
+    def test_a_broken_helper_fails_open(self):
+        with unittest.mock.patch.object(rerun_guard, "_load_git_identity", side_effect=ImportError("x")):
+            for _ in range(3):
+                result = rerun_guard.main(
+                    self._payload("python -m unittest afenda.tools.tests.test_a"), self.env
+                )
+                self.assertEqual(result, (0, ""))
+
+    def test_a_heredoc_body_is_data_not_a_gate(self):
+        # A commit message that names a gate command is not a gate run.
+        command = (
+            "cat > msg.txt <<'EOF'\n"
+            "ran python -m unittest afenda.tools.tests.test_a\n"
+            "EOF\n"
+            "git commit -q -F msg.txt"
+        )
+        codes = self._three(command, command, command)
+        self.assertEqual(codes, [0, 0, 0])
+
+    def test_docstring_no_longer_cites_a_lane(self):
+        self.assertNotIn("Lane A", _HOOK_PATH.read_text(encoding="utf-8"))
 
 
 if __name__ == "__main__":
