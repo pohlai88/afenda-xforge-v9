@@ -3,9 +3,10 @@
 //
 // A light paper page, composed as a poster. The art column - the crystal
 // bear, inline so auth_bear.css can reach its layers, on its four-season stage
-// - is a fixed share of the page: 42% of the width from 1200px, 38% from
+// - is a fixed share of the page: 45% of the width from 1200px, 40% from
 // 768px, and a 180-250px banner above the form on a phone (the owner's
-// re-framing, docs/superpowers/specs/2026-09-26-four-season-bear.md). Its one
+// re-framing, docs/superpowers/specs/2026-09-26-four-season-bear.md, and the
+// four-season fix wave's "Geometry fact"). Its one
 // surface is the stage's deep-ink panel (owner decision 2): a flat
 // `--bear-ink` fill that auth_bear.css paints on the art column only when the
 // stage renders - no radius, no shadow, no gradient, and nothing in this
@@ -31,7 +32,7 @@
 // both smaller than the face's own margin at every width the spec names.
 //
 // Breakpoints: Bootstrap's md (768px) turns the page from art-above-form into
-// art-beside-form, and 1200px widens the art column from 38% to 42%.
+// art-beside-form, and 1200px widens the art column from 40% to 45%.
 // Everything that must exist at every width - the art itself, its left
 // anchor, the card, the lockup - is declared unconditionally, outside them.
 // (A third, at 1100px, only pairs the fields of the two tall forms.)
@@ -521,13 +522,19 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
     // - phone: a banner above the form, 180-250px tall on the viewport's
     //   height, so the "Log in" button stays above the fold on a 360x640
     //   screen; it spans the width, and the bear sits small in its corner.
-    // - tablet (768px): 38% of the width; desktop (1200px): 42%. The form
-    //   column takes the rest; its 22rem floor fits 62% of 768px.
+    // - tablet (768px): 40% of the width; desktop (1200px): 45%. The form
+    //   column takes the rest; its 22rem floor fits 60% of 768px.
     // `justify-content: flex-start` is the left anchor and `align-items:
     // flex-end` seats the bear on the column's bottom edge, where its tree
     // already runs off. `overflow: hidden` clips the stage's small bleed to
     // the column, so the page never scrolls sideways and nothing the bear or
     // its season layer draws can reach the form column.
+    // `container-type: size` (the four-season fix wave, "Geometry fact") is
+    // what lets the stage size itself in cqh/cqw below: the column's OWN
+    // dimensions never depend on its content in either layout (flex-basis +
+    // the row's stretch above md, a fixed height on phone), so there is no
+    // circular query, and the stage reads the column's real box instead of
+    // the viewport's.
     .o_afenda_auth_art {
         flex: 0 0 auto;
         height: clamp(180px, 28vh, 250px);
@@ -536,14 +543,15 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
         justify-content: flex-start;
         min-width: 0;
         overflow: hidden;
+        container-type: size;
 
         @media (min-width: 768px) {
-            flex: 0 0 38%;
+            flex: 0 0 40%;
             height: auto;
         }
 
         @media (min-width: 1200px) {
-            flex: 0 0 42%;
+            flex: 0 0 45%;
         }
     }
 
@@ -551,13 +559,19 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
     // ratio (the master's 800x887), the hero and its season layer filling it.
     // - phone: 90% of the banner's height, so a 10% top safe zone stays clear
     //   and the whole face shows (it sits in the top half of the art).
-    // - md and up: 78% of the column's width, capped at 72.15vh - which is
-    //   80vh of height at this ratio - whichever binds first, so the bear is
-    //   78% of the column's width or 80% of its height and the top 20% of the
-    //   column stays clear. It bleeds 1% of the column past the left edge and
+    // - md and up: HEIGHT-led (the four-season fix wave's "Geometry fact":
+    //   no landscape column is wide enough, at the master's ratio, to hold
+    //   the bear at 70-80% of its width AND 75-85% of its height at once).
+    //   The stage is 76% of the column's height (cqh), capped at 92% of its
+    //   width (cqw) converted through the master's own ratio - so the top
+    //   safe zone is at least 24% of the column and the bear never outgrows
+    //   the width either. It bleeds 1% of the column past the left edge and
     //   2vh past the bottom for scale; the face starts 3.75% of the bear's
-    //   width in from its left, which is more than that bleed at every width.
-    // The ratio is passed through `unquote` so no Sass division touches it.
+    //   width in from its left, which every landscape column in the
+    //   geometry fact (all narrower than the bear) clears at the 92% cap.
+    // The ratio is passed through `unquote` so no Sass division touches it;
+    // the height's `min(...)` is too, so libsass never tries to evaluate the
+    // calc() itself and simply emits the string.
     .o_afenda_auth_stage {
         flex: 0 0 auto;
         aspect-ratio: unquote("800 / 887");
@@ -565,9 +579,8 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
         height: 90%;
 
         @media (min-width: 768px) {
-            width: 78%;
-            max-width: 72.15vh;
-            height: auto;
+            height: unquote("min(76cqh, calc(92cqw * 887 / 800))");
+            width: auto;
             margin: 0 0 -2vh -1%;
         }
     }
