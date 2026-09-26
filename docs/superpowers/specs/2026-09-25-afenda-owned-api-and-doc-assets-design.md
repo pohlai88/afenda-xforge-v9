@@ -203,3 +203,138 @@ reference, not as a tutorial.
      model), so `afenda/tools/api_diff.py` compares two committed sets directly. It reports
      the same breaking classes 1.4 lists, plus additions, and writes the changelog section.
    - **Revisit:** when oasdiff ships 3.1 in a stable release.
+
+## Corrections recorded
+
+These were filed on 2026-09-26, while planning, after two independent plan reviews and
+measurement. Format: `.claude/odoo-agent-rules.md`, "Correction ledger". Where an entry and
+the body disagree, the entry wins.
+
+- `id`: AFD-ARCH-CORR-0001
+  - **previous_claim:** "`type`: an AFENDA URI, `https://www.nexuscanon.com/docs/api/errors#<code>`"
+    (1.1).
+  - **evidence:** the landing site serves no errors page; `/docs` lives on the app host
+    (`afenda/addons/afenda_api_docs/controllers/landing.py:91`).
+  - **disposition:** AMENDED
+  - **replacement:** `type` is the relative reference `/docs/api/errors#<code>`, served by
+    `afenda_api_docs` (RFC 9457 allows relative references).
+  - **introduced_in:** 79b38fcce
+- `id`: AFD-ARCH-CORR-0002
+  - **previous_claim:** the codes "e.g. `access_denied`, `validation_error`, `not_found`,
+    `unauthorized`, `internal_error`" (1.1).
+  - **evidence:**
+    - `AccessDenied(UserError)` answers 403 (`odoo/exceptions.py:39`).
+    - Bearer failures raise werkzeug `Unauthorized` 401 (`odoo/addons/base/models/ir_http.py:240,246,249`).
+    - `ConcurrencyError` is a plain `Exception` (`odoo/exceptions.py:33`), so it arrives as a 500.
+    - `LockError(UserError)` is the 409 (`odoo/exceptions.py:14-21`).
+  - **disposition:** AMENDED
+  - **replacement:** the table.
+
+    | By exception class | Code |
+    |---|---|
+    | `AccessDenied`, `AccessError` | `access_denied` |
+    | `MissingError` | `not_found`, with a fixed `detail` that carries no uid or record |
+    | `LockError` | `conflict` |
+    | `ValidationError` | `validation_error` |
+    | `UserError` | `user_error` |
+
+    Otherwise by status: 401 `unauthenticated` (keeping `WWW-Authenticate`), 403
+    `access_denied`, 404 `not_found`, 409 `conflict`, other 4xx `invalid_request`, 5xx
+    `internal_error`. The body also carries `message` = `detail`, which upstream's `/doc`
+    explorer reads.
+  - **introduced_in:** 79b38fcce
+- `id`: AFD-ARCH-CORR-0003
+  - **previous_claim:** "every `/json/2` error becomes `application/problem+json`" (1.1).
+  - **evidence:** two paths never reach `ir.http._handle_error`:
+    - a wrong Content-Type gives a 415 before dispatch (`odoo/http.py:2199-2213`);
+    - an unknown database gives a nodb 404 (`odoo/http.py:2851-2864`).
+  - **disposition:** AMENDED
+  - **replacement:** every `/json/2` error raised after dispatch. Those two pre-dispatch
+    cases keep upstream's HTML and are documented as exclusions.
+  - **introduced_in:** 79b38fcce
+- `id`: AFD-ARCH-CORR-0004
+  - **previous_claim:** "`x-afenda-build` carries the commit" (1.2).
+  - **evidence:** a per-commit value makes every committed document differ on every commit,
+    which defeats the golden-file gate in 1.3.
+  - **disposition:** RETRACTED
+  - **replacement:** none. `info.version` is the only version marker.
+  - **introduced_in:** 79b38fcce
+- `id`: AFD-ARCH-CORR-0005
+  - **previous_claim:** "Files: `docs/api/openapi/<app>.json`" (1.3).
+  - **evidence:** `.dockerignore:8` excludes `/docs` from the production image, so the
+    files could not be served.
+  - **disposition:** AMENDED
+  - **replacement:** `afenda/addons/afenda_api_docs/openapi/<area>.json`, plus `CHANGELOG.md`
+    alongside.
+  - **introduced_in:** 79b38fcce
+- `id`: AFD-ARCH-CORR-0006
+  - **previous_claim:** "Generated as: a dedicated API-reference role … each supported
+    app's manager group" (1.3).
+  - **evidence:**
+    - Admin receives each installed app's groups through that app's data (e.g.
+      `addons/account/security/account_security.xml:79`).
+    - Admin does not receive the feature groups (`odoo/addons/base/security/base_groups.xml:47-53`).
+  - **disposition:** AMENDED
+  - **replacement:** generated as `base.user_admin` with `su=False` and `lang=en_US`, on
+    default settings. The documented surface is the administrator's on a fresh
+    installation. Fields behind optional feature groups (e.g. multi-currency) are not in it.
+  - **introduced_in:** 79b38fcce
+- `id`: AFD-ARCH-CORR-0007
+  - **previous_claim:** owner decision 2's rule: `core` for modules in every application's
+    closure or none, else the smallest closure.
+  - **evidence:** measured on a fresh 34-app database, 2026-09-25:
+    - every Community application depends on `mail`, so `mail`'s models landed in `core`;
+    - `core` came to 2.2 MiB.
+  - **disposition:** AMENDED
+  - **replacement:** checked in order:
+    1. a model defined by an application module belongs to that application;
+    2. otherwise `ir.*` models form a `technical` document;
+    3. then the original rule.
+
+    Measured: `core` 927 KiB, `technical` 745 KiB, `mail` 557 KiB.
+  - **introduced_in:** 1243e57a9
+- `id`: AFD-ARCH-CORR-0008
+  - **previous_claim:** "each committed document stays under 1 MiB … If it does not, narrow
+    what the document includes" (phase 1 acceptance).
+  - **evidence:** `account` measures 1166 KiB, 55 models and 1012 operations, all genuine
+    accounting API surface.
+  - **disposition:** AMENDED, **for the owner's attention:**
+  - **replacement:** committed asset documents are budgeted at 1.5 MiB each. The live
+    per-request document keeps 1 MiB. The per-operation response entries shrink to shared
+    `4XX` and `5XX` references, and the final sizes are re-measured before the budget is
+    fixed.
+  - **introduced_in:** 79b38fcce
+- `id`: AFD-ARCH-CORR-0009
+  - **previous_claim:** "every committed document validates against the OpenAPI 3.1
+    meta-schema" (phase 1 acceptance).
+  - **evidence:** there is no JSON Schema validator in `.venv`, and phase 1 adds no
+    dependencies.
+  - **disposition:** AMENDED
+  - **replacement:** a standard-library structural check:
+    - the required top-level keys;
+    - every `$ref` resolves;
+    - every operation has `operationId`, `requestBody` and `responses`.
+
+    Full meta-schema validation is an accepted gap.
+  - **introduced_in:** 79b38fcce
+- `id`: AFD-ARCH-CORR-0010
+  - **previous_claim:** "a deliberately breaking test change is caught by the oasdiff check,
+    and an additive one is not" (phase 1 acceptance).
+  - **evidence:** 1.4 also requires additive changes to bump MINOR.
+  - **disposition:** AMENDED
+  - **replacement:** an additive change is never reported as breaking, but it needs at
+    least a MINOR bump. A descriptive-only change needs none. The check is done by
+    `afenda/tools/api_diff.py` (decision 4).
+  - **introduced_in:** 79b38fcce
+- `id`: AFD-ARCH-CORR-0011
+  - **previous_claim:** implied by 1.2's determinism requirement: every field's selection
+    values appear in the committed documents.
+  - **evidence:**
+    - the time-zone selection is `pytz.all_timezones` (`odoo/addons/base/models/res_partner.py:40`);
+    - `pytz` is unpinned (`requirements.txt:80`);
+    - language selections come from installed languages.
+  - **disposition:** AMENDED
+  - **replacement:** committed documents omit `enum` for selections computed at runtime (a
+    callable or a method name) and mark them `x-afenda-dynamic-enum: true`. The live
+    per-request document keeps them.
+  - **introduced_in:** 79b38fcce
