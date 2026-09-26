@@ -43,6 +43,15 @@ class Changes:
     descriptive: list = field(default_factory=list)
 
 
+@dataclass
+class ContractSummary:
+    """The counts `changelog_section` needs for the initial-contract summary line."""
+
+    documents: int
+    operations: int
+    schemas: int
+
+
 # --------------------------------------------------------------------------
 # Reading documents: base (a git ref) and head (the working tree).
 # --------------------------------------------------------------------------
@@ -302,13 +311,34 @@ def check(base_version, head_version: str, changes: Changes, changelog: str) -> 
 # CHANGELOG.md.
 # --------------------------------------------------------------------------
 
-def changelog_section(version: str, changes: Changes, first: bool) -> str:
-    """The Markdown section for one version, headed `## <version> — <suffix>`."""
-    if first:
-        heading = f"## {version} — initial contract"
-    else:
-        heading = f"## {version} — {_BUMP_LABEL[required_bump(changes)]}"
+def changelog_section(
+    version: str, changes: Changes, first: bool, summary: "ContractSummary | None" = None
+) -> str:
+    """The Markdown section for one version, headed `## <version> — <suffix>`.
 
+    `first` (no base contract) writes the heading plus one summary line,
+    not a per-item list: against an empty base, every operation and schema
+    in `head` is additive by construction, so a full listing would repeat
+    one bullet per item in the initial surface (thousands, for a real API)
+    both in the committed file and in anything that captures `check`'s or
+    this command's output (a CI step summary, for one). `summary` supplies
+    the counts for that line; a missing `summary` reads as all-zero rather
+    than raising, since a heading is still owed even without one.
+
+    A version-to-version diff (`first` is False, a base contract exists)
+    keeps the full Breaking/Additive/Descriptive lists, unchanged.
+    """
+    if first:
+        counts = summary or ContractSummary(documents=0, operations=0, schemas=0)
+        heading = f"## {version} — initial contract"
+        line = (
+            f"Initial published contract: {counts.documents} documents, "
+            f"{counts.operations} operations, {counts.schemas} schemas. "
+            "Errors are RFC 9457 Problem Details (see /docs/api/errors)."
+        )
+        return f"{heading}\n\n{line}\n"
+
+    heading = f"## {version} — {_BUMP_LABEL[required_bump(changes)]}"
     lines = [heading, ""]
     for title, items in (
         ("Breaking", changes.breaking),
@@ -323,7 +353,9 @@ def changelog_section(version: str, changes: Changes, first: bool) -> str:
     return "\n".join(lines).rstrip("\n") + "\n"
 
 
-def render_changelog(existing, version: str, changes: Changes, first: bool) -> str:
+def render_changelog(
+    existing, version: str, changes: Changes, first: bool, summary: "ContractSummary | None" = None
+) -> str:
     """`existing` with the section for `version` prepended; idempotent.
 
     A section already present (matched by heading prefix, since headings
@@ -334,7 +366,7 @@ def render_changelog(existing, version: str, changes: Changes, first: bool) -> s
     if existing and heading.search(existing):
         return existing
 
-    section = changelog_section(version, changes, first)
+    section = changelog_section(version, changes, first, summary)
     if not existing or not existing.strip():
         return "# API changelog\n\n" + section
 
@@ -367,15 +399,33 @@ def _head_version():
     return read_version(text)
 
 
-def _print_changes(changes: Changes) -> None:
+def format_changes_report(changes: Changes, base_version) -> str:
+    """The `check` CLI's printed change report.
+
+    With a base contract (`base_version` is not None), the full
+    Breaking/Additive/Descriptive lists, as before. Without one, every item
+    in `head` is additive by construction (there is nothing to compare
+    against), so a full listing is thousands of lines for a real API and
+    would flood a CI step summary that captures it; the three list counts
+    are printed instead (`base_version` doubles as the base-contract flag,
+    since `_base_contract_at`/`base_contract` are the one place that
+    decides it).
+    """
+    if base_version is None:
+        return (
+            f"breaking: {len(changes.breaking)}, "
+            f"additive: {len(changes.additive)}, "
+            f"descriptive: {len(changes.descriptive)}"
+        )
+    lines = []
     for title, items in (
         ("Breaking", changes.breaking),
         ("Additive", changes.additive),
         ("Descriptive", changes.descriptive),
     ):
-        print(f"{title}:")
-        for item in items:
-            print(f"  {item}")
+        lines.append(f"{title}:")
+        lines.extend(f"  {item}" for item in items)
+    return "\n".join(lines)
 
 
 def _changelog_path() -> Path:
@@ -387,7 +437,7 @@ def _cmd_check(args: argparse.Namespace) -> int:
     base = load_set(lambda name: get_text_at_ref(args.base_ref, name), base_names)
     head = _load_head()
     changes = diff(base, head)
-    _print_changes(changes)
+    print(format_changes_report(changes, base_version))
 
     if base_version is None:
         print("no base contract")
@@ -409,7 +459,8 @@ def _cmd_check(args: argparse.Namespace) -> int:
 def _cmd_changelog(args: argparse.Namespace) -> int:
     base_names, base_version = _base_contract_at(args.base_ref)
     base = load_set(lambda name: get_text_at_ref(args.base_ref, name), base_names)
-    head = _load_head()
+    head_names = list_head()
+    head = load_set(read_local_text, head_names)
     changes = diff(base, head)
 
     head_version = _head_version()
@@ -419,7 +470,13 @@ def _cmd_changelog(args: argparse.Namespace) -> int:
 
     changelog_path = _changelog_path()
     existing = changelog_path.read_text(encoding="utf-8") if changelog_path.exists() else None
-    updated = render_changelog(existing, head_version, changes, first=base_version is None)
+    first = base_version is None
+    summary = (
+        ContractSummary(documents=len(head_names), operations=len(head["paths"]), schemas=len(head["schemas"]))
+        if first
+        else None
+    )
+    updated = render_changelog(existing, head_version, changes, first=first, summary=summary)
     if updated != existing:
         changelog_path.parent.mkdir(parents=True, exist_ok=True)
         changelog_path.write_text(updated, encoding="utf-8")

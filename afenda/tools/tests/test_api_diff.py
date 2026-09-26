@@ -9,9 +9,12 @@ import unittest
 
 from afenda.tools.api_diff import (
     Changes,
+    ContractSummary,
     base_contract,
+    changelog_section,
     check,
     diff,
+    format_changes_report,
     load_set,
     render_changelog,
     required_bump,
@@ -300,11 +303,36 @@ class CheckTests(unittest.TestCase):
 
 class ChangelogTests(unittest.TestCase):
     def test_changelog_is_idempotent(self):
+        # The initial-contract section is a summary, not a per-item list
+        # (fix round 2), so a real `summary` is passed here to exercise the
+        # actual call shape `changelog` uses.
         changes = Changes(breaking=[], additive=["added op"], descriptive=[])
-        once = render_changelog(None, "1.0.0", changes, first=True)
-        twice = render_changelog(once, "1.0.0", changes, first=True)
+        summary = ContractSummary(documents=3, operations=42, schemas=7)
+        once = render_changelog(None, "1.0.0", changes, first=True, summary=summary)
+        twice = render_changelog(once, "1.0.0", changes, first=True, summary=summary)
         self.assertEqual(once, twice)
         self.assertEqual(once.count("## 1.0.0"), 1)
+
+    def test_initial_contract_section_is_a_summary(self):
+        # No base contract: every item in `changes.additive` is there only
+        # because there was nothing to compare against, so the section is
+        # the heading plus one summary line, not a bullet per addition.
+        changes = Changes(
+            breaking=[], additive=["added operation x", "added schema y"], descriptive=[]
+        )
+        summary = ContractSummary(documents=33, operations=7981, schemas=471)
+        section = changelog_section("1.0.0", changes, first=True, summary=summary)
+
+        self.assertIn("## 1.0.0 — initial contract", section)
+        self.assertIn("33 documents, 7981 operations, 471 schemas", section)
+        self.assertIn("RFC 9457", section)
+        self.assertIn("/docs/api/errors", section)
+        self.assertNotIn("### Additive", section)
+        self.assertNotIn("added operation x", section)
+        self.assertNotIn("added schema y", section)
+
+        non_blank_lines = [line for line in section.splitlines() if line.strip()]
+        self.assertEqual(len(non_blank_lines), 2)  # the heading, and the summary line.
 
     def test_render_changelog_prepends_new_section_above_existing(self):
         v1_changes = Changes(breaking=[], additive=[], descriptive=[])
@@ -319,6 +347,29 @@ class ChangelogTests(unittest.TestCase):
         self.assertTrue(after_v2.startswith("# API changelog"))
         self.assertEqual(after_v2.count("## 1.0.0"), 1)
         self.assertEqual(after_v2.count("## 1.1.0"), 1)
+
+
+class FormatChangesReportTests(unittest.TestCase):
+    """`format_changes_report` is the `check` CLI's printed report, factored
+    out so the no-base-contract behavior is testable without stubbing the
+    git layer (fix round 2)."""
+
+    def test_check_without_base_prints_counts_not_lists(self):
+        changes = Changes(
+            breaking=[], additive=["added operation a", "added operation b", "added operation c"], descriptive=[]
+        )
+        report = format_changes_report(changes, base_version=None)
+
+        self.assertEqual(report, "breaking: 0, additive: 3, descriptive: 0")
+        self.assertNotIn("added operation", report)
+
+    def test_check_with_base_prints_full_lists(self):
+        changes = Changes(breaking=["removed operation x"], additive=[], descriptive=[])
+        report = format_changes_report(changes, base_version="1.0.0")
+
+        self.assertIn("Breaking:", report)
+        self.assertIn("removed operation x", report)
+        self.assertNotIn("breaking: 1", report)
 
 
 if __name__ == "__main__":
