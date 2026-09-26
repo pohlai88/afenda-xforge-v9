@@ -162,8 +162,9 @@ before execution (plan quality; Odoo facts). The ledger at
 - Produces:
   - `problems.PROBLEM_CODES: tuple[tuple[str, int, str], ...]`: `(code, status, one-line
     description)` for `unauthenticated` 401, `access_denied` 403, `not_found` 404,
-    `conflict` 409, `validation_error` 422, `user_error` 422, `invalid_request` 400,
-    `internal_error` 500. Task 2 renders it.
+    `conflict` 409, `validation_error` 422, `user_error` 422, `invalid_request` 422 (the
+    description says "400, 422 or any other 4xx"; argument errors are 422 at
+    `addons/rpc/controllers/json2.py:77,84`), `internal_error` 500. Task 2 renders it.
   - `problems.problem_code(exception: BaseException, status: int) -> str`.
 - Prior art: `git show 0eccdfa11:afenda/addons/afenda_brand/models/ir_http.py`. Port the
   approach: `super()._handle_error`, then rewrite the `odoo.http.Response` from
@@ -245,6 +246,10 @@ before execution (plan quality; Odoo facts). The ledger at
     element `id="<code>"` per code.
   - **Delete** `test_error_responses_use_the_dispatcher_error_shape`; the tests above cover
     it.
+  - **Edit** `test_path_item_shape` (`tests/test_openapi.py:156-157`): its loop over
+    401/403/404/422 becomes
+    `assertEqual(set(item["post"]["responses"]), {"200", "4XX", "5XX"})`. The count is
+    unchanged.
 - [ ] **Step 2: Run them; they fail** on the old schema.
 - [ ] **Step 3: Implement.**
 - [ ] **Step 4: Run the full `afenda_api_docs` suite once.** Expect `0 failed, 0 error(s) of
@@ -334,28 +339,33 @@ before execution (plan quality; Odoo facts). The ledger at
   and names an existing file.
 
 - [ ] **Step 1: Failing tests.**
-  - The route:
-    - anonymous gets 303 to `/web/login`;
-    - an internal user gets 200 for `core`, with the bytes equal to the committed file;
-    - an unknown area gets 404.
-  - Path vectors `..%2fmanifest`, `%2e%2e`, `core.json%00`, `/etc/passwd` and `CHANGELOG`
-    each get 404 or 303 to `/docs`, and never file bytes. Assert no response body starts
-    with `{` or contains `"openapi"`.
+  - `test_spec_route_requires_login`: anonymous gets 303 to `/web/login`.
+  - `test_spec_route_serves_the_committed_bytes`: an internal user gets 200 for `core`,
+    with the bytes equal to the committed file.
+  - `test_spec_route_unknown_area_is_404`.
+  - `test_spec_route_path_tricks_never_serve_file_bytes`: authenticated as an internal
+    user, the vectors `..%2fmanifest`, `%2e%2e`, `core.json%00`, `/etc/passwd` and
+    `CHANGELOG` each get 404 or a 303 to `/docs`. No response body starts with `{` or
+    contains `"openapi"`.
+  - `test_api_page_links_each_committed_area`.
   - `test_committed_asset_carries_no_odoo_identity_in_prose`: apply
     `tests/test_identity.py`'s prose check to every `description`, `summary` and `title`
     value in every committed file. Keys, `operationId`, enum values and `$ref` are exempt.
-  - `test_committed_asset_matches_the_supported_applications`: a committed file exists for
-    each non-empty area, and every file name is a supported application or reserved area.
+  - `test_committed_asset_matches_the_supported_applications`: over `openapi/*.json` only,
+    since `CHANGELOG.md` arrives in Task 5. A committed file exists for each non-empty area,
+    and every file stem is a supported application or reserved area.
 - [ ] **Step 2: Run them; they fail.**
 - [ ] **Step 3: Implement the route, then generate.**
   - Build a fresh database, once:
     `-i afenda_brand,afenda_runtime,afenda_api_docs,<the 34 applications> --without-demo=all`.
     Measured at 215 s.
-  - Run the exporter twice, with `PYTHONHASHSEED=1` and then `=2`.
-  - `git status --porcelain` on `openapi/` must be empty after the second run. That is
-    Review Focus 1.
-- [ ] **Step 4: Run the route and asset tests, then the module suite once.** State the
-  count, the number of files, the largest document and its size. It must be ≤ 1.5 MiB;
+  - Run the exporter with `PYTHONHASHSEED=1`, then `git add` the `openapi/` directory.
+  - Run it again with `PYTHONHASHSEED=2`. `git diff --quiet -- afenda/addons/afenda_api_docs/openapi`
+    must succeed; that is Review Focus 1. The files are still untracked before the first
+    add, so `git status --porcelain` would show `??` here.
+- [ ] **Step 4: Run the route and asset tests, then the module suite once.** Expect `0 failed,
+  0 error(s) of 98 tests` (91 + the 7 above). State the number of files, the largest
+  document and its size. It must be ≤ 1.5 MiB;
   otherwise stop and report.
 - [ ] **Step 5: Commit** `[ADD] afenda_api_docs: the committed OpenAPI asset, served at /docs/api/spec`.
   Stage `openapi/*.json` and `.gitattributes` explicitly.
@@ -404,7 +414,9 @@ before execution (plan quality; Odoo facts). The ledger at
     - breaking without MAJOR is an error;
     - additive without MINOR is an error;
     - descriptive with no bump passes;
-    - a version change without its changelog section is an error;
+    - a version change without its changelog section is an error. Match the heading by
+      prefix, `^## <escaped version>\b`, because headings carry a suffix such as
+      `## 1.0.0 — initial contract`;
     - `test_check_passes_when_base_has_no_contract`.
   - `test_changelog_is_idempotent`.
 - [ ] **Step 2: Run them; they fail.**
@@ -459,8 +471,9 @@ before execution (plan quality; Odoo facts). The ledger at
       exporter (afenda/README.md), and commit" when `git status --porcelain` is non-empty;
     - upload `openapi/` as the artifact `openapi-asset`, so CI is a regeneration source;
     - step `timeout-minutes: 20`.
-  - **Raise `ODOO_TESTS_MIN`** to 146 + 8 (Task 1) + (the final `afenda_api_docs` count −
-    75). Confirm it with the Task 7 simulation, and cite the printed total in the comment.
+  - **Raise `ODOO_TESTS_MIN`** to 177: 146, plus 8 (Task 1), plus 23 (`afenda_api_docs`
+    goes from 75 to 98). Confirm it with the Task 7 simulation, and cite the printed total
+    in the comment.
   - **The CI job:** the fetch above, then the check. Write the three lists to
     `$GITHUB_STEP_SUMMARY`.
 - [ ] **Step 3: Run the static test.** actionlint is optional, if installed.
@@ -470,7 +483,10 @@ before execution (plan quality; Odoo facts). The ledger at
 
 **Files:**
 - Modify: `afenda/README.md`, section "Documentation at /docs". It covers:
-  - the error contract and the errors page;
+  - the error contract, the errors page, and the two pre-dispatch exclusions (415 wrong
+    content type, nodb 404; AFD-ARCH-CORR-0003);
+  - that the asset shows `base.user_admin` on default settings, so optional feature-group
+    fields are absent (AFD-ARCH-CORR-0006);
   - the asset and how to regenerate it (the exporter command, or the CI artifact);
   - the version rule and the `api_diff` commands.
 - Modify: `CLAUDE.md` Commands: add the export and `api_diff` commands, and note that a
@@ -484,10 +500,11 @@ before execution (plan quality; Odoo facts). The ledger at
 
 - [ ] **Step 1: Write them.**
 - [ ] **Step 2: Final gates, once each, citing the counts and the SHA:**
-  - the tools suite;
+  - the tools suite: `Ran 298 tests` (297 + Task 6's static test);
   - `afenda_runtime`, `afenda_api_docs`, `afenda_brand` and `afenda_brand_digest` installed
     together (the CI shape);
   - a fresh-database simulation of the `afenda-image` Odoo steps plus the asset step;
   - `test_deploy_static`.
-- [ ] **Step 3: Commit, then open the PR.** The PR text names AFD-ARCH-CORR-0008, the 1.5 MiB
-  budget, and AFD-ARCH-CORR-0007, the areas, for the owner.
+- [ ] **Step 3: Commit, then open the PR.** The PR text names these for the owner:
+  AFD-ARCH-CORR-0008 (the 1.5 MiB budget), AFD-ARCH-CORR-0007 (the areas) and
+  AFD-ARCH-CORR-0006 (admin on default settings).
