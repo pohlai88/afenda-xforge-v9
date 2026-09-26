@@ -48,8 +48,9 @@ goes under `afenda/addons/`. See `afenda/README.md` for the layout and run steps
 
 Before starting work, read the newest file in `docs/superpowers/handoffs/`. It records what the
 previous session (cloud or local) shipped, the owner's binding decisions, what waits on the
-owner, and what is still open. At present that is `2026-09-25-cloud-session.md`, which holds
-two owner rulings that are easy to miss: do not hand-write guide pages, and do not start G2.
+owner, and what is still open. At present that is `2026-09-26-api-assets.md` (phase 1 of the
+"AFENDA-owned API assets" plan, done); `2026-09-25-cloud-session.md` still holds two owner
+rulings that are easy to miss: do not hand-write guide pages, and do not start G2.
 A session that ends with work in flight writes a new dated handoff there. It does not rely on
 a scratch ledger, which dies with a cloud container.
 
@@ -156,7 +157,20 @@ MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin -c afen
 .venv/Scripts/python -m afenda.tools.corpus diff
 .venv/Scripts/python -m afenda.tools.corpus golden
 .venv/Scripts/python -m afenda.tools.rebrand --apply && .venv/Scripts/python -m afenda.tools.scan_identity
+# regenerate the committed OpenAPI asset (afenda/addons/afenda_api_docs/openapi/<area>.json), on a
+# fresh all-apps database, through odoo-bin shell; prints "afenda-openapi: wrote <N> documents"
+OUT_DIR=afenda/addons/afenda_api_docs/openapi ADDONS_ROOT=addons \
+  .venv/Scripts/python odoo-bin shell -c afenda/odoo.conf -d <all-apps db> --no-http < afenda/tools/export_openapi_shell.py
+# gate the OpenAPI contract change against a base ref, and write the CHANGELOG.md section for
+# the current API_VERSION (afenda/addons/afenda_api_docs/api_version.py)
+.venv/Scripts/python -m afenda.tools.api_diff check --base-ref origin/main
+.venv/Scripts/python -m afenda.tools.api_diff changelog --base-ref origin/main
 ```
+
+A `[REBRAND]` apply, or an upstream merge, changes generated help text and therefore the
+committed OpenAPI asset's descriptions (field `help`, model docstrings): regenerate the asset
+with the exporter above and commit the result. That is a descriptive-only change to the
+contract (no operation, schema or requirement changed), so it needs no `API_VERSION` bump.
 
 ## Branches and commits
 

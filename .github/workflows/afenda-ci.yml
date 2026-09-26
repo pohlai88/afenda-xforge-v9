@@ -79,9 +79,14 @@ jobs:
           python-version: "3.11"
       - name: python -m afenda.tools.api_diff check --base-ref origin/main
         # api_diff is standard-library only, so no install step precedes
-        # this. It always prints the three change lists (breaking, additive,
-        # descriptive); keep them in the PR's Summary tab even when the
-        # check fails, so a breaking change is visible without opening logs.
+        # this. Since 172c12518, what it prints depends on whether the base
+        # ref has a contract: a real version-to-version diff prints the
+        # three change lists (breaking, additive, descriptive) in full; with
+        # no base contract (e.g. this PR introduces the asset, or the base
+        # ref predates it), every item in HEAD is additive by construction,
+        # so it prints the three change-class counts instead. Either way,
+        # keep the output in the PR's Summary tab even when the check
+        # fails, so a breaking change is visible without opening logs.
         run: |
           set -o pipefail
           # Raw text in $GITHUB_STEP_SUMMARY is rendered as Markdown and its
