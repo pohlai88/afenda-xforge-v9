@@ -14,7 +14,13 @@ import unittest
 # afenda/tools/requirements.txt alone, which has no lxml, and a module that
 # fails to import takes all its tests out of the count with it.
 import xml.etree.ElementTree as etree
+from io import BytesIO
 from pathlib import Path
+
+# Pillow, not the standard library: crystal.py itself now depends on it (and
+# on resvg_py, imported the same way below) to rasterise HAZE_PNG_TARGET, so a
+# module that needs them to build cannot be tested without them either.
+from PIL import Image, ImageChops
 
 from afenda.tools.crystal_bear import crystal
 
@@ -62,14 +68,20 @@ def stage():
     return divs[0]
 
 
-def inline_svg():
-    """The hero: the stage's first SVG, the bear."""
+def haze_div():
+    """The haze: the stage's first child, a div, ahead of both SVGs (fix
+    round 2 moved it off the animated hero and onto its own div)."""
     return stage()[0]
 
 
-def season_svg():
-    """The season layer: the stage's second SVG, the particles."""
+def inline_svg():
+    """The hero: the stage's second child, the bear."""
     return stage()[1]
+
+
+def season_svg():
+    """The season layer: the stage's third child, the particles."""
+    return stage()[2]
 
 
 def season_css():
@@ -243,8 +255,13 @@ class CrystalBearOutputsTests(unittest.TestCase):
                          "auth_bear_scales.css is not what the generator produces; regenerate with "
                          "`python -m afenda.tools.crystal_bear`")
 
-    def test_the_inline_bear_is_the_standalone_bear_verbatim(self):
-        """Undo the indent and the root attributes and it must be build() exactly."""
+    def test_the_inline_bear_is_the_standalone_bear_minus_the_haze(self):
+        """Undo the indent and the root attributes and it must be
+        build(include_haze=False) exactly (fix round 2): the inline hero and
+        the standalone file agree on the bear itself, but not on the haze -
+        the standalone still draws it inline, the inline copy has it removed
+        to its own div (HAZE_DIV), painted by the page from HAZE_PNG_TARGET.
+        """
         text = (ROOT / crystal.TEMPLATE_TARGET).read_text(encoding="utf-8")
         indent = " " * 12
         start = text.index(indent + "<svg ")
@@ -252,16 +269,52 @@ class CrystalBearOutputsTests(unittest.TestCase):
         body = "\n".join(line[12:] if line.startswith(indent) else line
                          for line in text[start:end].split("\n"))
         self.assertTrue(body.startswith(crystal.SVG_ROOT_INLINE))
-        self.assertEqual(crystal.SVG_ROOT + body[len(crystal.SVG_ROOT_INLINE):], crystal.build(),
-                         "the inline bear has drifted from the standalone file")
+        self.assertEqual(crystal.SVG_ROOT + body[len(crystal.SVG_ROOT_INLINE):],
+                         crystal.build(include_haze=False),
+                         "the inline bear has drifted from build(include_haze=False)")
+
+    def test_the_haze_left_the_inline_hero_but_not_the_standalone(self):
+        """fix round 2: the haze group, its filter and its exclusive defs move
+        off the animated inline hero (it repainted every cross-fade frame -
+        see the module docstring's measured numbers) and onto HAZE_DIV; the
+        standalone file, which nothing animates, keeps drawing it inline."""
+        for el in elements(inline_svg()):
+            self.assertNotIn("filter", el.attrib, "the inline hero still carries a filter attribute")
+            self.assertNotIn("afb-haze", (el.get("class") or "").split(),
+                             "the inline hero still carries the afb-haze class")
+        for ident in ("afb-edgeOut", "afb-noSeam", "afb-flankFade", "afb-flankOnly", "afb-hazeFade"):
+            self.assertNotIn(ident, etree.tostring(inline_svg(), encoding="unicode"),
+                             f"the inline hero still carries the haze-only def {ident}")
+        standalone = etree.tostring(svg_root(), encoding="unicode")
+        self.assertIn("afb-haze", standalone, "the standalone file lost its haze group")
+        self.assertIn('filter="url(#afb-haze)"', standalone, "the standalone file lost its haze filter")
+
+    def test_the_stage_holds_the_haze_div_then_the_hero_then_the_season(self):
+        """The stage's exactly-three children, in order (fix round 2)."""
+        kids = list(stage())
+        self.assertEqual([el.tag for el in kids], ["div", f"{SVG_NS}svg", f"{SVG_NS}svg"])
+        self.assertEqual(kids[0].get("class"), "o_afenda_auth_haze afb-haze")
+        self.assertEqual(kids[0].get("aria-hidden"), "true")
+        self.assertEqual(len(list(kids[0])), 0, "the haze div is not empty")
+        self.assertEqual(kids[1].get("class"), "o_afenda_auth_hero")
+        self.assertEqual(kids[2].get("class"), "o_afenda_auth_season")
 
     def test_every_layer_class_is_present_in_both_outputs(self):
-        for label, root in (("svg", svg_root()), ("xml", inline_svg())):
+        # The inline hero (fix round 2) no longer carries afb-haze - that
+        # moved to HAZE_DIV, a sibling of the SVG, not a layer inside it - so
+        # its expected class list drops that one entry; the standalone file
+        # is unaffected and keeps the full list.
+        for label, root, expected in (
+            ("svg", svg_root(), LAYER_CLASSES),
+            ("xml", inline_svg(), tuple(c for c in LAYER_CLASSES if c != "afb-haze")),
+        ):
             with self.subTest(output=label):
                 found = classes(root)
                 flat = set().union(*found)
-                for cls in LAYER_CLASSES:
+                for cls in expected:
                     self.assertIn(cls, flat, f"{label}: no layer carries the class {cls}")
+                if label == "xml":
+                    self.assertNotIn("afb-haze", flat, "the inline hero kept the afb-haze class")
 
                 def count(*cs):
                     return sum(1 for c in found if set(cs) <= c)
@@ -274,8 +327,11 @@ class CrystalBearOutputsTests(unittest.TestCase):
                 self.assertEqual(count("afb-shadow", "afb-s1"), 3)
                 self.assertEqual(count("afb-shadow", "afb-s2"), 2)
                 self.assertEqual(count("afb-branch"), 2)
-                for single in ("afb-haze", "afb-body", "afb-base", "afb-headlight",
-                               "afb-sheen", "afb-rim", "afb-face", "afb-bush"):
+                singles = ("afb-body", "afb-base", "afb-headlight",
+                           "afb-sheen", "afb-rim", "afb-face", "afb-bush")
+                if label == "svg":
+                    singles += ("afb-haze",)
+                for single in singles:
                     self.assertEqual(count(single), 1, f"{label}: {single} is not on exactly one layer")
                 face = [el for el in elements(root) if "afb-face" in (el.get("class") or "").split()]
                 self.assertEqual(face[0].tag, f"{SVG_NS}g")
@@ -334,12 +390,13 @@ class CrystalBearOutputsTests(unittest.TestCase):
             if isinstance(el.tag, str):
                 self.assertFalse((el.text or "").strip(), f"text inside <{el.tag}>")
             self.assertFalse((el.tail or "").strip(), "text between elements")
-        # One stage, the template's only child, holding exactly the two SVGs:
-        # the hero, then the season layer drawn over it.
+        # One stage, the template's only child, holding exactly three
+        # children: the haze div, then the hero, then the season layer drawn
+        # over it (fix round 2 moved the haze off the hero and ahead of it).
         tpl = root.find("template")
         self.assertEqual([el.tag for el in tpl], ["div"])
         self.assertEqual(tpl[0].get("class"), "o_afenda_auth_stage")
-        self.assertEqual([el.tag for el in stage()], [f"{SVG_NS}svg", f"{SVG_NS}svg"])
+        self.assertEqual([el.tag for el in stage()], ["div", f"{SVG_NS}svg", f"{SVG_NS}svg"])
         self.assertEqual(len(root.findall(f".//{SVG_NS}svg")), 2)
         svg = inline_svg()
         self.assertEqual(svg.get("viewBox"), f"0 0 {crystal.W} {crystal.H}")
@@ -393,6 +450,67 @@ class CrystalBearOutputsTests(unittest.TestCase):
         for rgb in ((0.1, 0.34, 0.24), (0.9, 0.2, 0.7), (0.02, 0.5, 0.98)):
             for got, want in zip(crystal.oklab_to_srgb(crystal.srgb_to_oklab(rgb)), rgb):
                 self.assertAlmostEqual(got, want, places=6)
+
+
+class CrystalBearHazePngTests(unittest.TestCase):
+    """HAZE_PNG_TARGET (fix round 2): the haze, rasterised for the page's CSS
+    mask-image. Compared as DECODED PIXELS with a tolerance, never bytes -
+    resvg's own PNG encoder is free to change its compressed byte stream
+    across a pinned-version bump without moving a single pixel, and this must
+    not flake over that."""
+
+    MAX_CHANNEL_DIFF = 2  # the tolerance the module docstring and the contract name
+
+    def committed_image(self):
+        return Image.open(BytesIO((ROOT / crystal.HAZE_PNG_TARGET).read_bytes())).convert("RGBA")
+
+    def test_the_committed_haze_png_matches_the_regenerated_one_within_tolerance(self):
+        regenerated = Image.open(BytesIO(crystal.build_haze_png())).convert("RGBA")
+        committed = self.committed_image()
+        self.assertEqual(regenerated.size, committed.size,
+                         "the committed haze PNG is not 800x887 any more")
+        diff = ImageChops.difference(regenerated, committed)
+        max_diff = max(hi for _lo, hi in diff.getextrema())
+        self.assertLessEqual(max_diff, self.MAX_CHANNEL_DIFF,
+                             f"the committed haze PNG differs from the regenerated one by up to "
+                             f"{max_diff} per channel, over the {self.MAX_CHANNEL_DIFF} tolerance; "
+                             "regenerate with `python -m afenda.tools.crystal_bear`")
+
+    def test_the_committed_haze_png_is_800x887_rgba(self):
+        im = self.committed_image()
+        self.assertEqual(im.size, (crystal.W, crystal.H))
+        self.assertEqual(im.mode, "RGBA")
+
+    def test_the_committed_haze_png_is_white_rgb_with_the_haze_as_alpha(self):
+        """The rule build_haze_png() enforces: every pixel is fully
+        transparent, or pure white (255, 255, 255) with the haze's shape and
+        softness carried entirely by alpha - never a shade resvg's blur math
+        nudged off white at a fading edge."""
+        im = self.committed_image()
+        r, g, b, a = im.split()
+        self.assertGreater(a.getextrema()[1], 0, "the haze PNG is fully transparent")
+        opaque = a.point(lambda v: 255 if v > 0 else 0)
+        for name, channel in (("R", r), ("G", g), ("B", b)):
+            not_white = channel.point(lambda v: 255 if v != 255 else 0)
+            bad = ImageChops.multiply(opaque, not_white)
+            self.assertIsNone(bad.getbbox(), f"a pixel with alpha > 0 has {name} != 255")
+
+    def test_the_haze_svg_is_the_same_defs_and_group_build_draws_inline(self):
+        """build_haze_svg() cannot diverge from the vector the standalone
+        file (TARGET) still carries: same masks, same filter, same path -
+        only #afb-hazeFade's stop-color, forced to white."""
+        haze_svg = crystal.build_haze_svg()
+        standalone = crystal.build()
+        for ident in ("afb-edgeOut", "afb-noSeam", "afb-flankFade", "afb-flankOnly",
+                      'filter id="afb-haze"', "afb-hazeFade", 'fill-rule="evenodd"'):
+            self.assertIn(ident, haze_svg, f"build_haze_svg() lost {ident}")
+            self.assertIn(ident, standalone, f"build() (the standalone file) lost {ident}")
+        self.assertIn('stop-color="#FFFFFF"', haze_svg,
+                     "the haze SVG's hazeFade stops are not forced white")
+        self.assertNotIn(crystal.RAMP["rim"], haze_svg,
+                         "the haze SVG still carries the tinted (non-white) rim colour")
+        self.assertEqual(haze_svg.count("<svg"), 1)
+        self.assertIn(f'viewBox="0 0 {crystal.W} {crystal.H}"', haze_svg)
 
 
 class CrystalBearSeasonLayerTests(unittest.TestCase):
