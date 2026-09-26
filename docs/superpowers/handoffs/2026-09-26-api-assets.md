@@ -388,6 +388,9 @@ test files.
 - **No hand-written guide pages.** Still true; nothing in phase 1 adds one. See
   `afenda/README.md`'s guides bullet, which now says so explicitly.
 - **G2 waits.** Untouched by this plan.
+- **Automatic deploys removed (2026-09-26, this session).** Owner decision: deploys stay a
+  manual `./redeploy.sh` on the host (`deploy/README.md` → "Upgrades"); see "Waiting on the
+  owner" item 2.
 
 ## Waiting on the owner
 
@@ -396,13 +399,16 @@ spec's "Corrections recorded" now carries an `owner_approval` line (0007 as impl
 checked first). PR #5 is merged (see "Start here"). What remains needs the owner's own hands:
 
 1. **Required status checks on `main`** (repository settings → branches, or a ruleset):
-   require `tools suite`, `tools suite (Python 3.12)`, `api contract`, `nginx -t`,
-   `docker build` and `pr evidence` before merging. No agent tool can change repository
-   settings; until the owner sets it, the checks bind agents (through the steward skill) but
-   not a manual merge.
-2. **Automatic-deploy setup** on the host (`deploy/README.md` → "Automatic deploys"): a
-   terminal task the owner keeps for themselves. Until the `production` environment's secrets
-   exist, every `afenda-deploy` run ends with the "not set up yet" notice.
+   require `tools suite`, `tools suite (Python 3.12)`, `api contract`, `nginx -t` and
+   `pr evidence` before merging (`docker build`, i.e. `afenda-image`, is deliberately not in
+   that list: it only runs when a PR touches the image's inputs, so a docs-only PR would never
+   get a report from it and a required check would block the merge forever — PR #6 was such a
+   PR). No agent tool can change repository settings; until the owner sets it, the checks bind
+   agents (through the steward skill) but not a manual merge.
+2. **Automatic deploys were removed on 2026-09-26 by owner decision** (they never ran — 5 runs
+   on `main`, all "not set up yet" — needed host terminal setup the owner would not do, and the
+   SSH leg was never tested). Deploys stay manual: `./redeploy.sh` on the host
+   (`deploy/README.md` → "Upgrades").
 
 ## Draft PR body (historical — superseded by PR #5's description)
 

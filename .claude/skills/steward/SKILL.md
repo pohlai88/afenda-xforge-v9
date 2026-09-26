@@ -97,13 +97,12 @@ if wrong.
 
 - Method: **rebase and merge**, as PRs #2–#4 were (each commit kept, author dates intact).
 - Pass the head SHA you verified as the expected head, so a later push cannot slip in.
-- Merging to `main` starts `afenda-deploy` (automatic deploy after both CI workflows pass on the
-  push). That is the owner's design, not a side effect to avoid.
 
 ## After the merge
 
-1. Watch the push-triggered `afenda-ci` and `afenda-image` on `main`'s new head, then
-   `afenda-deploy`. A red run on `main` is worked by this same procedure at once.
+1. Watch the push-triggered `afenda-ci` and `afenda-image` on `main`'s new head; a red run on
+   `main` is worked by this same procedure at once. Deploying is a manual `./redeploy.sh` on
+   the host by the owner (`deploy/README.md` → "Upgrades").
 2. If work remains, restart the session's branch from the new `main` (a merged PR never takes
    new commits) and open a new PR.
 3. Update the newest handoff in `docs/superpowers/handoffs/` with what merged, the counts, and
