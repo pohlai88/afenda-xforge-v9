@@ -56,7 +56,8 @@ produced this spec). Plan: `docs/superpowers/plans/2026-09-26-four-season-bear.m
   summer emerald and warm gold; autumn rust, amber and copper; winter blue-grey, silver and icy
   white. The season table in the plan follows these, inside the contrast window.
 - **Particles support the bear** (roughly: bear 100 %, season colour 60 %, rim and glow 35 %,
-  particles 20 %): spring 9 petals, summer 6 glints, autumn 8 leaves, winter 16 flakes. Glints and
+  particles 20 %): spring 9 petals, summer 6 glints, autumn 8 leaves, winter 16 flakes (raised after the first
+  render; see the rulings below). Glints and
   the gleam never sit over the face; nothing ever enters the form column.
 - **The gleam** is a slow, very low-opacity diagonal reflection, once per season.
 - **Form states stay subtle and keep the season**: focus changes sheen, rim and facet brightness
@@ -79,13 +80,37 @@ produced this spec). Plan: `docs/superpowers/plans/2026-09-26-four-season-bear.m
   the column the bear is about 70–80 % of its width and 75–85 % of its height, with an 8–10 %
   top safe zone, a left offset of −4 % to +2 % and a bottom offset of −3 % to 0; the face is
   always fully visible. This replaces the earlier "hero box unchanged" acceptance.
+  The bear's aspect makes the width and height targets exclusive in a landscape column; the
+  rulings below settle it height-led.
+
+## Rulings after the first render (2026-09-26)
+
+The first render, reviewed at six viewports, and Codex's review on PR #8 found the bear too
+small (58 % of the column's height at 1440×900, 44 % at 1024×768, with 44 % of the panel empty
+above it), the particles too small to read, a muddy spring (rose beside moss on the face side)
+and a violet cast in autumn and winter (the dusk hue). The rulings:
+
+- **Height-led bear.** An art column narrower than the bear's 800:887 aspect, which is every
+  landscape viewport (1440×900 at 45 % is 0.72, 1024×768 at 40 % is 0.53), cannot hold the bear
+  at 70–80 % of its width and 75–85 % of its height at once. The bear takes 76 % of the column's
+  height, capped at 92 % of its width; the face stays fully visible under the −1 % bleed.
+  The columns take the top of the owner's ranges: 45 % on desktop, 40 % on tablet.
+- **The season layer fills the panel.** It extends one bear height above the bear and 30 % to its
+  right (viewBox `0 -887 1040 1774`), so whatever panel the bear leaves is weather, not empty ink.
+  The art column's `overflow: hidden` is the only clip; nothing reaches the form.
+- **Particles** are about twice the first size, and 1.5× as many for the larger area: spring 14
+  petals, summer 6 glints (still inside the bear), autumn 12 leaves, winter 24 flakes. The on-screen
+  fall speed is unchanged.
+- **Palette.** Spring's face side is all rose; green only on the lit side. Autumn is rust, amber
+  and copper, no dusk. Winter uses a new low-chroma blue-grey `frost` hue (230°, peak chroma
+  0.06), no dusk. The contrast window and its tests are unchanged.
 
 ## Acceptance
 
 - Every auth page (`/web/login`, `/web/signup?token`, `/web/reset_password` in all its states,
   `/web/login/totp`, `/request-access`) shows the stage: panel, luminous bear, season layer.
 - The loop starts on today's season; under reduced motion only today's season shows, still.
-- Layout: the re-framed proportions above hold at 1440×900, 1366×768, 1280×633, 1024×768,
+- Layout: the re-framed proportions, as settled by the rulings after the first render, hold at 1440×900, 1366×768, 1280×633, 1024×768,
   390×844 and 360×640; the face is fully visible at each; no horizontal scroll at 360 px; no
   particle enters the form column.
 - At rest: no layout per frame, no running CSS transition; frame p95 ≤ 20 ms.
