@@ -1,6 +1,6 @@
 """Corpus of every distinct line the rebrand rules could touch, with a golden rewrite.
 
-    python -m afenda.tools.corpus build --ref upstream-19.0   # corpus.txt from pristine tree
+    python -m afenda.tools.corpus build --ref archive/upstream-19.0   # corpus.txt from pristine tree
     python -m afenda.tools.corpus golden                       # golden.txt from corpus.txt + RULES
     python -m afenda.tools.corpus diff                         # show what current RULES change vs golden
 
@@ -8,7 +8,7 @@ Lines are keyed by (suffix, path kind) because rules depend on both.
 
 What this corpus structurally cannot cover: `build` derives corpus.txt
 entirely from `git archive <ref>` of a real Odoo tree (normally
-upstream-19.0), so it can only ever hold text that pristine upstream actually
+archive/upstream-19.0), so it can only ever hold text that pristine upstream actually
 shipped. A rule that targets an AFENDA-specific value with no upstream
 analogue -- e.g. rules.py's `superseded_domain`, which rewrites the retired
 `afenda.app` domain, a string upstream Odoo never contained -- has zero
@@ -139,15 +139,20 @@ def emit_utf8(text: str, stream=None) -> None:
         stream.write(text)
 
 
-def main(argv: list[str] | None = None) -> int:
-    from afenda.tools.rules import RULES
-
+def _build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("build")
-    b.add_argument("--ref", default="upstream-19.0")
+    b.add_argument("--ref", default="archive/upstream-19.0")
     sub.add_parser("golden")
     sub.add_parser("diff")
+    return parser
+
+
+def main(argv: list[str] | None = None) -> int:
+    from afenda.tools.rules import RULES
+
+    parser = _build_parser()
     args = parser.parse_args(argv)
     if args.cmd == "build":
         n = build(args.ref, CORPUS)

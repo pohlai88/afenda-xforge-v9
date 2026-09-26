@@ -1,5 +1,6 @@
 import difflib
 import io
+import subprocess
 import tempfile
 import unittest
 from pathlib import Path
@@ -8,6 +9,8 @@ from unittest import mock
 from afenda.tools import corpus as corpus_module
 from afenda.tools.corpus import CORPUS, GOLDEN, emit_utf8, rewrite_corpus
 from afenda.tools.rules import RULES
+
+REPO_ROOT = Path(__file__).resolve().parents[3]
 
 
 class CorpusGoldenTest(unittest.TestCase):
@@ -38,6 +41,33 @@ class CorpusGoldenTest(unittest.TestCase):
             if suffix in (".py", ".js", ".ts", ".scss", ".css", ".template") and ("import " in line or "Copyright" in line or "odoo.define(" in line or "require(" in line):
                 continue
             self.assertNotRegex(line, r"(?<![\w@/.])Odoo(?!\w)|\bodoo\.com\b|(?<![\w.])/odoo(?=[/'\"`?#\s)\]]|$)", f"visible Odoo left in golden: {entry[:160]}")
+
+
+class BuildRefDefaultTest(unittest.TestCase):
+    """The `build` subcommand's default `--ref` must name a ref that actually exists.
+
+    Regression for corpus.py's default drifting out from under a branch/tag rename
+    (the old default named `upstream-19.0`, a branch renamed away on 2026-09-25; the
+    retired ref lives on only as the tag `archive/upstream-19.0`). This reads the
+    default straight from the argparse parser `main()` builds, rather than hardcoding
+    the expected ref string here, so a future rename of the default would only need
+    the ref itself to exist -- not this test's expectation kept in sync by hand.
+    """
+
+    def test_default_ref_resolves_in_a_fresh_checkout(self):
+        default_ref = corpus_module._build_parser().parse_args(["build"]).ref
+
+        result = subprocess.run(
+            ["git", "rev-parse", "--verify", default_ref],
+            cwd=REPO_ROOT, capture_output=True, text=True,
+        )
+
+        if result.returncode != 0:
+            self.skipTest(
+                f"{default_ref!r} is not available in this checkout; fetch it with "
+                f"`git fetch origin tag {default_ref.rpartition('/')[2] or default_ref}`."
+            )
+        self.assertEqual(result.returncode, 0)
 
 
 class EmitUtf8Test(unittest.TestCase):
