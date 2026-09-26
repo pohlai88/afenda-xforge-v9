@@ -241,7 +241,7 @@ the fix wave's own measurement, atop `174c6ac5e` (HEAD before that wave's own co
 
 | What | Command | Printed result |
 |---|---|---|
-| Tools suite | `.venv/Scripts/python -m unittest discover afenda/tools/tests` | `Ran 306 tests in 51.070s` … `OK (skipped=1)` |
+| Tools suite | `.venv/Scripts/python -m unittest discover afenda/tools/tests` | `Ran 307 tests` … `OK (skipped=1)` |
 | `test_api_diff` alone (inside the tools suite) | `.venv/Scripts/python -m unittest afenda.tools.tests.test_api_diff -v` | `Ran 27 tests` … `OK` |
 | `test_deploy_static` alone (inside the tools suite) | `.venv/Scripts/python -m unittest afenda.tools.tests.test_deploy_static -v` | `Ran 35 tests in 0.016s` … `OK` |
 | Four AFENDA modules together (CI shape), reused db `afenda_t7`, port 8179 | `-u afenda_brand,afenda_brand_digest,afenda_runtime,afenda_api_docs --test-enable --test-tags "/afenda_brand,/afenda_brand_digest,/afenda_runtime,/afenda_api_docs"` | `odoo.tests.result: 0 failed, 0 error(s) of 184 tests when loading database 'afenda_t7'` |
@@ -341,6 +341,18 @@ test files.
    budget line now cites the test that enforces it.
 10. **Counts.** `ODOO_TESTS_MIN` `"183"` → `"184"` (see "Measured counts" above); the stale
     `183`/`304`/`104` corrected wherever this file and `afenda/README.md` still carried them.
+11. **`.github/workflows/afenda-image.yml` and `afenda/tools/tests/test_deploy_static.py`.**
+    The first real `afenda-image.yml` run (36216051763, at `5c71e380d`) failed at the "API
+    asset is current" step: its `odoo-bin shell` call passed no `--addons-path`, so the fresh
+    `assets` database it opened had `afenda_api_docs` "not installable, skipped", and
+    `afenda/tools/export_openapi_shell.py` raised `ModuleNotFoundError` importing it. The
+    other three `odoo-bin` calls in that file already carried
+    `--addons-path /opt/afenda/addons,/opt/afenda/afenda/addons,/opt/afenda/afenda/oca/server-brand,/opt/afenda/afenda/oca/web`;
+    that run's earlier steps — the module suites (floor 184) and the industry pack suites —
+    passed there, since they use those correct calls. Fixed by adding the same
+    `--addons-path` to the exporter's call, guarded by a new static test,
+    `test_ci_odoo_bin_calls_all_pass_the_afenda_addons_path`, that parses every `odoo-bin`
+    invocation out of the workflow file and asserts each one carries it.
 
 No PR was opened for this branch either (see "Owner decisions").
 
@@ -415,9 +427,11 @@ No PR was opened for this branch either (see "Owner decisions").
 > prose (stated in code order, complete); `TestSpecRouteGuard` is tagged
 > `post_install`/`-at_install` like its neighbours; `TestCommittedAsset` gained the size-budget
 > test above; and every stale `183`/`304`/`104` count left by Task 7 is corrected to
-> `184`/`306`/`105`.
+> `184`/`306`/`105`; the first real `afenda-image.yml` run (36216051763, at `5c71e380d`)
+> then found one more: the asset exporter's `odoo-bin shell` call had no `--addons-path`,
+> fixed with a static guard, raising the tools suite to `307`.
 >
-> **Gates:** `test_api_diff` 27 tests (25 + 2 new) OK; the tools suite 306 tests OK
+> **Gates:** `test_api_diff` 27 tests (25 + 2 new) OK; the tools suite 307 tests OK
 > (skipped=1); the four AFENDA modules together, reused database `afenda_t7`, 184 tests,
 > 0 failed/0 error; `TestCommittedAsset` + `TestSpecRouteGuard` alone, same database, 6 tests,
 > 0 failed/0 error. No generator or asset-content code changed, so no re-export was needed.

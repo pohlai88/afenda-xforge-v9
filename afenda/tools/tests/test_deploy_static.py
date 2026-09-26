@@ -226,6 +226,46 @@ class DeployStaticTests(unittest.TestCase):
             r"python -m afenda\.tools\.api_diff check --base-ref origin/main[^\n]*\|\| status=\$\?",
         )
 
+    def test_ci_odoo_bin_calls_all_pass_the_afenda_addons_path(self):
+        # afenda/odoo.conf supplies addons_path locally, but every `odoo-bin`
+        # invocation in CI runs inside a container with no config file, so
+        # each one must pass --addons-path itself. CI run 36216051763 (at
+        # 5c71e380d) shipped the exporter's shell call without it: the
+        # database it opened had no afenda_api_docs on its addons path,
+        # "not installable, skipped", and
+        # afenda/tools/export_openapi_shell.py raised ModuleNotFoundError.
+        image = (REPO / ".github" / "workflows" / "afenda-image.yml").read_text(encoding="utf-8")
+        addons_path = (
+            "/opt/afenda/addons,/opt/afenda/afenda/addons,"
+            "/opt/afenda/afenda/oca/server-brand,/opt/afenda/afenda/oca/web"
+        )
+        # Join backslash-continued physical lines into logical shell
+        # commands, the way bash itself does before running them, so a
+        # `--addons-path` on its own continuation line still counts.
+        logical_lines = []
+        buf = ""
+        for raw in image.splitlines():
+            line = f"{buf} {raw.strip()}" if buf else raw
+            if line.rstrip().endswith("\\"):
+                buf = line.rstrip()[:-1].rstrip()
+            else:
+                logical_lines.append(line)
+                buf = ""
+        if buf:
+            logical_lines.append(buf)
+
+        odoo_bin_commands = [line for line in logical_lines if "/opt/afenda/odoo-bin" in line]
+        self.assertGreaterEqual(
+            len(odoo_bin_commands), 4,
+            f"expected at least 4 odoo-bin invocations in afenda-image.yml, found {len(odoo_bin_commands)}",
+        )
+        for command in odoo_bin_commands:
+            self.assertIn(
+                f"--addons-path {addons_path}",
+                command,
+                f"odoo-bin call is missing --addons-path {addons_path!r}: {command!r}",
+            )
+
     def test_app_connects_as_the_least_privilege_role(self):
         compose = (DEPLOY / "compose.yaml").read_text(encoding="utf-8")
         env = re.search(r"^x-xforge-env: &xforge-env\n((?:  .*\n)+)", compose, re.MULTILINE).group(1)

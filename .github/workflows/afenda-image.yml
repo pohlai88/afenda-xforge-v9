@@ -181,6 +181,7 @@ jobs:
             -e OUT_DIR=/out -e ADDONS_ROOT=/opt/afenda/addons \
             --entrypoint /opt/venv/bin/python afenda/xforge:ci /opt/afenda/odoo-bin shell \
             --db_host 127.0.0.1 --db_port 5432 --db_user afenda_app --db_password ci -d assets \
+            --addons-path /opt/afenda/addons,/opt/afenda/afenda/addons,/opt/afenda/afenda/oca/server-brand,/opt/afenda/afenda/oca/web \
             --data-dir /ci-data --no-http < afenda/tools/export_openapi_shell.py 2>&1 | tee export.log
           line=$(grep -oE 'afenda-openapi: wrote [0-9]+ documents' export.log | tail -n 1 || true)
           echo "result: ${line:-none}"
