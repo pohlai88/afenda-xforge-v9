@@ -368,13 +368,13 @@ class SvgRecolourTests(unittest.TestCase):
         upstream = {}
         for rel in brand_images.RECOLOUR:
             blob = subprocess.run(
-                ["git", "show", f"upstream-19.0:{rel}"],
+                ["git", "show", f"archive/upstream-19.0:{rel}"],
                 cwd=ROOT, capture_output=True, text=True,
             )
             if blob.returncode == 0:
                 upstream[rel] = len(_ODOO_ARTWORK.findall(blob.stdout))
         if not upstream:
-            self.skipTest("upstream-19.0 is not available in this checkout")
+            self.skipTest("archive/upstream-19.0 is not available in this checkout")
         inert = [rel for rel, n in upstream.items() if n == 0]
         self.assertEqual(
             inert, [],
