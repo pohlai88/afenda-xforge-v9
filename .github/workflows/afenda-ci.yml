@@ -61,9 +61,11 @@ jobs:
   api_contract:
     # No database, no Docker: api_diff reads the committed openapi/ documents
     # and the base ref's git objects only, so this runs on every pull request
-    # regardless of what afenda-image.yml's path filters would build.
+    # regardless of what afenda-image.yml's path filters would build, and on
+    # every push to main too (the owner's path into main may be a direct
+    # push, not a PR merge, and that must be gated just the same).
     name: api contract
-    if: github.event_name == 'pull_request'
+    if: github.event_name == 'pull_request' || github.event_name == 'push'
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
@@ -72,7 +74,10 @@ jobs:
           fetch-depth: 1
       - name: Fetch main as the base contract
         # A depth-1 checkout has no history to diff against, and api_diff
-        # needs a local ref to read the base documents from.
+        # needs a local ref to read the base documents from. A pull request
+        # diffs against main's current tip; a push (below) diffs against the
+        # commit main pointed at before the push instead.
+        if: github.event_name == 'pull_request'
         run: git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main
       - uses: actions/setup-python@v5
         with:
@@ -87,6 +92,7 @@ jobs:
         # so it prints the three change-class counts instead. Either way,
         # keep the output in the PR's Summary tab even when the check
         # fails, so a breaking change is visible without opening logs.
+        if: github.event_name == 'pull_request'
         run: |
           set -o pipefail
           # Raw text in $GITHUB_STEP_SUMMARY is rendered as Markdown and its
@@ -100,6 +106,34 @@ jobs:
           echo '```text' >> "$GITHUB_STEP_SUMMARY"
           status=0
           python -m afenda.tools.api_diff check --base-ref origin/main 2>&1 | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
+      - name: python -m afenda.tools.api_diff check --base-ref <pre-push commit>
+        # A push's base is the commit main pointed at before the push
+        # (github.event.before), fetched by SHA since it need not be main's
+        # current tip once other commits have landed since. A brand-new
+        # branch's first push reports `before` as all zeros -- there is no
+        # prior commit to diff against, so this prints a notice and succeeds
+        # trivially instead of fetching a SHA that never existed. Values come
+        # through `env:`, never interpolated into the script, so a crafted
+        # `before` cannot inject shell syntax.
+        if: github.event_name == 'push'
+        env:
+          BEFORE: ${{ github.event.before }}
+        run: |
+          set -o pipefail
+          if [ "$BEFORE" = "0000000000000000000000000000000000000000" ]; then
+            echo "::notice::github.event.before is all zeros (new branch); nothing to diff api_diff against"
+            exit 0
+          fi
+          git fetch --no-tags --depth=1 origin "$BEFORE"
+          # Same fenced-summary / `|| status=$?` pattern as the pull_request
+          # step above, and for the same reason: GitHub's default `run:`
+          # shell is `bash -eo pipefail`, so a bare `status=$?` after the
+          # piped check never runs on failure, and the fence must still close.
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
+          status=0
+          python -m afenda.tools.api_diff check --base-ref "$BEFORE" 2>&1 | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 
