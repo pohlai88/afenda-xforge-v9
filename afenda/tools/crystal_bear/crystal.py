@@ -44,23 +44,47 @@ One rendering trap, recorded because it survived three drafts
     instead of the bear. That failure is invisible to a colour count and looks
     like a smudge on the paper, and masking it only relocates it.
 
-No raster is generated. The filters here (one Gaussian blur) are rendered
-reliably by browsers, the vector is a ninth of the raster's size and scales to
-any hero width, and a committed PNG would need a golden test whose result
-depends on the installed resvg version rather than on this repo.
+A raster IS now generated, for a measured reason (fix round 2). Profiling a
+season cross-fade at the grown bear size (1440x900, Chromium headless, 6 runs
+of 1.8 s) measured 4-19 dropped frames; isolating causes pinned it to the
+INLINE haze, `<g filter="url(#afb-haze)">`: hiding just `.afb-haze` in the hero
+dropped 0-2, hiding the season layer still dropped 1-4, hiding the hero (haze
+and all) dropped 0-1 - the haze alone accounts for nearly all of it, because
+its fill (`#afb-hazeFade`) and its opacity (`--afb-s-swell`) animate every
+frame and its 16px Gaussian blur no longer fits a frame once the bear grew
+about 1.7x in area. Turning the haze into an SVG `mask-image` measured WORSE
+(Chrome re-rasterises an SVG image on every paint: 11-22 dropped). A PNG
+bitmap of the white haze instead - used as a CSS `mask-image` on a div filled
+with `var(--bear-haze)` - measured 0-1 dropped and a mean pixel diff of 0.047
+against the original at a paused frame (350 of 583,200 px over an 8-level
+tolerance, all particle timing, none of it the haze). `resvg-py` is pinned in
+afenda/tools/requirements*.txt for exactly this, and the PNG's regeneration
+test compares DECODED pixels with a tolerance (max channel difference <= 2),
+never bytes, so a pinned-version bump cannot flake it.
 
-Four outputs, all from this module, so none can drift from another
-    TARGET           the standalone SVG, exactly as it renders on its own.
-    TEMPLATE_TARGET  a QWeb template: the stage, holding the SAME string inline
-                     (an <img> is opaque to the page's CSS, and the owner wants
-                     CSS to drive the bear's emotion, season and colour) and the
-                     season layer beside it. The hero is build() verbatim apart
-                     from three attributes on the root, so the two copies
-                     cannot disagree.
+Five outputs, all from this module, so none can drift from another
+    TARGET           the standalone SVG, exactly as it renders on its own -
+                     haze included, unchanged by the round-2 fix below.
+    TEMPLATE_TARGET  a QWeb template: the stage, holding the SAME hero string
+                     inline (an <img> is opaque to the page's CSS, and the
+                     owner wants CSS to drive the bear's emotion, season and
+                     colour), the haze div ahead of it, and the season layer
+                     after. The inline hero is build(include_haze=False): the
+                     haze repaints too often inside an animated SVG, so it
+                     moved to its own div, painted by CSS from HAZE_PNG_TARGET
+                     as a mask-image; the standalone file keeps the vector
+                     haze because nothing there animates it. Apart from that
+                     and three attributes on the root, the inline hero is
+                     build() verbatim, so the two copies cannot disagree on
+                     the bear itself.
     SCALES_TARGET    the colour scales that CSS draws from (OKLCH, Tailwind v4
                      step names), and the ink the stage is painted on.
     SEASONS_TARGET   the four-season engine: the season palette as registered
                      custom properties, the 32 s cycle, and the particle motion.
+    HAZE_PNG_TARGET  the haze alone: white RGB, the haze's own alpha, rasterised
+                     from the SAME defs and group build() still draws inline
+                     for the standalone file - so the bitmap the page masks
+                     with cannot diverge from the vector the target still has.
 
 The four seasons (docs/superpowers/specs/2026-09-26-four-season-bear.md). The
 bear cycles spring, summer, autumn, winter on a deep ink panel, luminous, its
@@ -82,13 +106,24 @@ import math
 import pathlib
 import random
 import re
+from io import BytesIO
+
+import resvg_py
+from PIL import Image
 
 HERE = pathlib.Path(__file__).resolve().parent
 TARGET = "afenda/addons/afenda_brand/static/src/img/auth_hero/crystal_bear.svg"
 TEMPLATE_TARGET = "afenda/addons/afenda_brand/views/auth_bear.xml"
 SCALES_TARGET = "afenda/addons/afenda_brand/static/src/css/auth_bear_scales.css"
 SEASONS_TARGET = "afenda/addons/afenda_brand/static/src/css/auth_bear_seasons.css"
+HAZE_PNG_TARGET = "afenda/addons/afenda_brand/static/src/img/auth_bear_haze.png"
 W, H = 800, 887
+
+# The stage's first child (fix round 2): the haze, now a div the page masks
+# with HAZE_PNG_TARGET rather than an animated filter inside the hero SVG.
+# `afb-haze` keeps the existing state rules (opacity, the glow lift, the
+# reduced-motion list) working on it unchanged.
+HAZE_DIV = '<div class="o_afenda_auth_haze afb-haze" aria-hidden="true"/>'
 
 # The root tag build() emits, and the one the inline copy uses instead. The
 # extra attributes belong to the inline copy only: the hero is decoration, so it
@@ -170,7 +205,89 @@ def trace_paths(fn):
                         tr.group(1) if tr else None, d.group(1)))
     return out
 
-def build() -> str:
+def _haze_defs(rim_stop_color: str) -> str:
+    """The five defs used ONLY by the haze - checked (afenda/tools/tests/
+    test_crystal_bear.py) against every other id in build()'s own output
+    before this was lifted out: nothing else references afb-edgeOut,
+    afb-noSeam, afb-flankFade, afb-flankOnly, afb-haze (the filter) or
+    afb-hazeFade. ``rim_stop_color`` is R['rim'] for the standalone file and
+    the inline hero (both keep the tinted glow) and #FFFFFF for
+    build_haze_svg() (fix round 2): the mask the page cuts with wants a WHITE
+    haze whose alpha alone carries the shape, painted by CSS from
+    var(--bear-haze) instead.
+    """
+    return f'''  <!-- The haze fades along a DIAGONAL, so "zero by x=660" is only true on the
+       gradient's own axis: at (770,120) it was still at t=0.47 and tinted the
+       paper, which is what left an 8-level step at the panel edge. This mask
+       fades it by x as well, so the art reaches the edge of its own viewBox at
+       exactly the page's colour whatever the diagonal is doing. -->
+  <linearGradient id="afb-edgeOut" gradientUnits="userSpaceOnUse" x1="560" y1="0" x2="790" y2="0">
+    <stop offset="0" stop-color="#FFFFFF"/>
+    <stop offset="1" stop-color="#000000"/>
+  </linearGradient>
+  <mask id="afb-noSeam" maskUnits="userSpaceOnUse" x="0" y="0" width="{W}" height="{H}">
+    <rect width="{W}" height="{H}" fill="url(#afb-edgeOut)"/>
+  </mask>
+  <!-- The ear is a narrow protrusion, and a 34px blur around one throws a blob
+       that touches no contour - which is why v5 left a smudge on the paper at
+       x560-760, y60-300 measuring -5.64 against the target's -0.15. Masking
+       the haze by Y as well confines it to the flank, where the target's glow
+       actually lives. v5's seam was the same mistake on the other axis: one
+       axis constrained, the other assumed. -->
+  <linearGradient id="afb-flankFade" gradientUnits="userSpaceOnUse" x1="0" y1="230" x2="0" y2="330">
+    <stop offset="0" stop-color="#000000"/>
+    <stop offset="1" stop-color="#FFFFFF"/>
+  </linearGradient>
+  <mask id="afb-flankOnly" maskUnits="userSpaceOnUse" x="0" y="0" width="{W}" height="{H}">
+    <rect width="{W}" height="{H}" fill="url(#afb-flankFade)"/>
+  </mask>
+  <filter id="afb-haze" x="-30%" y="-30%" width="160%" height="160%">
+    <feGaussianBlur stdDeviation="16"/>
+  </filter>
+  <linearGradient id="afb-hazeFade" gradientUnits="userSpaceOnUse" x1="300" y1="120" x2="660" y2="600">
+    <stop offset="0" stop-color="{rim_stop_color}" stop-opacity="0"/>
+    <stop offset="0.50" stop-color="{rim_stop_color}" stop-opacity="0.60"/>
+    <stop offset="0.80" stop-color="{rim_stop_color}" stop-opacity="0.35"/>
+    <stop offset="1" stop-color="{rim_stop_color}" stop-opacity="0"/>
+  </linearGradient>
+'''
+
+
+def _haze_group(notbear: str) -> str:
+    """The haze group exactly as build() has always drawn it: both masks, the
+    filter, opacity 0.9, the evenodd path. Shared by the standalone file (via
+    build()) and by build_haze_svg() (fix round 2), so the bitmap the page
+    masks with cannot diverge from the vector the standalone file still has.
+    """
+    return f'''<!-- The haze. In the target the bear does not end on a contour: its lit side
+     dissolves into the page. That is a blurred copy of the silhouette sitting
+     BEHIND the drawing, gradient-masked so only the lit flank throws it. A
+     filter is allowed here - this is the crystal tier, rendered once at hero
+     size, not a 16px mark. -->
+<g class="afb-haze" mask="url(#afb-noSeam)"><g mask="url(#afb-flankOnly)">
+  <g filter="url(#afb-haze)" opacity="0.9">
+    <!-- fill-rule, NOT clip-rule. clip-rule is ignored on a filled path - it
+         only binds inside a clipPath - so this filled with the default nonzero
+         rule and tinted the WHOLE canvas rather than the bear. That is why the
+         smudge survived every mask (masking a full-canvas wash just moves the
+         part you can see) and why shrinking the blur from 34 to 9 changed the
+         strip mean by 0.14. Filling the BEAR and blurring it puts the light
+         where a glow actually comes from: just outside the contour, with the
+         bear drawn over the top hiding the rest. -->
+    <path fill-rule="evenodd" fill="url(#afb-hazeFade)" d="M0 0 H{W} V{H} H0 Z {notbear}"/>
+  </g>
+</g></g>
+
+'''
+
+
+def build(*, include_haze: bool = True) -> str:
+    """The hero. ``include_haze=False`` (fix round 2) omits the haze group and
+    the five defs used only by it: that is the inline copy build_template()
+    puts in the stage, where the page paints the haze as its own div instead
+    (see HAZE_DIV, build_haze_svg()). The standalone file (TARGET) always
+    keeps include_haze=True, so it stays byte-identical to before this fix.
+    """
     notbear = (HERE / "path_notbear.txt").read_text(encoding="utf-8")
     flat = trace_paths("colour_trace.svg")
     # Every mark layer above the body is re-laid over the facets, IN ITS OWN
@@ -206,6 +323,8 @@ def build() -> str:
             marks.append('<g class="afb-face">' + ''.join(
                 paint(f2, tr2, d2, r2) for (f2, tr2, d2), r2 in zip(mark, MARK_ROLES)
                 if r2 in FACE_ROLES) + '</g>')
+    haze_defs = _haze_defs(R['rim']) if include_haze else ""
+    haze_group = _haze_group(notbear) if include_haze else ""
     return f'''{SVG_ROOT}
 <defs>
   <clipPath id="afb-bear" clipPathUnits="userSpaceOnUse">
@@ -217,41 +336,7 @@ def build() -> str:
     <stop offset="0.70" stop-color="{R['sheen']}" stop-opacity="0.28"/>
     <stop offset="1" stop-color="{R['sheen']}" stop-opacity="0.00"/>
   </linearGradient>
-  <!-- The haze fades along a DIAGONAL, so "zero by x=660" is only true on the
-       gradient's own axis: at (770,120) it was still at t=0.47 and tinted the
-       paper, which is what left an 8-level step at the panel edge. This mask
-       fades it by x as well, so the art reaches the edge of its own viewBox at
-       exactly the page's colour whatever the diagonal is doing. -->
-  <linearGradient id="afb-edgeOut" gradientUnits="userSpaceOnUse" x1="560" y1="0" x2="790" y2="0">
-    <stop offset="0" stop-color="#FFFFFF"/>
-    <stop offset="1" stop-color="#000000"/>
-  </linearGradient>
-  <mask id="afb-noSeam" maskUnits="userSpaceOnUse" x="0" y="0" width="{W}" height="{H}">
-    <rect width="{W}" height="{H}" fill="url(#afb-edgeOut)"/>
-  </mask>
-  <!-- The ear is a narrow protrusion, and a 34px blur around one throws a blob
-       that touches no contour - which is why v5 left a smudge on the paper at
-       x560-760, y60-300 measuring -5.64 against the target's -0.15. Masking
-       the haze by Y as well confines it to the flank, where the target's glow
-       actually lives. v5's seam was the same mistake on the other axis: one
-       axis constrained, the other assumed. -->
-  <linearGradient id="afb-flankFade" gradientUnits="userSpaceOnUse" x1="0" y1="230" x2="0" y2="330">
-    <stop offset="0" stop-color="#000000"/>
-    <stop offset="1" stop-color="#FFFFFF"/>
-  </linearGradient>
-  <mask id="afb-flankOnly" maskUnits="userSpaceOnUse" x="0" y="0" width="{W}" height="{H}">
-    <rect width="{W}" height="{H}" fill="url(#afb-flankFade)"/>
-  </mask>
-  <filter id="afb-haze" x="-30%" y="-30%" width="160%" height="160%">
-    <feGaussianBlur stdDeviation="16"/>
-  </filter>
-  <linearGradient id="afb-hazeFade" gradientUnits="userSpaceOnUse" x1="300" y1="120" x2="660" y2="600">
-    <stop offset="0" stop-color="{R['rim']}" stop-opacity="0"/>
-    <stop offset="0.50" stop-color="{R['rim']}" stop-opacity="0.60"/>
-    <stop offset="0.80" stop-color="{R['rim']}" stop-opacity="0.35"/>
-    <stop offset="1" stop-color="{R['rim']}" stop-opacity="0"/>
-  </linearGradient>
-  <linearGradient id="afb-rimGrad" gradientUnits="userSpaceOnUse" x1="430" y1="120" x2="800" y2="620">
+{haze_defs}  <linearGradient id="afb-rimGrad" gradientUnits="userSpaceOnUse" x1="430" y1="120" x2="800" y2="620">
     <stop offset="0" stop-color="{R['sheen']}" stop-opacity="0"/>
     <stop offset="0.42" stop-color="{R['sheen']}" stop-opacity="0.35"/>
     <stop offset="0.78" stop-color="{R['rim']}" stop-opacity="0.95"/>
@@ -263,26 +348,7 @@ def build() -> str:
      vertical seam wherever the panel stops - the owner's layout is one
      continuous surface, so this composites onto it instead of replacing it. -->
 
-<!-- The haze. In the target the bear does not end on a contour: its lit side
-     dissolves into the page. That is a blurred copy of the silhouette sitting
-     BEHIND the drawing, gradient-masked so only the lit flank throws it. A
-     filter is allowed here - this is the crystal tier, rendered once at hero
-     size, not a 16px mark. -->
-<g class="afb-haze" mask="url(#afb-noSeam)"><g mask="url(#afb-flankOnly)">
-  <g filter="url(#afb-haze)" opacity="0.9">
-    <!-- fill-rule, NOT clip-rule. clip-rule is ignored on a filled path - it
-         only binds inside a clipPath - so this filled with the default nonzero
-         rule and tinted the WHOLE canvas rather than the bear. That is why the
-         smudge survived every mask (masking a full-canvas wash just moves the
-         part you can see) and why shrinking the blur from 34 to 9 changed the
-         strip mean by 0.14. Filling the BEAR and blurring it puts the light
-         where a glow actually comes from: just outside the contour, with the
-         bear drawn over the top hiding the rest. -->
-    <path fill-rule="evenodd" fill="url(#afb-hazeFade)" d="M0 0 H{W} V{H} H0 Z {notbear}"/>
-  </g>
-</g></g>
-
-<g class="afb-body" clip-path="url(#afb-bear)">
+{haze_group}<g class="afb-body" clip-path="url(#afb-bear)">
   <rect class="afb-base" width="{W}" height="{H}" fill="{R['base']}"/>
 
   <!-- Form facets. Each is a whole plane passing through the body, so the
@@ -340,17 +406,19 @@ def build() -> str:
 </svg>'''
 
 def build_template() -> str:
-    """The QWeb template: the stage, holding the hero and the season layer.
+    """The QWeb template: the stage, holding the haze, the hero and the season layer.
 
-    The hero is build() verbatim with three root attributes, derived from
-    build()'s string rather than rendered separately, so the inline bear and
-    the standalone file cannot disagree. Each line is indented to sit inside
-    the stage; no attribute value spans a line, so indentation only touches
-    whitespace between elements and the text of comments, which QWeb drops
-    unless a template asks to preserve them. The season layer follows the hero,
-    so it paints over it.
+    The hero is build(include_haze=False) verbatim with three root attributes,
+    derived from that string rather than rendered separately, so the inline
+    bear and the standalone file cannot disagree on the bear itself (fix round
+    2 moved the haze off the hero and onto its own div, HAZE_DIV, ahead of it
+    - the page paints that div from HAZE_PNG_TARGET). Each line is indented to
+    sit inside the stage; no attribute value spans a line, so indentation only
+    touches whitespace between elements and the text of comments, which QWeb
+    drops unless a template asks to preserve them. The season layer follows
+    the hero, so it paints over it.
     """
-    svg = build()
+    svg = build(include_haze=False)
     if svg.count(SVG_ROOT) != 1 or not svg.startswith(SVG_ROOT):
         raise ValueError("build() no longer opens with SVG_ROOT; the inline copy cannot be derived")
     inline = SVG_ROOT_INLINE + svg[len(SVG_ROOT):]
@@ -364,12 +432,53 @@ def build_template() -> str:
         "<odoo>\n"
         '    <template id="auth_bear" name="AFENDA auth hero: crystal bear">\n'
         '        <div class="o_afenda_auth_stage">\n'
+        f"{indent(HAZE_DIV)}\n"
         f"{indent(inline)}\n"
         f"{indent(build_season())}\n"
         "        </div>\n"
         "    </template>\n"
         "</odoo>\n"
     )
+
+
+def build_haze_svg() -> str:
+    """A standalone SVG of the haze alone, WHITE: the same defs and group
+    build() draws inline, with #afb-hazeFade's stops forced to #FFFFFF (their
+    stop-opacity untouched) so only alpha carries the shape. build_haze_png()
+    rasterises this at hero size (800x887) for the page's CSS mask-image.
+    """
+    notbear = (HERE / "path_notbear.txt").read_text(encoding="utf-8")
+    return (
+        f'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 {W} {H}" width="{W}" height="{H}">\n'
+        f"<defs>\n{_haze_defs('#FFFFFF')}</defs>\n"
+        f"{_haze_group(notbear)}"
+        "</svg>\n"
+    )
+
+
+def build_haze_png() -> bytes:
+    """The committed haze bitmap: HAZE_PNG_TARGET, 800x887 RGBA.
+
+    Rasterised with the pinned resvg_py.svg_to_bytes (the same call
+    afenda/tools/xforge_icons_v3/render_png.py:78 makes), at the hero's own
+    size - no supersampling, because a mask read back at 100%/100% by CSS
+    gains nothing from oversampling it here. The rule this enforces, so a test
+    can hold it exactly rather than trust resvg's blur math at the edge: every
+    pixel is either fully transparent or pure white - RGB (255, 255, 255) -
+    with the haze's shape and softness carried ENTIRELY by alpha. resvg's
+    Gaussian blur mixes premultiplied colour at the fading edge, which can
+    nudge an edge pixel's RGB a shade off white even though the source paints
+    only white; this reasserts the rule the source already states rather than
+    let a rasteriser implementation detail leak into the committed asset.
+    """
+    raw = resvg_py.svg_to_bytes(svg_string=build_haze_svg(), width=W, height=H)
+    im = Image.open(BytesIO(bytes(raw))).convert("RGBA")
+    r, g, b, a = im.split()
+    white = Image.new("L", im.size, 255)
+    im = Image.merge("RGBA", (white, white, white, a))
+    out = BytesIO()
+    im.save(out, format="PNG")
+    return out.getvalue()
 
 
 # ---------------------------------------------------------------------------
@@ -1119,25 +1228,38 @@ def build_seasons_css() -> str:
     return "\n".join(lines) + "\n"
 
 
-def outputs() -> dict[str, str]:
-    """Every generated file, relative path -> text."""
+def outputs() -> dict[str, str | bytes]:
+    """Every generated file, relative path -> text (or bytes, for the PNG)."""
     return {
         TARGET: build(),
         TEMPLATE_TARGET: build_template(),
         SCALES_TARGET: build_scales_css(),
         SEASONS_TARGET: build_seasons_css(),
+        HAZE_PNG_TARGET: build_haze_png(),
     }
 
 
 def render_all(root: pathlib.Path) -> list[pathlib.Path]:
-    """Write every output under ``root``; returns only what changed on disk."""
+    """Write every output under ``root``; returns only what changed on disk.
+
+    ``content`` is ``bytes`` for HAZE_PNG_TARGET and ``str`` for everything
+    else; each is read back and written in its own mode so neither corrupts
+    the other (text mode would re-encode the PNG's bytes, binary mode would
+    write str's platform newline translation away from every other file).
+    """
     written = []
-    for rel, text in outputs().items():
+    for rel, content in outputs().items():
         out = root / rel
-        if out.is_file() and out.read_text(encoding="utf-8") == text:
-            continue
+        binary = isinstance(content, bytes)
+        if out.is_file():
+            existing = out.read_bytes() if binary else out.read_text(encoding="utf-8")
+            if existing == content:
+                continue
         out.parent.mkdir(parents=True, exist_ok=True)
-        out.write_text(text, encoding="utf-8", newline="\n")
+        if binary:
+            out.write_bytes(content)
+        else:
+            out.write_text(content, encoding="utf-8", newline="\n")
         written.append(out)
     return written
 
