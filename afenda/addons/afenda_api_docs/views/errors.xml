@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Rendered with {"codes": PROBLEM_CODES, "no_footer": True} by
+    controllers/api.py's docs_api_errors, the same way views/guides.xml is
+    rendered by landing.py: a generated page, so it does not set no_footer
+    itself. Every JSON-2 error's "type" field points at this page's URL
+    followed by "#<code>" (afenda_runtime/problems.py, models/ir_http.py),
+    so each code needs a matching id here for that fragment to land
+    anywhere. -->
+    <template id="api_errors" name="AFENDA API errors">
+        <t t-call="web.frontend_layout">
+            <div class="container py-5">
+                <h1>API errors</h1>
+                <p class="text-muted">
+                    Every JSON API error carries one of these codes in its
+                    <code>code</code> field, and repeats it in <code>type</code>
+                    as a link back to this page.
+                </p>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Code</th>
+                            <th>Status</th>
+                            <th>Meaning</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t t-foreach="codes" t-as="entry">
+                            <tr t-att-id="entry[0]">
+                                <td><code t-out="entry[0]"/></td>
+                                <td t-out="entry[1]"/>
+                                <td t-out="entry[2]"/>
+                            </tr>
+                        </t>
+                    </tbody>
+                </table>
+            </div>
+        </t>
+    </template>
+</odoo>

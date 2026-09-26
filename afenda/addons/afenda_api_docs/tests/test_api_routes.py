@@ -4,6 +4,8 @@ import re
 
 from odoo.tests import HttpCase, tagged
 
+from odoo.addons.afenda_runtime.problems import PROBLEM_CODES
+
 REDOC = pathlib.Path(__file__).resolve().parents[1] / "static" / "lib" / "redoc"
 REDOC_URL = "/afenda_api_docs/static/lib/redoc/redoc.standalone.js"
 
@@ -94,6 +96,15 @@ class TestApiRoutes(HttpCase):
         self.assertEqual(res.status_code, 200)
         self.assertIn("<redoc", res.text)
         self.assertNotIn("<option", res.text)
+
+    def test_errors_page_lists_every_code(self):
+        # Public, no login: the "type" field of every JSON-2 error body
+        # points here (#<code>), so it must be reachable by whoever gets
+        # the error, signed in or not.
+        res = self.url_open("/docs/api/errors")
+        self.assertEqual(res.status_code, 200)
+        for code, _status, _description in PROBLEM_CODES:
+            self.assertIn('id="%s"' % code, res.text)
 
     def test_landing_links_to_the_api_reference(self):
         self.assertIn('href="/docs/api"', self.url_open("/docs").text)
