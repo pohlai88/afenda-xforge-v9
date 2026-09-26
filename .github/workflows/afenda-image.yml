@@ -1,10 +1,12 @@
 # Build the deploy image when something that goes into it changes, check that
-# it carries the product identity, and run the AFENDA Odoo module suites inside
-# it. About ten minutes per run, so it is limited to the image's inputs: every
-# COPY source in deploy/Dockerfile, .dockerignore and this file. A change
-# elsewhere is still built on the VPS by deploy/redeploy.sh, which puts the
-# previous commit back if the build fails. Pull requests into main run it too,
-# so the module suites gate a change before it merges, not after.
+# it carries the product identity, run the AFENDA Odoo module suites inside
+# it, and regenerate the OpenAPI asset to gate it against the committed one.
+# Up to an hour per run (the asset step alone can take 20 minutes), so it is
+# limited to the image's inputs: every COPY source in deploy/Dockerfile,
+# .dockerignore and this file. A change elsewhere is still built on the VPS
+# by deploy/redeploy.sh, which puts the previous commit back if the build
+# fails. Pull requests into main run it too, so the module suites and the
+# asset check gate a change before it merges, not after.
 name: afenda-image
 
 on:
@@ -43,7 +45,7 @@ jobs:
   build:
     name: docker build
     runs-on: ubuntu-24.04
-    timeout-minutes: 45
+    timeout-minutes: 60
     services:
       postgres:
         image: postgres:16@sha256:a3b7f434b2dc57ce85a67e171163eb8ab1a1ebcb39d27484661f26b1dfbe30d6
@@ -165,6 +167,11 @@ jobs:
           # runner's checkout is owned by the actions user, so the mounted
           # directory must be opened up before the exporter can write into it.
           chmod -R a+w afenda/addons/afenda_api_docs/openapi
+          # The committed baseline, read from git BEFORE the export mutates
+          # the working directory below: `ls` afterwards would just measure
+          # what the exporter itself wrote, which passes the count check
+          # even when the exporter is broken.
+          committed=$(git ls-files -- 'afenda/addons/afenda_api_docs/openapi/*.json' | wc -l)
           # `-i` is mandatory: without it stdin is empty and the export is a
           # silent no-op.
           docker run -i --rm --network host \
@@ -178,7 +185,6 @@ jobs:
           echo "result: ${line:-none}"
           n=$(printf '%s' "$line" | grep -oE '[0-9]+' || true)
           [ -n "$n" ] || { echo "::error::no afenda-openapi result line"; exit 1; }
-          committed=$(ls afenda/addons/afenda_api_docs/openapi/*.json | wc -l)
           [ "$n" -gt 0 ] || { echo "::error::exporter wrote 0 documents"; exit 1; }
           [ "$n" -eq "$committed" ] || { echo "::error::exporter wrote $n documents, $committed *.json files are committed"; exit 1; }
           if [ -n "$(git status --porcelain -- afenda/addons/afenda_api_docs/openapi)" ]; then

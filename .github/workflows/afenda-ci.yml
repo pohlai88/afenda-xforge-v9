@@ -84,7 +84,14 @@ jobs:
         # check fails, so a breaking change is visible without opening logs.
         run: |
           set -o pipefail
+          # Raw text in $GITHUB_STEP_SUMMARY is rendered as Markdown and its
+          # blank lines collapse; a fenced block keeps the three change
+          # lists readable, and the fence still closes when the check fails.
+          echo '```text' >> "$GITHUB_STEP_SUMMARY"
           python -m afenda.tools.api_diff check --base-ref origin/main 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
+          status=$?
+          echo '```' >> "$GITHUB_STEP_SUMMARY"
+          exit "$status"
 
   nginx:
     name: nginx -t

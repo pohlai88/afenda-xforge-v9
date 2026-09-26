@@ -194,10 +194,20 @@ class DeployStaticTests(unittest.TestCase):
         # silent no-op (see the Task 6 brief).
         self.assertRegex(body, r"docker run -i --rm --network host[\s\S]*?< afenda/tools/export_openapi_shell\.py")
         self.assertIn("afenda-openapi: wrote", body)
-        # The printed N is checked against the committed asset files, and
-        # must be greater than zero.
-        self.assertIn("ls afenda/addons/afenda_api_docs/openapi/*.json | wc -l", body)
-        self.assertIn("-gt 0", body)
+        # The committed count must come from git, not from `ls` on the same
+        # directory the export just wrote into (that would just measure the
+        # exporter's own output and always agree with it).
+        self.assertIn("git ls-files -- 'afenda/addons/afenda_api_docs/openapi/*.json' | wc -l", body)
+        self.assertNotIn("ls afenda/addons/afenda_api_docs/openapi/*.json | wc -l", body)
+        # And it must be read before the export mutates the directory.
+        git_count_at = body.index("git ls-files -- 'afenda/addons/afenda_api_docs/openapi/*.json'")
+        export_at = body.index("docker run -i")
+        self.assertLess(git_count_at, export_at,
+                         "the committed count must be read before the export runs")
+        # The printed N is actually compared against that committed count,
+        # and must be greater than zero.
+        self.assertIn('[ "$n" -gt 0 ]', body)
+        self.assertIn('[ "$n" -eq "$committed" ]', body)
         self.assertIn("git status --porcelain -- afenda/addons/afenda_api_docs/openapi", body)
 
         ci = (REPO / ".github" / "workflows" / "afenda-ci.yml").read_text(encoding="utf-8")
