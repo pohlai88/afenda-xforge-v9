@@ -399,12 +399,16 @@ spec's "Corrections recorded" now carries an `owner_approval` line (0007 as impl
 checked first). PR #5 is merged (see "Start here"). What remains needs the owner's own hands:
 
 1. **Required status checks on `main`** (repository settings → branches, or a ruleset):
-   require `tools suite`, `tools suite (Python 3.12)`, `api contract`, `nginx -t` and
-   `pr evidence` before merging (`docker build`, i.e. `afenda-image`, is deliberately not in
-   that list: it only runs when a PR touches the image's inputs, so a docs-only PR would never
-   get a report from it and a required check would block the merge forever — PR #6 was such a
-   PR). No agent tool can change repository settings; until the owner sets it, the checks bind
-   agents (through the steward skill) but not a manual merge.
+   require `tools suite`, `tools suite (Python 3.12)`, `api contract`, `nginx -t`, `docker build`
+   and `pr evidence` before merging. `docker build` (`afenda-image`) is back in this list
+   (2026-09-26, PR #7 review fix): it used to be left out because it only ran when a PR touched
+   the image's inputs, so a docs-only PR (PR #6 was one) would never get a report from it and a
+   required check would block the merge forever. `afenda-image.yml` now decides that from the
+   actual diff in its own `changes` job rather than from the workflow's `on: paths`, so `build`
+   is skipped by `if:` instead of never running, and GitHub reports a job skipped by `if:` as
+   success — `docker build` always reports, and still fails a genuine image break. No agent tool
+   can change repository settings; until the owner sets it, the checks bind agents (through the
+   steward skill) but not a manual merge.
 2. **Automatic deploys were removed on 2026-09-26 by owner decision** (they never ran — 5 runs
    on `main`, all "not set up yet" — needed host terminal setup the owner would not do, and the
    SSH leg was never tested). Deploys stay manual: `./redeploy.sh` on the host

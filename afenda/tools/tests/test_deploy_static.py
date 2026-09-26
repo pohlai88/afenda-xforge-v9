@@ -266,6 +266,61 @@ class DeployStaticTests(unittest.TestCase):
                 f"odoo-bin call is missing --addons-path {addons_path!r}: {command!r}",
             )
 
+    def test_ci_image_build_always_reports_docker_build_as_a_status(self):
+        # afenda-image.yml used to filter push/pull_request by `paths:` at the
+        # workflow `on:` level: on a PR whose diff touched none of those
+        # globs, the `build` job never ran at all, so `docker build` could
+        # never report a status and could not be a required check (PR #7
+        # review, Codex). The filter must live in a `changes` job instead,
+        # whose `if:` skips `build` when nothing matches - GitHub reports a
+        # job skipped by `if:` as success for required status checks, so
+        # `docker build` always reports (green on a skip, red on a real
+        # failure).
+        image = (REPO / ".github" / "workflows" / "afenda-image.yml").read_text(encoding="utf-8")
+
+        on_block = re.search(r"^on:\n((?:.*\n)+?)^permissions:", image, re.MULTILINE).group(1)
+        self.assertNotIn("paths:", on_block, "on: still filters push/pull_request by paths")
+        self.assertIn("branches: [main]", on_block)
+        self.assertIn("workflow_dispatch:", on_block)
+
+        changes_job = re.search(r"^  changes:\n((?:.*\n)+?)^  build:\n", image, re.MULTILINE)
+        self.assertIsNotNone(changes_job, "no changes job before build")
+        changes_body = changes_job.group(1)
+        self.assertIn("name: image inputs", changes_body)
+        self.assertIn("image: ${{ steps.filter.outputs.image }}", changes_body)
+        for pattern in ("deploy/**", "afenda/**", "odoo/**", "addons/**", "odoo-bin",
+                        "requirements.txt", ".dockerignore",
+                        ".github/workflows/afenda-image.yml"):
+            self.assertIn(pattern, changes_body, f"changes job filter is missing {pattern!r}")
+
+        build_job = re.search(r"^  build:\n((?:.*\n)+)", image, re.MULTILINE).group(1)
+        self.assertIn("needs: changes", build_job)
+        self.assertIn("if: needs.changes.outputs.image == 'true'", build_job)
+
+        # No `run:` script inside the changes job may inline a `${{ }}`
+        # expression; only `env:` may carry one (same rule as afenda-pr.yml,
+        # test_afenda_pr_workflow_passes_the_body_through_env_not_expression).
+        lines = changes_body.splitlines()
+        offenders = []
+        i = 0
+        while i < len(lines):
+            match = re.match(r"^(\s*)run:\s*(.*)$", lines[i])
+            if match:
+                indent, inline = len(match.group(1)), match.group(2).strip()
+                if inline and inline not in ("|", ">", "|-", ">-"):
+                    if "${{" in inline:
+                        offenders.append(lines[i])
+                    i += 1
+                    continue
+                i += 1
+                while i < len(lines) and (lines[i].strip() == "" or len(lines[i]) - len(lines[i].lstrip()) > indent):
+                    if "${{" in lines[i]:
+                        offenders.append(lines[i])
+                    i += 1
+                continue
+            i += 1
+        self.assertEqual(offenders, [], f"a run: script in the changes job interpolates an expression: {offenders}")
+
     def test_afenda_pr_workflow_passes_the_body_through_env_not_expression(self):
         # afenda-pr.yml's `pr evidence` job must trigger when a PR description
         # is edited (the check re-runs against the new body, not just the

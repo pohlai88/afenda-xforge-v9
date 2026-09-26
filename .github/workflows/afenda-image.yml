@@ -1,37 +1,28 @@
 # Build the deploy image when something that goes into it changes, check that
 # it carries the product identity, run the AFENDA Odoo module suites inside
 # it, and regenerate the OpenAPI asset to gate it against the committed one.
-# Up to an hour per run (the asset step alone can take 20 minutes), so it is
-# limited to the image's inputs: every COPY source in deploy/Dockerfile,
-# .dockerignore and this file. A change elsewhere is still built on the VPS
-# by deploy/redeploy.sh, which puts the previous commit back if the build
-# fails. Pull requests into main run it too, so the module suites and the
-# asset check gate a change before it merges, not after.
+# Up to an hour per run (the asset step alone can take 20 minutes), so the
+# `changes` job below decides first whether the diff actually touches the
+# image's inputs: every COPY source in deploy/Dockerfile, .dockerignore and
+# this file. A change elsewhere is still built on the VPS by
+# deploy/redeploy.sh, which puts the previous commit back if the build fails.
+# Pull requests into main run this too, so the module suites and the asset
+# check gate a change before it merges, not after.
+#
+# The filter used to live in `on: paths`, at the workflow level: on a PR that
+# touched none of those paths the `docker build` job never ran at all, so it
+# could never report a status and could not be a required check. It is a
+# `changes` job's `if:` instead, so `docker build` always reports: GitHub
+# counts a job skipped by `if:` as a success for required status checks, so a
+# docs-only PR still gets a green (skipped) `docker build`, while a PR that
+# does touch an image input still gets a real build that can fail it.
 name: afenda-image
 
 on:
   push:
     branches: [main]
-    paths:
-      - "deploy/**"
-      - "afenda/**"
-      - "odoo/**"
-      - "addons/**"
-      - "odoo-bin"
-      - "requirements.txt"
-      - ".dockerignore"
-      - ".github/workflows/afenda-image.yml"
   pull_request:
     branches: [main]
-    paths:
-      - "deploy/**"
-      - "afenda/**"
-      - "odoo/**"
-      - "addons/**"
-      - "odoo-bin"
-      - "requirements.txt"
-      - ".dockerignore"
-      - ".github/workflows/afenda-image.yml"
   workflow_dispatch:
 
 permissions:
@@ -42,8 +33,60 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  changes:
+    name: image inputs
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    outputs:
+      image: ${{ steps.filter.outputs.image }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - id: filter
+        name: decide whether the diff touches an image input
+        env:
+          EVENT_NAME: ${{ github.event_name }}
+          BASE_SHA: ${{ github.event.pull_request.base.sha || github.event.before }}
+          HEAD_SHA: ${{ github.event.pull_request.head.sha || github.sha }}
+        run: |
+          set -euo pipefail
+          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
+            echo "decision: image=true (workflow_dispatch)"
+            echo "image=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if [ "$BASE_SHA" = "0000000000000000000000000000000000000000" ]; then
+            echo "decision: image=true (no base commit to diff against)"
+            echo "image=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          if ! git fetch --no-tags --depth=1 origin "$BASE_SHA" || ! git fetch --no-tags --depth=1 origin "$HEAD_SHA"; then
+            echo "decision: image=true (fetch of base or head failed; failing open)"
+            echo "image=true" >> "$GITHUB_OUTPUT"
+            exit 0
+          fi
+
+          image=false
+          while IFS= read -r path; do
+            [ -z "$path" ] && continue
+            case "$path" in
+              deploy/**|afenda/**|odoo/**|addons/**|odoo-bin|requirements.txt|.dockerignore|.github/workflows/afenda-image.yml)
+                echo "decision: image=true, matched: $path"
+                image=true
+                ;;
+            esac
+          done < <(git diff --name-only "$BASE_SHA" "$HEAD_SHA")
+
+          echo "decision: image=$image"
+          echo "image=$image" >> "$GITHUB_OUTPUT"
+
   build:
     name: docker build
+    needs: changes
+    if: needs.changes.outputs.image == 'true'
     runs-on: ubuntu-24.04
     timeout-minutes: 60
     services:

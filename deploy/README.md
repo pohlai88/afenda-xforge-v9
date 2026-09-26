@@ -178,8 +178,14 @@ network is provided.
 One command, on the VPS, from `deploy/`:
 
 ```bash
-./redeploy.sh                   # the branch head; or ./redeploy.sh <commit or tag>
+./redeploy.sh <commit>           # the full commit id whose CI passed, e.g. ./redeploy.sh 4f8b2c1e9a7d3f0561c8e2b9a4d6f1c8e0b2a4d6
 ```
+
+Always pass the commit explicitly. `redeploy.sh` defaults `ref` to `main` (`redeploy.sh:21`) but
+only fetches it after `backup.sh` has already run (`redeploy.sh:37-38`), so a bare `./redeploy.sh`
+can deploy whatever is on `main` at that later moment, not the commit the operator actually
+checked CI for. Use the `main` commit whose `afenda-ci` and `afenda-image` runs both succeeded
+(Actions tab), and pass its full 40-character SHA — not `main`, not a short SHA, not a tag.
 
 It refuses a checkout with tracked changes, backs up first, fetches the ref
 (shallow) with its submodules, builds, starts the stack, and ends with
@@ -204,9 +210,13 @@ docker compose run --rm init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin mo
 
 ### Deploying
 
-Deploys are manual: run `./redeploy.sh [<commit>]` on the host after a merge to `main`.
-There is no automatic deploy (removed 2026-09-26: it never ran and needed an SSH key into
-production).
+Deploys are manual: after a merge to `main`, check the Actions tab for the commit whose
+`afenda-ci` and `afenda-image` runs both succeeded, then run `./redeploy.sh <that commit's full
+SHA>` on the host — e.g. `./redeploy.sh 4f8b2c1e9a7d3f0561c8e2b9a4d6f1c8e0b2a4d6`. Never run a
+bare `./redeploy.sh`: it defaults to `main`'s current head (`redeploy.sh:21`) and fetches it only
+after `backup.sh` has already run (`redeploy.sh:37-38`), so it can deploy a commit pushed after
+the operator checked CI, not the one whose green run they verified. There is no automatic deploy
+(removed 2026-09-26: it never ran and needed an SSH key into production).
 
 ## The landing page
 
