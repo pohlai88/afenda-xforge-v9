@@ -22,8 +22,8 @@ goes under `afenda/addons/`. See `afenda/README.md` for the layout and run steps
   full chain for a small edit.
 - Full gates run **once**, at the end of a unit of work, right before the commit: the
   tools suite, the touched modules' Odoo suites, `scan_identity`, and `corpus diff` if a
-  rule changed. The `web,test_http` suite runs once per branch, and `python -m
-  afenda.tools.check` gates the one push (Gotchas has `push_gate.py`).
+  rule changed. The `web,test_http` suite runs once per branch. Before every push run
+  `/preflight` (`.claude/skills/preflight/`): `python -m afenda.tools.check`, then the reviews.
 - Do not rerun a gate that passed unless something it covers has changed since. Record
   the command, the printed count and the SHA, and cite that record instead of rerunning.
 - When a gate fails, read the whole failure, fix it, rerun only the failing test, then
@@ -185,8 +185,8 @@ diagnose-first procedure for a red check (log line → cause as `path:line` → 
 one fix GREEN → gates once → one push; the same fix failing twice stops for a report), and
 the merge (rebase and merge) and post-merge steps. `.github/PULL_REQUEST_TEMPLATE.md` asks for
 the evidence, and the `pr evidence` check (`afenda-pr.yml`, `afenda/tools/pr_evidence.py`)
-fails a PR whose description lacks a printed test count or lacks a commit id, and every push
-that opens or updates it is itself gated (Gotchas has `push_gate.py`). Spec:
+fails a PR whose description lacks a printed test count or a commit id of the PR, and every push
+that opens or updates it goes through `/preflight` and the push gate (Gotchas). Spec:
 `docs/superpowers/specs/2026-09-26-pr-stewardship.md`.
 
 ## Branches and commits
@@ -210,10 +210,10 @@ that opens or updates it is itself gated (Gotchas has `push_gate.py`). Spec:
 - Look at a file before `cat >` onto it, and re-check `git log` on paths you are about to write; a peer session may have committed there since you last read.
 - Cloning a database for a parallel lane must copy the filestore too (`filestore/<db>` under Odoo's data dir, path from `odoo.tools.config`), or every attachment-backed field breaks and the failures read as code regressions.
 - `.claude/hooks/rerun_guard.py` (a PreToolUse hook) blocks a gate command (a test suite,
-  `api_diff`, `corpus`, `scan_identity`, `pr_evidence`) the third time it runs in one session
-  on an unchanged tree. Cite the earlier count, change code, or stop and report; the hook fails
+  `api_diff`, `corpus`, `scan_identity`, `pr_evidence`, `afenda.tools.check`) the third time it
+  runs on an unchanged tree, counted across sessions and sub-agents. Cite the earlier count, change code, or stop and report; the hook fails
   open on any internal error.
 - `git commit --only <path>` refuses a path git does not track yet ("pathspec … did not match any file(s) known to git"): `git add` it (`git add -f` under `.claude/`) in the same shell call first.
-- The scoped fingerprint (`afenda/tools/_git_identity.py`'s `SCOPED_PATHS`, the one copy `rerun_guard.py`, `check.py` and `push_gate.py` share) covers `afenda .github .claude docs CLAUDE.md deploy` only (an unscoped diff costs about two minutes per call), so a `[REBRAND]` apply or an upstream merge is invisible to it: the first run after one is new evidence; say so where you cite it.
-- `.claude/hooks/push_gate.py` (PreToolUse on `git push` and the three GitHub-write MCP tools) blocks a push whose tip tree has no passing stamp in `.git/afenda-check/`; run `python -m afenda.tools.check` first. `disableAllHooks`, a wrapper script, an alias, or a raw `gh api`/`curl` write all bypass it — branch protection on `main` is the real backstop, not the hook.
+- The scoped fingerprint (`afenda/tools/_git_identity.py`'s `SCOPED_PATHS`, shared by `rerun_guard.py` and `check.py`'s dirty-tree refusal) covers `afenda .github .claude docs CLAUDE.md deploy` only (an unscoped diff costs about two minutes per call), so a `[REBRAND]` apply or an upstream merge is invisible to it: the first run after one is new evidence; say so where you cite it.
+- `.claude/hooks/push_gate.py` (PreToolUse) blocks a `git push` whose tip tree (the full commit tree, so a `[REBRAND]` apply needs a new stamp) has no passing stamp in `.git/afenda-check/`, a push chained to other commands, and always the three GitHub-write MCP tools; `/preflight` earns the stamp. `disableAllHooks`, a wrapper script, an alias, or a raw `gh api`/`curl` write all bypass it — branch protection on `main` is the real backstop, not the hook.
 - Ask "does this code call X" with an AST walk, not grep: grep matches the name inside docstrings, including ones stating it is deliberately *not* called.

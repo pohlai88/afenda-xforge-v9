@@ -71,8 +71,9 @@ outside the fix diff are recorded, not a reason for another sweep.
 - **Guard first:** the test that fails for the named cause, run and seen failing (the RED line
   with its failure count), before the fix.
 - **Narrowest per edit:** one test class or method, or one `afenda/tools/tests` module.
-- **Gates once** per unit of work, at the end: `python -m afenda.tools.check` (the tools suite,
-  the touched modules' Odoo suites), plus `scan_identity` and `corpus diff` when a rule changed.
+- **Gates once** per unit of work, at the end: `/preflight` (`python -m afenda.tools.check`: the
+  tools suite and the API contract always, the four AFENDA module suites when `afenda/addons/`
+  changed; then the reviews), plus `scan_identity` and `corpus diff` when a rule changed.
 - **Cite, don't re-run:** a passed gate is recorded as command · printed count · SHA and cited
   until something it covers changes. `.claude/hooks/rerun_guard.py` blocks the third run of a
   gate on an unchanged tree.
