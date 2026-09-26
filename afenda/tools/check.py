@@ -347,8 +347,14 @@ def main(argv=None, *, cwd=None, executor=None) -> int:
         return 1
 
     reason = None
+    try:
+        default_base = _git_identity.run_git(["merge-base", DEFAULT_BASE, "HEAD"], root).strip()
+    except _git_identity.GitIdentityError:
+        default_base = None  # no origin/main here (a scratch repo): the base passed is all there is
     if dirty:
         reason = "the tree has uncommitted scoped changes"
+    elif default_base and default_base != merge_base:
+        reason = f"the gates were chosen against {args.base!r}, not {DEFAULT_BASE}"
     elif not set(selected) <= set(to_run):
         reason = "not every selected gate ran (" + ", ".join(
             name for name in selected if name not in to_run

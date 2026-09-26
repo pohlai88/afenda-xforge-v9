@@ -404,6 +404,25 @@ class CheckMainTests(_TempRepo):
         self.assertEqual(code, 0)
         self.assertIn("CI only", out)
 
+    def test_a_base_other_than_origin_main_earns_no_stamp(self):
+        # `--base HEAD` selects no changed paths, so the Odoo gates never run; the push
+        # gate must not accept that tree (code review of 2e781020f).
+        _git(["update-ref", "refs/remotes/origin/main", "main"], self.repo)
+        self.write("afenda/addons/afenda_brand/x.py", "x = 1\n")
+        self.commit("addon", "afenda/addons/afenda_brand/x.py")
+        out = io.StringIO()
+        with redirect_stdout(out):
+            code = check.main(["--base", "HEAD"], cwd=self.repo, executor=_Executor())
+        self.assertEqual(code, 0)
+        self.assertIn("no stamp", out.getvalue())
+        self.assertFalse(self.stamp().exists())
+
+    def test_the_default_base_still_earns_a_stamp(self):
+        _git(["update-ref", "refs/remotes/origin/main", "main"], self.repo)
+        code, out, _executor = self.run_check()
+        self.assertEqual(code, 0)
+        self.assertTrue(self.stamp().exists(), out)
+
     def test_an_unknown_base_exits_2(self):
         out = io.StringIO()
         with redirect_stdout(out):

@@ -223,6 +223,8 @@ class PushGateTests(unittest.TestCase):
             "git -c core.hooksPath=/dev/null push origin main",
             "bash -c 'git push origin main'",
             "sh -c \"git push origin main\"",
+            "bash -lc 'git push origin main'",
+            "bash -ec 'git push origin main'",
             "eval git push origin main",
             "git status && git push origin main",
             "true; git push origin main | cat",
@@ -428,37 +430,52 @@ class WiringTests(unittest.TestCase):
             entry["matcher"]: [hook["command"] for hook in entry["hooks"]] for entry in pre
         }
         self.assertTrue(any("rerun_guard.py" in c for c in by_matcher["Bash"]))
-        self.assertTrue(any("push_gate.py" in c for c in by_matcher["Bash"]))
+        self.assertTrue(any("push_gate.sh" in c for c in by_matcher["Bash"]))
         mcp = "|".join(MCP_TOOLS)
-        self.assertTrue(any("push_gate.py" in c for c in by_matcher[mcp]))
+        self.assertTrue(any("push_gate.sh" in c for c in by_matcher[mcp]))
         self.assertEqual(tuple(push_gate.BLOCKED_MCP_TOOLS), MCP_TOOLS)
 
-    def test_only_the_push_gate_fails_closed_when_its_interpreter_is_missing(self):
-        # A missing interpreter exits 127, which does not block (M5); `|| exit 2`
-        # turns any non-zero exit of the push gate's command into a block.
+    def test_the_push_gate_is_wired_through_its_launcher(self):
+        # push_gate.sh fails closed itself (any non-zero exit of the gate becomes 2) and
+        # falls back to python3, so the settings carry no `|| exit 2` (code review #4).
         settings = json.loads(self.SETTINGS.read_text(encoding="utf-8"))
         commands = [
             hook["command"] for entry in settings["hooks"]["PreToolUse"] for hook in entry["hooks"]
         ]
-        gates = [c for c in commands if "push_gate.py" in c]
-        guards = [c for c in commands if "rerun_guard.py" in c]
+        gates = [c for c in commands if "push_gate" in c]
         self.assertEqual(len(gates), 2)
         for command in gates:
-            self.assertTrue(command.endswith(" || exit 2"), command)
-        for command in guards:
+            self.assertIn(".claude/hooks/push_gate.sh", command)
             self.assertNotIn("exit 2", command)
 
-    @unittest.skipUnless(os.name == "posix", "runs the wired command under sh")
-    def test_the_wired_command_blocks_when_the_interpreter_is_missing(self):
-        settings = json.loads(self.SETTINGS.read_text(encoding="utf-8"))
-        command = next(
-            hook["command"] for hook in settings["hooks"]["PreToolUse"][0]["hooks"]
-            if "push_gate.py" in hook["command"]
-        )
-        with tempfile.TemporaryDirectory() as empty:
+    @unittest.skipUnless(os.name == "posix" and os.path.exists("/bin/bash"), "runs the launcher under bash")
+    def test_without_any_python_only_a_push_is_refused(self):
+        # A fresh clone has no .venv: `python -m venv .venv` must still run (code review #4),
+        # while a push stays blocked.
+        launcher = _HOOK_PATH.with_name("push_gate.sh")
+        with tempfile.TemporaryDirectory() as empty, tempfile.TemporaryDirectory() as bindir:
+            os.symlink("/bin/cat", os.path.join(bindir, "cat"))
+            env = {"CLAUDE_PROJECT_DIR": empty, "PATH": bindir}
+            def run(payload):
+                return subprocess.run(
+                    ["/bin/bash", str(launcher)], input=json.dumps(payload),
+                    capture_output=True, text=True, env=env, timeout=60,
+                ).returncode
+            self.assertEqual(run({"tool_name": "Bash", "tool_input": {"command": "python3 -m venv .venv"}}), 0)
+            self.assertEqual(run({"tool_name": "Bash", "tool_input": {"command": "git push origin main"}}), 2)
+            self.assertEqual(run({"tool_name": MCP_TOOLS[0], "tool_input": {}}), 2)
+
+    @unittest.skipUnless(os.name == "posix" and os.path.exists("/bin/bash"), "runs the launcher under bash")
+    def test_the_launcher_fails_closed_when_the_gate_errors(self):
+        launcher = _HOOK_PATH.with_name("push_gate.sh")
+        with tempfile.TemporaryDirectory() as project:
+            hooks = os.path.join(project, ".claude", "hooks")
+            os.makedirs(hooks)
+            with open(os.path.join(hooks, "push_gate.py"), "w") as handle:
+                handle.write("raise SystemExit(1)\n")
             result = subprocess.run(
-                ["sh", "-c", command], input="{}", capture_output=True, text=True,
-                env={"CLAUDE_PROJECT_DIR": empty, "PATH": "/usr/bin:/bin"}, timeout=60,
+                ["/bin/bash", str(launcher)], input="{}", capture_output=True, text=True,
+                env={"CLAUDE_PROJECT_DIR": project, "PATH": os.environ.get("PATH", "")}, timeout=60,
             )
         self.assertEqual(result.returncode, 2)
 
