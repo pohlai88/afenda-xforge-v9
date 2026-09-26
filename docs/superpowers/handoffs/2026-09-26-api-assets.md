@@ -382,11 +382,13 @@ No PR was opened for this branch either (see "Owner decisions").
 3. **AFD-ARCH-CORR-0006** — the asset documents the administrator's default-settings surface,
    not a dedicated API-reference role with every feature group. Fields behind an optional
    feature group (multi-currency, etc.) are simply absent from the committed contract.
-4. **Whether to open a PR for this branch at all**, and against what target — Task 7's brief
-   said to open one; the controller deferred that to
-   `superpowers:finishing-a-development-branch` (whole-branch review first, then this fix
-   wave). A draft PR body, updated for the fix wave and naming AFD-ARCH-CORR-0008, 0007 and
-   0006 for the owner as before, is below ("Draft PR body").
+4. **PR #5 is open** (https://github.com/pohlai88/afenda-xforge-v9/pull/5), opened on the owner's
+   instruction of 2026-09-26 and driven to merge by `.claude/skills/steward/SKILL.md`. Its
+   description supersedes the draft below, which is kept as written.
+5. **Required status checks on `main`** (repository settings → branches, or a ruleset):
+   require `tools suite`, `tools suite (Python 3.12)`, `api contract`, `nginx -t`,
+   `docker build` and `pr evidence` before merging. Only the owner can set this; until then the
+   checks bind agents (through the steward skill) but not a manual merge.
 
 ## Draft PR body (not submitted — for the controller/owner)
 
