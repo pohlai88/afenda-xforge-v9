@@ -39,7 +39,7 @@ SEASON_CLASSES = (
     "afb-tone-3",
 )
 SEASONS = ("spring", "summer", "autumn", "winter")
-SCALE_HUES = ("aurora", "dusk", "ember", "forest", "mint", "moss", "rose", "rust")
+SCALE_HUES = ("aurora", "dusk", "ember", "forest", "frost", "mint", "moss", "rose", "rust")
 SCALE_STEPS = (50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950)
 TOKEN = re.compile(r"^\s*(--bear-[a-z0-9-]+):\s*oklch\(([\d.]+)% ([\d.]+) ([\d.]+)\);$", re.M)
 # The contract every line of the page's bear CSS keeps (auth_bear.css header).
@@ -280,7 +280,7 @@ class CrystalBearOutputsTests(unittest.TestCase):
                 face = [el for el in elements(root) if "afb-face" in (el.get("class") or "").split()]
                 self.assertEqual(face[0].tag, f"{SVG_NS}g")
                 self.assertEqual([el.get("class") for el in face[0]], ["afb-mask", "afb-chin"])
-                self.assertFalse(flat & set(SEASON_CLASSES) - {"afb-p"},
+                self.assertFalse(flat & set(SEASON_CLASSES),
                                  f"{label}: a season class reached the bear itself")
 
     def test_every_season_class_is_present_on_the_season_layer(self):
@@ -347,7 +347,7 @@ class CrystalBearOutputsTests(unittest.TestCase):
         self.assertEqual(svg.get("class"), "o_afenda_auth_hero")
         self.assertEqual((svg.get("aria-hidden"), svg.get("focusable")), ("true", "false"))
         season = season_svg()
-        self.assertEqual(season.get("viewBox"), f"0 0 {crystal.W} {crystal.H}")
+        self.assertEqual(season.get("viewBox"), f"0 -{crystal.H} {crystal.SEASON_W} {crystal.SEASON_H}")
         self.assertEqual(season.get("class"), "o_afenda_auth_season")
         self.assertEqual((season.get("aria-hidden"), season.get("focusable")), ("true", "false"))
         self.assertIsNone(svg_root().get("aria-hidden"),
@@ -357,10 +357,10 @@ class CrystalBearOutputsTests(unittest.TestCase):
         tokens, css = scale_tokens()
         expected = ({f"--bear-{h}-{s}" for h in SCALE_HUES for s in SCALE_STEPS}
                     | {"--bear-tenant", "--bear-ink"})
-        self.assertEqual(len(expected), 90)
+        self.assertEqual(len(expected), 101)
         self.assertEqual(set(tokens), expected)
         declared = re.findall(r"^\s*--bear-", css, re.M)
-        self.assertEqual(len(declared), 90, "a token is declared twice or malformed")
+        self.assertEqual(len(declared), 101, "a token is declared twice or malformed")
         self.assertEqual(tokens["--bear-ink"][2], tokens["--bear-tenant"][2],
                          "the ink panel is no longer the tenant's own hue")
         self.assertIn(".o_afenda_login {", css)
@@ -405,8 +405,8 @@ class CrystalBearSeasonLayerTests(unittest.TestCase):
         return [el for el in group if "afb-p" in (el.get("class") or "").split()]
 
     def test_the_particle_counts_are_the_plan_and_deterministic(self):
-        want = {"spring": ("afb-petal", 9), "summer": ("afb-glint", 6),
-                "autumn": ("afb-leaf", 8), "winter": ("afb-flake", 16)}
+        want = {"spring": ("afb-petal", 14), "summer": ("afb-glint", 6),
+                "autumn": ("afb-leaf", 12), "winter": ("afb-flake", 24)}
         for season, (shape, n) in want.items():
             with self.subTest(season=season):
                 ps = self.particles(season)
@@ -416,7 +416,7 @@ class CrystalBearSeasonLayerTests(unittest.TestCase):
                     self.assertIn(shape, p[0].get("class").split())
                     self.assertRegex(p.get("style"), r"^animation-duration:[\d.,s]+;animation-delay:[-\d.,s]+$")
         stars = [p for p in self.particles("winter") if p[0].tag == f"{SVG_NS}path"]
-        self.assertEqual(len(stars), 2, "not two six-arm star flakes")
+        self.assertEqual(len(stars), 3, "not three six-arm star flakes")
         self.assertEqual(crystal.build_season(), crystal.build_season(), "the season layer is not deterministic")
 
     def test_the_season_layer_has_no_transform_attribute(self):
@@ -424,6 +424,23 @@ class CrystalBearSeasonLayerTests(unittest.TestCase):
         property in SVG 2, so one here would be overwritten by the sway."""
         for el in elements(season_svg()):
             self.assertIsNone(el.get("transform"), f"<{el.tag}> carries a transform attribute")
+
+    def test_the_season_root_viewbox_and_faller_x_span_the_new_frame(self):
+        """The one shared frame (docs/superpowers/specs/2026-09-26-four-season-bear.md):
+        x 0..1040 (the bear's 800 plus 30% to its right), y -887..887 (one
+        bear height above it). Every faller point, not just its anchor, must
+        land inside that width."""
+        self.assertEqual(season_svg().get("viewBox"), f"0 -{crystal.H} {crystal.SEASON_W} {crystal.SEASON_H}")
+        num = re.compile(r"-?\d+(?:\.\d+)?")
+        for season in ("spring", "autumn", "winter"):
+            for p in self.particles(season):
+                shape = p[0]
+                if shape.tag == f"{SVG_NS}circle":
+                    xs = [float(shape.get("cx"))]
+                else:
+                    xs = [float(v) for v in num.findall(shape.get("d"))][0::2]
+                for x in xs:
+                    self.assertTrue(0 <= x <= crystal.SEASON_W, f"{season}: a faller point x={x} is off the frame")
 
     def test_fallers_start_above_the_canvas_and_glints_sit_inside_the_bear(self):
         num = re.compile(r"-?\d+(?:\.\d+)?")
@@ -435,14 +452,16 @@ class CrystalBearSeasonLayerTests(unittest.TestCase):
                 else:
                     vals = [float(v) for v in num.findall(shape.get("d"))]
                     xs, ys = vals[0::2], vals[1::2]
-                self.assertLess(max(ys), 0, f"{season}: a faller starts on the canvas")
-                self.assertTrue(0 <= sum(xs) / len(xs) <= crystal.W, f"{season}: a faller is off the canvas")
+                self.assertLess(max(ys), -crystal.H, f"{season}: a faller starts on the season frame")
+                self.assertTrue(0 <= sum(xs) / len(xs) <= crystal.SEASON_W,
+                                f"{season}: a faller is off the season frame")
         for p in self.particles("summer"):
             vals = [float(v) for v in num.findall(p[0].get("d"))]
             tips = list(zip(vals[0::2], vals[1::2]))
             for x, y in tips:
                 self.assertTrue(crystal.in_bear(x, y), f"a glint point ({x}, {y}) is off the bear")
-            self.assertGreaterEqual(min(x for x, _ in tips), 400, "a glint is off the lit flank")
+            self.assertGreaterEqual(min(x for x, _ in tips), crystal.PARTICLES["summer"]["min_x"],
+                                     "a glint is off the lit flank")
 
     def test_glints_and_the_gleam_keep_off_the_face(self):
         """The face is the bear's; the light never crosses it. Fallers may."""
