@@ -414,6 +414,120 @@ class DeployStaticTests(unittest.TestCase):
                 self.assertIn("trap restart_xforge EXIT", text)
 
 
+class LocalFirstGatesCiTests(unittest.TestCase):
+    """CI changes from docs/superpowers/specs/2026-09-26-local-first-gates.md
+    decision 5 and Corrections after review items 6 and 8: a sparse checkout
+    for `api_contract` (verified safe -- api_diff.py reads only git objects
+    and `afenda/addons/afenda_api_docs/openapi/`, never the working tree
+    under `odoo/`/root `addons/`), the `api_contract` push-branch fetch
+    failing open like `afenda-image.yml`'s `changes` job already does, pip
+    caching for the `tools` job, a cached Docker layer build for
+    `afenda-image`, and the `afenda-pr` `edited`/`PR_COMMITS` changes.
+
+    `tools`'s own checkout stays full (no sparse-checkout): `test_brand_images.py`
+    (`test_every_listed_path_exists_and_is_actually_recoloured`,
+    `brand_images.RECOLOUR`) reads 17 files spread across nine separate
+    `addons/*` module directories (account, base_automation, hr_attendance,
+    mass_mailing, stock, stock_picking_batch, survey, web,
+    website_mass_mailing), and `test_no_svg_in_the_tree_still_carries_an_odoo_brand_colour`
+    recursively scans the entirety of root `addons/` and `odoo/` for any
+    `*.svg` carrying an Odoo brand colour -- a cone sparse-checkout narrow
+    enough to save real time would either hard-fail the first test (a
+    RECOLOUR path outside the pattern) or silently weaken the second's
+    regression guarantee to whatever subset was listed. `submodules: true`
+    is still dropped from that job: the only match for `afenda/oca` under
+    `afenda/tools/tests` is `test_deploy_static.py`'s own string-literal
+    comparison against `afenda-image.yml`'s text (see
+    `test_ci_odoo_bin_calls_all_pass_the_afenda_addons_path` above), never a
+    filesystem read of the submodules' checked-out content.
+    """
+
+    def _job_block(self, text, name, next_name=None):
+        if next_name:
+            pattern = rf"^  {re.escape(name)}:\n((?:.*\n)+?)^  {re.escape(next_name)}:\n"
+        else:
+            pattern = rf"^  {re.escape(name)}:\n((?:.*\n)+)"
+        match = re.search(pattern, text, re.MULTILINE)
+        self.assertIsNotNone(match, f"no {name!r} job found")
+        return match.group(1)
+
+    def test_tools_job_drops_unused_submodules_and_caches_pip(self):
+        ci = (REPO / ".github" / "workflows" / "afenda-ci.yml").read_text(encoding="utf-8")
+        tools = self._job_block(ci, "tools", "api_contract")
+        self.assertNotIn("submodules: true", tools,
+                         "afenda/oca is never read by afenda/tools/tests; see the class docstring")
+        self.assertIn("cache: pip", tools)
+        self.assertIn("cache-dependency-path: afenda/tools/requirements*.txt", tools)
+        # The gate command itself is untouched (afenda.tools.check's static
+        # test asserts this string equals GATES["tools"]'s own command).
+        self.assertIn("python -m unittest discover afenda/tools/tests", tools)
+
+    def test_api_contract_job_uses_a_safe_sparse_checkout(self):
+        # api_diff.py reads only git objects (git show <ref>:<path>) for the
+        # base side, and only afenda/addons/afenda_api_docs/openapi/*.json,
+        # api_version.py and CHANGELOG.md (all under afenda/) for HEAD --
+        # confirmed by reading afenda/tools/api_diff.py: no reference to
+        # "odoo" or a bare "addons" path anywhere in it.
+        ci = (REPO / ".github" / "workflows" / "afenda-ci.yml").read_text(encoding="utf-8")
+        contract = self._job_block(ci, "api_contract", "nginx")
+        self.assertIn("sparse-checkout: afenda", contract)
+        api_diff_text = (REPO / "afenda" / "tools" / "api_diff.py").read_text(encoding="utf-8")
+        self.assertNotRegex(api_diff_text, r"""['"]odoo['"]|['"]addons['"]""")
+
+    def test_api_contract_push_fetch_fails_open(self):
+        # Mirrors afenda-image.yml's `changes` job (git fetch ... || { echo
+        # …; exit 0; }): a push whose `before` SHA is unreachable (a history
+        # rewrite, GC) must degrade gracefully, not hard-fail a legitimate
+        # push to main under this file's `bash -eo pipefail` default.
+        ci = (REPO / ".github" / "workflows" / "afenda-ci.yml").read_text(encoding="utf-8")
+        contract = self._job_block(ci, "api_contract", "nginx")
+        self.assertRegex(
+            contract,
+            r'if ! git fetch --no-tags --depth=1 origin "\$BEFORE"; then\n\s*echo "::notice::[^\n]*failing open',
+        )
+
+    def test_image_build_uses_buildx_with_a_gha_layer_cache(self):
+        # docs/superpowers/specs/2026-09-26-local-first-gates.md decision 5 /
+        # Corrections after review item 6: load: true keeps every later
+        # `docker run …afenda/xforge:ci…` step unchanged.
+        image = (REPO / ".github" / "workflows" / "afenda-image.yml").read_text(encoding="utf-8")
+        build = self._job_block(image, "build")
+        self.assertNotIn("docker build -f deploy/Dockerfile -t afenda/xforge:ci .", build)
+        self.assertIn("uses: docker/setup-buildx-action@v3", build)
+        self.assertIn("uses: docker/build-push-action@v6", build)
+        self.assertIn("context: .", build)
+        self.assertIn("file: deploy/Dockerfile", build)
+        self.assertIn("tags: afenda/xforge:ci", build)
+        self.assertIn("load: true", build)
+        self.assertIn("cache-from: type=gha,scope=afenda-image", build)
+        self.assertIn("cache-to: type=gha,mode=max,scope=afenda-image", build)
+        self.assertIn("BUILDKIT_PROGRESS: plain", build)
+
+    def test_pr_workflow_skips_edited_with_no_body_change(self):
+        # Corrections after review item 7: a job-level if:, not an on: filter
+        # (on: cannot express "only when changes.body is set").
+        pr = (REPO / ".github" / "workflows" / "afenda-pr.yml").read_text(encoding="utf-8")
+        job = self._job_block(pr, "pr_evidence")
+        self.assertIn("if: github.event.action != 'edited' || github.event.changes.body != null", job)
+        self.assertIn("pull-requests: read", pr)
+
+    def test_pr_workflow_fetches_pr_commits_from_the_api_through_env(self):
+        # Corrections after review item 8: the PR's commits come from
+        # `GET /repos/{repo}/pulls/{number}/commits` via gh api + GITHUB_TOKEN,
+        # not a local `git rev-list` (this checkout is shallow and sparse, so
+        # it has no commit graph to walk). PR_COMMITS must reach
+        # pr_evidence.py only through the environment.
+        pr = (REPO / ".github" / "workflows" / "afenda-pr.yml").read_text(encoding="utf-8")
+        job = self._job_block(pr, "pr_evidence")
+        self.assertIn("gh api", job)
+        self.assertRegex(job, r"pulls/\$PR_NUMBER/commits")
+        self.assertIn('echo "PR_COMMITS=', job)
+        self.assertIn('>> "$GITHUB_ENV"', job)
+        # The no-${{-in-run: rule (same as PR_BODY) is enforced file-wide by
+        # test_afenda_pr_workflow_passes_the_body_through_env_not_expression
+        # below, which already re-scans this new step too.
+
+
 class LandingSiteStaticTests(unittest.TestCase):
     """The nexuscanon.com landing page under deploy/site: one screen, black and
     white, styled and scripted only from same-origin files."""
