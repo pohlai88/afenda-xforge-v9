@@ -216,6 +216,28 @@ class PushGateTests(unittest.TestCase):
 
     # -- no bypass inside the hook -----------------------------------------
 
+    def test_push_affecting_config_is_refused_even_on_a_stamped_head(self):
+        # Codex P1 on PR #9: `-c remote.origin.push=other` makes git push `other`,
+        # while the gate would check HEAD. Any per-command config on a push is refused.
+        self.stamp("HEAD")
+        for command in (
+            "git -c remote.origin.push=other push origin",
+            "git -c push.default=matching push",
+            "git --config-env=remote.origin.push=X push origin",
+            "GIT_CONFIG_COUNT=1 GIT_CONFIG_KEY_0=remote.origin.push GIT_CONFIG_VALUE_0=other git push origin",
+            "GIT_CONFIG_PARAMETERS=\"'remote.origin.push=other'\" git push origin",
+        ):
+            with self.subTest(command=command):
+                self.assertBlocked(command)
+
+    def test_repo_option_makes_every_positional_a_refspec(self):
+        # Codex P1 on PR #9: with --repo, `other` is a refspec, not the remote.
+        self.stamp("HEAD")
+        self.assertBlocked("git push --repo=origin other")
+        self.assertBlocked("git push --repo origin other")
+        self.stamp("other")
+        self.assertAllowed("git push --repo=origin other")
+
     def test_bypass_attempts_are_checked_like_any_push(self):
         for command in (
             "AFENDA_SKIP_PUSH_GATE=1 git push origin main",

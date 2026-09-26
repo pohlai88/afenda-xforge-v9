@@ -64,6 +64,7 @@ import re
 import shlex
 import sys
 import time
+import contextlib
 from pathlib import Path
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -327,6 +328,27 @@ def _save_ledger(path: Path, data: dict) -> None:
     tmp_path.replace(path)
 
 
+
+@contextlib.contextmanager
+def _ledger_lock(ledger_path):
+    """Hold an exclusive lock on `<ledger>.lock` for the read-check-increment-write, so two
+    sessions cannot both read count N and both write N+1 (Codex P2, PR #9). POSIX flock, or
+    msvcrt on Windows; with neither the update runs unlocked (the guard fails open)."""
+    lock_path = Path(str(ledger_path) + ".lock")
+    lock_path.parent.mkdir(parents=True, exist_ok=True)
+    with open(lock_path, "a+b") as handle:
+        try:
+            import fcntl
+            fcntl.flock(handle.fileno(), fcntl.LOCK_EX)
+        except ImportError:
+            try:
+                import msvcrt
+                handle.seek(0)
+                msvcrt.locking(handle.fileno(), msvcrt.LK_LOCK, 1)
+            except (ImportError, OSError):
+                pass
+        yield
+
 def main(stdin_text: str, env: dict) -> tuple:
     """Returns (exit_code, stderr_text). Never raises: any internal error is
     caught and treated as fail-open (0, "")."""
@@ -360,43 +382,44 @@ def main(stdin_text: str, env: dict) -> tuple:
         override = env.get(_LEDGER_DIR_ENV)
         base_dir = Path(override) if override else git_identity.git_common_dir(root)
         ledger_path = base_dir / _LEDGER_NAME
-        ledger = _load_ledger(ledger_path)
+        with _ledger_lock(ledger_path):
+            ledger = _load_ledger(ledger_path)
 
-        now = time.time()
-        ledger = {
-            key: entry for key, entry in ledger.items()
-            if isinstance(entry, dict)
-            and isinstance(entry.get("time"), (int, float))
-            and now - entry["time"] <= _PRUNE_AFTER_SECONDS
-        }
-
-        keys = {
-            identity: hashlib.sha256(f"{identity}\x00{fingerprint}".encode()).hexdigest()
-            for identity in identities
-        }
-        for identity, key in keys.items():
-            count = ledger.get(key, {}).get("count", 0)
-            if isinstance(count, int) and count >= _BLOCK_AFTER:
-                normalised_command = " ".join(command.split())
-                head = fingerprint.split(":", 1)[0][:8]
-                message = (
-                    f'rerun-guard: "{normalised_command}" would run the gate '
-                    f"`{identity}` a third time on this unchanged tree (HEAD {head}); "
-                    "every session and sub-agent in this repository share the count. "
-                    "CLAUDE.md → Execution discipline: cite the earlier printed "
-                    "count, or change code first, or stop and report."
-                )
-                return 2, message
-
-        for identity, key in keys.items():
-            count = ledger.get(key, {}).get("count", 0)
-            ledger[key] = {
-                "count": (count if isinstance(count, int) else 0) + 1,
-                "time": now,
-                "gate": identity,
+            now = time.time()
+            ledger = {
+                key: entry for key, entry in ledger.items()
+                if isinstance(entry, dict)
+                and isinstance(entry.get("time"), (int, float))
+                and now - entry["time"] <= _PRUNE_AFTER_SECONDS
             }
-        _save_ledger(ledger_path, ledger)
-        return 0, ""
+
+            keys = {
+                identity: hashlib.sha256(f"{identity}\x00{fingerprint}".encode()).hexdigest()
+                for identity in identities
+            }
+            for identity, key in keys.items():
+                count = ledger.get(key, {}).get("count", 0)
+                if isinstance(count, int) and count >= _BLOCK_AFTER:
+                    normalised_command = " ".join(command.split())
+                    head = fingerprint.split(":", 1)[0][:8]
+                    message = (
+                        f'rerun-guard: "{normalised_command}" would run the gate '
+                        f"`{identity}` a third time on this unchanged tree (HEAD {head}); "
+                        "every session and sub-agent in this repository share the count. "
+                        "CLAUDE.md → Execution discipline: cite the earlier printed "
+                        "count, or change code first, or stop and report."
+                    )
+                    return 2, message
+
+            for identity, key in keys.items():
+                count = ledger.get(key, {}).get("count", 0)
+                ledger[key] = {
+                    "count": (count if isinstance(count, int) else 0) + 1,
+                    "time": now,
+                    "gate": identity,
+                }
+            _save_ledger(ledger_path, ledger)
+            return 0, ""
     except Exception:
         # Fail open: this hook must never be the reason real work is blocked.
         return 0, ""
