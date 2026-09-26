@@ -255,6 +255,22 @@ class TestDocument(TransactionCase):
         # Vacuous otherwise: a document with no $ref at all passes the loop.
         self.assertTrue(refs)
 
+    def test_asset_description_differs_from_the_live_document(self):
+        # The live document really is built per request for env.user
+        # (models/api_docs.py); the committed asset is built once, as
+        # base.user_admin, on a fresh installation with no demo data
+        # (export_openapi_shell.py, AFD-ARCH-CORR-0006) - so info.description
+        # must say so instead of claiming to be the signed-in caller's own
+        # view (fix round 1, finding 6).
+        live = build_document(self.env, names=["res.partner"], asset=False)
+        asset = build_document(self.env, names=["res.partner"], asset=True)
+        self.assertIn("signed-in user", live["info"]["description"])
+        self.assertNotIn("signed-in user", asset["info"]["description"])
+        self.assertIn("fresh installation as the administrator", asset["info"]["description"])
+        self.assertIn("fields behind optional feature groups are not listed",
+                       asset["info"]["description"])
+        self.assertNotEqual(live["info"]["description"], asset["info"]["description"])
+
     def test_info_version_is_the_api_version(self):
         # info.version documents the AFENDA contract (api_version.py), not
         # the Odoo release the server happens to run.
