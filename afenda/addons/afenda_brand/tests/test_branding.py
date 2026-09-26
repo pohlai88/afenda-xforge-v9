@@ -186,12 +186,15 @@ class TestBranding(HttpCase):
         flow, and therefore what keeps them from ever sharing a pixel.
 
         The frame, as the owner re-framed it (the four-season spec,
-        "Composition re-framed"): the art column is a fixed share of the
-        page - 40-45% from 1200px, 35-40% from 768px, and a 180-250px banner
-        above the form on a phone. Inside it the stage keeps the master's
-        800x887 ratio and is 70-80% of the column's width or 75-85% of its
-        height, whichever binds first, with a clear top safe zone, a left
-        offset of -4% to +2% and a bottom offset of -3% to 0.
+        "Composition re-framed", and the four-season fix wave's "Geometry
+        fact"): the art column is a fixed share of the page - 45% from
+        1200px, 40% from 768px, and a 180-250px banner above the form on a
+        phone. Inside it the stage keeps the master's 800x887 ratio and is
+        HEIGHT-led: 76% of the column's height (cqh), capped at 92% of its
+        width (cqw) - no landscape column is wide enough, at this ratio, to
+        hold the bear at 70-80% of its width AND 75-85% of its height at
+        once - with a clear top safe zone, a left offset of -4% to +2% and a
+        bottom offset of -3% to 0.
 
         The face is the invariant that fails silently. In the master's
         geometry the face mask sits at (30, 210, 241, 432): 3.75% of the art's
@@ -248,16 +251,21 @@ class TestBranding(HttpCase):
                          "the art column does not clip its bleed; the page can scroll sideways")
         (tablet,) = number(art[1].group(1), r"flex:\s*0\s+0\s+([\d.]+)%",
                            "the art column is not a fixed share of the page above md")
-        self.assertTrue(35 <= tablet <= 40, f"the tablet art column is {tablet}%, not 35-40%")
+        self.assertEqual(tablet, 40, f"the tablet art column is {tablet}%, not 40%")
         self.assertRegex(art[1].group(1), r"(?<![\w-])height:\s*auto",
                          "the art column keeps the phone banner's height beside the form")
         self._assert_media_gated(
             css, art[1].start(), "768px", "the tablet art column is not gated on the md breakpoint")
         (desktop,) = number(art[2].group(1), r"flex:\s*0\s+0\s+([\d.]+)%",
                             "the art column is not a fixed share of the page from 1200px")
-        self.assertTrue(40 <= desktop <= 45, f"the desktop art column is {desktop}%, not 40-45%")
+        self.assertEqual(desktop, 45, f"the desktop art column is {desktop}%, not 45%")
         self._assert_media_gated(
             css, art[2].start(), "1200px", "the desktop art column is not gated on 1200px")
+        # The size container the height-led stage below reads cqh/cqw from
+        # (the four-season fix wave's "Geometry fact"); it is declared once,
+        # ungated, since it applies at every width the stage itself uses it.
+        self.assertRegex(art[0].group(1), r"container-type:\s*size",
+                         "the art column is not a size container; cqh/cqw below cannot resolve")
         # The form keeps its floor beside the narrowest art column: 768px less
         # the tablet share, so the row never overflows sideways.
         (floor,) = number(css, r"\.o_afenda_login\s+\.o_afenda_auth_form\s*\{[^}]*min-width:\s*([\d.]+)rem",
@@ -288,7 +296,7 @@ class TestBranding(HttpCase):
         # The stage: the bear's frame in the column. Sized by login.scss, one
         # rule per layout; positioned and contained by auth_bear.css.
         stages = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_stage\s*\{([^}]*)\}", css))
-        sizing = [m for m in stages if "aspect-ratio" in m.group(1) or "max-width" in m.group(1)]
+        sizing = [m for m in stages if "aspect-ratio" in m.group(1) or "cqh" in m.group(1)]
         self.assertEqual(len(sizing), 2, "the stage is not sized by exactly two rules")
         self.assertRegex(sizing[0].group(1), r"aspect-ratio:\s*800\s*/\s*887",
                          "the stage does not keep the master's 800x887 ratio")
@@ -302,13 +310,23 @@ class TestBranding(HttpCase):
                         "the phone bear is wider than a 360px screen")
         self._assert_media_gated(
             css, sizing[1].start(), "768px", "the stage's column size is not gated on the md breakpoint")
-        (width,) = number(sizing[1].group(1), r"(?<![\w-])width:\s*([\d.]+)%",
-                          "the stage is not a share of the column's width")
-        self.assertTrue(70 <= width <= 80, f"the bear is {width}% of the column's width, not 70-80%")
-        (cap,) = number(sizing[1].group(1), r"max-width:\s*([\d.]+)vh",
-                        "the stage has no height-bound cap")
-        tall = cap * 887 / 800
-        self.assertTrue(75 <= tall <= 85, f"the bear's height cap is {tall:.1f}vh, not 75-85%")
+        # Height-led (the four-season fix wave's "Geometry fact"): no
+        # landscape column at this ratio can hold the bear at 70-80% of its
+        # width AND 75-85% of its height at once, so the stage's own width
+        # is left to `auto` (via the aspect-ratio) and the HEIGHT is what is
+        # bounded, in cqh/cqw off the size container declared on the art
+        # column above.
+        self.assertNotIn("max-width", sizing[1].group(1),
+                         "the stage still caps itself by width; it must be height-led")
+        self.assertRegex(sizing[1].group(1), r"(?<![\w-])width:\s*auto",
+                         "the stage's width is not left to the aspect-ratio")
+        cqh_pct, cqw_pct = number(
+            sizing[1].group(1),
+            r"height:\s*min\(\s*([\d.]+)cqh\s*,\s*calc\(\s*([\d.]+)cqw\s*\*\s*887\s*/\s*800\s*\)\s*\)",
+            "the stage is not sized min(76cqh, calc(92cqw * 887 / 800))")
+        self.assertEqual(cqh_pct, 76, f"the bear is {cqh_pct}% of the column's height, not 76%")
+        self.assertEqual(cqw_pct, 92, f"the bear's width cap is {cqw_pct}% of the column's width, not 92%")
+        self.assertGreaterEqual(100 - cqh_pct, 8, "the top safe zone is under 8% of the column's height")
         top, _right, bottom, left = number(
             sizing[1].group(1),
             r"margin:\s*(-?[\d.]+)(?:px)?\s+(-?[\d.]+)(?:px)?\s+(-?[\d.]+)vh\s+(-?[\d.]+)%",
@@ -316,26 +334,34 @@ class TestBranding(HttpCase):
         self.assertEqual(top, 0, "the stage is pushed down from the top safe zone")
         self.assertTrue(-3 <= bottom <= 0, f"the bottom offset is {bottom}vh, not -3 to 0")
         self.assertTrue(-4 <= left <= 2, f"the left offset is {left}%, not -4% to +2%")
-        self.assertGreaterEqual(100 - tall - bottom, 8, "the top safe zone is under 8% of the column")
         # The face starts 3.75% of the bear's width in (x=30 of 800); the
-        # left bleed, in % of the column, must stay inside that margin.
-        self.assertGreaterEqual(left + width * 30 / 800, 0, "the left bleed cuts into the face")
+        # left bleed, in % of the column, must stay inside that margin. Every
+        # landscape column the geometry fact lists (1440x900 at 45%, 1024x768
+        # at 40%) is narrower than the bear's own ratio, so the 92%-of-width
+        # cap is what actually binds and is the width the bleed is checked
+        # against.
+        self.assertGreaterEqual(left + cqw_pct * 30 / 800, 0, "the left bleed cuts into the face")
         fill = re.search(r"\.o_afenda_auth_stage\s*>\s*\.o_afenda_auth_hero\s*\{([^}]*)\}", css)
         self.assertTrue(fill, "the hero does not fill its stage")
         self.assertRegex(fill.group(1), r"(?<![\w-])width:\s*100%", "the hero is narrower than its stage")
         self.assertRegex(fill.group(1), r"(?<![\w-])height:\s*100%", "the hero is shorter than its stage")
 
         # The stage is the containing block of the season layer, so the
-        # layer's `inset: 0` is the hero's own box and can never reach the card.
+        # layer's `left`/`bottom` anchor sits against the hero's own box.
         stage = [m.group(1) for m in stages if "position" in m.group(1)]
         self.assertEqual(len(stage), 1, "the stage is not positioned by exactly one rule")
         self.assertRegex(stage[0], r"position:\s*relative", "the stage does not contain the season layer")
-        # No particle ever enters the form column: the season layer lives
-        # inside the art column, and the stage's paint containment clips
-        # everything it draws to the stage's own box.
+        # The stage no longer clips (the four-season fix wave's "Geometry
+        # fact": the season layer's frame now extends above and to the right
+        # of the bear). `contain: layout` stays, for the loop's per-frame
+        # layout work, but not `paint` -- the art column's own
+        # `overflow: hidden` (login.scss) is the only clip left, so nothing
+        # the season layer draws still reaches the form.
         contain = re.search(r"contain:\s*([^;]*)", stage[0])
-        self.assertTrue(contain and "paint" in contain.group(1).split(),
-                        "the stage does not clip its particles (contain: paint)")
+        self.assertTrue(contain, "the stage has no CSS containment")
+        self.assertEqual(contain.group(1).split(), ["layout"],
+                        "the stage still clips with contain: layout paint; only the art "
+                        "column's overflow: hidden clips now")
         for layer in doc.find_class("o_afenda_auth_season"):
             self.assertTrue(
                 any("o_afenda_auth_art" in (a.get("class") or "").split() for a in layer.iterancestors()),
@@ -345,7 +371,21 @@ class TestBranding(HttpCase):
         season = re.findall(r"\.o_afenda_login\s+\.o_afenda_auth_season\s*\{([^}]*position:[^}]*)\}", css)
         self.assertEqual(len(season), 1, "the season layer is not placed by exactly one rule")
         self.assertRegex(season[0], r"position:\s*absolute", "the season layer is in flow and moves the hero")
-        self.assertRegex(season[0], r"inset:\s*0", "the season layer is not confined to the stage")
+        # The season layer's new frame (the four-season fix wave): anchored
+        # to the stage's own left/bottom edges and sized 130%/200% of it --
+        # 1040/800 and 1774/887 exactly, so `preserveAspectRatio` keeps one
+        # user unit the same size as on the hero -- not `inset: 0`, which
+        # would centre the extra frame instead of growing it up and right.
+        self.assertNotIn("inset:", season[0],
+                         "the season layer still uses inset: 0, not left/bottom anchoring")
+        self.assertRegex(season[0], r"left:\s*0(?:px)?(?:\s|;)",
+                         "the season layer is not anchored to the stage's left edge")
+        self.assertRegex(season[0], r"bottom:\s*0(?:px)?(?:\s|;)",
+                         "the season layer is not anchored to the stage's bottom edge")
+        self.assertRegex(season[0], r"(?<![\w-])width:\s*130%",
+                         "the season layer is not 130% of the stage's width")
+        self.assertRegex(season[0], r"(?<![\w-])height:\s*200%",
+                         "the season layer is not 200% of the stage's height")
 
         # A hero outside a stage is a caller's <img>: bounded only by maxima.
         hero_rules = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_hero\s*\{([^}]*)\}", css))

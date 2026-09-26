@@ -206,26 +206,34 @@
 
 /* The stage is the bear's frame in the art column: login.scss sizes it (a
  * fixed share of the column, one 800x887 ratio) and the hero fills it. It is
- * the season layer's containing block (`position: relative`), and `contain:
- * layout paint` plus `isolation: isolate` keep the loop's per-frame work
- * inside it: nothing outside is laid out or repainted because a petal moved,
- * and nothing it draws paints past its own box. */
+ * the season layer's containing block (`position: relative`), and
+ * `isolation: isolate` keeps the loop's per-frame work its own compositor
+ * layer. The stage no longer clips (`contain: layout` only, not `layout
+ * paint`, the four-season fix wave's "Geometry fact"): the season layer's
+ * new frame extends above and to the right of the bear, so the art column's
+ * own `overflow: hidden` (login.scss) is the only clip left, and it clips to
+ * the column rather than to the bear's own box. */
 .o_afenda_login .o_afenda_auth_stage {
     position: relative;
-    contain: layout paint;
+    contain: layout;
     isolation: isolate;
 }
 
-/* The season layer lies exactly over the hero. An absolutely placed SVG is a
- * replaced element, whose `auto` width is its intrinsic size (CSS 2 10.3.8),
- * not the inset box - hence the explicit 100%, so it scales with the hero
- * instead of sitting at 800x887. Its own compositor layer, and it never takes
- * a click meant for the page. */
+/* The season layer no longer lies exactly over the hero: its viewBox is
+ * `0 -887 1040 1774` (the bear's own 800x887 plus 30% width to its right and
+ * one bear height above), so on the page it is sized `130%`/`200%` of the
+ * stage and anchored to the stage's own left/bottom edges (not `inset: 0`,
+ * which would have centred the extra frame instead of growing it up and
+ * right). 1040/800 = 1.3 and 1774/887 = 2 exactly, so the default
+ * `preserveAspectRatio` still maps one user unit to the same pixels as the
+ * hero: the gleam and glints stay on the bear. Its own compositor layer, and
+ * it never takes a click meant for the page. */
 .o_afenda_login .o_afenda_auth_season {
     position: absolute;
-    inset: 0;
-    width: 100%;
-    height: 100%;
+    left: 0;
+    bottom: 0;
+    width: 130%;
+    height: 200%;
     will-change: transform;
     pointer-events: none;
 }
