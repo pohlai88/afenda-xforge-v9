@@ -10,6 +10,7 @@ No test pushes anything: the hook only resolves refs and reads stamps.
 """
 import importlib.util
 import json
+import os
 import subprocess
 import sys
 import tempfile
@@ -72,14 +73,14 @@ class PushGateTests(unittest.TestCase):
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(json.dumps({"tree": tree, "passed": True}), encoding="utf-8")
 
-    def run_hook(self, command, cwd=None, tool_name="Bash"):
+    def run_hook(self, command, cwd=None, tool_name="Bash", env=None):
         payload = {
             "tool_name": tool_name,
             "tool_input": {"command": command},
             "session_id": "s",
             "cwd": str(cwd or self.repo),
         }
-        return push_gate.main(json.dumps(payload), {})
+        return push_gate.main(json.dumps(payload), env or {})
 
     def assertBlocked(self, command, **kwargs):
         code, stderr = self.run_hook(command, **kwargs)
@@ -108,6 +109,9 @@ class PushGateTests(unittest.TestCase):
     def test_unstamped_push_is_blocked_with_the_command_to_run(self):
         stderr = self.assertBlocked("git push origin main")
         self.assertIn("python -m afenda.tools.check", stderr)
+        self.assertIn(
+            "run /preflight (or python -m afenda.tools.check) first; it stamps this tree", stderr
+        )
 
     def test_stamped_push_passes(self):
         self.stamp()
@@ -229,6 +233,139 @@ class PushGateTests(unittest.TestCase):
             with self.subTest(command=command):
                 self.assertBlocked(command)
 
+    # -- a push runs alone (sweep 2: C1, H1, H3) ---------------------------
+
+    PUSH_ALONE = (
+        "push alone: run `git push …` as its own command after /preflight "
+        "(python -m afenda.tools.check) passed on this tree"
+    )
+
+    def assertPushAlone(self, command, **kwargs):
+        stderr = self.assertBlocked(command, **kwargs)
+        self.assertIn(self.PUSH_ALONE, stderr, command)
+
+    def test_a_commit_then_push_in_one_call_is_blocked_on_a_stamped_tree(self):
+        # PreToolUse sees the tree before `git commit` runs: HEAD is stamped
+        # now, the commit the push would send is not (C1).
+        self.stamp()
+        (self.repo / "a.txt").write_text("changed\n", encoding="utf-8")
+        _git(["add", "a.txt"], self.repo)
+        self.assertPushAlone("git commit -qam x && git push origin HEAD")
+        self.assertPushAlone("git commit -am '[FIX] x' && git push")
+
+    def test_a_push_with_any_other_command_or_shell_syntax_is_blocked(self):
+        self.stamp("main")
+        self.stamp("other")
+        for command in (
+            "git checkout other && git push origin HEAD",
+            "git status && git push origin main",
+            "git push origin main && git status",
+            "git push origin main || true",
+            "true; git push origin main",
+            "git push origin main;",
+            "git push origin main | cat",
+            "git push origin main &",
+            "git status\ngit push origin main",
+            "echo $(git push origin main)",
+            "echo `git push origin main`",
+            "{ git push origin main; }",
+            "if true; then git push origin main; fi",
+            "if git diff --quiet; then git push origin HEAD; fi",
+            "for x in 1; do git push origin main; done",
+            "while false; do git push origin main; done",
+            "until true; do git push origin main; done",
+            "case x in x) git push origin main;; esac",
+            "! git push origin main",
+            "(cd {repo} && git push origin main)",
+            "bash -c 'git status; git push origin main'",
+            "sh -c 'git commit -qam x && git push origin main'",
+            "eval 'git commit -qam x; git push origin main'",
+            ".venv/Scripts/python -m afenda.tools.check && git push -u origin HEAD",
+            "cat > m.txt <<'EOF'\nmsg\nEOF\ngit push origin main",
+            "cd /tmp && cd {repo} && git push origin main",
+            "git push origin main <<<x",
+        ):
+            with self.subTest(command=command):
+                self.assertPushAlone(command.replace("{repo}", str(self.repo)))
+
+    def test_a_push_alone_still_passes_when_stamped(self):
+        self.stamp()
+        for command in (
+            "git push origin main",
+            "git push -u origin HEAD",
+            f"cd {self.repo} && git push origin main",
+            f"git -C {self.repo} push origin main",
+            "command git push origin main",
+            "/usr/bin/git push origin main",
+            "env X=1 git push origin main",
+            "X=1 git push origin main",
+            "git push origin main 2>&1",
+            "git push origin main > /dev/null",
+            "bash -c 'git push origin main'",
+            "git push origin main  # after /preflight",
+        ):
+            with self.subTest(command=command):
+                self.assertAllowed(command)
+
+    def test_other_git_commands_that_say_push_are_not_pushes(self):
+        for command in (
+            "git stash push -m wip && git status",
+            "git stash push; git stash list",
+            "git commit -m 'push later' && git log -1",
+            "git log --grep=push | head",
+        ):
+            with self.subTest(command=command):
+                self.assertAllowed(command)
+
+    # -- backslash-newline continuations (H2) -------------------------------
+
+    def test_a_backslash_newline_continues_the_push(self):
+        self.assertBlocked("git push -u origin \\\n  main")
+        stderr = self.assertBlocked("git push origin \\\nmain")
+        self.assertIn("no passing check stamp", stderr)
+        self.stamp()
+        self.assertAllowed("git push -u origin \\\n  main")
+        self.assertAllowed("git push \\\n  origin \\\n  HEAD")
+
+    def test_a_heredoc_body_line_ending_in_a_backslash_still_ends_at_its_delimiter(self):
+        self.stamp()
+        command = "cat > m.txt <<'EOF'\nline \\\nEOF\ngit push origin main"
+        self.assertPushAlone(command)
+
+    # -- the matching refspec (H4) ----------------------------------------
+
+    def test_the_matching_refspec_is_not_a_delete(self):
+        self.stamp("main")
+        self.stamp("other")
+        for command in ("git push origin :", "git push origin +:"):
+            with self.subTest(command=command):
+                stderr = self.assertBlocked(command)
+                self.assertIn("matching", stderr)
+
+    # -- variables in a leading cd / -C path (M4) ----------------------------
+
+    def test_a_leading_cd_or_dash_c_path_expands_the_hook_environment(self):
+        self.stamp()
+        env = {"CLAUDE_PROJECT_DIR": str(self.repo), "HOME": str(self.outside)}
+        for command in (
+            'cd "$CLAUDE_PROJECT_DIR" && git push -u origin HEAD',
+            "cd ${CLAUDE_PROJECT_DIR} && git push -u origin HEAD",
+            "cd $HOME/repo && git push -u origin HEAD",
+            "cd ~/repo && git push -u origin HEAD",
+            "git -C $CLAUDE_PROJECT_DIR push origin main",
+            'git -C "${HOME}/repo" push origin main',
+            "git -C ~/repo push origin main",
+        ):
+            with self.subTest(command=command):
+                self.assertAllowed(command, cwd=self.outside, env=env)
+
+    def test_an_unexpandable_path_says_so(self):
+        self.stamp()
+        stderr = self.assertBlocked("cd $NOPE && git push origin main", cwd=self.outside)
+        self.assertIn("cannot expand", stderr)
+        stderr = self.assertBlocked("cd $HOME/repo && git push origin main", cwd=self.outside)
+        self.assertIn("cannot expand", stderr)
+
     def test_unparseable_command_mentioning_push_is_blocked(self):
         self.stamp()
         self.assertBlocked("git push origin 'main")
@@ -295,6 +432,35 @@ class WiringTests(unittest.TestCase):
         mcp = "|".join(MCP_TOOLS)
         self.assertTrue(any("push_gate.py" in c for c in by_matcher[mcp]))
         self.assertEqual(tuple(push_gate.BLOCKED_MCP_TOOLS), MCP_TOOLS)
+
+    def test_only_the_push_gate_fails_closed_when_its_interpreter_is_missing(self):
+        # A missing interpreter exits 127, which does not block (M5); `|| exit 2`
+        # turns any non-zero exit of the push gate's command into a block.
+        settings = json.loads(self.SETTINGS.read_text(encoding="utf-8"))
+        commands = [
+            hook["command"] for entry in settings["hooks"]["PreToolUse"] for hook in entry["hooks"]
+        ]
+        gates = [c for c in commands if "push_gate.py" in c]
+        guards = [c for c in commands if "rerun_guard.py" in c]
+        self.assertEqual(len(gates), 2)
+        for command in gates:
+            self.assertTrue(command.endswith(" || exit 2"), command)
+        for command in guards:
+            self.assertNotIn("exit 2", command)
+
+    @unittest.skipUnless(os.name == "posix", "runs the wired command under sh")
+    def test_the_wired_command_blocks_when_the_interpreter_is_missing(self):
+        settings = json.loads(self.SETTINGS.read_text(encoding="utf-8"))
+        command = next(
+            hook["command"] for hook in settings["hooks"]["PreToolUse"][0]["hooks"]
+            if "push_gate.py" in hook["command"]
+        )
+        with tempfile.TemporaryDirectory() as empty:
+            result = subprocess.run(
+                ["sh", "-c", command], input="{}", capture_output=True, text=True,
+                env={"CLAUDE_PROJECT_DIR": empty, "PATH": "/usr/bin:/bin"}, timeout=60,
+            )
+        self.assertEqual(result.returncode, 2)
 
     def test_settings_deny_edits_to_root_odoo_and_addons(self):
         settings = json.loads(self.SETTINGS.read_text(encoding="utf-8"))

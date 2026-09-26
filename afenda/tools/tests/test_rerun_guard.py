@@ -331,6 +331,41 @@ class RerunGuardTestCase(unittest.TestCase):
         codes = self._three(command, command, command)
         self.assertEqual(codes, [0, 0, 0])
 
+    def test_a_call_that_contains_a_git_push_is_never_counted(self):
+        # The push gate blocks a gate chained with a push before it runs, so
+        # counting it would lock the tree out of `check` (sweep 2, H1).
+        check = ".venv/Scripts/python -m afenda.tools.check"
+        codes = self._three(
+            f"{check} && git push -u origin HEAD",
+            f"{check} && git push -u origin HEAD",
+            f"{check}; git -C . push origin main",
+        )
+        self.assertEqual(codes, [0, 0, 0])
+        self.assertFalse((self.ledger_dir / "afenda-rerun-ledger.json").exists())
+        self.assertEqual(self._three(check, check, check), [0, 0, 2])
+
+    def test_a_git_stash_push_is_not_a_push(self):
+        command = "git stash push && python -m unittest afenda.tools.tests.test_a"
+        self.assertEqual(self._three(command, command, command), [0, 0, 2])
+
+    def test_a_backslash_newline_continues_the_command(self):
+        codes = self._three(
+            "python -m unittest \\\n  afenda.tools.tests.test_a",
+            "python -m unittest \\\n  afenda.tools.tests.test_b",
+            "python -m unittest \\\n  afenda.tools.tests.test_c",
+        )
+        self.assertEqual(codes, [0, 0, 0])
+        codes = self._three(
+            "python -m unittest afenda.tools.tests.test_a",
+            "MSYS_NO_PATHCONV=1 python odoo-bin -c afenda/odoo.conf \\\n  --test-enable --test-tags /x",
+            "python odoo-bin --test-enable --test-tags /x",
+        )
+        self.assertEqual(codes, [0, 0, 0])
+        self.assertEqual(
+            rerun_guard.main(self._payload("python odoo-bin --test-tags /x --test-enable"), self.env)[0],
+            2,
+        )
+
     def test_docstring_no_longer_cites_a_lane(self):
         self.assertNotIn("Lane A", _HOOK_PATH.read_text(encoding="utf-8"))
 

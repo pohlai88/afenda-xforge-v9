@@ -20,8 +20,14 @@ decision 3):
   - `python -m afenda.tools.{api_diff,corpus,scan_identity,pr_evidence}`:
     the module and its arguments.
   Verbosity (`-v`, `-q`), `--failfast`, flag order, output redirections,
-  pipes into `tail`/`tee` and leading `VAR=value` env prefixes do not change
-  it. A compound command (`a && b`) counts each gate in it.
+  pipes into `tail`/`tee`, leading `VAR=value` env prefixes and a
+  backslash-newline continuation do not change it. A compound command
+  (`a && b`) counts each gate in it.
+- **A Bash call that holds a `git push` counts nothing** (`_contains_git_push`).
+  The push gate blocks a push chained with anything else before any of it
+  runs, so counting the gate in `check && git push` would spend runs that
+  never happened and lock the tree out of `check` (sweep 2, H1); a push the
+  gate allows is alone, so there is no gate in it to count.
 - **The tree is the scoped fingerprint** from `afenda/tools/_git_identity.py`
   (HEAD plus a diff/status scoped to `_git_identity.SCOPED_PATHS`; an
   unscoped `git status` takes about two minutes on this tree).
@@ -77,6 +83,14 @@ _ENV_ASSIGNMENT_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*=")
 _OPERATOR_CHARS = set("|&;<>()")
 _HEREDOC_RE = re.compile(r"(?<!<)<<(-?)\s*(['\"]?)([A-Za-z_][\w.-]*)\2")
 _SHELL_WORD_RE = re.compile(r"(?:^|[\s/;&|(])(?:ba|z|da|k)?sh(?:\.exe)?(?=\s|$)")
+# A line that ends in an unescaped backslash continues on the next one.
+_CONTINUED_RE = re.compile(r"(?<!\\)(?:\\\\)*\\$")
+_SHELLS = {"bash", "sh", "zsh", "dash", "ksh", "bash.exe", "sh.exe"}
+# git global options that take a separate value.
+_GIT_VALUE_OPTIONS = {
+    "-C", "-c", "--config-env", "--exec-path", "--super-prefix", "--git-dir", "--work-tree",
+    "--namespace",
+}
 _VERBOSITY = {"-v", "-vv", "-vvv", "-q", "-qq", "--verbose", "--quiet"}
 _UNITTEST_IGNORED = _VERBOSITY | {"-f", "--failfast", "-b", "--buffer", "-c", "--catch", "--locals"}
 
@@ -98,21 +112,28 @@ def _load_git_identity():
 def _strip_heredoc_bodies(command: str) -> str:
     """Drop heredoc bodies (data such as a commit message that names a gate),
     except one fed to a shell (`bash <<EOF`), which is commands. The same
-    rule as push_gate.py's."""
-    kept, pending = [], []
-    for line in command.split("\n"):
+    rule as push_gate.py's, including its backslash-newline continuations."""
+    kept, pending, carry = [], [], ""
+    for raw in command.replace("\r\n", "\n").split("\n"):
         if pending:
             delimiter, strip_tabs, keep = pending[0]
-            if (line.lstrip("\t") if strip_tabs else line).strip() == delimiter:
+            if (raw.lstrip("\t") if strip_tabs else raw).strip() == delimiter:
                 pending.pop(0)
             elif keep:
-                kept.append(line)
+                kept.append(raw)
             continue
+        line = carry + raw
+        if _CONTINUED_RE.search(line):
+            carry = line[:-1] + " "
+            continue
+        carry = ""
         kept.append(line)
         for match in _HEREDOC_RE.finditer(line):
             feeds_shell = bool(_SHELL_WORD_RE.search(line[: match.start()]))
             pending.append((match.group(3), match.group(1) == "-", feeds_shell))
-    return "\n".join(kept)
+    if carry:
+        kept.append(carry)
+    return re.sub(r"\\\r?\n", " ", "\n".join(kept))
 
 
 def _simple_commands(command: str) -> list[list[str]]:
@@ -257,6 +278,29 @@ def _identity(argv):
     return None
 
 
+def _basename(token: str) -> str:
+    return token.replace("\\", "/").rsplit("/", 1)[-1]
+
+
+def _contains_git_push(command: str, depth: int = 0) -> bool:
+    """True when any simple command names `git` followed (after git's global
+    options) by `push`, also inside a `bash -c` / `eval` script. Deliberately
+    broad: a false True only skips counting (fail-open)."""
+    for argv in _simple_commands(command):
+        for index, token in enumerate(argv):
+            name = _basename(token)
+            if name in ("git", "git.exe"):
+                position = index + 1
+                while position < len(argv) and argv[position].startswith("-"):
+                    position += 2 if argv[position] in _GIT_VALUE_OPTIONS else 1
+                if position < len(argv) and argv[position] == "push":
+                    return True
+            elif (name in _SHELLS or name == "eval") and depth < 4:
+                if _contains_git_push(" ".join(argv[index + 1:]), depth + 1):
+                    return True
+    return False
+
+
 def _gate_identities(command: str) -> list[str]:
     identities = []
     for argv in _simple_commands(command):
@@ -300,7 +344,7 @@ def main(stdin_text: str, env: dict) -> tuple:
         if not _MAYBE_GATE_RE.search(command):
             return 0, ""
         identities = _gate_identities(command)
-        if not identities:
+        if not identities or _contains_git_push(command):
             return 0, ""
 
         # From here on this is a gate: git calls are in scope.
