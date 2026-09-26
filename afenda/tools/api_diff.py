@@ -96,6 +96,21 @@ def read_version(text: str) -> str:
     raise ValueError("API_VERSION assignment not found")
 
 
+def base_contract(names: list, version_text):
+    """The one "no base contract" rule (gc-change-gate.md), shared by `check`
+    and `changelog`.
+
+    "No base contract" means either ASSET_DIR or `api_version.py` is absent
+    at the base — so a base with documents (`names` non-empty) but no
+    `api_version.py` (`version_text` is None) is still no base contract, and
+    so is the reverse. Only when both are present is there a real
+    `base_version` to gate against. Returns `(names, base_version | None)`.
+    """
+    if not names or version_text is None:
+        return names, None
+    return names, read_version(version_text)
+
+
 # --------------------------------------------------------------------------
 # Building the union of all documents, request bodies resolved per-document.
 # --------------------------------------------------------------------------
@@ -170,10 +185,17 @@ def _diff_property(base_prop: dict, head_prop: dict, label: str, changes: Change
 
 
 def _diff_object_schema(base_schema, head_schema, label: str, changes: Changes) -> None:
-    base_props = (base_schema or {}).get("properties") or {}
-    head_props = (head_schema or {}).get("properties") or {}
-    base_required = set((base_schema or {}).get("required") or [])
-    head_required = set((head_schema or {}).get("required") or [])
+    base_schema = base_schema or {}
+    head_schema = head_schema or {}
+
+    for key in ("title", "description"):
+        if base_schema.get(key) != head_schema.get(key):
+            changes.descriptive.append(f"{label} changed {key}")
+
+    base_props = base_schema.get("properties") or {}
+    head_props = head_schema.get("properties") or {}
+    base_required = set(base_schema.get("required") or [])
+    head_required = set(head_schema.get("required") or [])
 
     for name in set(base_props) - set(head_props):
         changes.breaking.append(f"removed property {label}.{name}")
@@ -327,18 +349,15 @@ def render_changelog(existing, version: str, changes: Changes, first: bool) -> s
 # CLI.
 # --------------------------------------------------------------------------
 
-def _load_base(base_ref: str) -> dict:
-    names = list_base(base_ref)
-    return load_set(lambda name: get_text_at_ref(base_ref, name), names)
-
-
 def _load_head() -> dict:
     return load_set(read_local_text, list_head())
 
 
-def _base_version(base_ref: str):
-    text = get_text_at_ref(base_ref, VERSION_FILE)
-    return read_version(text) if text is not None else None
+def _base_contract_at(base_ref: str):
+    """`base_contract`, fed from the actual base ref (git ls-tree + git show)."""
+    names = list_base(base_ref)
+    version_text = get_text_at_ref(base_ref, VERSION_FILE)
+    return base_contract(names, version_text)
 
 
 def _head_version():
@@ -364,16 +383,15 @@ def _changelog_path() -> Path:
 
 
 def _cmd_check(args: argparse.Namespace) -> int:
-    base_names = list_base(args.base_ref)
+    base_names, base_version = _base_contract_at(args.base_ref)
     base = load_set(lambda name: get_text_at_ref(args.base_ref, name), base_names)
     head = _load_head()
     changes = diff(base, head)
     _print_changes(changes)
 
-    if not base_names:
+    if base_version is None:
         print("no base contract")
 
-    base_version = _base_version(args.base_ref) if base_names else None
     head_version = _head_version()
     if head_version is None:
         print(f"error: {VERSION_FILE} not found", file=sys.stderr)
@@ -389,7 +407,7 @@ def _cmd_check(args: argparse.Namespace) -> int:
 
 
 def _cmd_changelog(args: argparse.Namespace) -> int:
-    base_names = list_base(args.base_ref)
+    base_names, base_version = _base_contract_at(args.base_ref)
     base = load_set(lambda name: get_text_at_ref(args.base_ref, name), base_names)
     head = _load_head()
     changes = diff(base, head)
@@ -401,7 +419,7 @@ def _cmd_changelog(args: argparse.Namespace) -> int:
 
     changelog_path = _changelog_path()
     existing = changelog_path.read_text(encoding="utf-8") if changelog_path.exists() else None
-    updated = render_changelog(existing, head_version, changes, first=not base_names)
+    updated = render_changelog(existing, head_version, changes, first=base_version is None)
     if updated != existing:
         changelog_path.parent.mkdir(parents=True, exist_ok=True)
         changelog_path.write_text(updated, encoding="utf-8")

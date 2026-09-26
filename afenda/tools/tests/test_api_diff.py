@@ -9,6 +9,7 @@ import unittest
 
 from afenda.tools.api_diff import (
     Changes,
+    base_contract,
     check,
     diff,
     load_set,
@@ -121,6 +122,20 @@ class ChangeClassTests(unittest.TestCase):
         self.assertEqual(changes.breaking, [])
         self.assertEqual(changes.additive, [])
 
+    def test_schema_level_title_change_is_descriptive(self):
+        base = _world(schemas={
+            "res.partner": {"type": "object", "title": "Contact", "properties": {}}
+        })
+        head = _world(schemas={
+            "res.partner": {"type": "object", "title": "Contact record", "properties": {}}
+        })
+        changes = diff(base, head)
+        self.assertTrue(
+            any("res.partner" in c and "title" in c for c in changes.descriptive), changes.descriptive
+        )
+        self.assertEqual(changes.breaking, [])
+        self.assertEqual(changes.additive, [])
+
 
 class UnionAndResolutionTests(unittest.TestCase):
     def test_model_moving_between_area_files_is_no_change(self):
@@ -214,6 +229,30 @@ class UnionAndResolutionTests(unittest.TestCase):
         self.assertEqual((changes.breaking, changes.additive, changes.descriptive), ([], [], []))
 
 
+class BaseContractTests(unittest.TestCase):
+    """`base_contract` is the one "no base contract" rule shared by `check`
+    and `changelog` (gc-change-gate.md: either ASSET_DIR or api_version.py
+    absent means no base contract)."""
+
+    def test_documents_without_version_file_is_no_base_contract(self):
+        # Base has JSON documents (`list_base` would return names) but no
+        # api_version.py at that ref (`get_text_at_ref` for VERSION_FILE
+        # returns None) -- still no base contract, not "1.0.0".
+        names, base_version = base_contract(["core.json"], None)
+        self.assertEqual(names, ["core.json"])
+        self.assertIsNone(base_version)
+
+        # The consequence is the same as a fully absent base: `check` skips
+        # the bump rule entirely...
+        changes = Changes(breaking=["removed operation x"], additive=[], descriptive=[])
+        changelog = "# API changelog\n\n## 1.0.0 — initial contract\n"
+        self.assertEqual(check(base_version, "1.0.0", changes, changelog), [])
+
+        # ...and `changelog` writes the "initial contract" heading.
+        section = render_changelog(None, "1.0.0", changes, first=base_version is None)
+        self.assertIn("initial contract", section)
+
+
 class RequiredBumpTests(unittest.TestCase):
     def test_required_bump_major_for_breaking(self):
         changes = Changes(breaking=["removed x"], additive=[], descriptive=[])
@@ -266,6 +305,20 @@ class ChangelogTests(unittest.TestCase):
         twice = render_changelog(once, "1.0.0", changes, first=True)
         self.assertEqual(once, twice)
         self.assertEqual(once.count("## 1.0.0"), 1)
+
+    def test_render_changelog_prepends_new_section_above_existing(self):
+        v1_changes = Changes(breaking=[], additive=[], descriptive=[])
+        after_v1 = render_changelog(None, "1.0.0", v1_changes, first=True)
+
+        v2_changes = Changes(breaking=[], additive=["added op"], descriptive=[])
+        after_v2 = render_changelog(after_v1, "1.1.0", v2_changes, first=False)
+
+        self.assertIn("## 1.0.0", after_v2)
+        self.assertIn("## 1.1.0", after_v2)
+        self.assertLess(after_v2.index("## 1.1.0"), after_v2.index("## 1.0.0"))
+        self.assertTrue(after_v2.startswith("# API changelog"))
+        self.assertEqual(after_v2.count("## 1.0.0"), 1)
+        self.assertEqual(after_v2.count("## 1.1.0"), 1)
 
 
 if __name__ == "__main__":
