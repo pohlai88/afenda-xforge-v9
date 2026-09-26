@@ -87,9 +87,14 @@ jobs:
           # Raw text in $GITHUB_STEP_SUMMARY is rendered as Markdown and its
           # blank lines collapse; a fenced block keeps the three change
           # lists readable, and the fence still closes when the check fails.
+          # GitHub's default shell for `run:` is already `bash -eo pipefail`,
+          # so a bare `status=$?` on the line after the pipe never runs on
+          # failure: errexit terminates the shell at the failing pipeline
+          # itself. `|| status=$?` keeps the pipeline inside a checked
+          # command, so errexit does not fire, and the fence still closes.
           echo '```text' >> "$GITHUB_STEP_SUMMARY"
-          python -m afenda.tools.api_diff check --base-ref origin/main 2>&1 | tee -a "$GITHUB_STEP_SUMMARY"
-          status=$?
+          status=0
+          python -m afenda.tools.api_diff check --base-ref origin/main 2>&1 | tee -a "$GITHUB_STEP_SUMMARY" || status=$?
           echo '```' >> "$GITHUB_STEP_SUMMARY"
           exit "$status"
 

@@ -215,6 +215,16 @@ class DeployStaticTests(unittest.TestCase):
         # local base ref, so main is fetched at depth 1 before the check.
         self.assertIn("git fetch --no-tags --depth=1 origin main:refs/remotes/origin/main", ci)
         self.assertIn("python -m afenda.tools.api_diff check --base-ref origin/main", ci)
+        # GitHub's default `run:` shell is `bash -eo pipefail {0}`: a bare
+        # `status=$?` after the piped check never runs on failure, because
+        # errexit terminates the shell at the failing pipeline itself, before
+        # the closing ```-fence is ever written. The pipeline must be
+        # guarded by `|| status=$?` on the same line, so the fence always
+        # closes.
+        self.assertRegex(
+            ci,
+            r"python -m afenda\.tools\.api_diff check --base-ref origin/main[^\n]*\|\| status=\$\?",
+        )
 
     def test_app_connects_as_the_least_privilege_role(self):
         compose = (DEPLOY / "compose.yaml").read_text(encoding="utf-8")
