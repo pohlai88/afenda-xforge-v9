@@ -289,7 +289,11 @@ _COMPONENT_SCHEMAS = {
                 "description": "An opaque id for this occurrence; present on 5xx only.",
             },
         },
-        "required": ["type", "title", "status", "code", "detail"],
+        # message: afenda_runtime's ir.http._handle_error override
+        # (models/ir_http.py:65) always sets it on every JSON-2 error body,
+        # so the schema must promise it too, not merely tolerate it as an
+        # unlisted extra property (fix round 2, finding 2, PR #5 review).
+        "required": ["type", "title", "status", "code", "detail", "message"],
     },
     "Ids": {
         "type": "array",

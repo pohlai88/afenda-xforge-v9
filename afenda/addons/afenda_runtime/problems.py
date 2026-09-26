@@ -20,7 +20,19 @@ from odoo.exceptions import (
     ValidationError,
 )
 
-# (code, status, one-line description), documentation order.
+# (code, status, one-line description), documentation order. Every status is
+# the integer the client actually receives, except "invalid_request": the
+# runtime (`problem_code` below) returns it for any 4xx status not covered by
+# another row, so its documented status is the literal string "4xx" rather
+# than a single integer that would misrepresent every other 4xx it also
+# covers (fix round 2, finding 1, PR #5 review - a malformed JSON body is 400,
+# an argument the method does not accept is 422, and nothing here enumerates
+# every case in between). The response body itself always carries the real
+# integer status (afenda_api_docs/openapi.py's `Error` schema keeps
+# `status: {"type": "integer"}`); only this table's documentation column, the
+# shared Problem response description
+# (afenda_api_docs/openapi.py's `_PROBLEM_STATUSES`) and the /docs/api/errors
+# page (`views/errors.xml`) render the string.
 PROBLEM_CODES = (
     ("unauthenticated", 401, "No, or no valid, credentials were presented."),
     ("access_denied", 403, "The credentials are valid but do not allow this operation."),
@@ -28,7 +40,15 @@ PROBLEM_CODES = (
     ("conflict", 409, "The record could not be locked for the operation; retry later."),
     ("validation_error", 422, "A field or record constraint was violated."),
     ("user_error", 422, "The operation makes no sense given the current state."),
-    ("invalid_request", 422, "400, 422 or any other 4xx: the request itself is malformed."),
+    (
+        "invalid_request",
+        "4xx",
+        (
+            "Any other 4xx: the request itself is malformed - 400 for a "
+            "body that is not valid JSON, 422 for arguments the method "
+            "does not accept."
+        ),
+    ),
     ("internal_error", 500, "An unexpected server error occurred."),
 )
 

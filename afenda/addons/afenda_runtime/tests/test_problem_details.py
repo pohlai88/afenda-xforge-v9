@@ -6,9 +6,10 @@ from odoo.exceptions import AccessDenied, LockError, MissingError, UserError
 from odoo.tests import HttpCase, mute_logger, new_test_user, tagged
 from odoo.tools import config
 
-from ..problems import problem_code
+from ..problems import PROBLEM_CODES, problem_code
 
 _CONTRACT_KEYS = {"type", "title", "status", "code", "detail", "message"}
+_DOCUMENTED_STATUS_BY_CODE = {code: status for code, status, _description in PROBLEM_CODES}
 
 
 def _generate_key(env, user, days=0.5):
@@ -68,6 +69,25 @@ class TestProblemDetails(HttpCase):
         self.assertEqual(problem_code(Exception("x"), 418), "invalid_request")
         # 5xx is always internal_error, whatever the exception.
         self.assertEqual(problem_code(Exception("x"), 503), "internal_error")
+
+    def test_problem_codes_documents_every_4xx_the_runtime_can_return(self):
+        # PROBLEM_CODES drives the /docs/api/errors page (controllers/api.py)
+        # and the shared Problem response description
+        # (afenda_api_docs/openapi.py's _PROBLEM_STATUSES): every status this
+        # function can actually return for an unmapped exception must be
+        # documented, either as its own integer or, for the catch-all
+        # "invalid_request", as the literal string "4xx" (fix round 2,
+        # finding 1 - PR #5 review). A plain Exception is never one of
+        # _CODES_BY_EXCEPTION's classes, so this walks status alone.
+        for status in range(400, 500):
+            with self.subTest(status=status):
+                code = problem_code(Exception("x"), status)
+                documented = _DOCUMENTED_STATUS_BY_CODE[code]
+                self.assertTrue(
+                    documented == status or documented == "4xx",
+                    f"status {status} -> code {code!r} documented as "
+                    f"{documented!r}, which is neither {status} nor '4xx'",
+                )
 
     def test_missing_bad_or_revoked_key_is_problem_401(self):
         revoked_user = new_test_user(self.env, login="afenda_json2_revoked")
@@ -144,6 +164,30 @@ class TestProblemDetails(HttpCase):
             headers=self._bearer(self.employee_key),
         )
         self.assertEqual(r.status_code, 422)
+        self.assertEqual(
+            r.headers.get("Content-Type"), "application/problem+json; charset=utf-8",
+        )
+        body = r.json()
+        self.assertEqual(body["code"], "invalid_request")
+        self.assertEqual(body["type"], "/docs/api/errors#invalid_request")
+        self._assert_contract_keys(body, fivexx=False)
+
+    def test_malformed_json_body_is_problem_400(self):
+        # Json2Dispatcher.dispatch (odoo/http.py) raises werkzeug's
+        # BadRequest, an HTTPException with .code == 400, before any model or
+        # method is even resolved - a status this table's invalid_request
+        # row covers via the "4xx" fallback, not its own integer entry
+        # (fix round 2, finding 1 - PR #5 review).
+        with mute_logger("odoo.http"):
+            r = self.url_open(
+                "/json/2/res.partner/search",
+                data=b"{not-valid-json",
+                headers={
+                    **self._bearer(self.admin_key),
+                    "Content-Type": "application/json",
+                },
+            )
+        self.assertEqual(r.status_code, 400)
         self.assertEqual(
             r.headers.get("Content-Type"), "application/problem+json; charset=utf-8",
         )

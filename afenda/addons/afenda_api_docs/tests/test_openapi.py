@@ -1,10 +1,11 @@
 import json
 import re
+from datetime import datetime, timedelta
 from unittest.mock import patch
 
 from odoo.exceptions import AccessError
 from odoo.service.model import get_public_method
-from odoo.tests import TransactionCase, tagged
+from odoo.tests import HttpCase, TransactionCase, mute_logger, tagged
 
 from odoo.addons.afenda_api_docs.api_version import API_VERSION
 from odoo.addons.afenda_api_docs.openapi import (
@@ -280,7 +281,13 @@ class TestDocument(TransactionCase):
     def test_error_schema_is_problem_details(self):
         doc = build_document(self.env)
         error = doc["components"]["schemas"]["Error"]
-        self.assertEqual(error["required"], ["type", "title", "status", "code", "detail"])
+        # message belongs in required: afenda_runtime's ir.http._handle_error
+        # override (models/ir_http.py:65) always sets it, on every JSON-2
+        # error body, so the schema must promise it too (fix round 2, finding
+        # 2, PR #5 review).
+        self.assertEqual(
+            error["required"], ["type", "title", "status", "code", "detail", "message"],
+        )
         self.assertEqual(
             error["properties"]["code"]["enum"],
             [code for code, _status, _description in PROBLEM_CODES],
@@ -352,6 +359,44 @@ class TestDocument(TransactionCase):
             self.assertNotIn(name, doc["components"]["schemas"])
             self.assertFalse([p for p in doc["paths"] if p.startswith(f"/json/2/{name}/")])
         self.assertIn("res.partner", doc["components"]["schemas"])
+
+
+@tagged("post_install", "-at_install")
+class TestErrorSchemaOverHttp(HttpCase):
+    """The committed Error schema must match a real JSON-2 error body.
+
+    An HttpCase, so an Odoo BaseCase: a plain unittest class would be
+    discovered and then silently dropped (odoo/tests/tag_selector.py:88-90),
+    same reasoning as afenda_runtime/tests/test_problem_details.py.
+    """
+
+    def test_error_schema_covers_a_real_json2_error_body(self):
+        admin = self.env.ref("base.user_admin")
+        key = self.env["res.users.apikeys"].with_user(admin)._generate(
+            None, "t", datetime.now() + timedelta(days=0.5),
+        )
+        # An unknown model: addons/rpc/controllers/json2.py's web_json_2_rpc
+        # raises NotFound before any model or method is resolved, a plain 404
+        # (afenda_runtime/problems.py's _CODES_BY_STATUS) - cheap and does
+        # not depend on any particular model's fields.
+        with mute_logger("odoo.http"):
+            r = self.url_open(
+                "/json/2/not.a.real.model/search",
+                json={"domain": []},
+                headers={"Authorization": f"Bearer {key}"},
+            )
+        self.assertEqual(r.status_code, 404)
+        body = r.json()
+
+        schema = build_document(self.env)["components"]["schemas"]["Error"]
+        required = set(schema["required"])
+        # Every required property is actually on the wire...
+        self.assertLessEqual(required, set(body))
+        # ...and the only property the schema allows beyond required is the
+        # 5xx-only "instance" (absent here, a 404) - so "message", which
+        # ir.http._handle_error always sets, must be in required, not merely
+        # tolerated as an extra (fix round 2, finding 2, PR #5 review).
+        self.assertLessEqual(set(body) - required, {"instance"})
 
 
 @tagged("post_install", "-at_install")

@@ -741,7 +741,7 @@
       }
      }
     },
-    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 4xx invalid_request; 500 internal_error. See /docs/api/errors for what each means."
    }
   },
   "schemas": {
@@ -793,7 +793,8 @@
      "title",
      "status",
      "code",
-     "detail"
+     "detail",
+     "message"
     ],
     "title": "Error",
     "type": "object"
