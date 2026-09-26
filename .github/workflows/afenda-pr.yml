@@ -30,12 +30,9 @@ concurrency:
 jobs:
   pr_evidence:
     name: pr evidence
-    # A description-only edit that leaves the body untouched (e.g. a title
-    # fix) must not re-run the identical check on the identical SHA;
-    # `changes.body` is set on an `edited` event only when the body itself
-    # changed (a missing property evaluates to null, not an error). `on:`
-    # cannot express this by itself -- only a job- or step-level `if:` can.
-    if: github.event.action != 'edited' || github.event.changes.body != null
+    # No job-level `if:`: a skipped run counts as success for a required check,
+    # so skipping a title-only edit could turn a red `pr evidence` green. A
+    # duplicate run on the same SHA costs about 10 s.
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:

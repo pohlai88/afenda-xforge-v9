@@ -503,12 +503,13 @@ class LocalFirstGatesCiTests(unittest.TestCase):
         self.assertIn("cache-to: type=gha,mode=max,scope=afenda-image", build)
         self.assertIn("BUILDKIT_PROGRESS: plain", build)
 
-    def test_pr_workflow_skips_edited_with_no_body_change(self):
-        # Corrections after review item 7: a job-level if:, not an on: filter
-        # (on: cannot express "only when changes.body is set").
+    def test_pr_evidence_job_is_never_skipped(self):
+        # A skipped run counts as success for a required check, so a title-only edit
+        # after a red `pr evidence` would turn it green (code review of 2e781020f).
+        # The job runs on every event it is triggered by; a duplicate run costs ~10 s.
         pr = (REPO / ".github" / "workflows" / "afenda-pr.yml").read_text(encoding="utf-8")
         job = self._job_block(pr, "pr_evidence")
-        self.assertIn("if: github.event.action != 'edited' || github.event.changes.body != null", job)
+        self.assertNotRegex(job, r"(?m)^    if:")
         self.assertIn("pull-requests: read", pr)
 
     def test_pr_workflow_fetches_pr_commits_from_the_api_through_env(self):

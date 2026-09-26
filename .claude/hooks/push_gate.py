@@ -89,6 +89,11 @@ _OPERATOR_CHARS = set("|&;<>()")
 _HEREDOC_RE = re.compile(r"(?<!<)<<(-?)\s*(['\"]?)([A-Za-z_][\w.-]*)\2")
 _SHELL_WORD_RE = re.compile(r"(?:^|[\s/;&|(])(?:ba|z|da|k)?sh(?:\.exe)?(?=\s|$)")
 _SHELLS = {"bash", "sh", "zsh", "dash", "ksh", "bash.exe", "sh.exe"}
+
+
+def _is_c_flag(arg):
+    """`-c`, or a bundle of short options carrying `c` (`-lc`, `-ec`, `-xc`)."""
+    return bool(re.fullmatch(r"-[A-Za-z]*c[A-Za-z]*", arg))
 # Shell reserved words that can stand in front of a command (`{ git push; }`,
 # `then git push`, `! git push`).
 _RESERVED_WORDS = {
@@ -258,8 +263,9 @@ def _find_pushes(command: str, cwd: str, env: dict | None = None, depth: int = 0
             elif cwd is not None:
                 cwd = os.path.normpath(os.path.join(cwd, _expand_path(target, env)))
             continue
-        if name in _SHELLS and "-c" in argv[1:]:
-            index = argv.index("-c")
+        c_flag = next((i for i, arg in enumerate(argv[1:], 1) if _is_c_flag(arg)), None)
+        if name in _SHELLS and c_flag is not None:
+            index = c_flag
             if index + 1 < len(argv):
                 pushes += _find_pushes(argv[index + 1], cwd, env, depth + 1)
             continue
@@ -344,7 +350,7 @@ def _alone_reason(command: str, depth: int = 0):
         return "it holds no command"
     name = _basename(argv[0])
     if name in _SHELLS:
-        if len(argv) == 3 and argv[1] == "-c":
+        if len(argv) == 3 and _is_c_flag(argv[1]):
             return _alone_reason(argv[2], depth + 1)
         return f"`{argv[0]}` wraps more than one plain `-c` script"
     if name == "eval":
