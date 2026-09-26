@@ -104,13 +104,21 @@ class GitIdentityTests(_TempRepo):
         self.write("afenda/tools/tool.py", "value = 2\n")
         self.assertNotEqual(_git_identity.scoped_fingerprint(self.repo), before)
 
-    def test_scoped_dirty_lists_tracked_scoped_changes_only(self):
+    def test_scoped_dirty_lists_scoped_changes_and_untracked_files(self):
+        # An untracked, non-ignored file under the scope is dirty too: the
+        # gates run on the working tree, the stamp names HEAD's tree (sweep 2, M7).
         self.assertEqual(_git_identity.scoped_dirty(self.repo), [])
         self.write("addons/web/upstream.py", "upstream = 2\n")  # out of scope
-        self.write("afenda/untracked.py", "x = 1\n")  # untracked
+        self.write("addons/web/new.py", "new = 1\n")  # untracked, out of scope
         self.assertEqual(_git_identity.scoped_dirty(self.repo), [])
+        self.write(".gitignore", "*.log\n")
+        self.write("afenda/ignored.log", "x\n")  # ignored
+        self.write("afenda/untracked.py", "x = 1\n")  # untracked
+        self.assertEqual(_git_identity.scoped_dirty(self.repo), ["afenda/untracked.py"])
         self.write("afenda/tools/tool.py", "value = 2\n")
-        self.assertEqual(_git_identity.scoped_dirty(self.repo), ["afenda/tools/tool.py"])
+        self.assertEqual(
+            _git_identity.scoped_dirty(self.repo), ["afenda/tools/tool.py", "afenda/untracked.py"]
+        )
 
     def test_every_git_call_has_a_five_second_timeout(self):
         real_run = subprocess.run
@@ -296,6 +304,14 @@ class CheckMainTests(_TempRepo):
         code, out, executor = self.run_check()
         self.assertEqual(code, 2)
         self.assertIn("afenda/tools/tool.py", out)
+        self.assertEqual(executor.calls, [])
+        self.assertFalse(self.stamp().exists())
+
+    def test_an_untracked_scoped_file_is_refused_without_running_anything(self):
+        self.write("afenda/tools/new_module.py", "x = 1\n")
+        code, out, executor = self.run_check()
+        self.assertEqual(code, 2)
+        self.assertIn("afenda/tools/new_module.py", out)
         self.assertEqual(executor.calls, [])
         self.assertFalse(self.stamp().exists())
 

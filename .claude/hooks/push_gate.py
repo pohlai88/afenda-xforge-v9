@@ -11,10 +11,21 @@ and any exception, parse failure or unresolvable ref returns 2.
 
 What it does:
 
+- **A push runs alone.** PreToolUse runs once, before the whole Bash call, so
+  a command in front of the push (`git commit -am x && git push`, `git
+  checkout main && git push origin HEAD`) would move HEAD after the gate
+  looked (sweep 2, C1 and H3). Rather than model the shell, a Bash call that
+  holds a `git push` and anything else -- another command, `&&`, `||`, `;`,
+  `|`, `&`, a second line, `$(`, backticks, `{ }`, `if`/`for`/`while`/
+  `until`/`case`, a leading `!`, a heredoc, or a `bash -c`/`sh -c`/`eval`
+  wrapper around more than the push -- is blocked (`_alone_reason`). Kept:
+  one leading `cd <dir> &&`, `git -C <dir>`, `VAR=value`/`env VAR=value`/
+  `command` prefixes, output redirections, and `bash -c '<the push alone>'`.
+  A backslash-newline continuation is one line (H2).
 - **`git push`** in a Bash command (also after `cd`, `&&`, `;`, `|`, env
-  prefixes, `env`/`command`/`exec` wrappers, `git -C <path>`, `bash -c '...'`
-  and `eval`): each refspec is resolved with `git rev-parse` to its tip commit's
-  tree, and that tree must have a passing stamp,
+  prefixes, `env`/`command`/`exec` wrappers, shell reserved words, `git -C
+  <path>`, `bash -c '...'` and `eval`): each refspec is resolved with `git
+  rev-parse` to its tip commit's tree, and that tree must have a passing stamp,
   `<git common dir>/afenda-check/<tree sha>.json`, written by
   `python -m afenda.tools.check`. Only the tip tree of each pushed ref is
   checked, not every commit in the push.
@@ -26,7 +37,11 @@ What it does:
   - Needs no stamp: `--dry-run`/`-n`; `--delete`/`-d` and `:<dst>` deletes;
     a tag pushed as a tag (`v1`, `refs/tags/v1[:refs/tags/…]`, `tag v1`,
     `--tags` alone). A tag pushed onto a branch needs one.
+  - `$CLAUDE_PROJECT_DIR`, `${CLAUDE_PROJECT_DIR}`, `$HOME`, `${HOME}` and a
+    leading `~` in a `cd`/`-C` path expand from the hook's environment; any
+    other `$` there is blocked as unexpandable (M4).
   - Blocked outright: `--all`, `--branches`, `--mirror`, wildcard refspecs,
+    the matching refspec `:`/`+:` (H4),
     `--git-dir`/`--work-tree`/`--namespace` or a `GIT_DIR`-style env prefix,
     anything that does not resolve, and a command that mentions `push` but
     does not parse.
@@ -61,6 +76,11 @@ BLOCKED_MCP_TOOLS = (
     "mcp__github__delete_file",
 )
 CHECK_COMMAND = "python -m afenda.tools.check"
+STAMP_HINT = f"run /preflight (or {CHECK_COMMAND}) first; it stamps this tree"
+PUSH_ALONE = (
+    f"push alone: run `git push …` as its own command after /preflight ({CHECK_COMMAND}) "
+    "passed on this tree"
+)
 
 _PUSH_RE = re.compile(r"\bpush\b")
 _ENV_ASSIGNMENT_RE = re.compile(r"^[A-Za-z_][A-Za-z0-9_]*=")
@@ -69,6 +89,18 @@ _OPERATOR_CHARS = set("|&;<>()")
 _HEREDOC_RE = re.compile(r"(?<!<)<<(-?)\s*(['\"]?)([A-Za-z_][\w.-]*)\2")
 _SHELL_WORD_RE = re.compile(r"(?:^|[\s/;&|(])(?:ba|z|da|k)?sh(?:\.exe)?(?=\s|$)")
 _SHELLS = {"bash", "sh", "zsh", "dash", "ksh", "bash.exe", "sh.exe"}
+# Shell reserved words that can stand in front of a command (`{ git push; }`,
+# `then git push`, `! git push`).
+_RESERVED_WORDS = {
+    "{", "}", "!", "if", "then", "elif", "else", "fi", "do", "done", "while", "until",
+    "case", "esac", "select", "function", "coproc",
+}
+# Redirections a push alone may carry (`2>&1`, `> log`); `<<`, `<<<`, `<(`,
+# `>(` and `>|` are not among them.
+_PLAIN_REDIRECTIONS = {">", ">>", "<", ">&", "<&", "&>", "&>>"}
+# A line that ends in an unescaped backslash continues on the next one.
+_CONTINUED_RE = re.compile(r"(?<!\\)(?:\\\\)*\\$")
+_PATH_VAR_RE = re.compile(r"\$(?:\{(CLAUDE_PROJECT_DIR|HOME)\}|(CLAUDE_PROJECT_DIR|HOME)(?![A-Za-z0-9_]))")
 _WRAPPERS = {"command", "exec", "nohup", "time", "builtin", "sudo", "nice", "stdbuf"}
 _MAX_DEPTH = 4
 
@@ -98,30 +130,48 @@ def _basename(token: str) -> str:
 
 def _strip_heredoc_bodies(command: str) -> str:
     """Drop heredoc bodies (data such as a commit message, not shell syntax),
-    except one fed to a shell (`bash <<EOF`), which is commands."""
-    lines, kept, pending = command.split("\n"), [], []
-    for line in lines:
+    except one fed to a shell (`bash <<EOF`), which is commands. A line
+    outside a data body that ends in a backslash is joined to the next with a space
+    (a continuation); a data body's lines are taken as they are, so a body
+    line ending in a backslash cannot swallow its delimiter."""
+    kept, pending, carry = [], [], ""
+    for raw in command.replace("\r\n", "\n").split("\n"):
         if pending:
             delimiter, strip_tabs, keep = pending[0]
-            if (line.lstrip("\t") if strip_tabs else line).strip() == delimiter:
+            if (raw.lstrip("\t") if strip_tabs else raw).strip() == delimiter:
                 pending.pop(0)
             elif keep:
-                kept.append(line)
+                kept.append(raw)
             continue
+        line = carry + raw
+        if _CONTINUED_RE.search(line):
+            carry = line[:-1] + " "
+            continue
+        carry = ""
         kept.append(line)
         for match in _HEREDOC_RE.finditer(line):
             feeds_shell = bool(_SHELL_WORD_RE.search(line[: match.start()]))
             pending.append((match.group(3), match.group(1) == "-", feeds_shell))
-    return "\n".join(kept)
+    if carry:
+        kept.append(carry)
+    return re.sub(r"\\\r?\n", " ", "\n".join(kept))
+
+
+def _tokens(command: str) -> list[str]:
+    """Shell tokens of `command`, heredoc data bodies removed, and each newline
+    and backtick a `;` (a backtick opens or closes a command substitution, so
+    the push inside `` `git push` `` is a command of its own). An unbalanced
+    quote raises ValueError: callers fail closed."""
+    text = _strip_heredoc_bodies(command).replace("\n", " ; ").replace("`", " ; ")
+    lexer = shlex.shlex(text, posix=True, punctuation_chars=True)
+    lexer.whitespace_split = True
+    return list(lexer)
 
 
 def _simple_commands(command: str) -> list[list[str]]:
     """argv of each simple command, in order; redirections removed."""
-    command = _strip_heredoc_bodies(command)
-    lexer = shlex.shlex(command.replace("\n", " ; "), posix=True, punctuation_chars=True)
-    lexer.whitespace_split = True
     commands, current, skip_next = [], [], False
-    for token in lexer:  # an unbalanced quote raises ValueError: fail closed upstream
+    for token in _tokens(command):  # an unbalanced quote raises ValueError: fail closed upstream
         if skip_next:
             skip_next = False
             continue
@@ -142,10 +192,13 @@ def _simple_commands(command: str) -> list[list[str]]:
 
 
 def _strip_prefixes(argv):
-    """Drop env assignments and wrapper commands in front of the real command."""
+    """Drop env assignments, reserved words and wrapper commands in front of
+    the real command."""
     while argv:
         head = argv[0]
-        if _ENV_ASSIGNMENT_RE.match(head):
+        if head in _RESERVED_WORDS:
+            argv = argv[1:]
+        elif _ENV_ASSIGNMENT_RE.match(head):
             if _GIT_ENV_RE.match(head):
                 raise _Blocked(f"`{head.split('=', 1)[0]}` points git elsewhere; push without it")
             argv = argv[1:]
@@ -169,8 +222,27 @@ def _strip_prefixes(argv):
     return argv
 
 
-def _find_pushes(command: str, cwd: str, depth: int = 0):
+def _expand_path(target: str, env: dict) -> str:
+    """`target` with `~`, `$CLAUDE_PROJECT_DIR` and `$HOME` (braced or not)
+    expanded from the hook's environment; any other `$` is refused."""
+    def value(name):
+        found = env.get(name)
+        if not found:
+            raise _Blocked(f"cannot expand `${name}` in `{target}` (not set for the hook); write the path out")
+        return found
+
+    expanded = target
+    if expanded == "~" or expanded.startswith("~/"):
+        expanded = value("HOME") + expanded[1:]
+    expanded = _PATH_VAR_RE.sub(lambda match: value(match.group(1) or match.group(2)), expanded)
+    if "$" in expanded or expanded.startswith("~"):
+        raise _Blocked(f"cannot expand the variable in `{target}`; write the path out")
+    return expanded
+
+
+def _find_pushes(command: str, cwd: str, env: dict | None = None, depth: int = 0):
     """[(cwd, push arguments)] for every `git push` in `command`."""
+    env = env or {}
     if depth > _MAX_DEPTH:
         raise _Blocked("the command nests shells too deeply to read")
     pushes = []
@@ -180,19 +252,19 @@ def _find_pushes(command: str, cwd: str, depth: int = 0):
             continue
         name = _basename(argv[0])
         if name in ("cd", "pushd"):
-            target = argv[1] if len(argv) > 1 else os.path.expanduser("~")
+            target = argv[1] if len(argv) > 1 else "~"
             if target == "-":
                 cwd = None
             elif cwd is not None:
-                cwd = os.path.normpath(os.path.join(cwd, os.path.expanduser(target)))
+                cwd = os.path.normpath(os.path.join(cwd, _expand_path(target, env)))
             continue
         if name in _SHELLS and "-c" in argv[1:]:
             index = argv.index("-c")
             if index + 1 < len(argv):
-                pushes += _find_pushes(argv[index + 1], cwd, depth + 1)
+                pushes += _find_pushes(argv[index + 1], cwd, env, depth + 1)
             continue
         if name == "eval":
-            pushes += _find_pushes(" ".join(argv[1:]), cwd, depth + 1)
+            pushes += _find_pushes(" ".join(argv[1:]), cwd, env, depth + 1)
             continue
         if name not in ("git", "git.exe"):
             continue
@@ -202,7 +274,9 @@ def _find_pushes(command: str, cwd: str, depth: int = 0):
             arg = argv[index]
             if arg == "-C" and index + 1 < len(argv):
                 if git_cwd is not None:
-                    git_cwd = os.path.normpath(os.path.join(git_cwd, argv[index + 1]))
+                    git_cwd = os.path.normpath(
+                        os.path.join(git_cwd, _expand_path(argv[index + 1], env))
+                    )
                 index += 2
             elif arg.startswith(_GIT_UNSUPPORTED):
                 raise _Blocked(f"`git {arg}` is not a form this gate resolves; use `git -C <path>`")
@@ -218,6 +292,71 @@ def _find_pushes(command: str, cwd: str, depth: int = 0):
                 raise _Blocked("`cd -` before the push leaves the directory unknown")
             pushes.append((git_cwd, argv[index + 1:]))
     return pushes
+
+
+def _alone_reason(command: str, depth: int = 0):
+    """None when `command` is one `git push` and nothing else (optionally after
+    a single leading `cd <dir> &&`), else what else it holds."""
+    if depth > _MAX_DEPTH:
+        return "the command nests shells too deeply to read"
+    if "$(" in command or "`" in command:
+        return "it holds a command substitution"
+    tokens = _tokens(command.strip())
+    segments, operators, current, index = [], [], [], 0
+    while index < len(tokens):
+        token = tokens[index]
+        if token and set(token) <= _OPERATOR_CHARS:
+            if token in _PLAIN_REDIRECTIONS:
+                target = tokens[index + 1] if index + 1 < len(tokens) else ""
+                if not target or set(target) <= _OPERATOR_CHARS:
+                    return f"`{token}` has no plain target"
+                if current and current[-1].isdigit():
+                    current.pop()  # the fd of `2>&1`
+                index += 2
+                continue
+            operators.append(token)
+            segments.append(current)
+            current = []
+        else:
+            current.append(token)
+        index += 1
+    segments.append(current)
+
+    if not operators:
+        argv = segments[0]
+    elif (
+        operators == ["&&"] and len(segments[0]) == 2 and segments[0][0] == "cd"
+        and not segments[0][1].startswith("-")
+    ):
+        argv = segments[1]
+    else:
+        return "it runs other commands or shell syntax around the push (" + " ".join(operators) + ")"
+
+    while argv and _ENV_ASSIGNMENT_RE.match(argv[0]):
+        argv = argv[1:]
+    if argv and _basename(argv[0]) == "env":
+        argv = argv[1:]
+        while argv and _ENV_ASSIGNMENT_RE.match(argv[0]):
+            argv = argv[1:]
+    if argv and argv[0] == "command":
+        argv = argv[1:]
+    if not argv:
+        return "it holds no command"
+    name = _basename(argv[0])
+    if name in _SHELLS:
+        if len(argv) == 3 and argv[1] == "-c":
+            return _alone_reason(argv[2], depth + 1)
+        return f"`{argv[0]}` wraps more than one plain `-c` script"
+    if name == "eval":
+        return _alone_reason(" ".join(argv[1:]), depth + 1)
+    if name not in ("git", "git.exe"):
+        return f"`{argv[0]}` runs in front of the push"
+    index = 1
+    while index < len(argv) and argv[index].startswith("-"):
+        index += 2 if argv[index] == "-C" or argv[index] in _GIT_VALUE_OPTIONS else 1
+    if index >= len(argv) or argv[index] != "push":
+        return "its git command is not the push"
+    return None
 
 
 def _parse_push_args(args):
@@ -291,6 +430,8 @@ def _evaluate(git_identity, cwd, args):
         if "*" in spec:
             return f"`{spec}` is a wildcard refspec; push named refs"
         if sep and not src:
+            if not dst:
+                return f"`{spec}` pushes every matching branch; name the refspec explicitly"
             continue  # `:dst` deletes dst
         full_name = git_identity.run_git(
             ["rev-parse", "--verify", "--quiet", "--symbolic-full-name", "--end-of-options", src],
@@ -307,9 +448,10 @@ def _evaluate(git_identity, cwd, args):
     return None
 
 
-def _check_push(command: str, cwd: str):
+def _check_push(command: str, cwd: str, env: dict | None = None):
     try:
-        pushes = _find_pushes(command, cwd)
+        pushes = _find_pushes(command, cwd, env)
+        alone = _alone_reason(command) if pushes else None
     except ValueError as error:
         return 2, (
             f"push-gate: blocked; the command mentions `push` but does not parse ({error}). "
@@ -319,6 +461,8 @@ def _check_push(command: str, cwd: str):
         return 2, f"push-gate: blocked; {error}."
     if not pushes:
         return 0, ""
+    if alone:
+        return 2, f"push-gate: blocked; {PUSH_ALONE} ({alone})."
     git_identity = _load_git_identity()
     for push_cwd, args in pushes:
         try:
@@ -328,9 +472,8 @@ def _check_push(command: str, cwd: str):
         if reason:
             return 2, (
                 f"push-gate: blocked `git push {' '.join(args)}`: {reason}. "
-                f"Commit, run `{CHECK_COMMAND}` on the clean tree (it stamps the tree on a "
-                "full pass), then push. CLAUDE.md -> Execution discipline: a push is not a "
-                "test runner."
+                f"Commit, then {STAMP_HINT} on a full pass of the clean tree; then push "
+                "alone. CLAUDE.md -> Execution discipline: a push is not a test runner."
             )
     return 0, ""
 
@@ -357,7 +500,7 @@ def main(stdin_text: str, env: dict) -> tuple:
         cwd = payload.get("cwd")
         if not isinstance(cwd, str) or not cwd:
             cwd = env.get("CLAUDE_PROJECT_DIR") or os.getcwd()
-        return _check_push(command, cwd)
+        return _check_push(command, cwd, env)
     except Exception as error:  # fail closed: never let a broken gate pass a push
         return 2, (
             f"push-gate: blocked; the gate itself failed ({type(error).__name__}: {error}). "

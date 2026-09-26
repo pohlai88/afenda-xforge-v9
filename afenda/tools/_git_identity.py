@@ -101,9 +101,15 @@ def scoped_fingerprint(root) -> str:
 
 
 def scoped_dirty(root) -> list[str]:
-    """Tracked paths under SCOPED_PATHS with staged or unstaged changes, sorted."""
+    """Paths under SCOPED_PATHS that HEAD's tree does not hold as they are,
+    sorted: tracked files with staged or unstaged changes, and untracked files
+    that are not ignored (an untracked directory is listed once, as `dir/`).
+    The gates run on the working tree while the stamp names HEAD's tree, so a
+    new file that was never committed must keep `check` from stamping (sweep
+    2, M7). An ignored file stays invisible: the upstream `.gitignore` ignores
+    dotfiles, so a new, un-added file under `.claude/` is a known limit."""
     out = run_git(
-        ["status", "--porcelain=v1", "-z", "--untracked-files=no", "--", *SCOPED_PATHS],
+        ["status", "--porcelain=v1", "-z", "--untracked-files=normal", "--", *SCOPED_PATHS],
         root,
     )
     entries = out.split("\0")
