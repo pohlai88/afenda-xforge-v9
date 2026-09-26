@@ -1,0 +1,5737 @@
+{
+ "components": {
+  "requestBodies": {
+   "base_on_rule_cancel_shipment": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "pickings": {}
+       },
+       "required": [
+        "pickings"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "base_on_rule_get_tracking_link": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "picking": {}
+       },
+       "required": [
+        "picking"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "base_on_rule_rate_shipment": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "order": {}
+       },
+       "required": [
+        "order"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "can_access_from_current_website": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "website_id": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {}
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_and_get_website_url": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_mail_with_source": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "source_ref": {}
+       },
+       "required": [
+        "source_ref"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {
+         "type": "object"
+        }
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "delivery.carrier": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "allow_cash_on_delivery": {
+      "description": "Allow customers to choose Cash on Delivery as their payment method.",
+      "title": "Cash on Delivery",
+      "type": "boolean"
+     },
+     "amount": {
+      "description": "Amount of the order to benefit from a free shipping, expressed in the company currency",
+      "title": "Amount",
+      "type": "number"
+     },
+     "can_generate_return": {
+      "readOnly": true,
+      "title": "Can Generate Return",
+      "type": "boolean"
+     },
+     "can_publish": {
+      "readOnly": true,
+      "title": "Can Publish",
+      "type": "boolean"
+     },
+     "carrier_description": {
+      "description": "A description of the delivery method that you want to communicate to your customers on the Sales Order and sales confirmation email.E.g. instructions for customers to follow.",
+      "title": "Carrier Description",
+      "type": "string"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "country_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Countries",
+      "type": "array",
+      "x-relation": "res.country"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "debug_logging": {
+      "description": "Log requests in order to ease debugging",
+      "title": "Debug logging",
+      "type": "boolean"
+     },
+     "delivery_type": {
+      "enum": [
+       "base_on_rule",
+       "fixed"
+      ],
+      "title": "Provider",
+      "type": "string",
+      "x-enum-labels": [
+       "Based on Rules",
+       "Fixed Price"
+      ]
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "excluded_tag_ids": {
+      "description": "The method is NOT available if at least one product of the order has one of these tags.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Excluded Tags",
+      "type": "array",
+      "x-relation": "product.tag"
+     },
+     "fixed_margin": {
+      "description": "This fixed amount will be added to the shipping price.",
+      "title": "Fixed Margin",
+      "type": "number"
+     },
+     "fixed_price": {
+      "title": "Fixed Price",
+      "type": "number"
+     },
+     "free_over": {
+      "description": "If the order total amount (shipping excluded) is above or equal to this value, the customer benefits from a free shipping",
+      "title": "Free if order amount is above",
+      "type": "boolean"
+     },
+     "get_return_label_from_portal": {
+      "description": "The return label can be downloaded by the customer from the customer portal.",
+      "title": "Return Label Accessible from Customer Portal",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "integration_level": {
+      "description": "Action while validating Delivery Orders",
+      "enum": [
+       "rate",
+       "rate_and_ship"
+      ],
+      "title": "Integration Level",
+      "type": "string",
+      "x-enum-labels": [
+       "Get Rate",
+       "Get Rate and Create Shipment"
+      ]
+     },
+     "invoice_policy": {
+      "description": "Estimated Cost: the customer will be invoiced the estimated cost of the shipping.\nReal Cost: the customer will be invoiced the real cost of the shipping, the cost of theshipping will be updated on the SO after the delivery.",
+      "enum": [
+       "estimated",
+       "real"
+      ],
+      "title": "Invoicing Policy",
+      "type": "string",
+      "x-enum-labels": [
+       "Estimated cost",
+       "Real cost"
+      ]
+     },
+     "is_published": {
+      "title": "Is Published",
+      "type": "boolean"
+     },
+     "margin": {
+      "description": "This percentage will be added to the shipping price.",
+      "title": "Margin",
+      "type": "number"
+     },
+     "max_volume": {
+      "description": "If the total volume of the order is over this volume, the method won't be available.",
+      "title": "Max Volume",
+      "type": "number"
+     },
+     "max_weight": {
+      "description": "If the total weight of the order is over this weight, the method won't be available.",
+      "title": "Max Weight",
+      "type": "number"
+     },
+     "must_have_tag_ids": {
+      "description": "The method is available only if at least one product of the order has one of these tags.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Must Have Tags",
+      "type": "array",
+      "x-relation": "product.tag"
+     },
+     "name": {
+      "title": "Delivery Method",
+      "type": "string"
+     },
+     "price_rule_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Pricing Rules",
+      "type": "array",
+      "x-relation": "delivery.price.rule"
+     },
+     "prod_environment": {
+      "description": "Set to True if your credentials are certified for production.",
+      "title": "Environment",
+      "type": "boolean"
+     },
+     "product_id": {
+      "title": "Delivery Product",
+      "type": "integer",
+      "x-relation": "product.product"
+     },
+     "return_label_on_delivery": {
+      "description": "The return label is automatically generated at the delivery.",
+      "title": "Generate Return Label",
+      "type": "boolean"
+     },
+     "route_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Routes",
+      "type": "array",
+      "x-relation": "stock.route"
+     },
+     "sequence": {
+      "description": "Determine the display order",
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "shipping_insurance": {
+      "description": "Shipping insurance is a service which may reimburse senders whose parcels are lost, stolen, and/or damaged in transit.",
+      "title": "Insurance Percentage",
+      "type": "integer"
+     },
+     "state_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "States",
+      "type": "array",
+      "x-relation": "res.country.state"
+     },
+     "supports_shipping_insurance": {
+      "readOnly": true,
+      "title": "Supports Shipping Insurance",
+      "type": "boolean"
+     },
+     "tracking_url": {
+      "description": "This option adds a link for the customer in the portal to track their package easily. Use <shipmenttrackingnumber> as a placeholder in your URL.",
+      "title": "Tracking Link",
+      "type": "string"
+     },
+     "volume_uom_name": {
+      "readOnly": true,
+      "title": "Volume unit of measure label",
+      "type": "string"
+     },
+     "website_absolute_url": {
+      "description": "The full absolute URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website Absolute URL",
+      "type": "string"
+     },
+     "website_description": {
+      "description": "A description of the Product that you want to communicate to your customers. This description will be copied to every Sales Order, Delivery Order and Customer Invoice/Credit Note",
+      "title": "Description for Online Quotations",
+      "type": "string"
+     },
+     "website_id": {
+      "description": "Restrict to a specific website.",
+      "title": "Website",
+      "type": "integer",
+      "x-relation": "website"
+     },
+     "website_published": {
+      "title": "Visible on current website",
+      "type": "boolean"
+     },
+     "website_url": {
+      "description": "The full relative URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website URL",
+      "type": "string"
+     },
+     "weight_uom_name": {
+      "readOnly": true,
+      "title": "Weight unit of measure label",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "zip_prefix_ids": {
+      "description": "Prefixes of zip codes that this carrier applies to. Note that regular expressions can be used to support countries with varying zip code lengths, i.e. '$' can be added to end of prefix to match the exact zip (e.g. '100$' will only match '100' and not '1000')",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Zip Prefixes",
+      "type": "array",
+      "x-relation": "delivery.zip.prefix"
+     }
+    },
+    "required": [
+     "delivery_type",
+     "invoice_policy",
+     "name",
+     "product_id"
+    ],
+    "title": "Shipping Methods",
+    "type": "object"
+   },
+   "delivery.price.rule": {
+    "properties": {
+     "carrier_id": {
+      "title": "Carrier",
+      "type": "integer",
+      "x-relation": "delivery.carrier"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "list_base_price": {
+      "title": "Sale Base Price",
+      "type": "number"
+     },
+     "list_price": {
+      "title": "Sale Price",
+      "type": "number"
+     },
+     "max_value": {
+      "title": "Maximum Value",
+      "type": "number"
+     },
+     "name": {
+      "readOnly": true,
+      "title": "Name",
+      "type": "string"
+     },
+     "operator": {
+      "enum": [
+       "==",
+       "<=",
+       "<",
+       ">=",
+       ">"
+      ],
+      "title": "Operator",
+      "type": "string",
+      "x-enum-labels": [
+       "=",
+       "<=",
+       "<",
+       ">=",
+       ">"
+      ]
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "variable": {
+      "enum": [
+       "weight",
+       "volume",
+       "wv",
+       "price",
+       "quantity"
+      ],
+      "title": "Variable",
+      "type": "string",
+      "x-enum-labels": [
+       "Weight",
+       "Volume",
+       "Weight * Volume",
+       "Price",
+       "Quantity"
+      ]
+     },
+     "variable_factor": {
+      "enum": [
+       "weight",
+       "volume",
+       "wv",
+       "price",
+       "quantity"
+      ],
+      "title": "Variable Factor",
+      "type": "string",
+      "x-enum-labels": [
+       "Weight",
+       "Volume",
+       "Weight * Volume",
+       "Price",
+       "Quantity"
+      ]
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "carrier_id",
+     "list_base_price",
+     "list_price",
+     "max_value",
+     "operator",
+     "sequence",
+     "variable",
+     "variable_factor"
+    ],
+    "title": "Delivery Price Rules",
+    "type": "object"
+   },
+   "delivery.zip.prefix": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Prefix",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Delivery Zip Prefix",
+    "type": "object"
+   },
+   "product.feed": {
+    "properties": {
+     "access_token": {
+      "readOnly": true,
+      "title": "Access Token",
+      "type": "string"
+     },
+     "cache_expiry": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Cache Expiry",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "feed_cache": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Feed Cache",
+      "type": "string"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "lang_id": {
+      "description": "Select the language to translate product names, descriptions, and other text in the feed.",
+      "title": "Language",
+      "type": "integer",
+      "x-relation": "res.lang"
+     },
+     "last_notification_date": {
+      "format": "date",
+      "title": "Last Notification Date",
+      "type": "string"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "pricelist_id": {
+      "description": "Specify a pricelist to localize the feed with a specific currency. If not set, the default website pricelist will be used.\nNote that the pricelist must be selectable on the website.",
+      "title": "Pricelist",
+      "type": "integer",
+      "x-relation": "product.pricelist"
+     },
+     "product_category_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Categories",
+      "type": "array",
+      "x-relation": "product.public.category"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "target": {
+      "enum": [
+       "gmc"
+      ],
+      "title": "Target",
+      "type": "string",
+      "x-enum-labels": [
+       "Google Merchant Center"
+      ]
+     },
+     "url": {
+      "readOnly": true,
+      "title": "Url",
+      "type": "string"
+     },
+     "website_id": {
+      "title": "Website",
+      "type": "integer",
+      "x-relation": "website"
+     },
+     "website_lang_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Languages",
+      "type": "array",
+      "x-relation": "res.lang"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "access_token",
+     "cache_expiry",
+     "lang_id",
+     "name",
+     "target",
+     "website_id"
+    ],
+    "title": "Product Feed",
+    "type": "object"
+   },
+   "product.image": {
+    "properties": {
+     "can_image_1024_be_zoomed": {
+      "readOnly": true,
+      "title": "Can Image 1024 be zoomed",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "embed_code": {
+      "readOnly": true,
+      "title": "Embed Code",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "image_1024": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 1024",
+      "type": "string"
+     },
+     "image_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 128",
+      "type": "string"
+     },
+     "image_1920": {
+      "format": "byte",
+      "title": "Image",
+      "type": "string"
+     },
+     "image_256": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 256",
+      "type": "string"
+     },
+     "image_512": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 512",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "product_tmpl_id": {
+      "title": "Product Template",
+      "type": "integer",
+      "x-relation": "product.template"
+     },
+     "product_variant_id": {
+      "title": "Product Variant",
+      "type": "integer",
+      "x-relation": "product.product"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "video_url": {
+      "description": "URL of a video for showcasing your product.",
+      "title": "Video URL",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Product Image",
+    "type": "object"
+   },
+   "product.public.category": {
+    "properties": {
+     "align_category_content": {
+      "description": "Align the category content on the shop page. Corresponds to the 'Center Content' editor option.",
+      "title": "Align Category Content",
+      "type": "boolean"
+     },
+     "child_id": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Children Categories",
+      "type": "array",
+      "x-relation": "product.public.category"
+     },
+     "cover_image": {
+      "description": "Displayed only in the Category List Snippet.",
+      "format": "byte",
+      "title": "Cover Image",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "has_published_products": {
+      "readOnly": true,
+      "title": "Has Published Products",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "image_1024": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 1024",
+      "type": "string"
+     },
+     "image_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 128",
+      "type": "string"
+     },
+     "image_1920": {
+      "format": "byte",
+      "title": "Image",
+      "type": "string"
+     },
+     "image_256": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 256",
+      "type": "string"
+     },
+     "image_512": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 512",
+      "type": "string"
+     },
+     "is_seo_optimized": {
+      "readOnly": true,
+      "title": "SEO optimized",
+      "type": "boolean"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "parent_id": {
+      "title": "Parent",
+      "type": "integer",
+      "x-relation": "product.public.category"
+     },
+     "parent_path": {
+      "title": "Parent Path",
+      "type": "string"
+     },
+     "parents_and_self": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Parents And Self",
+      "type": "array",
+      "x-relation": "product.public.category"
+     },
+     "product_tmpl_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Product Tmpl",
+      "type": "array",
+      "x-relation": "product.template"
+     },
+     "seo_name": {
+      "title": "Seo name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "show_category_description": {
+      "description": "Display the category description on the shop page. Corresponds to the 'Show Description' editor option.",
+      "title": "Show Category Description",
+      "type": "boolean"
+     },
+     "show_category_title": {
+      "description": "Display the category title on the shop page. Corresponds to the 'Show Title' editor option.",
+      "title": "Show Category Title",
+      "type": "boolean"
+     },
+     "website_description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "website_footer": {
+      "title": "Category Footer",
+      "type": "string"
+     },
+     "website_id": {
+      "description": "Restrict to a specific website.",
+      "title": "Website",
+      "type": "integer",
+      "x-relation": "website"
+     },
+     "website_meta_description": {
+      "title": "Website meta description",
+      "type": "string"
+     },
+     "website_meta_keywords": {
+      "title": "Website meta keywords",
+      "type": "string"
+     },
+     "website_meta_og_img": {
+      "title": "Website opengraph image",
+      "type": "string"
+     },
+     "website_meta_title": {
+      "title": "Website meta title",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Website Product Category",
+    "type": "object"
+   },
+   "product.ribbon": {
+    "properties": {
+     "assign": {
+      "description": "Defines how this ribbon is assigned to products:\n- Manually: You assign the ribbon manually to products.\n- Sale: Applied when the product is visibly on sale.\n- New: Applied based on the New period you will define.\n- Out Of Stock: Applied when the product is out of stock.",
+      "enum": [
+       "manual",
+       "sale",
+       "new",
+       "out_of_stock"
+      ],
+      "title": "Assign",
+      "type": "string",
+      "x-enum-labels": [
+       "Manually",
+       "On Sale",
+       "When New",
+       "when out of stock"
+      ]
+     },
+     "bg_color": {
+      "title": "Background Color",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Ribbon Name",
+      "type": "string"
+     },
+     "new_period": {
+      "title": "New Period",
+      "type": "integer"
+     },
+     "position": {
+      "enum": [
+       "left",
+       "right"
+      ],
+      "title": "Position",
+      "type": "string",
+      "x-enum-labels": [
+       "Left",
+       "Right"
+      ]
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "style": {
+      "description": "Defines the display style:\n- Ribbon: Shows a ribbon banner on the product image.\n- Badge: Shows a small badge label on the product image.",
+      "enum": [
+       "ribbon",
+       "tag"
+      ],
+      "title": "Style",
+      "type": "string",
+      "x-enum-labels": [
+       "Ribbon",
+       "Badge"
+      ]
+     },
+     "text_color": {
+      "title": "Text Color",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "assign",
+     "bg_color",
+     "name",
+     "position",
+     "style",
+     "text_color"
+    ],
+    "title": "Product ribbon",
+    "type": "object"
+   },
+   "website.base.unit": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "description": "Define a custom unit to display in the price per unit of measure field.",
+      "title": "Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Unit of Measure for price per unit on eCommerce products.",
+    "type": "object"
+   },
+   "website.checkout.step": {
+    "properties": {
+     "back_button_label": {
+      "title": "Back Button Label",
+      "type": "string"
+     },
+     "can_publish": {
+      "readOnly": true,
+      "title": "Can Publish",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "is_published": {
+      "title": "Is Published",
+      "type": "boolean"
+     },
+     "main_button_label": {
+      "title": "Main Button Label",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "step_href": {
+      "title": "Href",
+      "type": "string"
+     },
+     "website_absolute_url": {
+      "description": "The full absolute URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website Absolute URL",
+      "type": "string"
+     },
+     "website_id": {
+      "description": "Restrict to a specific website.",
+      "title": "Website",
+      "type": "integer",
+      "x-relation": "website"
+     },
+     "website_published": {
+      "title": "Visible on current website",
+      "type": "boolean"
+     },
+     "website_url": {
+      "description": "The full relative URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website URL",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "step_href"
+    ],
+    "title": "Website Checkout Step",
+    "type": "object"
+   },
+   "website.sale.extra.field": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "field_id": {
+      "title": "Field",
+      "type": "integer",
+      "x-relation": "ir.model.fields"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "label": {
+      "readOnly": true,
+      "title": "Field Label",
+      "type": "string"
+     },
+     "name": {
+      "readOnly": true,
+      "title": "Field Name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "website_id": {
+      "title": "Website",
+      "type": "integer",
+      "x-relation": "website"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "field_id"
+    ],
+    "title": "E-Commerce Extra Info Shown on product page",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "website_sale"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/delivery.carrier/available_carriers": {
+   "post": {
+    "operationId": "delivery.carrier.available_carriers",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner": {},
+         "source": {}
+        },
+        "required": [
+         "partner",
+         "source"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "available_carriers",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/base_on_rule_cancel_shipment": {
+   "post": {
+    "operationId": "delivery.carrier.base_on_rule_cancel_shipment",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_cancel_shipment"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "base_on_rule_cancel_shipment",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/base_on_rule_get_tracking_link": {
+   "post": {
+    "operationId": "delivery.carrier.base_on_rule_get_tracking_link",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_get_tracking_link"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "base_on_rule_get_tracking_link",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/base_on_rule_rate_shipment": {
+   "post": {
+    "operationId": "delivery.carrier.base_on_rule_rate_shipment",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_rate_shipment"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "base_on_rule_rate_shipment",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/base_on_rule_send_shipping": {
+   "post": {
+    "operationId": "delivery.carrier.base_on_rule_send_shipping",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_cancel_shipment"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "base_on_rule_send_shipping",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/can_access_from_current_website": {
+   "post": {
+    "operationId": "delivery.carrier.can_access_from_current_website",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/can_access_from_current_website"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "can_access_from_current_website",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/cancel_shipment": {
+   "post": {
+    "description": "Cancel a shipment",
+    "operationId": "delivery.carrier.cancel_shipment",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_cancel_shipment"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "cancel_shipment",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "delivery.carrier.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/create_and_get_website_url": {
+   "post": {
+    "operationId": "delivery.carrier.create_and_get_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_and_get_website_url",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "delivery.carrier.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/fixed_cancel_shipment": {
+   "post": {
+    "operationId": "delivery.carrier.fixed_cancel_shipment",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_cancel_shipment"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fixed_cancel_shipment",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/fixed_get_tracking_link": {
+   "post": {
+    "operationId": "delivery.carrier.fixed_get_tracking_link",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_get_tracking_link"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fixed_get_tracking_link",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/fixed_rate_shipment": {
+   "post": {
+    "operationId": "delivery.carrier.fixed_rate_shipment",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_rate_shipment"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fixed_rate_shipment",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/fixed_send_shipping": {
+   "post": {
+    "operationId": "delivery.carrier.fixed_send_shipping",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_cancel_shipment"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fixed_send_shipping",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "delivery.carrier.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/get_return_label": {
+   "post": {
+    "operationId": "delivery.carrier.get_return_label",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "origin_date": {},
+         "pickings": {},
+         "tracking_number": {}
+        },
+        "required": [
+         "pickings"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_return_label",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/get_return_label_prefix": {
+   "post": {
+    "operationId": "delivery.carrier.get_return_label_prefix",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_return_label_prefix",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/get_tracking_link": {
+   "post": {
+    "description": "Ask the tracking link to the service provider",
+    "operationId": "delivery.carrier.get_tracking_link",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_get_tracking_link"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_tracking_link",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/install_more_provider": {
+   "post": {
+    "operationId": "delivery.carrier.install_more_provider",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "install_more_provider",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/log_xml": {
+   "post": {
+    "operationId": "delivery.carrier.log_xml",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "func": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "xml_string": {}
+        },
+        "required": [
+         "xml_string",
+         "func"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "log_xml",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "delivery.carrier.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/open_website_url": {
+   "post": {
+    "operationId": "delivery.carrier.open_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "open_website_url",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/rate_shipment": {
+   "post": {
+    "description": "Compute the price of the order shipment",
+    "operationId": "delivery.carrier.rate_shipment",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_rate_shipment"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rate_shipment",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "delivery.carrier.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "delivery.carrier.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "delivery.carrier.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "delivery.carrier.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/send_shipping": {
+   "post": {
+    "description": "Send the package to the service provider",
+    "operationId": "delivery.carrier.send_shipping",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/base_on_rule_cancel_shipment"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "send_shipping",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/toggle_debug": {
+   "post": {
+    "operationId": "delivery.carrier.toggle_debug",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "toggle_debug",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/toggle_prod_environment": {
+   "post": {
+    "operationId": "delivery.carrier.toggle_prod_environment",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "toggle_prod_environment",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "delivery.carrier.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/website_publish_button": {
+   "post": {
+    "operationId": "delivery.carrier.website_publish_button",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "website_publish_button",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.carrier/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "delivery.carrier.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "delivery.carrier"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "delivery.price.rule.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "delivery.price.rule.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "delivery.price.rule.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "delivery.price.rule.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "delivery.price.rule.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "delivery.price.rule.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "delivery.price.rule.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "delivery.price.rule.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "delivery.price.rule.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.price.rule/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "delivery.price.rule.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "delivery.price.rule"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "delivery.zip.prefix.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "delivery.zip.prefix.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "delivery.zip.prefix.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "delivery.zip.prefix.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "delivery.zip.prefix.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "delivery.zip.prefix.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "delivery.zip.prefix.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "delivery.zip.prefix.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "delivery.zip.prefix.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/delivery.zip.prefix/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "delivery.zip.prefix.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "delivery.zip.prefix"
+    ]
+   }
+  },
+  "/json/2/product.feed/action_invalidate_cache": {
+   "post": {
+    "operationId": "product.feed.action_invalidate_cache",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_invalidate_cache",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/create": {
+   "post": {
+    "description": "Chatter override : - subscribe uid - subscribe followers of parent - log a creation message",
+    "operationId": "product.feed.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "product.feed.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "product.feed.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "product.feed.message_change_thread",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_parent_message": {},
+         "new_thread": {}
+        },
+        "required": [
+         "new_thread"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_get_followers": {
+   "post": {
+    "operationId": "product.feed.message_get_followers",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "after": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "filter_recipients": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "limit": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_mail_with_source": {
+   "post": {
+    "operationId": "product.feed.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_new": {
+   "post": {
+    "operationId": "product.feed.message_new",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "msg_dict": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "product.feed.message_notify",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "attachment_ids": {},
+         "attachments": {},
+         "author_id": {},
+         "body": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "email_from": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "model": {},
+         "partner_ids": {},
+         "res_id": {},
+         "subject": {},
+         "subtype_id": {},
+         "subtype_xmlid": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "product.feed.message_parse",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "message": {},
+         "save_original": {}
+        },
+        "required": [
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_post": {
+   "post": {
+    "operationId": "product.feed.message_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "body": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "message_type": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_post_with_source": {
+   "post": {
+    "operationId": "product.feed.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "product.feed.message_process",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "model": {},
+         "save_original": {},
+         "strip_attachments": {},
+         "thread_id": {}
+        },
+        "required": [
+         "model",
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "product.feed.message_route",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "message_dict": {},
+         "model": {},
+         "thread_id": {}
+        },
+        "required": [
+         "message",
+         "message_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "product.feed.message_subscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {},
+         "subtype_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "product.feed.message_unsubscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "product.feed.message_update",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "msg_dict": {},
+         "update_vals": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "product.feed.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/notify_cancel_by_type": {
+   "post": {
+    "operationId": "product.feed.notify_cancel_by_type",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "notification_type": {}
+        },
+        "required": [
+         "notification_type"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "product.feed.rating_apply",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "notify_delay_send": {},
+         "rate": {},
+         "rating": {},
+         "subtype_xmlid": {},
+         "token": {}
+        },
+        "required": [
+         "rate"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "product.feed.rating_send_request",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "force_send": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "lang": {},
+         "template": {}
+        },
+        "required": [
+         "template"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "product.feed.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "product.feed.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "product.feed.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "product.feed.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/unlink": {
+   "post": {
+    "description": "When removing a record, its rating should be deleted too.",
+    "operationId": "product.feed.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.feed/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "product.feed.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "product.feed"
+    ]
+   }
+  },
+  "/json/2/product.image/create": {
+   "post": {
+    "description": "We don't want the default_product_tmpl_id from the context to be applied if we have a product_variant_id set to avoid having the variant images to show also as template images. But we want it if we don't have a product_variant_id set.",
+    "operationId": "product.image.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.image/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "product.image.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.image/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "product.image.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.image/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "product.image.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.image/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "product.image.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.image/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "product.image.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.image/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "product.image.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.image/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "product.image.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.image/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "product.image.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.image/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "product.image.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "product.image"
+    ]
+   }
+  },
+  "/json/2/product.public.category/can_access_from_current_website": {
+   "post": {
+    "operationId": "product.public.category.can_access_from_current_website",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/can_access_from_current_website"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "can_access_from_current_website",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/check_parent_id": {
+   "post": {
+    "operationId": "product.public.category.check_parent_id",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "check_parent_id",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "product.public.category.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "product.public.category.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "product.public.category.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/get_available_snippet_categories": {
+   "post": {
+    "description": "Return parent categories available for selection in the dynamic category snippet.",
+    "operationId": "product.public.category.get_available_snippet_categories",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "website_id": {}
+        },
+        "required": [
+         "website_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_available_snippet_categories",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "product.public.category.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "product.public.category.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "product.public.category.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "product.public.category.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "product.public.category.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "product.public.category.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.public.category/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "product.public.category.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "product.public.category"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "product.ribbon.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "product.ribbon.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "product.ribbon.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "product.ribbon.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "product.ribbon.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "product.ribbon.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "product.ribbon.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "product.ribbon.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "product.ribbon.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/product.ribbon/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "product.ribbon.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "product.ribbon"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "website.base.unit.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "website.base.unit.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "website.base.unit.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "website.base.unit.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "website.base.unit.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "website.base.unit.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "website.base.unit.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "website.base.unit.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "website.base.unit.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.base.unit/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "website.base.unit.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "website.base.unit"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/can_access_from_current_website": {
+   "post": {
+    "operationId": "website.checkout.step.can_access_from_current_website",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/can_access_from_current_website"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "can_access_from_current_website",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "website.checkout.step.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/create_and_get_website_url": {
+   "post": {
+    "operationId": "website.checkout.step.create_and_get_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_and_get_website_url",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "website.checkout.step.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "website.checkout.step.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "website.checkout.step.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/open_website_url": {
+   "post": {
+    "operationId": "website.checkout.step.open_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "open_website_url",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "website.checkout.step.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "website.checkout.step.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "website.checkout.step.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "website.checkout.step.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "website.checkout.step.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/website_publish_button": {
+   "post": {
+    "operationId": "website.checkout.step.website_publish_button",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "website_publish_button",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.checkout.step/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "website.checkout.step.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "website.checkout.step"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "website.sale.extra.field.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "website.sale.extra.field.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "website.sale.extra.field.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "website.sale.extra.field.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "website.sale.extra.field.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "website.sale.extra.field.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "website.sale.extra.field.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "website.sale.extra.field.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "website.sale.extra.field.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_and_get_website_url"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  },
+  "/json/2/website.sale.extra.field/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "website.sale.extra.field.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "website.sale.extra.field"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Shipping Methods",
+   "name": "delivery.carrier"
+  },
+  {
+   "description": "Delivery Price Rules",
+   "name": "delivery.price.rule"
+  },
+  {
+   "description": "Delivery Zip Prefix",
+   "name": "delivery.zip.prefix"
+  },
+  {
+   "description": "Product Feed",
+   "name": "product.feed"
+  },
+  {
+   "description": "Product Image",
+   "name": "product.image"
+  },
+  {
+   "description": "Website Product Category",
+   "name": "product.public.category"
+  },
+  {
+   "description": "Product ribbon",
+   "name": "product.ribbon"
+  },
+  {
+   "description": "Unit of Measure for price per unit on eCommerce products.",
+   "name": "website.base.unit"
+  },
+  {
+   "description": "Website Checkout Step",
+   "name": "website.checkout.step"
+  },
+  {
+   "description": "E-Commerce Extra Info Shown on product page",
+   "name": "website.sale.extra.field"
+  }
+ ]
+}

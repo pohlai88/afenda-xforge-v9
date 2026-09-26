@@ -1,0 +1,5081 @@
+{
+ "components": {
+  "requestBodies": {
+   "action_open_matched_serial": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "activity_feedback": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "act_type_xmlids": {},
+        "attachment_ids": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "feedback": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "only_automated": {},
+        "user_id": {}
+       },
+       "required": [
+        "act_type_xmlids"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "activity_reschedule": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "act_type_xmlids": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "date_deadline": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "new_user_id": {},
+        "only_automated": {},
+        "user_id": {}
+       },
+       "required": [
+        "act_type_xmlids"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "activity_schedule": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "act_type_xmlid": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "date_deadline": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "note": {},
+        "summary": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "activity_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "act_type_xmlids": {},
+        "additional_domain": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "only_automated": {},
+        "user_id": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "activity_send_mail": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "template_id": {}
+       },
+       "required": [
+        "template_id"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "activity_unlink": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "act_type_xmlids": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "only_automated": {},
+        "user_id": {}
+       },
+       "required": [
+        "act_type_xmlids"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {}
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_change_thread": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "new_parent_message": {},
+        "new_thread": {}
+       },
+       "required": [
+        "new_thread"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_get_followers": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "after": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "filter_recipients": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "limit": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_mail_with_source": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "source_ref": {}
+       },
+       "required": [
+        "source_ref"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_new": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "msg_dict": {}
+       },
+       "required": [
+        "msg_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_notify": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "attachment_ids": {},
+        "attachments": {},
+        "author_id": {},
+        "body": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "email_from": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "model": {},
+        "partner_ids": {},
+        "res_id": {},
+        "subject": {},
+        "subtype_id": {},
+        "subtype_xmlid": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_parse": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "message": {},
+        "save_original": {}
+       },
+       "required": [
+        "message"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_post": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "body": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "message_type": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_process": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "message": {},
+        "model": {},
+        "save_original": {},
+        "strip_attachments": {},
+        "thread_id": {}
+       },
+       "required": [
+        "model",
+        "message"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_route": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "message": {},
+        "message_dict": {},
+        "model": {},
+        "thread_id": {}
+       },
+       "required": [
+        "message",
+        "message_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_subscribe": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "partner_ids": {},
+        "subtype_ids": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_unsubscribe": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "partner_ids": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_update": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "msg_dict": {},
+        "update_vals": {}
+       },
+       "required": [
+        "msg_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "notify_cancel_by_type": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "notification_type": {}
+       },
+       "required": [
+        "notification_type"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "rating_apply": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "feedback": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "notify_delay_send": {},
+        "rate": {},
+        "rating": {},
+        "subtype_xmlid": {},
+        "token": {}
+       },
+       "required": [
+        "rate"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "rating_send_request": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "force_send": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "lang": {},
+        "template": {}
+       },
+       "required": [
+        "template"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {
+         "type": "object"
+        }
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "maintenance.equipment": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "activity_calendar_event_id": {
+      "readOnly": true,
+      "title": "Next Activity Calendar Event",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Next Activity Deadline",
+      "type": "string"
+     },
+     "activity_exception_decoration": {
+      "description": "Type of the exception activity on record.",
+      "enum": [
+       "warning",
+       "danger"
+      ],
+      "readOnly": true,
+      "title": "Activity Exception Decoration",
+      "type": "string",
+      "x-enum-labels": [
+       "Alert",
+       "Error"
+      ]
+     },
+     "activity_exception_icon": {
+      "description": "Icon to indicate an exception activity.",
+      "readOnly": true,
+      "title": "Icon",
+      "type": "string"
+     },
+     "activity_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Activities",
+      "type": "array",
+      "x-relation": "mail.activity"
+     },
+     "activity_state": {
+      "description": "Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities.",
+      "enum": [
+       "overdue",
+       "today",
+       "planned"
+      ],
+      "readOnly": true,
+      "title": "Activity State",
+      "type": "string",
+      "x-enum-labels": [
+       "Overdue",
+       "Today",
+       "Planned"
+      ]
+     },
+     "activity_summary": {
+      "title": "Next Activity Summary",
+      "type": "string"
+     },
+     "activity_type_icon": {
+      "description": "Font awesome icon e.g. fa-tasks",
+      "readOnly": true,
+      "title": "Activity Type Icon",
+      "type": "string"
+     },
+     "activity_type_id": {
+      "title": "Next Activity Type",
+      "type": "integer",
+      "x-relation": "mail.activity.type"
+     },
+     "activity_user_id": {
+      "readOnly": true,
+      "title": "Responsible User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "assign_date": {
+      "format": "date",
+      "title": "Assigned Date",
+      "type": "string"
+     },
+     "category_id": {
+      "title": "Equipment Category",
+      "type": "integer",
+      "x-relation": "maintenance.equipment.category"
+     },
+     "color": {
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "cost": {
+      "title": "Cost",
+      "type": "number"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "department_id": {
+      "title": "Assigned Department",
+      "type": "integer",
+      "x-relation": "hr.department"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "effective_date": {
+      "description": "This date will be used to compute the Mean Time Between Failure.",
+      "format": "date",
+      "title": "Effective Date",
+      "type": "string"
+     },
+     "employee_id": {
+      "title": "Assigned Employee",
+      "type": "integer",
+      "x-relation": "hr.employee"
+     },
+     "equipment_assign_to": {
+      "enum": [
+       "department",
+       "employee",
+       "other"
+      ],
+      "title": "Used By",
+      "type": "string",
+      "x-enum-labels": [
+       "Department",
+       "Employee",
+       "Other"
+      ]
+     },
+     "equipment_properties": {
+      "title": "Properties",
+      "type": "object"
+     },
+     "estimated_next_failure": {
+      "description": "Computed as Latest Failure Date + MTBF",
+      "format": "date",
+      "readOnly": true,
+      "title": "Estimated time before next failure (in days)",
+      "type": "string"
+     },
+     "expected_mtbf": {
+      "description": "Expected Mean Time Between Failure",
+      "title": "Expected MTBF",
+      "type": "integer"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "latest_failure_date": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Latest Failure Date",
+      "type": "string"
+     },
+     "location_id": {
+      "title": "Location",
+      "type": "integer",
+      "x-relation": "stock.location"
+     },
+     "maintenance_count": {
+      "readOnly": true,
+      "title": "Maintenance Count",
+      "type": "integer"
+     },
+     "maintenance_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Maintenance",
+      "type": "array",
+      "x-relation": "maintenance.request"
+     },
+     "maintenance_open_count": {
+      "readOnly": true,
+      "title": "Current Maintenance",
+      "type": "integer"
+     },
+     "maintenance_team_id": {
+      "title": "Maintenance Team",
+      "type": "integer",
+      "x-relation": "maintenance.team"
+     },
+     "match_serial": {
+      "readOnly": true,
+      "title": "Match Serial",
+      "type": "boolean"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "model": {
+      "title": "Model",
+      "type": "string"
+     },
+     "mtbf": {
+      "description": "Mean Time Between Failure, computed based on done corrective maintenances.",
+      "readOnly": true,
+      "title": "MTBF",
+      "type": "integer"
+     },
+     "mttr": {
+      "description": "Mean Time To Repair",
+      "readOnly": true,
+      "title": "MTTR",
+      "type": "integer"
+     },
+     "my_activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "My Activity Deadline",
+      "type": "string"
+     },
+     "name": {
+      "title": "Equipment Name",
+      "type": "string"
+     },
+     "note": {
+      "title": "Note",
+      "type": "string"
+     },
+     "owner_user_id": {
+      "readOnly": true,
+      "title": "Owner",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "partner_id": {
+      "title": "Vendor",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "partner_ref": {
+      "title": "Vendor Reference",
+      "type": "string"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "scrap_date": {
+      "format": "date",
+      "title": "Scrap Date",
+      "type": "string"
+     },
+     "serial_no": {
+      "title": "Serial Number",
+      "type": "string"
+     },
+     "technician_user_id": {
+      "title": "Technician",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "warranty_date": {
+      "format": "date",
+      "title": "Warranty Expiration Date",
+      "type": "string"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "effective_date",
+     "equipment_assign_to",
+     "name"
+    ],
+    "title": "Maintenance Equipment",
+    "type": "object"
+   },
+   "maintenance.equipment.category": {
+    "properties": {
+     "color": {
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "equipment_count": {
+      "readOnly": true,
+      "title": "Equipment Count",
+      "type": "integer"
+     },
+     "equipment_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Equipment",
+      "type": "array",
+      "x-relation": "maintenance.equipment"
+     },
+     "equipment_properties_definition": {
+      "items": {
+       "type": "object"
+      },
+      "title": "Equipment Properties",
+      "type": "array"
+     },
+     "fold": {
+      "readOnly": true,
+      "title": "Folded in Maintenance Pipe",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "maintenance_count": {
+      "readOnly": true,
+      "title": "Maintenance Count",
+      "type": "integer"
+     },
+     "maintenance_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Maintenance",
+      "type": "array",
+      "x-relation": "maintenance.request"
+     },
+     "maintenance_open_count": {
+      "readOnly": true,
+      "title": "Current Maintenance",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Category Name",
+      "type": "string"
+     },
+     "note": {
+      "title": "Comments",
+      "type": "string"
+     },
+     "technician_user_id": {
+      "title": "Responsible",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Maintenance Equipment Category",
+    "type": "object"
+   },
+   "maintenance.request": {
+    "properties": {
+     "activity_calendar_event_id": {
+      "readOnly": true,
+      "title": "Next Activity Calendar Event",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Next Activity Deadline",
+      "type": "string"
+     },
+     "activity_exception_decoration": {
+      "description": "Type of the exception activity on record.",
+      "enum": [
+       "warning",
+       "danger"
+      ],
+      "readOnly": true,
+      "title": "Activity Exception Decoration",
+      "type": "string",
+      "x-enum-labels": [
+       "Alert",
+       "Error"
+      ]
+     },
+     "activity_exception_icon": {
+      "description": "Icon to indicate an exception activity.",
+      "readOnly": true,
+      "title": "Icon",
+      "type": "string"
+     },
+     "activity_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Activities",
+      "type": "array",
+      "x-relation": "mail.activity"
+     },
+     "activity_state": {
+      "description": "Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities.",
+      "enum": [
+       "overdue",
+       "today",
+       "planned"
+      ],
+      "readOnly": true,
+      "title": "Activity State",
+      "type": "string",
+      "x-enum-labels": [
+       "Overdue",
+       "Today",
+       "Planned"
+      ]
+     },
+     "activity_summary": {
+      "title": "Next Activity Summary",
+      "type": "string"
+     },
+     "activity_type_icon": {
+      "description": "Font awesome icon e.g. fa-tasks",
+      "readOnly": true,
+      "title": "Activity Type Icon",
+      "type": "string"
+     },
+     "activity_type_id": {
+      "title": "Next Activity Type",
+      "type": "integer",
+      "x-relation": "mail.activity.type"
+     },
+     "activity_user_id": {
+      "readOnly": true,
+      "title": "Responsible User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "archive": {
+      "description": "Set archive to true to hide the maintenance request without deleting it.",
+      "title": "Archive",
+      "type": "boolean"
+     },
+     "category_id": {
+      "readOnly": true,
+      "title": "Category",
+      "type": "integer",
+      "x-relation": "maintenance.equipment.category"
+     },
+     "close_date": {
+      "description": "Date the maintenance was finished. ",
+      "format": "date",
+      "title": "Close Date",
+      "type": "string"
+     },
+     "color": {
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "done": {
+      "readOnly": true,
+      "title": "Request Done",
+      "type": "boolean"
+     },
+     "duration": {
+      "description": "Duration in hours.",
+      "readOnly": true,
+      "title": "Duration",
+      "type": "number"
+     },
+     "email_cc": {
+      "title": "Email cc",
+      "type": "string"
+     },
+     "employee_id": {
+      "title": "Employee",
+      "type": "integer",
+      "x-relation": "hr.employee"
+     },
+     "equipment_id": {
+      "title": "Equipment",
+      "type": "integer",
+      "x-relation": "maintenance.equipment"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "instruction_google_slide": {
+      "description": "Paste the url of your Google Slide. Make sure the access to the document is public.",
+      "title": "Google Slide",
+      "type": "string"
+     },
+     "instruction_pdf": {
+      "format": "byte",
+      "title": "PDF",
+      "type": "string"
+     },
+     "instruction_text": {
+      "title": "Text",
+      "type": "string"
+     },
+     "instruction_type": {
+      "enum": [
+       "pdf",
+       "google_slide",
+       "text"
+      ],
+      "title": "Instruction",
+      "type": "string",
+      "x-enum-labels": [
+       "PDF",
+       "Google Slide",
+       "Text"
+      ]
+     },
+     "kanban_state": {
+      "enum": [
+       "normal",
+       "blocked",
+       "done"
+      ],
+      "title": "Kanban State",
+      "type": "string",
+      "x-enum-labels": [
+       "In Progress",
+       "Blocked",
+       "Ready for next stage"
+      ]
+     },
+     "maintenance_team_id": {
+      "title": "Team",
+      "type": "integer",
+      "x-relation": "maintenance.team"
+     },
+     "maintenance_type": {
+      "enum": [
+       "corrective",
+       "preventive"
+      ],
+      "title": "Maintenance Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Corrective",
+       "Preventive"
+      ]
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "my_activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "My Activity Deadline",
+      "type": "string"
+     },
+     "name": {
+      "title": "Subjects",
+      "type": "string"
+     },
+     "owner_user_id": {
+      "readOnly": true,
+      "title": "Created by User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "priority": {
+      "enum": [
+       "0",
+       "1",
+       "2",
+       "3"
+      ],
+      "title": "Priority",
+      "type": "string",
+      "x-enum-labels": [
+       "Very Low",
+       "Low",
+       "Normal",
+       "High"
+      ]
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "recurring_maintenance": {
+      "title": "Recurrent",
+      "type": "boolean"
+     },
+     "repeat_interval": {
+      "title": "Repeat Every",
+      "type": "integer"
+     },
+     "repeat_type": {
+      "enum": [
+       "forever",
+       "until"
+      ],
+      "title": "Until",
+      "type": "string",
+      "x-enum-labels": [
+       "Forever",
+       "Until"
+      ]
+     },
+     "repeat_unit": {
+      "enum": [
+       "day",
+       "week",
+       "month",
+       "year"
+      ],
+      "title": "Repeat Unit",
+      "type": "string",
+      "x-enum-labels": [
+       "Days",
+       "Weeks",
+       "Months",
+       "Years"
+      ]
+     },
+     "repeat_until": {
+      "format": "date",
+      "title": "End Date",
+      "type": "string"
+     },
+     "request_date": {
+      "description": "Date requested for the maintenance to happen",
+      "format": "date",
+      "title": "Request Date",
+      "type": "string"
+     },
+     "schedule_date": {
+      "description": "Date the maintenance team plans the maintenance.  It should not differ much from the Request Date. ",
+      "format": "date-time",
+      "title": "Scheduled Date",
+      "type": "string"
+     },
+     "schedule_end": {
+      "description": "Expected completion date and time of the maintenance request.",
+      "format": "date-time",
+      "title": "Scheduled End",
+      "type": "string"
+     },
+     "stage_id": {
+      "title": "Stage",
+      "type": "integer",
+      "x-relation": "maintenance.stage"
+     },
+     "user_id": {
+      "title": "Technician",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "company_id",
+     "kanban_state",
+     "maintenance_team_id",
+     "name"
+    ],
+    "title": "Maintenance Request",
+    "type": "object"
+   },
+   "maintenance.stage": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "done": {
+      "title": "Request Done",
+      "type": "boolean"
+     },
+     "fold": {
+      "title": "Folded in Maintenance Pipe",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Maintenance Stage",
+    "type": "object"
+   },
+   "maintenance.team": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "alias_bounced_content": {
+      "description": "If set, this content will automatically be sent out to unauthorized users instead of the default message.",
+      "title": "Custom Bounced Message",
+      "type": "string"
+     },
+     "alias_contact": {
+      "description": "Policy to post a message on the document using the mailgateway.\n- everyone: everyone can post\n- partners: only authenticated partners\n- followers: only followers of the related document or members of following channels\n",
+      "enum": [
+       "everyone",
+       "partners",
+       "followers",
+       "employees"
+      ],
+      "title": "Alias Contact Security",
+      "type": "string",
+      "x-enum-labels": [
+       "Everyone",
+       "Authenticated Partners",
+       "Followers only",
+       "Authenticated Employees"
+      ]
+     },
+     "alias_defaults": {
+      "description": "A Python dictionary that will be evaluated to provide default values when creating new records for this alias.",
+      "readOnly": true,
+      "title": "Default Values",
+      "type": "string"
+     },
+     "alias_domain": {
+      "description": "Email domain e.g. 'example.com' in 'AFENDA xForge@example.com'",
+      "readOnly": true,
+      "title": "Alias Domain Name",
+      "type": "string"
+     },
+     "alias_domain_id": {
+      "title": "Alias Domain",
+      "type": "integer",
+      "x-relation": "mail.alias.domain"
+     },
+     "alias_email": {
+      "readOnly": true,
+      "title": "Email Alias",
+      "type": "string"
+     },
+     "alias_force_thread_id": {
+      "description": "Optional ID of a thread (record) to which all incoming messages will be attached, even if they did not reply to it. If set, this will disable the creation of new records completely.",
+      "title": "Record Thread ID",
+      "type": "integer"
+     },
+     "alias_full_name": {
+      "readOnly": true,
+      "title": "Alias Email",
+      "type": "string"
+     },
+     "alias_id": {
+      "description": "Email alias for this maintenance team.",
+      "title": "Alias",
+      "type": "integer",
+      "x-relation": "mail.alias"
+     },
+     "alias_incoming_local": {
+      "title": "Local-part based incoming detection",
+      "type": "boolean"
+     },
+     "alias_model_id": {
+      "description": "The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming email that does not reply to an existing record will cause the creation of a new record of this model (e.g. a Project Task)",
+      "title": "Aliased Model",
+      "type": "integer",
+      "x-relation": "ir.model"
+     },
+     "alias_name": {
+      "description": "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.nexuscanon.com>",
+      "title": "Alias Name",
+      "type": "string"
+     },
+     "alias_parent_model_id": {
+      "description": "Parent model holding the alias. The model holding the alias reference is not necessarily the model given by alias_model_id (example: project (parent_model) and task (model))",
+      "title": "Parent Model",
+      "type": "integer",
+      "x-relation": "ir.model"
+     },
+     "alias_parent_thread_id": {
+      "description": "ID of the parent record holding the alias (example: project holding the task creation alias)",
+      "title": "Parent Record Thread ID",
+      "type": "integer"
+     },
+     "alias_status": {
+      "description": "Alias status assessed on the last message received.",
+      "enum": [
+       "not_tested",
+       "valid",
+       "invalid"
+      ],
+      "readOnly": true,
+      "title": "Alias Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Not Tested",
+       "Valid",
+       "Invalid"
+      ]
+     },
+     "color": {
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "equipment_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Equipment",
+      "type": "array",
+      "x-relation": "maintenance.equipment"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "member_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Team Members",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "name": {
+      "title": "Team Name",
+      "type": "string"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "request_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Request",
+      "type": "array",
+      "x-relation": "maintenance.request"
+     },
+     "todo_request_count": {
+      "readOnly": true,
+      "title": "Number of Requests",
+      "type": "integer"
+     },
+     "todo_request_count_block": {
+      "readOnly": true,
+      "title": "Number of Requests Blocked",
+      "type": "integer"
+     },
+     "todo_request_count_date": {
+      "readOnly": true,
+      "title": "Number of Requests Scheduled",
+      "type": "integer"
+     },
+     "todo_request_count_high_priority": {
+      "readOnly": true,
+      "title": "Number of Requests in High Priority",
+      "type": "integer"
+     },
+     "todo_request_count_unscheduled": {
+      "readOnly": true,
+      "title": "Number of Requests Unscheduled",
+      "type": "integer"
+     },
+     "todo_request_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Requests",
+      "type": "array",
+      "x-relation": "maintenance.request"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "alias_contact",
+     "alias_defaults",
+     "alias_id",
+     "alias_model_id",
+     "name"
+    ],
+    "title": "Maintenance Teams",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "maintenance"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/maintenance.equipment.category/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "maintenance.equipment.category.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment.category/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "maintenance.equipment.category.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment.category/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "maintenance.equipment.category.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment.category/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "maintenance.equipment.category.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment.category/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "maintenance.equipment.category.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment.category/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "maintenance.equipment.category.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment.category/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "maintenance.equipment.category.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment.category/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "maintenance.equipment.category.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment.category/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "maintenance.equipment.category.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment.category/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "maintenance.equipment.category.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "maintenance.equipment.category"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/action_open_matched_serial": {
+   "post": {
+    "operationId": "maintenance.equipment.action_open_matched_serial",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_matched_serial",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/action_reschedule_my_next_nextweek": {
+   "post": {
+    "operationId": "maintenance.equipment.action_reschedule_my_next_nextweek",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_nextweek",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/action_reschedule_my_next_today": {
+   "post": {
+    "operationId": "maintenance.equipment.action_reschedule_my_next_today",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_today",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/action_reschedule_my_next_tomorrow": {
+   "post": {
+    "operationId": "maintenance.equipment.action_reschedule_my_next_tomorrow",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_tomorrow",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/activity_feedback": {
+   "post": {
+    "description": "Set activities as done, limiting to some activity types and optionally to a given user.",
+    "operationId": "maintenance.equipment.activity_feedback",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_feedback"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_feedback",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/activity_reschedule": {
+   "post": {
+    "description": "Reschedule some automated activities. Activities to reschedule are selected based on type xml ids and optionally by user. Purpose is to be able to",
+    "operationId": "maintenance.equipment.activity_reschedule",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_reschedule"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_reschedule",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/activity_schedule": {
+   "post": {
+    "description": "Schedule an activity on each record of the current record set. This method allow to provide as parameter act_type_xmlid. This is an xml_id of activity type instead of directly giving an activity_type_id. It is useful to avoid having various \"env.ref\" in the code and allow to let the mixin handle access rights.",
+    "operationId": "maintenance.equipment.activity_schedule",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_schedule"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_schedule",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/activity_search": {
+   "post": {
+    "description": "Search automated activities on current record set, given a list of activity types xml IDs. It is useful when dealing with specific types involved in automatic activities management.",
+    "operationId": "maintenance.equipment.activity_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_search",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/activity_send_mail": {
+   "post": {
+    "description": "Automatically send an email based on the given mail.template, given its ID.",
+    "operationId": "maintenance.equipment.activity_send_mail",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_send_mail"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_send_mail",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/activity_unlink": {
+   "post": {
+    "description": "Unlink activities, limiting to some activity types and optionally to a given user.",
+    "operationId": "maintenance.equipment.activity_unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_unlink",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "maintenance.equipment.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "maintenance.equipment.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "maintenance.equipment.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "maintenance.equipment.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_get_followers": {
+   "post": {
+    "operationId": "maintenance.equipment.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_mail_with_source": {
+   "post": {
+    "operationId": "maintenance.equipment.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_new": {
+   "post": {
+    "operationId": "maintenance.equipment.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "maintenance.equipment.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "maintenance.equipment.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_post": {
+   "post": {
+    "operationId": "maintenance.equipment.message_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_post"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_post_with_source": {
+   "post": {
+    "operationId": "maintenance.equipment.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "maintenance.equipment.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "maintenance.equipment.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "maintenance.equipment.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "maintenance.equipment.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "maintenance.equipment.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "maintenance.equipment.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/notify_cancel_by_type": {
+   "post": {
+    "operationId": "maintenance.equipment.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "maintenance.equipment.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "maintenance.equipment.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "maintenance.equipment.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "maintenance.equipment.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "maintenance.equipment.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "maintenance.equipment.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/unlink": {
+   "post": {
+    "description": "When removing a record, its rating should be deleted too.",
+    "operationId": "maintenance.equipment.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.equipment/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "maintenance.equipment.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "maintenance.equipment"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/action_reschedule_my_next_nextweek": {
+   "post": {
+    "operationId": "maintenance.request.action_reschedule_my_next_nextweek",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_nextweek",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/action_reschedule_my_next_today": {
+   "post": {
+    "operationId": "maintenance.request.action_reschedule_my_next_today",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_today",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/action_reschedule_my_next_tomorrow": {
+   "post": {
+    "operationId": "maintenance.request.action_reschedule_my_next_tomorrow",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_tomorrow",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/activity_feedback": {
+   "post": {
+    "description": "Set activities as done, limiting to some activity types and optionally to a given user.",
+    "operationId": "maintenance.request.activity_feedback",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_feedback"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_feedback",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/activity_reschedule": {
+   "post": {
+    "description": "Reschedule some automated activities. Activities to reschedule are selected based on type xml ids and optionally by user. Purpose is to be able to",
+    "operationId": "maintenance.request.activity_reschedule",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_reschedule"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_reschedule",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/activity_schedule": {
+   "post": {
+    "description": "Schedule an activity on each record of the current record set. This method allow to provide as parameter act_type_xmlid. This is an xml_id of activity type instead of directly giving an activity_type_id. It is useful to avoid having various \"env.ref\" in the code and allow to let the mixin handle access rights.",
+    "operationId": "maintenance.request.activity_schedule",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_schedule"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_schedule",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/activity_search": {
+   "post": {
+    "description": "Search automated activities on current record set, given a list of activity types xml IDs. It is useful when dealing with specific types involved in automatic activities management.",
+    "operationId": "maintenance.request.activity_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_search",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/activity_send_mail": {
+   "post": {
+    "description": "Automatically send an email based on the given mail.template, given its ID.",
+    "operationId": "maintenance.request.activity_send_mail",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_send_mail"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_send_mail",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/activity_unlink": {
+   "post": {
+    "description": "Unlink activities, limiting to some activity types and optionally to a given user.",
+    "operationId": "maintenance.request.activity_unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/activity_unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_unlink",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/activity_update": {
+   "post": {
+    "description": "Update maintenance activities based on current record set state. It reschedule, unlink or create maintenance request activities.",
+    "operationId": "maintenance.request.activity_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_update",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/archive_equipment_request": {
+   "post": {
+    "operationId": "maintenance.request.archive_equipment_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "archive_equipment_request",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "maintenance.request.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "maintenance.request.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "maintenance.request.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "maintenance.request.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_get_followers": {
+   "post": {
+    "operationId": "maintenance.request.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_mail_with_source": {
+   "post": {
+    "operationId": "maintenance.request.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_new": {
+   "post": {
+    "operationId": "maintenance.request.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "maintenance.request.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "maintenance.request.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_post": {
+   "post": {
+    "operationId": "maintenance.request.message_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_post"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_post_with_source": {
+   "post": {
+    "operationId": "maintenance.request.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "maintenance.request.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "maintenance.request.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "maintenance.request.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "maintenance.request.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/message_update": {
+   "post": {
+    "operationId": "maintenance.request.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "maintenance.request.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/notify_cancel_by_type": {
+   "post": {
+    "operationId": "maintenance.request.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "maintenance.request.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "maintenance.request.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "maintenance.request.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/reset_equipment_request": {
+   "post": {
+    "description": "Reinsert the maintenance request into the maintenance pipe in the first stage",
+    "operationId": "maintenance.request.reset_equipment_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "reset_equipment_request",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "maintenance.request.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "maintenance.request.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "maintenance.request.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/unlink": {
+   "post": {
+    "description": "When removing a record, its rating should be deleted too.",
+    "operationId": "maintenance.request.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.request/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "maintenance.request.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "maintenance.request"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "maintenance.stage.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "maintenance.stage.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "maintenance.stage.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "maintenance.stage.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "maintenance.stage.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "maintenance.stage.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "maintenance.stage.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "maintenance.stage.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "maintenance.stage.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.stage/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "maintenance.stage.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "maintenance.stage"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/create": {
+   "post": {
+    "description": "Create aliases using sudo if an alias is required, notably if its name is given.",
+    "operationId": "maintenance.team.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "maintenance.team.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "maintenance.team.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "maintenance.team.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_get_followers": {
+   "post": {
+    "operationId": "maintenance.team.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_mail_with_source": {
+   "post": {
+    "operationId": "maintenance.team.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_new": {
+   "post": {
+    "operationId": "maintenance.team.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "maintenance.team.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "maintenance.team.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_post": {
+   "post": {
+    "operationId": "maintenance.team.message_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_post"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_post_with_source": {
+   "post": {
+    "operationId": "maintenance.team.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "maintenance.team.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "maintenance.team.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "maintenance.team.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "maintenance.team.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "maintenance.team.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "maintenance.team.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/notify_cancel_by_type": {
+   "post": {
+    "operationId": "maintenance.team.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "maintenance.team.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "maintenance.team.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "maintenance.team.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "maintenance.team.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "maintenance.team.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "maintenance.team.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/unlink": {
+   "post": {
+    "description": "Delete the given records, and cascade-delete their corresponding alias.",
+    "operationId": "maintenance.team.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_matched_serial"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  },
+  "/json/2/maintenance.team/write": {
+   "post": {
+    "description": "Split writable fields of mail.alias and other fields alias fields will write with sudo and the other normally. Also handle alias_domain_id update. If alias does not exist and we try to set a name, create the alias automatically.",
+    "operationId": "maintenance.team.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "maintenance.team"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Maintenance Equipment",
+   "name": "maintenance.equipment"
+  },
+  {
+   "description": "Maintenance Equipment Category",
+   "name": "maintenance.equipment.category"
+  },
+  {
+   "description": "Maintenance Request",
+   "name": "maintenance.request"
+  },
+  {
+   "description": "Maintenance Stage",
+   "name": "maintenance.stage"
+  },
+  {
+   "description": "Maintenance Teams",
+   "name": "maintenance.team"
+  }
+ ]
+}

@@ -1,0 +1,4463 @@
+{
+ "components": {
+  "requestBodies": {
+   "action_mass_archive": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "recurrence_update_setting": {}
+       },
+       "required": [
+        "recurrence_update_setting"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {}
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "get_default_duration": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_mail_with_source": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "source_ref": {}
+       },
+       "required": [
+        "source_ref"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "unlink": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {
+         "type": "object"
+        }
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "calendar.alarm": {
+    "properties": {
+     "alarm_type": {
+      "enum": [
+       "notification",
+       "email",
+       "sms"
+      ],
+      "title": "Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Notification",
+       "Email",
+       "SMS Text Message"
+      ]
+     },
+     "body": {
+      "description": "Additional message that would be sent with the notification for the reminder",
+      "title": "Additional Message",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "duration": {
+      "title": "Remind Before",
+      "type": "integer"
+     },
+     "duration_minutes": {
+      "readOnly": true,
+      "title": "Duration in minutes",
+      "type": "integer"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "interval": {
+      "enum": [
+       "minutes",
+       "hours",
+       "days"
+      ],
+      "title": "Unit",
+      "type": "string",
+      "x-enum-labels": [
+       "Minutes",
+       "Hours",
+       "Days"
+      ]
+     },
+     "mail_template_id": {
+      "description": "Template used to render mail reminder content.",
+      "title": "Email Template",
+      "type": "integer",
+      "x-relation": "mail.template"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "notify_responsible": {
+      "title": "Notify Responsible",
+      "type": "boolean"
+     },
+     "sms_template_id": {
+      "description": "Template used to render SMS reminder content.",
+      "title": "SMS Template",
+      "type": "integer",
+      "x-relation": "sms.template"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "alarm_type",
+     "duration",
+     "interval",
+     "name"
+    ],
+    "title": "Event Alarm",
+    "type": "object"
+   },
+   "calendar.attendee": {
+    "properties": {
+     "access_token": {
+      "title": "Invitation Token",
+      "type": "string"
+     },
+     "availability": {
+      "enum": [
+       "free",
+       "busy"
+      ],
+      "readOnly": true,
+      "title": "Available/Busy",
+      "type": "string",
+      "x-enum-labels": [
+       "Available",
+       "Busy"
+      ]
+     },
+     "common_name": {
+      "readOnly": true,
+      "title": "Common name",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "email": {
+      "readOnly": true,
+      "title": "Email",
+      "type": "string"
+     },
+     "event_id": {
+      "title": "Meeting linked",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "mail_tz": {
+      "description": "Timezone used for displaying time in the mail template",
+      "readOnly": true,
+      "title": "Mail Tz",
+      "type": "string",
+      "x-afenda-dynamic-enum": true
+     },
+     "partner_id": {
+      "readOnly": true,
+      "title": "Attendee",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "phone": {
+      "readOnly": true,
+      "title": "Phone",
+      "type": "string"
+     },
+     "recurrence_id": {
+      "readOnly": true,
+      "title": "Recurrence Rule",
+      "type": "integer",
+      "x-relation": "calendar.recurrence"
+     },
+     "state": {
+      "enum": [
+       "accepted",
+       "declined",
+       "tentative",
+       "needsAction"
+      ],
+      "title": "Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Yes",
+       "No",
+       "Maybe",
+       "Needs Action"
+      ]
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "event_id",
+     "partner_id"
+    ],
+    "title": "Calendar Attendee Information",
+    "type": "object"
+   },
+   "calendar.event": {
+    "properties": {
+     "accepted_count": {
+      "readOnly": true,
+      "title": "Accepted Count",
+      "type": "integer"
+     },
+     "access_token": {
+      "title": "Invitation Token",
+      "type": "string"
+     },
+     "active": {
+      "description": "If the active field is set to false, it will allow you to hide the event alarm information without removing it.",
+      "title": "Active",
+      "type": "boolean"
+     },
+     "activity_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Activities",
+      "type": "array",
+      "x-relation": "mail.activity"
+     },
+     "alarm_ids": {
+      "description": "Notifications sent to all attendees to remind of the meeting.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Reminders",
+      "type": "array",
+      "x-relation": "calendar.alarm"
+     },
+     "allday": {
+      "title": "All Day",
+      "type": "boolean"
+     },
+     "applicant_id": {
+      "title": "Applicant",
+      "type": "integer",
+      "x-relation": "hr.applicant"
+     },
+     "attendee_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Participant",
+      "type": "array",
+      "x-relation": "calendar.attendee"
+     },
+     "attendees_count": {
+      "readOnly": true,
+      "title": "Attendees Count",
+      "type": "integer"
+     },
+     "awaiting_count": {
+      "readOnly": true,
+      "title": "Awaiting Count",
+      "type": "integer"
+     },
+     "byday": {
+      "enum": [
+       "1",
+       "2",
+       "3",
+       "4",
+       "-1"
+      ],
+      "title": "By day",
+      "type": "string",
+      "x-enum-labels": [
+       "First",
+       "Second",
+       "Third",
+       "Fourth",
+       "Last"
+      ]
+     },
+     "categ_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Tags",
+      "type": "array",
+      "x-relation": "calendar.event.type"
+     },
+     "count": {
+      "description": "Repeat x times",
+      "title": "Number of Repetitions",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "current_attendee": {
+      "readOnly": true,
+      "title": "Current Attendee",
+      "type": "integer",
+      "x-relation": "calendar.attendee"
+     },
+     "current_status": {
+      "enum": [
+       "accepted",
+       "declined",
+       "tentative",
+       "needsAction"
+      ],
+      "title": "Attending?",
+      "type": "string",
+      "x-enum-labels": [
+       "Yes",
+       "No",
+       "Maybe",
+       "Needs Action"
+      ]
+     },
+     "day": {
+      "title": "Date of month",
+      "type": "integer"
+     },
+     "declined_count": {
+      "readOnly": true,
+      "title": "Declined Count",
+      "type": "integer"
+     },
+     "description": {
+      "description": "When synchronization with an external calendar is active, this description is synchronized         with the one of the associated meeting in that external calendar. Any update will be propagated there         and vice versa.",
+      "title": "Description",
+      "type": "string"
+     },
+     "display_description": {
+      "readOnly": true,
+      "title": "Display Description",
+      "type": "boolean"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "display_time": {
+      "readOnly": true,
+      "title": "Event Time",
+      "type": "string"
+     },
+     "duration": {
+      "title": "Duration",
+      "type": "number"
+     },
+     "effective_privacy": {
+      "description": "Whether the event is private, considering the user privacy",
+      "enum": [
+       "public",
+       "private",
+       "confidential"
+      ],
+      "readOnly": true,
+      "title": "Effective Privacy",
+      "type": "string",
+      "x-enum-labels": [
+       "Public",
+       "Private",
+       "Only internal users"
+      ]
+     },
+     "end_type": {
+      "enum": [
+       "count",
+       "end_date",
+       "forever"
+      ],
+      "title": "Recurrence Termination",
+      "type": "string",
+      "x-enum-labels": [
+       "Number of repetitions",
+       "End date",
+       "Forever"
+      ]
+     },
+     "event_tz": {
+      "title": "Timezone",
+      "type": "string",
+      "x-afenda-dynamic-enum": true
+     },
+     "follow_recurrence": {
+      "title": "Follow Recurrence",
+      "type": "boolean"
+     },
+     "fri": {
+      "title": "Fri",
+      "type": "boolean"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "interval": {
+      "description": "Repeat every (Days/Week/Month/Year)",
+      "title": "Repeat On",
+      "type": "integer"
+     },
+     "invalid_email_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Invalid Email Partner",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "is_highlighted": {
+      "readOnly": true,
+      "title": "Is the Event Highlighted",
+      "type": "boolean"
+     },
+     "is_organizer_alone": {
+      "description": "Check if the organizer is alone in the event, i.e. if the organizer is the only one that hasn't declined\n        the event (only if the organizer is not the only attendee)",
+      "readOnly": true,
+      "title": "Is the Organizer Alone",
+      "type": "boolean"
+     },
+     "location": {
+      "title": "Location",
+      "type": "string"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "mon": {
+      "title": "Mon",
+      "type": "boolean"
+     },
+     "month_by": {
+      "enum": [
+       "date",
+       "day"
+      ],
+      "title": "Option",
+      "type": "string",
+      "x-enum-labels": [
+       "Date of month",
+       "Day of month"
+      ]
+     },
+     "name": {
+      "title": "Meeting Subject",
+      "type": "string"
+     },
+     "notes": {
+      "title": "Notes",
+      "type": "string"
+     },
+     "opportunity_id": {
+      "title": "Opportunity",
+      "type": "integer",
+      "x-relation": "crm.lead"
+     },
+     "partner_id": {
+      "description": "Partner-related data of the user",
+      "readOnly": true,
+      "title": "Scheduled by",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Attendees",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "privacy": {
+      "description": "People to whom this event will be visible.",
+      "enum": [
+       "public",
+       "private",
+       "confidential"
+      ],
+      "title": "Privacy",
+      "type": "string",
+      "x-enum-labels": [
+       "Public",
+       "Private",
+       "Only internal users"
+      ]
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "recurrence_id": {
+      "title": "Recurrence Rule",
+      "type": "integer",
+      "x-relation": "calendar.recurrence"
+     },
+     "recurrence_update": {
+      "description": "Choose what to do with other events in the recurrence. Updating All Events is not allowed when dates or time is modified",
+      "enum": [
+       "self_only",
+       "future_events",
+       "all_events"
+      ],
+      "title": "Recurrence Update",
+      "type": "string",
+      "x-enum-labels": [
+       "This event",
+       "This and following events",
+       "All events"
+      ]
+     },
+     "recurrency": {
+      "title": "Recurrent",
+      "type": "boolean"
+     },
+     "res_id": {
+      "title": "Document ID",
+      "type": "integer"
+     },
+     "res_model": {
+      "readOnly": true,
+      "title": "Document Model Name",
+      "type": "string"
+     },
+     "res_model_id": {
+      "title": "Document Model",
+      "type": "integer",
+      "x-relation": "ir.model"
+     },
+     "res_model_name": {
+      "readOnly": true,
+      "title": "Model Description",
+      "type": "string"
+     },
+     "rrule": {
+      "title": "Recurrent Rule",
+      "type": "string"
+     },
+     "rrule_type": {
+      "description": "Let the event automatically repeat at that interval",
+      "enum": [
+       "daily",
+       "weekly",
+       "monthly",
+       "yearly"
+      ],
+      "title": "Recurrence",
+      "type": "string",
+      "x-enum-labels": [
+       "Days",
+       "Weeks",
+       "Months",
+       "Years"
+      ]
+     },
+     "rrule_type_ui": {
+      "description": "Let the event automatically repeat at that interval",
+      "enum": [
+       "daily",
+       "weekly",
+       "monthly",
+       "yearly",
+       "custom"
+      ],
+      "title": "Repeat",
+      "type": "string",
+      "x-enum-labels": [
+       "Daily",
+       "Weekly",
+       "Monthly",
+       "Yearly",
+       "Custom"
+      ]
+     },
+     "sat": {
+      "title": "Sat",
+      "type": "boolean"
+     },
+     "should_show_status": {
+      "readOnly": true,
+      "title": "Should Show Status",
+      "type": "boolean"
+     },
+     "show_as": {
+      "description": "If the time is shown as 'busy', this event will be visible to other people with either the full         information or simply 'busy' written depending on its privacy. Use this option to let other people know         that you are unavailable during that period of time. \n If the event is shown as 'free', other users know         that you are available during that period of time.",
+      "enum": [
+       "free",
+       "busy"
+      ],
+      "title": "Show as",
+      "type": "string",
+      "x-enum-labels": [
+       "Available",
+       "Busy"
+      ]
+     },
+     "start": {
+      "description": "Start date of an event, without time for full days events",
+      "format": "date-time",
+      "title": "Start",
+      "type": "string"
+     },
+     "start_date": {
+      "format": "date",
+      "title": "Start Date",
+      "type": "string"
+     },
+     "stop": {
+      "description": "Stop date of an event, without time for full days events",
+      "format": "date-time",
+      "title": "Stop",
+      "type": "string"
+     },
+     "stop_date": {
+      "format": "date",
+      "title": "End Date",
+      "type": "string"
+     },
+     "sun": {
+      "title": "Sun",
+      "type": "boolean"
+     },
+     "tentative_count": {
+      "readOnly": true,
+      "title": "Tentative Count",
+      "type": "integer"
+     },
+     "thu": {
+      "title": "Thu",
+      "type": "boolean"
+     },
+     "tue": {
+      "title": "Tue",
+      "type": "boolean"
+     },
+     "unavailable_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Unavailable Attendees",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "until": {
+      "format": "date",
+      "title": "Until",
+      "type": "string"
+     },
+     "user_can_edit": {
+      "readOnly": true,
+      "title": "User Can Edit",
+      "type": "boolean"
+     },
+     "user_id": {
+      "title": "Organizer",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "videocall_channel_id": {
+      "title": "Discuss Channel",
+      "type": "integer",
+      "x-relation": "discuss.channel"
+     },
+     "videocall_location": {
+      "readOnly": true,
+      "title": "Meeting URL",
+      "type": "string"
+     },
+     "videocall_source": {
+      "enum": [
+       "discuss",
+       "custom"
+      ],
+      "readOnly": true,
+      "title": "Videocall Source",
+      "type": "string",
+      "x-enum-labels": [
+       "Discuss",
+       "Custom"
+      ]
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "wed": {
+      "title": "Wed",
+      "type": "boolean"
+     },
+     "weekday": {
+      "enum": [
+       "MON",
+       "TUE",
+       "WED",
+       "THU",
+       "FRI",
+       "SAT",
+       "SUN"
+      ],
+      "title": "Weekday",
+      "type": "string",
+      "x-enum-labels": [
+       "Monday",
+       "Tuesday",
+       "Wednesday",
+       "Thursday",
+       "Friday",
+       "Saturday",
+       "Sunday"
+      ]
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "show_as",
+     "start",
+     "stop"
+    ],
+    "title": "Calendar Event",
+    "type": "object"
+   },
+   "calendar.event.type": {
+    "properties": {
+     "color": {
+      "title": "Color",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Event Meeting Type",
+    "type": "object"
+   },
+   "calendar.filters": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "partner_checked": {
+      "title": "Checked",
+      "type": "boolean"
+     },
+     "partner_id": {
+      "title": "Employee",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "user_id": {
+      "title": "Me",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "partner_id",
+     "user_id"
+    ],
+    "title": "Calendar Filters",
+    "type": "object"
+   },
+   "calendar.recurrence": {
+    "properties": {
+     "base_event_id": {
+      "title": "Base Event",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "byday": {
+      "enum": [
+       "1",
+       "2",
+       "3",
+       "4",
+       "-1"
+      ],
+      "title": "By day",
+      "type": "string",
+      "x-enum-labels": [
+       "First",
+       "Second",
+       "Third",
+       "Fourth",
+       "Last"
+      ]
+     },
+     "calendar_event_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Calendar Event",
+      "type": "array",
+      "x-relation": "calendar.event"
+     },
+     "count": {
+      "title": "Count",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "day": {
+      "title": "Day",
+      "type": "integer"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "dtstart": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Dtstart",
+      "type": "string"
+     },
+     "end_type": {
+      "enum": [
+       "count",
+       "end_date",
+       "forever"
+      ],
+      "title": "End Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Number of repetitions",
+       "End date",
+       "Forever"
+      ]
+     },
+     "event_tz": {
+      "title": "Timezone",
+      "type": "string",
+      "x-afenda-dynamic-enum": true
+     },
+     "fri": {
+      "title": "Fri",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "interval": {
+      "title": "Interval",
+      "type": "integer"
+     },
+     "mon": {
+      "title": "Mon",
+      "type": "boolean"
+     },
+     "month_by": {
+      "enum": [
+       "date",
+       "day"
+      ],
+      "title": "Month By",
+      "type": "string",
+      "x-enum-labels": [
+       "Date of month",
+       "Day of month"
+      ]
+     },
+     "name": {
+      "readOnly": true,
+      "title": "Name",
+      "type": "string"
+     },
+     "rrule": {
+      "title": "Rrule",
+      "type": "string"
+     },
+     "rrule_type": {
+      "enum": [
+       "daily",
+       "weekly",
+       "monthly",
+       "yearly"
+      ],
+      "title": "Rrule Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Days",
+       "Weeks",
+       "Months",
+       "Years"
+      ]
+     },
+     "sat": {
+      "title": "Sat",
+      "type": "boolean"
+     },
+     "sun": {
+      "title": "Sun",
+      "type": "boolean"
+     },
+     "thu": {
+      "title": "Thu",
+      "type": "boolean"
+     },
+     "trigger_id": {
+      "title": "Trigger",
+      "type": "integer",
+      "x-relation": "ir.cron.trigger"
+     },
+     "tue": {
+      "title": "Tue",
+      "type": "boolean"
+     },
+     "until": {
+      "format": "date",
+      "title": "Repeat Until",
+      "type": "string"
+     },
+     "wed": {
+      "title": "Wed",
+      "type": "boolean"
+     },
+     "weekday": {
+      "enum": [
+       "MON",
+       "TUE",
+       "WED",
+       "THU",
+       "FRI",
+       "SAT",
+       "SUN"
+      ],
+      "title": "Weekday",
+      "type": "string",
+      "x-enum-labels": [
+       "Monday",
+       "Tuesday",
+       "Wednesday",
+       "Thursday",
+       "Friday",
+       "Saturday",
+       "Sunday"
+      ]
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "title": "Event Recurrence Rule",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "calendar"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/calendar.alarm/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "calendar.alarm.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.alarm/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "calendar.alarm.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.alarm/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "calendar.alarm.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.alarm/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "calendar.alarm.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.alarm/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "calendar.alarm.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.alarm/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "calendar.alarm.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.alarm/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "calendar.alarm.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.alarm/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "calendar.alarm.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.alarm/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "calendar.alarm.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.alarm/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "calendar.alarm.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "calendar.alarm"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "calendar.attendee.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/do_accept": {
+   "post": {
+    "description": "Marks event invitation as Accepted.",
+    "operationId": "calendar.attendee.do_accept",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "do_accept",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/do_decline": {
+   "post": {
+    "description": "Marks event invitation as Declined.",
+    "operationId": "calendar.attendee.do_decline",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "do_decline",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/do_tentative": {
+   "post": {
+    "description": "Makes event invitation as Tentative.",
+    "operationId": "calendar.attendee.do_tentative",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "do_tentative",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "calendar.attendee.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "calendar.attendee.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "calendar.attendee.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "calendar.attendee.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "calendar.attendee.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "calendar.attendee.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "calendar.attendee.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "calendar.attendee.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.attendee/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "calendar.attendee.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "calendar.attendee"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "calendar.event.type.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "calendar.event.type.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "calendar.event.type.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "calendar.event.type.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "calendar.event.type.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "calendar.event.type.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "calendar.event.type.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "calendar.event.type.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "calendar.event.type.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event.type/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "calendar.event.type.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "calendar.event.type"
+    ]
+   }
+  },
+  "/json/2/calendar.event/action_join_meeting": {
+   "post": {
+    "description": "Method used when an existing user wants to join",
+    "operationId": "calendar.event.action_join_meeting",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_id": {}
+        },
+        "required": [
+         "partner_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_join_meeting",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/action_join_video_call": {
+   "post": {
+    "operationId": "calendar.event.action_join_video_call",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_join_video_call",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/action_mass_archive": {
+   "post": {
+    "description": "The aim of this action purpose is to be called from sync calendar module when mass deletion is not possible.",
+    "operationId": "calendar.event.action_mass_archive",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_mass_archive"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_mass_archive",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/action_mass_deletion": {
+   "post": {
+    "operationId": "calendar.event.action_mass_deletion",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_mass_archive"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_mass_deletion",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/action_open_calendar_event": {
+   "post": {
+    "operationId": "calendar.event.action_open_calendar_event",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_calendar_event",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/action_open_composer": {
+   "post": {
+    "operationId": "calendar.event.action_open_composer",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_composer",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/action_send_sms": {
+   "post": {
+    "operationId": "calendar.event.action_send_sms",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_send_sms",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/action_sendmail": {
+   "post": {
+    "operationId": "calendar.event.action_sendmail",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_sendmail",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/action_unlink_event": {
+   "post": {
+    "description": "Delete the event after displaying the delete wizard if necessary.",
+    "operationId": "calendar.event.action_unlink_event",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "attendee_id": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "recurrence": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_unlink_event",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/change_attendee_status": {
+   "post": {
+    "operationId": "calendar.event.change_attendee_status",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "recurrence_update_setting": {},
+         "status": {}
+        },
+        "required": [
+         "status",
+         "recurrence_update_setting"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "change_attendee_status",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/clear_videocall_location": {
+   "post": {
+    "operationId": "calendar.event.clear_videocall_location",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "clear_videocall_location",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "calendar.event.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "calendar.event.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/find_partner_customer": {
+   "post": {
+    "operationId": "calendar.event.find_partner_customer",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "find_partner_customer",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "calendar.event.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/get_default_duration": {
+   "post": {
+    "operationId": "calendar.event.get_default_duration",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/get_default_duration"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_default_duration",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/get_discuss_videocall_location": {
+   "post": {
+    "operationId": "calendar.event.get_discuss_videocall_location",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/get_default_duration"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_discuss_videocall_location",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/get_display_time_tz": {
+   "post": {
+    "description": "get the display_time of the meeting, forcing the timezone. This method is called from email template, to not use sudo().",
+    "operationId": "calendar.event.get_display_time_tz",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "tz": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_display_time_tz",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/get_next_alarm_date": {
+   "post": {
+    "operationId": "calendar.event.get_next_alarm_date",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "events_by_alarm": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         }
+        },
+        "required": [
+         "events_by_alarm"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_next_alarm_date",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/get_state_selections": {
+   "post": {
+    "operationId": "calendar.event.get_state_selections",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/get_default_duration"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_state_selections",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/get_unusual_days": {
+   "post": {
+    "operationId": "calendar.event.get_unusual_days",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_from": {},
+         "date_to": {}
+        },
+        "required": [
+         "date_from"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_unusual_days",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "calendar.event.message_change_thread",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_parent_message": {},
+         "new_thread": {}
+        },
+        "required": [
+         "new_thread"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_get_followers": {
+   "post": {
+    "operationId": "calendar.event.message_get_followers",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "after": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "filter_recipients": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "limit": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_mail_with_source": {
+   "post": {
+    "operationId": "calendar.event.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_new": {
+   "post": {
+    "operationId": "calendar.event.message_new",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "msg_dict": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "calendar.event.message_notify",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "attachment_ids": {},
+         "attachments": {},
+         "author_id": {},
+         "body": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "email_from": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "model": {},
+         "partner_ids": {},
+         "res_id": {},
+         "subject": {},
+         "subtype_id": {},
+         "subtype_xmlid": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "calendar.event.message_parse",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "message": {},
+         "save_original": {}
+        },
+        "required": [
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_post": {
+   "post": {
+    "operationId": "calendar.event.message_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "body": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "message_type": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_post_with_source": {
+   "post": {
+    "operationId": "calendar.event.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "calendar.event.message_process",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "model": {},
+         "save_original": {},
+         "strip_attachments": {},
+         "thread_id": {}
+        },
+        "required": [
+         "model",
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "calendar.event.message_route",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "message_dict": {},
+         "model": {},
+         "thread_id": {}
+        },
+        "required": [
+         "message",
+         "message_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "calendar.event.message_subscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {},
+         "subtype_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "calendar.event.message_unsubscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "calendar.event.message_update",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "msg_dict": {},
+         "update_vals": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "calendar.event.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/notify_cancel_by_type": {
+   "post": {
+    "operationId": "calendar.event.notify_cancel_by_type",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "notification_type": {}
+        },
+        "required": [
+         "notification_type"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "calendar.event.rating_apply",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "notify_delay_send": {},
+         "rate": {},
+         "rating": {},
+         "subtype_xmlid": {},
+         "token": {}
+        },
+        "required": [
+         "rate"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "calendar.event.rating_send_request",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "force_send": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "lang": {},
+         "template": {}
+        },
+        "required": [
+         "template"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "calendar.event.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "calendar.event.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "calendar.event.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "calendar.event.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/set_discuss_videocall_location": {
+   "post": {
+    "operationId": "calendar.event.set_discuss_videocall_location",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "set_discuss_videocall_location",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "calendar.event.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.event/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "calendar.event.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "calendar.event"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "calendar.filters.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "calendar.filters.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "calendar.filters.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "calendar.filters.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "calendar.filters.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "calendar.filters.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "calendar.filters.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "calendar.filters.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "calendar.filters.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/unlink_from_partner_id": {
+   "post": {
+    "operationId": "calendar.filters.unlink_from_partner_id",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "partner_id": {}
+        },
+        "required": [
+         "partner_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink_from_partner_id",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.filters/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "calendar.filters.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "calendar.filters"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "calendar.recurrence.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "calendar.recurrence.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "calendar.recurrence.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/get_recurrence_name": {
+   "post": {
+    "operationId": "calendar.recurrence.get_recurrence_name",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_recurrence_name",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "calendar.recurrence.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "calendar.recurrence.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "calendar.recurrence.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "calendar.recurrence.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "calendar.recurrence.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "calendar.recurrence.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  },
+  "/json/2/calendar.recurrence/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "calendar.recurrence.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "calendar.recurrence"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Event Alarm",
+   "name": "calendar.alarm"
+  },
+  {
+   "description": "Calendar Attendee Information",
+   "name": "calendar.attendee"
+  },
+  {
+   "description": "Calendar Event",
+   "name": "calendar.event"
+  },
+  {
+   "description": "Event Meeting Type",
+   "name": "calendar.event.type"
+  },
+  {
+   "description": "Calendar Filters",
+   "name": "calendar.filters"
+  },
+  {
+   "description": "Event Recurrence Rule",
+   "name": "calendar.recurrence"
+  }
+ ]
+}

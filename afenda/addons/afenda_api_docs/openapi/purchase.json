@@ -1,0 +1,5186 @@
+{
+ "components": {
+  "requestBodies": {
+   "action_add_to_po": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "action_share": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {}
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_mail_with_source": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "source_ref": {}
+       },
+       "required": [
+        "source_ref"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {
+         "type": "object"
+        }
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "purchase.bill.line.match": {
+    "properties": {
+     "account_move_id": {
+      "readOnly": true,
+      "title": "Account Move",
+      "type": "integer",
+      "x-relation": "account.move"
+     },
+     "aml_id": {
+      "readOnly": true,
+      "title": "Aml",
+      "type": "integer",
+      "x-relation": "account.move.line"
+     },
+     "billed_amount_untaxed": {
+      "readOnly": true,
+      "title": "Billed Amount Untaxed",
+      "type": "number"
+     },
+     "company_id": {
+      "readOnly": true,
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "line_amount_untaxed": {
+      "readOnly": true,
+      "title": "Line Amount Untaxed",
+      "type": "number"
+     },
+     "line_qty": {
+      "readOnly": true,
+      "title": "Line Qty",
+      "type": "number"
+     },
+     "line_uom_id": {
+      "readOnly": true,
+      "title": "Line Uom",
+      "type": "integer",
+      "x-relation": "uom.uom"
+     },
+     "partner_id": {
+      "readOnly": true,
+      "title": "Partner",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "pol_id": {
+      "readOnly": true,
+      "title": "Pol",
+      "type": "integer",
+      "x-relation": "purchase.order.line"
+     },
+     "product_id": {
+      "readOnly": true,
+      "title": "Product",
+      "type": "integer",
+      "x-relation": "product.product"
+     },
+     "product_uom_id": {
+      "description": "Default unit of measure used for all stock operations.",
+      "readOnly": true,
+      "title": "Unit",
+      "type": "integer",
+      "x-relation": "uom.uom"
+     },
+     "product_uom_price": {
+      "title": "Product Uom Price",
+      "type": "number"
+     },
+     "product_uom_qty": {
+      "title": "Product Uom Qty",
+      "type": "number"
+     },
+     "purchase_amount_untaxed": {
+      "readOnly": true,
+      "title": "Purchase Amount Untaxed",
+      "type": "number"
+     },
+     "purchase_order_id": {
+      "readOnly": true,
+      "title": "Purchase Order",
+      "type": "integer",
+      "x-relation": "purchase.order"
+     },
+     "qty_invoiced": {
+      "readOnly": true,
+      "title": "Qty Invoiced",
+      "type": "number"
+     },
+     "qty_to_invoice": {
+      "readOnly": true,
+      "title": "Qty to invoice",
+      "type": "number"
+     },
+     "reference": {
+      "readOnly": true,
+      "title": "Reference",
+      "type": "string"
+     },
+     "state": {
+      "readOnly": true,
+      "title": "State",
+      "type": "string"
+     }
+    },
+    "title": "Purchase Line and Vendor Bill line matching view",
+    "type": "object"
+   },
+   "purchase.bill.union": {
+    "properties": {
+     "amount": {
+      "readOnly": true,
+      "title": "Amount",
+      "type": "number"
+     },
+     "company_id": {
+      "readOnly": true,
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "date": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Date",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "readOnly": true,
+      "title": "Reference",
+      "type": "string"
+     },
+     "partner_id": {
+      "readOnly": true,
+      "title": "Vendor",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "purchase_order_id": {
+      "readOnly": true,
+      "title": "Purchase Order",
+      "type": "integer",
+      "x-relation": "purchase.order"
+     },
+     "reference": {
+      "readOnly": true,
+      "title": "Source",
+      "type": "string"
+     },
+     "vendor_bill_id": {
+      "readOnly": true,
+      "title": "Vendor Bill",
+      "type": "integer",
+      "x-relation": "account.move"
+     }
+    },
+    "title": "Purchases & Bills Union",
+    "type": "object"
+   },
+   "purchase.order": {
+    "properties": {
+     "access_token": {
+      "title": "Security Token",
+      "type": "string"
+     },
+     "access_url": {
+      "description": "Customer Portal URL",
+      "readOnly": true,
+      "title": "Portal Access URL",
+      "type": "string"
+     },
+     "access_warning": {
+      "readOnly": true,
+      "title": "Access warning",
+      "type": "string"
+     },
+     "acknowledged": {
+      "description": "It indicates that the vendor has acknowledged the receipt of the purchase order.",
+      "title": "Acknowledged",
+      "type": "boolean"
+     },
+     "activity_calendar_event_id": {
+      "readOnly": true,
+      "title": "Next Activity Calendar Event",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Next Activity Deadline",
+      "type": "string"
+     },
+     "activity_exception_decoration": {
+      "description": "Type of the exception activity on record.",
+      "enum": [
+       "warning",
+       "danger"
+      ],
+      "readOnly": true,
+      "title": "Activity Exception Decoration",
+      "type": "string",
+      "x-enum-labels": [
+       "Alert",
+       "Error"
+      ]
+     },
+     "activity_exception_icon": {
+      "description": "Icon to indicate an exception activity.",
+      "readOnly": true,
+      "title": "Icon",
+      "type": "string"
+     },
+     "activity_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Activities",
+      "type": "array",
+      "x-relation": "mail.activity"
+     },
+     "activity_state": {
+      "description": "Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities.",
+      "enum": [
+       "overdue",
+       "today",
+       "planned"
+      ],
+      "readOnly": true,
+      "title": "Activity State",
+      "type": "string",
+      "x-enum-labels": [
+       "Overdue",
+       "Today",
+       "Planned"
+      ]
+     },
+     "activity_summary": {
+      "title": "Next Activity Summary",
+      "type": "string"
+     },
+     "activity_type_icon": {
+      "description": "Font awesome icon e.g. fa-tasks",
+      "readOnly": true,
+      "title": "Activity Type Icon",
+      "type": "string"
+     },
+     "activity_type_id": {
+      "title": "Next Activity Type",
+      "type": "integer",
+      "x-relation": "mail.activity.type"
+     },
+     "activity_user_id": {
+      "readOnly": true,
+      "title": "Responsible User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "amount_tax": {
+      "readOnly": true,
+      "title": "Taxes",
+      "type": "number"
+     },
+     "amount_total": {
+      "readOnly": true,
+      "title": "Total",
+      "type": "number"
+     },
+     "amount_total_cc": {
+      "readOnly": true,
+      "title": "Total in currency",
+      "type": "number"
+     },
+     "amount_untaxed": {
+      "readOnly": true,
+      "title": "Untaxed Amount",
+      "type": "number"
+     },
+     "company_currency_id": {
+      "readOnly": true,
+      "title": "Company Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "company_price_include": {
+      "description": "Default on whether the sales price used on the product and invoices with this Company includes its taxes.",
+      "enum": [
+       "tax_included",
+       "tax_excluded"
+      ],
+      "readOnly": true,
+      "title": "Default Sales Price Include",
+      "type": "string",
+      "x-enum-labels": [
+       "Tax Included",
+       "Tax Excluded"
+      ]
+     },
+     "country_code": {
+      "description": "The ISO country code in two chars. \nYou can use this field for quick search.",
+      "readOnly": true,
+      "title": "Country code",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "currency_rate": {
+      "readOnly": true,
+      "title": "Currency Rate",
+      "type": "number"
+     },
+     "date_approve": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Confirmation Date",
+      "type": "string"
+     },
+     "date_calendar_start": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Date Calendar Start",
+      "type": "string"
+     },
+     "date_order": {
+      "description": "Depicts the date within which the Quotation should be confirmed and converted into a purchase order.",
+      "format": "date-time",
+      "title": "Order Deadline",
+      "type": "string"
+     },
+     "date_planned": {
+      "description": "Delivery date promised by vendor. This date is used to determine expected arrival of products.",
+      "format": "date-time",
+      "title": "Expected Arrival",
+      "type": "string"
+     },
+     "default_location_dest_id_usage": {
+      "description": "Technical field used to display the Drop Ship Address",
+      "enum": [
+       "supplier",
+       "view",
+       "internal",
+       "customer",
+       "inventory",
+       "production",
+       "transit"
+      ],
+      "readOnly": true,
+      "title": "Destination Location Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Vendor",
+       "Virtual",
+       "Internal",
+       "Customer",
+       "Inventory Loss",
+       "Production",
+       "Transit"
+      ]
+     },
+     "dest_address_id": {
+      "description": "Put an address if you want to deliver directly from the vendor to the customer. Otherwise, keep empty to deliver to your own company.",
+      "title": "Dropship Address",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "duplicated_order_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Duplicated Order",
+      "type": "array",
+      "x-relation": "purchase.order"
+     },
+     "effective_date": {
+      "description": "Completion date of the first receipt order.",
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Arrival",
+      "type": "string"
+     },
+     "fiscal_position_id": {
+      "title": "Fiscal Position",
+      "type": "integer",
+      "x-relation": "account.fiscal.position"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "has_sale_order": {
+      "readOnly": true,
+      "title": "Technical field for whether the purchase order has associated sale orders",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "incoming_picking_count": {
+      "readOnly": true,
+      "title": "Incoming Shipment count",
+      "type": "integer"
+     },
+     "incoterm_id": {
+      "description": "International Commercial Terms are a series of predefined commercial terms used in international transactions.",
+      "title": "Incoterm",
+      "type": "integer",
+      "x-relation": "account.incoterms"
+     },
+     "incoterm_location": {
+      "title": "Incoterm Location",
+      "type": "string"
+     },
+     "invoice_count": {
+      "readOnly": true,
+      "title": "Bill Count",
+      "type": "integer"
+     },
+     "invoice_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Bills",
+      "type": "array",
+      "x-relation": "account.move"
+     },
+     "invoice_status": {
+      "enum": [
+       "no",
+       "to invoice",
+       "invoiced"
+      ],
+      "readOnly": true,
+      "title": "Billing Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Nothing to Bill",
+       "Waiting Bills",
+       "Fully Billed"
+      ]
+     },
+     "is_late": {
+      "title": "Is Late",
+      "type": "boolean"
+     },
+     "is_shipped": {
+      "readOnly": true,
+      "title": "Is Shipped",
+      "type": "boolean"
+     },
+     "lock_confirmed_po": {
+      "description": "Purchase Order Modification used when you want to purchase order editable after confirm",
+      "enum": [
+       "edit",
+       "lock"
+      ],
+      "readOnly": true,
+      "title": "Purchase Order Modification",
+      "type": "string",
+      "x-enum-labels": [
+       "Allow to edit purchase orders",
+       "Confirmed purchase orders are not editable"
+      ]
+     },
+     "locked": {
+      "description": "Locked Purchase Orders cannot be modified.",
+      "title": "Locked",
+      "type": "boolean"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "mrp_production_count": {
+      "readOnly": true,
+      "title": "Count of MO Source",
+      "type": "integer"
+     },
+     "my_activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "My Activity Deadline",
+      "type": "string"
+     },
+     "name": {
+      "title": "Order Reference",
+      "type": "string"
+     },
+     "note": {
+      "title": "Terms and Conditions",
+      "type": "string"
+     },
+     "on_time_rate": {
+      "description": "Over the past x days; the number of products received on time divided by the number of ordered products.x is either the System Parameter purchase_stock.on_time_delivery_days or the default 365",
+      "readOnly": true,
+      "title": "On-Time Delivery Rate",
+      "type": "number"
+     },
+     "order_line": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Order Lines",
+      "type": "array",
+      "x-relation": "purchase.order.line"
+     },
+     "origin": {
+      "description": "Reference of the document that generated this purchase order request (e.g. a sales order)",
+      "title": "Source",
+      "type": "string"
+     },
+     "partner_bill_count": {
+      "readOnly": true,
+      "title": "# Vendor Bills",
+      "type": "integer"
+     },
+     "partner_id": {
+      "description": "You can find a vendor by its Name, TIN, Email or Internal Reference.",
+      "title": "Vendor",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "partner_ref": {
+      "description": "Reference of the sales order or bid sent by the vendor. It's used to do the matching when you receive the products as this reference is usually written on the delivery order sent by your vendor.",
+      "title": "Vendor Reference",
+      "type": "string"
+     },
+     "payment_term_id": {
+      "title": "Payment Terms",
+      "type": "integer",
+      "x-relation": "account.payment.term"
+     },
+     "picking_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Receptions",
+      "type": "array",
+      "x-relation": "stock.picking"
+     },
+     "picking_type_id": {
+      "description": "This will determine operation type of incoming shipment",
+      "title": "Deliver To",
+      "type": "integer",
+      "x-relation": "stock.picking.type"
+     },
+     "priority": {
+      "enum": [
+       "0",
+       "1"
+      ],
+      "title": "Priority",
+      "type": "string",
+      "x-enum-labels": [
+       "Normal",
+       "Urgent"
+      ]
+     },
+     "product_id": {
+      "readOnly": true,
+      "title": "Product",
+      "type": "integer",
+      "x-relation": "product.product"
+     },
+     "project_id": {
+      "title": "Project",
+      "type": "integer",
+      "x-relation": "project.project"
+     },
+     "purchase_warning_text": {
+      "description": "Internal warning for the partner or the products as set by the user.",
+      "readOnly": true,
+      "title": "Purchase Warning",
+      "type": "string"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "receipt_reminder_email": {
+      "title": "Receipt Reminder Email",
+      "type": "boolean"
+     },
+     "receipt_status": {
+      "description": "Red: Late\n            Orange: To process today\n            Green: On time",
+      "enum": [
+       "pending",
+       "partial",
+       "full"
+      ],
+      "readOnly": true,
+      "title": "Receipt Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Not Received",
+       "Partially Received",
+       "Fully Received"
+      ]
+     },
+     "reference_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "References",
+      "type": "array",
+      "x-relation": "stock.reference"
+     },
+     "reminder_date_before_receipt": {
+      "title": "Days Before Receipt",
+      "type": "integer"
+     },
+     "repair_count": {
+      "readOnly": true,
+      "title": "Count of source repairs",
+      "type": "integer"
+     },
+     "sale_order_count": {
+      "readOnly": true,
+      "title": "Number of Source Sale",
+      "type": "integer"
+     },
+     "show_comparison": {
+      "readOnly": true,
+      "title": "Show Comparison",
+      "type": "boolean"
+     },
+     "state": {
+      "enum": [
+       "draft",
+       "sent",
+       "to approve",
+       "purchase",
+       "cancel"
+      ],
+      "readOnly": true,
+      "title": "Status",
+      "type": "string",
+      "x-enum-labels": [
+       "RFQ",
+       "RFQ Sent",
+       "To Approve",
+       "Purchase Order",
+       "Cancelled"
+      ]
+     },
+     "tax_calculation_rounding_method": {
+      "enum": [
+       "round_globally",
+       "round_per_line"
+      ],
+      "readOnly": true,
+      "title": "Tax calculation rounding method",
+      "type": "string",
+      "x-enum-labels": [
+       "Round per Tax",
+       "Round per Line"
+      ]
+     },
+     "tax_country_id": {
+      "description": "Technical field to filter the available taxes depending on the fiscal country and fiscal position.",
+      "readOnly": true,
+      "title": "Tax Country",
+      "type": "integer",
+      "x-relation": "res.country"
+     },
+     "tax_totals": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Tax Totals",
+      "type": "string"
+     },
+     "user_id": {
+      "title": "Buyer",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "company_id",
+     "currency_id",
+     "date_order",
+     "name",
+     "partner_id",
+     "picking_type_id"
+    ],
+    "title": "Purchase Order",
+    "type": "object"
+   },
+   "purchase.order.line": {
+    "properties": {
+     "allowed_uom_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Allowed Uom",
+      "type": "array",
+      "x-relation": "uom.uom"
+     },
+     "amount_to_invoice_at_date": {
+      "readOnly": true,
+      "title": "Amount",
+      "type": "number"
+     },
+     "analytic_distribution": {
+      "title": "Analytic Distribution",
+      "type": "object"
+     },
+     "analytic_precision": {
+      "title": "Analytic Precision",
+      "type": "integer"
+     },
+     "company_id": {
+      "readOnly": true,
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "date_approve": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Confirmation Date",
+      "type": "string"
+     },
+     "date_order": {
+      "description": "Depicts the date within which the Quotation should be confirmed and converted into a purchase order.",
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Order Date",
+      "type": "string"
+     },
+     "date_planned": {
+      "description": "Delivery date expected from vendor. This date respectively defaults to vendor pricelist lead time then today's date.",
+      "format": "date-time",
+      "title": "Expected Arrival",
+      "type": "string"
+     },
+     "discount": {
+      "title": "Discount (%)",
+      "type": "number"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "display_type": {
+      "description": "Technical field for UX purpose.",
+      "enum": [
+       "line_section",
+       "line_subsection",
+       "line_note"
+      ],
+      "title": "Display Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Section",
+       "Subsection",
+       "Note"
+      ]
+     },
+     "distribution_analytic_account_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Distribution Analytic Account",
+      "type": "array",
+      "x-relation": "account.analytic.account"
+     },
+     "forecasted_issue": {
+      "readOnly": true,
+      "title": "Forecasted Issue",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "invoice_lines": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Bill Lines",
+      "type": "array",
+      "x-relation": "account.move.line"
+     },
+     "is_downpayment": {
+      "title": "Is Downpayment",
+      "type": "boolean"
+     },
+     "is_storable": {
+      "description": "A storable product is a product for which you manage stock.",
+      "readOnly": true,
+      "title": "Track Inventory",
+      "type": "boolean"
+     },
+     "location_final_id": {
+      "title": "Location from procurement",
+      "type": "integer",
+      "x-relation": "stock.location"
+     },
+     "move_dest_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Downstream moves alt",
+      "type": "array",
+      "x-relation": "stock.move"
+     },
+     "move_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Reservation",
+      "type": "array",
+      "x-relation": "stock.move"
+     },
+     "name": {
+      "title": "Description",
+      "type": "string"
+     },
+     "order_id": {
+      "title": "Order Reference",
+      "type": "integer",
+      "x-relation": "purchase.order"
+     },
+     "orderpoint_id": {
+      "title": "Orderpoint",
+      "type": "integer",
+      "x-relation": "stock.warehouse.orderpoint"
+     },
+     "parent_id": {
+      "readOnly": true,
+      "title": "Parent Section Line",
+      "type": "integer",
+      "x-relation": "purchase.order.line"
+     },
+     "partner_id": {
+      "description": "You can find a vendor by its Name, TIN, Email or Internal Reference.",
+      "readOnly": true,
+      "title": "Partner",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "price_subtotal": {
+      "readOnly": true,
+      "title": "Subtotal",
+      "type": "number"
+     },
+     "price_tax": {
+      "readOnly": true,
+      "title": "Tax",
+      "type": "number"
+     },
+     "price_total": {
+      "readOnly": true,
+      "title": "Total",
+      "type": "number"
+     },
+     "price_unit": {
+      "title": "Unit Price",
+      "type": "number"
+     },
+     "price_unit_discounted": {
+      "readOnly": true,
+      "title": "Unit Price (Discounted)",
+      "type": "number"
+     },
+     "price_unit_product_uom": {
+      "description": "The Price of one unit of the product's Unit of Measure",
+      "readOnly": true,
+      "title": "Unit Price Product UoM",
+      "type": "number"
+     },
+     "product_description_variants": {
+      "title": "Custom Description",
+      "type": "string"
+     },
+     "product_id": {
+      "title": "Product",
+      "type": "integer",
+      "x-relation": "product.product"
+     },
+     "product_no_variant_attribute_value_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Product attribute values that do not create variants",
+      "type": "array",
+      "x-relation": "product.template.attribute.value"
+     },
+     "product_qty": {
+      "title": "Quantity",
+      "type": "number"
+     },
+     "product_template_attribute_value_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Attribute Values",
+      "type": "array",
+      "x-relation": "product.template.attribute.value"
+     },
+     "product_type": {
+      "description": "Goods are tangible materials and merchandise you provide.\nA service is a non-material product you provide.",
+      "enum": [
+       "consu",
+       "service",
+       "combo"
+      ],
+      "readOnly": true,
+      "title": "Product Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Goods",
+       "Service",
+       "Combo"
+      ]
+     },
+     "product_uom_id": {
+      "title": "Unit",
+      "type": "integer",
+      "x-relation": "uom.uom"
+     },
+     "product_uom_qty": {
+      "readOnly": true,
+      "title": "Total Quantity",
+      "type": "number"
+     },
+     "propagate_cancel": {
+      "title": "Propagate cancellation",
+      "type": "boolean"
+     },
+     "purchase_line_warn_msg": {
+      "readOnly": true,
+      "title": "Purchase Line Warn Msg",
+      "type": "string"
+     },
+     "qty_invoiced": {
+      "readOnly": true,
+      "title": "Billed Qty",
+      "type": "number"
+     },
+     "qty_invoiced_at_date": {
+      "readOnly": true,
+      "title": "Billed",
+      "type": "number"
+     },
+     "qty_received": {
+      "title": "Received Qty",
+      "type": "number"
+     },
+     "qty_received_at_date": {
+      "readOnly": true,
+      "title": "Received",
+      "type": "number"
+     },
+     "qty_received_manual": {
+      "title": "Manual Received Qty",
+      "type": "number"
+     },
+     "qty_received_method": {
+      "description": "According to product configuration, the received quantity can be automatically computed by mechanism:\n  - Manual: the quantity is set manually on the line\n  - Stock Moves: the quantity comes from confirmed pickings\n",
+      "enum": [
+       "manual",
+       "stock_moves"
+      ],
+      "readOnly": true,
+      "title": "Received Qty Method",
+      "type": "string",
+      "x-enum-labels": [
+       "Manual",
+       "Stock Moves"
+      ]
+     },
+     "qty_to_invoice": {
+      "readOnly": true,
+      "title": "To Invoice Quantity",
+      "type": "number"
+     },
+     "sale_line_id": {
+      "title": "Origin Sale Item",
+      "type": "integer",
+      "x-relation": "sale.order.line"
+     },
+     "sale_order_id": {
+      "readOnly": true,
+      "title": "Sale Order",
+      "type": "integer",
+      "x-relation": "sale.order"
+     },
+     "selected_seller_id": {
+      "description": "Technical field to get the vendor pricelist used to generate this line",
+      "readOnly": true,
+      "title": "Selected Seller",
+      "type": "integer",
+      "x-relation": "product.supplierinfo"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "state": {
+      "enum": [
+       "draft",
+       "sent",
+       "to approve",
+       "purchase",
+       "cancel"
+      ],
+      "readOnly": true,
+      "title": "Status",
+      "type": "string",
+      "x-enum-labels": [
+       "RFQ",
+       "RFQ Sent",
+       "To Approve",
+       "Purchase Order",
+       "Cancelled"
+      ]
+     },
+     "tax_calculation_rounding_method": {
+      "enum": [
+       "round_globally",
+       "round_per_line"
+      ],
+      "readOnly": true,
+      "title": "Tax calculation rounding method",
+      "type": "string",
+      "x-enum-labels": [
+       "Round per Tax",
+       "Round per Line"
+      ]
+     },
+     "tax_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Taxes",
+      "type": "array",
+      "x-relation": "account.tax"
+     },
+     "technical_price_unit": {
+      "description": "Technical field for price computation",
+      "title": "Technical Price Unit",
+      "type": "number"
+     },
+     "translated_product_name": {
+      "readOnly": true,
+      "title": "Translated Product Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "order_id",
+     "price_unit",
+     "product_qty"
+    ],
+    "title": "Purchase Order Line",
+    "type": "object"
+   },
+   "purchase.report": {
+    "properties": {
+     "category_id": {
+      "readOnly": true,
+      "title": "Product Category",
+      "type": "integer",
+      "x-relation": "product.category"
+     },
+     "commercial_partner_id": {
+      "readOnly": true,
+      "title": "Commercial Entity",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "company_id": {
+      "readOnly": true,
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "country_id": {
+      "readOnly": true,
+      "title": "Partner Country",
+      "type": "integer",
+      "x-relation": "res.country"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "date_approve": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Confirmation Date",
+      "type": "string"
+     },
+     "date_order": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Order Date",
+      "type": "string"
+     },
+     "days_to_arrival": {
+      "readOnly": true,
+      "title": "Effective Days To Arrival",
+      "type": "number"
+     },
+     "delay": {
+      "description": "Amount of time between purchase approval and order by date.",
+      "readOnly": true,
+      "title": "Days to Confirm",
+      "type": "number"
+     },
+     "delay_pass": {
+      "description": "Amount of time between date planned and order by date for each purchase order line.",
+      "readOnly": true,
+      "title": "Days to Receive",
+      "type": "number"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "effective_date": {
+      "format": "date-time",
+      "title": "Effective Date",
+      "type": "string"
+     },
+     "fiscal_position_id": {
+      "readOnly": true,
+      "title": "Fiscal Position",
+      "type": "integer",
+      "x-relation": "account.fiscal.position"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "nbr_lines": {
+      "readOnly": true,
+      "title": "# of Lines",
+      "type": "integer"
+     },
+     "order_id": {
+      "readOnly": true,
+      "title": "Order",
+      "type": "integer",
+      "x-relation": "purchase.order"
+     },
+     "partner_id": {
+      "readOnly": true,
+      "title": "Vendor",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "picking_type_id": {
+      "readOnly": true,
+      "title": "Warehouse",
+      "type": "integer",
+      "x-relation": "stock.warehouse"
+     },
+     "price_average": {
+      "readOnly": true,
+      "title": "Average Cost",
+      "type": "number"
+     },
+     "price_total": {
+      "readOnly": true,
+      "title": "Total",
+      "type": "number"
+     },
+     "product_id": {
+      "readOnly": true,
+      "title": "Product",
+      "type": "integer",
+      "x-relation": "product.product"
+     },
+     "product_tmpl_id": {
+      "readOnly": true,
+      "title": "Product Template",
+      "type": "integer",
+      "x-relation": "product.template"
+     },
+     "product_uom_id": {
+      "readOnly": true,
+      "title": "Reference Unit of Measure",
+      "type": "integer",
+      "x-relation": "uom.uom"
+     },
+     "qty_billed": {
+      "readOnly": true,
+      "title": "Qty Billed",
+      "type": "number"
+     },
+     "qty_ordered": {
+      "readOnly": true,
+      "title": "Qty Ordered",
+      "type": "number"
+     },
+     "qty_received": {
+      "readOnly": true,
+      "title": "Qty Received",
+      "type": "number"
+     },
+     "qty_to_be_billed": {
+      "readOnly": true,
+      "title": "Qty to be Billed",
+      "type": "number"
+     },
+     "state": {
+      "enum": [
+       "draft",
+       "sent",
+       "to approve",
+       "purchase",
+       "cancel"
+      ],
+      "readOnly": true,
+      "title": "Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Draft RFQ",
+       "RFQ Sent",
+       "To Approve",
+       "Purchase Order",
+       "Cancelled"
+      ]
+     },
+     "untaxed_total": {
+      "readOnly": true,
+      "title": "Untaxed Total",
+      "type": "number"
+     },
+     "user_id": {
+      "readOnly": true,
+      "title": "Buyer",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "volume": {
+      "readOnly": true,
+      "title": "Volume",
+      "type": "number"
+     },
+     "weight": {
+      "readOnly": true,
+      "title": "Gross Weight",
+      "type": "number"
+     }
+    },
+    "title": "Purchase Report",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "purchase"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/purchase.bill.line.match/action_add_to_po": {
+   "post": {
+    "operationId": "purchase.bill.line.match.action_add_to_po",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_add_to_po",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/action_match_lines": {
+   "post": {
+    "operationId": "purchase.bill.line.match.action_match_lines",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_match_lines",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/action_open_line": {
+   "post": {
+    "operationId": "purchase.bill.line.match.action_open_line",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_line",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "purchase.bill.line.match.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "purchase.bill.line.match.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "purchase.bill.line.match.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "purchase.bill.line.match.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "purchase.bill.line.match.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "purchase.bill.line.match.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "purchase.bill.line.match.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "purchase.bill.line.match.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "purchase.bill.line.match.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.line.match/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "purchase.bill.line.match.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "purchase.bill.line.match"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "purchase.bill.union.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "purchase.bill.union.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "purchase.bill.union.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "purchase.bill.union.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "purchase.bill.union.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "purchase.bill.union.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "purchase.bill.union.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "purchase.bill.union.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "purchase.bill.union.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.bill.union/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "purchase.bill.union.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "purchase.bill.union"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/action_add_from_catalog": {
+   "post": {
+    "operationId": "purchase.order.line.action_add_from_catalog",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_add_from_catalog",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/action_open_order": {
+   "post": {
+    "operationId": "purchase.order.line.action_open_order",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_order",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/action_product_forecast_report": {
+   "post": {
+    "operationId": "purchase.order.line.action_product_forecast_report",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_product_forecast_report",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "purchase.order.line.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "purchase.order.line.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "purchase.order.line.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/get_parent_section_line": {
+   "post": {
+    "operationId": "purchase.order.line.get_parent_section_line",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_parent_section_line",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "purchase.order.line.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/onchange_product_id": {
+   "post": {
+    "operationId": "purchase.order.line.onchange_product_id",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "onchange_product_id",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "purchase.order.line.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "purchase.order.line.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "purchase.order.line.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "purchase.order.line.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "purchase.order.line.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order.line/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "purchase.order.line.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "purchase.order.line"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_acknowledge": {
+   "post": {
+    "operationId": "purchase.order.action_acknowledge",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_acknowledge",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_add_from_catalog": {
+   "post": {
+    "operationId": "purchase.order.action_add_from_catalog",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_add_from_catalog",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_bill_matching": {
+   "post": {
+    "operationId": "purchase.order.action_bill_matching",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_bill_matching",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_create_invoice": {
+   "post": {
+    "description": "Create the invoice associated to the PO.",
+    "operationId": "purchase.order.action_create_invoice",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "attachment_ids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_create_invoice",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_merge": {
+   "post": {
+    "operationId": "purchase.order.action_merge",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_merge",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_open_business_doc": {
+   "post": {
+    "operationId": "purchase.order.action_open_business_doc",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_business_doc",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_purchase_comparison": {
+   "post": {
+    "operationId": "purchase.order.action_purchase_comparison",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_purchase_comparison",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_purchase_order_suggest": {
+   "post": {
+    "description": "Adds suggested products to PO, removing products with no suggested_qty, and collapsing existing po_lines into at most 1 orderline. Saves suggestion params (eg. number_of_days) to partner table.",
+    "operationId": "purchase.order.action_purchase_order_suggest",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_purchase_order_suggest",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_reschedule_my_next_nextweek": {
+   "post": {
+    "operationId": "purchase.order.action_reschedule_my_next_nextweek",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_nextweek",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_reschedule_my_next_today": {
+   "post": {
+    "operationId": "purchase.order.action_reschedule_my_next_today",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_today",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_reschedule_my_next_tomorrow": {
+   "post": {
+    "operationId": "purchase.order.action_reschedule_my_next_tomorrow",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_tomorrow",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_rfq_send": {
+   "post": {
+    "description": "This function opens a window to compose an email, with the edi purchase template message loaded by default",
+    "operationId": "purchase.order.action_rfq_send",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_rfq_send",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_share": {
+   "post": {
+    "operationId": "purchase.order.action_share",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_share"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_share",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_view_invoice": {
+   "post": {
+    "description": "This function returns an action that display existing vendor bills of given purchase order ids. When only one found, show the vendor bill immediately.",
+    "operationId": "purchase.order.action_view_invoice",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "invoices": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_invoice",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_view_mrp_productions": {
+   "post": {
+    "operationId": "purchase.order.action_view_mrp_productions",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_mrp_productions",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_view_picking": {
+   "post": {
+    "operationId": "purchase.order.action_view_picking",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_picking",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_view_repair_orders": {
+   "post": {
+    "operationId": "purchase.order.action_view_repair_orders",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_repair_orders",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/action_view_sale_orders": {
+   "post": {
+    "operationId": "purchase.order.action_view_sale_orders",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_sale_orders",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/activity_feedback": {
+   "post": {
+    "description": "Set activities as done, limiting to some activity types and optionally to a given user.",
+    "operationId": "purchase.order.activity_feedback",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "attachment_ids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_feedback",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/activity_reschedule": {
+   "post": {
+    "description": "Reschedule some automated activities. Activities to reschedule are selected based on type xml ids and optionally by user. Purpose is to be able to",
+    "operationId": "purchase.order.activity_reschedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_user_id": {},
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_reschedule",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/activity_schedule": {
+   "post": {
+    "description": "Schedule an activity on each record of the current record set. This method allow to provide as parameter act_type_xmlid. This is an xml_id of activity type instead of directly giving an activity_type_id. It is useful to avoid having various \"env.ref\" in the code and allow to let the mixin handle access rights.",
+    "operationId": "purchase.order.activity_schedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlid": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "note": {},
+         "summary": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_schedule",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/activity_search": {
+   "post": {
+    "description": "Search automated activities on current record set, given a list of activity types xml IDs. It is useful when dealing with specific types involved in automatic activities management.",
+    "operationId": "purchase.order.activity_search",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "additional_domain": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_search",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/activity_send_mail": {
+   "post": {
+    "description": "Automatically send an email based on the given mail.template, given its ID.",
+    "operationId": "purchase.order.activity_send_mail",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "template_id": {}
+        },
+        "required": [
+         "template_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_send_mail",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/activity_unlink": {
+   "post": {
+    "description": "Unlink activities, limiting to some activity types and optionally to a given user.",
+    "operationId": "purchase.order.activity_unlink",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_unlink",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/button_approve": {
+   "post": {
+    "operationId": "purchase.order.button_approve",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "force": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "button_approve",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/button_cancel": {
+   "post": {
+    "operationId": "purchase.order.button_cancel",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "button_cancel",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/button_confirm": {
+   "post": {
+    "operationId": "purchase.order.button_confirm",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "button_confirm",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/button_draft": {
+   "post": {
+    "operationId": "purchase.order.button_draft",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "button_draft",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/button_lock": {
+   "post": {
+    "operationId": "purchase.order.button_lock",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "button_lock",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/button_unlock": {
+   "post": {
+    "operationId": "purchase.order.button_unlock",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "button_unlock",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "purchase.order.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/create_document_from_attachment": {
+   "post": {
+    "description": "Create the purchase orders from given attachment_ids and redirect newly create order view.",
+    "operationId": "purchase.order.create_document_from_attachment",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "attachment_ids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         }
+        },
+        "required": [
+         "attachment_ids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_document_from_attachment",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "purchase.order.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "purchase.order.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/get_acknowledge_url": {
+   "post": {
+    "operationId": "purchase.order.get_acknowledge_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_acknowledge_url",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/get_confirm_url": {
+   "post": {
+    "description": "Create url for confirm reminder or purchase reception email for sending in mail. Unsuported anymore. We only use the acknowledge mechanism. Keep it for backward compatibility",
+    "operationId": "purchase.order.get_confirm_url",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "confirm_type": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_confirm_url",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/get_localized_date_planned": {
+   "post": {
+    "description": "Returns the localized date planned in the timezone of the order's user or the company's partner or UTC if none of them are set.",
+    "operationId": "purchase.order.get_localized_date_planned",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_planned": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_localized_date_planned",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/get_order_timezone": {
+   "post": {
+    "description": "Returns the timezone of the order's user or the company's partner or UTC if none of them are set.",
+    "operationId": "purchase.order.get_order_timezone",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_order_timezone",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/get_portal_url": {
+   "post": {
+    "description": "Get a portal url for this model, including access_token. The associated route must handle the flags for them to have any effect. - suffix: string to append to the url, before the query string - report_type: report_type query string, often one of: html, pdf, text - download: set the download query string to true - query_string: additional query string - anchor: string to append after the anchor #",
+    "operationId": "purchase.order.get_portal_url",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "anchor": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "download": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "query_string": {},
+         "report_type": {},
+         "suffix": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_portal_url",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/get_update_url": {
+   "post": {
+    "description": "Create portal url for user to update the scheduled date on purchase order lines.",
+    "operationId": "purchase.order.get_update_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_update_url",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "purchase.order.message_change_thread",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_parent_message": {},
+         "new_thread": {}
+        },
+        "required": [
+         "new_thread"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_get_followers": {
+   "post": {
+    "operationId": "purchase.order.message_get_followers",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "after": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "filter_recipients": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "limit": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_mail_with_source": {
+   "post": {
+    "operationId": "purchase.order.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_new": {
+   "post": {
+    "operationId": "purchase.order.message_new",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "msg_dict": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "purchase.order.message_notify",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "attachment_ids": {},
+         "attachments": {},
+         "author_id": {},
+         "body": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "email_from": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "model": {},
+         "partner_ids": {},
+         "res_id": {},
+         "subject": {},
+         "subtype_id": {},
+         "subtype_xmlid": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "purchase.order.message_parse",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "message": {},
+         "save_original": {}
+        },
+        "required": [
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_post": {
+   "post": {
+    "operationId": "purchase.order.message_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_post_with_source": {
+   "post": {
+    "operationId": "purchase.order.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "purchase.order.message_process",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "model": {},
+         "save_original": {},
+         "strip_attachments": {},
+         "thread_id": {}
+        },
+        "required": [
+         "model",
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "purchase.order.message_route",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "message_dict": {},
+         "model": {},
+         "thread_id": {}
+        },
+        "required": [
+         "message",
+         "message_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "purchase.order.message_subscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {},
+         "subtype_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "purchase.order.message_unsubscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "purchase.order.message_update",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "msg_dict": {},
+         "update_vals": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "purchase.order.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/notify_cancel_by_type": {
+   "post": {
+    "operationId": "purchase.order.notify_cancel_by_type",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "notification_type": {}
+        },
+        "required": [
+         "notification_type"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/onchange_date_planned": {
+   "post": {
+    "operationId": "purchase.order.onchange_date_planned",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "onchange_date_planned",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/onchange_partner_id": {
+   "post": {
+    "operationId": "purchase.order.onchange_partner_id",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "onchange_partner_id",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/print_quotation": {
+   "post": {
+    "operationId": "purchase.order.print_quotation",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "print_quotation",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "purchase.order.rating_apply",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "notify_delay_send": {},
+         "rate": {},
+         "rating": {},
+         "subtype_xmlid": {},
+         "token": {}
+        },
+        "required": [
+         "rate"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "purchase.order.rating_send_request",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "force_send": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "lang": {},
+         "template": {}
+        },
+        "required": [
+         "template"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "purchase.order.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/retrieve_dashboard": {
+   "post": {
+    "operationId": "purchase.order.retrieve_dashboard",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_share"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "retrieve_dashboard",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "purchase.order.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "purchase.order.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "purchase.order.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/send_reminder_preview": {
+   "post": {
+    "operationId": "purchase.order.send_reminder_preview",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "send_reminder_preview",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/unlink": {
+   "post": {
+    "description": "When removing a record, its rating should be deleted too.",
+    "operationId": "purchase.order.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.order/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "purchase.order.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "purchase.order"
+    ]
+   }
+  },
+  "/json/2/purchase.report/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "purchase.report.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  },
+  "/json/2/purchase.report/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "purchase.report.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  },
+  "/json/2/purchase.report/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "purchase.report.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  },
+  "/json/2/purchase.report/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "purchase.report.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  },
+  "/json/2/purchase.report/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "purchase.report.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  },
+  "/json/2/purchase.report/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "purchase.report.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  },
+  "/json/2/purchase.report/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "purchase.report.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  },
+  "/json/2/purchase.report/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "purchase.report.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  },
+  "/json/2/purchase.report/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "purchase.report.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_po"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  },
+  "/json/2/purchase.report/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "purchase.report.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "purchase.report"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Purchase Line and Vendor Bill line matching view",
+   "name": "purchase.bill.line.match"
+  },
+  {
+   "description": "Purchases & Bills Union",
+   "name": "purchase.bill.union"
+  },
+  {
+   "description": "Purchase Order",
+   "name": "purchase.order"
+  },
+  {
+   "description": "Purchase Order Line",
+   "name": "purchase.order.line"
+  },
+  {
+   "description": "Purchase Report",
+   "name": "purchase.report"
+  }
+ ]
+}

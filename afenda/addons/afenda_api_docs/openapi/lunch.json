@@ -1,0 +1,5367 @@
+{
+ "components": {
+  "requestBodies": {
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {}
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_mail_with_source": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "source_ref": {}
+       },
+       "required": [
+        "source_ref"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "unlink": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {
+         "type": "object"
+        }
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "lunch.alert": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "available_today": {
+      "readOnly": true,
+      "title": "Is Displayed Today",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "cron_id": {
+      "readOnly": true,
+      "title": "Cron",
+      "type": "integer",
+      "x-relation": "ir.cron"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "fri": {
+      "title": "Fri",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "location_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Location",
+      "type": "array",
+      "x-relation": "lunch.location"
+     },
+     "message": {
+      "title": "Message",
+      "type": "string"
+     },
+     "mode": {
+      "enum": [
+       "alert",
+       "chat"
+      ],
+      "title": "Display",
+      "type": "string",
+      "x-enum-labels": [
+       "Alert in app",
+       "Chat notification"
+      ]
+     },
+     "mon": {
+      "title": "Mon",
+      "type": "boolean"
+     },
+     "name": {
+      "title": "Alert Name",
+      "type": "string"
+     },
+     "notification_moment": {
+      "enum": [
+       "am",
+       "pm"
+      ],
+      "title": "Notification Moment",
+      "type": "string",
+      "x-enum-labels": [
+       "AM",
+       "PM"
+      ]
+     },
+     "notification_time": {
+      "title": "Notification Time",
+      "type": "number"
+     },
+     "recipients": {
+      "enum": [
+       "everyone",
+       "last_week",
+       "last_month",
+       "last_year"
+      ],
+      "title": "Recipients",
+      "type": "string",
+      "x-enum-labels": [
+       "Everyone",
+       "Employee who ordered last week",
+       "Employee who ordered last month",
+       "Employee who ordered last year"
+      ]
+     },
+     "sat": {
+      "title": "Sat",
+      "type": "boolean"
+     },
+     "sun": {
+      "title": "Sun",
+      "type": "boolean"
+     },
+     "thu": {
+      "title": "Thu",
+      "type": "boolean"
+     },
+     "tue": {
+      "title": "Tue",
+      "type": "boolean"
+     },
+     "tz": {
+      "title": "Timezone",
+      "type": "string",
+      "x-afenda-dynamic-enum": true
+     },
+     "until": {
+      "format": "date",
+      "title": "Show Until",
+      "type": "string"
+     },
+     "wed": {
+      "title": "Wed",
+      "type": "boolean"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "cron_id",
+     "message",
+     "name",
+     "notification_moment",
+     "tz"
+    ],
+    "title": "Lunch Alert",
+    "type": "object"
+   },
+   "lunch.cashmove": {
+    "properties": {
+     "amount": {
+      "title": "Amount",
+      "type": "number"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "date": {
+      "format": "date",
+      "title": "Date",
+      "type": "string"
+     },
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "user_id": {
+      "title": "User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "amount",
+     "currency_id",
+     "date"
+    ],
+    "title": "Lunch Cashmove",
+    "type": "object"
+   },
+   "lunch.cashmove.report": {
+    "properties": {
+     "amount": {
+      "title": "Amount",
+      "type": "number"
+     },
+     "currency_id": {
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "date": {
+      "format": "date",
+      "title": "Date",
+      "type": "string"
+     },
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "user_id": {
+      "title": "User",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "title": "Cashmoves report",
+    "type": "object"
+   },
+   "lunch.location": {
+    "properties": {
+     "address": {
+      "title": "Address",
+      "type": "string"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Location Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Lunch Locations",
+    "type": "object"
+   },
+   "lunch.order": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "available_on_date": {
+      "readOnly": true,
+      "title": "Available On Date",
+      "type": "boolean"
+     },
+     "available_today": {
+      "readOnly": true,
+      "title": "This is True when if the supplier is available today",
+      "type": "boolean"
+     },
+     "available_toppings_1": {
+      "description": "Are extras available for this product",
+      "readOnly": true,
+      "title": "Available Toppings 1",
+      "type": "boolean"
+     },
+     "available_toppings_2": {
+      "description": "Are extras available for this product",
+      "readOnly": true,
+      "title": "Available Toppings 2",
+      "type": "boolean"
+     },
+     "available_toppings_3": {
+      "description": "Are extras available for this product",
+      "readOnly": true,
+      "title": "Available Toppings 3",
+      "type": "boolean"
+     },
+     "category_id": {
+      "readOnly": true,
+      "title": "Product Category",
+      "type": "integer",
+      "x-relation": "lunch.product.category"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "date": {
+      "format": "date",
+      "title": "Order Date",
+      "type": "string"
+     },
+     "display_add_button": {
+      "readOnly": true,
+      "title": "Display Add Button",
+      "type": "boolean"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "display_reorder_button": {
+      "readOnly": true,
+      "title": "Display Reorder Button",
+      "type": "boolean"
+     },
+     "display_toppings": {
+      "readOnly": true,
+      "title": "Extras",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "image_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 128",
+      "type": "string"
+     },
+     "image_1920": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 1920",
+      "type": "string"
+     },
+     "lunch_location_id": {
+      "title": "Lunch Location",
+      "type": "integer",
+      "x-relation": "lunch.location"
+     },
+     "name": {
+      "readOnly": true,
+      "title": "Product Name",
+      "type": "string"
+     },
+     "note": {
+      "title": "Notes",
+      "type": "string"
+     },
+     "notified": {
+      "title": "Notified",
+      "type": "boolean"
+     },
+     "order_deadline_passed": {
+      "readOnly": true,
+      "title": "Order Deadline Passed",
+      "type": "boolean"
+     },
+     "price": {
+      "readOnly": true,
+      "title": "Total Price",
+      "type": "number"
+     },
+     "product_description": {
+      "readOnly": true,
+      "title": "Description",
+      "type": "string"
+     },
+     "product_id": {
+      "title": "Product",
+      "type": "integer",
+      "x-relation": "lunch.product"
+     },
+     "quantity": {
+      "title": "Quantity",
+      "type": "number"
+     },
+     "state": {
+      "enum": [
+       "new",
+       "ordered",
+       "sent",
+       "confirmed",
+       "cancelled"
+      ],
+      "readOnly": true,
+      "title": "Status",
+      "type": "string",
+      "x-enum-labels": [
+       "To Order",
+       "Ordered",
+       "Sent",
+       "Received",
+       "Cancelled"
+      ]
+     },
+     "supplier_id": {
+      "readOnly": true,
+      "title": "Vendor",
+      "type": "integer",
+      "x-relation": "lunch.supplier"
+     },
+     "topping_ids_1": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Extras 1",
+      "type": "array",
+      "x-relation": "lunch.topping"
+     },
+     "topping_ids_2": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Extras 2",
+      "type": "array",
+      "x-relation": "lunch.topping"
+     },
+     "topping_ids_3": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Extras 3",
+      "type": "array",
+      "x-relation": "lunch.topping"
+     },
+     "topping_label_1": {
+      "readOnly": true,
+      "title": "Extra 1 Label",
+      "type": "string"
+     },
+     "topping_label_2": {
+      "readOnly": true,
+      "title": "Extra 2 Label",
+      "type": "string"
+     },
+     "topping_label_3": {
+      "readOnly": true,
+      "title": "Extra 3 Label",
+      "type": "string"
+     },
+     "topping_quantity_1": {
+      "enum": [
+       "0_more",
+       "1_more",
+       "1"
+      ],
+      "readOnly": true,
+      "title": "Extra 1 Quantity",
+      "type": "string",
+      "x-enum-labels": [
+       "None or More",
+       "One or More",
+       "Only One"
+      ]
+     },
+     "topping_quantity_2": {
+      "enum": [
+       "0_more",
+       "1_more",
+       "1"
+      ],
+      "readOnly": true,
+      "title": "Extra 2 Quantity",
+      "type": "string",
+      "x-enum-labels": [
+       "None or More",
+       "One or More",
+       "Only One"
+      ]
+     },
+     "topping_quantity_3": {
+      "enum": [
+       "0_more",
+       "1_more",
+       "1"
+      ],
+      "readOnly": true,
+      "title": "Extra 3 Quantity",
+      "type": "string",
+      "x-enum-labels": [
+       "None or More",
+       "One or More",
+       "Only One"
+      ]
+     },
+     "user_id": {
+      "title": "User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "date",
+     "product_id",
+     "quantity"
+    ],
+    "title": "Lunch Order",
+    "type": "object"
+   },
+   "lunch.product": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "category_id": {
+      "title": "Product Category",
+      "type": "integer",
+      "x-relation": "lunch.product.category"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "favorite_user_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Favorite User",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "image_1024": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 1024",
+      "type": "string"
+     },
+     "image_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 128",
+      "type": "string"
+     },
+     "image_1920": {
+      "format": "byte",
+      "title": "Image",
+      "type": "string"
+     },
+     "image_256": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 256",
+      "type": "string"
+     },
+     "image_512": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 512",
+      "type": "string"
+     },
+     "is_available_at": {
+      "readOnly": true,
+      "title": "Product Availability",
+      "type": "integer",
+      "x-relation": "lunch.location"
+     },
+     "is_favorite": {
+      "title": "Is Favorite",
+      "type": "boolean"
+     },
+     "is_new": {
+      "readOnly": true,
+      "title": "Is New",
+      "type": "boolean"
+     },
+     "last_order_date": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Last Order Date",
+      "type": "string"
+     },
+     "name": {
+      "title": "Product Name",
+      "type": "string"
+     },
+     "new_until": {
+      "format": "date",
+      "title": "New Until",
+      "type": "string"
+     },
+     "price": {
+      "title": "Price",
+      "type": "number"
+     },
+     "product_image": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Product Image",
+      "type": "string"
+     },
+     "supplier_id": {
+      "title": "Vendor",
+      "type": "integer",
+      "x-relation": "lunch.supplier"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "category_id",
+     "name",
+     "price",
+     "supplier_id"
+    ],
+    "title": "Lunch Product",
+    "type": "object"
+   },
+   "lunch.product.category": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "image_1024": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 1024",
+      "type": "string"
+     },
+     "image_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 128",
+      "type": "string"
+     },
+     "image_1920": {
+      "format": "byte",
+      "title": "Image",
+      "type": "string"
+     },
+     "image_256": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 256",
+      "type": "string"
+     },
+     "image_512": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 512",
+      "type": "string"
+     },
+     "name": {
+      "title": "Product Category",
+      "type": "string"
+     },
+     "product_count": {
+      "description": "The number of products related to this category",
+      "readOnly": true,
+      "title": "Product Count",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Lunch Product Category",
+    "type": "object"
+   },
+   "lunch.supplier": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "activity_calendar_event_id": {
+      "readOnly": true,
+      "title": "Next Activity Calendar Event",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Next Activity Deadline",
+      "type": "string"
+     },
+     "activity_exception_decoration": {
+      "description": "Type of the exception activity on record.",
+      "enum": [
+       "warning",
+       "danger"
+      ],
+      "readOnly": true,
+      "title": "Activity Exception Decoration",
+      "type": "string",
+      "x-enum-labels": [
+       "Alert",
+       "Error"
+      ]
+     },
+     "activity_exception_icon": {
+      "description": "Icon to indicate an exception activity.",
+      "readOnly": true,
+      "title": "Icon",
+      "type": "string"
+     },
+     "activity_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Activities",
+      "type": "array",
+      "x-relation": "mail.activity"
+     },
+     "activity_state": {
+      "description": "Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities.",
+      "enum": [
+       "overdue",
+       "today",
+       "planned"
+      ],
+      "readOnly": true,
+      "title": "Activity State",
+      "type": "string",
+      "x-enum-labels": [
+       "Overdue",
+       "Today",
+       "Planned"
+      ]
+     },
+     "activity_summary": {
+      "title": "Next Activity Summary",
+      "type": "string"
+     },
+     "activity_type_icon": {
+      "description": "Font awesome icon e.g. fa-tasks",
+      "readOnly": true,
+      "title": "Activity Type Icon",
+      "type": "string"
+     },
+     "activity_type_id": {
+      "title": "Next Activity Type",
+      "type": "integer",
+      "x-relation": "mail.activity.type"
+     },
+     "activity_user_id": {
+      "readOnly": true,
+      "title": "Responsible User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "automatic_email_time": {
+      "title": "Order Time",
+      "type": "number"
+     },
+     "available_location_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Location",
+      "type": "array",
+      "x-relation": "lunch.location"
+     },
+     "available_today": {
+      "readOnly": true,
+      "title": "This is True when if the supplier is available today",
+      "type": "boolean"
+     },
+     "city": {
+      "title": "City",
+      "type": "string"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "country_id": {
+      "title": "Country",
+      "type": "integer",
+      "x-relation": "res.country"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "cron_id": {
+      "readOnly": true,
+      "title": "Cron",
+      "type": "integer",
+      "x-relation": "ir.cron"
+     },
+     "delivery": {
+      "enum": [
+       "delivery",
+       "no_delivery"
+      ],
+      "title": "Delivery",
+      "type": "string",
+      "x-enum-labels": [
+       "Delivery",
+       "No Delivery"
+      ]
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "email": {
+      "title": "Email",
+      "type": "string"
+     },
+     "email_formatted": {
+      "description": "Format email address \"Name <email@domain>\"",
+      "readOnly": true,
+      "title": "Formatted Email",
+      "type": "string"
+     },
+     "fri": {
+      "title": "Fri",
+      "type": "boolean"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "moment": {
+      "enum": [
+       "am",
+       "pm"
+      ],
+      "title": "Moment",
+      "type": "string",
+      "x-enum-labels": [
+       "AM",
+       "PM"
+      ]
+     },
+     "mon": {
+      "title": "Mon",
+      "type": "boolean"
+     },
+     "my_activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "My Activity Deadline",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "order_deadline_passed": {
+      "readOnly": true,
+      "title": "Order Deadline Passed",
+      "type": "boolean"
+     },
+     "partner_id": {
+      "title": "Vendor",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "phone": {
+      "title": "Phone",
+      "type": "string"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "recurrency_end_date": {
+      "description": "This field is used in order to ",
+      "format": "date",
+      "title": "Until",
+      "type": "string"
+     },
+     "responsible_id": {
+      "description": "The responsible is the person that will order lunch for everyone. It will be used as the 'from' when sending the automatic email.",
+      "title": "Responsible",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "sat": {
+      "title": "Sat",
+      "type": "boolean"
+     },
+     "send_by": {
+      "enum": [
+       "phone",
+       "mail"
+      ],
+      "title": "Send Order By",
+      "type": "string",
+      "x-enum-labels": [
+       "Phone",
+       "Email"
+      ]
+     },
+     "show_confirm_button": {
+      "readOnly": true,
+      "title": "Show Confirm Button",
+      "type": "boolean"
+     },
+     "show_order_button": {
+      "readOnly": true,
+      "title": "Show Order Button",
+      "type": "boolean"
+     },
+     "state_id": {
+      "title": "State",
+      "type": "integer",
+      "x-relation": "res.country.state"
+     },
+     "street": {
+      "title": "Street",
+      "type": "string"
+     },
+     "street2": {
+      "title": "Street2",
+      "type": "string"
+     },
+     "sun": {
+      "title": "Sun",
+      "type": "boolean"
+     },
+     "thu": {
+      "title": "Thu",
+      "type": "boolean"
+     },
+     "topping_ids_1": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Topping Ids 1",
+      "type": "array",
+      "x-relation": "lunch.topping"
+     },
+     "topping_ids_2": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Topping Ids 2",
+      "type": "array",
+      "x-relation": "lunch.topping"
+     },
+     "topping_ids_3": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Topping Ids 3",
+      "type": "array",
+      "x-relation": "lunch.topping"
+     },
+     "topping_label_1": {
+      "title": "Extra 1 Label",
+      "type": "string"
+     },
+     "topping_label_2": {
+      "title": "Extra 2 Label",
+      "type": "string"
+     },
+     "topping_label_3": {
+      "title": "Extra 3 Label",
+      "type": "string"
+     },
+     "topping_quantity_1": {
+      "enum": [
+       "0_more",
+       "1_more",
+       "1"
+      ],
+      "title": "Extra 1 Quantity",
+      "type": "string",
+      "x-enum-labels": [
+       "None or More",
+       "One or More",
+       "Only One"
+      ]
+     },
+     "topping_quantity_2": {
+      "enum": [
+       "0_more",
+       "1_more",
+       "1"
+      ],
+      "title": "Extra 2 Quantity",
+      "type": "string",
+      "x-enum-labels": [
+       "None or More",
+       "One or More",
+       "Only One"
+      ]
+     },
+     "topping_quantity_3": {
+      "enum": [
+       "0_more",
+       "1_more",
+       "1"
+      ],
+      "title": "Extra 3 Quantity",
+      "type": "string",
+      "x-enum-labels": [
+       "None or More",
+       "One or More",
+       "Only One"
+      ]
+     },
+     "tue": {
+      "title": "Tue",
+      "type": "boolean"
+     },
+     "tz": {
+      "title": "Timezone",
+      "type": "string",
+      "x-afenda-dynamic-enum": true
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "wed": {
+      "title": "Wed",
+      "type": "boolean"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "zip_code": {
+      "title": "Zip",
+      "type": "string"
+     }
+    },
+    "required": [
+     "automatic_email_time",
+     "cron_id",
+     "moment",
+     "partner_id",
+     "topping_label_1",
+     "topping_label_2",
+     "topping_label_3",
+     "topping_quantity_1",
+     "topping_quantity_2",
+     "topping_quantity_3",
+     "tz"
+    ],
+    "title": "Lunch Supplier",
+    "type": "object"
+   },
+   "lunch.topping": {
+    "properties": {
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "price": {
+      "title": "Price",
+      "type": "number"
+     },
+     "supplier_id": {
+      "title": "Supplier",
+      "type": "integer",
+      "x-relation": "lunch.supplier"
+     },
+     "topping_category": {
+      "title": "Topping Category",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "price",
+     "topping_category"
+    ],
+    "title": "Lunch Extras",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "lunch"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/lunch.alert/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "lunch.alert.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.alert/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "lunch.alert.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.alert/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "lunch.alert.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.alert/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "lunch.alert.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.alert/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "lunch.alert.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.alert/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "lunch.alert.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.alert/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "lunch.alert.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.alert/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "lunch.alert.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.alert/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "lunch.alert.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.alert/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "lunch.alert.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "lunch.alert"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "lunch.cashmove.report.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "lunch.cashmove.report.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "lunch.cashmove.report.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "lunch.cashmove.report.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "lunch.cashmove.report.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "lunch.cashmove.report.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "lunch.cashmove.report.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "lunch.cashmove.report.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "lunch.cashmove.report.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove.report/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "lunch.cashmove.report.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "lunch.cashmove.report"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "lunch.cashmove.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "lunch.cashmove.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "lunch.cashmove.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/get_wallet_balance": {
+   "post": {
+    "operationId": "lunch.cashmove.get_wallet_balance",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "include_config": {},
+         "user": {}
+        },
+        "required": [
+         "user"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_wallet_balance",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "lunch.cashmove.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "lunch.cashmove.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "lunch.cashmove.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "lunch.cashmove.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "lunch.cashmove.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "lunch.cashmove.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.cashmove/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "lunch.cashmove.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "lunch.cashmove"
+    ]
+   }
+  },
+  "/json/2/lunch.location/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "lunch.location.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.location/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "lunch.location.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.location/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "lunch.location.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.location/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "lunch.location.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.location/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "lunch.location.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.location/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "lunch.location.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.location/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "lunch.location.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.location/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "lunch.location.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.location/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "lunch.location.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.location/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "lunch.location.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "lunch.location"
+    ]
+   }
+  },
+  "/json/2/lunch.order/action_cancel": {
+   "post": {
+    "operationId": "lunch.order.action_cancel",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_cancel",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/action_confirm": {
+   "post": {
+    "operationId": "lunch.order.action_confirm",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_confirm",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/action_notify": {
+   "post": {
+    "operationId": "lunch.order.action_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_notify",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/action_order": {
+   "post": {
+    "operationId": "lunch.order.action_order",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_order",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/action_reorder": {
+   "post": {
+    "operationId": "lunch.order.action_reorder",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reorder",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/action_reset": {
+   "post": {
+    "operationId": "lunch.order.action_reset",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reset",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/action_send": {
+   "post": {
+    "operationId": "lunch.order.action_send",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_send",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/add_to_cart": {
+   "post": {
+    "description": "This method currently does nothing, we currently need it in order to be able to reuse this model in place of a wizard",
+    "operationId": "lunch.order.add_to_cart",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "add_to_cart",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "lunch.order.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "lunch.order.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "lunch.order.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "lunch.order.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "lunch.order.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "lunch.order.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "lunch.order.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "lunch.order.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "lunch.order.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/update_quantity": {
+   "post": {
+    "operationId": "lunch.order.update_quantity",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "increment": {}
+        },
+        "required": [
+         "increment"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "update_quantity",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.order/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "lunch.order.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "lunch.order"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "lunch.product.category.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "lunch.product.category.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "lunch.product.category.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "lunch.product.category.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "lunch.product.category.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "lunch.product.category.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "lunch.product.category.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "lunch.product.category.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "lunch.product.category.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product.category/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "lunch.product.category.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "lunch.product.category"
+    ]
+   }
+  },
+  "/json/2/lunch.product/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "lunch.product.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.product/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "lunch.product.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.product/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "lunch.product.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.product/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "lunch.product.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.product/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "lunch.product.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.product/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "lunch.product.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.product/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "lunch.product.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.product/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "lunch.product.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.product/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "lunch.product.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.product/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "lunch.product.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "lunch.product"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/action_confirm_orders": {
+   "post": {
+    "operationId": "lunch.supplier.action_confirm_orders",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_confirm_orders",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/action_reschedule_my_next_nextweek": {
+   "post": {
+    "operationId": "lunch.supplier.action_reschedule_my_next_nextweek",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_nextweek",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/action_reschedule_my_next_today": {
+   "post": {
+    "operationId": "lunch.supplier.action_reschedule_my_next_today",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_today",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/action_reschedule_my_next_tomorrow": {
+   "post": {
+    "operationId": "lunch.supplier.action_reschedule_my_next_tomorrow",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_tomorrow",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/action_send_orders": {
+   "post": {
+    "operationId": "lunch.supplier.action_send_orders",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_send_orders",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/activity_feedback": {
+   "post": {
+    "description": "Set activities as done, limiting to some activity types and optionally to a given user.",
+    "operationId": "lunch.supplier.activity_feedback",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "attachment_ids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_feedback",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/activity_reschedule": {
+   "post": {
+    "description": "Reschedule some automated activities. Activities to reschedule are selected based on type xml ids and optionally by user. Purpose is to be able to",
+    "operationId": "lunch.supplier.activity_reschedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_user_id": {},
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_reschedule",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/activity_schedule": {
+   "post": {
+    "description": "Schedule an activity on each record of the current record set. This method allow to provide as parameter act_type_xmlid. This is an xml_id of activity type instead of directly giving an activity_type_id. It is useful to avoid having various \"env.ref\" in the code and allow to let the mixin handle access rights.",
+    "operationId": "lunch.supplier.activity_schedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlid": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "note": {},
+         "summary": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_schedule",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/activity_search": {
+   "post": {
+    "description": "Search automated activities on current record set, given a list of activity types xml IDs. It is useful when dealing with specific types involved in automatic activities management.",
+    "operationId": "lunch.supplier.activity_search",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "additional_domain": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_search",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/activity_send_mail": {
+   "post": {
+    "description": "Automatically send an email based on the given mail.template, given its ID.",
+    "operationId": "lunch.supplier.activity_send_mail",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "template_id": {}
+        },
+        "required": [
+         "template_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_send_mail",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/activity_unlink": {
+   "post": {
+    "description": "Unlink activities, limiting to some activity types and optionally to a given user.",
+    "operationId": "lunch.supplier.activity_unlink",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_unlink",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "lunch.supplier.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "lunch.supplier.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "lunch.supplier.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "lunch.supplier.message_change_thread",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_parent_message": {},
+         "new_thread": {}
+        },
+        "required": [
+         "new_thread"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_get_followers": {
+   "post": {
+    "operationId": "lunch.supplier.message_get_followers",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "after": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "filter_recipients": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "limit": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_mail_with_source": {
+   "post": {
+    "operationId": "lunch.supplier.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_new": {
+   "post": {
+    "operationId": "lunch.supplier.message_new",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "msg_dict": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "lunch.supplier.message_notify",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "attachment_ids": {},
+         "attachments": {},
+         "author_id": {},
+         "body": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "email_from": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "model": {},
+         "partner_ids": {},
+         "res_id": {},
+         "subject": {},
+         "subtype_id": {},
+         "subtype_xmlid": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "lunch.supplier.message_parse",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "message": {},
+         "save_original": {}
+        },
+        "required": [
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_post": {
+   "post": {
+    "operationId": "lunch.supplier.message_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "body": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "message_type": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_post_with_source": {
+   "post": {
+    "operationId": "lunch.supplier.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "lunch.supplier.message_process",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "model": {},
+         "save_original": {},
+         "strip_attachments": {},
+         "thread_id": {}
+        },
+        "required": [
+         "model",
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "lunch.supplier.message_route",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "message_dict": {},
+         "model": {},
+         "thread_id": {}
+        },
+        "required": [
+         "message",
+         "message_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "lunch.supplier.message_subscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {},
+         "subtype_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "lunch.supplier.message_unsubscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "lunch.supplier.message_update",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "msg_dict": {},
+         "update_vals": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "lunch.supplier.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/notify_cancel_by_type": {
+   "post": {
+    "operationId": "lunch.supplier.notify_cancel_by_type",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "notification_type": {}
+        },
+        "required": [
+         "notification_type"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "lunch.supplier.rating_apply",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "notify_delay_send": {},
+         "rate": {},
+         "rating": {},
+         "subtype_xmlid": {},
+         "token": {}
+        },
+        "required": [
+         "rate"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "lunch.supplier.rating_send_request",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "force_send": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "lang": {},
+         "template": {}
+        },
+        "required": [
+         "template"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "lunch.supplier.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "lunch.supplier.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "lunch.supplier.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "lunch.supplier.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "lunch.supplier.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.supplier/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "lunch.supplier.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "lunch.supplier"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "lunch.topping.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "lunch.topping.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "lunch.topping.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "lunch.topping.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "lunch.topping.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "lunch.topping.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "lunch.topping.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "lunch.topping.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "lunch.topping.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  },
+  "/json/2/lunch.topping/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "lunch.topping.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "lunch.topping"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Lunch Alert",
+   "name": "lunch.alert"
+  },
+  {
+   "description": "Lunch Cashmove",
+   "name": "lunch.cashmove"
+  },
+  {
+   "description": "Cashmoves report",
+   "name": "lunch.cashmove.report"
+  },
+  {
+   "description": "Lunch Locations",
+   "name": "lunch.location"
+  },
+  {
+   "description": "Lunch Order",
+   "name": "lunch.order"
+  },
+  {
+   "description": "Lunch Product",
+   "name": "lunch.product"
+  },
+  {
+   "description": "Lunch Product Category",
+   "name": "lunch.product.category"
+  },
+  {
+   "description": "Lunch Supplier",
+   "name": "lunch.supplier"
+  },
+  {
+   "description": "Lunch Extras",
+   "name": "lunch.topping"
+  }
+ ]
+}

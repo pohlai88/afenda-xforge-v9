@@ -37,6 +37,20 @@
             <redoc t-att-spec-url="spec_url" sanitize="true"/>
             <script type="text/javascript"
                     src="/afenda_api_docs/static/lib/redoc/redoc.standalone.js"/>
+            <!-- The committed OpenAPI asset (AFD-ARCH-CORR-0005): one link
+            per area actually present under openapi/ on this server, never a
+            hard-coded list - an area with no models gets no file and so no
+            link. -->
+            <div t-if="asset_areas" id="afenda_api_asset_links" class="container py-3">
+                <p>Committed OpenAPI documents, one per area:</p>
+                <ul>
+                    <t t-foreach="asset_areas" t-as="area">
+                        <li>
+                            <a t-attf-href="/docs/api/spec/#{area}.json" t-out="area"/>
+                        </li>
+                    </t>
+                </ul>
+            </div>
         </t>
     </template>
 </odoo>

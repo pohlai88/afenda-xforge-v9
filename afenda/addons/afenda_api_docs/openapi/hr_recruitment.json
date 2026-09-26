@@ -1,0 +1,5643 @@
+{
+ "components": {
+  "requestBodies": {
+   "action_add_to_job": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {}
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_change_thread": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "new_parent_message": {},
+        "new_thread": {}
+       },
+       "required": [
+        "new_thread"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_get_followers": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "after": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "filter_recipients": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "limit": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_mail_with_source": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "source_ref": {}
+       },
+       "required": [
+        "source_ref"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_new": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "msg_dict": {}
+       },
+       "required": [
+        "msg_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_notify": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "attachment_ids": {},
+        "attachments": {},
+        "author_id": {},
+        "body": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "email_from": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "model": {},
+        "partner_ids": {},
+        "res_id": {},
+        "subject": {},
+        "subtype_id": {},
+        "subtype_xmlid": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_parse": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "message": {},
+        "save_original": {}
+       },
+       "required": [
+        "message"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_post": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "body": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "message_type": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_process": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "message": {},
+        "model": {},
+        "save_original": {},
+        "strip_attachments": {},
+        "thread_id": {}
+       },
+       "required": [
+        "model",
+        "message"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_route": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "message": {},
+        "message_dict": {},
+        "model": {},
+        "thread_id": {}
+       },
+       "required": [
+        "message",
+        "message_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_subscribe": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "partner_ids": {},
+        "subtype_ids": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_unsubscribe": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "partner_ids": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_update": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "msg_dict": {},
+        "update_vals": {}
+       },
+       "required": [
+        "msg_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "notify_cancel_by_type": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "notification_type": {}
+       },
+       "required": [
+        "notification_type"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "rating_apply": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "feedback": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "notify_delay_send": {},
+        "rate": {},
+        "rating": {},
+        "subtype_xmlid": {},
+        "token": {}
+       },
+       "required": [
+        "rate"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "rating_send_request": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "force_send": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "lang": {},
+        "template": {}
+       },
+       "required": [
+        "template"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {
+         "type": "object"
+        }
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "hr.applicant": {
+    "properties": {
+     "active": {
+      "description": "If the active field is set to false, it will allow you to hide the case without removing it.",
+      "title": "Active",
+      "type": "boolean"
+     },
+     "activity_calendar_event_id": {
+      "readOnly": true,
+      "title": "Next Activity Calendar Event",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Next Activity Deadline",
+      "type": "string"
+     },
+     "activity_exception_decoration": {
+      "description": "Type of the exception activity on record.",
+      "enum": [
+       "warning",
+       "danger"
+      ],
+      "readOnly": true,
+      "title": "Activity Exception Decoration",
+      "type": "string",
+      "x-enum-labels": [
+       "Alert",
+       "Error"
+      ]
+     },
+     "activity_exception_icon": {
+      "description": "Icon to indicate an exception activity.",
+      "readOnly": true,
+      "title": "Icon",
+      "type": "string"
+     },
+     "activity_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Activities",
+      "type": "array",
+      "x-relation": "mail.activity"
+     },
+     "activity_state": {
+      "description": "Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities.",
+      "enum": [
+       "overdue",
+       "today",
+       "planned"
+      ],
+      "readOnly": true,
+      "title": "Activity State",
+      "type": "string",
+      "x-enum-labels": [
+       "Overdue",
+       "Today",
+       "Planned"
+      ]
+     },
+     "activity_summary": {
+      "title": "Next Activity Summary",
+      "type": "string"
+     },
+     "activity_type_icon": {
+      "description": "Font awesome icon e.g. fa-tasks",
+      "readOnly": true,
+      "title": "Activity Type Icon",
+      "type": "string"
+     },
+     "activity_type_id": {
+      "title": "Next Activity Type",
+      "type": "integer",
+      "x-relation": "mail.activity.type"
+     },
+     "activity_user_id": {
+      "readOnly": true,
+      "title": "Responsible User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "applicant_notes": {
+      "title": "Applicant Notes",
+      "type": "string"
+     },
+     "applicant_properties": {
+      "title": "Properties",
+      "type": "object"
+     },
+     "applicant_skill_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Skills",
+      "type": "array",
+      "x-relation": "hr.applicant.skill"
+     },
+     "application_count": {
+      "description": "Applications with the same email or phone or mobile",
+      "readOnly": true,
+      "title": "Application Count",
+      "type": "integer"
+     },
+     "application_status": {
+      "enum": [
+       "ongoing",
+       "hired",
+       "refused",
+       "archived"
+      ],
+      "readOnly": true,
+      "title": "Application Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Ongoing",
+       "Hired",
+       "Refused",
+       "Archived"
+      ]
+     },
+     "attachment_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Attachments",
+      "type": "array",
+      "x-relation": "ir.attachment"
+     },
+     "attachment_number": {
+      "readOnly": true,
+      "title": "Number of Attachments",
+      "type": "integer"
+     },
+     "availability": {
+      "description": "The date at which the applicant will be available to start working",
+      "format": "date",
+      "title": "Availability",
+      "type": "string"
+     },
+     "campaign_id": {
+      "description": "This is a name that helps you keep track of your different campaign efforts, e.g. Fall_Drive, Christmas_Special",
+      "title": "Campaign",
+      "type": "integer",
+      "x-relation": "utm.campaign"
+     },
+     "categ_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Tags",
+      "type": "array",
+      "x-relation": "hr.applicant.category"
+     },
+     "color": {
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Applied on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "current_applicant_skill_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Current Applicant Skill",
+      "type": "array",
+      "x-relation": "hr.applicant.skill"
+     },
+     "date_closed": {
+      "format": "date-time",
+      "title": "Hire Date",
+      "type": "string"
+     },
+     "date_last_stage_update": {
+      "format": "date-time",
+      "title": "Last Stage Update",
+      "type": "string"
+     },
+     "date_open": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Assigned",
+      "type": "string"
+     },
+     "day_close": {
+      "readOnly": true,
+      "title": "Days to Close",
+      "type": "number"
+     },
+     "day_open": {
+      "readOnly": true,
+      "title": "Days to Open",
+      "type": "number"
+     },
+     "delay_close": {
+      "description": "Number of days to close",
+      "readOnly": true,
+      "title": "Delay to Close",
+      "type": "number"
+     },
+     "department_id": {
+      "title": "Department",
+      "type": "integer",
+      "x-relation": "hr.department"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "duration_tracking": {
+      "description": "JSON that maps ids from a many2one field to seconds spent",
+      "readOnly": true,
+      "title": "Status time",
+      "type": "object"
+     },
+     "email_cc": {
+      "title": "Email cc",
+      "type": "string"
+     },
+     "email_from": {
+      "title": "Email",
+      "type": "string"
+     },
+     "email_normalized": {
+      "description": "This field is used to search on email address as the primary email field can contain more than strictly an email address.",
+      "readOnly": true,
+      "title": "Normalized Email",
+      "type": "string"
+     },
+     "emp_is_active": {
+      "description": "If the active field is set to False, it will allow you to hide the resource record without removing it.",
+      "readOnly": true,
+      "title": "Employee Active",
+      "type": "boolean"
+     },
+     "employee_id": {
+      "description": "Employee linked to the applicant.",
+      "title": "Employee",
+      "type": "integer",
+      "x-relation": "hr.employee"
+     },
+     "employee_name": {
+      "title": "Employee Name",
+      "type": "string"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "interviewer_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Interviewers",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "is_applicant_in_pool": {
+      "readOnly": true,
+      "title": "Is Applicant In Pool",
+      "type": "boolean"
+     },
+     "is_blacklisted": {
+      "description": "If the email address is on the blacklist, the contact won't receive mass mailing anymore, from any list",
+      "readOnly": true,
+      "title": "Blacklist",
+      "type": "boolean"
+     },
+     "is_pool_applicant": {
+      "readOnly": true,
+      "title": "Is Pool Applicant",
+      "type": "boolean"
+     },
+     "is_rotting": {
+      "readOnly": true,
+      "title": "Rotting",
+      "type": "boolean"
+     },
+     "job_id": {
+      "title": "Job Position",
+      "type": "integer",
+      "x-relation": "hr.job"
+     },
+     "kanban_state": {
+      "enum": [
+       "normal",
+       "done",
+       "waiting",
+       "blocked"
+      ],
+      "title": "Kanban State",
+      "type": "string",
+      "x-enum-labels": [
+       "In Progress",
+       "Ready for Next Stage",
+       "Waiting",
+       "Blocked"
+      ]
+     },
+     "last_stage_id": {
+      "description": "Stage of the applicant before being in the current stage. Used for lost cases analysis.",
+      "title": "Last Stage",
+      "type": "integer",
+      "x-relation": "hr.recruitment.stage"
+     },
+     "legend_blocked": {
+      "readOnly": true,
+      "title": "Kanban Blocked",
+      "type": "string"
+     },
+     "legend_done": {
+      "readOnly": true,
+      "title": "Kanban Valid",
+      "type": "string"
+     },
+     "legend_normal": {
+      "readOnly": true,
+      "title": "Kanban Ongoing",
+      "type": "string"
+     },
+     "legend_waiting": {
+      "readOnly": true,
+      "title": "Kanban Waiting",
+      "type": "string"
+     },
+     "linkedin_profile": {
+      "title": "LinkedIn Profile",
+      "type": "string"
+     },
+     "matching_score": {
+      "readOnly": true,
+      "title": "Matching Score",
+      "type": "integer"
+     },
+     "matching_skill_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Matching Skills",
+      "type": "array",
+      "x-relation": "hr.skill"
+     },
+     "medium_id": {
+      "description": "This displays how the applicant has reached out, e.g. via Email, LinkedIn, Website, etc.",
+      "title": "Medium",
+      "type": "integer",
+      "x-relation": "utm.medium"
+     },
+     "meeting_display_date": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Meeting Display Date",
+      "type": "string"
+     },
+     "meeting_display_text": {
+      "readOnly": true,
+      "title": "Meeting Display Text",
+      "type": "string"
+     },
+     "meeting_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Meetings",
+      "type": "array",
+      "x-relation": "calendar.event"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_bounce": {
+      "description": "Counter of the number of bounced emails for this contact",
+      "title": "Bounce",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_main_attachment_id": {
+      "title": "Main Attachment",
+      "type": "integer",
+      "x-relation": "ir.attachment"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "missing_skill_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Missing Skills",
+      "type": "array",
+      "x-relation": "hr.skill"
+     },
+     "my_activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "My Activity Deadline",
+      "type": "string"
+     },
+     "partner_id": {
+      "title": "Contact",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "partner_name": {
+      "title": "Applicant's Name",
+      "type": "string"
+     },
+     "partner_phone": {
+      "title": "Phone",
+      "type": "string"
+     },
+     "partner_phone_sanitized": {
+      "readOnly": true,
+      "title": "Sanitized Phone Number",
+      "type": "string"
+     },
+     "phone_blacklisted": {
+      "description": "Indicates if a blacklisted sanitized phone number is a phone number. Helps distinguish which number is blacklisted             when there is both a mobile and phone field in a model.",
+      "readOnly": true,
+      "title": "Blacklisted Phone is Phone",
+      "type": "boolean"
+     },
+     "phone_mobile_search": {
+      "title": "Phone Number",
+      "type": "string"
+     },
+     "phone_sanitized": {
+      "description": "Field used to store sanitized phone number. Helps speeding up searches and comparisons.",
+      "readOnly": true,
+      "title": "Sanitized Number",
+      "type": "string"
+     },
+     "phone_sanitized_blacklisted": {
+      "description": "If the sanitized phone number is on the blacklist, the contact won't receive mass mailing sms anymore, from any list",
+      "readOnly": true,
+      "title": "Phone Blacklisted",
+      "type": "boolean"
+     },
+     "pool_applicant_id": {
+      "title": "Pool Applicant",
+      "type": "integer",
+      "x-relation": "hr.applicant"
+     },
+     "priority": {
+      "enum": [
+       "0",
+       "1",
+       "2",
+       "3"
+      ],
+      "title": "Evaluation",
+      "type": "string",
+      "x-enum-labels": [
+       "Normal",
+       "Good",
+       "Very Good",
+       "Excellent"
+      ]
+     },
+     "probability": {
+      "title": "Probability",
+      "type": "number"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "refuse_date": {
+      "format": "date-time",
+      "title": "Refuse Date",
+      "type": "string"
+     },
+     "refuse_reason_id": {
+      "title": "Refuse Reason",
+      "type": "integer",
+      "x-relation": "hr.applicant.refuse.reason"
+     },
+     "rotting_days": {
+      "description": "Day count since this resource was last updated",
+      "readOnly": true,
+      "title": "Days Rotting",
+      "type": "integer"
+     },
+     "salary_expected": {
+      "description": "Salary Expected by Applicant",
+      "title": "Expected",
+      "type": "number"
+     },
+     "salary_expected_extra": {
+      "description": "Salary Expected by Applicant, extra advantages",
+      "title": "Expected Salary Extra",
+      "type": "string"
+     },
+     "salary_proposed": {
+      "description": "Salary Proposed by the Organisation",
+      "title": "Proposed",
+      "type": "number"
+     },
+     "salary_proposed_extra": {
+      "description": "Salary Proposed by the Organisation, extra advantages",
+      "title": "Proposed Salary Extra",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "skill_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Skill",
+      "type": "array",
+      "x-relation": "hr.skill"
+     },
+     "source_id": {
+      "description": "This is the source of the link, e.g. Search Engine, another domain, or name of email list",
+      "title": "Source",
+      "type": "integer",
+      "x-relation": "utm.source"
+     },
+     "stage_id": {
+      "title": "Stage",
+      "type": "integer",
+      "x-relation": "hr.recruitment.stage"
+     },
+     "talent_pool_count": {
+      "readOnly": true,
+      "title": "Talent Pool Count",
+      "type": "integer"
+     },
+     "talent_pool_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Talent Pools",
+      "type": "array",
+      "x-relation": "hr.talent.pool"
+     },
+     "type_id": {
+      "title": "Degree",
+      "type": "integer",
+      "x-relation": "hr.recruitment.degree"
+     },
+     "user_email": {
+      "readOnly": true,
+      "title": "User Email",
+      "type": "string"
+     },
+     "user_id": {
+      "title": "Recruiter",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "kanban_state"
+    ],
+    "title": "Applicant",
+    "type": "object"
+   },
+   "hr.applicant.category": {
+    "properties": {
+     "color": {
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Tag Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Category of applicant",
+    "type": "object"
+   },
+   "hr.applicant.refuse.reason": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Description",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "template_id": {
+      "title": "Email Template",
+      "type": "integer",
+      "x-relation": "mail.template"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Refuse Reason of Applicant",
+    "type": "object"
+   },
+   "hr.job.platform": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "email": {
+      "description": "Applications received from this Email won't be linked to a contact.There will be no email address set on the Applicant either.",
+      "title": "Email",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "regex": {
+      "description": "The regex facilitates to extract information from the subject or body of the received email to autopopulate the Applicant's name field",
+      "title": "Regex",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "email",
+     "name"
+    ],
+    "title": "Job Platforms",
+    "type": "object"
+   },
+   "hr.recruitment.degree": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Degree Name",
+      "type": "string"
+     },
+     "score": {
+      "title": "Score",
+      "type": "number"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "score"
+    ],
+    "title": "Applicant Degree",
+    "type": "object"
+   },
+   "hr.recruitment.source": {
+    "properties": {
+     "alias_id": {
+      "title": "Alias ID",
+      "type": "integer",
+      "x-relation": "mail.alias"
+     },
+     "campaign_id": {
+      "title": "Campaign",
+      "type": "integer",
+      "x-relation": "utm.campaign"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "email": {
+      "readOnly": true,
+      "title": "Email",
+      "type": "string"
+     },
+     "has_domain": {
+      "readOnly": true,
+      "title": "Has Domain",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "job_id": {
+      "title": "Job",
+      "type": "integer",
+      "x-relation": "hr.job"
+     },
+     "medium_id": {
+      "title": "Medium",
+      "type": "integer",
+      "x-relation": "utm.medium"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "source_id": {
+      "title": "Source",
+      "type": "integer",
+      "x-relation": "utm.source"
+     },
+     "url": {
+      "readOnly": true,
+      "title": "Tracker URL",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "source_id"
+    ],
+    "title": "Source of Applicants",
+    "type": "object"
+   },
+   "hr.recruitment.stage": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "fold": {
+      "description": "This stage is folded in the kanban view when there are no records in that stage to display.",
+      "title": "Folded in Kanban",
+      "type": "boolean"
+     },
+     "hired_stage": {
+      "description": "If checked, this stage is used to determine the hire date of an applicant",
+      "title": "Hired Stage",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "is_warning_visible": {
+      "readOnly": true,
+      "title": "Is Warning Visible",
+      "type": "boolean"
+     },
+     "job_ids": {
+      "description": "Specific jobs that use this stage. Other jobs will not use this stage.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Job Specific",
+      "type": "array",
+      "x-relation": "hr.job"
+     },
+     "legend_blocked": {
+      "title": "Red Kanban Label",
+      "type": "string"
+     },
+     "legend_done": {
+      "title": "Green Kanban Label",
+      "type": "string"
+     },
+     "legend_normal": {
+      "title": "Grey Kanban Label",
+      "type": "string"
+     },
+     "legend_waiting": {
+      "title": "Orange Kanban Label",
+      "type": "string"
+     },
+     "name": {
+      "title": "Stage Name",
+      "type": "string"
+     },
+     "requirements": {
+      "title": "Requirements",
+      "type": "string"
+     },
+     "rotting_threshold_days": {
+      "description": "Day count before applicants in this stage become stale.         Set to 0 to disable.  Changing this parameter will not affect the rotting status/date of resources last updated before this change.",
+      "title": "Days to rot",
+      "type": "integer"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "template_id": {
+      "description": "If set, a message is posted on the applicant using the template when the applicant is set to the stage.",
+      "title": "Email Template",
+      "type": "integer",
+      "x-relation": "mail.template"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "legend_blocked",
+     "legend_done",
+     "legend_normal",
+     "legend_waiting",
+     "name"
+    ],
+    "title": "Recruitment Stages",
+    "type": "object"
+   },
+   "hr.talent.pool": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "categ_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Tags",
+      "type": "array",
+      "x-relation": "hr.applicant.category"
+     },
+     "color": {
+      "title": "Color",
+      "type": "integer"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "description": {
+      "title": "Talent Pool Description",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "name": {
+      "title": "Title",
+      "type": "string"
+     },
+     "no_of_talents": {
+      "description": "The number of talents in this talent pool.",
+      "readOnly": true,
+      "title": "# Talents",
+      "type": "integer"
+     },
+     "pool_manager": {
+      "title": "Pool Manager",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "talent_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Talent",
+      "type": "array",
+      "x-relation": "hr.applicant"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Talent Pool",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "hr_recruitment"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/hr.applicant.category/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "hr.applicant.category.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.category/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "hr.applicant.category.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.category/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "hr.applicant.category.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.category/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "hr.applicant.category.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.category/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "hr.applicant.category.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.category/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "hr.applicant.category.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.category/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "hr.applicant.category.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.category/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "hr.applicant.category.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.category/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "hr.applicant.category.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.category/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "hr.applicant.category.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "hr.applicant.category"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "hr.applicant.refuse.reason.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "hr.applicant.refuse.reason.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "hr.applicant.refuse.reason.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "hr.applicant.refuse.reason.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "hr.applicant.refuse.reason.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "hr.applicant.refuse.reason.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "hr.applicant.refuse.reason.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "hr.applicant.refuse.reason.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "hr.applicant.refuse.reason.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant.refuse.reason/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "hr.applicant.refuse.reason.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "hr.applicant.refuse.reason"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_add_to_job": {
+   "post": {
+    "operationId": "hr.applicant.action_add_to_job",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_add_to_job",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_create_meeting": {
+   "post": {
+    "description": "This opens Meeting's calendar view to schedule meeting on current applicant @return: Dictionary value for created Meeting view",
+    "operationId": "hr.applicant.action_create_meeting",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_create_meeting",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_job_add_applicants": {
+   "post": {
+    "operationId": "hr.applicant.action_job_add_applicants",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_job_add_applicants",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_open_applications": {
+   "post": {
+    "operationId": "hr.applicant.action_open_applications",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_applications",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_open_attachments": {
+   "post": {
+    "operationId": "hr.applicant.action_open_attachments",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_attachments",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_open_employee": {
+   "post": {
+    "operationId": "hr.applicant.action_open_employee",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_employee",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_reschedule_my_next_nextweek": {
+   "post": {
+    "operationId": "hr.applicant.action_reschedule_my_next_nextweek",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_nextweek",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_reschedule_my_next_today": {
+   "post": {
+    "operationId": "hr.applicant.action_reschedule_my_next_today",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_today",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_reschedule_my_next_tomorrow": {
+   "post": {
+    "operationId": "hr.applicant.action_reschedule_my_next_tomorrow",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_tomorrow",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_send_email": {
+   "post": {
+    "operationId": "hr.applicant.action_send_email",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_send_email",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_send_sms": {
+   "post": {
+    "operationId": "hr.applicant.action_send_sms",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_send_sms",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_talent_pool_add_applicants": {
+   "post": {
+    "operationId": "hr.applicant.action_talent_pool_add_applicants",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_talent_pool_add_applicants",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/action_talent_pool_stat_button": {
+   "post": {
+    "operationId": "hr.applicant.action_talent_pool_stat_button",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_talent_pool_stat_button",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/activity_feedback": {
+   "post": {
+    "description": "Set activities as done, limiting to some activity types and optionally to a given user.",
+    "operationId": "hr.applicant.activity_feedback",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "attachment_ids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_feedback",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/activity_reschedule": {
+   "post": {
+    "description": "Reschedule some automated activities. Activities to reschedule are selected based on type xml ids and optionally by user. Purpose is to be able to",
+    "operationId": "hr.applicant.activity_reschedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_user_id": {},
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_reschedule",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/activity_schedule": {
+   "post": {
+    "description": "Schedule an activity on each record of the current record set. This method allow to provide as parameter act_type_xmlid. This is an xml_id of activity type instead of directly giving an activity_type_id. It is useful to avoid having various \"env.ref\" in the code and allow to let the mixin handle access rights.",
+    "operationId": "hr.applicant.activity_schedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlid": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "note": {},
+         "summary": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_schedule",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/activity_search": {
+   "post": {
+    "description": "Search automated activities on current record set, given a list of activity types xml IDs. It is useful when dealing with specific types involved in automatic activities management.",
+    "operationId": "hr.applicant.activity_search",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "additional_domain": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_search",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/activity_send_mail": {
+   "post": {
+    "description": "Automatically send an email based on the given mail.template, given its ID.",
+    "operationId": "hr.applicant.activity_send_mail",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "template_id": {}
+        },
+        "required": [
+         "template_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_send_mail",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/activity_unlink": {
+   "post": {
+    "description": "Unlink activities, limiting to some activity types and optionally to a given user.",
+    "operationId": "hr.applicant.activity_unlink",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_unlink",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/archive_applicant": {
+   "post": {
+    "operationId": "hr.applicant.archive_applicant",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "archive_applicant",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "hr.applicant.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/create_employee_from_applicant": {
+   "post": {
+    "description": "Create an employee from applicant",
+    "operationId": "hr.applicant.create_employee_from_applicant",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_employee_from_applicant",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "hr.applicant.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/find_or_create_record": {
+   "post": {
+    "description": "Version of ``_find_or_create_record`` used in frontend notably in website_links. For UTM models it calls _find_or_create_record. For other models (as through inheritance custom models could be used notably in website links) it simply calls a create. In the end it relies on standard ACLs, and is mainly a wrapper for UTM models.",
+    "operationId": "hr.applicant.find_or_create_record",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "model_name": {},
+         "name": {}
+        },
+        "required": [
+         "model_name",
+         "name"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "find_or_create_record",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "hr.applicant.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/link_applicant_to_talent": {
+   "post": {
+    "operationId": "hr.applicant.link_applicant_to_talent",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "link_applicant_to_talent",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/mail_action_blacklist_remove": {
+   "post": {
+    "operationId": "hr.applicant.mail_action_blacklist_remove",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "mail_action_blacklist_remove",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "hr.applicant.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_get_followers": {
+   "post": {
+    "operationId": "hr.applicant.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_mail_with_source": {
+   "post": {
+    "operationId": "hr.applicant.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_new": {
+   "post": {
+    "operationId": "hr.applicant.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "hr.applicant.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "hr.applicant.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_post": {
+   "post": {
+    "operationId": "hr.applicant.message_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_post"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_post_with_source": {
+   "post": {
+    "operationId": "hr.applicant.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "hr.applicant.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "hr.applicant.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "hr.applicant.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "hr.applicant.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/message_update": {
+   "post": {
+    "operationId": "hr.applicant.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "hr.applicant.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/notify_cancel_by_type": {
+   "post": {
+    "operationId": "hr.applicant.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/phone_action_blacklist_remove": {
+   "post": {
+    "operationId": "hr.applicant.phone_action_blacklist_remove",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "phone_action_blacklist_remove",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "hr.applicant.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "hr.applicant.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "hr.applicant.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/reset_applicant": {
+   "post": {
+    "description": "Reinsert the applicant into the recruitment pipe in the first stage",
+    "operationId": "hr.applicant.reset_applicant",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "reset_applicant",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "hr.applicant.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "hr.applicant.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "hr.applicant.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/tracking_fields": {
+   "post": {
+    "operationId": "hr.applicant.tracking_fields",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "tracking_fields",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/unlink": {
+   "post": {
+    "description": "When removing a record, its rating should be deleted too.",
+    "operationId": "hr.applicant.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/website_form_input_filter": {
+   "post": {
+    "operationId": "hr.applicant.website_form_input_filter",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "request": {},
+         "values": {}
+        },
+        "required": [
+         "request",
+         "values"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "website_form_input_filter",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.applicant/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "hr.applicant.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "hr.applicant"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "hr.job.platform.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "hr.job.platform.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "hr.job.platform.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "hr.job.platform.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "hr.job.platform.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "hr.job.platform.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "hr.job.platform.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "hr.job.platform.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "hr.job.platform.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.job.platform/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "hr.job.platform.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "hr.job.platform"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "hr.recruitment.degree.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "hr.recruitment.degree.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "hr.recruitment.degree.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "hr.recruitment.degree.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "hr.recruitment.degree.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "hr.recruitment.degree.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "hr.recruitment.degree.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "hr.recruitment.degree.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "hr.recruitment.degree.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.degree/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "hr.recruitment.degree.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "hr.recruitment.degree"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/create": {
+   "post": {
+    "description": "Create the UTM sources if necessary, generate the name based on the content in batch.",
+    "operationId": "hr.recruitment.source.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/create_alias": {
+   "post": {
+    "operationId": "hr.recruitment.source.create_alias",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_alias",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/create_and_get_alias": {
+   "post": {
+    "operationId": "hr.recruitment.source.create_and_get_alias",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_and_get_alias",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "hr.recruitment.source.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "hr.recruitment.source.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "hr.recruitment.source.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "hr.recruitment.source.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "hr.recruitment.source.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "hr.recruitment.source.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "hr.recruitment.source.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/unlink": {
+   "post": {
+    "description": "Cascade delete aliases to avoid useless / badly configured aliases.",
+    "operationId": "hr.recruitment.source.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.source/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "hr.recruitment.source.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "hr.recruitment.source"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "hr.recruitment.stage.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "hr.recruitment.stage.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "hr.recruitment.stage.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "hr.recruitment.stage.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "hr.recruitment.stage.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "hr.recruitment.stage.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "hr.recruitment.stage.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "hr.recruitment.stage.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "hr.recruitment.stage.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.recruitment.stage/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "hr.recruitment.stage.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "hr.recruitment.stage"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/action_talent_pool_add_talents": {
+   "post": {
+    "operationId": "hr.talent.pool.action_talent_pool_add_talents",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_talent_pool_add_talents",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/create": {
+   "post": {
+    "description": "Chatter override : - subscribe uid - subscribe followers of parent - log a creation message",
+    "operationId": "hr.talent.pool.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "hr.talent.pool.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "hr.talent.pool.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "hr.talent.pool.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_get_followers": {
+   "post": {
+    "operationId": "hr.talent.pool.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_mail_with_source": {
+   "post": {
+    "operationId": "hr.talent.pool.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_new": {
+   "post": {
+    "operationId": "hr.talent.pool.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "hr.talent.pool.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "hr.talent.pool.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_post": {
+   "post": {
+    "operationId": "hr.talent.pool.message_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_post"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_post_with_source": {
+   "post": {
+    "operationId": "hr.talent.pool.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "hr.talent.pool.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "hr.talent.pool.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "hr.talent.pool.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "hr.talent.pool.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "hr.talent.pool.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "hr.talent.pool.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/notify_cancel_by_type": {
+   "post": {
+    "operationId": "hr.talent.pool.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "hr.talent.pool.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "hr.talent.pool.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "hr.talent.pool.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "hr.talent.pool.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "hr.talent.pool.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "hr.talent.pool.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/unlink": {
+   "post": {
+    "description": "When removing a record, its rating should be deleted too.",
+    "operationId": "hr.talent.pool.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_add_to_job"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  },
+  "/json/2/hr.talent.pool/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "hr.talent.pool.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "hr.talent.pool"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Applicant",
+   "name": "hr.applicant"
+  },
+  {
+   "description": "Category of applicant",
+   "name": "hr.applicant.category"
+  },
+  {
+   "description": "Refuse Reason of Applicant",
+   "name": "hr.applicant.refuse.reason"
+  },
+  {
+   "description": "Job Platforms",
+   "name": "hr.job.platform"
+  },
+  {
+   "description": "Applicant Degree",
+   "name": "hr.recruitment.degree"
+  },
+  {
+   "description": "Source of Applicants",
+   "name": "hr.recruitment.source"
+  },
+  {
+   "description": "Recruitment Stages",
+   "name": "hr.recruitment.stage"
+  },
+  {
+   "description": "Talent Pool",
+   "name": "hr.talent.pool"
+  }
+ ]
+}

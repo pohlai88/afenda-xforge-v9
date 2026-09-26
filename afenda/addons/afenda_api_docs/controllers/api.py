@@ -1,3 +1,6 @@
+import re
+from pathlib import Path
+
 from werkzeug.urls import url_encode
 
 from odoo import http
@@ -15,6 +18,24 @@ from ..aliasing import alias_prose
 # mechanism upstream uses on the login page (addons/web/controllers/home.py:153),
 # including its `frame-ancestors 'self'` against framing by another origin.
 _API_PAGE_CSP = "img-src 'self' data:; frame-ancestors 'self'"
+
+# The committed OpenAPI asset areas (AFD-ARCH-CORR-0005), one file per
+# non-empty area, written by `afenda/tools/export_openapi_shell.py` and
+# committed to the repository - never generated at request time.
+_OPENAPI_DIR = (Path(__file__).resolve().parents[1] / "openapi").resolve()
+# The only shape `write_assets` ever names a file with (asset_rules.py:
+# `manifest_applications` reads module directory names, which
+# odoo/addons/base's own module-name column already restricts to this
+# charset). Anything else - a dot, a slash, an encoded null byte, an
+# uppercase letter - is refused before the filesystem is ever touched, so a
+# path trick has nothing to work with even before the parent-directory
+# check below.
+_AREA_RE = re.compile(r"^[a-z0-9_]+$")
+
+
+def _committed_areas():
+    """Sorted stems of every committed OpenAPI asset area on disk."""
+    return sorted(path.stem for path in _OPENAPI_DIR.glob("*.json"))
 
 
 class AfendaApiController(http.Controller):
@@ -50,9 +71,48 @@ class AfendaApiController(http.Controller):
             "spec_url": spec_url,
             "app": app or "",
             "apps": self._app_choices(),
+            "asset_areas": _committed_areas(),
         })
         response.headers["Content-Security-Policy"] = _API_PAGE_CSP
         return response
+
+    # auth='user': same reasoning as /docs/openapi.json - each area's
+    # document lists every model and field an integrator can call, which is
+    # per-user information disclosure even though the committed bytes
+    # themselves are the same for everyone (AFD-ARCH-CORR-0005 fixes the
+    # document to base.user_admin at build time; this route does not
+    # regenerate it per caller, it only gates *access* to the committed
+    # file the same way the live document is gated).
+    @http.route(
+        "/docs/api/spec/<string:area>.json",
+        type="http", auth="user", methods=["GET"], website=False, sitemap=False,
+    )
+    def docs_api_spec(self, area, **kwargs):
+        """Serve one committed OpenAPI asset area's bytes, verbatim, from disk.
+
+        Two independent checks stand between this route and the filesystem,
+        because either one failing alone must not be enough to escape
+        `_OPENAPI_DIR`: `_AREA_RE` refuses any `area` that is not
+        `^[a-z0-9_]+$` (a dot, a slash - encoded or not - or a stray null
+        byte all fail it, so `..%2fmanifest`, `%2e%2e` and
+        `core.json%00` never even reach a path lookup), and the resolved
+        file's parent must still equal `_OPENAPI_DIR` (defence in depth
+        against anything the regex alone might miss). Only then is the file
+        read - never through `area` used to build a path before both checks
+        pass.
+        """
+        if not _AREA_RE.match(area):
+            return request.not_found()
+        path = (_OPENAPI_DIR / f"{area}.json").resolve()
+        if path.parent != _OPENAPI_DIR or not path.is_file():
+            return request.not_found()
+        return request.make_response(
+            path.read_bytes(),
+            headers=[
+                ("Content-Type", "application/json"),
+                ("Cache-Control", "private, no-store"),
+            ],
+        )
 
     # auth='public': the "type" field of every JSON-2 error body, signed in
     # or not, points here (afenda_runtime/problems.py, models/ir_http.py), so

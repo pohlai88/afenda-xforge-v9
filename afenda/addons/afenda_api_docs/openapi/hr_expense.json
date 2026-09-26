@@ -1,0 +1,2582 @@
+{
+ "components": {
+  "requestBodies": {
+   "action_approve": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_mail_with_source": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "source_ref": {}
+       },
+       "required": [
+        "source_ref"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "hr.expense": {
+    "properties": {
+     "account_id": {
+      "description": "An expense account is expected",
+      "title": "Account",
+      "type": "integer",
+      "x-relation": "account.account"
+     },
+     "account_move_id": {
+      "readOnly": true,
+      "title": "Journal Entry",
+      "type": "integer",
+      "x-relation": "account.move"
+     },
+     "activity_calendar_event_id": {
+      "readOnly": true,
+      "title": "Next Activity Calendar Event",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Next Activity Deadline",
+      "type": "string"
+     },
+     "activity_exception_decoration": {
+      "description": "Type of the exception activity on record.",
+      "enum": [
+       "warning",
+       "danger"
+      ],
+      "readOnly": true,
+      "title": "Activity Exception Decoration",
+      "type": "string",
+      "x-enum-labels": [
+       "Alert",
+       "Error"
+      ]
+     },
+     "activity_exception_icon": {
+      "description": "Icon to indicate an exception activity.",
+      "readOnly": true,
+      "title": "Icon",
+      "type": "string"
+     },
+     "activity_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Activities",
+      "type": "array",
+      "x-relation": "mail.activity"
+     },
+     "activity_state": {
+      "description": "Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities.",
+      "enum": [
+       "overdue",
+       "today",
+       "planned"
+      ],
+      "readOnly": true,
+      "title": "Activity State",
+      "type": "string",
+      "x-enum-labels": [
+       "Overdue",
+       "Today",
+       "Planned"
+      ]
+     },
+     "activity_summary": {
+      "title": "Next Activity Summary",
+      "type": "string"
+     },
+     "activity_type_icon": {
+      "description": "Font awesome icon e.g. fa-tasks",
+      "readOnly": true,
+      "title": "Activity Type Icon",
+      "type": "string"
+     },
+     "activity_type_id": {
+      "title": "Next Activity Type",
+      "type": "integer",
+      "x-relation": "mail.activity.type"
+     },
+     "activity_user_id": {
+      "readOnly": true,
+      "title": "Responsible User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "amount_residual": {
+      "readOnly": true,
+      "title": "Amount Due",
+      "type": "number"
+     },
+     "analytic_distribution": {
+      "title": "Analytic Distribution",
+      "type": "object"
+     },
+     "analytic_precision": {
+      "title": "Analytic Precision",
+      "type": "integer"
+     },
+     "approval_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Approval Date",
+      "type": "string"
+     },
+     "approval_state": {
+      "enum": [
+       "submitted",
+       "approved",
+       "refused"
+      ],
+      "readOnly": true,
+      "title": "Approval State",
+      "type": "string",
+      "x-enum-labels": [
+       "Submitted",
+       "Approved",
+       "Refused"
+      ]
+     },
+     "attachment_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Attachments",
+      "type": "array",
+      "x-relation": "ir.attachment"
+     },
+     "can_approve": {
+      "readOnly": true,
+      "title": "Can Approve",
+      "type": "boolean"
+     },
+     "can_be_reinvoiced": {
+      "readOnly": true,
+      "title": "Can be reinvoiced",
+      "type": "boolean"
+     },
+     "can_reset": {
+      "readOnly": true,
+      "title": "Can Reset",
+      "type": "boolean"
+     },
+     "company_currency_id": {
+      "readOnly": true,
+      "title": "Report Company Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "company_id": {
+      "readOnly": true,
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "currency_id": {
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "currency_rate": {
+      "readOnly": true,
+      "title": "Currency Rate",
+      "type": "number"
+     },
+     "date": {
+      "format": "date",
+      "title": "Expense Date",
+      "type": "string"
+     },
+     "department_id": {
+      "readOnly": true,
+      "title": "Department",
+      "type": "integer",
+      "x-relation": "hr.department"
+     },
+     "description": {
+      "title": "Internal Notes",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "distribution_analytic_account_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Distribution Analytic Account",
+      "type": "array",
+      "x-relation": "account.analytic.account"
+     },
+     "duplicate_expense_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Duplicate Expense",
+      "type": "array",
+      "x-relation": "hr.expense"
+     },
+     "employee_id": {
+      "title": "Employee",
+      "type": "integer",
+      "x-relation": "hr.employee"
+     },
+     "former_sheet_id": {
+      "title": "Former Report",
+      "type": "integer"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "is_editable": {
+      "readOnly": true,
+      "title": "Is Editable By Current User",
+      "type": "boolean"
+     },
+     "is_multiple_currency": {
+      "readOnly": true,
+      "title": "Is currency_id different from the company_currency_id",
+      "type": "boolean"
+     },
+     "journal_id": {
+      "readOnly": true,
+      "title": "Journal",
+      "type": "integer",
+      "x-relation": "account.journal"
+     },
+     "label_currency_rate": {
+      "readOnly": true,
+      "title": "Label Currency Rate",
+      "type": "string"
+     },
+     "manager_id": {
+      "readOnly": true,
+      "title": "Manager",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_main_attachment_checksum": {
+      "readOnly": true,
+      "title": "Checksum/SHA1",
+      "type": "string"
+     },
+     "message_main_attachment_id": {
+      "title": "Main Attachment",
+      "type": "integer",
+      "x-relation": "ir.attachment"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "my_activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "My Activity Deadline",
+      "type": "string"
+     },
+     "name": {
+      "title": "Description",
+      "type": "string"
+     },
+     "nb_attachment": {
+      "readOnly": true,
+      "title": "Number of Attachments",
+      "type": "integer"
+     },
+     "payment_method_line_id": {
+      "description": "The payment method used when the expense is paid by the company.",
+      "title": "Payment Method",
+      "type": "integer",
+      "x-relation": "account.payment.method.line"
+     },
+     "payment_mode": {
+      "enum": [
+       "own_account",
+       "company_account"
+      ],
+      "title": "Paid By",
+      "type": "string",
+      "x-enum-labels": [
+       "Employee (to reimburse)",
+       "Company"
+      ]
+     },
+     "price_unit": {
+      "readOnly": true,
+      "title": "Unit Price",
+      "type": "number"
+     },
+     "product_description": {
+      "readOnly": true,
+      "title": "Product Description",
+      "type": "string"
+     },
+     "product_has_cost": {
+      "readOnly": true,
+      "title": "Product Has Cost",
+      "type": "boolean"
+     },
+     "product_has_tax": {
+      "readOnly": true,
+      "title": "Whether tax is defined on a selected product",
+      "type": "boolean"
+     },
+     "product_id": {
+      "title": "Category",
+      "type": "integer",
+      "x-relation": "product.product"
+     },
+     "product_uom_id": {
+      "readOnly": true,
+      "title": "Unit",
+      "type": "integer",
+      "x-relation": "uom.uom"
+     },
+     "quantity": {
+      "title": "Quantity",
+      "type": "number"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "sale_order_id": {
+      "description": "If the category has an expense policy, it will be reinvoiced on this sales order",
+      "title": "Customer to Reinvoice",
+      "type": "integer",
+      "x-relation": "sale.order"
+     },
+     "sale_order_line_id": {
+      "readOnly": true,
+      "title": "Sale Order Line",
+      "type": "integer",
+      "x-relation": "sale.order.line"
+     },
+     "same_receipt_expense_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Same Receipt Expense",
+      "type": "array",
+      "x-relation": "hr.expense"
+     },
+     "selectable_payment_method_line_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Selectable Payment Method Line",
+      "type": "array",
+      "x-relation": "account.payment.method.line"
+     },
+     "split_expense_origin_id": {
+      "description": "Original expense from a split.",
+      "title": "Origin Split Expense",
+      "type": "integer",
+      "x-relation": "hr.expense"
+     },
+     "state": {
+      "enum": [
+       "draft",
+       "submitted",
+       "approved",
+       "posted",
+       "in_payment",
+       "paid",
+       "refused"
+      ],
+      "readOnly": true,
+      "title": "Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Draft",
+       "Submitted",
+       "Approved",
+       "Posted",
+       "In Payment",
+       "Paid",
+       "Refused"
+      ]
+     },
+     "tax_amount": {
+      "description": "Tax amount in company currency",
+      "readOnly": true,
+      "title": "Tax amount",
+      "type": "number"
+     },
+     "tax_amount_currency": {
+      "description": "Tax amount in currency",
+      "readOnly": true,
+      "title": "Tax amount in Currency",
+      "type": "number"
+     },
+     "tax_ids": {
+      "description": "Both price-included and price-excluded taxes will behave as price-included taxes for expenses.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Included taxes",
+      "type": "array",
+      "x-relation": "account.tax"
+     },
+     "total_amount": {
+      "title": "Total",
+      "type": "number"
+     },
+     "total_amount_currency": {
+      "title": "Total In Currency",
+      "type": "number"
+     },
+     "untaxed_amount": {
+      "readOnly": true,
+      "title": "Total Untaxed Amount",
+      "type": "number"
+     },
+     "untaxed_amount_currency": {
+      "readOnly": true,
+      "title": "Total Untaxed Amount In Currency",
+      "type": "number"
+     },
+     "vendor_id": {
+      "title": "Vendor",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "company_id",
+     "currency_id",
+     "employee_id",
+     "name",
+     "payment_mode",
+     "price_unit",
+     "quantity"
+    ],
+    "title": "Expense",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "hr_expense"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/hr.expense/action_approve": {
+   "post": {
+    "description": "Approve an expense, pops a wizard if a duplicated expense is found to confirm they are all valid expenses",
+    "operationId": "hr.expense.action_approve",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_approve",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_approve_duplicates": {
+   "post": {
+    "operationId": "hr.expense.action_approve_duplicates",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_approve_duplicates",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_open_account_move": {
+   "post": {
+    "operationId": "hr.expense.action_open_account_move",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_account_move",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_open_sale_order": {
+   "post": {
+    "operationId": "hr.expense.action_open_sale_order",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_sale_order",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_open_split_expense": {
+   "post": {
+    "operationId": "hr.expense.action_open_split_expense",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_split_expense",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_pay": {
+   "post": {
+    "description": "Register payment shortcut on the expense form view",
+    "operationId": "hr.expense.action_pay",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_pay",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_post": {
+   "post": {
+    "description": "When creating the move of the expense, if the AA is given in the project of the SO, we take it as reference in the distribution. Otherwise, we create a AA for the project of the SO and set the distribution to it.",
+    "operationId": "hr.expense.action_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_post",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_refuse": {
+   "post": {
+    "description": "Refuse an expense with a reason",
+    "operationId": "hr.expense.action_refuse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_refuse",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_reschedule_my_next_nextweek": {
+   "post": {
+    "operationId": "hr.expense.action_reschedule_my_next_nextweek",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_nextweek",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_reschedule_my_next_today": {
+   "post": {
+    "operationId": "hr.expense.action_reschedule_my_next_today",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_today",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_reschedule_my_next_tomorrow": {
+   "post": {
+    "operationId": "hr.expense.action_reschedule_my_next_tomorrow",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_tomorrow",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_reset": {
+   "post": {
+    "description": "Reset an expense to draft state, reversing the accounting entries if needed",
+    "operationId": "hr.expense.action_reset",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reset",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_show_same_receipt_expense_ids": {
+   "post": {
+    "operationId": "hr.expense.action_show_same_receipt_expense_ids",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_show_same_receipt_expense_ids",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_split_wizard": {
+   "post": {
+    "operationId": "hr.expense.action_split_wizard",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_split_wizard",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/action_submit": {
+   "post": {
+    "description": "Submit a draft expense to an approve, may skip to the approval step if no approver on the employee nor the expense",
+    "operationId": "hr.expense.action_submit",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_submit",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/activity_feedback": {
+   "post": {
+    "description": "Set activities as done, limiting to some activity types and optionally to a given user.",
+    "operationId": "hr.expense.activity_feedback",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "attachment_ids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_feedback",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/activity_reschedule": {
+   "post": {
+    "description": "Reschedule some automated activities. Activities to reschedule are selected based on type xml ids and optionally by user. Purpose is to be able to",
+    "operationId": "hr.expense.activity_reschedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_user_id": {},
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_reschedule",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/activity_schedule": {
+   "post": {
+    "description": "Schedule an activity on each record of the current record set. This method allow to provide as parameter act_type_xmlid. This is an xml_id of activity type instead of directly giving an activity_type_id. It is useful to avoid having various \"env.ref\" in the code and allow to let the mixin handle access rights.",
+    "operationId": "hr.expense.activity_schedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlid": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "note": {},
+         "summary": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_schedule",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/activity_search": {
+   "post": {
+    "description": "Search automated activities on current record set, given a list of activity types xml IDs. It is useful when dealing with specific types involved in automatic activities management.",
+    "operationId": "hr.expense.activity_search",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "additional_domain": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_search",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/activity_send_mail": {
+   "post": {
+    "description": "Automatically send an email based on the given mail.template, given its ID.",
+    "operationId": "hr.expense.activity_send_mail",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "template_id": {}
+        },
+        "required": [
+         "template_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_send_mail",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/activity_unlink": {
+   "post": {
+    "description": "Unlink activities, limiting to some activity types and optionally to a given user.",
+    "operationId": "hr.expense.activity_unlink",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_unlink",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/attach_document": {
+   "post": {
+    "description": "When an attachment is uploaded as a receipt, set it as the main attachment.",
+    "operationId": "hr.expense.attach_document",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "attach_document",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "hr.expense.create",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "vals_list": {}
+        },
+        "required": [
+         "vals_list"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/create_expense_from_attachments": {
+   "post": {
+    "description": "Create the expenses from files.",
+    "operationId": "hr.expense.create_expense_from_attachments",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "attachment_ids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "view_type": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_expense_from_attachments",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "hr.expense.fields_get",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "allfields": {
+          "type": [
+           "array",
+           "null"
+          ]
+         },
+         "attributes": {
+          "type": [
+           "array",
+           "null"
+          ]
+         },
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "hr.expense.formatted_read_group",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "aggregates": {
+          "type": "array"
+         },
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "domain": {
+          "type": "array"
+         },
+         "groupby": {
+          "type": "array"
+         },
+         "having": {
+          "type": "array"
+         },
+         "limit": {
+          "type": [
+           "integer",
+           "null"
+          ]
+         },
+         "offset": {
+          "type": "integer"
+         },
+         "order": {
+          "type": [
+           "string",
+           "null"
+          ]
+         }
+        },
+        "required": [
+         "domain"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/get_expense_dashboard": {
+   "post": {
+    "operationId": "hr.expense.get_expense_dashboard",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_expense_dashboard",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "hr.expense.message_change_thread",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_parent_message": {},
+         "new_thread": {}
+        },
+        "required": [
+         "new_thread"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_get_followers": {
+   "post": {
+    "operationId": "hr.expense.message_get_followers",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "after": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "filter_recipients": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "limit": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_mail_with_source": {
+   "post": {
+    "operationId": "hr.expense.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_new": {
+   "post": {
+    "operationId": "hr.expense.message_new",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "msg_dict": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "hr.expense.message_notify",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "attachment_ids": {},
+         "attachments": {},
+         "author_id": {},
+         "body": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "email_from": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "model": {},
+         "partner_ids": {},
+         "res_id": {},
+         "subject": {},
+         "subtype_id": {},
+         "subtype_xmlid": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "hr.expense.message_parse",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "message": {},
+         "save_original": {}
+        },
+        "required": [
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_post": {
+   "post": {
+    "operationId": "hr.expense.message_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "body": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "message_type": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_post_with_source": {
+   "post": {
+    "operationId": "hr.expense.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "hr.expense.message_process",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "model": {},
+         "save_original": {},
+         "strip_attachments": {},
+         "thread_id": {}
+        },
+        "required": [
+         "model",
+         "message"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "hr.expense.message_route",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "custom_values": {},
+         "message": {},
+         "message_dict": {},
+         "model": {},
+         "thread_id": {}
+        },
+        "required": [
+         "message",
+         "message_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "hr.expense.message_subscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {},
+         "subtype_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "hr.expense.message_unsubscribe",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner_ids": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "hr.expense.message_update",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "msg_dict": {},
+         "update_vals": {}
+        },
+        "required": [
+         "msg_dict"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "hr.expense.name_search",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "domain": {
+          "type": [
+           "array",
+           "null"
+          ]
+         },
+         "limit": {
+          "type": "integer"
+         },
+         "name": {
+          "type": "string"
+         },
+         "operator": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/notify_cancel_by_type": {
+   "post": {
+    "operationId": "hr.expense.notify_cancel_by_type",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "notification_type": {}
+        },
+        "required": [
+         "notification_type"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "hr.expense.rating_apply",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "notify_delay_send": {},
+         "rate": {},
+         "rating": {},
+         "subtype_xmlid": {},
+         "token": {}
+        },
+        "required": [
+         "rate"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "hr.expense.rating_send_request",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "force_send": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "lang": {},
+         "template": {}
+        },
+        "required": [
+         "template"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "hr.expense.read",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "fields": {
+          "type": [
+           "array",
+           "null"
+          ]
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "load": {
+          "type": "string"
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "hr.expense.search",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "domain": {
+          "type": "array"
+         },
+         "limit": {
+          "type": [
+           "integer",
+           "null"
+          ]
+         },
+         "offset": {
+          "type": "integer"
+         },
+         "order": {
+          "type": [
+           "string",
+           "null"
+          ]
+         }
+        },
+        "required": [
+         "domain"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "hr.expense.search_count",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "domain": {
+          "type": "array"
+         },
+         "limit": {
+          "type": [
+           "integer",
+           "null"
+          ]
+         }
+        },
+        "required": [
+         "domain"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "hr.expense.search_read",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "domain": {
+          "type": [
+           "array",
+           "null"
+          ]
+         },
+         "fields": {
+          "type": [
+           "array",
+           "null"
+          ]
+         },
+         "limit": {
+          "type": [
+           "integer",
+           "null"
+          ]
+         },
+         "offset": {
+          "type": "integer"
+         },
+         "order": {
+          "type": [
+           "string",
+           "null"
+          ]
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/unlink": {
+   "post": {
+    "description": "When removing a record, its rating should be deleted too.",
+    "operationId": "hr.expense.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/update_activities_and_mails": {
+   "post": {
+    "description": "Update the \"Review this expense\" activity with the new state of the expense, also sends mail to approver to ask them to act",
+    "operationId": "hr.expense.update_activities_and_mails",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_approve"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "update_activities_and_mails",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  },
+  "/json/2/hr.expense/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "hr.expense.write",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "vals": {}
+        },
+        "required": [
+         "vals"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "hr.expense"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Expense",
+   "name": "hr.expense"
+  }
+ ]
+}
