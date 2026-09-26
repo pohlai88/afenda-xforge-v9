@@ -1,0 +1,222 @@
+import re
+import tempfile
+from pathlib import Path
+
+from odoo.tests import TransactionCase, tagged
+
+from odoo.addons.afenda_api_docs.assets import asset_areas, render_asset, write_assets
+from odoo.addons.afenda_api_docs.asset_rules import (
+    RESERVED_AREAS,
+    assign_area,
+    manifest_applications,
+)
+from odoo.addons.afenda_api_docs.openapi import build_document
+
+
+def _write_manifest(root, name, application=True, installable=None):
+    module_dir = Path(root) / name
+    module_dir.mkdir(parents=True, exist_ok=True)
+    manifest = {"name": name, "application": application}
+    if installable is not None:
+        manifest["installable"] = installable
+    (module_dir / "__manifest__.py").write_text(repr(manifest), encoding="utf-8")
+
+
+@tagged("post_install", "-at_install")
+class TestAssignArea(TransactionCase):
+    """Five hand-built-closure cases (AFD-ARCH-CORR-0007, rules 2, 4, 5)."""
+
+    def test_the_apps_own_module_goes_to_that_app(self):
+        closures = {
+            "sale": frozenset({"sale", "base"}),
+            "purchase": frozenset({"purchase", "base"}),
+        }
+        self.assertEqual(assign_area("sale", closures), "sale")
+
+    def test_a_module_in_every_closure_goes_to_core(self):
+        closures = {
+            "sale": frozenset({"sale", "base"}),
+            "purchase": frozenset({"purchase", "base"}),
+        }
+        # "base" is in both closures and is not itself an app key.
+        self.assertEqual(assign_area("base", closures), "core")
+
+    def test_a_module_in_no_closure_goes_to_core(self):
+        closures = {
+            "sale": frozenset({"sale", "base"}),
+            "purchase": frozenset({"purchase", "base"}),
+        }
+        self.assertEqual(assign_area("nowhere_module", closures), "core")
+
+    def test_of_two_candidates_the_smaller_closure_wins(self):
+        closures = {
+            "sale": frozenset({"sale", "base", "stock"}),
+            "mrp": frozenset({"mrp", "base", "stock", "sale"}),
+            # A third app that does NOT depend on "stock", so "stock" is a
+            # candidate of two (not all) apps - otherwise rule 4 ("in every
+            # closure") would fire instead of rule 5.
+            "website": frozenset({"website", "base"}),
+        }
+        # "stock" is in sale's and mrp's closures; sale's (3) is smaller than mrp's (4).
+        self.assertEqual(assign_area("stock", closures), "sale")
+
+    def test_an_equal_tie_goes_to_the_alphabetical_first(self):
+        closures = {
+            "zeta": frozenset({"zeta", "base", "shared"}),
+            "alpha": frozenset({"alpha", "base", "shared"}),
+            # A third app that does NOT depend on "shared", for the same
+            # reason as above.
+            "website": frozenset({"website", "base"}),
+        }
+        # Both candidate closures contain "shared" and are the same size (3).
+        self.assertEqual(assign_area("shared", closures), "alpha")
+
+
+@tagged("post_install", "-at_install")
+class TestManifestApplications(TransactionCase):
+    def test_manifest_applications_reads_only_installable_applications(self):
+        with tempfile.TemporaryDirectory() as root:
+            _write_manifest(root, "an_app")  # application: True, installable default
+            _write_manifest(root, "an_uninstallable_app", installable=False)
+            _write_manifest(root, "not_an_app", application=False)
+            self.assertEqual(manifest_applications(Path(root)), ["an_app"])
+
+
+@tagged("post_install", "-at_install")
+class TestAssetAreas(TransactionCase):
+    def test_ir_models_are_technical(self):
+        areas = asset_areas(self.env)
+        ir_models = [
+            name for name in self.env.registry.models
+            if (name == "ir" or name.startswith("ir."))
+            and not self.env[name]._abstract
+            and not self.env[name]._transient
+        ]
+        self.assertTrue(ir_models)
+        self.assertIn("technical", areas)
+        for name in ir_models:
+            self.assertIn(name, areas["technical"])
+
+    def test_areas_cover_every_concrete_model_once(self):
+        areas = asset_areas(self.env)
+        expected = sorted(
+            name for name, model_cls in self.env.registry.models.items()
+            if not model_cls._abstract and not model_cls._transient
+        )
+        got_flat = [name for names in areas.values() for name in names]
+        self.assertEqual(sorted(got_flat), expected)
+        # No duplicates: the flat count matches the deduplicated count.
+        self.assertEqual(len(got_flat), len(expected))
+
+
+@tagged("post_install", "-at_install")
+class TestAssetDynamicEnum(TransactionCase):
+    def test_asset_omits_dynamic_enums(self):
+        # On the apps installed for this suite, res.partner.lang's selection
+        # is a bound method (odoo/addons/base/models/res_partner.py,
+        # `_lang_get`) - genuinely dynamic, unlike res.partner.tz, which is a
+        # static list here (base defines it with the module-level `_tzs`
+        # list passed directly, not through a callable or method name).
+        field = self.env["res.partner"]._fields["lang"]
+        self.assertTrue(callable(field.selection) or isinstance(field.selection, str))
+
+        live = build_document(self.env, names=["res.partner"], asset=False)
+        asset = build_document(self.env, names=["res.partner"], asset=True)
+
+        lang_asset = asset["components"]["schemas"]["res.partner"]["properties"]["lang"]
+        self.assertNotIn("enum", lang_asset)
+        self.assertNotIn("x-enum-labels", lang_asset)
+        self.assertTrue(lang_asset.get("x-afenda-dynamic-enum"))
+
+        lang_live = live["components"]["schemas"]["res.partner"]["properties"]["lang"]
+        self.assertTrue(lang_live.get("enum"))
+
+        # A static selection keeps its enum in the asset document too.
+        static_field = self.env["res.partner"]._fields["type"]
+        self.assertFalse(callable(static_field.selection) or isinstance(static_field.selection, str))
+        type_asset = asset["components"]["schemas"]["res.partner"]["properties"]["type"]
+        self.assertTrue(type_asset.get("enum"))
+        self.assertNotIn("x-afenda-dynamic-enum", type_asset)
+
+
+@tagged("post_install", "-at_install")
+class TestRenderAsset(TransactionCase):
+    def test_render_has_no_build_or_time_markers(self):
+        content = render_asset(self.env, "core", ["res.partner", "res.users"])
+        self.assertNotIn(b"x-afenda-build", content)
+        self.assertIsNone(re.search(rb"\d{4}-\d{2}-\d{2}T", content))
+
+    def test_render_is_structurally_valid_openapi_31(self):
+        content = render_asset(self.env, "core", ["res.partner", "res.users"])
+        import json
+        doc = json.loads(content)
+
+        for key in ("openapi", "info", "paths", "components"):
+            self.assertIn(key, doc)
+        self.assertEqual(doc["openapi"], "3.1.0")
+        self.assertTrue(doc["paths"])
+
+        def walk(node):
+            if isinstance(node, dict):
+                ref = node.get("$ref")
+                if ref:
+                    prefix, kind, name = ref.rsplit("/", 2)
+                    self.assertEqual(prefix, "#/components")
+                    self.assertIn(name, doc["components"][kind])
+                for value in node.values():
+                    walk(value)
+            elif isinstance(node, list):
+                for value in node:
+                    walk(value)
+
+        walk(doc)
+
+        for item in doc["paths"].values():
+            post = item["post"]
+            self.assertIn("operationId", post)
+            self.assertIn("requestBody", post)
+            self.assertIn("responses", post)
+
+
+@tagged("post_install", "-at_install")
+class TestWriteAssets(TransactionCase):
+    def _installed_app_names(self):
+        return sorted(
+            self.env["ir.module.module"].sudo()
+            .search([("state", "=", "installed"), ("application", "=", True)])
+            .mapped("name")
+        )
+
+    def test_write_refuses_a_database_with_different_apps(self):
+        with tempfile.TemporaryDirectory() as addons_root, \
+             tempfile.TemporaryDirectory() as out_dir:
+            for app in self._installed_app_names():
+                _write_manifest(addons_root, app)
+            # An application the fixture names but the database never installed.
+            _write_manifest(addons_root, "zzz_not_installed_app")
+
+            with self.assertRaises(ValueError) as capture:
+                write_assets(self.env, Path(out_dir), Path(addons_root))
+            self.assertIn("zzz_not_installed_app", str(capture.exception))
+            self.assertEqual(list(Path(out_dir).iterdir()), [])
+
+    def test_write_removes_stale_area_files_but_keeps_the_changelog(self):
+        with tempfile.TemporaryDirectory() as addons_root, \
+             tempfile.TemporaryDirectory() as out_dir:
+            for app in self._installed_app_names():
+                _write_manifest(addons_root, app)
+
+            out_dir = Path(out_dir)
+            stale = out_dir / "some_stale_area.json"
+            stale.write_text("{}", encoding="utf-8")
+            changelog = out_dir / "CHANGELOG.md"
+            changelog.write_text("# Changelog\n", encoding="utf-8")
+
+            expected_areas = asset_areas(self.env)
+            count = write_assets(self.env, out_dir, Path(addons_root))
+
+            self.assertEqual(count, len(expected_areas))
+            self.assertFalse(stale.exists())
+            self.assertEqual(changelog.read_text(encoding="utf-8"), "# Changelog\n")
+            for area in expected_areas:
+                self.assertTrue((out_dir / f"{area}.json").exists())

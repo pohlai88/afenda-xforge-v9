@@ -4,3 +4,8 @@ deploy/** text eol=lf
 # Compressed fonts under deploy/ are binary: `text` would rewrite any CR LF
 # byte pair inside them on commit.
 deploy/**/*.woff2 binary
+# Committed OpenAPI asset areas (AFD-ARCH-CORR-0005): generated, byte-exact
+# output of afenda/tools/export_openapi_shell.py. Never diffed or relabeled
+# by an editor's line-ending rewrite, and never counted in a language/diff
+# summary of the tree.
+afenda/addons/afenda_api_docs/openapi/*.json -diff eol=lf linguist-generated
