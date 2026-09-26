@@ -17,6 +17,9 @@
     # 19.0.1.0.7: the auth back links stop carrying reset/signup tokens, back
     # before the action in the tab order, icons hidden from assistive tech.
     # Views and SCSS only, no migration.
+    # 19.0.1.0.9: the tenant signature auth page restored exactly as in
+    # 19.0.1.0.7 (the four-season stage of 19.0.1.0.8 removed), so a redeploy's
+    # upgrade reloads it. Views, CSS and assets only, no migration.
     "version": "19.0.1.0.9",
     "category": "Hidden/Tools",
     "author": "AFENDA",
@@ -93,8 +96,6 @@
             # first, then the skins and states that read them.
             "afenda_brand/static/src/css/auth_bear_scales.css",
             "afenda_brand/static/src/css/auth_bear.css",
-            # The season layer around the tenant signature (never in it).
-            "afenda_brand/static/src/css/auth_seasons.css",
         ],
         # Printed documents: static font instances (wkhtmltopdf cannot use the
         # variable fonts) plus the document rules.

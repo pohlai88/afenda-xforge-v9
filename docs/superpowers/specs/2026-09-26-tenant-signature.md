@@ -1,4 +1,4 @@
-# The tenant signature, and seasons around it
+# The tenant signature
 
 Status: owner ruling, 2026-09-26: "restore it and build on top; avoid future overriding, since
 this is the tenant's signature design."
@@ -16,35 +16,15 @@ this is the tenant's signature design."
   - CLAUDE.md and the superdesign skill state the rule.
 - **Re-pinning a digest is the owner's decision**, never the fix for a red test.
 
-## The season layer: built on top, never in
+## No season layer
 
-A separate layer adds the seasons around the signature. It never touches the bear, the card,
-the logo, the buttons or the text.
-
-- **Markup:** `.o_afenda_seasons` is its own `aria-hidden` element in `webclient_templates.xml`'s
-  `login_layout`, fixed to the viewport. It holds four season sheets: spring, summer, autumn,
-  winter.
-- **Each sheet** tints the paper very lightly and carries its own weather, drawn in CSS:
-  - spring: falling petals;
-  - summer: twinkling glints;
-  - autumn: falling leaves;
-  - winter: snow, in pale blue-grey so it reads on light paper.
-- **Stacking:** the paper tint lies under everything. The weather crosses the page and the bear,
-  but stays under the form column, so it never covers a field or a word.
-- **Motion:**
-  - A 32 s loop: each season holds for 6 s, then cross-fades over 2 s.
-  - The loop starts on today's season, taken from the server's UTC date in northern
-    meteorological order, which is a brand cycle, not a climate.
-  - Only `opacity` and `transform` animate, so the compositor draws it and the bear never
-    repaints.
-- **Reduced motion:** only today's sheet shows, and it is still.
-- **Styles** live in `static/src/css/auth_seasons.css`, every selector under `.o_afenda_login`.
+A season layer drawn in CSS around the bear (petals, sun and butterflies, maple leaves,
+snowflakes) was built and shown on 2026-09-26; the owner rejected it the same day ("reset to
+original without your added CSS"). The auth page is the design of c5545d38f, nothing added.
 
 ## Acceptance
 
 - The signature test passes. `crystal_bear.svg` and `auth_bear.xml` are unchanged from
   c5545d38f.
-- Every auth page shows the layer. The bear is pixel-identical to the pre-season render with
-  the layer hidden.
-- 0 layouts per frame at rest; frame p95 ≤ 20 ms.
-- The owner sees stills and a loop video before the merge.
+- The auth page's view, stylesheets and manifest assets equal c5545d38f; only the module version
+  differs (19.0.1.0.9, so a redeploy reloads them over 19.0.1.0.8).

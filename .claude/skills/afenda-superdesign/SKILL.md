@@ -60,11 +60,9 @@ design advice will reach for the left column:
 Product character: quiet, dense, precise enterprise software. Borders, spacing
 and type over shadow; restrained radius; semantic colour; tabular numerals;
 status never colour-only. No card soup, glass, marketing gradients, icon
-rainbows or decorative motion. One owner-named exception: the auth pages' season
-layer (`docs/superpowers/specs/2026-09-26-tenant-signature.md`), confined to
-`.o_afenda_seasons` and `auth_seasons.css`; it never spreads. The crystal bear itself is
-the tenant's signature: never recolour, regenerate or replace it (pinned by
-`afenda/tools/tests/test_tenant_signature.py`); anything seasonal goes around it.
+rainbows or decorative motion. The auth-page crystal bear is the tenant's signature
+(`docs/superpowers/specs/2026-09-26-tenant-signature.md`): never recolour, regenerate,
+replace or decorate it (pinned by `afenda/tools/tests/test_tenant_signature.py`).
 
 ## Route the request first
 
