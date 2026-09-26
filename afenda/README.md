@@ -229,11 +229,15 @@ after review, `python -m afenda.tools.corpus golden` and commit both files.
   `/docs/api/errors` (`auth='public'`, since the `type` URI must resolve signed out too);
   the vocabulary itself lives in `afenda_runtime/problems.py` (`PROBLEM_CODES`).
   Three cases are answered before Odoo dispatches to `ir.http._handle_error` at all, and so
-  keep upstream's plain HTML body instead of a Problem Details one (AFD-ARCH-CORR-0003):
-  a wrong `Content-Type` (415), an unknown database (nodb 404), and a failure while a
-  read-only request re-acquires its cursor (`odoo/http.py:2317-2324` → `2889`, e.g. pool
-  exhaustion or a lost connection) — the last one would need a server-wide patch of
-  `Json2Dispatcher.handle_error` to cover, so it is documented rather than patched.
+  never reach ours (AFD-ARCH-CORR-0003). Two keep upstream's plain HTML body: a wrong
+  `Content-Type` (415) and an unknown database (nodb 404). The third — a failure while a
+  read-only request re-acquires its cursor (`odoo/http.py:2317-2324`, e.g. pool exhaustion
+  or a lost connection) — escapes to `request.dispatcher.handle_error` (`odoo/http.py:2889`),
+  which by then is `Json2Dispatcher.handle_error` (`odoo/http.py:2666-2690`): it answers with
+  upstream's JSON-RPC-style `serialize_exception` body (`name`, `message`, `arguments`,
+  `context`, and `debug` — the full traceback), status 500 — not HTML, and not RFC 9457 either.
+  Covering it would need a server-wide patch of `Json2Dispatcher.handle_error`, so it is
+  documented rather than patched.
 - **The OpenAPI asset** — `afenda/addons/afenda_api_docs/openapi/<area>.json`, one file per
   non-empty area, plus `openapi/CHANGELOG.md` — is the repository's committed, versioned
   publication of the same contract the live `/docs/openapi.json` serves, generated once as
@@ -248,12 +252,18 @@ after review, `python -m afenda.tools.corpus golden` and commit both files.
   field listed in `openapi.py`'s `ENVIRONMENT_DERIVED_SELECTIONS`, starting with
   `("res.partner", "tz")`, `pytz`-derived) omits `enum` in the asset and is marked
   `x-afenda-dynamic-enum: true`; the live per-request document still lists the values.
-  Each committed document is budgeted at 1.5 MiB (AFD-ARCH-CORR-0008); the live per-request
-  document keeps the tighter 1 MiB budget from per-operation response entries collapsing to
-  shared `4XX`/`5XX` references. Which module's models land in which area file is decided in
-  this order (AFD-ARCH-CORR-0007): a model defined by an application module belongs to that
-  application; otherwise an `ir.*` model goes to a `technical` document; otherwise the
-  smallest-closure rule.
+  Each committed document is budgeted at 1.5 MiB (AFD-ARCH-CORR-0008, enforced by
+  `TestCommittedAsset.test_committed_asset_stays_under_the_size_budget`); the live
+  per-request document keeps the tighter 1 MiB budget from per-operation response entries
+  collapsing to shared `4XX`/`5XX` references. Which module's models land in which area
+  file is decided in this order (`assets.py`'s `asset_areas`/`asset_rules.py`'s
+  `assign_area`; a deliberate deviation from AFD-ARCH-CORR-0007's own listing order, see
+  the handoff): abstract and transient models are excluded; an `ir.*`-named model goes to
+  a `technical` document; otherwise a model defined by an application module belongs to
+  that application; otherwise a model whose module is in every installed application's
+  dependency closure, or in none of them, goes to `core`; otherwise the application with
+  the smallest closure containing the module, an equal tie going to the alphabetically
+  first application name.
   - **Regenerate it** either by downloading CI's `openapi-asset` artifact (`afenda-image.yml`,
     uploaded from every run, stale or not) or by running the exporter yourself, through
     `odoo-bin shell` on a fresh database with every Community application installed:
