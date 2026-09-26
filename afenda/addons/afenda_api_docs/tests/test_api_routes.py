@@ -8,6 +8,16 @@ from odoo.addons.afenda_runtime.problems import PROBLEM_CODES
 
 REDOC = pathlib.Path(__file__).resolve().parents[1] / "static" / "lib" / "redoc"
 REDOC_URL = "/afenda_api_docs/static/lib/redoc/redoc.standalone.js"
+OPENAPI_DIR = pathlib.Path(__file__).resolve().parents[1] / "openapi"
+
+# Each vector plugs in for the whole `<area>` path segment (a spec URL of
+# "/docs/api/spec/<vector>.json"); every one of them must be refused before
+# `docs_api_spec` ever reads a file, whether by `_AREA_RE` (".." and a null
+# byte are never in `^[a-z0-9_]+$`) or by ending up on a route this
+# controller does not own at all (a literal "/" makes the request path
+# longer than this route's pattern, landing on landing.py's `/docs/<path:
+# subpath>` catch-all instead, which redirects rather than 404s).
+_PATH_TRICK_VECTORS = ("..%2fmanifest", "%2e%2e", "core.json%00", "/etc/passwd", "CHANGELOG")
 
 
 @tagged("post_install", "-at_install")
@@ -108,6 +118,44 @@ class TestApiRoutes(HttpCase):
 
     def test_landing_links_to_the_api_reference(self):
         self.assertIn('href="/docs/api"', self.url_open("/docs").text)
+
+    def test_spec_route_requires_login(self):
+        self.assertRedirectsToLogin("/docs/api/spec/core.json")
+
+    def test_spec_route_serves_the_committed_bytes(self):
+        committed = OPENAPI_DIR / "core.json"
+        self.assertTrue(committed.is_file(), "run the exporter before this test")
+        self.authenticate("admin", "admin")
+        res = self.url_open("/docs/api/spec/core.json")
+        self.assertEqual(res.status_code, 200)
+        self.assertEqual(res.headers["Content-Type"], "application/json")
+        self.assertEqual(res.headers["Cache-Control"], "private, no-store")
+        self.assertEqual(res.content, committed.read_bytes())
+
+    def test_spec_route_unknown_area_is_404(self):
+        self.authenticate("admin", "admin")
+        res = self.url_open("/docs/api/spec/zzz_not_a_committed_area.json")
+        self.assertEqual(res.status_code, 404)
+
+    def test_spec_route_path_tricks_never_serve_file_bytes(self):
+        self.authenticate("admin", "admin")
+        for vector in _PATH_TRICK_VECTORS:
+            url = "/docs/api/spec/" + vector + ".json"
+            res = self.url_open(url, allow_redirects=False)
+            self.assertIn(res.status_code, (404, 303), vector)
+            if res.status_code == 303:
+                self.assertIn("/docs", res.headers["Location"], vector)
+            self.assertFalse(res.text.startswith("{"), vector)
+            self.assertNotIn('"openapi"', res.text, vector)
+
+    def test_api_page_links_each_committed_area(self):
+        areas = sorted(path.stem for path in OPENAPI_DIR.glob("*.json"))
+        self.assertTrue(areas, "run the exporter before this test")
+        self.authenticate("admin", "admin")
+        res = self.url_open("/docs/api")
+        self.assertEqual(res.status_code, 200)
+        for area in areas:
+            self.assertIn(f'href="/docs/api/spec/{area}.json"', res.text, area)
 
     def test_vendored_redoc_is_served_and_matches_its_recorded_hash(self):
         recorded = re.search(

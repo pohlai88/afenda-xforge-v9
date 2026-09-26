@@ -1,0 +1,1242 @@
+{
+ "components": {
+  "requestBodies": {
+   "action_recycle_records": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "data_recycle.model": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "domain": {
+      "title": "Filter",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "include_archived": {
+      "title": "Include Archived",
+      "type": "boolean"
+     },
+     "last_notification": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Notification",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "notify_frequency": {
+      "title": "Notify",
+      "type": "integer"
+     },
+     "notify_frequency_period": {
+      "enum": [
+       "days",
+       "weeks",
+       "months"
+      ],
+      "title": "Notify Frequency Period",
+      "type": "string",
+      "x-enum-labels": [
+       "Days",
+       "Weeks",
+       "Months"
+      ]
+     },
+     "notify_user_ids": {
+      "description": "List of users to notify when there are new records to recycle",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Notify Users",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "records_to_recycle_count": {
+      "readOnly": true,
+      "title": "Records To Recycle",
+      "type": "integer"
+     },
+     "recycle_action": {
+      "enum": [
+       "archive",
+       "unlink"
+      ],
+      "title": "Recycle Action",
+      "type": "string",
+      "x-enum-labels": [
+       "Archive",
+       "Delete"
+      ]
+     },
+     "recycle_mode": {
+      "enum": [
+       "manual",
+       "automatic"
+      ],
+      "title": "Recycle Mode",
+      "type": "string",
+      "x-enum-labels": [
+       "Manual",
+       "Automatic"
+      ]
+     },
+     "recycle_record_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Recycle Record",
+      "type": "array",
+      "x-relation": "data_recycle.record"
+     },
+     "res_model_id": {
+      "title": "Model",
+      "type": "integer",
+      "x-relation": "ir.model"
+     },
+     "res_model_name": {
+      "readOnly": true,
+      "title": "Model Name",
+      "type": "string"
+     },
+     "time_field_delta": {
+      "title": "Delta",
+      "type": "integer"
+     },
+     "time_field_delta_unit": {
+      "enum": [
+       "days",
+       "weeks",
+       "months",
+       "years"
+      ],
+      "title": "Delta Unit",
+      "type": "string",
+      "x-enum-labels": [
+       "Days",
+       "Weeks",
+       "Months",
+       "Years"
+      ]
+     },
+     "time_field_id": {
+      "title": "Time Field",
+      "type": "integer",
+      "x-relation": "ir.model.fields"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "recycle_action",
+     "recycle_mode",
+     "res_model_id"
+    ],
+    "title": "Recycling Model",
+    "type": "object"
+   },
+   "data_recycle.record": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "company_id": {
+      "readOnly": true,
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "readOnly": true,
+      "title": "Record Name",
+      "type": "string"
+     },
+     "recycle_model_id": {
+      "title": "Recycle Model",
+      "type": "integer",
+      "x-relation": "data_recycle.model"
+     },
+     "res_id": {
+      "title": "Record ID",
+      "type": "integer"
+     },
+     "res_model_id": {
+      "readOnly": true,
+      "title": "Model",
+      "type": "integer",
+      "x-relation": "ir.model"
+     },
+     "res_model_name": {
+      "readOnly": true,
+      "title": "Model Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "title": "Recycling Record",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "data_recycle"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/data_recycle.model/action_recycle_records": {
+   "post": {
+    "operationId": "data_recycle.model.action_recycle_records",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_recycle_records"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_recycle_records",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "data_recycle.model.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "data_recycle.model.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "data_recycle.model.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "data_recycle.model.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/open_records": {
+   "post": {
+    "operationId": "data_recycle.model.open_records",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_recycle_records"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "open_records",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "data_recycle.model.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "data_recycle.model.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "data_recycle.model.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "data_recycle.model.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "data_recycle.model.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_recycle_records"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.model/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "data_recycle.model.write",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "vals": {}
+        },
+        "required": [
+         "vals"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "data_recycle.model"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/action_discard": {
+   "post": {
+    "operationId": "data_recycle.record.action_discard",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_recycle_records"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_discard",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/action_validate": {
+   "post": {
+    "operationId": "data_recycle.record.action_validate",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_recycle_records"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_validate",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "data_recycle.record.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "data_recycle.record.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "data_recycle.record.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "data_recycle.record.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "data_recycle.record.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "data_recycle.record.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "data_recycle.record.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "data_recycle.record.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "data_recycle.record.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_recycle_records"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  },
+  "/json/2/data_recycle.record/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "data_recycle.record.write",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "vals": {
+          "type": "object"
+         }
+        },
+        "required": [
+         "vals"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "data_recycle.record"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Recycling Model",
+   "name": "data_recycle.model"
+  },
+  {
+   "description": "Recycling Record",
+   "name": "data_recycle.record"
+  }
+ ]
+}

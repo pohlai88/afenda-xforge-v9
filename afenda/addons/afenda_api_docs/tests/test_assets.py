@@ -1,3 +1,4 @@
+import json
 import re
 import tempfile
 from pathlib import Path
@@ -16,6 +17,21 @@ from odoo.addons.afenda_api_docs.asset_rules import (
     manifest_applications,
 )
 from odoo.addons.afenda_api_docs.openapi import build_document
+
+# afenda/addons/afenda_api_docs/openapi (the committed asset,
+# AFD-ARCH-CORR-0005) and, four parents up from this file, the repo's own
+# `addons/` (afenda/addons/afenda_api_docs/tests -> afenda_api_docs -> addons
+# -> afenda -> repo root), which is what `manifest_applications` must be
+# checked against - never `afenda/addons`, which holds AFENDA's own modules,
+# none of which are `application: True`.
+_OPENAPI_DIR = Path(__file__).resolve().parents[1] / "openapi"
+_REPO_ADDONS_ROOT = Path(__file__).resolve().parents[4] / "addons"
+
+# Every `description`, `summary` and `title` value is prose (AFD-ARCH-CORR-
+# 0004's aliasing split, aliasing.py); everything else in a committed
+# document - keys, `operationId`, enum values, `$ref` - is a wire value and
+# is not walked.
+_COMMITTED_PROSE_KEYS = ("description", "summary", "title")
 
 
 def _write_manifest(root, name, application=True, installable=None):
@@ -249,6 +265,51 @@ class TestWriteAssets(TransactionCase):
             self.assertEqual(changelog.read_text(encoding="utf-8"), "# Changelog\n")
             for area in expected_areas:
                 self.assertTrue((out_dir / f"{area}.json").exists())
+
+
+@tagged("post_install", "-at_install")
+class TestCommittedAsset(TransactionCase):
+    """Checks over the files actually committed under `openapi/*.json`.
+
+    Reads only `openapi/*.json` - never `CHANGELOG.md`, which Task 5 adds -
+    and needs no live registry matching the full 34-application set: both
+    checks are static, over whatever is on disk right now.
+    """
+
+    def test_committed_asset_matches_the_supported_applications(self):
+        files = sorted(_OPENAPI_DIR.glob("*.json"))
+        self.assertTrue(files, "no committed OpenAPI documents; run the exporter first")
+        allowed = set(manifest_applications(_REPO_ADDONS_ROOT)) | set(RESERVED_AREAS)
+        stems = {path.stem for path in files}
+        self.assertTrue(stems.issubset(allowed), stems - allowed)
+
+    def test_committed_asset_carries_no_odoo_identity_in_prose(self):
+        # Local import: test_identity.py defines an HttpCase subclass, which
+        # this TransactionCase-only test does not need to load merely to
+        # reuse the tell list.
+        from .test_identity import ODOO_TELLS  # noqa: PLC0415
+
+        files = sorted(_OPENAPI_DIR.glob("*.json"))
+        self.assertTrue(files, "no committed OpenAPI documents; run the exporter first")
+
+        def walk(node, prose):
+            if isinstance(node, dict):
+                for key, value in node.items():
+                    if key in _COMMITTED_PROSE_KEYS and isinstance(value, str):
+                        prose.append(value)
+                    walk(value, prose)
+            elif isinstance(node, list):
+                for value in node:
+                    walk(value, prose)
+
+        for path in files:
+            doc = json.loads(path.read_text(encoding="utf-8"))
+            prose = []
+            walk(doc, prose)
+            self.assertTrue(prose, path.name)
+            for text in prose:
+                for tell in ODOO_TELLS:
+                    self.assertNotIn(tell, text, f"{tell!r} in {path.name}")
 
 
 @tagged("post_install", "-at_install")

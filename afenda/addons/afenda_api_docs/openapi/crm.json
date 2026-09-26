@@ -1,0 +1,7696 @@
+{
+ "components": {
+  "requestBodies": {
+   "action_opportunity_forecast": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {}
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_change_thread": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "new_parent_message": {},
+        "new_thread": {}
+       },
+       "required": [
+        "new_thread"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_get_followers": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "after": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "filter_recipients": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "limit": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_mail_with_source": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "source_ref": {}
+       },
+       "required": [
+        "source_ref"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_new": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "msg_dict": {}
+       },
+       "required": [
+        "msg_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_notify": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "attachment_ids": {},
+        "attachments": {},
+        "author_id": {},
+        "body": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "email_from": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "model": {},
+        "partner_ids": {},
+        "res_id": {},
+        "subject": {},
+        "subtype_id": {},
+        "subtype_xmlid": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_parse": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "message": {},
+        "save_original": {}
+       },
+       "required": [
+        "message"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_post": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "body": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "message_type": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_process": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "message": {},
+        "model": {},
+        "save_original": {},
+        "strip_attachments": {},
+        "thread_id": {}
+       },
+       "required": [
+        "model",
+        "message"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_route": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "message": {},
+        "message_dict": {},
+        "model": {},
+        "thread_id": {}
+       },
+       "required": [
+        "message",
+        "message_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_subscribe": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "partner_ids": {},
+        "subtype_ids": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_unsubscribe": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "partner_ids": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_update": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "msg_dict": {},
+        "update_vals": {}
+       },
+       "required": [
+        "msg_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "notify_cancel_by_type": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "notification_type": {}
+       },
+       "required": [
+        "notification_type"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "rating_apply": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "feedback": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "notify_delay_send": {},
+        "rate": {},
+        "rating": {},
+        "subtype_xmlid": {},
+        "token": {}
+       },
+       "required": [
+        "rate"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "rating_send_request": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "force_send": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "lang": {},
+        "template": {}
+       },
+       "required": [
+        "template"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "unlink": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {
+         "type": "object"
+        }
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "crm.activity.report": {
+    "properties": {
+     "active": {
+      "readOnly": true,
+      "title": "Active",
+      "type": "boolean"
+     },
+     "author_id": {
+      "readOnly": true,
+      "title": "Assigned To",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "body": {
+      "readOnly": true,
+      "title": "Activity Description",
+      "type": "string"
+     },
+     "company_id": {
+      "readOnly": true,
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "country_id": {
+      "readOnly": true,
+      "title": "Country",
+      "type": "integer",
+      "x-relation": "res.country"
+     },
+     "date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Completion Date",
+      "type": "string"
+     },
+     "date_closed": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Closed Date",
+      "type": "string"
+     },
+     "date_conversion": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Conversion Date",
+      "type": "string"
+     },
+     "date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Expected Closing",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "lead_create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Creation Date",
+      "type": "string"
+     },
+     "lead_id": {
+      "readOnly": true,
+      "title": "Opportunity",
+      "type": "integer",
+      "x-relation": "crm.lead"
+     },
+     "lead_type": {
+      "description": "Type is used to separate Leads and Opportunities",
+      "enum": [
+       "lead",
+       "opportunity"
+      ],
+      "title": "Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Lead",
+       "Opportunity"
+      ]
+     },
+     "mail_activity_type_id": {
+      "readOnly": true,
+      "title": "Activity Type",
+      "type": "integer",
+      "x-relation": "mail.activity.type"
+     },
+     "partner_id": {
+      "readOnly": true,
+      "title": "Customer",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "stage_id": {
+      "readOnly": true,
+      "title": "Stage",
+      "type": "integer",
+      "x-relation": "crm.stage"
+     },
+     "subtype_id": {
+      "readOnly": true,
+      "title": "Subtype",
+      "type": "integer",
+      "x-relation": "mail.message.subtype"
+     },
+     "tag_ids": {
+      "description": "Classify and analyze your lead/opportunity categories like: Training, Service",
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Tags",
+      "type": "array",
+      "x-relation": "crm.tag"
+     },
+     "team_id": {
+      "readOnly": true,
+      "title": "Sales Team",
+      "type": "integer",
+      "x-relation": "crm.team"
+     },
+     "user_id": {
+      "readOnly": true,
+      "title": "Salesperson",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "won_status": {
+      "enum": [
+       "won",
+       "lost",
+       "pending"
+      ],
+      "readOnly": true,
+      "title": "Is Won",
+      "type": "string",
+      "x-enum-labels": [
+       "Won",
+       "Lost",
+       "Pending"
+      ]
+     }
+    },
+    "title": "CRM Activity Analysis",
+    "type": "object"
+   },
+   "crm.lead": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "activity_calendar_event_id": {
+      "readOnly": true,
+      "title": "Next Activity Calendar Event",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Next Activity Deadline",
+      "type": "string"
+     },
+     "activity_exception_decoration": {
+      "description": "Type of the exception activity on record.",
+      "enum": [
+       "warning",
+       "danger"
+      ],
+      "readOnly": true,
+      "title": "Activity Exception Decoration",
+      "type": "string",
+      "x-enum-labels": [
+       "Alert",
+       "Error"
+      ]
+     },
+     "activity_exception_icon": {
+      "description": "Icon to indicate an exception activity.",
+      "readOnly": true,
+      "title": "Icon",
+      "type": "string"
+     },
+     "activity_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Activities",
+      "type": "array",
+      "x-relation": "mail.activity"
+     },
+     "activity_state": {
+      "description": "Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities.",
+      "enum": [
+       "overdue",
+       "today",
+       "planned"
+      ],
+      "readOnly": true,
+      "title": "Activity State",
+      "type": "string",
+      "x-enum-labels": [
+       "Overdue",
+       "Today",
+       "Planned"
+      ]
+     },
+     "activity_summary": {
+      "title": "Next Activity Summary",
+      "type": "string"
+     },
+     "activity_type_icon": {
+      "description": "Font awesome icon e.g. fa-tasks",
+      "readOnly": true,
+      "title": "Activity Type Icon",
+      "type": "string"
+     },
+     "activity_type_id": {
+      "title": "Next Activity Type",
+      "type": "integer",
+      "x-relation": "mail.activity.type"
+     },
+     "activity_user_id": {
+      "readOnly": true,
+      "title": "Responsible User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "automated_probability": {
+      "readOnly": true,
+      "title": "Automated Probability",
+      "type": "number"
+     },
+     "calendar_event_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Meetings",
+      "type": "array",
+      "x-relation": "calendar.event"
+     },
+     "campaign_id": {
+      "description": "This is a name that helps you keep track of your different campaign efforts, e.g. Fall_Drive, Christmas_Special",
+      "title": "Campaign",
+      "type": "integer",
+      "x-relation": "utm.campaign"
+     },
+     "city": {
+      "title": "City",
+      "type": "string"
+     },
+     "color": {
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "commercial_partner_id": {
+      "title": "Customer Company",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "company_currency": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "contact_name": {
+      "title": "Contact Name",
+      "type": "string"
+     },
+     "country_id": {
+      "title": "Country",
+      "type": "integer",
+      "x-relation": "res.country"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "date_automation_last": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Action",
+      "type": "string"
+     },
+     "date_closed": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Closed Date",
+      "type": "string"
+     },
+     "date_conversion": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Conversion Date",
+      "type": "string"
+     },
+     "date_deadline": {
+      "description": "Estimate of the date on which the opportunity will be won.",
+      "format": "date",
+      "title": "Expected Closing",
+      "type": "string"
+     },
+     "date_last_stage_update": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Stage Update",
+      "type": "string"
+     },
+     "date_open": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Assignment Date",
+      "type": "string"
+     },
+     "day_close": {
+      "readOnly": true,
+      "title": "Days to Close",
+      "type": "number"
+     },
+     "day_open": {
+      "readOnly": true,
+      "title": "Days to Assign",
+      "type": "number"
+     },
+     "description": {
+      "title": "Notes",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "duplicate_lead_count": {
+      "readOnly": true,
+      "title": "Potential Duplicate Lead Count",
+      "type": "integer"
+     },
+     "duplicate_lead_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Potential Duplicate Lead",
+      "type": "array",
+      "x-relation": "crm.lead"
+     },
+     "duration_tracking": {
+      "description": "JSON that maps ids from a many2one field to seconds spent",
+      "readOnly": true,
+      "title": "Status time",
+      "type": "object"
+     },
+     "email_cc": {
+      "title": "Email cc",
+      "type": "string"
+     },
+     "email_domain_criterion": {
+      "readOnly": true,
+      "title": "Email Domain Criterion",
+      "type": "string"
+     },
+     "email_from": {
+      "title": "Email",
+      "type": "string"
+     },
+     "email_normalized": {
+      "description": "This field is used to search on email address as the primary email field can contain more than strictly an email address.",
+      "readOnly": true,
+      "title": "Normalized Email",
+      "type": "string"
+     },
+     "email_state": {
+      "enum": [
+       "correct",
+       "incorrect"
+      ],
+      "readOnly": true,
+      "title": "Email Quality",
+      "type": "string",
+      "x-enum-labels": [
+       "Correct",
+       "Incorrect"
+      ]
+     },
+     "event_id": {
+      "description": "Event triggering the rule that created this lead",
+      "title": "Source Event",
+      "type": "integer",
+      "x-relation": "event.event"
+     },
+     "event_lead_rule_id": {
+      "description": "Rule that created this lead",
+      "title": "Registration Rule",
+      "type": "integer",
+      "x-relation": "event.lead.rule"
+     },
+     "expected_revenue": {
+      "title": "Expected Revenue",
+      "type": "number"
+     },
+     "function": {
+      "title": "Job Position",
+      "type": "string"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "iap_enrich_done": {
+      "description": "Whether IAP service for lead enrichment based on email has been performed on this lead.",
+      "title": "Enrichment done",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "is_automated_probability": {
+      "readOnly": true,
+      "title": "Is automated probability?",
+      "type": "boolean"
+     },
+     "is_blacklisted": {
+      "description": "If the email address is on the blacklist, the contact won't receive mass mailing anymore, from any list",
+      "readOnly": true,
+      "title": "Blacklist",
+      "type": "boolean"
+     },
+     "is_partner_visible": {
+      "readOnly": true,
+      "title": "Is Partner Visible",
+      "type": "boolean"
+     },
+     "is_rotting": {
+      "readOnly": true,
+      "title": "Rotting",
+      "type": "boolean"
+     },
+     "lang_active_count": {
+      "readOnly": true,
+      "title": "Lang Active Count",
+      "type": "integer"
+     },
+     "lang_code": {
+      "description": "This field is used to set/get locales for user",
+      "readOnly": true,
+      "title": "Locale Code",
+      "type": "string"
+     },
+     "lang_id": {
+      "title": "Language",
+      "type": "integer",
+      "x-relation": "res.lang"
+     },
+     "lead_mining_request_id": {
+      "title": "Lead Mining Request",
+      "type": "integer",
+      "x-relation": "crm.iap.lead.mining.request"
+     },
+     "lead_properties": {
+      "title": "Properties",
+      "type": "object"
+     },
+     "lost_reason_id": {
+      "title": "Lost Reason",
+      "type": "integer",
+      "x-relation": "crm.lost.reason"
+     },
+     "medium_id": {
+      "description": "This is the method of delivery, e.g. Postcard, Email, or Banner Ad",
+      "title": "Medium",
+      "type": "integer",
+      "x-relation": "utm.medium"
+     },
+     "meeting_display_date": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Meeting Display Date",
+      "type": "string"
+     },
+     "meeting_display_label": {
+      "readOnly": true,
+      "title": "Meeting Display Label",
+      "type": "string"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_bounce": {
+      "description": "Counter of the number of bounced emails for this contact",
+      "title": "Bounce",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "my_activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "My Activity Deadline",
+      "type": "string"
+     },
+     "name": {
+      "title": "Opportunity",
+      "type": "string"
+     },
+     "order_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Orders",
+      "type": "array",
+      "x-relation": "sale.order"
+     },
+     "origin_channel_id": {
+      "readOnly": true,
+      "title": "Live chat from which the lead was created",
+      "type": "integer",
+      "x-relation": "discuss.channel"
+     },
+     "origin_survey_id": {
+      "title": "Survey",
+      "type": "integer",
+      "x-relation": "survey.survey"
+     },
+     "partner_email_update": {
+      "readOnly": true,
+      "title": "Partner Email will Update",
+      "type": "boolean"
+     },
+     "partner_id": {
+      "description": "Linked partner (optional). Usually created when converting the lead. You can find a partner by its Name, TIN, Email or Internal Reference.",
+      "title": "Contact",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "partner_is_blacklisted": {
+      "description": "If the email address is on the blacklist, the contact won't receive mass mailing anymore, from any list",
+      "readOnly": true,
+      "title": "Partner is blacklisted",
+      "type": "boolean"
+     },
+     "partner_name": {
+      "description": "The name of the future partner company that will be created while converting the lead into opportunity",
+      "title": "Company Name",
+      "type": "string"
+     },
+     "partner_phone_update": {
+      "readOnly": true,
+      "title": "Partner Phone will Update",
+      "type": "boolean"
+     },
+     "phone": {
+      "title": "Phone",
+      "type": "string"
+     },
+     "phone_blacklisted": {
+      "description": "Indicates if a blacklisted sanitized phone number is a phone number. Helps distinguish which number is blacklisted             when there is both a mobile and phone field in a model.",
+      "readOnly": true,
+      "title": "Blacklisted Phone is Phone",
+      "type": "boolean"
+     },
+     "phone_mobile_search": {
+      "title": "Phone Number",
+      "type": "string"
+     },
+     "phone_sanitized": {
+      "description": "Field used to store sanitized phone number. Helps speeding up searches and comparisons.",
+      "readOnly": true,
+      "title": "Sanitized Number",
+      "type": "string"
+     },
+     "phone_sanitized_blacklisted": {
+      "description": "If the sanitized phone number is on the blacklist, the contact won't receive mass mailing sms anymore, from any list",
+      "readOnly": true,
+      "title": "Phone Blacklisted",
+      "type": "boolean"
+     },
+     "phone_state": {
+      "enum": [
+       "correct",
+       "incorrect"
+      ],
+      "readOnly": true,
+      "title": "Phone Quality",
+      "type": "string",
+      "x-enum-labels": [
+       "Correct",
+       "Incorrect"
+      ]
+     },
+     "priority": {
+      "enum": [
+       "0",
+       "1",
+       "2",
+       "3"
+      ],
+      "title": "Priority",
+      "type": "string",
+      "x-enum-labels": [
+       "Low",
+       "Medium",
+       "High",
+       "Very High"
+      ]
+     },
+     "probability": {
+      "title": "Probability",
+      "type": "number"
+     },
+     "prorated_revenue": {
+      "readOnly": true,
+      "title": "Prorated Revenue",
+      "type": "number"
+     },
+     "quotation_count": {
+      "readOnly": true,
+      "title": "Number of Quotations",
+      "type": "integer"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "recurring_plan": {
+      "title": "Recurring Plan",
+      "type": "integer",
+      "x-relation": "crm.recurring.plan"
+     },
+     "recurring_revenue": {
+      "title": "Recurring Revenues",
+      "type": "number"
+     },
+     "recurring_revenue_monthly": {
+      "readOnly": true,
+      "title": "Expected MRR",
+      "type": "number"
+     },
+     "recurring_revenue_monthly_prorated": {
+      "readOnly": true,
+      "title": "Prorated MRR",
+      "type": "number"
+     },
+     "recurring_revenue_prorated": {
+      "readOnly": true,
+      "title": "Prorated Recurring Revenues",
+      "type": "number"
+     },
+     "referred": {
+      "title": "Referred By",
+      "type": "string"
+     },
+     "registration_count": {
+      "description": "Counter for the registrations linked to this lead",
+      "readOnly": true,
+      "title": "# Registrations",
+      "type": "integer"
+     },
+     "registration_ids": {
+      "description": "Registrations triggering the rule that created this lead",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Source Registrations",
+      "type": "array",
+      "x-relation": "event.registration"
+     },
+     "reveal_id": {
+      "title": "Reveal ID",
+      "type": "string"
+     },
+     "rotting_days": {
+      "description": "Day count since this resource was last updated",
+      "readOnly": true,
+      "title": "Days Rotting",
+      "type": "integer"
+     },
+     "sale_amount_total": {
+      "description": "Untaxed Total of Confirmed Orders",
+      "readOnly": true,
+      "title": "Sum of Orders",
+      "type": "number"
+     },
+     "sale_order_count": {
+      "readOnly": true,
+      "title": "Number of Sale Orders",
+      "type": "integer"
+     },
+     "show_enrich_button": {
+      "readOnly": true,
+      "title": "Allow manual enrich",
+      "type": "boolean"
+     },
+     "source_id": {
+      "description": "This is the source of the link, e.g. Search Engine, another domain, or name of email list",
+      "title": "Source",
+      "type": "integer",
+      "x-relation": "utm.source"
+     },
+     "stage_id": {
+      "title": "Stage",
+      "type": "integer",
+      "x-relation": "crm.stage"
+     },
+     "stage_id_color": {
+      "readOnly": true,
+      "title": "Stage Color",
+      "type": "integer"
+     },
+     "state_id": {
+      "title": "State",
+      "type": "integer",
+      "x-relation": "res.country.state"
+     },
+     "street": {
+      "title": "Street",
+      "type": "string"
+     },
+     "street2": {
+      "title": "Street2",
+      "type": "string"
+     },
+     "tag_ids": {
+      "description": "Classify and analyze your lead/opportunity categories like: Training, Service",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Tags",
+      "type": "array",
+      "x-relation": "crm.tag"
+     },
+     "team_id": {
+      "title": "Sales Team",
+      "type": "integer",
+      "x-relation": "crm.team"
+     },
+     "type": {
+      "enum": [
+       "lead",
+       "opportunity"
+      ],
+      "title": "Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Lead",
+       "Opportunity"
+      ]
+     },
+     "user_company_ids": {
+      "description": "UX: Limit to lead company or all if no company",
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "User Company",
+      "type": "array",
+      "x-relation": "res.company"
+     },
+     "user_id": {
+      "title": "Salesperson",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "visitor_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Web Visitors",
+      "type": "array",
+      "x-relation": "website.visitor"
+     },
+     "visitor_page_count": {
+      "readOnly": true,
+      "title": "# Page Views",
+      "type": "integer"
+     },
+     "visitor_sessions_count": {
+      "readOnly": true,
+      "title": "# Sessions",
+      "type": "integer"
+     },
+     "website": {
+      "description": "Website of the contact",
+      "title": "Website",
+      "type": "string"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "won_status": {
+      "enum": [
+       "won",
+       "lost",
+       "pending"
+      ],
+      "readOnly": true,
+      "title": "Won/Lost",
+      "type": "string",
+      "x-enum-labels": [
+       "Won",
+       "Lost",
+       "Pending"
+      ]
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "zip": {
+      "title": "Zip",
+      "type": "string"
+     }
+    },
+    "required": [
+     "name",
+     "type"
+    ],
+    "title": "Lead",
+    "type": "object"
+   },
+   "crm.lead.scoring.frequency": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "lost_count": {
+      "title": "Lost Count",
+      "type": "number"
+     },
+     "team_id": {
+      "title": "Sales Team",
+      "type": "integer",
+      "x-relation": "crm.team"
+     },
+     "value": {
+      "title": "Value",
+      "type": "string"
+     },
+     "variable": {
+      "title": "Variable",
+      "type": "string"
+     },
+     "won_count": {
+      "title": "Won Count",
+      "type": "number"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "title": "Lead Scoring Frequency",
+    "type": "object"
+   },
+   "crm.lead.scoring.frequency.field": {
+    "properties": {
+     "color": {
+      "title": "Color",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "field_id": {
+      "title": "Field",
+      "type": "integer",
+      "x-relation": "ir.model.fields"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "readOnly": true,
+      "title": "Field Label",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "field_id"
+    ],
+    "title": "Fields that can be used for predictive lead scoring computation",
+    "type": "object"
+   },
+   "crm.lost.reason": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "leads_count": {
+      "readOnly": true,
+      "title": "Leads Count",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Description",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Opp. Lost Reason",
+    "type": "object"
+   },
+   "crm.recurring.plan": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Plan Name",
+      "type": "string"
+     },
+     "number_of_months": {
+      "title": "# Months",
+      "type": "integer"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "number_of_months"
+    ],
+    "title": "CRM Recurring revenue plans",
+    "type": "object"
+   },
+   "crm.stage": {
+    "properties": {
+     "color": {
+      "title": "Color",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "fold": {
+      "description": "This stage is folded in the kanban view when there are no records in that stage to display.",
+      "title": "Folded in Pipeline",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "is_won": {
+      "title": "Is Won Stage?",
+      "type": "boolean"
+     },
+     "name": {
+      "title": "Stage Name",
+      "type": "string"
+     },
+     "requirements": {
+      "description": "Enter here the internal requirements for this stage (ex: Offer sent to customer). It will appear as a tooltip over the stage's name.",
+      "title": "Requirements",
+      "type": "string"
+     },
+     "rotting_threshold_days": {
+      "description": "Highlight opportunities that haven't been updated for this many days.         Set to 0 to disable. Changing this parameter will not affect the rotting status/date of resources last updated before this change.",
+      "title": "Days to rot",
+      "type": "integer"
+     },
+     "sequence": {
+      "description": "Used to order stages. Lower is better.",
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "team_count": {
+      "readOnly": true,
+      "title": "team_count",
+      "type": "integer"
+     },
+     "team_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Sales Teams",
+      "type": "array",
+      "x-relation": "crm.team"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "CRM Stages",
+    "type": "object"
+   },
+   "crm.tag": {
+    "properties": {
+     "color": {
+      "title": "Color",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Tag Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "CRM Tag",
+    "type": "object"
+   },
+   "crm.team": {
+    "properties": {
+     "abandoned_carts_amount": {
+      "readOnly": true,
+      "title": "Amount of Abandoned Carts",
+      "type": "integer"
+     },
+     "abandoned_carts_count": {
+      "readOnly": true,
+      "title": "Number of Abandoned Carts",
+      "type": "integer"
+     },
+     "active": {
+      "description": "If the active field is set to false, it will allow you to hide the Sales Team without removing it.",
+      "title": "Active",
+      "type": "boolean"
+     },
+     "alias_bounced_content": {
+      "description": "If set, this content will automatically be sent out to unauthorized users instead of the default message.",
+      "title": "Custom Bounced Message",
+      "type": "string"
+     },
+     "alias_contact": {
+      "description": "Policy to post a message on the document using the mailgateway.\n- everyone: everyone can post\n- partners: only authenticated partners\n- followers: only followers of the related document or members of following channels\n",
+      "enum": [
+       "everyone",
+       "partners",
+       "followers",
+       "employees"
+      ],
+      "title": "Alias Contact Security",
+      "type": "string",
+      "x-enum-labels": [
+       "Everyone",
+       "Authenticated Partners",
+       "Followers only",
+       "Authenticated Employees"
+      ]
+     },
+     "alias_defaults": {
+      "description": "A Python dictionary that will be evaluated to provide default values when creating new records for this alias.",
+      "readOnly": true,
+      "title": "Default Values",
+      "type": "string"
+     },
+     "alias_domain": {
+      "description": "Email domain e.g. 'example.com' in 'AFENDA xForge@example.com'",
+      "readOnly": true,
+      "title": "Alias Domain Name",
+      "type": "string"
+     },
+     "alias_domain_id": {
+      "title": "Alias Domain",
+      "type": "integer",
+      "x-relation": "mail.alias.domain"
+     },
+     "alias_email": {
+      "readOnly": true,
+      "title": "Email Alias",
+      "type": "string"
+     },
+     "alias_force_thread_id": {
+      "description": "Optional ID of a thread (record) to which all incoming messages will be attached, even if they did not reply to it. If set, this will disable the creation of new records completely.",
+      "title": "Record Thread ID",
+      "type": "integer"
+     },
+     "alias_full_name": {
+      "readOnly": true,
+      "title": "Alias Email",
+      "type": "string"
+     },
+     "alias_id": {
+      "description": "The email address associated with this channel. New emails received will automatically create new leads assigned to the channel.",
+      "title": "Alias",
+      "type": "integer",
+      "x-relation": "mail.alias"
+     },
+     "alias_incoming_local": {
+      "title": "Local-part based incoming detection",
+      "type": "boolean"
+     },
+     "alias_model_id": {
+      "description": "The model (AFENDA xForge Document Kind) to which this alias corresponds. Any incoming email that does not reply to an existing record will cause the creation of a new record of this model (e.g. a Project Task)",
+      "title": "Aliased Model",
+      "type": "integer",
+      "x-relation": "ir.model"
+     },
+     "alias_name": {
+      "description": "The name of the email alias, e.g. 'jobs' if you want to catch emails for <jobs@example.nexuscanon.com>",
+      "title": "Alias Name",
+      "type": "string"
+     },
+     "alias_parent_model_id": {
+      "description": "Parent model holding the alias. The model holding the alias reference is not necessarily the model given by alias_model_id (example: project (parent_model) and task (model))",
+      "title": "Parent Model",
+      "type": "integer",
+      "x-relation": "ir.model"
+     },
+     "alias_parent_thread_id": {
+      "description": "ID of the parent record holding the alias (example: project holding the task creation alias)",
+      "title": "Parent Record Thread ID",
+      "type": "integer"
+     },
+     "alias_status": {
+      "description": "Alias status assessed on the last message received.",
+      "enum": [
+       "not_tested",
+       "valid",
+       "invalid"
+      ],
+      "readOnly": true,
+      "title": "Alias Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Not Tested",
+       "Valid",
+       "Invalid"
+      ]
+     },
+     "assignment_auto_enabled": {
+      "readOnly": true,
+      "title": "Auto Assignment",
+      "type": "boolean"
+     },
+     "assignment_domain": {
+      "description": "Additional filter domain when fetching unassigned leads to allocate to the team.",
+      "title": "Assignment Domain",
+      "type": "string"
+     },
+     "assignment_enabled": {
+      "readOnly": true,
+      "title": "Lead Assign",
+      "type": "boolean"
+     },
+     "assignment_max": {
+      "description": "Monthly average leads capacity for all salesmen belonging to the team",
+      "readOnly": true,
+      "title": "Lead Average Capacity",
+      "type": "integer"
+     },
+     "assignment_optout": {
+      "title": "Skip auto assignment",
+      "type": "boolean"
+     },
+     "color": {
+      "description": "The color of the channel",
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "crm_team_member_all_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Sales Team Members (incl. inactive)",
+      "type": "array",
+      "x-relation": "crm.team.member"
+     },
+     "crm_team_member_ids": {
+      "description": "Add members to automatically assign their documents to this sales team.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Sales Team Members",
+      "type": "array",
+      "x-relation": "crm.team.member"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "dashboard_button_name": {
+      "readOnly": true,
+      "title": "Dashboard Button",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "favorite_user_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Favorite Members",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "invoiced": {
+      "description": "Invoice revenue for the current month. This is the amount the sales channel has invoiced this month. It is used to compute the progression ratio of the current and target revenue on the kanban view.",
+      "readOnly": true,
+      "title": "Invoiced This Month",
+      "type": "number"
+     },
+     "invoiced_target": {
+      "description": "Revenue Target for the current month (untaxed total of paid invoices).",
+      "title": "Invoicing Target",
+      "type": "number"
+     },
+     "is_favorite": {
+      "description": "Favorite teams to display them in the dashboard and access them easily.",
+      "title": "Show on dashboard",
+      "type": "boolean"
+     },
+     "is_membership_multi": {
+      "description": "If True, users may belong to several sales teams. Otherwise membership is limited to a single sales team.",
+      "readOnly": true,
+      "title": "Multiple Memberships Allowed",
+      "type": "boolean"
+     },
+     "lead_all_assigned_month_count": {
+      "description": "Number of leads and opportunities assigned this last month.",
+      "readOnly": true,
+      "title": "# Leads/Opps assigned this month",
+      "type": "integer"
+     },
+     "lead_all_assigned_month_exceeded": {
+      "description": "True if the monthly lead assignment count is greater than the maximum assignment limit, false otherwise.",
+      "readOnly": true,
+      "title": "Exceed monthly lead assignement",
+      "type": "boolean"
+     },
+     "lead_properties_definition": {
+      "items": {
+       "type": "object"
+      },
+      "title": "Lead Properties",
+      "type": "array"
+     },
+     "lead_unassigned_count": {
+      "readOnly": true,
+      "title": "# Unassigned Leads",
+      "type": "integer"
+     },
+     "member_company_ids": {
+      "description": "UX: Limit to team company or all if no company",
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Member Company",
+      "type": "array",
+      "x-relation": "res.company"
+     },
+     "member_ids": {
+      "description": "Users assigned to this team.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Salespersons",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "member_warning": {
+      "readOnly": true,
+      "title": "Membership Issue Warning",
+      "type": "string"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "name": {
+      "title": "Sales Team",
+      "type": "string"
+     },
+     "origin_survey_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Survey opportunities related to the sales team",
+      "type": "array",
+      "x-relation": "survey.survey"
+     },
+     "pos_config_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Point of Sales",
+      "type": "array",
+      "x-relation": "pos.config"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "sale_order_count": {
+      "readOnly": true,
+      "title": "# Sale Orders",
+      "type": "integer"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "use_leads": {
+      "description": "Check this box to filter and qualify incoming requests as leads before converting them into opportunities and assigning them to a salesperson.",
+      "title": "Leads",
+      "type": "boolean"
+     },
+     "use_opportunities": {
+      "description": "Check this box to manage a presales process with opportunities.",
+      "title": "Pipeline",
+      "type": "boolean"
+     },
+     "user_id": {
+      "title": "Team Leader",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "website_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Websites",
+      "type": "array",
+      "x-relation": "website"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "alias_contact",
+     "alias_defaults",
+     "alias_id",
+     "alias_model_id",
+     "name"
+    ],
+    "title": "Sales Team",
+    "type": "object"
+   },
+   "crm.team.member": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "assignment_domain": {
+      "title": "Assignment Domain",
+      "type": "string"
+     },
+     "assignment_domain_preferred": {
+      "title": "Preference assignment Domain",
+      "type": "string"
+     },
+     "assignment_enabled": {
+      "readOnly": true,
+      "title": "Lead Assign",
+      "type": "boolean"
+     },
+     "assignment_max": {
+      "title": "Average Leads Capacity (on 30 days)",
+      "type": "integer"
+     },
+     "assignment_optout": {
+      "title": "Pause assignment",
+      "type": "boolean"
+     },
+     "company_id": {
+      "description": "The default company for this user.",
+      "readOnly": true,
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "crm_team_id": {
+      "title": "Sales Team",
+      "type": "integer",
+      "x-relation": "crm.team"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "email": {
+      "readOnly": true,
+      "title": "Email",
+      "type": "string"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "image_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image (128)",
+      "type": "string"
+     },
+     "image_1920": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image",
+      "type": "string"
+     },
+     "is_membership_multi": {
+      "description": "If True, users may belong to several sales teams. Otherwise membership is limited to a single sales team.",
+      "readOnly": true,
+      "title": "Multiple Memberships Allowed",
+      "type": "boolean"
+     },
+     "lead_day_count": {
+      "description": "Number of leads assigned to this member in the last 24 hours (lost leads excluded)",
+      "readOnly": true,
+      "title": "Leads (last 24h)",
+      "type": "integer"
+     },
+     "lead_month_count": {
+      "description": "Number of leads assigned to this member in the last 30 days",
+      "readOnly": true,
+      "title": "Leads (30 days)",
+      "type": "integer"
+     },
+     "member_warning": {
+      "readOnly": true,
+      "title": "Member Warning",
+      "type": "string"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "phone": {
+      "readOnly": true,
+      "title": "Phone",
+      "type": "string"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "user_company_ids": {
+      "description": "UX: Limit to team company or all if no company",
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "User Company",
+      "type": "array",
+      "x-relation": "res.company"
+     },
+     "user_id": {
+      "title": "Salesperson",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "user_in_teams_ids": {
+      "description": "UX: Give users not to add in the currently chosen team to avoid duplicates",
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "User In Teams",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "crm_team_id",
+     "user_id"
+    ],
+    "title": "Sales Team Member",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "crm"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/crm.activity.report/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "crm.activity.report.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.activity.report/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.activity.report.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.activity.report/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.activity.report.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.activity.report/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.activity.report.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.activity.report/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.activity.report.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.activity.report/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.activity.report.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.activity.report/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.activity.report.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.activity.report/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.activity.report.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.activity.report/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "crm.activity.report.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.activity.report/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "crm.activity.report.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.activity.report"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "crm.lead.scoring.frequency.field.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.lead.scoring.frequency.field.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.lead.scoring.frequency.field.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.lead.scoring.frequency.field.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.lead.scoring.frequency.field.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.lead.scoring.frequency.field.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.lead.scoring.frequency.field.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.lead.scoring.frequency.field.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "crm.lead.scoring.frequency.field.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency.field/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "crm.lead.scoring.frequency.field.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.lead.scoring.frequency.field"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "crm.lead.scoring.frequency.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.lead.scoring.frequency.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.lead.scoring.frequency.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.lead.scoring.frequency.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.lead.scoring.frequency.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.lead.scoring.frequency.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.lead.scoring.frequency.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.lead.scoring.frequency.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "crm.lead.scoring.frequency.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead.scoring.frequency/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "crm.lead.scoring.frequency.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.lead.scoring.frequency"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_generate_leads": {
+   "post": {
+    "operationId": "crm.lead.action_generate_leads",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_generate_leads",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_new_quotation": {
+   "post": {
+    "operationId": "crm.lead.action_new_quotation",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_new_quotation",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_open_livechat": {
+   "post": {
+    "operationId": "crm.lead.action_open_livechat",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_livechat",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_redirect_to_livechat_sessions": {
+   "post": {
+    "operationId": "crm.lead.action_redirect_to_livechat_sessions",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_livechat_sessions",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_redirect_to_page_views": {
+   "post": {
+    "operationId": "crm.lead.action_redirect_to_page_views",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_page_views",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_reschedule_meeting": {
+   "post": {
+    "operationId": "crm.lead.action_reschedule_meeting",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_meeting",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_reschedule_my_next_nextweek": {
+   "post": {
+    "operationId": "crm.lead.action_reschedule_my_next_nextweek",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_nextweek",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_reschedule_my_next_today": {
+   "post": {
+    "operationId": "crm.lead.action_reschedule_my_next_today",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_today",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_reschedule_my_next_tomorrow": {
+   "post": {
+    "operationId": "crm.lead.action_reschedule_my_next_tomorrow",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_tomorrow",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_restore": {
+   "post": {
+    "description": "Restoring a lost lead means that it should go back to its normal life cycle. This should reactivate the lead but also force the recompute of its probability, for the stage where the lead is currently at. During toggle_active, when reactivating a lost lead,only the automated probability will be recomputed, because the probability is not automated anymore. Restore will reset this automation.",
+    "operationId": "crm.lead.action_restore",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_restore",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_sale_quotations_new": {
+   "post": {
+    "operationId": "crm.lead.action_sale_quotations_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_sale_quotations_new",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_schedule_meeting": {
+   "post": {
+    "description": "Open meeting's calendar view to schedule meeting on current opportunity.",
+    "operationId": "crm.lead.action_schedule_meeting",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "smart_calendar": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_schedule_meeting",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_set_automated_probability": {
+   "post": {
+    "description": "Update the automated probability and align probability to that value",
+    "operationId": "crm.lead.action_set_automated_probability",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_set_automated_probability",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_set_lost": {
+   "post": {
+    "description": "Lost semantic: probability = 0 AND active = False",
+    "operationId": "crm.lead.action_set_lost",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_set_lost",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_set_won": {
+   "post": {
+    "description": "Won semantic: stage.is_won (AND probability = 100 but implied)",
+    "operationId": "crm.lead.action_set_won",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_set_won",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_set_won_rainbowman": {
+   "post": {
+    "operationId": "crm.lead.action_set_won_rainbowman",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_set_won_rainbowman",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_show_potential_duplicates": {
+   "post": {
+    "description": "Open kanban view to display duplicate leads or opportunity. :return dict: dictionary value for created kanban view",
+    "operationId": "crm.lead.action_show_potential_duplicates",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_show_potential_duplicates",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_view_sale_order": {
+   "post": {
+    "operationId": "crm.lead.action_view_sale_order",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_sale_order",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/action_view_sale_quotation": {
+   "post": {
+    "operationId": "crm.lead.action_view_sale_quotation",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_sale_quotation",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/activity_feedback": {
+   "post": {
+    "description": "Set activities as done, limiting to some activity types and optionally to a given user.",
+    "operationId": "crm.lead.activity_feedback",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "attachment_ids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_feedback",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/activity_reschedule": {
+   "post": {
+    "description": "Reschedule some automated activities. Activities to reschedule are selected based on type xml ids and optionally by user. Purpose is to be able to",
+    "operationId": "crm.lead.activity_reschedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_user_id": {},
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_reschedule",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/activity_schedule": {
+   "post": {
+    "description": "Schedule an activity on each record of the current record set. This method allow to provide as parameter act_type_xmlid. This is an xml_id of activity type instead of directly giving an activity_type_id. It is useful to avoid having various \"env.ref\" in the code and allow to let the mixin handle access rights.",
+    "operationId": "crm.lead.activity_schedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlid": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "note": {},
+         "summary": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_schedule",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/activity_search": {
+   "post": {
+    "description": "Search automated activities on current record set, given a list of activity types xml IDs. It is useful when dealing with specific types involved in automatic activities management.",
+    "operationId": "crm.lead.activity_search",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "additional_domain": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_search",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/activity_send_mail": {
+   "post": {
+    "description": "Automatically send an email based on the given mail.template, given its ID.",
+    "operationId": "crm.lead.activity_send_mail",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "template_id": {}
+        },
+        "required": [
+         "template_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_send_mail",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/activity_unlink": {
+   "post": {
+    "description": "Unlink activities, limiting to some activity types and optionally to a given user.",
+    "operationId": "crm.lead.activity_unlink",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_unlink",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/convert_opportunity": {
+   "post": {
+    "operationId": "crm.lead.convert_opportunity",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "partner": {},
+         "team_id": {},
+         "user_ids": {}
+        },
+        "required": [
+         "partner"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "convert_opportunity",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "crm.lead.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.lead.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/find_or_create_record": {
+   "post": {
+    "description": "Version of ``_find_or_create_record`` used in frontend notably in website_links. For UTM models it calls _find_or_create_record. For other models (as through inheritance custom models could be used notably in website links) it simply calls a create. In the end it relies on standard ACLs, and is mainly a wrapper for UTM models.",
+    "operationId": "crm.lead.find_or_create_record",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "model_name": {},
+         "name": {}
+        },
+        "required": [
+         "model_name",
+         "name"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "find_or_create_record",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.lead.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/get_rainbowman_message": {
+   "post": {
+    "operationId": "crm.lead.get_rainbowman_message",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_rainbowman_message",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/iap_enrich": {
+   "post": {
+    "operationId": "crm.lead.iap_enrich",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "batch_size": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         }
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "iap_enrich",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/log_meeting": {
+   "post": {
+    "description": "Log the meeting info with a link to it in the chatter :param record meeting: the meeting we want to log",
+    "operationId": "crm.lead.log_meeting",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "meeting": {}
+        },
+        "required": [
+         "meeting"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "log_meeting",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/mail_action_blacklist_remove": {
+   "post": {
+    "operationId": "crm.lead.mail_action_blacklist_remove",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "mail_action_blacklist_remove",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/merge_opportunity": {
+   "post": {
+    "description": "Merge opportunities in one. Different cases of merge:",
+    "operationId": "crm.lead.merge_opportunity",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "auto_unlink": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "team_id": {},
+         "user_id": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "merge_opportunity",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "crm.lead.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_get_followers": {
+   "post": {
+    "operationId": "crm.lead.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_mail_with_source": {
+   "post": {
+    "operationId": "crm.lead.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_new": {
+   "post": {
+    "operationId": "crm.lead.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "crm.lead.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "crm.lead.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_post": {
+   "post": {
+    "operationId": "crm.lead.message_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_post"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_post_with_source": {
+   "post": {
+    "operationId": "crm.lead.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "crm.lead.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "crm.lead.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "crm.lead.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "crm.lead.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/message_update": {
+   "post": {
+    "operationId": "crm.lead.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.lead.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/notify_cancel_by_type": {
+   "post": {
+    "operationId": "crm.lead.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/phone_action_blacklist_remove": {
+   "post": {
+    "operationId": "crm.lead.phone_action_blacklist_remove",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "phone_action_blacklist_remove",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/prepare_pls_tooltip_data": {
+   "post": {
+    "description": "Compute and return all necessary information to render CrmPlsTooltip, displayed when pressing the small AI button, located next to the label of probability when automated, in the crm.lead form view. This method first replaces ids with display names of relational fields before returning data, then also recomputes probabilities and writes them on self.",
+    "operationId": "crm.lead.prepare_pls_tooltip_data",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "prepare_pls_tooltip_data",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "crm.lead.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "crm.lead.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.lead.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/redirect_lead_opportunity_view": {
+   "post": {
+    "operationId": "crm.lead.redirect_lead_opportunity_view",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "redirect_lead_opportunity_view",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.lead.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.lead.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.lead.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/tracking_fields": {
+   "post": {
+    "operationId": "crm.lead.tracking_fields",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "tracking_fields",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/unlink": {
+   "post": {
+    "description": "Update meetings when removing opportunities, otherwise you have a link to a record that does not lead anywhere.",
+    "operationId": "crm.lead.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/website_form_input_filter": {
+   "post": {
+    "operationId": "crm.lead.website_form_input_filter",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "request": {},
+         "values": {}
+        },
+        "required": [
+         "request",
+         "values"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "website_form_input_filter",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lead/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "crm.lead.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.lead"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/action_lost_leads": {
+   "post": {
+    "operationId": "crm.lost.reason.action_lost_leads",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_lost_leads",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "crm.lost.reason.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.lost.reason.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.lost.reason.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.lost.reason.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.lost.reason.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.lost.reason.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.lost.reason.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.lost.reason.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "crm.lost.reason.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.lost.reason/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "crm.lost.reason.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.lost.reason"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "crm.recurring.plan.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.recurring.plan.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.recurring.plan.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.recurring.plan.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.recurring.plan.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.recurring.plan.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.recurring.plan.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.recurring.plan.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "crm.recurring.plan.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.recurring.plan/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "crm.recurring.plan.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.recurring.plan"
+    ]
+   }
+  },
+  "/json/2/crm.stage/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "crm.stage.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.stage/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.stage.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.stage/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.stage.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.stage/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.stage.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.stage/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.stage.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.stage/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.stage.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.stage/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.stage.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.stage/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.stage.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.stage/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "crm.stage.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.stage/write": {
+   "post": {
+    "description": "Since leads that are in a won stage must have their probability = 100%, this override ensures that setting a stage as won will set all the leads in that stage to probability = 100%. Inversely, if a won stage is not marked as won anymore, the lead probability should be recomputed based on automated probability. Note: If a user sets a stage as won and changes his mind right after, the manual probability will be lost in the process.",
+    "operationId": "crm.stage.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.stage"
+    ]
+   }
+  },
+  "/json/2/crm.tag/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "crm.tag.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.tag/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.tag.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.tag/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.tag.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.tag/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.tag.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.tag/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.tag.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.tag/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.tag.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.tag/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.tag.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.tag/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.tag.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.tag/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "crm.tag.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.tag/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "crm.tag.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.tag"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/create": {
+   "post": {
+    "description": "Specific behavior implemented on create",
+    "operationId": "crm.team.member.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.team.member.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.team.member.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "crm.team.member.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_get_followers": {
+   "post": {
+    "operationId": "crm.team.member.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_mail_with_source": {
+   "post": {
+    "operationId": "crm.team.member.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_new": {
+   "post": {
+    "operationId": "crm.team.member.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "crm.team.member.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "crm.team.member.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_post": {
+   "post": {
+    "operationId": "crm.team.member.message_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_post"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_post_with_source": {
+   "post": {
+    "operationId": "crm.team.member.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "crm.team.member.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "crm.team.member.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "crm.team.member.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "crm.team.member.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "crm.team.member.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.team.member.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/notify_cancel_by_type": {
+   "post": {
+    "operationId": "crm.team.member.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "crm.team.member.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "crm.team.member.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.team.member.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.team.member.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.team.member.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.team.member.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/unlink": {
+   "post": {
+    "description": "When removing a record, its rating should be deleted too.",
+    "operationId": "crm.team.member.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team.member/write": {
+   "post": {
+    "description": "Specific behavior about active. If you change user_id / team_id user get warnings in form view and a raise in constraint check. We support archive / activation of memberships that toggles other memberships. But we do not support manual creation or update of user_id / team_id. This either works, either crashes). Indeed supporting it would lead to complex code with low added value. Users should create or remove members, and maybe archive / activate them. Updating manually memberships by modifying user_id or team_id is advanced and does not benefit from our support.",
+    "operationId": "crm.team.member.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.team.member"
+    ]
+   }
+  },
+  "/json/2/crm.team/action_assign_leads": {
+   "post": {
+    "description": "Manual (direct) leads assignment. This method both",
+    "operationId": "crm.team.action_assign_leads",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_assign_leads",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/action_open_leads": {
+   "post": {
+    "operationId": "crm.team.action_open_leads",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_leads",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/action_open_unassigned_leads": {
+   "post": {
+    "operationId": "crm.team.action_open_unassigned_leads",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_unassigned_leads",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/action_opportunity_forecast": {
+   "post": {
+    "operationId": "crm.team.action_opportunity_forecast",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_opportunity_forecast"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_opportunity_forecast",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/action_primary_channel_button": {
+   "post": {
+    "operationId": "crm.team.action_primary_channel_button",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_primary_channel_button",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/action_your_pipeline": {
+   "post": {
+    "operationId": "crm.team.action_your_pipeline",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_opportunity_forecast"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_your_pipeline",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/create": {
+   "post": {
+    "description": "Create aliases using sudo if an alias is required, notably if its name is given.",
+    "operationId": "crm.team.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "crm.team.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "crm.team.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/get_abandoned_carts": {
+   "post": {
+    "operationId": "crm.team.get_abandoned_carts",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_abandoned_carts",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "crm.team.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_get_followers": {
+   "post": {
+    "operationId": "crm.team.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_mail_with_source": {
+   "post": {
+    "operationId": "crm.team.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_new": {
+   "post": {
+    "operationId": "crm.team.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "crm.team.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "crm.team.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_post": {
+   "post": {
+    "operationId": "crm.team.message_post",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_post"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_post_with_source": {
+   "post": {
+    "operationId": "crm.team.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "crm.team.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "crm.team.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "crm.team.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "crm.team.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "crm.team.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "crm.team.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/notify_cancel_by_type": {
+   "post": {
+    "operationId": "crm.team.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "crm.team.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "crm.team.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "crm.team.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "crm.team.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "crm.team.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "crm.team.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/unlink": {
+   "post": {
+    "description": "When unlinking, concatenate ``crm.lead.scoring.frequency`` linked to the team into \"no team\" statistics.",
+    "operationId": "crm.team.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/update_invoiced_target": {
+   "post": {
+    "operationId": "crm.team.update_invoiced_target",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "value": {}
+        },
+        "required": [
+         "value"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "update_invoiced_target",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  },
+  "/json/2/crm.team/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "crm.team.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "crm.team"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "CRM Activity Analysis",
+   "name": "crm.activity.report"
+  },
+  {
+   "description": "Lead",
+   "name": "crm.lead"
+  },
+  {
+   "description": "Lead Scoring Frequency",
+   "name": "crm.lead.scoring.frequency"
+  },
+  {
+   "description": "Fields that can be used for predictive lead scoring computation",
+   "name": "crm.lead.scoring.frequency.field"
+  },
+  {
+   "description": "Opp. Lost Reason",
+   "name": "crm.lost.reason"
+  },
+  {
+   "description": "CRM Recurring revenue plans",
+   "name": "crm.recurring.plan"
+  },
+  {
+   "description": "CRM Stages",
+   "name": "crm.stage"
+  },
+  {
+   "description": "CRM Tag",
+   "name": "crm.tag"
+  },
+  {
+   "description": "Sales Team",
+   "name": "crm.team"
+  },
+  {
+   "description": "Sales Team Member",
+   "name": "crm.team.member"
+  }
+ ]
+}

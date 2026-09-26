@@ -1,0 +1,1638 @@
+{
+ "components": {
+  "requestBodies": {
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "unlink": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "restaurant.floor": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "background_color": {
+      "description": "The background color of the floor in a html-compatible format",
+      "title": "Background Color",
+      "type": "string"
+     },
+     "background_image": {
+      "format": "byte",
+      "title": "Background Image",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "floor_background_image": {
+      "format": "byte",
+      "title": "Floor Background Image",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Floor Name",
+      "type": "string"
+     },
+     "pos_config_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Point of Sales",
+      "type": "array",
+      "x-relation": "pos.config"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "table_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Tables",
+      "type": "array",
+      "x-relation": "restaurant.table"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Restaurant Floor",
+    "type": "object"
+   },
+   "restaurant.order.course": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "fired": {
+      "title": "Fired",
+      "type": "boolean"
+     },
+     "fired_date": {
+      "format": "date-time",
+      "title": "Fired Date",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "index": {
+      "title": "Course index",
+      "type": "integer"
+     },
+     "line_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Order Lines",
+      "type": "array",
+      "x-relation": "pos.order.line"
+     },
+     "order_id": {
+      "title": "Order Ref",
+      "type": "integer",
+      "x-relation": "pos.order"
+     },
+     "uuid": {
+      "readOnly": true,
+      "title": "Uuid",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "order_id"
+    ],
+    "title": "POS Restaurant Order Course",
+    "type": "object"
+   },
+   "restaurant.table": {
+    "properties": {
+     "active": {
+      "description": "If false, the table is deactivated and will not be available in the point of sale",
+      "title": "Active",
+      "type": "boolean"
+     },
+     "color": {
+      "description": "The table's color, expressed as a valid 'background' CSS property value",
+      "title": "Color",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "floor_id": {
+      "title": "Floor",
+      "type": "integer",
+      "x-relation": "restaurant.floor"
+     },
+     "height": {
+      "description": "The table's height in pixels",
+      "title": "Height",
+      "type": "number"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "identifier": {
+      "title": "Security Token",
+      "type": "string"
+     },
+     "parent_id": {
+      "description": "The parent table if this table is part of a group of tables",
+      "title": "Parent Table",
+      "type": "integer",
+      "x-relation": "restaurant.table"
+     },
+     "position_h": {
+      "description": "The table's horizontal position from the left side to the table's center, in pixels",
+      "title": "Horizontal Position",
+      "type": "number"
+     },
+     "position_v": {
+      "description": "The table's vertical position from the top to the table's center, in pixels",
+      "title": "Vertical Position",
+      "type": "number"
+     },
+     "seats": {
+      "description": "The default number of customer served at this table.",
+      "title": "Seats",
+      "type": "integer"
+     },
+     "shape": {
+      "enum": [
+       "square",
+       "round"
+      ],
+      "title": "Shape",
+      "type": "string",
+      "x-enum-labels": [
+       "Square",
+       "Round"
+      ]
+     },
+     "table_number": {
+      "description": "The number of the table as displayed on the floor plan",
+      "title": "Table Number",
+      "type": "integer"
+     },
+     "width": {
+      "description": "The table's width in pixels",
+      "title": "Width",
+      "type": "number"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "identifier",
+     "shape",
+     "table_number"
+    ],
+    "title": "Restaurant Table",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "pos_restaurant"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/restaurant.floor/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "restaurant.floor.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/deactivate_floor": {
+   "post": {
+    "operationId": "restaurant.floor.deactivate_floor",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "session_id": {}
+        },
+        "required": [
+         "session_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "deactivate_floor",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "restaurant.floor.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "restaurant.floor.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "restaurant.floor.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "restaurant.floor.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/rename_floor": {
+   "post": {
+    "operationId": "restaurant.floor.rename_floor",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_name": {}
+        },
+        "required": [
+         "new_name"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rename_floor",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "restaurant.floor.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "restaurant.floor.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "restaurant.floor.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/sync_from_ui": {
+   "post": {
+    "operationId": "restaurant.floor.sync_from_ui",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "background_color": {},
+         "config_id": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "name": {}
+        },
+        "required": [
+         "name",
+         "background_color",
+         "config_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "sync_from_ui",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "restaurant.floor.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.floor/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "restaurant.floor.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "restaurant.floor"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "restaurant.order.course.create",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "vals_list": {}
+        },
+        "required": [
+         "vals_list"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "restaurant.order.course.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "restaurant.order.course.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "restaurant.order.course.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "restaurant.order.course.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "restaurant.order.course.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "restaurant.order.course.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "restaurant.order.course.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "restaurant.order.course.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.order.course/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "restaurant.order.course.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "restaurant.order.course"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/are_orders_still_in_draft": {
+   "post": {
+    "operationId": "restaurant.table.are_orders_still_in_draft",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "are_orders_still_in_draft",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "restaurant.table.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "restaurant.table.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "restaurant.table.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "restaurant.table.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "restaurant.table.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "restaurant.table.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "restaurant.table.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "restaurant.table.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/set_parent_id": {
+   "post": {
+    "operationId": "restaurant.table.set_parent_id",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "config_id": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "parent_id": {}
+        },
+        "required": [
+         "parent_id",
+         "config_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "set_parent_id",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "restaurant.table.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  },
+  "/json/2/restaurant.table/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "restaurant.table.write",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "vals": {
+          "type": "object"
+         }
+        },
+        "required": [
+         "vals"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "restaurant.table"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Restaurant Floor",
+   "name": "restaurant.floor"
+  },
+  {
+   "description": "POS Restaurant Order Course",
+   "name": "restaurant.order.course"
+  },
+  {
+   "description": "Restaurant Table",
+   "name": "restaurant.table"
+  }
+ ]
+}

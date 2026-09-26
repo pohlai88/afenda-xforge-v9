@@ -1,0 +1,7646 @@
+{
+ "components": {
+  "requestBodies": {
+   "action_grant_access": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "partner_id": {}
+       },
+       "required": [
+        "partner_id"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {}
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_change_thread": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "new_parent_message": {},
+        "new_thread": {}
+       },
+       "required": [
+        "new_thread"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_get_followers": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "after": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "filter_recipients": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "limit": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_mail_with_source": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "source_ref": {}
+       },
+       "required": [
+        "source_ref"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_new": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "msg_dict": {}
+       },
+       "required": [
+        "msg_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_notify": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "attachment_ids": {},
+        "attachments": {},
+        "author_id": {},
+        "body": {},
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "email_from": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "model": {},
+        "partner_ids": {},
+        "res_id": {},
+        "subject": {},
+        "subtype_id": {},
+        "subtype_xmlid": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_parse": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "message": {},
+        "save_original": {}
+       },
+       "required": [
+        "message"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_process": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "message": {},
+        "model": {},
+        "save_original": {},
+        "strip_attachments": {},
+        "thread_id": {}
+       },
+       "required": [
+        "model",
+        "message"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_route": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "custom_values": {},
+        "message": {},
+        "message_dict": {},
+        "model": {},
+        "thread_id": {}
+       },
+       "required": [
+        "message",
+        "message_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_subscribe": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "partner_ids": {},
+        "subtype_ids": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_unsubscribe": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "partner_ids": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "message_update": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "msg_dict": {},
+        "update_vals": {}
+       },
+       "required": [
+        "msg_dict"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "notify_cancel_by_type": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "notification_type": {}
+       },
+       "required": [
+        "notification_type"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "rating_apply": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "feedback": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "notify_delay_send": {},
+        "rate": {},
+        "rating": {},
+        "subtype_xmlid": {},
+        "token": {}
+       },
+       "required": [
+        "rate"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "rating_get_grades": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "rating_send_request": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "force_send": {},
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "lang": {},
+        "template": {}
+       },
+       "required": [
+        "template"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "unlink": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {
+         "type": "object"
+        }
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "slide.answer": {
+    "properties": {
+     "comment": {
+      "description": "This comment will be displayed to the user if they select this answer",
+      "title": "Comment",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "is_correct": {
+      "title": "Is correct answer",
+      "type": "boolean"
+     },
+     "question_id": {
+      "title": "Question",
+      "type": "integer",
+      "x-relation": "slide.question"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "text_value": {
+      "title": "Answer",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "question_id",
+     "text_value"
+    ],
+    "title": "Slide Question's Answer",
+    "type": "object"
+   },
+   "slide.channel": {
+    "properties": {
+     "access_token": {
+      "title": "Security Token",
+      "type": "string"
+     },
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "activity_calendar_event_id": {
+      "readOnly": true,
+      "title": "Next Activity Calendar Event",
+      "type": "integer",
+      "x-relation": "calendar.event"
+     },
+     "activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Next Activity Deadline",
+      "type": "string"
+     },
+     "activity_exception_decoration": {
+      "description": "Type of the exception activity on record.",
+      "enum": [
+       "warning",
+       "danger"
+      ],
+      "readOnly": true,
+      "title": "Activity Exception Decoration",
+      "type": "string",
+      "x-enum-labels": [
+       "Alert",
+       "Error"
+      ]
+     },
+     "activity_exception_icon": {
+      "description": "Icon to indicate an exception activity.",
+      "readOnly": true,
+      "title": "Icon",
+      "type": "string"
+     },
+     "activity_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Activities",
+      "type": "array",
+      "x-relation": "mail.activity"
+     },
+     "activity_state": {
+      "description": "Status based on activities\nOverdue: Due date is already passed\nToday: Activity date is today\nPlanned: Future activities.",
+      "enum": [
+       "overdue",
+       "today",
+       "planned"
+      ],
+      "readOnly": true,
+      "title": "Activity State",
+      "type": "string",
+      "x-enum-labels": [
+       "Overdue",
+       "Today",
+       "Planned"
+      ]
+     },
+     "activity_summary": {
+      "title": "Next Activity Summary",
+      "type": "string"
+     },
+     "activity_type_icon": {
+      "description": "Font awesome icon e.g. fa-tasks",
+      "readOnly": true,
+      "title": "Activity Type Icon",
+      "type": "string"
+     },
+     "activity_type_id": {
+      "title": "Next Activity Type",
+      "type": "integer",
+      "x-relation": "mail.activity.type"
+     },
+     "activity_user_id": {
+      "readOnly": true,
+      "title": "Responsible User",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "allow_comment": {
+      "description": "Allow Attendees to like and comment your content and to submit reviews on your course.",
+      "title": "Allow rating on Course",
+      "type": "boolean"
+     },
+     "can_comment": {
+      "readOnly": true,
+      "title": "Can Comment",
+      "type": "boolean"
+     },
+     "can_publish": {
+      "readOnly": true,
+      "title": "Can Publish",
+      "type": "boolean"
+     },
+     "can_review": {
+      "readOnly": true,
+      "title": "Can Review",
+      "type": "boolean"
+     },
+     "can_upload": {
+      "readOnly": true,
+      "title": "Can Upload",
+      "type": "boolean"
+     },
+     "can_vote": {
+      "readOnly": true,
+      "title": "Can Vote",
+      "type": "boolean"
+     },
+     "channel_partner_all_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "All Attendees Information",
+      "type": "array",
+      "x-relation": "slide.channel.partner"
+     },
+     "channel_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Enrolled Attendees Information",
+      "type": "array",
+      "x-relation": "slide.channel.partner"
+     },
+     "channel_type": {
+      "description": "Defines the course type (e.g., \"Training\" for interactive learning, or \"Documentation\" for resources and guides).",
+      "enum": [
+       "training",
+       "documentation"
+      ],
+      "title": "Course type",
+      "type": "string",
+      "x-enum-labels": [
+       "Training",
+       "Documentation"
+      ]
+     },
+     "color": {
+      "description": "Used to decorate kanban view",
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "completed": {
+      "readOnly": true,
+      "title": "Done",
+      "type": "boolean"
+     },
+     "completed_template_id": {
+      "description": "Defines the email your Attendees will receive once they reach the end of your course.",
+      "title": "Completion Notification",
+      "type": "integer",
+      "x-relation": "mail.template"
+     },
+     "completion": {
+      "readOnly": true,
+      "title": "Completion",
+      "type": "integer"
+     },
+     "cover_properties": {
+      "title": "Cover Properties",
+      "type": "string"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "description": {
+      "description": "The description that is displayed on top of the course page, just below the title",
+      "title": "Description",
+      "type": "string"
+     },
+     "description_html": {
+      "title": "Detailed Description",
+      "type": "string"
+     },
+     "description_short": {
+      "description": "The description that is displayed on the course card",
+      "title": "Short Description",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "enroll": {
+      "description": "Defines how people can enroll to your Course.",
+      "enum": [
+       "public",
+       "invite"
+      ],
+      "title": "Enroll Policy",
+      "type": "string",
+      "x-enum-labels": [
+       "Open",
+       "On Invitation"
+      ]
+     },
+     "enroll_group_ids": {
+      "description": "Members of those groups are automatically added as members of the channel.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Auto Enroll Groups",
+      "type": "array",
+      "x-relation": "res.groups"
+     },
+     "enroll_msg": {
+      "description": "Message explaining the enroll process",
+      "title": "Enroll Message",
+      "type": "string"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "has_requested_access": {
+      "readOnly": true,
+      "title": "Access Requested",
+      "type": "boolean"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "image_1024": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 1024",
+      "type": "string"
+     },
+     "image_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 128",
+      "type": "string"
+     },
+     "image_1920": {
+      "format": "byte",
+      "title": "Image",
+      "type": "string"
+     },
+     "image_256": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 256",
+      "type": "string"
+     },
+     "image_512": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 512",
+      "type": "string"
+     },
+     "is_member": {
+      "description": "Is the attendee actively enrolled.",
+      "readOnly": true,
+      "title": "Is Enrolled Attendee",
+      "type": "boolean"
+     },
+     "is_member_invited": {
+      "description": "Is the invitation for this attendee pending.",
+      "readOnly": true,
+      "title": "Is Invited Attendee",
+      "type": "boolean"
+     },
+     "is_published": {
+      "title": "Is Published",
+      "type": "boolean"
+     },
+     "is_seo_optimized": {
+      "readOnly": true,
+      "title": "SEO optimized",
+      "type": "boolean"
+     },
+     "is_visible": {
+      "readOnly": true,
+      "title": "Is Visible On Website",
+      "type": "boolean"
+     },
+     "karma_gen_channel_finish": {
+      "title": "Course finished",
+      "type": "integer"
+     },
+     "karma_gen_channel_rank": {
+      "title": "Course ranked",
+      "type": "integer"
+     },
+     "karma_review": {
+      "description": "Karma needed to add a review on the course",
+      "title": "Add Review",
+      "type": "integer"
+     },
+     "karma_slide_comment": {
+      "description": "Karma needed to add a comment on a slide of this course",
+      "title": "Add Comment",
+      "type": "integer"
+     },
+     "karma_slide_vote": {
+      "description": "Karma needed to like/dislike a slide of this course.",
+      "title": "Vote",
+      "type": "integer"
+     },
+     "members_all_count": {
+      "readOnly": true,
+      "title": "# Enrolled or Invited Attendees",
+      "type": "integer"
+     },
+     "members_certified_count": {
+      "readOnly": true,
+      "title": "# Certified Attendees",
+      "type": "integer"
+     },
+     "members_completed_count": {
+      "readOnly": true,
+      "title": "# Completed Attendees",
+      "type": "integer"
+     },
+     "members_count": {
+      "readOnly": true,
+      "title": "# Enrolled Attendees",
+      "type": "integer"
+     },
+     "members_engaged_count": {
+      "description": "Active attendees include both 'joined' and 'ongoing' attendees.",
+      "readOnly": true,
+      "title": "# Active Attendees",
+      "type": "integer"
+     },
+     "members_invited_count": {
+      "readOnly": true,
+      "title": "# Invited Attendees",
+      "type": "integer"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "my_activity_date_deadline": {
+      "format": "date",
+      "readOnly": true,
+      "title": "My Activity Deadline",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "nbr_article": {
+      "readOnly": true,
+      "title": "Articles",
+      "type": "integer"
+     },
+     "nbr_certification": {
+      "readOnly": true,
+      "title": "Number of Certifications",
+      "type": "integer"
+     },
+     "nbr_document": {
+      "readOnly": true,
+      "title": "Documents",
+      "type": "integer"
+     },
+     "nbr_infographic": {
+      "readOnly": true,
+      "title": "Infographics",
+      "type": "integer"
+     },
+     "nbr_quiz": {
+      "readOnly": true,
+      "title": "Number of Quizs",
+      "type": "integer"
+     },
+     "nbr_video": {
+      "readOnly": true,
+      "title": "Videos",
+      "type": "integer"
+     },
+     "partner_has_new_content": {
+      "readOnly": true,
+      "title": "Partner Has New Content",
+      "type": "boolean"
+     },
+     "partner_ids": {
+      "description": "Enrolled partners in the course",
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Attendees",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "prerequisite_channel_ids": {
+      "description": "Prerequisite courses to complete before accessing this one.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Prerequisites",
+      "type": "array",
+      "x-relation": "slide.channel"
+     },
+     "prerequisite_of_channel_ids": {
+      "description": "Courses that have this course as prerequisite.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Prerequisite Of",
+      "type": "array",
+      "x-relation": "slide.channel"
+     },
+     "prerequisite_user_has_completed": {
+      "readOnly": true,
+      "title": "Has Completed Prerequisite",
+      "type": "boolean"
+     },
+     "promote_strategy": {
+      "description": "Defines the content that will be promoted on the course home page",
+      "enum": [
+       "latest",
+       "most_voted",
+       "most_viewed",
+       "specific",
+       "none"
+      ],
+      "title": "Featured Content",
+      "type": "string",
+      "x-enum-labels": [
+       "Latest Created",
+       "Most Voted",
+       "Most Viewed",
+       "Select Manually",
+       "None"
+      ]
+     },
+     "promoted_slide_id": {
+      "title": "Promoted Slide",
+      "type": "integer",
+      "x-relation": "slide.slide"
+     },
+     "publish_template_id": {
+      "description": "Defines the email your Attendees will receive each time you upload new content.",
+      "title": "New Content Notification",
+      "type": "integer",
+      "x-relation": "mail.template"
+     },
+     "rating_avg": {
+      "readOnly": true,
+      "title": "Average Rating",
+      "type": "number"
+     },
+     "rating_avg_stars": {
+      "readOnly": true,
+      "title": "Rating Average (Stars)",
+      "type": "number"
+     },
+     "rating_avg_text": {
+      "enum": [
+       "top",
+       "ok",
+       "ko",
+       "none"
+      ],
+      "readOnly": true,
+      "title": "Rating Avg Text",
+      "type": "string",
+      "x-enum-labels": [
+       "Happy",
+       "Neutral",
+       "Unhappy",
+       "Not Rated yet"
+      ]
+     },
+     "rating_count": {
+      "readOnly": true,
+      "title": "Rating count",
+      "type": "integer"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "rating_last_feedback": {
+      "readOnly": true,
+      "title": "Rating Last Feedback",
+      "type": "string"
+     },
+     "rating_last_image": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Rating Last Image",
+      "type": "string"
+     },
+     "rating_last_text": {
+      "enum": [
+       "top",
+       "ok",
+       "ko",
+       "none"
+      ],
+      "readOnly": true,
+      "title": "Rating Text",
+      "type": "string",
+      "x-enum-labels": [
+       "Happy",
+       "Neutral",
+       "Unhappy",
+       "Not Rated yet"
+      ]
+     },
+     "rating_last_value": {
+      "readOnly": true,
+      "title": "Rating Last Value",
+      "type": "number"
+     },
+     "rating_percentage_satisfaction": {
+      "readOnly": true,
+      "title": "Rating Satisfaction",
+      "type": "number"
+     },
+     "seo_name": {
+      "title": "Seo name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "share_channel_template_id": {
+      "description": "Email template used when sharing a channel",
+      "title": "Channel Share Template",
+      "type": "integer",
+      "x-relation": "mail.template"
+     },
+     "share_slide_template_id": {
+      "description": "Email template used when sharing a slide",
+      "title": "Share Template",
+      "type": "integer",
+      "x-relation": "mail.template"
+     },
+     "slide_category_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Categories",
+      "type": "array",
+      "x-relation": "slide.slide"
+     },
+     "slide_content_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Content",
+      "type": "array",
+      "x-relation": "slide.slide"
+     },
+     "slide_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Slides and categories",
+      "type": "array",
+      "x-relation": "slide.slide"
+     },
+     "slide_last_update": {
+      "format": "date",
+      "readOnly": true,
+      "title": "Last Update",
+      "type": "string"
+     },
+     "slide_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Slide User Data",
+      "type": "array",
+      "x-relation": "slide.slide.partner"
+     },
+     "tag_ids": {
+      "description": "Used to categorize and filter displayed channels/courses",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Tags",
+      "type": "array",
+      "x-relation": "slide.channel.tag"
+     },
+     "total_slides": {
+      "readOnly": true,
+      "title": "Number of Contents",
+      "type": "integer"
+     },
+     "total_time": {
+      "readOnly": true,
+      "title": "Duration",
+      "type": "number"
+     },
+     "total_views": {
+      "readOnly": true,
+      "title": "Visits",
+      "type": "integer"
+     },
+     "total_votes": {
+      "readOnly": true,
+      "title": "Votes",
+      "type": "integer"
+     },
+     "upload_group_ids": {
+      "description": "Group of users allowed to publish contents on a documentation course.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Upload Groups",
+      "type": "array",
+      "x-relation": "res.groups"
+     },
+     "user_id": {
+      "title": "Responsible",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "visibility": {
+      "description": "Defines who can access your courses and their content.",
+      "enum": [
+       "public",
+       "connected",
+       "members",
+       "link"
+      ],
+      "title": "Show Course To",
+      "type": "string",
+      "x-enum-labels": [
+       "Everyone",
+       "Signed In",
+       "Course Attendees",
+       "Anyone with the link"
+      ]
+     },
+     "website_absolute_url": {
+      "description": "The full absolute URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website Absolute URL",
+      "type": "string"
+     },
+     "website_default_background_image_url": {
+      "readOnly": true,
+      "title": "Background image URL",
+      "type": "string"
+     },
+     "website_id": {
+      "description": "Restrict to a specific website.",
+      "title": "Website",
+      "type": "integer",
+      "x-relation": "website"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "website_meta_description": {
+      "title": "Website meta description",
+      "type": "string"
+     },
+     "website_meta_keywords": {
+      "title": "Website meta keywords",
+      "type": "string"
+     },
+     "website_meta_og_img": {
+      "title": "Website opengraph image",
+      "type": "string"
+     },
+     "website_meta_title": {
+      "title": "Website meta title",
+      "type": "string"
+     },
+     "website_published": {
+      "title": "Visible on current website",
+      "type": "boolean"
+     },
+     "website_url": {
+      "description": "The full relative URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website URL",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "channel_type",
+     "enroll",
+     "name",
+     "visibility"
+    ],
+    "title": "Course",
+    "type": "object"
+   },
+   "slide.channel.partner": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "channel_enroll": {
+      "description": "Defines how people can enroll to your Course.",
+      "enum": [
+       "public",
+       "invite"
+      ],
+      "readOnly": true,
+      "title": "Enroll Policy",
+      "type": "string",
+      "x-enum-labels": [
+       "Open",
+       "On Invitation"
+      ]
+     },
+     "channel_id": {
+      "title": "Course",
+      "type": "integer",
+      "x-relation": "slide.channel"
+     },
+     "channel_type": {
+      "description": "Defines the course type (e.g., \"Training\" for interactive learning, or \"Documentation\" for resources and guides).",
+      "enum": [
+       "training",
+       "documentation"
+      ],
+      "readOnly": true,
+      "title": "Course type",
+      "type": "string",
+      "x-enum-labels": [
+       "Training",
+       "Documentation"
+      ]
+     },
+     "channel_user_id": {
+      "readOnly": true,
+      "title": "Responsible",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "channel_visibility": {
+      "description": "Defines who can access your courses and their content.",
+      "enum": [
+       "public",
+       "connected",
+       "members",
+       "link"
+      ],
+      "readOnly": true,
+      "title": "Show Course To",
+      "type": "string",
+      "x-enum-labels": [
+       "Everyone",
+       "Signed In",
+       "Course Attendees",
+       "Anyone with the link"
+      ]
+     },
+     "channel_website_id": {
+      "description": "Restrict to a specific website.",
+      "readOnly": true,
+      "title": "Website",
+      "type": "integer",
+      "x-relation": "website"
+     },
+     "completed_slides_count": {
+      "title": "# Completed Contents",
+      "type": "integer"
+     },
+     "completion": {
+      "title": "% Completed Contents",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "invitation_link": {
+      "readOnly": true,
+      "title": "Invitation Link",
+      "type": "string"
+     },
+     "last_invitation_date": {
+      "format": "date-time",
+      "title": "Last Invitation Date",
+      "type": "string"
+     },
+     "member_status": {
+      "enum": [
+       "invited",
+       "joined",
+       "ongoing",
+       "completed"
+      ],
+      "readOnly": true,
+      "title": "Attendee Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Invite Sent",
+       "Joined",
+       "Ongoing",
+       "Finished"
+      ]
+     },
+     "nbr_certification": {
+      "readOnly": true,
+      "title": "Number of Certifications",
+      "type": "integer"
+     },
+     "next_slide_id": {
+      "readOnly": true,
+      "title": "Next Lesson",
+      "type": "integer",
+      "x-relation": "slide.slide"
+     },
+     "partner_email": {
+      "readOnly": true,
+      "title": "Email",
+      "type": "string"
+     },
+     "partner_id": {
+      "title": "Partner",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "survey_certification_success": {
+      "title": "Certified",
+      "type": "boolean"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "channel_id",
+     "member_status",
+     "partner_id"
+    ],
+    "title": "Channel / Partners (Members)",
+    "type": "object"
+   },
+   "slide.channel.tag": {
+    "properties": {
+     "channel_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Channels",
+      "type": "array",
+      "x-relation": "slide.channel"
+     },
+     "color": {
+      "description": "Tag color used in both backend and website. No color means no display in kanban or front-end, to distinguish internal tags from public categorization tags",
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "group_id": {
+      "title": "Group",
+      "type": "integer",
+      "x-relation": "slide.channel.tag.group"
+     },
+     "group_sequence": {
+      "readOnly": true,
+      "title": "Group sequence",
+      "type": "integer"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "group_id",
+     "name",
+     "sequence"
+    ],
+    "title": "Channel/Course Tag",
+    "type": "object"
+   },
+   "slide.channel.tag.group": {
+    "properties": {
+     "can_publish": {
+      "readOnly": true,
+      "title": "Can Publish",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "is_published": {
+      "title": "Is Published",
+      "type": "boolean"
+     },
+     "name": {
+      "title": "Group Name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "tag_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Tags",
+      "type": "array",
+      "x-relation": "slide.channel.tag"
+     },
+     "website_absolute_url": {
+      "description": "The full absolute URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website Absolute URL",
+      "type": "string"
+     },
+     "website_published": {
+      "title": "Visible on current website",
+      "type": "boolean"
+     },
+     "website_url": {
+      "description": "The full relative URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website URL",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "sequence"
+    ],
+    "title": "Channel/Course Groups",
+    "type": "object"
+   },
+   "slide.embed": {
+    "properties": {
+     "count_views": {
+      "title": "# Views",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "slide_id": {
+      "title": "Presentation",
+      "type": "integer",
+      "x-relation": "slide.slide"
+     },
+     "url": {
+      "title": "Third Party Website URL",
+      "type": "string"
+     },
+     "website_name": {
+      "readOnly": true,
+      "title": "Website",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "slide_id"
+    ],
+    "title": "Embedded Slides View Counter",
+    "type": "object"
+   },
+   "slide.question": {
+    "properties": {
+     "answer_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Answer",
+      "type": "array",
+      "x-relation": "slide.answer"
+     },
+     "answers_validation_error": {
+      "readOnly": true,
+      "title": "Error on Answers",
+      "type": "string"
+     },
+     "attempts_avg": {
+      "readOnly": true,
+      "title": "Attempts Avg",
+      "type": "number"
+     },
+     "attempts_count": {
+      "readOnly": true,
+      "title": "Attempts Count",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "done_count": {
+      "readOnly": true,
+      "title": "Done Count",
+      "type": "integer"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "question": {
+      "title": "Question Name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "slide_id": {
+      "title": "Content",
+      "type": "integer",
+      "x-relation": "slide.slide"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "question",
+     "slide_id"
+    ],
+    "title": "Content Quiz Question",
+    "type": "object"
+   },
+   "slide.slide": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "binary_content": {
+      "format": "byte",
+      "title": "File",
+      "type": "string"
+     },
+     "can_publish": {
+      "readOnly": true,
+      "title": "Can Publish",
+      "type": "boolean"
+     },
+     "can_self_mark_completed": {
+      "description": "The slide can be marked as completed even without opening it",
+      "readOnly": true,
+      "title": "Can Mark Completed",
+      "type": "boolean"
+     },
+     "can_self_mark_uncompleted": {
+      "description": "The slide can be marked as not completed and the progression",
+      "readOnly": true,
+      "title": "Can Mark Uncompleted",
+      "type": "boolean"
+     },
+     "category_id": {
+      "readOnly": true,
+      "title": "Section",
+      "type": "integer",
+      "x-relation": "slide.slide"
+     },
+     "channel_allow_comment": {
+      "description": "Allow Attendees to like and comment your content and to submit reviews on your course.",
+      "readOnly": true,
+      "title": "Allows comment",
+      "type": "boolean"
+     },
+     "channel_id": {
+      "title": "Course",
+      "type": "integer",
+      "x-relation": "slide.channel"
+     },
+     "channel_type": {
+      "description": "Defines the course type (e.g., \"Training\" for interactive learning, or \"Documentation\" for resources and guides).",
+      "enum": [
+       "training",
+       "documentation"
+      ],
+      "readOnly": true,
+      "title": "Channel type",
+      "type": "string",
+      "x-enum-labels": [
+       "Training",
+       "Documentation"
+      ]
+     },
+     "comments_count": {
+      "readOnly": true,
+      "title": "Number of comments",
+      "type": "integer"
+     },
+     "completion_time": {
+      "title": "Duration",
+      "type": "number"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "date_published": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Publish Date",
+      "type": "string"
+     },
+     "description": {
+      "title": "Description",
+      "type": "string"
+     },
+     "dislikes": {
+      "readOnly": true,
+      "title": "Dislikes",
+      "type": "integer"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "document_binary_content": {
+      "format": "byte",
+      "title": "PDF Content",
+      "type": "string"
+     },
+     "document_google_url": {
+      "description": "Link of the document (we currently only support Google Drive as source)",
+      "title": "Document Link",
+      "type": "string"
+     },
+     "embed_code": {
+      "readOnly": true,
+      "title": "Embed Code",
+      "type": "string"
+     },
+     "embed_code_external": {
+      "description": "Same as 'Embed Code' but used to embed the content on an external website.",
+      "readOnly": true,
+      "title": "External Embed Code",
+      "type": "string"
+     },
+     "embed_count": {
+      "readOnly": true,
+      "title": "# of Embeds",
+      "type": "integer"
+     },
+     "embed_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "External Slide Embeds",
+      "type": "array",
+      "x-relation": "slide.embed"
+     },
+     "google_drive_id": {
+      "readOnly": true,
+      "title": "Google Drive ID of the external URL",
+      "type": "string"
+     },
+     "has_message": {
+      "readOnly": true,
+      "title": "Has Message",
+      "type": "boolean"
+     },
+     "html_content": {
+      "description": "Custom HTML content for slides of category 'Article'.",
+      "title": "HTML Content",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "image_1024": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 1024",
+      "type": "string"
+     },
+     "image_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 128",
+      "type": "string"
+     },
+     "image_1920": {
+      "format": "byte",
+      "title": "Image",
+      "type": "string"
+     },
+     "image_256": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 256",
+      "type": "string"
+     },
+     "image_512": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 512",
+      "type": "string"
+     },
+     "image_binary_content": {
+      "format": "byte",
+      "title": "Image Content",
+      "type": "string"
+     },
+     "image_google_url": {
+      "description": "Link of the image (we currently only support Google Drive as source)",
+      "title": "Image Link",
+      "type": "string"
+     },
+     "is_category": {
+      "title": "Is a category",
+      "type": "boolean"
+     },
+     "is_new_slide": {
+      "readOnly": true,
+      "title": "Is New Slide",
+      "type": "boolean"
+     },
+     "is_preview": {
+      "description": "The course is accessible by anyone : the users don't need to join the channel to access the content of the course.",
+      "title": "Allow Preview",
+      "type": "boolean"
+     },
+     "is_published": {
+      "title": "Is Published",
+      "type": "boolean"
+     },
+     "is_seo_optimized": {
+      "readOnly": true,
+      "title": "SEO optimized",
+      "type": "boolean"
+     },
+     "likes": {
+      "readOnly": true,
+      "title": "Likes",
+      "type": "integer"
+     },
+     "message_attachment_count": {
+      "readOnly": true,
+      "title": "Attachment Count",
+      "type": "integer"
+     },
+     "message_follower_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers",
+      "type": "array",
+      "x-relation": "mail.followers"
+     },
+     "message_has_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "Message Delivery error",
+      "type": "boolean"
+     },
+     "message_has_error_counter": {
+      "description": "Number of messages with delivery error",
+      "readOnly": true,
+      "title": "Number of errors",
+      "type": "integer"
+     },
+     "message_has_sms_error": {
+      "description": "If checked, some messages have a delivery error.",
+      "readOnly": true,
+      "title": "SMS Delivery error",
+      "type": "boolean"
+     },
+     "message_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "message_is_follower": {
+      "readOnly": true,
+      "title": "Is Follower",
+      "type": "boolean"
+     },
+     "message_needaction": {
+      "description": "If checked, new messages require your attention.",
+      "readOnly": true,
+      "title": "Action Needed",
+      "type": "boolean"
+     },
+     "message_needaction_counter": {
+      "description": "Number of messages requiring action",
+      "readOnly": true,
+      "title": "Number of Actions",
+      "type": "integer"
+     },
+     "message_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Followers (Partners)",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "name": {
+      "title": "Title",
+      "type": "string"
+     },
+     "nbr_article": {
+      "readOnly": true,
+      "title": "Number of Articles",
+      "type": "integer"
+     },
+     "nbr_certification": {
+      "readOnly": true,
+      "title": "Number of Certifications",
+      "type": "integer"
+     },
+     "nbr_document": {
+      "readOnly": true,
+      "title": "Number of Documents",
+      "type": "integer"
+     },
+     "nbr_infographic": {
+      "readOnly": true,
+      "title": "Number of Images",
+      "type": "integer"
+     },
+     "nbr_quiz": {
+      "readOnly": true,
+      "title": "Number of Quizs",
+      "type": "integer"
+     },
+     "nbr_video": {
+      "readOnly": true,
+      "title": "Number of Videos",
+      "type": "integer"
+     },
+     "partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Subscribers",
+      "type": "array",
+      "x-relation": "res.partner"
+     },
+     "public_views": {
+      "readOnly": true,
+      "title": "# of Public Views",
+      "type": "integer"
+     },
+     "question_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Questions",
+      "type": "array",
+      "x-relation": "slide.question"
+     },
+     "questions_count": {
+      "readOnly": true,
+      "title": "Numbers of Questions",
+      "type": "integer"
+     },
+     "quiz_first_attempt_reward": {
+      "title": "Reward: first attempt",
+      "type": "integer"
+     },
+     "quiz_fourth_attempt_reward": {
+      "title": "Reward: every attempt after the third try",
+      "type": "integer"
+     },
+     "quiz_second_attempt_reward": {
+      "title": "Reward: second attempt",
+      "type": "integer"
+     },
+     "quiz_third_attempt_reward": {
+      "title": "Reward: third attempt",
+      "type": "integer"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "seo_name": {
+      "title": "Seo name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "slide_category": {
+      "enum": [
+       "infographic",
+       "article",
+       "document",
+       "video",
+       "quiz",
+       "certification"
+      ],
+      "title": "Category",
+      "type": "string",
+      "x-enum-labels": [
+       "Image",
+       "Article",
+       "Document",
+       "Video",
+       "Quiz",
+       "Certification"
+      ]
+     },
+     "slide_icon_class": {
+      "readOnly": true,
+      "title": "Slide Icon fa-class",
+      "type": "string"
+     },
+     "slide_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Content",
+      "type": "array",
+      "x-relation": "slide.slide"
+     },
+     "slide_partner_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Subscribers information",
+      "type": "array",
+      "x-relation": "slide.slide.partner"
+     },
+     "slide_resource_downloadable": {
+      "description": "Allow the user to download the content of the slide.",
+      "title": "Allow Download",
+      "type": "boolean"
+     },
+     "slide_resource_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Additional Resource for this slide",
+      "type": "array",
+      "x-relation": "slide.slide.resource"
+     },
+     "slide_type": {
+      "description": "Subtype of the slide category, allows more precision on the actual file type / source type.",
+      "enum": [
+       "image",
+       "article",
+       "quiz",
+       "pdf",
+       "sheet",
+       "doc",
+       "slides",
+       "youtube_video",
+       "google_drive_video",
+       "vimeo_video",
+       "certification"
+      ],
+      "title": "Slide Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Image",
+       "Article",
+       "Quiz",
+       "PDF",
+       "Sheet (Excel, Google Sheet, ...)",
+       "Document (Word, Google Doc, ...)",
+       "Slides (PowerPoint, Google Slides, ...)",
+       "YouTube Video",
+       "Google Drive Video",
+       "Vimeo Video",
+       "Certification"
+      ]
+     },
+     "slide_views": {
+      "readOnly": true,
+      "title": "# of Website Views",
+      "type": "integer"
+     },
+     "source_type": {
+      "enum": [
+       "local_file",
+       "external"
+      ],
+      "title": "Source Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Upload from Device",
+       "Retrieve from Google Drive"
+      ]
+     },
+     "survey_id": {
+      "title": "Certification",
+      "type": "integer",
+      "x-relation": "survey.survey"
+     },
+     "tag_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Tags",
+      "type": "array",
+      "x-relation": "slide.tag"
+     },
+     "total_slides": {
+      "readOnly": true,
+      "title": "Total Slides",
+      "type": "integer"
+     },
+     "total_views": {
+      "readOnly": true,
+      "title": "# Total Views",
+      "type": "integer"
+     },
+     "url": {
+      "description": "URL of the Google Drive file or URL of the YouTube video",
+      "title": "External URL",
+      "type": "string"
+     },
+     "user_has_completed": {
+      "readOnly": true,
+      "title": "Is Member",
+      "type": "boolean"
+     },
+     "user_has_completed_category": {
+      "readOnly": true,
+      "title": "Is Category Completed",
+      "type": "boolean"
+     },
+     "user_id": {
+      "title": "Uploaded by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "user_membership_id": {
+      "description": "Subscriber information for the current logged in user",
+      "readOnly": true,
+      "title": "Subscriber information",
+      "type": "integer",
+      "x-relation": "slide.slide.partner"
+     },
+     "user_vote": {
+      "readOnly": true,
+      "title": "User vote",
+      "type": "integer"
+     },
+     "video_source_type": {
+      "enum": [
+       "youtube",
+       "google_drive",
+       "vimeo"
+      ],
+      "readOnly": true,
+      "title": "Video Source",
+      "type": "string",
+      "x-enum-labels": [
+       "YouTube",
+       "Google Drive",
+       "Vimeo"
+      ]
+     },
+     "video_url": {
+      "description": "Link of the video (we support YouTube, Google Drive and Vimeo as sources)",
+      "title": "Video Link",
+      "type": "string"
+     },
+     "vimeo_id": {
+      "readOnly": true,
+      "title": "Video Vimeo ID",
+      "type": "string"
+     },
+     "website_absolute_url": {
+      "description": "The full absolute URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website Absolute URL",
+      "type": "string"
+     },
+     "website_id": {
+      "description": "Restrict to a specific website.",
+      "readOnly": true,
+      "title": "Website",
+      "type": "integer",
+      "x-relation": "website"
+     },
+     "website_message_ids": {
+      "description": "Website communication history",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Website Messages",
+      "type": "array",
+      "x-relation": "mail.message"
+     },
+     "website_meta_description": {
+      "title": "Website meta description",
+      "type": "string"
+     },
+     "website_meta_keywords": {
+      "title": "Website meta keywords",
+      "type": "string"
+     },
+     "website_meta_og_img": {
+      "title": "Website opengraph image",
+      "type": "string"
+     },
+     "website_meta_title": {
+      "title": "Website meta title",
+      "type": "string"
+     },
+     "website_published": {
+      "title": "Visible on current website",
+      "type": "boolean"
+     },
+     "website_share_url": {
+      "readOnly": true,
+      "title": "Share URL",
+      "type": "string"
+     },
+     "website_url": {
+      "description": "The full relative URL to access the document through the website.",
+      "readOnly": true,
+      "title": "Website URL",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "youtube_id": {
+      "readOnly": true,
+      "title": "Video YouTube ID",
+      "type": "string"
+     }
+    },
+    "required": [
+     "channel_id",
+     "name",
+     "slide_category",
+     "source_type"
+    ],
+    "title": "Slides",
+    "type": "object"
+   },
+   "slide.slide.partner": {
+    "properties": {
+     "channel_id": {
+      "readOnly": true,
+      "title": "Channel",
+      "type": "integer",
+      "x-relation": "slide.channel"
+     },
+     "completed": {
+      "title": "Completed",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "partner_id": {
+      "title": "Partner",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "quiz_attempts_count": {
+      "title": "Quiz attempts count",
+      "type": "integer"
+     },
+     "slide_category": {
+      "enum": [
+       "infographic",
+       "article",
+       "document",
+       "video",
+       "quiz",
+       "certification"
+      ],
+      "readOnly": true,
+      "title": "Category",
+      "type": "string",
+      "x-enum-labels": [
+       "Image",
+       "Article",
+       "Document",
+       "Video",
+       "Quiz",
+       "Certification"
+      ]
+     },
+     "slide_id": {
+      "title": "Content",
+      "type": "integer",
+      "x-relation": "slide.slide"
+     },
+     "survey_scoring_success": {
+      "readOnly": true,
+      "title": "Certification Succeeded",
+      "type": "boolean"
+     },
+     "user_input_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Certification attempts",
+      "type": "array",
+      "x-relation": "survey.user_input"
+     },
+     "vote": {
+      "title": "Vote",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "partner_id",
+     "slide_id"
+    ],
+    "title": "Slide / Partner decorated m2m",
+    "type": "object"
+   },
+   "slide.slide.resource": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "data": {
+      "format": "byte",
+      "title": "Resource",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "download_url": {
+      "readOnly": true,
+      "title": "Download URL",
+      "type": "string"
+     },
+     "file_name": {
+      "title": "File Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "link": {
+      "title": "Link",
+      "type": "string"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "resource_type": {
+      "enum": [
+       "file",
+       "url"
+      ],
+      "title": "Resource Type",
+      "type": "string",
+      "x-enum-labels": [
+       "File",
+       "Link"
+      ]
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "slide_id": {
+      "title": "Slide",
+      "type": "integer",
+      "x-relation": "slide.slide"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "resource_type",
+     "slide_id"
+    ],
+    "title": "Additional resource for a particular slide",
+    "type": "object"
+   },
+   "slide.tag": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Slide Tag",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "website_slides"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/slide.answer/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.answer.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.answer/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.answer.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.answer/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.answer.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.answer/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.answer.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.answer/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.answer.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.answer/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.answer.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.answer/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.answer.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.answer/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.answer.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.answer/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "slide.answer.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.answer/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.answer.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.answer"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.channel.partner.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.channel.partner.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.channel.partner.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.channel.partner.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.channel.partner.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.channel.partner.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.channel.partner.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.channel.partner.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/unlink": {
+   "post": {
+    "description": "Override unlink method : Remove attendee from a channel, then also remove slide.slide.partner related to.",
+    "operationId": "slide.channel.partner.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.partner/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.channel.partner.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.channel.partner"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.channel.tag.group.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/create_and_get_website_url": {
+   "post": {
+    "operationId": "slide.channel.tag.group.create_and_get_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_and_get_website_url",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.channel.tag.group.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.channel.tag.group.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.channel.tag.group.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/open_website_url": {
+   "post": {
+    "operationId": "slide.channel.tag.group.open_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "open_website_url",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.channel.tag.group.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.channel.tag.group.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.channel.tag.group.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.channel.tag.group.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "slide.channel.tag.group.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/website_publish_button": {
+   "post": {
+    "operationId": "slide.channel.tag.group.website_publish_button",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "website_publish_button",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag.group/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.channel.tag.group.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.channel.tag.group"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.channel.tag.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.channel.tag.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.channel.tag.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.channel.tag.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.channel.tag.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.channel.tag.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.channel.tag.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.channel.tag.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "slide.channel.tag.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel.tag/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.channel.tag.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.channel.tag"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_channel_enroll": {
+   "post": {
+    "operationId": "slide.channel.action_channel_enroll",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_channel_enroll",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_channel_invite": {
+   "post": {
+    "operationId": "slide.channel.action_channel_invite",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_channel_invite",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_grant_access": {
+   "post": {
+    "operationId": "slide.channel.action_grant_access",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_grant_access"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_grant_access",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_mass_mailing_attendees": {
+   "post": {
+    "operationId": "slide.channel.action_mass_mailing_attendees",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_mass_mailing_attendees",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_redirect_to_certified_members": {
+   "post": {
+    "operationId": "slide.channel.action_redirect_to_certified_members",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_certified_members",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_redirect_to_completed_members": {
+   "post": {
+    "operationId": "slide.channel.action_redirect_to_completed_members",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_completed_members",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_redirect_to_engaged_members": {
+   "post": {
+    "operationId": "slide.channel.action_redirect_to_engaged_members",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_engaged_members",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_redirect_to_invited_members": {
+   "post": {
+    "operationId": "slide.channel.action_redirect_to_invited_members",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_invited_members",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_redirect_to_members": {
+   "post": {
+    "description": "Redirects to attendees of the course. If status_filter is set to 'invited' / 'engaged' ('joined' + 'ongoing') / 'completed', attendees are filtered accordingly.",
+    "operationId": "slide.channel.action_redirect_to_members",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "status_filter": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_members",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_refuse_access": {
+   "post": {
+    "operationId": "slide.channel.action_refuse_access",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_grant_access"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_refuse_access",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_request_access": {
+   "post": {
+    "description": "Request access to the channel. Returns a dict with keys being either 'error' (specific error raised) or 'done' (request done or not).",
+    "operationId": "slide.channel.action_request_access",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_request_access",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_reschedule_my_next_nextweek": {
+   "post": {
+    "operationId": "slide.channel.action_reschedule_my_next_nextweek",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_nextweek",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_reschedule_my_next_today": {
+   "post": {
+    "operationId": "slide.channel.action_reschedule_my_next_today",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_today",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_reschedule_my_next_tomorrow": {
+   "post": {
+    "operationId": "slide.channel.action_reschedule_my_next_tomorrow",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_reschedule_my_next_tomorrow",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_view_ratings": {
+   "post": {
+    "operationId": "slide.channel.action_view_ratings",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_ratings",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/action_view_slides": {
+   "post": {
+    "operationId": "slide.channel.action_view_slides",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_slides",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/activity_feedback": {
+   "post": {
+    "description": "Set activities as done, limiting to some activity types and optionally to a given user.",
+    "operationId": "slide.channel.activity_feedback",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "attachment_ids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "feedback": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_feedback",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/activity_reschedule": {
+   "post": {
+    "description": "Reschedule some automated activities. Activities to reschedule are selected based on type xml ids and optionally by user. Purpose is to be able to",
+    "operationId": "slide.channel.activity_reschedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "new_user_id": {},
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_reschedule",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/activity_schedule": {
+   "post": {
+    "description": "Schedule an activity on each record of the current record set. This method allow to provide as parameter act_type_xmlid. This is an xml_id of activity type instead of directly giving an activity_type_id. It is useful to avoid having various \"env.ref\" in the code and allow to let the mixin handle access rights.",
+    "operationId": "slide.channel.activity_schedule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlid": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "date_deadline": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "note": {},
+         "summary": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_schedule",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/activity_search": {
+   "post": {
+    "description": "Search automated activities on current record set, given a list of activity types xml IDs. It is useful when dealing with specific types involved in automatic activities management.",
+    "operationId": "slide.channel.activity_search",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "additional_domain": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_search",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/activity_send_mail": {
+   "post": {
+    "description": "Automatically send an email based on the given mail.template, given its ID.",
+    "operationId": "slide.channel.activity_send_mail",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "template_id": {}
+        },
+        "required": [
+         "template_id"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_send_mail",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/activity_unlink": {
+   "post": {
+    "description": "Unlink activities, limiting to some activity types and optionally to a given user.",
+    "operationId": "slide.channel.activity_unlink",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "act_type_xmlids": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "only_automated": {},
+         "user_id": {}
+        },
+        "required": [
+         "act_type_xmlids"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "activity_unlink",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/can_access_from_current_website": {
+   "post": {
+    "operationId": "slide.channel.can_access_from_current_website",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "website_id": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "can_access_from_current_website",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.channel.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/create_and_get_website_url": {
+   "post": {
+    "operationId": "slide.channel.create_and_get_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_and_get_website_url",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.channel.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.channel.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/get_backend_menu_id": {
+   "post": {
+    "operationId": "slide.channel.get_backend_menu_id",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_backend_menu_id",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "slide.channel.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_get_followers": {
+   "post": {
+    "operationId": "slide.channel.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_mail_with_source": {
+   "post": {
+    "operationId": "slide.channel.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_new": {
+   "post": {
+    "operationId": "slide.channel.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "slide.channel.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "slide.channel.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_post": {
+   "post": {
+    "description": "Temporary workaround to avoid spam. If someone replies on a channel through the 'Presentation Published' email, it should be considered as a note as we don't want all channel followers to be notified of this answer. Also make sure that only one review can be posted per course.",
+    "operationId": "slide.channel.message_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "parent_id": {},
+         "subtype_id": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_post_with_source": {
+   "post": {
+    "operationId": "slide.channel.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "slide.channel.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "slide.channel.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "slide.channel.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "slide.channel.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "slide.channel.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.channel.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/notify_cancel_by_type": {
+   "post": {
+    "operationId": "slide.channel.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/open_website_url": {
+   "post": {
+    "operationId": "slide.channel.open_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "open_website_url",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "slide.channel.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/rating_get_grades": {
+   "post": {
+    "description": "Get the repartitions of rating grade for the given res_ids. :param domain: Optional domain of the rating to include/exclude in the grades computation. :returns: A dictionary where the key is the rating and the value is the count of unique ``(res_model, res_id)`` pairs whose grades are associated with that rating.",
+    "operationId": "slide.channel.rating_get_grades",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_get_grades"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_get_grades",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/rating_get_stats": {
+   "post": {
+    "description": "Get the statistics of the rating repartitions",
+    "operationId": "slide.channel.rating_get_stats",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_get_grades"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_get_stats",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "slide.channel.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.channel.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.channel.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.channel.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.channel.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/unlink": {
+   "post": {
+    "description": "\" Necessary override to avoid cache issues in the ORM. This signals the ORM to remove slides first to avoid having the SQL cascade the deletion, which attempts to recompute slide statistics of removed slides and creates a cache failure.",
+    "operationId": "slide.channel.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/website_publish_button": {
+   "post": {
+    "operationId": "slide.channel.website_publish_button",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "website_publish_button",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.channel/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.channel.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.channel"
+    ]
+   }
+  },
+  "/json/2/slide.embed/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.embed.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.embed/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.embed.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.embed/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.embed.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.embed/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.embed.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.embed/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.embed.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.embed/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.embed.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.embed/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.embed.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.embed/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.embed.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.embed/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "slide.embed.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.embed/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.embed.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.embed"
+    ]
+   }
+  },
+  "/json/2/slide.question/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.question.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.question/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.question.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.question/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.question.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.question/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.question.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.question/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.question.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.question/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.question.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.question/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.question.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.question/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.question.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.question/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "slide.question.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.question/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.question.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.question"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.slide.partner.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.slide.partner.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.slide.partner.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.slide.partner.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.slide.partner.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.slide.partner.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.slide.partner.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.slide.partner.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "slide.slide.partner.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.partner/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.slide.partner.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.slide.partner"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.slide.resource.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.slide.resource.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.slide.resource.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.slide.resource.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.slide.resource.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.slide.resource.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.slide.resource.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.slide.resource.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "slide.slide.resource.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide.resource/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.slide.resource.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.slide.resource"
+    ]
+   }
+  },
+  "/json/2/slide.slide/action_dislike": {
+   "post": {
+    "operationId": "slide.slide.action_dislike",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_dislike",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/action_like": {
+   "post": {
+    "operationId": "slide.slide.action_like",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_like",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/action_mark_completed": {
+   "post": {
+    "operationId": "slide.slide.action_mark_completed",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_mark_completed",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/action_mark_uncompleted": {
+   "post": {
+    "operationId": "slide.slide.action_mark_uncompleted",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_mark_uncompleted",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/action_set_viewed": {
+   "post": {
+    "operationId": "slide.slide.action_set_viewed",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "quiz_attempts_inc": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_set_viewed",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/action_view_embeds": {
+   "post": {
+    "operationId": "slide.slide.action_view_embeds",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_embeds",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.slide.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/create_and_get_website_url": {
+   "post": {
+    "operationId": "slide.slide.create_and_get_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create_and_get_website_url",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.slide.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.slide.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/get_backend_menu_id": {
+   "post": {
+    "operationId": "slide.slide.get_backend_menu_id",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_backend_menu_id",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_change_thread": {
+   "post": {
+    "description": "Transfer the list of the mail thread messages from an model to another",
+    "operationId": "slide.slide.message_change_thread",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_change_thread"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_change_thread",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_get_followers": {
+   "post": {
+    "operationId": "slide.slide.message_get_followers",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_get_followers"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_get_followers",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_mail_with_source": {
+   "post": {
+    "operationId": "slide.slide.message_mail_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_mail_with_source",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_new": {
+   "post": {
+    "operationId": "slide.slide.message_new",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_new"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_new",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_notify": {
+   "post": {
+    "description": "Shortcut allowing to notify partners of messages that should not be displayed on a document. It pushes notifications on inbox or by email depending on the user configuration, like other notifications.",
+    "operationId": "slide.slide.message_notify",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_notify"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_notify",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_parse": {
+   "post": {
+    "description": "Parses an email.message.Message representing an RFC-2822 email and returns a generic dict holding the message details.",
+    "operationId": "slide.slide.message_parse",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_parse"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_parse",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_post": {
+   "post": {
+    "operationId": "slide.slide.message_post",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "message_type": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_post_with_source": {
+   "post": {
+    "operationId": "slide.slide.message_post_with_source",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_mail_with_source"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_post_with_source",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_process": {
+   "post": {
+    "description": "Process an incoming RFC2822 email message, relying on ``mail.message.parse()`` for the parsing operation, and ``message_route()`` to figure out the target model.",
+    "operationId": "slide.slide.message_process",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_process"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_process",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_route": {
+   "post": {
+    "description": "Attempt to figure out the correct target model, thread_id, custom_values and user_id to use for an incoming message. Multiple values may be returned, if a message had multiple recipients matching existing mail.aliases, for example.",
+    "operationId": "slide.slide.message_route",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_route"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_route",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_subscribe": {
+   "post": {
+    "description": "Main public API to add followers to a record set. Its main purpose is to perform access rights checks before calling ``_message_subscribe``.",
+    "operationId": "slide.slide.message_subscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_subscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_subscribe",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_unsubscribe": {
+   "post": {
+    "description": "Remove partners from the records followers.",
+    "operationId": "slide.slide.message_unsubscribe",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_unsubscribe"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_unsubscribe",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/message_update": {
+   "post": {
+    "description": "Called by ``message_process`` when a new message is received for an existing thread. The default behavior is to update the record with update_vals taken from the incoming email. Additional behavior may be implemented by overriding this method.",
+    "operationId": "slide.slide.message_update",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/message_update"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "message_update",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.slide.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/notify_cancel_by_type": {
+   "post": {
+    "operationId": "slide.slide.notify_cancel_by_type",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/notify_cancel_by_type"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "notify_cancel_by_type",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/open_website_url": {
+   "post": {
+    "operationId": "slide.slide.open_website_url",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "open_website_url",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/rating_apply": {
+   "post": {
+    "description": "Apply a rating to the record. This rating can either be linked to a token (customer flow) or directly a rating record (code flow).",
+    "operationId": "slide.slide.rating_apply",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_apply"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_apply",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/rating_send_request": {
+   "post": {
+    "description": "This method send rating request by email, using a template given in parameter.",
+    "operationId": "slide.slide.rating_send_request",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/rating_send_request"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "rating_send_request",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.slide.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.slide.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.slide.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.slide.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "slide.slide.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/website_publish_button": {
+   "post": {
+    "operationId": "slide.slide.website_publish_button",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "website_publish_button",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.slide/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.slide.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.slide"
+    ]
+   }
+  },
+  "/json/2/slide.tag/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "slide.tag.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  },
+  "/json/2/slide.tag/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "slide.tag.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  },
+  "/json/2/slide.tag/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "slide.tag.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  },
+  "/json/2/slide.tag/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "slide.tag.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  },
+  "/json/2/slide.tag/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "slide.tag.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  },
+  "/json/2/slide.tag/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "slide.tag.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  },
+  "/json/2/slide.tag/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "slide.tag.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  },
+  "/json/2/slide.tag/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "slide.tag.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  },
+  "/json/2/slide.tag/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "slide.tag.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  },
+  "/json/2/slide.tag/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "slide.tag.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "slide.tag"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Slide Question's Answer",
+   "name": "slide.answer"
+  },
+  {
+   "description": "Course",
+   "name": "slide.channel"
+  },
+  {
+   "description": "Channel / Partners (Members)",
+   "name": "slide.channel.partner"
+  },
+  {
+   "description": "Channel/Course Tag",
+   "name": "slide.channel.tag"
+  },
+  {
+   "description": "Channel/Course Groups",
+   "name": "slide.channel.tag.group"
+  },
+  {
+   "description": "Embedded Slides View Counter",
+   "name": "slide.embed"
+  },
+  {
+   "description": "Content Quiz Question",
+   "name": "slide.question"
+  },
+  {
+   "description": "Slides",
+   "name": "slide.slide"
+  },
+  {
+   "description": "Slide / Partner decorated m2m",
+   "name": "slide.slide.partner"
+  },
+  {
+   "description": "Additional resource for a particular slide",
+   "name": "slide.slide.resource"
+  },
+  {
+   "description": "Slide Tag",
+   "name": "slide.tag"
+  }
+ ]
+}

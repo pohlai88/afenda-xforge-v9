@@ -1,0 +1,6775 @@
+{
+ "components": {
+  "requestBodies": {
+   "action_open_discuss_channel_view": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {}
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {
+         "type": "array"
+        }
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "create_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "vals_list": {}
+       },
+       "required": [
+        "vals_list"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "fields_get": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "allfields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "attributes": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "formatted_read_group": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "aggregates": {
+         "type": "array"
+        },
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "groupby": {
+         "type": "array"
+        },
+        "having": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "name_search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": "integer"
+        },
+        "name": {
+         "type": "string"
+        },
+        "operator": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "load": {
+         "type": "string"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_count": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": "array"
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        }
+       },
+       "required": [
+        "domain"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "search_read": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "domain": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "fields": {
+         "type": [
+          "array",
+          "null"
+         ]
+        },
+        "limit": {
+         "type": [
+          "integer",
+          "null"
+         ]
+        },
+        "offset": {
+         "type": "integer"
+        },
+        "order": {
+         "type": [
+          "string",
+          "null"
+         ]
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "unlink": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        }
+       },
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {
+         "type": "object"
+        }
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   },
+   "write_2": {
+    "content": {
+     "application/json": {
+      "schema": {
+       "properties": {
+        "context": {
+         "$ref": "#/components/schemas/Context"
+        },
+        "ids": {
+         "$ref": "#/components/schemas/Ids"
+        },
+        "vals": {}
+       },
+       "required": [
+        "vals"
+       ],
+       "type": "object"
+      }
+     }
+    },
+    "required": true
+   }
+  },
+  "responses": {
+   "Problem": {
+    "content": {
+     "application/problem+json": {
+      "schema": {
+       "$ref": "#/components/schemas/Error"
+      }
+     }
+    },
+    "description": "An RFC 9457 Problem Details object. code is one of: 401 unauthenticated; 403 access_denied; 404 not_found; 409 conflict; 422 validation_error; 422 user_error; 422 invalid_request; 500 internal_error. See /docs/api/errors for what each means."
+   }
+  },
+  "schemas": {
+   "Context": {
+    "description": "Context for the call, such as lang, tz and allowed_company_ids.",
+    "type": "object"
+   },
+   "Error": {
+    "properties": {
+     "code": {
+      "enum": [
+       "unauthenticated",
+       "access_denied",
+       "not_found",
+       "conflict",
+       "validation_error",
+       "user_error",
+       "invalid_request",
+       "internal_error"
+      ],
+      "type": "string"
+     },
+     "detail": {
+      "type": "string"
+     },
+     "instance": {
+      "description": "An opaque id for this occurrence; present on 5xx only.",
+      "type": "string"
+     },
+     "message": {
+      "description": "Repeats detail.",
+      "type": "string"
+     },
+     "status": {
+      "type": "integer"
+     },
+     "title": {
+      "description": "The HTTP reason phrase.",
+      "type": "string"
+     },
+     "type": {
+      "description": "A reference to the error code's entry on /docs/api/errors.",
+      "format": "uri-reference",
+      "type": "string"
+     }
+    },
+    "required": [
+     "type",
+     "title",
+     "status",
+     "code",
+     "detail"
+    ],
+    "title": "Error",
+    "type": "object"
+   },
+   "Ids": {
+    "description": "Record ids the method is called on.",
+    "items": {
+     "type": "integer"
+    },
+    "type": "array"
+   },
+   "chatbot.message": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "discuss_channel_id": {
+      "title": "Discussion Channel",
+      "type": "integer",
+      "x-relation": "discuss.channel"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "mail_message_id": {
+      "title": "Related Mail Message",
+      "type": "integer",
+      "x-relation": "mail.message"
+     },
+     "script_step_id": {
+      "title": "Chatbot Step",
+      "type": "integer",
+      "x-relation": "chatbot.script.step"
+     },
+     "user_raw_answer": {
+      "title": "User's raw answer",
+      "type": "string"
+     },
+     "user_raw_script_answer_id": {
+      "description": "Id of the script answer. Useful for statistics when answer is deleted.",
+      "title": "User Raw Script Answer",
+      "type": "integer"
+     },
+     "user_script_answer_id": {
+      "title": "User's answer",
+      "type": "integer",
+      "x-relation": "chatbot.script.answer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "discuss_channel_id"
+    ],
+    "title": "Chatbot Message",
+    "type": "object"
+   },
+   "chatbot.script": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "first_step_warning": {
+      "enum": [
+       "first_step_operator",
+       "first_step_invalid"
+      ],
+      "readOnly": true,
+      "title": "First Step Warning",
+      "type": "string",
+      "x-enum-labels": [
+       "First Step Operator",
+       "First Step Invalid"
+      ]
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "image_1024": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 1024",
+      "type": "string"
+     },
+     "image_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 128",
+      "type": "string"
+     },
+     "image_1920": {
+      "format": "byte",
+      "title": "Image",
+      "type": "string"
+     },
+     "image_256": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 256",
+      "type": "string"
+     },
+     "image_512": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image 512",
+      "type": "string"
+     },
+     "lead_count": {
+      "readOnly": true,
+      "title": "Generated Lead Count",
+      "type": "integer"
+     },
+     "livechat_channel_count": {
+      "readOnly": true,
+      "title": "Livechat Channel Count",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "operator_partner_id": {
+      "title": "Bot Operator",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "script_step_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Script Steps",
+      "type": "array",
+      "x-relation": "chatbot.script.step"
+     },
+     "source_id": {
+      "title": "Source",
+      "type": "integer",
+      "x-relation": "utm.source"
+     },
+     "title": {
+      "title": "Title",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "operator_partner_id",
+     "source_id",
+     "title"
+    ],
+    "title": "Chatbot Script",
+    "type": "object"
+   },
+   "chatbot.script.answer": {
+    "properties": {
+     "chatbot_script_id": {
+      "readOnly": true,
+      "title": "Chatbot",
+      "type": "integer",
+      "x-relation": "chatbot.script"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Answer",
+      "type": "string"
+     },
+     "redirect_link": {
+      "description": "The visitor will be redirected to this link upon clicking the option (note that the script will end if the link is external to the livechat website).",
+      "title": "Redirect Link",
+      "type": "string"
+     },
+     "script_step_id": {
+      "title": "Script Step",
+      "type": "integer",
+      "x-relation": "chatbot.script.step"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "script_step_id"
+    ],
+    "title": "Chatbot Script Answer",
+    "type": "object"
+   },
+   "chatbot.script.step": {
+    "properties": {
+     "answer_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Answers",
+      "type": "array",
+      "x-relation": "chatbot.script.answer"
+     },
+     "chatbot_script_id": {
+      "title": "Chatbot",
+      "type": "integer",
+      "x-relation": "chatbot.script"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "crm_team_id": {
+      "description": "Used in combination with 'create_lead' step type in order to automatically assign the created lead/opportunity to the defined team",
+      "title": "Sales Team",
+      "type": "integer",
+      "x-relation": "crm.team"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "is_forward_operator": {
+      "readOnly": true,
+      "title": "Is Forward Operator",
+      "type": "boolean"
+     },
+     "is_forward_operator_child": {
+      "readOnly": true,
+      "title": "Is Forward Operator Child",
+      "type": "boolean"
+     },
+     "message": {
+      "title": "Message",
+      "type": "string"
+     },
+     "name": {
+      "readOnly": true,
+      "title": "Name",
+      "type": "string"
+     },
+     "operator_expertise_ids": {
+      "description": "When forwarding live chat conversations, the chatbot will prioritize users with matching expertise.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Operator Expertise",
+      "type": "array",
+      "x-relation": "im_livechat.expertise"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "step_type": {
+      "enum": [
+       "text",
+       "question_selection",
+       "question_email",
+       "question_phone",
+       "forward_operator",
+       "free_input_single",
+       "free_input_multi",
+       "create_lead",
+       "create_lead_and_forward"
+      ],
+      "title": "Step Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Text",
+       "Question",
+       "Email",
+       "Phone",
+       "Forward to Operator",
+       "Free Input",
+       "Free Input (Multi-Line)",
+       "Create Lead",
+       "Create Lead & Forward"
+      ]
+     },
+     "triggering_answer_ids": {
+      "description": "Show this step only if all of these answers have been selected.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Only If",
+      "type": "array",
+      "x-relation": "chatbot.script.answer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "chatbot_script_id",
+     "step_type"
+    ],
+    "title": "Chatbot Script Step",
+    "type": "object"
+   },
+   "im_livechat.channel": {
+    "properties": {
+     "are_you_inside": {
+      "readOnly": true,
+      "title": "Are you inside the matrix?",
+      "type": "boolean"
+     },
+     "available_operator_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Available Operator",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "block_assignment_during_call": {
+      "description": "While on a call, agents will not receive new conversations.",
+      "title": "No Chats During Call",
+      "type": "boolean"
+     },
+     "button_background_color": {
+      "description": "Default background color of the Livechat button",
+      "title": "Button Background Color",
+      "type": "string"
+     },
+     "button_text": {
+      "title": "Text of the Button",
+      "type": "string"
+     },
+     "button_text_color": {
+      "description": "Default text color of the Livechat button",
+      "title": "Button Text Color",
+      "type": "string"
+     },
+     "channel_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Sessions",
+      "type": "array",
+      "x-relation": "discuss.channel"
+     },
+     "chatbot_script_count": {
+      "readOnly": true,
+      "title": "Number of Chatbot",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "default_message": {
+      "description": "This is an automated 'welcome' message that your visitor will see when they initiate a new conversation.",
+      "title": "Welcome Message",
+      "type": "string"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "header_background_color": {
+      "description": "Default background color of the channel header once open",
+      "title": "Header Background Color",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "max_sessions": {
+      "description": "Maximum number of concurrent sessions per operator.",
+      "title": "Maximum Sessions",
+      "type": "integer"
+     },
+     "max_sessions_mode": {
+      "description": "If limited, operators will only handle the selected number of sessions at a time.",
+      "enum": [
+       "unlimited",
+       "limited"
+      ],
+      "title": "Sessions per Operator",
+      "type": "string",
+      "x-enum-labels": [
+       "Unlimited",
+       "Limited"
+      ]
+     },
+     "name": {
+      "title": "Channel Name",
+      "type": "string"
+     },
+     "nbr_channel": {
+      "readOnly": true,
+      "title": "Number of conversation",
+      "type": "integer"
+     },
+     "ongoing_session_count": {
+      "readOnly": true,
+      "title": "Number of Ongoing Sessions",
+      "type": "integer"
+     },
+     "rating_avg": {
+      "readOnly": true,
+      "title": "Average Rating",
+      "type": "number"
+     },
+     "rating_avg_percentage": {
+      "readOnly": true,
+      "title": "Average Rating (%)",
+      "type": "number"
+     },
+     "rating_count": {
+      "readOnly": true,
+      "title": "# Ratings",
+      "type": "integer"
+     },
+     "rating_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Ratings",
+      "type": "array",
+      "x-relation": "rating.rating"
+     },
+     "rating_percentage_satisfaction": {
+      "description": "Percentage of happy ratings",
+      "readOnly": true,
+      "title": "Rating Satisfaction",
+      "type": "integer"
+     },
+     "remaining_session_capacity": {
+      "readOnly": true,
+      "title": "Remaining Session Capacity",
+      "type": "integer"
+     },
+     "review_link": {
+      "description": "Visitors who leave a positive review will be redirected to this optional link.",
+      "title": "Review Link",
+      "type": "string"
+     },
+     "rule_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Rules",
+      "type": "array",
+      "x-relation": "im_livechat.channel.rule"
+     },
+     "script_external": {
+      "readOnly": true,
+      "title": "Script (external)",
+      "type": "string"
+     },
+     "title_color": {
+      "description": "Default title color of the channel once open",
+      "title": "Title Color",
+      "type": "string"
+     },
+     "user_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Agents",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "web_page": {
+      "description": "URL to a static page where you client can discuss with the operator of the channel.",
+      "readOnly": true,
+      "title": "Web Page",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Livechat Channel",
+    "type": "object"
+   },
+   "im_livechat.channel.member.history": {
+    "properties": {
+     "agent_expertise_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Agent Expertise",
+      "type": "array",
+      "x-relation": "im_livechat.expertise"
+     },
+     "avatar_128": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Avatar 128",
+      "type": "string"
+     },
+     "call_count": {
+      "readOnly": true,
+      "title": "# of Sessions with Calls",
+      "type": "number"
+     },
+     "call_duration_hour": {
+      "readOnly": true,
+      "title": "Call Duration",
+      "type": "number"
+     },
+     "call_history_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Call History",
+      "type": "array",
+      "x-relation": "discuss.call.history"
+     },
+     "call_percentage": {
+      "readOnly": true,
+      "title": "Session with Calls (%)",
+      "type": "number"
+     },
+     "channel_id": {
+      "readOnly": true,
+      "title": "Channel",
+      "type": "integer",
+      "x-relation": "discuss.channel"
+     },
+     "chatbot_script_id": {
+      "readOnly": true,
+      "title": "Chatbot Script",
+      "type": "integer",
+      "x-relation": "chatbot.script"
+     },
+     "conversation_tag_ids": {
+      "description": "Tags to qualify the conversation.",
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Live Chat Conversation Tags",
+      "type": "array",
+      "x-relation": "im_livechat.conversation.tag"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "guest_id": {
+      "readOnly": true,
+      "title": "Guest",
+      "type": "integer",
+      "x-relation": "mail.guest"
+     },
+     "has_call": {
+      "readOnly": true,
+      "title": "Has Call",
+      "type": "number"
+     },
+     "help_status": {
+      "enum": [
+       "requested",
+       "provided"
+      ],
+      "readOnly": true,
+      "title": "Help Status",
+      "type": "string",
+      "x-enum-labels": [
+       "Help Requested",
+       "Help Provided"
+      ]
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "livechat_member_type": {
+      "enum": [
+       "agent",
+       "visitor",
+       "bot"
+      ],
+      "readOnly": true,
+      "title": "Livechat Member Type",
+      "type": "string",
+      "x-enum-labels": [
+       "Agent",
+       "Visitor",
+       "Chatbot"
+      ]
+     },
+     "member_id": {
+      "title": "Member",
+      "type": "integer",
+      "x-relation": "discuss.channel.member"
+     },
+     "message_count": {
+      "title": "# of Messages per Session",
+      "type": "integer"
+     },
+     "partner_id": {
+      "readOnly": true,
+      "title": "Partner",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "rating": {
+      "readOnly": true,
+      "title": "Rating Value",
+      "type": "number"
+     },
+     "rating_id": {
+      "readOnly": true,
+      "title": "Rating",
+      "type": "integer",
+      "x-relation": "rating.rating"
+     },
+     "rating_text": {
+      "enum": [
+       "top",
+       "ok",
+       "ko",
+       "none"
+      ],
+      "readOnly": true,
+      "title": "Rating text",
+      "type": "string",
+      "x-enum-labels": [
+       "Happy",
+       "Neutral",
+       "Unhappy",
+       "Not Rated yet"
+      ]
+     },
+     "response_time_hour": {
+      "title": "Response Time",
+      "type": "number"
+     },
+     "session_country_id": {
+      "description": "Country of the visitor of the channel",
+      "readOnly": true,
+      "title": "Country",
+      "type": "integer",
+      "x-relation": "res.country"
+     },
+     "session_duration_hour": {
+      "description": "Time spent by the persona in the session in hours",
+      "readOnly": true,
+      "title": "Session Duration",
+      "type": "number"
+     },
+     "session_livechat_channel_id": {
+      "readOnly": true,
+      "title": "Live chat channel",
+      "type": "integer",
+      "x-relation": "im_livechat.channel"
+     },
+     "session_outcome": {
+      "enum": [
+       "no_answer",
+       "no_agent",
+       "no_failure",
+       "escalated"
+      ],
+      "readOnly": true,
+      "title": "Livechat Outcome",
+      "type": "string",
+      "x-enum-labels": [
+       "Never Answered",
+       "No one Available",
+       "Success",
+       "Escalated"
+      ]
+     },
+     "session_start_hour": {
+      "readOnly": true,
+      "title": "Session Start Hour",
+      "type": "number"
+     },
+     "session_week_day": {
+      "enum": [
+       "0",
+       "1",
+       "2",
+       "3",
+       "4",
+       "5",
+       "6"
+      ],
+      "readOnly": true,
+      "title": "Day of the Week",
+      "type": "string",
+      "x-enum-labels": [
+       "Monday",
+       "Tuesday",
+       "Wednesday",
+       "Thursday",
+       "Friday",
+       "Saturday",
+       "Sunday"
+      ]
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "title": "Keep the channel member history",
+    "type": "object"
+   },
+   "im_livechat.channel.rule": {
+    "properties": {
+     "action": {
+      "description": "* 'Show' displays the chat button on the pages.\n* 'Show with notification' is 'Show' in addition to a floating text just next to the button.\n* 'Open automatically' displays the button and automatically opens the conversation pane on larger screens. On small screens, this behaves like 'Show'.\n* 'Hide' hides the chat button on the pages.\n",
+      "enum": [
+       "display_button",
+       "display_button_and_text",
+       "auto_popup",
+       "hide_button"
+      ],
+      "title": "Live Chat Button",
+      "type": "string",
+      "x-enum-labels": [
+       "Show",
+       "Show with notification",
+       "Open automatically",
+       "Hide"
+      ]
+     },
+     "auto_popup_timer": {
+      "description": "Delay (in seconds) to automatically open the conversation window. Note: the selected action must be 'Open automatically' otherwise this parameter will not be taken into account.",
+      "title": "Time to Open",
+      "type": "integer"
+     },
+     "channel_id": {
+      "description": "The channel of the rule",
+      "title": "Channel",
+      "type": "integer",
+      "x-relation": "im_livechat.channel"
+     },
+     "chatbot_enabled_condition": {
+      "enum": [
+       "always",
+       "only_if_no_operator",
+       "only_if_operator"
+      ],
+      "title": "Enable ChatBot",
+      "type": "string",
+      "x-enum-labels": [
+       "Always",
+       "Only when no operator is available",
+       "Only when an operator is available"
+      ]
+     },
+     "chatbot_script_id": {
+      "title": "Chatbot",
+      "type": "integer",
+      "x-relation": "chatbot.script"
+     },
+     "country_ids": {
+      "description": "The rule will only be applied for these countries. Example: if you select 'Belgium' and 'United States' and that you set the action to 'Hide', the chat button will be hidden on the specified URL from the visitors located in these 2 countries. This feature requires GeoIP installed on your server.",
+      "items": {
+       "type": "integer"
+      },
+      "title": "Countries",
+      "type": "array",
+      "x-relation": "res.country"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "regex_url": {
+      "description": "Regular expression specifying the web pages this rule will be applied on.",
+      "title": "URL Regex",
+      "type": "string"
+     },
+     "sequence": {
+      "description": "Given the order to find a matching rule. If 2 rules are matching for the given url/country, the one with the lowest sequence will be chosen.",
+      "title": "Matching order",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "action",
+     "chatbot_enabled_condition"
+    ],
+    "title": "Livechat Channel Rules",
+    "type": "object"
+   },
+   "im_livechat.conversation.tag": {
+    "properties": {
+     "color": {
+      "title": "Color",
+      "type": "integer"
+     },
+     "conversation_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Discuss Channels",
+      "type": "array",
+      "x-relation": "discuss.channel"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Live Chat Conversation Tags",
+    "type": "object"
+   },
+   "im_livechat.expertise": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "user_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Operators",
+      "type": "array",
+      "x-relation": "res.users"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Live Chat Expertise",
+    "type": "object"
+   },
+   "im_livechat.report.channel": {
+    "properties": {
+     "agent_providing_help_history": {
+      "readOnly": true,
+      "title": "Help Provided (Agent)",
+      "type": "integer",
+      "x-relation": "im_livechat.channel.member.history"
+     },
+     "agent_requesting_help_history": {
+      "readOnly": true,
+      "title": "Help Requested (Agent)",
+      "type": "integer",
+      "x-relation": "im_livechat.channel.member.history"
+     },
+     "call_duration_hour": {
+      "readOnly": true,
+      "title": "Call Duration",
+      "type": "number"
+     },
+     "channel_id": {
+      "readOnly": true,
+      "title": "Conversation",
+      "type": "integer",
+      "x-relation": "discuss.channel"
+     },
+     "channel_name": {
+      "readOnly": true,
+      "title": "Channel Name",
+      "type": "string"
+     },
+     "chatbot_answers_path": {
+      "readOnly": true,
+      "title": "Chatbot Answers",
+      "type": "string"
+     },
+     "chatbot_answers_path_str": {
+      "readOnly": true,
+      "title": "Chatbot Answers (String)",
+      "type": "string"
+     },
+     "chatbot_script_id": {
+      "readOnly": true,
+      "title": "Chatbot",
+      "type": "integer",
+      "x-relation": "chatbot.script"
+     },
+     "conversation_tag_ids": {
+      "description": "Tags to qualify the conversation.",
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Tags used in this conversation",
+      "type": "array",
+      "x-relation": "im_livechat.conversation.tag"
+     },
+     "country_id": {
+      "readOnly": true,
+      "title": "Country of the visitor",
+      "type": "integer",
+      "x-relation": "res.country"
+     },
+     "day_number": {
+      "enum": [
+       "0",
+       "1",
+       "2",
+       "3",
+       "4",
+       "5",
+       "6"
+      ],
+      "readOnly": true,
+      "title": "Day of the Week",
+      "type": "string",
+      "x-enum-labels": [
+       "Sunday",
+       "Monday",
+       "Tuesday",
+       "Wednesday",
+       "Thursday",
+       "Friday",
+       "Saturday"
+      ]
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "duration": {
+      "description": "Duration of the conversation (in minutes)",
+      "readOnly": true,
+      "title": "Duration (min)",
+      "type": "number"
+     },
+     "handled_by_agent": {
+      "readOnly": true,
+      "title": "Handled by Agent",
+      "type": "integer"
+     },
+     "handled_by_bot": {
+      "readOnly": true,
+      "title": "Handled by Bot",
+      "type": "integer"
+     },
+     "has_call": {
+      "readOnly": true,
+      "title": "Whether the session had a call",
+      "type": "number"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "lang_id": {
+      "description": "Lang of the visitor of the channel.",
+      "readOnly": true,
+      "title": "Language",
+      "type": "integer",
+      "x-relation": "res.lang"
+     },
+     "leads_created": {
+      "readOnly": true,
+      "title": "Leads created",
+      "type": "integer"
+     },
+     "livechat_channel_id": {
+      "readOnly": true,
+      "title": "Channel",
+      "type": "integer",
+      "x-relation": "im_livechat.channel"
+     },
+     "nbr_message": {
+      "description": "Number of message in the conversation",
+      "readOnly": true,
+      "title": "Messages per Session",
+      "type": "integer"
+     },
+     "number_of_calls": {
+      "readOnly": true,
+      "title": "# of Sessions with calls",
+      "type": "number"
+     },
+     "partner_id": {
+      "readOnly": true,
+      "title": "Agent",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "percentage_of_calls": {
+      "readOnly": true,
+      "title": "Session with Calls (%)",
+      "type": "number"
+     },
+     "rating": {
+      "readOnly": true,
+      "title": "Rating",
+      "type": "integer"
+     },
+     "rating_text": {
+      "readOnly": true,
+      "title": "Satisfaction Rate",
+      "type": "string"
+     },
+     "session_expertise_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "readOnly": true,
+      "title": "Expertises used in this session",
+      "type": "array",
+      "x-relation": "im_livechat.expertise"
+     },
+     "session_expertises": {
+      "readOnly": true,
+      "title": "Expertises used in this session (String)",
+      "type": "string"
+     },
+     "session_outcome": {
+      "enum": [
+       "no_answer",
+       "no_agent",
+       "no_failure",
+       "escalated"
+      ],
+      "readOnly": true,
+      "title": "Session Outcome",
+      "type": "string",
+      "x-enum-labels": [
+       "Never Answered",
+       "No one Available",
+       "Success",
+       "Escalated"
+      ]
+     },
+     "start_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Start Date of session",
+      "type": "string"
+     },
+     "start_date_hour": {
+      "readOnly": true,
+      "title": "Hour of start Date of session",
+      "type": "string"
+     },
+     "start_date_minutes": {
+      "readOnly": true,
+      "title": "Start Date of session, truncated to minutes",
+      "type": "string"
+     },
+     "start_hour": {
+      "readOnly": true,
+      "title": "Start Hour of session",
+      "type": "string"
+     },
+     "time_to_answer": {
+      "description": "Average time in hours to give the first answer to the visitor",
+      "readOnly": true,
+      "title": "Response Time",
+      "type": "number"
+     },
+     "uuid": {
+      "readOnly": true,
+      "title": "UUID",
+      "type": "string"
+     },
+     "visitor_partner_id": {
+      "readOnly": true,
+      "title": "Customer",
+      "type": "integer",
+      "x-relation": "res.partner"
+     }
+    },
+    "title": "Livechat Support Channel Report",
+    "type": "object"
+   },
+   "rating.rating": {
+    "properties": {
+     "access_token": {
+      "title": "Security Token",
+      "type": "string"
+     },
+     "consumed": {
+      "title": "Filled Rating",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "title": "Submitted on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "feedback": {
+      "title": "Comment",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "is_internal": {
+      "description": "Hide to public / portal users, independently from subtype configuration.",
+      "title": "Visible Internally Only",
+      "type": "boolean"
+     },
+     "message_id": {
+      "title": "Message",
+      "type": "integer",
+      "x-relation": "mail.message"
+     },
+     "parent_ref": {
+      "pattern": "^[a-z0-9_.]+,\\d+$",
+      "readOnly": true,
+      "title": "Parent Ref",
+      "type": "string",
+      "x-afenda-dynamic-enum": true
+     },
+     "parent_res_id": {
+      "title": "Parent Document",
+      "type": "integer"
+     },
+     "parent_res_model": {
+      "title": "Parent Document Model",
+      "type": "string"
+     },
+     "parent_res_model_id": {
+      "title": "Parent Related Document Model",
+      "type": "integer",
+      "x-relation": "ir.model"
+     },
+     "parent_res_name": {
+      "readOnly": true,
+      "title": "Parent Document Name",
+      "type": "string"
+     },
+     "partner_id": {
+      "title": "Customer",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "publisher_comment": {
+      "title": "Publisher comment",
+      "type": "string"
+     },
+     "publisher_datetime": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Commented on",
+      "type": "string"
+     },
+     "publisher_id": {
+      "readOnly": true,
+      "title": "Commented by",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "rated_on": {
+      "format": "date-time",
+      "title": "Rated On",
+      "type": "string"
+     },
+     "rated_partner_id": {
+      "title": "Rated Operator",
+      "type": "integer",
+      "x-relation": "res.partner"
+     },
+     "rated_partner_name": {
+      "readOnly": true,
+      "title": "Name",
+      "type": "string"
+     },
+     "rating": {
+      "title": "Rating Value",
+      "type": "number"
+     },
+     "rating_image": {
+      "format": "byte",
+      "readOnly": true,
+      "title": "Image",
+      "type": "string"
+     },
+     "rating_image_url": {
+      "readOnly": true,
+      "title": "Image URL",
+      "type": "string"
+     },
+     "rating_text": {
+      "enum": [
+       "top",
+       "ok",
+       "ko",
+       "none"
+      ],
+      "readOnly": true,
+      "title": "Rating",
+      "type": "string",
+      "x-enum-labels": [
+       "Happy",
+       "Neutral",
+       "Unhappy",
+       "Not Rated yet"
+      ]
+     },
+     "res_id": {
+      "title": "Document",
+      "type": "integer"
+     },
+     "res_model": {
+      "readOnly": true,
+      "title": "Document Model",
+      "type": "string"
+     },
+     "res_model_id": {
+      "title": "Related Document Model",
+      "type": "integer",
+      "x-relation": "ir.model"
+     },
+     "res_name": {
+      "readOnly": true,
+      "title": "Resource name",
+      "type": "string"
+     },
+     "resource_ref": {
+      "pattern": "^[a-z0-9_.]+,\\d+$",
+      "readOnly": true,
+      "title": "Resource Ref",
+      "type": "string",
+      "x-afenda-dynamic-enum": true
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "res_id"
+    ],
+    "title": "Rating",
+    "type": "object"
+   },
+   "utm.campaign": {
+    "properties": {
+     "ab_testing_completed": {
+      "readOnly": true,
+      "title": "A/B Testing Campaign Finished",
+      "type": "boolean"
+     },
+     "ab_testing_mailings_count": {
+      "readOnly": true,
+      "title": "A/B Test Mailings #",
+      "type": "integer"
+     },
+     "ab_testing_mailings_sms_count": {
+      "readOnly": true,
+      "title": "A/B Test Mailings SMS #",
+      "type": "integer"
+     },
+     "ab_testing_schedule_datetime": {
+      "description": "Date that will be used to know when to determine and send the winner mailing",
+      "format": "date-time",
+      "title": "Send Final On",
+      "type": "string"
+     },
+     "ab_testing_sms_winner_selection": {
+      "enum": [
+       "manual",
+       "clicks_ratio",
+       "crm_lead_count",
+       "sale_quotation_count",
+       "sale_invoiced_amount"
+      ],
+      "title": "SMS Winner Selection",
+      "type": "string",
+      "x-enum-labels": [
+       "Manual",
+       "Highest Click Rate",
+       "Leads",
+       "Quotations",
+       "Revenues"
+      ]
+     },
+     "ab_testing_winner_mailing_id": {
+      "title": "A/B Campaign Winner Mailing",
+      "type": "integer",
+      "x-relation": "mailing.mailing"
+     },
+     "ab_testing_winner_selection": {
+      "description": "Selection to determine the winner mailing that will be sent.",
+      "enum": [
+       "manual",
+       "opened_ratio",
+       "clicks_ratio",
+       "replied_ratio",
+       "crm_lead_count",
+       "sale_quotation_count",
+       "sale_invoiced_amount"
+      ],
+      "title": "Winner Selection",
+      "type": "string",
+      "x-enum-labels": [
+       "Manual",
+       "Highest Open Rate",
+       "Highest Click Rate",
+       "Highest Reply Rate",
+       "Leads",
+       "Quotations",
+       "Revenues"
+      ]
+     },
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "bounced_ratio": {
+      "readOnly": true,
+      "title": "Bounced Ratio",
+      "type": "number"
+     },
+     "click_count": {
+      "readOnly": true,
+      "title": "Number of clicks generated by the campaign",
+      "type": "integer"
+     },
+     "color": {
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "company_id": {
+      "title": "Company",
+      "type": "integer",
+      "x-relation": "res.company"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "crm_lead_count": {
+      "readOnly": true,
+      "title": "Leads/Opportunities count",
+      "type": "integer"
+     },
+     "currency_id": {
+      "readOnly": true,
+      "title": "Currency",
+      "type": "integer",
+      "x-relation": "res.currency"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "invoiced_amount": {
+      "readOnly": true,
+      "title": "Revenues generated by the campaign",
+      "type": "integer"
+     },
+     "is_auto_campaign": {
+      "description": "Allows us to filter relevant Campaigns",
+      "title": "Automatically Generated Campaign",
+      "type": "boolean"
+     },
+     "is_mailing_campaign_activated": {
+      "readOnly": true,
+      "title": "Is Mailing Campaign Activated",
+      "type": "boolean"
+     },
+     "mailing_mail_count": {
+      "readOnly": true,
+      "title": "Number of Mass Mailing",
+      "type": "integer"
+     },
+     "mailing_mail_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Mass Mailings",
+      "type": "array",
+      "x-relation": "mailing.mailing"
+     },
+     "mailing_sms_count": {
+      "readOnly": true,
+      "title": "Number of Mass SMS",
+      "type": "integer"
+     },
+     "mailing_sms_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Mass SMS",
+      "type": "array",
+      "x-relation": "mailing.mailing"
+     },
+     "name": {
+      "title": "Campaign Identifier",
+      "type": "string"
+     },
+     "opened_ratio": {
+      "readOnly": true,
+      "title": "Opened Ratio",
+      "type": "number"
+     },
+     "quotation_count": {
+      "readOnly": true,
+      "title": "Quotation Count",
+      "type": "integer"
+     },
+     "received_ratio": {
+      "readOnly": true,
+      "title": "Received Ratio",
+      "type": "number"
+     },
+     "replied_ratio": {
+      "readOnly": true,
+      "title": "Replied Ratio",
+      "type": "number"
+     },
+     "stage_id": {
+      "title": "Stage",
+      "type": "integer",
+      "x-relation": "utm.stage"
+     },
+     "tag_ids": {
+      "items": {
+       "type": "integer"
+      },
+      "title": "Tags",
+      "type": "array",
+      "x-relation": "utm.tag"
+     },
+     "title": {
+      "title": "Campaign Name",
+      "type": "string"
+     },
+     "use_leads": {
+      "readOnly": true,
+      "title": "Use Leads",
+      "type": "boolean"
+     },
+     "user_id": {
+      "title": "Responsible",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name",
+     "stage_id",
+     "title",
+     "user_id"
+    ],
+    "title": "UTM Campaign",
+    "type": "object"
+   },
+   "utm.medium": {
+    "properties": {
+     "active": {
+      "title": "Active",
+      "type": "boolean"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Medium Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "UTM Medium",
+    "type": "object"
+   },
+   "utm.source": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Source Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "UTM Source",
+    "type": "object"
+   },
+   "utm.stage": {
+    "properties": {
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "sequence": {
+      "title": "Sequence",
+      "type": "integer"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "Campaign Stage",
+    "type": "object"
+   },
+   "utm.tag": {
+    "properties": {
+     "color": {
+      "description": "Tag color. No color means no display in kanban to distinguish internal tags from public categorization tags.",
+      "title": "Color Index",
+      "type": "integer"
+     },
+     "create_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Created on",
+      "type": "string"
+     },
+     "create_uid": {
+      "readOnly": true,
+      "title": "Created by",
+      "type": "integer",
+      "x-relation": "res.users"
+     },
+     "display_name": {
+      "readOnly": true,
+      "title": "Display Name",
+      "type": "string"
+     },
+     "id": {
+      "readOnly": true,
+      "title": "ID",
+      "type": "integer"
+     },
+     "name": {
+      "title": "Name",
+      "type": "string"
+     },
+     "write_date": {
+      "format": "date-time",
+      "readOnly": true,
+      "title": "Last Updated on",
+      "type": "string"
+     },
+     "write_uid": {
+      "readOnly": true,
+      "title": "Last Updated by",
+      "type": "integer",
+      "x-relation": "res.users"
+     }
+    },
+    "required": [
+     "name"
+    ],
+    "title": "UTM Tag",
+    "type": "object"
+   }
+  },
+  "securitySchemes": {
+   "bearerAuth": {
+    "scheme": "bearer",
+    "type": "http"
+   }
+  }
+ },
+ "info": {
+  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "title": "AFENDA xForge JSON API",
+  "version": "1.0.0",
+  "x-afenda-area": "im_livechat"
+ },
+ "openapi": "3.1.0",
+ "paths": {
+  "/json/2/chatbot.message/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "chatbot.message.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.message/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "chatbot.message.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.message/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "chatbot.message.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.message/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "chatbot.message.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.message/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "chatbot.message.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.message/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "chatbot.message.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.message/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "chatbot.message.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.message/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "chatbot.message.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.message/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "chatbot.message.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.message/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "chatbot.message.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "chatbot.message"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "chatbot.script.answer.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "chatbot.script.answer.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "chatbot.script.answer.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "chatbot.script.answer.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "chatbot.script.answer.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "chatbot.script.answer.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "chatbot.script.answer.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "chatbot.script.answer.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "chatbot.script.answer.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.answer/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "chatbot.script.answer.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "chatbot.script.answer"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/create": {
+   "post": {
+    "description": "Ensure we correctly assign sequences when creating steps. Indeed, sequences are very important within the script, and will break the whole flow if not correctly defined.",
+    "operationId": "chatbot.script.step.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "chatbot.script.step.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "chatbot.script.step.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "chatbot.script.step.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "chatbot.script.step.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "chatbot.script.step.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "chatbot.script.step.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "chatbot.script.step.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "chatbot.script.step.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script.step/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "chatbot.script.step.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "chatbot.script.step"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/action_test_script": {
+   "post": {
+    "operationId": "chatbot.script.action_test_script",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_test_script",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/action_view_leads": {
+   "post": {
+    "operationId": "chatbot.script.action_view_leads",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_leads",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/action_view_livechat_channels": {
+   "post": {
+    "operationId": "chatbot.script.action_view_livechat_channels",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_livechat_channels",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "chatbot.script.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "chatbot.script.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "chatbot.script.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "chatbot.script.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "chatbot.script.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "chatbot.script.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "chatbot.script.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "chatbot.script.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "chatbot.script.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/chatbot.script/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "chatbot.script.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "chatbot.script"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/action_open_discuss_channel_view": {
+   "post": {
+    "operationId": "im_livechat.channel.member.history.action_open_discuss_channel_view",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_discuss_channel_view"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_discuss_channel_view",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "im_livechat.channel.member.history.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "im_livechat.channel.member.history.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "im_livechat.channel.member.history.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "im_livechat.channel.member.history.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "im_livechat.channel.member.history.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.channel.member.history.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.channel.member.history.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "im_livechat.channel.member.history.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "im_livechat.channel.member.history.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.member.history/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "im_livechat.channel.member.history.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "im_livechat.channel.member.history"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "im_livechat.channel.rule.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "im_livechat.channel.rule.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "im_livechat.channel.rule.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/match_rule": {
+   "post": {
+    "description": "determine if a rule of the given channel matches with the given url :param channel_id : the identifier of the channel_id :param url : the url to match with a rule :param country_id : the identifier of the country :returns the rule that matches the given condition. False otherwise. :rtype : im_livechat.channel.rule",
+    "operationId": "im_livechat.channel.rule.match_rule",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "channel_id": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "country_id": {},
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "url": {}
+        },
+        "required": [
+         "channel_id",
+         "url"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "match_rule",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "im_livechat.channel.rule.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "im_livechat.channel.rule.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.channel.rule.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.channel.rule.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "im_livechat.channel.rule.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "im_livechat.channel.rule.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel.rule/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "im_livechat.channel.rule.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "im_livechat.channel.rule"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/action_join": {
+   "post": {
+    "operationId": "im_livechat.channel.action_join",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_join",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/action_quit": {
+   "post": {
+    "operationId": "im_livechat.channel.action_quit",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_quit",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/action_view_chatbot_scripts": {
+   "post": {
+    "operationId": "im_livechat.channel.action_view_chatbot_scripts",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_chatbot_scripts",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/action_view_rating": {
+   "post": {
+    "description": "Action to display the rating relative to the channel, so all rating of the sessions of the current channel :returns : the ir.action 'action_view_rating' with the correct context",
+    "operationId": "im_livechat.channel.action_view_rating",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_view_rating",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "im_livechat.channel.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "im_livechat.channel.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "im_livechat.channel.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/get_livechat_info": {
+   "post": {
+    "operationId": "im_livechat.channel.get_livechat_info",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "ids": {
+          "$ref": "#/components/schemas/Ids"
+         },
+         "username": {}
+        },
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "get_livechat_info",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "im_livechat.channel.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "im_livechat.channel.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.channel.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.channel.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "im_livechat.channel.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "im_livechat.channel.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.channel/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "im_livechat.channel.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "im_livechat.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "im_livechat.conversation.tag.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "im_livechat.conversation.tag.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "im_livechat.conversation.tag.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "im_livechat.conversation.tag.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "im_livechat.conversation.tag.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.conversation.tag.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.conversation.tag.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "im_livechat.conversation.tag.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "im_livechat.conversation.tag.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.conversation.tag/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "im_livechat.conversation.tag.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "im_livechat.conversation.tag"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "im_livechat.expertise.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "im_livechat.expertise.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "im_livechat.expertise.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "im_livechat.expertise.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "im_livechat.expertise.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.expertise.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.expertise.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "im_livechat.expertise.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "im_livechat.expertise.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.expertise/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "im_livechat.expertise.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "im_livechat.expertise"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/action_open_discuss_channel_view": {
+   "post": {
+    "operationId": "im_livechat.report.channel.action_open_discuss_channel_view",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/action_open_discuss_channel_view"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_discuss_channel_view",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "im_livechat.report.channel.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "im_livechat.report.channel.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/formatted_read_group": {
+   "post": {
+    "operationId": "im_livechat.report.channel.formatted_read_group",
+    "requestBody": {
+     "content": {
+      "application/json": {
+       "schema": {
+        "properties": {
+         "aggregates": {},
+         "context": {
+          "$ref": "#/components/schemas/Context"
+         },
+         "domain": {},
+         "groupby": {},
+         "having": {},
+         "limit": {},
+         "offset": {},
+         "order": {}
+        },
+        "required": [
+         "domain"
+        ],
+        "type": "object"
+       }
+      }
+     },
+     "required": true
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "im_livechat.report.channel.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "im_livechat.report.channel.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.report.channel.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "im_livechat.report.channel.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "im_livechat.report.channel.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "im_livechat.report.channel.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/im_livechat.report.channel/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "im_livechat.report.channel.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "im_livechat.report.channel"
+    ]
+   }
+  },
+  "/json/2/rating.rating/action_open_rated_object": {
+   "post": {
+    "operationId": "rating.rating.action_open_rated_object",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_open_rated_object",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "rating.rating.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "rating.rating.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "rating.rating.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "rating.rating.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "rating.rating.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/reset": {
+   "post": {
+    "operationId": "rating.rating.reset",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "reset",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "rating.rating.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "rating.rating.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "rating.rating.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "rating.rating.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/rating.rating/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "rating.rating.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "rating.rating"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/action_create_mass_sms": {
+   "post": {
+    "operationId": "utm.campaign.action_create_mass_sms",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_create_mass_sms",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/action_redirect_to_invoiced": {
+   "post": {
+    "operationId": "utm.campaign.action_redirect_to_invoiced",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_invoiced",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/action_redirect_to_leads_opportunities": {
+   "post": {
+    "operationId": "utm.campaign.action_redirect_to_leads_opportunities",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_leads_opportunities",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/action_redirect_to_mailing_sms": {
+   "post": {
+    "operationId": "utm.campaign.action_redirect_to_mailing_sms",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_mailing_sms",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/action_redirect_to_quotations": {
+   "post": {
+    "operationId": "utm.campaign.action_redirect_to_quotations",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "action_redirect_to_quotations",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "utm.campaign.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "utm.campaign.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "utm.campaign.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "utm.campaign.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "utm.campaign.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "utm.campaign.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "utm.campaign.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "utm.campaign.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "utm.campaign.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.campaign/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "utm.campaign.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "utm.campaign"
+    ]
+   }
+  },
+  "/json/2/utm.medium/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "utm.medium.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.medium/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "utm.medium.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.medium/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "utm.medium.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.medium/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "utm.medium.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.medium/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "utm.medium.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.medium/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "utm.medium.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.medium/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "utm.medium.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.medium/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "utm.medium.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.medium/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "utm.medium.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.medium/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "utm.medium.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "utm.medium"
+    ]
+   }
+  },
+  "/json/2/utm.source/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "utm.source.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create_2"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.source/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "utm.source.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.source/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "utm.source.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.source/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "utm.source.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.source/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "utm.source.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.source/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "utm.source.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.source/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "utm.source.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.source/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "utm.source.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.source/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "utm.source.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.source/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "utm.source.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "utm.source"
+    ]
+   }
+  },
+  "/json/2/utm.stage/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "utm.stage.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.stage/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "utm.stage.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.stage/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "utm.stage.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.stage/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "utm.stage.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.stage/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "utm.stage.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.stage/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "utm.stage.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.stage/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "utm.stage.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.stage/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "utm.stage.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.stage/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "utm.stage.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.stage/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "utm.stage.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "utm.stage"
+    ]
+   }
+  },
+  "/json/2/utm.tag/create": {
+   "post": {
+    "description": "Create new records for the model.",
+    "operationId": "utm.tag.create",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/create"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "create",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  },
+  "/json/2/utm.tag/fields_get": {
+   "post": {
+    "description": "Return the definition of each field.",
+    "operationId": "utm.tag.fields_get",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/fields_get"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "fields_get",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  },
+  "/json/2/utm.tag/formatted_read_group": {
+   "post": {
+    "description": "A method similar to :meth:`_read_group` but with all the formatting needed by the webclient.",
+    "operationId": "utm.tag.formatted_read_group",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/formatted_read_group"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "formatted_read_group",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  },
+  "/json/2/utm.tag/name_search": {
+   "post": {
+    "description": "Search for records that have a display name matching the given ``name`` pattern when compared with the given ``operator``, while also matching the optional search domain (``domain``).",
+    "operationId": "utm.tag.name_search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/name_search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "name_search",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  },
+  "/json/2/utm.tag/read": {
+   "post": {
+    "description": "Read the requested fields for the records in ``self``, and return their values as a list of dicts.",
+    "operationId": "utm.tag.read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "read",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  },
+  "/json/2/utm.tag/search": {
+   "post": {
+    "description": "Search for the records that satisfy the given ``domain`` :ref:`search domain <reference/orm/domains>`.",
+    "operationId": "utm.tag.search",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  },
+  "/json/2/utm.tag/search_count": {
+   "post": {
+    "description": "Return the number of records in the current model matching :ref:`the provided domain <reference/orm/domains>`.",
+    "operationId": "utm.tag.search_count",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_count"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_count",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  },
+  "/json/2/utm.tag/search_read": {
+   "post": {
+    "description": "Perform a :meth:`search_fetch` followed by a :meth:`_read_format`.",
+    "operationId": "utm.tag.search_read",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/search_read"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "search_read",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  },
+  "/json/2/utm.tag/unlink": {
+   "post": {
+    "description": "Delete the records in ``self``.",
+    "operationId": "utm.tag.unlink",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/unlink"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "unlink",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  },
+  "/json/2/utm.tag/write": {
+   "post": {
+    "description": "Update all records in ``self`` with the provided values.",
+    "operationId": "utm.tag.write",
+    "requestBody": {
+     "$ref": "#/components/requestBodies/write"
+    },
+    "responses": {
+     "200": {
+      "description": "Success."
+     },
+     "4XX": {
+      "$ref": "#/components/responses/Problem"
+     },
+     "5XX": {
+      "$ref": "#/components/responses/Problem"
+     }
+    },
+    "summary": "write",
+    "tags": [
+     "utm.tag"
+    ]
+   }
+  }
+ },
+ "security": [
+  {
+   "bearerAuth": []
+  }
+ ],
+ "servers": [
+  {
+   "url": "/"
+  }
+ ],
+ "tags": [
+  {
+   "description": "Chatbot Message",
+   "name": "chatbot.message"
+  },
+  {
+   "description": "Chatbot Script",
+   "name": "chatbot.script"
+  },
+  {
+   "description": "Chatbot Script Answer",
+   "name": "chatbot.script.answer"
+  },
+  {
+   "description": "Chatbot Script Step",
+   "name": "chatbot.script.step"
+  },
+  {
+   "description": "Livechat Channel",
+   "name": "im_livechat.channel"
+  },
+  {
+   "description": "Keep the channel member history",
+   "name": "im_livechat.channel.member.history"
+  },
+  {
+   "description": "Livechat Channel Rules",
+   "name": "im_livechat.channel.rule"
+  },
+  {
+   "description": "Live Chat Conversation Tags",
+   "name": "im_livechat.conversation.tag"
+  },
+  {
+   "description": "Live Chat Expertise",
+   "name": "im_livechat.expertise"
+  },
+  {
+   "description": "Livechat Support Channel Report",
+   "name": "im_livechat.report.channel"
+  },
+  {
+   "description": "Rating",
+   "name": "rating.rating"
+  },
+  {
+   "description": "UTM Campaign",
+   "name": "utm.campaign"
+  },
+  {
+   "description": "UTM Medium",
+   "name": "utm.medium"
+  },
+  {
+   "description": "UTM Source",
+   "name": "utm.source"
+  },
+  {
+   "description": "Campaign Stage",
+   "name": "utm.stage"
+  },
+  {
+   "description": "UTM Tag",
+   "name": "utm.tag"
+  }
+ ]
+}
