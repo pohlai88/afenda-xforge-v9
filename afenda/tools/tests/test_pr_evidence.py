@@ -63,6 +63,36 @@ class CheckTests(unittest.TestCase):
         self.assertTrue(any("commit id" in e for e in errors), errors)
         self.assertFalse(any("printed test count" in e for e in errors), errors)
 
+    def test_pure_decimal_short_id_is_not_a_commit(self):
+        # An issue/PR reference like `#1234567` is 7 decimal digits with no
+        # a-f letter and is not 40 characters long: it must not be accepted
+        # as a commit id.
+        body = (
+            "## Verification\n"
+            "\n"
+            "Ran 307 tests … OK, see issue #1234567.\n"
+        )
+        errors = check(body)
+        self.assertTrue(any("commit id" in e for e in errors), errors)
+
+    def test_forty_digit_all_decimal_id_passes_as_commit(self):
+        # Exactly 40 hex characters is unambiguously a full commit id, even
+        # if every digit happens to be decimal.
+        body = (
+            "## Verification\n"
+            "\n"
+            "Ran 307 tests … OK, commit 1234567890123456789012345678901234567890.\n"
+        )
+        self.assertEqual(check(body), [])
+
+    def test_short_sha_with_a_letter_passes_as_commit(self):
+        body = (
+            "## Verification\n"
+            "\n"
+            "Ran 307 tests … OK, commit 5d6b77378.\n"
+        )
+        self.assertEqual(check(body), [])
+
     def test_evidence_before_the_section_does_not_count(self):
         # The count and the commit id both appear only above the Verification
         # heading; the section itself (a bare heading, nothing else) has
@@ -135,6 +165,19 @@ class CheckTests(unittest.TestCase):
             "| 5c71e380d |\n"
         )
         self.assertEqual(check(body), [])
+
+
+class TemplateTests(unittest.TestCase):
+    def test_unedited_template_fails_the_evidence_check(self):
+        # The committed PR template is a blank form: nobody has pasted a
+        # real printed count or commit id into it yet, so it must fail the
+        # same check the workflow runs against a real PR body. If it
+        # passes, an author who never fills in Verification would still
+        # get a green pr-evidence check.
+        template = (REPO / ".github" / "PULL_REQUEST_TEMPLATE.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertNotEqual(check(template), [])
 
 
 class CliTests(unittest.TestCase):

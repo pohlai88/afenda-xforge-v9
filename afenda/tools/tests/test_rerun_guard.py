@@ -15,6 +15,7 @@ import json
 import subprocess
 import tempfile
 import unittest
+import unittest.mock
 from pathlib import Path
 
 _HOOK_PATH = (
@@ -85,6 +86,18 @@ class RerunGuardTestCase(unittest.TestCase):
         self.assertEqual(exit_code, 0)
         self.assertEqual(stderr, "")
 
+    def test_non_gate_command_never_calls_run_git(self):
+        # A non-gate command must return before any git subprocess is
+        # spawned at all -- not merely happen to pass on a repo that
+        # tolerates it.
+        with unittest.mock.patch.object(rerun_guard, "_run_git") as mock_run_git:
+            exit_code, stderr = rerun_guard.main(
+                self._payload("ls -la afenda"), self.env
+            )
+        self.assertEqual(exit_code, 0)
+        self.assertEqual(stderr, "")
+        mock_run_git.assert_not_called()
+
     def test_non_bash_tool_passes_without_touching_git(self):
         # A gate-looking command under a non-Bash tool must not even reach
         # git: pass a cwd that is not a git repo at all to prove it.
@@ -132,6 +145,16 @@ class RerunGuardTestCase(unittest.TestCase):
                 self.assertEqual(first[0], 0)
                 self.assertEqual(second[0], 0)
                 self.assertEqual(third[0], 2, command)
+
+    def test_grepping_for_unittest_is_not_a_gate_command(self):
+        # `grep -n unittest <file>` merely names the word "unittest" in a
+        # search; it is not `python -m unittest ...` and must not be treated
+        # as a gate command, or a third identical grep would be blocked.
+        command = "grep -n unittest afenda/tools/pr_evidence.py"
+        for _ in range(3):
+            exit_code, stderr = rerun_guard.main(self._payload(command), self.env)
+            self.assertEqual(exit_code, 0)
+            self.assertEqual(stderr, "")
 
     def test_odoo_bin_without_test_enable_is_not_a_gate_command(self):
         command = ".venv/Scripts/python odoo-bin -c afenda/odoo.conf -d afenda"
