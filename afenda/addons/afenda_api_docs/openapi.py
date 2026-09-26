@@ -54,6 +54,50 @@ _TYPE_MAP = {
 # through quietly.
 _FALLBACK = {"type": "string"}
 
+# AFD-ARCH-CORR-0011, amended (commit e344ed3c8): a selection also counts as
+# environment-derived when it is a *static* list built at import time from
+# something that varies by server (installed pytz, the host's OS locale
+# data...), so baking it into a committed asset would freeze one server's
+# snapshot. `res.partner.tz` is exactly this: `fields.Selection(_tzs, ...)`
+# (odoo/addons/base/models/res_partner.py:223) passes the module-level list
+# `_tzs` (line 40: `_tzs = [(tz, tz) for tz in sorted(pytz.all_timezones, ...)]`)
+# directly, never through the `_tz_get` method one line below it - so its
+# field object's `selection` is a plain list, not a callable or method name,
+# and the general rule below would otherwise miss it. A grep of this tree
+# confirms `_tzs` is the only such import-time-computed selection list
+# reachable from a model field. Entries are (model, field name) pairs on the
+# field that actually *owns* the selection - i.e. after following any
+# related chain (see `_resolve_selection_owner`), never on a field that
+# merely relates to it.
+ENVIRONMENT_DERIVED_SELECTIONS = frozenset({
+    ("res.partner", "tz"),
+})
+
+
+def _resolve_selection_owner(field):
+    """The field that actually defines `selection`, following `related`.
+
+    A related selection field's own `selection` attribute is *always* a
+    wrapper lambda that delegates to the target
+    (`Selection.setup_related`, odoo/orm/fields_selection.py:77-82: `self.
+    selection = lambda model: field._description_selection(model.env)`), so
+    checking `field.selection` directly would call every related selection
+    field dynamic regardless of what its target actually is. Odoo resolves
+    a related field's ultimate target at setup time onto `related_field`
+    (`odoo/orm/fields.py:290` declares `related`, `:302` declares
+    `related_field`, `:604-626` is `setup_related`, which walks the whole
+    dotted chain and assigns `self.related_field = field` to the *last*
+    field in it - itself possibly still related, e.g.
+    `res.users.tz` -(_inherits, model_classes.py:503)-> related to
+    `partner_id.tz`, i.e. `res.partner.tz` directly). Walking `related_field`
+    until it stops being set reaches the true owner in one or more hops.
+    """
+    seen = set()
+    while field.related and field.related_field is not None and id(field) not in seen:
+        seen.add(id(field))
+        field = field.related_field
+    return field
+
 
 def model_schema(model, asset=False):
     """JSON Schema for one model, from what the calling user may read.
@@ -62,12 +106,15 @@ def model_schema(model, asset=False):
     (odoo/orm/models.py:3364), so the schema is per user by construction.
 
     `asset=True` applies the dynamic-selection rule (AFD-ARCH-CORR-0011): a
-    selection field whose `selection` attribute (on the field object, not
-    `fields_get`'s already-resolved list - see odoo/orm/fields_selection.py)
-    is a callable or a method name would otherwise bake one server's runtime
-    values (installed languages, timezones...) into a committed asset. Such
-    a field gets no `enum`/`x-enum-labels`, and `x-afenda-dynamic-enum: true`
-    instead. The live document (asset=False) is unaffected.
+    selection field whose *owning* field (see `_resolve_selection_owner`)
+    has a `selection` attribute (on the field object, not `fields_get`'s
+    already-resolved list - see odoo/orm/fields_selection.py) that is a
+    callable or a method name, or whose owning `(model, field)` is listed in
+    `ENVIRONMENT_DERIVED_SELECTIONS`, would otherwise bake one server's
+    runtime values (installed languages, timezones...) into a committed
+    asset. Such a field gets no `enum`/`x-enum-labels`, and
+    `x-afenda-dynamic-enum: true` instead. The live document (asset=False)
+    is unaffected.
     """
     properties = {}
     required = []
@@ -80,9 +127,14 @@ def model_schema(model, asset=False):
         # Wire values: enum keys are sent back verbatim, labels are read.
         if meta.get("selection"):
             field = model._fields.get(name)
-            dynamic = asset and field is not None and (
-                callable(field.selection) or isinstance(field.selection, str)
-            )
+            dynamic = False
+            if asset and field is not None:
+                owner = _resolve_selection_owner(field)
+                dynamic = (
+                    callable(owner.selection)
+                    or isinstance(owner.selection, str)
+                    or (owner.model_name, owner.name) in ENVIRONMENT_DERIVED_SELECTIONS
+                )
             if dynamic:
                 prop["x-afenda-dynamic-enum"] = True
             else:

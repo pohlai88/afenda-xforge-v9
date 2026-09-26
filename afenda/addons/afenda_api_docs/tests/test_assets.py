@@ -4,7 +4,12 @@ from pathlib import Path
 
 from odoo.tests import TransactionCase, tagged
 
-from odoo.addons.afenda_api_docs.assets import asset_areas, render_asset, write_assets
+from odoo.addons.afenda_api_docs.assets import (
+    _app_closures,
+    asset_areas,
+    render_asset,
+    write_assets,
+)
 from odoo.addons.afenda_api_docs.asset_rules import (
     RESERVED_AREAS,
     assign_area,
@@ -112,16 +117,40 @@ class TestAssetAreas(TransactionCase):
 @tagged("post_install", "-at_install")
 class TestAssetDynamicEnum(TransactionCase):
     def test_asset_omits_dynamic_enums(self):
-        # On the apps installed for this suite, res.partner.lang's selection
-        # is a bound method (odoo/addons/base/models/res_partner.py,
-        # `_lang_get`) - genuinely dynamic, unlike res.partner.tz, which is a
-        # static list here (base defines it with the module-level `_tzs`
-        # list passed directly, not through a callable or method name).
-        field = self.env["res.partner"]._fields["lang"]
-        self.assertTrue(callable(field.selection) or isinstance(field.selection, str))
+        # res.partner.lang: selection is a bound method
+        # (odoo/addons/base/models/res_partner.py, `_lang_get`) - dynamic
+        # under the general callable/method-name rule.
+        lang_field = self.env["res.partner"]._fields["lang"]
+        self.assertTrue(callable(lang_field.selection) or isinstance(lang_field.selection, str))
 
-        live = build_document(self.env, names=["res.partner"], asset=False)
-        asset = build_document(self.env, names=["res.partner"], asset=True)
+        # res.partner.tz is a *static* list at the field-object level
+        # (odoo/addons/base/models/res_partner.py:40,223 -
+        # `fields.Selection(_tzs, ...)` passes the module-level list built
+        # from pytz at import time, never the `_tz_get` method) - the
+        # general rule alone would miss it. It is dynamic only via the
+        # named ENVIRONMENT_DERIVED_SELECTIONS exception (amended
+        # AFD-ARCH-CORR-0011, commit e344ed3c8).
+        tz_field = self.env["res.partner"]._fields["tz"]
+        self.assertFalse(callable(tz_field.selection) or isinstance(tz_field.selection, str))
+
+        # res.users.tz is auto-created by `_inherits` delegation
+        # (odoo/orm/model_classes.py:500-504) as related="partner_id.tz",
+        # resolving through `related_field` to that very same
+        # res.partner.tz field object - so it must be caught too.
+        users_tz_field = self.env["res.users"]._fields["tz"]
+        self.assertEqual(users_tz_field.related, "partner_id.tz")
+
+        live = build_document(self.env, names=["res.partner", "res.users"], asset=False)
+        asset = build_document(self.env, names=["res.partner", "res.users"], asset=True)
+
+        for model_name in ("res.partner", "res.users"):
+            tz_asset = asset["components"]["schemas"][model_name]["properties"]["tz"]
+            self.assertNotIn("enum", tz_asset, model_name)
+            self.assertNotIn("x-enum-labels", tz_asset, model_name)
+            self.assertTrue(tz_asset.get("x-afenda-dynamic-enum"), model_name)
+
+            tz_live = live["components"]["schemas"][model_name]["properties"]["tz"]
+            self.assertTrue(tz_live.get("enum"), model_name)
 
         lang_asset = asset["components"]["schemas"]["res.partner"]["properties"]["lang"]
         self.assertNotIn("enum", lang_asset)
@@ -220,3 +249,22 @@ class TestWriteAssets(TransactionCase):
             self.assertEqual(changelog.read_text(encoding="utf-8"), "# Changelog\n")
             for area in expected_areas:
                 self.assertTrue((out_dir / f"{area}.json").exists())
+
+
+@tagged("post_install", "-at_install")
+class TestReservedAreaGuard(TransactionCase):
+    def test_an_installed_application_named_core_is_refused(self):
+        # RESERVED_AREAS = ("core", "technical"): an installed application
+        # literally named "core" would be indistinguishable from the area
+        # every closure-spanning module lands in (assets.py's
+        # `_app_closures`), so it must be refused rather than silently
+        # shadowed.
+        self.env["ir.module.module"].create({
+            "name": "core",
+            "state": "installed",
+            "application": True,
+        })
+        self.assertIn("core", RESERVED_AREAS)
+        with self.assertRaises(ValueError) as capture:
+            _app_closures(self.env)
+        self.assertIn("core", str(capture.exception))
