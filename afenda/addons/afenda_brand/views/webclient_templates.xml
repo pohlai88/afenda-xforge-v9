@@ -26,8 +26,8 @@
     </template>
 
     <!-- Login: a paper page, not a masthead.
-         The hero art carries the left of the page, the crystal bear on its
-         one deep-ink panel (the four-season stage); one white card on the right carries
+         The hero art carries the left of the page, sitting straight on the
+         paper with no plate of its own; one white card on the right carries
          the form; the AFENDA lockup and the product line are the small
          attribution at the top right. No odoo.com link anywhere. -->
     <template id="login_layout" inherit_id="web.login_layout" name="AFENDA login layout">
@@ -108,6 +108,35 @@
              carries.) -->
         <xpath expr="//t[@t-call='web.frontend_layout']/div[hasclass('container')]" position="replace">
             <div class="o_afenda_auth">
+                <!-- ===== THE SEASON LAYER =====
+                     Built AROUND the tenant signature, never in it
+                     (docs/superpowers/specs/2026-09-26-tenant-signature.md): the
+                     bear below is untouched. Two fixed, aria-hidden layers, four
+                     sheets each, cross-faded on a 32 s loop by auth_seasons.css:
+                     the paper tints under everything, the weather over the page and
+                     the bear but under the form. Each sheet's delay puts today's
+                     season (server UTC date, northern meteorological order; a
+                     brand cycle, not a climate) first: sheet i comes up after
+                     ((i - today) mod 4) * 8 s. -->
+                <t t-set="afs_names" t-value="['spring', 'summer', 'autumn', 'winter']"/>
+                <t t-set="afs_today" t-value="(datetime.date.today().month % 12) // 3"/>
+                <t t-set="afs_k" t-value="(afs_today + 3) % 4"/>
+                <div class="o_afenda_seasons" aria-hidden="true" t-att-data-afs-season="afs_names[afs_k]">
+                    <t t-foreach="afs_names" t-as="afs_name">
+                        <div t-attf-class="afs-sheet afs-#{afs_name}"
+                             t-attf-style="animation-delay: -#{(32 - ((afs_name_index - afs_k) % 4) * 8) % 32}s"/>
+                    </t>
+                </div>
+                <div class="o_afenda_weather" aria-hidden="true" t-att-data-afs-season="afs_names[afs_k]">
+                    <t t-foreach="afs_names" t-as="afs_name">
+                        <div t-attf-class="afs-sheet afs-#{afs_name}"
+                             t-attf-style="animation-delay: -#{(32 - ((afs_name_index - afs_k) % 4) * 8) % 32}s">
+                            <t t-foreach="range(18)" t-as="afs_i">
+                                <span class="afs-p" t-attf-style="--x: #{(afs_i * 37 + afs_name_index * 13) % 100}%; --y: #{(afs_i * 53 + afs_name_index * 17) % 92}vh; --t: #{13 + (afs_i * 5 + afs_name_index) % 9}s; --d: -#{(afs_i * 7 + afs_name_index * 3) % 22}s; --s: #{0.7 + (afs_i % 4) * 0.15}"/>
+                            </t>
+                        </div>
+                    </t>
+                </div>
                 <!-- ===== THE HERO ART =====
                      Three cases on `afenda_hero`; the opt-out semantics are the
                      ones this slot has always had:
@@ -126,33 +155,17 @@
                        company_logo is drawn instead (the t-else branch).
                      `is None`, not `or`: `or` would collapse "unset" and
                      "opted out" and leave the fallback unreachable.
-                     THE FOUR-SEASON STAGE (docs/superpowers/specs/
-                     2026-09-26-four-season-bear.md). The t-call renders
-                     div.o_afenda_auth_stage: the hero and, beside it, the season
-                     layer (svg.o_afenda_auth_season, petals, glints, leaves,
-                     snow). Only this branch has a stage, and auth_bear.css
-                     paints the one deep-ink panel under the art only
-                     `:has(.o_afenda_auth_stage)` - flat, no radius, no shadow -
-                     so a caller's image and the tenant fallback still sit on
-                     bare paper, as they always have.
-                     `data-afb-season` is TODAY's season, so the loop starts on
-                     it and reduced motion shows only it: the server's date
-                     (Odoo pins the process to UTC, odoo/_monkeypatches/
-                     __init__.py:57) in northern-hemisphere meteorological
-                     seasons, Dec-Feb winter through Sep-Nov autumn; `datetime`
-                     is a default QWeb rendering value (odoo/addons/base/models/
-                     ir_qweb.py:1316). `month % 12 // 3` folds December onto
-                     January. It is on the slot, not the stage, because the
-                     stage is generated markup and the slot is ours; the
-                     seasons' static blocks key on the pair.
-                     login.scss anchors the art to the LEFT edge and lets the right
+                     The art sits straight on the page. No plate, no panel, no
+                     radius: the artwork carries its own near-paper tone in the
+                     muzzle and the lettuce, so any surface painted under it
+                     reads as a seam.
+                     login.scss anchors it to the LEFT edge and lets the right
                      vary with the viewport. In the master's 800x887 geometry
                      the face mask starts at x=30, so roughly 4% of margin is
                      all that stands between a crop from the left and a cut
                      muzzle; the tree at x=0, y=886 is what is meant to run off
                      the page. -->
-                <div class="o_afenda_auth_art"
-                     t-att-data-afb-season="('winter','spring','summer','autumn')[datetime.date.today().month % 12 // 3]">
+                <div class="o_afenda_auth_art">
                     <t t-if="afenda_hero is None" t-call="afenda_brand.auth_bear"/>
                     <img t-elif="afenda_hero" class="o_afenda_auth_hero" alt="" role="presentation"
                          width="800" height="887" t-att-src="afenda_hero"/>

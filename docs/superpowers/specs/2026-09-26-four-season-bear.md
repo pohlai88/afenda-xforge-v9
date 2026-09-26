@@ -1,7 +1,9 @@
 # The four-season crystal bear
 
-Status: approved by the owner on 2026-09-26 (four decisions below, given in the session that
-produced this spec). Plan: `docs/superpowers/plans/2026-09-26-four-season-bear.md`.
+Status: SUPERSEDED on 2026-09-26 by `2026-09-26-tenant-signature.md`: the owner restored the
+original crystal bear as the tenant signature; the stage below was removed in 19.0.1.0.9.
+Kept as history. (Was: approved by the owner on 2026-09-26; plan
+`docs/superpowers/plans/2026-09-26-four-season-bear.md`.)
 
 ## Owner decisions (binding)
 

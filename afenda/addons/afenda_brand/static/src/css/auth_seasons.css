@@ -1,0 +1,122 @@
+/* AFENDA xForge auth pages: the season layer, built AROUND the tenant signature.
+ *
+ * docs/superpowers/specs/2026-09-26-tenant-signature.md. The crystal bear is the tenant's
+ * signature (pinned by afenda/tools/tests/test_tenant_signature.py): nothing here selects
+ * into it. Two fixed, aria-hidden layers from login_layout, four sheets each:
+ *   .o_afenda_seasons  the paper tint, under everything
+ *   .o_afenda_weather  petals, glints, leaves, snow: over the page and the bear, under the form
+ * A 32 s loop, each season a 6 s hold and a 2 s cross-fade; the template's per-sheet delay
+ * starts it on today's season. Only opacity and transform animate, so the compositor draws
+ * the loop and nothing repaints. Reduced motion: today's sheet only, still.
+ */
+
+.o_afenda_login .o_afenda_seasons,
+.o_afenda_login .o_afenda_weather {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+.o_afenda_login .o_afenda_seasons { z-index: 0; }
+.o_afenda_login .o_afenda_weather { z-index: 2; }
+.o_afenda_login .o_afenda_auth_art { position: relative; z-index: 1; }
+.o_afenda_login .o_afenda_auth_form { position: relative; z-index: 3; }
+
+.o_afenda_login .o_afenda_seasons .afs-sheet,
+.o_afenda_login .o_afenda_weather .afs-sheet {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    will-change: opacity;
+    animation: afs-cycle 32s linear infinite;
+}
+
+/* The paper, very lightly toned per season (the base paper is #f7f7f5). */
+.o_afenda_login .o_afenda_seasons .afs-spring { background: #faf1f3; }
+.o_afenda_login .o_afenda_seasons .afs-summer { background: #f4f7ee; }
+.o_afenda_login .o_afenda_seasons .afs-autumn { background: #f9f2e7; }
+.o_afenda_login .o_afenda_seasons .afs-winter { background: #eff4f9; }
+
+/* The weather. Each particle carries --x (column), --y (resting row), --t (duration),
+ * --d (negative delay: spread over its cycle at every moment) and --s (scale). */
+.o_afenda_login .o_afenda_weather .afs-p {
+    position: absolute;
+    left: var(--x);
+    top: -6vh;
+    display: block;
+    will-change: transform;
+    animation: afs-fall var(--t) linear var(--d) infinite;
+}
+.o_afenda_login .o_afenda_weather .afs-spring .afs-p {
+    width: calc(15px * var(--s));
+    height: calc(9px * var(--s));
+    border-radius: 60% 40% 60% 40% / 70% 50% 50% 30%;
+    background: #f2a9c4;
+    opacity: 0.85;
+}
+.o_afenda_login .o_afenda_weather .afs-spring .afs-p:nth-child(3n) { background: #f7c6d8; }
+.o_afenda_login .o_afenda_weather .afs-autumn .afs-p {
+    width: calc(20px * var(--s));
+    height: calc(10px * var(--s));
+    border-radius: 0 100% 0 100%;
+    background: #d9822b;
+    opacity: 0.9;
+}
+.o_afenda_login .o_afenda_weather .afs-autumn .afs-p:nth-child(3n) { background: #c65d21; }
+.o_afenda_login .o_afenda_weather .afs-autumn .afs-p:nth-child(4n) { background: #e8a33d; }
+.o_afenda_login .o_afenda_weather .afs-winter .afs-p {
+    width: calc(7px * var(--s));
+    height: calc(7px * var(--s));
+    border-radius: 50%;
+    background: #9fb6cc;
+    opacity: 0.8;
+    animation-name: afs-snow;
+}
+.o_afenda_login .o_afenda_weather .afs-summer .afs-p {
+    top: var(--y);
+    width: calc(16px * var(--s));
+    height: calc(16px * var(--s));
+    background: #e9c46a;
+    clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
+    animation-name: afs-twinkle;
+    animation-duration: calc(var(--t) / 4);
+}
+
+@keyframes afs-cycle {
+    0% { opacity: 1; }
+    18.75% { opacity: 1; }
+    25% { opacity: 0; }
+    93.75% { opacity: 0; }
+    100% { opacity: 1; }
+}
+@keyframes afs-fall {
+    0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    50% { transform: translate3d(36px, 56vh, 0) rotate(180deg); }
+    100% { transform: translate3d(-12px, 112vh, 0) rotate(360deg); }
+}
+@keyframes afs-snow {
+    0% { transform: translate3d(0, 0, 0); }
+    50% { transform: translate3d(20px, 56vh, 0); }
+    100% { transform: translate3d(-8px, 112vh, 0); }
+}
+@keyframes afs-twinkle {
+    0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
+    50% { opacity: 1; transform: scale(1) rotate(45deg); }
+}
+
+/* Reduced motion: nothing moves; only today's season shows, its weather at rest. */
+@media (prefers-reduced-motion: reduce) {
+    .o_afenda_login .o_afenda_seasons .afs-sheet,
+    .o_afenda_login .o_afenda_weather .afs-sheet,
+    .o_afenda_login .o_afenda_weather .afs-p {
+        animation: none;
+    }
+    .o_afenda_login .o_afenda_weather .afs-p { transform: translate3d(0, calc(var(--y) + 6vh), 0); }
+    .o_afenda_login .o_afenda_weather .afs-summer .afs-p { transform: none; opacity: 1; }
+    .o_afenda_login [data-afs-season="spring"] .afs-spring,
+    .o_afenda_login [data-afs-season="summer"] .afs-summer,
+    .o_afenda_login [data-afs-season="autumn"] .afs-autumn,
+    .o_afenda_login [data-afs-season="winter"] .afs-winter {
+        opacity: 1;
+    }
+}

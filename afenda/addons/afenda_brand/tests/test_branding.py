@@ -1,7 +1,6 @@
 import ast
 import base64
 import collections
-import datetime
 import hashlib
 import inspect
 import io
@@ -19,7 +18,7 @@ from odoo import http
 from odoo.modules.module import get_manifest, load_script
 from odoo.tests import HttpCase, new_test_user, tagged
 from odoo.tools import file_open, is_html_empty
-from odoo.tools.safe_eval import safe_eval
+from odoo.tools.misc import file_path
 
 # The generator that drew the icons this module ships, reached from the repo
 # root the server is started in. Only the blend is borrowed: the palette these
@@ -84,20 +83,8 @@ _VERSIONS_WITHOUT_MIGRATION = {
                   "reload on upgrade; no record needs rewriting",
     "19.0.1.0.7": "auth back links drop reset/signup tokens, tab order, icon a11y "
                   "-- views and SCSS only",
-    "19.0.1.0.8": "the four-season stage: ink panel, season-owned bear palette, "
-                  "today's season on the art -- views and CSS only",
-}
-
-
-# Northern-hemisphere meteorological seasons, the four-season spec's ruling:
-# Dec-Feb winter, Mar-May spring, Jun-Aug summer, Sep-Nov autumn. Written out
-# month by month so the table the layout's expression is held to is not the
-# same arithmetic as the expression itself.
-_SEASON_OF_MONTH = {
-    12: "winter", 1: "winter", 2: "winter",
-    3: "spring", 4: "spring", 5: "spring",
-    6: "summer", 7: "summer", 8: "summer",
-    9: "autumn", 10: "autumn", 11: "autumn",
+    "19.0.1.0.9": "the tenant signature auth page restored (the four-season stage "
+                  "of 19.0.1.0.8 removed) -- views, CSS and assets only",
 }
 
 
@@ -174,35 +161,29 @@ class TestBranding(HttpCase):
         return html, self.url_open(hrefs[0]).text.lower()
 
     def test_the_auth_page_is_art_left_and_card_right(self):
-        """Art on the left, form column on the right, and the face never cut.
+        """Art on the left, form column on the right, and the art never cropped.
 
-        The art is the INLINE crystal bear (views/auth_bear.xml, t-called by
-        login_layout) on its four-season stage, not an <img> whose src could
-        be fetched.
+        Rewritten for the poster: the art is now the INLINE crystal bear
+        (views/auth_bear.xml, t-called by login_layout) rather than an <img>
+        whose src could be fetched, so the "served file is a vector" and "src
+        is the one swap point" assertions went with the <img>. The two
+        invariants that were load-bearing all along survive unchanged.
 
-        Document order: the art block comes before the form block, which is
-        what makes the page read art-then-form when it stacks below md and
-        art-beside-form above it. It is also what keeps the two in normal
+        The first is document order: the art block comes before the form block,
+        which is what makes the page read art-then-form when it stacks below md
+        and art-beside-form above it. It is also what keeps the two in normal
         flow, and therefore what keeps them from ever sharing a pixel.
 
-        The frame, as the owner re-framed it (the four-season spec,
-        "Composition re-framed", and the four-season fix wave's "Geometry
-        fact"): the art column is a fixed share of the page - 45% from
-        1200px, 40% from 768px, and a 180-250px banner above the form on a
-        phone. Inside it the stage keeps the master's 800x887 ratio and is
-        HEIGHT-led: 76% of the column's height (cqh), capped at 92% of its
-        width (cqw) - no landscape column is wide enough, at this ratio, to
-        hold the bear at 70-80% of its width AND 75-85% of its height at
-        once - with a clear top safe zone, a left offset of -4% to +2% and a
-        bottom offset of -3% to 0.
-
-        The face is the invariant that fails silently. In the master's
-        geometry the face mask sits at (30, 210, 241, 432): 3.75% of the art's
-        width from its left edge. The stage may bleed past the column's left
-        edge for scale, so the arithmetic below proves the bleed is always
-        smaller than that margin; the hero itself carries no crop mechanism
-        and no offset of its own. These are properties of the compiled rules
-        rather than of a screenshot, which is why they are asserted here.
+        The second is the one that fails silently, so it is pinned hardest. In
+        the master's 800x887 geometry the face mask sits at (30, 210, 241, 432)
+        -- about 4% of left margin -- while the tree already runs to x=0 and
+        y=886. The tree running off the left and the bottom is the composition;
+        the face being cut is a rendering bug that looks like a drawing. So the
+        art is anchored to its LEFT edge and bounded ONLY by maxima: with no
+        object-fit, no fixed dimension, no minimum and no negative offset, a
+        narrower viewport can only scale the whole image down, never crop a
+        side of it. That is a property of the compiled rules rather than of a
+        screenshot, which is why it is asserted here and not left to the eye.
         """
         html, css = self._frontend_css()
         doc = lxml_html.fromstring(html)
@@ -218,8 +199,8 @@ class TestBranding(HttpCase):
         heroes = doc.find_class("o_afenda_auth_hero")
         self.assertEqual(len(heroes), 1, "the hero art is not rendered exactly once")
         # The geometry every measurement in this docstring is stated in. Point
-        # the slot at art with a different viewBox and the face arithmetic
-        # below stops describing it; this is what says so.
+        # the slot at art with a different viewBox and the left-margin
+        # arithmetic above stops describing it; this is what says so.
         self.assertEqual(heroes[0].get("viewbox") or heroes[0].get("viewBox"), "0 0 800 887",
                          "the hero art is not the 800x887 master this crop math describes")
         # Nothing names an art FILE in the stylesheet: the art is markup now,
@@ -227,167 +208,34 @@ class TestBranding(HttpCase):
         self.assertNotIn("crystal_bear", css,
                          "the stylesheet names the art file: the swap point is not single")
 
-        def number(body, pattern, message):
-            match = re.search(pattern, body)
-            self.assertTrue(match, message)
-            return [float(value) for value in match.groups()]
-
-        # The art column: a phone banner, then a fixed share of the width.
         art = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_art\s*\{([^}]*)\}", css))
-        self.assertEqual(len(art), 3, "the art column is not drawn by exactly three rules")
+        self.assertEqual(len(art), 2, "the art box is not drawn by exactly two rules")
         self.assertRegex(art[0].group(1), r"justify-content:\s*flex-start",
                          "the art is not anchored to its left edge")
         self.assertRegex(art[0].group(1), r"align-items:\s*flex-end",
                          "the art is not seated on the page's bottom edge")
         self._assert_not_media_gated(
             css, art[0].start(), "the art's left anchor exists only inside a media query")
-        low, _vh, high = number(
-            art[0].group(1), r"(?<![\w-])height:\s*clamp\(\s*([\d.]+)px\s*,\s*([\d.]+)vh\s*,\s*([\d.]+)px\s*\)",
-            "the phone banner has no clamped height")
-        self.assertTrue(180 <= low <= high <= 250, f"the phone banner is not 180-250px: {low}-{high}px")
-        # Nothing the bear bleeds or its season layer draws leaves the column,
-        # and the page never scrolls sideways because of the art.
-        self.assertRegex(art[0].group(1), r"overflow:\s*hidden",
-                         "the art column does not clip its bleed; the page can scroll sideways")
-        (tablet,) = number(art[1].group(1), r"flex:\s*0\s+0\s+([\d.]+)%",
-                           "the art column is not a fixed share of the page above md")
-        self.assertEqual(tablet, 40, f"the tablet art column is {tablet}%, not 40%")
-        self.assertRegex(art[1].group(1), r"(?<![\w-])height:\s*auto",
-                         "the art column keeps the phone banner's height beside the form")
+        # The poster ratio: above md the art column HUGS the bear - its width
+        # is the art's own height-bound width, never more than 55% of the page.
+        # A fixed 55% column left a strip of empty paper between the bear and
+        # the form on any screen wider than the art is tall.
+        self.assertRegex(art[1].group(1), r"flex:\s*0\s+1\s+auto",
+                         "the art column does not size to the bear above md")
+        self.assertRegex(art[1].group(1), r"max-width:\s*55%",
+                         "the art column is not capped at 55% of the page above md")
         self._assert_media_gated(
-            css, art[1].start(), "768px", "the tablet art column is not gated on the md breakpoint")
-        (desktop,) = number(art[2].group(1), r"flex:\s*0\s+0\s+([\d.]+)%",
-                            "the art column is not a fixed share of the page from 1200px")
-        self.assertEqual(desktop, 45, f"the desktop art column is {desktop}%, not 45%")
-        self._assert_media_gated(
-            css, art[2].start(), "1200px", "the desktop art column is not gated on 1200px")
-        # The size container the height-led stage below reads cqh/cqw from
-        # (the four-season fix wave's "Geometry fact"); it is declared once,
-        # ungated, since it applies at every width the stage itself uses it.
-        self.assertRegex(art[0].group(1), r"container-type:\s*size",
-                         "the art column is not a size container; cqh/cqw below cannot resolve")
-        # The form keeps its floor beside the narrowest art column: 768px less
-        # the tablet share, so the row never overflows sideways.
-        (floor,) = number(css, r"\.o_afenda_login\s+\.o_afenda_auth_form\s*\{[^}]*min-width:\s*([\d.]+)rem",
-                          "the form column has no floor above md")
-        self.assertLessEqual(floor * 16, 768 * (100 - tablet) / 100,
-                             "the form's floor and the art column overflow a 768px screen")
-
-        # The art box itself paints nothing. The one surface under the art is
-        # the ink panel (the four-season spec, owner decision 2, superseding
-        # the old "no panel" ruling by name): a flat `--bear-ink` fill behind
-        # the luminous bear, drawn by its OWN rule and only when the stage
-        # renders -- `:has(.o_afenda_auth_stage)` -- so a caller's <img> or the
-        # tenant-logo fallback still sits on bare paper. Flat means flat: no
-        # gradient, border, shadow or radius, which is the letter of visual-QA
-        # row H4 that still holds. The mood aura lives on the FORM column.
+            css, art[1].start(), "768px", "the art's poster width is not gated on the md breakpoint")
+        # Nothing paints a surface under the art. The artwork carries its own
+        # near-paper tone in the muzzle and the lettuce, so a plate, a rule or
+        # a shadow here draws a visible seam around it -- the exact failure the
+        # owner's "no panel" ruling is about. The mood aura lives on the FORM
+        # column for the same reason.
         for rule in art:
             for seam in ("background", "border", "box-shadow"):
                 self.assertNotIn(seam, rule.group(1),
                                  f"the art sits on a {seam}, which shows as a seam")
-        panel = re.findall(
-            r"\.o_afenda_login\s+\.o_afenda_auth_art:has\(\.o_afenda_auth_stage\)\s*\{([^}]*)\}", css)
-        self.assertEqual(len(panel), 1, "the ink panel is not drawn by exactly one rule")
-        self.assertEqual(re.sub(r"[\s;]", "", panel[0]), "background-color:var(--bear-ink)",
-                         "the ink panel paints more than one flat --bear-ink fill")
-        for seam in ("background-image", "gradient", "border", "box-shadow", "radius"):
-            self.assertNotIn(seam, panel[0], f"the ink panel carries a {seam}; it must be flat")
 
-        # The stage: the bear's frame in the column. Sized by login.scss, one
-        # rule per layout; positioned and contained by auth_bear.css.
-        stages = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_stage\s*\{([^}]*)\}", css))
-        sizing = [m for m in stages if "aspect-ratio" in m.group(1) or "cqh" in m.group(1)]
-        self.assertEqual(len(sizing), 2, "the stage is not sized by exactly two rules")
-        self.assertRegex(sizing[0].group(1), r"aspect-ratio:\s*800\s*/\s*887",
-                         "the stage does not keep the master's 800x887 ratio")
-        self._assert_not_media_gated(
-            css, sizing[0].start(), "the stage has no size outside a media query")
-        (phone_height,) = number(sizing[0].group(1), r"(?<![\w-])height:\s*([\d.]+)%",
-                                 "the stage is not sized on the phone banner's height")
-        self.assertTrue(85 <= phone_height <= 92,
-                        f"the phone bear is {phone_height}% of the banner; the top safe zone is not 8-15%")
-        self.assertLess(high * phone_height / 100 * 800 / 887, 360,
-                        "the phone bear is wider than a 360px screen")
-        self._assert_media_gated(
-            css, sizing[1].start(), "768px", "the stage's column size is not gated on the md breakpoint")
-        # Height-led (the four-season fix wave's "Geometry fact"): no
-        # landscape column at this ratio can hold the bear at 70-80% of its
-        # width AND 75-85% of its height at once, so the stage's own width
-        # is left to `auto` (via the aspect-ratio) and the HEIGHT is what is
-        # bounded, in cqh/cqw off the size container declared on the art
-        # column above.
-        self.assertNotIn("max-width", sizing[1].group(1),
-                         "the stage still caps itself by width; it must be height-led")
-        self.assertRegex(sizing[1].group(1), r"(?<![\w-])width:\s*auto",
-                         "the stage's width is not left to the aspect-ratio")
-        cqh_pct, cqw_pct = number(
-            sizing[1].group(1),
-            r"height:\s*min\(\s*([\d.]+)cqh\s*,\s*calc\(\s*([\d.]+)cqw\s*\*\s*887\s*/\s*800\s*\)\s*\)",
-            "the stage is not sized min(76cqh, calc(92cqw * 887 / 800))")
-        self.assertEqual(cqh_pct, 76, f"the bear is {cqh_pct}% of the column's height, not 76%")
-        self.assertEqual(cqw_pct, 92, f"the bear's width cap is {cqw_pct}% of the column's width, not 92%")
-        self.assertGreaterEqual(100 - cqh_pct, 8, "the top safe zone is under 8% of the column's height")
-        top, _right, bottom, left = number(
-            sizing[1].group(1),
-            r"margin:\s*(-?[\d.]+)(?:px)?\s+(-?[\d.]+)(?:px)?\s+(-?[\d.]+)vh\s+(-?[\d.]+)%",
-            "the stage has no bottom (vh) and left (%) offset")
-        self.assertEqual(top, 0, "the stage is pushed down from the top safe zone")
-        self.assertTrue(-3 <= bottom <= 0, f"the bottom offset is {bottom}vh, not -3 to 0")
-        self.assertTrue(-4 <= left <= 2, f"the left offset is {left}%, not -4% to +2%")
-        # The face starts 3.75% of the bear's width in (x=30 of 800); the
-        # left bleed, in % of the column, must stay inside that margin. Every
-        # landscape column the geometry fact lists (1440x900 at 45%, 1024x768
-        # at 40%) is narrower than the bear's own ratio, so the 92%-of-width
-        # cap is what actually binds and is the width the bleed is checked
-        # against.
-        self.assertGreaterEqual(left + cqw_pct * 30 / 800, 0, "the left bleed cuts into the face")
-        fill = re.search(r"\.o_afenda_auth_stage\s*>\s*\.o_afenda_auth_hero\s*\{([^}]*)\}", css)
-        self.assertTrue(fill, "the hero does not fill its stage")
-        self.assertRegex(fill.group(1), r"(?<![\w-])width:\s*100%", "the hero is narrower than its stage")
-        self.assertRegex(fill.group(1), r"(?<![\w-])height:\s*100%", "the hero is shorter than its stage")
-
-        # The stage is the containing block of the season layer, so the
-        # layer's `left`/`bottom` anchor sits against the hero's own box.
-        stage = [m.group(1) for m in stages if "position" in m.group(1)]
-        self.assertEqual(len(stage), 1, "the stage is not positioned by exactly one rule")
-        self.assertRegex(stage[0], r"position:\s*relative", "the stage does not contain the season layer")
-        # The stage no longer clips (the four-season fix wave's "Geometry
-        # fact": the season layer's frame now extends above and to the right
-        # of the bear). `contain: layout` stays, for the loop's per-frame
-        # layout work, but not `paint` -- the art column's own
-        # `overflow: hidden` (login.scss) is the only clip left, so nothing
-        # the season layer draws still reaches the form.
-        contain = re.search(r"contain:\s*([^;]*)", stage[0])
-        self.assertTrue(contain, "the stage has no CSS containment")
-        self.assertEqual(contain.group(1).split(), ["layout"],
-                        "the stage still clips with contain: layout paint; only the art "
-                        "column's overflow: hidden clips now")
-        for layer in doc.find_class("o_afenda_auth_season"):
-            self.assertTrue(
-                any("o_afenda_auth_art" in (a.get("class") or "").split() for a in layer.iterancestors()),
-                "the season layer renders outside the art column")
-        self.assertEqual(len(doc.find_class("o_afenda_auth_season")), 1,
-                         "the season layer is not rendered exactly once")
-        season = re.findall(r"\.o_afenda_login\s+\.o_afenda_auth_season\s*\{([^}]*position:[^}]*)\}", css)
-        self.assertEqual(len(season), 1, "the season layer is not placed by exactly one rule")
-        self.assertRegex(season[0], r"position:\s*absolute", "the season layer is in flow and moves the hero")
-        # The season layer's new frame (the four-season fix wave): anchored
-        # to the stage's own left/bottom edges and sized 130%/200% of it --
-        # 1040/800 and 1774/887 exactly, so `preserveAspectRatio` keeps one
-        # user unit the same size as on the hero -- not `inset: 0`, which
-        # would centre the extra frame instead of growing it up and right.
-        self.assertNotIn("inset:", season[0],
-                         "the season layer still uses inset: 0, not left/bottom anchoring")
-        self.assertRegex(season[0], r"left:\s*0(?:px)?(?:\s|;)",
-                         "the season layer is not anchored to the stage's left edge")
-        self.assertRegex(season[0], r"bottom:\s*0(?:px)?(?:\s|;)",
-                         "the season layer is not anchored to the stage's bottom edge")
-        self.assertRegex(season[0], r"(?<![\w-])width:\s*130%",
-                         "the season layer is not 130% of the stage's width")
-        self.assertRegex(season[0], r"(?<![\w-])height:\s*200%",
-                         "the season layer is not 200% of the stage's height")
-
-        # A hero outside a stage is a caller's <img>: bounded only by maxima.
         hero_rules = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth_hero\s*\{([^}]*)\}", css))
         self.assertEqual(len(hero_rules), 2, "the hero art is not sized by exactly two rules")
         self.assertRegex(hero_rules[0].group(1), r"width:\s*auto",
@@ -398,19 +246,26 @@ class TestBranding(HttpCase):
                          "the hero art may overflow its own box")
         self._assert_not_media_gated(
             css, hero_rules[0].start(), "the hero art is sized only inside a media query")
+        # Every bound is a maximum, and no crop mechanism exists in either
+        # rule. object-fit, a minimum, a clip-path and a negative offset are
+        # the four ways the face gets cut while every other assertion in this
+        # test still passes.
+        for rule in hero_rules:
+            body = rule.group(1)
+            for cropper in ("object-fit", "min-width", "min-height", "clip-path"):
+                self.assertNotIn(cropper, body, f"{cropper} can crop the face out of the art")
+            self.assertNotRegex(body, r":\s*-",
+                                "a negative offset pulls the art off its own box")
+        # The narrow cap is what keeps the action above the fold once the art
+        # is above the card; the wide one is what makes the art large. Both are
+        # heights, so neither can touch the left edge.
+        self.assertRegex(hero_rules[0].group(1), r"max-height:\s*28vh",
+                         "the art is not capped at 28vh when it stacks above the form")
         self.assertRegex(hero_rules[1].group(1), r"max-height:\s*\d+vh",
                          "the art is uncapped on a wide screen")
         self._assert_media_gated(
             css, hero_rules[1].start(), "768px",
             "the art's wide-screen size is not gated on the md breakpoint")
-        # No crop mechanism on the hero, in any rule that sizes it: object-fit,
-        # a minimum, a clip-path and a negative offset are the four ways the
-        # face gets cut while every other assertion in this test still passes.
-        for body in [rule.group(1) for rule in hero_rules] + [fill.group(1)]:
-            for cropper in ("object-fit", "min-width", "min-height", "clip-path"):
-                self.assertNotIn(cropper, body, f"{cropper} can crop the face out of the art")
-            self.assertNotRegex(body, r":\s*-",
-                                "a negative offset pulls the art off its own box")
 
         stacked = list(re.finditer(r"\.o_afenda_login\s+\.o_afenda_auth\s*\{([^}]*)\}", css))
         self.assertEqual(len(stacked), 2, "the page is not drawn by exactly two rules")
@@ -431,7 +286,7 @@ class TestBranding(HttpCase):
         # is the only way to make them, so that is what is closed here. The
         # aura pseudo-element is absolutely placed, but inside the form column
         # (`inset: 0` of a positioned column), so it cannot reach the art.
-        for rule in stacked + art + sizing + hero_rules:
+        for rule in stacked + art + hero_rules:
             self.assertNotRegex(rule.group(1), r"position:\s*(absolute|fixed)",
                                 "the art is out of flow and can overlap the card")
         aura = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_form::before\s*\{([^}]*)\}", css)
@@ -456,13 +311,6 @@ class TestBranding(HttpCase):
         - every id is afb- prefixed: the inline copy shares the page's id
           space, and an unprefixed `haze` or `bear` would collide with
           anything the page, a portal snippet or an OAuth button calls that.
-
-        The haze is no longer one of the hero's own layers (the four-season
-        fix wave: its feGaussianBlur was re-rasterising every cross-fade
-        frame at the grown hero size). It is checked below as the stage's
-        OTHER first child instead -- still classed `afb-haze` so the existing
-        state rules keep reaching it, but a sibling div, not a `<g>` inside
-        this SVG, and the hero must carry no `filter` any more.
         """
         html = self.url_open("/web/login").text
         doc = lxml_html.fromstring(html)
@@ -480,24 +328,17 @@ class TestBranding(HttpCase):
         for node in hero.iter():
             if isinstance(node.tag, str):
                 classes.update((node.get("class") or "").split())
-        for layer in ("afb-body", "afb-base", "afb-facet", "afb-f1", "afb-f2",
+        for layer in ("afb-haze", "afb-body", "afb-base", "afb-facet", "afb-f1", "afb-f2",
                       "afb-f3", "afb-shadow", "afb-s1", "afb-s2", "afb-headlight", "afb-sheen",
                       "afb-rim", "afb-face", "afb-mask", "afb-chin", "afb-bush", "afb-branch"):
             self.assertIn(layer, classes, f"the bear has no {layer} layer for auth_bear.css to bind")
-        self.assertNotIn("afb-haze", classes,
-                         "the haze is still one of the hero's own layers; it must be the stage's sibling div")
-        self.assertFalse(hero.xpath(".//*[@filter]"),
-                         "the hero still carries a filter, which re-rasterises every cross-fade frame "
-                         "at this size; the four-season fix wave moved the glow to a baked PNG mask")
 
         ids = [node.get("id") for node in hero.iter() if isinstance(node.tag, str) and node.get("id")]
         self.assertTrue(ids, "the bear defines no gradients or clip paths")
         stray = [i for i in ids if not i.startswith("afb-")]
         self.assertFalse(stray, f"unprefixed ids share the page's id space: {stray}")
-        for needed in ("afb-rimGrad", "afb-sheenEdge"):
+        for needed in ("afb-rimGrad", "afb-sheenEdge", "afb-hazeFade"):
             self.assertIn(needed, ids, f"#{needed}, which auth_bear.css recolours, is missing")
-        self.assertNotIn("afb-hazeFade", ids,
-                         "#afb-hazeFade is still on the page; the gradient it fed is gone with the haze group")
         # The face must sit inside its group: the group is what turns.
         face = [n for n in hero.iter() if isinstance(n.tag, str) and "afb-face" in (n.get("class") or "").split()]
         self.assertEqual(len(face), 1, "the face is not one group")
@@ -506,46 +347,6 @@ class TestBranding(HttpCase):
         inner = {c for n in face[0].iter() if isinstance(n.tag, str)
                  for c in (n.get("class") or "").split()}
         self.assertTrue({"afb-mask", "afb-chin"} <= inner, "the mask and chin are not in the face group")
-
-        # The four-season stage: one div in the art slot wrapping the hero and
-        # the season layer, the particles' sibling SVG (animating inside the
-        # bear would repaint its 16px blur every frame). Decoration, like the
-        # bear: hidden from assistive tech and never focusable.
-        stages = doc.find_class("o_afenda_auth_stage")
-        self.assertEqual(len(stages), 1, "the stage is not rendered exactly once")
-        self.assertIn("o_afenda_auth_art", (stages[0].getparent().get("class") or "").split(),
-                      "the stage is not in the art slot")
-        self.assertIs(hero.getparent(), stages[0], "the hero is not on the stage")
-        seasons = doc.find_class("o_afenda_auth_season")
-        self.assertEqual(len(seasons), 1, "the season layer is not rendered exactly once")
-        self.assertEqual(seasons[0].tag, "svg", "the season layer is not an inline SVG")
-        self.assertIs(seasons[0].getparent(), stages[0], "the season layer is not on the stage")
-        self.assertEqual(seasons[0].get("aria-hidden"), "true", "the season layer is announced")
-        self.assertEqual(seasons[0].get("focusable"), "false", "the season layer takes keyboard focus")
-
-        # The stage's third child (the haze div, the four-season fix wave):
-        # first in document order, so the hero paints over it and the season
-        # layer, last, paints over both. A plain div, decoration like its
-        # siblings, still classed afb-haze so the existing state rules
-        # (opacity, the glow lift, the reduced-motion list) keep reaching it.
-        stage_children = [c for c in stages[0] if isinstance(c.tag, str)]
-        self.assertEqual(len(stage_children), 3, "the stage does not have exactly three children")
-        self.assertEqual([c.tag for c in stage_children], ["div", "svg", "svg"],
-                         "the stage's children are not haze div, hero svg, season svg in that order")
-        haze_div, hero_child, season_child = stage_children
-        self.assertIs(hero_child, hero, "the hero is not the stage's second child, after the haze div")
-        self.assertIs(season_child, seasons[0], "the season layer is not the stage's third child")
-        self.assertEqual(set((haze_div.get("class") or "").split()), {"o_afenda_auth_haze", "afb-haze"},
-                         "the haze div does not carry both o_afenda_auth_haze and afb-haze")
-        self.assertEqual(haze_div.get("aria-hidden"), "true", "the haze div is announced to screen readers")
-        self.assertFalse(haze_div.text_content().strip(), "the haze div carries text a reader could announce")
-        self.assertFalse(seasons[0].text_content().strip(), "the season layer carries readable text")
-        # The loop starts on today's season: the server's date, which Odoo
-        # pins to UTC (odoo/_monkeypatches/__init__.py:57).
-        today = datetime.datetime.now(datetime.timezone.utc).date()
-        art = doc.find_class("o_afenda_auth_art")[0]
-        self.assertEqual(art.get("data-afb-season"), _SEASON_OF_MONTH[today.month],
-                         "the stage does not start on today's season")
 
         # The fallback ruling survives: a tenant with no hero art gets their
         # own company_logo in the art slot, and a caller that points the slot
@@ -571,106 +372,6 @@ class TestBranding(HttpCase):
         self.assertEqual(first.get("t-call"), "afenda_brand.auth_bear",
                          "the default branch does not render the inline bear")
 
-    def test_the_haze_is_a_masked_png(self):
-        """The haze div: a flat --bear-haze fill, masked by the generated PNG.
-
-        Replaces the hero's own feGaussianBlur (the four-season fix wave's
-        "Evidence": it was re-rasterising every cross-fade frame at the grown
-        hero size, dropping 7-19 frames of 6; 0-1 with this div in its
-        place). The div sits BEHIND the hero in document order, over the
-        hero's own box, so the hero also needs its own `position: relative`
-        -- otherwise paint order alone would not put it back on top.
-        """
-        _html, css = self._frontend_css()
-        haze = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_haze\s*\{([^}]*)\}", css)
-        self.assertTrue(haze, "the haze div has no rule in the bundle")
-        body = haze.group(1)
-        self.assertRegex(body, r"(?<![\w-])background-color:\s*var\(--bear-haze\)",
-                         "the haze div does not paint --bear-haze")
-        png_url = (r'url\(\s*"?/afenda_brand/static/src/img/auth_bear_haze\.png"?\s*\)'
-                   r'\s+0\s+0\s*/\s*100%\s+100%\s+no-repeat')
-        self.assertRegex(body, rf"(?<![\w-])mask:\s*{png_url}",
-                         "the haze div's mask does not use the generated PNG at that path")
-        self.assertRegex(body, rf"-webkit-mask:\s*{png_url}",
-                         "the haze div has no -webkit-mask fallback for the generated PNG")
-        self.assertRegex(body, r"(?<![\w-])position:\s*absolute", "the haze div is not taken out of flow")
-        self.assertRegex(body, r"(?<![\w-])inset:\s*0",
-                         "the haze div does not cover the hero's own box (the stage)")
-        self.assertRegex(body, r"(?<![\w-])pointer-events:\s*none",
-                         "the haze div can take a click meant for the page")
-        # The PNG is named exactly twice: the mask property and its
-        # -webkit-mask fallback, both above, both this one rule. Anywhere
-        # else would be a second, stale reference to the asset.
-        self.assertEqual(css.count("auth_bear_haze.png"), 2,
-                         "the haze PNG is referenced somewhere other than its one mask rule")
-
-        hero_position = re.search(
-            r"\.o_afenda_login\s+\.o_afenda_auth_stage\s*>\s*\.o_afenda_auth_hero\s*\{([^}]*position:[^}]*)\}",
-            css)
-        self.assertTrue(hero_position, "the hero has no position rule to paint over the haze")
-        self.assertRegex(hero_position.group(1), r"(?<![\w-])position:\s*relative",
-                         "the hero is not position: relative, so paint order cannot put it over the haze")
-
-    def test_the_season_frame_matches_the_generators_viewbox(self):
-        """The season layer's CSS size, cross-checked against its OWN viewBox.
-
-        Re-review finding R1 (the four-season fix wave, round 2): nothing
-        before this compared the generator's season viewBox against the
-        page's 130%/200% -- test_crystal_bear.py (T1) checks crystal.py's own
-        constants, and the assertions in
-        test_the_auth_page_is_art_left_and_card_right hardcode the CSS. This
-        derives the expected percentages from the RENDERED page's own season
-        viewBox against the hero's 800x887 master instead, so a change on
-        either side -- the generator's viewBox or the page's CSS -- fails
-        here rather than agreeing with itself.
-        """
-        html, css = self._frontend_css()
-        doc = lxml_html.fromstring(html)
-        seasons = doc.find_class("o_afenda_auth_season")
-        self.assertEqual(len(seasons), 1, "the season layer is not rendered exactly once")
-        view_box = seasons[0].get("viewbox") or seasons[0].get("viewBox")
-        self.assertTrue(view_box, "the season layer has no viewBox")
-        _vb_x, _vb_y, vb_width, vb_height = (float(v) for v in view_box.split())
-
-        season = re.search(
-            r"\.o_afenda_login\s+\.o_afenda_auth_season\s*\{([^}]*position:[^}]*)\}", css)
-        self.assertTrue(season, "the season layer is not placed by exactly one rule")
-        width = re.search(r"(?<![\w-])width:\s*([\d.]+)%", season.group(1))
-        height = re.search(r"(?<![\w-])height:\s*([\d.]+)%", season.group(1))
-        self.assertTrue(width and height, "the season layer has no width/height percentage")
-        expected_width = vb_width / 800 * 100
-        expected_height = vb_height / 887 * 100
-        self.assertAlmostEqual(
-            float(width.group(1)), expected_width, places=3,
-            msg=f"the season layer is {width.group(1)}% wide; its own viewBox ({vb_width} of 800) "
-                f"says it should be {expected_width}%")
-        self.assertAlmostEqual(
-            float(height.group(1)), expected_height, places=3,
-            msg=f"the season layer is {height.group(1)}% tall; its own viewBox ({vb_height} of 887) "
-                f"says it should be {expected_height}%")
-
-    def test_the_season_follows_the_calendar(self):
-        """The layout's season expression, evaluated for every month.
-
-        The served page only ever shows today's month, so eleven of the twelve
-        answers would go unchecked until the calendar reached them. The
-        expression is read from the combined arch - the one QWeb compiles - and
-        evaluated with `datetime` standing in for the rendering value
-        (odoo/addons/base/models/ir_qweb.py:1316), pinned to each month.
-        """
-        arch = self.env.ref("web.login_layout").get_combined_arch()
-        tree = lxml_etree.fromstring(arch.encode())
-        slot = tree.xpath("//div[@class='o_afenda_auth_art']")
-        self.assertEqual(len(slot), 1, "the art slot is not in the layout exactly once")
-        expression = slot[0].get("t-att-data-afb-season")
-        self.assertTrue(expression, "the art slot does not name today's season")
-        for month, season in _SEASON_OF_MONTH.items():
-            today = datetime.date(2026, month, 15)
-            clock = collections.namedtuple("Clock", "date")(
-                collections.namedtuple("Date", "today")(lambda today=today: today))
-            self.assertEqual(safe_eval(expression, {"datetime": clock}), season,
-                             f"month {month} does not open on {season}")
-
     def test_the_bear_stylesheets_reach_the_bundle(self):
         """Both bear stylesheets are in the compiled web.assets_frontend.
 
@@ -686,20 +387,65 @@ class TestBranding(HttpCase):
         self.assertIn(".o_afenda_login:has(#login:focus)", css,
                       "auth_bear.css is not in web.assets_frontend")
         self.assertIn("color-mix(in oklch", css, "color-mix() did not survive the bundle")
-        # Load order: the scales must precede the seasons that read them, the
-        # seasons the stage tokens and states that read THEM, and login.scss's
-        # paper ground must stay the first `.o_afenda_login {` block
-        # (test_frontend_css_has_login_surface reads the first one).
-        self.assertIn("@keyframes afb-season-cycle", css,
-                      "auth_bear_seasons.css is not in web.assets_frontend")
-        self.assertLess(css.index("--bear-forest-500"), css.index("--afb-s-base"),
-                        "the seasons load before the scales they read")
-        self.assertLess(css.index("@keyframes afb-season-cycle"),
-                        css.index(".o_afenda_login:has(#login:focus)"),
-                        "the states load before the seasons")
+        # Load order: the scales must precede the skins that read them, and
+        # login.scss's paper ground must stay the first `.o_afenda_login {`
+        # block (test_frontend_css_has_login_surface reads the first one).
+        self.assertLess(css.index("--bear-forest-500"), css.index("--skin-base"),
+                        "the skins load before the scales they read")
         ground = re.search(r"\.o_afenda_login\s*\{([^}]*)\}", css)
         self.assertIn(BRAND["paper"].lower(), ground.group(1),
                       "a bear stylesheet now owns the first .o_afenda_login block")
+
+    def test_the_season_layer_surrounds_the_signature(self):
+        """The season layer sits AROUND the tenant signature, never in it.
+
+        docs/superpowers/specs/2026-09-26-tenant-signature.md: two aria-hidden layers of four
+        sheets each, the weather 18 particles a sheet, starting on today's season (server UTC
+        date, northern meteorological order). None of it is inside the bear's art, and the
+        bear's SVG carries no season class. (The bear's own bytes are pinned by
+        afenda/tools/tests/test_tenant_signature.py.)
+        """
+        import datetime
+        doc = lxml_html.fromstring(self.url_open("/web/login").text)
+        names = ["spring", "summer", "autumn", "winter"]
+        today = names[((datetime.date.today().month % 12) // 3 + 3) % 4]
+        for layer in ("o_afenda_seasons", "o_afenda_weather"):
+            nodes = doc.xpath(f"//div[contains(concat(' ', @class, ' '), ' {layer} ')]")
+            self.assertEqual(len(nodes), 1, f"{layer} is not on the login page exactly once")
+            node = nodes[0]
+            self.assertEqual(node.get("aria-hidden"), "true", f"{layer} is not aria-hidden")
+            self.assertEqual(node.get("data-afs-season"), today, f"{layer} does not start on today's season")
+            sheets = node.xpath("./div[contains(@class, 'afs-sheet')]")
+            self.assertEqual([s.get("class").split()[-1] for s in sheets], [f"afs-{n}" for n in names])
+            self.assertFalse(node.xpath("ancestor::*[contains(@class, 'o_afenda_auth_art')]"),
+                             f"{layer} is inside the bear's art")
+        self.assertEqual(len(doc.xpath("//div[contains(@class, 'o_afenda_weather')]//span[@class='afs-p']")), 72)
+        hero = doc.xpath("//svg[contains(@class, 'o_afenda_auth_hero')]")
+        self.assertEqual(len(hero), 1, "the signature bear is not inline on the login page")
+        self.assertNotIn("afs-", lxml_html.tostring(hero[0], encoding="unicode"))
+
+    def test_the_season_stylesheet_is_scoped_and_moves_only_opacity_and_transform(self):
+        """auth_seasons.css: every rule under .o_afenda_login, nothing reaching into the bear,
+        keyframes that animate only opacity and transform, and a reduced-motion block."""
+        path = file_path("afenda_brand/static/src/css/auth_seasons.css")
+        with open(path, encoding="utf-8") as handle:
+            source = re.sub(r"/\*.*?\*/", "", handle.read(), flags=re.S)
+        _html, css = self._frontend_css()
+        self.assertIn(".o_afenda_weather", css, "auth_seasons.css is not in web.assets_frontend")
+        for frames in re.findall(r"@keyframes\s+[\w-]+\s*\{((?:[^{}]*\{[^{}]*\})*)[^{}]*\}", source):
+            props = set(re.findall(r"([a-z-]+)\s*:", frames))
+            self.assertLessEqual(props, {"opacity", "transform"}, f"a season keyframe animates {props}")
+        body = re.sub(r"@keyframes\s+[\w-]+\s*\{(?:[^{}]*\{[^{}]*\})*[^{}]*\}", "", source)
+        body = re.sub(r"@media[^{]*\{", "", body)
+        for prelude in re.findall(r"([^{}]+)\{[^{}]*\}", body):
+            for selector in prelude.split(","):
+                selector = selector.strip()
+                if not selector:
+                    continue
+                self.assertTrue(selector.startswith(".o_afenda_login"), f"unscoped selector {selector!r}")
+                self.assertNotRegex(selector, r"afb-|o_afenda_auth_hero|o_afenda_auth_lockup",
+                                    f"{selector!r} reaches into the signature")
+        self.assertIn("prefers-reduced-motion: reduce", source)
 
     @staticmethod
     def _css_rules(source):
@@ -750,8 +496,7 @@ class TestBranding(HttpCase):
         return parts
 
     def test_the_bear_stylesheet_is_scoped_and_invents_no_colour(self):
-        """auth_bear.css and auth_bear_seasons.css, read as SOURCE: scoped,
-        literal-free, fully defined, and each held to its own motion contract.
+        """auth_bear.css, read as SOURCE: scoped, literal-free, fully defined.
 
         Scoped: web.assets_frontend also serves the portal and afenda_api_docs,
         so an unscoped `:has()` or `[class*=afb-]` rule would restyle pages it
@@ -765,209 +510,90 @@ class TestBranding(HttpCase):
 
         Fully defined: `fill: var(--x)` with --x undefined is invalid at
         computed-value time and falls back to black. Every var() used must be
-        declared by the generated scales, by the generated seasons (a
-        registered @property or a static season block), or by auth_bear.css's
-        base rule or stage rule -- not merely by some page skin or state that
-        is not always active. The component tokens `--bear-*` live on the
-        STAGE, not the body: they read the season values, which exist only on
-        the stage, and an unregistered custom property substitutes its var()s
-        on the element that declares it, so a body-level `--bear-*` would
-        never see them.
+        declared by the generated scales or by this file's base skin -- not
+        merely by some page skin or state that is not always active.
 
-        The seasons own the bear's palette: a page skin sets only the form's
-        mood (`--skin-mood`), and a state sets only the registered modifiers,
-        which rest at 0% and transition on the body.
-
-        Motion, two contracts. The hand-written auth_bear.css keeps the
-        owner's original one: nothing moves at rest, every animation is inside
-        a state rule, and the only loop is the submit sweep; its layers
-        transition only transform and filter, since a colour or opacity
-        transition would lag the season loop. The one exception, the
-        four-season loop (spec owner decision 1), lives in the generated
-        auth_bear_seasons.css and is fenced: only `afb-season-*` keyframes,
-        only on the stage and its season layer, only transforms, opacity and
-        the season tokens. Reduced motion stops the stage, pauses the season
-        layer and still stops the face, and no rule in either file puts a CSS
+        And the motion contract the owner set: nothing moves at rest. Every
+        animation is inside a state rule, the only loop is the submit sweep,
+        reduced motion switches all of it off, and no rule ever puts a CSS
         transform on the four layers whose placement IS their transform
         attribute.
         """
-        def read(name):
-            with file_open(f"afenda_brand/static/src/css/{name}", "r") as handle:
-                return handle.read()
-
-        def declared(text):
-            return set(re.findall(r"(--[\w-]+)\s*:", re.sub(r"/\*.*?\*/", "", text, flags=re.S)))
-
-        source, seasons, scales = read("auth_bear.css"), read("auth_bear_seasons.css"), read("auth_bear_scales.css")
+        with file_open("afenda_brand/static/src/css/auth_bear.css", "r") as handle:
+            source = handle.read()
+        with file_open("afenda_brand/static/src/css/auth_bear_scales.css", "r") as handle:
+            scales = handle.read()
         rules = self._css_rules(source)
-        season_rules = self._css_rules(seasons)
         self.assertGreater(len(rules), 20, "auth_bear.css parsed into too few rules to mean anything")
-        self.assertGreater(len(season_rules), 10,
-                           "auth_bear_seasons.css parsed into too few rules to mean anything")
-        style_rules = [r for r in rules if not r[0].startswith("@")]
-        season_style = [r for r in season_rules if not r[0].startswith("@")]
 
+        style_rules = [r for r in rules if not r[0].startswith("@")]
         # At-rules cannot be scoped to a selector, so they are allowed by
         # kind and held to a namespace instead: @property registers a custom
         # property for the whole document and @keyframes a global animation
         # name, and a generic `--mood` or `settle` would collide with anything
         # else on the page that picks the same word. @media only wraps rules,
-        # and the rules inside it are checked below like any other.
-        for name, parsed in (("auth_bear.css", rules), ("auth_bear_seasons.css", season_rules)):
-            for prelude, _body, context in parsed:
-                if context is not None:
-                    self.assertTrue(context.startswith("@media"),
-                                    f"{context!r}: only @media may wrap rules in {name}")
-                if prelude.startswith("@"):
-                    kind, _, at_name = prelude.partition(" ")
-                    self.assertIn(kind, ("@property", "@keyframes"),
-                                  f"{prelude!r}: an at-rule {name} has no reason to use")
-                    self.assertTrue(at_name.strip().lstrip("-").startswith(("afb-", "bear-")),
-                                    f"{prelude!r} in {name} declares a global name outside afb-/bear-")
-                    continue
-                for selector in self._top_level_selectors(prelude):
-                    self.assertTrue(
-                        selector.startswith(".o_afenda_login"),
-                        f"{name}: {selector!r} is not rooted at .o_afenda_login and can leak onto the portal",
-                    )
-
-        named = {colour.lower() for colour in ImageColor.colormap} - {"transparent"}
-        for name, parsed in (("auth_bear.css", rules), ("auth_bear_seasons.css", season_rules)):
-            for prelude, body, _context in parsed:
-                where = f"{name} {prelude!r}"
-                self.assertFalse(re.findall(r"#[0-9a-fA-F]{3,8}\b", body), f"{where} holds a hex colour")
-                self.assertFalse(
-                    re.findall(r"(?<![\w-])(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch|color)\(", body, flags=re.I),
-                    f"{where} holds a colour function literal",
+        # and the rules inside it are checked above like any other.
+        for prelude, _body, context in rules:
+            if context is not None:
+                self.assertTrue(context.startswith("@media"),
+                                f"{context!r}: only @media may wrap rules in auth_bear.css")
+            if prelude.startswith("@"):
+                kind, _, name = prelude.partition(" ")
+                self.assertIn(kind, ("@property", "@keyframes"),
+                              f"{prelude!r}: an at-rule auth_bear.css has no reason to use")
+                self.assertTrue(name.strip().lstrip("-").startswith(("afb-", "bear-")),
+                                f"{prelude!r} declares a global name outside afb-/bear-")
+        for prelude, _body, _context in style_rules:
+            for selector in self._top_level_selectors(prelude):
+                self.assertTrue(
+                    selector.startswith(".o_afenda_login"),
+                    f"{selector!r} is not rooted at .o_afenda_login and can leak onto the portal",
                 )
-                words = set(re.findall(r"(?<![\w#.-])([a-z]+)(?![\w(-])", body.lower()))
-                self.assertFalse(words & named, f"{where} names a colour: {sorted(words & named)}")
 
-        # What is always defined: the scales, the seasons (registered, and set
-        # by the static season blocks), the base rule and the stage rule.
-        defined = declared(scales)
-        defined |= {prelude.split()[1] for prelude, _b, _c in season_rules if prelude.startswith("@property")}
-        for _prelude, body, _context in season_style:
-            defined |= declared(body)
+        named = {name.lower() for name in ImageColor.colormap} - {"transparent"}
+        for prelude, body, _context in rules:
+            where = f"auth_bear.css {prelude!r}"
+            self.assertFalse(re.findall(r"#[0-9a-fA-F]{3,8}\b", body), f"{where} holds a hex colour")
+            self.assertFalse(
+                re.findall(r"(?<![\w-])(?:rgba?|hsla?|hwb|lab|lch|oklab|oklch|color)\(", body, flags=re.I),
+                f"{where} holds a colour function literal",
+            )
+            words = set(re.findall(r"(?<![\w#.-])([a-z]+)(?![\w(-])", body.lower()))
+            self.assertFalse(words & named, f"{where} names a colour: {sorted(words & named)}")
+
+        defined = set(re.findall(r"(--[\w-]+)\s*:", re.sub(r"/\*.*?\*/", "", scales, flags=re.S)))
         base = [body for prelude, body, context in rules if prelude == ".o_afenda_login" and context is None]
-        self.assertEqual(len(base), 1, "auth_bear.css has no single base rule")
-        stage = "".join(body for prelude, body, context in rules
-                        if prelude == ".o_afenda_login .o_afenda_auth_stage" and context is None)
-        self.assertTrue(stage, "auth_bear.css has no stage rule")
-        defined |= declared(base[0]) | declared(stage)
-        components = ("--bear-base", "--bear-f1", "--bear-f2", "--bear-f3", "--bear-s1", "--bear-s2",
-                      "--bear-headlight", "--bear-sheen-a", "--bear-sheen-b", "--bear-rim-a",
-                      "--bear-rim-b", "--bear-haze", "--bear-cream", "--bear-branch")
-        for token in components:
-            self.assertIn(token, declared(stage), f"the stage does not define {token}")
-            self.assertNotIn(token, declared(base[0]),
-                             f"the body still defines {token}, where the season values cannot reach it")
-        used = set()
-        for text in (source, seasons):
-            used |= set(re.findall(r"var\(\s*(--[\w-]+)", re.sub(r"/\*.*?\*/", "", text, flags=re.S)))
+        self.assertTrue(base, "auth_bear.css has no base skin")
+        defined |= set(re.findall(r"(--[\w-]+)\s*:", base[0]))
+        for token in ("--bear-base", "--bear-f1", "--bear-f2", "--bear-f3", "--bear-s1",
+                      "--bear-s2", "--bear-headlight", "--bear-sheen-a", "--bear-sheen-b",
+                      "--bear-rim-a", "--bear-rim-b", "--bear-haze", "--bear-cream",
+                      "--bear-branch", "--afb-mood"):
+            self.assertIn(token, defined, f"the base skin does not define {token}")
+        used = set(re.findall(r"var\(\s*(--[\w-]+)", re.sub(r"/\*.*?\*/", "", source, flags=re.S)))
         self.assertFalse(used - defined,
                          f"var() used but never defined, which paints black: {sorted(used - defined)}")
 
-        # The state modifiers: registered, so they transition instead of
-        # snapping, defined at rest on the body with every mix at 0% (a state
-        # sets a tint AND a mix), and transitioned there.
-        registered = {prelude.split()[1]: body for prelude, body, _c in rules if prelude.startswith("@property")}
-        modifiers = {"--afb-mood": "<color>", "--afb-glow": "<number>"}
-        for part in ("tone", "facet", "rim", "sheen"):
-            modifiers[f"--afb-{part}-tint"] = "<color>"
-            modifiers[f"--afb-{part}-mix"] = "<percentage>"
-        transition = re.search(r"(?<![\w-])transition\s*:([^;]*)", base[0])
-        self.assertTrue(transition, "the base rule transitions no modifier")
-        for token, syntax in modifiers.items():
-            self.assertIn(token, registered, f"{token} is not registered and would snap")
-            self.assertIn(f'"{syntax}"', registered[token], f"{token} is not registered as {syntax}")
-            self.assertIn(token, declared(base[0]), f"{token} has no resting value on the body")
-            self.assertIn(token, transition.group(1), f"{token} is registered but never transitions")
-            if token.endswith("-mix"):
-                self.assertRegex(base[0], rf"{token}\s*:\s*0%", f"{token} is not 0% at rest")
-        # The old names are gone, and nothing but the mood is left of a skin.
-        code = re.sub(r"/\*.*?\*/", "", source, flags=re.S)
-        self.assertFalse(re.findall(r"--(?:tone|facet|rim|sheen|glow|face)\b", code),
-                         "a pre-season modifier name is still in use")
-        self.assertEqual(set(re.findall(r"--skin-[\w-]+", code)), {"--skin-mood"},
-                         "a page skin still carries more than the form's mood")
-        for prelude, body, _context in style_rules:
-            if ":has(" in prelude:
-                reach = {t for t in declared(body) if t.startswith(("--bear-", "--afb-s-", "--afb-on-"))}
-                self.assertFalse(reach, f"{prelude!r} reaches the bear's palette past the seasons: {sorted(reach)}")
-
-        # The layers transition only what the loop does not drive.
-        layer_transitions = [body for prelude, body, _c in style_rules
-                             if ".o_afenda_auth_hero" in prelude and re.search(r"(?<![\w-])transition\s*:", body)]
-        self.assertTrue(layer_transitions, "the bear's layers have no transition")
-        for body in layer_transitions:
-            self.assertRegex(body, r"transform\s+480ms", "the layers no longer ease their moves")
-            self.assertRegex(body, r"filter\s+480ms", "the layers no longer ease their filter")
-            for fighter in ("fill", "stop-color", "opacity"):
-                self.assertNotRegex(body, rf"(?<![\w-]){fighter}\s+\d",
-                                    f"a {fighter} transition on the layers lags the season loop")
-
         placed = ("afb-mask", "afb-chin", "afb-bush", "afb-branch")
-        for prelude, body, _context in style_rules + season_style:
+        for prelude, body, _context in style_rules:
             if any(layer in prelude for layer in placed):
                 self.assertNotRegex(
                     body, r"(?<![\w-])(transform|translate|rotate|scale)\s*:",
                     f"{prelude!r} moves a layer whose transform attribute places it",
                 )
 
-        # The hand-written contract: nothing moves at rest.
-        for prelude, body, _context in style_rules:
+        for prelude, body, context in style_rules:
             if re.search(r"(?<![\w-])animation(-name)?\s*:", body) and "none" not in body:
                 self.assertIn(":has(", prelude, f"{prelude!r} animates at rest")
             if "infinite" in body:
                 self.assertIn(".o_btn_loading", prelude,
                               f"{prelude!r} loops outside the submit state")
-        for prelude, _body, _context in rules:
-            self.assertFalse(prelude.startswith("@keyframes afb-season-"),
-                             f"{prelude!r}: the season loop belongs to the generated file")
 
-        # The one exception, fenced to the generated seasons file.
-        keyframes = {prelude.split()[1]: body for prelude, body, _c in season_rules
-                     if prelude.startswith("@keyframes")}
-        self.assertIn("afb-season-cycle", keyframes, "the seasons file has no season cycle")
-        for name, body in keyframes.items():
-            self.assertTrue(name.startswith("afb-season-"), f"@keyframes {name} is outside afb-season-*")
-            for prop in re.findall(r"([-\w]+)\s*:", body):
-                self.assertTrue(
-                    prop in ("translate", "rotate", "scale", "transform", "opacity")
-                    or prop.startswith(("--afb-s-", "--afb-on-")),
-                    f"@keyframes {name} animates {prop}, which repaints or lays out every frame",
-                )
-        keywords = {"linear", "ease", "ease-in", "ease-out", "ease-in-out", "infinite", "alternate",
-                    "alternate-reverse", "reverse", "normal", "both", "forwards", "backwards",
-                    "running", "paused", "cubic-bezier", "steps", "step-start", "step-end", "none",
-                    "jump-start", "jump-end", "jump-none", "jump-both", "start", "end"}
-        for prelude, body, _context in season_style:
-            for value in re.findall(r"(?<![\w-])animation(?:-name)?\s*:\s*([^;]+)", body):
-                if value.strip().startswith("none"):
-                    continue
-                names = set(re.findall(r"(?<![\w.-])[a-z][\w-]*", value.lower())) - keywords
-                self.assertTrue(names, f"{prelude!r} animates with no named keyframes")
-                self.assertLessEqual(names, set(keyframes),
-                                     f"{prelude!r} animates with keyframes outside afb-season-*: {sorted(names)}")
-                for selector in self._top_level_selectors(prelude):
-                    self.assertTrue(
-                        ".o_afenda_auth_stage" in selector or ".o_afenda_auth_season" in selector,
-                        f"{selector!r} animates outside the four-season stage",
-                    )
-
-        reduced = [(p, b) for p, b, c in style_rules + season_style
-                   if c and "prefers-reduced-motion:reduce" in re.sub(r"\s", "", c)]
+        reduced = [(p, b) for p, b, c in style_rules if c and "prefers-reduced-motion: reduce" in c]
         self.assertTrue(reduced, "no prefers-reduced-motion block")
         self.assertTrue(any(".afb-face" in p and re.search(r"animation:\s*none", b)
                             and re.search(r"transform:\s*none", b) for p, b in reduced),
                         "reduced motion does not stop the face")
-        self.assertTrue(any(".o_afenda_auth_stage" in p and re.search(r"animation:\s*none", b)
-                            for p, b in reduced),
-                        "reduced motion does not stop the season loop")
-        self.assertTrue(any(".o_afenda_auth_season" in p and re.search(r"animation-play-state:\s*paused", b)
-                            for p, b in reduced),
-                        "reduced motion does not pause the season layer")
 
     def _assert_one_poster(self, url, page, headline):
         """One hero, one lockup, one h1 carrying the page's headline, one card."""
@@ -1163,9 +789,8 @@ class TestBranding(HttpCase):
             frontend[frontend.index("afenda_brand/static/src/scss/login.scss"):],
             ["afenda_brand/static/src/scss/login.scss",
              "afenda_brand/static/src/css/auth_bear_scales.css",
-             "afenda_brand/static/src/css/auth_bear_seasons.css",
              "afenda_brand/static/src/css/auth_bear.css"],
-            "the bear stylesheets are not loaded after login.scss: scales, seasons, then states",
+            "the bear stylesheets are not loaded after login.scss, scales first",
         )
 
     def test_the_lockup_is_the_only_mark_and_the_card_carries_none(self):
@@ -1226,23 +851,16 @@ class TestBranding(HttpCase):
         self.assertRegex(box.group(1), r"aspect-ratio:\s*2\.5",
                          "the lockup reserves no box of the lockup's own shape")
 
-        # The art slot holds the hero and nothing else: the four-season stage,
-        # which is the inline bear and its season layer, with no <img> beside
-        # it, so the tenant's logo is neither doubled onto the page nor left
-        # behind in the card upstream renders it in.
+        # The art slot holds the hero and nothing else: the inline bear, with
+        # no <img> beside it, so the tenant's logo is neither doubled onto the
+        # page nor left behind in the card upstream renders it in.
         art = doc.find_class("o_afenda_auth_art")
         self.assertEqual(len(art), 1, "the art slot is not rendered exactly once")
         self.assertFalse(art[0].xpath(".//img"), "the art slot holds an image beside the bear")
         slot_art = [n for n in art[0] if isinstance(n.tag, str)]
         self.assertEqual(len(slot_art), 1, "the art slot does not hold exactly one piece of art")
-        self.assertIn("o_afenda_auth_stage", (slot_art[0].get("class") or "").split(),
-                      "the art slot holds something other than the stage")
-        on_stage = [(n.get("class") or "").split() for n in slot_art[0] if isinstance(n.tag, str)]
-        self.assertEqual(len(on_stage), 3,
-                         "the stage holds more than the haze div, the hero and its season layer")
-        self.assertIn("o_afenda_auth_haze", on_stage[0], "the haze div is not first on the stage")
-        self.assertIn("o_afenda_auth_hero", on_stage[1], "the hero is not the stage's second child")
-        self.assertIn("o_afenda_auth_season", on_stage[2], "the season layer is not over the hero")
+        self.assertIn("o_afenda_auth_hero", slot_art[0].get("class") or "",
+                      "the art slot holds something other than the hero")
         self.assertFalse(doc.xpath("//img[contains(@src, 'company_logo')]"),
                          "the tenant logo renders alongside the hero")
 

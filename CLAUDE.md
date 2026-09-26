@@ -200,6 +200,7 @@ that opens or updates it goes through `/preflight` and the push gate (Gotchas). 
 
 ## Gotchas
 
+- The auth-page crystal bear (`crystal_bear.svg`, `auth_bear.xml`) is the tenant signature (owner, 2026-09-26): pinned by `test_tenant_signature.py` and denied to agent edits; design around it, never in it.
 - `git status` on the whole tree takes about two minutes; scope it to paths.
 - The `web,test_http` suite has known unrelated failures: wkhtmltopdf missing, `WebSuite.test_check_suite`, `WebManifestRoutesTest` colliding with afenda_brand. Run it once at the end, not per fix.
 - Never review rebrand rule changes by applying to the tree; the corpus diff shows every distinct rewrite first.

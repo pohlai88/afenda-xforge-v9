@@ -60,9 +60,11 @@ design advice will reach for the left column:
 Product character: quiet, dense, precise enterprise software. Borders, spacing
 and type over shadow; restrained radius; semantic colour; tabular numerals;
 status never colour-only. No card soup, glass, marketing gradients, icon
-rainbows or decorative motion. One owner-named exception: the auth-page hero's
-four-season loop (`docs/superpowers/specs/2026-09-26-four-season-bear.md`), confined
-to `.o_afenda_auth_stage` and the generated `auth_bear_seasons.css`; it never spreads.
+rainbows or decorative motion. One owner-named exception: the auth pages' season
+layer (`docs/superpowers/specs/2026-09-26-tenant-signature.md`), confined to
+`.o_afenda_seasons` and `auth_seasons.css`; it never spreads. The crystal bear itself is
+the tenant's signature: never recolour, regenerate or replace it (pinned by
+`afenda/tools/tests/test_tenant_signature.py`); anything seasonal goes around it.
 
 ## Route the request first
 
@@ -160,6 +162,9 @@ touch the same file never do.
   DESIGN (or the reverse) is visible.
 
 ## Red flags — stop and re-route
+
+- Changing the crystal bear (`crystal_bear.svg`, `auth_bear.xml`) for a design request: it is
+  the tenant signature; design around it.
 
 - Editing anything under `addons/` or `odoo/` to change how something looks.
 - Editing a rendered brand asset instead of the rule that generates it.
