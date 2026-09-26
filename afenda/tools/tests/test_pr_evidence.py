@@ -2,7 +2,13 @@
 
 One test per rule in the plan's Task 1 (a)-(g), plus a CLI test that drives
 the module through `subprocess` with `PR_BODY` set, the way the workflow
-itself will invoke it.
+itself will invoke it. `PrCommitsTests` and the matching `CliTests` cover the
+`PR_COMMITS` contract (docs/superpowers/specs/2026-09-26-local-first-gates.md
+decision 4 and Corrections after review item 8): a cited commit id must be a
+prefix of one of the PR's real commits, fetched by the workflow from the
+GitHub API, never from a local `git rev-list`. `PR_COMMITS` unset (`None`)
+must keep today's behaviour exactly, which the pre-existing tests above
+already exercise unchanged.
 """
 import os
 import subprocess
@@ -167,6 +173,48 @@ class CheckTests(unittest.TestCase):
         self.assertEqual(check(body), [])
 
 
+class PrCommitsTests(unittest.TestCase):
+    """`check(body, pr_commits)`: a cited id must prefix one of `pr_commits`."""
+
+    def test_unset_pr_commits_keeps_todays_behaviour(self):
+        # No second argument at all (every pre-existing call above) and an
+        # explicit `None` must behave identically: the format-only check,
+        # with no cross-check against any commit list.
+        body = "## Verification\n\nRan 307 tests … OK, commit 5d6b77378.\n"
+        self.assertEqual(check(body), [])
+        self.assertEqual(check(body, None), [])
+
+    def test_empty_pr_commits_list_also_skips_the_match_check(self):
+        # An empty list is falsy, same as None: nothing to compare against
+        # (e.g. the API call returned no commits), so the format-only rule
+        # still governs rather than failing every PR outright.
+        body = "## Verification\n\nRan 307 tests … OK, commit 5d6b77378.\n"
+        self.assertEqual(check(body, []), [])
+
+    def test_cited_id_matching_a_pr_commit_prefix_passes(self):
+        body = "## Verification\n\nRan 307 tests … OK, commit abc1234.\n"
+        pr_commits = ["abc1234" + "0" * 33]  # 40 hex chars, prefixed by the cited id
+        self.assertEqual(len(pr_commits[0]), 40)
+        self.assertEqual(check(body, pr_commits), [])
+
+    def test_cited_id_not_matching_any_pr_commit_fails_naming_the_id(self):
+        body = "## Verification\n\nRan 307 tests … OK, commit abc1234.\n"
+        pr_commits = ["deadbee" + "0" * 33]  # a real commit, but not this one
+        errors = check(body, pr_commits)
+        self.assertEqual(len(errors), 1, errors)
+        self.assertIn("abc1234", errors[0])
+        self.assertIn("does not match", errors[0])
+
+    def test_one_matching_id_among_several_cited_is_enough(self):
+        body = (
+            "## Verification\n\n"
+            "Ran 307 tests … OK, commit foreign12.\n"
+            "0 failed, 0 error(s) of 184 tests, commit abc1234.\n"
+        )
+        pr_commits = ["abc1234" + "0" * 33]
+        self.assertEqual(check(body, pr_commits), [])
+
+
 class TemplateTests(unittest.TestCase):
     def test_unedited_template_fails_the_evidence_check(self):
         # The committed PR template is a blank form: nobody has pasted a
@@ -181,12 +229,20 @@ class TemplateTests(unittest.TestCase):
 
 
 class CliTests(unittest.TestCase):
-    def _run(self, body):
+    def _run(self, body, pr_commits=None):
         env = dict(os.environ)
         if body is None:
             env.pop("PR_BODY", None)
         else:
             env["PR_BODY"] = body
+        # Isolated from whatever the host shell happens to have set, unless
+        # this test explicitly supplies it: PR_COMMITS unset must reproduce
+        # today's behaviour exactly, never accidentally pick up a stray
+        # ambient value.
+        if pr_commits is None:
+            env.pop("PR_COMMITS", None)
+        else:
+            env["PR_COMMITS"] = " ".join(pr_commits)
         return subprocess.run(
             [sys.executable, "-m", "afenda.tools.pr_evidence"],
             cwd=str(REPO),
@@ -207,6 +263,27 @@ class CliTests(unittest.TestCase):
         self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
         self.assertIn("::error::", proc.stdout)
         self.assertIn("Verification section", proc.stdout)
+
+    def test_cli_fails_when_pr_commits_is_set_and_the_cited_id_is_foreign(self):
+        # A commit id copied from another PR (spec decision 4): the format
+        # check alone would accept it, but it is not a prefix of anything in
+        # this PR's own PR_COMMITS, fetched by the workflow from the GitHub
+        # API.
+        body = "## Verification\n\nRan 307 tests … OK, commit abc1234.\n"
+        proc = self._run(body, pr_commits=["deadbee" + "0" * 33])
+        self.assertEqual(proc.returncode, 1, proc.stdout + proc.stderr)
+        self.assertIn("abc1234", proc.stdout)
+
+    def test_cli_passes_when_pr_commits_matches_the_cited_prefix(self):
+        body = "## Verification\n\nRan 307 tests … OK, commit abc1234.\n"
+        proc = self._run(body, pr_commits=["abc1234" + "0" * 33])
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
+        self.assertIn("pr evidence: ok", proc.stdout)
+
+    def test_cli_unset_pr_commits_keeps_todays_behaviour(self):
+        body = "## Verification\n\nRan 307 tests … OK, commit 5d6b77378.\n"
+        proc = self._run(body, pr_commits=None)
+        self.assertEqual(proc.returncode, 0, proc.stdout + proc.stderr)
 
     def test_main_function_matches_the_cli(self):
         # main() itself (not just the subprocess) reads PR_BODY and returns

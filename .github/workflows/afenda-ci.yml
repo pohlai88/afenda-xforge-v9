@@ -35,10 +35,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
-          submodules: true
       - uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python }}
+          cache: pip
+          cache-dependency-path: afenda/tools/requirements*.txt
       - name: Install the tools' pinned requirements
         run: |
           python -m pip install -r afenda/tools/requirements.txt
@@ -72,6 +73,14 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 1
+          # api_diff reads only afenda/addons/afenda_api_docs/openapi/*.json,
+          # api_version.py and CHANGELOG.md (all under afenda/) for HEAD, and
+          # `git show <ref>:<path>` (git objects, unaffected by
+          # sparse-checkout) for the base ref: it never opens a file under
+          # odoo/ or root addons/ (afenda/tools/tests/test_deploy_static.py's
+          # LocalFirstGatesCiTests re-confirms this against api_diff.py
+          # itself).
+          sparse-checkout: afenda
       - name: Fetch main as the base contract
         # A depth-1 checkout has no history to diff against, and api_diff
         # needs a local ref to read the base documents from. A pull request
@@ -126,7 +135,13 @@ jobs:
             echo "::notice::github.event.before is all zeros (new branch); nothing to diff api_diff against"
             exit 0
           fi
-          git fetch --no-tags --depth=1 origin "$BEFORE"
+          # Mirrors afenda-image.yml's `changes` job: an unreachable `before`
+          # (a history rewrite, GC) must degrade gracefully, not hard-fail a
+          # legitimate push to main under this file's `bash -eo pipefail`.
+          if ! git fetch --no-tags --depth=1 origin "$BEFORE"; then
+            echo "::notice::fetch of github.event.before ($BEFORE) failed; failing open, nothing to diff api_diff against"
+            exit 0
+          fi
           # Same fenced-summary / `|| status=$?` pattern as the pull_request
           # step above, and for the same reason: GitHub's default `run:`
           # shell is `bash -eo pipefail`, so a bare `status=$?` after the

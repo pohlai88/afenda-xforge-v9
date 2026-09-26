@@ -108,8 +108,26 @@ jobs:
         with:
           fetch-depth: 1
           submodules: true
-      - name: docker build -f deploy/Dockerfile .
-        run: docker build -f deploy/Dockerfile -t afenda/xforge:ci .
+      - uses: docker/setup-buildx-action@v3
+      - name: docker build -f deploy/Dockerfile . (buildx, GHA layer cache)
+        # load: true keeps the image in the local Docker daemon under the
+        # same tag, so every later `docker run …afenda/xforge:ci…` step below
+        # (identity check, module suites, packs, asset regen) needs no other
+        # change. cache-from/cache-to: type=gha persists layers between
+        # runner instances (a GitHub-hosted runner's local Docker layer cache
+        # does not survive between jobs); scope: afenda-image keeps this
+        # workflow's cache from evicting another workflow's under the shared
+        # per-repo budget.
+        uses: docker/build-push-action@v6
+        env:
+          BUILDKIT_PROGRESS: plain
+        with:
+          context: .
+          file: deploy/Dockerfile
+          tags: afenda/xforge:ci
+          load: true
+          cache-from: type=gha,scope=afenda-image
+          cache-to: type=gha,mode=max,scope=afenda-image
       - name: The image is AFENDA xForge
         run: |
           name=$(docker run --rm --entrypoint /opt/venv/bin/python afenda/xforge:ci \

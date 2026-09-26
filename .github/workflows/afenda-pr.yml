@@ -1,11 +1,17 @@
 # Enforces that a pull request into main cites evidence, not just a claim: its
 # description must hold a printed test count (`Ran N tests` or `of N tests`)
 # and a commit id, both inside a `Verification` section (a heading or a bold
-# paragraph), placed there after that section starts. The check itself is
+# paragraph), placed there after that section starts, and that cited commit id
+# must be a prefix of one of this PR's own commits. The check itself is
 # `afenda/tools/pr_evidence.py` (standard library only, unit-tested in the
-# tools suite); this workflow only wires the PR body to it. The procedure
-# this evidence is meant to serve is `.claude/skills/steward/SKILL.md` (spec:
-# docs/superpowers/specs/2026-09-26-pr-stewardship.md, decision 3).
+# tools suite); this workflow fetches the PR's commit shas from the GitHub
+# API (a shallow, sparse checkout has no commit graph for a local
+# `git rev-list` to walk) and wires both PR_BODY and PR_COMMITS to it through
+# `env:`, never through a shell-interpolated `${{ }}`. The procedure this
+# evidence is meant to serve is `.claude/skills/steward/SKILL.md` (spec:
+# docs/superpowers/specs/2026-09-26-pr-stewardship.md, decision 3, and
+# docs/superpowers/specs/2026-09-26-local-first-gates.md, decision 4 /
+# Corrections after review item 8).
 name: afenda-pr
 
 on:
@@ -15,6 +21,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: afenda-pr-${{ github.event.pull_request.number }}
@@ -23,6 +30,12 @@ concurrency:
 jobs:
   pr_evidence:
     name: pr evidence
+    # A description-only edit that leaves the body untouched (e.g. a title
+    # fix) must not re-run the identical check on the identical SHA;
+    # `changes.body` is set on an `edited` event only when the body itself
+    # changed (a missing property evaluates to null, not an error). `on:`
+    # cannot express this by itself -- only a job- or step-level `if:` can.
+    if: github.event.action != 'edited' || github.event.changes.body != null
     runs-on: ubuntu-24.04
     timeout-minutes: 5
     steps:
@@ -33,10 +46,27 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.11"
+      - name: Fetch the PR's commit ids
+        # From the GitHub API, not a local `git rev-list`: this checkout is
+        # shallow and sparse, with no commit graph to walk, and a rebased or
+        # force-pushed PR's stale local ancestry would give the wrong answer
+        # anyway. PR_COMMITS reaches pr_evidence.py only through the
+        # environment (it lands in $GITHUB_ENV here, so every later step
+        # inherits it automatically) -- never through a `${{ }}` inside a
+        # run: script.
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          PR_NUMBER: ${{ github.event.pull_request.number }}
+        run: |
+          set -o pipefail
+          commits=$(gh api "repos/$REPO/pulls/$PR_NUMBER/commits" --paginate -q '.[].sha')
+          echo "PR_COMMITS=$(echo "$commits" | tr '\n' ' ')" >> "$GITHUB_ENV"
       - name: python -m afenda.tools.pr_evidence
         # The body reaches the script through the environment, never through
         # `${{ }}` inside the script itself: a crafted PR description could
-        # otherwise inject shell syntax into the step.
+        # otherwise inject shell syntax into the step. PR_COMMITS is already
+        # in this job's environment from the step above.
         env:
           PR_BODY: ${{ github.event.pull_request.body }}
         run: python -m afenda.tools.pr_evidence

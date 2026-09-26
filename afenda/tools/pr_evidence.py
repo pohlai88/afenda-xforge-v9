@@ -23,8 +23,21 @@ long. This excludes a bare decimal run such as an issue or PR reference
 (`#1234567`), which is 7-40 digits but neither has a hex letter nor reaches
 the full 40-character length of a real SHA.
 
-Standard library only. CLI: reads `PR_BODY` from the environment (never from
-a shell-interpolated `${{ }}` in the calling workflow), prints one
+`check(body, pr_commits=None)` also takes the PR's own commit ids (spec
+decision 4; Corrections after review item 8): when `pr_commits` is given and
+non-empty, at least one cited id in the Verification section must be a
+prefix of one of them, or the check fails naming the cited id(s). This
+catches a stale or copied commit id that merely *looks* like a SHA. Passing
+`None` (or an empty list) skips this cross-check entirely and reproduces the
+format-only rule exactly -- the CLI's behaviour when `PR_COMMITS` is unset.
+`pr_commits` is meant to come from the GitHub API
+(`GET /repos/{repo}/pulls/{number}/commits`), not a local `git rev-list`: a
+shallow, two-endpoint checkout (this repo's own CI pattern) has no commit
+graph to walk, only the two endpoint trees.
+
+Standard library only. CLI: reads `PR_BODY`, and optionally `PR_COMMITS` (a
+whitespace-separated list of full commit SHAs), from the environment (never
+from a shell-interpolated `${{ }}` in the calling workflow), prints one
 `::error::<message>` per failure and exits 1, or prints `pr evidence: ok` and
 exits 0.
 """
@@ -54,8 +67,23 @@ def _is_commit_id(token: str) -> bool:
     return len(token) == 40 or any(ch in "abcdef" for ch in token)
 
 
-def _has_commit_id(text: str) -> bool:
-    return any(_is_commit_id(token) for token in _SHA_CANDIDATE_RE.findall(text))
+def _cited_commit_ids(text: str) -> list:
+    """The distinct, correctly-shaped commit-id candidates in `text`, in the
+    order they first appear."""
+    seen = []
+    for token in _SHA_CANDIDATE_RE.findall(text):
+        if _is_commit_id(token) and token not in seen:
+            seen.append(token)
+    return seen
+
+
+def _no_match_error(candidates, pr_commits) -> str:
+    ids = ", ".join(candidates)
+    return (
+        f"the Verification section cites {ids}, but that does not match any "
+        f"commit in this pull request ({len(pr_commits)} commit(s) checked, "
+        "fetched from the GitHub API)"
+    )
 
 
 def _find_section(lines: list) -> "tuple[int, int] | None":
@@ -84,8 +112,12 @@ def _find_section(lines: list) -> "tuple[int, int] | None":
     return None
 
 
-def check(body) -> list:
-    """The list of evidence problems in `body`; empty means the PR passes."""
+def check(body, pr_commits=None) -> list:
+    """The list of evidence problems in `body`; empty means the PR passes.
+
+    `pr_commits`, when truthy, is the PR's own full commit SHAs: at least one
+    cited id must then be a prefix of one of them (see the module docstring).
+    """
     if not body or not body.strip():
         return [_NO_SECTION]
 
@@ -100,14 +132,19 @@ def check(body) -> list:
     errors = []
     if not _COUNT_RE.search(section_text):
         errors.append(_NO_COUNT)
-    if not _has_commit_id(section_text):
+    candidates = _cited_commit_ids(section_text)
+    if not candidates:
         errors.append(_NO_SHA)
+    elif pr_commits and not any(sha.startswith(c) for c in candidates for sha in pr_commits):
+        errors.append(_no_match_error(candidates, pr_commits))
     return errors
 
 
 def main(argv=None) -> int:
     del argv  # The body comes from the environment, never argv (see module docstring).
-    errors = check(os.environ.get("PR_BODY"))
+    raw_commits = os.environ.get("PR_COMMITS")
+    pr_commits = raw_commits.split() if raw_commits else None
+    errors = check(os.environ.get("PR_BODY"), pr_commits)
     for error in errors:
         print(f"::error::{error}")
     if errors:
