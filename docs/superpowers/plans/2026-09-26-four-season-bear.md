@@ -37,19 +37,19 @@ branch, restarted from `main` c5545d38f. Route: WARM (refines the approved cryst
 
 | role | spring | summer | autumn | winter |
 |---|---|---|---|---|
-| base | rose-600 | forest-600 | ember-600 | aurora-600 |
-| f1 | moss-600 | mint-600 | rust-600 | dusk-600 |
-| s1 | rose-600 | forest-600 | rust-600 | dusk-600 |
-| s2 | moss-600 | moss-600 | dusk-600 | aurora-600 |
+| base | rose-600 | forest-600 | ember-600 | frost-600 |
+| f1 | rose-600 | mint-600 | rust-600 | frost-600 |
+| s1 | rose-600 | forest-600 | rust-600 | frost-600 |
+| s2 | rose-600 | moss-600 | rust-600 | frost-600 |
 | headlight | rose-500 | mint-500 | ember-500 | aurora-600 |
 | f2 | rose-300 | moss-300 | ember-300 | aurora-200 |
-| f3 | moss-200 | moss-200 | ember-200 | dusk-100 |
+| f3 | moss-200 | moss-200 | ember-200 | frost-100 |
 | sheen | rose-100 | ember-100 | rust-200 | aurora-50 |
-| rim-a / rim-b | rose-200 / ember-50 | ember-200 / ember-50 | ember-100 / ember-50 | dusk-100 / aurora-50 |
+| rim-a / rim-b | rose-200 / ember-50 | ember-200 / ember-50 | ember-100 / ember-50 | frost-100 / aurora-50 |
 | haze | rose-200 | ember-100 | rust-200 | aurora-100 |
-| particle tones 1/2/3 | rose-200, rose-100, rose-50 | ember-50, ember-100 | rust-400, ember-400, rust-300 | aurora-50, dusk-50 |
+| particle tones 1/2/3 | rose-200, rose-100, rose-50 | ember-50, ember-100 | rust-400, ember-400, rust-300 | aurora-50, frost-50 |
 
-Winter headlight moved aurora-500 → aurora-600 in T1 (measured 2.99:1 against the page cream at 500; 4.35 at 600). Particle counts per the owner's guidance: spring 9 petals, summer 6 glints, autumn 8 leaves, winter 16 flakes (14 dots, 2 stars); the gleam peaks at ≤ 0.35 opacity and never crosses the face. Face-side roles (base, f1, s1, s2, headlight) ≥ step 500/600; lit side ≤ 400. If a measured
+Winter headlight moved aurora-500 → aurora-600 in T1 (measured 2.99:1 against the page cream at 500; 4.35 at 600). Table as built after the first-render rulings (spec, "Rulings after the first render"): spring's face side all rose, no dusk in autumn or winter, the new `frost` hue (230°, peak chroma 0.06) for winter. Particle counts: spring 14 petals, summer 6 glints, autumn 12 leaves, winter 24 flakes (21 dots, 3 stars); the gleam peaks at ≤ 0.35 opacity and never crosses the face. Face-side roles (base, f1, s1, s2, headlight) ≥ step 500/600; lit side ≤ 400. If a measured
 contrast misses 3:1 (tests below), move the step one notch within that side of the window and
 record it in the spec.
 
@@ -63,18 +63,19 @@ record it in the spec.
   `.o_afenda_login .o_afenda_auth_art[data-afb-season="summer|autumn|winter"]
   .o_afenda_auth_stage` = that hold + `animation-delay: -8s | -16s | -24s`. The loop starts on
   today's season.
-- Particles (seeded `random.Random(20260926)`, coordinates to 0.1): spring 12 petals size 9–14,
-  start y −30, x ∈ [20, 780] with min spacing 40, fall 9–13 s, spin 4–7 s, sway 2.6–3.6 s;
-  summer 8 four-point glints, arms 10–18, rejection-sampled inside the bear on the lit flank
-  (x ≥ 420, all arm tips `in_bear`), twinkle 2.4–4.0 s; autumn 10 almond leaves size 14–22,
-  start y −40, fall 7–11 s, spin 3–6 s, sway 2.2–3.2 s; winter 20 flakes (17 circles r 2.5–6,
-  3 six-arm stars), fall 10–16 s, drift 3–5 s. Delays stratified:
-  `delay = -((i + rng.random()) / n) * duration`. Durations/delays inline per particle
-  (`style="animation-duration:…;animation-delay:…"`). No `transform` attribute anywhere in the
-  season layer; shapes pre-rotated in `d`. Fallers are outside the bear clip; glints inside.
-- Gleam: one diagonal band path in `g.afb-gleam-clip` (clip `afb-seasonClip` = the same
-  not-bear evenodd as `#afb-bear`); `afb-season-gleam` 8 s loop, `translate` 140px → −560px
-  between 30 % and 60 % with an opacity pulse, so it lands mid-hold.
+- Particles (seeded `random.Random(20260926)`, coordinates to 0.1), in the season frame
+  `viewBox="0 -887 1040 1774"` (one bear height above the bear, 30 % to its right; the bear keeps
+  0..800 × 0..887): spring 14 petals size 18–28, summer 6 four-point glints (arms placed with every
+  tip inside the bear and at x ≥ 420, off the face box), autumn 12 almond leaves size 28–44, winter
+  24 flakes (21 circles r 5–12, 3 six-arm stars 14–20). Fallers spread over x 20..1020 and start
+  above y −887; `FALL_PX` 1814 (887 + 887 + 40) and fall durations scaled by 1814 / 960 so the
+  on-screen speed is unchanged (spring 17.0–24.6 s, autumn 13.2–20.8 s, winter 18.9–30.2 s).
+  Delays stratified: `delay = -((i + rng.random()) / n) * duration`, inline per particle. No
+  `transform` attribute anywhere in the season layer; shapes pre-rotated in `d`. Exact values:
+  `PARTICLES` in `crystal.py`.
+- Gleam: one diagonal band in `g.afb-gleam-clip` (clip = the same not-bear evenodd as
+  `#afb-bear`); `afb-season-gleam` 8 s loop, `translate` 140px → −360px between 32 % and 58 %,
+  peak opacity 0.35, so it lands mid-hold and stops short of the face.
 - Haze breathing: `.afb-haze{opacity: calc(var(--afb-glow) * var(--afb-s-swell))}`.
 - Phone (`max-width: 767.98px`): `.o_afenda_login .afb-p > *{scale: 1.8}`.
 
@@ -104,9 +105,9 @@ record it in the spec.
 7. `crystal_bear.svg` (standalone) byte-identical; `render_all` writes four outputs.
 8. Tests (16 → 28): goldens for all four outputs; template = one stage with two SVGs, both
    `aria-hidden`/`focusable=false`; hero verbatim check adjusted for indentation; layer classes
-   (hero list unchanged, new `SEASON_CLASSES`); ids/`url()` resolve per root; scales = 90 tokens;
-   standalone has no `afb-season`; particle counts 12/8/10/20 + 1 gleam, deterministic; no
-   `transform` attribute in the season layer; fallers start y < 0 with x ∈ [0, 800], glints
+   (hero list unchanged, new `SEASON_CLASSES`); ids/`url()` resolve per root; scales = 90 tokens (101 once `frost` joined);
+   standalone has no `afb-season`; particle counts as under Timing (9/6/8/16 as first built, 14/6/12/24 after the first-render rulings) + 1 gleam, deterministic; no
+   `transform` attribute in the season layer; fallers start y < 0 with x ∈ [0, 1040] (the season frame), glints
    inside the bear; `in_bear` known points ((135, 321) inside; (790, 20), (780, 870) outside);
    contrast: every body role ≥ 3:1 vs `--bear-ink`, face-side roles ≥ 3:1 vs cream, every
    particle tone ≥ 3:1 vs ink; cycle 32 s with the stops above; static blocks equal the hold

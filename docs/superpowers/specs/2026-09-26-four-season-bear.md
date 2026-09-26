@@ -104,6 +104,15 @@ and a violet cast in autumn and winter (the dusk hue). The rulings:
 - **Palette.** Spring's face side is all rose; green only on the lit side. Autumn is rust, amber
   and copper, no dusk. Winter uses a new low-chroma blue-grey `frost` hue (230°, peak chroma
   0.06), no dusk. The contrast window and its tests are unchanged.
+- **The glow is a bitmap.** At the larger size the bear's glow (a 16 px Gaussian blur of the
+  silhouette, tinted by the season) was re-blurred on every frame of each 2 s cross-fade: 4–19
+  dropped frames per 1.8 s at 1440×900 (6 repeats), against 0 with the glow hidden. The glow now
+  leaves the hero: the generator rasterises it once (resvg, pinned) into
+  `static/src/img/auth_bear_haze.png`, and the page paints the season's haze colour through it as a
+  mask. A season change then repaints a flat colour, not a blur. Measured on a prototype: 0–1
+  dropped per 1.8 s, and the same picture (mean pixel difference 0.05 of 255). The standalone
+  `crystal_bear.svg` keeps its vector glow. An SVG mask was measured too and rejected (11–22
+  dropped): Chrome re-renders an SVG image on every paint.
 
 ## Acceptance
 
