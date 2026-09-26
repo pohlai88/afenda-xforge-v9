@@ -16,8 +16,7 @@ Files: `Dockerfile` (built from the repository root), `entrypoint.sh` (renders
 (writes `PUBLIC_URL` into the landing page at nginx start), `site/` (the
 landing page), `dns/` (the DigitalOcean zone), `make-secrets.sh`, `backup.sh`
 (with `prune-backups.sh`), `offsite.sh` (copies backups off the host),
-`redeploy.sh` (one-command upgrade), `ci-redeploy.sh` (the automatic deploy's forced command),
-`restore.sh`.
+`redeploy.sh` (one-command upgrade), `restore.sh`.
 
 Run every command below from `deploy/`.
 
@@ -203,61 +202,11 @@ upgrade without a version bump:
 docker compose run --rm init sh -c '/opt/venv/bin/python /opt/afenda/odoo-bin module upgrade -c "$RC" afenda_brand afenda_runtime afenda_api_docs'
 ```
 
-### Automatic deploys
+### Deploying
 
-`.github/workflows/afenda-deploy.yml` runs `redeploy.sh` on the host after every push to
-`main` that passes CI, so a merge goes live without anyone logging in. For each commit it waits
-until both `afenda-ci` and `afenda-image` have succeeded, checks that the commit is still the head
-of `main`, and then connects over SSH with a key that can do only one thing.
-`deploy/ci-redeploy.sh` is that key's forced command. It accepts nothing but a full commit id, runs
-one deploy at a time, and skips a commit that is already checked out. A commit that did not touch
-the image's inputs (so `afenda-image` did not run) is not deployed, because nothing the host builds
-changed.
-
-Each deploy is an ordinary `redeploy.sh` run: a backup first, then a build, a restart and a health
-check. The app is briefly unavailable while it restarts. If the build fails, the previous commit is
-put back. A failure after the restart prints the backup to restore. Either way the run goes red in
-Actions, with the host's output in its log.
-
-Until the secrets below exist, every run ends with a notice ("not set up yet") and no failure.
-
-**One-time setup**, as the account that runs `redeploy.sh` on the host (usually `root`):
-
-```bash
-# 1. Bring the host up to date by hand once, so deploy/ci-redeploy.sh exists there.
-cd /srv/afenda/deploy && ./redeploy.sh
-
-# 2. A key that can only run ci-redeploy.sh (`restrict`: no shell, no forwarding, no pty).
-ssh-keygen -t ed25519 -N '' -C afenda-ci-deploy -f ~/afenda-ci-deploy
-echo "command=\"/srv/afenda/deploy/ci-redeploy.sh\",restrict $(cat ~/afenda-ci-deploy.pub)" >> ~/.ssh/authorized_keys
-
-# 3. Print the three values for GitHub.
-cat ~/afenda-ci-deploy                                                   # DEPLOY_SSH_KEY
-echo "app.nexuscanon.com $(cut -d' ' -f1,2 /etc/ssh/ssh_host_ed25519_key.pub)"   # DEPLOY_KNOWN_HOSTS
-whoami                                                                    # DEPLOY_USER
-
-# 4. After saving them in GitHub, delete the private key from the host.
-shred -u ~/afenda-ci-deploy
-```
-
-In GitHub, go to the repository's **Settings → Environments → New environment**, name it
-`production`, and add four **environment secrets**: `DEPLOY_SSH_KEY` (the whole private key,
-including its BEGIN and END lines), `DEPLOY_KNOWN_HOSTS`, `DEPLOY_USER`, and
-`DEPLOY_HOST` = `app.nexuscanon.com`. Optionally, add yourself under **Required reviewers** on
-that environment: each deploy then waits for one click of approval instead of going out on its
-own.
-
-`DEPLOY_KNOWN_HOSTS` pins the host's own key, read on the host, so the runner refuses any other
-machine answering at that name. Port 22 stays key-only, and GitHub's runners have no fixed
-addresses, so the firewall cannot narrow it further.
-
-**By hand from GitHub:** go to **Actions → afenda-deploy → Run workflow**. Leave the field empty to
-deploy the head of `main`, or give a full commit id. Going back to an older commit is a code
-rollback only. If a newer module version already upgraded the database, restore the backup that
-the newer deploy printed as well (see "Backup and restore").
-
-**To switch it off:** delete the `DEPLOY_SSH_KEY` secret, or remove the key's line from
-`~/.ssh/authorized_keys` on the host.
+Deploys are manual: run `./redeploy.sh [<commit>]` on the host after a merge to `main`.
+There is no automatic deploy (removed 2026-09-26: it never ran and needed an SSH key into
+production).
 
 ## The landing page
 
