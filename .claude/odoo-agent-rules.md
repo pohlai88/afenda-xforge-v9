@@ -178,16 +178,5 @@ the printed count with every result, or it is not accepted.
 
 ## Environment
 
-- Python: `.venv/Scripts/python` only. Never install into the global interpreter.
-- Server: port 8169 (`.claude/launch.json` config `odoo-afenda`). Tests: port 8179.
-- PostgreSQL: superuser `odoo`, trust auth, `127.0.0.1:5444`, database `afenda`.
-- Test command (Git Bash; the env prefix stops MSYS from mangling `/module` tags):
-
-```bash
-MSYS_NO_PATHCONV=1 MSYS2_ARG_CONV_EXCL="*" .venv/Scripts/python odoo-bin \
-  -c afenda/odoo.conf -d afenda -u <module> --test-enable \
-  --test-tags "/<module>" --stop-after-init --http-port 8179
-```
-
-- Never run `git status` on the whole tree (about two minutes). Use
-  `git diff --quiet -- <paths>` or `git status -- <paths>`.
+Environment facts (Python, ports, PostgreSQL, the test command, `git status` scoping) are
+already in your context: see `CLAUDE.md` § Environment and § Commands.
