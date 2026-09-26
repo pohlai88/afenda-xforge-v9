@@ -192,6 +192,7 @@ class TestApiRoutes(HttpCase):
             self.assertTrue((REDOC / name).is_file(), name)
 
 
+@tagged("post_install", "-at_install")
 class TestSpecRouteGuard(BaseCase):
     """Unit tests on `_resolve_committed_path` itself, no HTTP involved.
 

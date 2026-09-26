@@ -36,6 +36,12 @@ _REPO_ADDONS_ROOT = Path(__file__).resolve().parents[4] / "addons"
 # named `summary` explicitly too, so both are checked here.
 _COMMITTED_PROSE_KEYS = ("description", "summary", "title", "x-enum-labels")
 
+# AFD-ARCH-CORR-0008: 1.5 MiB, not the original 1 MiB - `account.json` alone
+# is genuine accounting API surface just over 1 MiB (55 models, 1012
+# operations). The live per-request document keeps the tighter 1 MiB budget
+# instead, via shared 4XX/5XX response references.
+_COMMITTED_SIZE_BUDGET = 1_572_864  # 1.5 * 1024 * 1024
+
 
 def _write_manifest(root, name, application=True, installable=None):
     module_dir = Path(root) / name
@@ -334,6 +340,17 @@ class TestCommittedAsset(TransactionCase):
                 if isinstance(text, str):
                     for tell in ODOO_TELLS:
                         self.assertNotIn(tell, text, f"{tell!r} in {path.name}")
+
+    def test_committed_asset_stays_under_the_size_budget(self):
+        # AFD-ARCH-CORR-0008: each committed document is budgeted at 1.5 MiB.
+        files = sorted(_OPENAPI_DIR.glob("*.json"))
+        self.assertTrue(files, "no committed OpenAPI documents; run the exporter first")
+        offenders = [
+            f"{path.name}: {size} bytes (budget {_COMMITTED_SIZE_BUDGET})"
+            for path in files
+            if (size := path.stat().st_size) > _COMMITTED_SIZE_BUDGET
+        ]
+        self.assertEqual(offenders, [], offenders)
 
 
 @tagged("post_install", "-at_install")
