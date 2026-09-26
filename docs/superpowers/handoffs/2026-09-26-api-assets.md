@@ -82,10 +82,16 @@ each; read that section for the full evidence and replacement text.
   API-reference role. The documented surface is the administrator's on a fresh install;
   fields behind an optional feature group the admin doesn't hold by default (e.g.
   multi-currency) are absent.
-- **AFD-ARCH-CORR-0007** (AMENDED, approved by the owner 2026-09-26 as implemented, `ir.*` first): area attribution is checked in order — a model defined
-  by an application module belongs to that application; otherwise `ir.*` models form a
-  `technical` document; otherwise the original smallest-closure rule. Measured: `core`
-  927 KiB, `technical` 745 KiB, `mail` 557 KiB.
+- **AFD-ARCH-CORR-0007** (AMENDED, approved by the owner 2026-09-26 as implemented): area
+  attribution is checked in this order (`afenda_api_docs/assets.py`, `asset_areas`, then
+  `asset_rules.py`, `assign_area`): abstract and transient models are excluded; an `ir.*` model
+  goes to `technical`; otherwise a model defined by an application module belongs to that
+  application; otherwise a module in every application's closure, or in none, goes to `core`;
+  otherwise the smallest closure, an equal tie going to the alphabetically first application.
+  The correction's own text lists application ownership before `ir.*`; the code's order is the
+  approved one, and it affects no model today (every `ir.*` `_name` in an application module
+  extends a model first defined in `base`). Measured: `core` 927 KiB, `technical` 745 KiB,
+  `mail` 557 KiB.
 - **AFD-ARCH-CORR-0008** (AMENDED, approved by the owner 2026-09-26): the per-committed-document
   size budget is 1.5 MiB, not 1 MiB — `account` alone measures over 1 MiB of genuine
   accounting API surface (55 models, 1012 operations). The live per-request document keeps
