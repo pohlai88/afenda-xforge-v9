@@ -2,8 +2,9 @@ import hashlib
 import pathlib
 import re
 
-from odoo.tests import HttpCase, tagged
+from odoo.tests import BaseCase, HttpCase, tagged
 
+from odoo.addons.afenda_api_docs.controllers.api import _resolve_committed_path
 from odoo.addons.afenda_runtime.problems import PROBLEM_CODES
 
 REDOC = pathlib.Path(__file__).resolve().parents[1] / "static" / "lib" / "redoc"
@@ -17,7 +18,23 @@ OPENAPI_DIR = pathlib.Path(__file__).resolve().parents[1] / "openapi"
 # controller does not own at all (a literal "/" makes the request path
 # longer than this route's pattern, landing on landing.py's `/docs/<path:
 # subpath>` catch-all instead, which redirects rather than 404s).
-_PATH_TRICK_VECTORS = ("..%2fmanifest", "%2e%2e", "core.json%00", "/etc/passwd", "CHANGELOG")
+# `..%5c__manifest__` is the Windows-flavoured sibling of `..%2fmanifest` -
+# but, unlike a `/` (encoded or not), a decoded `\` is not a URL path
+# separator, so this vector does NOT widen past this route the way
+# `..%2fmanifest` and `/etc/passwd` do: it reaches `docs_api_spec` itself,
+# as `area = "..\\__manifest__"`, and is refused there by `_AREA_RE` (a
+# backslash is not in its charset). Kept anyway because it is a real,
+# commonly-tried traversal shape and it is this route's own guard, not the
+# catch-all, that must refuse it - see `TestSpecRouteGuard` below.
+_PATH_TRICK_VECTORS = (
+    "..%2fmanifest", "..%5c__manifest__", "%2e%2e", "core.json%00",
+    "/etc/passwd", "CHANGELOG",
+)
+# One byte over the length cap in `_AREA_RE` (`{1,64}`) - proves the cap
+# itself is enforced by the regex, before any `Path.is_file()` call could
+# raise `OSError` (`ENAMETOOLONG`) and turn into an authenticated 500
+# instead of the ordinary 404 (fix round 1, finding 4).
+_OVERLONG_AREA = "a" * 300
 
 
 @tagged("post_install", "-at_install")
@@ -148,6 +165,11 @@ class TestApiRoutes(HttpCase):
             self.assertFalse(res.text.startswith("{"), vector)
             self.assertNotIn('"openapi"', res.text, vector)
 
+    def test_spec_route_overlong_area_is_404_not_500(self):
+        self.authenticate("admin", "admin")
+        res = self.url_open("/docs/api/spec/" + _OVERLONG_AREA + ".json")
+        self.assertEqual(res.status_code, 404)
+
     def test_api_page_links_each_committed_area(self):
         areas = sorted(path.stem for path in OPENAPI_DIR.glob("*.json"))
         self.assertTrue(areas, "run the exporter before this test")
@@ -168,3 +190,35 @@ class TestApiRoutes(HttpCase):
         self.assertEqual(hashlib.sha256(res.content).hexdigest(), recorded)
         for name in ("LICENSE", "redoc.standalone.js.LICENSE.txt"):
             self.assertTrue((REDOC / name).is_file(), name)
+
+
+class TestSpecRouteGuard(BaseCase):
+    """Unit tests on `_resolve_committed_path` itself, no HTTP involved.
+
+    `TestApiRoutes.test_spec_route_path_tricks_never_serve_file_bytes`
+    proves the end-to-end behaviour, but two of its vectors (`/etc/passwd`
+    and `..%2fmanifest`, both containing a `/` once decoded) are refused by
+    werkzeug's routing *before* `docs_api_spec` is ever called - a decoded
+    `/` makes the request path longer than `/docs/api/spec/<string:area>.
+    json` matches at all, so those two fall through to landing.py's own
+    catch-all instead. That is a real, useful defence, but it means those
+    two vectors do not actually exercise this controller's own guard.
+    These tests call `_resolve_committed_path` directly, so every vector
+    here does - including `..` and `../x`, which are exactly what
+    `..%2fmanifest` decodes to before hitting the `.json` suffix and which
+    the HTTP-level test cannot isolate this way.
+    """
+
+    def test_guard_refuses_traversal_and_bad_shapes(self):
+        for area in ("..", "../x", "core\n", "a" * 300, "CHANGELOG"):
+            self.assertIsNone(_resolve_committed_path(area), area)
+
+    def test_guard_accepts_a_committed_area(self):
+        # A positive control: the guard must not simply refuse everything.
+        # "core" is one of the two reserved areas (asset_rules.RESERVED_AREAS)
+        # and every database with at least one installed module produces a
+        # non-empty "core" area, so its file is always present once the
+        # exporter has run.
+        path = _resolve_committed_path("core")
+        self.assertIsNotNone(path)
+        self.assertEqual(path.name, "core.json")

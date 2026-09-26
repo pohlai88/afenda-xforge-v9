@@ -3411,7 +3411,7 @@
   }
  },
  "info": {
-  "description": "Every model and method reachable over POST /json/2/<model>/<method>. Generated from the running system for the signed-in user, so it shows only what that user may read.",
+  "description": "The published contract for one application area, generated from a fresh installation as the administrator on default settings; fields behind optional feature groups are not listed. Every model and method is reachable over POST /json/2/<model>/<method>.",
   "title": "AFENDA xForge JSON API",
   "version": "1.0.0",
   "x-afenda-area": "fleet"

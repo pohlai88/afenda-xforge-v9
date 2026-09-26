@@ -34,15 +34,14 @@
             become options through the bundle's `Gw` (kebab-case to camelCase,
             values as strings), and `Ei` reads a string as `"false"!==value`,
             so the attribute must be present and not "false". -->
-            <redoc t-att-spec-url="spec_url" sanitize="true"/>
-            <script type="text/javascript"
-                    src="/afenda_api_docs/static/lib/redoc/redoc.standalone.js"/>
             <!-- The committed OpenAPI asset (AFD-ARCH-CORR-0005): one link
             per area actually present under openapi/ on this server, never a
             hard-coded list - an area with no models gets no file and so no
-            link. -->
+            link. Placed above <redoc> (fix round 1, finding 7) so it reads
+            as this page's own contents, not as an afterthought below the
+            embedded viewer. -->
             <div t-if="asset_areas" id="afenda_api_asset_links" class="container py-3">
-                <p>Committed OpenAPI documents, one per area:</p>
+                <p>API documents by application:</p>
                 <ul>
                     <t t-foreach="asset_areas" t-as="area">
                         <li>
@@ -51,6 +50,9 @@
                     </t>
                 </ul>
             </div>
+            <redoc t-att-spec-url="spec_url" sanitize="true"/>
+            <script type="text/javascript"
+                    src="/afenda_api_docs/static/lib/redoc/redoc.standalone.js"/>
         </t>
     </template>
 </odoo>

@@ -27,10 +27,24 @@ _OPENAPI_DIR = (Path(__file__).resolve().parents[1] / "openapi").resolve()
 # `manifest_applications` reads module directory names, which
 # odoo/addons/base's own module-name column already restricts to this
 # charset). Anything else - a dot, a slash, an encoded null byte, an
-# uppercase letter - is refused before the filesystem is ever touched, so a
-# path trick has nothing to work with even before the parent-directory
-# check below.
-_AREA_RE = re.compile(r"^[a-z0-9_]+$")
+# uppercase letter, a trailing control character, or anything longer than
+# any real module name - is refused before the filesystem is ever touched,
+# so a path trick has nothing to work with even before the parent-directory
+# check in `_resolve_committed_path` below.
+#
+# The length cap (64) is not merely cosmetic: `Path.is_file()` on a
+# component longer than the filesystem's NAME_MAX raises `OSError`
+# (`ENAMETOOLONG`), which an unhandled exception would turn into an
+# authenticated 500 rather than the 404 every other rejected shape gets
+# here - so the cap must reject before any filesystem call is made, not
+# rely on catching that error after the fact (fix round 1, finding 4).
+# Matched with `fullmatch`, never `match`: `match` alone lets `$` accept a
+# string with one trailing newline (`re.match(r"^[a-z0-9_]+$", "core\n")`
+# succeeds - `$` matches just before a trailing "\n" even without
+# `re.MULTILINE`), which would let `area` carry one byte the regex was
+# meant to refuse. `fullmatch` requires the whole string, "\n" included, to
+# lie inside the character class, so it does not (fix round 1, finding 3).
+_AREA_RE = re.compile(r"[a-z0-9_]{1,64}")
 
 
 def _committed_areas():
@@ -38,8 +52,35 @@ def _committed_areas():
     return sorted(path.stem for path in _OPENAPI_DIR.glob("*.json"))
 
 
+def _resolve_committed_path(area):
+    """The `Path` of one committed area's file, or `None` if `area` is refused.
+
+    Exposed as its own function (rather than inlined in the route) so its
+    guard can be unit-tested directly, on shapes such as `".."`, `"../x"`,
+    a trailing-newline area, and an over-length area, without going through
+    HTTP or risking a request instead landing on some *other* route this
+    controller does not own (see `tests/test_api_routes.py`'s
+    `TestSpecRouteGuard`, and its docstring on why `/etc/passwd`-shaped
+    vectors alone cannot exercise this function). Two independent checks,
+    in this order: `_AREA_RE` first (a dot, a slash - encoded or not -, a
+    control character, an uppercase letter, or too long a name never even
+    reaches a path lookup), and only once that passes, that the resolved
+    file's parent is still `_OPENAPI_DIR` (defence in depth against
+    anything the regex alone might miss, e.g. a symlink) and that the file
+    actually exists.
+    """
+    if not _AREA_RE.fullmatch(area):
+        return None
+    path = (_OPENAPI_DIR / f"{area}.json").resolve()
+    if path.parent != _OPENAPI_DIR or not path.is_file():
+        return None
+    return path
+
+
 class AfendaApiController(http.Controller):
-    # auth='user' on both routes: the document lists every model and field the
+    # auth='user' on /docs/openapi.json and /docs/api (not on
+    # /docs/api/spec/<area>.json below, whose auth reasoning differs - see
+    # its own comment): the live document lists every model and field the
     # caller can read, which is an information-disclosure surface, and is
     # generated per user - meaningless if it could be fetched anonymously.
     # werkzeug ranks these static rules above landing.py's
@@ -76,35 +117,25 @@ class AfendaApiController(http.Controller):
         response.headers["Content-Security-Policy"] = _API_PAGE_CSP
         return response
 
-    # auth='user': same reasoning as /docs/openapi.json - each area's
-    # document lists every model and field an integrator can call, which is
-    # per-user information disclosure even though the committed bytes
-    # themselves are the same for everyone (AFD-ARCH-CORR-0005 fixes the
-    # document to base.user_admin at build time; this route does not
-    # regenerate it per caller, it only gates *access* to the committed
-    # file the same way the live document is gated).
+    # auth='user', but unlike /docs/openapi.json this is NOT gating a
+    # per-caller information disclosure: every committed file is the exact
+    # same bytes for every caller (built once, as base.user_admin, on a
+    # fresh installation - AFD-ARCH-CORR-0006) and carries no data from
+    # *this* server - it is the repository's own published contract, not a
+    # view of this database. `auth="user"` stays anyway (controller
+    # ruling, fix round 1 finding 8): a portal user can fetch it, and that
+    # is fine, since there is nothing server-specific in it to disclose;
+    # the gate is here only to keep this route's audience the same as the
+    # rest of `/docs/api` and `/docs/openapi.json`, not because the bytes
+    # themselves need protecting.
     @http.route(
         "/docs/api/spec/<string:area>.json",
         type="http", auth="user", methods=["GET"], website=False, sitemap=False,
     )
     def docs_api_spec(self, area, **kwargs):
-        """Serve one committed OpenAPI asset area's bytes, verbatim, from disk.
-
-        Two independent checks stand between this route and the filesystem,
-        because either one failing alone must not be enough to escape
-        `_OPENAPI_DIR`: `_AREA_RE` refuses any `area` that is not
-        `^[a-z0-9_]+$` (a dot, a slash - encoded or not - or a stray null
-        byte all fail it, so `..%2fmanifest`, `%2e%2e` and
-        `core.json%00` never even reach a path lookup), and the resolved
-        file's parent must still equal `_OPENAPI_DIR` (defence in depth
-        against anything the regex alone might miss). Only then is the file
-        read - never through `area` used to build a path before both checks
-        pass.
-        """
-        if not _AREA_RE.match(area):
-            return request.not_found()
-        path = (_OPENAPI_DIR / f"{area}.json").resolve()
-        if path.parent != _OPENAPI_DIR or not path.is_file():
+        """Serve one committed OpenAPI asset area's bytes, verbatim, from disk."""
+        path = _resolve_committed_path(area)
+        if path is None:
             return request.not_found()
         return request.make_response(
             path.read_bytes(),

@@ -468,6 +468,26 @@ def _share_request_bodies(paths):
     return shared
 
 
+# info.description differs by build (fix round 1, finding 6): the live
+# document (asset=False) really is generated per request for env.user, but
+# the committed asset (asset=False -> True; render_asset) is built once, as
+# base.user_admin, on a fresh installation with no demo data
+# (export_openapi_shell.py, AFD-ARCH-CORR-0006) - describing it as
+# "generated ... for the signed-in user" would be false for every reader of
+# a committed file, none of whom is the caller it was actually built for.
+_LIVE_DOCUMENT_DESCRIPTION = (
+    "Every model and method reachable over POST /json/2/<model>/<method>. "
+    "Generated from the running system for the signed-in user, so it "
+    "shows only what that user may read."
+)
+_ASSET_DOCUMENT_DESCRIPTION = (
+    "The published contract for one application area, generated from a "
+    "fresh installation as the administrator on default settings; fields "
+    "behind optional feature groups are not listed. Every model and method "
+    "is reachable over POST /json/2/<model>/<method>."
+)
+
+
 def build_document(env, app=None, names=None, asset=False):
     """An OpenAPI 3.1 document for one app, the core set, or an explicit model list.
 
@@ -503,9 +523,7 @@ def build_document(env, app=None, names=None, asset=False):
             "title": alias_prose(f"{BRAND['product']} JSON API"),
             "version": API_VERSION,
             "description": alias_prose(
-                "Every model and method reachable over POST /json/2/<model>/<method>. "
-                "Generated from the running system for the signed-in user, so it "
-                "shows only what that user may read."
+                _ASSET_DOCUMENT_DESCRIPTION if asset else _LIVE_DOCUMENT_DESCRIPTION
             ),
         },
         "servers": [{"url": "/"}],

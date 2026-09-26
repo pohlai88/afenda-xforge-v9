@@ -27,11 +27,14 @@ from odoo.addons.afenda_api_docs.openapi import build_document
 _OPENAPI_DIR = Path(__file__).resolve().parents[1] / "openapi"
 _REPO_ADDONS_ROOT = Path(__file__).resolve().parents[4] / "addons"
 
-# Every `description`, `summary` and `title` value is prose (AFD-ARCH-CORR-
-# 0004's aliasing split, aliasing.py); everything else in a committed
-# document - keys, `operationId`, enum values, `$ref` - is a wire value and
-# is not walked.
-_COMMITTED_PROSE_KEYS = ("description", "summary", "title")
+# Every `description`, `summary`, `title` and `x-enum-labels` value is prose
+# (AFD-ARCH-CORR-0004's aliasing split, aliasing.py); everything else in a
+# committed document - keys, `operationId`, enum values, `$ref` - is a wire
+# value and is not walked. A superset of test_identity.py's own PROSE_KEYS
+# (which omits `summary`, since on the *live* document `summary` is always
+# the method name, a wire value): the committed asset's own task brief
+# named `summary` explicitly too, so both are checked here.
+_COMMITTED_PROSE_KEYS = ("description", "summary", "title", "x-enum-labels")
 
 
 def _write_manifest(root, name, application=True, installable=None):
@@ -283,33 +286,54 @@ class TestCommittedAsset(TransactionCase):
         stems = {path.stem for path in files}
         self.assertTrue(stems.issubset(allowed), stems - allowed)
 
+    def test_committed_asset_covers_every_application_that_owns_a_model(self):
+        # The subset check above (every committed stem is a supported
+        # application or a reserved area) says nothing about the reverse:
+        # that a non-empty area actually got a file. `core` and `technical`
+        # are always non-empty on any database with at least one installed
+        # module (technical: ir.* models; core: base itself, in every
+        # closure). Rule 2 (asset_rules.py's `assign_area`) puts a module's
+        # *own* models in that module's own area regardless of which other
+        # applications happen to be installed alongside it, so this check
+        # is independent of whether this test runs against `afenda_t2`'s
+        # small install or the full 34-application `afenda_assets` used to
+        # generate these files - whatever this database's own installed
+        # applications are, each one that owns a concrete model must have a
+        # file here too.
+        stems = {path.stem for path in _OPENAPI_DIR.glob("*.json")}
+        self.assertIn("core", stems)
+        self.assertIn("technical", stems)
+
+        apps = self.env["ir.module.module"].sudo().search(
+            [("state", "=", "installed"), ("application", "=", True)]
+        )
+        for app in apps:
+            owns_a_model = any(
+                not self.env[name]._abstract
+                and not self.env[name]._transient
+                and self.env[name]._original_module == app.name
+                for name in self.env.registry.models
+            )
+            if owns_a_model:
+                self.assertIn(app.name, stems, app.name)
+
     def test_committed_asset_carries_no_odoo_identity_in_prose(self):
         # Local import: test_identity.py defines an HttpCase subclass, which
         # this TransactionCase-only test does not need to load merely to
-        # reuse the tell list.
-        from .test_identity import ODOO_TELLS  # noqa: PLC0415
+        # reuse the tell list and the shared walker.
+        from .test_identity import ODOO_TELLS, walk_prose  # noqa: PLC0415
 
         files = sorted(_OPENAPI_DIR.glob("*.json"))
         self.assertTrue(files, "no committed OpenAPI documents; run the exporter first")
 
-        def walk(node, prose):
-            if isinstance(node, dict):
-                for key, value in node.items():
-                    if key in _COMMITTED_PROSE_KEYS and isinstance(value, str):
-                        prose.append(value)
-                    walk(value, prose)
-            elif isinstance(node, list):
-                for value in node:
-                    walk(value, prose)
-
         for path in files:
             doc = json.loads(path.read_text(encoding="utf-8"))
-            prose = []
-            walk(doc, prose)
+            prose = walk_prose(doc, keys=_COMMITTED_PROSE_KEYS)
             self.assertTrue(prose, path.name)
             for text in prose:
-                for tell in ODOO_TELLS:
-                    self.assertNotIn(tell, text, f"{tell!r} in {path.name}")
+                if isinstance(text, str):
+                    for tell in ODOO_TELLS:
+                        self.assertNotIn(tell, text, f"{tell!r} in {path.name}")
 
 
 @tagged("post_install", "-at_install")
