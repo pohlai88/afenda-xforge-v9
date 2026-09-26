@@ -22,6 +22,7 @@ from landing between two pixel centres and disappearing.
 """
 from __future__ import annotations
 
+from functools import lru_cache
 from io import BytesIO
 
 import resvg_py
@@ -69,8 +70,19 @@ def _reduce(im: Image.Image, size: int) -> Image.Image:
     return small
 
 
+@lru_cache(maxsize=None)
 def icon_png(key: str, size: int) -> Image.Image:
-    """The icon at ``size``, carrying the material the responsive rule allows."""
+    """The icon at ``size``, carrying the material the responsive rule allows.
+
+    Cached: every call site (``__main__.export`` and the test suite) only reads the
+    returned ``Image`` (``.convert``, ``.tobytes``, ``.getbbox``, ``.getchannel(...)
+    .getbbox``, ``.load`` for pixel reads, ``.save``) -- confirmed by an AST walk of
+    every ``icon_png(`` call site under ``afenda/tools`` -- so returning the same
+    cached object to every caller changes no observable behaviour. Re-rasterising an
+    (icon, size) pair through ``resvg_py`` is the dominant cost in this module (see
+    the test suite's own docstring on why it renders each pair repeatedly); caching
+    collapses that to once per pair for a process's lifetime.
+    """
     # The tier is chosen from the FINAL size, not the supersampled one, so a
     # 16px icon renders its flat duotone enlarged and then reduced, rather than
     # rendering the crystal material and reducing that to mud.
