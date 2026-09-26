@@ -55,11 +55,19 @@ _TYPE_MAP = {
 _FALLBACK = {"type": "string"}
 
 
-def model_schema(model):
+def model_schema(model, asset=False):
     """JSON Schema for one model, from what the calling user may read.
 
     `fields_get` already drops fields whose `groups` the caller lacks
     (odoo/orm/models.py:3364), so the schema is per user by construction.
+
+    `asset=True` applies the dynamic-selection rule (AFD-ARCH-CORR-0011): a
+    selection field whose `selection` attribute (on the field object, not
+    `fields_get`'s already-resolved list - see odoo/orm/fields_selection.py)
+    is a callable or a method name would otherwise bake one server's runtime
+    values (installed languages, timezones...) into a committed asset. Such
+    a field gets no `enum`/`x-enum-labels`, and `x-afenda-dynamic-enum: true`
+    instead. The live document (asset=False) is unaffected.
     """
     properties = {}
     required = []
@@ -71,8 +79,15 @@ def model_schema(model):
             prop["description"] = alias_prose(meta["help"])
         # Wire values: enum keys are sent back verbatim, labels are read.
         if meta.get("selection"):
-            prop["enum"] = [key for key, _label in meta["selection"]]
-            prop["x-enum-labels"] = [alias_prose(label) for _key, label in meta["selection"]]
+            field = model._fields.get(name)
+            dynamic = asset and field is not None and (
+                callable(field.selection) or isinstance(field.selection, str)
+            )
+            if dynamic:
+                prop["x-afenda-dynamic-enum"] = True
+            else:
+                prop["enum"] = [key for key, _label in meta["selection"]]
+                prop["x-enum-labels"] = [alias_prose(label) for _key, label in meta["selection"]]
         if meta.get("relation"):
             prop["x-relation"] = meta["relation"]
         if meta.get("readonly"):
@@ -401,13 +416,21 @@ def _share_request_bodies(paths):
     return shared
 
 
-def build_document(env, app=None):
-    """An OpenAPI 3.1 document for one app, or for the core set.
+def build_document(env, app=None, names=None, asset=False):
+    """An OpenAPI 3.1 document for one app, the core set, or an explicit model list.
 
     Generated for `env.user`: models it cannot read are left out entirely,
     and `fields_get` drops fields outside its groups.
+
+    `names`, when given, is used verbatim in place of `models_for_app(env,
+    app)` - the asset exporter groups models into areas that cut across a
+    single app's own models (assets.py), so it must supply its own list
+    rather than have this function derive one from `app`. `asset=True`
+    applies the dynamic-selection rule to every model's schema (see
+    `model_schema`).
     """
-    names = models_for_app(env, app) if app else [m for m in _CORE_MODELS if m in env]
+    if names is None:
+        names = models_for_app(env, app) if app else [m for m in _CORE_MODELS if m in env]
 
     paths = {}
     schemas = dict(_COMPONENT_SCHEMAS)
@@ -416,7 +439,7 @@ def build_document(env, app=None):
         model = env[name]
         if not model.has_access("read"):
             continue
-        schemas[name] = model_schema(model)
+        schemas[name] = model_schema(model, asset=asset)
         tags.append({"name": name, "description": alias_prose(model._description or name)})
         for method_name, func in model_operations(model).items():
             paths[f"/json/2/{name}/{method_name}"] = path_item(name, method_name, func)
