@@ -62,7 +62,7 @@ option on any event.
    a workflow or deploy file, a unit test for code) and see it fail — the RED line with its
    failure count.
 5. **Fix at the cause**, one change. Run that test: the GREEN line.
-6. **Gates once** for what the change touches — `python -m afenda.tools.check` (`CLAUDE.md` →
+6. **Gates once** for what the change touches — `/preflight`, i.e. `python -m afenda.tools.check` then the reviews (`CLAUDE.md` →
    "Test the edit, not the world") — then **one push**; `.claude/hooks/push_gate.py` enforces
    that the stamp exists. The commit message carries the cause, the evidence line, the guard,
    and the RED, GREEN and gate counts.

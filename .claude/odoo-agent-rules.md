@@ -179,4 +179,4 @@ the printed count with every result, or it is not accepted.
 ## Environment
 
 Environment facts (Python, ports, PostgreSQL, the test command, `git status` scoping) are
-already in your context: see `CLAUDE.md` § Environment and § Commands.
+already in your context: see `CLAUDE.md` § Environment and § Commands (`git status` scoping is in § Gotchas).
