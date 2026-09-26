@@ -1,11 +1,29 @@
-Description of the issue/feature this PR addresses:
+## Why
 
-Current behavior before PR:
+<!-- What problem this solves, or what the owner asked for. Link the spec or plan if there is one. -->
 
-Desired behavior after PR is merged:
+## Before
 
+<!-- Behaviour or state before this PR. -->
 
+## After
 
+<!-- Behaviour or state after this PR merges. -->
 
----
-I confirm I have signed the CLA and read the PR guidelines at www.odoo.com/submit-pr
+## Verification
+
+<!-- Printed counts, never exit codes: `afenda-pr`'s `pr evidence` check
+     requires at least one `Ran N tests` / `of N tests` line and one commit
+     id in this section. -->
+
+| Gate | Command | Printed result | SHA |
+|---|---|---|---|
+| Tools suite | `python -m unittest discover afenda/tools/tests` | `Ran 307 tests … OK (skipped=1)` | `5d6b77378` |
+
+## For the owner
+
+<!-- Decisions or corrections that need the owner's ruling. "None." if there are none. -->
+
+## Not verified
+
+<!-- What no run exercised: gates skipped, edge cases untested, anything left for review to catch. -->

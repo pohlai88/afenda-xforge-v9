@@ -1,0 +1,42 @@
+# Enforces that a pull request into main cites evidence, not just a claim: its
+# description must hold a printed test count (`Ran N tests` or `of N tests`)
+# and a commit id, both inside a `Verification` section (a heading or a bold
+# paragraph), placed there after that section starts. The check itself is
+# `afenda/tools/pr_evidence.py` (standard library only, unit-tested in the
+# tools suite); this workflow only wires the PR body to it. The procedure
+# this evidence is meant to serve is `.claude/skills/steward/SKILL.md` (spec:
+# docs/superpowers/specs/2026-09-26-pr-stewardship.md, decision 3).
+name: afenda-pr
+
+on:
+  pull_request:
+    branches: [main]
+    types: [opened, edited, synchronize, reopened, ready_for_review]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: afenda-pr-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+jobs:
+  pr_evidence:
+    name: pr evidence
+    runs-on: ubuntu-24.04
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+          sparse-checkout: afenda/tools
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: python -m afenda.tools.pr_evidence
+        # The body reaches the script through the environment, never through
+        # `${{ }}` inside the script itself: a crafted PR description could
+        # otherwise inject shell syntax into the step.
+        env:
+          PR_BODY: ${{ github.event.pull_request.body }}
+        run: python -m afenda.tools.pr_evidence

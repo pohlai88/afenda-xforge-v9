@@ -266,6 +266,40 @@ class DeployStaticTests(unittest.TestCase):
                 f"odoo-bin call is missing --addons-path {addons_path!r}: {command!r}",
             )
 
+    def test_afenda_pr_workflow_passes_the_body_through_env_not_expression(self):
+        # afenda-pr.yml's `pr evidence` job must trigger when a PR description
+        # is edited (the check re-runs against the new body, not just the
+        # first one), and the body must reach the script through `env:` --
+        # never interpolated into a `run:` script, where a crafted PR
+        # description could inject shell syntax (docs/superpowers/specs/
+        # 2026-09-26-pr-stewardship.md, decision 3).
+        workflow = (REPO / ".github" / "workflows" / "afenda-pr.yml").read_text(encoding="utf-8")
+        self.assertRegex(workflow, r"types:\s*\[[^\]]*\bedited\b[^\]]*\]")
+        self.assertIn("PR_BODY: ${{ github.event.pull_request.body }}", workflow)
+
+        # No `run:` step's script may contain a `${{ }}` expression, whether
+        # inline or in a block scalar (`run: |`); only `env:` may carry one.
+        lines = workflow.splitlines()
+        offenders = []
+        i = 0
+        while i < len(lines):
+            match = re.match(r"^(\s*)run:\s*(.*)$", lines[i])
+            if match:
+                indent, inline = len(match.group(1)), match.group(2).strip()
+                if inline and inline not in ("|", ">", "|-", ">-"):
+                    if "${{" in inline:
+                        offenders.append(lines[i])
+                    i += 1
+                    continue
+                i += 1
+                while i < len(lines) and (lines[i].strip() == "" or len(lines[i]) - len(lines[i].lstrip()) > indent):
+                    if "${{" in lines[i]:
+                        offenders.append(lines[i])
+                    i += 1
+                continue
+            i += 1
+        self.assertEqual(offenders, [], f"a run: script interpolates an expression: {offenders}")
+
     def test_app_connects_as_the_least_privilege_role(self):
         compose = (DEPLOY / "compose.yaml").read_text(encoding="utf-8")
         env = re.search(r"^x-xforge-env: &xforge-env\n((?:  .*\n)+)", compose, re.MULTILINE).group(1)
