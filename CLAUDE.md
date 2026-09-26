@@ -41,6 +41,9 @@ goes under `afenda/addons/`. See `afenda/README.md` for the layout and run steps
   its expected count, and what not to touch. If a sub-agent has to rediscover context,
   the dispatch was defective.
 - Run independent tasks in parallel in one turn. Run tasks that share a file serially.
+  `.claude/skills/orchestrate/SKILL.md` is binding on how: a conflict map before any dispatch,
+  the slowest real-environment signal (CI, the image, a fresh install) started first, reviews as
+  one parallel sweep split by dimension, then one fix wave and one scoped re-review.
   Accept a sub-agent's result only against its acceptance check: a "passed" without the
   printed count is not accepted.
 
@@ -204,4 +207,8 @@ fails a PR whose description cites no printed test count and no commit. Spec:
 - Several Claude sessions may share this one worktree, so they share one `.git/index`. The exposure is the next bare `git commit` by anyone, not your `git add`: use `git commit --only -F msgfile -- <paths>` (options before the `--`), staging and committing in one shell invocation.
 - Look at a file before `cat >` onto it, and re-check `git log` on paths you are about to write; a peer session may have committed there since you last read.
 - Cloning a database for a parallel lane must copy the filestore too (`filestore/<db>` under Odoo's data dir, path from `odoo.tools.config`), or every attachment-backed field breaks and the failures read as code regressions.
+- `.claude/hooks/rerun_guard.py` (a PreToolUse hook) blocks a gate command (a test suite,
+  `api_diff`, `corpus`, `scan_identity`, `pr_evidence`) the third time it runs in one session
+  on an unchanged tree. Cite the earlier count, change code, or stop and report; the hook fails
+  open on any internal error.
 - Ask "does this code call X" with an AST walk, not grep: grep matches the name inside docstrings, including ones stating it is deliberately *not* called.
