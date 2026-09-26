@@ -251,6 +251,13 @@ the body disagree, the entry wins.
   - **disposition:** AMENDED
   - **replacement:** every `/json/2` error raised after dispatch. Those two pre-dispatch
     cases keep upstream's HTML and are documented as exclusions.
+  - **Third exclusion, added 2026-09-26 by the Task 1 review:** a read-only request that
+    hits `ReadOnlySqlTransaction` re-acquires its cursor outside the served-exception
+    wrapper (`odoo/http.py:2317-2324`). If that fails (pool exhaustion, lost connection),
+    the error reaches `Application.__call__` → `request.dispatcher.handle_error`
+    (`odoo/http.py:2889`) and keeps upstream's body, traceback included. Covering it would
+    need a server-wide patch of `Json2Dispatcher.handle_error`, so it is documented rather
+    than patched.
   - **introduced_in:** 79b38fcce
 - `id`: AFD-ARCH-CORR-0004
   - **previous_claim:** "`x-afenda-build` carries the commit" (1.2).
