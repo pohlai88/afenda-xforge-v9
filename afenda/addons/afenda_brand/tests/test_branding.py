@@ -456,6 +456,13 @@ class TestBranding(HttpCase):
         - every id is afb- prefixed: the inline copy shares the page's id
           space, and an unprefixed `haze` or `bear` would collide with
           anything the page, a portal snippet or an OAuth button calls that.
+
+        The haze is no longer one of the hero's own layers (the four-season
+        fix wave: its feGaussianBlur was re-rasterising every cross-fade
+        frame at the grown hero size). It is checked below as the stage's
+        OTHER first child instead -- still classed `afb-haze` so the existing
+        state rules keep reaching it, but a sibling div, not a `<g>` inside
+        this SVG, and the hero must carry no `filter` any more.
         """
         html = self.url_open("/web/login").text
         doc = lxml_html.fromstring(html)
@@ -473,17 +480,24 @@ class TestBranding(HttpCase):
         for node in hero.iter():
             if isinstance(node.tag, str):
                 classes.update((node.get("class") or "").split())
-        for layer in ("afb-haze", "afb-body", "afb-base", "afb-facet", "afb-f1", "afb-f2",
+        for layer in ("afb-body", "afb-base", "afb-facet", "afb-f1", "afb-f2",
                       "afb-f3", "afb-shadow", "afb-s1", "afb-s2", "afb-headlight", "afb-sheen",
                       "afb-rim", "afb-face", "afb-mask", "afb-chin", "afb-bush", "afb-branch"):
             self.assertIn(layer, classes, f"the bear has no {layer} layer for auth_bear.css to bind")
+        self.assertNotIn("afb-haze", classes,
+                         "the haze is still one of the hero's own layers; it must be the stage's sibling div")
+        self.assertFalse(hero.xpath(".//*[@filter]"),
+                         "the hero still carries a filter, which re-rasterises every cross-fade frame "
+                         "at this size; the four-season fix wave moved the glow to a baked PNG mask")
 
         ids = [node.get("id") for node in hero.iter() if isinstance(node.tag, str) and node.get("id")]
         self.assertTrue(ids, "the bear defines no gradients or clip paths")
         stray = [i for i in ids if not i.startswith("afb-")]
         self.assertFalse(stray, f"unprefixed ids share the page's id space: {stray}")
-        for needed in ("afb-rimGrad", "afb-sheenEdge", "afb-hazeFade"):
+        for needed in ("afb-rimGrad", "afb-sheenEdge"):
             self.assertIn(needed, ids, f"#{needed}, which auth_bear.css recolours, is missing")
+        self.assertNotIn("afb-hazeFade", ids,
+                         "#afb-hazeFade is still on the page; the gradient it fed is gone with the haze group")
         # The face must sit inside its group: the group is what turns.
         face = [n for n in hero.iter() if isinstance(n.tag, str) and "afb-face" in (n.get("class") or "").split()]
         self.assertEqual(len(face), 1, "the face is not one group")
@@ -508,6 +522,23 @@ class TestBranding(HttpCase):
         self.assertIs(seasons[0].getparent(), stages[0], "the season layer is not on the stage")
         self.assertEqual(seasons[0].get("aria-hidden"), "true", "the season layer is announced")
         self.assertEqual(seasons[0].get("focusable"), "false", "the season layer takes keyboard focus")
+
+        # The stage's third child (the haze div, the four-season fix wave):
+        # first in document order, so the hero paints over it and the season
+        # layer, last, paints over both. A plain div, decoration like its
+        # siblings, still classed afb-haze so the existing state rules
+        # (opacity, the glow lift, the reduced-motion list) keep reaching it.
+        stage_children = [c for c in stages[0] if isinstance(c.tag, str)]
+        self.assertEqual(len(stage_children), 3, "the stage does not have exactly three children")
+        self.assertEqual([c.tag for c in stage_children], ["div", "svg", "svg"],
+                         "the stage's children are not haze div, hero svg, season svg in that order")
+        haze_div, hero_child, season_child = stage_children
+        self.assertIs(hero_child, hero, "the hero is not the stage's second child, after the haze div")
+        self.assertIs(season_child, seasons[0], "the season layer is not the stage's third child")
+        self.assertEqual(set((haze_div.get("class") or "").split()), {"o_afenda_auth_haze", "afb-haze"},
+                         "the haze div does not carry both o_afenda_auth_haze and afb-haze")
+        self.assertEqual(haze_div.get("aria-hidden"), "true", "the haze div is announced to screen readers")
+        self.assertFalse(haze_div.text_content().strip(), "the haze div carries text a reader could announce")
         self.assertFalse(seasons[0].text_content().strip(), "the season layer carries readable text")
         # The loop starts on today's season: the server's date, which Odoo
         # pins to UTC (odoo/_monkeypatches/__init__.py:57).
@@ -539,6 +570,84 @@ class TestBranding(HttpCase):
         first = next(n for n in slot[0] if isinstance(n.tag, str))
         self.assertEqual(first.get("t-call"), "afenda_brand.auth_bear",
                          "the default branch does not render the inline bear")
+
+    def test_the_haze_is_a_masked_png(self):
+        """The haze div: a flat --bear-haze fill, masked by the generated PNG.
+
+        Replaces the hero's own feGaussianBlur (the four-season fix wave's
+        "Evidence": it was re-rasterising every cross-fade frame at the grown
+        hero size, dropping 7-19 frames of 6; 0-1 with this div in its
+        place). The div sits BEHIND the hero in document order, over the
+        hero's own box, so the hero also needs its own `position: relative`
+        -- otherwise paint order alone would not put it back on top.
+        """
+        _html, css = self._frontend_css()
+        haze = re.search(r"\.o_afenda_login\s+\.o_afenda_auth_haze\s*\{([^}]*)\}", css)
+        self.assertTrue(haze, "the haze div has no rule in the bundle")
+        body = haze.group(1)
+        self.assertRegex(body, r"(?<![\w-])background-color:\s*var\(--bear-haze\)",
+                         "the haze div does not paint --bear-haze")
+        png_url = (r'url\(\s*"?/afenda_brand/static/src/img/auth_bear_haze\.png"?\s*\)'
+                   r'\s+0\s+0\s*/\s*100%\s+100%\s+no-repeat')
+        self.assertRegex(body, rf"(?<![\w-])mask:\s*{png_url}",
+                         "the haze div's mask does not use the generated PNG at that path")
+        self.assertRegex(body, rf"-webkit-mask:\s*{png_url}",
+                         "the haze div has no -webkit-mask fallback for the generated PNG")
+        self.assertRegex(body, r"(?<![\w-])position:\s*absolute", "the haze div is not taken out of flow")
+        self.assertRegex(body, r"(?<![\w-])inset:\s*0",
+                         "the haze div does not cover the hero's own box (the stage)")
+        self.assertRegex(body, r"(?<![\w-])pointer-events:\s*none",
+                         "the haze div can take a click meant for the page")
+        # The PNG is named exactly twice: the mask property and its
+        # -webkit-mask fallback, both above, both this one rule. Anywhere
+        # else would be a second, stale reference to the asset.
+        self.assertEqual(css.count("auth_bear_haze.png"), 2,
+                         "the haze PNG is referenced somewhere other than its one mask rule")
+
+        hero_position = re.search(
+            r"\.o_afenda_login\s+\.o_afenda_auth_stage\s*>\s*\.o_afenda_auth_hero\s*\{([^}]*position:[^}]*)\}",
+            css)
+        self.assertTrue(hero_position, "the hero has no position rule to paint over the haze")
+        self.assertRegex(hero_position.group(1), r"(?<![\w-])position:\s*relative",
+                         "the hero is not position: relative, so paint order cannot put it over the haze")
+
+    def test_the_season_frame_matches_the_generators_viewbox(self):
+        """The season layer's CSS size, cross-checked against its OWN viewBox.
+
+        Re-review finding R1 (the four-season fix wave, round 2): nothing
+        before this compared the generator's season viewBox against the
+        page's 130%/200% -- test_crystal_bear.py (T1) checks crystal.py's own
+        constants, and the assertions in
+        test_the_auth_page_is_art_left_and_card_right hardcode the CSS. This
+        derives the expected percentages from the RENDERED page's own season
+        viewBox against the hero's 800x887 master instead, so a change on
+        either side -- the generator's viewBox or the page's CSS -- fails
+        here rather than agreeing with itself.
+        """
+        html, css = self._frontend_css()
+        doc = lxml_html.fromstring(html)
+        seasons = doc.find_class("o_afenda_auth_season")
+        self.assertEqual(len(seasons), 1, "the season layer is not rendered exactly once")
+        view_box = seasons[0].get("viewbox") or seasons[0].get("viewBox")
+        self.assertTrue(view_box, "the season layer has no viewBox")
+        _vb_x, _vb_y, vb_width, vb_height = (float(v) for v in view_box.split())
+
+        season = re.search(
+            r"\.o_afenda_login\s+\.o_afenda_auth_season\s*\{([^}]*position:[^}]*)\}", css)
+        self.assertTrue(season, "the season layer is not placed by exactly one rule")
+        width = re.search(r"(?<![\w-])width:\s*([\d.]+)%", season.group(1))
+        height = re.search(r"(?<![\w-])height:\s*([\d.]+)%", season.group(1))
+        self.assertTrue(width and height, "the season layer has no width/height percentage")
+        expected_width = vb_width / 800 * 100
+        expected_height = vb_height / 887 * 100
+        self.assertAlmostEqual(
+            float(width.group(1)), expected_width, places=3,
+            msg=f"the season layer is {width.group(1)}% wide; its own viewBox ({vb_width} of 800) "
+                f"says it should be {expected_width}%")
+        self.assertAlmostEqual(
+            float(height.group(1)), expected_height, places=3,
+            msg=f"the season layer is {height.group(1)}% tall; its own viewBox ({vb_height} of 887) "
+                f"says it should be {expected_height}%")
 
     def test_the_season_follows_the_calendar(self):
         """The layout's season expression, evaluated for every month.
@@ -1129,9 +1238,11 @@ class TestBranding(HttpCase):
         self.assertIn("o_afenda_auth_stage", (slot_art[0].get("class") or "").split(),
                       "the art slot holds something other than the stage")
         on_stage = [(n.get("class") or "").split() for n in slot_art[0] if isinstance(n.tag, str)]
-        self.assertEqual(len(on_stage), 2, "the stage holds more than the hero and its season layer")
-        self.assertIn("o_afenda_auth_hero", on_stage[0], "the hero is not first on the stage")
-        self.assertIn("o_afenda_auth_season", on_stage[1], "the season layer is not over the hero")
+        self.assertEqual(len(on_stage), 3,
+                         "the stage holds more than the haze div, the hero and its season layer")
+        self.assertIn("o_afenda_auth_haze", on_stage[0], "the haze div is not first on the stage")
+        self.assertIn("o_afenda_auth_hero", on_stage[1], "the hero is not the stage's second child")
+        self.assertIn("o_afenda_auth_season", on_stage[2], "the season layer is not over the hero")
         self.assertFalse(doc.xpath("//img[contains(@src, 'company_logo')]"),
                          "the tenant logo renders alongside the hero")
 

@@ -4,7 +4,10 @@
  * PLAIN CSS, not SCSS. web.assets_frontend concatenates a .css file with only a
  * comment strip and a whitespace collapse (odoo/addons/base/models/
  * assetsbundle.py:965-972), so oklch() and color-mix() reach the browser as
- * written. No url() here: the bundle rewrites relative ones (rx_url, :916).
+ * written. One url() here, on the haze mask: it is written with a leading
+ * "/" (an absolute, web-rooted path), which is the one shape rx_url's
+ * relative-url rewrite (assetsbundle.py:916) explicitly leaves alone, so it
+ * reaches the browser exactly as written too.
  *
  * Three rules hold for every line below, and tests/test_branding.py checks
  * each one against this file's source (and against auth_bear_seasons.css):
@@ -65,17 +68,26 @@
  * opacity transition would trail the loop's colours by 420ms, every frame.
  *
  * The layers (classes and ids generated into views/auth_bear.xml):
- *   afb-haze (glow group), afb-body (clipped body), afb-base,
- *   afb-facet afb-f1|f2|f3, afb-shadow afb-s1|s2, afb-headlight, afb-sheen,
- *   afb-rim, afb-face (group: afb-mask, afb-chin), afb-bush, afb-branch;
- *   gradients #afb-sheenEdge, #afb-rimGrad, #afb-hazeFade.
+ *   afb-body (clipped body), afb-base, afb-facet afb-f1|f2|f3, afb-shadow
+ *   afb-s1|s2, afb-headlight, afb-sheen, afb-rim, afb-face (group: afb-mask,
+ *   afb-chin), afb-bush, afb-branch; gradients #afb-sheenEdge, #afb-rimGrad.
  * afb-mask, afb-chin, afb-bush and afb-branch carry a transform ATTRIBUTE that
  * places them. In SVG 2 that attribute is the CSS `transform` property, so any
  * CSS `transform` on those four would throw the face across the canvas. They
  * are only ever recoloured; the face moves through its group, afb-face, which
  * has no transform of its own.
- * Beside the hero, on the same stage: svg.o_afenda_auth_season, the season
- * layer (petals, glints, leaves, snow), styled by auth_bear_seasons.css.
+ * The stage's other two children, both siblings of the hero, not descendants:
+ * div.o_afenda_auth_haze (afb-haze), a bitmap glow -- the hero's own haze
+ * group and its exclusive defs (the afb-haze filter, #afb-hazeFade,
+ * #afb-flankFade, #afb-flankOnly, #afb-noSeam) were re-rasterising every
+ * cross-fade frame at the hero's post-fix-round-2 size (the four-season fix
+ * wave's "Evidence": 7-19 dropped frames per cross-fade), so the generator
+ * (afenda/tools/crystal_bear) now bakes that same glow to a PNG mask instead
+ * (0-1 dropped, verified against a pixel-diff budget) -- and
+ * svg.o_afenda_auth_season, the season layer (petals, glints, leaves, snow),
+ * styled by auth_bear_seasons.css. Document order on the stage: the haze div
+ * first, then the hero, then the season layer, so the hero paints over the
+ * haze and the season layer paints over both.
  */
 
 /* The modifiers are registered so they TRANSITION: an unregistered custom
@@ -219,6 +231,36 @@
     isolation: isolate;
 }
 
+/* The haze: a bitmap glow, not the hero's own filter any more (the four-season
+ * fix wave's "Evidence" -- the inline haze's feGaussianBlur was re-rasterised
+ * every cross-fade frame at the grown hero size, dropping 7-19 frames; the
+ * generator now bakes the same glow, in white, to
+ * auth_bear_haze.png and this div masks a flat --bear-haze fill with it). It
+ * sits BEHIND the hero (document order, the stage's first child) and exactly
+ * over the same box: `inset: 0` is the hero's own box, the stage. The PNG's
+ * path is absolute (a leading "/"), which rx_url leaves alone (see the file
+ * header). `.afb-haze` below (unchanged since before this fix wave) still
+ * carries the opacity and the lift; this rule only places and paints it. */
+.o_afenda_login .o_afenda_auth_haze {
+    position: absolute;
+    inset: 0;
+    background-color: var(--bear-haze);
+    -webkit-mask: url("/afenda_brand/static/src/img/auth_bear_haze.png") 0 0 / 100% 100% no-repeat;
+    mask: url("/afenda_brand/static/src/img/auth_bear_haze.png") 0 0 / 100% 100% no-repeat;
+    will-change: opacity;
+    pointer-events: none;
+}
+
+/* The hero must paint OVER the haze div behind it, even though both are
+ * absolutely-uninvolved siblings in normal flow (the hero is a block-level
+ * SVG, the haze an absolutely-placed div): `position: relative` gives the
+ * hero its own stacking context at the stage's own paint order (document
+ * order), ahead of the haze. The season layer, later in the DOM and
+ * absolutely placed, stays on top of both. */
+.o_afenda_login .o_afenda_auth_stage > .o_afenda_auth_hero {
+    position: relative;
+}
+
 /* The season layer no longer lies exactly over the hero: its viewBox is
  * `0 -887 1040 1774` (the bear's own 800x887 plus 30% width to its right and
  * one bear height above), so on the page it is sized `130%`/`200%` of the
@@ -287,7 +329,9 @@
 .o_afenda_login #afb-sheenEdge stop:nth-child(n+3) { stop-color: var(--bear-sheen-b); }
 .o_afenda_login #afb-rimGrad stop:nth-child(-n+2) { stop-color: var(--bear-rim-a); }
 .o_afenda_login #afb-rimGrad stop:nth-child(n+3) { stop-color: var(--bear-rim-b); }
-.o_afenda_login #afb-hazeFade stop { stop-color: var(--bear-haze); }
+/* No #afb-hazeFade stop rule any more: that gradient (and the haze group it
+ * fed) is gone from the page's hero. --bear-haze now feeds the haze div's
+ * background-color instead, below. */
 
 /* Moves ease; colours do not transition here. A state's colour change eases
  * through the registered modifiers on the body; the season's through its own
@@ -301,10 +345,15 @@
 
 /* The glow: its opacity and its lift are the two things the states move, and
  * the season breathes it (--afb-s-swell, 0.85 in a hold, 1 at the height of
- * each cross-fade). */
+ * each cross-fade). Opacity does not transition here -- the season drives it
+ * every frame already -- but the lift is a state reaction like any other
+ * layer's move, so it eases on the same 480ms curve as the hero's layers
+ * (the transition rule above only reaches .o_afenda_auth_hero descendants,
+ * and the haze div is a sibling of the hero now, not one). */
 .o_afenda_login .afb-haze {
     opacity: calc(var(--afb-glow) * var(--afb-s-swell));
     transform: translateY(var(--afb-glow-lift));
+    transition: transform 480ms cubic-bezier(.2, .8, .2, 1);
 }
 
 /* The face turns as one piece, about a point near the chin, so it reads as a
