@@ -59,7 +59,7 @@ jobs:
           --health-interval 5s --health-timeout 5s --health-retries 20
     env:
       PACK_TESTS_MIN: "17"  # industry packs: afenda_industry_base 4, afenda_industry_bakery 13 (local, fresh database, fac7cbd6e)
-      ODOO_TESTS_MIN: "184"  # measured by the API-assets fix-wave's database reuse (afenda_t7, atop 174c6ac5e before this wave's own commit): "0 failed, 0 error(s) of 184 tests when loading database 'afenda_t7'" for afenda_brand,afenda_brand_digest,afenda_runtime,afenda_api_docs together (183 + 1: TestCommittedAsset's new size-budget test)
+      ODOO_TESTS_MIN: "187"  # measured atop 4263d6729 (HEAD before this commit), reused db afenda_t7: "0 failed, 0 error(s) of 187 tests when loading database 'afenda_t7'" for afenda_brand,afenda_brand_digest,afenda_runtime,afenda_api_docs together (184 + 3: the PR #5 review fix wave's two afenda_runtime guards - test_problem_codes_documents_every_4xx_the_runtime_can_return, test_malformed_json_body_is_problem_400 - and one afenda_api_docs guard, TestErrorSchemaOverHttp.test_error_schema_covers_a_real_json2_error_body)
     steps:
       - uses: actions/checkout@v4
         with:

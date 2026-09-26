@@ -235,39 +235,47 @@ Task 7 measured these at commit `e5b3b81a5` (304 / 183 / 104 tools-suite / four-
 `174c6ac5e` → the commits after it) added three tests — `afenda/tools/tests/test_api_diff.py`
 gained `BaseRefTests` (a nonexistent `--base-ref` must exit 2, not read as "no base contract")
 and a downgrade-is-an-error case, and `TestCommittedAsset` gained the 1.5 MiB size-budget
-check (AFD-ARCH-CORR-0008) — raising every count below by the same amount. What follows is
-the fix wave's own measurement, atop `174c6ac5e` (HEAD before that wave's own commits); Task
-7's original counts are superseded, not repeated.
+check (AFD-ARCH-CORR-0008) — raising every count below by the same amount. A further fix
+wave (two verified PR #5 review findings — `problem_code`'s `invalid_request` fallback
+documented as a single integer status instead of "any other 4xx", and the `Error` schema's
+`required` missing `message`, which `ir.http._handle_error` always sets) added three more
+tests, measured atop `4263d6729` (HEAD before that wave's own commit): two guards in
+`afenda_runtime/tests/test_problem_details.py`
+(`test_problem_codes_documents_every_4xx_the_runtime_can_return`,
+`test_malformed_json_body_is_problem_400`) and one in
+`afenda_api_docs/tests/test_openapi.py` (`TestErrorSchemaOverHttp`), raising the four-module
+count from 184 to 187 and the `afenda_api_docs` real count from 105 to 106. What follows is
+that measurement; the two earlier waves' counts are superseded, not repeated.
 
 | What | Command | Printed result |
 |---|---|---|
 | Tools suite | `.venv/Scripts/python -m unittest discover afenda/tools/tests` | `Ran 307 tests` … `OK (skipped=1)` |
 | `test_api_diff` alone (inside the tools suite) | `.venv/Scripts/python -m unittest afenda.tools.tests.test_api_diff -v` | `Ran 27 tests` … `OK` |
 | `test_deploy_static` alone (inside the tools suite) | `.venv/Scripts/python -m unittest afenda.tools.tests.test_deploy_static -v` | `Ran 35 tests in 0.016s` … `OK` |
-| Four AFENDA modules together (CI shape), reused db `afenda_t7`, port 8179 | `-u afenda_brand,afenda_brand_digest,afenda_runtime,afenda_api_docs --test-enable --test-tags "/afenda_brand,/afenda_brand_digest,/afenda_runtime,/afenda_api_docs"` | `odoo.tests.result: 0 failed, 0 error(s) of 184 tests when loading database 'afenda_t7'` |
+| Four AFENDA modules together (CI shape), reused db `afenda_t7`, port 8179 | `-u afenda_brand,afenda_brand_digest,afenda_runtime,afenda_api_docs --test-enable --test-tags "/afenda_brand,/afenda_brand_digest,/afenda_runtime,/afenda_api_docs"` | `odoo.tests.result: 0 failed, 0 error(s) of 187 tests when loading database 'afenda_t7'` |
 | `TestCommittedAsset` + `TestSpecRouteGuard` alone, same db | `--test-tags "/afenda_api_docs:TestCommittedAsset,/afenda_api_docs:TestSpecRouteGuard"` | `odoo.tests.result: 0 failed, 0 error(s) of 6 tests when loading database 'afenda_t7'` |
-| Asset export, fresh all-apps db `afenda_assets` (reused; already had all Community apps installed from Task 4, so not reinstalled) | `OUT_DIR=<tmp> ADDONS_ROOT=addons odoo-bin shell … < afenda/tools/export_openapi_shell.py` | `afenda-openapi: wrote 33 documents`; `diff -rq` against the committed `openapi/` shows only the (never-exported) `CHANGELOG.md` as a difference — all 33 `.json` files byte-identical |
-| `api_diff check` against `origin/main` | `python -m afenda.tools.api_diff check --base-ref origin/main` | `breaking: 0, additive: 8452, descriptive: 0` / `no base contract` (exit 0) — `origin/main` predates this feature, confirming the no-base-contract counts path (AFD-ARCH-CORR-0010, the Task 5/172c12518 fix); unaffected by the fix wave, no code change on that path |
+| Asset export, `afenda_assets` (reused; -u afenda_runtime,afenda_api_docs first) | `OUT_DIR=... ADDONS_ROOT=addons odoo-bin shell … < afenda/tools/export_openapi_shell.py`, run twice with `PYTHONHASHSEED=1` then `=2` | `afenda-openapi: wrote 33 documents` both times, no diff between the two runs; this wave's fix touches every document's shared `Error` schema and `Problem` response description (`required` gains `message`; the `invalid_request` status text changes from `422` to `4xx`), so, unlike the two prior waves, all 33 `.json` files differ from the previously-committed version — largest is `account.json` at 1,031,064 B (budget 1,572,864 B) |
+| `api_diff check` against `origin/main` | `python -m afenda.tools.api_diff check --base-ref origin/main` | `breaking: 0, additive: 8452, descriptive: 0` / `no base contract` (exit 0) — `origin/main` predates this feature, confirming the no-base-contract counts path (AFD-ARCH-CORR-0010, the Task 5/172c12518 fix); unaffected by either fix wave, no code change on that path |
 
 **A finding worth recording, not a discrepancy in the required number:** the per-module
-breakdown `odoo.tests.stats` prints alongside the result line (e.g. `afenda_api_docs: 147
+breakdown `odoo.tests.stats` prints alongside the result line (e.g. `afenda_api_docs: 150
 tests`) is **not** the module's real test count. `OdooSuite._handleClassSetUp` /
 `_tearDownPreviousClass` (`odoo/tests/suite.py:196-225`) record a `setUpClass`/`tearDownClass`
 stat entry per test class via `result.collectStats`, and `_TEST_ID`'s regex
 (`odoo/tests/result.py:45-54`) happily parses `TestClass.setUpClass` as if `setUpClass` were a
 test method, so `log_stats()`'s per-module counter (`odoo/tests/result.py:244-273`) counts
-2 phantom entries per test class on top of the real tests. Confirmed by class count: 21 + 3 +
-1 + 4 = 29 classes across `afenda_api_docs`/`afenda_brand`/`afenda_brand_digest`/
-`afenda_runtime` (the fix wave adds a test method to an existing class, `TestCommittedAsset`,
-and a `@tagged` decorator to another existing class, `TestSpecRouteGuard` — no new class, so
-the class count is unchanged from Task 7) × 2 = 58; `147+61+4+30 − 58 = 184` — exactly the
-real, authoritative `testsRun` total, and the corrected per-module split (`105`/`55`/`2`/`22`)
-matches the narrower run above (`TestCommittedAsset`+`TestSpecRouteGuard` alone: 6 real tests,
-10 stats = 6 + 2×2 classes). **Only the single `odoo.tests.result` line is the real count** —
-never sum the per-module `odoo.tests.stats` lines.
+2 phantom entries per test class on top of the real tests. Confirmed by class count: 22 + 3 +
+1 + 4 = 30 classes across `afenda_api_docs`/`afenda_brand`/`afenda_brand_digest`/
+`afenda_runtime` (this wave adds one new class to `afenda_api_docs`,
+`TestErrorSchemaOverHttp` — 21 → 22 — and two test methods to `afenda_runtime`'s existing
+`TestProblemDetails`, no new class there) × 2 = 60; `150+61+4+32 − 60 = 187` — exactly the
+real, authoritative `testsRun` total, and the corrected per-module split
+(`106`/`55`/`2`/`24`) matches the class-count arithmetic above. **Only the single
+`odoo.tests.result` line is the real count** — never sum the per-module `odoo.tests.stats`
+lines.
 
-The measured `184` is why `.github/workflows/afenda-image.yml`'s `ODOO_TESTS_MIN` is now set
-to `"184"`, with a comment citing this measurement and the SHA it ran atop (`174c6ac5e`).
+The measured `187` is why `.github/workflows/afenda-image.yml`'s `ODOO_TESTS_MIN` is now set
+to `"187"`, with a comment citing this measurement and the SHA it ran atop (`4263d6729`).
 
 ## What this session changed (Task 7, docs/CI only — no application code)
 
