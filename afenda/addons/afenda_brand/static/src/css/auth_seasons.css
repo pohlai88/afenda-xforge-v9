@@ -17,9 +17,11 @@
     pointer-events: none;
     overflow: hidden;
 }
-.o_afenda_login .o_afenda_seasons { z-index: 0; }
+/* Stacking without touching the art's box: the tint at -1 paints above the page ground and
+ * under every in-flow block (the bear included); the weather at 2 paints over the in-flow
+ * art; the form column, positioned at 3, stays above the weather. */
+.o_afenda_login .o_afenda_seasons { z-index: -1; }
 .o_afenda_login .o_afenda_weather { z-index: 2; }
-.o_afenda_login .o_afenda_auth_art { position: relative; z-index: 1; }
 .o_afenda_login .o_afenda_auth_form { position: relative; z-index: 3; }
 
 .o_afenda_login .o_afenda_seasons .afs-sheet,
@@ -31,56 +33,74 @@
     animation: afs-cycle 32s linear infinite;
 }
 
-/* The paper, very lightly toned per season (the base paper is #f7f7f5). */
-.o_afenda_login .o_afenda_seasons .afs-spring { background: #faf1f3; }
-.o_afenda_login .o_afenda_seasons .afs-summer { background: #f4f7ee; }
-.o_afenda_login .o_afenda_seasons .afs-autumn { background: #f9f2e7; }
-.o_afenda_login .o_afenda_seasons .afs-winter { background: #eff4f9; }
+/* The paper, lightly toned per season (the base paper is #f7f7f5). */
+.o_afenda_login .o_afenda_seasons .afs-spring { background: #fbf3f6; }
+.o_afenda_login .o_afenda_seasons .afs-summer { background: #fdf8ea; }
+.o_afenda_login .o_afenda_seasons .afs-autumn { background: #fbf1e4; }
+.o_afenda_login .o_afenda_seasons .afs-winter { background: #eef4fa; }
 
-/* The weather. Each particle carries --x (column), --y (resting row), --t (duration),
- * --d (negative delay: spread over its cycle at every moment) and --s (scale). */
+/* The weather: the symbols everyone knows. Spring: flowers of many colours. Summer: the sun
+ * and butterflies. Autumn: maple leaves. Winter: six-armed snowflakes. Each shape is an SVG
+ * mask; the colour is the particle's background. Each particle carries --x (column), --y
+ * (resting row), --t (duration), --d (negative delay, so the sheet is full at every moment)
+ * and --s (scale). */
+.o_afenda_login .o_afenda_weather .afs-spring { --afs-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='black'%3E%3Ccircle cx='12' cy='5.6' r='4.9'/%3E%3Ccircle cx='18.1' cy='10' r='4.9'/%3E%3Ccircle cx='15.8' cy='17.2' r='4.9'/%3E%3Ccircle cx='8.2' cy='17.2' r='4.9'/%3E%3Ccircle cx='5.9' cy='10' r='4.9'/%3E%3C/g%3E%3C/svg%3E"); }
+.o_afenda_login .o_afenda_weather .afs-summer { --afs-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cg fill='black'%3E%3Cpath d='M11.4 11.5C9.6 5.2 3.2 2.6 1.8 5.8c-1.2 2.9 1.9 6.6 9.6 6.9zM12.6 11.5c1.8-6.3 8.2-8.9 9.6-5.7 1.2 2.9-1.9 6.6-9.6 6.9zM11.4 12.9c-3.6.4-7.4 2.2-6.4 5 1 2.9 4.9.6 6.4-5zM12.6 12.9c3.6.4 7.4 2.2 6.4 5-1 2.9-4.9.6-6.4-5z'/%3E%3Crect x='11.3' y='8' width='1.4' height='10' rx='.7'/%3E%3C/g%3E%3C/svg%3E"); }
+.o_afenda_login .o_afenda_weather .afs-autumn { --afs-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='black' d='M12 1l1.6 4 2.6-1.1-1 4.6 3.9-1.6-.9 3 3.8 1-3.4 2.6 1 2-5.4-.5-.9 7h-2.6l-.9-7-5.4.5 1-2-3.4-2.6 3.8-1-.9-3 3.9 1.6-1-4.6 2.6 1.1z'/%3E%3C/svg%3E"); }
+.o_afenda_login .o_afenda_weather .afs-winter { --afs-shape: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' viewBox='0 0 24 24'%3E%3Cg fill='none' stroke='black' stroke-width='1.7' stroke-linecap='round'%3E%3Cg id='a'%3E%3Cpath d='M12 12V1.8M12 5.4 9.6 3M12 5.4 14.4 3M12 8.6 10.2 6.8M12 8.6 13.8 6.8'/%3E%3C/g%3E%3Cuse xlink:href='%23a' transform='rotate(60 12 12)'/%3E%3Cuse xlink:href='%23a' transform='rotate(120 12 12)'/%3E%3Cuse xlink:href='%23a' transform='rotate(180 12 12)'/%3E%3Cuse xlink:href='%23a' transform='rotate(240 12 12)'/%3E%3Cuse xlink:href='%23a' transform='rotate(300 12 12)'/%3E%3C/g%3E%3C/svg%3E"); }
+
 .o_afenda_login .o_afenda_weather .afs-p {
     position: absolute;
     left: var(--x);
     top: -6vh;
     display: block;
+    width: calc(24px * var(--s));
+    height: calc(24px * var(--s));
+    -webkit-mask: var(--afs-shape) center / contain no-repeat;
+    mask: var(--afs-shape) center / contain no-repeat;
     will-change: transform;
     animation: afs-fall var(--t) linear var(--d) infinite;
 }
-.o_afenda_login .o_afenda_weather .afs-spring .afs-p {
-    width: calc(15px * var(--s));
-    height: calc(9px * var(--s));
-    border-radius: 60% 40% 60% 40% / 70% 50% 50% 30%;
-    background: #f2a9c4;
-    opacity: 0.85;
-}
-.o_afenda_login .o_afenda_weather .afs-spring .afs-p:nth-child(3n) { background: #f7c6d8; }
-.o_afenda_login .o_afenda_weather .afs-autumn .afs-p {
-    width: calc(20px * var(--s));
-    height: calc(10px * var(--s));
-    border-radius: 0 100% 0 100%;
-    background: #d9822b;
-    opacity: 0.9;
-}
-.o_afenda_login .o_afenda_weather .afs-autumn .afs-p:nth-child(3n) { background: #c65d21; }
-.o_afenda_login .o_afenda_weather .afs-autumn .afs-p:nth-child(4n) { background: #e8a33d; }
-.o_afenda_login .o_afenda_weather .afs-winter .afs-p {
-    width: calc(7px * var(--s));
-    height: calc(7px * var(--s));
+
+/* Spring: five-petal blossoms, a golden heart in every colour. */
+.o_afenda_login .o_afenda_weather .afs-spring .afs-p { background: radial-gradient(circle at 50% 50%, #ffd43b 0 21%, #f06595 22%); }
+.o_afenda_login .o_afenda_weather .afs-spring .afs-p:nth-child(6n+1) { background: radial-gradient(circle at 50% 50%, #f76707 0 21%, #fcc419 22%); }
+.o_afenda_login .o_afenda_weather .afs-spring .afs-p:nth-child(6n+2) { background: radial-gradient(circle at 50% 50%, #ffd43b 0 21%, #9775fa 22%); }
+.o_afenda_login .o_afenda_weather .afs-spring .afs-p:nth-child(6n+3) { background: radial-gradient(circle at 50% 50%, #ffd43b 0 21%, #ff8787 22%); }
+.o_afenda_login .o_afenda_weather .afs-spring .afs-p:nth-child(6n+4) { background: radial-gradient(circle at 50% 50%, #ffd43b 0 21%, #4dabf7 22%); }
+.o_afenda_login .o_afenda_weather .afs-spring .afs-p:nth-child(6n+5) { background: radial-gradient(circle at 50% 50%, #ffd43b 0 21%, #ffa94d 22%); }
+
+/* Summer: the sun in the top corner, its rays turning slowly, and bright butterflies. */
+.o_afenda_login .o_afenda_weather .afs-summer .afs-p { left: -40px; top: var(--y); background: #ff922b; animation-name: afs-flutter; }
+.o_afenda_login .o_afenda_weather .afs-summer .afs-p:nth-child(5n+2) { background: #339af0; }
+.o_afenda_login .o_afenda_weather .afs-summer .afs-p:nth-child(5n+3) { background: #f06595; }
+.o_afenda_login .o_afenda_weather .afs-summer .afs-p:nth-child(5n+4) { background: #fab005; }
+.o_afenda_login .o_afenda_weather .afs-summer .afs-p:nth-child(5n) { background: #20c997; }
+.o_afenda_login .o_afenda_weather .afs-summer .afs-p:first-child {
+    left: -80px;
+    top: -80px;
+    width: 260px;
+    height: 260px;
     border-radius: 50%;
-    background: #9fb6cc;
-    opacity: 0.8;
-    animation-name: afs-snow;
+    background:
+        radial-gradient(circle, #ffd43b 0 30%, #ffe066 31% 34%, transparent 35%),
+        repeating-conic-gradient(from 0deg, #ffd43b 0 5deg, transparent 5deg 22.5deg);
+    -webkit-mask: radial-gradient(circle, black 0 64%, transparent 65%);
+    mask: radial-gradient(circle, black 0 64%, transparent 65%);
+    opacity: 0.9;
+    animation: afs-spin 60s linear infinite;
 }
-.o_afenda_login .o_afenda_weather .afs-summer .afs-p {
-    top: var(--y);
-    width: calc(16px * var(--s));
-    height: calc(16px * var(--s));
-    background: #e9c46a;
-    clip-path: polygon(50% 0, 60% 40%, 100% 50%, 60% 60%, 50% 100%, 40% 60%, 0 50%, 40% 40%);
-    animation-name: afs-twinkle;
-    animation-duration: calc(var(--t) / 4);
-}
+
+/* Autumn: maple leaves in red, orange, gold and brown. */
+.o_afenda_login .o_afenda_weather .afs-autumn .afs-p { background: #e03131; width: calc(28px * var(--s)); height: calc(28px * var(--s)); }
+.o_afenda_login .o_afenda_weather .afs-autumn .afs-p:nth-child(4n+1) { background: #f76707; }
+.o_afenda_login .o_afenda_weather .afs-autumn .afs-p:nth-child(4n+2) { background: #f59f00; }
+.o_afenda_login .o_afenda_weather .afs-autumn .afs-p:nth-child(4n+3) { background: #a0522d; }
+
+/* Winter: six-armed crystal snowflakes in icy blues. */
+.o_afenda_login .o_afenda_weather .afs-winter .afs-p { background: #4a86c5; opacity: 0.85; animation-name: afs-snow; }
+.o_afenda_login .o_afenda_weather .afs-winter .afs-p:nth-child(3n+1) { background: #74a9d8; }
+.o_afenda_login .o_afenda_weather .afs-winter .afs-p:nth-child(3n+2) { background: #99c2e6; width: calc(16px * var(--s)); height: calc(16px * var(--s)); }
 
 @keyframes afs-cycle {
     0% { opacity: 1; }
@@ -95,13 +115,20 @@
     100% { transform: translate3d(-12px, 112vh, 0) rotate(360deg); }
 }
 @keyframes afs-snow {
-    0% { transform: translate3d(0, 0, 0); }
-    50% { transform: translate3d(20px, 56vh, 0); }
-    100% { transform: translate3d(-8px, 112vh, 0); }
+    0% { transform: translate3d(0, 0, 0) rotate(0deg); }
+    50% { transform: translate3d(20px, 56vh, 0) rotate(90deg); }
+    100% { transform: translate3d(-8px, 112vh, 0) rotate(180deg); }
 }
-@keyframes afs-twinkle {
-    0%, 100% { opacity: 0; transform: scale(0.4) rotate(0deg); }
-    50% { opacity: 1; transform: scale(1) rotate(45deg); }
+@keyframes afs-flutter {
+    0% { transform: translate3d(0, 20vh, 0) rotate(-8deg); }
+    25% { transform: translate3d(30vw, 8vh, 0) rotate(10deg); }
+    50% { transform: translate3d(55vw, 26vh, 0) rotate(-6deg); }
+    75% { transform: translate3d(80vw, 12vh, 0) rotate(12deg); }
+    100% { transform: translate3d(110vw, 22vh, 0) rotate(-8deg); }
+}
+@keyframes afs-spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
 
 /* Reduced motion: nothing moves; only today's season shows, its weather at rest. */
@@ -112,7 +139,8 @@
         animation: none;
     }
     .o_afenda_login .o_afenda_weather .afs-p { transform: translate3d(0, calc(var(--y) + 6vh), 0); }
-    .o_afenda_login .o_afenda_weather .afs-summer .afs-p { transform: none; opacity: 1; }
+    .o_afenda_login .o_afenda_weather .afs-summer .afs-p { left: var(--x); transform: none; }
+    .o_afenda_login .o_afenda_weather .afs-summer .afs-p:first-child { left: -80px; transform: none; }
     .o_afenda_login [data-afs-season="spring"] .afs-spring,
     .o_afenda_login [data-afs-season="summer"] .afs-summer,
     .o_afenda_login [data-afs-season="autumn"] .afs-autumn,
