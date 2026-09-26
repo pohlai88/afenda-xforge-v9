@@ -17,7 +17,10 @@
     # 19.0.1.0.7: the auth back links stop carrying reset/signup tokens, back
     # before the action in the tab order, icons hidden from assistive tech.
     # Views and SCSS only, no migration.
-    "version": "19.0.1.0.7",
+    # 19.0.1.0.8: the four-season stage -- the ink panel, the season-owned
+    # bear palette and today's season on the art. Views and CSS only, no
+    # migration (_VERSIONS_WITHOUT_MIGRATION).
+    "version": "19.0.1.0.8",
     "category": "Hidden/Tools",
     "author": "AFENDA",
     "website": "https://www.nexuscanon.com",
@@ -90,8 +93,11 @@
             # comment strip and a whitespace collapse
             # (odoo/addons/base/models/assetsbundle.py:965-972), so oklch() and
             # color-mix() reach the browser untouched. The generated scales
-            # first, then the skins and states that read them.
+            # first, then the generated seasons that read them (the one
+            # looping animation, fenced to the stage), then the hand-written
+            # stage tokens and form states that read both.
             "afenda_brand/static/src/css/auth_bear_scales.css",
+            "afenda_brand/static/src/css/auth_bear_seasons.css",
             "afenda_brand/static/src/css/auth_bear.css",
         ],
         # Printed documents: static font instances (wkhtmltopdf cannot use the

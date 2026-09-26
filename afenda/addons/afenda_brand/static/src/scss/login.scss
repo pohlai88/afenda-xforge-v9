@@ -1,11 +1,16 @@
 // AFENDA xForge auth surface: /web/login, /web/signup, /web/reset_password and
 // every other page that t-calls web.login_layout.
 //
-// A light paper page, composed as a poster. The hero art - the crystal bear,
-// inline so auth_bear.css can reach its layers - carries the left 55%, seated
-// on the page's bottom-left corner with NO plate, panel or radius of its own:
-// the artwork holds its own near-paper tone in the muzzle and the lettuce, so
-// any surface painted under it shows as a seam. The right column reads top to
+// A light paper page, composed as a poster. The art column - the crystal
+// bear, inline so auth_bear.css can reach its layers, on its four-season stage
+// - is a fixed share of the page: 42% of the width from 1200px, 38% from
+// 768px, and a 180-250px banner above the form on a phone (the owner's
+// re-framing, docs/superpowers/specs/2026-09-26-four-season-bear.md). Its one
+// surface is the stage's deep-ink panel (owner decision 2): a flat
+// `--bear-ink` fill that auth_bear.css paints on the art column only when the
+// stage renders - no radius, no shadow, no gradient, and nothing in this
+// file. A caller's image or the tenant fallback keeps the bare paper. The
+// right column reads top to
 // bottom: the AFENDA lockup (small, top right, the same on every page), the
 // page's display headline, one white card carrying the form, and a quiet
 // footnote. Nothing is layered behind or over the card: the art and the form
@@ -16,21 +21,20 @@
 // CSS on purpose (see the manifest).
 //
 // The LEFT anchor on the art is the one thing here that fails silently. In the
-// master's 800x887 geometry the face mask sits at (30, 210, 241, 432) - about
-// 4% of left margin - while the tree already runs to x=0 and y=886. So the
-// tree running off the left and the bottom is the composition; a crop from the
-// left is a cut muzzle, and it reads as a rendering bug rather than a design.
-// Every rule below therefore anchors the art's left edge to the page's left
-// edge and lets the RIGHT side vary with the viewport: `justify-content:
-// flex-start`, no `object-fit`, no negative left offset, and a cap expressed
-// only as a maximum, so the browser scales the whole image down rather than
-// cropping any side of it.
+// master's 800x887 geometry the face mask sits at (30, 210, 241, 432) - 3.75%
+// of the art's width from its left edge - while the tree already runs to x=0
+// and y=886. So the tree running off the left and the bottom is the
+// composition; a crop into the muzzle reads as a rendering bug rather than a
+// design. The bear is anchored bottom-left in its column and scaled whole
+// (one aspect ratio, no `object-fit`); the only offsets are the stage's small
+// bleed past the column's left (-1% of the column) and bottom (-2vh) edges,
+// both smaller than the face's own margin at every width the spec names.
 //
-// One media query, at Bootstrap's md (768px), and it changes only the
-// direction of the page: art beside the form above it, art above the form
-// below it. Everything that must exist at every width - the art itself, its
-// left anchor, the card, the lockup - is declared unconditionally, outside it.
-// (A second, at 1100px, only pairs the fields of the two tall forms.)
+// Breakpoints: Bootstrap's md (768px) turns the page from art-above-form into
+// art-beside-form, and 1200px widens the art column from 38% to 42%.
+// Everything that must exist at every width - the art itself, its left
+// anchor, the card, the lockup - is declared unconditionally, outside them.
+// (A third, at 1100px, only pairs the fields of the two tall forms.)
 //
 // The canonical screen is a LAPTOP: every auth page fits about 1280-1536 x
 // 640 of viewport (a 1366x768 screen less the browser's chrome) with no
@@ -509,45 +513,85 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
         }
     }
 
-    // The art's box. Deliberately bare: no background, no border, no radius,
-    // no shadow. The artwork carries its own near-paper tone, so a plate here
-    // would draw a visible seam around it.
-    // `justify-content: flex-start` is the left anchor and is the reason the
-    // muzzle survives a narrow viewport; `align-items: flex-end` seats the art
-    // on the page's bottom edge, which is where its tree already runs off.
+    // The art column: a fixed share of the page (the owner's re-framing).
+    // This file gives it no background, border, radius or shadow. The one
+    // surface it ever carries is the ink panel, and that is auth_bear.css's
+    // `:has(.o_afenda_auth_stage)` rule, flat, only while the four-season
+    // stage renders; the geometry below does not change with it.
+    // - phone: a banner above the form, 180-250px tall on the viewport's
+    //   height, so the "Log in" button stays above the fold on a 360x640
+    //   screen; it spans the width, and the bear sits small in its corner.
+    // - tablet (768px): 38% of the width; desktop (1200px): 42%. The form
+    //   column takes the rest; its 22rem floor fits 62% of 768px.
+    // `justify-content: flex-start` is the left anchor and `align-items:
+    // flex-end` seats the bear on the column's bottom edge, where its tree
+    // already runs off. `overflow: hidden` clips the stage's small bleed to
+    // the column, so the page never scrolls sideways and nothing the bear or
+    // its season layer draws can reach the form column.
     .o_afenda_auth_art {
         flex: 0 0 auto;
+        height: clamp(180px, 28vh, 250px);
         display: flex;
         align-items: flex-end;
         justify-content: flex-start;
         min-width: 0;
+        overflow: hidden;
 
         @media (min-width: 768px) {
-            // The column HUGS the bear: its width is the art's own rendered
-            // width (height-bound at 92vh), capped at 55% of the page. A fixed
-            // 55% column opened a strip of empty paper between the bear and
-            // the form whenever the screen was wider than the art is tall
-            // (180px at 1280x633), and the pair stopped reading as one poster.
-            flex: 0 1 auto;
-            max-width: 55%;
+            flex: 0 0 38%;
+            height: auto;
+        }
+
+        @media (min-width: 1200px) {
+            flex: 0 0 42%;
         }
     }
 
-    // Bounded only by maxima, and never by a fixed dimension: the browser then
-    // scales the WHOLE image down to fit rather than cropping a side of it,
-    // which is the only way the face is guaranteed intact at every width. No
-    // object-fit and no width/height: the intrinsic 800x887 stays authoritative.
-    // The same rule holds for the inline <svg> and for an <img> a caller
-    // points the slot at: both carry width="800" height="887", and the svg's
-    // viewBox gives it the same ratio.
-    // The narrow cap is a height, in vh, and it is what keeps the "Log in"
-    // button above the fold on a 375x667 screen once the art is above the card.
+    // The bear's frame inside the column: the four-season stage, one aspect
+    // ratio (the master's 800x887), the hero and its season layer filling it.
+    // - phone: 90% of the banner's height, so a 10% top safe zone stays clear
+    //   and the whole face shows (it sits in the top half of the art).
+    // - md and up: 78% of the column's width, capped at 72.15vh - which is
+    //   80vh of height at this ratio - whichever binds first, so the bear is
+    //   78% of the column's width or 80% of its height and the top 20% of the
+    //   column stays clear. It bleeds 1% of the column past the left edge and
+    //   2vh past the bottom for scale; the face starts 3.75% of the bear's
+    //   width in from its left, which is more than that bleed at every width.
+    // The ratio is passed through `unquote` so no Sass division touches it.
+    .o_afenda_auth_stage {
+        flex: 0 0 auto;
+        aspect-ratio: unquote("800 / 887");
+        width: auto;
+        height: 90%;
+
+        @media (min-width: 768px) {
+            width: 78%;
+            max-width: 72.15vh;
+            height: auto;
+            margin: 0 0 -2vh -1%;
+        }
+    }
+
+    // The hero fills its stage exactly, so the season layer (absolutely placed
+    // over the same box by auth_bear.css) lands on it pixel for pixel and the
+    // glints stay on the bear.
+    .o_afenda_auth_stage > .o_afenda_auth_hero {
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        max-height: none;
+    }
+
+    // A hero OUTSIDE a stage is a caller's <img> (the t-elif branch). Bounded
+    // only by maxima, never by a fixed dimension, so the browser scales the
+    // WHOLE image down to fit the column rather than cropping a side of it. No
+    // object-fit: its intrinsic size stays authoritative.
     .o_afenda_auth_hero {
         display: block;
         width: auto;
         height: auto;
         max-width: 100%;
-        max-height: 28vh;
+        max-height: 100%;
 
         @media (min-width: 768px) {
             max-height: 92vh;
@@ -577,8 +621,8 @@ $afb-focus-ring: 0 0 0 1px $o-brand-primary;
     // The form column: lockup, headline, card, footnote. `flex: 1 1 auto`
     // rather than a percentage below md, so a stacked page gives the form
     // whatever the art leaves. Above md it keeps a floor of 22rem so the card
-    // never drops to the 300px at which its label rows wrap; the art is the
-    // side that gives.
+    // never drops to the 300px at which its label rows wrap; the art column's
+    // fixed share leaves it 62% of 768px (476px), above that floor.
     // Poster rhythm. No uniform `gap`: one gap for everything put the AFENDA
     // mark as close to the headline as the headline is to its own subline, so
     // the page read as one undifferentiated stack. Spacing follows grouping
